@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="aboutMenu" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="answerLabel" xml:space="preserve">
+    <value>_Answer:</value>
+  </data>
+  <data name="author" xml:space="preserve">
+    <value>Dmitry Kischenko</value>
+  </data>
+  <data name="authorText" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="calcButton" xml:space="preserve">
+    <value>Sovle</value>
+  </data>
+  <data name="cm" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="copyMenu" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="cutMenu" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="degreeMenu" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="editMenu" xml:space="preserve">
+    <value>_Edit</value>
+  </data>
+  <data name="functionLabel" xml:space="preserve">
+    <value>_Function:</value>
+  </data>
+  <data name="helpMenu" xml:space="preserve">
+    <value>_Help</value>
+  </data>
+  <data name="homePageText" xml:space="preserve">
+    <value>Home Page:</value>
+  </data>
+  <data name="indexOutOfRangeexceptionMessage" xml:space="preserve">
+    <value>Perhaps, variables have entered incorrectly.</value>
+  </data>
+  <data name="keyNotFoundExceptionMessage" xml:space="preserve">
+    <value>Variable not found.</value>
+  </data>
+  <data name="logicLabel" xml:space="preserve">
+    <value>Logical</value>
+  </data>
+  <data name="logicToolTip" xml:space="preserve">
+    <value>Supported statements:
+
+! (not) - negation;
+&amp; (and) - logical conjunction;
+| (or) - logical disjunction;
+-&gt;, =&gt; (impl) - logical implication
+&lt;-&gt;, &lt;=&gt; (eq) - logically equivalent;
+nand - Sheffer stroke;
+nor - Peirce arrow;
+^, xor - exclusive disjunction;
+table(x) - truth table;
+t, true - true;
+f, false - false;</value>
+  </data>
+  <data name="logicViewTitle" xml:space="preserve">
+    <value>Truth table</value>
+  </data>
+  <data name="mathLabel" xml:space="preserve">
+    <value>Mathematical</value>
+  </data>
+  <data name="mathToolTip" xml:space="preserve">
+    <value>Supported statements:
+
++ - addition;
+- - subtraction, unary minus;
+* - multiplication;
+/ - division;
+^ - involution;
+abs(x) - absolute;
+sin(x) - sine;
+cos(x) - cosine;
+tan(x) - tangent;
+cot(x) - cotangent;
+arcsin(x) - arcsine;
+arccos(x) - aarccosine;
+arctan(x) - arctangent;
+arccot(x) - arccotangent;
+sqrt(x) - square root;
+root(x, n) - nth root;
+lg(x) - common logarithm;
+ln(x) - natural logarithm;
+log(x, y) - logarithm;
+exp(x) - exponential;
+pi - Pi constant;
+plot(x) - graph;
+deriv(x) - derivative;</value>
+  </data>
+  <data name="pasteMenu" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="radianMenu" xml:space="preserve">
+    <value>Radian</value>
+  </data>
+  <data name="selectAllMenu" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="showGridBox" xml:space="preserve">
+    <value>Show Grid</value>
+  </data>
+  <data name="varsLabel" xml:space="preserve">
+    <value>_Variables:</value>
+  </data>
+  <data name="versionText" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="viewMenu" xml:space="preserve">
+    <value>_View</value>
+  </data>
+  <data name="workingStatus" xml:space="preserve">
+    <value>Computation...</value>
+  </data>
+  <data name="operationsMenu" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="operationsTitle" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="redoMenu" xml:space="preserve">
+    <value>_Redo</value>
+  </data>
+  <data name="undoMenu" xml:space="preserve">
+    <value>_Undo</value>
+  </data>
+  <data name="gradianMenu" xml:space="preserve">
+    <value>Gradian</value>
+  </data>
+  <data name="notSupported" xml:space="preserve">
+    <value>This operation is not supported.</value>
+  </data>
+  <data name="operationAnd" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="operationEq" xml:space="preserve">
+    <value>Equality</value>
+  </data>
+  <data name="operationFalse" xml:space="preserve">
+    <value>False constant</value>
+  </data>
+  <data name="operationImpl" xml:space="preserve">
+    <value>Implication</value>
+  </data>
+  <data name="operationNAnd" xml:space="preserve">
+    <value>Sheffer stroke</value>
+  </data>
+  <data name="operationNOr" xml:space="preserve">
+    <value>Peirce's arrow</value>
+  </data>
+  <data name="operationNot" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="operationOr" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="operationTable" xml:space="preserve">
+    <value>Truth Table</value>
+  </data>
+  <data name="operationTrue" xml:space="preserve">
+    <value>True constant</value>
+  </data>
+  <data name="operationXOr" xml:space="preserve">
+    <value>Exclusive or</value>
+  </data>
+  <data name="operationAbs" xml:space="preserve">
+    <value>Absolute value</value>
+  </data>
+  <data name="operationArccos" xml:space="preserve">
+    <value>Arccosine</value>
+  </data>
+  <data name="operationArccot" xml:space="preserve">
+    <value>Arccotangent</value>
+  </data>
+  <data name="operationArcsin" xml:space="preserve">
+    <value>Arcsine</value>
+  </data>
+  <data name="operationArctan" xml:space="preserve">
+    <value>Arctangent</value>
+  </data>
+  <data name="operationCos" xml:space="preserve">
+    <value>Cosine</value>
+  </data>
+  <data name="operationCot" xml:space="preserve">
+    <value>Cotangent</value>
+  </data>
+  <data name="operationDeriv" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="operationDiv" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="operationExp" xml:space="preserve">
+    <value>Exponent</value>
+  </data>
+  <data name="operationInv" xml:space="preserve">
+    <value>Exponentiation</value>
+  </data>
+  <data name="operationLg" xml:space="preserve">
+    <value>Common logarithm</value>
+  </data>
+  <data name="operationLn" xml:space="preserve">
+    <value>Natural logarithm</value>
+  </data>
+  <data name="operationLog" xml:space="preserve">
+    <value>Logarithm</value>
+  </data>
+  <data name="operationMinus" xml:space="preserve">
+    <value>Subtraction</value>
+  </data>
+  <data name="operationMul" xml:space="preserve">
+    <value>Multiplication</value>
+  </data>
+  <data name="operationPi" xml:space="preserve">
+    <value>Pi</value>
+  </data>
+  <data name="operationPlot" xml:space="preserve">
+    <value>Graph of a function</value>
+  </data>
+  <data name="operationPlus" xml:space="preserve">
+    <value>Addition</value>
+  </data>
+  <data name="operationRoot" xml:space="preserve">
+    <value>n-th root</value>
+  </data>
+  <data name="operationSin" xml:space="preserve">
+    <value>Sine</value>
+  </data>
+  <data name="operationSqr" xml:space="preserve">
+    <value>Square</value>
+  </data>
+  <data name="operationSqrt" xml:space="preserve">
+    <value>Square root</value>
+  </data>
+  <data name="operationTan" xml:space="preserve">
+    <value>Tangent</value>
+  </data>
+</root>

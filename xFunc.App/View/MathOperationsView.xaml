@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="xFunc.App.View.MathOperationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:xFunc.App.Resources">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Rectangle}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" Grid.Row="0" ToolTip="{x:Static res:Resource.operationPlus}" Command="{Binding Path=PlusCommand}">
+            <Rectangle Fill="{StaticResource plus}" Width="10" Height="12" />
+        </Button>
+        <Button Grid.Column="1" Grid.Row="0" ToolTip="{x:Static res:Resource.operationMinus}" Command="{Binding Path=MinusCommand}">
+            <Rectangle Fill="{StaticResource minus}" Width="9" Height="10" />
+        </Button>
+        <Button Grid.Column="2" Grid.Row="0" ToolTip="{x:Static res:Resource.operationMul}" Command="{Binding Path=MultiplyCommand}">
+            <Rectangle Fill="{StaticResource mul}" Width="8" Height="10" />
+        </Button>
+        <Button Grid.Column="3" Grid.Row="0" ToolTip="{x:Static res:Resource.operationDiv}" Command="{Binding Path=DivideCommand}">
+            <Rectangle Fill="{StaticResource div}" Width="10" Height="10" />
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="1" ToolTip="{x:Static res:Resource.operationSqr}" Command="{Binding Path=SquareCommand}">
+            <Rectangle Fill="{StaticResource sqr}" Width="16" Height="16" />
+        </Button>
+        <Button Grid.Column="1" Grid.Row="1" ToolTip="{x:Static res:Resource.operationInv}" Command="{Binding Path=InvolutionCommand}">
+            <Rectangle Fill="{StaticResource inv}" Width="16" Height="16" />
+        </Button>
+        <Button Grid.Column="2" Grid.Row="1" ToolTip="{x:Static res:Resource.operationSqrt}" Command="{Binding Path=SqrtCommand}">
+            <Rectangle Fill="{StaticResource sqrt}" Width="25" Height="14" />
+        </Button>
+        <Button Grid.Column="3" Grid.Row="1" ToolTip="{x:Static res:Resource.operationRoot}" Command="{Binding Path=RootCommand}">
+            <Rectangle Fill="{StaticResource root}" Width="28" Height="14" />
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="2" ToolTip="{x:Static res:Resource.operationSin}" Command="{Binding Path=SinCommand}">
+            <Rectangle Fill="{StaticResource sin}" Width="40" Height="14" />
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" ToolTip="{x:Static res:Resource.operationCos}" Command="{Binding Path=CosCommand}">
+            <Rectangle Fill="{StaticResource cos}" Width="40" Height="14" />
+        </Button>
+        <Button Grid.Column="2" Grid.Row="2" ToolTip="{x:Static res:Resource.operationTan}" Command="{Binding Path=TanCommand}">
+            <Rectangle Fill="{StaticResource tan}" Width="40" Height="14" />
+        </Button>
+        <Button Grid.Column="3" Grid.Row="2" ToolTip="{x:Static res:Resource.operationCot}" Command="{Binding Path=CotCommand}">
+            <Rectangle Fill="{StaticResource cot}" Width="40" Height="14" />
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="3" ToolTip="{x:Static res:Resource.operationArcsin}" Command="{Binding Path=ArcsinCommand}">
+            <Rectangle Fill="{StaticResource arcsin}" Width="40" Height="16" />
+        </Button>
+        <Button Grid.Column="1" Grid.Row="3" ToolTip="{x:Static res:Resource.operationArccos}" Command="{Binding Path=ArccosCommand}">
+            <Rectangle Fill="{StaticResource arccos}" Width="41" Height="15" />
+        </Button>
+        <Button Grid.Column="2" Grid.Row="3" ToolTip="{x:Static res:Resource.operationArctan}" Command="{Binding Path=ArctanCommand}">
+            <Rectangle Fill="{StaticResource arctan}" Width="40" Height="16" />
+        </Button>
+        <Button Grid.Column="3" Grid.Row="3" ToolTip="{x:Static res:Resource.operationArccot}" Command="{Binding Path=ArccotCommand}">
+            <Rectangle Fill="{StaticResource arccot}" Width="41" Height="15" />
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="4" ToolTip="{x:Static res:Resource.operationLg}" Command="{Binding Path=LnCommand}">
+            <Rectangle Fill="{StaticResource ln}" Width="40" Height="14" />
+        </Button>
+        <Button Grid.Column="1" Grid.Row="4" ToolTip="{x:Static res:Resource.operationLn}" Command="{Binding Path=LgCommand}">
+            <Rectangle Fill="{StaticResource lg}" Width="40" Height="14" />
+        </Button>
+        <Button Grid.Column="2" Grid.Row="4" ToolTip="{x:Static res:Resource.operationLog}" Command="{Binding Path=LogCommand}">
+            <Rectangle Fill="{StaticResource log}" Width="40" Height="14" />
+        </Button>
+        <Button Grid.Column="3" Grid.Row="4" ToolTip="{x:Static res:Resource.operationAbs}" Command="{Binding Path=AbsCommand}">
+            <Rectangle Fill="{StaticResource abs}" Width="40" Height="16" />
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="5" ToolTip="{x:Static res:Resource.operationDeriv}" Command="{Binding Path=DerivativeCommand}">
+            <Rectangle Fill="{StaticResource deriv}" Width="20" Height="22" />
+        </Button>
+        <Button Grid.Column="1" Grid.Row="5" ToolTip="{x:Static res:Resource.operationPlot}" Command="{Binding Path=PlotCommand}">
+            <Rectangle Fill="{StaticResource plot}" Width="22" Height="21" />
+        </Button>
+        <Button Grid.Column="2" Grid.Row="5" ToolTip="{x:Static res:Resource.operationPi}" Command="{Binding Path=PiCommand}">
+            <Rectangle Fill="{StaticResource pi}" Width="14" Height="10" />
+        </Button>
+        <Button Grid.Column="3" Grid.Row="5" ToolTip="{x:Static res:Resource.operationExp}" Command="{Binding Path=ECommand}">
+            <Rectangle Fill="{StaticResource exp}" Width="20" Height="14" />
+        </Button>
+    </Grid>
+</UserControl>

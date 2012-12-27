@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E762246C-21B2-47D9-9D80-54E9E0ED3150}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xFunc.Test</RootNamespace>
+    <AssemblyName>xFunc.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Expressions\Maths\AbsoluteMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\AdditionMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ArccosMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ArcsinMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ArctanMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ArccotMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\CotangentMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\TangentMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\SineMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\CosineMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\DivisionMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ExpMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ExponentiationMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\LgMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\LnMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\LogMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\MultiplicationMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\RootMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\SqrtMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\SubtractionMathExpressionTest.cs" />
+    <Compile Include="LexerTest.cs" />
+    <Compile Include="LogicParameterCollectionTest.cs" />
+    <Compile Include="MathParserTest.cs" />
+    <Compile Include="LogicParserTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xFunc.Library\xFunc.Library.csproj">
+      <Project>{C4663038-901D-41F7-A5A3-C42D60C92C82}</Project>
+      <Name>xFunc.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

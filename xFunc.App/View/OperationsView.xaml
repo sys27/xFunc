@@ -1,0 +1,26 @@
+﻿<Window x:Class="xFunc.App.View.OperationsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:xFunc.App.Resources"
+        xmlns:view="clr-namespace:xFunc.App.View"
+        Title="{x:Static res:Resource.operationsTitle}" SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False" WindowStyle="ToolWindow" ShowActivated="False"
+        Topmost="{Binding Path=View.IsActive}">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="55" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <BooleanToVisibilityConverter x:Key="boolToVisibility" />
+    </Window.Resources>
+    <Window.Visibility>
+        <Binding Path="IsOperationsVisibile" Mode="TwoWay" Converter="{StaticResource boolToVisibility}" />
+    </Window.Visibility>
+
+    <Grid>
+        <view:MathOperationsView Visibility="{Binding Path=IsMath, Converter={StaticResource boolToVisibility}}" />
+        <view:LogicOperationsView Visibility="{Binding Path=IsLogic, Converter={StaticResource boolToVisibility}}" />
+    </Grid>
+</Window>

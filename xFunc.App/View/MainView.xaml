@@ -1,0 +1,72 @@
+﻿<Window x:Class="xFunc.App.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:xFunc.App.Resources"
+        xmlns:converters="clr-namespace:xFunc.App.Converters"
+        Title="xFunc" Width="385" Height="204"
+        MinWidth="340" MinHeight="200" ResizeMode="CanMinimize"
+        Icon="../Images/xFunc.ico">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="visibilityConverter" />
+        <converters:AngleMeasurementToBooleanConverter x:Key="angleConverter" />
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=MathCommand}" Modifiers="Alt" Key="D1" />
+        <KeyBinding Command="{Binding Path=LogicCommand}" Modifiers="Alt" Key="D2" />
+
+        <KeyBinding Command="{Binding Path=DegreeCommand}" Modifiers="Control+Alt" Key="D1" />
+        <KeyBinding Command="{Binding Path=RadianCommand}" Modifiers="Control+Alt" Key="D2" />
+        <KeyBinding Command="{Binding Path=GradianCommand}" Modifiers="Control+Alt" Key="D3" />
+
+        <KeyBinding Command="{Binding Path=OperationsViewCommand}" Modifiers="Control+Alt"  Key="O"/>
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="{x:Static res:Resource.viewMenu}">
+                <MenuItem Header="{x:Static res:Resource.mathLabel}" InputGestureText="Alt+1" Command="{Binding Path=MathCommand}" IsCheckable="True" IsChecked="{Binding Path=IsMath, Mode=OneWay}" />
+                <MenuItem Header="{x:Static res:Resource.logicLabel}" InputGestureText="Alt+2" Command="{Binding Path=LogicCommand}" IsCheckable="True" IsChecked="{Binding Path=IsLogic, Mode=OneWay}" />
+                <Separator Visibility="{Binding Path=IsMath, Converter={StaticResource visibilityConverter}}" />
+                <MenuItem Header="{x:Static res:Resource.degreeMenu}" Visibility="{Binding Path=IsMath, Converter={StaticResource visibilityConverter}}" IsCheckable="True" IsChecked="{Binding Path=AngleMeasurement, Converter={StaticResource angleConverter}, ConverterParameter=degree, Mode=OneWay}" Command="{Binding Path=DegreeCommand}" InputGestureText="Ctrl+Alt+1" />
+                <MenuItem Header="{x:Static res:Resource.radianMenu}" Visibility="{Binding Path=IsMath, Converter={StaticResource visibilityConverter}}" IsCheckable="True" IsChecked="{Binding Path=AngleMeasurement,Converter={StaticResource angleConverter}, ConverterParameter=radian, Mode=OneWay}" Command="{Binding Path=RadianCommand}" InputGestureText="Ctrl+Alt+2" />
+                <MenuItem Header="{x:Static res:Resource.gradianMenu}" Visibility="{Binding Path=IsMath, Converter={StaticResource visibilityConverter}}" IsCheckable="True" IsChecked="{Binding Path=AngleMeasurement,Converter={StaticResource angleConverter}, ConverterParameter=gradian, Mode=OneWay}" Command="{Binding Path=GradianCommand}" InputGestureText="Ctrl+Alt+3" />
+                <Separator />
+                <MenuItem Header="{x:Static res:Resource.operationsMenu}" IsCheckable="True" IsChecked="{Binding Path=IsOperationsVisibile, Mode=OneWay}" Command="{Binding Path=OperationsViewCommand}" InputGestureText="Ctrl+Alt+O" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resource.editMenu}">
+                <MenuItem Header="{x:Static res:Resource.undoMenu}" InputGestureText="Ctrl+Z" Command="Undo" />
+                <MenuItem Header="{x:Static res:Resource.redoMenu}" InputGestureText="Ctrl+Y" Command="Redo" />
+                <Separator />
+                <MenuItem Header="{x:Static res:Resource.cutMenu}" InputGestureText="Ctrl+X" Command="Cut" />
+                <MenuItem Header="{x:Static res:Resource.copyMenu}" InputGestureText="Ctrl+C" Command="Copy" />
+                <MenuItem Header="{x:Static res:Resource.pasteMenu}" InputGestureText="Ctrl+V" Command="Paste" />
+                <Separator />
+                <MenuItem Header="{x:Static res:Resource.selectAllMenu}" InputGestureText="Ctrl+A" Command="SelectAll" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resource.helpMenu}">
+                <MenuItem Header="{x:Static res:Resource.aboutMenu}" Command="{Binding Path=AboutCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Label Content="{x:Static res:Resource.functionLabel}" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Target="{Binding ElementName=functionTextBox}" Width="81" HorizontalContentAlignment="Right" />
+            <TextBox x:Name="functionTextBox" Margin="98,12,8,0" VerticalAlignment="Top" Text="{Binding Function, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="98,38,0,0" VerticalAlignment="Top">
+                <RadioButton Content="{x:Static res:Resource.mathLabel}" IsChecked="{Binding Path=IsMath}" ToolTip="{x:Static res:Resource.mathToolTip}" />
+                <RadioButton Content="{x:Static res:Resource.logicLabel}" IsChecked="{Binding Path=IsLogic}" ToolTip="{x:Static res:Resource.logicToolTip}" Margin="8,0,0,0" />
+            </StackPanel>
+            <Label Content="{x:Static res:Resource.varsLabel}" HorizontalAlignment="Left" Margin="10,56,0,0" Target="{Binding ElementName=xTextBox}" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" />
+            <TextBox x:Name="xTextBox" Margin="98,58,8,0" Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" Height="21.96" VerticalAlignment="Top"/>
+            <Label Content="{x:Static res:Resource.answerLabel}" Margin="10,82,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="83" Target="{Binding ElementName=answerTextBox}" HorizontalContentAlignment="Right" />
+            <TextBox x:Name="answerTextBox" Margin="98,84,8,0" VerticalAlignment="Top" Text="{Binding Answer}" IsReadOnly="True" />
+
+            <TextBlock HorizontalAlignment="Left" Text="{Binding Path=Status}" VerticalAlignment="Bottom" Margin="12,0,0,10" Visibility="{Binding Path=StatusVisibility, Converter={StaticResource visibilityConverter}}" />
+            <Button Content="{x:Static res:Resource.calcButton}" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="75" IsDefault="True" Command="{Binding CalcCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C4663038-901D-41F7-A5A3-C42D60C92C82}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xFunc.Library</RootNamespace>
+    <AssemblyName>xFunc.Library</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\LexerException.cs" />
+    <Compile Include="Exceptions\ParserException.cs" />
+    <Compile Include="Expressions\Logics\AndLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\BinaryLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\ConstLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\EqualityLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\ILogicExpression.cs" />
+    <Compile Include="Expressions\Logics\ImplicationLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\LogicParameterCollection.cs" />
+    <Compile Include="Expressions\Logics\NAndLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\NOrLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\NotLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\OrLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\TruthTableExpression.cs" />
+    <Compile Include="Expressions\Logics\UnaryLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\VariableLogicExpression.cs" />
+    <Compile Include="Expressions\Logics\XOrLogicExpression.cs" />
+    <Compile Include="Expressions\Maths\AbsoluteMathExpression.cs" />
+    <Compile Include="Expressions\Maths\AdditionMathExpression.cs" />
+    <Compile Include="Expressions\Maths\AngleMeasurement.cs" />
+    <Compile Include="Expressions\Maths\ArccosMathExpression.cs" />
+    <Compile Include="Expressions\Maths\ArccotMathExpression.cs" />
+    <Compile Include="Expressions\Maths\ArcsinMathExpression.cs" />
+    <Compile Include="Expressions\Maths\ArctanMathExpression.cs" />
+    <Compile Include="Expressions\Maths\BinaryMathExpression.cs" />
+    <Compile Include="Expressions\Maths\CosineMathExpression.cs" />
+    <Compile Include="Expressions\Maths\CotangentMathExpression.cs" />
+    <Compile Include="Expressions\Maths\DerivativeMathExpression.cs" />
+    <Compile Include="Expressions\Maths\DivisionMathExpression.cs" />
+    <Compile Include="Expressions\Maths\ExpMathExpression.cs" />
+    <Compile Include="Expressions\Maths\IMathExpression.cs" />
+    <Compile Include="Expressions\Maths\ExponentiationMathExpression.cs" />
+    <Compile Include="Expressions\Maths\LgMathExpression.cs" />
+    <Compile Include="Expressions\Maths\LnMathExpression.cs" />
+    <Compile Include="Expressions\Maths\LogMathExpression.cs" />
+    <Compile Include="Expressions\Maths\MultiplicationMathExpression.cs" />
+    <Compile Include="Expressions\Maths\NumberMathExpression.cs" />
+    <Compile Include="Expressions\Maths\MathParameterCollection.cs" />
+    <Compile Include="Expressions\Maths\PlotMathExpression.cs" />
+    <Compile Include="Expressions\Maths\RootMathExpression.cs" />
+    <Compile Include="Expressions\Maths\SineMathExpression.cs" />
+    <Compile Include="Expressions\Maths\SqrtMathExpression.cs" />
+    <Compile Include="Expressions\Maths\SubtractionMathExpression.cs" />
+    <Compile Include="Expressions\Maths\TangentMathExpression.cs" />
+    <Compile Include="Expressions\Maths\TrigonometryMathExpression.cs" />
+    <Compile Include="Expressions\Maths\UnaryMathExpression.cs" />
+    <Compile Include="Expressions\Maths\UnaryMinusMathExpression.cs" />
+    <Compile Include="Expressions\Maths\VariableMathExpression.cs" />
+    <Compile Include="LogicParser.cs" />
+    <Compile Include="MathExtentions.cs" />
+    <Compile Include="MathLexer.cs" />
+    <Compile Include="LogicLexer.cs" />
+    <Compile Include="MathParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Resource.ru.Designer.cs">
+      <DependentUpon>Resource.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Token.cs" />
+    <Compile Include="TokenType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -53,57 +53,59 @@
   <ItemGroup>
     <Compile Include="Exceptions\LexerException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
-    <Compile Include="Expressions\Logics\AndLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\BinaryLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\ConstLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\EqualityLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\ILogicExpression.cs" />
-    <Compile Include="Expressions\Logics\ImplicationLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\LogicParameterCollection.cs" />
-    <Compile Include="Expressions\Logics\NAndLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\NOrLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\NotLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\OrLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\TruthTableExpression.cs" />
-    <Compile Include="Expressions\Logics\UnaryLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\VariableLogicExpression.cs" />
-    <Compile Include="Expressions\Logics\XOrLogicExpression.cs" />
-    <Compile Include="Expressions\Maths\AbsoluteMathExpression.cs" />
-    <Compile Include="Expressions\Maths\AdditionMathExpression.cs" />
-    <Compile Include="Expressions\Maths\AngleMeasurement.cs" />
-    <Compile Include="Expressions\Maths\ArccosMathExpression.cs" />
-    <Compile Include="Expressions\Maths\ArccotMathExpression.cs" />
-    <Compile Include="Expressions\Maths\ArcsinMathExpression.cs" />
-    <Compile Include="Expressions\Maths\ArctanMathExpression.cs" />
-    <Compile Include="Expressions\Maths\BinaryMathExpression.cs" />
-    <Compile Include="Expressions\Maths\CosineMathExpression.cs" />
-    <Compile Include="Expressions\Maths\CotangentMathExpression.cs" />
-    <Compile Include="Expressions\Maths\DerivativeMathExpression.cs" />
-    <Compile Include="Expressions\Maths\DivisionMathExpression.cs" />
-    <Compile Include="Expressions\Maths\ExpMathExpression.cs" />
-    <Compile Include="Expressions\Maths\IMathExpression.cs" />
-    <Compile Include="Expressions\Maths\ExponentiationMathExpression.cs" />
-    <Compile Include="Expressions\Maths\LgMathExpression.cs" />
-    <Compile Include="Expressions\Maths\LnMathExpression.cs" />
-    <Compile Include="Expressions\Maths\LogMathExpression.cs" />
-    <Compile Include="Expressions\Maths\MultiplicationMathExpression.cs" />
-    <Compile Include="Expressions\Maths\NumberMathExpression.cs" />
-    <Compile Include="Expressions\Maths\MathParameterCollection.cs" />
-    <Compile Include="Expressions\Maths\PlotMathExpression.cs" />
-    <Compile Include="Expressions\Maths\RootMathExpression.cs" />
-    <Compile Include="Expressions\Maths\SineMathExpression.cs" />
-    <Compile Include="Expressions\Maths\SqrtMathExpression.cs" />
-    <Compile Include="Expressions\Maths\SubtractionMathExpression.cs" />
-    <Compile Include="Expressions\Maths\TangentMathExpression.cs" />
-    <Compile Include="Expressions\Maths\TrigonometryMathExpression.cs" />
-    <Compile Include="Expressions\Maths\UnaryMathExpression.cs" />
-    <Compile Include="Expressions\Maths\UnaryMinusMathExpression.cs" />
-    <Compile Include="Expressions\Maths\VariableMathExpression.cs" />
-    <Compile Include="LogicParser.cs" />
-    <Compile Include="MathExtentions.cs" />
-    <Compile Include="MathLexer.cs" />
-    <Compile Include="LogicLexer.cs" />
-    <Compile Include="MathParser.cs" />
+    <Compile Include="Logics\Expressions\AndLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\BinaryLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\ConstLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\EqualityLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\ILogicExpression.cs" />
+    <Compile Include="Logics\Expressions\ImplicationLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\LogicParameterCollection.cs" />
+    <Compile Include="Logics\Expressions\NAndLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\NOrLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\NotLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\OrLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\TruthTableExpression.cs" />
+    <Compile Include="Logics\Expressions\UnaryLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\VariableLogicExpression.cs" />
+    <Compile Include="Logics\Expressions\XOrLogicExpression.cs" />
+    <Compile Include="Logics\LogicToken.cs" />
+    <Compile Include="Logics\LogicTokenType.cs" />
+    <Compile Include="Maths\Expressions\AbsoluteMathExpression.cs" />
+    <Compile Include="Maths\Expressions\AdditionMathExpression.cs" />
+    <Compile Include="Maths\Expressions\AngleMeasurement.cs" />
+    <Compile Include="Maths\Expressions\ArccosMathExpression.cs" />
+    <Compile Include="Maths\Expressions\ArccotMathExpression.cs" />
+    <Compile Include="Maths\Expressions\ArcsinMathExpression.cs" />
+    <Compile Include="Maths\Expressions\ArctanMathExpression.cs" />
+    <Compile Include="Maths\Expressions\BinaryMathExpression.cs" />
+    <Compile Include="Maths\Expressions\CosineMathExpression.cs" />
+    <Compile Include="Maths\Expressions\CotangentMathExpression.cs" />
+    <Compile Include="Maths\Expressions\DerivativeMathExpression.cs" />
+    <Compile Include="Maths\Expressions\DivisionMathExpression.cs" />
+    <Compile Include="Maths\Expressions\ExpMathExpression.cs" />
+    <Compile Include="Maths\Expressions\IMathExpression.cs" />
+    <Compile Include="Maths\Expressions\ExponentiationMathExpression.cs" />
+    <Compile Include="Maths\Expressions\LgMathExpression.cs" />
+    <Compile Include="Maths\Expressions\LnMathExpression.cs" />
+    <Compile Include="Maths\Expressions\LogMathExpression.cs" />
+    <Compile Include="Maths\Expressions\MultiplicationMathExpression.cs" />
+    <Compile Include="Maths\Expressions\NumberMathExpression.cs" />
+    <Compile Include="Maths\Expressions\MathParameterCollection.cs" />
+    <Compile Include="Maths\Expressions\PlotMathExpression.cs" />
+    <Compile Include="Maths\Expressions\RootMathExpression.cs" />
+    <Compile Include="Maths\Expressions\SineMathExpression.cs" />
+    <Compile Include="Maths\Expressions\SqrtMathExpression.cs" />
+    <Compile Include="Maths\Expressions\SubtractionMathExpression.cs" />
+    <Compile Include="Maths\Expressions\TangentMathExpression.cs" />
+    <Compile Include="Maths\Expressions\TrigonometryMathExpression.cs" />
+    <Compile Include="Maths\Expressions\UnaryMathExpression.cs" />
+    <Compile Include="Maths\Expressions\UnaryMinusMathExpression.cs" />
+    <Compile Include="Maths\Expressions\VariableMathExpression.cs" />
+    <Compile Include="Logics\LogicParser.cs" />
+    <Compile Include="Maths\MathExtentions.cs" />
+    <Compile Include="Maths\MathLexer.cs" />
+    <Compile Include="Logics\LogicLexer.cs" />
+    <Compile Include="Maths\MathParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -115,8 +117,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Token.cs" />
-    <Compile Include="TokenType.cs" />
+    <Compile Include="Maths\MathToken.cs" />
+    <Compile Include="Maths\MathTokenType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE">
@@ -133,6 +135,7 @@
       <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

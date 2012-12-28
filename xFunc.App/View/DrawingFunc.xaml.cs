@@ -3,8 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using xFunc.App.Resources;
-using xFunc.Library.Expressions;
-using xFunc.Library.Expressions.Maths;
+using xFunc.Library.Maths.Expressions;
 
 namespace xFunc.App.View
 {

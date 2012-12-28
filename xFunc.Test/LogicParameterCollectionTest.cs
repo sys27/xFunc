@@ -1,6 +1,6 @@
-﻿using xFunc.Library.Expressions.Logics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using xFunc.Library.Logics.Expressions;
 
 namespace xFunc.Test
 {    

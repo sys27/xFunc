@@ -77,7 +77,6 @@
     <Compile Include="MathParserTest.cs" />
     <Compile Include="LogicParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TokenTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Library\xFunc.Library.csproj">

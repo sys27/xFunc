@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using xFunc.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using xFunc.Library.Expressions.Logics;
-using xFunc.Library.Expressions.Maths;
+using xFunc.Library.Maths;
+using xFunc.Library.Logics;
+using xFunc.Library.Logics.Expressions;
 
 namespace xFunc.Test
 {
@@ -26,13 +26,11 @@ namespace xFunc.Test
             }
         }
 
-        private MathParser mathParser;
         private LogicParser logicParser;
 
         [TestInitialize]
         public void TestInit()
         {
-            mathParser = new MathParser();
             logicParser = new LogicParser();
         }
 

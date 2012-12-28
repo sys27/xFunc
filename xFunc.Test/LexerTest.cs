@@ -1,8 +1,9 @@
-﻿using xFunc.Library;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using xFunc.Library.Exceptions;
+using xFunc.Library.Maths;
+using xFunc.Library.Logics;
 
 namespace xFunc.Test
 {
@@ -42,17 +43,17 @@ namespace xFunc.Test
         public void LogicTokenizationTest()
         {
             string function = "a & (b | c)";
-            List<Token> expected = new List<Token>
+            List<LogicToken> expected = new List<LogicToken>
                                           {
-                                              new Token(TokenType.Variable, 'a'),
-                                              new Token(TokenType.And),
-                                              new Token(TokenType.OpenBracket),
-                                              new Token(TokenType.Variable, 'b'),
-                                              new Token(TokenType.Or),
-                                              new Token(TokenType.Variable, 'c'),
-                                              new Token(TokenType.CloseBracket)
+                                              new LogicToken(LogicTokenType.Variable, 'a'),
+                                              new LogicToken(LogicTokenType.And),
+                                              new LogicToken(LogicTokenType.OpenBracket),
+                                              new LogicToken(LogicTokenType.Variable, 'b'),
+                                              new LogicToken(LogicTokenType.Or),
+                                              new LogicToken(LogicTokenType.Variable, 'c'),
+                                              new LogicToken(LogicTokenType.CloseBracket)
                                           };
-            List<Token> actual = new List<Token>(logicLexer.LogicTokenization(function));
+            List<LogicToken> actual = new List<LogicToken>(logicLexer.LogicTokenization(function));
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -84,18 +85,18 @@ namespace xFunc.Test
         public void MathTokenizationTest()
         {
             string function = "sin(x)+1*x";
-            List<Token> expected = new List<Token>
+            List<MathToken> expected = new List<MathToken>
                                           {
-                                              new Token(TokenType.Sine),
-                                              new Token(TokenType.OpenBracket),
-                                              new Token(TokenType.Variable, 'x'),
-                                              new Token(TokenType.CloseBracket),
-                                              new Token(TokenType.Addition),
-                                              new Token(TokenType.Number, 1),
-                                              new Token(TokenType.Multiplication),
-                                              new Token(TokenType.Variable, 'x')
+                                              new MathToken(MathTokenType.Sine),
+                                              new MathToken(MathTokenType.OpenBracket),
+                                              new MathToken(MathTokenType.Variable, 'x'),
+                                              new MathToken(MathTokenType.CloseBracket),
+                                              new MathToken(MathTokenType.Addition),
+                                              new MathToken(MathTokenType.Number, 1),
+                                              new MathToken(MathTokenType.Multiplication),
+                                              new MathToken(MathTokenType.Variable, 'x')
                                           };
-            List<Token> actual = new List<Token>(mathLexer.MathTokenization(function));
+            List<MathToken> actual = new List<MathToken>(mathLexer.MathTokenization(function));
 
             CollectionAssert.AreEqual(expected, actual);
         }

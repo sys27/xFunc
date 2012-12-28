@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using xFunc.Library;
-using xFunc.Library.Expressions.Maths;
+using xFunc.Library.Maths.Expressions;
+using xFunc.Library.Maths;
 
 namespace xFunc.Test.Expressions.Maths
 {

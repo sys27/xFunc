@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using xFunc.App.Command;
+using xFunc.App.Properties;
 using xFunc.App.Resources;
+using xFunc.App.View;
 using xFunc.Library;
 using xFunc.Library.Exceptions;
-using xFunc.App.View;
-using xFunc.Library.Expressions.Logics;
-using xFunc.Library.Expressions.Maths;
-using xFunc.App.Properties;
+using xFunc.Library.Logics;
+using xFunc.Library.Logics.Expressions;
+using xFunc.Library.Maths;
+using xFunc.Library.Maths.Expressions;
 
 namespace xFunc.App.ViewModel
 {

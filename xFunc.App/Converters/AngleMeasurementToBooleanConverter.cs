@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
-using xFunc.Library.Expressions.Maths;
+using xFunc.Library.Maths.Expressions;
 
 namespace xFunc.App.Converters
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using xFunc.Library.Expressions.Logics;
+using xFunc.Library.Logics.Expressions;
 
 namespace xFunc.App.View
 {

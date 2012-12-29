@@ -26,15 +26,6 @@ namespace xFunc.App.View
             InitializeComponent();
             versionNumber.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             link.RequestNavigate += (o, args) => Process.Start(args.Uri.ToString());
-
-            Uri uri = new Uri("/LICENSE", UriKind.Relative);
-            using (Stream file = Application.GetResourceStream(uri).Stream)
-            {
-                using (StreamReader reader = new StreamReader(file))
-                {
-                    license.Text = reader.ReadToEnd();
-                }
-            }
         }
 
     }

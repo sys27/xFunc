@@ -20,7 +20,7 @@
             <Hyperlink x:Name="link" NavigateUri="http://xfunc.codeplex.com/">http://xfunc.codeplex.com/</Hyperlink>
         </TextBlock>
         <GroupBox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="12,121,10,0" Height="194" Width="412" Header="Apache License 2.0">
-            <TextBox x:Name="license" Margin="4" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+            <TextBox x:Name="license" Margin="4" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{x:Static res:Resource.aboutLicense}" />
         </GroupBox>
 
         <Button Content="OK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10" IsDefault="True" IsCancel="True" />

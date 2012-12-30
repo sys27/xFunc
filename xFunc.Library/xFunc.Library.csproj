@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Maths\MathToken.cs" />
     <Compile Include="Maths\MathTokenType.cs" />
+    <Compile Include="Workspace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE">

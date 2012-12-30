@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
 using System.Windows;
-using xFunc.App.View;
-using xFunc.App.ViewModel;
+using xFunc.App.Presenters;
+using xFunc.App.Views;
 
 namespace xFunc.App
 {
@@ -12,13 +16,8 @@ namespace xFunc.App
         protected override void OnStartup(StartupEventArgs e)
         {
             MainView mainView = new MainView();
-            OperationsView mathOperationsView = new OperationsView();
-            MainViewModel mainViewModel = new MainViewModel { View = mainView };
-            mainView.DataContext = mainViewModel;
-            mathOperationsView.DataContext = mainViewModel;
-
-            this.MainWindow = mainView;
-            this.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
+            MainPresenter mainPresenter = new MainPresenter(mainView);
+            
             mainView.Show();
         }
 

@@ -20,5 +20,7 @@ packages
 *.vssscc
 *.vspscc
 *.user
+*.nupkg
+*.nuspec
 
 Thumbs.db

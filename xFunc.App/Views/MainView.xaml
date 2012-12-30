@@ -1,0 +1,258 @@
+﻿<ribbon:RibbonWindow x:Class="xFunc.App.Views.MainView"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
+                     Title="xFunc" Width="1024" Height="576" WindowStartupLocation="CenterScreen"
+                     Icon="../Images/xFunc.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="230" MinWidth="220" MaxWidth="400" />
+        </Grid.ColumnDefinitions>
+
+        <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="2">
+            <ribbon:Ribbon.QuickAccessItems>
+                <ribbon:QuickAccessMenuItem IsChecked="True">
+                    <ribbon:Button Header="Undo" Icon="../Images/Undo.png" />
+                </ribbon:QuickAccessMenuItem>
+                <ribbon:QuickAccessMenuItem IsChecked="True">
+                    <ribbon:Button Header="Redo" Icon="../Images/Redo.png" />
+                </ribbon:QuickAccessMenuItem>
+            </ribbon:Ribbon.QuickAccessItems>
+            <ribbon:RibbonTabItem Header="Home" IsSelected="True">
+                <ribbon:RibbonGroupBox Header="Clipboard">
+                    <ribbon:Button Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" />
+                    <ribbon:Button Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" />
+                    <Separator />
+                    <ribbon:Button Header="Cut" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" />
+                    <ribbon:Button Header="Copy" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" />
+                    <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" />
+                </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="Angles">
+                    <ribbon:ToggleButton Header="Degree" LargeIcon="../Images/DegreeLarge.png" />
+                    <ribbon:ToggleButton Size="Large" Header="Radian" LargeIcon="../Images/RadianLarge.png" />
+                    <ribbon:ToggleButton Size="Large" Header="Gradian" LargeIcon="../Images/GradianLarge.png" />
+                </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTabItem>
+            <ribbon:RibbonTabItem Header="View">
+                <ribbon:RibbonGroupBox Header="Show">
+                    <ribbon:ToggleButton Header="Operations" IsChecked="True" />
+                </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="Font">
+                    <ribbon:Spinner x:Name="fontSizeSpinner" Header="Size:" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" Format="" />
+                </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTabItem>
+        </ribbon:Ribbon>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Expressions">
+                <ListBox />
+            </TabItem>
+            <TabItem Header="Graphs"></TabItem>
+        </TabControl>
+
+        <GridSplitter Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="3,0,0,0" Background="White" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel >
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Height" Value="30" />
+                    </Style>
+                </StackPanel.Resources>
+                <Expander Header="Numbers &amp; Arithmetic" IsExpanded="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource seven}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource eight}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource nine}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource div}" Width="14" Height="14" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource four}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource five}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource six}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource mul}" Width="14" Height="12" />
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource one}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource two}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource three}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource minus}" Width="12" Height="4" />
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Rectangle Fill="{StaticResource zero}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="3" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource point}" Width="3" Height="3" />
+                        </Button>
+                        <Button Grid.Row="3" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource plus}" Width="14" Height="12" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Standart" IsExpanded="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource sqr}" Width="20" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource inv}" Width="20" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource sqrt}" Width="22" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource root}" Width="22" Height="16" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource ln}" Width="26" Height="16" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource lg}" Width="26" Height="16" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource log}" Width="36" Height="16" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Trigonometric">
+                    <Grid Margin="0,4,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource sin}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource cos}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource tan}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource cot}" Width="36" Height="20" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource arcsin}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource arccos}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2">
+                            <Rectangle Fill="{StaticResource arctan}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3">
+                            <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Constants">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource pi}" Width="18" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1">
+                            <Rectangle Fill="{StaticResource exp}" Width="18" Height="12" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Additional">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0">
+                            <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
+                        </Button>
+                    </Grid>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Row="2" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+        <TextBox x:Name="expressionBox" Grid.Row="2" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" />
+
+        <ribbon:StatusBar Grid.Row="3" Grid.ColumnSpan="2" />
+    </Grid>
+</ribbon:RibbonWindow>

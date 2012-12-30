@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fluent;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace xFunc.App.View
+namespace xFunc.App.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для LogicOperationsView.xaml
-    /// </summary>
-    public partial class LogicOperationsView : UserControl
+
+    public partial class MainView : RibbonWindow, IMainView
     {
-        public LogicOperationsView()
+
+        public MainView()
         {
             InitializeComponent();
+
+            expressionBox.Focus();
         }
+
     }
+
 }

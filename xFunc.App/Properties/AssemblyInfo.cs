@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("xFunc")]
-[assembly: AssemblyCopyright("Copyright © eXit 2012")]
+[assembly: AssemblyCopyright("Copyright © Dmitry Kischenko 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

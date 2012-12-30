@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("xFunc.Library")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("xFunc designed for math and logical calculations.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("xFunc")]
-[assembly: AssemblyCopyright("Copyright © eXit 2012")]
+[assembly: AssemblyCopyright("Copyright © Dmitry Kischenko 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

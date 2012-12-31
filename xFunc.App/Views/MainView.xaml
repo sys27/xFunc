@@ -18,17 +18,16 @@
 
         <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="2">
             <ribbon:Ribbon.QuickAccessItems>
-                <ribbon:QuickAccessMenuItem IsChecked="True">
-                    <ribbon:Button Header="Undo" Icon="../Images/Undo.png" />
-                </ribbon:QuickAccessMenuItem>
-                <ribbon:QuickAccessMenuItem IsChecked="True">
-                    <ribbon:Button Header="Redo" Icon="../Images/Redo.png" />
-                </ribbon:QuickAccessMenuItem>
+                <ribbon:QuickAccessMenuItem Target="{Binding ElementName=undoButton}" IsChecked="True" />
+                <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
+            <ribbon:Ribbon.ToolBarItems>
+                <ribbon:Button Size="Small" Icon="../Images/Help.png" />
+            </ribbon:Ribbon.ToolBarItems>
             <ribbon:RibbonTabItem Header="Home" IsSelected="True">
                 <ribbon:RibbonGroupBox Header="Clipboard">
-                    <ribbon:Button Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" />
-                    <ribbon:Button Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" />
+                    <ribbon:Button x:Name="undoButton" Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" />
+                    <ribbon:Button x:Name="redoButton" Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" />
                     <Separator />
                     <ribbon:Button Header="Cut" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" />
                     <ribbon:Button Header="Copy" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" />
@@ -38,6 +37,114 @@
                     <ribbon:ToggleButton Header="Degree" LargeIcon="../Images/DegreeLarge.png" />
                     <ribbon:ToggleButton Size="Large" Header="Radian" LargeIcon="../Images/RadianLarge.png" />
                     <ribbon:ToggleButton Size="Large" Header="Gradian" LargeIcon="../Images/GradianLarge.png" />
+                </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTabItem>
+            <ribbon:RibbonTabItem Header="Insert">
+                <ribbon:RibbonGroupBox Header="Variables">
+                    <ribbon:SplitButton Header="Vars" ResizeMode="Both" >
+                        <ribbon:Gallery MinItemsInRow="2" MaxItemsInRow="5" ItemWidth="28" ItemHeight="28" GroupBy="Tag" SelectedFilter="{Binding ElementName=defalutGroup}">
+                            <ribbon:Gallery.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Setter Property="BorderBrush" Value="Gray" />
+                                </Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </ribbon:Gallery.Resources>
+                            <ribbon:Gallery.Filters>
+                                <ribbon:GalleryGroupFilter x:Name="defaultGroup" Title="All" Groups="English,Greek" />
+                                <ribbon:GalleryGroupFilter Title="English" Groups="English" />
+                                <ribbon:GalleryGroupFilter Title="Greek" Groups="Greek" />
+                            </ribbon:Gallery.Filters>
+                            <Border Tag="English">
+                                <TextBlock Text="a" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="b" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="c" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="d" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="e" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="f" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="g" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="h" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="i" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="j" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="k" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="l" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="m" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="n" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="o" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="p" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="q" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="r" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="s" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="t" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="u" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="v" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="w" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="x" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="y" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="z" />
+                            </Border>
+
+                            <Border Tag="Greek">
+                                <TextBlock Text="α" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="β" />
+                            </Border>
+                        </ribbon:Gallery>
+                    </ribbon:SplitButton>
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
             <ribbon:RibbonTabItem Header="View">

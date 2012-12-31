@@ -42,7 +42,7 @@
             <ribbon:RibbonTabItem Header="Insert">
                 <ribbon:RibbonGroupBox Header="Variables">
                     <ribbon:SplitButton Header="Vars" ResizeMode="Both" >
-                        <ribbon:Gallery MinItemsInRow="2" MaxItemsInRow="5" ItemWidth="28" ItemHeight="28" GroupBy="Tag" SelectedFilter="{Binding ElementName=defalutGroup}">
+                        <ribbon:Gallery MinItemsInRow="2" MaxItemsInRow="6" ItemWidth="24" ItemHeight="24" GroupBy="Tag" SelectedFilter="{Binding ElementName=defalutGroup}">
                             <ribbon:Gallery.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="BorderThickness" Value="1" />
@@ -142,6 +142,72 @@
                             </Border>
                             <Border Tag="Greek">
                                 <TextBlock Text="β" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="γ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="δ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ε" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ζ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="η" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="θ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ι" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="κ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="λ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="μ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ν" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ξ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ο" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="π" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ρ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="σς" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="τ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="υ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="φ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="χ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ψ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ω" />
                             </Border>
                         </ribbon:Gallery>
                     </ribbon:SplitButton>

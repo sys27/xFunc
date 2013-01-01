@@ -549,6 +549,18 @@ namespace xFunc.Library.Maths
 
                         stack.Push(binExp);
                     }
+                    else if (expression is AssignMathExpression)
+                    {
+                        AssignMathExpression assign = (AssignMathExpression)expression;
+                        assign.Value = stack.Pop();
+
+                        if (!(stack.Peek() is VariableMathExpression))
+                            throw new ParserException(Resource.InvalidExpression);
+
+                        assign.Variable = (VariableMathExpression)stack.Pop();
+
+                        stack.Push(assign);
+                    }
                     else
                     {
                         throw new ParserException(Resource.UnexpectedError);
@@ -648,6 +660,9 @@ namespace xFunc.Library.Maths
                     case MathTokenType.Derivative:
                         preOutput.Add(new DerivativeMathExpression());
                         break;
+                    case MathTokenType.Assign:
+                        preOutput.Add(new AssignMathExpression());
+                        break;
                     default:
                         throw new ParserException(Resource.NotSupportedToken);
                 }
@@ -714,7 +729,8 @@ namespace xFunc.Library.Maths
                          token.Type == MathTokenType.UnaryMinus ||
                          token.Type == MathTokenType.E ||
                          token.Type == MathTokenType.Plot ||
-                         token.Type == MathTokenType.Derivative)
+                         token.Type == MathTokenType.Derivative ||
+                         token.Type == MathTokenType.Assign)
                 {
                     while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
                     {

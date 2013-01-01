@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogicExpressionItem.cs" />
     <Compile Include="Exceptions\LexerException.cs" />
     <Compile Include="Exceptions\ParserException.cs" />
     <Compile Include="Logics\Expressions\AndLogicExpression.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Logics\Expressions\XOrLogicExpression.cs" />
     <Compile Include="Logics\LogicToken.cs" />
     <Compile Include="Logics\LogicTokenType.cs" />
+    <Compile Include="MathExpressionItem.cs" />
     <Compile Include="Maths\Expressions\AbsoluteMathExpression.cs" />
     <Compile Include="Maths\Expressions\AdditionMathExpression.cs" />
     <Compile Include="Maths\Expressions\AngleMeasurement.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Maths\Expressions\ArccotMathExpression.cs" />
     <Compile Include="Maths\Expressions\ArcsinMathExpression.cs" />
     <Compile Include="Maths\Expressions\ArctanMathExpression.cs" />
+    <Compile Include="Maths\Expressions\AssignExpression.cs" />
     <Compile Include="Maths\Expressions\BinaryMathExpression.cs" />
     <Compile Include="Maths\Expressions\CosineMathExpression.cs" />
     <Compile Include="Maths\Expressions\CotangentMathExpression.cs" />

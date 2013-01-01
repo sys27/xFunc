@@ -25,6 +25,7 @@ namespace xFunc.Library.Maths
                     index = i;
 
                 char letter = function[i];
+                string sub = function.Substring(i);
                 MathToken token = new MathToken();
                 if (letter == '(')
                 {
@@ -88,6 +89,14 @@ namespace xFunc.Library.Maths
                 {
                     token.Type = MathTokenType.Comma;
                 }
+                else if (sub.StartsWith(":="))
+                {
+                    token.Type = MathTokenType.Assign;
+                    tokens.Add(token);
+                    i++;
+
+                    continue;
+                }
                 else if (char.IsDigit(letter))
                 {
                     if (i != (function.Length - 1))
@@ -116,7 +125,6 @@ namespace xFunc.Library.Maths
                 }
                 else if (char.IsLetter(letter))
                 {
-                    string sub = function.Substring(i);
                     if (sub.StartsWith("pi"))
                     {
                         token.Type = MathTokenType.Variable;

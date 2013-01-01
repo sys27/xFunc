@@ -101,6 +101,10 @@
         /// </summary>
         E              = 24,
         /// <summary>
+        /// :=
+        /// </summary>
+        Assign         = -2,
+        /// <summary>
         /// plot
         /// </summary>
         Plot           = 29,

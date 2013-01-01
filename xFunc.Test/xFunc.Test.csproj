@@ -72,6 +72,7 @@
     <Compile Include="Expressions\Maths\RootMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\SqrtMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\SubtractionMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\AssignMathExpressionTest.cs" />
     <Compile Include="LexerTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathParserTest.cs" />

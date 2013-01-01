@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using xFunc.Library.Logics.Expressions;
 using xFunc.Library.Maths.Expressions;
 
@@ -10,8 +11,8 @@ namespace xFunc.Library
     {
 
         private int maxCountOfExp;
-        private List<IMathExpression> mathExpressions;
-        private List<ILogicExpression> logicExpressions;
+        private List<MathExpressionItem> mathExpressions;
+        private List<LogicExpressionItem> logicExpressions;
 
         private MathParameterCollection mathParameters;
         private LogicParameterCollection logicParameters;
@@ -25,8 +26,8 @@ namespace xFunc.Library
         public Workspace(int maxCountOfExp)
         {
             this.maxCountOfExp = maxCountOfExp;
-            mathExpressions = new List<IMathExpression>();
-            logicExpressions = new List<ILogicExpression>();
+            mathExpressions = new List<MathExpressionItem>();
+            logicExpressions = new List<LogicExpressionItem>();
 
             mathParameters = new MathParameterCollection();
             logicParameters = new LogicParameterCollection();
@@ -40,7 +41,17 @@ namespace xFunc.Library
             if (mathExpressions.Count >= maxCountOfExp)
                 mathExpressions.RemoveAt(0);
 
-            mathExpressions.Add(exp);
+            MathExpressionItem item = new MathExpressionItem()
+            {
+                Expression = exp
+            };
+
+            if (exp is DerivativeMathExpression)
+                item.Answer = exp.Derivative().ToString();
+            else
+                item.Answer = exp.Calculate(mathParameters).ToString();
+
+            mathExpressions.Add(item);
         }
 
         public void Add(ILogicExpression exp)
@@ -51,23 +62,25 @@ namespace xFunc.Library
             if (logicExpressions.Count >= maxCountOfExp)
                 logicExpressions.RemoveAt(0);
 
-            logicExpressions.Add(exp);
+            LogicExpressionItem item = new LogicExpressionItem(exp, exp.Calculate(logicParameters).ToString());
+
+            logicExpressions.Add(item);
         }
 
-        public void Remove(IMathExpression exp)
+        public void Remove(MathExpressionItem item)
         {
-            if (exp == null)
+            if (item == null)
                 throw new NullReferenceException();
 
-            mathExpressions.Remove(exp);
+            mathExpressions.Remove(item);
         }
 
-        public void Remove(ILogicExpression exp)
+        public void Remove(LogicExpressionItem item)
         {
-            if (exp == null)
+            if (item == null)
                 throw new NullReferenceException();
 
-            logicExpressions.Remove(exp);
+            logicExpressions.Remove(item);
         }
 
         public void RemoveMathAt(int index)
@@ -88,7 +101,7 @@ namespace xFunc.Library
             }
         }
 
-        public IEnumerable<IMathExpression> MathExpressions
+        public IEnumerable<MathExpressionItem> MathExpressions
         {
             get
             {
@@ -96,7 +109,7 @@ namespace xFunc.Library
             }
         }
 
-        public IEnumerable<ILogicExpression> LogicExpressions
+        public IEnumerable<LogicExpressionItem> LogicExpressions
         {
             get
             {

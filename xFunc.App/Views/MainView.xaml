@@ -224,7 +224,10 @@
         </ribbon:Ribbon>
 
         <TabControl Grid.Row="1">
-            <TabItem Header="Expressions">
+            <TabItem Header="Math Expressions">
+                <ListBox />
+            </TabItem>
+            <TabItem Header="Logic Expressions">
                 <ListBox />
             </TabItem>
             <TabItem Header="Graphs"></TabItem>
@@ -232,10 +235,36 @@
 
         <GridSplitter Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
         <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="3,0,0,0" Background="White" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <StackPanel >
+            <StackPanel>
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Height" Value="30" />
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="BorderBrush" Value="Silver" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="Black" />
+                                            <Setter Property="Background" Value="#FFE0E0E0" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="BorderBrush" Value="White" />
+                                            <Setter Property="BorderThickness" Value="2" />
+                                            <Setter Property="Background" Value="#FFD5D5D5" />
+                                        </Trigger>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="Background" Value="#FFE0E0E0" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </StackPanel.Resources>
                 <Expander Header="Numbers &amp; Arithmetic" IsExpanded="True">

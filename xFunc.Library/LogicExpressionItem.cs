@@ -7,6 +7,7 @@ namespace xFunc.Library
     public class LogicExpressionItem
     {
 
+        private string strExp;
         private ILogicExpression exp;
         private string answer;
 
@@ -15,10 +16,19 @@ namespace xFunc.Library
 
         }
 
-        public LogicExpressionItem(ILogicExpression exp, string answer)
+        public LogicExpressionItem(string strExp, ILogicExpression exp, string answer)
         {
+            this.strExp = strExp;
             this.exp = exp;
             this.answer = answer;
+        }
+
+        public string StringExpression
+        {
+            get
+            {
+                return strExp;
+            }
         }
 
         public ILogicExpression Expression
@@ -27,10 +37,6 @@ namespace xFunc.Library
             {
                 return exp;
             }
-            set
-            {
-                exp = value;
-            }
         }
 
         public string Answer
@@ -38,10 +44,6 @@ namespace xFunc.Library
             get
             {
                 return answer;
-            }
-            set
-            {
-                answer = value;
             }
         }
 

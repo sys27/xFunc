@@ -10,6 +10,7 @@ namespace xFunc.Library
     public class MathExpressionItem
     {
 
+        private string strExp;
         private IMathExpression exp;
         private string answer;
 
@@ -18,10 +19,19 @@ namespace xFunc.Library
 
         }
 
-        public MathExpressionItem(IMathExpression exp, string answer)
+        public MathExpressionItem(string strExp, IMathExpression exp, string answer)
         {
+            this.strExp = strExp;
             this.exp = exp;
             this.answer = answer;
+        }
+
+        public string StringExpression
+        {
+            get
+            {
+                return strExp;
+            }
         }
 
         public IMathExpression Expression
@@ -30,10 +40,6 @@ namespace xFunc.Library
             {
                 return exp;
             }
-            set
-            {
-                exp = value;
-            }
         }
 
         public string Answer
@@ -41,10 +47,6 @@ namespace xFunc.Library
             get
             {
                 return answer;
-            }
-            set
-            {
-                answer = value;
             }
         }
 

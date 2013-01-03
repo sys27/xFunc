@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using xFunc.Library.Logics;
 using xFunc.Library.Logics.Expressions;
+using xFunc.Library.Maths;
 using xFunc.Library.Maths.Expressions;
 
 namespace xFunc.Library
@@ -9,6 +11,9 @@ namespace xFunc.Library
 
     public class Workspace
     {
+
+        private MathParser mathParser;
+        private LogicParser logicParser;
 
         private int maxCountOfExp;
         private List<MathExpressionItem> mathExpressions;
@@ -25,6 +30,9 @@ namespace xFunc.Library
 
         public Workspace(int maxCountOfExp)
         {
+            mathParser = new MathParser();
+            logicParser = new LogicParser();
+
             this.maxCountOfExp = maxCountOfExp;
             mathExpressions = new List<MathExpressionItem>();
             logicExpressions = new List<LogicExpressionItem>();
@@ -33,44 +41,45 @@ namespace xFunc.Library
             logicParameters = new LogicParameterCollection();
         }
 
-        public void Add(IMathExpression exp)
+        public void Add(string strExp, ExpressionType expType)
         {
-            if (exp == null)
-                throw new NullReferenceException();
+            if (string.IsNullOrWhiteSpace(strExp))
+                throw new ArgumentNullException();
 
-            if (mathExpressions.Count >= maxCountOfExp)
-                mathExpressions.RemoveAt(0);
-
-            MathExpressionItem item = new MathExpressionItem()
+            if (expType == ExpressionType.Math)
             {
-                Expression = exp
-            };
+                IMathExpression exp = mathParser.Parse(strExp);
+                MathExpressionItem item = null;
+                if (exp is DerivativeMathExpression)
+                {
+                    item = new MathExpressionItem(strExp, exp, exp.Derivative().ToString());
+                }
+                else if (exp is AssignMathExpression)
+                {
+                    exp.Calculate(mathParameters);
+                    AssignMathExpression assign = (AssignMathExpression)exp;
+                    item = new MathExpressionItem(strExp, exp, string.Format("The value '{1}' was assigned to the variable '{0}.", assign.Variable, assign.Value));
+                }
+                else
+                {
+                    item = new MathExpressionItem(strExp, exp, exp.Calculate(mathParameters).ToString());
+                }
 
-            if (exp is DerivativeMathExpression)
-                item.Answer = exp.Derivative().ToString();
-            else
-                item.Answer = exp.Calculate(mathParameters).ToString();
+                mathExpressions.Add(item);
+            }
+            else if (expType == ExpressionType.Logic)
+            {
+                ILogicExpression exp = logicParser.Parse(strExp);
+                LogicExpressionItem item = new LogicExpressionItem(strExp, exp, exp.Calculate(logicParameters).ToString());
 
-            mathExpressions.Add(item);
-        }
-
-        public void Add(ILogicExpression exp)
-        {
-            if (exp == null)
-                throw new NullReferenceException();
-
-            if (logicExpressions.Count >= maxCountOfExp)
-                logicExpressions.RemoveAt(0);
-
-            LogicExpressionItem item = new LogicExpressionItem(exp, exp.Calculate(logicParameters).ToString());
-
-            logicExpressions.Add(item);
+                logicExpressions.Add(item);
+            }
         }
 
         public void Remove(MathExpressionItem item)
         {
             if (item == null)
-                throw new NullReferenceException();
+                throw new ArgumentNullException();
 
             mathExpressions.Remove(item);
         }
@@ -78,7 +87,7 @@ namespace xFunc.Library
         public void Remove(LogicExpressionItem item)
         {
             if (item == null)
-                throw new NullReferenceException();
+                throw new ArgumentNullException();
 
             logicExpressions.Remove(item);
         }

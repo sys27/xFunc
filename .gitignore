@@ -22,5 +22,7 @@ packages
 *.user
 *.nupkg
 *.nuspec
+*.diff
+*.design
 
 Thumbs.db

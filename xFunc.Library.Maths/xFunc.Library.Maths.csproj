@@ -48,7 +48,7 @@
     <Compile Include="Expressions\ArccotMathExpression.cs" />
     <Compile Include="Expressions\ArcsinMathExpression.cs" />
     <Compile Include="Expressions\ArctanMathExpression.cs" />
-    <Compile Include="Expressions\AssignExpression.cs" />
+    <Compile Include="Expressions\AssignMathExpression.cs" />
     <Compile Include="Expressions\BinaryMathExpression.cs" />
     <Compile Include="Expressions\CosineMathExpression.cs" />
     <Compile Include="Expressions\CotangentMathExpression.cs" />

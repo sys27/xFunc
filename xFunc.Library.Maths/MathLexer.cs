@@ -12,7 +12,7 @@ namespace xFunc.Library.Maths
         public IEnumerable<MathToken> MathTokenization(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
-                throw new ArgumentException(Resource.NotSpecifiedFuncation, "function");
+                throw new ArgumentException(Resource.NotSpecifiedFunction, "function");
 
             function = function.ToLower().Replace(" ", "");
             List<MathToken> tokens = new List<MathToken>();

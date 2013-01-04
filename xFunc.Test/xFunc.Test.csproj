@@ -88,9 +88,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xFunc.Library\xFunc.Library.csproj">
-      <Project>{C4663038-901D-41F7-A5A3-C42D60C92C82}</Project>
-      <Name>xFunc.Library</Name>
+    <ProjectReference Include="..\xFunc.Library.Logics\xFunc.Library.Logics.csproj">
+      <Project>{dfc61417-f3cc-47d5-b2de-4029be939a4c}</Project>
+      <Name>xFunc.Library.Logics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xFunc.Library.Maths\xFunc.Library.Maths.csproj">
+      <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
+      <Name>xFunc.Library.Maths</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

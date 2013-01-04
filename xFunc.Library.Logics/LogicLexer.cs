@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using xFunc.Library.Exceptions;
-using xFunc.Library.Resources;
+using xFunc.Library.Logics.Exceptions;
+using xFunc.Library.Logics.Resources;
 
 namespace xFunc.Library.Logics
 {
@@ -50,7 +50,7 @@ namespace xFunc.Library.Logics
                     }
                     else
                     {
-                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+                        throw new LogicLexerException(string.Format(Resource.NotSupportedSymbol, letter));
                     }
                 }
                 else if (letter == '<')
@@ -67,12 +67,12 @@ namespace xFunc.Library.Logics
                         }
                         else
                         {
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+                            throw new LogicLexerException(string.Format(Resource.NotSupportedSymbol, letter));
                         }
                     }
                     else
                     {
-                        throw new LexerException(Resource.InvalidExpression);
+                        throw new LogicLexerException(Resource.InvalidExpression);
                     }
                 }
                 else if (letter == '^')
@@ -184,7 +184,7 @@ namespace xFunc.Library.Logics
                 }
                 else
                 {
-                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+                    throw new LogicLexerException(string.Format(Resource.NotSupportedSymbol, letter));
                 }
 
                 tokens.Add(token);

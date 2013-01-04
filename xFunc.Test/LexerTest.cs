@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using xFunc.Library.Exceptions;
 using xFunc.Library.Maths;
+using xFunc.Library.Maths.Exceptions;
 using xFunc.Library.Logics;
+using xFunc.Library.Logics.Exceptions;
 
 namespace xFunc.Test
 {
@@ -72,7 +73,7 @@ namespace xFunc.Test
         ///Тест для LogicTokenization, не поддерживаемые символы.
         ///</summary>
         [TestMethod]
-        [ExpectedException(typeof(LexerException))]
+        [ExpectedException(typeof(LogicLexerException))]
         public void LogicTokenizationSymbolNotSupportedTest()
         {
             logicLexer.LogicTokenization("a # b");
@@ -115,7 +116,7 @@ namespace xFunc.Test
         ///Тест для MathTokenization, не поддерживаемые символы.
         ///</summary>
         [TestMethod]
-        [ExpectedException(typeof(LexerException))]
+        [ExpectedException(typeof(MathLexerException))]
         public void MathTokenizationSymbolNotSupportedTest()
         {
             mathLexer.MathTokenization("a | b");

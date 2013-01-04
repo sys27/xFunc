@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using xFunc.Library.Exceptions;
+using xFunc.Library.Logics.Exceptions;
 using xFunc.Library.Logics.Expressions;
-using xFunc.Library.Resources;
+using xFunc.Library.Logics.Resources;
 
 namespace xFunc.Library.Logics
 {
@@ -53,7 +53,7 @@ namespace xFunc.Library.Logics
                     }
                     else
                     {
-                        throw new ParserException(Resource.UnexpectedError);
+                        throw new LogicParserException(Resource.UnexpectedError);
                     }
                 }
 
@@ -157,7 +157,7 @@ namespace xFunc.Library.Logics
                 }
                 else
                 {
-                    throw new ParserException(Resource.NotSupportedToken);
+                    throw new LogicParserException(Resource.NotSupportedToken);
                 }
             }
             if (stack.Count != 0)
@@ -213,7 +213,7 @@ namespace xFunc.Library.Logics
                         preOutput.Add(new VariableLogicExpression(token.Variable));
                         break;
                     default:
-                        throw new ParserException(Resource.NotSupportedToken);
+                        throw new LogicParserException(Resource.NotSupportedToken);
                 }
             }
 

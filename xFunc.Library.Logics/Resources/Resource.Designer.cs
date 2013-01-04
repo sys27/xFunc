@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace xFunc.Library.Resources {
+namespace xFunc.Library.Logics.Resources
+{
     using System;
     
     

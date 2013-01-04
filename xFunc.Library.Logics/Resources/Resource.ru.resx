@@ -126,7 +126,7 @@
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>Функция имеет неверное количество переменных.</value>
   </data>
-  <data name="NotSpecifiedFuncation" xml:space="preserve">
+  <data name="NotSpecifiedFunction" xml:space="preserve">
     <value>Функция не задана.</value>
   </data>
   <data name="NotSupportedSymbol" xml:space="preserve">

@@ -126,7 +126,7 @@
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>The function has an invalid number of variables.</value>
   </data>
-  <data name="NotSpecifiedFuncation" xml:space="preserve">
+  <data name="NotSpecifiedFunction" xml:space="preserve">
     <value>The function is not specified.</value>
   </data>
   <data name="NotSupportedSymbol" xml:space="preserve">

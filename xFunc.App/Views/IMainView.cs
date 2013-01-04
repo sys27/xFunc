@@ -9,6 +9,8 @@ namespace xFunc.App.Views
     public interface IMainView
     {
 
+        string Expression { get; }
+
     }
 
 }

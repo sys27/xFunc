@@ -26,12 +26,12 @@
             </ribbon:Ribbon.ToolBarItems>
             <ribbon:RibbonTabItem Header="Home" IsSelected="True">
                 <ribbon:RibbonGroupBox Header="Clipboard">
-                    <ribbon:Button x:Name="undoButton" Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" />
-                    <ribbon:Button x:Name="redoButton" Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" />
+                    <ribbon:Button x:Name="undoButton" Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo" />
+                    <ribbon:Button x:Name="redoButton" Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" Command="ApplicationCommands.Redo" />
                     <Separator />
-                    <ribbon:Button Header="Cut" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" />
-                    <ribbon:Button Header="Copy" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" />
-                    <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" />
+                    <ribbon:Button Header="Cut" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" Command="ApplicationCommands.Cut" />
+                    <ribbon:Button Header="Copy" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" Command="ApplicationCommands.Copy" />
+                    <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="Angles">
                     <ribbon:ToggleButton Header="Degree" LargeIcon="../Images/DegreeLarge.png" />

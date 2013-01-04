@@ -41,7 +41,7 @@
             </ribbon:RibbonTabItem>
             <ribbon:RibbonTabItem Header="Insert">
                 <ribbon:RibbonGroupBox Header="Variables">
-                    <ribbon:SplitButton Header="Vars" ResizeMode="Both" >
+                    <ribbon:SplitButton Header="Vars" ResizeMode="Both" Icon="../Images/Vars.png" LargeIcon="../Images/VarsLarge.png">
                         <ribbon:Gallery MinItemsInRow="2" MaxItemsInRow="6" ItemWidth="24" ItemHeight="24" GroupBy="Tag" SelectedFilter="{Binding ElementName=defalutGroup}">
                             <ribbon:Gallery.Resources>
                                 <Style TargetType="{x:Type Border}">

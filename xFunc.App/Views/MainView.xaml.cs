@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using xFunc.App.Presenters;
 
 namespace xFunc.App.Views
 {
@@ -18,11 +19,23 @@ namespace xFunc.App.Views
     public partial class MainView : RibbonWindow, IMainView
     {
 
+        private MainPresenter presenter;
+
         public MainView()
         {
+            this.presenter = new MainPresenter(this);
+
             InitializeComponent();
 
             expressionBox.Focus();
+        }
+
+        public string Expression
+        {
+            get
+            {
+                return expressionBox.Text;
+            }
         }
 
     }

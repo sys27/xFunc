@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.App.Presenters;
+using xFunc.Library.Maths;
 using xFunc.Library.Maths.Expressions;
 
 namespace xFunc.App.Views
@@ -23,11 +24,11 @@ namespace xFunc.App.Views
 
         public MainView()
         {
-            this.presenter = new MainPresenter(this);
-
             InitializeComponent();
 
             expressionBox.Focus();
+
+            this.presenter = new MainPresenter(this);
         }
 
         private void DergeeButton_Click(object o, RoutedEventArgs args)
@@ -66,7 +67,10 @@ namespace xFunc.App.Views
 
             if (expressionBox.SelectionLength > 0)
             {
-                // todo: ...
+                var prevSelectionLength = expressionBox.SelectionLength;
+
+                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ")");
+                expressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 2;
             }
             else
             {
@@ -75,6 +79,14 @@ namespace xFunc.App.Views
             }
 
             expressionBox.Focus();
+        }
+
+        public IEnumerable<MathWorkspaceItem> MathExpressions
+        {
+            set
+            {
+                mathExpsListBox.ItemsSource = value;
+            }
         }
 
     }

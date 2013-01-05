@@ -34,9 +34,9 @@
                     <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="Angles">
-                    <ribbon:ToggleButton Header="Degree" LargeIcon="../Images/DegreeLarge.png" />
-                    <ribbon:ToggleButton Size="Large" Header="Radian" LargeIcon="../Images/RadianLarge.png" />
-                    <ribbon:ToggleButton Size="Large" Header="Gradian" LargeIcon="../Images/GradianLarge.png" />
+                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Checked="DergeeButton_Click" />
+                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Checked="RadianButton_Click" />
+                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Checked="GradianButton_Click" />
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
             <ribbon:RibbonTabItem Header="Insert">
@@ -282,52 +282,52 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0">
+                        <Button Grid.Row="0" Grid.Column="0" Tag="7" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource seven}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="1">
+                        <Button Grid.Row="0" Grid.Column="1" Tag="8" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource eight}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="2">
+                        <Button Grid.Row="0" Grid.Column="2" Tag="9" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource nine}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="3">
+                        <Button Grid.Row="0" Grid.Column="3" Tag="/" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource div}" Width="14" Height="14" />
                         </Button>
 
-                        <Button Grid.Row="1" Grid.Column="0">
+                        <Button Grid.Row="1" Grid.Column="0" Tag="4" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource four}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="1">
+                        <Button Grid.Row="1" Grid.Column="1" Tag="5" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource five}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="2">
+                        <Button Grid.Row="1" Grid.Column="2" Tag="6" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource six}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="3">
+                        <Button Grid.Row="1" Grid.Column="3" Tag="*" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource mul}" Width="14" Height="12" />
                         </Button>
 
-                        <Button Grid.Row="2" Grid.Column="0">
+                        <Button Grid.Row="2" Grid.Column="0" Tag="1" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource one}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="2" Grid.Column="1">
+                        <Button Grid.Row="2" Grid.Column="1" Tag="2" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource two}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="2" Grid.Column="2">
+                        <Button Grid.Row="2" Grid.Column="2" Tag="3" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource three}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="2" Grid.Column="3">
+                        <Button Grid.Row="2" Grid.Column="3" Tag="-" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource minus}" Width="12" Height="4" />
                         </Button>
 
-                        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Tag="0" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource zero}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="3" Grid.Column="2">
+                        <Button Grid.Row="3" Grid.Column="2" Tag="." Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource point}" Width="3" Height="3" />
                         </Button>
-                        <Button Grid.Row="3" Grid.Column="3">
+                        <Button Grid.Row="3" Grid.Column="3" Tag="+" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource plus}" Width="14" Height="12" />
                         </Button>
                     </Grid>
@@ -385,29 +385,29 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0">
+                        <Button Grid.Row="0" Grid.Column="0" Tag="sin" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sin}" Width="36" Height="20" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="1">
+                        <Button Grid.Row="0" Grid.Column="1" Tag="cos" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource cos}" Width="36" Height="20" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="2">
+                        <Button Grid.Row="0" Grid.Column="2" Tag="tan" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource tan}" Width="36" Height="20" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="3">
+                        <Button Grid.Row="0" Grid.Column="3" Tag="cot" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource cot}" Width="36" Height="20" />
                         </Button>
 
-                        <Button Grid.Row="1" Grid.Column="0">
+                        <Button Grid.Row="1" Grid.Column="0" Tag="arcsin" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arcsin}" Width="40" Height="20" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="1">
+                        <Button Grid.Row="1" Grid.Column="1" Tag="arccos" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccos}" Width="40" Height="20" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="2">
+                        <Button Grid.Row="1" Grid.Column="2" Tag="arctan" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arctan}" Width="40" Height="20" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="3">
+                        <Button Grid.Row="1" Grid.Column="3" Tag="arccot" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
                         </Button>
                     </Grid>

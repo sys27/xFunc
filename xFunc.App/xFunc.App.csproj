@@ -166,9 +166,6 @@
     <Resource Include="Images\UndoLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Operations.design" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Help.png" />
   </ItemGroup>
   <ItemGroup>

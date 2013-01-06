@@ -22,6 +22,10 @@ namespace xFunc.App.Views
 
         private MainPresenter presenter;
 
+        public static RoutedCommand DegreeCommand = new RoutedCommand();
+        public static RoutedCommand RadianCommand = new RoutedCommand();
+        public static RoutedCommand GradianCommand = new RoutedCommand();
+
         public MainView()
         {
             InitializeComponent();
@@ -33,25 +37,33 @@ namespace xFunc.App.Views
             degreeButton.IsChecked = true;
         }
 
-        private void DergeeButton_Click(object o, RoutedEventArgs args)
+        private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             this.radianButton.IsChecked = false;
             this.gradianButton.IsChecked = false;
             presenter.SetAngleMeasurement(AngleMeasurement.Degree);
         }
 
-        private void RadianButton_Click(object o, RoutedEventArgs args)
+        private void RadianButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             this.degreeButton.IsChecked = false;
             this.gradianButton.IsChecked = false;
             presenter.SetAngleMeasurement(AngleMeasurement.Radian);
         }
 
-        private void GradianButton_Click(object o, RoutedEventArgs args)
+        private void GradianButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             this.degreeButton.IsChecked = false;
             this.radianButton.IsChecked = false;
             presenter.SetAngleMeasurement(AngleMeasurement.Gradian);
+        }
+
+        private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            if (tabControl.SelectedItem == logicTab)
+                args.CanExecute = false;
+            else
+                args.CanExecute = true;
         }
 
         private void InsertChar_Click(object o, RoutedEventArgs args)

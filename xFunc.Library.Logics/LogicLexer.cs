@@ -20,6 +20,7 @@ namespace xFunc.Library.Logics
             for (int i = 0; i < function.Length; i++)
             {
                 char letter = function[i];
+                string sub = function.Substring(i);
                 LogicToken token = new LogicToken();
                 if (letter == '(')
                 {
@@ -79,9 +80,16 @@ namespace xFunc.Library.Logics
                 {
                     token.Type = LogicTokenType.XOr;
                 }
+                else if (sub.StartsWith(":="))
+                {
+                    token.Type = LogicTokenType.Assign;
+                    tokens.Add(token);
+                    i++;
+
+                    continue;
+                }
                 else if (char.IsLetter(letter))
                 {
-                    string sub = function.Substring(i);
                     if (sub.StartsWith("true"))
                     {
                         token.Type = LogicTokenType.True;

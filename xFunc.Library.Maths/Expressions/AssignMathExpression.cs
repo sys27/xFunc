@@ -24,7 +24,7 @@ namespace xFunc.Library.Maths.Expressions
         public double Calculate(MathParameterCollection parameters)
         {
             if (parameters == null)
-                throw new NullReferenceException();
+                throw new ArgumentNullException("parameters");
 
             parameters.Add(variable.Variable, value.Calculate(parameters));
 

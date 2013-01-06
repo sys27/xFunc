@@ -40,7 +40,17 @@ namespace xFunc.Library.Logics
                 expressions.RemoveAt(0);
 
             ILogicExpression exp = parser.Parse(strExp);
-            LogicWorkspaceItem item = new LogicWorkspaceItem(strExp, exp, exp.Calculate(parameters).ToString());
+            LogicWorkspaceItem item = new LogicWorkspaceItem(strExp, exp);
+            if (exp is AssignLogicExpression)
+            {
+                AssignLogicExpression assign = (AssignLogicExpression)exp;
+                assign.Calculate(parameters);
+                item.Answer = string.Format("The value '{1}' was assigned to the variable '{0}'.", assign.Value, assign.Variable);
+            }
+            else
+            {
+                item.Answer = exp.Calculate(parameters).ToString();
+            }
 
             expressions.Add(item);
         }
@@ -75,7 +85,7 @@ namespace xFunc.Library.Logics
         {
             get
             {
-                return expressions;
+                return expressions.AsReadOnly();
             }
         }
 

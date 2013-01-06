@@ -49,7 +49,7 @@ namespace xFunc.Library.Maths
             {
                 AssignMathExpression assign = (AssignMathExpression)exp;
                 assign.Calculate(parameters);
-                item.Answer = string.Format("The value '{1}' was assigned to the variable '{0}.", assign.Variable, assign.Value);
+                item.Answer = string.Format("The value '{1}' was assigned to the variable '{0}'.", assign.Value, assign.Variable);
             }
             else
             {

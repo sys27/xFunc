@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.App.Presenters;
+using xFunc.Library.Logics;
 using xFunc.Library.Maths;
 using xFunc.Library.Maths.Expressions;
 
@@ -141,7 +142,11 @@ namespace xFunc.App.Views
         {
             if (args.Key == Key.Enter)
             {
-                presenter.AddExpression(expressionBox.Text);
+                if (tabControl.SelectedItem == mathTab)
+                    presenter.AddMathExpression(expressionBox.Text);
+                else if (tabControl.SelectedItem == logicTab)
+                    presenter.AddLogicExpression(expressionBox.Text);
+
                 expressionBox.Text = string.Empty;
             }
         }
@@ -151,6 +156,14 @@ namespace xFunc.App.Views
             set
             {
                 mathExpsListBox.ItemsSource = value;
+            }
+        }
+
+        public IEnumerable<LogicWorkspaceItem> LogicExpressions
+        {
+            set
+            {
+                logicExpsListBox.ItemsSource = value;
             }
         }
 

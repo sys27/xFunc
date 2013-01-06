@@ -62,6 +62,10 @@ namespace xFunc.Library.Logics
         False          = 76,
 
         /// <summary>
+        /// :=
+        /// </summary>
+        Assign         = -1,
+        /// <summary>
         /// Variable.
         /// </summary>
         Variable       = 101

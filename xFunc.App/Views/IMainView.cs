@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using xFunc.Library.Logics;
 using xFunc.Library.Maths;
 
 namespace xFunc.App.Views
@@ -11,6 +12,7 @@ namespace xFunc.App.Views
     {
 
         IEnumerable<MathWorkspaceItem> MathExpressions { set; }
+        IEnumerable<LogicWorkspaceItem> LogicExpressions { set; }
 
     }
 

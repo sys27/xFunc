@@ -19,6 +19,12 @@ namespace xFunc.Library.Logics
 
         }
 
+        public LogicWorkspaceItem(string strExp, ILogicExpression exp)
+            : this(strExp, exp, null)
+        {
+
+        }
+
         public LogicWorkspaceItem(string strExp, ILogicExpression exp, string answer)
         {
             this.strExp = strExp;
@@ -47,6 +53,10 @@ namespace xFunc.Library.Logics
             get
             {
                 return answer;
+            }
+            internal set
+            {
+                answer = value;
             }
         }
 

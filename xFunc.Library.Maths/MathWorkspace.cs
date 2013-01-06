@@ -36,6 +36,9 @@ namespace xFunc.Library.Maths
             if (string.IsNullOrWhiteSpace(strExp))
                 throw new ArgumentNullException("strExp");
 
+            while (expressions.Count >= countOfExps)
+                expressions.RemoveAt(0);
+
             IMathExpression exp = parser.Parse(strExp);
             MathWorkspaceItem item = new MathWorkspaceItem(strExp, exp);
             if (exp is DerivativeMathExpression)
@@ -79,6 +82,10 @@ namespace xFunc.Library.Maths
             get
             {
                 return countOfExps;
+            }
+            set
+            {
+                countOfExps = value;
             }
         }
 

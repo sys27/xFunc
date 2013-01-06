@@ -29,6 +29,8 @@ namespace xFunc.App.Views
             expressionBox.Focus();
 
             this.presenter = new MainPresenter(this);
+
+            degreeButton.IsChecked = true;
         }
 
         private void DergeeButton_Click(object o, RoutedEventArgs args)
@@ -79,6 +81,15 @@ namespace xFunc.App.Views
             }
 
             expressionBox.Focus();
+        }
+
+        private void ExpressionBox_KeyUp(object o, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter)
+            {
+                presenter.AddExpression(expressionBox.Text);
+                expressionBox.Text = string.Empty;
+            }
         }
 
         public IEnumerable<MathWorkspaceItem> MathExpressions

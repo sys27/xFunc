@@ -27,6 +27,13 @@ namespace xFunc.App.Presenters
             mathWorkspace.Parser.AngleMeasurement = angle;
         }
 
+        public void AddExpression(string strExp)
+        {
+            mathWorkspace.Add(strExp);
+
+            view.MathExpressions = mathWorkspace.Expressions;
+        }
+
     }
 
 }

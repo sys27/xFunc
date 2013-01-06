@@ -364,16 +364,16 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0">
+                        <Button Grid.Row="0" Grid.Column="0" Tag="^2" Click="InsertInv_Click">
                             <Rectangle Fill="{StaticResource sqr}" Width="20" Height="16" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="1">
+                        <Button Grid.Row="0" Grid.Column="1" Tag="^y" Click="InsertInv_Click">
                             <Rectangle Fill="{StaticResource inv}" Width="20" Height="16" />
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="sqrt" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sqrt}" Width="22" Height="16" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="3">
+                        <Button Grid.Row="0" Grid.Column="3" Tag="root" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource root}" Width="22" Height="16" />
                         </Button>
 
@@ -383,7 +383,7 @@
                         <Button Grid.Row="1" Grid.Column="1" Tag="lg" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource lg}" Width="26" Height="16" />
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="2">
+                        <Button Grid.Row="1" Grid.Column="2" Tag="log" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource log}" Width="36" Height="16" />
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="abs" Click="InsertFunc_Click">

@@ -77,6 +77,48 @@ namespace xFunc.App.Views
             else
             {
                 expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "()");
+                expressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
+            }
+
+            expressionBox.Focus();
+        }
+
+        private void InsertInv_Click(object o, RoutedEventArgs args)
+        {
+            string func = ((Button)o).Tag.ToString();
+            var prevSelectionStart = expressionBox.SelectionStart;
+
+            if (expressionBox.SelectionLength > 0)
+            {
+                var prevSelectionLength = expressionBox.SelectionLength;
+
+                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, "(").Insert(prevSelectionStart + prevSelectionLength + 1, ")" + func);
+                expressionBox.SelectionStart = prevSelectionStart + prevSelectionLength + func.Length + 2;
+            }
+            else
+            {
+                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func);
+                expressionBox.SelectionStart = prevSelectionStart + func.Length;
+            }
+
+            expressionBox.Focus();
+        }
+
+        private void InsertDoubleArgFunc_Click(object o, RoutedEventArgs args)
+        {
+            string func = ((Button)o).Tag.ToString();
+            var prevSelectionStart = expressionBox.SelectionStart;
+
+            if (expressionBox.SelectionLength > 0)
+            {
+                var prevSelectionLength = expressionBox.SelectionLength;
+
+                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ", )");
+                expressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 3;
+            }
+            else
+            {
+                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(, )");
                 expressionBox.SelectionStart = prevSelectionStart + func.Length + 2;
             }
 

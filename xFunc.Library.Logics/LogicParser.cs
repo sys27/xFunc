@@ -51,6 +51,18 @@ namespace xFunc.Library.Logics
 
                         stack.Push(binLoginExp);
                     }
+                    else if (expression is AssignLogicExpression)
+                    {
+                        AssignLogicExpression assign = (AssignLogicExpression)expression;
+                        assign.Value = stack.Pop();
+
+                        if (!(stack.Peek() is VariableLogicExpression))
+                            throw new LogicParserException(Resource.InvalidExpression);
+
+                        assign.Variable = (VariableLogicExpression)stack.Pop();
+
+                        stack.Push(assign);
+                    }
                     else
                     {
                         throw new LogicParserException(Resource.UnexpectedError);
@@ -138,6 +150,7 @@ namespace xFunc.Library.Logics
                          token.Type == LogicTokenType.NOr ||
                          token.Type == LogicTokenType.NAnd ||
                          token.Type == LogicTokenType.XOr ||
+                         token.Type == LogicTokenType.Assign ||
                          token.Type == LogicTokenType.TruthTable ||
                          token.Type == LogicTokenType.True ||
                          token.Type == LogicTokenType.False)
@@ -199,6 +212,9 @@ namespace xFunc.Library.Logics
                         break;
                     case LogicTokenType.XOr:
                         preOutput.Add(new XOrLogicExpression());
+                        break;
+                    case LogicTokenType.Assign:
+                        preOutput.Add(new AssignLogicExpression());
                         break;
                     case LogicTokenType.TruthTable:
                         preOutput.Add(new TruthTableExpression());

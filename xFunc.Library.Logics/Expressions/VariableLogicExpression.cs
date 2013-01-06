@@ -23,6 +23,14 @@ namespace xFunc.Library.Logics.Expressions
             return parameters[variable];
         }
 
+        public char Variable
+        {
+            get
+            {
+                return variable;
+            }
+        }
+
     }
 
 }

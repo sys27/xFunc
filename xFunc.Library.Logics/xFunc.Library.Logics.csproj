@@ -42,6 +42,7 @@
     <Compile Include="Exceptions\LogicLexerException.cs" />
     <Compile Include="Exceptions\LogicParserException.cs" />
     <Compile Include="Expressions\AndLogicExpression.cs" />
+    <Compile Include="Expressions\AssignLogicExpression.cs" />
     <Compile Include="Expressions\BinaryLogicExpression.cs" />
     <Compile Include="Expressions\ConstLogicExpression.cs" />
     <Compile Include="Expressions\EqualityLogicExpression.cs" />

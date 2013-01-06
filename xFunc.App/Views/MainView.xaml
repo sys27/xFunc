@@ -3,8 +3,15 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
                      xmlns:math="clr-namespace:xFunc.Library.Maths;assembly=xFunc.Library.Maths"
+                     xmlns:logic="clr-namespace:xFunc.Library.Logics;assembly=xFunc.Library.Logics"
+                     xmlns:local="clr-namespace:xFunc.App.Views"
                      Title="xFunc" Width="1024" Height="576" WindowStartupLocation="CenterScreen"
                      Icon="../Images/xFunc.ico">
+    <ribbon:RibbonWindow.CommandBindings>
+        <CommandBinding Command="local:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="local:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="local:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+    </ribbon:RibbonWindow.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -35,9 +42,9 @@
                     <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="Angles">
-                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Checked="DergeeButton_Click" />
-                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Checked="RadianButton_Click" />
-                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Checked="GradianButton_Click" />
+                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Command="local:MainView.DegreeCommand" />
+                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Command="local:MainView.RadianCommand" />
+                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Command="local:MainView.GradianCommand" />
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
             <ribbon:RibbonTabItem Header="Insert">
@@ -224,8 +231,8 @@
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>
 
-        <TabControl Grid.Row="1">
-            <TabItem Header="Math Expressions">
+        <TabControl x:Name="tabControl" Grid.Row="1">
+            <TabItem x:Name="mathTab" Header="Math Expressions">
                 <ListBox x:Name="mathExpsListBox">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type math:MathWorkspaceItem}">
@@ -246,7 +253,7 @@
                     </ListBox.ItemContainerStyle>
                 </ListBox>
             </TabItem>
-            <TabItem Header="Logic Expressions">
+            <TabItem x:Name="logicTab" Header="Logic Expressions">
                 <ListBox />
             </TabItem>
             <TabItem Header="Graphs"></TabItem>

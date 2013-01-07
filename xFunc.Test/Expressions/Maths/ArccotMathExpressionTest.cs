@@ -50,7 +50,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("arccot(x)"));
 
-            Assert.AreEqual("-1 / (1 + (x ^ 2))", exp.ToString());
+            Assert.AreEqual("-(1 / (1 + (x ^ 2)))", exp.ToString());
         }
 
         [TestMethod]
@@ -58,21 +58,21 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("arccot(2x)"));
 
-            Assert.AreEqual("-2 / (1 + ((2 * x) ^ 2))", exp.ToString());
+            Assert.AreEqual("-(2 / (1 + ((2 * x) ^ 2)))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(arccot(xy), x)").Derivative();
-            Assert.AreEqual("-y / (1 + ((x * y) ^ 2))", exp.ToString());
+            Assert.AreEqual("-(y / (1 + ((x * y) ^ 2)))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = parser.Parse("deriv(arccot(xy), y)").Derivative();
-            Assert.AreEqual("-x / (1 + ((x * y) ^ 2))", exp.ToString());
+            Assert.AreEqual("-(x / (1 + ((x * y) ^ 2)))", exp.ToString());
         }
 
         [TestMethod]

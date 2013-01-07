@@ -50,7 +50,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("cot(x)"));
 
-            Assert.AreEqual("-1 / (sin(x) ^ 2)", exp.ToString());
+            Assert.AreEqual("-(1 / (sin(x) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
@@ -58,21 +58,21 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("cot(2x)"));
 
-            Assert.AreEqual("-2 / (sin(2 * x) ^ 2)", exp.ToString());
+            Assert.AreEqual("-(2 / (sin(2 * x) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(cot(xy), x)").Derivative();
-            Assert.AreEqual("-y / (sin(x * y) ^ 2)", exp.ToString());
+            Assert.AreEqual("-(y / (sin(x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = parser.Parse("deriv(cot(xy), y)").Derivative();
-            Assert.AreEqual("-x / (sin(x * y) ^ 2)", exp.ToString());
+            Assert.AreEqual("-(x / (sin(x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]

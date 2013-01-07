@@ -5,105 +5,122 @@
     {
 
         /// <summary>
+        /// :=
+        /// </summary>
+        Assign = 0,
+        /// <summary>
         /// (
         /// </summary>
-        OpenBracket    = -1,
+        OpenBracket    = 1,
         /// <summary>
         /// )
         /// </summary>
-        CloseBracket   = 0,
+        CloseBracket   = 2,
         /// <summary>
         /// ,
         /// </summary>
-        Comma          = 1,
+        Comma          = 3,
         /// <summary>
         /// +
         /// </summary>
-        Addition       = 2,
+        Addition       = 4,
         /// <summary>
         /// -
         /// </summary>
-        Subtraction    = 3,
+        Subtraction    = 5,
         /// <summary>
         /// *
         /// </summary>
-        Multiplication = 4,
+        Multiplication = 6,
         /// <summary>
         /// /
         /// </summary>
-        Division       = 5,
+        Division       = 7,
         /// <summary>
         /// ^
         /// </summary>
-        Exponentiation = 6,
+        Exponentiation = 8,
         /// <summary>
         /// - (Unary)
         /// </summary>
-        UnaryMinus     = 8,
+        UnaryMinus     = 9,
         /// <summary>
         /// abs
         /// </summary>
-        Absolute       = 9,
+        Absolute       = 10,
         /// <summary>
         /// sin
         /// </summary>
-        Sine           = 10,
+        Sine           = 11,
         /// <summary>
         /// cos
         /// </summary>
-        Cosine         = 11,
+        Cosine         = 12,
         /// <summary>
         /// tg
         /// </summary>
-        Tangent        = 12,
+        Tangent        = 13,
         /// <summary>
         /// Cot
         /// </summary>
-        Cotangent      = 13,
+        Cotangent      = 14,
+        /// <summary>
+        /// sec
+        /// </summary>
+        Secant         = 15,
+        /// <summary>
+        /// csc
+        /// </summary>
+        Cosecant       = 16,
         /// <summary>
         /// Arcsin
         /// </summary>
-        Arcsin         = 14,
+        Arcsine         = 17,
         /// <summary>
         /// Arccos
         /// </summary>
-        Arccos         = 15,
+        Arccosine         = 18,
         /// <summary>
         /// Arctan
         /// </summary>
-        Arctan         = 16,
+        Arctangent         = 19,
         /// <summary>
         /// Arccot
         /// </summary>
-        Arccot         = 17,
+        Arccotangent         = 20,
+        /// <summary>
+        /// arcsec
+        /// </summary>
+        Arcsecant      = 21,
+        /// <summary>
+        /// arccsc
+        /// </summary>
+        Arccosecant    = 22,
         /// <summary>
         /// sqrt
         /// </summary>
-        Sqrt           = 19,
+        Sqrt           = 23,
         /// <summary>
         /// root
         /// </summary>
-        Root           = 20,
+        Root           = 24,
         /// <summary>
         /// Ln
         /// </summary>
-        Ln             = 21,
+        Ln             = 25,
         /// <summary>
         /// Lg
         /// </summary>
-        Lg             = 22,
+        Lg             = 26,
         /// <summary>
         /// Log
         /// </summary>
-        Log            = 23,
+        Log            = 27,
+
         /// <summary>
         /// Exponential
         /// </summary>
-        E              = 24,
-        /// <summary>
-        /// :=
-        /// </summary>
-        Assign         = -2,
+        E              = 28,
         /// <summary>
         /// plot
         /// </summary>

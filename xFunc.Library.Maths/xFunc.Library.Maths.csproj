@@ -46,10 +46,13 @@
     <Compile Include="Expressions\AngleMeasurement.cs" />
     <Compile Include="Expressions\ArccosMathExpression.cs" />
     <Compile Include="Expressions\ArccotMathExpression.cs" />
+    <Compile Include="Expressions\ArccscMathExpression.cs" />
+    <Compile Include="Expressions\ArcsecMathExpression.cs" />
     <Compile Include="Expressions\ArcsinMathExpression.cs" />
     <Compile Include="Expressions\ArctanMathExpression.cs" />
     <Compile Include="Expressions\AssignMathExpression.cs" />
     <Compile Include="Expressions\BinaryMathExpression.cs" />
+    <Compile Include="Expressions\CosecantMathExpression.cs" />
     <Compile Include="Expressions\CosineMathExpression.cs" />
     <Compile Include="Expressions\CotangentMathExpression.cs" />
     <Compile Include="Expressions\DerivativeMathExpression.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="Expressions\NumberMathExpression.cs" />
     <Compile Include="Expressions\PlotMathExpression.cs" />
     <Compile Include="Expressions\RootMathExpression.cs" />
+    <Compile Include="Expressions\SecantMathExpression.cs" />
     <Compile Include="Expressions\SineMathExpression.cs" />
     <Compile Include="Expressions\SqrtMathExpression.cs" />
     <Compile Include="Expressions\SubtractionMathExpression.cs" />

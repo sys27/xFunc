@@ -57,14 +57,14 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(cos(xy), x)").Derivative();
-            Assert.AreEqual("-sin(x * y) * y", exp.ToString());
+            Assert.AreEqual("-(sin(x * y) * y)", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = parser.Parse("deriv(cos(xy), y)").Derivative();
-            Assert.AreEqual("-sin(x * y) * x", exp.ToString());
+            Assert.AreEqual("-(sin(x * y) * x)", exp.ToString());
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("cos(2x)"));
 
-            Assert.AreEqual("-sin(2 * x) * 2", exp.ToString());
+            Assert.AreEqual("-(sin(2 * x) * 2)", exp.ToString());
         }
 
         [TestMethod]

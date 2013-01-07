@@ -182,9 +182,25 @@ namespace xFunc.Library.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("sec"))
+                    {
+                        token.Type = MathTokenType.Secant;
+                        tokens.Add(token);
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("csc"))
+                    {
+                        token.Type = MathTokenType.Cosecant;
+                        tokens.Add(token);
+                        i += 2;
+
+                        continue;
+                    }
                     if (sub.StartsWith("arcsin"))
                     {
-                        token.Type = MathTokenType.Arcsin;
+                        token.Type = MathTokenType.Arcsine;
                         tokens.Add(token);
                         i += 5;
 
@@ -192,7 +208,7 @@ namespace xFunc.Library.Maths
                     }
                     if (sub.StartsWith("arccos"))
                     {
-                        token.Type = MathTokenType.Arccos;
+                        token.Type = MathTokenType.Arccosine;
                         tokens.Add(token);
                         i += 5;
 
@@ -200,7 +216,7 @@ namespace xFunc.Library.Maths
                     }
                     if (sub.StartsWith("arctan"))
                     {
-                        token.Type = MathTokenType.Arctan;
+                        token.Type = MathTokenType.Arctangent;
                         tokens.Add(token);
                         i += 5;
 
@@ -208,7 +224,23 @@ namespace xFunc.Library.Maths
                     }
                     if (sub.StartsWith("arccot"))
                     {
-                        token.Type = MathTokenType.Arccot;
+                        token.Type = MathTokenType.Arccotangent;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arcsec"))
+                    {
+                        token.Type = MathTokenType.Arcsecant;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arccsc"))
+                    {
+                        token.Type = MathTokenType.Arccosecant;
                         tokens.Add(token);
                         i += 5;
 

@@ -11,7 +11,6 @@ namespace xFunc.Test.Expressions.Maths
     {
 
         private MathParser parser;
-        private const double E = 0.0000000001;
 
         [TestInitialize]
         public void TestInit()
@@ -25,8 +24,7 @@ namespace xFunc.Test.Expressions.Maths
             parser.AngleMeasurement = AngleMeasurement.Degree;
             IMathExpression exp = parser.Parse("sec(1)");
 
-            double expected = 1.00015232804391;
-            Assert.IsTrue(Math.Abs(expected - exp.Calculate(null)) < E);
+            Assert.AreEqual(MathExtentions.Sec(Math.PI / 180), exp.Calculate(null));
         }
 
         [TestMethod]
@@ -35,8 +33,7 @@ namespace xFunc.Test.Expressions.Maths
             parser.AngleMeasurement = AngleMeasurement.Radian;
             IMathExpression exp = parser.Parse("sec(1)");
 
-            double expected = 1.85081571768093;
-            Assert.IsTrue(Math.Abs(expected - exp.Calculate(null)) < E);
+            Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate(null));
         }
 
         [TestMethod]
@@ -45,8 +42,7 @@ namespace xFunc.Test.Expressions.Maths
             parser.AngleMeasurement = AngleMeasurement.Gradian;
             IMathExpression exp = parser.Parse("sec(1)");
 
-            double expected = 1.0001233827398;
-            Assert.IsTrue(Math.Abs(expected - exp.Calculate(null)) < E);
+            Assert.AreEqual(MathExtentions.Sec(Math.PI / 200), exp.Calculate(null));
         }
 
         [TestMethod]

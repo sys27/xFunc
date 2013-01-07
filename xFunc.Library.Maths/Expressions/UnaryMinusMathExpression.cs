@@ -2,7 +2,7 @@
 
 namespace xFunc.Library.Maths.Expressions
 {
-    
+
     public class UnaryMinusMathExpression : UnaryMathExpression
     {
 
@@ -12,7 +12,10 @@ namespace xFunc.Library.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("-{0}");
+            if (firstMathExpression is BinaryMathExpression)
+                return ToString("-({0})");
+            else
+                return ToString("-{0}");
         }
 
         public override double Calculate(MathParameterCollection parameters)

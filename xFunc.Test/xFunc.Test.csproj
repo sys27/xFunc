@@ -87,6 +87,7 @@
     <Compile Include="Expressions\Maths\AssignMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\SecantMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\CosecantMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\ArcsecMathExpressionTest.cs" />
     <Compile Include="LexerTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathParserTest.cs" />

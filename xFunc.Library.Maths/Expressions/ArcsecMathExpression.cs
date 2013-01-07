@@ -28,26 +28,29 @@ namespace xFunc.Library.Maths.Expressions
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
-            var radian = 1 / firstMathExpression.Calculate(parameters);
-
-            return Math.Acos(radian) / Math.PI * 180;
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 180;
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Acos(1 / firstMathExpression.Calculate(parameters));
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
-            var radian = 1 / firstMathExpression.Calculate(parameters);
-
-            return Math.Acos(radian) / Math.PI * 200;
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 200;
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            throw new NotImplementedException();
+            AbsoluteMathExpression abs = new AbsoluteMathExpression(firstMathExpression);
+            ExponentiationMathExpression sqr = new ExponentiationMathExpression(firstMathExpression, new NumberMathExpression(2));
+            SubtractionMathExpression sub = new SubtractionMathExpression(sqr, new NumberMathExpression(1));
+            SqrtMathExpression sqrt = new SqrtMathExpression(sub);
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(abs, sqrt);
+            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Derivative(variable), mul);
+
+            return div;
         }
 
     }

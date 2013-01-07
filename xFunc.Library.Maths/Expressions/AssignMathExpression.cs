@@ -26,7 +26,7 @@ namespace xFunc.Library.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
-            parameters.Add(variable.Variable, value.Calculate(parameters));
+            parameters[variable.Variable] = value.Calculate(parameters);
 
             return double.NaN;
         }

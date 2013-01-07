@@ -11,7 +11,6 @@ namespace xFunc.Test.Expressions.Maths
     {
 
         private MathParser parser;
-        private const double E = 0.0000000001;
 
         [TestInitialize]
         public void TestInit()
@@ -25,8 +24,7 @@ namespace xFunc.Test.Expressions.Maths
             parser.AngleMeasurement = AngleMeasurement.Degree;
             IMathExpression exp = parser.Parse("csc(1)");
 
-            double expected = 57.2986884985502;
-            Assert.IsTrue(Math.Abs(expected - exp.Calculate(null)) < E);
+            Assert.AreEqual(MathExtentions.Csc(Math.PI / 180), exp.Calculate(null));
         }
 
         [TestMethod]
@@ -35,8 +33,7 @@ namespace xFunc.Test.Expressions.Maths
             parser.AngleMeasurement = AngleMeasurement.Radian;
             IMathExpression exp = parser.Parse("csc(1)");
 
-            double expected = 1.1883951057781;
-            Assert.IsTrue(Math.Abs(expected - exp.Calculate(null)) < E);
+            Assert.AreEqual(MathExtentions.Csc(1), exp.Calculate(null));
         }
 
         [TestMethod]
@@ -45,17 +42,16 @@ namespace xFunc.Test.Expressions.Maths
             parser.AngleMeasurement = AngleMeasurement.Gradian;
             IMathExpression exp = parser.Parse("csc(1)");
 
-            double expected = 63.6645953060006;
-            Assert.IsTrue(Math.Abs(expected - exp.Calculate(null)) < E);
+            Assert.AreEqual(MathExtentions.Csc(Math.PI / 200), exp.Calculate(null));
         }
 
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(csc(2x), x)");
+            IMathExpression exp = parser.Parse("deriv(csc(2x), x)").Derivative();
 
             // todo: bug -2
-            Assert.AreEqual("-2 * (cot(2 * x) * csc(2 * x))", exp.Derivative().ToString());
+            Assert.AreEqual("-2 * (cot(2 * x) * csc(2 * x))", exp.ToString());
         }
 
     }

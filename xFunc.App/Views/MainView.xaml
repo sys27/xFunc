@@ -416,6 +416,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -448,6 +449,19 @@
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="arccot" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
+                        </Button>
+                        
+                        <Button Grid.Row="2" Grid.Column="0" Tag="sec" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource sec}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Tag="csc" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource csc}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="2" Tag="arcsec" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arcsec}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="3" Tag="arccsc" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arccsc}" Width="40" Height="20" />
                         </Button>
                     </Grid>
                 </Expander>
@@ -483,7 +497,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0">
+                        <Button Grid.Row="0" Grid.Column="0" Tag="deriv" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
                         </Button>
                     </Grid>

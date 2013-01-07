@@ -627,16 +627,28 @@ namespace xFunc.Library.Maths
                     case MathTokenType.Cotangent:
                         preOutput.Add(new CotangentMathExpression { AngleMeasurement = angleMeasurement });
                         break;
-                    case MathTokenType.Arcsin:
+                    case MathTokenType.Secant:
+                        preOutput.Add(new SecantMathExpression { AngleMeasurement = angleMeasurement });
+                        break;
+                    case MathTokenType.Cosecant:
+                        preOutput.Add(new CosecantMathExpression { AngleMeasurement = angleMeasurement });
+                        break;
+                    case MathTokenType.Arcsine:
                         preOutput.Add(new ArcsinMathExpression { AngleMeasurement = angleMeasurement });
                         break;
-                    case MathTokenType.Arccos:
+                    case MathTokenType.Arccosine:
                         preOutput.Add(new ArccosMathExpression { AngleMeasurement = angleMeasurement });
                         break;
-                    case MathTokenType.Arctan:
+                    case MathTokenType.Arctangent:
                         preOutput.Add(new ArctanMathExpression { AngleMeasurement = angleMeasurement });
                         break;
-                    case MathTokenType.Arccot:
+                    case MathTokenType.Arcsecant:
+                        preOutput.Add(new ArcsecMathExpression { AngleMeasurement = angleMeasurement });
+                        break;
+                    case MathTokenType.Arccosecant:
+                        preOutput.Add(new ArccscMathExpression { AngleMeasurement = angleMeasurement });
+                        break;
+                    case MathTokenType.Arccotangent:
                         preOutput.Add(new ArccotMathExpression { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Sqrt:
@@ -717,10 +729,14 @@ namespace xFunc.Library.Maths
                          token.Type == MathTokenType.Cosine ||
                          token.Type == MathTokenType.Tangent ||
                          token.Type == MathTokenType.Cotangent ||
-                         token.Type == MathTokenType.Arcsin ||
-                         token.Type == MathTokenType.Arccos ||
-                         token.Type == MathTokenType.Arctan ||
-                         token.Type == MathTokenType.Arccot ||
+                         token.Type == MathTokenType.Secant ||
+                         token.Type == MathTokenType.Cosecant ||
+                         token.Type == MathTokenType.Arcsine ||
+                         token.Type == MathTokenType.Arccosine ||
+                         token.Type == MathTokenType.Arctangent ||
+                         token.Type == MathTokenType.Arccotangent ||
+                         token.Type == MathTokenType.Arcsecant ||
+                         token.Type == MathTokenType.Arccosecant ||
                          token.Type == MathTokenType.Sqrt ||
                          token.Type == MathTokenType.Root ||
                          token.Type == MathTokenType.Lg ||

@@ -51,6 +51,26 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest2()
+        {
+            // 2x + 3
+            NumberMathExpression num1 = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x);
+
+            NumberMathExpression num2 = new NumberMathExpression(3);
+
+            IMathExpression exp = new AdditionMathExpression(mul1, num2);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("2", deriv.ToString());
+
+            num1.Number = 5;
+            Assert.AreEqual("(5 * x) + 3", exp.ToString());
+            Assert.AreEqual("2", deriv.ToString());
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(xy + x + y, x)").Derivative();

@@ -27,28 +27,28 @@ namespace xFunc.Library.Maths.Expressions
 
         public override IMathExpression Derivative(VariableMathExpression variable)
         {
-            var first = MathParser.HaveVar(firstMathExpression, variable);
-            var second = MathParser.HaveVar(secondMathExpression, variable);
+            var first = MathParser.HasVar(firstMathExpression, variable);
+            var second = MathParser.HasVar(secondMathExpression, variable);
 
             if (first && second)
             {
-                MultiplicationMathExpression mul1 = new MultiplicationMathExpression(firstMathExpression.Derivative(variable), secondMathExpression);
-                MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression, secondMathExpression.Derivative(variable));
+                MultiplicationMathExpression mul1 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone());
+                MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone().Derivative(variable));
                 SubtractionMathExpression sub = new SubtractionMathExpression(mul1, mul2);
-                ExponentiationMathExpression inv = new ExponentiationMathExpression(secondMathExpression, new NumberMathExpression(2));
+                ExponentiationMathExpression inv = new ExponentiationMathExpression(secondMathExpression.Clone(), new NumberMathExpression(2));
                 DivisionMathExpression division = new DivisionMathExpression(sub, inv);
 
                 return division;
             }
             else if (first)
             {
-                return new DivisionMathExpression(firstMathExpression.Derivative(variable), secondMathExpression);
+                return new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone());
             }
             else if (second)
             {
-                MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression, secondMathExpression.Derivative(variable));
+                MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone().Derivative(variable));
                 UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(mul2);
-                ExponentiationMathExpression inv = new ExponentiationMathExpression(secondMathExpression, new NumberMathExpression(2));
+                ExponentiationMathExpression inv = new ExponentiationMathExpression(secondMathExpression.Clone(), new NumberMathExpression(2));
                 DivisionMathExpression division = new DivisionMathExpression(unMinus, inv);
 
                 return division;
@@ -57,6 +57,11 @@ namespace xFunc.Library.Maths.Expressions
             {
                 return new NumberMathExpression(0);
             }
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new DivisionMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

@@ -44,6 +44,28 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest2()
+        {
+            // (2x) / (3x)
+            NumberMathExpression num1 = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x);
+
+            NumberMathExpression num2 = new NumberMathExpression(3);
+            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(num2, x.Clone());
+
+            IMathExpression exp = new DivisionMathExpression(mul1, mul2);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("((6 * x) - (6 * x)) / ((3 * x) ^ 2)", deriv.ToString());
+
+            num1.Number = 4;
+            num2.Number = 5;
+            Assert.AreEqual("(4 * x) / (5 * x)", exp.ToString());
+            Assert.AreEqual("((6 * x) - (6 * x)) / ((3 * x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv((y + x ^ 2) / x, x)").Derivative();

@@ -25,10 +25,10 @@ namespace xFunc.Library.Maths.Expressions
 
         public override IMathExpression Derivative(VariableMathExpression variable)
         {
-            if (MathParser.HaveVar(firstMathExpression, variable) || MathParser.HaveVar(secondMathExpression, variable))
+            if (MathParser.HasVar(firstMathExpression, variable) || MathParser.HasVar(secondMathExpression, variable))
             {
-                DivisionMathExpression div = new DivisionMathExpression(new NumberMathExpression(1), secondMathExpression);
-                ExponentiationMathExpression inv = new ExponentiationMathExpression(firstMathExpression, div);
+                DivisionMathExpression div = new DivisionMathExpression(new NumberMathExpression(1), secondMathExpression.Clone());
+                ExponentiationMathExpression inv = new ExponentiationMathExpression(firstMathExpression.Clone(), div);
 
                 return inv.Derivative(variable);
             }
@@ -36,6 +36,11 @@ namespace xFunc.Library.Maths.Expressions
             {
                 return new NumberMathExpression(0);
             }
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new RootMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

@@ -41,12 +41,17 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            SineMathExpression sine = new SineMathExpression(firstMathExpression);
+            SineMathExpression sine = new SineMathExpression(firstMathExpression.Clone());
             ExponentiationMathExpression involution = new ExponentiationMathExpression(sine, new NumberMathExpression(2));
-            DivisionMathExpression division = new DivisionMathExpression(firstMathExpression.Derivative(variable), involution);
+            DivisionMathExpression division = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), involution);
             UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(division);
 
             return unMinus;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new CotangentMathExpression(firstMathExpression.Clone());
         }
 
     }

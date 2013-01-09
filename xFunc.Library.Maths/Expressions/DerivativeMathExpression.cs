@@ -41,6 +41,11 @@ namespace xFunc.Library.Maths.Expressions
             return MathParser.SimplifyExpressions(firstMathExpression.Derivative(this.variable));
         }
 
+        public IMathExpression Clone()
+        {
+            return new DerivativeMathExpression(firstMathExpression.Clone(), (VariableMathExpression)variable.Clone());
+        }
+
         public IMathExpression FirstMathExpression
         {
             get

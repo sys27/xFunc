@@ -508,6 +508,10 @@
         <GridSplitter Grid.Row="2" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <TextBox x:Name="expressionBox" Grid.Row="2" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" KeyUp="ExpressionBox_KeyUp" />
 
-        <ribbon:StatusBar Grid.Row="3" Grid.ColumnSpan="2" />
+        <ribbon:StatusBar Grid.Row="3" Grid.ColumnSpan="2">
+            <ribbon:StatusBarItem HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock x:Name="statusBox" />
+            </ribbon:StatusBarItem>
+        </ribbon:StatusBar>
     </Grid>
 </ribbon:RibbonWindow>

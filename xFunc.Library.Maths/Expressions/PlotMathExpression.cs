@@ -20,6 +20,11 @@ namespace xFunc.Library.Maths.Expressions
             throw new NotSupportedException();
         }
 
+        public override IMathExpression Clone()
+        {
+            return new PlotMathExpression(firstMathExpression.Clone());
+        }
+
     }
 
 }

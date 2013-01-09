@@ -46,11 +46,29 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(arccsc(2x), x)").Derivative();
 
-            Assert.AreEqual("-(2 / (abs((2 * x)) * sqrt(((2 * x) ^ 2) - 1)))", exp.ToString());
+            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            // arccsc(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new ArccscMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
+
+            num.Number = 4;
+            Assert.AreEqual("arccsc(4 * x)", exp.ToString());
+            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
         }
 
     }

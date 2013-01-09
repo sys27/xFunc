@@ -22,14 +22,14 @@ namespace xFunc.Library.Maths.Expressions
 
         public override IMathExpression Derivative(VariableMathExpression variable)
         {
-            if (MathParser.HaveVar(firstMathExpression, variable))
+            if (MathParser.HasVar(firstMathExpression, variable))
             {
                 if (!(secondMathExpression is NumberMathExpression))
                     throw new NotSupportedException();
 
-                LnMathExpression ln = new LnMathExpression(secondMathExpression);
-                MultiplicationMathExpression mul = new MultiplicationMathExpression(firstMathExpression, ln);
-                DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Derivative(variable), mul);
+                LnMathExpression ln = new LnMathExpression(secondMathExpression.Clone());
+                MultiplicationMathExpression mul = new MultiplicationMathExpression(firstMathExpression.Clone(), ln);
+                DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), mul);
 
                 return div;
             }
@@ -37,6 +37,11 @@ namespace xFunc.Library.Maths.Expressions
             {
                 return new NumberMathExpression(0);
             }
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new LogMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

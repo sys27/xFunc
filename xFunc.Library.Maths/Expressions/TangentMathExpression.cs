@@ -36,11 +36,16 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            CosineMathExpression cos = new CosineMathExpression(firstMathExpression);
+            CosineMathExpression cos = new CosineMathExpression(firstMathExpression.Clone());
             ExponentiationMathExpression inv = new ExponentiationMathExpression(cos, new NumberMathExpression(2));
-            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Derivative(variable), inv);
+            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), inv);
 
             return div;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new TangentMathExpression(firstMathExpression.Clone());
         }
 
     }

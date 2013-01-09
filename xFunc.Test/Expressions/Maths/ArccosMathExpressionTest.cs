@@ -46,7 +46,7 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("arccos(x)"));
 
@@ -59,6 +59,24 @@ namespace xFunc.Test.Expressions.Maths
             IMathExpression exp = MathParser.Derivative(parser.Parse("arccos(2x)"));
 
             Assert.AreEqual("-(2 / sqrt(1 - ((2 * x) ^ 2)))", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest3()
+        {
+            // arccos(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new ArccosMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("-(2 / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
+
+            num.Number = 6;
+            Assert.AreEqual("arccos(6 * x)", exp.ToString());
+            Assert.AreEqual("-(2 / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
         }
 
         [TestMethod]

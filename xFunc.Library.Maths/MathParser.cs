@@ -480,21 +480,21 @@ namespace xFunc.Library.Maths
             return SimplifyExpressions(expression.Derivative(variable));
         }
 
-        public static bool HaveVar(IMathExpression expression, VariableMathExpression arg)
+        public static bool HasVar(IMathExpression expression, VariableMathExpression arg)
         {
             if (expression is BinaryMathExpression)
             {
                 BinaryMathExpression bin = expression as BinaryMathExpression;
-                if (HaveVar(bin.FirstMathExpression, arg))
+                if (HasVar(bin.FirstMathExpression, arg))
                     return true;
                 else
-                    return HaveVar(bin.SecondMathExpression, arg);
+                    return HasVar(bin.SecondMathExpression, arg);
             }
             else if (expression is UnaryMathExpression)
             {
                 UnaryMathExpression un = expression as UnaryMathExpression;
 
-                return HaveVar(un.FirstMathExpression, arg);
+                return HasVar(un.FirstMathExpression, arg);
             }
             else if (expression is VariableMathExpression)
             {

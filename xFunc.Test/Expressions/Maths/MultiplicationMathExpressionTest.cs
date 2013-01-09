@@ -27,11 +27,28 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("sin(2x)"));
 
             Assert.AreEqual("cos(2 * x) * 2", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            // 2x
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+
+            IMathExpression exp = new MultiplicationMathExpression(num, x);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("2", deriv.ToString());
+
+            num.Number = 3;
+            Assert.AreEqual("3 * x", exp.ToString());
+            Assert.AreEqual("2", deriv.ToString());
         }
 
         [TestMethod]

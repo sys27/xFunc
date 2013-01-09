@@ -46,11 +46,29 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(sec(2x), x)");
+            IMathExpression exp = parser.Parse("deriv(sec(2x), x)").Derivative();
 
-            Assert.AreEqual("2 * (tan(2 * x) * sec(2 * x))", exp.Derivative().ToString());
+            Assert.AreEqual("2 * (tan(2 * x) * sec(2 * x))", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            // sec(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new SecantMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("2 * (tan(2 * x) * sec(2 * x))", deriv.ToString());
+
+            num.Number = 4;
+            Assert.AreEqual("sec(4 * x)", exp.ToString());
+            Assert.AreEqual("2 * (tan(2 * x) * sec(2 * x))", deriv.ToString());
         }
 
     }

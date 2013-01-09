@@ -62,6 +62,24 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest2()
+        {
+            // cot(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new CotangentMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("-(2 / (sin(2 * x) ^ 2))", deriv.ToString());
+
+            num.Number = 3;
+            Assert.AreEqual("cot(3 * x)", exp.ToString());
+            Assert.AreEqual("-(2 / (sin(2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(cot(xy), x)").Derivative();

@@ -27,11 +27,29 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("lg(2x)"));
 
             Assert.AreEqual("2 / ((2 * x) * ln(10))", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            // lg(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new LgMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("2 / ((2 * x) * ln(10))", deriv.ToString());
+
+            num.Number = 3;
+            Assert.AreEqual("lg(3 * x)", exp.ToString());
+            Assert.AreEqual("2 / ((2 * x) * ln(10))", deriv.ToString());
         }
 
         [TestMethod]

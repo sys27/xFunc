@@ -36,10 +36,15 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            CosineMathExpression cos = new CosineMathExpression(firstMathExpression);
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(cos, firstMathExpression.Derivative(variable));
+            CosineMathExpression cos = new CosineMathExpression(firstMathExpression.Clone());
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(cos, firstMathExpression.Clone().Derivative(variable));
 
             return mul;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new SineMathExpression(firstMathExpression.Clone());
         }
 
     }

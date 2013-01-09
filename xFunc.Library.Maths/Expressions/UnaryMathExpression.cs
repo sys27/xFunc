@@ -21,6 +21,8 @@ namespace xFunc.Library.Maths.Expressions
 
         public abstract double Calculate(MathParameterCollection parameters);
 
+        public abstract IMathExpression Clone();
+
         public IMathExpression Derivative()
         {
             return Derivative(new VariableMathExpression('x'));
@@ -30,7 +32,7 @@ namespace xFunc.Library.Maths.Expressions
 
         public IMathExpression Derivative(VariableMathExpression variable)
         {
-            if (MathParser.HaveVar(firstMathExpression, variable))
+            if (MathParser.HasVar(firstMathExpression, variable))
             {
                 return _Derivative(variable);
             }

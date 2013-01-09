@@ -36,11 +36,16 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            SineMathExpression sine = new SineMathExpression(firstMathExpression);
-            MultiplicationMathExpression multiplication = new MultiplicationMathExpression(sine, firstMathExpression.Derivative(variable));
+            SineMathExpression sine = new SineMathExpression(firstMathExpression.Clone());
+            MultiplicationMathExpression multiplication = new MultiplicationMathExpression(sine, firstMathExpression.Clone().Derivative(variable));
             UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(multiplication);
 
             return unMinus;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new CosineMathExpression(firstMathExpression.Clone());
         }
 
     }

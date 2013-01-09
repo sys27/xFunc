@@ -50,7 +50,6 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = parser.Parse("deriv(csc(2x), x)").Derivative();
 
-            // todo: bug -2
             Assert.AreEqual("-2 * (cot(2 * x) * csc(2 * x))", exp.ToString());
         }
 

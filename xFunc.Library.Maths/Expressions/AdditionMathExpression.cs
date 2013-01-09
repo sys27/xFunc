@@ -27,25 +27,30 @@ namespace xFunc.Library.Maths.Expressions
 
         public override IMathExpression Derivative(VariableMathExpression variable)
         {
-            var first = MathParser.HaveVar(firstMathExpression, variable);
-            var second = MathParser.HaveVar(secondMathExpression, variable);
+            var first = MathParser.HasVar(firstMathExpression, variable);
+            var second = MathParser.HasVar(secondMathExpression, variable);
 
             if (first && second)
             {
-                return new AdditionMathExpression(firstMathExpression.Derivative(variable), secondMathExpression.Derivative(variable));
+                return new AdditionMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Derivative(variable).Clone());
             }
             else if (first)
             {
-                return firstMathExpression.Derivative(variable);
+                return firstMathExpression.Clone().Derivative(variable);
             }
             else if (second)
             {
-                return secondMathExpression.Derivative(variable);
+                return secondMathExpression.Derivative(variable).Clone();
             }
             else
             {
                 return new NumberMathExpression(0);
             }
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new AdditionMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

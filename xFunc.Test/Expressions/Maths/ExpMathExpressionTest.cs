@@ -43,6 +43,24 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest3()
+        {
+            // exp(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new ExpMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("2 * exp(2 * x)", deriv.ToString());
+
+            num.Number = 6;
+            Assert.AreEqual("exp(6 * x)", exp.ToString());
+            Assert.AreEqual("2 * exp(2 * x)", deriv.ToString());
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv(exp(xy), x)").Derivative();

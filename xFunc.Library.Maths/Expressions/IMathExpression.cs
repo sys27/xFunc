@@ -10,6 +10,8 @@ namespace xFunc.Library.Maths.Expressions
         IMathExpression Derivative();
         IMathExpression Derivative(VariableMathExpression variable);
 
+        IMathExpression Clone();
+
         IMathExpression Parent { get; set; }
 
     }

@@ -27,11 +27,28 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("sqrt(2x)"));
 
             Assert.AreEqual("1 / sqrt(2 * x)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new SqrtMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("1 / sqrt(2 * x)", deriv.ToString());
+
+            num.Number = 3;
+            Assert.AreEqual("sqrt(3 * x)", exp.ToString());
+            Assert.AreEqual("1 / sqrt(2 * x)", deriv.ToString());
         }
 
         [TestMethod]

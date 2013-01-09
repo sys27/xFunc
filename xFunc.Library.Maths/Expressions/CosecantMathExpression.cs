@@ -47,13 +47,18 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            UnaryMinusMathExpression unary = new UnaryMinusMathExpression(firstMathExpression.Derivative(variable));
-            CotangentMathExpression cot = new CotangentMathExpression(firstMathExpression);
-            CosecantMathExpression csc = new CosecantMathExpression(firstMathExpression);
+            UnaryMinusMathExpression unary = new UnaryMinusMathExpression(firstMathExpression.Clone().Derivative(variable));
+            CotangentMathExpression cot = new CotangentMathExpression(firstMathExpression.Clone());
+            CosecantMathExpression csc = new CosecantMathExpression(firstMathExpression.Clone());
             MultiplicationMathExpression mul1 = new MultiplicationMathExpression(cot, csc);
             MultiplicationMathExpression mul2 = new MultiplicationMathExpression(unary, mul1);
 
             return mul2;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new CosecantMathExpression(firstMathExpression.Clone());
         }
 
     }

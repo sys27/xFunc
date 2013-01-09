@@ -36,11 +36,16 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            ExponentiationMathExpression involution = new ExponentiationMathExpression(firstMathExpression, new NumberMathExpression(2));
+            ExponentiationMathExpression involution = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
             AdditionMathExpression add = new AdditionMathExpression(new NumberMathExpression(1), involution);
-            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Derivative(variable), add);
+            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), add);
 
             return div;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new ArctanMathExpression(firstMathExpression.Clone());
         }
 
     }

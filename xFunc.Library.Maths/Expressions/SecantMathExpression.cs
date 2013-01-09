@@ -47,12 +47,17 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            TangentMathExpression tan = new TangentMathExpression(firstMathExpression);
-            SecantMathExpression sec = new SecantMathExpression(firstMathExpression);
+            TangentMathExpression tan = new TangentMathExpression(firstMathExpression.Clone());
+            SecantMathExpression sec = new SecantMathExpression(firstMathExpression.Clone());
             MultiplicationMathExpression mul1 = new MultiplicationMathExpression(tan, sec);
-            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Derivative(variable), mul1);
+            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), mul1);
 
             return mul2;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new SecantMathExpression(firstMathExpression.Clone());
         }
 
     }

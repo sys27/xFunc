@@ -12,7 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.App.Presenters;
 using xFunc.Library.Logics;
+using xFunc.Library.Logics.Exceptions;
 using xFunc.Library.Maths;
+using xFunc.Library.Maths.Exceptions;
 using xFunc.Library.Maths.Expressions;
 
 namespace xFunc.App.Views
@@ -142,10 +144,65 @@ namespace xFunc.App.Views
         {
             if (args.Key == Key.Enter)
             {
-                if (tabControl.SelectedItem == mathTab)
-                    presenter.AddMathExpression(expressionBox.Text);
-                else if (tabControl.SelectedItem == logicTab)
-                    presenter.AddLogicExpression(expressionBox.Text);
+                try
+                {
+                    if (tabControl.SelectedItem == mathTab)
+                        presenter.AddMathExpression(expressionBox.Text);
+                    else if (tabControl.SelectedItem == logicTab)
+                        presenter.AddLogicExpression(expressionBox.Text);
+                }
+                catch (MathLexerException mle)
+                {
+                    statusBox.Text = mle.Message;
+                }
+                catch (MathParserException mpe)
+                {
+                    statusBox.Text = mpe.Message;
+                }
+                catch (LogicLexerException lle)
+                {
+                    statusBox.Text = lle.Message;
+                }
+                catch (LogicParserException lpe)
+                {
+                    statusBox.Text = lpe.Message;
+                }
+                catch (DivideByZeroException dbze)
+                {
+                    statusBox.Text = dbze.Message;
+                }
+                catch (ArgumentNullException ane)
+                {
+                    statusBox.Text = ane.Message;
+                }
+                catch (ArgumentException ae)
+                {
+                    statusBox.Text = ae.Message;
+                }
+                catch (FormatException fe)
+                {
+                    statusBox.Text = fe.Message;
+                }
+                catch (OverflowException oe)
+                {
+                    statusBox.Text = oe.Message;
+                }
+                catch (KeyNotFoundException)
+                {
+                    statusBox.Text = "The variable not found.";
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    statusBox.Text = ioe.Message;
+                }
+                catch (NotSupportedException)
+                {
+                    statusBox.Text = "This operation is not supported.";
+                }
 
                 expressionBox.Text = string.Empty;
             }

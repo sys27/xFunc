@@ -25,9 +25,14 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(firstMathExpression.Derivative(variable), this);
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), this.Clone());
 
             return mul;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new ExpMathExpression(firstMathExpression.Clone());
         }
 
     }

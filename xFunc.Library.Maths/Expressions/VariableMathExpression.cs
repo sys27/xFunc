@@ -33,6 +33,11 @@ namespace xFunc.Library.Maths.Expressions
             return parameters[variable];
         }
 
+        public IMathExpression Clone()
+        {
+            return new VariableMathExpression(variable);
+        }
+
         public IMathExpression Derivative()
         {
             return Derivative(new VariableMathExpression('x'));
@@ -43,7 +48,7 @@ namespace xFunc.Library.Maths.Expressions
             if (this.Equals(variable))
                 return new NumberMathExpression(1);
             else
-                return this;
+                return this.Clone();
         }
 
         public char Variable

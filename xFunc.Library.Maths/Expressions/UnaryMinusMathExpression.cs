@@ -23,9 +23,14 @@ namespace xFunc.Library.Maths.Expressions
             return -firstMathExpression.Calculate(parameters);
         }
 
+        public override IMathExpression Clone()
+        {
+            return new UnaryMinusMathExpression(firstMathExpression.Clone());
+        }
+
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            return new UnaryMinusMathExpression(firstMathExpression.Derivative());
+            return new UnaryMinusMathExpression(firstMathExpression.Clone().Derivative());
         }
 
     }

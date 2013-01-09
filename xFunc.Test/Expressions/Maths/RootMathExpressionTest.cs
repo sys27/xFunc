@@ -27,11 +27,28 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("root(x, 3)"));
 
             Assert.AreEqual("(1 / 3) * (x ^ ((1 / 3) - 1))", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            // root(x, 3)
+            NumberMathExpression num = new NumberMathExpression(3);
+            VariableMathExpression x = new VariableMathExpression('x');
+
+            IMathExpression exp = new RootMathExpression(x, num);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("(1 / 3) * (x ^ ((1 / 3) - 1))", deriv.ToString());
+
+            num.Number = 4;
+            Assert.AreEqual("root(x, 4)", exp.ToString());
+            Assert.AreEqual("(1 / 3) * (x ^ ((1 / 3) - 1))", deriv.ToString());
         }
 
         [TestMethod]

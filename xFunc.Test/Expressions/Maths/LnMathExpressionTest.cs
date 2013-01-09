@@ -27,11 +27,29 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("ln(2x)"));
 
             Assert.AreEqual("1 / x", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest2()
+        {
+            // ln(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new LnMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("1 / x", deriv.ToString());
+
+            num.Number = 5;
+            Assert.AreEqual("ln(5 * x)", exp.ToString());
+            Assert.AreEqual("1 / x", deriv.ToString());
         }
 
         [TestMethod]

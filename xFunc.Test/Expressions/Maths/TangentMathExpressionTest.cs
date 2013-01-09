@@ -46,7 +46,7 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest()
+        public void DerivativeTest1()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("tan(x)"));
 
@@ -54,11 +54,28 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest1()
+        public void DerivativeTest2()
         {
             IMathExpression exp = MathParser.Derivative(parser.Parse("tan(2x)"));
 
             Assert.AreEqual("2 / (cos(2 * x) ^ 2)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest3()
+        {
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new TangentMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("2 / (cos(2 * x) ^ 2)", deriv.ToString());
+
+            num.Number = 5;
+            Assert.AreEqual("tan(5 * x)", exp.ToString());
+            Assert.AreEqual("2 / (cos(2 * x) ^ 2)", deriv.ToString());
         }
 
         [TestMethod]

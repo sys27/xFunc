@@ -41,6 +41,11 @@ namespace xFunc.Library.Maths.Expressions
             throw new NotSupportedException();
         }
 
+        public IMathExpression Clone()
+        {
+            return new AssignMathExpression((VariableMathExpression)variable.Clone(), value.Clone());
+        }
+
         public VariableMathExpression Variable
         {
             get

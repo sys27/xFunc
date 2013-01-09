@@ -43,6 +43,37 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest3()
+        {
+            // x ^ 3
+            VariableMathExpression x = new VariableMathExpression('x');
+            NumberMathExpression num1 = new NumberMathExpression(3);
+
+            IMathExpression exp = new ExponentiationMathExpression(x, num1);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("3 * (x ^ 2)", deriv.ToString());
+
+            num1.Number = 4;
+            Assert.AreEqual("x ^ 4", exp.ToString());
+            Assert.AreEqual("3 * (x ^ 2)", deriv.ToString());
+
+            // 2 ^ (3x)
+            NumberMathExpression num2 = new NumberMathExpression(2);
+            num1 = new NumberMathExpression(3);
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num1, x.Clone());
+
+            exp = new ExponentiationMathExpression(num2, mul);
+            deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("(ln(2) * (2 ^ (3 * x))) * 3", deriv.ToString());
+
+            num1.Number = 4;
+            Assert.AreEqual("2 ^ (4 * x)", exp.ToString());
+            Assert.AreEqual("(ln(2) * (2 ^ (3 * x))) * 3", deriv.ToString());
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = parser.Parse("deriv((y * x) ^ 3, x)").Derivative();

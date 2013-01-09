@@ -22,10 +22,15 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression, this);
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(firstMathExpression.Derivative(variable), div);
+            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone(), this.Clone());
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), div);
 
             return mul;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new AbsoluteMathExpression(firstMathExpression.Clone());
         }
 
     }

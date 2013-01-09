@@ -43,6 +43,11 @@ namespace xFunc.Library.Maths.Expressions
             return new NumberMathExpression(0);
         }
 
+        public IMathExpression Clone()
+        {
+            return new NumberMathExpression(number);
+        }
+
         public double Number
         {
             get

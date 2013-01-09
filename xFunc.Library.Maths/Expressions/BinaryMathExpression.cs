@@ -21,6 +21,8 @@
 
         public abstract double Calculate(MathParameterCollection parameters);
 
+        public abstract IMathExpression Clone();
+
         public IMathExpression Derivative()
         {
             return Derivative(new VariableMathExpression('x'));

@@ -43,14 +43,19 @@ namespace xFunc.Library.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            AbsoluteMathExpression abs = new AbsoluteMathExpression(firstMathExpression);
-            ExponentiationMathExpression sqr = new ExponentiationMathExpression(firstMathExpression, new NumberMathExpression(2));
+            AbsoluteMathExpression abs = new AbsoluteMathExpression(firstMathExpression.Clone());
+            ExponentiationMathExpression sqr = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
             SubtractionMathExpression sub = new SubtractionMathExpression(sqr, new NumberMathExpression(1));
             SqrtMathExpression sqrt = new SqrtMathExpression(sub);
             MultiplicationMathExpression mul = new MultiplicationMathExpression(abs, sqrt);
-            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Derivative(variable), mul);
+            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), mul);
 
             return div;
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new ArcsecMathExpression(firstMathExpression.Clone());
         }
 
     }

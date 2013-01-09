@@ -83,6 +83,24 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest2()
+        {
+            // cos(2x)
+            NumberMathExpression num = new NumberMathExpression(2);
+            VariableMathExpression x = new VariableMathExpression('x');
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+
+            IMathExpression exp = new CosineMathExpression(mul);
+            IMathExpression deriv = MathParser.Derivative(exp);
+
+            Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
+
+            num.Number = 7;
+            Assert.AreEqual("cos(7 * x)", exp.ToString());
+            Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
+        }
+
+        [TestMethod]
         public void ToStringTest()
         {
             IMathExpression exp = parser.Parse("cos(2x)");

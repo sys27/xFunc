@@ -27,29 +27,34 @@ namespace xFunc.Library.Maths.Expressions
 
         public override IMathExpression Derivative(VariableMathExpression variable)
         {
-            var first = MathParser.HaveVar(firstMathExpression, variable);
-            var second = MathParser.HaveVar(secondMathExpression, variable);
+            var first = MathParser.HasVar(firstMathExpression, variable);
+            var second = MathParser.HasVar(secondMathExpression, variable);
 
             if (first && second)
             {
-                MultiplicationMathExpression mul1 = new MultiplicationMathExpression(firstMathExpression.Derivative(variable), secondMathExpression);
-                MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression, secondMathExpression.Derivative(variable));
+                MultiplicationMathExpression mul1 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone());
+                MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone().Derivative(variable));
                 AdditionMathExpression add = new AdditionMathExpression(mul1, mul2);
 
                 return add;
             }
             else if (first)
             {
-                return new MultiplicationMathExpression(firstMathExpression.Derivative(variable), secondMathExpression);
+                return new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone());
             }
             else if (second)
             {
-                return new MultiplicationMathExpression(firstMathExpression, secondMathExpression.Derivative(variable));
+                return new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone().Derivative(variable));
             }
             else
             {
                 return new NumberMathExpression(0);
             }
+        }
+
+        public override IMathExpression Clone()
+        {
+            return new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

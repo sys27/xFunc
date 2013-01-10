@@ -19,6 +19,8 @@ packages
 *.suo
 *.vssscc
 *.vspscc
+*.psess
+*.vsp
 *.user
 *.nupkg
 *.nuspec

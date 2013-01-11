@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("xFunc")]
-[assembly: AssemblyCopyright("Copyright © Dmitry Kischenko 2012")]
+[assembly: AssemblyCopyright("Copyright © 2012 Dmitry Kischenko")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -17,5 +17,5 @@ using System.Windows;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("1.4.1.0")]
-[assembly: AssemblyFileVersion("1.4.1.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]

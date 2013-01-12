@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using xFunc.Library.Maths;
-using xFunc.Library.Logics;
-using xFunc.Library.Logics.Expressions;
+using xFunc.Maths;
+using xFunc.Logics;
+using xFunc.Logics.Expressions;
 
 namespace xFunc.Test
 {

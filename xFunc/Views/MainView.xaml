@@ -1,0 +1,566 @@
+﻿<!-- Copyright 2012 Dmitry Kischenko
+
+Licensed under the Apache License, Version 2.0 (the "License"); 
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http:www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software 
+distributed under the License is distributed on an "AS IS" BASIS, 
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+express or implied. 
+See the License for the specific language governing permissions and 
+limitations under the License. -->
+<ribbon:RibbonWindow x:Class="xFunc.Views.MainView"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
+                     xmlns:math="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
+                     xmlns:logic="clr-namespace:xFunc.Logics;assembly=xFunc.Logics"
+                     xmlns:local="clr-namespace:xFunc.Views"
+                     Title="xFunc" Width="1024" Height="576" WindowStartupLocation="CenterScreen"
+                     Icon="../Images/xFunc.ico">
+    <ribbon:RibbonWindow.CommandBindings>
+        <CommandBinding Command="local:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="local:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="local:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+    </ribbon:RibbonWindow.CommandBindings>
+    <ribbon:RibbonWindow.InputBindings>
+        <KeyBinding Command="local:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
+        <KeyBinding Command="local:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
+        <KeyBinding Command="local:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
+    </ribbon:RibbonWindow.InputBindings>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="128" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="230" MinWidth="220" MaxWidth="400" />
+        </Grid.ColumnDefinitions>
+
+        <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="2">
+            <ribbon:Ribbon.QuickAccessItems>
+                <ribbon:QuickAccessMenuItem Target="{Binding ElementName=undoButton}" IsChecked="True" />
+                <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
+            </ribbon:Ribbon.QuickAccessItems>
+            <ribbon:Ribbon.ToolBarItems>
+                <ribbon:Button Size="Small" Icon="../Images/Help.png" />
+            </ribbon:Ribbon.ToolBarItems>
+            <ribbon:RibbonTabItem Header="Home" IsSelected="True">
+                <ribbon:RibbonGroupBox Header="Clipboard">
+                    <ribbon:Button x:Name="undoButton" Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="Undo (Ctrl+Z)" Text="Undo the last change" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button x:Name="redoButton" Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" Command="ApplicationCommands.Redo">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="Redo (Ctrl+R)" Text="Redo the last change" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <Separator />
+                    <ribbon:Button Header="Cut" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" Command="ApplicationCommands.Cut">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="Cut (Ctrl+X)" Text="Cut the selected text" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button Header="Copy" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" Command="ApplicationCommands.Copy">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="Copy (Ctrl+C)" Text="Copy the selected text" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="Paste (Ctrl+P)" Text="Paste text from clipboard" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="Angles">
+                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Command="local:MainView.DegreeCommand">
+                        <ribbon:ToggleButton.ToolTip>
+                            <ribbon:ScreenTip Title="Degree (Ctrl+Alt+D)" Text="Degrees as a unit of angle measure" />
+                        </ribbon:ToggleButton.ToolTip>
+                    </ribbon:ToggleButton>
+                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Command="local:MainView.RadianCommand">
+                        <ribbon:ToggleButton.ToolTip>
+                            <ribbon:ScreenTip Title="Radian (Ctrl+Alt+R)" Text="Radians as a unit of angle measure" />
+                        </ribbon:ToggleButton.ToolTip>
+                    </ribbon:ToggleButton>
+                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Command="local:MainView.GradianCommand">
+                        <ribbon:ToggleButton.ToolTip>
+                            <ribbon:ScreenTip Title="Gradian (Ctrl+Alt+G)" Text="Gradians as a unit of angle measure" />
+                        </ribbon:ToggleButton.ToolTip>
+                    </ribbon:ToggleButton>
+                </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTabItem>
+            <ribbon:RibbonTabItem Header="Insert">
+                <ribbon:RibbonGroupBox Header="Variables">
+                    <ribbon:SplitButton Header="Vars" ResizeMode="Both" Icon="../Images/Vars.png" LargeIcon="../Images/VarsLarge.png">
+                        <ribbon:Gallery MinItemsInRow="2" MaxItemsInRow="6" ItemWidth="24" ItemHeight="24" GroupBy="Tag" SelectedFilter="{Binding ElementName=defalutGroup}">
+                            <ribbon:Gallery.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Setter Property="BorderBrush" Value="Gray" />
+                                </Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </ribbon:Gallery.Resources>
+                            <ribbon:Gallery.Filters>
+                                <ribbon:GalleryGroupFilter x:Name="defaultGroup" Title="All" Groups="English,Greek" />
+                                <ribbon:GalleryGroupFilter Title="English" Groups="English" />
+                                <ribbon:GalleryGroupFilter Title="Greek" Groups="Greek" />
+                            </ribbon:Gallery.Filters>
+                            <Border Tag="English">
+                                <TextBlock Text="a" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="b" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="c" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="d" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="e" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="f" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="g" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="h" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="i" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="j" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="k" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="l" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="m" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="n" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="o" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="p" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="q" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="r" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="s" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="t" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="u" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="v" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="w" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="x" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="y" />
+                            </Border>
+                            <Border Tag="English">
+                                <TextBlock Text="z" />
+                            </Border>
+
+                            <Border Tag="Greek">
+                                <TextBlock Text="α" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="β" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="γ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="δ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ε" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ζ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="η" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="θ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ι" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="κ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="λ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="μ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ν" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ξ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ο" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="π" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ρ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="σς" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="τ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="υ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="φ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="χ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ψ" />
+                            </Border>
+                            <Border Tag="Greek">
+                                <TextBlock Text="ω" />
+                            </Border>
+                        </ribbon:Gallery>
+                    </ribbon:SplitButton>
+                </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTabItem>
+            <ribbon:RibbonTabItem Header="View">
+                <ribbon:RibbonGroupBox Header="Font">
+                    <ribbon:Spinner x:Name="fontSizeSpinner" Header="Size:" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" Format="" />
+                </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTabItem>
+        </ribbon:Ribbon>
+
+        <TabControl x:Name="tabControl" Grid.Row="1">
+            <TabControl.Resources>
+                <Style x:Key="listBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </TabControl.Resources>
+            <TabItem x:Name="mathTab" Header="Math Expressions">
+                <ListBox x:Name="mathExpsListBox" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type math:MathWorkspaceItem}">
+                            <Border BorderBrush="Silver" BorderThickness="0,0,0,1">
+                                <StackPanel Orientation="Vertical" Margin="5,5,0,5">
+                                    <TextBlock Text="Expression:" />
+                                    <TextBlock Text="{Binding Path=StringExpression}" FontSize="16" Margin="20,2,0,5" />
+                                    <TextBlock Text="Answer:" />
+                                    <TextBlock Text="{Binding Path=Answer}" FontSize="14" Margin="20,2,0,0" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem x:Name="logicTab" Header="Logic Expressions">
+                <ListBox x:Name="logicExpsListBox" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type logic:LogicWorkspaceItem}">
+                            <Border BorderBrush="Silver" BorderThickness="0,0,0,1">
+                                <StackPanel Orientation="Vertical" Margin="5,5,0,5">
+                                    <TextBlock Text="Expression:" />
+                                    <TextBlock Text="{Binding Path=StringExpression}" FontSize="16" Margin="20,2,0,5" />
+                                    <TextBlock Text="Answer:" />
+                                    <TextBlock Text="{Binding Path=Answer}" FontSize="14" Margin="20,2,0,0" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Graphs"></TabItem>
+        </TabControl>
+
+        <GridSplitter Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="3,0,0,0" Background="White" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="BorderBrush" Value="Silver" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="Black" />
+                                            <Setter Property="Background" Value="#FFE0E0E0" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="BorderBrush" Value="White" />
+                                            <Setter Property="BorderThickness" Value="2" />
+                                            <Setter Property="Background" Value="#FFD5D5D5" />
+                                        </Trigger>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="Background" Value="#FFE0E0E0" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <Expander Header="Numbers &amp; Arithmetic" IsExpanded="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="7" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource seven}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="8" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource eight}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="9" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource nine}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="/" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource div}" Width="14" Height="14" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0" Tag="4" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource four}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1" Tag="5" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource five}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2" Tag="6" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource six}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3" Tag="*" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource mul}" Width="14" Height="12" />
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="0" Tag="1" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource one}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Tag="2" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource two}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="2" Tag="3" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource three}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="3" Tag="-" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource minus}" Width="12" Height="4" />
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Tag="0" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource zero}" Width="14" Height="12" />
+                        </Button>
+                        <Button Grid.Row="3" Grid.Column="2" Tag="." Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource point}" Width="3" Height="3" />
+                        </Button>
+                        <Button Grid.Row="3" Grid.Column="3" Tag="+" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource plus}" Width="14" Height="12" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Standart" IsExpanded="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="^2" Click="InsertInv_Click">
+                            <Rectangle Fill="{StaticResource sqr}" Width="20" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="^y" Click="InsertInv_Click">
+                            <Rectangle Fill="{StaticResource inv}" Width="20" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="sqrt" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource sqrt}" Width="22" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="root" Click="InsertDoubleArgFunc_Click">
+                            <Rectangle Fill="{StaticResource root}" Width="22" Height="16" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0" Tag="ln" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource ln}" Width="26" Height="16" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1" Tag="lg" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource lg}" Width="26" Height="16" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2" Tag="log" Click="InsertDoubleArgFunc_Click">
+                            <Rectangle Fill="{StaticResource log}" Width="36" Height="16" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3" Tag="abs" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Trigonometric">
+                    <Grid Margin="0,4,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="sin" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource sin}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="cos" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource cos}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="tan" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource tan}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="cot" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource cot}" Width="36" Height="20" />
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0" Tag="arcsin" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arcsin}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1" Tag="arccos" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arccos}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2" Tag="arctan" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arctan}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3" Tag="arccot" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
+                        </Button>
+                        
+                        <Button Grid.Row="2" Grid.Column="0" Tag="sec" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource sec}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Tag="csc" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource csc}" Width="36" Height="20" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="2" Tag="arcsec" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arcsec}" Width="40" Height="20" />
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="3" Tag="arccsc" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource arccsc}" Width="40" Height="20" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Constants">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="π" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource pi}" Width="18" Height="12" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="e" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource exp}" Width="18" Height="12" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander Header="Additional">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="deriv" Click="InsertDoubleArgFunc_Click">
+                            <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
+                        </Button>
+                    </Grid>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Row="2" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+        <TextBox x:Name="expressionBox" Grid.Row="2" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" KeyUp="ExpressionBox_KeyUp" />
+
+        <ribbon:StatusBar Grid.Row="3" Grid.ColumnSpan="2">
+            <ribbon:StatusBarItem HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock x:Name="statusBox" />
+            </ribbon:StatusBarItem>
+        </ribbon:StatusBar>
+    </Grid>
+</ribbon:RibbonWindow>

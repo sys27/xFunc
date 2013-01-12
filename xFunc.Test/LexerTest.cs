@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using xFunc.Library.Maths;
-using xFunc.Library.Maths.Exceptions;
-using xFunc.Library.Logics;
-using xFunc.Library.Logics.Exceptions;
+using xFunc.Maths;
+using xFunc.Maths.Exceptions;
+using xFunc.Logics;
+using xFunc.Logics.Exceptions;
 
 namespace xFunc.Test
 {

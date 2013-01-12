@@ -230,6 +230,7 @@ namespace xFunc.Views
             set
             {
                 mathExpsListBox.ItemsSource = value;
+                mathExpsListBox.ScrollIntoView(value.Last());
             }
         }
 
@@ -238,6 +239,7 @@ namespace xFunc.Views
             set
             {
                 logicExpsListBox.ItemsSource = value;
+                logicExpsListBox.ScrollIntoView(value.Last());
             }
         }
 

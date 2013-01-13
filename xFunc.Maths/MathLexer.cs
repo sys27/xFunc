@@ -172,11 +172,35 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("cosec"))
+                    {
+                        token.Type = MathTokenType.Cosecant;
+                        tokens.Add(token);
+                        i += 4;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("csc"))
+                    {
+                        token.Type = MathTokenType.Cosecant;
+                        tokens.Add(token);
+                        i += 2;
+
+                        continue;
+                    }
                     if (sub.StartsWith("cos"))
                     {
                         token.Type = MathTokenType.Cosine;
                         tokens.Add(token);
                         i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("tg"))
+                    {
+                        token.Type = MathTokenType.Tangent;
+                        tokens.Add(token);
+                        i++;
 
                         continue;
                     }
@@ -188,7 +212,7 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("cot"))
+                    if (sub.StartsWith("cot") || sub.StartsWith("ctg"))
                     {
                         token.Type = MathTokenType.Cotangent;
                         tokens.Add(token);
@@ -204,17 +228,25 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("csc"))
-                    {
-                        token.Type = MathTokenType.Cosecant;
-                        tokens.Add(token);
-                        i += 2;
-
-                        continue;
-                    }
                     if (sub.StartsWith("arcsin"))
                     {
                         token.Type = MathTokenType.Arcsine;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arccosec"))
+                    {
+                        token.Type = MathTokenType.Arccosecant;
+                        tokens.Add(token);
+                        i += 7;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arccsc"))
+                    {
+                        token.Type = MathTokenType.Arccosecant;
                         tokens.Add(token);
                         i += 5;
 
@@ -228,6 +260,14 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("arctg"))
+                    {
+                        token.Type = MathTokenType.Arctangent;
+                        tokens.Add(token);
+                        i += 4;
+
+                        continue;
+                    }
                     if (sub.StartsWith("arctan"))
                     {
                         token.Type = MathTokenType.Arctangent;
@@ -236,7 +276,7 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("arccot"))
+                    if (sub.StartsWith("arccot") || sub.StartsWith("arcctg"))
                     {
                         token.Type = MathTokenType.Arccotangent;
                         tokens.Add(token);
@@ -247,14 +287,6 @@ namespace xFunc.Maths
                     if (sub.StartsWith("arcsec"))
                     {
                         token.Type = MathTokenType.Arcsecant;
-                        tokens.Add(token);
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arccsc"))
-                    {
-                        token.Type = MathTokenType.Arccosecant;
                         tokens.Add(token);
                         i += 5;
 

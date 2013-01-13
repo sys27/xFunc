@@ -19,8 +19,8 @@ limitations under the License. -->
                      xmlns:math="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
                      xmlns:logic="clr-namespace:xFunc.Logics;assembly=xFunc.Logics"
                      xmlns:local="clr-namespace:xFunc.Views"
-                     Title="xFunc" Width="1024" Height="576" WindowStartupLocation="CenterScreen"
-                     Icon="../Images/xFunc.ico">
+                     Title="xFunc" Width="1024" Height="576" MinWidth="450"
+                     WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
     <ribbon:RibbonWindow.CommandBindings>
         <CommandBinding Command="local:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="local:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />

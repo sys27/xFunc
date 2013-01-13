@@ -151,7 +151,7 @@ namespace xFunc.Views
             else
             {
                 expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(, )");
-                expressionBox.SelectionStart = prevSelectionStart + func.Length + 2;
+                expressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
             }
 
             expressionBox.Focus();

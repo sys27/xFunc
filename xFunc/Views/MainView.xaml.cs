@@ -47,7 +47,7 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
-            expressionBox.Focus();
+            mathExpressionBox.Focus();
 
             this.presenter = new MainPresenter(this);
 
@@ -88,85 +88,82 @@ namespace xFunc.Views
 
         private void InsertChar_Click(object o, RoutedEventArgs args)
         {
-            var prevSelectionStart = expressionBox.SelectionStart;
-            expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, ((Button)o).Tag.ToString());
-            expressionBox.SelectionStart = ++prevSelectionStart;
-            expressionBox.Focus();
+            var prevSelectionStart = mathExpressionBox.SelectionStart;
+            mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, ((Button)o).Tag.ToString());
+            mathExpressionBox.SelectionStart = ++prevSelectionStart;
+            mathExpressionBox.Focus();
         }
 
         private void InsertFunc_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            var prevSelectionStart = expressionBox.SelectionStart;
+            var prevSelectionStart = mathExpressionBox.SelectionStart;
 
-            if (expressionBox.SelectionLength > 0)
+            if (mathExpressionBox.SelectionLength > 0)
             {
-                var prevSelectionLength = expressionBox.SelectionLength;
+                var prevSelectionLength = mathExpressionBox.SelectionLength;
 
-                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ")");
-                expressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 2;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ")");
+                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 2;
             }
             else
             {
-                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "()");
-                expressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "()");
+                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
             }
 
-            expressionBox.Focus();
+            mathExpressionBox.Focus();
         }
 
         private void InsertInv_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            var prevSelectionStart = expressionBox.SelectionStart;
+            var prevSelectionStart = mathExpressionBox.SelectionStart;
 
-            if (expressionBox.SelectionLength > 0)
+            if (mathExpressionBox.SelectionLength > 0)
             {
-                var prevSelectionLength = expressionBox.SelectionLength;
+                var prevSelectionLength = mathExpressionBox.SelectionLength;
 
-                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, "(").Insert(prevSelectionStart + prevSelectionLength + 1, ")" + func);
-                expressionBox.SelectionStart = prevSelectionStart + prevSelectionLength + func.Length + 2;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, "(").Insert(prevSelectionStart + prevSelectionLength + 1, ")" + func);
+                mathExpressionBox.SelectionStart = prevSelectionStart + prevSelectionLength + func.Length + 2;
             }
             else
             {
-                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func);
-                expressionBox.SelectionStart = prevSelectionStart + func.Length;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func);
+                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length;
             }
 
-            expressionBox.Focus();
+            mathExpressionBox.Focus();
         }
 
         private void InsertDoubleArgFunc_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            var prevSelectionStart = expressionBox.SelectionStart;
+            var prevSelectionStart = mathExpressionBox.SelectionStart;
 
-            if (expressionBox.SelectionLength > 0)
+            if (mathExpressionBox.SelectionLength > 0)
             {
-                var prevSelectionLength = expressionBox.SelectionLength;
+                var prevSelectionLength = mathExpressionBox.SelectionLength;
 
-                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ", )");
-                expressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 3;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ", )");
+                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 3;
             }
             else
             {
-                expressionBox.Text = expressionBox.Text.Insert(prevSelectionStart, func + "(, )");
-                expressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "(, )");
+                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
             }
 
-            expressionBox.Focus();
+            mathExpressionBox.Focus();
         }
 
-        private void ExpressionBox_KeyUp(object o, KeyEventArgs args)
+        private void mathExpressionBox_KeyUp(object o, KeyEventArgs args)
         {
             if (args.Key == Key.Enter)
             {
                 try
                 {
-                    if (tabControl.SelectedItem == mathTab)
-                        presenter.AddMathExpression(expressionBox.Text);
-                    else if (tabControl.SelectedItem == logicTab)
-                        presenter.AddLogicExpression(expressionBox.Text);
+                    presenter.AddMathExpression(mathExpressionBox.Text);
                 }
                 catch (MathLexerException mle)
                 {
@@ -175,6 +172,55 @@ namespace xFunc.Views
                 catch (MathParserException mpe)
                 {
                     statusBox.Text = mpe.Message;
+                }
+                catch (DivideByZeroException dbze)
+                {
+                    statusBox.Text = dbze.Message;
+                }
+                catch (ArgumentNullException ane)
+                {
+                    statusBox.Text = ane.Message;
+                }
+                catch (ArgumentException ae)
+                {
+                    statusBox.Text = ae.Message;
+                }
+                catch (FormatException fe)
+                {
+                    statusBox.Text = fe.Message;
+                }
+                catch (OverflowException oe)
+                {
+                    statusBox.Text = oe.Message;
+                }
+                catch (KeyNotFoundException)
+                {
+                    statusBox.Text = "The variable not found.";
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    statusBox.Text = ioe.Message;
+                }
+                catch (NotSupportedException)
+                {
+                    statusBox.Text = "This operation is not supported.";
+                }
+
+                mathExpressionBox.Text = string.Empty;
+            }
+        }
+
+        private void logicExpressionBox_KeyUp(object o, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter)
+            {
+                try
+                {
+                    presenter.AddLogicExpression(logicExpressionBox.Text);
                 }
                 catch (LogicLexerException lle)
                 {
@@ -221,7 +267,7 @@ namespace xFunc.Views
                     statusBox.Text = "This operation is not supported.";
                 }
 
-                expressionBox.Text = string.Empty;
+                logicExpressionBox.Text = string.Empty;
             }
         }
 

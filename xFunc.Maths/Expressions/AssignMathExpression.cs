@@ -35,6 +35,11 @@ namespace xFunc.Maths.Expressions
             this.value = value;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0} := {1}", variable, value);
+        }
+
         public double Calculate(MathParameterCollection parameters)
         {
             if (parameters == null)

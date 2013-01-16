@@ -19,6 +19,7 @@ limitations under the License. -->
                      xmlns:math="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
                      xmlns:logic="clr-namespace:xFunc.Logics;assembly=xFunc.Logics"
                      xmlns:local="clr-namespace:xFunc.Views"
+                     xmlns:converters="clr-namespace:xFunc.Converters"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
                      WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
     <ribbon:RibbonWindow.CommandBindings>
@@ -31,7 +32,7 @@ limitations under the License. -->
         <KeyBinding Command="local:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
         <KeyBinding Command="local:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
     </ribbon:RibbonWindow.InputBindings>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -297,7 +298,15 @@ limitations under the License. -->
                                 <Border BorderBrush="Silver" BorderThickness="0,0,0,1">
                                     <StackPanel Orientation="Vertical" Margin="5,5,0,5">
                                         <TextBlock Text="Expression:" />
-                                        <TextBlock Text="{Binding Path=StringExpression}" FontSize="16" Margin="20,2,0,5" />
+                                        <TextBlock FontSize="16" Margin="20,2,0,5">
+                                            <TextBlock.Text>
+                                                <Binding Path="Expression">
+                                                    <Binding.Converter>
+                                                        <converters:IMathExpressionToStringConverter />
+                                                    </Binding.Converter>
+                                                </Binding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                         <TextBlock Text="Answer:" />
                                         <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                     </StackPanel>
@@ -322,9 +331,17 @@ limitations under the License. -->
                                 <Border BorderBrush="Silver" BorderThickness="0,0,0,1">
                                     <StackPanel Orientation="Vertical" Margin="5,5,0,5">
                                         <TextBlock Text="Expression:" />
-                                        <TextBlock Text="{Binding Path=StringExpression}" FontSize="16" Margin="20,2,0,5" />
+                                        <TextBlock FontSize="16" Margin="20,2,0,5">
+                                            <TextBlock.Text>
+                                                <Binding Path="Expression">
+                                                    <Binding.Converter>
+                                                        <converters:ILogicExpressionToStringConverter />
+                                                    </Binding.Converter>
+                                                </Binding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                         <TextBlock Text="Answer:" />
-                                        <TextBlock Text="{Binding Path=Answer}" FontSize="14" Margin="20,2,0,0" />
+                                        <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -515,7 +532,7 @@ limitations under the License. -->
                         <Button Grid.Row="1" Grid.Column="3" Tag="arccot" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
                         </Button>
-                        
+
                         <Button Grid.Row="2" Grid.Column="0" Tag="sec" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sec}" Width="36" Height="20" />
                         </Button>

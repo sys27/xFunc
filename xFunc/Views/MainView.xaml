@@ -360,12 +360,14 @@ limitations under the License. -->
                     
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <StackPanel Margin="8">
+                            <StackPanel Margin="6,4,8,4">
                                 <TextBlock Text="Expressions:" FontSize="14" />
+                                <ListBox BorderBrush="Transparent" BorderThickness="0" />
+                                <TextBox x:Name="graphExpBox" FontFamily="Lucida Calligraphy" FontSize="14" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
-                    <views:PlottingGraph Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                    <views:PlottingGraph x:Name="plot" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" />
                 </Grid>
             </TabItem>
         </TabControl>

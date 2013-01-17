@@ -18,19 +18,19 @@ limitations under the License. -->
                      xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
                      xmlns:math="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
                      xmlns:logic="clr-namespace:xFunc.Logics;assembly=xFunc.Logics"
-                     xmlns:local="clr-namespace:xFunc.Views"
+                     xmlns:views="clr-namespace:xFunc.Views"
                      xmlns:converters="clr-namespace:xFunc.Converters"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
                      WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
     <ribbon:RibbonWindow.CommandBindings>
-        <CommandBinding Command="local:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
-        <CommandBinding Command="local:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
-        <CommandBinding Command="local:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
     </ribbon:RibbonWindow.CommandBindings>
     <ribbon:RibbonWindow.InputBindings>
-        <KeyBinding Command="local:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
-        <KeyBinding Command="local:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
-        <KeyBinding Command="local:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
+        <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
+        <KeyBinding Command="views:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
+        <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
     </ribbon:RibbonWindow.InputBindings>
 
     <Grid>
@@ -82,17 +82,17 @@ limitations under the License. -->
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="Angles">
-                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Command="local:MainView.DegreeCommand">
+                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Command="views:MainView.DegreeCommand">
                         <ribbon:ToggleButton.ToolTip>
                             <ribbon:ScreenTip Title="Degree (Ctrl+Alt+D)" Text="Degrees as a unit of angle measure" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Command="local:MainView.RadianCommand">
+                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Command="views:MainView.RadianCommand">
                         <ribbon:ToggleButton.ToolTip>
                             <ribbon:ScreenTip Title="Radian (Ctrl+Alt+R)" Text="Radians as a unit of angle measure" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Command="local:MainView.GradianCommand">
+                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Command="views:MainView.GradianCommand">
                         <ribbon:ToggleButton.ToolTip>
                             <ribbon:ScreenTip Title="Gradian (Ctrl+Alt+G)" Text="Gradians as a unit of angle measure" />
                         </ribbon:ToggleButton.ToolTip>
@@ -351,7 +351,23 @@ limitations under the License. -->
                     <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" FontFamily="Lucida Calligraphy" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Graphs"></TabItem>
+            <TabItem Header="Graphs">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="4*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="8">
+                                <TextBlock Text="Expressions:" FontSize="14" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                    <views:PlottingGraph Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                </Grid>
+            </TabItem>
         </TabControl>
 
         <GridSplitter Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Left" VerticalAlignment="Stretch" />

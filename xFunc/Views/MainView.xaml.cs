@@ -271,6 +271,66 @@ namespace xFunc.Views
             }
         }
 
+        private void graphExpBox_KeyUp(object o, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter)
+            {
+                try
+                {
+                    var lastAngle = presenter.AngleMeasurement;
+                    presenter.AngleMeasurement = AngleMeasurement.Radian;
+                    plot.Expression = presenter.MathWorkspace.Parser.Parse(graphExpBox.Text);
+                    presenter.AngleMeasurement = lastAngle;
+                }
+                catch (MathLexerException mle)
+                {
+                    statusBox.Text = mle.Message;
+                }
+                catch (MathParserException mpe)
+                {
+                    statusBox.Text = mpe.Message;
+                }
+                catch (DivideByZeroException dbze)
+                {
+                    statusBox.Text = dbze.Message;
+                }
+                catch (ArgumentNullException ane)
+                {
+                    statusBox.Text = ane.Message;
+                }
+                catch (ArgumentException ae)
+                {
+                    statusBox.Text = ae.Message;
+                }
+                catch (FormatException fe)
+                {
+                    statusBox.Text = fe.Message;
+                }
+                catch (OverflowException oe)
+                {
+                    statusBox.Text = oe.Message;
+                }
+                catch (KeyNotFoundException)
+                {
+                    statusBox.Text = "The variable not found.";
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    statusBox.Text = ioe.Message;
+                }
+                catch (NotSupportedException)
+                {
+                    statusBox.Text = "This operation is not supported.";
+                }
+
+                graphExpBox.Text = string.Empty;
+            }
+        }
+
         public IEnumerable<MathWorkspaceItem> MathExpressions
         {
             set

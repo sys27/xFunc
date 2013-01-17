@@ -53,6 +53,22 @@ namespace xFunc.Presenters
             view.LogicExpressions = logicWorkspace.Expressions;
         }
 
+        public MathWorkspace MathWorkspace
+        {
+            get
+            {
+                return mathWorkspace;
+            }
+        }
+
+        public LogicWorkspace LogicWorkspace
+        {
+            get
+            {
+                return logicWorkspace;
+            }
+        }
+
         public AngleMeasurement AngleMeasurement
         {
             get

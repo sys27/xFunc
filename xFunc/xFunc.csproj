@@ -101,9 +101,13 @@
     <Compile Include="Converters\ILogicExpressionToStringConverter.cs" />
     <Compile Include="Converters\IMathExpressionToStringConverter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Views\DrawingCanvas.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlottingGraph.xaml.cs">
+      <DependentUpon>PlottingGraph.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +122,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlottingGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

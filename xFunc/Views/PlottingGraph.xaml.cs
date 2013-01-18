@@ -65,8 +65,8 @@ namespace xFunc.Views
         {
             if (args.OriginalSource is DrawingCanvas)
             {
-                double x = args.GetPosition(null).X;
-                double y = args.GetPosition(null).Y;
+                double x = args.GetPosition(this).X;
+                double y = args.GetPosition(this).Y;
                 point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), "cm");
 
                 if (args.LeftButton == MouseButtonState.Pressed)

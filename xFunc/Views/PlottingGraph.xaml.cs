@@ -51,7 +51,7 @@ namespace xFunc.Views
         {
             currentWidth = this.ActualWidth;
             currentHeight = this.ActualHeight;
-            limitY = this.ActualHeight;
+            limitY = this.ActualHeight - this.secondRow.Height.Value;
             centerX = currentWidth / 2;
             centerY = currentHeight / 2;
         }
@@ -151,11 +151,11 @@ namespace xFunc.Views
                 {
                     for (double x = centerX; x >= 0; x -= cm)
                     {
-                        context.DrawLine(pen, new Point(x, 0), new Point(x, currentHeight));
+                        context.DrawLine(pen, new Point(x, 0), new Point(x, limitY));
                     }
                     for (double x = centerX; x <= currentWidth; x += cm)
                     {
-                        context.DrawLine(pen, new Point(x, 0), new Point(x, currentHeight));
+                        context.DrawLine(pen, new Point(x, 0), new Point(x, limitY));
                     }
 
                     for (double y = centerY; y >= 0; y -= cm)
@@ -179,7 +179,7 @@ namespace xFunc.Views
             Pen pen = new Pen(Brushes.Black, 1);
             using (DrawingContext context = oxoyVisual.RenderOpen())
             {
-                context.DrawLine(pen, new Point(centerX, 0), new Point(centerX, currentHeight));
+                context.DrawLine(pen, new Point(centerX, 0), new Point(centerX, limitY));
                 context.DrawLine(pen, new Point(0, centerY), new Point(currentWidth, centerY));
                 if (slider.Value <= 1.5)
                     context.DrawText(new FormattedText("0",
@@ -228,7 +228,7 @@ namespace xFunc.Views
                                                            10, Brushes.Black),
                                          new Point(centerX - 12, y + 7));
                 }
-                for (double y = centerY + cm; y <= currentHeight; y += cm)
+                for (double y = centerY + cm; y <= limitY; y += cm)
                 {
                     context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
 
@@ -261,7 +261,7 @@ namespace xFunc.Views
                 y = exp.Calculate(parameters);
 
                 tempY = centerY - (y * cm);
-                if (double.IsNaN(y) || tempY < -20 || tempY > limitY)
+                if (double.IsNaN(y) || tempY < 0 || tempY > limitY)
                 {
                     startFlag = true;
                 }

@@ -363,7 +363,7 @@ limitations under the License. -->
                             <StackPanel Margin="6,4,8,4">
                                 <TextBlock Text="Expressions:" FontSize="14" />
                                 <ListBox BorderBrush="Transparent" BorderThickness="0" />
-                                <TextBox x:Name="graphExpBox" FontFamily="Lucida Calligraphy" FontSize="14" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
+                                <TextBox x:Name="graphExpBox" FontFamily="Lucida Calligraphy" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
                             </StackPanel>
                         </ScrollViewer>
                     </Border>

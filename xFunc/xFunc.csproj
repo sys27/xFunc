@@ -98,8 +98,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\ILogicExpressionToStringConverter.cs" />
-    <Compile Include="Converters\IMathExpressionToStringConverter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>

@@ -30,12 +30,14 @@ namespace xFunc.Presenters
         private IMainView view;
 
         private MathWorkspace mathWorkspace;
+        private List<IMathExpression> listOfGraphs;
         private LogicWorkspace logicWorkspace;
 
         public MainPresenter(IMainView view)
         {
             this.view = view;
             this.mathWorkspace = new MathWorkspace();
+            this.listOfGraphs = new List<IMathExpression>();
             this.logicWorkspace = new LogicWorkspace();
         }
 
@@ -44,6 +46,16 @@ namespace xFunc.Presenters
             mathWorkspace.Add(strExp);
 
             view.MathExpressions = mathWorkspace.Expressions;
+        }
+
+        public void AddGraph(string strExp)
+        {
+            var lastAngle = mathWorkspace.Parser.AngleMeasurement;
+            mathWorkspace.Parser.AngleMeasurement = AngleMeasurement.Radian;
+            listOfGraphs.Add(mathWorkspace.Parser.Parse(strExp));
+            mathWorkspace.Parser.AngleMeasurement = lastAngle;
+
+            view.Graphs = listOfGraphs.AsReadOnly();
         }
 
         public void AddLogicExpression(string strExp)

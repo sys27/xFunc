@@ -19,7 +19,6 @@ limitations under the License. -->
                      xmlns:math="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
                      xmlns:logic="clr-namespace:xFunc.Logics;assembly=xFunc.Logics"
                      xmlns:views="clr-namespace:xFunc.Views"
-                     xmlns:converters="clr-namespace:xFunc.Converters"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
                      WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
     <ribbon:RibbonWindow.CommandBindings>
@@ -295,21 +294,22 @@ limitations under the License. -->
                     <ListBox x:Name="mathExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type math:MathWorkspaceItem}">
-                                <Border BorderBrush="Silver" BorderThickness="0,0,0,1">
-                                    <StackPanel Orientation="Vertical" Margin="5,5,0,5">
-                                        <TextBlock Text="Expression:" />
-                                        <TextBlock FontSize="16" Margin="20,2,0,5">
-                                            <TextBlock.Text>
-                                                <Binding Path="Expression">
-                                                    <Binding.Converter>
-                                                        <converters:IMathExpressionToStringConverter />
-                                                    </Binding.Converter>
-                                                </Binding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBlock Text="Answer:" />
-                                        <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
-                                    </StackPanel>
+                                <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <TextBlock Text="Expression:" />
+                                            <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
+                                            <TextBlock Text="Answer:" />
+                                            <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
+                                        </StackPanel>
+                                        <Button Grid.Column="2" Content="x" Width="16" Height="16" VerticalAlignment="Top" />
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -328,21 +328,22 @@ limitations under the License. -->
                     <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type logic:LogicWorkspaceItem}">
-                                <Border BorderBrush="Silver" BorderThickness="0,0,0,1">
-                                    <StackPanel Orientation="Vertical" Margin="5,5,0,5">
-                                        <TextBlock Text="Expression:" />
-                                        <TextBlock FontSize="16" Margin="20,2,0,5">
-                                            <TextBlock.Text>
-                                                <Binding Path="Expression">
-                                                    <Binding.Converter>
-                                                        <converters:ILogicExpressionToStringConverter />
-                                                    </Binding.Converter>
-                                                </Binding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBlock Text="Answer:" />
-                                        <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
-                                    </StackPanel>
+                                <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <TextBlock Text="Expression:" />
+                                            <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
+                                            <TextBlock Text="Answer:" />
+                                            <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
+                                        </StackPanel>
+                                        <Button Grid.Column="2" Content="x" Width="16" Height="16" VerticalAlignment="Top" />
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

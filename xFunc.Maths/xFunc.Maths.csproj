@@ -66,7 +66,6 @@
     <Compile Include="Expressions\MathParameterCollection.cs" />
     <Compile Include="Expressions\MultiplicationMathExpression.cs" />
     <Compile Include="Expressions\NumberMathExpression.cs" />
-    <Compile Include="Expressions\PlotMathExpression.cs" />
     <Compile Include="Expressions\RootMathExpression.cs" />
     <Compile Include="Expressions\SecantMathExpression.cs" />
     <Compile Include="Expressions\SineMathExpression.cs" />

@@ -14,7 +14,8 @@ xFunc designed for math and logical calculations. It written on C#. This program
 ### To-Do List:
 
 * Add a truth table;
-* Add sinh, cosh, tanh, coth, sech, csch;
+* Add sinh, cosh, tanh, coth, sech, csch, arsinh, arcosh, artanh, arcoth, arsech, arcsch;
+* Add ability to create user-defined functions;
 * New UI;
 
 ### More:

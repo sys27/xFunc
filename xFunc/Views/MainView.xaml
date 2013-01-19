@@ -301,7 +301,7 @@ limitations under the License. -->
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        
+
                                         <StackPanel Grid.Column="1" Orientation="Vertical">
                                             <TextBlock Text="Expression:" />
                                             <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
@@ -358,12 +358,18 @@ limitations under the License. -->
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                             <StackPanel Margin="6,4,8,4">
                                 <TextBlock Text="Expressions:" FontSize="14" />
-                                <ListBox BorderBrush="Transparent" BorderThickness="0" />
+                                <ListBox x:Name="graphsList" BorderBrush="Transparent" BorderThickness="0" SelectionChanged="graphsList_SelectionChanged">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Grid.Column="1" Text="{Binding}" FontSize="14" HorizontalAlignment="Stretch" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                                 <TextBox x:Name="graphExpBox" FontFamily="Lucida Calligraphy" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
                             </StackPanel>
                         </ScrollViewer>

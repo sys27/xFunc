@@ -136,10 +136,6 @@ namespace xFunc.Maths
         /// </summary>
         E              = 28,
         /// <summary>
-        /// plot
-        /// </summary>
-        Plot           = 29,
-        /// <summary>
         /// deriv
         /// </summary>
         Derivative     = 30,

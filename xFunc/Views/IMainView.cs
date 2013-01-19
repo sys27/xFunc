@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using xFunc.Logics;
 using xFunc.Maths;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.Views
 {
@@ -26,6 +27,7 @@ namespace xFunc.Views
     {
 
         IEnumerable<MathWorkspaceItem> MathExpressions { set; }
+        IEnumerable<IMathExpression> Graphs { set; }
         IEnumerable<LogicWorkspaceItem> LogicExpressions { set; }
 
     }

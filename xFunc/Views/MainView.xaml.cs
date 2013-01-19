@@ -277,10 +277,7 @@ namespace xFunc.Views
             {
                 try
                 {
-                    var lastAngle = presenter.AngleMeasurement;
-                    presenter.AngleMeasurement = AngleMeasurement.Radian;
-                    plot.Expression = presenter.MathWorkspace.Parser.Parse(graphExpBox.Text);
-                    presenter.AngleMeasurement = lastAngle;
+                    presenter.AddGraph(graphExpBox.Text);
                 }
                 catch (MathLexerException mle)
                 {
@@ -331,6 +328,11 @@ namespace xFunc.Views
             }
         }
 
+        private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
+        {
+            plot.Expression = graphsList.Items[graphsList.SelectedIndex] as IMathExpression;
+        }
+
         private void aboutButton_Click(object o, RoutedEventArgs args)
         {
             AboutView aboutView = new AboutView() { Owner = this };
@@ -343,6 +345,15 @@ namespace xFunc.Views
             {
                 mathExpsListBox.ItemsSource = value;
                 mathExpsListBox.ScrollIntoView(value.Last());
+            }
+        }
+
+        public IEnumerable<IMathExpression> Graphs
+        {
+            set
+            {
+                graphsList.ItemsSource = value;
+                graphsList.SelectedIndex = value.Count() - 1;
             }
         }
 

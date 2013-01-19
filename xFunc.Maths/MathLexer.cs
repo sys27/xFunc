@@ -332,14 +332,6 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("plot"))
-                    {
-                        token.Type = MathTokenType.Plot;
-                        tokens.Add(token);
-                        i += 3;
-
-                        continue;
-                    }
                     if (sub.StartsWith("deriv"))
                     {
                         token.Type = MathTokenType.Derivative;

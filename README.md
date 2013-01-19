@@ -13,7 +13,6 @@ xFunc designed for math and logical calculations. It written on C#. This program
 
 ### To-Do List:
 
-* Add a plotting graph;
 * Add a truth table;
 * Add sinh, cosh, tanh, coth, sech, csch;
 * New UI;

@@ -50,7 +50,7 @@ limitations under the License. -->
                 <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
             <ribbon:Ribbon.ToolBarItems>
-                <ribbon:Button Size="Small" Icon="../Images/Help.png" />
+                <ribbon:Button Header="About" ToolTip="Show the about window" Size="Small" Icon="../Images/Help.png" Click="aboutButton_Click" />
             </ribbon:Ribbon.ToolBarItems>
             <ribbon:RibbonTabItem Header="Home" IsSelected="True">
                 <ribbon:RibbonGroupBox Header="Clipboard">

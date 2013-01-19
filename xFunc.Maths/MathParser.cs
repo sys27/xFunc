@@ -680,9 +680,6 @@ namespace xFunc.Maths
                     case MathTokenType.Log:
                         preOutput.Add(new LogMathExpression());
                         break;
-                    case MathTokenType.Plot:
-                        preOutput.Add(new PlotMathExpression());
-                        break;
                     case MathTokenType.Derivative:
                         preOutput.Add(new DerivativeMathExpression());
                         break;
@@ -758,7 +755,6 @@ namespace xFunc.Maths
                          token.Type == MathTokenType.Log ||
                          token.Type == MathTokenType.UnaryMinus ||
                          token.Type == MathTokenType.E ||
-                         token.Type == MathTokenType.Plot ||
                          token.Type == MathTokenType.Derivative ||
                          token.Type == MathTokenType.Assign)
                 {

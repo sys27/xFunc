@@ -331,6 +331,12 @@ namespace xFunc.Views
             }
         }
 
+        private void aboutButton_Click(object o, RoutedEventArgs args)
+        {
+            AboutView aboutView = new AboutView() { Owner = this };
+            aboutView.ShowDialog();
+        }
+
         public IEnumerable<MathWorkspaceItem> MathExpressions
         {
             set

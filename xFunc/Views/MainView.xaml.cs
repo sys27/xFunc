@@ -82,10 +82,29 @@ namespace xFunc.Views
 
         private void InsertChar_Click(object o, RoutedEventArgs args)
         {
-            var prevSelectionStart = mathExpressionBox.SelectionStart;
-            mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, ((Button)o).Tag.ToString());
-            mathExpressionBox.SelectionStart = ++prevSelectionStart;
-            mathExpressionBox.Focus();
+            var tag = ((Button)o).Tag.ToString();
+
+            if (tabControl.SelectedItem == mathTab)
+            {
+                var prevSelectionStart = mathExpressionBox.SelectionStart;
+                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, tag);
+                mathExpressionBox.SelectionStart = prevSelectionStart + tag.Length;
+                mathExpressionBox.Focus();
+            }
+            else if (tabControl.SelectedItem == logicTab)
+            {
+                var prevSelectionStart = logicExpressionBox.SelectionStart;
+                logicExpressionBox.Text = logicExpressionBox.Text.Insert(prevSelectionStart, tag);
+                logicExpressionBox.SelectionStart = prevSelectionStart + tag.Length;
+                logicExpressionBox.Focus();
+            }
+            else if (tabControl.SelectedItem == graphsTab)
+            {
+                var prevSelectionStart = graphExpBox.SelectionStart;
+                graphExpBox.Text = graphExpBox.Text.Insert(prevSelectionStart, tag);
+                graphExpBox.SelectionStart = prevSelectionStart + tag.Length;
+                graphExpBox.Focus();
+            }
         }
 
         private void InsertFunc_Click(object o, RoutedEventArgs args)
@@ -328,6 +347,32 @@ namespace xFunc.Views
         private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
             plot.Expression = graphsList.Items[graphsList.SelectedIndex] as IMathExpression;
+        }
+
+        private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
+        {
+            if (tabControl.SelectedItem == logicTab)
+            {
+                numberToolBar.Visibility = Visibility.Collapsed;
+                standartToolBar.Visibility = Visibility.Collapsed;
+                trigonometricToolBar.Visibility = Visibility.Collapsed;
+                constantsMathToolBar.Visibility = Visibility.Collapsed;
+                additionalToolBar.Visibility = Visibility.Collapsed;
+
+                standartLogicToolBar.Visibility = Visibility.Visible;
+                constantsLogicToolBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                numberToolBar.Visibility = Visibility.Visible;
+                standartToolBar.Visibility = Visibility.Visible;
+                trigonometricToolBar.Visibility = Visibility.Visible;
+                constantsMathToolBar.Visibility = Visibility.Visible;
+                additionalToolBar.Visibility = Visibility.Visible;
+
+                standartLogicToolBar.Visibility = Visibility.Collapsed;
+                constantsLogicToolBar.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void aboutButton_Click(object o, RoutedEventArgs args)

@@ -33,16 +33,16 @@ namespace xFunc.Logics
 
         }
 
-        public LogicWorkspaceItem(string strExp, ILogicExpression exp)
-            : this(strExp, exp, null)
+        public LogicWorkspaceItem(ILogicExpression exp)
+            : this(exp, null)
         {
 
         }
 
-        public LogicWorkspaceItem(string strExp, ILogicExpression exp, string answer)
+        public LogicWorkspaceItem(ILogicExpression exp, string answer)
         {
-            this.strExp = strExp;
             this.exp = exp;
+            this.strExp = exp.ToString();
             this.answer = answer;
         }
 

@@ -33,16 +33,16 @@ namespace xFunc.Maths
 
         }
 
-        public MathWorkspaceItem(string strExp, IMathExpression exp)
-            : this(strExp, exp, null)
+        public MathWorkspaceItem(IMathExpression exp)
+            : this(exp, null)
         {
 
         }
 
-        public MathWorkspaceItem(string strExp, IMathExpression exp, string answer)
+        public MathWorkspaceItem(IMathExpression exp, string answer)
         {
-            this.strExp = strExp;
             this.exp = exp;
+            this.strExp = exp.ToString();
             this.answer = answer;
         }
 

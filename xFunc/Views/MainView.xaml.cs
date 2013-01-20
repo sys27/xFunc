@@ -15,21 +15,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using xFunc.Presenters;
 using xFunc.Logics;
 using xFunc.Logics.Exceptions;
 using xFunc.Maths;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
+using xFunc.Presenters;
 
 namespace xFunc.Views
 {
@@ -164,6 +158,7 @@ namespace xFunc.Views
                 try
                 {
                     presenter.AddMathExpression(mathExpressionBox.Text);
+                    statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
                 {
@@ -221,6 +216,7 @@ namespace xFunc.Views
                 try
                 {
                     presenter.AddLogicExpression(logicExpressionBox.Text);
+                    statusBox.Text = string.Empty;
                 }
                 catch (LogicLexerException lle)
                 {
@@ -278,6 +274,7 @@ namespace xFunc.Views
                 try
                 {
                     presenter.AddGraph(graphExpBox.Text);
+                    statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
                 {

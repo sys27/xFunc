@@ -37,6 +37,9 @@ namespace xFunc.Logics
 
         public ILogicExpression Parse(string function)
         {
+            if (string.IsNullOrWhiteSpace(function))
+                throw new ArgumentNullException("function");
+
             if (function != lastFunc)
             {
                 IEnumerable<LogicToken> tokens = lexer.LogicTokenization(function);
@@ -134,9 +137,6 @@ namespace xFunc.Logics
 
         private IEnumerable<LogicToken> ConvertToReversePolishNotation(IEnumerable<LogicToken> tokens)
         {
-            if (tokens == null)
-                throw new ArgumentNullException("tokens");
-
             List<LogicToken> output = new List<LogicToken>();
             Stack<LogicToken> stack = new Stack<LogicToken>();
 

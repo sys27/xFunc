@@ -699,9 +699,6 @@ namespace xFunc.Maths
 
         private IEnumerable<MathToken> ConvertToReversePolishNotation(IEnumerable<MathToken> tokens)
         {
-            if (tokens == null)
-                throw new ArgumentNullException("tokens");
-
             List<MathToken> output = new List<MathToken>();
             Stack<MathToken> stack = new Stack<MathToken>();
 

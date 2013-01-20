@@ -8,7 +8,7 @@ xFunc designed for math and logical calculations. It written on C#. This program
 * Calculating expressions (maths and logics);
 * Supporting measures of angles;
 * Derivative and simplifying expressions;
-* Plotting graphs (implemented in v. 1.4.1.0);
+* Plotting graphs;
 * Truth tables (implemented in v. 1.4.1.0);
 
 ### To-Do List:

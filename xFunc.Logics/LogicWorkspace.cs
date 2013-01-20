@@ -54,7 +54,7 @@ namespace xFunc.Logics
                 expressions.RemoveAt(0);
 
             ILogicExpression exp = parser.Parse(strExp);
-            LogicWorkspaceItem item = new LogicWorkspaceItem(strExp, exp);
+            LogicWorkspaceItem item = new LogicWorkspaceItem(exp);
             if (exp is AssignLogicExpression)
             {
                 AssignLogicExpression assign = (AssignLogicExpression)exp;

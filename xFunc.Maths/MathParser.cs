@@ -521,6 +521,9 @@ namespace xFunc.Maths
 
         public IMathExpression Parse(string function)
         {
+            if (string.IsNullOrWhiteSpace(function))
+                throw new ArgumentNullException("function");
+
             if (function != lastFunc)
             {
                 IEnumerable<MathToken> tokens = lexer.MathTokenization(function);

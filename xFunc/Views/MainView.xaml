@@ -342,7 +342,7 @@ limitations under the License. -->
                                             <TextBlock Text="Answer:" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
-                                        <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0,0,0,1" Tag="{Binding}" Click="removeMath_Click">
+                                        <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeMath_Click">
                                             <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
                                         </Button>
                                     </Grid>
@@ -408,7 +408,7 @@ limitations under the License. -->
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <TextBox x:Name="graphExpBox" FontFamily="Lucida Calligraphy" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
+                                <TextBox x:Name="graphExpressionBox" FontFamily="Lucida Calligraphy" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
                             </StackPanel>
                         </ScrollViewer>
                     </Border>

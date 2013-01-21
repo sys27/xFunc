@@ -75,11 +75,26 @@ namespace xFunc.Maths
 
         public void Remove(MathWorkspaceItem item)
         {
+            if (item.Expression is AssignMathExpression)
+            {
+                var assign = item.Expression as AssignMathExpression;
+
+                parameters.Remove(assign.Variable.Character);
+            }
+
             expressions.Remove(item);
         }
 
         public void RemoveAt(int index)
         {
+            var item = expressions[index];
+            if (item.Expression is AssignMathExpression)
+            {
+                var assign = item.Expression as AssignMathExpression;
+
+                parameters.Remove(assign.Variable.Character);
+            }
+
             expressions.RemoveAt(index);
         }
 

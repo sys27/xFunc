@@ -37,7 +37,7 @@ namespace xFunc.Logics.Expressions
             return parameters[variable];
         }
 
-        public char Variable
+        public char Character
         {
             get
             {

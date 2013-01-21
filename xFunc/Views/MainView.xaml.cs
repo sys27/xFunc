@@ -100,10 +100,10 @@ namespace xFunc.Views
             }
             else if (tabControl.SelectedItem == graphsTab)
             {
-                var prevSelectionStart = graphExpBox.SelectionStart;
-                graphExpBox.Text = graphExpBox.Text.Insert(prevSelectionStart, tag);
-                graphExpBox.SelectionStart = prevSelectionStart + tag.Length;
-                graphExpBox.Focus();
+                var prevSelectionStart = graphExpressionBox.SelectionStart;
+                graphExpressionBox.Text = graphExpressionBox.Text.Insert(prevSelectionStart, tag);
+                graphExpressionBox.SelectionStart = prevSelectionStart + tag.Length;
+                graphExpressionBox.Focus();
             }
         }
 
@@ -172,7 +172,7 @@ namespace xFunc.Views
 
         private void mathExpressionBox_KeyUp(object o, KeyEventArgs args)
         {
-            if (args.Key == Key.Enter)
+            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(mathExpressionBox.Text))
             {
                 try
                 {
@@ -230,7 +230,7 @@ namespace xFunc.Views
 
         private void logicExpressionBox_KeyUp(object o, KeyEventArgs args)
         {
-            if (args.Key == Key.Enter)
+            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(logicExpressionBox.Text))
             {
                 try
                 {
@@ -288,11 +288,11 @@ namespace xFunc.Views
 
         private void graphExpBox_KeyUp(object o, KeyEventArgs args)
         {
-            if (args.Key == Key.Enter)
+            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(graphExpressionBox.Text))
             {
                 try
                 {
-                    presenter.AddGraph(graphExpBox.Text);
+                    presenter.AddGraph(graphExpressionBox.Text);
                     statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
@@ -340,7 +340,7 @@ namespace xFunc.Views
                     statusBox.Text = "This operation is not supported.";
                 }
 
-                graphExpBox.Text = string.Empty;
+                graphExpressionBox.Text = string.Empty;
             }
         }
 

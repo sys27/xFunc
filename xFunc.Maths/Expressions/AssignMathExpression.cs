@@ -45,7 +45,7 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
-            parameters[variable.Variable] = value.Calculate(parameters);
+            parameters[variable.Character] = value.Calculate(parameters);
 
             return double.NaN;
         }

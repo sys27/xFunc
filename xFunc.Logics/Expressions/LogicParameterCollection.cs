@@ -31,12 +31,18 @@ namespace xFunc.Logics.Expressions
         {
             get
             {
+                if (!this.Contains(variable))
+                    throw new KeyNotFoundException();
+
                 int index = 1 << Count - IndexOf(variable) - 1;
 
                 return (bits & index) == index;
             }
             set
             {
+                if (!this.Contains(variable))
+                    base.Add(variable);
+
                 int index = 1 << Count - IndexOf(variable) - 1;
 
                 if (((bits & index) == index) != value)
@@ -63,7 +69,7 @@ namespace xFunc.Logics.Expressions
         public new void Remove(char c)
         {
             bits >>= Count;
-            Remove(c);
+            base.Remove(c);
         }
 
         public int Bits

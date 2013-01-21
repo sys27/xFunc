@@ -48,6 +48,13 @@ namespace xFunc.Presenters
             view.MathExpressions = mathWorkspace.Expressions;
         }
 
+        public void RemoveMathExpression(MathWorkspaceItem item)
+        {
+            mathWorkspace.Remove(item);
+
+            view.MathExpressions = mathWorkspace.Expressions;
+        }
+
         public void AddGraph(string strExp)
         {
             var lastAngle = mathWorkspace.Parser.AngleMeasurement;
@@ -61,6 +68,13 @@ namespace xFunc.Presenters
         public void AddLogicExpression(string strExp)
         {
             logicWorkspace.Add(strExp);
+
+            view.LogicExpressions = logicWorkspace.Expressions;
+        }
+
+        public void RemoveLogicExpression(LogicWorkspaceItem item)
+        {
+            logicWorkspace.Remove(item);
 
             view.LogicExpressions = logicWorkspace.Expressions;
         }

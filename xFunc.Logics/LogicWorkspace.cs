@@ -71,11 +71,26 @@ namespace xFunc.Logics
 
         public void Remove(LogicWorkspaceItem item)
         {
+            if (item.Expression is AssignLogicExpression)
+            {
+                var assign = item.Expression as AssignLogicExpression;
+
+                parameters.Remove(assign.Variable.Character);
+            }
+
             expressions.Remove(item);
         }
 
         public void RemoveAt(int index)
         {
+            var item = expressions[index];
+            if (item.Expression is AssignLogicExpression)
+            {
+                var assign = item.Expression as AssignLogicExpression;
+
+                parameters.Remove(assign.Variable.Character);
+            }
+
             expressions.RemoveAt(index);
         }
 

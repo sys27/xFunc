@@ -21,6 +21,40 @@ limitations under the License. -->
                      xmlns:views="clr-namespace:xFunc.Views"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
                      WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
+    <ribbon:RibbonWindow.Resources>
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Silver" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="Background" Value="#FFE0E0E0" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="BorderBrush" Value="White" />
+                                <Setter Property="BorderThickness" Value="2" />
+                                <Setter Property="Background" Value="#FFD5D5D5" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" Value="#FFE0E0E0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ribbon:RibbonWindow.Resources>
     <ribbon:RibbonWindow.CommandBindings>
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
@@ -308,7 +342,9 @@ limitations under the License. -->
                                             <TextBlock Text="Answer:" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
-                                        <Button Grid.Column="2" Content="x" Width="16" Height="16" VerticalAlignment="Top" />
+                                        <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0,0,0,1" Tag="{Binding}" Click="removeMath_Click">
+                                            <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -342,7 +378,9 @@ limitations under the License. -->
                                             <TextBlock Text="Answer:" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
-                                        <Button Grid.Column="2" Content="x" Width="16" Height="16" VerticalAlignment="Top" />
+                                        <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0,0,0,1" Tag="{Binding}" Click="removeLogic_Click">
+                                            <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -383,36 +421,7 @@ limitations under the License. -->
         <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="3,0,0,0" Background="White" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <StackPanel.Resources>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Height" Value="30" />
-                        <Setter Property="Background" Value="White" />
-                        <Setter Property="BorderBrush" Value="Silver" />
-                        <Setter Property="BorderThickness" Value="1" />
-                        <Setter Property="SnapsToDevicePixels" Value="True" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                        <ContentPresenter />
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="BorderBrush" Value="Black" />
-                                            <Setter Property="Background" Value="#FFE0E0E0" />
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="BorderBrush" Value="White" />
-                                            <Setter Property="BorderThickness" Value="2" />
-                                            <Setter Property="Background" Value="#FFD5D5D5" />
-                                        </Trigger>
-                                        <Trigger Property="IsFocused" Value="True">
-                                            <Setter Property="Background" Value="#FFE0E0E0" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonStyle}" />
                 </StackPanel.Resources>
                 <Expander x:Name="numberToolBar" Header="Numbers &amp; Arithmetic" IsExpanded="True">
                     <Grid>

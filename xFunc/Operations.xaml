@@ -643,4 +643,23 @@ limitations under the License. -->
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+
+    <DrawingBrush x:Key="remove" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 4.99999,5L 105,105">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="10" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 5.00005,105L 105,5.00006">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="10" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 </ResourceDictionary>

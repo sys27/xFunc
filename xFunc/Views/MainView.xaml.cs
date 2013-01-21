@@ -381,12 +381,26 @@ namespace xFunc.Views
             aboutView.ShowDialog();
         }
 
+        private void removeMath_Click(object o, RoutedEventArgs args)
+        {
+            var item = ((Button)o).Tag as MathWorkspaceItem;
+
+            presenter.RemoveMathExpression(item);
+        }
+
+        private void removeLogic_Click(object o, RoutedEventArgs args)
+        {
+            var item = (o as Button).Tag as LogicWorkspaceItem;
+
+            presenter.RemoveLogicExpression(item);
+        }
+
         public IEnumerable<MathWorkspaceItem> MathExpressions
         {
             set
             {
                 mathExpsListBox.ItemsSource = value;
-                mathExpsListBox.ScrollIntoView(value.Last());
+                mathExpsListBox.ScrollIntoView(value.LastOrDefault());
             }
         }
 
@@ -404,7 +418,7 @@ namespace xFunc.Views
             set
             {
                 logicExpsListBox.ItemsSource = value;
-                logicExpsListBox.ScrollIntoView(value.Last());
+                logicExpsListBox.ScrollIntoView(value.LastOrDefault());
             }
         }
 

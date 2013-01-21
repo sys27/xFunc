@@ -31,7 +31,7 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             VariableMathExpression @var = obj as VariableMathExpression;
-            if (@var != null && @var.Variable == this.variable)
+            if (@var != null && @var.Character == this.variable)
                 return true;
 
             return false;
@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions
                 return this.Clone();
         }
 
-        public char Variable
+        public char Character
         {
             get
             {

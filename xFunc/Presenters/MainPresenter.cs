@@ -29,82 +29,9 @@ namespace xFunc.Presenters
 
         private IMainView view;
 
-        private MathWorkspace mathWorkspace;
-        private List<IMathExpression> listOfGraphs;
-        private LogicWorkspace logicWorkspace;
-
         public MainPresenter(IMainView view)
         {
             this.view = view;
-            this.mathWorkspace = new MathWorkspace();
-            this.listOfGraphs = new List<IMathExpression>();
-            this.logicWorkspace = new LogicWorkspace();
-        }
-
-        public void AddMathExpression(string strExp)
-        {
-            mathWorkspace.Add(strExp);
-
-            view.MathExpressions = mathWorkspace.Expressions;
-        }
-
-        public void RemoveMathExpression(MathWorkspaceItem item)
-        {
-            mathWorkspace.Remove(item);
-
-            view.MathExpressions = mathWorkspace.Expressions;
-        }
-
-        public void AddGraph(string strExp)
-        {
-            var lastAngle = mathWorkspace.Parser.AngleMeasurement;
-            mathWorkspace.Parser.AngleMeasurement = AngleMeasurement.Radian;
-            listOfGraphs.Add(mathWorkspace.Parser.Parse(strExp));
-            mathWorkspace.Parser.AngleMeasurement = lastAngle;
-
-            view.Graphs = listOfGraphs.AsReadOnly();
-        }
-
-        public void AddLogicExpression(string strExp)
-        {
-            logicWorkspace.Add(strExp);
-
-            view.LogicExpressions = logicWorkspace.Expressions;
-        }
-
-        public void RemoveLogicExpression(LogicWorkspaceItem item)
-        {
-            logicWorkspace.Remove(item);
-
-            view.LogicExpressions = logicWorkspace.Expressions;
-        }
-
-        public MathWorkspace MathWorkspace
-        {
-            get
-            {
-                return mathWorkspace;
-            }
-        }
-
-        public LogicWorkspace LogicWorkspace
-        {
-            get
-            {
-                return logicWorkspace;
-            }
-        }
-
-        public AngleMeasurement AngleMeasurement
-        {
-            get
-            {
-                return mathWorkspace.Parser.AngleMeasurement;
-            }
-            set
-            {
-                mathWorkspace.Parser.AngleMeasurement = value;
-            }
         }
 
     }

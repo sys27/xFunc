@@ -17,13 +17,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using xFunc.Logics;
 using xFunc.Logics.Exceptions;
+using xFunc.Logics.Expressions;
 using xFunc.Maths;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Presenters;
+using xFunc.ViewModel;
 
 namespace xFunc.Views
 {
@@ -31,7 +34,11 @@ namespace xFunc.Views
     public partial class MainView : Fluent.RibbonWindow, IMainView
     {
 
-        private MainPresenter presenter;
+        private MainPresenter mainPresenter;
+        private MathTabPresenter mathPresenter;
+        private LogicTabPresenter logicPresenter;
+        private GraphsTabPresenter graphsPresenter;
+        private TruthTableTabPresenter truthTablePresenter;
 
         public static RoutedCommand DegreeCommand = new RoutedCommand();
         public static RoutedCommand RadianCommand = new RoutedCommand();
@@ -43,7 +50,11 @@ namespace xFunc.Views
 
             mathExpressionBox.Focus();
 
-            this.presenter = new MainPresenter(this);
+            this.mainPresenter = new MainPresenter(this);
+            this.mathPresenter = new MathTabPresenter(this);
+            this.logicPresenter = new LogicTabPresenter(this);
+            this.graphsPresenter = new GraphsTabPresenter(this);
+            this.truthTablePresenter = new TruthTableTabPresenter(this);
 
             degreeButton.IsChecked = true;
         }
@@ -52,7 +63,7 @@ namespace xFunc.Views
         {
             this.radianButton.IsChecked = false;
             this.gradianButton.IsChecked = false;
-            presenter.AngleMeasurement = AngleMeasurement.Degree;
+            mathPresenter.AngleMeasurement = AngleMeasurement.Degree;
             this.degreeButton.IsChecked = true;
         }
 
@@ -60,7 +71,7 @@ namespace xFunc.Views
         {
             this.degreeButton.IsChecked = false;
             this.gradianButton.IsChecked = false;
-            presenter.AngleMeasurement = AngleMeasurement.Radian;
+            mathPresenter.AngleMeasurement = AngleMeasurement.Radian;
             this.radianButton.IsChecked = true;
         }
 
@@ -68,16 +79,16 @@ namespace xFunc.Views
         {
             this.degreeButton.IsChecked = false;
             this.radianButton.IsChecked = false;
-            presenter.AngleMeasurement = AngleMeasurement.Gradian;
+            mathPresenter.AngleMeasurement = AngleMeasurement.Gradian;
             this.gradianButton.IsChecked = true;
         }
 
         private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            if (tabControl.SelectedItem == logicTab)
-                args.CanExecute = false;
-            else
+            if (tabControl.SelectedItem == mathTab)
                 args.CanExecute = true;
+            else
+                args.CanExecute = false;
         }
 
         private void InsertChar_Click(object o, RoutedEventArgs args)
@@ -184,13 +195,46 @@ namespace xFunc.Views
             tb.Focus();
         }
 
+        private void GenerateTruthTable(IEnumerable<ILogicExpression> exps, LogicParameterCollection parameters)
+        {
+            truthTableGridView.Columns.Clear();
+
+            truthTableGridView.Columns.Add(new GridViewColumn
+            {
+                Header = "#",
+                DisplayMemberBinding = new Binding("Index")
+            });
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                truthTableGridView.Columns.Add(new GridViewColumn
+                {
+                    Header = parameters[i],
+                    DisplayMemberBinding = new Binding(string.Format("VarsValues[{0}]", i))
+                });
+            }
+            for (int i = 0; i < exps.Count() - 1; i++)
+            {
+                truthTableGridView.Columns.Add(new GridViewColumn
+                {
+                    Header = exps.ElementAt(i),
+                    DisplayMemberBinding = new Binding(string.Format("Values[{0}]", i))
+                });
+            }
+            if (exps.Count() != 0)
+                truthTableGridView.Columns.Add(new GridViewColumn
+                {
+                    Header = exps.ElementAt(exps.Count() - 1),
+                    DisplayMemberBinding = new Binding("Result")
+                });
+        }
+
         private void mathExpressionBox_KeyUp(object o, KeyEventArgs args)
         {
             if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(mathExpressionBox.Text))
             {
                 try
                 {
-                    presenter.AddMathExpression(mathExpressionBox.Text);
+                    mathPresenter.Add(mathExpressionBox.Text);
                     statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
@@ -248,7 +292,7 @@ namespace xFunc.Views
             {
                 try
                 {
-                    presenter.AddLogicExpression(logicExpressionBox.Text);
+                    logicPresenter.Add(logicExpressionBox.Text);
                     statusBox.Text = string.Empty;
                 }
                 catch (LogicLexerException lle)
@@ -306,7 +350,7 @@ namespace xFunc.Views
             {
                 try
                 {
-                    presenter.AddGraph(graphExpressionBox.Text);
+                    graphsPresenter.Add(graphExpressionBox.Text);
                     statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
@@ -358,9 +402,71 @@ namespace xFunc.Views
             }
         }
 
+        private void truthTableExpressionBox_KeyUp(object o, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(truthTableExpressionBox.Text))
+            {
+                try
+                {
+                    truthTablePresenter.Generate(truthTableExpressionBox.Text);
+                    GenerateTruthTable(truthTablePresenter.Expressions, truthTablePresenter.Parameters);
+                    truthTableList.ItemsSource = truthTablePresenter.Table;
+
+                    statusBox.Text = string.Empty;
+                }
+                catch (LogicLexerException lle)
+                {
+                    statusBox.Text = lle.Message;
+                }
+                catch (LogicParserException lpe)
+                {
+                    statusBox.Text = lpe.Message;
+                }
+                catch (DivideByZeroException dbze)
+                {
+                    statusBox.Text = dbze.Message;
+                }
+                catch (ArgumentNullException ane)
+                {
+                    statusBox.Text = ane.Message;
+                }
+                catch (ArgumentException ae)
+                {
+                    statusBox.Text = ae.Message;
+                }
+                catch (FormatException fe)
+                {
+                    statusBox.Text = fe.Message;
+                }
+                catch (OverflowException oe)
+                {
+                    statusBox.Text = oe.Message;
+                }
+                catch (KeyNotFoundException)
+                {
+                    statusBox.Text = "The variable not found.";
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    statusBox.Text = ioe.Message;
+                }
+                catch (NotSupportedException)
+                {
+                    statusBox.Text = "This operation is not supported.";
+                }
+            }
+        }
+
         private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
-            plot.Expression = graphsList.Items[graphsList.SelectedIndex] as IMathExpression;
+            if (graphsList.SelectedIndex >= 0)
+                plot.Expression = graphsList.Items[graphsList.SelectedIndex] as IMathExpression;
+            else
+                plot.Expression = null;
         }
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
@@ -399,14 +505,21 @@ namespace xFunc.Views
         {
             var item = ((Button)o).Tag as MathWorkspaceItem;
 
-            presenter.RemoveMathExpression(item);
+            mathPresenter.Remove(item);
         }
 
         private void removeLogic_Click(object o, RoutedEventArgs args)
         {
             var item = (o as Button).Tag as LogicWorkspaceItem;
 
-            presenter.RemoveLogicExpression(item);
+            logicPresenter.Remove(item);
+        }
+
+        private void removeGraph_Click(object o, RoutedEventArgs args)
+        {
+            var item = (o as Button).Tag as IMathExpression;
+
+            graphsPresenter.Remove(item);
         }
 
         public IEnumerable<MathWorkspaceItem> MathExpressions

@@ -378,7 +378,7 @@ limitations under the License. -->
                                             <TextBlock Text="Answer:" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
-                                        <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0,0,0,1" Tag="{Binding}" Click="removeLogic_Click">
+                                        <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
                                             <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
                                         </Button>
                                     </Grid>
@@ -401,10 +401,20 @@ limitations under the License. -->
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                             <StackPanel Margin="6,4,8,4">
                                 <TextBlock Text="Expressions:" FontSize="14" />
-                                <ListBox x:Name="graphsList" BorderBrush="Transparent" BorderThickness="0" SelectionChanged="graphsList_SelectionChanged">
+                                <ListBox x:Name="graphsList" BorderBrush="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" Background="White" SelectionChanged="graphsList_SelectionChanged">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Grid.Column="1" Text="{Binding}" FontSize="14" HorizontalAlignment="Stretch" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0" Text="{Binding}" FontSize="14" />
+                                                <Button Grid.Column="1" Width="16" Height="16" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeGraph_Click">
+                                                    <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
+                                                </Button>
+                                            </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
@@ -413,6 +423,21 @@ limitations under the License. -->
                         </ScrollViewer>
                     </Border>
                     <views:PlottingGraph x:Name="plot" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="truthTableTab" Header="Truth Table">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="truthTableExpressionBox" Grid.Row="0" FontFamily="Lucida Calligraphy" FontSize="16" Foreground="Black" KeyUp="truthTableExpressionBox_KeyUp" />
+                    <ListView x:Name="truthTableList" Grid.Row="1">
+                        <ListView.View>
+                            <GridView x:Name="truthTableGridView" />
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -259,7 +259,11 @@ namespace xFunc.Views
         private void DrawFunc()
         {
             if (exp == null)
+            {
+                canvas.DeleteVisual(funcVisual);
+
                 return;
+            }
 
             PathGeometry geometry = new PathGeometry();
             PathFigure figure = null;

@@ -83,91 +83,105 @@ namespace xFunc.Views
         private void InsertChar_Click(object o, RoutedEventArgs args)
         {
             var tag = ((Button)o).Tag.ToString();
-
+            TextBox tb = null;
             if (tabControl.SelectedItem == mathTab)
-            {
-                var prevSelectionStart = mathExpressionBox.SelectionStart;
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, tag);
-                mathExpressionBox.SelectionStart = prevSelectionStart + tag.Length;
-                mathExpressionBox.Focus();
-            }
+                tb = mathExpressionBox;
             else if (tabControl.SelectedItem == logicTab)
-            {
-                var prevSelectionStart = logicExpressionBox.SelectionStart;
-                logicExpressionBox.Text = logicExpressionBox.Text.Insert(prevSelectionStart, tag);
-                logicExpressionBox.SelectionStart = prevSelectionStart + tag.Length;
-                logicExpressionBox.Focus();
-            }
+                tb = logicExpressionBox;
             else if (tabControl.SelectedItem == graphsTab)
-            {
-                var prevSelectionStart = graphExpressionBox.SelectionStart;
-                graphExpressionBox.Text = graphExpressionBox.Text.Insert(prevSelectionStart, tag);
-                graphExpressionBox.SelectionStart = prevSelectionStart + tag.Length;
-                graphExpressionBox.Focus();
-            }
+                tb = graphExpressionBox;
+
+            var prevSelectionStart = tb.SelectionStart;
+            tb.Text = tb.Text.Insert(prevSelectionStart, tag);
+            tb.SelectionStart = prevSelectionStart + tag.Length;
+            tb.Focus();
         }
 
         private void InsertFunc_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            var prevSelectionStart = mathExpressionBox.SelectionStart;
+            TextBox tb = null;
+            if (tabControl.SelectedItem == mathTab)
+                tb = mathExpressionBox;
+            else if (tabControl.SelectedItem == logicTab)
+                tb = logicExpressionBox;
+            else if (tabControl.SelectedItem == graphsTab)
+                tb = graphExpressionBox;
 
-            if (mathExpressionBox.SelectionLength > 0)
+            var prevSelectionStart = tb.SelectionStart;
+
+            if (tb.SelectionLength > 0)
             {
-                var prevSelectionLength = mathExpressionBox.SelectionLength;
+                var prevSelectionLength = tb.SelectionLength;
 
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ")");
-                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 2;
+                tb.Text = tb.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ")");
+                tb.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 2;
             }
             else
             {
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "()");
-                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
+                tb.Text = tb.Text.Insert(prevSelectionStart, func + "()");
+                tb.SelectionStart = prevSelectionStart + func.Length + 1;
             }
 
-            mathExpressionBox.Focus();
+            tb.Focus();
         }
 
         private void InsertInv_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            var prevSelectionStart = mathExpressionBox.SelectionStart;
+            TextBox tb = null;
+            if (tabControl.SelectedItem == mathTab)
+                tb = mathExpressionBox;
+            else if (tabControl.SelectedItem == logicTab)
+                tb = logicExpressionBox;
+            else if (tabControl.SelectedItem == graphsTab)
+                tb = graphExpressionBox;
 
-            if (mathExpressionBox.SelectionLength > 0)
+            var prevSelectionStart = tb.SelectionStart;
+
+            if (tb.SelectionLength > 0)
             {
-                var prevSelectionLength = mathExpressionBox.SelectionLength;
+                var prevSelectionLength = tb.SelectionLength;
 
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, "(").Insert(prevSelectionStart + prevSelectionLength + 1, ")" + func);
-                mathExpressionBox.SelectionStart = prevSelectionStart + prevSelectionLength + func.Length + 2;
+                tb.Text = tb.Text.Insert(prevSelectionStart, "(").Insert(prevSelectionStart + prevSelectionLength + 1, ")" + func);
+                tb.SelectionStart = prevSelectionStart + prevSelectionLength + func.Length + 2;
             }
             else
             {
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func);
-                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length;
+                tb.Text = tb.Text.Insert(prevSelectionStart, func);
+                tb.SelectionStart = prevSelectionStart + func.Length;
             }
 
-            mathExpressionBox.Focus();
+            tb.Focus();
         }
 
         private void InsertDoubleArgFunc_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            var prevSelectionStart = mathExpressionBox.SelectionStart;
+            TextBox tb = null;
+            if (tabControl.SelectedItem == mathTab)
+                tb = mathExpressionBox;
+            else if (tabControl.SelectedItem == logicTab)
+                tb = logicExpressionBox;
+            else if (tabControl.SelectedItem == graphsTab)
+                tb = graphExpressionBox;
 
-            if (mathExpressionBox.SelectionLength > 0)
+            var prevSelectionStart = tb.SelectionStart;
+
+            if (tb.SelectionLength > 0)
             {
-                var prevSelectionLength = mathExpressionBox.SelectionLength;
+                var prevSelectionLength = tb.SelectionLength;
 
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ", )");
-                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 3;
+                tb.Text = tb.Text.Insert(prevSelectionStart, func + "(").Insert(prevSelectionStart + prevSelectionLength + func.Length + 1, ", )");
+                tb.SelectionStart = prevSelectionStart + func.Length + prevSelectionLength + 3;
             }
             else
             {
-                mathExpressionBox.Text = mathExpressionBox.Text.Insert(prevSelectionStart, func + "(, )");
-                mathExpressionBox.SelectionStart = prevSelectionStart + func.Length + 1;
+                tb.Text = tb.Text.Insert(prevSelectionStart, func + "(, )");
+                tb.SelectionStart = prevSelectionStart + func.Length + 1;
             }
 
-            mathExpressionBox.Focus();
+            tb.Focus();
         }
 
         private void mathExpressionBox_KeyUp(object o, KeyEventArgs args)

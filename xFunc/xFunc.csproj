@@ -98,7 +98,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Presenters\GraphsTabPresenter.cs" />
+    <Compile Include="Presenters\LogicTabPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Presenters\MathTabPresenter.cs" />
+    <Compile Include="Presenters\TruthTableTabPresenter.cs" />
+    <Compile Include="ViewModel\TruthTableRowViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>

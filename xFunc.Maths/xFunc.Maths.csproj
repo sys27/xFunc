@@ -60,6 +60,7 @@
     <Compile Include="Expressions\ExpMathExpression.cs" />
     <Compile Include="Expressions\ExponentiationMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicCosineMathExpression.cs" />
+    <Compile Include="Expressions\HyperbolicCotangentMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicSineMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicTangentMathExpression.cs" />
     <Compile Include="Expressions\IMathExpression.cs" />

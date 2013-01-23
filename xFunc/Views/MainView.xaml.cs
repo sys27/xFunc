@@ -26,7 +26,7 @@ using xFunc.Maths;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Presenters;
-using xFunc.ViewModel;
+using xFunc.ViewModels;
 
 namespace xFunc.Views
 {
@@ -503,14 +503,14 @@ namespace xFunc.Views
 
         private void removeMath_Click(object o, RoutedEventArgs args)
         {
-            var item = ((Button)o).Tag as MathWorkspaceItem;
+            var item = ((Button)o).Tag as MathWorkspaceItemViewModel;
 
             mathPresenter.Remove(item);
         }
 
         private void removeLogic_Click(object o, RoutedEventArgs args)
         {
-            var item = (o as Button).Tag as LogicWorkspaceItem;
+            var item = (o as Button).Tag as LogicWorkspaceItemViewModel;
 
             logicPresenter.Remove(item);
         }
@@ -522,7 +522,7 @@ namespace xFunc.Views
             graphsPresenter.Remove(item);
         }
 
-        public IEnumerable<MathWorkspaceItem> MathExpressions
+        public IEnumerable<MathWorkspaceItemViewModel> MathExpressions
         {
             set
             {
@@ -540,7 +540,7 @@ namespace xFunc.Views
             }
         }
 
-        public IEnumerable<LogicWorkspaceItem> LogicExpressions
+        public IEnumerable<LogicWorkspaceItemViewModel> LogicExpressions
         {
             set
             {

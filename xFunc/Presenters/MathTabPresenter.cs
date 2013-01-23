@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.ViewModels;
 using xFunc.Views;
 
 namespace xFunc.Presenters
 {
-  
+
     public class MathTabPresenter
     {
 
@@ -24,18 +25,29 @@ namespace xFunc.Presenters
             this.workspace = new MathWorkspace();
         }
 
+        private void UpdateList()
+        {
+            var vm = new List<MathWorkspaceItemViewModel>();
+            for (int i = 0; i < workspace.Expressions.Count(); i++)
+            {
+                vm.Add(new MathWorkspaceItemViewModel(i + 1, workspace.Expressions.ElementAt(i)));
+            }
+
+            view.MathExpressions = vm;
+        }
+
         public void Add(string strExp)
         {
             workspace.Add(strExp);
 
-            view.MathExpressions = workspace.Expressions;
+            UpdateList();
         }
 
-        public void Remove(MathWorkspaceItem item)
+        public void Remove(MathWorkspaceItemViewModel item)
         {
-            workspace.Remove(item);
+            workspace.Remove(item.Item);
 
-            view.MathExpressions = workspace.Expressions;
+            UpdateList();
         }
 
         public MathWorkspace Workspace

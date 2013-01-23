@@ -668,6 +668,12 @@ namespace xFunc.Maths
                     case MathTokenType.Arccotangent:
                         preOutput.Add(new ArccotMathExpression { AngleMeasurement = angleMeasurement });
                         break;
+                    case MathTokenType.Sineh:
+                        preOutput.Add(new HyperbolicSineMathExpression());
+                        break;
+                    case MathTokenType.Cosineh:
+                        preOutput.Add(new HyperbolicCosineMathExpression());
+                        break;
                     case MathTokenType.Sqrt:
                         preOutput.Add(new SqrtMathExpression());
                         break;
@@ -748,6 +754,8 @@ namespace xFunc.Maths
                          token.Type == MathTokenType.Arccotangent ||
                          token.Type == MathTokenType.Arcsecant ||
                          token.Type == MathTokenType.Arccosecant ||
+                         token.Type == MathTokenType.Sineh ||
+                         token.Type == MathTokenType.Cosineh ||
                          token.Type == MathTokenType.Sqrt ||
                          token.Type == MathTokenType.Root ||
                          token.Type == MathTokenType.Lg ||

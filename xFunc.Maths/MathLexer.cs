@@ -196,6 +196,22 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("th"))
+                    {
+                        token.Type = MathTokenType.Tangenth;
+                        tokens.Add(token);
+                        i++;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("tanh"))
+                    {
+                        token.Type = MathTokenType.Tangenth;
+                        tokens.Add(token);
+                        i += 3;
+
+                        continue;
+                    }
                     if (sub.StartsWith("sin"))
                     {
                         token.Type = MathTokenType.Sine;

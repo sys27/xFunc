@@ -212,6 +212,22 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("cth"))
+                    {
+                        token.Type = MathTokenType.Cotangenth;
+                        tokens.Add(token);
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("coth"))
+                    {
+                        token.Type = MathTokenType.Cotangenth;
+                        tokens.Add(token);
+                        i += 3;
+
+                        continue;
+                    }
                     if (sub.StartsWith("sin"))
                     {
                         token.Type = MathTokenType.Sine;

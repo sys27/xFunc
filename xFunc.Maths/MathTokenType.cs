@@ -139,6 +139,10 @@ namespace xFunc.Maths
         /// cosh
         /// </summary>
         Cosineh        = 41,
+        /// <summary>
+        /// tanh
+        /// </summary>
+        Tangenth       = 42,
 
         /// <summary>
         /// Exponential

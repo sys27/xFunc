@@ -16,8 +16,7 @@ limitations under the License. -->
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
-                     xmlns:math="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
-                     xmlns:logic="clr-namespace:xFunc.Logics;assembly=xFunc.Logics"
+                     xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                      xmlns:views="clr-namespace:xFunc.Views"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
                      WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
@@ -327,7 +326,7 @@ limitations under the License. -->
                     </Grid.RowDefinitions>
                     <ListBox x:Name="mathExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type math:MathWorkspaceItem}">
+                            <DataTemplate DataType="{x:Type viewModels:MathWorkspaceItemViewModel}">
                                 <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -336,6 +335,9 @@ limitations under the License. -->
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
+                                        <Border Grid.Column="0" Margin="0,0,8,0" BorderBrush="Silver" BorderThickness="0,0,0,1" VerticalAlignment="Top">
+                                            <TextBlock Text="{Binding Path=Index}" FontSize="14" />
+                                        </Border>
                                         <StackPanel Grid.Column="1" Orientation="Vertical">
                                             <TextBlock Text="Expression:" />
                                             <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
@@ -363,7 +365,7 @@ limitations under the License. -->
 
                     <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type logic:LogicWorkspaceItem}">
+                            <DataTemplate DataType="{x:Type viewModels:LogicWorkspaceItemViewModel}">
                                 <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -372,6 +374,9 @@ limitations under the License. -->
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
+                                        <Border Grid.Column="0" Margin="0,0,8,0" BorderBrush="Silver" BorderThickness="0,0,0,1" VerticalAlignment="Top">
+                                            <TextBlock Text="{Binding Path=Index}" FontSize="14" />
+                                        </Border>
                                         <StackPanel Grid.Column="1" Orientation="Vertical">
                                             <TextBlock Text="Expression:" />
                                             <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />

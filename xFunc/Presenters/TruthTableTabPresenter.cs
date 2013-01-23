@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using xFunc.ViewModel;
+using xFunc.ViewModels;
 using xFunc.Views;
 using xFunc.Logics;
 using xFunc.Logics.Expressions;

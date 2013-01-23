@@ -54,7 +54,7 @@ namespace xFunc.Maths
                 expressions.RemoveAt(0);
 
             IMathExpression exp = parser.Parse(strExp);
-            MathWorkspaceItem item = new MathWorkspaceItem(exp);
+            MathWorkspaceItem item = new MathWorkspaceItem(strExp, exp);
             if (exp is DerivativeMathExpression)
             {
                 item.Answer = exp.Derivative().ToString();

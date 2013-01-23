@@ -480,6 +480,13 @@ namespace xFunc.Maths
                 if (inv.SecondMathExpression.Equals(one))
                     return inv.FirstMathExpression;
             }
+            else if (expression is RootMathExpression)
+            {
+                RootMathExpression root = expression as RootMathExpression;
+
+                if (root.SecondMathExpression.Equals(one))
+                    return root.FirstMathExpression;
+            }
 
             return expression;
         }

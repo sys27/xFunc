@@ -42,7 +42,7 @@ namespace xFunc.Logics
 
             if (function != lastFunc)
             {
-                IEnumerable<LogicToken> tokens = lexer.LogicTokenization(function);
+                IEnumerable<LogicToken> tokens = lexer.Tokenization(function);
                 IEnumerable<LogicToken> rpn = ConvertToReversePolishNotation(tokens);
                 IEnumerable<ILogicExpression> expressions = ConvertTokensToExpression(rpn);
 
@@ -95,7 +95,7 @@ namespace xFunc.Logics
 
         public LogicParameterCollection GetLogicParameters(string function)
         {
-            HashSet<char> c = new HashSet<char>(from t in lexer.LogicTokenization(function).AsParallel()
+            HashSet<char> c = new HashSet<char>(from t in lexer.Tokenization(function).AsParallel()
                                                 where t.Type == LogicTokenType.Variable
                                                 orderby t.Variable
                                                 select t.Variable);

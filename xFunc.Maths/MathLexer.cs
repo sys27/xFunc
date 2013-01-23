@@ -23,7 +23,7 @@ namespace xFunc.Maths
     public class MathLexer
     {
 
-        public IEnumerable<MathToken> MathTokenization(string function)
+        public IEnumerable<MathToken> Tokenization(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentException(Resource.NotSpecifiedFunction, "function");

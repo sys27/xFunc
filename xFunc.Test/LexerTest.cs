@@ -54,7 +54,7 @@ namespace xFunc.Test
                                               new LogicToken(LogicTokenType.Variable, 'c'),
                                               new LogicToken(LogicTokenType.CloseBracket)
                                           };
-            List<LogicToken> actual = new List<LogicToken>(logicLexer.LogicTokenization(function));
+            List<LogicToken> actual = new List<LogicToken>(logicLexer.Tokenization(function));
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -66,7 +66,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(ArgumentException))]
         public void LogicTokenizationIsFunctionNullTest()
         {
-            logicLexer.LogicTokenization(null);
+            logicLexer.Tokenization(null);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(LogicLexerException))]
         public void LogicTokenizationSymbolNotSupportedTest()
         {
-            logicLexer.LogicTokenization("a # b");
+            logicLexer.Tokenization("a # b");
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace xFunc.Test
                                               new MathToken(MathTokenType.Multiplication),
                                               new MathToken(MathTokenType.Variable, 'x')
                                           };
-            List<MathToken> actual = new List<MathToken>(mathLexer.MathTokenization(function));
+            List<MathToken> actual = new List<MathToken>(mathLexer.Tokenization(function));
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -109,7 +109,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(ArgumentException))]
         public void MathTokenizationIsFunctionNullTest()
         {
-            mathLexer.MathTokenization(null);
+            mathLexer.Tokenization(null);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathLexerException))]
         public void MathTokenizationSymbolNotSupportedTest()
         {
-            mathLexer.MathTokenization("a | b");
+            mathLexer.Tokenization("a | b");
         }
 
     }

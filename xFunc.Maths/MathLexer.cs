@@ -164,6 +164,38 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("sh"))
+                    {
+                        token.Type = MathTokenType.Sineh;
+                        tokens.Add(token);
+                        i++;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("sinh"))
+                    {
+                        token.Type = MathTokenType.Sineh;
+                        tokens.Add(token);
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("ch"))
+                    {
+                        token.Type = MathTokenType.Cosineh;
+                        tokens.Add(token);
+                        i++;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("cosh"))
+                    {
+                        token.Type = MathTokenType.Cosineh;
+                        tokens.Add(token);
+                        i += 3;
+
+                        continue;
+                    }
                     if (sub.StartsWith("sin"))
                     {
                         token.Type = MathTokenType.Sine;

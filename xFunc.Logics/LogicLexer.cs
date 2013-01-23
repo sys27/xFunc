@@ -23,7 +23,7 @@ namespace xFunc.Logics
     public class LogicLexer
     {
 
-        public IEnumerable<LogicToken> LogicTokenization(string function)
+        public IEnumerable<LogicToken> Tokenization(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentException(Resource.NotSpecifiedFunction, "function");

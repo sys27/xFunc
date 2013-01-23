@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using xFunc.Logics;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.ViewModels;
 
 namespace xFunc.Views
 {
@@ -27,9 +28,9 @@ namespace xFunc.Views
     public interface IMainView
     {
 
-        IEnumerable<MathWorkspaceItem> MathExpressions { set; }
+        IEnumerable<MathWorkspaceItemViewModel> MathExpressions { set; }
         IEnumerable<IMathExpression> Graphs { set; }
-        IEnumerable<LogicWorkspaceItem> LogicExpressions { set; }
+        IEnumerable<LogicWorkspaceItemViewModel> LogicExpressions { set; }
 
     }
 

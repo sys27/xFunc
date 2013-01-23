@@ -89,19 +89,19 @@ namespace xFunc.Maths
         /// <summary>
         /// Arcsin
         /// </summary>
-        Arcsine         = 17,
+        Arcsine        = 17,
         /// <summary>
         /// Arccos
         /// </summary>
-        Arccosine         = 18,
+        Arccosine      = 18,
         /// <summary>
         /// Arctan
         /// </summary>
-        Arctangent         = 19,
+        Arctangent     = 19,
         /// <summary>
         /// Arccot
         /// </summary>
-        Arccotangent         = 20,
+        Arccotangent   = 20,
         /// <summary>
         /// arcsec
         /// </summary>
@@ -130,6 +130,15 @@ namespace xFunc.Maths
         /// Log
         /// </summary>
         Log            = 27,
+
+        /// <summary>
+        /// sinh
+        /// </summary>
+        Sineh          = 40,
+        /// <summary>
+        /// cosh
+        /// </summary>
+        Cosineh        = 41,
 
         /// <summary>
         /// Exponential

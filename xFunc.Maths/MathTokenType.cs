@@ -143,6 +143,10 @@ namespace xFunc.Maths
         /// tanh
         /// </summary>
         Tangenth       = 42,
+        /// <summary>
+        /// coth
+        /// </summary>
+        Cotangenth     = 43,
 
         /// <summary>
         /// Exponential

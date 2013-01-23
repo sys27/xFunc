@@ -20,42 +20,38 @@ using System.Text;
 namespace xFunc.Maths.Expressions
 {
 
-    public class HyperbolicCosineMathExpression : UnaryMathExpression
+    public class HyperbolicTangentMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicCosineMathExpression()
+        public HyperbolicTangentMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicCosineMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicTangentMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
         }
 
-        public override string ToString()
-        {
-            return ToString("cosh({0})");
-        }
-
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Cosh(firstMathExpression.Calculate(parameters));
+            return Math.Tanh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicCosineMathExpression(firstMathExpression.Clone());
+            return new HyperbolicTangentMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var sinh = new HyperbolicSineMathExpression(firstMathExpression.Clone());
-            var mul = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), sinh);
+            var cosh = new HyperbolicCosineMathExpression(firstMathExpression.Clone());
+            var inv = new ExponentiationMathExpression(cosh, new NumberMathExpression(2));
+            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), inv);
 
-            return mul;
+            return div;
         }
 
     }

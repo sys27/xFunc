@@ -70,6 +70,8 @@
     <Compile Include="Expressions\Maths\ArcsinMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\ArctanMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\ArccotMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\HyperbolicArcosecantMathExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\HyperbolicArsecantMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\HyperbolicArcotangentMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\HyperbolicArtangentMathExpressionTest.cs" />
     <Compile Include="Expressions\Maths\HyperbolicArcosineMathExpressionTest.cs" />

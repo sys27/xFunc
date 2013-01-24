@@ -52,6 +52,7 @@
     <Compile Include="Expressions\ArctanMathExpression.cs" />
     <Compile Include="Expressions\AssignMathExpression.cs" />
     <Compile Include="Expressions\BinaryMathExpression.cs" />
+    <Compile Include="Expressions\HyperbolicArcotangentMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicArtangentMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicArcosineMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicArsineMathExpression.cs" />

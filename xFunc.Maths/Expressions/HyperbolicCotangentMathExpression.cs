@@ -21,6 +21,11 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        public override string ToString()
+        {
+            return ToString("coth({0})");
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Coth(firstMathExpression.Calculate(parameters));

@@ -147,6 +147,14 @@ namespace xFunc.Maths
         /// coth
         /// </summary>
         Cotangenth     = 43,
+        /// <summary>
+        /// sech
+        /// </summary>
+        Secanth        = 44,
+        /// <summary>
+        /// csch
+        /// </summary>
+        Cosecanth      = 45,
 
         /// <summary>
         /// Exponential

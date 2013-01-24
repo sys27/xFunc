@@ -244,6 +244,54 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("arsinh"))
+                    {
+                        token.Type = MathTokenType.Arsineh;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arcosh"))
+                    {
+                        token.Type = MathTokenType.Arcosineh;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("artanh"))
+                    {
+                        token.Type = MathTokenType.Artangenth;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arcoth"))
+                    {
+                        token.Type = MathTokenType.Arcotangenth;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arsech"))
+                    {
+                        token.Type = MathTokenType.Arsecanth;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arcsch"))
+                    {
+                        token.Type = MathTokenType.Arcosecanth;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
                     if (sub.StartsWith("sin"))
                     {
                         token.Type = MathTokenType.Sine;

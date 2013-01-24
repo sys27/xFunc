@@ -35,6 +35,11 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        public override string ToString()
+        {
+            return ToString("tanh({0})");
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Tanh(firstMathExpression.Calculate(parameters));

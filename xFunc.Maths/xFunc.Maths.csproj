@@ -52,6 +52,7 @@
     <Compile Include="Expressions\ArctanMathExpression.cs" />
     <Compile Include="Expressions\AssignMathExpression.cs" />
     <Compile Include="Expressions\BinaryMathExpression.cs" />
+    <Compile Include="Expressions\HyperbolicCosecantMathExpression.cs" />
     <Compile Include="Expressions\CosecantMathExpression.cs" />
     <Compile Include="Expressions\CosineMathExpression.cs" />
     <Compile Include="Expressions\CotangentMathExpression.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Expressions\ExponentiationMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicCosineMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicCotangentMathExpression.cs" />
+    <Compile Include="Expressions\HyperbolicSecantMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicSineMathExpression.cs" />
     <Compile Include="Expressions\HyperbolicTangentMathExpression.cs" />
     <Compile Include="Expressions\IMathExpression.cs" />

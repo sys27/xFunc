@@ -6,16 +6,16 @@ using System.Text;
 namespace xFunc.Maths.Expressions
 {
 
-    public class HyperbolicArsineMathExpression : UnaryMathExpression
+    public class HyperbolicArtangentMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicArsineMathExpression()
+        public HyperbolicArtangentMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicArsineMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicArtangentMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -23,25 +23,24 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("arsinh({0})");
+            return ToString("artanh({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Asinh(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Atanh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArsineMathExpression(firstMathExpression.Clone());
+            return new HyperbolicArtangentMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
             var sqr = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
-            var add = new AdditionMathExpression(sqr, new NumberMathExpression(1));
-            var sqrt = new SqrtMathExpression(add);
-            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sqrt);
+            var sub = new SubtractionMathExpression(new NumberMathExpression(1), sqr);
+            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sub);
 
             return div;
         }

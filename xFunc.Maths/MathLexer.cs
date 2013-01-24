@@ -228,6 +228,22 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("sech"))
+                    {
+                        token.Type = MathTokenType.Secanth;
+                        tokens.Add(token);
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("csch"))
+                    {
+                        token.Type = MathTokenType.Cosecanth;
+                        tokens.Add(token);
+                        i += 3;
+
+                        continue;
+                    }
                     if (sub.StartsWith("sin"))
                     {
                         token.Type = MathTokenType.Sine;

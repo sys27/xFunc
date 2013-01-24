@@ -35,9 +35,19 @@ namespace xFunc.Maths
             return 1 / Math.Cos(d);
         }
 
+        public static double Sech(double d)
+        {
+            return 2 / (Math.Exp(d) + Math.Exp(-d));
+        }
+
         public static double Csc(double d)
         {
             return 1 / Math.Sin(d);
+        }
+
+        public static double Csch(double d)
+        {
+            return 2 / (Math.Exp(d) - Math.Exp(-d));
         }
 
         public static double Acot(double d)

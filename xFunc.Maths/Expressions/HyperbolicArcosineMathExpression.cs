@@ -21,6 +21,11 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        public override string ToString()
+        {
+            return ToString("arcosh({0})");
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Acosh(firstMathExpression.Calculate(parameters));

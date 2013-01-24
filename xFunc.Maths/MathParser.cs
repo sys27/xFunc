@@ -699,6 +699,9 @@ namespace xFunc.Maths
                     case MathTokenType.Arcosineh:
                         preOutput.Add(new HyperbolicArcosineMathExpression());
                         break;
+                    case MathTokenType.Artangenth:
+                        preOutput.Add(new HyperbolicArtangentMathExpression());
+                        break;
                     case MathTokenType.Sqrt:
                         preOutput.Add(new SqrtMathExpression());
                         break;

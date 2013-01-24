@@ -50,9 +50,29 @@ namespace xFunc.Maths
             return 2 / (Math.Exp(d) - Math.Exp(-d));
         }
 
+        public static double Asinh(double d)
+        {
+            return Math.Log(d + Math.Sqrt(d * d + 1));
+        }
+
+        public static double Acosh(double d)
+        {
+            return Math.Log(d + Math.Sqrt(d + 1) * Math.Sqrt(d - 1));
+        }
+
+        public static double Atanh(double d)
+        {
+            return Math.Log((1 + d) / (1 - d)) / 2;
+        }
+
         public static double Acot(double d)
         {
             return Math.PI / 2 - Math.Atan(d);
+        }
+
+        public static double Acoth(double d)
+        {
+            return Math.Log((d + 1) / (d - 1)) / 2;
         }
 
         public static double Asec(double d)
@@ -60,9 +80,20 @@ namespace xFunc.Maths
             return Math.Acos(1 / d);
         }
 
+        public static double Asech(double d)
+        {
+            var z = 1 / d;
+            return Math.Log(z + Math.Sqrt(z + 1) * Math.Sqrt(z - 1));
+        }
+
         public static double Acsc(double d)
         {
             return Math.Asin(1 / d);
+        }
+
+        public static double Acsch(double d)
+        {
+            return Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
         }
 
     }

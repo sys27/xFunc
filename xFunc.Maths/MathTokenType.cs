@@ -155,6 +155,30 @@ namespace xFunc.Maths
         /// csch
         /// </summary>
         Cosecanth      = 45,
+        /// <summary>
+        /// arsinh
+        /// </summary>
+        Arsineh        = 46,
+        /// <summary>
+        /// arcosh
+        /// </summary>
+        Arcosineh      = 47,
+        /// <summary>
+        /// artanh
+        /// </summary>
+        Artangenth     = 48,
+        /// <summary>
+        /// arcoth
+        /// </summary>
+        Arcotangenth   = 49,
+        /// <summary>
+        /// arsech
+        /// </summary>
+        Arsecanth      = 50,
+        /// <summary>
+        /// arcsch
+        /// </summary>
+        Arcosecanth    = 51,
 
         /// <summary>
         /// Exponential

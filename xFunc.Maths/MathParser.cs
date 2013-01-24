@@ -705,6 +705,12 @@ namespace xFunc.Maths
                     case MathTokenType.Arcotangenth:
                         preOutput.Add(new HyperbolicArcotangentMathExpression());
                         break;
+                    case MathTokenType.Arsecanth:
+                        preOutput.Add(new HyperbolicArsecantMathExpression());
+                        break;
+                    case MathTokenType.Arcosecanth:
+                        preOutput.Add(new HyperbolicArcosecantMathExpression());
+                        break;
                     case MathTokenType.Sqrt:
                         preOutput.Add(new SqrtMathExpression());
                         break;

@@ -693,6 +693,9 @@ namespace xFunc.Maths
                     case MathTokenType.Cosecanth:
                         preOutput.Add(new HyperbolicCosecantMathExpression());
                         break;
+                    case MathTokenType.Arsineh:
+                        preOutput.Add(new HyperbolicArsineMathExpression());
+                        break;
                     case MathTokenType.Sqrt:
                         preOutput.Add(new SqrtMathExpression());
                         break;
@@ -779,6 +782,12 @@ namespace xFunc.Maths
                          token.Type == MathTokenType.Cotangenth ||
                          token.Type == MathTokenType.Secanth ||
                          token.Type == MathTokenType.Cosecanth ||
+                         token.Type == MathTokenType.Arsineh ||
+                         token.Type == MathTokenType.Arcosineh ||
+                         token.Type == MathTokenType.Artangenth ||
+                         token.Type == MathTokenType.Arcotangenth ||
+                         token.Type == MathTokenType.Arsecanth ||
+                         token.Type == MathTokenType.Arcosecanth ||
                          token.Type == MathTokenType.Sqrt ||
                          token.Type == MathTokenType.Root ||
                          token.Type == MathTokenType.Lg ||

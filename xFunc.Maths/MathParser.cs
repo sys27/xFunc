@@ -63,8 +63,8 @@ namespace xFunc.Maths
                 un.FirstMathExpression = _SimplifyExpressions(un.FirstMathExpression);
             }
 
-            NumberMathExpression zero = new NumberMathExpression(0);
-            NumberMathExpression one = new NumberMathExpression(1);
+            NumberMathExpression zero = 0;
+            NumberMathExpression one = 1;
 
             if (expression is UnaryMinusMathExpression)
             {

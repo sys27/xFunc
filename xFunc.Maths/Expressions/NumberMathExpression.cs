@@ -28,6 +28,16 @@ namespace xFunc.Maths.Expressions
             this.number = number;
         }
 
+        public static implicit operator double(NumberMathExpression number)
+        {
+            return number.Number;
+        }
+
+        public static implicit operator NumberMathExpression(double number)
+        {
+            return new NumberMathExpression(number);
+        }
+
         public override bool Equals(object obj)
         {
             NumberMathExpression num = obj as NumberMathExpression;

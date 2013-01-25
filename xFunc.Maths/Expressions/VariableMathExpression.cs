@@ -28,6 +28,16 @@ namespace xFunc.Maths.Expressions
             this.variable = variable;
         }
 
+        public static implicit operator char(VariableMathExpression variable)
+        {
+            return variable.Character;
+        }
+
+        public static implicit operator VariableMathExpression(char variable)
+        {
+            return new VariableMathExpression(variable);
+        }
+
         public override bool Equals(object obj)
         {
             VariableMathExpression @var = obj as VariableMathExpression;

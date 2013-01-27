@@ -88,11 +88,29 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional.
+        /// </summary>
+        public static string AdditionalExpanderHeader {
+            get {
+                return ResourceManager.GetString("AdditionalExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Angles.
         /// </summary>
         public static string AnglesGroupHeader {
             get {
                 return ResourceManager.GetString("AnglesGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Answer:.
+        /// </summary>
+        public static string AnswerTextBox {
+            get {
+                return ResourceManager.GetString("AnswerTextBox", resourceCulture);
             }
         }
         
@@ -120,6 +138,24 @@ namespace xFunc.Resources {
         public static string ClipboardGroupHeader {
             get {
                 return ResourceManager.GetString("ClipboardGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cm.
+        /// </summary>
+        public static string cm {
+            get {
+                return ResourceManager.GetString("cm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constants.
+        /// </summary>
+        public static string ConstantsExpanderHeader {
+            get {
+                return ResourceManager.GetString("ConstantsExpanderHeader", resourceCulture);
             }
         }
         
@@ -205,6 +241,24 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expressions:.
+        /// </summary>
+        public static string ExpressionsTextBox {
+            get {
+                return ResourceManager.GetString("ExpressionsTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expression:.
+        /// </summary>
+        public static string ExpressionTextBox {
+            get {
+                return ResourceManager.GetString("ExpressionTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Font.
         /// </summary>
         public static string FontGroupHeader {
@@ -277,6 +331,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic.
+        /// </summary>
+        public static string HyperbolicExpanderHeader {
+            get {
+                return ResourceManager.GetString("HyperbolicExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Perhaps, variables have entered incorrectly..
         /// </summary>
         public static string IndexOutOfRangeExceptionError {
@@ -318,6 +381,15 @@ namespace xFunc.Resources {
         public static string NotSupportedOperationError {
             get {
                 return ResourceManager.GetString("NotSupportedOperationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numbers &amp; Arithmetic.
+        /// </summary>
+        public static string NumberAndArithmeticExpanderHeader {
+            get {
+                return ResourceManager.GetString("NumberAndArithmeticExpanderHeader", resourceCulture);
             }
         }
         
@@ -408,6 +480,24 @@ namespace xFunc.Resources {
         public static string ShowGridCheckBox {
             get {
                 return ResourceManager.GetString("ShowGridCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standart.
+        /// </summary>
+        public static string StandartExpanderHeader {
+            get {
+                return ResourceManager.GetString("StandartExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigonometric.
+        /// </summary>
+        public static string TrigonometricExpanderHeader {
+            get {
+                return ResourceManager.GetString("TrigonometricExpanderHeader", resourceCulture);
             }
         }
         

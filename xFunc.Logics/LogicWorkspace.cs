@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using xFunc.Logics.Expressions;
+using xFunc.Logics.Resources;
 
 namespace xFunc.Logics
 {
@@ -59,7 +60,7 @@ namespace xFunc.Logics
             {
                 AssignLogicExpression assign = (AssignLogicExpression)exp;
                 assign.Calculate(parameters);
-                item.Answer = string.Format("The value '{1}' was assigned to the variable '{0}'.", assign.Value, assign.Variable);
+                item.Answer = string.Format(Resource.AssignVariable, assign.Value, assign.Variable);
             }
             else
             {

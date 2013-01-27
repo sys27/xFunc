@@ -103,6 +103,11 @@
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Presenters\MathTabPresenter.cs" />
     <Compile Include="Presenters\TruthTableTabPresenter.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\LogicWorkspaceItemViewModel.cs" />
     <Compile Include="ViewModels\MathWorkspaceItemViewModel.cs" />
     <Compile Include="ViewModels\TruthTableRowViewModel.cs" />
@@ -194,7 +199,12 @@
     <Resource Include="Images\Vars.png" />
     <Resource Include="Images\VarsLarge.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Logics\xFunc.Logics.csproj">
       <Project>{dfc61417-f3cc-47d5-b2de-4029be939a4c}</Project>

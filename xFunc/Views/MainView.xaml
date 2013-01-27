@@ -15,6 +15,7 @@ limitations under the License. -->
 <ribbon:RibbonWindow x:Class="xFunc.Views.MainView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:res="clr-namespace:xFunc.Resources"
                      xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
                      xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                      xmlns:views="clr-namespace:xFunc.Views"
@@ -82,57 +83,57 @@ limitations under the License. -->
                 <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
             <ribbon:Ribbon.ToolBarItems>
-                <ribbon:Button Header="About" ToolTip="Show the about window" Size="Small" Icon="../Images/Help.png" Click="aboutButton_Click" />
+                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" ToolTip="{x:Static res:Resource.AboutButtonToolTip}" Size="Small" Icon="../Images/Help.png" Click="aboutButton_Click" />
             </ribbon:Ribbon.ToolBarItems>
-            <ribbon:RibbonTabItem Header="Home" IsSelected="True">
-                <ribbon:RibbonGroupBox Header="Clipboard">
-                    <ribbon:Button x:Name="undoButton" Header="Undo" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo">
+            <ribbon:RibbonTabItem Header="{x:Static res:Resource.HomeRibbonTabHeader}" IsSelected="True">
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ClipboardGroupHeader}">
+                    <ribbon:Button x:Name="undoButton" Header="{x:Static res:Resource.UndoButtonHeader}" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="Undo (Ctrl+Z)" Text="Undo the last change" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.UndoScreenTipTitle}" Text="{x:Static res:Resource.UndoScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                    <ribbon:Button x:Name="redoButton" Header="Redo" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" Command="ApplicationCommands.Redo">
+                    <ribbon:Button x:Name="redoButton" Header="{x:Static res:Resource.RedoButtonHeader}" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" Command="ApplicationCommands.Redo">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="Redo (Ctrl+R)" Text="Redo the last change" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.RedoScreenTipTitle}" Text="{x:Static res:Resource.RedoScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                     <Separator />
-                    <ribbon:Button Header="Cut" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" Command="ApplicationCommands.Cut">
+                    <ribbon:Button Header="{x:Static res:Resource.CutButtonHeader}" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" Command="ApplicationCommands.Cut">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="Cut (Ctrl+X)" Text="Cut the selected text" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.CutScreenTipTitle}" Text="{x:Static res:Resource.CutScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                    <ribbon:Button Header="Copy" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" Command="ApplicationCommands.Copy">
+                    <ribbon:Button Header="{x:Static res:Resource.CopyButtonHeader}" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" Command="ApplicationCommands.Copy">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="Copy (Ctrl+C)" Text="Copy the selected text" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.CopyScreenTipTitle}" Text="{x:Static res:Resource.CopyScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                    <ribbon:Button Header="Paste" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste">
+                    <ribbon:Button Header="{x:Static res:Resource.PasteButtonHeader}" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="Paste (Ctrl+P)" Text="Paste text from clipboard" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.PasteScreenTipTitle}" Text="{x:Static res:Resource.PasteScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox Header="Angles">
-                    <ribbon:ToggleButton x:Name="degreeButton" Header="Degree" LargeIcon="../Images/DegreeLarge.png" Command="views:MainView.DegreeCommand">
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.AnglesGroupHeader}">
+                    <ribbon:ToggleButton x:Name="degreeButton" Header="{x:Static res:Resource.DegreeButtonHeader}" LargeIcon="../Images/DegreeLarge.png" Command="views:MainView.DegreeCommand">
                         <ribbon:ToggleButton.ToolTip>
-                            <ribbon:ScreenTip Title="Degree (Ctrl+Alt+D)" Text="Degrees as a unit of angle measure" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.DegreeScreenTipTitle}" Text="{x:Static res:Resource.DegreeScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="radianButton" Header="Radian" LargeIcon="../Images/RadianLarge.png" Command="views:MainView.RadianCommand">
+                    <ribbon:ToggleButton x:Name="radianButton" Header="{x:Static res:Resource.RadianButtonHeader}" LargeIcon="../Images/RadianLarge.png" Command="views:MainView.RadianCommand">
                         <ribbon:ToggleButton.ToolTip>
-                            <ribbon:ScreenTip Title="Radian (Ctrl+Alt+R)" Text="Radians as a unit of angle measure" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.RadianScreenTipTitle}" Text="{x:Static res:Resource.RadianScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="gradianButton" Header="Gradian" LargeIcon="../Images/GradianLarge.png" Command="views:MainView.GradianCommand">
+                    <ribbon:ToggleButton x:Name="gradianButton" Header="{x:Static res:Resource.GradianButtonHeader}" LargeIcon="../Images/GradianLarge.png" Command="views:MainView.GradianCommand">
                         <ribbon:ToggleButton.ToolTip>
-                            <ribbon:ScreenTip Title="Gradian (Ctrl+Alt+G)" Text="Gradians as a unit of angle measure" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.GradianScreenTipTitle}" Text="{x:Static res:Resource.GradianScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
-            <ribbon:RibbonTabItem Header="Insert">
-                <ribbon:RibbonGroupBox Header="Variables">
+            <ribbon:RibbonTabItem Header="{x:Static res:Resource.InsertRibbonTab}">
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.VariablesGroupHeader}">
                     <ribbon:SplitButton Header="Vars" ResizeMode="Both" Icon="../Images/Vars.png" LargeIcon="../Images/VarsLarge.png">
                         <ribbon:Gallery MinItemsInRow="2" MaxItemsInRow="6" ItemWidth="24" ItemHeight="24" GroupBy="Tag" SelectedFilter="{Binding ElementName=defalutGroup}">
                             <ribbon:Gallery.Resources>
@@ -305,9 +306,9 @@ limitations under the License. -->
                     </ribbon:SplitButton>
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
-            <ribbon:RibbonTabItem Header="View">
-                <ribbon:RibbonGroupBox Header="Font">
-                    <ribbon:Spinner x:Name="fontSizeSpinner" Header="Size:" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" Format="" />
+            <ribbon:RibbonTabItem Header="{x:Static res:Resource.ViewRibbonTab}">
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.FontGroupHeader}">
+                    <ribbon:Spinner x:Name="fontSizeSpinner" Header="{x:Static res:Resource.FontSizeSpinner}" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" Format="" />
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>
@@ -318,7 +319,7 @@ limitations under the License. -->
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </TabControl.Resources>
-            <TabItem x:Name="mathTab" Header="Math Expressions">
+            <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -356,7 +357,7 @@ limitations under the License. -->
                     <TextBox x:Name="mathExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" FontFamily="Lucida Calligraphy" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="mathExpressionBox_KeyUp" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="logicTab" Header="Logic Expressions">
+            <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -395,7 +396,7 @@ limitations under the License. -->
                     <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" FontFamily="Lucida Calligraphy" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="graphsTab" Header="Graphs">
+            <TabItem x:Name="graphsTab" Header="{x:Static res:Resource.GraphsTab}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -430,7 +431,7 @@ limitations under the License. -->
                     <views:PlottingGraph x:Name="plot" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="truthTableTab" Header="Truth Table">
+            <TabItem x:Name="truthTableTab" Header="{x:Static res:Resource.TruthTableTab}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

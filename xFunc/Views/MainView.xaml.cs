@@ -19,13 +19,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using xFunc.Logics;
 using xFunc.Logics.Exceptions;
 using xFunc.Logics.Expressions;
-using xFunc.Maths;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Presenters;
+using xFunc.Resources;
 using xFunc.ViewModels;
 
 namespace xFunc.Views
@@ -267,11 +266,11 @@ namespace xFunc.Views
                 }
                 catch (KeyNotFoundException)
                 {
-                    statusBox.Text = "The variable not found.";
+                    statusBox.Text = Resource.VariableNotFoundExceptionError;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
                 }
                 catch (InvalidOperationException ioe)
                 {
@@ -279,7 +278,7 @@ namespace xFunc.Views
                 }
                 catch (NotSupportedException)
                 {
-                    statusBox.Text = "This operation is not supported.";
+                    statusBox.Text = Resource.NotSupportedOperationError;
                 }
 
                 mathExpressionBox.Text = string.Empty;
@@ -325,11 +324,11 @@ namespace xFunc.Views
                 }
                 catch (KeyNotFoundException)
                 {
-                    statusBox.Text = "The variable not found.";
+                    statusBox.Text = Resource.VariableNotFoundExceptionError;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
                 }
                 catch (InvalidOperationException ioe)
                 {
@@ -337,7 +336,7 @@ namespace xFunc.Views
                 }
                 catch (NotSupportedException)
                 {
-                    statusBox.Text = "This operation is not supported.";
+                    statusBox.Text = Resource.NotSupportedOperationError;
                 }
 
                 logicExpressionBox.Text = string.Empty;
@@ -383,11 +382,11 @@ namespace xFunc.Views
                 }
                 catch (KeyNotFoundException)
                 {
-                    statusBox.Text = "The variable not found.";
+                    statusBox.Text = Resource.VariableNotFoundExceptionError;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
                 }
                 catch (InvalidOperationException ioe)
                 {
@@ -395,7 +394,7 @@ namespace xFunc.Views
                 }
                 catch (NotSupportedException)
                 {
-                    statusBox.Text = "This operation is not supported.";
+                    statusBox.Text = Resource.NotSupportedOperationError;
                 }
 
                 graphExpressionBox.Text = string.Empty;
@@ -444,11 +443,11 @@ namespace xFunc.Views
                 }
                 catch (KeyNotFoundException)
                 {
-                    statusBox.Text = "The variable not found.";
+                    statusBox.Text = Resource.VariableNotFoundExceptionError;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    statusBox.Text = "Perhaps, variables have entered incorrectly.";
+                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
                 }
                 catch (InvalidOperationException ioe)
                 {
@@ -456,7 +455,7 @@ namespace xFunc.Views
                 }
                 catch (NotSupportedException)
                 {
-                    statusBox.Text = "This operation is not supported.";
+                    statusBox.Text = Resource.NotSupportedOperationError;
                 }
             }
         }

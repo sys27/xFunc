@@ -18,6 +18,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using xFunc.Maths.Expressions;
+using xFunc.Resources;
 
 namespace xFunc.Views
 {
@@ -79,7 +80,7 @@ namespace xFunc.Views
             {
                 double x = args.GetPosition(this).X;
                 double y = args.GetPosition(this).Y;
-                point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), "cm");
+                point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
 
                 if (args.LeftButton == MouseButtonState.Pressed)
                 {
@@ -133,7 +134,7 @@ namespace xFunc.Views
 
             double x = args.GetPosition(null).X;
             double y = args.GetPosition(null).Y;
-            point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), "cm");
+            point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
         }
 
         private void slider_ValueChanged(object o, RoutedPropertyChangedEventArgs<double> args)

@@ -118,174 +118,174 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutButtonHeader" xml:space="preserve">
-    <value>About</value>
+    <value>О программе</value>
   </data>
   <data name="AboutButtonToolTip" xml:space="preserve">
-    <value>Show the about window</value>
+    <value>Открыть окно "О программе"</value>
   </data>
   <data name="AboutWindowTitle" xml:space="preserve">
-    <value>About</value>
+    <value>О программе</value>
   </data>
   <data name="AdditionalExpanderHeader" xml:space="preserve">
-    <value>Additional</value>
+    <value>Дополнительные</value>
   </data>
   <data name="AnglesGroupHeader" xml:space="preserve">
-    <value>Angles</value>
+    <value>Меры измерения углов</value>
   </data>
   <data name="AnswerTextBox" xml:space="preserve">
-    <value>Answer:</value>
+    <value>Ответ:</value>
   </data>
   <data name="Author" xml:space="preserve">
-    <value>Dmitry Kischenko</value>
+    <value>Дмитрий Кищенко</value>
   </data>
   <data name="AuthorTextBox" xml:space="preserve">
-    <value>Author:</value>
+    <value>Разработчик:</value>
   </data>
   <data name="ClipboardGroupHeader" xml:space="preserve">
-    <value>Clipboard</value>
+    <value>Буфер обмена</value>
   </data>
   <data name="cm" xml:space="preserve">
-    <value>cm</value>
+    <value>см</value>
   </data>
   <data name="ConstantsExpanderHeader" xml:space="preserve">
-    <value>Constants</value>
+    <value>Констаты</value>
   </data>
   <data name="CopyButtonHeader" xml:space="preserve">
-    <value>Copy</value>
+    <value>Копировать</value>
   </data>
   <data name="CopyScreenTipText" xml:space="preserve">
-    <value>Copy the selected text</value>
+    <value>Копировать выделенный текст</value>
   </data>
   <data name="CopyScreenTipTitle" xml:space="preserve">
-    <value>Copy (Ctrl+C)</value>
+    <value>Копировать (Ctrl+C)</value>
   </data>
   <data name="CutButtonHeader" xml:space="preserve">
-    <value>Cut</value>
+    <value>Вырезать</value>
   </data>
   <data name="CutScreenTipText" xml:space="preserve">
-    <value>Cut the selected text</value>
+    <value>Вырезать выделенный текст</value>
   </data>
   <data name="CutScreenTipTitle" xml:space="preserve">
-    <value>Cut (Ctrl+X)</value>
+    <value>Вырезать (Ctrl+X)</value>
   </data>
   <data name="DegreeButtonHeader" xml:space="preserve">
-    <value>Dergee</value>
+    <value>Градусы</value>
   </data>
   <data name="DegreeScreenTipText" xml:space="preserve">
-    <value>Use degrees as a unit of angle measure</value>
+    <value>Использовать градусы как единицы измерения углов</value>
   </data>
   <data name="DegreeScreenTipTitle" xml:space="preserve">
-    <value>Degree (Ctrl+Alt+D)</value>
+    <value>Градусы (Ctrl+Alt+D)</value>
   </data>
   <data name="ExpressionsTextBox" xml:space="preserve">
-    <value>Expressions:</value>
+    <value>Графики:</value>
   </data>
   <data name="ExpressionTextBox" xml:space="preserve">
-    <value>Expression:</value>
+    <value>Выражение:</value>
   </data>
   <data name="FontGroupHeader" xml:space="preserve">
-    <value>Font</value>
+    <value>Шрифт</value>
   </data>
   <data name="FontSizeSpinner" xml:space="preserve">
-    <value>Size:</value>
+    <value>Размер:</value>
   </data>
   <data name="GradianButtonHeader" xml:space="preserve">
-    <value>Gradian</value>
+    <value>Грады</value>
   </data>
   <data name="GradianScreenTipText" xml:space="preserve">
-    <value>Use gradians as a unit of angle measure</value>
+    <value>Использовать грады как единицы измерения углов</value>
   </data>
   <data name="GradianScreenTipTitle" xml:space="preserve">
-    <value>Gradian (Ctrl+Alt+G)</value>
+    <value>Грады (Ctrl+Alt+G)</value>
   </data>
   <data name="GraphsTab" xml:space="preserve">
-    <value>Graphs</value>
+    <value>Графики</value>
   </data>
   <data name="HomePageTextBox" xml:space="preserve">
-    <value>Home Page:</value>
+    <value>Сайт:</value>
   </data>
   <data name="HomeRibbonTabHeader" xml:space="preserve">
-    <value>Home</value>
+    <value>Главная</value>
   </data>
   <data name="HyperbolicExpanderHeader" xml:space="preserve">
-    <value>Hyperbolic</value>
+    <value>Гиперболические</value>
   </data>
   <data name="IndexOutOfRangeExceptionError" xml:space="preserve">
-    <value>Perhaps, variables have entered incorrectly.</value>
+    <value>Возможно, переменные были введены неправильно.</value>
   </data>
   <data name="InsertRibbonTab" xml:space="preserve">
-    <value>Insert</value>
+    <value>Вставить</value>
   </data>
   <data name="LogicTab" xml:space="preserve">
-    <value>Logic Expressions</value>
+    <value>Логические</value>
   </data>
   <data name="MathTab" xml:space="preserve">
-    <value>Math Expressions</value>
+    <value>Математические</value>
   </data>
   <data name="NotSupportedOperationError" xml:space="preserve">
-    <value>This operation is not supported.</value>
+    <value>Указанная операция не поддерживается.</value>
   </data>
   <data name="NumberAndArithmeticExpanderHeader" xml:space="preserve">
-    <value>Numbers &amp; Arithmetic</value>
+    <value>Числа и арифметические</value>
   </data>
   <data name="PasteButtonHeader" xml:space="preserve">
-    <value>Paste</value>
+    <value>Вставить</value>
   </data>
   <data name="PasteScreenTipText" xml:space="preserve">
-    <value>Paste text from clipboard</value>
+    <value>Вставить текст с буфера обмена</value>
   </data>
   <data name="PasteScreenTipTitle" xml:space="preserve">
-    <value>Paste (Ctrl+V)</value>
+    <value>Вставить (Ctrl+V)</value>
   </data>
   <data name="RadianButtonHeader" xml:space="preserve">
-    <value>Radian</value>
+    <value>Радианы</value>
   </data>
   <data name="RadianScreenTipText" xml:space="preserve">
-    <value>Use radians as a unit of angle measure</value>
+    <value>Использовать радианы как единицы измерения углов</value>
   </data>
   <data name="RadianScreenTipTitle" xml:space="preserve">
-    <value>Radian (Ctrl+Alt+R)</value>
+    <value>Радианы (Ctrl+Alt+R)</value>
   </data>
   <data name="RedoButtonHeader" xml:space="preserve">
-    <value>Redo</value>
+    <value>Вернуть</value>
   </data>
   <data name="RedoScreenTipText" xml:space="preserve">
-    <value>Redo the last change</value>
+    <value>Вернуть последнее изменение</value>
   </data>
   <data name="RedoScreenTipTitle" xml:space="preserve">
-    <value>Redo (Ctrl+Y)</value>
+    <value>Вернуть (Ctrl+Y)</value>
   </data>
   <data name="ShowGridCheckBox" xml:space="preserve">
-    <value>Show Grid</value>
+    <value>Показать сетку</value>
   </data>
   <data name="StandartExpanderHeader" xml:space="preserve">
-    <value>Standart</value>
+    <value>Стандартные</value>
   </data>
   <data name="TrigonometricExpanderHeader" xml:space="preserve">
-    <value>Trigonometric</value>
+    <value>Тригонометрические</value>
   </data>
   <data name="TruthTableTab" xml:space="preserve">
-    <value>Truth Table</value>
+    <value>Таблица истинности</value>
   </data>
   <data name="UndoButtonHeader" xml:space="preserve">
-    <value>Undo</value>
+    <value>Отмена</value>
   </data>
   <data name="UndoScreenTipText" xml:space="preserve">
-    <value>Undo the last change</value>
+    <value>Отменить последнее изменение</value>
   </data>
   <data name="UndoScreenTipTitle" xml:space="preserve">
-    <value>Undo (Ctrl+Z)</value>
+    <value>Отмена (Ctrl+Z)</value>
   </data>
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
-    <value>The variable not found.</value>
+    <value>Переменная не найдена.</value>
   </data>
   <data name="VariablesGroupHeader" xml:space="preserve">
-    <value>Variables</value>
+    <value>Переменные</value>
   </data>
   <data name="VersionTextBox" xml:space="preserve">
-    <value>Version:</value>
+    <value>Версия:</value>
   </data>
   <data name="ViewRibbonTab" xml:space="preserve">
-    <value>View</value>
+    <value>Представление</value>
   </data>
 </root>

@@ -340,9 +340,9 @@ limitations under the License. -->
                                             <TextBlock Text="{Binding Path=Index}" FontSize="14" />
                                         </Border>
                                         <StackPanel Grid.Column="1" Orientation="Vertical">
-                                            <TextBlock Text="Expression:" />
+                                            <TextBlock Text="{x:Static res:Resource.ExpressionTextBox}" />
                                             <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
-                                            <TextBlock Text="Answer:" />
+                                            <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
                                         <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeMath_Click">
@@ -379,9 +379,9 @@ limitations under the License. -->
                                             <TextBlock Text="{Binding Path=Index}" FontSize="14" />
                                         </Border>
                                         <StackPanel Grid.Column="1" Orientation="Vertical">
-                                            <TextBlock Text="Expression:" />
+                                            <TextBlock Text="{x:Static res:Resource.ExpressionTextBox}" />
                                             <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
-                                            <TextBlock Text="Answer:" />
+                                            <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
                                         <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
@@ -406,7 +406,7 @@ limitations under the License. -->
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                             <StackPanel Margin="6,4,8,4">
-                                <TextBlock Text="Expressions:" FontSize="14" />
+                                <TextBlock Text="{x:Static res:Resource.ExpressionsTextBox}" FontSize="14" />
                                 <ListBox x:Name="graphsList" BorderBrush="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" Background="White" SelectionChanged="graphsList_SelectionChanged">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -459,7 +459,7 @@ limitations under the License. -->
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonStyle}" />
                 </StackPanel.Resources>
-                <Expander x:Name="numberToolBar" Header="Numbers &amp; Arithmetic" IsExpanded="True">
+                <Expander x:Name="numberToolBar" Header="{x:Static res:Resource.NumberAndArithmeticExpanderHeader}" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -524,7 +524,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="standartToolBar" Header="Standart" IsExpanded="True">
+                <Expander x:Name="standartToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -564,7 +564,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="trigonometricToolBar" Header="Trigonometric">
+                <Expander x:Name="trigonometricToolBar" Header="{x:Static res:Resource.TrigonometricExpanderHeader}">
                     <Grid Margin="0,4,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -618,7 +618,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="hyperbolicToolBar" Header="Hyperbolic">
+                <Expander x:Name="hyperbolicToolBar" Header="{x:Static res:Resource.HyperbolicExpanderHeader}">
                     <Grid Margin="0,4,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -672,7 +672,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="constantsMathToolBar" Header="Constants">
+                <Expander x:Name="constantsMathToolBar" Header="{x:Static res:Resource.ConstantsExpanderHeader}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -692,7 +692,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="additionalToolBar" Header="Additional">
+                <Expander x:Name="additionalToolBar" Header="{x:Static res:Resource.AdditionalExpanderHeader}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -709,7 +709,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="standartLogicToolBar" Header="Standart" Visibility="Collapsed" IsExpanded="True">
+                <Expander x:Name="standartLogicToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" Visibility="Collapsed" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -749,7 +749,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="constantsLogicToolBar" Header="Constants" Visibility="Collapsed" IsExpanded="True">
+                <Expander x:Name="constantsLogicToolBar" Header="{x:Static res:Resource.ConstantsExpanderHeader}" Visibility="Collapsed" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />

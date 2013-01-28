@@ -470,7 +470,7 @@ namespace xFunc.Views
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
-            if (tabControl.SelectedItem == logicTab)
+            if (tabControl.SelectedItem == logicTab || tabControl.SelectedItem == truthTableTab)
             {
                 numberToolBar.Visibility = Visibility.Collapsed;
                 standartToolBar.Visibility = Visibility.Collapsed;

@@ -21,13 +21,17 @@ namespace xFunc.Logics
     {
 
         /// <summary>
+        /// :=
+        /// </summary>
+        Assign         = 0,
+        /// <summary>
         /// (
         /// </summary>
-        OpenBracket    = 0,
+        OpenBracket    = 1,
         /// <summary>
         /// )
         /// </summary>
-        CloseBracket   = 1,
+        CloseBracket   = 2,
 
         /// <summary>
         /// !
@@ -75,10 +79,6 @@ namespace xFunc.Logics
         /// </summary>
         False          = 76,
 
-        /// <summary>
-        /// :=
-        /// </summary>
-        Assign         = -1,
         /// <summary>
         /// Variable.
         /// </summary>

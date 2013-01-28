@@ -773,45 +773,11 @@ namespace xFunc.Maths
                     if (stackToken.Type == MathTokenType.OpenBracket)
                         stack.Push(stackToken);
                 }
-                else if (token.Type == MathTokenType.Addition ||
-                         token.Type == MathTokenType.Subtraction ||
-                         token.Type == MathTokenType.Multiplication ||
-                         token.Type == MathTokenType.Division ||
-                         token.Type == MathTokenType.Exponentiation ||
-                         token.Type == MathTokenType.Absolute ||
-                         token.Type == MathTokenType.Sine ||
-                         token.Type == MathTokenType.Cosine ||
-                         token.Type == MathTokenType.Tangent ||
-                         token.Type == MathTokenType.Cotangent ||
-                         token.Type == MathTokenType.Secant ||
-                         token.Type == MathTokenType.Cosecant ||
-                         token.Type == MathTokenType.Arcsine ||
-                         token.Type == MathTokenType.Arccosine ||
-                         token.Type == MathTokenType.Arctangent ||
-                         token.Type == MathTokenType.Arccotangent ||
-                         token.Type == MathTokenType.Arcsecant ||
-                         token.Type == MathTokenType.Arccosecant ||
-                         token.Type == MathTokenType.Sineh ||
-                         token.Type == MathTokenType.Cosineh ||
-                         token.Type == MathTokenType.Tangenth ||
-                         token.Type == MathTokenType.Cotangenth ||
-                         token.Type == MathTokenType.Secanth ||
-                         token.Type == MathTokenType.Cosecanth ||
-                         token.Type == MathTokenType.Arsineh ||
-                         token.Type == MathTokenType.Arcosineh ||
-                         token.Type == MathTokenType.Artangenth ||
-                         token.Type == MathTokenType.Arcotangenth ||
-                         token.Type == MathTokenType.Arsecanth ||
-                         token.Type == MathTokenType.Arcosecanth ||
-                         token.Type == MathTokenType.Sqrt ||
-                         token.Type == MathTokenType.Root ||
-                         token.Type == MathTokenType.Lg ||
-                         token.Type == MathTokenType.Ln ||
-                         token.Type == MathTokenType.Log ||
-                         token.Type == MathTokenType.UnaryMinus ||
-                         token.Type == MathTokenType.E ||
-                         token.Type == MathTokenType.Derivative ||
-                         token.Type == MathTokenType.Assign)
+                else if (token.Type == MathTokenType.Number || token.Type == MathTokenType.Variable)
+                {
+                    output.Add(token);
+                }
+                else
                 {
                     while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
                     {
@@ -821,14 +787,6 @@ namespace xFunc.Maths
                     }
 
                     stack.Push(token);
-                }
-                else if (token.Type == MathTokenType.Number || token.Type == MathTokenType.Variable)
-                {
-                    output.Add(token);
-                }
-                else
-                {
-                    throw new MathParserException(Resource.NotSupportedToken);
                 }
             }
             if (stack.Count != 0)

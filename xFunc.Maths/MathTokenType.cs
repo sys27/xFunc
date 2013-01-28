@@ -21,7 +21,7 @@ namespace xFunc.Maths
         /// <summary>
         /// :=
         /// </summary>
-        Assign = 0,
+        Assign         = 0,
         /// <summary>
         /// (
         /// </summary>

@@ -156,18 +156,11 @@ namespace xFunc.Logics
                         stackToken = stack.Pop();
                     }
                 }
-                else if (token.Type == LogicTokenType.Not ||
-                         token.Type == LogicTokenType.And ||
-                         token.Type == LogicTokenType.Or ||
-                         token.Type == LogicTokenType.Implication ||
-                         token.Type == LogicTokenType.Equality ||
-                         token.Type == LogicTokenType.NOr ||
-                         token.Type == LogicTokenType.NAnd ||
-                         token.Type == LogicTokenType.XOr ||
-                         token.Type == LogicTokenType.Assign ||
-                         token.Type == LogicTokenType.TruthTable ||
-                         token.Type == LogicTokenType.True ||
-                         token.Type == LogicTokenType.False)
+                else if (token.Type == LogicTokenType.Variable)
+                {
+                    output.Add(token);
+                }
+                else
                 {
                     while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
                     {
@@ -177,14 +170,6 @@ namespace xFunc.Logics
                     }
 
                     stack.Push(token);
-                }
-                else if (token.Type == LogicTokenType.Variable)
-                {
-                    output.Add(token);
-                }
-                else
-                {
-                    throw new LogicParserException(Resource.NotSupportedToken);
                 }
             }
             if (stack.Count != 0)

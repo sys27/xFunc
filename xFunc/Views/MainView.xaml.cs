@@ -234,6 +234,7 @@ namespace xFunc.Views
                 try
                 {
                     mathPresenter.Add(mathExpressionBox.Text);
+                    mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[mathExpsListBox.Items.Count - 1]);
                     statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
@@ -292,6 +293,7 @@ namespace xFunc.Views
                 try
                 {
                     logicPresenter.Add(logicExpressionBox.Text);
+                    logicExpsListBox.ScrollIntoView(logicExpsListBox.Items[logicExpsListBox.Items.Count - 1]);
                     statusBox.Text = string.Empty;
                 }
                 catch (LogicLexerException lle)
@@ -528,7 +530,6 @@ namespace xFunc.Views
             set
             {
                 mathExpsListBox.ItemsSource = value;
-                mathExpsListBox.ScrollIntoView(value.LastOrDefault());
             }
         }
 
@@ -546,7 +547,6 @@ namespace xFunc.Views
             set
             {
                 logicExpsListBox.ItemsSource = value;
-                logicExpsListBox.ScrollIntoView(value.LastOrDefault());
             }
         }
 

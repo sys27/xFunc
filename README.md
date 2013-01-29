@@ -11,11 +11,6 @@ xFunc designed for math and logical calculations. It written on C#. This program
 * Plotting graphs;
 * Truth tables (implemented in v. 1.4.1.0);
 
-### To-Do List:
-
-* Add ability to create user-defined functions;
-* New UI;
-
 ### More:
 
 * [xfunc.codeplex.com](http://xfunc.codeplex.com/)

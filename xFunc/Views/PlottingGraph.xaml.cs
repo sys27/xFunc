@@ -230,41 +230,57 @@ namespace xFunc.Views
             Pen pen = new Pen(Brushes.Black, 1);
             using (DrawingContext context = oxoyVisual.RenderOpen())
             {
-                context.DrawLine(pen, new Point(centerX, 0), new Point(centerX, currentHeight));
-                context.DrawLine(pen, new Point(0, centerY), new Point(currentWidth, centerY));
-                if (slider.Value <= 1.5)
+                var boolX = centerX >= 0 && centerX <= currentWidth;
+                var boolY = centerY >= 0 && centerY <= currentHeight;
+                if (boolX)
+                    context.DrawLine(pen, new Point(centerX, 0), new Point(centerX, currentHeight));
+                if (boolY)
+                    context.DrawLine(pen, new Point(0, centerY), new Point(currentWidth, centerY));
+                if (slider.Value <= 1.5 && centerX >= 12 && centerX <= currentWidth && boolY)
                     context.DrawText(new FormattedText("0", this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 12, centerY + 7));
 
                 // OX
-                for (double x = centerX - cm; x >= 0; x -= cm)
+                if (boolY)
                 {
-                    context.DrawLine(pen, new Point(x, centerY - 5), new Point(x, centerY + 5));
-
-                    if (slider.Value <= 1.5)
-                        context.DrawText(new FormattedText(Math.Round(-(centerX - x) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 15, centerY + 7));
-                }
-                for (double x = centerX + cm; x <= currentWidth; x += cm)
-                {
-                    context.DrawLine(pen, new Point(x, centerY - 5), new Point(x, centerY + 5));
-
-                    if (slider.Value <= 1.5)
-                        context.DrawText(new FormattedText(Math.Round((x - centerX) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 12, centerY + 7));
+                    for (double x = centerX - cm; x >= 0; x -= cm)
+                    {
+                        if (x >= 0 && x <= currentWidth)
+                            context.DrawLine(pen, new Point(x, centerY - 5), new Point(x, centerY + 5));
+                        if (slider.Value <= 1.5 && x >= 15 && x <= currentWidth)
+                            context.DrawText(new FormattedText(Math.Round(-(centerX - x) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 15, centerY + 7));
+                    }
+                    for (double x = centerX + cm; x <= currentWidth; x += cm)
+                    {
+                        if (x >= 0 && x <= currentWidth)
+                            context.DrawLine(pen, new Point(x, centerY - 5), new Point(x, centerY + 5));
+                        if (slider.Value <= 1.5 && x >= 15 && x <= currentWidth)
+                            context.DrawText(new FormattedText(Math.Round((x - centerX) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 12, centerY + 7));
+                    }
                 }
 
                 // OY
-                for (double y = centerY - cm; y >= 0; y -= cm)
+                if (boolX)
                 {
-                    context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
+                    for (double y = centerY - cm; y >= 0; y -= cm)
+                    {
+                        if (y >= 0 && y <= currentHeight)
+                        {
+                            context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
 
-                    if (slider.Value <= 1.5)
-                        context.DrawText(new FormattedText(Math.Round((centerY - y) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 12, y + 7));
-                }
-                for (double y = centerY + cm; y <= currentHeight; y += cm)
-                {
-                    context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
+                            if (slider.Value <= 1.5 && centerX >= 15)
+                                context.DrawText(new FormattedText(Math.Round((centerY - y) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 12, y + 7));
+                        }
+                    }
+                    for (double y = centerY + cm; y <= currentHeight; y += cm)
+                    {
+                        if (y >= 0 && y <= currentHeight)
+                        {
+                            context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
 
-                    if (slider.Value <= 1.5)
-                        context.DrawText(new FormattedText(Math.Round(-(y - centerY) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 15, y + 7));
+                            if (slider.Value <= 1.5 && centerX >= 15)
+                                context.DrawText(new FormattedText(Math.Round(-(y - centerY) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 15, y + 7));
+                        }
+                    }
                 }
             }
             canvas.AddVisual(oxoyVisual);

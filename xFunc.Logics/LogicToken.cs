@@ -21,21 +21,15 @@ namespace xFunc.Logics
     {
 
         private LogicTokenType type;
-        private double number;
         private char variable;
 
         public LogicToken() { }
 
-        public LogicToken(LogicTokenType type) : this(type, 0, ' ') { }
+        public LogicToken(LogicTokenType type) : this(type, ' ') { }
 
-        public LogicToken(LogicTokenType type, double number) : this(type, number, ' ') { }
-
-        public LogicToken(LogicTokenType type, char variable) : this(type, 0, variable) { }
-
-        public LogicToken(LogicTokenType type, double number, char variable)
+        public LogicToken(LogicTokenType type, char variable)
         {
             this.type = type;
-            this.number = number;
             this.variable = variable;
         }
 

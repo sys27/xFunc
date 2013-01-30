@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -134,7 +135,7 @@ namespace xFunc.Views
 
             double x = args.GetPosition(null).X;
             double y = args.GetPosition(null).Y;
-            point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
+            point.Text = string.Format(CultureInfo.InvariantCulture, "x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
         }
 
         private void slider_ValueChanged(object o, RoutedPropertyChangedEventArgs<double> args)
@@ -247,14 +248,14 @@ namespace xFunc.Views
                         if (x >= 0 && x <= currentWidth)
                             context.DrawLine(pen, new Point(x, centerY - 5), new Point(x, centerY + 5));
                         if (slider.Value <= 1.5 && x >= 15 && x <= currentWidth)
-                            context.DrawText(new FormattedText(Math.Round(-(centerX - x) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 15, centerY + 7));
+                            context.DrawText(new FormattedText(Math.Round(-(centerX - x) / cm, 0).ToString(CultureInfo.InvariantCulture), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 15, centerY + 7));
                     }
                     for (double x = centerX + cm; x <= currentWidth; x += cm)
                     {
                         if (x >= 0 && x <= currentWidth)
                             context.DrawLine(pen, new Point(x, centerY - 5), new Point(x, centerY + 5));
                         if (slider.Value <= 1.5 && x >= 15 && x <= currentWidth)
-                            context.DrawText(new FormattedText(Math.Round((x - centerX) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 12, centerY + 7));
+                            context.DrawText(new FormattedText(Math.Round((x - centerX) / cm, 0).ToString(CultureInfo.InvariantCulture), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(x - 12, centerY + 7));
                     }
                 }
 
@@ -268,7 +269,7 @@ namespace xFunc.Views
                             context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
 
                             if (slider.Value <= 1.5 && centerX >= 15)
-                                context.DrawText(new FormattedText(Math.Round((centerY - y) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 12, y + 7));
+                                context.DrawText(new FormattedText(Math.Round((centerY - y) / cm, 0).ToString(CultureInfo.InvariantCulture), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 12, y + 7));
                         }
                     }
                     for (double y = centerY + cm; y <= currentHeight; y += cm)
@@ -278,7 +279,7 @@ namespace xFunc.Views
                             context.DrawLine(pen, new Point(centerX - 5, y), new Point(centerX + 5, y));
 
                             if (slider.Value <= 1.5 && centerX >= 15)
-                                context.DrawText(new FormattedText(Math.Round(-(y - centerY) / cm, 0).ToString(), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 15, y + 7));
+                                context.DrawText(new FormattedText(Math.Round(-(y - centerY) / cm, 0).ToString(CultureInfo.InvariantCulture), this.Dispatcher.Thread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Arial"), 10, Brushes.Black), new Point(centerX - 15, y + 7));
                         }
                     }
                 }

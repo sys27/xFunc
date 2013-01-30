@@ -33,7 +33,6 @@ namespace xFunc.Views
     public partial class MainView : Fluent.RibbonWindow, IMainView
     {
 
-        private MainPresenter mainPresenter;
         private MathTabPresenter mathPresenter;
         private LogicTabPresenter logicPresenter;
         private GraphsTabPresenter graphsPresenter;
@@ -49,7 +48,6 @@ namespace xFunc.Views
 
             mathExpressionBox.Focus();
 
-            this.mainPresenter = new MainPresenter(this);
             this.mathPresenter = new MathTabPresenter(this);
             this.logicPresenter = new LogicTabPresenter(this);
             this.graphsPresenter = new GraphsTabPresenter(this);

@@ -51,23 +51,28 @@ namespace xFunc.Logics
             if (string.IsNullOrWhiteSpace(strExp))
                 throw new ArgumentNullException("strExp");
 
-            while (expressions.Count >= countOfExps)
+            string[] exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            while (expressions.Count + exps.Length > countOfExps)
                 expressions.RemoveAt(0);
 
-            ILogicExpression exp = parser.Parse(strExp);
-            LogicWorkspaceItem item = new LogicWorkspaceItem(strExp, exp);
-            if (exp is AssignLogicExpression)
+            foreach (var s in exps)
             {
-                AssignLogicExpression assign = (AssignLogicExpression)exp;
-                assign.Calculate(parameters);
-                item.Answer = string.Format(Resource.AssignVariable, assign.Value, assign.Variable);
-            }
-            else
-            {
-                item.Answer = exp.Calculate(parameters).ToString();
-            }
+                ILogicExpression exp = parser.Parse(s);
+                LogicWorkspaceItem item = new LogicWorkspaceItem(s, exp);
+                if (exp is AssignLogicExpression)
+                {
+                    AssignLogicExpression assign = (AssignLogicExpression)exp;
+                    assign.Calculate(parameters);
+                    item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
+                }
+                else
+                {
+                    item.Answer = exp.Calculate(parameters).ToString();
+                }
 
-            expressions.Add(item);
+                expressions.Add(item);
+            }
         }
 
         public void Remove(LogicWorkspaceItem item)

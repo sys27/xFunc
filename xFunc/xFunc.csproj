@@ -101,7 +101,6 @@
     </Compile>
     <Compile Include="Presenters\GraphsTabPresenter.cs" />
     <Compile Include="Presenters\LogicTabPresenter.cs" />
-    <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Presenters\MathTabPresenter.cs" />
     <Compile Include="Presenters\TruthTableTabPresenter.cs" />
     <Compile Include="Resources\Resource.ru.Designer.cs">

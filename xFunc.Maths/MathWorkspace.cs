@@ -51,27 +51,32 @@ namespace xFunc.Maths
             if (string.IsNullOrWhiteSpace(strExp))
                 throw new ArgumentNullException("strExp");
 
-            while (expressions.Count >= countOfExps)
+            string[] exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            while (expressions.Count + exps.Length > countOfExps)
                 expressions.RemoveAt(0);
 
-            IMathExpression exp = parser.Parse(strExp);
-            MathWorkspaceItem item = new MathWorkspaceItem(strExp, exp);
-            if (exp is DerivativeMathExpression)
+            foreach (var s in exps)
             {
-                item.Answer = exp.Derivative().ToString();
-            }
-            else if (exp is AssignMathExpression)
-            {
-                AssignMathExpression assign = (AssignMathExpression)exp;
-                assign.Calculate(parameters);
-                item.Answer = string.Format(Resource.AssignVariable, assign.Value, assign.Variable);
-            }
-            else
-            {
-                item.Answer = exp.Calculate(parameters).ToString();
-            }
+                IMathExpression exp = parser.Parse(s);
+                MathWorkspaceItem item = new MathWorkspaceItem(s, exp);
+                if (exp is DerivativeMathExpression)
+                {
+                    item.Answer = exp.Derivative().ToString();
+                }
+                else if (exp is AssignMathExpression)
+                {
+                    AssignMathExpression assign = (AssignMathExpression)exp;
+                    assign.Calculate(parameters);
+                    item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
+                }
+                else
+                {
+                    item.Answer = exp.Calculate(parameters).ToString();
+                }
 
-            expressions.Add(item);
+                expressions.Add(item);
+            }
         }
 
         public void Remove(MathWorkspaceItem item)

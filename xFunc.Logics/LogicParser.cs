@@ -55,14 +55,14 @@ namespace xFunc.Logics
                     }
                     else if (expression is UnaryLogicExpression)
                     {
-                        UnaryLogicExpression unaryLogicExp = (UnaryLogicExpression)expression;
+                        UnaryLogicExpression unaryLogicExp = expression as UnaryLogicExpression;
                         unaryLogicExp.FirstMathExpression = stack.Pop();
 
                         stack.Push(unaryLogicExp);
                     }
                     else if (expression is BinaryLogicExpression)
                     {
-                        BinaryLogicExpression binLoginExp = (BinaryLogicExpression)expression;
+                        BinaryLogicExpression binLoginExp = expression as BinaryLogicExpression;
                         binLoginExp.SecondOperand = stack.Pop();
                         binLoginExp.FirstOperand = stack.Pop();
 
@@ -70,7 +70,7 @@ namespace xFunc.Logics
                     }
                     else if (expression is AssignLogicExpression)
                     {
-                        AssignLogicExpression assign = (AssignLogicExpression)expression;
+                        AssignLogicExpression assign = expression as AssignLogicExpression;
                         assign.Value = stack.Pop();
 
                         if (!(stack.Peek() is VariableLogicExpression))

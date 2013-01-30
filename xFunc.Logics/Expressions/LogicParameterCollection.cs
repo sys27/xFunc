@@ -60,16 +60,16 @@ namespace xFunc.Logics.Expressions
             }
         }
 
-        public new void Add(char c)
+        public new void Add(char character)
         {
             bits <<= Count;
-            base.Add(c);
+            base.Add(character);
         }
 
-        public new void Remove(char c)
+        public new void Remove(char character)
         {
             bits >>= Count;
-            base.Remove(c);
+            base.Remove(character);
         }
 
         public int Bits

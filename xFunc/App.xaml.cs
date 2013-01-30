@@ -30,7 +30,6 @@ namespace xFunc
         protected override void OnStartup(StartupEventArgs e)
         {
             MainView mainView = new MainView();
-            MainPresenter mainPresenter = new MainPresenter(mainView);
             
             mainView.Show();
         }

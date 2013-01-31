@@ -73,6 +73,41 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void EqualsTest1()
+        {
+            VariableMathExpression x1 = 'x';
+            NumberMathExpression num1 = 2;
+            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x1);
+            AbsoluteMathExpression abs1 = new AbsoluteMathExpression(mul1);
+
+            VariableMathExpression x2 = 'x';
+            NumberMathExpression num2 = 2;
+            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(num2, x2);
+            AbsoluteMathExpression abs2 = new AbsoluteMathExpression(mul2);
+
+            Assert.IsTrue(abs1.Equals(abs2));
+            Assert.IsTrue(abs1.Equals(abs1));
+        }
+
+        [TestMethod]
+        public void EqualsTest2()
+        {
+            VariableMathExpression x1 = 'x';
+            NumberMathExpression num1 = 2;
+            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x1);
+            AbsoluteMathExpression abs1 = new AbsoluteMathExpression(mul1);
+
+            VariableMathExpression x2 = 'x';
+            NumberMathExpression num2 = 3;
+            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(num2, x2);
+            AbsoluteMathExpression abs2 = new AbsoluteMathExpression(mul2);
+
+            Assert.IsFalse(abs1.Equals(abs2));
+            Assert.IsFalse(abs1.Equals(mul2));
+            Assert.IsFalse(abs1.Equals(null));
+        }
+
+        [TestMethod]
         public void ToStringTest()
         {
             IMathExpression exp = parser.Parse("abs(-1)");

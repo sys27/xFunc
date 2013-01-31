@@ -484,8 +484,17 @@ namespace xFunc.Maths
             {
                 RootMathExpression root = expression as RootMathExpression;
 
+                // root(x, 1)
                 if (root.SecondMathExpression.Equals(one))
                     return root.FirstMathExpression;
+            }
+            else if (expression is LogMathExpression)
+            {
+                LogMathExpression log = expression as LogMathExpression;
+                
+                // log(4x, 4x)
+                if (log.FirstMathExpression.Equals(log.SecondMathExpression))
+                    return one;
             }
 
             return expression;

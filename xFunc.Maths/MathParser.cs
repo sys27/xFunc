@@ -71,7 +71,7 @@ namespace xFunc.Maths
                 UnaryMinusMathExpression unMinus = expression as UnaryMinusMathExpression;
                 // -(-x)
                 if (unMinus.FirstMathExpression is UnaryMinusMathExpression)
-                    return ((UnaryMinusMathExpression)unMinus.FirstMathExpression).FirstMathExpression;
+                    return (unMinus.FirstMathExpression as UnaryMinusMathExpression).FirstMathExpression;
                 // -1
                 if (unMinus.FirstMathExpression is NumberMathExpression)
                 {

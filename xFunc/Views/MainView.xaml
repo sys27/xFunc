@@ -444,6 +444,7 @@ limitations under the License. -->
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="Black" />
                             </Style>
                         </ListView.ItemContainerStyle>
                         <ListView.View>

@@ -28,6 +28,17 @@ namespace xFunc.Maths.Expressions
 
         public DerivativeMathExpression(IMathExpression firstMathExpression, VariableMathExpression variable) { }
 
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            DerivativeMathExpression exp = obj as DerivativeMathExpression;
+            return this.firstMathExpression.Equals(exp.FirstMathExpression) && this.variable.Equals(exp.Variable);
+        }
+
         public override string ToString()
         {
             return string.Format("deriv({0}, {1})", firstMathExpression.ToString(), variable.ToString());

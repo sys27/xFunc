@@ -22,10 +22,21 @@ namespace xFunc.Maths.Expressions
         protected IMathExpression firstMathExpression;
         protected IMathExpression secondMathExpression;
 
-        public BinaryMathExpression(IMathExpression firstOperand, IMathExpression secondOperand)
+        public BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
         {
-            this.FirstMathExpression = firstOperand;
-            this.SecondMathExpression = secondOperand;
+            this.FirstMathExpression = firstMathExpression;
+            this.SecondMathExpression = secondMathExpression;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            BinaryMathExpression exp = obj as BinaryMathExpression;
+            return this.firstMathExpression.Equals(exp.FirstMathExpression) && this.secondMathExpression.Equals(exp.SecondMathExpression);
         }
 
         protected string ToString(string format)

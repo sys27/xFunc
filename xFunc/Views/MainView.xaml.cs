@@ -232,7 +232,9 @@ namespace xFunc.Views
                 try
                 {
                     mathPresenter.Add(mathExpressionBox.Text);
-                    mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[mathExpsListBox.Items.Count - 1]);
+                    var count = mathExpsListBox.Items.Count;
+                    if (count > 0)
+                        mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[count - 1]);
                     statusBox.Text = string.Empty;
                 }
                 catch (MathLexerException mle)
@@ -291,7 +293,9 @@ namespace xFunc.Views
                 try
                 {
                     logicPresenter.Add(logicExpressionBox.Text);
-                    logicExpsListBox.ScrollIntoView(logicExpsListBox.Items[logicExpsListBox.Items.Count - 1]);
+                    var count = logicExpsListBox.Items.Count;
+                    if (count > 0)
+                        logicExpsListBox.ScrollIntoView(logicExpsListBox.Items[count - 1]);
                     statusBox.Text = string.Empty;
                 }
                 catch (LogicLexerException lle)

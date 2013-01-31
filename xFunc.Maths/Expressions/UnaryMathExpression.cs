@@ -28,6 +28,17 @@ namespace xFunc.Maths.Expressions
             this.FirstMathExpression = firstMathExpression;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            UnaryMathExpression exp = obj as UnaryMathExpression;
+            return this.firstMathExpression.Equals(exp.FirstMathExpression);
+        }
+
         protected string ToString(string format)
         {
             return string.Format(format, firstMathExpression.ToString());

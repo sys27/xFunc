@@ -20,7 +20,8 @@ limitations under the License. -->
                      xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                      xmlns:views="clr-namespace:xFunc.Views"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
-                     WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico">
+                     WindowStartupLocation="CenterScreen" Icon="../Images/xFunc.ico"
+                     TextOptions.TextFormattingMode="Display">
     <ribbon:RibbonWindow.Resources>
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="30" />

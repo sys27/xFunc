@@ -13,65 +13,53 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
-
-    public class SecantMathExpression : TrigonometryMathExpression
+    
+    public class CosineMathExpression : TrigonometryMathExpression
     {
 
-        public SecantMathExpression()
-            : base(null)
-        {
+        public CosineMathExpression() : base(null) { }
 
-        }
-
-        public SecantMathExpression(IMathExpression firstMathExpression)
-            : base(firstMathExpression)
-        {
-
-        }
+        public CosineMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("sec({0})");
+            return ToString("cos({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return 1 / Math.Cos(radian);
+            return Math.Cos(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return 1 / Math.Cos(firstMathExpression.Calculate(parameters));
+            return Math.Cos(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return 1 / Math.Cos(radian);
+            return Math.Cos(radian);
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            TangentMathExpression tan = new TangentMathExpression(firstMathExpression.Clone());
-            SecantMathExpression sec = new SecantMathExpression(firstMathExpression.Clone());
-            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(tan, sec);
-            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), mul1);
+            SineMathExpression sine = new SineMathExpression(firstMathExpression.Clone());
+            MultiplicationMathExpression multiplication = new MultiplicationMathExpression(sine, firstMathExpression.Clone().Derivative(variable));
+            UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(multiplication);
 
-            return mul2;
+            return unMinus;
         }
 
         public override IMathExpression Clone()
         {
-            return new SecantMathExpression(firstMathExpression.Clone());
+            return new CosineMathExpression(firstMathExpression.Clone());
         }
 
     }

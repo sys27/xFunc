@@ -14,53 +14,51 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class ArcsinMathExpression : TrigonometryMathExpression
+    public class SineMathExpression : TrigonometryMathExpression
     {
 
-        public ArcsinMathExpression() : base(null) { }
+        public SineMathExpression() : base(null) { }
 
-        public ArcsinMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public SineMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("arcsin({0})");
+            return ToString("sin({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
-            var radian = firstMathExpression.Calculate(parameters);
+            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return Math.Asin(radian) / Math.PI * 180;
+            return Math.Sin(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Asin(firstMathExpression.Calculate(parameters));
+            return Math.Sin(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
-            var radian = firstMathExpression.Calculate(parameters);
+            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return Math.Asin(radian) / Math.PI * 200;
+            return Math.Sin(radian);
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            ExponentiationMathExpression involution = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
-            SubtractionMathExpression sub = new SubtractionMathExpression(new NumberMathExpression(1), involution);
-            SqrtMathExpression sqrt = new SqrtMathExpression(sub);
-            DivisionMathExpression division = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sqrt);
+            CosineMathExpression cos = new CosineMathExpression(firstMathExpression.Clone());
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(cos, firstMathExpression.Clone().Derivative(variable));
 
-            return division;
+            return mul;
         }
 
         public override IMathExpression Clone()
         {
-            return new ArcsinMathExpression(firstMathExpression.Clone());
+            return new SineMathExpression(firstMathExpression.Clone());
         }
 
     }

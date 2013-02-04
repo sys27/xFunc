@@ -13,53 +13,59 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
-    
-    public class TangentMathExpression : TrigonometryMathExpression
+
+    public class CotangentMathExpression : TrigonometryMathExpression
     {
 
-        public TangentMathExpression() : base(null) { }
+        public CotangentMathExpression() : base(null) { }
 
-        public TangentMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public CotangentMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("tan({0})");
+            return ToString("cot({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return Math.Tan(radian);
+            return MathExtentions.Cot(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Tan(firstMathExpression.Calculate(parameters));
+            var x = firstMathExpression.Calculate(parameters);
+
+            return MathExtentions.Cot(x);
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return Math.Tan(radian);
+            return MathExtentions.Cot(radian);
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            CosineMathExpression cos = new CosineMathExpression(firstMathExpression.Clone());
-            ExponentiationMathExpression inv = new ExponentiationMathExpression(cos, new NumberMathExpression(2));
-            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), inv);
+            SineMathExpression sine = new SineMathExpression(firstMathExpression.Clone());
+            ExponentiationMathExpression involution = new ExponentiationMathExpression(sine, new NumberMathExpression(2));
+            DivisionMathExpression division = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), involution);
+            UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(division);
 
-            return div;
+            return unMinus;
         }
 
         public override IMathExpression Clone()
         {
-            return new TangentMathExpression(firstMathExpression.Clone());
+            return new CotangentMathExpression(firstMathExpression.Clone());
         }
 
     }

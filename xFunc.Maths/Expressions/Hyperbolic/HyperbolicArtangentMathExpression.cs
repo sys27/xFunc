@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicSecantMathExpression : UnaryMathExpression
+    public class HyperbolicArtangentMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicSecantMathExpression()
+        public HyperbolicArtangentMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicSecantMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicArtangentMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,28 +37,26 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("sech({0})");
+            return ToString("artanh({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Sech(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Atanh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicSecantMathExpression(firstMathExpression.Clone());
+            return new HyperbolicArtangentMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var tanh = new HyperbolicTangentMathExpression(firstMathExpression.Clone());
-            var sech = Clone();
-            var mul1 = new MultiplicationMathExpression(tanh, sech);
-            var mul2 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), mul1);
-            var unMinus = new UnaryMinusMathExpression(mul2);
+            var sqr = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
+            var sub = new SubtractionMathExpression(new NumberMathExpression(1), sqr);
+            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sub);
 
-            return unMinus;
+            return div;
         }
 
     }

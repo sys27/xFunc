@@ -13,52 +13,66 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class SineMathExpression : TrigonometryMathExpression
+    public class CosecantMathExpression : TrigonometryMathExpression
     {
 
-        public SineMathExpression() : base(null) { }
+        public CosecantMathExpression()
+            : base(null)
+        {
 
-        public SineMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        }
+
+        public CosecantMathExpression(IMathExpression firstMathExpression)
+            : base(firstMathExpression)
+        {
+
+        }
 
         public override string ToString()
         {
-            return ToString("sin({0})");
+            return ToString("csc({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return Math.Sin(radian);
+            return 1 / Math.Sin(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Sin(firstMathExpression.Calculate(parameters));
+            return 1 / Math.Sin(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return Math.Sin(radian);
+            return 1 / Math.Sin(radian);
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            CosineMathExpression cos = new CosineMathExpression(firstMathExpression.Clone());
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(cos, firstMathExpression.Clone().Derivative(variable));
+            UnaryMinusMathExpression unary = new UnaryMinusMathExpression(firstMathExpression.Clone().Derivative(variable));
+            CotangentMathExpression cot = new CotangentMathExpression(firstMathExpression.Clone());
+            CosecantMathExpression csc = new CosecantMathExpression(firstMathExpression.Clone());
+            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(cot, csc);
+            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(unary, mul1);
 
-            return mul;
+            return mul2;
         }
 
         public override IMathExpression Clone()
         {
-            return new SineMathExpression(firstMathExpression.Clone());
+            return new CosecantMathExpression(firstMathExpression.Clone());
         }
 
     }

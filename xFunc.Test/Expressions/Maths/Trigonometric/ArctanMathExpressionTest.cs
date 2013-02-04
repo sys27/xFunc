@@ -2,12 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class ArccosMathExpressionTest
+    public class ArctanMathExpressionTest
     {
 
         private MathParser parser;
@@ -22,90 +23,90 @@ namespace xFunc.Test.Expressions.Maths
         public void CalculateRadianTest()
         {
             parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("arccos(1)");
+            IMathExpression exp = parser.Parse("arctan(1)");
 
-            Assert.AreEqual(Math.Acos(1), exp.Calculate(null));
+            Assert.AreEqual(Math.Atan(1), exp.Calculate(null));
         }
 
         [TestMethod]
         public void CalculateDegreeTest()
         {
             parser.AngleMeasurement = AngleMeasurement.Degree;
-            IMathExpression exp = parser.Parse("arccos(1)");
+            IMathExpression exp = parser.Parse("arctan(1)");
 
-            Assert.AreEqual(Math.Acos(1) / Math.PI * 180, exp.Calculate(null));
+            Assert.AreEqual(Math.Atan(1) / Math.PI * 180, exp.Calculate(null));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
             parser.AngleMeasurement = AngleMeasurement.Gradian;
-            IMathExpression exp = parser.Parse("arccos(1)");
+            IMathExpression exp = parser.Parse("arctan(1)");
 
-            Assert.AreEqual(Math.Acos(1) / Math.PI * 200, exp.Calculate(null));
+            Assert.AreEqual(Math.Atan(1) / Math.PI * 200, exp.Calculate(null));
         }
 
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("arccos(x)"));
+            IMathExpression exp = MathParser.Derivative(parser.Parse("arctan(x)"));
 
-            Assert.AreEqual("-(1 / sqrt(1 - (x ^ 2)))", exp.ToString());
+            Assert.AreEqual("1 / (1 + (x ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("arccos(2x)"));
+            IMathExpression exp = MathParser.Derivative(parser.Parse("arctan(2x)"));
 
-            Assert.AreEqual("-(2 / sqrt(1 - ((2 * x) ^ 2)))", exp.ToString());
+            Assert.AreEqual("2 / (1 + ((2 * x) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void DerivativeTest3()
         {
-            // arccos(2x)
+            // arctan(2x)
             NumberMathExpression num = new NumberMathExpression(2);
             VariableMathExpression x = new VariableMathExpression('x');
             MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
 
-            IMathExpression exp = new ArccosMathExpression(mul);
+            IMathExpression exp = new ArctanMathExpression(mul);
             IMathExpression deriv = MathParser.Derivative(exp);
 
-            Assert.AreEqual("-(2 / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
+            Assert.AreEqual("2 / (1 + ((2 * x) ^ 2))", deriv.ToString());
 
             num.Number = 6;
-            Assert.AreEqual("arccos(6 * x)", exp.ToString());
-            Assert.AreEqual("-(2 / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
+            Assert.AreEqual("arctan(6 * x)", exp.ToString());
+            Assert.AreEqual("2 / (1 + ((2 * x) ^ 2))", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(arccos(xy), x)").Derivative();
-            Assert.AreEqual("-(y / sqrt(1 - ((x * y) ^ 2)))", exp.ToString());
+            IMathExpression exp = parser.Parse("deriv(arctan(xy), x)").Derivative();
+            Assert.AreEqual("y / (1 + ((x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(arccos(xy), y)").Derivative();
-            Assert.AreEqual("-(x / sqrt(1 - ((x * y) ^ 2)))", exp.ToString());
+            IMathExpression exp = parser.Parse("deriv(arctan(xy), y)").Derivative();
+            Assert.AreEqual("x / (1 + ((x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(arccos(x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arctan(x), y)").Derivative();
             Assert.AreEqual("0", exp.ToString());
         }
 
         [TestMethod]
         public void ToStringTest()
         {
-            IMathExpression exp = parser.Parse("arccos(1)");
+            IMathExpression exp = parser.Parse("arctan(1)");
 
-            Assert.AreEqual("arccos(1)", exp.ToString());
+            Assert.AreEqual("arctan(1)", exp.ToString());
         }
 
     }

@@ -2,12 +2,13 @@
 using System;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class TangentMathExpressionTest
+    public class SineMathExpressionTest
     {
 
         private MathParser parser;
@@ -22,89 +23,90 @@ namespace xFunc.Test.Expressions.Maths
         public void CalculateRadianTest()
         {
             parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("tan(1)");
+            IMathExpression exp = parser.Parse("sin(1)");
 
-            Assert.AreEqual(Math.Tan(1), exp.Calculate(null));
+            Assert.AreEqual(Math.Sin(1), exp.Calculate(null));
         }
 
         [TestMethod]
         public void CalculateDegreeTest()
         {
             parser.AngleMeasurement = AngleMeasurement.Degree;
-            IMathExpression exp = parser.Parse("tan(1)");
+            IMathExpression exp = parser.Parse("sin(1)");
 
-            Assert.AreEqual(Math.Tan(1 * Math.PI / 180), exp.Calculate(null));
+            Assert.AreEqual(Math.Sin(1 * Math.PI / 180), exp.Calculate(null));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
             parser.AngleMeasurement = AngleMeasurement.Gradian;
-            IMathExpression exp = parser.Parse("tan(1)");
+            IMathExpression exp = parser.Parse("sin(1)");
 
-            Assert.AreEqual(Math.Tan(1 * Math.PI / 200), exp.Calculate(null));
+            Assert.AreEqual(Math.Sin(1 * Math.PI / 200), exp.Calculate(null));
         }
 
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("tan(x)"));
+            IMathExpression exp = MathParser.Derivative(parser.Parse("sin(x)"));
 
-            Assert.AreEqual("1 / (cos(x) ^ 2)", exp.ToString());
+            Assert.AreEqual("cos(x)", exp.ToString());
         }
 
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("tan(2x)"));
+            IMathExpression exp = MathParser.Derivative(parser.Parse("sin(2x)"));
 
-            Assert.AreEqual("2 / (cos(2 * x) ^ 2)", exp.ToString());
+            Assert.AreEqual("cos(2 * x) * 2", exp.ToString());
         }
 
         [TestMethod]
         public void DerivativeTest3()
         {
+            // sin(2x)
             NumberMathExpression num = new NumberMathExpression(2);
             VariableMathExpression x = new VariableMathExpression('x');
             MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
 
-            IMathExpression exp = new TangentMathExpression(mul);
+            IMathExpression exp = new SineMathExpression(mul);
             IMathExpression deriv = MathParser.Derivative(exp);
 
-            Assert.AreEqual("2 / (cos(2 * x) ^ 2)", deriv.ToString());
+            Assert.AreEqual("cos(2 * x) * 2", deriv.ToString());
 
-            num.Number = 5;
-            Assert.AreEqual("tan(5 * x)", exp.ToString());
-            Assert.AreEqual("2 / (cos(2 * x) ^ 2)", deriv.ToString());
+            num.Number = 3;
+            Assert.AreEqual("sin(3 * x)", exp.ToString());
+            Assert.AreEqual("cos(2 * x) * 2", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(tan(xy), x)").Derivative();
-            Assert.AreEqual("y / (cos(x * y) ^ 2)", exp.ToString());
+            IMathExpression exp = parser.Parse("deriv(sin(xy), x)").Derivative();
+            Assert.AreEqual("cos(x * y) * y", exp.ToString());
         }
 
         [TestMethod]
-        public void PartialDerivativeTest2()
+        public void PartialDerivativeTes2()
         {
-            IMathExpression exp = parser.Parse("deriv(tan(xy), y)").Derivative();
-            Assert.AreEqual("x / (cos(x * y) ^ 2)", exp.ToString());
+            IMathExpression exp = parser.Parse("deriv(sin(xy), y)").Derivative();
+            Assert.AreEqual("cos(x * y) * x", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(tan(x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(sin(y), x)").Derivative();
             Assert.AreEqual("0", exp.ToString());
         }
 
         [TestMethod]
         public void ToStringTest()
         {
-            IMathExpression exp = parser.Parse("tan(2x)");
+            IMathExpression exp = parser.Parse("sin(2x)");
 
-            Assert.AreEqual("tan(2 * x)", exp.ToString());
+            Assert.AreEqual("sin(2 * x)", exp.ToString());
         }
 
     }

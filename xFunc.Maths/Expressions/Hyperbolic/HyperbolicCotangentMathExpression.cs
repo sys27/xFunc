@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArsecantMathExpression : UnaryMathExpression
+    public class HyperbolicCotangentMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicArsecantMathExpression()
+        public HyperbolicCotangentMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicArsecantMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicCotangentMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,26 +37,24 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("arsech({0})");
+            return ToString("coth({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Asech(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Coth(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArsecantMathExpression(firstMathExpression.Clone());
+            return new HyperbolicCotangentMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var inv = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
-            var sub = new SubtractionMathExpression(new NumberMathExpression(1), inv);
-            var sqrt = new SqrtMathExpression(sub);
-            var mul = new MultiplicationMathExpression(firstMathExpression.Clone(), sqrt);
-            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), mul);
+            var sinh = new HyperbolicSineMathExpression(firstMathExpression.Clone());
+            var inv = new ExponentiationMathExpression(sinh, new NumberMathExpression(2));
+            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), inv);
             var unMinus = new UnaryMinusMathExpression(div);
 
             return unMinus;

@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArcosineMathExpression : UnaryMathExpression
+    public class HyperbolicCosineMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicArcosineMathExpression()
+        public HyperbolicCosineMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicArcosineMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicCosineMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,27 +37,25 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("arcosh({0})");
+            return ToString("cosh({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Acosh(firstMathExpression.Calculate(parameters));
+            return Math.Cosh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArcosineMathExpression(firstMathExpression.Clone());
+            return new HyperbolicCosineMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var sqr = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
-            var sub = new SubtractionMathExpression(sqr, new NumberMathExpression(1));
-            var sqrt = new SqrtMathExpression(sub);
-            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sqrt);
+            var sinh = new HyperbolicSineMathExpression(firstMathExpression.Clone());
+            var mul = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), sinh);
 
-            return div;
+            return mul;
         }
 
     }

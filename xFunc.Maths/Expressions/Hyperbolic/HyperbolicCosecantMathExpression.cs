@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicTangentMathExpression : UnaryMathExpression
+    public class HyperbolicCosecantMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicTangentMathExpression()
+        public HyperbolicCosecantMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicTangentMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicCosecantMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,26 +37,28 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("tanh({0})");
+            return ToString("csch({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Tanh(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Csch(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicTangentMathExpression(firstMathExpression.Clone());
+            return new HyperbolicCosecantMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var cosh = new HyperbolicCosineMathExpression(firstMathExpression.Clone());
-            var inv = new ExponentiationMathExpression(cosh, new NumberMathExpression(2));
-            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), inv);
+            var coth = new HyperbolicCotangentMathExpression(firstMathExpression.Clone());
+            var csch = Clone();
+            var mul1 = new MultiplicationMathExpression(coth, csch);
+            var mul2 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), mul1);
+            var unMinus = new UnaryMinusMathExpression(mul2);
 
-            return div;
+            return unMinus;
         }
 
     }

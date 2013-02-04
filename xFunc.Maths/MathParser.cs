@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths

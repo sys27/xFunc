@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArcotangentMathExpression : UnaryMathExpression
+    public class HyperbolicTangentMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicArcotangentMathExpression()
+        public HyperbolicTangentMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicArcotangentMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicTangentMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,24 +37,24 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("arcoth({0})");
+            return ToString("tanh({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Acoth(firstMathExpression.Calculate(parameters));
+            return Math.Tanh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArcotangentMathExpression(firstMathExpression.Clone());
+            return new HyperbolicTangentMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var sqr = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
-            var sub = new SubtractionMathExpression(new NumberMathExpression(1), sqr);
-            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sub);
+            var cosh = new HyperbolicCosineMathExpression(firstMathExpression.Clone());
+            var inv = new ExponentiationMathExpression(cosh, new NumberMathExpression(2));
+            var div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), inv);
 
             return div;
         }

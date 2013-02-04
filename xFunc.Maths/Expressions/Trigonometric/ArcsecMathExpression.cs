@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class CosecantMathExpression : TrigonometryMathExpression
+    public class ArcsecMathExpression : TrigonometryMathExpression
     {
 
-        public CosecantMathExpression()
+        public ArcsecMathExpression()
             : base(null)
         {
 
         }
 
-        public CosecantMathExpression(IMathExpression firstMathExpression)
+        public ArcsecMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,42 +37,39 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("csc({0})");
+            return ToString("arcsec({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
-
-            return 1 / Math.Sin(radian);
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 180;
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return 1 / Math.Sin(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
-
-            return 1 / Math.Sin(radian);
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 200;
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            UnaryMinusMathExpression unary = new UnaryMinusMathExpression(firstMathExpression.Clone().Derivative(variable));
-            CotangentMathExpression cot = new CotangentMathExpression(firstMathExpression.Clone());
-            CosecantMathExpression csc = new CosecantMathExpression(firstMathExpression.Clone());
-            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(cot, csc);
-            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(unary, mul1);
+            AbsoluteMathExpression abs = new AbsoluteMathExpression(firstMathExpression.Clone());
+            ExponentiationMathExpression sqr = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
+            SubtractionMathExpression sub = new SubtractionMathExpression(sqr, new NumberMathExpression(1));
+            SqrtMathExpression sqrt = new SqrtMathExpression(sub);
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(abs, sqrt);
+            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), mul);
 
-            return mul2;
+            return div;
         }
 
         public override IMathExpression Clone()
         {
-            return new CosecantMathExpression(firstMathExpression.Clone());
+            return new ArcsecMathExpression(firstMathExpression.Clone());
         }
 
     }

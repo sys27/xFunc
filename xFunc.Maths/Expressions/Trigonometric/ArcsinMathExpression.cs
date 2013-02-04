@@ -14,53 +14,53 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class ArccotMathExpression : TrigonometryMathExpression
+    public class ArcsinMathExpression : TrigonometryMathExpression
     {
 
-        public ArccotMathExpression() : base(null) { }
+        public ArcsinMathExpression() : base(null) { }
 
-        public ArccotMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public ArcsinMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("arccot({0})");
+            return ToString("arcsin({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters);
 
-            return MathExtentions.Acot(radian) / Math.PI * 180;
+            return Math.Asin(radian) / Math.PI * 180;
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return MathExtentions.Acot(firstMathExpression.Calculate(parameters));
+            return Math.Asin(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters);
 
-            return MathExtentions.Acot(radian) / Math.PI * 200;
+            return Math.Asin(radian) / Math.PI * 200;
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
             ExponentiationMathExpression involution = new ExponentiationMathExpression(firstMathExpression.Clone(), new NumberMathExpression(2));
-            AdditionMathExpression add = new AdditionMathExpression(new NumberMathExpression(1), involution);
-            DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), add);
-            UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(div);
+            SubtractionMathExpression sub = new SubtractionMathExpression(new NumberMathExpression(1), involution);
+            SqrtMathExpression sqrt = new SqrtMathExpression(sub);
+            DivisionMathExpression division = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), sqrt);
 
-            return unMinus;
+            return division;
         }
 
         public override IMathExpression Clone()
         {
-            return new ArccotMathExpression(firstMathExpression.Clone());
+            return new ArcsinMathExpression(firstMathExpression.Clone());
         }
 
     }

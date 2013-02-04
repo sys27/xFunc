@@ -2,6 +2,7 @@
 using System;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Test.Expressions.Maths
 {

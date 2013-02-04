@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Trigonometric
 {
 
     public abstract class TrigonometryMathExpression : UnaryMathExpression

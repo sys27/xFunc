@@ -17,19 +17,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicCosineMathExpression : UnaryMathExpression
+    public class HyperbolicSecantMathExpression : UnaryMathExpression
     {
 
-        public HyperbolicCosineMathExpression()
+        public HyperbolicSecantMathExpression()
             : base(null)
         {
 
         }
 
-        public HyperbolicCosineMathExpression(IMathExpression firstMathExpression)
+        public HyperbolicSecantMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -37,25 +37,28 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return ToString("cosh({0})");
+            return ToString("sech({0})");
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Cosh(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Sech(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicCosineMathExpression(firstMathExpression.Clone());
+            return new HyperbolicSecantMathExpression(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            var sinh = new HyperbolicSineMathExpression(firstMathExpression.Clone());
-            var mul = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), sinh);
+            var tanh = new HyperbolicTangentMathExpression(firstMathExpression.Clone());
+            var sech = Clone();
+            var mul1 = new MultiplicationMathExpression(tanh, sech);
+            var mul2 = new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), mul1);
+            var unMinus = new UnaryMinusMathExpression(mul2);
 
-            return mul;
+            return unMinus;
         }
 
     }

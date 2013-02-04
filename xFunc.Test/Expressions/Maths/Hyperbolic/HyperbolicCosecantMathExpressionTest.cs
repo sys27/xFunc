@@ -2,12 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Hyperbolic;
 
 namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class HyperbolicArcotangentMathExpressionTest
+    public class HyperbolicCosecantMathExpressionTest
     {
 
         private MathParser parser;
@@ -21,17 +22,17 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = parser.Parse("arcoth(1)");
+            var exp = parser.Parse("csch(1)");
 
-            Assert.AreEqual(MathExtentions.Acoth(1), exp.Calculate(null));
+            Assert.AreEqual(MathExtentions.Csch(1), exp.Calculate(null));
         }
 
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(arcoth(2x), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(csch(2x), x)").Derivative();
 
-            Assert.AreEqual("2 / (1 - ((2 * x) ^ 2))", exp.ToString());
+            Assert.AreEqual("-(2 * (coth(2 * x) * csch(2 * x)))", exp.ToString());
         }
 
     }

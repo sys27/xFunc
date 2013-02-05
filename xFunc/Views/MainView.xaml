@@ -674,6 +674,32 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
+                <Expander x:Name="bitwiseToolBar" Header="{x:Static res:Resource.BitwiseExpanderHeader}">
+                    <Grid Margin="0,4,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="~" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource bit_not}" Width="26" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="&amp;" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource bit_and}" Width="30" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="|" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource bit_or}" Width="20" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="xor" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource bit_xor}" Width="28" Height="20" />
+                        </Button>
+                    </Grid>
+                </Expander>
                 <Expander x:Name="constantsMathToolBar" Header="{x:Static res:Resource.ConstantsExpanderHeader}">
                     <Grid>
                         <Grid.RowDefinitions>

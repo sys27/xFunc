@@ -133,6 +133,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitwise.
+        /// </summary>
+        public static string BitwiseExpanderHeader {
+            get {
+                return ResourceManager.GetString("BitwiseExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
         public static string ClipboardGroupHeader {

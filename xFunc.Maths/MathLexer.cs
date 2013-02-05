@@ -134,14 +134,19 @@ namespace xFunc.Maths
                             length++;
                     }
 
-                    if (i + length < function.Length && char.IsLetter(function[i + length]))
-                        function = function.Insert(i + length, "*");
-
                     var number = function.Substring(i, length);
                     token.Type = MathTokenType.Number;
                     token.Number = double.Parse(number, CultureInfo.InvariantCulture);
+                    tokens.Add(token);
+
+                    if (i + length < function.Length && char.IsLetter(function[i + length]))
+                    {
+                        token = new MathToken(MathTokenType.Multiplication);
+                        tokens.Add(token);
+                    }
 
                     i += length - 1;
+                    continue;
                 }
                 else if (char.IsLetter(letter))
                 {

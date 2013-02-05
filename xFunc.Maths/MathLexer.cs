@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Resources;
@@ -32,13 +33,8 @@ namespace xFunc.Maths
             function = function.ToLower().Replace(" ", "");
             List<MathToken> tokens = new List<MathToken>();
 
-            int index = 0;
-            bool isDigit = false;
             for (int i = 0; i < function.Length; i++)
             {
-                if (!isDigit)
-                    index = i;
-
                 char letter = function[i];
                 string sub = function.Substring(i);
                 MathToken token = new MathToken();
@@ -126,29 +122,26 @@ namespace xFunc.Maths
                 }
                 else if (char.IsDigit(letter))
                 {
-                    if (i != (function.Length - 1))
+                    int length = 1;
+                    int j;
+                    for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
+                        length++;
+
+                    if (j < function.Length && function[j] == '.')
                     {
-                        if (char.IsDigit(function[i + 1]))
-                        {
-                            isDigit = true;
-                            continue;
-                        }
-                        if (function[i + 1] == '.')
-                        {
-                            isDigit = true;
-                            i++;
-                            continue;
-                        }
-                        if (char.IsLetter(function[i + 1]))
-                        {
-                            function = function.Insert(i + 1, "*");
-                        }
+                        length++;
+                        for (j += 1; j < function.Length && char.IsDigit(function[j]); j++)
+                            length++;
                     }
 
+                    if (i + length < function.Length && char.IsLetter(function[i + length]))
+                        function = function.Insert(i + length, "*");
+
+                    var number = function.Substring(i, length);
                     token.Type = MathTokenType.Number;
-                    string number = function.Substring(index, i - index + 1);
-                    token.Number = double.Parse(number, System.Globalization.CultureInfo.InvariantCulture);
-                    isDigit = false;
+                    token.Number = double.Parse(number, CultureInfo.InvariantCulture);
+
+                    i += length - 1;
                 }
                 else if (char.IsLetter(letter))
                 {

@@ -25,6 +25,13 @@ namespace xFunc.Maths
     public class MathLexer : ILexer
     {
 
+        private HashSet<string> notVar;
+
+        public MathLexer()
+        {
+            notVar = new HashSet<string>() { "and", "or", "xor" };
+        }
+
         public IEnumerable<MathToken> Tokenization(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
@@ -139,7 +146,7 @@ namespace xFunc.Maths
                     token.Number = double.Parse(number, CultureInfo.InvariantCulture);
                     tokens.Add(token);
 
-                    if (i + length < function.Length && char.IsLetter(function[i + length]))
+                    if (i + length < function.Length && char.IsLetter(function[i + length]) && !notVar.Any(s => function.Substring(i + length).StartsWith(s)))
                     {
                         token = new MathToken(MathTokenType.Multiplication);
                         tokens.Add(token);

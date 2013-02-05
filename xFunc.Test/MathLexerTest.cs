@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths;
+using xFunc.Maths.Exceptions;
 
 namespace xFunc.Test
 {
@@ -38,6 +39,13 @@ namespace xFunc.Test
         public void NullString()
         {
             lexer.Tokenization(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MathLexerException))]
+        public void NotSupportedSymbol()
+        {
+            var tokens = lexer.Tokenization("@");
         }
 
         [TestMethod]
@@ -370,15 +378,15 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        public void Sec()
+        public void Sech()
         {
-            FuncTest("sec", MathTokenType.Secant);
+            FuncTest("sech", MathTokenType.Secanth);
         }
 
         [TestMethod]
-        public void Csc()
+        public void Csch()
         {
-            FuncTest("csc", MathTokenType.Cosecant);
+            FuncTest("csch", MathTokenType.Cosecanth);
         }
 
         [TestMethod]
@@ -415,6 +423,248 @@ namespace xFunc.Test
         public void Arcsch()
         {
             FuncTest("arcsch", MathTokenType.Arcosecanth);
+        }
+
+        [TestMethod]
+        public void Sin()
+        {
+            FuncTest("sin", MathTokenType.Sine);
+        }
+
+        [TestMethod]
+        public void Cosec()
+        {
+            FuncTest("cosec", MathTokenType.Cosecant);
+        }
+
+        [TestMethod]
+        public void Csc()
+        {
+            FuncTest("csc", MathTokenType.Cosecant);
+        }
+
+        [TestMethod]
+        public void Cos()
+        {
+            FuncTest("cos", MathTokenType.Cosine);
+        }
+
+        [TestMethod]
+        public void Tg()
+        {
+            FuncTest("tg", MathTokenType.Tangent);
+        }
+
+        [TestMethod]
+        public void Tan()
+        {
+            FuncTest("tan", MathTokenType.Tangent);
+        }
+
+        [TestMethod]
+        public void Ctg()
+        {
+            FuncTest("ctg", MathTokenType.Cotangent);
+        }
+
+        [TestMethod]
+        public void Cot()
+        {
+            FuncTest("cot", MathTokenType.Cotangent);
+        }
+
+        [TestMethod]
+        public void Sec()
+        {
+            FuncTest("sec", MathTokenType.Secant);
+        }
+
+        [TestMethod]
+        public void Arcsin()
+        {
+            FuncTest("arcsin", MathTokenType.Arcsine);
+        }
+
+        [TestMethod]
+        public void Arccosec()
+        {
+            FuncTest("arccosec", MathTokenType.Arccosecant);
+        }
+
+        [TestMethod]
+        public void Arccsc()
+        {
+            FuncTest("arccsc", MathTokenType.Arccosecant);
+        }
+
+        [TestMethod]
+        public void Arccos()
+        {
+            FuncTest("arccos", MathTokenType.Arccosine);
+        }
+
+        [TestMethod]
+        public void Arctg()
+        {
+            FuncTest("arctg", MathTokenType.Arctangent);
+        }
+
+        [TestMethod]
+        public void Arctan()
+        {
+            FuncTest("arctan", MathTokenType.Arctangent);
+        }
+
+        [TestMethod]
+        public void Arcctg()
+        {
+            FuncTest("arcctg", MathTokenType.Arccotangent);
+        }
+
+        [TestMethod]
+        public void Arccot()
+        {
+            FuncTest("arccot", MathTokenType.Arccotangent);
+        }
+
+        [TestMethod]
+        public void Arcsec()
+        {
+            FuncTest("arcsec", MathTokenType.Arcsecant);
+        }
+
+        [TestMethod]
+        public void Sqrt()
+        {
+            FuncTest("sqrt", MathTokenType.Sqrt);
+        }
+
+        [TestMethod]
+        public void Root()
+        {
+            var tokens = lexer.Tokenization("root(27, 3)");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(MathTokenType.Root),
+                new MathToken(MathTokenType.OpenBracket),
+                new MathToken(27),
+                new MathToken(MathTokenType.Comma),
+                new MathToken(3),
+                new MathToken(MathTokenType.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void Lg()
+        {
+            FuncTest("lg", MathTokenType.Lg);
+        }
+
+        [TestMethod]
+        public void Ln()
+        {
+            FuncTest("ln", MathTokenType.Ln);
+        }
+
+        [TestMethod]
+        public void Log()
+        {
+            var tokens = lexer.Tokenization("log(2, 2)");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(MathTokenType.Log),
+                new MathToken(MathTokenType.OpenBracket),
+                new MathToken(2),
+                new MathToken(MathTokenType.Comma),
+                new MathToken(2),
+                new MathToken(MathTokenType.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void Deriv()
+        {
+            var tokens = lexer.Tokenization("deriv(sin(x), x)");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(MathTokenType.Derivative),
+                new MathToken(MathTokenType.OpenBracket),
+                new MathToken(MathTokenType.Sine),
+                new MathToken(MathTokenType.OpenBracket),
+                new MathToken('x'),
+                new MathToken(MathTokenType.CloseBracket),
+                new MathToken(MathTokenType.Comma),
+                new MathToken('x'),
+                new MathToken(MathTokenType.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void NotAsWord()
+        {
+            FuncTest("not", MathTokenType.Not);
+        }
+
+        [TestMethod]
+        public void AndAsWord()
+        {
+            var tokens = lexer.Tokenization("1 and 2");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(1),
+                new MathToken(MathTokenType.And),
+                new MathToken(2)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void OrAsWord()
+        {
+            var tokens = lexer.Tokenization("1 or 2");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(1),
+                new MathToken(MathTokenType.Or),
+                new MathToken(2)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void XOrAsWord()
+        {
+            var tokens = lexer.Tokenization("1 xor 2");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(1),
+                new MathToken(MathTokenType.XOr),
+                new MathToken(2)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void Var()
+        {
+            var tokens = lexer.Tokenization("x * y");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken('x'),
+                new MathToken(MathTokenType.Multiplication),
+                new MathToken('y')
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
     }

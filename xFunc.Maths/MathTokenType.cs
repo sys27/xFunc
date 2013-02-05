@@ -181,6 +181,23 @@ namespace xFunc.Maths
         Arcosecanth    = 51,
 
         /// <summary>
+        /// not
+        /// </summary>
+        Not            = 60,
+        /// <summary>
+        /// and
+        /// </summary>
+        And            = 61,
+        /// <summary>
+        /// or
+        /// </summary>
+        Or             = 62,
+        /// <summary>
+        /// xor
+        /// </summary>
+        XOr            = 63,
+
+        /// <summary>
         /// Exponential
         /// </summary>
         E              = 28,

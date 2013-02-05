@@ -288,4 +288,7 @@
   <data name="ViewRibbonTab" xml:space="preserve">
     <value>Вид</value>
   </data>
+  <data name="BitwiseExpanderHeader" xml:space="preserve">
+    <value>Битовые</value>
+  </data>
 </root>

@@ -19,6 +19,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Resources;
+using xFunc.Maths.Expressions.Bitwise;
 
 namespace xFunc.Maths
 {
@@ -742,6 +743,18 @@ namespace xFunc.Maths
                         break;
                     case MathTokenType.Assign:
                         preOutput.Add(new AssignMathExpression());
+                        break;
+                    case MathTokenType.Not:
+                        preOutput.Add(new NotMathExpression());
+                        break;
+                    case MathTokenType.And:
+                        preOutput.Add(new AndMathExpression());
+                        break;
+                    case MathTokenType.Or:
+                        preOutput.Add(new OrMathExpression());
+                        break;
+                    case MathTokenType.XOr:
+                        preOutput.Add(new XOrMathExpression());
                         break;
                     default:
                         throw new MathParserException(Resource.NotSupportedToken);

@@ -545,7 +545,7 @@ namespace xFunc.Maths
 
             if (function != lastFunc)
             {
-                IEnumerable<MathToken> tokens = lexer.Tokenization(function);
+                IEnumerable<MathToken> tokens = lexer.Tokenize(function);
                 IEnumerable<MathToken> rpn = ConvertToReversePolishNotation(tokens);
                 IEnumerable<IMathExpression> expressions = ConvertTokensToExpressions(rpn);
 

@@ -32,7 +32,7 @@ namespace xFunc.Maths
             notVar = new HashSet<string>() { "and", "or", "xor" };
         }
 
-        public IEnumerable<MathToken> Tokenization(string function)
+        public IEnumerable<MathToken> Tokenize(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
@@ -43,7 +43,6 @@ namespace xFunc.Maths
             for (int i = 0; i < function.Length; i++)
             {
                 char letter = function[i];
-                string sub = function.Substring(i);
                 MathToken token = new MathToken();
                 if (letter == '(')
                 {
@@ -119,7 +118,7 @@ namespace xFunc.Maths
                 {
                     token.Type = MathTokenType.Or;
                 }
-                else if (sub.StartsWith(":="))
+                else if (letter == ':' && i + 1 < function.Length && function[i + 1] == '=')
                 {
                     token.Type = MathTokenType.Assign;
                     tokens.Add(token);
@@ -157,6 +156,7 @@ namespace xFunc.Maths
                 }
                 else if (char.IsLetter(letter))
                 {
+                    var sub = function.Substring(i);
                     if (sub.StartsWith("pi"))
                     {
                         token.Type = MathTokenType.Variable;

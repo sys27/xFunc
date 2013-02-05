@@ -21,13 +21,13 @@ using xFunc.Maths.Resources;
 namespace xFunc.Maths
 {
 
-    public class MathLexer
+    public class MathLexer : ILexer
     {
 
         public IEnumerable<MathToken> Tokenization(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
-                throw new ArgumentException(Resource.NotSpecifiedFunction, "function");
+                throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");
             List<MathToken> tokens = new List<MathToken>();

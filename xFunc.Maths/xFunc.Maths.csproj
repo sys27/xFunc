@@ -93,6 +93,7 @@
     <Compile Include="Expressions\UnaryMathExpression.cs" />
     <Compile Include="Expressions\UnaryMinusMathExpression.cs" />
     <Compile Include="Expressions\VariableMathExpression.cs" />
+    <Compile Include="ILexer.cs" />
     <Compile Include="MathExtentions.cs" />
     <Compile Include="MathLexer.cs" />
     <Compile Include="MathParser.cs" />

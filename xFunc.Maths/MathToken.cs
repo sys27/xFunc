@@ -28,11 +28,11 @@ namespace xFunc.Maths
 
         public MathToken(MathTokenType type) : this(type, 0, ' ') { }
 
-        public MathToken(MathTokenType type, double number) : this(type, number, ' ') { }
+        public MathToken(double number) : this(MathTokenType.Number, number, ' ') { }
 
-        public MathToken(MathTokenType type, char variable) : this(type, 0, variable) { }
+        public MathToken(char variable) : this(MathTokenType.Variable, 0, variable) { }
 
-        public MathToken(MathTokenType type, double number, char variable)
+        internal MathToken(MathTokenType type, double number, char variable)
         {
             this.type = type;
             this.number = number;

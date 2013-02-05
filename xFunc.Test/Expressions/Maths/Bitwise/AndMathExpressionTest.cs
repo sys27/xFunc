@@ -19,13 +19,13 @@ namespace xFunc.Test.Expressions.Maths.Bitwise
             parser = new MathParser();
         }
 
-        //[TestMethod]
-        //public void CalculateTest()
-        //{
-        //    IMathExpression exp = parser.Parse("1 and 2");
+        [TestMethod]
+        public void CalculateTest()
+        {
+            IMathExpression exp = parser.Parse("1 and 3");
 
-        //    Assert.AreEqual(3, exp.Calculate(null));
-        //}
+            Assert.AreEqual(1, exp.Calculate(null));
+        }
 
     }
 

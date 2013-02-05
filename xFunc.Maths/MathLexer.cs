@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Resources;
 
@@ -102,6 +103,18 @@ namespace xFunc.Maths
                 else if (letter == ',')
                 {
                     token.Type = MathTokenType.Comma;
+                }
+                else if (letter == '~')
+                {
+                    token.Type = MathTokenType.Not;
+                }
+                else if (letter == '&')
+                {
+                    token.Type = MathTokenType.And;
+                }
+                else if (letter == '|')
+                {
+                    token.Type = MathTokenType.Or;
                 }
                 else if (sub.StartsWith(":="))
                 {
@@ -465,6 +478,39 @@ namespace xFunc.Maths
                         token.Type = MathTokenType.Derivative;
                         tokens.Add(token);
                         i += 4;
+
+                        continue;
+                    }
+
+                    if (sub.StartsWith("not"))
+                    {
+                        token.Type = MathTokenType.Not;
+                        tokens.Add(token);
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("and"))
+                    {
+                        token.Type = MathTokenType.And;
+                        tokens.Add(token);
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("or"))
+                    {
+                        token.Type = MathTokenType.Or;
+                        tokens.Add(token);
+                        i++;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("xor"))
+                    {
+                        token.Type = MathTokenType.XOr;
+                        tokens.Add(token);
+                        i += 2;
 
                         continue;
                     }

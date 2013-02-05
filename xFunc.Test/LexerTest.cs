@@ -119,7 +119,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathLexerException))]
         public void MathTokenizationSymbolNotSupportedTest()
         {
-            mathLexer.Tokenization("a | b");
+            mathLexer.Tokenization("a @ b");
         }
 
     }

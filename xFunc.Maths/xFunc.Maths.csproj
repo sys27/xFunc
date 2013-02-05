@@ -45,6 +45,10 @@
     <Compile Include="Expressions\AbsoluteMathExpression.cs" />
     <Compile Include="Expressions\AdditionMathExpression.cs" />
     <Compile Include="Expressions\AngleMeasurement.cs" />
+    <Compile Include="Expressions\Bitwise\AndMathExpression.cs" />
+    <Compile Include="Expressions\Bitwise\XOrMathExpression.cs" />
+    <Compile Include="Expressions\Bitwise\OrMathExpression.cs" />
+    <Compile Include="Expressions\Bitwise\NotMathExpression.cs" />
     <Compile Include="Expressions\Trigonometric\ArccosMathExpression.cs" />
     <Compile Include="Expressions\Trigonometric\ArccotMathExpression.cs" />
     <Compile Include="Expressions\Trigonometric\ArccscMathExpression.cs" />

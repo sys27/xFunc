@@ -22,7 +22,7 @@ namespace xFunc.Test
 
         private void FuncTest(string func, MathTokenType type)
         {
-            var tokens = lexer.Tokenization(func + "(3)");
+            var tokens = lexer.Tokenize(func + "(3)");
 
             var expected = new List<MathToken>()
             {
@@ -38,20 +38,20 @@ namespace xFunc.Test
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullString()
         {
-            lexer.Tokenization(null);
+            lexer.Tokenize(null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(MathLexerException))]
         public void NotSupportedSymbol()
         {
-            var tokens = lexer.Tokenization("@");
+            var tokens = lexer.Tokenize("@");
         }
 
         [TestMethod]
         public void Brackets()
         {
-            var tokens = lexer.Tokenization("(2)");
+            var tokens = lexer.Tokenize("(2)");
 
             var expected = new List<MathToken>()
             {
@@ -65,7 +65,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Add()
         {
-            var tokens = lexer.Tokenization("2 + 2");
+            var tokens = lexer.Tokenize("2 + 2");
 
             var expected = new List<MathToken>()
             {
@@ -79,7 +79,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddAfterOpenBracket()
         {
-            var tokens = lexer.Tokenization("(+2)");
+            var tokens = lexer.Tokenize("(+2)");
 
             var expected = new List<MathToken>()
             {
@@ -93,7 +93,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddBeforeNumber()
         {
-            var tokens = lexer.Tokenization("+2");
+            var tokens = lexer.Tokenize("+2");
 
             var expected = new List<MathToken>()
             {
@@ -105,7 +105,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Sub()
         {
-            var tokens = lexer.Tokenization("2 - 2");
+            var tokens = lexer.Tokenize("2 - 2");
 
             var expected = new List<MathToken>()
             {
@@ -119,7 +119,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubAfterOpenBracket()
         {
-            var tokens = lexer.Tokenization("(-2)");
+            var tokens = lexer.Tokenize("(-2)");
 
             var expected = new List<MathToken>()
             {
@@ -134,7 +134,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubBeforeNumber()
         {
-            var tokens = lexer.Tokenization("-2");
+            var tokens = lexer.Tokenize("-2");
 
             var expected = new List<MathToken>()
             {
@@ -147,7 +147,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Mul()
         {
-            var tokens = lexer.Tokenization("2 * 2");
+            var tokens = lexer.Tokenize("2 * 2");
 
             var expected = new List<MathToken>()
             {
@@ -161,7 +161,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Div()
         {
-            var tokens = lexer.Tokenization("2 / 2");
+            var tokens = lexer.Tokenize("2 / 2");
 
             var expected = new List<MathToken>()
             {
@@ -175,7 +175,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Inv()
         {
-            var tokens = lexer.Tokenization("2 ^ 2");
+            var tokens = lexer.Tokenize("2 ^ 2");
 
             var expected = new List<MathToken>()
             {
@@ -189,7 +189,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Comma()
         {
-            var tokens = lexer.Tokenization("log(2, 2)");
+            var tokens = lexer.Tokenize("log(2, 2)");
 
             var expected = new List<MathToken>()
             {
@@ -206,7 +206,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Not()
         {
-            var tokens = lexer.Tokenization("~2");
+            var tokens = lexer.Tokenize("~2");
 
             var expected = new List<MathToken>()
             {
@@ -219,7 +219,7 @@ namespace xFunc.Test
         [TestMethod]
         public void And()
         {
-            var tokens = lexer.Tokenization("2 & 2");
+            var tokens = lexer.Tokenize("2 & 2");
 
             var expected = new List<MathToken>()
             {
@@ -233,7 +233,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Or()
         {
-            var tokens = lexer.Tokenization("2 | 2");
+            var tokens = lexer.Tokenize("2 | 2");
 
             var expected = new List<MathToken>()
             {
@@ -247,7 +247,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Assign()
         {
-            var tokens = lexer.Tokenization("x := 2");
+            var tokens = lexer.Tokenize("x := 2");
 
             var expected = new List<MathToken>()
             {
@@ -261,7 +261,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Integer()
         {
-            var tokens = lexer.Tokenization("-2764786 + 46489879");
+            var tokens = lexer.Tokenize("-2764786 + 46489879");
 
             var expected = new List<MathToken>()
             {
@@ -276,7 +276,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Double()
         {
-            var tokens = lexer.Tokenization("-45.3 + 87.64");
+            var tokens = lexer.Tokenize("-45.3 + 87.64");
 
             var expected = new List<MathToken>()
             {
@@ -291,7 +291,7 @@ namespace xFunc.Test
         [TestMethod]
         public void NumAndVar()
         {
-            var tokens = lexer.Tokenization("-2x");
+            var tokens = lexer.Tokenize("-2x");
 
             var expected = new List<MathToken>()
             {
@@ -306,7 +306,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Pi()
         {
-            var tokens = lexer.Tokenization("3pi");
+            var tokens = lexer.Tokenize("3pi");
 
             var expected = new List<MathToken>()
             {
@@ -542,7 +542,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Root()
         {
-            var tokens = lexer.Tokenization("root(27, 3)");
+            var tokens = lexer.Tokenize("root(27, 3)");
 
             var expected = new List<MathToken>()
             {
@@ -571,7 +571,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Log()
         {
-            var tokens = lexer.Tokenization("log(2, 2)");
+            var tokens = lexer.Tokenize("log(2, 2)");
 
             var expected = new List<MathToken>()
             {
@@ -588,7 +588,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Deriv()
         {
-            var tokens = lexer.Tokenization("deriv(sin(x), x)");
+            var tokens = lexer.Tokenize("deriv(sin(x), x)");
 
             var expected = new List<MathToken>()
             {
@@ -614,7 +614,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AndAsWord()
         {
-            var tokens = lexer.Tokenization("1 and 2");
+            var tokens = lexer.Tokenize("1 and 2");
 
             var expected = new List<MathToken>()
             {
@@ -628,7 +628,7 @@ namespace xFunc.Test
         [TestMethod]
         public void OrAsWord()
         {
-            var tokens = lexer.Tokenization("1 or 2");
+            var tokens = lexer.Tokenize("1 or 2");
 
             var expected = new List<MathToken>()
             {
@@ -642,7 +642,7 @@ namespace xFunc.Test
         [TestMethod]
         public void XOrAsWord()
         {
-            var tokens = lexer.Tokenization("1 xor 2");
+            var tokens = lexer.Tokenize("1 xor 2");
 
             var expected = new List<MathToken>()
             {
@@ -656,7 +656,7 @@ namespace xFunc.Test
         [TestMethod]
         public void Var()
         {
-            var tokens = lexer.Tokenization("x * y");
+            var tokens = lexer.Tokenize("x * y");
 
             var expected = new List<MathToken>()
             {

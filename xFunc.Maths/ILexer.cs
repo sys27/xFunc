@@ -9,7 +9,7 @@ namespace xFunc.Maths
     public interface ILexer
     {
 
-        IEnumerable<MathToken> Tokenization(string function);
+        IEnumerable<MathToken> Tokenize(string function);
 
     }
 

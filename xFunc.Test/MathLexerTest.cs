@@ -266,6 +266,21 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void NumAndVar()
+        {
+            var tokens = lexer.Tokenization("-2x");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken(MathTokenType.UnaryMinus),
+                new MathToken(2),
+                new MathToken(MathTokenType.Multiplication),
+                new MathToken('x')
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

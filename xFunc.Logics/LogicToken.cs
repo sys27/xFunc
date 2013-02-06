@@ -27,7 +27,9 @@ namespace xFunc.Logics
 
         public LogicToken(LogicTokenType type) : this(type, ' ') { }
 
-        public LogicToken(LogicTokenType type, char variable)
+        public LogicToken(char variable) : this(LogicTokenType.Variable, variable) { }
+
+        internal LogicToken(LogicTokenType type, char variable)
         {
             this.type = type;
             this.variable = variable;

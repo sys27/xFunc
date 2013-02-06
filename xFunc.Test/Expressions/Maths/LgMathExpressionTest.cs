@@ -67,6 +67,15 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void SimplifyTest()
+        {
+            IMathExpression exp = parser.Parse("lg(10)");
+            NumberMathExpression one = 1;
+
+            Assert.AreEqual(one, exp);
+        }
+
+        [TestMethod]
         public void ToStringTest()
         {
             IMathExpression exp = parser.Parse("lg(2)");

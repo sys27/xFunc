@@ -74,6 +74,15 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void SimplifyTest()
+        {
+            IMathExpression exp = parser.Parse("ln(e)");
+            NumberMathExpression one = 1;
+
+            Assert.AreEqual(one, exp);
+        }
+
+        [TestMethod]
         public void ToStringTest()
         {
             IMathExpression exp = parser.Parse("ln(2)");

@@ -58,6 +58,7 @@
     <Compile Include="Expressions\UnaryLogicExpression.cs" />
     <Compile Include="Expressions\VariableLogicExpression.cs" />
     <Compile Include="Expressions\XOrLogicExpression.cs" />
+    <Compile Include="ILexer.cs" />
     <Compile Include="LogicLexer.cs" />
     <Compile Include="LogicParser.cs" />
     <Compile Include="LogicToken.cs" />

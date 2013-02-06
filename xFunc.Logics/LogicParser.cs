@@ -25,14 +25,20 @@ namespace xFunc.Logics
     public class LogicParser
     {
 
-        private LogicLexer lexer;
+        private ILexer lexer;
 
         private string lastFunc = string.Empty;
         private ILogicExpression logicExpression;
 
         public LogicParser()
+            : this(new LogicLexer())
         {
-            lexer = new LogicLexer();
+
+        }
+
+        public LogicParser(ILexer lexer)
+        {
+            this.lexer = lexer;
         }
 
         public ILogicExpression Parse(string function)
@@ -42,7 +48,7 @@ namespace xFunc.Logics
 
             if (function != lastFunc)
             {
-                IEnumerable<LogicToken> tokens = lexer.Tokenization(function);
+                IEnumerable<LogicToken> tokens = lexer.Tokenize(function);
                 IEnumerable<LogicToken> rpn = ConvertToReversePolishNotation(tokens);
                 IEnumerable<ILogicExpression> expressions = ConvertTokensToExpression(rpn);
 
@@ -95,7 +101,7 @@ namespace xFunc.Logics
 
         public LogicParameterCollection GetLogicParameters(string function)
         {
-            HashSet<char> c = new HashSet<char>(from t in lexer.Tokenization(function).AsParallel()
+            HashSet<char> c = new HashSet<char>(from t in lexer.Tokenize(function).AsParallel()
                                                 where t.Type == LogicTokenType.Variable
                                                 orderby t.Variable
                                                 select t.Variable);

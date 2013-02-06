@@ -309,7 +309,7 @@ limitations under the License. -->
             </ribbon:RibbonTabItem>-->
             <ribbon:RibbonTabItem Header="{x:Static res:Resource.ViewRibbonTab}">
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.FontGroupHeader}">
-                    <ribbon:Spinner x:Name="fontSizeSpinner" Header="{x:Static res:Resource.FontSizeSpinner}" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" Format="" />
+                    <ribbon:Spinner x:Name="fontSizeSpinner" Header="{x:Static res:Resource.FontSizeSpinner}" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" />
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>

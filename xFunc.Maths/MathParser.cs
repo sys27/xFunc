@@ -505,6 +505,22 @@ namespace xFunc.Maths
                 if (log.FirstMathExpression.Equals(log.SecondMathExpression))
                     return one;
             }
+            else if (expression is LnMathExpression)
+            {
+                LnMathExpression ln = expression as LnMathExpression;
+
+                // ln(e)
+                if (ln.FirstMathExpression.Equals(new VariableMathExpression('e')))
+                    return one;
+            }
+            else if (expression is LgMathExpression)
+            {
+                LgMathExpression lg = expression as LgMathExpression;
+
+                // lg(10)
+                if (lg.FirstMathExpression.Equals(new NumberMathExpression(10)))
+                    return one;
+            }
 
             return expression;
         }

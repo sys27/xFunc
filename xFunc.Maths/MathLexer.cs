@@ -40,7 +40,7 @@ namespace xFunc.Maths
             function = function.ToLower().Replace(" ", "");
             List<MathToken> tokens = new List<MathToken>();
 
-            for (int i = 0; i < function.Length; i++)
+            for (int i = 0; i < function.Length; )
             {
                 char letter = function[i];
                 MathToken token = new MathToken();
@@ -59,11 +59,13 @@ namespace xFunc.Maths
                         char pre = function[i - 1];
                         if (pre == '(')
                         {
+                            i++;
                             continue;
                         }
                     }
                     else
                     {
+                        i++;
                         continue;
                     }
 
@@ -78,6 +80,8 @@ namespace xFunc.Maths
                         {
                             token.Type = MathTokenType.UnaryMinus;
                             tokens.Add(token);
+
+                            i++;
                             continue;
                         }
                     }
@@ -85,6 +89,8 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.UnaryMinus;
                         tokens.Add(token);
+
+                        i++;
                         continue;
                     }
 
@@ -122,7 +128,7 @@ namespace xFunc.Maths
                 {
                     token.Type = MathTokenType.Assign;
                     tokens.Add(token);
-                    i++;
+                    i += 2;
 
                     continue;
                 }
@@ -151,7 +157,7 @@ namespace xFunc.Maths
                         tokens.Add(token);
                     }
 
-                    i += length - 1;
+                    i += length;
                     continue;
                 }
                 else if (char.IsLetter(letter))
@@ -162,7 +168,7 @@ namespace xFunc.Maths
                         token.Type = MathTokenType.Variable;
                         token.Variable = 'π';
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -170,7 +176,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.E;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -178,7 +184,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Absolute;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -186,7 +192,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Sineh;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -194,7 +200,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Sineh;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -202,7 +208,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cosineh;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -210,7 +216,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cosineh;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -218,7 +224,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Tangenth;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -226,7 +232,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Tangenth;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -234,7 +240,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cotangenth;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -242,7 +248,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cotangenth;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -250,7 +256,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Secanth;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -258,7 +264,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cosecanth;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -266,7 +272,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arsineh;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -274,7 +280,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arcosineh;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -282,7 +288,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Artangenth;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -290,7 +296,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arcotangenth;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -298,7 +304,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arsecanth;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -306,7 +312,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arcosecanth;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -314,7 +320,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Sine;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -322,7 +328,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cosecant;
                         tokens.Add(token);
-                        i += 4;
+                        i += 5;
 
                         continue;
                     }
@@ -330,7 +336,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cosecant;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -338,7 +344,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cosine;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -346,7 +352,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Tangent;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -354,7 +360,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Tangent;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -362,7 +368,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Cotangent;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -370,7 +376,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Secant;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -378,7 +384,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arcsine;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -386,7 +392,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arccosecant;
                         tokens.Add(token);
-                        i += 7;
+                        i += 8;
 
                         continue;
                     }
@@ -394,7 +400,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arccosecant;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -402,7 +408,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arccosine;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -410,7 +416,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arctangent;
                         tokens.Add(token);
-                        i += 4;
+                        i += 5;
 
                         continue;
                     }
@@ -418,7 +424,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arctangent;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -426,7 +432,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arccotangent;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -434,7 +440,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Arcsecant;
                         tokens.Add(token);
-                        i += 5;
+                        i += 6;
 
                         continue;
                     }
@@ -442,7 +448,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Sqrt;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -450,7 +456,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Root;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -458,7 +464,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Lg;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -466,7 +472,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Ln;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -474,7 +480,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Log;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -482,7 +488,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Derivative;
                         tokens.Add(token);
-                        i += 4;
+                        i += 5;
 
                         continue;
                     }
@@ -491,7 +497,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Not;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -499,7 +505,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.And;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -507,7 +513,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.Or;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
 
                         continue;
                     }
@@ -515,7 +521,7 @@ namespace xFunc.Maths
                     {
                         token.Type = MathTokenType.XOr;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -534,6 +540,7 @@ namespace xFunc.Maths
                 }
 
                 tokens.Add(token);
+                i++;
             }
 
             return tokens;

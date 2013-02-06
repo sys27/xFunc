@@ -27,7 +27,7 @@ namespace xFunc.Maths
     public class MathParser
     {
 
-        private MathLexer lexer;
+        private ILexer lexer;
 
         private string lastFunc = string.Empty;
         private IMathExpression mathExpression;
@@ -35,8 +35,14 @@ namespace xFunc.Maths
         private AngleMeasurement angleMeasurement;
 
         public MathParser()
+            : this(new MathLexer())
         {
-            lexer = new MathLexer();
+
+        }
+
+        public MathParser(ILexer lexer)
+        {
+            this.lexer = lexer;
         }
 
         public static IMathExpression SimplifyExpressions(IMathExpression expression)
@@ -494,7 +500,7 @@ namespace xFunc.Maths
             else if (expression is LogMathExpression)
             {
                 LogMathExpression log = expression as LogMathExpression;
-                
+
                 // log(4x, 4x)
                 if (log.FirstMathExpression.Equals(log.SecondMathExpression))
                     return one;

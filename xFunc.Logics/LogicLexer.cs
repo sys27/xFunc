@@ -20,21 +20,20 @@ using xFunc.Logics.Resources;
 namespace xFunc.Logics
 {
 
-    public class LogicLexer
+    public class LogicLexer : ILexer
     {
 
-        public IEnumerable<LogicToken> Tokenization(string function)
+        public IEnumerable<LogicToken> Tokenize(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
-                throw new ArgumentException(Resource.NotSpecifiedFunction, "function");
+                throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");
             List<LogicToken> tokens = new List<LogicToken>();
 
-            for (int i = 0; i < function.Length; i++)
+            for (int i = 0; i < function.Length; )
             {
                 char letter = function[i];
-                string sub = function.Substring(i);
                 LogicToken token = new LogicToken();
                 if (letter == '(')
                 {
@@ -56,59 +55,42 @@ namespace xFunc.Logics
                 {
                     token.Type = LogicTokenType.Or;
                 }
-                else if (letter == '-' || letter == '=')
+                else if ((letter == '-' || letter == '=') && (i + 1 < function.Length && function[i + 1] == '>'))
                 {
-                    if (i + 1 <= function.Length && function[i + 1] == '>')
-                    {
-                        token.Type = LogicTokenType.Implication;
-                        i++;
-                    }
-                    else
-                    {
-                        throw new LogicLexerException(string.Format(Resource.NotSupportedSymbol, letter));
-                    }
+                    token.Type = LogicTokenType.Implication;
+                    tokens.Add(token);
+                    i += 2;
+
+                    continue;
                 }
-                else if (letter == '<')
+                else if (letter == '<' && (i + 1 <= function.Length && (function[i + 1] == '=' || function[i + 1] == '-')) && (i + 2 <= function.Length && function[i + 2] == '>'))
                 {
-                    if (i + 1 <= function.Length)
-                    {
-                        if (function[i + 1] == '=' || function[i + 1] == '-')
-                        {
-                            if (i + 2 <= function.Length && function[i + 2] == '>')
-                            {
-                                token.Type = LogicTokenType.Equality;
-                                i += 2;
-                            }
-                        }
-                        else
-                        {
-                            throw new LogicLexerException(string.Format(Resource.NotSupportedSymbol, letter));
-                        }
-                    }
-                    else
-                    {
-                        throw new LogicLexerException(Resource.InvalidExpression);
-                    }
+                    token.Type = LogicTokenType.Equality;
+                    tokens.Add(token);
+                    i += 3;
+
+                    continue;
                 }
                 else if (letter == '^')
                 {
                     token.Type = LogicTokenType.XOr;
                 }
-                else if (sub.StartsWith(":="))
+                else if (letter == ':' && i + 1 < function.Length && function[i + 1] == '=')
                 {
                     token.Type = LogicTokenType.Assign;
                     tokens.Add(token);
-                    i++;
+                    i += 2;
 
                     continue;
                 }
                 else if (char.IsLetter(letter))
                 {
+                    var sub = function.Substring(i);
                     if (sub.StartsWith("true"))
                     {
                         token.Type = LogicTokenType.True;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
 
                         continue;
                     }
@@ -116,7 +98,7 @@ namespace xFunc.Logics
                     {
                         token.Type = LogicTokenType.False;
                         tokens.Add(token);
-                        i += 4;
+                        i += 5;
 
                         continue;
                     }
@@ -124,7 +106,7 @@ namespace xFunc.Logics
                     {
                         token.Type = LogicTokenType.Not;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
 
                         continue;
                     }
@@ -132,56 +114,63 @@ namespace xFunc.Logics
                     {
                         token.Type = LogicTokenType.Or;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
+
                         continue;
                     }
                     if (sub.StartsWith("and"))
                     {
                         token.Type = LogicTokenType.And;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
+
                         continue;
                     }
                     if (sub.StartsWith("impl"))
                     {
                         token.Type = LogicTokenType.Implication;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
+
                         continue;
                     }
                     if (sub.StartsWith("eq"))
                     {
                         token.Type = LogicTokenType.Equality;
                         tokens.Add(token);
-                        i++;
+                        i += 2;
+
                         continue;
                     }
                     if (sub.StartsWith("nor"))
                     {
                         token.Type = LogicTokenType.NOr;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
+
                         continue;
                     }
                     if (sub.StartsWith("nand"))
                     {
                         token.Type = LogicTokenType.NAnd;
                         tokens.Add(token);
-                        i += 3;
+                        i += 4;
+
                         continue;
                     }
                     if (sub.StartsWith("xor"))
                     {
                         token.Type = LogicTokenType.XOr;
                         tokens.Add(token);
-                        i += 2;
+                        i += 3;
+
                         continue;
                     }
                     if (sub.StartsWith("table"))
                     {
                         token.Type = LogicTokenType.TruthTable;
                         tokens.Add(token);
-                        i += 4;
+                        i += 5;
 
                         continue;
                     }
@@ -190,6 +179,7 @@ namespace xFunc.Logics
                     {
                         token.Type = LogicTokenType.True;
                         tokens.Add(token);
+                        i++;
 
                         continue;
                     }
@@ -197,6 +187,7 @@ namespace xFunc.Logics
                     {
                         token.Type = LogicTokenType.False;
                         tokens.Add(token);
+                        i++;
 
                         continue;
                     }
@@ -210,6 +201,7 @@ namespace xFunc.Logics
                 }
 
                 tokens.Add(token);
+                i++;
             }
 
             return tokens;

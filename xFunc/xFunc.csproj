@@ -104,6 +104,11 @@
     <Compile Include="Presenters\LogicTabPresenter.cs" />
     <Compile Include="Presenters\MathTabPresenter.cs" />
     <Compile Include="Presenters\TruthTableTabPresenter.cs" />
+    <Compile Include="Resources\Resource.uk.Designer.cs">
+      <DependentUpon>Resource.uk.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Resource.ru.Designer.cs">
       <DependentUpon>Resource.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -206,6 +211,10 @@
     <Resource Include="Images\VarsLarge.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.uk.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.uk.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>

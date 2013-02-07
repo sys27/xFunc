@@ -13,5 +13,5 @@ xFunc designed for math and logical calculations. It written on C#. This program
 
 ### More:
 
-* [xfunc.codeplex.com](http://xfunc.codeplex.com/)
+* [CodePlex](http://xfunc.codeplex.com/)
 * [e-x-it.blogspot.com (rus)](http://e-x-it.blogspot.com/2012/12/xfunc-14.html)

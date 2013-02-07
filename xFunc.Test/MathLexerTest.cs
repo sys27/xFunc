@@ -667,6 +667,20 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void BitVar()
+        {
+            var tokens = lexer.Tokenize("x and x");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken('x'),
+                new MathToken(MathTokenType.And),
+                new MathToken('x')
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

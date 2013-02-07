@@ -526,13 +526,18 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    if (i != (function.Length - 1) && char.IsLetter(function[i + 1]))
-                    {
-                        function = function.Insert(i + 1, "*");
-                    }
-
                     token.Type = MathTokenType.Variable;
                     token.Variable = letter;
+                    tokens.Add(token);
+                    
+                    if (i + 1 < function.Length && char.IsLetter(function[i + 1]) && !notVar.Any(s => function.Substring(i + 1).StartsWith(s)))
+                    {
+                        token = new MathToken(MathTokenType.Multiplication);
+                        tokens.Add(token);
+                    }
+
+                    i++;
+                    continue;
                 }
                 else
                 {

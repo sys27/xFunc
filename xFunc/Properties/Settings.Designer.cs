@@ -214,5 +214,17 @@ namespace xFunc.Properties {
                 this["AngleMeasurement"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int MaxCountOfExpressions {
+            get {
+                return ((int)(this["MaxCountOfExpressions"]));
+            }
+            set {
+                this["MaxCountOfExpressions"] = value;
+            }
+        }
     }
 }

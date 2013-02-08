@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,7 @@ using xFunc.Logics.Expressions;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Presenters;
+using xFunc.Properties;
 using xFunc.Resources;
 using xFunc.ViewModels;
 
@@ -46,6 +48,24 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
+            if (Settings.Default.WindowState != WindowState.Minimized)
+            {
+                this.WindowState = Settings.Default.WindowState;
+
+                if (Settings.Default.WindowTop == 0 || Settings.Default.WindowLeft == 0)
+                {
+                    this.Top = (SystemParameters.PrimaryScreenHeight - this.Height) / 2;
+                    this.Left = (SystemParameters.PrimaryScreenWidth - this.Width) / 2;
+                }
+                else
+                {
+                    this.Top = Settings.Default.WindowTop;
+                    this.Left = Settings.Default.WindowLeft;
+                }
+            }
+            this.Width = Settings.Default.WindowWidth;
+            this.Height = Settings.Default.WindowHeight;
+
             mathExpressionBox.Focus();
 
             this.mathPresenter = new MathTabPresenter(this);
@@ -54,6 +74,22 @@ namespace xFunc.Views
             this.truthTablePresenter = new TruthTableTabPresenter(this);
 
             degreeButton.IsChecked = true;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (this.WindowState != WindowState.Minimized)
+                Settings.Default.WindowState = this.WindowState;
+
+            Settings.Default.WindowTop = this.Top;
+            Settings.Default.WindowLeft = this.Left;
+
+            Settings.Default.WindowWidth = this.Width;
+            Settings.Default.WindowHeight = this.Height;
+
+            Settings.Default.Save();
+
+            base.OnClosing(e);
         }
 
         private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)

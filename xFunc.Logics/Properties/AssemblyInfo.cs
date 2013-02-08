@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("xFunc.Logics")]
-[assembly: AssemblyCopyright("Copyright © 2012 Dmitry Kischenko")]
+[assembly: AssemblyCopyright("Copyright © 2012-2013 Dmitry Kischenko")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

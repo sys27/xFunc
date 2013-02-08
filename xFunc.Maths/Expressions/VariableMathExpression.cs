@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             VariableMathExpression @var = obj as VariableMathExpression;
-            if (@var != null && @var.Character == this.variable)
+            if (@var != null && @var.Character == variable)
                 return true;
 
             return false;
@@ -69,10 +69,10 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Derivative(VariableMathExpression variable)
         {
-            if (this.Equals(variable))
+            if (Equals(variable))
                 return new NumberMathExpression(1);
-            else
-                return this.Clone();
+
+            return Clone();
         }
 
         public char Character

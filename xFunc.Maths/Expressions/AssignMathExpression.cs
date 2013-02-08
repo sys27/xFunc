@@ -81,7 +81,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return this.value;
+                return value;
             }
             set
             {

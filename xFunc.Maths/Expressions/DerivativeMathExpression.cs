@@ -32,16 +32,16 @@ namespace xFunc.Maths.Expressions
         {
             if (this == obj)
                 return true;
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
 
             DerivativeMathExpression exp = obj as DerivativeMathExpression;
-            return this.firstMathExpression.Equals(exp.FirstMathExpression) && this.variable.Equals(exp.Variable);
+            return firstMathExpression.Equals(exp.FirstMathExpression) && variable.Equals(exp.Variable);
         }
 
         public override string ToString()
         {
-            return string.Format("deriv({0}, {1})", firstMathExpression.ToString(), variable.ToString());
+            return string.Format("deriv({0}, {1})", firstMathExpression, variable);
         }
 
         public double Calculate(MathParameterCollection parameters)

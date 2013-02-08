@@ -50,14 +50,14 @@ namespace xFunc.Views
 
             mathExpressionBox.Focus();
 
-            this.mathPresenter = new MathTabPresenter(this);
-            this.logicPresenter = new LogicTabPresenter(this);
-            this.graphsPresenter = new GraphsTabPresenter(this);
-            this.truthTablePresenter = new TruthTableTabPresenter(this);
+            mathPresenter = new MathTabPresenter(this);
+            logicPresenter = new LogicTabPresenter(this);
+            graphsPresenter = new GraphsTabPresenter(this);
+            truthTablePresenter = new TruthTableTabPresenter(this);
 
             LoadSettings();
 
-            switch (this.mathPresenter.AngleMeasurement)
+            switch (mathPresenter.AngleMeasurement)
             {
                 case AngleMeasurement.Degree:
                     degreeButton.IsChecked = true;
@@ -82,97 +82,94 @@ namespace xFunc.Views
         {
             if (Settings.Default.WindowState != WindowState.Minimized)
             {
-                this.WindowState = Settings.Default.WindowState;
+                WindowState = Settings.Default.WindowState;
 
                 if (Settings.Default.WindowTop == 0 || Settings.Default.WindowLeft == 0)
                 {
-                    this.Top = (SystemParameters.PrimaryScreenHeight - this.Height) / 2;
-                    this.Left = (SystemParameters.PrimaryScreenWidth - this.Width) / 2;
+                    Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
+                    Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
                 }
                 else
                 {
-                    this.Top = Settings.Default.WindowTop;
-                    this.Left = Settings.Default.WindowLeft;
+                    Top = Settings.Default.WindowTop;
+                    Left = Settings.Default.WindowLeft;
                 }
             }
-            this.Width = Settings.Default.WindowWidth;
-            this.Height = Settings.Default.WindowHeight;
+            Width = Settings.Default.WindowWidth;
+            Height = Settings.Default.WindowHeight;
 
-            this.mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
+            mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
 
-            this.tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
+            tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
 
-            this.numberToolBar.IsExpanded = Settings.Default.NumbersExpanded;
-            this.standartMathToolBar.IsExpanded = Settings.Default.StandartMathExpanded;
-            this.trigonometricToolBar.IsExpanded = Settings.Default.TrigonometricExpanded;
-            this.hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
-            this.bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
-            this.constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
-            this.additionalToolBar.IsExpanded = Settings.Default.AdditionalExpanded;
+            numberToolBar.IsExpanded = Settings.Default.NumbersExpanded;
+            standartMathToolBar.IsExpanded = Settings.Default.StandartMathExpanded;
+            trigonometricToolBar.IsExpanded = Settings.Default.TrigonometricExpanded;
+            hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
+            bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
+            constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
+            additionalToolBar.IsExpanded = Settings.Default.AdditionalExpanded;
 
-            this.standartLogicToolBar.IsExpanded = Settings.Default.StandartLogicExpanded;
-            this.constantsLogicToolBar.IsExpanded = Settings.Default.ConstantsLogicExpanded;
+            standartLogicToolBar.IsExpanded = Settings.Default.StandartLogicExpanded;
+            constantsLogicToolBar.IsExpanded = Settings.Default.ConstantsLogicExpanded;
         }
 
         private void SaveSettings()
         {
-            if (this.WindowState != WindowState.Minimized)
-                Settings.Default.WindowState = this.WindowState;
+            if (WindowState != WindowState.Minimized)
+                Settings.Default.WindowState = WindowState;
 
-            Settings.Default.WindowTop = this.Top;
-            Settings.Default.WindowLeft = this.Left;
+            Settings.Default.WindowTop = Top;
+            Settings.Default.WindowLeft = Left;
 
-            Settings.Default.WindowWidth = this.Width;
-            Settings.Default.WindowHeight = this.Height;
+            Settings.Default.WindowWidth = Width;
+            Settings.Default.WindowHeight = Height;
 
-            Settings.Default.AngleMeasurement = this.mathPresenter.AngleMeasurement;
+            Settings.Default.AngleMeasurement = mathPresenter.AngleMeasurement;
 
-            Settings.Default.SelectedTabIndex = this.tabControl.SelectedIndex;
+            Settings.Default.SelectedTabIndex = tabControl.SelectedIndex;
 
-            Settings.Default.NumbersExpanded = this.numberToolBar.IsExpanded;
-            Settings.Default.StandartMathExpanded = this.standartMathToolBar.IsExpanded;
-            Settings.Default.TrigonometricExpanded = this.trigonometricToolBar.IsExpanded;
-            Settings.Default.HyperbolicExpanded = this.hyperbolicToolBar.IsExpanded;
-            Settings.Default.BitwiseExpanded = this.bitwiseToolBar.IsExpanded;
-            Settings.Default.ConstantsMathExpanded = this.constantsMathToolBar.IsExpanded;
-            Settings.Default.AdditionalExpanded = this.additionalToolBar.IsExpanded;
+            Settings.Default.NumbersExpanded = numberToolBar.IsExpanded;
+            Settings.Default.StandartMathExpanded = standartMathToolBar.IsExpanded;
+            Settings.Default.TrigonometricExpanded = trigonometricToolBar.IsExpanded;
+            Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
+            Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
+            Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
+            Settings.Default.AdditionalExpanded = additionalToolBar.IsExpanded;
 
-            Settings.Default.StandartLogicExpanded = this.standartLogicToolBar.IsExpanded;
-            Settings.Default.ConstantsLogicExpanded = this.constantsLogicToolBar.IsExpanded;
+            Settings.Default.StandartLogicExpanded = standartLogicToolBar.IsExpanded;
+            Settings.Default.ConstantsLogicExpanded = constantsLogicToolBar.IsExpanded;
 
             Settings.Default.Save();
         }
 
         private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            this.radianButton.IsChecked = false;
-            this.gradianButton.IsChecked = false;
+            radianButton.IsChecked = false;
+            gradianButton.IsChecked = false;
             mathPresenter.AngleMeasurement = AngleMeasurement.Degree;
-            this.degreeButton.IsChecked = true;
+            degreeButton.IsChecked = true;
         }
 
         private void RadianButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            this.degreeButton.IsChecked = false;
-            this.gradianButton.IsChecked = false;
+            degreeButton.IsChecked = false;
+            gradianButton.IsChecked = false;
             mathPresenter.AngleMeasurement = AngleMeasurement.Radian;
-            this.radianButton.IsChecked = true;
+            radianButton.IsChecked = true;
         }
 
         private void GradianButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            this.degreeButton.IsChecked = false;
-            this.radianButton.IsChecked = false;
+            degreeButton.IsChecked = false;
+            radianButton.IsChecked = false;
             mathPresenter.AngleMeasurement = AngleMeasurement.Gradian;
-            this.gradianButton.IsChecked = true;
+            gradianButton.IsChecked = true;
         }
 
         private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            if (tabControl.SelectedItem == mathTab)
-                args.CanExecute = true;
-            else
-                args.CanExecute = false;
+            args.CanExecute = tabControl.SelectedItem == mathTab;
         }
 
         private void InsertChar_Click(object o, RoutedEventArgs args)
@@ -591,7 +588,7 @@ namespace xFunc.Views
 
         private void aboutButton_Click(object o, RoutedEventArgs args)
         {
-            AboutView aboutView = new AboutView() { Owner = this };
+            AboutView aboutView = new AboutView { Owner = this };
             aboutView.ShowDialog();
         }
 
@@ -604,14 +601,14 @@ namespace xFunc.Views
 
         private void removeLogic_Click(object o, RoutedEventArgs args)
         {
-            var item = (o as Button).Tag as LogicWorkspaceItemViewModel;
+            var item = ((Button)o).Tag as LogicWorkspaceItemViewModel;
 
             logicPresenter.Remove(item);
         }
 
         private void removeGraph_Click(object o, RoutedEventArgs args)
         {
-            var item = (o as Button).Tag as IMathExpression;
+            var item = ((Button)o).Tag as IMathExpression;
 
             graphsPresenter.Remove(item);
         }

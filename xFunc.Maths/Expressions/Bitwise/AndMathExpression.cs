@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace xFunc.Maths.Expressions.Bitwise
 {
@@ -23,7 +20,7 @@ namespace xFunc.Maths.Expressions.Bitwise
 
         public override string ToString()
         {
-            if (parentMathExpression != null && parentMathExpression is BinaryMathExpression)
+            if (parentMathExpression is BinaryMathExpression)
             {
                 return ToString("({0} and {1})");
             }

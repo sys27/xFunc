@@ -14,8 +14,6 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using xFunc.Logics.Expressions;
 using xFunc.Logics.Resources;
 
@@ -41,9 +39,10 @@ namespace xFunc.Logics
         public LogicWorkspace(int countOfExps)
         {
             this.countOfExps = countOfExps;
-            this.expressions = new List<LogicWorkspaceItem>(countOfExps);
-            this.parser = new LogicParser();
-            this.parameters = new LogicParameterCollection();
+
+            expressions = new List<LogicWorkspaceItem>(countOfExps);
+            parser = new LogicParser();
+            parameters = new LogicParameterCollection();
         }
 
         public void Add(string strExp)

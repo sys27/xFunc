@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Views;
@@ -21,8 +19,8 @@ namespace xFunc.Presenters
         {
             this.view = view;
 
-            this.parser = new MathParser() { AngleMeasurement = AngleMeasurement.Radian };
-            this.listOfGraphs = new List<IMathExpression>();
+            parser = new MathParser { AngleMeasurement = AngleMeasurement.Radian };
+            listOfGraphs = new List<IMathExpression>();
         }
 
         public void Add(string strExp)

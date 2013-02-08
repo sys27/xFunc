@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            if (parentMathExpression != null && parentMathExpression is BinaryMathExpression)
+            if (parentMathExpression is BinaryMathExpression)
             {
                 return ToString("({0} * {1})");
             }
@@ -52,18 +52,16 @@ namespace xFunc.Maths.Expressions
 
                 return add;
             }
-            else if (first)
+            if (first)
             {
                 return new MultiplicationMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone());
             }
-            else if (second)
+            if (second)
             {
                 return new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone().Derivative(variable));
             }
-            else
-            {
-                return new NumberMathExpression(0);
-            }
+
+            return new NumberMathExpression(0);
         }
 
         public override IMathExpression Clone()

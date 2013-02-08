@@ -14,8 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
 
@@ -38,10 +37,10 @@ namespace xFunc.Maths
 
         }
 
-        public MathWorkspace(int countOfExp)
+        public MathWorkspace(int countOfExps)
         {
-            this.countOfExps = countOfExp;
-            expressions = new List<MathWorkspaceItem>(countOfExp);
+            this.countOfExps = countOfExps;
+            expressions = new List<MathWorkspaceItem>(countOfExps);
             parser = new MathParser();
             parameters = new MathParameterCollection();
         }
@@ -66,13 +65,13 @@ namespace xFunc.Maths
                 }
                 else if (exp is AssignMathExpression)
                 {
-                    AssignMathExpression assign = (AssignMathExpression)exp;
+                    AssignMathExpression assign = exp as AssignMathExpression;
                     assign.Calculate(parameters);
                     item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
                 }
                 else
                 {
-                    item.Answer = exp.Calculate(parameters).ToString();
+                    item.Answer = exp.Calculate(parameters).ToString(CultureInfo.InvariantCulture);
                 }
 
                 expressions.Add(item);

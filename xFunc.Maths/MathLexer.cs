@@ -25,11 +25,11 @@ namespace xFunc.Maths
     public class MathLexer : ILexer
     {
 
-        private HashSet<string> notVar;
+        private readonly HashSet<string> notVar;
 
         public MathLexer()
         {
-            notVar = new HashSet<string>() { "and", "or", "xor" };
+            notVar = new HashSet<string> { "and", "or", "xor" };
         }
 
         public IEnumerable<MathToken> Tokenize(string function)
@@ -38,12 +38,12 @@ namespace xFunc.Maths
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");
-            List<MathToken> tokens = new List<MathToken>();
+            var tokens = new List<MathToken>();
 
             for (int i = 0; i < function.Length; )
             {
                 char letter = function[i];
-                MathToken token = new MathToken();
+                var token = new MathToken();
                 if (letter == '(')
                 {
                     token.Type = MathTokenType.OpenBracket;

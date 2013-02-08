@@ -48,6 +48,38 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
+            mathExpressionBox.Focus();
+
+            this.mathPresenter = new MathTabPresenter(this);
+            this.logicPresenter = new LogicTabPresenter(this);
+            this.graphsPresenter = new GraphsTabPresenter(this);
+            this.truthTablePresenter = new TruthTableTabPresenter(this);
+
+            LoadSettings();
+
+            switch (this.mathPresenter.AngleMeasurement)
+            {
+                case AngleMeasurement.Degree:
+                    degreeButton.IsChecked = true;
+                    break;
+                case AngleMeasurement.Radian:
+                    radianButton.IsChecked = true;
+                    break;
+                case AngleMeasurement.Gradian:
+                    gradianButton.IsChecked = true;
+                    break;
+            }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            SaveSettings();
+
+            base.OnClosing(e);
+        }
+
+        private void LoadSettings()
+        {
             if (Settings.Default.WindowState != WindowState.Minimized)
             {
                 this.WindowState = Settings.Default.WindowState;
@@ -66,17 +98,23 @@ namespace xFunc.Views
             this.Width = Settings.Default.WindowWidth;
             this.Height = Settings.Default.WindowHeight;
 
-            mathExpressionBox.Focus();
+            this.mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
 
-            this.mathPresenter = new MathTabPresenter(this);
-            this.logicPresenter = new LogicTabPresenter(this);
-            this.graphsPresenter = new GraphsTabPresenter(this);
-            this.truthTablePresenter = new TruthTableTabPresenter(this);
+            this.tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
 
-            degreeButton.IsChecked = true;
+            this.numberToolBar.IsExpanded = Settings.Default.NumbersExpanded;
+            this.standartMathToolBar.IsExpanded = Settings.Default.StandartMathExpanded;
+            this.trigonometricToolBar.IsExpanded = Settings.Default.TrigonometricExpanded;
+            this.hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
+            this.bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
+            this.constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
+            this.additionalToolBar.IsExpanded = Settings.Default.AdditionalExpanded;
+
+            this.standartLogicToolBar.IsExpanded = Settings.Default.StandartLogicExpanded;
+            this.constantsLogicToolBar.IsExpanded = Settings.Default.ConstantsLogicExpanded;
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private void SaveSettings()
         {
             if (this.WindowState != WindowState.Minimized)
                 Settings.Default.WindowState = this.WindowState;
@@ -87,9 +125,22 @@ namespace xFunc.Views
             Settings.Default.WindowWidth = this.Width;
             Settings.Default.WindowHeight = this.Height;
 
-            Settings.Default.Save();
+            Settings.Default.AngleMeasurement = this.mathPresenter.AngleMeasurement;
 
-            base.OnClosing(e);
+            Settings.Default.SelectedTabIndex = this.tabControl.SelectedIndex;
+
+            Settings.Default.NumbersExpanded = this.numberToolBar.IsExpanded;
+            Settings.Default.StandartMathExpanded = this.standartMathToolBar.IsExpanded;
+            Settings.Default.TrigonometricExpanded = this.trigonometricToolBar.IsExpanded;
+            Settings.Default.HyperbolicExpanded = this.hyperbolicToolBar.IsExpanded;
+            Settings.Default.BitwiseExpanded = this.bitwiseToolBar.IsExpanded;
+            Settings.Default.ConstantsMathExpanded = this.constantsMathToolBar.IsExpanded;
+            Settings.Default.AdditionalExpanded = this.additionalToolBar.IsExpanded;
+
+            Settings.Default.StandartLogicExpanded = this.standartLogicToolBar.IsExpanded;
+            Settings.Default.ConstantsLogicExpanded = this.constantsLogicToolBar.IsExpanded;
+
+            Settings.Default.Save();
         }
 
         private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)
@@ -513,7 +564,7 @@ namespace xFunc.Views
             if (tabControl.SelectedItem == logicTab || tabControl.SelectedItem == truthTableTab)
             {
                 numberToolBar.Visibility = Visibility.Collapsed;
-                standartToolBar.Visibility = Visibility.Collapsed;
+                standartMathToolBar.Visibility = Visibility.Collapsed;
                 trigonometricToolBar.Visibility = Visibility.Collapsed;
                 hyperbolicToolBar.Visibility = Visibility.Collapsed;
                 bitwiseToolBar.Visibility = Visibility.Collapsed;
@@ -526,7 +577,7 @@ namespace xFunc.Views
             else
             {
                 numberToolBar.Visibility = Visibility.Visible;
-                standartToolBar.Visibility = Visibility.Visible;
+                standartMathToolBar.Visibility = Visibility.Visible;
                 trigonometricToolBar.Visibility = Visibility.Visible;
                 hyperbolicToolBar.Visibility = Visibility.Visible;
                 bitwiseToolBar.Visibility = Visibility.Visible;

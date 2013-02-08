@@ -525,7 +525,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="standartToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" IsExpanded="True">
+                <Expander x:Name="standartMathToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />

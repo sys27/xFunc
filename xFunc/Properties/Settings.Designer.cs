@@ -13,7 +13,7 @@ namespace xFunc.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -80,6 +80,138 @@ namespace xFunc.Properties {
             }
             set {
                 this["WindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NumbersExpanded {
+            get {
+                return ((bool)(this["NumbersExpanded"]));
+            }
+            set {
+                this["NumbersExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool StandartMathExpanded {
+            get {
+                return ((bool)(this["StandartMathExpanded"]));
+            }
+            set {
+                this["StandartMathExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool StandartLogicExpanded {
+            get {
+                return ((bool)(this["StandartLogicExpanded"]));
+            }
+            set {
+                this["StandartLogicExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TrigonometricExpanded {
+            get {
+                return ((bool)(this["TrigonometricExpanded"]));
+            }
+            set {
+                this["TrigonometricExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HyperbolicExpanded {
+            get {
+                return ((bool)(this["HyperbolicExpanded"]));
+            }
+            set {
+                this["HyperbolicExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BitwiseExpanded {
+            get {
+                return ((bool)(this["BitwiseExpanded"]));
+            }
+            set {
+                this["BitwiseExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConstantsMathExpanded {
+            get {
+                return ((bool)(this["ConstantsMathExpanded"]));
+            }
+            set {
+                this["ConstantsMathExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AdditionalExpanded {
+            get {
+                return ((bool)(this["AdditionalExpanded"]));
+            }
+            set {
+                this["AdditionalExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConstantsLogicExpanded {
+            get {
+                return ((bool)(this["ConstantsLogicExpanded"]));
+            }
+            set {
+                this["ConstantsLogicExpanded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SelectedTabIndex {
+            get {
+                return ((int)(this["SelectedTabIndex"]));
+            }
+            set {
+                this["SelectedTabIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Degree")]
+        public global::xFunc.Maths.Expressions.AngleMeasurement AngleMeasurement {
+            get {
+                return ((global::xFunc.Maths.Expressions.AngleMeasurement)(this["AngleMeasurement"]));
+            }
+            set {
+                this["AngleMeasurement"] = value;
             }
         }
     }

@@ -50,5 +50,8 @@
     <Setting Name="AngleMeasurement" Type="xFunc.Maths.Expressions.AngleMeasurement" Scope="User">
       <Value Profile="(Default)">Degree</Value>
     </Setting>
+    <Setting Name="MaxCountOfExpressions" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

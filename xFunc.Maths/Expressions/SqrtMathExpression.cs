@@ -36,7 +36,7 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Derivative(VariableMathExpression variable)
         {
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(new NumberMathExpression(2), this.Clone());
+            MultiplicationMathExpression mul = new MultiplicationMathExpression(new NumberMathExpression(2), Clone());
             DivisionMathExpression div = new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), mul);
 
             return div;

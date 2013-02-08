@@ -13,9 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace xFunc.Maths.Expressions
 {
@@ -46,10 +43,8 @@ namespace xFunc.Maths.Expressions
 
                 return inv.Derivative(variable);
             }
-            else
-            {
-                return new NumberMathExpression(0);
-            }
+            
+            return new NumberMathExpression(0);
         }
 
         public override IMathExpression Clone()

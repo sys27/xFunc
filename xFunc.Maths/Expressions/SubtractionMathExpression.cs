@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            if (parentMathExpression != null && parentMathExpression is BinaryMathExpression)
+            if (parentMathExpression is BinaryMathExpression)
             {
                 return ToString("({0} - {1})");
             }
@@ -48,18 +48,16 @@ namespace xFunc.Maths.Expressions
             {
                 return new SubtractionMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone().Derivative(variable));
             }
-            else if (first)
+            if (first)
             {
                 return firstMathExpression.Clone().Derivative(variable);
             }
-            else if (second)
+            if (second)
             {
                 return new UnaryMinusMathExpression(secondMathExpression.Clone().Derivative(variable));
             }
-            else
-            {
-                return new NumberMathExpression(0);
-            }
+
+            return new NumberMathExpression(0);
         }
 
         public override IMathExpression Clone()

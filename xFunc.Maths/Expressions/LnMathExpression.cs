@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
 
         public LnMathExpression() : base(null) { }
 
-        public LnMathExpression(IMathExpression FirstMathExpression) : base(FirstMathExpression) { }
+        public LnMathExpression(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {

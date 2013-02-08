@@ -539,21 +539,20 @@ namespace xFunc.Maths
         {
             if (expression is BinaryMathExpression)
             {
-                BinaryMathExpression bin = expression as BinaryMathExpression;
+                var bin = expression as BinaryMathExpression;
                 if (HasVar(bin.FirstMathExpression, arg))
                     return true;
-                else
-                    return HasVar(bin.SecondMathExpression, arg);
+
+                return HasVar(bin.SecondMathExpression, arg);
             }
-            else if (expression is UnaryMathExpression)
+            if (expression is UnaryMathExpression)
             {
-                UnaryMathExpression un = expression as UnaryMathExpression;
+                var un = expression as UnaryMathExpression;
 
                 return HasVar(un.FirstMathExpression, arg);
             }
-            else if (expression is VariableMathExpression)
+            if (expression is VariableMathExpression && expression.Equals(arg))
             {
-                if (expression.Equals(arg))
                     return true;
             }
 

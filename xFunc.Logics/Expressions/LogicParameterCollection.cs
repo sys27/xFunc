@@ -31,7 +31,7 @@ namespace xFunc.Logics.Expressions
         {
             get
             {
-                if (!this.Contains(variable))
+                if (!Contains(variable))
                     throw new KeyNotFoundException();
 
                 int index = 1 << Count - IndexOf(variable) - 1;
@@ -40,7 +40,7 @@ namespace xFunc.Logics.Expressions
             }
             set
             {
-                if (!this.Contains(variable))
+                if (!Contains(variable))
                     base.Add(variable);
 
                 int index = 1 << Count - IndexOf(variable) - 1;

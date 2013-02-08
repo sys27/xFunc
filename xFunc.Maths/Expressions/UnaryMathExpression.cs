@@ -25,23 +25,23 @@ namespace xFunc.Maths.Expressions
 
         public UnaryMathExpression(IMathExpression firstMathExpression)
         {
-            this.FirstMathExpression = firstMathExpression;
+            FirstMathExpression = firstMathExpression;
         }
 
         public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
 
             UnaryMathExpression exp = obj as UnaryMathExpression;
-            return this.firstMathExpression.Equals(exp.FirstMathExpression);
+            return firstMathExpression.Equals(exp.FirstMathExpression);
         }
 
         protected string ToString(string format)
         {
-            return string.Format(format, firstMathExpression.ToString());
+            return string.Format(format, firstMathExpression);
         }
 
         public abstract double Calculate(MathParameterCollection parameters);
@@ -61,10 +61,8 @@ namespace xFunc.Maths.Expressions
             {
                 return _Derivative(variable);
             }
-            else
-            {
-                return new NumberMathExpression(0);
-            }
+
+            return new NumberMathExpression(0);
         }
 
         public IMathExpression FirstMathExpression

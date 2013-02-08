@@ -28,8 +28,8 @@ namespace xFunc.Maths.Expressions
         {
             if (firstMathExpression is BinaryMathExpression)
                 return ToString("-({0})");
-            else
-                return ToString("-{0}");
+
+            return ToString("-{0}");
         }
 
         public override double Calculate(MathParameterCollection parameters)

@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            if (parentMathExpression != null && parentMathExpression is BinaryMathExpression)
+            if (parentMathExpression is BinaryMathExpression)
             {
                 return ToString("({0} / {1})");
             }
@@ -54,11 +54,11 @@ namespace xFunc.Maths.Expressions
 
                 return division;
             }
-            else if (first)
+            if (first)
             {
                 return new DivisionMathExpression(firstMathExpression.Clone().Derivative(variable), secondMathExpression.Clone());
             }
-            else if (second)
+            if (second)
             {
                 MultiplicationMathExpression mul2 = new MultiplicationMathExpression(firstMathExpression.Clone(), secondMathExpression.Clone().Derivative(variable));
                 UnaryMinusMathExpression unMinus = new UnaryMinusMathExpression(mul2);
@@ -67,10 +67,8 @@ namespace xFunc.Maths.Expressions
 
                 return division;
             }
-            else
-            {
-                return new NumberMathExpression(0);
-            }
+
+            return new NumberMathExpression(0);
         }
 
         public override IMathExpression Clone()

@@ -47,10 +47,8 @@ namespace xFunc.Maths.Expressions
 
                 return div;
             }
-            else
-            {
-                return new NumberMathExpression(0);
-            }
+
+            return new NumberMathExpression(0);
         }
 
         public override IMathExpression Clone()

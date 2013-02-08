@@ -24,24 +24,24 @@ namespace xFunc.Maths.Expressions
 
         public BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
         {
-            this.FirstMathExpression = firstMathExpression;
-            this.SecondMathExpression = secondMathExpression;
+            FirstMathExpression = firstMathExpression;
+            SecondMathExpression = secondMathExpression;
         }
 
         public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
 
             BinaryMathExpression exp = obj as BinaryMathExpression;
-            return this.firstMathExpression.Equals(exp.FirstMathExpression) && this.secondMathExpression.Equals(exp.SecondMathExpression);
+            return firstMathExpression.Equals(exp.FirstMathExpression) && secondMathExpression.Equals(exp.SecondMathExpression);
         }
 
         protected string ToString(string format)
         {
-            return string.Format(format, firstMathExpression.ToString(), secondMathExpression.ToString());
+            return string.Format(format, firstMathExpression, secondMathExpression);
         }
 
         public abstract double Calculate(MathParameterCollection parameters);

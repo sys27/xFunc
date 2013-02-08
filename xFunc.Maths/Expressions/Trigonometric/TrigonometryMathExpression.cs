@@ -13,9 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -28,7 +25,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public TrigonometryMathExpression(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
-            this.angleMeasurement = AngleMeasurement.Degree;
+            angleMeasurement = AngleMeasurement.Degree;
         }
 
         public abstract double CalculateDergee(MathParameterCollection parameters);

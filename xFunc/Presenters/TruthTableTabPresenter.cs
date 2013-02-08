@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using xFunc.ViewModels;
 using xFunc.Views;
 using xFunc.Logics;
@@ -25,7 +24,7 @@ namespace xFunc.Presenters
         {
             this.view = view;
 
-            this.parser = new LogicParser();
+            parser = new LogicParser();
         }
 
         public void Generate(string strExp)

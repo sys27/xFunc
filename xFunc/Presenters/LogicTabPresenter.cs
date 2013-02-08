@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using xFunc.Logics;
 using xFunc.Properties;
 using xFunc.ViewModels;
@@ -21,7 +20,7 @@ namespace xFunc.Presenters
         {
             this.view = view;
 
-            this.workspace = new LogicWorkspace(Settings.Default.MaxCountOfExpressions);
+            workspace = new LogicWorkspace(Settings.Default.MaxCountOfExpressions);
         }
 
         private void UpdateList()

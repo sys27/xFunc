@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using xFunc.Logics;
+using xFunc.Properties;
 using xFunc.ViewModels;
 using xFunc.Views;
 
@@ -20,8 +21,7 @@ namespace xFunc.Presenters
         {
             this.view = view;
 
-            // TODO: add settings...
-            this.workspace = new LogicWorkspace();
+            this.workspace = new LogicWorkspace(Settings.Default.MaxCountOfExpressions);
         }
 
         private void UpdateList()

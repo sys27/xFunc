@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Properties;
 using xFunc.ViewModels;
 using xFunc.Views;
 
@@ -21,8 +22,7 @@ namespace xFunc.Presenters
         {
             this.view = view;
 
-            // TODO: add settings...
-            this.workspace = new MathWorkspace();
+            this.workspace = new MathWorkspace(Settings.Default.MaxCountOfExpressions);
         }
 
         private void UpdateList()

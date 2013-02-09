@@ -160,6 +160,82 @@ namespace xFunc.Test
             SimpleTest(add, expected);
         }
 
+        [TestMethod]
+        public void SubFirstZero()
+        {
+            var sub = new Subtraction(new Number(0), new Variable('x'));
+            var expected = new UnaryMinus(new Variable('x'));
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubSecondZero()
+        {
+            var sub = new Subtraction(new Variable('x'), new Number(0));
+            var expected = new Variable('x');
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubTwoNumbers()
+        {
+            var sub = new Subtraction(new Number(3), new Number(2));
+            var expected = new Number(1);
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubSecondUnaryMinus()
+        {
+            var sub = new Subtraction(new Number(2), new UnaryMinus(new Variable('x')));
+            var expected = new Addition(new Number(2), new Variable('x'));
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiff_NumAddVar_SubNum()
+        {
+            // (2 + x) - 2
+            var sub = new Subtraction(new Addition(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Variable('x');
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiff_VarAddNum_SubNum()
+        {
+            // (x + 2) - 2
+            var sub = new Subtraction(new Addition(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Variable('x');
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiffNumSub_NumAddVar_()
+        {
+            // 2 - (2 + x)
+            var sub = new Subtraction(new Number(2), new Addition(new Number(2), new Variable('x')));
+            var expected = new UnaryMinus(new Variable('x'));
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiffNumSub_VarAddNum_()
+        {
+            // 2 - (x + 2)
+            var sub = new Subtraction(new Number(2), new Addition(new Variable('x'), new Number(2)));
+            var expected = new UnaryMinus(new Variable('x'));
+
+            SimpleTest(sub, expected);
+        }
+
     }
 
 }

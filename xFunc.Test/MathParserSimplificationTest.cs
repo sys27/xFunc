@@ -83,6 +83,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiffNumAdd_NumAddVar_()
         {
+            // 2 + (2 + x)
             var add = new Addition(new Number(2), new Addition(new Number(2), new Variable('x')));
             var expected = new Addition(new Variable('x'), new Number(4));
 
@@ -92,6 +93,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiffNumAdd_VarAddNum_()
         {
+            // 2 + (x + 2)
             var add = new Addition(new Number(2), new Addition(new Variable('x'), new Number(2)));
             var expected = new Addition(new Variable('x'), new Number(4));
 
@@ -101,6 +103,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiff_NumAddVar_AddNum()
         {
+            // (2 + x) + 2
             var add = new Addition(new Addition(new Number(2), new Variable('x')), new Number(2));
             var expected = new Addition(new Variable('x'), new Number(4));
 
@@ -110,8 +113,49 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiff_VarAddNum_AddNum()
         {
+            // (x + 2) + 2
             var add = new Addition(new Addition(new Variable('x'), new Number(2)), new Number(2));
             var expected = new Addition(new Variable('x'), new Number(4));
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiffNum_NumSubVar_()
+        {
+            // 2 + (2 - x)
+            var add = new Addition(new Number(2), new Subtraction(new Number(2), new Variable('x')));
+            var expected = new Subtraction(new Number(4), new Variable('x'));
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiffNum_VarSubNum_()
+        {
+            // 2 + (x - 2)
+            var add = new Addition(new Number(2), new Subtraction(new Variable('x'), new Number(2)));
+            var expected = new Variable('x');
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiff_NumSubVar_AddNum()
+        {
+            // (2 - x) + 2
+            var add = new Addition(new Subtraction(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Subtraction(new Number(4), new Variable('x'));
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiff_VarSubNum_AddNum()
+        {
+            // (x - 2) + 2
+            var add = new Addition(new Subtraction(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Variable('x');
 
             SimpleTest(add, expected);
         }

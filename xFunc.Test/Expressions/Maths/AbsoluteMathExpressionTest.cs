@@ -29,7 +29,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("abs(x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("abs(x)"));
 
             Assert.AreEqual("x / abs(x)", exp.ToString());
         }
@@ -37,16 +37,16 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest2()
         {
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+            Number num = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new AbsoluteMathExpression(mul);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Absolute(mul);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("2 * ((2 * x) / abs(2 * x))", deriv.ToString());
 
-            num.Number = 3;
+            num.Value = 3;
             Assert.AreEqual("abs(3 * x)", exp.ToString());
             Assert.AreEqual("2 * ((2 * x) / abs(2 * x))", deriv.ToString());
         }
@@ -54,36 +54,36 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(abs(xy), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(abs(xy), x)").Differentiation();
             Assert.AreEqual("y * ((x * y) / abs(x * y))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(abs(xy), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(abs(xy), y)").Differentiation();
             Assert.AreEqual("x * ((x * y) / abs(x * y))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(abs(x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(abs(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 
         [TestMethod]
         public void EqualsTest1()
         {
-            VariableMathExpression x1 = 'x';
-            NumberMathExpression num1 = 2;
-            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x1);
-            AbsoluteMathExpression abs1 = new AbsoluteMathExpression(mul1);
+            Variable x1 = 'x';
+            Number num1 = 2;
+            Multiplication mul1 = new Multiplication(num1, x1);
+            Absolute abs1 = new Absolute(mul1);
 
-            VariableMathExpression x2 = 'x';
-            NumberMathExpression num2 = 2;
-            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(num2, x2);
-            AbsoluteMathExpression abs2 = new AbsoluteMathExpression(mul2);
+            Variable x2 = 'x';
+            Number num2 = 2;
+            Multiplication mul2 = new Multiplication(num2, x2);
+            Absolute abs2 = new Absolute(mul2);
 
             Assert.IsTrue(abs1.Equals(abs2));
             Assert.IsTrue(abs1.Equals(abs1));
@@ -92,15 +92,15 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void EqualsTest2()
         {
-            VariableMathExpression x1 = 'x';
-            NumberMathExpression num1 = 2;
-            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x1);
-            AbsoluteMathExpression abs1 = new AbsoluteMathExpression(mul1);
+            Variable x1 = 'x';
+            Number num1 = 2;
+            Multiplication mul1 = new Multiplication(num1, x1);
+            Absolute abs1 = new Absolute(mul1);
 
-            VariableMathExpression x2 = 'x';
-            NumberMathExpression num2 = 3;
-            MultiplicationMathExpression mul2 = new MultiplicationMathExpression(num2, x2);
-            AbsoluteMathExpression abs2 = new AbsoluteMathExpression(mul2);
+            Variable x2 = 'x';
+            Number num2 = 3;
+            Multiplication mul2 = new Multiplication(num2, x2);
+            Absolute abs2 = new Absolute(mul2);
 
             Assert.IsFalse(abs1.Equals(abs2));
             Assert.IsFalse(abs1.Equals(mul2));

@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(csch(2x), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(csch(2x), x)").Differentiation();
 
             Assert.AreEqual("-(2 * (coth(2 * x) * csch(2 * x)))", exp.ToString());
         }

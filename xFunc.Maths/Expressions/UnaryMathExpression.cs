@@ -48,21 +48,21 @@ namespace xFunc.Maths.Expressions
 
         public abstract IMathExpression Clone();
 
-        public IMathExpression Derivative()
+        public IMathExpression Differentiation()
         {
-            return Derivative(new VariableMathExpression('x'));
+            return Differentiation(new Variable('x'));
         }
 
-        protected abstract IMathExpression _Derivative(VariableMathExpression variable);
+        protected abstract IMathExpression _Derivative(Variable variable);
 
-        public IMathExpression Derivative(VariableMathExpression variable)
+        public IMathExpression Differentiation(Variable variable)
         {
             if (MathParser.HasVar(firstMathExpression, variable))
             {
                 return _Derivative(variable);
             }
 
-            return new NumberMathExpression(0);
+            return new Number(0);
         }
 
         public IMathExpression FirstMathExpression

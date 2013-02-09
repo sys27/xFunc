@@ -48,12 +48,12 @@ namespace xFunc.Maths.Expressions
 
         public abstract IMathExpression Clone();
 
-        public IMathExpression Derivative()
+        public IMathExpression Differentiation()
         {
-            return Derivative(new VariableMathExpression('x'));
+            return Differentiation(new Variable('x'));
         }
 
-        public abstract IMathExpression Derivative(VariableMathExpression variable);
+        public abstract IMathExpression Differentiation(Variable variable);
 
         public IMathExpression FirstMathExpression
         {

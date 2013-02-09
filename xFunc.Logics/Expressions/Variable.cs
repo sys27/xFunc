@@ -16,17 +16,33 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-
-    public class TruthTableExpression : UnaryLogicExpression
+    
+    public class Variable : ILogicExpression
     {
 
-        public TruthTableExpression() : base(null) { }
+        private char variable;
 
-        public TruthTableExpression(ILogicExpression expression) : base(expression) { }
-
-        public override bool Calculate(LogicParameterCollection parameters)
+        public Variable(char variable)
         {
-            throw new NotSupportedException();
+            this.variable = variable;
+        }
+
+        public override string ToString()
+        {
+            return variable.ToString();
+        }
+
+        public bool Calculate(LogicParameterCollection parameters)
+        {
+            return parameters[variable];
+        }
+
+        public char Character
+        {
+            get
+            {
+                return variable;
+            }
         }
 
     }

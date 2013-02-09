@@ -16,30 +16,30 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-    
-    public class NAndLogicExpression : BinaryLogicExpression
+
+    public class Not : UnaryLogicExpression
     {
 
-        public NAndLogicExpression()
-            : base(null, null)
+        public Not()
+            : base(null)
         {
 
         }
 
-        public NAndLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
-            : base(firstOperand, secondOperand)
+        public Not(ILogicExpression firstMathExpression)
+            : base(firstMathExpression)
         {
 
         }
 
         public override string ToString()
         {
-            return ToString("↑");
+            return ToString("!");
         }
 
         public override bool Calculate(LogicParameterCollection parameters)
         {
-            return !(firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters));
+            return !firstMathExpression.Calculate(parameters);
         }
 
     }

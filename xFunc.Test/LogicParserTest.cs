@@ -65,11 +65,11 @@ namespace xFunc.Test
         {
             string function = "(a | c) & b";
             ILogicExpression actual = logicParser.Parse(function);
-            Assert.IsTrue(actual is AndLogicExpression);
+            Assert.IsTrue(actual is And);
 
-            AndLogicExpression a = (AndLogicExpression)actual;
-            Assert.IsTrue(a.FirstOperand is OrLogicExpression);
-            Assert.IsTrue(a.SecondOperand is VariableLogicExpression);
+            And a = (And)actual;
+            Assert.IsTrue(a.FirstOperand is Or);
+            Assert.IsTrue(a.SecondOperand is Variable);
         }
 
     }

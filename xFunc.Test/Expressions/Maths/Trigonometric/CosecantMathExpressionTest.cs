@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(csc(2x), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(csc(2x), x)").Differentiation();
 
             Assert.AreEqual("-2 * (cot(2 * x) * csc(2 * x))", exp.ToString());
         }

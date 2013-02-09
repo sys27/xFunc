@@ -29,7 +29,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("log(x, 2)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("log(x, 2)"));
 
             Assert.AreEqual("1 / (x * ln(2))", exp.ToString());
         }
@@ -38,15 +38,15 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // log(x, 2)
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
+            Number num = new Number(2);
+            Variable x = new Variable('x');
 
-            IMathExpression exp = new LogMathExpression(x, num);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Log(x, num);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
 
-            num.Number = 4;
+            num.Value = 4;
             Assert.AreEqual("log(x, 4)", exp.ToString());
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
         }
@@ -54,14 +54,14 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(log(x, 2), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(log(x, 2), x)").Differentiation();
             Assert.AreEqual("1 / (x * ln(2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(log(x, 2), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(log(x, 2), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 
@@ -69,7 +69,7 @@ namespace xFunc.Test.Expressions.Maths
         public void SimplifyTest()
         {
             IMathExpression exp = parser.Parse("log(4x, 4x)");
-            NumberMathExpression one = 1;
+            Number one = 1;
 
             Assert.AreEqual(one, exp);
         }

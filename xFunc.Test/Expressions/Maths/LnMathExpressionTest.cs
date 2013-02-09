@@ -29,7 +29,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("ln(2x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("ln(2x)"));
 
             Assert.AreEqual("1 / x", exp.ToString());
         }
@@ -38,16 +38,16 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // ln(2x)
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+            Number num = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new LnMathExpression(mul);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Ln(mul);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("1 / x", deriv.ToString());
 
-            num.Number = 5;
+            num.Value = 5;
             Assert.AreEqual("ln(5 * x)", exp.ToString());
             Assert.AreEqual("1 / x", deriv.ToString());
         }
@@ -55,21 +55,21 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(ln(xy), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(ln(xy), x)").Differentiation();
             Assert.AreEqual("y / (x * y)", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(ln(xy), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(ln(xy), y)").Differentiation();
             Assert.AreEqual("x / (x * y)", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(ln(y), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(ln(y), x)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 
@@ -77,7 +77,7 @@ namespace xFunc.Test.Expressions.Maths
         public void SimplifyTest()
         {
             IMathExpression exp = parser.Parse("ln(e)");
-            NumberMathExpression one = 1;
+            Number one = 1;
 
             Assert.AreEqual(one, exp);
         }

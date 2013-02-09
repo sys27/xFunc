@@ -59,13 +59,13 @@ namespace xFunc.Maths
             {
                 IMathExpression exp = parser.Parse(s);
                 MathWorkspaceItem item = new MathWorkspaceItem(s, exp);
-                if (exp is DerivativeMathExpression)
+                if (exp is Derivative)
                 {
-                    item.Answer = exp.Derivative().ToString();
+                    item.Answer = exp.Differentiation().ToString();
                 }
-                else if (exp is AssignMathExpression)
+                else if (exp is Assign)
                 {
-                    AssignMathExpression assign = exp as AssignMathExpression;
+                    Assign assign = exp as Assign;
                     assign.Calculate(parameters);
                     item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
                 }
@@ -80,9 +80,9 @@ namespace xFunc.Maths
 
         public void Remove(MathWorkspaceItem item)
         {
-            if (item.Expression is AssignMathExpression)
+            if (item.Expression is Assign)
             {
-                var assign = item.Expression as AssignMathExpression;
+                var assign = item.Expression as Assign;
 
                 parameters.Remove(assign.Variable.Character);
             }
@@ -93,9 +93,9 @@ namespace xFunc.Maths
         public void RemoveAt(int index)
         {
             var item = expressions[index];
-            if (item.Expression is AssignMathExpression)
+            if (item.Expression is Assign)
             {
-                var assign = item.Expression as AssignMathExpression;
+                var assign = item.Expression as Assign;
 
                 parameters.Remove(assign.Variable.Character);
             }

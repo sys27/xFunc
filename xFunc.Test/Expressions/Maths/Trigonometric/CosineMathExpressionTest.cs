@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("cos(x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("cos(x)"));
 
             Assert.AreEqual("-sin(x)", exp.ToString());
         }
@@ -57,28 +57,28 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(cos(xy), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(cos(xy), x)").Differentiation();
             Assert.AreEqual("-(sin(x * y) * y)", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(cos(xy), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(cos(xy), y)").Differentiation();
             Assert.AreEqual("-(sin(x * y) * x)", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(cos(x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(cos(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("cos(2x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("cos(2x)"));
 
             Assert.AreEqual("-(sin(2 * x) * 2)", exp.ToString());
         }
@@ -87,16 +87,16 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // cos(2x)
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+            Number num = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new CosineMathExpression(mul);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Cosine(mul);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
 
-            num.Number = 7;
+            num.Value = 7;
             Assert.AreEqual("cos(7 * x)", exp.ToString());
             Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
         }

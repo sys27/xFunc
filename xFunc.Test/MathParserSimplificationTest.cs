@@ -80,6 +80,42 @@ namespace xFunc.Test
             SimpleTest(add, expected);
         }
 
+        [TestMethod]
+        public void AddDiffNumAdd_NumAddVar_()
+        {
+            var add = new AdditionMathExpression(new NumberMathExpression(2), new AdditionMathExpression(new NumberMathExpression(2), new VariableMathExpression('x')));
+            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiffNumAdd_VarAddNum_()
+        {
+            var add = new AdditionMathExpression(new NumberMathExpression(2), new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(2)));
+            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiff_NumAddVar_AddNum()
+        {
+            var add = new AdditionMathExpression(new AdditionMathExpression(new NumberMathExpression(2), new VariableMathExpression('x')), new NumberMathExpression(2));
+            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+
+            SimpleTest(add, expected);
+        }
+
+        [TestMethod]
+        public void AddDiff_VarAddNum_AddNum()
+        {
+            var add = new AdditionMathExpression(new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(2)), new NumberMathExpression(2));
+            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+
+            SimpleTest(add, expected);
+        }
+
     }
 
 }

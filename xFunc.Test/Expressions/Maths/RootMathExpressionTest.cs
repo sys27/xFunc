@@ -29,7 +29,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("root(x, 3)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("root(x, 3)"));
 
             Assert.AreEqual("(1 / 3) * (x ^ ((1 / 3) - 1))", exp.ToString());
         }
@@ -38,15 +38,15 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // root(x, 3)
-            NumberMathExpression num = new NumberMathExpression(3);
-            VariableMathExpression x = new VariableMathExpression('x');
+            Number num = new Number(3);
+            Variable x = new Variable('x');
 
-            IMathExpression exp = new RootMathExpression(x, num);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Root(x, num);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("(1 / 3) * (x ^ ((1 / 3) - 1))", deriv.ToString());
 
-            num.Number = 4;
+            num.Value = 4;
             Assert.AreEqual("root(x, 4)", exp.ToString());
             Assert.AreEqual("(1 / 3) * (x ^ ((1 / 3) - 1))", deriv.ToString());
         }
@@ -54,14 +54,14 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(root(xy, 3), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(root(xy, 3), x)").Differentiation();
             Assert.AreEqual("y * ((1 / 3) * ((x * y) ^ ((1 / 3) - 1)))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(root(y, 3), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(root(y, 3), x)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 

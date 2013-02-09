@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(arsinh(2x), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arsinh(2x), x)").Differentiation();
 
             Assert.AreEqual("2 / sqrt(((2 * x) ^ 2) + 1)", exp.ToString());
         }

@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("arcsin(x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("arcsin(x)"));
 
             Assert.AreEqual("1 / sqrt(1 - (x ^ 2))", exp.ToString());
         }
@@ -57,7 +57,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("arcsin(2x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("arcsin(2x)"));
 
             Assert.AreEqual("2 / sqrt(1 - ((2 * x) ^ 2))", exp.ToString());
         }
@@ -66,16 +66,16 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest3()
         {
             // arcsin(2x)
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+            Number num = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new ArcsinMathExpression(mul);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Arcsin(mul);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("2 / sqrt(1 - ((2 * x) ^ 2))", deriv.ToString());
 
-            num.Number = 5;
+            num.Value = 5;
             Assert.AreEqual("arcsin(5 * x)", exp.ToString());
             Assert.AreEqual("2 / sqrt(1 - ((2 * x) ^ 2))", deriv.ToString());
         }
@@ -83,21 +83,21 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(arcsin(xy), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arcsin(xy), x)").Differentiation();
             Assert.AreEqual("y / sqrt(1 - ((x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(arcsin(xy), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arcsin(xy), y)").Differentiation();
             Assert.AreEqual("x / sqrt(1 - ((x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(arcsin(x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arcsin(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 

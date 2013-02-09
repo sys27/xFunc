@@ -20,8 +20,8 @@ namespace xFunc.Test
         [TestMethod]
         public void DoubleUnary()
         {
-            var un = new UnaryMinusMathExpression(new UnaryMinusMathExpression(new VariableMathExpression('x')));
-            var expected = new VariableMathExpression('x');
+            var un = new UnaryMinus(new UnaryMinus(new Variable('x')));
+            var expected = new Variable('x');
 
             SimpleTest(un, expected);
         }
@@ -29,8 +29,8 @@ namespace xFunc.Test
         [TestMethod]
         public void UnaryNumber()
         {
-            var un = new UnaryMinusMathExpression(new NumberMathExpression(1));
-            var expected = new NumberMathExpression(-1);
+            var un = new UnaryMinus(new Number(1));
+            var expected = new Number(-1);
 
             SimpleTest(un, expected);
         }
@@ -38,8 +38,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddFirstZero()
         {
-            var add = new AdditionMathExpression(new NumberMathExpression(0), new VariableMathExpression('x'));
-            var expected = new VariableMathExpression('x');
+            var add = new Addition(new Number(0), new Variable('x'));
+            var expected = new Variable('x');
 
             SimpleTest(add, expected);
         }
@@ -47,8 +47,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddSecondZero()
         {
-            var add = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(0));
-            var expected = new VariableMathExpression('x');
+            var add = new Addition(new Variable('x'), new Number(0));
+            var expected = new Variable('x');
 
             SimpleTest(add, expected);
         }
@@ -56,8 +56,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddTwoNumbers()
         {
-            var add = new AdditionMathExpression(new NumberMathExpression(3), new NumberMathExpression(2));
-            var expected = new NumberMathExpression(5);
+            var add = new Addition(new Number(3), new Number(2));
+            var expected = new Number(5);
 
             SimpleTest(add, expected);
         }
@@ -65,8 +65,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddFirstUnaryMinus()
         {
-            var add = new AdditionMathExpression(new UnaryMinusMathExpression(new VariableMathExpression('x')), new NumberMathExpression(2));
-            var expected = new SubtractionMathExpression(new NumberMathExpression(2), new VariableMathExpression('x'));
+            var add = new Addition(new UnaryMinus(new Variable('x')), new Number(2));
+            var expected = new Subtraction(new Number(2), new Variable('x'));
 
             SimpleTest(add, expected);
         }
@@ -74,8 +74,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddSecondUnaryMinus()
         {
-            var add = new AdditionMathExpression(new NumberMathExpression(2), new UnaryMinusMathExpression(new VariableMathExpression('x')));
-            var expected = new SubtractionMathExpression(new NumberMathExpression(2), new VariableMathExpression('x'));
+            var add = new Addition(new Number(2), new UnaryMinus(new Variable('x')));
+            var expected = new Subtraction(new Number(2), new Variable('x'));
 
             SimpleTest(add, expected);
         }
@@ -83,8 +83,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiffNumAdd_NumAddVar_()
         {
-            var add = new AdditionMathExpression(new NumberMathExpression(2), new AdditionMathExpression(new NumberMathExpression(2), new VariableMathExpression('x')));
-            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+            var add = new Addition(new Number(2), new Addition(new Number(2), new Variable('x')));
+            var expected = new Addition(new Variable('x'), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -92,8 +92,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiffNumAdd_VarAddNum_()
         {
-            var add = new AdditionMathExpression(new NumberMathExpression(2), new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(2)));
-            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+            var add = new Addition(new Number(2), new Addition(new Variable('x'), new Number(2)));
+            var expected = new Addition(new Variable('x'), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -101,8 +101,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiff_NumAddVar_AddNum()
         {
-            var add = new AdditionMathExpression(new AdditionMathExpression(new NumberMathExpression(2), new VariableMathExpression('x')), new NumberMathExpression(2));
-            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+            var add = new Addition(new Addition(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Addition(new Variable('x'), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -110,8 +110,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddDiff_VarAddNum_AddNum()
         {
-            var add = new AdditionMathExpression(new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(2)), new NumberMathExpression(2));
-            var expected = new AdditionMathExpression(new VariableMathExpression('x'), new NumberMathExpression(4));
+            var add = new Addition(new Addition(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Addition(new Variable('x'), new Number(4));
 
             SimpleTest(add, expected);
         }

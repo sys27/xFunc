@@ -42,7 +42,7 @@ namespace xFunc.Test
             parser.AngleMeasurement = AngleMeasurement.Degree;
             IMathExpression exp = parser.Parse("sin(x)");
 
-            Assert.AreEqual(AngleMeasurement.Degree, ((SineMathExpression)exp).AngleMeasurement);
+            Assert.AreEqual(AngleMeasurement.Degree, ((Sine)exp).AngleMeasurement);
         }
 
         [TestMethod]
@@ -51,30 +51,30 @@ namespace xFunc.Test
             IMathExpression exp = parser.Parse("deriv(xy + y + x, x)");
 
             Assert.AreEqual("deriv(((x * y) + y) + x, x)", exp.ToString());
-            Assert.AreEqual("y + 1", exp.Derivative().ToString());
+            Assert.AreEqual("y + 1", exp.Differentiation().ToString());
 
 
             exp = parser.Parse("deriv(xy + y + x, y)");
 
             Assert.AreEqual("deriv(((x * y) + y) + x, y)", exp.ToString());
-            Assert.AreEqual("x + 1", exp.Derivative().ToString());
+            Assert.AreEqual("x + 1", exp.Differentiation().ToString());
 
 
             exp = parser.Parse("deriv(x * (y + 1) + y + x, x)");
 
-            Assert.AreEqual("y + 2", exp.Derivative().ToString());
+            Assert.AreEqual("y + 2", exp.Differentiation().ToString());
 
 
             exp = parser.Parse("deriv(y / x, x)");
 
             Assert.AreEqual("deriv(y / x, x)", exp.ToString());
-            Assert.AreEqual("-y / (x ^ 2)", exp.Derivative().ToString());
+            Assert.AreEqual("-y / (x ^ 2)", exp.Differentiation().ToString());
 
 
             exp = parser.Parse("deriv(y / x, y)");
 
             Assert.AreEqual("deriv(y / x, y)", exp.ToString());
-            Assert.AreEqual("1 / x", exp.Derivative().ToString());
+            Assert.AreEqual("1 / x", exp.Differentiation().ToString());
         }
 
     }

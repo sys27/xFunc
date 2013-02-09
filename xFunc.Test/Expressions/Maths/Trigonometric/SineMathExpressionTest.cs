@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("sin(x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("sin(x)"));
 
             Assert.AreEqual("cos(x)", exp.ToString());
         }
@@ -57,7 +57,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("sin(2x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("sin(2x)"));
 
             Assert.AreEqual("cos(2 * x) * 2", exp.ToString());
         }
@@ -66,16 +66,16 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest3()
         {
             // sin(2x)
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+            Number num = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new SineMathExpression(mul);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Sine(mul);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("cos(2 * x) * 2", deriv.ToString());
 
-            num.Number = 3;
+            num.Value = 3;
             Assert.AreEqual("sin(3 * x)", exp.ToString());
             Assert.AreEqual("cos(2 * x) * 2", deriv.ToString());
         }
@@ -83,21 +83,21 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(sin(xy), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(sin(xy), x)").Differentiation();
             Assert.AreEqual("cos(x * y) * y", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTes2()
         {
-            IMathExpression exp = parser.Parse("deriv(sin(xy), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(sin(xy), y)").Differentiation();
             Assert.AreEqual("cos(x * y) * x", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(sin(y), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(sin(y), x)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 

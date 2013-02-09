@@ -37,7 +37,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("2x + 3"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("2x + 3"));
 
             Assert.AreEqual("2", exp.ToString());
         }
@@ -45,7 +45,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("2x + 3x"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("2x + 3x"));
 
             Assert.AreEqual("5", exp.ToString());
         }
@@ -54,18 +54,18 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // 2x + 3
-            NumberMathExpression num1 = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul1 = new MultiplicationMathExpression(num1, x);
+            Number num1 = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul1 = new Multiplication(num1, x);
 
-            NumberMathExpression num2 = new NumberMathExpression(3);
+            Number num2 = new Number(3);
 
-            IMathExpression exp = new AdditionMathExpression(mul1, num2);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Addition(mul1, num2);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("2", deriv.ToString());
 
-            num1.Number = 5;
+            num1.Value = 5;
             Assert.AreEqual("(5 * x) + 3", exp.ToString());
             Assert.AreEqual("2", deriv.ToString());
         }
@@ -73,21 +73,21 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(xy + x + y, x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(xy + x + y, x)").Differentiation();
             Assert.AreEqual("y + 1", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(xy + x + y, y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(xy + x + y, y)").Differentiation();
             Assert.AreEqual("x + 1", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(x + 1, y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(x + 1, y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 

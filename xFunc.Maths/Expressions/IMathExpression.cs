@@ -21,8 +21,8 @@ namespace xFunc.Maths.Expressions
     {
 
         double Calculate(MathParameterCollection parameters);
-        IMathExpression Derivative();
-        IMathExpression Derivative(VariableMathExpression variable);
+        IMathExpression Differentiation();
+        IMathExpression Differentiation(Variable variable);
 
         IMathExpression Clone();
 

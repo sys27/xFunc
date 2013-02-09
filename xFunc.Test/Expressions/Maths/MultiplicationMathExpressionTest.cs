@@ -29,7 +29,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("sin(2x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("sin(2x)"));
 
             Assert.AreEqual("cos(2 * x) * 2", exp.ToString());
         }
@@ -38,15 +38,15 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // 2x
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
+            Number num = new Number(2);
+            Variable x = new Variable('x');
 
-            IMathExpression exp = new MultiplicationMathExpression(num, x);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Multiplication(num, x);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("2", deriv.ToString());
 
-            num.Number = 3;
+            num.Value = 3;
             Assert.AreEqual("3 * x", exp.ToString());
             Assert.AreEqual("2", deriv.ToString());
         }
@@ -54,28 +54,28 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv((x + 1) * (y + x), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv((x + 1) * (y + x), x)").Differentiation();
             Assert.AreEqual("(y + x) + (x + 1)", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv((y + 1) * (3 + x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv((y + 1) * (3 + x), y)").Differentiation();
             Assert.AreEqual("3 + x", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv((x + 1) * (y + x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv((x + 1) * (y + x), y)").Differentiation();
             Assert.AreEqual("x + 1", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest4()
         {
-            IMathExpression exp = parser.Parse("deriv((x + 1) * (3 + x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv((x + 1) * (3 + x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 

@@ -55,9 +55,9 @@ namespace xFunc.Maths
 
         private static IMathExpression _SimplifyExpressions(IMathExpression expression)
         {
-            if (expression is NumberMathExpression)
+            if (expression is Number)
                 return expression;
-            if (expression is VariableMathExpression)
+            if (expression is Variable)
                 return expression;
 
             if (expression is BinaryMathExpression)
@@ -72,27 +72,27 @@ namespace xFunc.Maths
                 un.FirstMathExpression = _SimplifyExpressions(un.FirstMathExpression);
             }
 
-            NumberMathExpression zero = 0;
-            NumberMathExpression one = 1;
+            Number zero = 0;
+            Number one = 1;
 
-            if (expression is UnaryMinusMathExpression)
+            if (expression is UnaryMinus)
             {
-                UnaryMinusMathExpression unMinus = expression as UnaryMinusMathExpression;
+                UnaryMinus unMinus = expression as UnaryMinus;
                 // -(-x)
-                if (unMinus.FirstMathExpression is UnaryMinusMathExpression)
-                    return (unMinus.FirstMathExpression as UnaryMinusMathExpression).FirstMathExpression;
+                if (unMinus.FirstMathExpression is UnaryMinus)
+                    return (unMinus.FirstMathExpression as UnaryMinus).FirstMathExpression;
                 // -1
-                if (unMinus.FirstMathExpression is NumberMathExpression)
+                if (unMinus.FirstMathExpression is Number)
                 {
-                    NumberMathExpression number = unMinus.FirstMathExpression as NumberMathExpression;
-                    number.Number = -number.Number;
+                    Number number = unMinus.FirstMathExpression as Number;
+                    number.Value = -number.Value;
 
                     return number;
                 }
             }
-            else if (expression is AdditionMathExpression)
+            else if (expression is Addition)
             {
-                AdditionMathExpression add = expression as AdditionMathExpression;
+                Addition add = expression as Addition;
 
                 // plus zero
                 if (add.FirstMathExpression.Equals(zero))
@@ -100,19 +100,19 @@ namespace xFunc.Maths
                 if (add.SecondMathExpression.Equals(zero))
                     return add.FirstMathExpression;
 
-                if (add.FirstMathExpression is NumberMathExpression && add.SecondMathExpression is NumberMathExpression)
-                    return new NumberMathExpression(add.Calculate(null));
+                if (add.FirstMathExpression is Number && add.SecondMathExpression is Number)
+                    return new Number(add.Calculate(null));
 
-                if (add.FirstMathExpression is UnaryMinusMathExpression)
+                if (add.FirstMathExpression is UnaryMinus)
                 {
                     IMathExpression temp = add.FirstMathExpression;
                     add.FirstMathExpression = add.SecondMathExpression;
                     add.SecondMathExpression = temp;
                 }
-                if (add.SecondMathExpression is UnaryMinusMathExpression)
+                if (add.SecondMathExpression is UnaryMinus)
                 {
-                    UnaryMinusMathExpression unMinus = add.SecondMathExpression as UnaryMinusMathExpression;
-                    SubtractionMathExpression sub = new SubtractionMathExpression(add.FirstMathExpression, unMinus.FirstMathExpression);
+                    UnaryMinus unMinus = add.SecondMathExpression as UnaryMinus;
+                    Subtraction sub = new Subtraction(add.FirstMathExpression, unMinus.FirstMathExpression);
 
                     return sub;
                 }
@@ -121,31 +121,31 @@ namespace xFunc.Maths
                 // 2 + (x + 2)
                 // (2 + x) + 2
                 // (x + 2) + 2
-                AdditionMathExpression bracketAdd = null;
-                NumberMathExpression firstNumber = null;
-                if (add.FirstMathExpression is AdditionMathExpression && add.SecondMathExpression is NumberMathExpression)
+                Addition bracketAdd = null;
+                Number firstNumber = null;
+                if (add.FirstMathExpression is Addition && add.SecondMathExpression is Number)
                 {
-                    bracketAdd = add.FirstMathExpression as AdditionMathExpression;
-                    firstNumber = add.SecondMathExpression as NumberMathExpression;
+                    bracketAdd = add.FirstMathExpression as Addition;
+                    firstNumber = add.SecondMathExpression as Number;
                 }
-                else if (add.SecondMathExpression is AdditionMathExpression && add.FirstMathExpression is NumberMathExpression)
+                else if (add.SecondMathExpression is Addition && add.FirstMathExpression is Number)
                 {
-                    bracketAdd = add.SecondMathExpression as AdditionMathExpression;
-                    firstNumber = add.FirstMathExpression as NumberMathExpression;
+                    bracketAdd = add.SecondMathExpression as Addition;
+                    firstNumber = add.FirstMathExpression as Number;
                 }
                 if (bracketAdd != null)
                 {
-                    if (bracketAdd.FirstMathExpression is NumberMathExpression)
+                    if (bracketAdd.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketAdd.FirstMathExpression as NumberMathExpression;
-                        AdditionMathExpression result = new AdditionMathExpression(bracketAdd.SecondMathExpression, new NumberMathExpression(firstNumber.Number + secondNumber.Number));
+                        Number secondNumber = bracketAdd.FirstMathExpression as Number;
+                        Addition result = new Addition(bracketAdd.SecondMathExpression, new Number(firstNumber.Value + secondNumber.Value));
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketAdd.SecondMathExpression is NumberMathExpression)
+                    if (bracketAdd.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketAdd.SecondMathExpression as NumberMathExpression;
-                        AdditionMathExpression result = new AdditionMathExpression(bracketAdd.FirstMathExpression, new NumberMathExpression(firstNumber.Number + secondNumber.Number));
+                        Number secondNumber = bracketAdd.SecondMathExpression as Number;
+                        Addition result = new Addition(bracketAdd.FirstMathExpression, new Number(firstNumber.Value + secondNumber.Value));
 
                         return _SimplifyExpressions(result);
                     }
@@ -155,148 +155,148 @@ namespace xFunc.Maths
                 // 2 + (x - 2)
                 // (2 - x) + 2
                 // (x - 2) + 2
-                SubtractionMathExpression bracketSub = null;
-                if (add.FirstMathExpression is SubtractionMathExpression && add.SecondMathExpression is NumberMathExpression)
+                Subtraction bracketSub = null;
+                if (add.FirstMathExpression is Subtraction && add.SecondMathExpression is Number)
                 {
-                    bracketSub = add.FirstMathExpression as SubtractionMathExpression;
-                    firstNumber = add.SecondMathExpression as NumberMathExpression;
+                    bracketSub = add.FirstMathExpression as Subtraction;
+                    firstNumber = add.SecondMathExpression as Number;
                 }
-                else if (add.SecondMathExpression is SubtractionMathExpression && add.FirstMathExpression is NumberMathExpression)
+                else if (add.SecondMathExpression is Subtraction && add.FirstMathExpression is Number)
                 {
-                    bracketSub = add.SecondMathExpression as SubtractionMathExpression;
-                    firstNumber = add.FirstMathExpression as NumberMathExpression;
+                    bracketSub = add.SecondMathExpression as Subtraction;
+                    firstNumber = add.FirstMathExpression as Number;
                 }
                 if (bracketSub != null)
                 {
-                    if (bracketSub.FirstMathExpression is NumberMathExpression)
+                    if (bracketSub.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketSub.FirstMathExpression as NumberMathExpression;
-                        SubtractionMathExpression result = new SubtractionMathExpression(new NumberMathExpression(firstNumber.Number + secondNumber.Number), bracketSub.SecondMathExpression);
+                        Number secondNumber = bracketSub.FirstMathExpression as Number;
+                        Subtraction result = new Subtraction(new Number(firstNumber.Value + secondNumber.Value), bracketSub.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketSub.SecondMathExpression is NumberMathExpression)
+                    if (bracketSub.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketSub.SecondMathExpression as NumberMathExpression;
-                        AdditionMathExpression result = new AdditionMathExpression(new NumberMathExpression(firstNumber.Number - secondNumber.Number), bracketSub.FirstMathExpression);
+                        Number secondNumber = bracketSub.SecondMathExpression as Number;
+                        Addition result = new Addition(new Number(firstNumber.Value - secondNumber.Value), bracketSub.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
             }
-            else if (expression is SubtractionMathExpression)
+            else if (expression is Subtraction)
             {
-                SubtractionMathExpression sub = expression as SubtractionMathExpression;
+                Subtraction sub = expression as Subtraction;
 
                 // sub zero
                 if (sub.FirstMathExpression.Equals(zero))
-                    return _SimplifyExpressions(new UnaryMinusMathExpression(sub.SecondMathExpression));
+                    return _SimplifyExpressions(new UnaryMinus(sub.SecondMathExpression));
                 if (sub.SecondMathExpression.Equals(zero))
                     return sub.FirstMathExpression;
 
-                if (sub.FirstMathExpression is NumberMathExpression && sub.SecondMathExpression is NumberMathExpression)
-                    return new NumberMathExpression(sub.Calculate(null));
+                if (sub.FirstMathExpression is Number && sub.SecondMathExpression is Number)
+                    return new Number(sub.Calculate(null));
 
-                if (sub.SecondMathExpression is UnaryMinusMathExpression)
+                if (sub.SecondMathExpression is UnaryMinus)
                 {
-                    UnaryMinusMathExpression unMinus = sub.SecondMathExpression as UnaryMinusMathExpression;
-                    AdditionMathExpression add = new AdditionMathExpression(sub.FirstMathExpression, unMinus.FirstMathExpression);
+                    UnaryMinus unMinus = sub.SecondMathExpression as UnaryMinus;
+                    Addition add = new Addition(sub.FirstMathExpression, unMinus.FirstMathExpression);
 
                     return add;
                 }
 
                 // (2 + x) - 2
                 // (x + 2) - 2
-                if (sub.FirstMathExpression is AdditionMathExpression && sub.SecondMathExpression is NumberMathExpression)
+                if (sub.FirstMathExpression is Addition && sub.SecondMathExpression is Number)
                 {
-                    AdditionMathExpression bracketAdd = sub.FirstMathExpression as AdditionMathExpression;
-                    NumberMathExpression firstNumber = sub.SecondMathExpression as NumberMathExpression;
+                    Addition bracketAdd = sub.FirstMathExpression as Addition;
+                    Number firstNumber = sub.SecondMathExpression as Number;
 
-                    if (bracketAdd.FirstMathExpression is NumberMathExpression)
+                    if (bracketAdd.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketAdd.FirstMathExpression as NumberMathExpression;
-                        AdditionMathExpression result = new AdditionMathExpression(bracketAdd.SecondMathExpression, new NumberMathExpression(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
+                        Number secondNumber = bracketAdd.FirstMathExpression as Number;
+                        Addition result = new Addition(bracketAdd.SecondMathExpression, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketAdd.SecondMathExpression is NumberMathExpression)
+                    if (bracketAdd.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketAdd.SecondMathExpression as NumberMathExpression;
-                        AdditionMathExpression result = new AdditionMathExpression(bracketAdd.FirstMathExpression, new NumberMathExpression(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
+                        Number secondNumber = bracketAdd.SecondMathExpression as Number;
+                        Addition result = new Addition(bracketAdd.FirstMathExpression, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
 
                         return _SimplifyExpressions(result);
                     }
                 }
                 // 2 - (2 + x)
                 // 2 - (x + 2)
-                else if (sub.SecondMathExpression is AdditionMathExpression && sub.FirstMathExpression is NumberMathExpression)
+                else if (sub.SecondMathExpression is Addition && sub.FirstMathExpression is Number)
                 {
-                    AdditionMathExpression bracketAdd = sub.SecondMathExpression as AdditionMathExpression;
-                    NumberMathExpression firstNumber = sub.FirstMathExpression as NumberMathExpression;
+                    Addition bracketAdd = sub.SecondMathExpression as Addition;
+                    Number firstNumber = sub.FirstMathExpression as Number;
 
-                    if (bracketAdd.FirstMathExpression is NumberMathExpression)
+                    if (bracketAdd.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketAdd.FirstMathExpression as NumberMathExpression;
-                        SubtractionMathExpression result = new SubtractionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.SecondMathExpression);
+                        Number secondNumber = bracketAdd.FirstMathExpression as Number;
+                        Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketAdd.SecondMathExpression is NumberMathExpression)
+                    if (bracketAdd.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketAdd.SecondMathExpression as NumberMathExpression;
-                        SubtractionMathExpression result = new SubtractionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.FirstMathExpression);
+                        Number secondNumber = bracketAdd.SecondMathExpression as Number;
+                        Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
                 // (2 - x) - 2
                 // (x - 2) - 2
-                else if (sub.FirstMathExpression is SubtractionMathExpression && sub.SecondMathExpression is NumberMathExpression)
+                else if (sub.FirstMathExpression is Subtraction && sub.SecondMathExpression is Number)
                 {
-                    SubtractionMathExpression bracketSub = sub.FirstMathExpression as SubtractionMathExpression;
-                    NumberMathExpression firstNumber = sub.SecondMathExpression as NumberMathExpression;
+                    Subtraction bracketSub = sub.FirstMathExpression as Subtraction;
+                    Number firstNumber = sub.SecondMathExpression as Number;
 
-                    if (bracketSub.FirstMathExpression is NumberMathExpression)
+                    if (bracketSub.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketSub.FirstMathExpression as NumberMathExpression;
-                        SubtractionMathExpression result = new SubtractionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.SecondMathExpression);
+                        Number secondNumber = bracketSub.FirstMathExpression as Number;
+                        Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketSub.SecondMathExpression is NumberMathExpression)
+                    if (bracketSub.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketSub.SecondMathExpression as NumberMathExpression;
-                        SubtractionMathExpression result = new SubtractionMathExpression(bracketSub.FirstMathExpression, new NumberMathExpression(firstNumber.Calculate(null) + secondNumber.Calculate(null)));
+                        Number secondNumber = bracketSub.SecondMathExpression as Number;
+                        Subtraction result = new Subtraction(bracketSub.FirstMathExpression, new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)));
 
                         return _SimplifyExpressions(result);
                     }
                 }
                 // 2 - (2 - x)
                 // 2 - (x - 2)
-                else if (sub.SecondMathExpression is SubtractionMathExpression && sub.FirstMathExpression is NumberMathExpression)
+                else if (sub.SecondMathExpression is Subtraction && sub.FirstMathExpression is Number)
                 {
-                    SubtractionMathExpression bracketSub = sub.SecondMathExpression as SubtractionMathExpression;
-                    NumberMathExpression firstNumber = sub.FirstMathExpression as NumberMathExpression;
+                    Subtraction bracketSub = sub.SecondMathExpression as Subtraction;
+                    Number firstNumber = sub.FirstMathExpression as Number;
 
-                    if (bracketSub.FirstMathExpression is NumberMathExpression)
+                    if (bracketSub.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketSub.FirstMathExpression as NumberMathExpression;
-                        AdditionMathExpression result = new AdditionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.SecondMathExpression);
+                        Number secondNumber = bracketSub.FirstMathExpression as Number;
+                        Addition result = new Addition(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketSub.SecondMathExpression is NumberMathExpression)
+                    if (bracketSub.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketSub.SecondMathExpression as NumberMathExpression;
-                        SubtractionMathExpression result = new SubtractionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) + secondNumber.Calculate(null)), bracketSub.FirstMathExpression);
+                        Number secondNumber = bracketSub.SecondMathExpression as Number;
+                        Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)), bracketSub.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
             }
-            else if (expression is MultiplicationMathExpression)
+            else if (expression is Multiplication)
             {
-                MultiplicationMathExpression mul = expression as MultiplicationMathExpression;
+                Multiplication mul = expression as Multiplication;
 
                 // mul by zero
                 if (mul.FirstMathExpression.Equals(zero) || mul.SecondMathExpression.Equals(zero))
@@ -312,31 +312,31 @@ namespace xFunc.Maths
                 // 2 * (x * 2)
                 // (2 * x) * 2
                 // (x * 2) * 2
-                MultiplicationMathExpression bracketMul = null;
-                NumberMathExpression firstNumber = null;
-                if (mul.FirstMathExpression is MultiplicationMathExpression && mul.SecondMathExpression is NumberMathExpression)
+                Multiplication bracketMul = null;
+                Number firstNumber = null;
+                if (mul.FirstMathExpression is Multiplication && mul.SecondMathExpression is Number)
                 {
-                    bracketMul = mul.FirstMathExpression as MultiplicationMathExpression;
-                    firstNumber = mul.SecondMathExpression as NumberMathExpression;
+                    bracketMul = mul.FirstMathExpression as Multiplication;
+                    firstNumber = mul.SecondMathExpression as Number;
                 }
-                else if (mul.SecondMathExpression is MultiplicationMathExpression && mul.FirstMathExpression is NumberMathExpression)
+                else if (mul.SecondMathExpression is Multiplication && mul.FirstMathExpression is Number)
                 {
-                    bracketMul = mul.SecondMathExpression as MultiplicationMathExpression;
-                    firstNumber = mul.FirstMathExpression as NumberMathExpression;
+                    bracketMul = mul.SecondMathExpression as Multiplication;
+                    firstNumber = mul.FirstMathExpression as Number;
                 }
                 if (bracketMul != null)
                 {
-                    if (bracketMul.FirstMathExpression is NumberMathExpression)
+                    if (bracketMul.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketMul.FirstMathExpression as NumberMathExpression;
-                        MultiplicationMathExpression result = new MultiplicationMathExpression(new NumberMathExpression(firstNumber.Number * secondNumber.Number), bracketMul.SecondMathExpression);
+                        Number secondNumber = bracketMul.FirstMathExpression as Number;
+                        Multiplication result = new Multiplication(new Number(firstNumber.Value * secondNumber.Value), bracketMul.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketMul.SecondMathExpression is NumberMathExpression)
+                    if (bracketMul.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketMul.SecondMathExpression as NumberMathExpression;
-                        MultiplicationMathExpression result = new MultiplicationMathExpression(new NumberMathExpression(firstNumber.Number * secondNumber.Number), bracketMul.FirstMathExpression);
+                        Number secondNumber = bracketMul.SecondMathExpression as Number;
+                        Multiplication result = new Multiplication(new Number(firstNumber.Value * secondNumber.Value), bracketMul.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
@@ -346,38 +346,38 @@ namespace xFunc.Maths
                 // 2 * (x / 2)
                 // (2 / x) * 2
                 // (x / 2) * 2
-                DivisionMathExpression bracketDiv = null;
-                if (mul.FirstMathExpression is DivisionMathExpression && mul.SecondMathExpression is NumberMathExpression)
+                Division bracketDiv = null;
+                if (mul.FirstMathExpression is Division && mul.SecondMathExpression is Number)
                 {
-                    bracketDiv = mul.FirstMathExpression as DivisionMathExpression;
-                    firstNumber = mul.SecondMathExpression as NumberMathExpression;
+                    bracketDiv = mul.FirstMathExpression as Division;
+                    firstNumber = mul.SecondMathExpression as Number;
                 }
-                else if (mul.SecondMathExpression is DivisionMathExpression && mul.FirstMathExpression is NumberMathExpression)
+                else if (mul.SecondMathExpression is Division && mul.FirstMathExpression is Number)
                 {
-                    bracketDiv = mul.SecondMathExpression as DivisionMathExpression;
-                    firstNumber = mul.FirstMathExpression as NumberMathExpression;
+                    bracketDiv = mul.SecondMathExpression as Division;
+                    firstNumber = mul.FirstMathExpression as Number;
                 }
                 if (bracketDiv != null)
                 {
-                    if (bracketDiv.FirstMathExpression is NumberMathExpression)
+                    if (bracketDiv.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketDiv.FirstMathExpression as NumberMathExpression;
-                        DivisionMathExpression result = new DivisionMathExpression(new NumberMathExpression(firstNumber.Number * secondNumber.Number), bracketDiv.SecondMathExpression);
+                        Number secondNumber = bracketDiv.FirstMathExpression as Number;
+                        Division result = new Division(new Number(firstNumber.Value * secondNumber.Value), bracketDiv.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketDiv.SecondMathExpression is NumberMathExpression)
+                    if (bracketDiv.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketDiv.SecondMathExpression as NumberMathExpression;
-                        MultiplicationMathExpression result = new MultiplicationMathExpression(new NumberMathExpression(firstNumber.Number / secondNumber.Number), bracketDiv.FirstMathExpression);
+                        Number secondNumber = bracketDiv.SecondMathExpression as Number;
+                        Multiplication result = new Multiplication(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
             }
-            else if (expression is DivisionMathExpression)
+            else if (expression is Division)
             {
-                DivisionMathExpression div = expression as DivisionMathExpression;
+                Division div = expression as Division;
 
                 // 0 / x
                 if (div.FirstMathExpression.Equals(zero))
@@ -391,96 +391,96 @@ namespace xFunc.Maths
 
                 // (2 * x) / 2
                 // (x * 2) / 2
-                if (div.FirstMathExpression is MultiplicationMathExpression && div.SecondMathExpression is NumberMathExpression)
+                if (div.FirstMathExpression is Multiplication && div.SecondMathExpression is Number)
                 {
-                    MultiplicationMathExpression bracketMul = div.FirstMathExpression as MultiplicationMathExpression;
-                    NumberMathExpression firstNumber = div.SecondMathExpression as NumberMathExpression;
+                    Multiplication bracketMul = div.FirstMathExpression as Multiplication;
+                    Number firstNumber = div.SecondMathExpression as Number;
 
-                    if (bracketMul.FirstMathExpression is NumberMathExpression)
+                    if (bracketMul.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketMul.FirstMathExpression as NumberMathExpression;
-                        MultiplicationMathExpression result = new MultiplicationMathExpression(new NumberMathExpression(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
+                        Number secondNumber = bracketMul.FirstMathExpression as Number;
+                        Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketMul.SecondMathExpression is NumberMathExpression)
+                    if (bracketMul.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketMul.SecondMathExpression as NumberMathExpression;
-                        MultiplicationMathExpression result = new MultiplicationMathExpression(new NumberMathExpression(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
+                        Number secondNumber = bracketMul.SecondMathExpression as Number;
+                        Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
                 // 2 / (2 * x)
                 // 2 / (x * 2)
-                else if (div.SecondMathExpression is MultiplicationMathExpression && div.FirstMathExpression is NumberMathExpression)
+                else if (div.SecondMathExpression is Multiplication && div.FirstMathExpression is Number)
                 {
-                    MultiplicationMathExpression bracketMul = div.SecondMathExpression as MultiplicationMathExpression;
-                    NumberMathExpression firstNumber = div.FirstMathExpression as NumberMathExpression;
+                    Multiplication bracketMul = div.SecondMathExpression as Multiplication;
+                    Number firstNumber = div.FirstMathExpression as Number;
 
-                    if (bracketMul.FirstMathExpression is NumberMathExpression)
+                    if (bracketMul.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketMul.FirstMathExpression as NumberMathExpression;
-                        DivisionMathExpression result = new DivisionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
+                        Number secondNumber = bracketMul.FirstMathExpression as Number;
+                        Division result = new Division(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketMul.SecondMathExpression is NumberMathExpression)
+                    if (bracketMul.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketMul.SecondMathExpression as NumberMathExpression;
-                        DivisionMathExpression result = new DivisionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
+                        Number secondNumber = bracketMul.SecondMathExpression as Number;
+                        Division result = new Division(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
                 // (2 / x) / 2
                 // (x / 2) / 2
-                else if (div.FirstMathExpression is DivisionMathExpression && div.SecondMathExpression is NumberMathExpression)
+                else if (div.FirstMathExpression is Division && div.SecondMathExpression is Number)
                 {
-                    DivisionMathExpression bracketDiv = div.FirstMathExpression as DivisionMathExpression;
-                    NumberMathExpression firstNumber = div.SecondMathExpression as NumberMathExpression;
+                    Division bracketDiv = div.FirstMathExpression as Division;
+                    Number firstNumber = div.SecondMathExpression as Number;
 
-                    if (bracketDiv.FirstMathExpression is NumberMathExpression)
+                    if (bracketDiv.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketDiv.FirstMathExpression as NumberMathExpression;
-                        DivisionMathExpression result = new DivisionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.SecondMathExpression);
+                        Number secondNumber = bracketDiv.FirstMathExpression as Number;
+                        Division result = new Division(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketDiv.SecondMathExpression is NumberMathExpression)
+                    if (bracketDiv.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketDiv.SecondMathExpression as NumberMathExpression;
-                        DivisionMathExpression result = new DivisionMathExpression(bracketDiv.FirstMathExpression, new NumberMathExpression(firstNumber.Calculate(null) * secondNumber.Calculate(null)));
+                        Number secondNumber = bracketDiv.SecondMathExpression as Number;
+                        Division result = new Division(bracketDiv.FirstMathExpression, new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)));
 
                         return _SimplifyExpressions(result);
                     }
                 }
                 // 2 / (2 / x)
                 // 2 / (x / 2)
-                else if (div.SecondMathExpression is DivisionMathExpression && div.FirstMathExpression is NumberMathExpression)
+                else if (div.SecondMathExpression is Division && div.FirstMathExpression is Number)
                 {
-                    DivisionMathExpression bracketDiv = div.SecondMathExpression as DivisionMathExpression;
-                    NumberMathExpression firstNumber = div.FirstMathExpression as NumberMathExpression;
+                    Division bracketDiv = div.SecondMathExpression as Division;
+                    Number firstNumber = div.FirstMathExpression as Number;
 
-                    if (bracketDiv.FirstMathExpression is NumberMathExpression)
+                    if (bracketDiv.FirstMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketDiv.FirstMathExpression as NumberMathExpression;
-                        MultiplicationMathExpression result = new MultiplicationMathExpression(new NumberMathExpression(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.SecondMathExpression);
+                        Number secondNumber = bracketDiv.FirstMathExpression as Number;
+                        Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.SecondMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
-                    if (bracketDiv.SecondMathExpression is NumberMathExpression)
+                    if (bracketDiv.SecondMathExpression is Number)
                     {
-                        NumberMathExpression secondNumber = bracketDiv.SecondMathExpression as NumberMathExpression;
-                        DivisionMathExpression result = new DivisionMathExpression(new NumberMathExpression(firstNumber.Calculate(null) * secondNumber.Calculate(null)), bracketDiv.FirstMathExpression);
+                        Number secondNumber = bracketDiv.SecondMathExpression as Number;
+                        Division result = new Division(new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)), bracketDiv.FirstMathExpression);
 
                         return _SimplifyExpressions(result);
                     }
                 }
             }
-            else if (expression is ExponentiationMathExpression)
+            else if (expression is Exponentiation)
             {
-                ExponentiationMathExpression inv = expression as ExponentiationMathExpression;
+                Exponentiation inv = expression as Exponentiation;
 
                 // x^0
                 if (inv.SecondMathExpression.Equals(zero))
@@ -489,53 +489,53 @@ namespace xFunc.Maths
                 if (inv.SecondMathExpression.Equals(one))
                     return inv.FirstMathExpression;
             }
-            else if (expression is RootMathExpression)
+            else if (expression is Root)
             {
-                RootMathExpression root = expression as RootMathExpression;
+                Root root = expression as Root;
 
                 // root(x, 1)
                 if (root.SecondMathExpression.Equals(one))
                     return root.FirstMathExpression;
             }
-            else if (expression is LogMathExpression)
+            else if (expression is Log)
             {
-                LogMathExpression log = expression as LogMathExpression;
+                Log log = expression as Log;
 
                 // log(4x, 4x)
                 if (log.FirstMathExpression.Equals(log.SecondMathExpression))
                     return one;
             }
-            else if (expression is LnMathExpression)
+            else if (expression is Ln)
             {
-                LnMathExpression ln = expression as LnMathExpression;
+                Ln ln = expression as Ln;
 
                 // ln(e)
-                if (ln.FirstMathExpression.Equals(new VariableMathExpression('e')))
+                if (ln.FirstMathExpression.Equals(new Variable('e')))
                     return one;
             }
-            else if (expression is LgMathExpression)
+            else if (expression is Lg)
             {
-                LgMathExpression lg = expression as LgMathExpression;
+                Lg lg = expression as Lg;
 
                 // lg(10)
-                if (lg.FirstMathExpression.Equals(new NumberMathExpression(10)))
+                if (lg.FirstMathExpression.Equals(new Number(10)))
                     return one;
             }
 
             return expression;
         }
 
-        public static IMathExpression Derivative(IMathExpression expression)
+        public static IMathExpression Differentiation(IMathExpression expression)
         {
-            return Derivative(expression, new VariableMathExpression('x'));
+            return Differentiation(expression, new Variable('x'));
         }
 
-        public static IMathExpression Derivative(IMathExpression expression, VariableMathExpression variable)
+        public static IMathExpression Differentiation(IMathExpression expression, Variable variable)
         {
-            return SimplifyExpressions(expression.Derivative(variable));
+            return SimplifyExpressions(expression.Differentiation(variable));
         }
 
-        public static bool HasVar(IMathExpression expression, VariableMathExpression arg)
+        public static bool HasVar(IMathExpression expression, Variable arg)
         {
             if (expression is BinaryMathExpression)
             {
@@ -551,7 +551,7 @@ namespace xFunc.Maths
 
                 return HasVar(un.FirstMathExpression, arg);
             }
-            if (expression is VariableMathExpression && expression.Equals(arg))
+            if (expression is Variable && expression.Equals(arg))
             {
                     return true;
             }
@@ -573,13 +573,13 @@ namespace xFunc.Maths
                 Stack<IMathExpression> stack = new Stack<IMathExpression>();
                 foreach (var expression in expressions)
                 {
-                    if (expression is NumberMathExpression || expression is VariableMathExpression)
+                    if (expression is Number || expression is Variable)
                     {
                         stack.Push(expression);
                     }
                     else if (expression is BinaryMathExpression)
                     {
-                        if ((expression is LogMathExpression || expression is RootMathExpression) && stack.Count < 2)
+                        if ((expression is Log || expression is Root) && stack.Count < 2)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
                         BinaryMathExpression binExp = (BinaryMathExpression)expression;
@@ -595,26 +595,26 @@ namespace xFunc.Maths
 
                         stack.Push(unaryMathExp);
                     }
-                    else if (expression is DerivativeMathExpression)
+                    else if (expression is Derivative)
                     {
-                        if (!(stack.Peek() is VariableMathExpression))
+                        if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        DerivativeMathExpression binExp = (DerivativeMathExpression)expression;
-                        binExp.Variable = (VariableMathExpression)stack.Pop();
+                        Derivative binExp = (Derivative)expression;
+                        binExp.Variable = (Variable)stack.Pop();
                         binExp.FirstMathExpression = stack.Pop();
 
                         stack.Push(binExp);
                     }
-                    else if (expression is AssignMathExpression)
+                    else if (expression is Assign)
                     {
-                        AssignMathExpression assign = (AssignMathExpression)expression;
+                        Assign assign = (Assign)expression;
                         assign.Value = stack.Pop();
 
-                        if (!(stack.Peek() is VariableMathExpression))
+                        if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        assign.Variable = (VariableMathExpression)stack.Pop();
+                        assign.Variable = (Variable)stack.Pop();
 
                         stack.Push(assign);
                     }
@@ -643,139 +643,139 @@ namespace xFunc.Maths
                 switch (token.Type)
                 {
                     case MathTokenType.Number:
-                        preOutput.Add(new NumberMathExpression(token.Number));
+                        preOutput.Add(new Number(token.Number));
                         break;
                     case MathTokenType.Variable:
-                        preOutput.Add(new VariableMathExpression(token.Variable));
+                        preOutput.Add(new Variable(token.Variable));
                         break;
                     case MathTokenType.UnaryMinus:
-                        preOutput.Add(new UnaryMinusMathExpression());
+                        preOutput.Add(new UnaryMinus());
                         break;
                     case MathTokenType.E:
-                        preOutput.Add(new ExpMathExpression());
+                        preOutput.Add(new Exponential());
                         break;
                     case MathTokenType.Addition:
-                        preOutput.Add(new AdditionMathExpression());
+                        preOutput.Add(new Addition());
                         break;
                     case MathTokenType.Subtraction:
-                        preOutput.Add(new SubtractionMathExpression());
+                        preOutput.Add(new Subtraction());
                         break;
                     case MathTokenType.Multiplication:
-                        preOutput.Add(new MultiplicationMathExpression());
+                        preOutput.Add(new Multiplication());
                         break;
                     case MathTokenType.Division:
-                        preOutput.Add(new DivisionMathExpression());
+                        preOutput.Add(new Division());
                         break;
                     case MathTokenType.Exponentiation:
-                        preOutput.Add(new ExponentiationMathExpression());
+                        preOutput.Add(new Exponentiation());
                         break;
                     case MathTokenType.Absolute:
-                        preOutput.Add(new AbsoluteMathExpression());
+                        preOutput.Add(new Absolute());
                         break;
                     case MathTokenType.Sine:
-                        preOutput.Add(new SineMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Sine { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Cosine:
-                        preOutput.Add(new CosineMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Cosine { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Tangent:
-                        preOutput.Add(new TangentMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Tangent { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Cotangent:
-                        preOutput.Add(new CotangentMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Cotangent { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Secant:
-                        preOutput.Add(new SecantMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Secant { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Cosecant:
-                        preOutput.Add(new CosecantMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Cosecant { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arcsine:
-                        preOutput.Add(new ArcsinMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Arcsin { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arccosine:
-                        preOutput.Add(new ArccosMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Arccos { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arctangent:
-                        preOutput.Add(new ArctanMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Arctan { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arcsecant:
-                        preOutput.Add(new ArcsecMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Arcsec { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arccosecant:
-                        preOutput.Add(new ArccscMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Arccsc { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arccotangent:
-                        preOutput.Add(new ArccotMathExpression { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Arccot { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Sineh:
-                        preOutput.Add(new HyperbolicSineMathExpression());
+                        preOutput.Add(new HyperbolicSine());
                         break;
                     case MathTokenType.Cosineh:
-                        preOutput.Add(new HyperbolicCosineMathExpression());
+                        preOutput.Add(new HyperbolicCosine());
                         break;
                     case MathTokenType.Tangenth:
-                        preOutput.Add(new HyperbolicTangentMathExpression());
+                        preOutput.Add(new HyperbolicTangent());
                         break;
                     case MathTokenType.Cotangenth:
-                        preOutput.Add(new HyperbolicCotangentMathExpression());
+                        preOutput.Add(new HyperbolicCotangent());
                         break;
                     case MathTokenType.Secanth:
-                        preOutput.Add(new HyperbolicSecantMathExpression());
+                        preOutput.Add(new HyperbolicSecant());
                         break;
                     case MathTokenType.Cosecanth:
-                        preOutput.Add(new HyperbolicCosecantMathExpression());
+                        preOutput.Add(new HyperbolicCosecant());
                         break;
                     case MathTokenType.Arsineh:
-                        preOutput.Add(new HyperbolicArsineMathExpression());
+                        preOutput.Add(new HyperbolicArsine());
                         break;
                     case MathTokenType.Arcosineh:
-                        preOutput.Add(new HyperbolicArcosineMathExpression());
+                        preOutput.Add(new HyperbolicArcosine());
                         break;
                     case MathTokenType.Artangenth:
-                        preOutput.Add(new HyperbolicArtangentMathExpression());
+                        preOutput.Add(new HyperbolicArtangent());
                         break;
                     case MathTokenType.Arcotangenth:
-                        preOutput.Add(new HyperbolicArcotangentMathExpression());
+                        preOutput.Add(new HyperbolicArcotangent());
                         break;
                     case MathTokenType.Arsecanth:
-                        preOutput.Add(new HyperbolicArsecantMathExpression());
+                        preOutput.Add(new HyperbolicArsecant());
                         break;
                     case MathTokenType.Arcosecanth:
-                        preOutput.Add(new HyperbolicArcosecantMathExpression());
+                        preOutput.Add(new HyperbolicArcosecant());
                         break;
                     case MathTokenType.Sqrt:
-                        preOutput.Add(new SqrtMathExpression());
+                        preOutput.Add(new Sqrt());
                         break;
                     case MathTokenType.Root:
-                        preOutput.Add(new RootMathExpression());
+                        preOutput.Add(new Root());
                         break;
                     case MathTokenType.Lg:
-                        preOutput.Add(new LgMathExpression());
+                        preOutput.Add(new Lg());
                         break;
                     case MathTokenType.Ln:
-                        preOutput.Add(new LnMathExpression());
+                        preOutput.Add(new Ln());
                         break;
                     case MathTokenType.Log:
-                        preOutput.Add(new LogMathExpression());
+                        preOutput.Add(new Log());
                         break;
                     case MathTokenType.Derivative:
-                        preOutput.Add(new DerivativeMathExpression());
+                        preOutput.Add(new Derivative());
                         break;
                     case MathTokenType.Assign:
-                        preOutput.Add(new AssignMathExpression());
+                        preOutput.Add(new Assign());
                         break;
                     case MathTokenType.Not:
-                        preOutput.Add(new NotMathExpression());
+                        preOutput.Add(new Not());
                         break;
                     case MathTokenType.And:
-                        preOutput.Add(new AndMathExpression());
+                        preOutput.Add(new And());
                         break;
                     case MathTokenType.Or:
-                        preOutput.Add(new OrMathExpression());
+                        preOutput.Add(new Or());
                         break;
                     case MathTokenType.XOr:
-                        preOutput.Add(new XOrMathExpression());
+                        preOutput.Add(new XOr());
                         break;
                     default:
                         throw new MathParserException(Resource.NotSupportedToken);

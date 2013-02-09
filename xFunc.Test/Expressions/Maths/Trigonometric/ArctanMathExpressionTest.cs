@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("arctan(x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("arctan(x)"));
 
             Assert.AreEqual("1 / (1 + (x ^ 2))", exp.ToString());
         }
@@ -57,7 +57,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = MathParser.Derivative(parser.Parse("arctan(2x)"));
+            IMathExpression exp = MathParser.Differentiation(parser.Parse("arctan(2x)"));
 
             Assert.AreEqual("2 / (1 + ((2 * x) ^ 2))", exp.ToString());
         }
@@ -66,16 +66,16 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest3()
         {
             // arctan(2x)
-            NumberMathExpression num = new NumberMathExpression(2);
-            VariableMathExpression x = new VariableMathExpression('x');
-            MultiplicationMathExpression mul = new MultiplicationMathExpression(num, x);
+            Number num = new Number(2);
+            Variable x = new Variable('x');
+            Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new ArctanMathExpression(mul);
-            IMathExpression deriv = MathParser.Derivative(exp);
+            IMathExpression exp = new Arctan(mul);
+            IMathExpression deriv = MathParser.Differentiation(exp);
 
             Assert.AreEqual("2 / (1 + ((2 * x) ^ 2))", deriv.ToString());
 
-            num.Number = 6;
+            num.Value = 6;
             Assert.AreEqual("arctan(6 * x)", exp.ToString());
             Assert.AreEqual("2 / (1 + ((2 * x) ^ 2))", deriv.ToString());
         }
@@ -83,21 +83,21 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(arctan(xy), x)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arctan(xy), x)").Differentiation();
             Assert.AreEqual("y / (1 + ((x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv(arctan(xy), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arctan(xy), y)").Differentiation();
             Assert.AreEqual("x / (1 + ((x * y) ^ 2))", exp.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv(arctan(x), y)").Derivative();
+            IMathExpression exp = parser.Parse("deriv(arctan(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
 

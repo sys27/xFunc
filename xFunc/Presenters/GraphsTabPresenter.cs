@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Properties;
 using xFunc.Views;
 
 namespace xFunc.Presenters
@@ -13,6 +14,7 @@ namespace xFunc.Presenters
         private IMainView view;
 
         private MathParser parser;
+        private int countOfGraphs;
         private List<IMathExpression> listOfGraphs;
 
         public GraphsTabPresenter(IMainView view)
@@ -20,12 +22,16 @@ namespace xFunc.Presenters
             this.view = view;
 
             parser = new MathParser { AngleMeasurement = AngleMeasurement.Radian };
-            listOfGraphs = new List<IMathExpression>();
+            countOfGraphs = Settings.Default.MaxCountOfExpressions;
+            listOfGraphs = new List<IMathExpression>(countOfGraphs);
         }
 
         public void Add(string strExp)
         {
             listOfGraphs.Add(parser.Parse(strExp));
+
+            while (listOfGraphs.Count + 1 > countOfGraphs)
+                listOfGraphs.RemoveAt(0);
 
             view.Graphs = listOfGraphs.AsReadOnly();
         }

@@ -17,29 +17,16 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
-    public class OrLogicExpression : BinaryLogicExpression
+    public class TruthTable : UnaryLogicExpression
     {
 
-        public OrLogicExpression()
-            : base(null, null)
-        {
+        public TruthTable() : base(null) { }
 
-        }
-
-        public OrLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
-            : base(firstOperand, secondOperand)
-        {
-
-        }
-
-        public override string ToString()
-        {
-            return ToString("|");
-        }
+        public TruthTable(ILogicExpression expression) : base(expression) { }
 
         public override bool Calculate(LogicParameterCollection parameters)
         {
-            return firstOperand.Calculate(parameters) | secondOperand.Calculate(parameters);
+            throw new NotSupportedException();
         }
 
     }

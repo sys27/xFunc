@@ -59,9 +59,9 @@ namespace xFunc.Logics
             {
                 ILogicExpression exp = parser.Parse(s);
                 LogicWorkspaceItem item = new LogicWorkspaceItem(s, exp);
-                if (exp is AssignLogicExpression)
+                if (exp is Assign)
                 {
-                    AssignLogicExpression assign = (AssignLogicExpression)exp;
+                    Assign assign = (Assign)exp;
                     assign.Calculate(parameters);
                     item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
                 }
@@ -76,9 +76,9 @@ namespace xFunc.Logics
 
         public void Remove(LogicWorkspaceItem item)
         {
-            if (item.Expression is AssignLogicExpression)
+            if (item.Expression is Assign)
             {
-                var assign = item.Expression as AssignLogicExpression;
+                var assign = item.Expression as Assign;
 
                 parameters.Remove(assign.Variable.Character);
             }
@@ -89,9 +89,9 @@ namespace xFunc.Logics
         public void RemoveAt(int index)
         {
             var item = expressions[index];
-            if (item.Expression is AssignLogicExpression)
+            if (item.Expression is Assign)
             {
-                var assign = item.Expression as AssignLogicExpression;
+                var assign = item.Expression as Assign;
 
                 parameters.Remove(assign.Variable.Character);
             }

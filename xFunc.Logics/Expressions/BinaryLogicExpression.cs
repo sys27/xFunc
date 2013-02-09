@@ -34,12 +34,12 @@ namespace xFunc.Logics.Expressions
             string first;
             string second;
 
-            if (firstOperand is VariableLogicExpression || firstOperand is ConstLogicExpression)
+            if (firstOperand is Variable || firstOperand is Const)
                 first = firstOperand.ToString();
             else
                 first = "(" + firstOperand + ")";
 
-            if (secondOperand is VariableLogicExpression || secondOperand is ConstLogicExpression)
+            if (secondOperand is Variable || secondOperand is Const)
                 second = secondOperand.ToString();
             else
                 second = "(" + secondOperand + ")";

@@ -55,7 +55,7 @@ namespace xFunc.Logics
                 Stack<ILogicExpression> stack = new Stack<ILogicExpression>();
                 foreach (var expression in expressions)
                 {
-                    if (expression is VariableLogicExpression || expression is ConstLogicExpression)
+                    if (expression is Variable || expression is Const)
                     {
                         stack.Push(expression);
                     }
@@ -74,15 +74,15 @@ namespace xFunc.Logics
 
                         stack.Push(binLoginExp);
                     }
-                    else if (expression is AssignLogicExpression)
+                    else if (expression is Assign)
                     {
-                        AssignLogicExpression assign = expression as AssignLogicExpression;
+                        Assign assign = expression as Assign;
                         assign.Value = stack.Pop();
 
-                        if (!(stack.Peek() is VariableLogicExpression))
+                        if (!(stack.Peek() is Variable))
                             throw new LogicParserException(Resource.InvalidExpression);
 
-                        assign.Variable = (VariableLogicExpression)stack.Pop();
+                        assign.Variable = (Variable)stack.Pop();
 
                         stack.Push(assign);
                     }
@@ -133,7 +133,7 @@ namespace xFunc.Logics
                 ConvertToColletion(bin.FirstOperand, collection);
                 ConvertToColletion(bin.SecondOperand, collection);
             }
-            else if (expression is VariableLogicExpression)
+            else if (expression is Variable)
             {
                 return;
             }
@@ -195,43 +195,43 @@ namespace xFunc.Logics
                 switch (token.Type)
                 {
                     case LogicTokenType.Not:
-                        preOutput.Add(new NotLogicExpression());
+                        preOutput.Add(new Not());
                         break;
                     case LogicTokenType.And:
-                        preOutput.Add(new AndLogicExpression());
+                        preOutput.Add(new And());
                         break;
                     case LogicTokenType.Or:
-                        preOutput.Add(new OrLogicExpression());
+                        preOutput.Add(new Or());
                         break;
                     case LogicTokenType.Implication:
-                        preOutput.Add(new ImplicationLogicExpression());
+                        preOutput.Add(new Implication());
                         break;
                     case LogicTokenType.Equality:
-                        preOutput.Add(new EqualityLogicExpression());
+                        preOutput.Add(new Equality());
                         break;
                     case LogicTokenType.NAnd:
-                        preOutput.Add(new NAndLogicExpression());
+                        preOutput.Add(new NAnd());
                         break;
                     case LogicTokenType.NOr:
-                        preOutput.Add(new NOrLogicExpression());
+                        preOutput.Add(new NOr());
                         break;
                     case LogicTokenType.XOr:
-                        preOutput.Add(new XOrLogicExpression());
+                        preOutput.Add(new XOr());
                         break;
                     case LogicTokenType.Assign:
-                        preOutput.Add(new AssignLogicExpression());
+                        preOutput.Add(new Assign());
                         break;
                     case LogicTokenType.TruthTable:
-                        preOutput.Add(new TruthTableExpression());
+                        preOutput.Add(new TruthTable());
                         break;
                     case LogicTokenType.True:
-                        preOutput.Add(new ConstLogicExpression(true));
+                        preOutput.Add(new Const(true));
                         break;
                     case LogicTokenType.False:
-                        preOutput.Add(new ConstLogicExpression(false));
+                        preOutput.Add(new Const(false));
                         break;
                     case LogicTokenType.Variable:
-                        preOutput.Add(new VariableLogicExpression(token.Variable));
+                        preOutput.Add(new Variable(token.Variable));
                         break;
                     default:
                         throw new LogicParserException(Resource.NotSupportedToken);

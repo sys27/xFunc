@@ -16,30 +16,30 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-
-    public class EqualityLogicExpression : BinaryLogicExpression
+    
+    public class Const : ILogicExpression
     {
 
-        public EqualityLogicExpression()
-            : base(null, null)
-        {
+        private bool value;
 
+        public Const()
+        {
+            
         }
 
-        public EqualityLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
-            : base(firstOperand, secondOperand)
+        public Const(bool value)
         {
-
+            this.value = value;
         }
 
         public override string ToString()
         {
-            return ToString("<->");
+            return value.ToString();
         }
 
-        public override bool Calculate(LogicParameterCollection parameters)
+        public bool Calculate(LogicParameterCollection parameters)
         {
-            return (firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters)) | (!firstOperand.Calculate(parameters) & !secondOperand.Calculate(parameters));
+            return value;
         }
 
     }

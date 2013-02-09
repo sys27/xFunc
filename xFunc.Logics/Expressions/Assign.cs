@@ -17,18 +17,18 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
-    public class AssignLogicExpression : ILogicExpression
+    public class Assign : ILogicExpression
     {
 
-        private VariableLogicExpression variable;
+        private Variable variable;
         private ILogicExpression value;
 
-        public AssignLogicExpression()
+        public Assign()
         {
 
         }
 
-        public AssignLogicExpression(VariableLogicExpression variable, ILogicExpression value)
+        public Assign(Variable variable, ILogicExpression value)
         {
             this.variable = variable;
             this.value = value;
@@ -51,7 +51,7 @@ namespace xFunc.Logics.Expressions
             return false;
         }
 
-        public VariableLogicExpression Variable
+        public Variable Variable
         {
             get
             {

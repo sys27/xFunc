@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
-    public class ImplicationLogicExpression : BinaryLogicExpression
+    public class Implication : BinaryLogicExpression
     {
 
-        public ImplicationLogicExpression()
+        public Implication()
             : base(null, null)
         {
 
         }
 
-        public ImplicationLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
+        public Implication(ILogicExpression firstOperand, ILogicExpression secondOperand)
             : base(firstOperand, secondOperand)
         {
 

@@ -17,29 +17,29 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
-    public class NotLogicExpression : UnaryLogicExpression
+    public class Equality : BinaryLogicExpression
     {
 
-        public NotLogicExpression()
-            : base(null)
+        public Equality()
+            : base(null, null)
         {
 
         }
 
-        public NotLogicExpression(ILogicExpression firstMathExpression)
-            : base(firstMathExpression)
+        public Equality(ILogicExpression firstOperand, ILogicExpression secondOperand)
+            : base(firstOperand, secondOperand)
         {
 
         }
 
         public override string ToString()
         {
-            return ToString("!");
+            return ToString("<->");
         }
 
         public override bool Calculate(LogicParameterCollection parameters)
         {
-            return !firstMathExpression.Calculate(parameters);
+            return (firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters)) | (!firstOperand.Calculate(parameters) & !secondOperand.Calculate(parameters));
         }
 
     }

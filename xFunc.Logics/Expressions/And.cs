@@ -16,30 +16,22 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-    
-    public class ConstLogicExpression : ILogicExpression
+
+    public class And : BinaryLogicExpression
     {
 
-        private bool value;
+        public And() : base(null, null) { }
 
-        public ConstLogicExpression()
-        {
-            
-        }
-
-        public ConstLogicExpression(bool value)
-        {
-            this.value = value;
-        }
+        public And(ILogicExpression firstOperand, ILogicExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         public override string ToString()
         {
-            return value.ToString();
+            return ToString("&");
         }
 
-        public bool Calculate(LogicParameterCollection parameters)
+        public override bool Calculate(LogicParameterCollection parameters)
         {
-            return value;
+            return firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters);
         }
 
     }

@@ -29,7 +29,7 @@ namespace xFunc.Logics.Expressions
 
         protected string ToString(string operand)
         {
-            if (firstMathExpression is VariableLogicExpression)
+            if (firstMathExpression is Variable)
                 return string.Format("{0}{1}", operand, firstMathExpression);
 
             return string.Format("{0}({1})", operand, firstMathExpression);

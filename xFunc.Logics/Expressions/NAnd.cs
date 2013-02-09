@@ -17,32 +17,29 @@ using System;
 namespace xFunc.Logics.Expressions
 {
     
-    public class VariableLogicExpression : ILogicExpression
+    public class NAnd : BinaryLogicExpression
     {
 
-        private char variable;
-
-        public VariableLogicExpression(char variable)
+        public NAnd()
+            : base(null, null)
         {
-            this.variable = variable;
+
+        }
+
+        public NAnd(ILogicExpression firstOperand, ILogicExpression secondOperand)
+            : base(firstOperand, secondOperand)
+        {
+
         }
 
         public override string ToString()
         {
-            return variable.ToString();
+            return ToString("↑");
         }
 
-        public bool Calculate(LogicParameterCollection parameters)
+        public override bool Calculate(LogicParameterCollection parameters)
         {
-            return parameters[variable];
-        }
-
-        public char Character
-        {
-            get
-            {
-                return variable;
-            }
+            return !(firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters));
         }
 
     }

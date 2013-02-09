@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
-    public class NOrLogicExpression : BinaryLogicExpression
+    public class XOr : BinaryLogicExpression
     {
 
-        public NOrLogicExpression()
+        public XOr()
             : base(null, null)
         {
 
         }
 
-        public NOrLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
+        public XOr(ILogicExpression firstOperand, ILogicExpression secondOperand)
             : base(firstOperand, secondOperand)
         {
 
@@ -34,12 +34,12 @@ namespace xFunc.Logics.Expressions
 
         public override string ToString()
         {
-            return ToString("↓");
+            return ToString("⊕");
         }
 
         public override bool Calculate(LogicParameterCollection parameters)
         {
-            return !(firstOperand.Calculate(parameters) | secondOperand.Calculate(parameters));
+            return !(firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters)) & (firstOperand.Calculate(parameters) | secondOperand.Calculate(parameters));
         }
 
     }

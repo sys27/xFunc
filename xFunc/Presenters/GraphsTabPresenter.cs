@@ -30,7 +30,7 @@ namespace xFunc.Presenters
         {
             listOfGraphs.Add(parser.Parse(strExp));
 
-            while (listOfGraphs.Count + 1 > countOfGraphs)
+            while (listOfGraphs.Count > countOfGraphs)
                 listOfGraphs.RemoveAt(0);
 
             view.Graphs = listOfGraphs.AsReadOnly();

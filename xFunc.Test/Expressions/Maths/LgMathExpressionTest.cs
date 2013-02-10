@@ -65,16 +65,7 @@ namespace xFunc.Test.Expressions.Maths
             IMathExpression exp = parser.Parse("deriv(lg(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
-
-        [TestMethod]
-        public void SimplifyTest()
-        {
-            IMathExpression exp = parser.Parse("lg(10)");
-            Number one = 1;
-
-            Assert.AreEqual(one, exp);
-        }
-
+        
         [TestMethod]
         public void ToStringTest()
         {

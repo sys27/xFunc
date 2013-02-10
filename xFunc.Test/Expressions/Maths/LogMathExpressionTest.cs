@@ -64,16 +64,7 @@ namespace xFunc.Test.Expressions.Maths
             IMathExpression exp = parser.Parse("deriv(log(x, 2), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
-
-        [TestMethod]
-        public void SimplifyTest()
-        {
-            IMathExpression exp = parser.Parse("log(4x, 4x)");
-            Number one = 1;
-
-            Assert.AreEqual(one, exp);
-        }
-
+        
         [TestMethod]
         public void ToStringTest()
         {

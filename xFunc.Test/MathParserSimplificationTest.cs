@@ -375,6 +375,167 @@ namespace xFunc.Test
             SimpleTest(mul, expected);
         }
 
+        [TestMethod]
+        public void DivZero()
+        {
+            var div = new Division(new Number(0), new Variable('x'));
+            var expected = new Number(0);
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DivideByZeroException))]
+        public void DivByZero()
+        {
+            var div = new Division(new Variable('x'), new Number(0));
+
+            SimpleTest(div, null);
+        }
+
+        [TestMethod]
+        public void DivByOne()
+        {
+            var div = new Division(new Variable('x'), new Number(1));
+            var expected = new Variable('x');
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiff_NumMulVar_DivNum()
+        {
+            // (2 * x) / 2
+            var div = new Division(new Multiplication(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Variable('x');
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiff_VarMulNum_DivNum()
+        {
+            // (x * 2) / 2
+            var div = new Division(new Multiplication(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Variable('x');
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiffNumDiv_NumMulVar_()
+        {
+            // 2 / (2 * x)
+            var div = new Division(new Number(2), new Multiplication(new Number(2), new Variable('x')));
+            var expected = new Division(new Number(1), new Variable('x'));
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiffNumDiv_VarMulNum_()
+        {
+            // 2 / (2 * x)
+            var div = new Division(new Number(2), new Multiplication(new Variable('x'), new Number(2)));
+            var expected = new Division(new Number(1), new Variable('x'));
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiff_NumDivVar_DivNum()
+        {
+            // (2 / x) / 2
+            var div = new Division(new Division(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Division(new Number(1), new Variable('x'));
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiff_VarDivNum_DivNum()
+        {
+            // (x / 2) / 2
+            var div = new Division(new Division(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Division(new Variable('x'), new Number(4));
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiffNumDiv_NumDivVar_()
+        {
+            // 2 / (2 / x)
+            var div = new Division(new Number(2), new Division(new Number(2), new Variable('x')));
+            var expected = new Variable('x');
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivDiffNumDiv_VarDivNum_()
+        {
+            // 2 / (x / 2)
+            var div = new Division(new Number(2), new Division(new Variable('x'), new Number(2)));
+            var expected = new Division(new Number(4), new Variable('x'));
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void PowerZero()
+        {
+            var pow = new Exponentiation(new Variable('x'), new Number(0));
+            var expected = new Number(1);
+
+            SimpleTest(pow, expected);
+        }
+
+        [TestMethod]
+        public void PowerOne()
+        {
+            var pow = new Exponentiation(new Variable('x'), new Number(1));
+            var expected = new Variable('x');
+
+            SimpleTest(pow, expected);
+        }
+
+        [TestMethod]
+        public void RootOne()
+        {
+            var root = new Root(new Variable('x'), new Number(1));
+            var expected = new Variable('x');
+
+            SimpleTest(root, expected);
+        }
+
+        [TestMethod]
+        public void Log()
+        {
+            var log = new Log(new Variable('x'), new Variable('x'));
+            var expected = new Number(1);
+
+            SimpleTest(log, expected);
+        }
+
+        [TestMethod]
+        public void Ln()
+        {
+            var ln = new Ln(new Variable('e'));
+            var expected = new Number(1);
+
+            SimpleTest(ln, expected);
+        }
+
+        [TestMethod]
+        public void Lg()
+        {
+            var log = new Lg(new Number(10));
+            var expected = new Number(1);
+
+            SimpleTest(log, expected);
+        }
+
     }
 
 }

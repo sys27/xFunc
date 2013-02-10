@@ -236,6 +236,145 @@ namespace xFunc.Test
             SimpleTest(sub, expected);
         }
 
+        [TestMethod]
+        public void SubDiff_NumSubVar_SubNum()
+        {
+            var sub = new Subtraction(new Subtraction(new Number(2), new Variable('x')), new Number(2));
+            var expected = new UnaryMinus(new Variable('x'));
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiff_VarSubNum_SubNum()
+        {
+            var sub = new Subtraction(new Subtraction(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Subtraction(new Variable('x'), new Number(4));
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiffNumSub_NumSubVar_()
+        {
+            var sub = new Subtraction(new Number(2), new Subtraction(new Number(2), new Variable('x')));
+            var expected = new Variable('x');
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void SubDiffNumSub_VarSubNum_()
+        {
+            var sub = new Subtraction(new Number(2), new Subtraction(new Variable('x'), new Number(2)));
+            var expected = new Subtraction(new Number(4), new Variable('x'));
+
+            SimpleTest(sub, expected);
+        }
+
+        [TestMethod]
+        public void MulByZero()
+        {
+            var mul = new Multiplication(new Variable('x'), new Number(0));
+            var expected = new Number(0);
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulFirstOne()
+        {
+            var mul = new Multiplication(new Number(1), new Variable('x'));
+            var expected = new Variable('x');
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulSecondOne()
+        {
+            var mul = new Multiplication(new Variable('x'), new Number(1));
+            var expected = new Variable('x');
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiffNumMul_NumMulVar_()
+        {
+            var mul = new Multiplication(new Number(2), new Multiplication(new Number(2), new Variable('x')));
+            var expected = new Multiplication(new Number(4), new Variable('x'));
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiffNumMul_VarMulNum_()
+        {
+            var mul = new Multiplication(new Number(2), new Multiplication(new Variable('x'), new Number(2)));
+            var expected = new Multiplication(new Number(4), new Variable('x'));
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiff_NumMulVar_MulNum()
+        {
+            var mul = new Multiplication(new Multiplication(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Multiplication(new Number(4), new Variable('x'));
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiff_VarMulNum_MulNum()
+        {
+            var mul = new Multiplication(new Multiplication(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Multiplication(new Number(4), new Variable('x'));
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiffNumMul_NumDivVar_()
+        {
+            // 2 * (2 / x)
+            var mul = new Multiplication(new Number(2), new Division(new Number(2), new Variable('x')));
+            var expected = new Division(new Number(4), new Variable('x'));
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiffNumMul_VarDivNum_()
+        {
+            // 2 * (x / 2)
+            var mul = new Multiplication(new Number(2), new Division(new Variable('x'), new Number(2)));
+            var expected = new Variable('x');
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiffl_NumDivVar_MulNum()
+        {
+            // (2 / x) * 2
+            var mul = new Multiplication(new Division(new Number(2), new Variable('x')), new Number(2));
+            var expected = new Division(new Number(4), new Variable('x'));
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
+        public void MulDiff_VarDivNum_MulNum()
+        {
+            // (x / 2) * 2
+            var mul = new Multiplication(new Division(new Variable('x'), new Number(2)), new Number(2));
+            var expected = new Variable('x');
+
+            SimpleTest(mul, expected);
+        }
+
     }
 
 }

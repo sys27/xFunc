@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new HyperbolicArtangent(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
             var sub = new Subtraction(new Number(1), sqr);

@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new HyperbolicArcosecant(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             var inv = new Exponentiation(firstMathExpression.Clone(), new Number(2));
             var add = new Addition(new Number(1), inv);

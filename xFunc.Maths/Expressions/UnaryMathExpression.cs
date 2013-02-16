@@ -53,17 +53,17 @@ namespace xFunc.Maths.Expressions
             return Differentiation(new Variable('x'));
         }
 
-        protected abstract IMathExpression _Derivative(Variable variable);
-
         public IMathExpression Differentiation(Variable variable)
         {
             if (MathParser.HasVar(firstMathExpression, variable))
             {
-                return _Derivative(variable);
+                return _Differentiation(variable);
             }
 
             return new Number(0);
         }
+
+        protected abstract IMathExpression _Differentiation(Variable variable);
 
         public IMathExpression FirstMathExpression
         {

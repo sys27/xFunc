@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
             return Math.Log10(FirstMathExpression.Calculate(parameters));
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Ln ln = new Ln(new Number(10));
             Multiplication mul1 = new Multiplication(firstMathExpression.Clone(), ln);

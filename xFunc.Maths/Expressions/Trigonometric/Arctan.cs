@@ -48,7 +48,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return Math.Atan(radian) / Math.PI * 200;
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Exponentiation involution = new Exponentiation(firstMathExpression.Clone(), new Number(2));
             Addition add = new Addition(new Number(1), involution);

@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
             return new UnaryMinus(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             return new UnaryMinus(firstMathExpression.Clone().Differentiation());
         }

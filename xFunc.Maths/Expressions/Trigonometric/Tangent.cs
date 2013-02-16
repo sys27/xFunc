@@ -48,7 +48,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return Math.Tan(radian);
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Cosine cos = new Cosine(firstMathExpression.Clone());
             Exponentiation inv = new Exponentiation(cos, new Number(2));

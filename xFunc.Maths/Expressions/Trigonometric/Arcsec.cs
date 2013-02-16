@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 200;
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Absolute abs = new Absolute(firstMathExpression.Clone());
             Exponentiation sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));

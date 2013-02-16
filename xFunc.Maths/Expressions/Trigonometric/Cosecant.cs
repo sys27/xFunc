@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return 1 / Math.Sin(radian);
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiation(variable));
             Cotangent cot = new Cotangent(firstMathExpression.Clone());

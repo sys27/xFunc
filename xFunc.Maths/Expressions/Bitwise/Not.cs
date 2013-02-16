@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Bitwise
             return new Not(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             throw new NotSupportedException();
         }

@@ -48,7 +48,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return Math.Sin(radian);
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Cosine cos = new Cosine(firstMathExpression.Clone());
             Multiplication mul = new Multiplication(cos, firstMathExpression.Clone().Differentiation(variable));

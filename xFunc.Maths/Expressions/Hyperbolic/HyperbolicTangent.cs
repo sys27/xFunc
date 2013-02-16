@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new HyperbolicTangent(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             var cosh = new HyperbolicCosine(firstMathExpression.Clone());
             var inv = new Exponentiation(cosh, new Number(2));

@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new HyperbolicCosine(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             var sinh = new HyperbolicSine(firstMathExpression.Clone());
             var mul = new Multiplication(firstMathExpression.Clone().Differentiation(variable), sinh);

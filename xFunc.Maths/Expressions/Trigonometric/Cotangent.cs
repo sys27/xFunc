@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return MathExtentions.Cot(radian);
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Sine sine = new Sine(firstMathExpression.Clone());
             Exponentiation involution = new Exponentiation(sine, new Number(2));

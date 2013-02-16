@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new HyperbolicSecant(firstMathExpression.Clone());
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             var tanh = new HyperbolicTangent(firstMathExpression.Clone());
             var sech = Clone();

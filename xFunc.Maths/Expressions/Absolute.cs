@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
             return Math.Abs(firstMathExpression.Calculate(parameters));
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Division div = new Division(firstMathExpression.Clone(), Clone());
             Multiplication mul = new Multiplication(firstMathExpression.Clone().Differentiation(variable), div);

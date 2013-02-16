@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return 1 / Math.Cos(radian);
         }
 
-        protected override IMathExpression _Derivative(Variable variable)
+        protected override IMathExpression _Differentiation(Variable variable)
         {
             Tangent tan = new Tangent(firstMathExpression.Clone());
             Secant sec = new Secant(firstMathExpression.Clone());

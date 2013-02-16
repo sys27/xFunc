@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Test.Expressions.Maths
 {
@@ -10,18 +11,10 @@ namespace xFunc.Test.Expressions.Maths
     public class AssignTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest1()
         {
-            IMathExpression exp = parser.Parse("x := 1");
+            IMathExpression exp = new Assign(new Variable('x'), new Number(1));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);
@@ -33,8 +26,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest2()
         {
-            parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("x := sin(1)");
+            IMathExpression exp = new Assign(new Variable('x'), new Sine(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian });
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);
@@ -46,8 +38,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest3()
         {
-            parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("x := 4 * (8 + 1)");
+            IMathExpression exp = new Assign(new Variable('x'), new Multiplication(new Number(4), new Addition(new Number(8), new Number(1))));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);

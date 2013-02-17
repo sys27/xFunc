@@ -90,7 +90,7 @@
     <Compile Include="Expressions\Maths\Trigonometric\SineTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\CosineTest.cs" />
     <Compile Include="Expressions\Maths\DivisionTest.cs" />
-    <Compile Include="Expressions\Maths\ExpTest.cs" />
+    <Compile Include="Expressions\Maths\ExponentialTest.cs" />
     <Compile Include="Expressions\Maths\ExponentiationTest.cs" />
     <Compile Include="Expressions\Maths\LgTest.cs" />
     <Compile Include="Expressions\Maths\LnTest.cs" />

@@ -10,28 +10,21 @@ namespace xFunc.Test.Expressions.Maths
     public class MultiplicationTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = parser.Parse("2 * 2");
+            IMathExpression exp = new Multiplication(new Number(2), new Number(2));
 
-            Assert.AreEqual(2 * 2, exp.Calculate(null));
+            Assert.AreEqual(4, exp.Calculate(null));
         }
 
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Differentiation(parser.Parse("sin(2x)"));
+            IMathExpression exp = new Multiplication(new Number(2), new Variable('x'));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("cos(2 * x) * 2", exp.ToString());
+            Assert.AreEqual("2 * 1", deriv.ToString());
         }
 
         [TestMethod]
@@ -42,49 +35,49 @@ namespace xFunc.Test.Expressions.Maths
             Variable x = new Variable('x');
 
             IMathExpression exp = new Multiplication(num, x);
-            IMathExpression deriv = MathParser.Differentiation(exp);
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("2", deriv.ToString());
+            Assert.AreEqual("2 * 1", deriv.ToString());
 
             num.Value = 3;
             Assert.AreEqual("3 * x", exp.ToString());
-            Assert.AreEqual("2", deriv.ToString());
+            Assert.AreEqual("2 * 1", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv((x + 1) * (y + x), x)").Differentiation();
-            Assert.AreEqual("(y + x) + (x + 1)", exp.ToString());
+            // (x + 1) * (y + x)
+            IMathExpression exp = new Multiplication(new Addition(new Variable('x'), new Number(1)), new Addition(new Variable('y'), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
+            Assert.AreEqual("(1 * (y + x)) + ((x + 1) * 1)", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = parser.Parse("deriv((y + 1) * (3 + x), y)").Differentiation();
-            Assert.AreEqual("3 + x", exp.ToString());
+            // (y + 1) * (3 + x)
+            IMathExpression exp = new Multiplication(new Addition(new Variable('y'), new Number(1)), new Addition(new Number(3), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            Assert.AreEqual("1 * (3 + x)", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = parser.Parse("deriv((x + 1) * (y + x), y)").Differentiation();
-            Assert.AreEqual("x + 1", exp.ToString());
+            // (x + 1) * (y + x)
+            IMathExpression exp = new Multiplication(new Addition(new Variable('x'), new Number(1)), new Addition(new Variable('y'), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            Assert.AreEqual("(x + 1) * 1", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest4()
         {
-            IMathExpression exp = parser.Parse("deriv((x + 1) * (3 + x), y)").Differentiation();
-            Assert.AreEqual("0", exp.ToString());
-        }
-
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = parser.Parse("2sin(x)");
-
-            Assert.AreEqual("2 * sin(x)", exp.ToString());
+            // (x + 1) * (3 + x)
+            IMathExpression exp = new Multiplication(new Addition(new Variable('x'), new Number(1)), new Addition(new Number(3), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            Assert.AreEqual("0", deriv.ToString());
         }
 
     }

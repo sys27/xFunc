@@ -55,6 +55,11 @@ namespace xFunc.Maths
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return type.GetHashCode() ^ number.GetHashCode() ^ variable.GetHashCode();
+        }
+
         public override string ToString()
         {
             if (type == MathTokenType.Number)

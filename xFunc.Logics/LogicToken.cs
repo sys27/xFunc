@@ -49,6 +49,11 @@ namespace xFunc.Logics
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return type.GetHashCode() ^ variable.GetHashCode();
+        }
+
         public override string ToString()
         {
             if (type == LogicTokenType.Variable)

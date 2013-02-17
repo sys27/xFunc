@@ -89,22 +89,6 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual("0", deriv.ToString());
         }
 
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = new Addition(new Sine(new Number(1)), new Number(2));
-
-            Assert.AreEqual("sin(1) + 2", exp.ToString());
-        }
-
-        [TestMethod]
-        public void ToStringTest1()
-        {
-            IMathExpression exp = new Addition(new Addition(new Sine(new Number(1)), new Variable('x')), new Number(2));
-
-            Assert.AreEqual("(sin(1) + x) + 2", exp.ToString());
-        }
-
     }
 
 }

@@ -94,14 +94,6 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual("0", deriv.ToString());
         }
 
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = new Division(new Number(1), new Number(2));
-
-            Assert.AreEqual("1 / 2", exp.ToString());
-        }
-
     }
 
 }

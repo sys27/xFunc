@@ -56,14 +56,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Expressions\Logics\AndLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\EqualityLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\ImplicationLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\NAndLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\NOrLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\NotLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\OrLogicExpressionTest.cs" />
-    <Compile Include="Expressions\Logics\XOrLogicExpressionTest.cs" />
+    <Compile Include="Expressions\Logics\AndTest.cs" />
+    <Compile Include="Expressions\Logics\EqualityTest.cs" />
+    <Compile Include="Expressions\Logics\ImplicationTest.cs" />
+    <Compile Include="Expressions\Logics\NAndTest.cs" />
+    <Compile Include="Expressions\Logics\NOrTest.cs" />
+    <Compile Include="Expressions\Logics\NotTest.cs" />
+    <Compile Include="Expressions\Logics\OrTest.cs" />
+    <Compile Include="Expressions\Logics\XOrTest.cs" />
     <Compile Include="Expressions\Maths\AbsoluteTest.cs" />
     <Compile Include="Expressions\Maths\AdditionTest.cs" />
     <Compile Include="Expressions\Maths\Bitwise\XOrTest.cs" />

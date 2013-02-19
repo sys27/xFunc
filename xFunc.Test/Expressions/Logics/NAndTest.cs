@@ -7,7 +7,7 @@ namespace xFunc.Test.Expressions.Logics
 {
 
     [TestClass]
-    public class NAndLogicExpressionTest
+    public class NAndTest
     {
 
         private LogicParser parser;

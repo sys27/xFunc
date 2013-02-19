@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using xFunc.Logics;
 using xFunc.Logics.Expressions;
+using xFunc.Logics;
 
 namespace xFunc.Test.Expressions.Logics
 {
 
     [TestClass]
-    public class EqualityLogicExpressionTest
+    public class OrTest
     {
 
         private LogicParser parser;
@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Logics
         [TestMethod]
         public void CalculateTest()
         {
-            ILogicExpression exp = parser.Parse("a <=> b");
+            ILogicExpression exp = parser.Parse("a | b");
             LogicParameterCollection parameters = new LogicParameterCollection();
             parameters.Add('a');
             parameters.Add('b');
@@ -32,15 +32,15 @@ namespace xFunc.Test.Expressions.Logics
 
             parameters['a'] = true;
             parameters['b'] = false;
-            Assert.IsFalse(exp.Calculate(parameters));
+            Assert.IsTrue(exp.Calculate(parameters));
 
             parameters['a'] = false;
             parameters['b'] = true;
-            Assert.IsFalse(exp.Calculate(parameters));
+            Assert.IsTrue(exp.Calculate(parameters));
 
             parameters['a'] = false;
             parameters['b'] = false;
-            Assert.IsTrue(exp.Calculate(parameters));
+            Assert.IsFalse(exp.Calculate(parameters));
         }
 
     }

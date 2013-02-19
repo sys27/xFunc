@@ -7,7 +7,7 @@ namespace xFunc.Test.Expressions.Logics
 {
 
     [TestClass]
-    public class ImplicationLogicExpressionTest
+    public class NOrTest
     {
 
         private LogicParser parser;
@@ -21,14 +21,14 @@ namespace xFunc.Test.Expressions.Logics
         [TestMethod]
         public void CalculateTest()
         {
-            ILogicExpression exp = parser.Parse("a -> b");
+            ILogicExpression exp = parser.Parse("a nor b");
             LogicParameterCollection parameters = new LogicParameterCollection();
             parameters.Add('a');
             parameters.Add('b');
 
             parameters['a'] = true;
             parameters['b'] = true;
-            Assert.IsTrue(exp.Calculate(parameters));
+            Assert.IsFalse(exp.Calculate(parameters));
 
             parameters['a'] = true;
             parameters['b'] = false;
@@ -36,7 +36,7 @@ namespace xFunc.Test.Expressions.Logics
 
             parameters['a'] = false;
             parameters['b'] = true;
-            Assert.IsTrue(exp.Calculate(parameters));
+            Assert.IsFalse(exp.Calculate(parameters));
 
             parameters['a'] = false;
             parameters['b'] = false;

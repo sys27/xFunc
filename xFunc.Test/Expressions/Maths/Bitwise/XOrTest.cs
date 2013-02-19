@@ -11,18 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Bitwise
     public class XOrTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = parser.Parse("1 xor 2");
+            IMathExpression exp = new XOr(new Number(1), new Number(2));
 
             Assert.AreEqual(3, exp.Calculate(null));
         }

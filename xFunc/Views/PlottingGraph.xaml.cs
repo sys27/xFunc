@@ -302,7 +302,7 @@ namespace xFunc.Views
             bool startFlag = true;
             double y;
             double tempY;
-            for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.01 * slider.Value)
+            for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
             {
                 parameters['x'] = x;
                 y = exp.Calculate(parameters);

@@ -11,18 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
     public class HyperbolicArcosecantTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = parser.Parse("arcsch(1)");
+            var exp = new HyperbolicArcosecant(new Number(1));
 
             Assert.AreEqual(MathExtentions.Acsch(1), exp.Calculate(null));
         }
@@ -30,9 +22,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(arcsch(2x), x)").Differentiation();
+            IMathExpression exp = new HyperbolicArcosecant(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(1 + ((2 * x) ^ 2))))", exp.ToString());
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(1 + ((2 * x) ^ 2))))", deriv.ToString());
         }
 
     }

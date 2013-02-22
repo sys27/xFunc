@@ -11,18 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
     public class HyperbolicTangentTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = parser.Parse("tanh(1)");
+            var exp = new HyperbolicTangent(new Number(1));
 
             Assert.AreEqual(Math.Tanh(1), exp.Calculate(null));
         }
@@ -30,9 +22,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(tanh(2x), x)").Differentiation();
+            IMathExpression exp = new HyperbolicTangent(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("2 / (cosh(2 * x) ^ 2)", exp.ToString());
+            Assert.AreEqual("(2 * 1) / (cosh(2 * x) ^ 2)", deriv.ToString());
         }
 
     }

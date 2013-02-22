@@ -11,18 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
     public class HyperbolicArsineTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = parser.Parse("arsinh(1)");
+            var exp = new HyperbolicArsine(new Number(1));
 
             Assert.AreEqual(MathExtentions.Asinh(1), exp.Calculate(null));
         }
@@ -30,9 +22,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(arsinh(2x), x)").Differentiation();
+            IMathExpression exp = new HyperbolicArsine(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("2 / sqrt(((2 * x) ^ 2) + 1)", exp.ToString());
+            Assert.AreEqual("(2 * 1) / sqrt(((2 * x) ^ 2) + 1)", deriv.ToString());
         }
 
     }

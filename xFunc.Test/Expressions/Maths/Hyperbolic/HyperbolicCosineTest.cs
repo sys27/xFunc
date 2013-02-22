@@ -11,18 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
     public class HyperbolicCosineTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = parser.Parse("cosh(1)");
+            var exp = new HyperbolicCosine(new Number(1));
 
             Assert.AreEqual(Math.Cosh(1), exp.Calculate(null));
         }
@@ -30,9 +22,10 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(cosh(2x), x)").Differentiation();
+            IMathExpression exp = new HyperbolicCosine(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("2 * sinh(2 * x)", exp.ToString());
+            Assert.AreEqual("(2 * 1) * sinh(2 * x)", deriv.ToString());
         }
 
     }

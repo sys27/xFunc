@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace xFunc.Logics
 {
 
-    public interface ILexer
+    public interface IMathLexer
     {
 
         IEnumerable<LogicToken> Tokenize(string function);

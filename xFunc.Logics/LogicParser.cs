@@ -25,7 +25,7 @@ namespace xFunc.Logics
     public class LogicParser
     {
 
-        private ILexer lexer;
+        private IMathLexer lexer;
 
         private string lastFunc = string.Empty;
         private ILogicExpression logicExpression;
@@ -36,7 +36,7 @@ namespace xFunc.Logics
 
         }
 
-        public LogicParser(ILexer lexer)
+        public LogicParser(IMathLexer lexer)
         {
             this.lexer = lexer;
         }

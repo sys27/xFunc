@@ -11,6 +11,16 @@ namespace xFunc.Test
     public class MathParserTest
     {
 
+        private MathParser parser;
+        private MathLexerMock lexer;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            lexer = new MathLexerMock();
+            parser = new MathParser(lexer);
+        }
+
         [TestMethod]
         public void HasVarTest1()
         {
@@ -33,7 +43,6 @@ namespace xFunc.Test
         [ExpectedException(typeof(ArgumentNullException))]
         public void ParseNullStr()
         {
-            MathParser parser = new MathParser(null);
             parser.Parse(null);
         }
 

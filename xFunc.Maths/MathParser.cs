@@ -551,9 +551,9 @@ namespace xFunc.Maths
 
                 return HasVar(un.FirstMathExpression, arg);
             }
-            if (expression is Variable && expression.Equals(arg))
+            if (expression.Equals(arg))
             {
-                    return true;
+                return true;
             }
 
             return false;

@@ -100,15 +100,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             IMathExpression exp = parser.Parse("deriv(arctan(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
-
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = parser.Parse("arctan(1)");
-
-            Assert.AreEqual("arctan(1)", exp.ToString());
-        }
-
+        
     }
 
 }

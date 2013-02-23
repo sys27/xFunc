@@ -100,15 +100,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             IMathExpression exp = parser.Parse("deriv(arcsin(x), y)").Differentiation();
             Assert.AreEqual("0", exp.ToString());
         }
-
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = parser.Parse("arcsin(1)");
-
-            Assert.AreEqual("arcsin(1)", exp.ToString());
-        }
-
+        
     }
 
 }

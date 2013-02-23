@@ -101,14 +101,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
         }
 
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = parser.Parse("cos(2x)");
-
-            Assert.AreEqual("cos(2 * x)", exp.ToString());
-        }
-
     }
 
 }

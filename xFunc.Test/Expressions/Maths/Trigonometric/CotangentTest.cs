@@ -101,14 +101,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Assert.AreEqual("0", exp.ToString());
         }
 
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = parser.Parse("cot(2x)");
-
-            Assert.AreEqual("cot(2 * x)", exp.ToString());
-        }
-
     }
 
 }

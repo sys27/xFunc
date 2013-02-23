@@ -101,14 +101,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Assert.AreEqual("0", exp.ToString());
         }
 
-        [TestMethod]
-        public void ToStringTest()
-        {
-            IMathExpression exp = parser.Parse("arccos(1)");
-
-            Assert.AreEqual("arccos(1)", exp.ToString());
-        }
-
     }
 
 }

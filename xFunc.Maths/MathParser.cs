@@ -27,7 +27,7 @@ namespace xFunc.Maths
     public class MathParser
     {
 
-        private ILexer lexer;
+        private IMathLexer lexer;
 
         private string lastFunc = string.Empty;
         private IMathExpression mathExpression;
@@ -40,7 +40,7 @@ namespace xFunc.Maths
 
         }
 
-        public MathParser(ILexer lexer)
+        public MathParser(IMathLexer lexer)
         {
             this.lexer = lexer;
         }

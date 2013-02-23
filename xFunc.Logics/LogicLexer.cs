@@ -20,7 +20,7 @@ using xFunc.Logics.Resources;
 namespace xFunc.Logics
 {
 
-    public class LogicLexer : ILexer
+    public class LogicLexer : IMathLexer
     {
 
         public IEnumerable<LogicToken> Tokenize(string function)

@@ -106,6 +106,7 @@
     <Compile Include="Expressions\Maths\Trigonometric\ArccscTest.cs" />
     <Compile Include="Expressions\Maths\Hyperbolic\HyperbolicSineTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
+    <Compile Include="MathLexerMock.cs" />
     <Compile Include="MathParserTest.cs" />
     <Compile Include="LogicParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -561,6 +561,11 @@ namespace xFunc.Maths
 
         public IMathExpression Parse(string function)
         {
+            return Parse(function, true);
+        }
+
+        public IMathExpression Parse(string function, bool simplify)
+        {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentNullException("function");
 
@@ -631,7 +636,10 @@ namespace xFunc.Maths
                 mathExpression = stack.Pop();
             }
 
-            return SimplifyExpressions(mathExpression);
+            if (simplify)
+                return SimplifyExpressions(mathExpression);
+
+            return mathExpression;
         }
 
         private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<MathToken> tokens)

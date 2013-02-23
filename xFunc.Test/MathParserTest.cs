@@ -11,70 +11,30 @@ namespace xFunc.Test
     public class MathParserTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
+        [TestMethod]
+        public void HasVarTest1()
         {
-            parser = new MathParser();
+            IMathExpression exp = new Sine(new Multiplication(new Number(2), new Variable('x')));
+            bool expected = MathParser.HasVar(exp, new Variable('x'));
+
+            Assert.AreEqual(expected, true);
         }
 
         [TestMethod]
-        public void ParseTest()
+        public void HasVarTest2()
         {
-            IMathExpression exp = parser.Parse("1 + x * sin(x)");
+            IMathExpression exp = new Sine(new Multiplication(new Number(2), new Number(3)));
+            bool expected = MathParser.HasVar(exp, new Variable('x'));
 
-            Assert.AreEqual("1 + (x * sin(x))", exp.ToString());
+            Assert.AreEqual(expected, false);
         }
 
         [TestMethod]
-        public void RPNTest()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ParseNullStr()
         {
-            IMathExpression exp = parser.Parse("log(x^2, 4)");
-
-            Assert.AreEqual("log((x ^ 2), 4)", exp.ToString());
-            Assert.AreEqual(1, exp.Calculate(new MathParameterCollection() { { 'x', 2 } }));
-        }
-
-        [TestMethod]
-        public void AngleTest()
-        {
-            parser.AngleMeasurement = AngleMeasurement.Degree;
-            IMathExpression exp = parser.Parse("sin(x)");
-
-            Assert.AreEqual(AngleMeasurement.Degree, ((Sine)exp).AngleMeasurement);
-        }
-
-        [TestMethod]
-        public void DerivativeTest()
-        {
-            IMathExpression exp = parser.Parse("deriv(xy + y + x, x)");
-
-            Assert.AreEqual("deriv(((x * y) + y) + x, x)", exp.ToString());
-            Assert.AreEqual("y + 1", exp.Differentiation().ToString());
-
-
-            exp = parser.Parse("deriv(xy + y + x, y)");
-
-            Assert.AreEqual("deriv(((x * y) + y) + x, y)", exp.ToString());
-            Assert.AreEqual("x + 1", exp.Differentiation().ToString());
-
-
-            exp = parser.Parse("deriv(x * (y + 1) + y + x, x)");
-
-            Assert.AreEqual("y + 2", exp.Differentiation().ToString());
-
-
-            exp = parser.Parse("deriv(y / x, x)");
-
-            Assert.AreEqual("deriv(y / x, x)", exp.ToString());
-            Assert.AreEqual("-y / (x ^ 2)", exp.Differentiation().ToString());
-
-
-            exp = parser.Parse("deriv(y / x, y)");
-
-            Assert.AreEqual("deriv(y / x, y)", exp.ToString());
-            Assert.AreEqual("1 / x", exp.Differentiation().ToString());
+            MathParser parser = new MathParser(null);
+            parser.Parse(null);
         }
 
     }

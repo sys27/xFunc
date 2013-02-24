@@ -11,19 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
     public class CosineTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateRadianTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("cos(1)");
+            IMathExpression exp = new Cosine(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
             Assert.AreEqual(Math.Cos(1), exp.Calculate(null));
         }
@@ -31,8 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Degree;
-            IMathExpression exp = parser.Parse("cos(1)");
+            IMathExpression exp = new Cosine(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
             Assert.AreEqual(Math.Cos(1 * Math.PI / 180), exp.Calculate(null));
         }
@@ -40,51 +30,31 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Gradian;
-            IMathExpression exp = parser.Parse("cos(1)");
+            IMathExpression exp = new Cosine(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
             Assert.AreEqual(Math.Cos(1 * Math.PI / 200), exp.Calculate(null));
         }
 
         [TestMethod]
-        public void DerivativeTest()
-        {
-            IMathExpression exp = MathParser.Differentiation(parser.Parse("cos(x)"));
-
-            Assert.AreEqual("-sin(x)", exp.ToString());
-        }
-
-        [TestMethod]
-        public void PartialDerivativeTest1()
-        {
-            IMathExpression exp = parser.Parse("deriv(cos(xy), x)").Differentiation();
-            Assert.AreEqual("-(sin(x * y) * y)", exp.ToString());
-        }
-
-        [TestMethod]
-        public void PartialDerivativeTest2()
-        {
-            IMathExpression exp = parser.Parse("deriv(cos(xy), y)").Differentiation();
-            Assert.AreEqual("-(sin(x * y) * x)", exp.ToString());
-        }
-
-        [TestMethod]
-        public void PartialDerivativeTest3()
-        {
-            IMathExpression exp = parser.Parse("deriv(cos(x), y)").Differentiation();
-            Assert.AreEqual("0", exp.ToString());
-        }
-
-        [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = MathParser.Differentiation(parser.Parse("cos(2x)"));
+            IMathExpression exp = new Cosine(new Variable('x'));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("-(sin(2 * x) * 2)", exp.ToString());
+            Assert.AreEqual("-(sin(x) * 1)", deriv.ToString());
         }
 
         [TestMethod]
         public void DerivativeTest2()
+        {
+            IMathExpression exp = new Cosine(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
+
+            Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTest3()
         {
             // cos(2x)
             Number num = new Number(2);
@@ -92,13 +62,37 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Cosine(mul);
-            IMathExpression deriv = MathParser.Differentiation(exp);
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
+            Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
 
             num.Value = 7;
             Assert.AreEqual("cos(7 * x)", exp.ToString());
-            Assert.AreEqual("-(sin(2 * x) * 2)", deriv.ToString());
+            Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void PartialDerivativeTest1()
+        {
+            IMathExpression exp = new Cosine(new Multiplication(new Variable('x'), new Variable('y')));
+            IMathExpression deriv = exp.Differentiation();
+            Assert.AreEqual("-(sin(x * y) * (1 * y))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void PartialDerivativeTest2()
+        {
+            IMathExpression exp = new Cosine(new Multiplication(new Variable('x'), new Variable('y')));
+            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            Assert.AreEqual("-(sin(x * y) * (x * 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void PartialDerivativeTest3()
+        {
+            IMathExpression exp = new Cosine(new Variable('x'));
+            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            Assert.AreEqual("0", deriv.ToString());
         }
 
     }

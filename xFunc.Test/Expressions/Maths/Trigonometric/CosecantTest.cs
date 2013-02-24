@@ -11,19 +11,10 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
     public class CosecantTest
     {
 
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Degree;
-            IMathExpression exp = parser.Parse("csc(1)");
+            IMathExpression exp = new Cosecant(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
             Assert.AreEqual(MathExtentions.Csc(Math.PI / 180), exp.Calculate(null));
         }
@@ -31,8 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("csc(1)");
+            IMathExpression exp = new Cosecant(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
             Assert.AreEqual(MathExtentions.Csc(1), exp.Calculate(null));
         }
@@ -40,8 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Gradian;
-            IMathExpression exp = parser.Parse("csc(1)");
+            IMathExpression exp = new Cosecant(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
             Assert.AreEqual(MathExtentions.Csc(Math.PI / 200), exp.Calculate(null));
         }
@@ -49,9 +38,10 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = parser.Parse("deriv(csc(2x), x)").Differentiation();
+            IMathExpression exp = new Cosecant(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("-2 * (cot(2 * x) * csc(2 * x))", exp.ToString());
+            Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());
         }
 
     }

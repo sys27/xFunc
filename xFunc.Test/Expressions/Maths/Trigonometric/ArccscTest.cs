@@ -10,20 +10,11 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
     [TestClass]
     public class ArccscTest
     {
-
-        private MathParser parser;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            parser = new MathParser();
-        }
-
+        
         [TestMethod]
         public void CalculateRadianTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Radian;
-            IMathExpression exp = parser.Parse("arccsc(1)");
+            IMathExpression exp = new Arccsc(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
             Assert.AreEqual(MathExtentions.Acsc(1), exp.Calculate(null));
         }
@@ -31,8 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Degree;
-            IMathExpression exp = parser.Parse("arccsc(1)");
+            IMathExpression exp = new Arccsc(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
             Assert.AreEqual(MathExtentions.Acsc(1) / Math.PI * 180, exp.Calculate(null));
         }
@@ -40,8 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            parser.AngleMeasurement = AngleMeasurement.Gradian;
-            IMathExpression exp = parser.Parse("arccsc(1)");
+            IMathExpression exp = new Arccsc(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
             Assert.AreEqual(MathExtentions.Acsc(1) / Math.PI * 200, exp.Calculate(null));
         }
@@ -49,9 +38,10 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = parser.Parse("deriv(arccsc(2x), x)").Differentiation();
+            IMathExpression exp = new Arccsc(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", exp.ToString());
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
         }
 
         [TestMethod]
@@ -63,13 +53,13 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Arccsc(mul);
-            IMathExpression deriv = MathParser.Differentiation(exp);
+            IMathExpression deriv = exp.Differentiation();
 
-            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
 
             num.Value = 4;
             Assert.AreEqual("arccsc(4 * x)", exp.ToString());
-            Assert.AreEqual("-(2 / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
         }
 
     }

@@ -35,7 +35,7 @@ namespace xFunc.Test
             }
             set
             {
-                tokens = new List<MathToken>(tokens);
+                tokens = new List<MathToken>(value);
             }
         }
 

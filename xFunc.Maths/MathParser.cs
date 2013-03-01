@@ -602,6 +602,8 @@ namespace xFunc.Maths
                     }
                     else if (expression is Derivative)
                     {
+                        if (stack.Count < 2)
+                            throw new MathParserException(Resource.InvalidNumberOfVariables);
                         if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
@@ -613,6 +615,9 @@ namespace xFunc.Maths
                     }
                     else if (expression is Assign)
                     {
+                        if (stack.Count < 2)
+                            throw new MathParserException(Resource.InvalidNumberOfVariables);
+
                         Assign assign = (Assign)expression;
                         assign.Value = stack.Pop();
 

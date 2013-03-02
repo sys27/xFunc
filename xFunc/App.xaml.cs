@@ -16,9 +16,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using xFunc.Presenters;
+using xFunc.Properties;
 using xFunc.Views;
 
 namespace xFunc
@@ -29,8 +31,15 @@ namespace xFunc
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            var lang = Settings.Default.Lang;
+            if (lang != "Auto")
+            {
+                this.Dispatcher.Thread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+                this.Dispatcher.Thread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
+            }
+
             MainView mainView = new MainView();
-            
+
             mainView.Show();
         }
 

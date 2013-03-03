@@ -291,4 +291,25 @@
   <data name="BitwiseExpanderHeader" xml:space="preserve">
     <value>Битовые</value>
   </data>
+  <data name="ClearButtonHeader" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="ClearScreenTipText" xml:space="preserve">
+    <value>Удалить все выражения из списка.</value>
+  </data>
+  <data name="ClearScreenTipTitle" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="DeleteExpButtonHeader" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="DeleteExpScreenTipText" xml:space="preserve">
+    <value>Удалить выделенное выражение</value>
+  </data>
+  <data name="DeleteExpScreenTipTitle" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="ExpListGroupHeader" xml:space="preserve">
+    <value>Список выражений</value>
+  </data>
 </root>

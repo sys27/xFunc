@@ -74,6 +74,21 @@ namespace xFunc.Logics
             }
         }
 
+        public void Clear()
+        {
+            foreach (var exp in expressions)
+            {
+                if (exp.Expression is Assign)
+                {
+                    var assign = exp.Expression as Assign;
+
+                    parameters.Remove(assign.Variable.Character);
+                }
+            }
+
+            expressions.Clear();
+        }
+
         public void Remove(LogicWorkspaceItem item)
         {
             if (item.Expression is Assign)

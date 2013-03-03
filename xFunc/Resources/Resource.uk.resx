@@ -291,4 +291,25 @@
   <data name="BitwiseExpanderHeader" xml:space="preserve">
     <value>Бітові</value>
   </data>
+  <data name="ClearButtonHeader" xml:space="preserve">
+    <value>Очистити</value>
+  </data>
+  <data name="ClearScreenTipText" xml:space="preserve">
+    <value>Видалити всі вирази зі списку.</value>
+  </data>
+  <data name="ClearScreenTipTitle" xml:space="preserve">
+    <value>Очистити</value>
+  </data>
+  <data name="DeleteExpButtonHeader" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="DeleteExpScreenTipText" xml:space="preserve">
+    <value>Видалити виділений вираз</value>
+  </data>
+  <data name="DeleteExpScreenTipTitle" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="ExpListGroupHeader" xml:space="preserve">
+    <value>Список виразів</value>
+  </data>
 </root>

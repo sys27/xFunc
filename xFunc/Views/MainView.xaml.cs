@@ -44,6 +44,9 @@ namespace xFunc.Views
         public static RoutedCommand RadianCommand = new RoutedCommand();
         public static RoutedCommand GradianCommand = new RoutedCommand();
 
+        public static RoutedCommand DeleteExpCommand = new RoutedCommand();
+        public static RoutedCommand ClearCommand = new RoutedCommand();
+
         public MainView()
         {
             InitializeComponent();
@@ -170,6 +173,41 @@ namespace xFunc.Views
         private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
+        }
+
+        private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            if (tabControl.SelectedItem == mathTab)
+            {
+                var item = (MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem;
+
+                mathPresenter.Remove(item);
+            }
+            else if (tabControl.SelectedItem == logicTab)
+            {
+                var item = (LogicWorkspaceItemViewModel)logicExpsListBox.SelectedItem;
+
+                logicPresenter.Remove(item);
+            }
+        }
+
+        private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
+                              (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null);
+        }
+
+        private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            if (tabControl.SelectedItem == mathTab)
+                mathPresenter.Clear();
+            else if (tabControl.SelectedItem == logicTab)
+                logicPresenter.Clear();
+        }
+
+        private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = tabControl.SelectedItem == mathTab || tabControl.SelectedItem == logicTab;
         }
 
         private void InsertChar_Click(object o, RoutedEventArgs args)

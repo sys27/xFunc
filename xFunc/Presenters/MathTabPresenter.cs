@@ -42,6 +42,13 @@ namespace xFunc.Presenters
             UpdateList();
         }
 
+        public void Clear()
+        {
+            workspace.Clear();
+
+            UpdateList();
+        }
+
         public void Remove(MathWorkspaceItemViewModel item)
         {
             workspace.Remove(item.Item);

@@ -59,6 +59,9 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        
+        <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
+        <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
     </ribbon:RibbonWindow.CommandBindings>
     <ribbon:RibbonWindow.InputBindings>
         <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
@@ -130,6 +133,18 @@ limitations under the License. -->
                             <ribbon:ScreenTip Title="{x:Static res:Resource.GradianScreenTipTitle}" Text="{x:Static res:Resource.GradianScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
+                </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ExpListGroupHeader}">
+                    <ribbon:Button Header="{x:Static res:Resource.DeleteExpButtonHeader}" Icon="../Images/Delete.png" LargeIcon="../Images/DeleteLarge.png" Command="views:MainView.DeleteExpCommand">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.DeleteExpScreenTipTitle}" Text="{x:Static res:Resource.DeleteExpScreenTipText}" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button Header="{x:Static res:Resource.ClearButtonHeader}" Icon="../Images/Clear.png" LargeIcon="../Images/ClearLarge.png" Command="views:MainView.ClearCommand">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.ClearScreenTipTitle}" Text="{x:Static res:Resource.ClearScreenTipText}" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
             <!--<ribbon:RibbonTabItem Header="{x:Static res:Resource.InsertRibbonTab}">

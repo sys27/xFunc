@@ -47,6 +47,8 @@ namespace xFunc.Views
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
+        public static RoutedCommand AboutCommand = new RoutedCommand();
+
         public MainView()
         {
             InitializeComponent();
@@ -208,6 +210,12 @@ namespace xFunc.Views
         private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab || tabControl.SelectedItem == logicTab;
+        }
+
+        private void AboutCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            AboutView aboutView = new AboutView { Owner = this };
+            aboutView.ShowDialog();
         }
 
         private void InsertChar_Click(object o, RoutedEventArgs args)
@@ -624,13 +632,7 @@ namespace xFunc.Views
             }
         }
 
-        private void aboutButton_Click(object o, RoutedEventArgs args)
-        {
-            AboutView aboutView = new AboutView { Owner = this };
-            aboutView.ShowDialog();
-        }
-
-        private void removeMath_Click(object o, RoutedEventArgs args)
+                private void removeMath_Click(object o, RoutedEventArgs args)
         {
             var item = ((Button)o).Tag as MathWorkspaceItemViewModel;
 

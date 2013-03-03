@@ -62,11 +62,15 @@ limitations under the License. -->
         
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
+
+        <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
     </ribbon:RibbonWindow.CommandBindings>
     <ribbon:RibbonWindow.InputBindings>
         <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
+
+        <KeyBinding Command="views:MainView.AboutCommand" Key="F1" />
     </ribbon:RibbonWindow.InputBindings>
 
     <Grid>
@@ -86,7 +90,7 @@ limitations under the License. -->
                 <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
             <ribbon:Ribbon.ToolBarItems>
-                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" ToolTip="{x:Static res:Resource.AboutButtonToolTip}" Size="Small" Icon="../Images/Help.png" Click="aboutButton_Click" />
+                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" ToolTip="{x:Static res:Resource.AboutButtonToolTip}" Size="Small" Icon="../Images/Help.png" Command="views:MainView.AboutCommand" />
             </ribbon:Ribbon.ToolBarItems>
             <ribbon:RibbonTabItem Header="{x:Static res:Resource.HomeRibbonTabHeader}" IsSelected="True">
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ClipboardGroupHeader}">

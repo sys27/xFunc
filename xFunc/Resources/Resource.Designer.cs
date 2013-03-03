@@ -142,6 +142,33 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string ClearButtonHeader {
+            get {
+                return ResourceManager.GetString("ClearButtonHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete all expressions..
+        /// </summary>
+        public static string ClearScreenTipText {
+            get {
+                return ResourceManager.GetString("ClearScreenTipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string ClearScreenTipTitle {
+            get {
+                return ResourceManager.GetString("ClearScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
         public static string ClipboardGroupHeader {
@@ -246,6 +273,42 @@ namespace xFunc.Resources {
         public static string DegreeScreenTipTitle {
             get {
                 return ResourceManager.GetString("DegreeScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteExpButtonHeader {
+            get {
+                return ResourceManager.GetString("DeleteExpButtonHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the selected expression.
+        /// </summary>
+        public static string DeleteExpScreenTipText {
+            get {
+                return ResourceManager.GetString("DeleteExpScreenTipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteExpScreenTipTitle {
+            get {
+                return ResourceManager.GetString("DeleteExpScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expression List.
+        /// </summary>
+        public static string ExpListGroupHeader {
+            get {
+                return ResourceManager.GetString("ExpListGroupHeader", resourceCulture);
             }
         }
         

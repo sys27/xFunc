@@ -291,4 +291,25 @@
   <data name="BitwiseExpanderHeader" xml:space="preserve">
     <value>Bitwise</value>
   </data>
+  <data name="ClearButtonHeader" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ClearScreenTipText" xml:space="preserve">
+    <value>Delete all expressions.</value>
+  </data>
+  <data name="ClearScreenTipTitle" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="DeleteExpButtonHeader" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteExpScreenTipText" xml:space="preserve">
+    <value>Delete the selected expression</value>
+  </data>
+  <data name="DeleteExpScreenTipTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ExpListGroupHeader" xml:space="preserve">
+    <value>Expression List</value>
+  </data>
 </root>

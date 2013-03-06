@@ -322,6 +322,70 @@ namespace xFunc.Views
             tb.Focus();
         }
 
+        private void EnterButton_Click(object o, RoutedEventArgs args)
+        {
+            if (!string.IsNullOrWhiteSpace(mathExpressionBox.Text))
+                MathExpEnter();
+        }
+
+        private void MathExpEnter()
+        {
+            try
+            {
+                mathPresenter.Add(mathExpressionBox.Text);
+                var count = mathExpsListBox.Items.Count;
+                if (count > 0)
+                    mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[count - 1]);
+                statusBox.Text = string.Empty;
+            }
+            catch (MathLexerException mle)
+            {
+                statusBox.Text = mle.Message;
+            }
+            catch (MathParserException mpe)
+            {
+                statusBox.Text = mpe.Message;
+            }
+            catch (DivideByZeroException dbze)
+            {
+                statusBox.Text = dbze.Message;
+            }
+            catch (ArgumentNullException ane)
+            {
+                statusBox.Text = ane.Message;
+            }
+            catch (ArgumentException ae)
+            {
+                statusBox.Text = ae.Message;
+            }
+            catch (FormatException fe)
+            {
+                statusBox.Text = fe.Message;
+            }
+            catch (OverflowException oe)
+            {
+                statusBox.Text = oe.Message;
+            }
+            catch (KeyNotFoundException)
+            {
+                statusBox.Text = Resource.VariableNotFoundExceptionError;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                statusBox.Text = Resource.IndexOutOfRangeExceptionError;
+            }
+            catch (InvalidOperationException ioe)
+            {
+                statusBox.Text = ioe.Message;
+            }
+            catch (NotSupportedException)
+            {
+                statusBox.Text = Resource.NotSupportedOperationError;
+            }
+
+            mathExpressionBox.Text = string.Empty;
+        }
+
         private void GenerateTruthTable(IEnumerable<ILogicExpression> exps, LogicParameterCollection parameters)
         {
             truthTableGridView.Columns.Clear();
@@ -359,60 +423,7 @@ namespace xFunc.Views
         {
             if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(mathExpressionBox.Text))
             {
-                try
-                {
-                    mathPresenter.Add(mathExpressionBox.Text);
-                    var count = mathExpsListBox.Items.Count;
-                    if (count > 0)
-                        mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[count - 1]);
-                    statusBox.Text = string.Empty;
-                }
-                catch (MathLexerException mle)
-                {
-                    statusBox.Text = mle.Message;
-                }
-                catch (MathParserException mpe)
-                {
-                    statusBox.Text = mpe.Message;
-                }
-                catch (DivideByZeroException dbze)
-                {
-                    statusBox.Text = dbze.Message;
-                }
-                catch (ArgumentNullException ane)
-                {
-                    statusBox.Text = ane.Message;
-                }
-                catch (ArgumentException ae)
-                {
-                    statusBox.Text = ae.Message;
-                }
-                catch (FormatException fe)
-                {
-                    statusBox.Text = fe.Message;
-                }
-                catch (OverflowException oe)
-                {
-                    statusBox.Text = oe.Message;
-                }
-                catch (KeyNotFoundException)
-                {
-                    statusBox.Text = Resource.VariableNotFoundExceptionError;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
-                }
-                catch (InvalidOperationException ioe)
-                {
-                    statusBox.Text = ioe.Message;
-                }
-                catch (NotSupportedException)
-                {
-                    statusBox.Text = Resource.NotSupportedOperationError;
-                }
-
-                mathExpressionBox.Text = string.Empty;
+                MathExpEnter();
             }
         }
 
@@ -632,7 +643,7 @@ namespace xFunc.Views
             }
         }
 
-                private void removeMath_Click(object o, RoutedEventArgs args)
+        private void removeMath_Click(object o, RoutedEventArgs args)
         {
             var item = ((Button)o).Tag as MathWorkspaceItemViewModel;
 

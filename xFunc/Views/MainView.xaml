@@ -533,11 +533,14 @@ limitations under the License. -->
                             <Rectangle Fill="{StaticResource minus}" Width="12" Height="4" />
                         </Button>
 
-                        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Tag="0" Click="InsertChar_Click">
+                        <Button Grid.Row="3" Grid.Column="0" Tag="0" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource zero}" Width="14" Height="12" />
                         </Button>
-                        <Button Grid.Row="3" Grid.Column="2" Tag="." Click="InsertChar_Click">
+                        <Button Grid.Row="3" Grid.Column="1" Tag="." Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource point}" Width="3" Height="3" />
+                        </Button>
+                        <Button Grid.Row="3" Grid.Column="2" Click="EnterButton_Click">
+                            <Rectangle Fill="{StaticResource enter}" Width="14" Height="12" />
                         </Button>
                         <Button Grid.Row="3" Grid.Column="3" Tag="+" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource plus}" Width="14" Height="12" />

@@ -113,6 +113,15 @@ limitations under the License. -->
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+    <DrawingBrush x:Key="enter" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 22.08,3.36L 0,3.36L 0,-1.52588e-005L 22.08,-1.52588e-005L 22.08,3.36 Z M 22.08,13.44L 0,13.44L 0,10.08L 22.08,10.08L 22.08,13.44 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 
     <DrawingBrush x:Key="plus" Stretch="Uniform">
         <DrawingBrush.Drawing>

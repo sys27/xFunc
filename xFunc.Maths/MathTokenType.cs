@@ -17,6 +17,10 @@ using System;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// Describes a type of token.
+    /// </summary>
+    /// <seealso cref="MathToken"/>
     public enum MathTokenType
     {
 

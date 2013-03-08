@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     {
 
         /// <summary>
-        /// Calculates a mathemarical expression.
+        /// Calculates this mathemarical expression.
         /// </summary>
         /// <param name="parameters">A collection of variables that are used in the expression.</param>
         /// <returns>A result of the calculation.</returns>

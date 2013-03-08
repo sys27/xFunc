@@ -59,6 +59,11 @@ namespace xFunc.Maths
             this.variable = variable;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             MathToken token = obj as MathToken;
@@ -75,11 +80,19 @@ namespace xFunc.Maths
             return false;
         }
 
+        /// <summary>
+        /// Returns the hash code for this token.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
             return type.GetHashCode() ^ number.GetHashCode() ^ variable.GetHashCode();
         }
 
+        /// <summary>
+        /// Converts this instance of token into an equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this token.</returns>
         public override string ToString()
         {
             if (type == MathTokenType.Number)
@@ -94,6 +107,9 @@ namespace xFunc.Maths
             return type.ToString();
         }
 
+        /// <summary>
+        /// Get or Set the type of token.
+        /// </summary>
         public MathTokenType Type
         {
             get
@@ -106,6 +122,9 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Get or Set the value of number.
+        /// </summary>
         public double Number
         {
             get
@@ -118,6 +137,9 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Get or Set the name of variable.
+        /// </summary>
         public char Variable
         {
             get

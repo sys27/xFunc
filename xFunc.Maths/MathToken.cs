@@ -17,6 +17,10 @@ using System;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// Represents a token.
+    /// </summary>
+    /// <seealso cref="IMathLexer.Tokenize"/>
     public class MathToken
     {
 
@@ -24,12 +28,28 @@ namespace xFunc.Maths
         private double number;
         private char variable;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="MathToken"/>.
+        /// </summary>
         public MathToken() { }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="MathToken"/>.
+        /// </summary>
+        /// <param name="type">A type of token.</param>
+        /// <seealso cref="MathTokenType"/>
         public MathToken(MathTokenType type) : this(type, 0, ' ') { }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="MathToken"/> and sets the value of number.
+        /// </summary>
+        /// <param name="number">A real number.</param>
         public MathToken(double number) : this(MathTokenType.Number, number, ' ') { }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="MathToken"/> and sets the name of variable.
+        /// </summary>
+        /// <param name="variable">A name of variable.</param>
         public MathToken(char variable) : this(MathTokenType.Variable, 0, variable) { }
 
         internal MathToken(MathTokenType type, double number, char variable)

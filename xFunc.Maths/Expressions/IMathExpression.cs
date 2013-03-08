@@ -17,15 +17,41 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Defines methods to calculate and to differentiate mathematical expressions.
+    /// </summary>
     public interface IMathExpression
     {
 
+        /// <summary>
+        /// Calculates a mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="MathParameterCollection"/>
         double Calculate(MathParameterCollection parameters);
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <returns>Returns a derivative of the expression.</returns>
         IMathExpression Differentiation();
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>Returns a derivative of the expression of several variables.</returns>
+        /// <seealso cref="Variable"/>
         IMathExpression Differentiation(Variable variable);
 
+        /// <summary>
+        /// Clones this instanse of the <see cref="IMathExpression"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         IMathExpression Clone();
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         IMathExpression Parent { get; set; }
 
     }

@@ -312,4 +312,7 @@
   <data name="ExpListGroupHeader" xml:space="preserve">
     <value>Expression List</value>
   </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>The value '{1}' was assigned to the variable '{0}'.</value>
+  </data>
 </root>

@@ -312,4 +312,7 @@
   <data name="ExpListGroupHeader" xml:space="preserve">
     <value>Список выражений</value>
   </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>Переменной '{0}' присвоено '{1}' значение.</value>
+  </data>
 </root>

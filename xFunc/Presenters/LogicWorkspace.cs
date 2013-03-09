@@ -14,10 +14,11 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using xFunc.Logics;
 using xFunc.Logics.Expressions;
-using xFunc.Logics.Resources;
+using xFunc.Resources;
 
-namespace xFunc.Logics
+namespace xFunc.Presenters
 {
 
     public class LogicWorkspace

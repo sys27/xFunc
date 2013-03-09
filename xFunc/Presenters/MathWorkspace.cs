@@ -15,10 +15,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using xFunc.Maths;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Resources;
+using xFunc.Resources;
 
-namespace xFunc.Maths
+namespace xFunc.Presenters
 {
 
     public class MathWorkspace

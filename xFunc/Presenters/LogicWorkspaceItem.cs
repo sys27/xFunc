@@ -15,7 +15,7 @@
 using System;
 using xFunc.Logics.Expressions;
 
-namespace xFunc.Logics
+namespace xFunc.Presenters
 {
 
     public class LogicWorkspaceItem

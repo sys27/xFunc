@@ -15,7 +15,7 @@
 using System;
 using xFunc.Maths.Expressions;
 
-namespace xFunc.Maths
+namespace xFunc.Presenters
 {
 
     public class MathWorkspaceItem

@@ -102,7 +102,11 @@
     </Compile>
     <Compile Include="Presenters\GraphsTabPresenter.cs" />
     <Compile Include="Presenters\LogicTabPresenter.cs" />
+    <Compile Include="Presenters\LogicWorkspace.cs" />
+    <Compile Include="Presenters\LogicWorkspaceItem.cs" />
     <Compile Include="Presenters\MathTabPresenter.cs" />
+    <Compile Include="Presenters\MathWorkspace.cs" />
+    <Compile Include="Presenters\MathWorkspaceItem.cs" />
     <Compile Include="Presenters\TruthTableTabPresenter.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

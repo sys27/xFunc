@@ -115,6 +115,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value &apos;{1}&apos; was assigned to the variable &apos;{0}&apos;..
+        /// </summary>
+        public static string AssignVariable {
+            get {
+                return ResourceManager.GetString("AssignVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dmitry Kischenko.
         /// </summary>
         public static string Author {

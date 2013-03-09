@@ -61,15 +61,6 @@ namespace xFunc.Logics.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value &apos;{1}&apos; was assigned to the variable &apos;{0}&apos;..
-        /// </summary>
-        internal static string AssignVariable {
-            get {
-                return ResourceManager.GetString("AssignVariable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to An error occurred while parsing the tree..
         /// </summary>
         internal static string ErrorWhileParsingTree {

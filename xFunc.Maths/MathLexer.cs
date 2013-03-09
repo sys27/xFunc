@@ -27,11 +27,19 @@ namespace xFunc.Maths
 
         private readonly HashSet<string> notVar;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="MathLexer"/>.
+        /// </summary>
         public MathLexer()
         {
             notVar = new HashSet<string> { "and", "or", "xor" };
         }
 
+        /// <summary>
+        /// Converts the string into a sequence of tokens.
+        /// </summary>
+        /// <param name="function">The string that contains the functions and operators.</param>
+        /// <returns>The sequence of tokens.</returns>
         public IEnumerable<MathToken> Tokenize(string function)
         {
             if (string.IsNullOrWhiteSpace(function))

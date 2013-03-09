@@ -63,8 +63,6 @@
     <Compile Include="LogicParser.cs" />
     <Compile Include="LogicToken.cs" />
     <Compile Include="LogicTokenType.cs" />
-    <Compile Include="LogicWorkspace.cs" />
-    <Compile Include="LogicWorkspaceItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.uk.Designer.cs">
       <DependentUpon>Resource.uk.resx</DependentUpon>

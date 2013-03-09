@@ -312,4 +312,7 @@
   <data name="ExpListGroupHeader" xml:space="preserve">
     <value>Список виразів</value>
   </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
+  </data>
 </root>

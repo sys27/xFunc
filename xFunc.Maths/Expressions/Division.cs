@@ -39,15 +39,15 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Calculate(parameters) / secondMathExpression.Calculate(parameters);
         }
 
-        public override IMathExpression Differentiation(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             var first = MathParser.HasVar(firstMathExpression, variable);
             var second = MathParser.HasVar(secondMathExpression, variable);
 
             if (first && second)
             {
-                Multiplication mul1 = new Multiplication(firstMathExpression.Clone().Differentiation(variable), secondMathExpression.Clone());
-                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiation(variable));
+                Multiplication mul1 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
+                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
                 Subtraction sub = new Subtraction(mul1, mul2);
                 Exponentiation inv = new Exponentiation(secondMathExpression.Clone(), new Number(2));
                 Division division = new Division(sub, inv);
@@ -56,11 +56,11 @@ namespace xFunc.Maths.Expressions
             }
             if (first)
             {
-                return new Division(firstMathExpression.Clone().Differentiation(variable), secondMathExpression.Clone());
+                return new Division(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
             }
             if (second)
             {
-                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiation(variable));
+                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
                 UnaryMinus unMinus = new UnaryMinus(mul2);
                 Exponentiation inv = new Exponentiation(secondMathExpression.Clone(), new Number(2));
                 Division division = new Division(unMinus, inv);

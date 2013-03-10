@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             var cosh = new HyperbolicCosine(firstMathExpression.Clone());
             var inv = new Exponentiation(cosh, new Number(2));
-            var div = new Division(firstMathExpression.Clone().Differentiation(variable), inv);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
 
             return div;
         }

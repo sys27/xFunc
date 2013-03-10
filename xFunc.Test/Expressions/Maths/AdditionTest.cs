@@ -31,7 +31,7 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest1()
         {
             IMathExpression exp = new Addition(new Multiplication(new Number(2), new Variable('x')), new Number(3));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("2 * 1", deriv.ToString());
         }
@@ -40,7 +40,7 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             IMathExpression exp = new Addition(new Multiplication(new Number(2), new Variable('x')), new Multiplication(new Number(3), new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) + (3 * 1)", deriv.ToString());
         }
@@ -56,7 +56,7 @@ namespace xFunc.Test.Expressions.Maths
             Number num2 = new Number(3);
 
             IMathExpression exp = new Addition(mul1, num2);
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("2 * 1", deriv.ToString());
 
@@ -69,7 +69,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = new Addition(new Addition(new Multiplication(new Variable('x'), new Variable('y')), new Variable('x')), new Variable('y'));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) + 1", deriv.ToString());
         }
 
@@ -77,7 +77,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = new Addition(new Addition(new Multiplication(new Variable('x'), new Variable('y')), new Variable('x')), new Variable('y'));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("(x * 1) + 1", deriv.ToString());
         }
 
@@ -85,7 +85,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest3()
         {
             IMathExpression exp = new Addition(new Variable('x'), new Number(1));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("0", deriv.ToString());
         }
 

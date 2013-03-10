@@ -36,7 +36,7 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Division div = new Division(firstMathExpression.Clone().Differentiation(variable), firstMathExpression.Clone());
+            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), firstMathExpression.Clone());
 
             return div;
         }

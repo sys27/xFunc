@@ -39,7 +39,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void DerivativeTest1()
         {
             IMathExpression exp = new Secant(new Multiplication(new Number(2), new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
         }
@@ -53,7 +53,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Secant(mul);
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
 

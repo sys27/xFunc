@@ -24,7 +24,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             // x - sin(x)
             IMathExpression exp = new Subtraction(new Variable('x'), new Sine(new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 - (cos(x) * 1)", deriv.ToString());
         }
@@ -40,7 +40,7 @@ namespace xFunc.Test.Expressions.Maths
             Multiplication mul2 = new Multiplication(num2, x.Clone());
 
             IMathExpression exp = new Subtraction(mul1, mul2);
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) - (3 * 1)", deriv.ToString());
 
@@ -54,7 +54,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = new Subtraction(new Multiplication(new Variable('x'), new Variable('y')), new Variable('y'));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("(x * 1) - 1", deriv.ToString());
         }
 
@@ -62,7 +62,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = new Subtraction(new Variable('x'), new Variable('y'));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("1", deriv.ToString());
         }
 
@@ -70,7 +70,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest3()
         {
             IMathExpression exp = new Subtraction(new Variable('x'), new Variable('y'));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("-1", deriv.ToString());
         }
 
@@ -78,7 +78,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest4()
         {
             IMathExpression exp = new Subtraction(new Variable('x'), new Number(1));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("0", deriv.ToString());
         }
 

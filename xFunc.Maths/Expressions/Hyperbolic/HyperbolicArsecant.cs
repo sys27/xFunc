@@ -53,7 +53,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             var sub = new Subtraction(new Number(1), inv);
             var sqrt = new Sqrt(sub);
             var mul = new Multiplication(firstMathExpression.Clone(), sqrt);
-            var div = new Division(firstMathExpression.Clone().Differentiation(variable), mul);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
             var unMinus = new UnaryMinus(div);
 
             return unMinus;

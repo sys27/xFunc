@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             Sine sine = new Sine(firstMathExpression.Clone());
             Exponentiation involution = new Exponentiation(sine, new Number(2));
-            Division division = new Division(firstMathExpression.Clone().Differentiation(variable), involution);
+            Division division = new Division(firstMathExpression.Clone().Differentiate(variable), involution);
             UnaryMinus unMinus = new UnaryMinus(division);
 
             return unMinus;

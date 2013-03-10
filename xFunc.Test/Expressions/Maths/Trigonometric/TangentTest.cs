@@ -39,7 +39,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void DerivativeTest1()
         {
             IMathExpression exp = new Tangent(new Variable('x'));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 / (cos(x) ^ 2)", deriv.ToString());
         }
@@ -48,7 +48,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void DerivativeTest2()
         {
             IMathExpression exp = new Tangent(new Multiplication(new Number(2), new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
         }
@@ -61,7 +61,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Tangent(mul);
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
 
@@ -74,7 +74,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = new Tangent(new Multiplication(new Variable('x'), new Variable('y')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) / (cos(x * y) ^ 2)", deriv.ToString());
         }
 
@@ -82,7 +82,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = new Tangent(new Multiplication(new Variable('x'), new Variable('y')));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("(x * 1) / (cos(x * y) ^ 2)", deriv.ToString());
         }
 
@@ -90,7 +90,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void PartialDerivativeTest3()
         {
             IMathExpression exp = new Tangent(new Variable('x'));
-            IMathExpression deriv = exp.Differentiation(new Variable('y'));
+            IMathExpression deriv = exp.Differentiate(new Variable('y'));
             Assert.AreEqual("0", deriv.ToString());
         }
 

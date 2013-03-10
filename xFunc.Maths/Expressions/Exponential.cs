@@ -36,7 +36,7 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Multiplication mul = new Multiplication(firstMathExpression.Clone().Differentiation(variable), Clone());
+            Multiplication mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), Clone());
 
             return mul;
         }

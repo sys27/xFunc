@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Cosine cos = new Cosine(firstMathExpression.Clone());
-            Multiplication mul = new Multiplication(cos, firstMathExpression.Clone().Differentiation(variable));
+            Multiplication mul = new Multiplication(cos, firstMathExpression.Clone().Differentiate(variable));
 
             return mul;
         }

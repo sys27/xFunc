@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest1()
         {
             IMathExpression exp = new Sqrt(new Multiplication(new Number(2), new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * sqrt(2 * x))", deriv.ToString());
         }
@@ -35,7 +35,7 @@ namespace xFunc.Test.Expressions.Maths
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Sqrt(mul);
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * sqrt(2 * x))", deriv.ToString());
 
@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             // sqrt(2xy)
             IMathExpression exp = new Sqrt(new Multiplication(new Multiplication(new Number(2), new Variable('x')), new Variable('y')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("((2 * 1) * y) / (2 * sqrt((2 * x) * y))", deriv.ToString());
         }
 
@@ -57,7 +57,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             IMathExpression exp = new Sqrt(new Variable('y'));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("0", deriv.ToString());
         }
 

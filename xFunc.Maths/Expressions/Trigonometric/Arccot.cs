@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             Exponentiation involution = new Exponentiation(firstMathExpression.Clone(), new Number(2));
             Addition add = new Addition(new Number(1), involution);
-            Division div = new Division(firstMathExpression.Clone().Differentiation(variable), add);
+            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), add);
             UnaryMinus unMinus = new UnaryMinus(div);
 
             return unMinus;

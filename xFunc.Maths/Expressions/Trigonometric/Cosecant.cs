@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiation(variable));
+            UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
             Cotangent cot = new Cotangent(firstMathExpression.Clone());
             Cosecant csc = new Cosecant(firstMathExpression.Clone());
             Multiplication mul1 = new Multiplication(cot, csc);

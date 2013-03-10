@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             var sinh = new HyperbolicSine(firstMathExpression.Clone());
             var inv = new Exponentiation(sinh, new Number(2));
-            var div = new Division(firstMathExpression.Clone().Differentiation(variable), inv);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
             var unMinus = new UnaryMinus(div);
 
             return unMinus;

@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
             var sub = new Subtraction(new Number(1), sqr);
-            var div = new Division(firstMathExpression.Clone().Differentiation(variable), sub);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), sub);
 
             return div;
         }

@@ -46,24 +46,24 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters)
         {
-            return Differentiation().Calculate(parameters);
+            return Differentiate().Calculate(parameters);
         }
 
-        public IMathExpression Differentiation()
+        public IMathExpression Differentiate()
         {
             if (firstMathExpression is Derivative)
-                return MathParser.SimplifyExpressions(firstMathExpression.Differentiation(variable).Differentiation(variable));
+                return MathParser.Simplify(firstMathExpression.Differentiate(variable).Differentiate(variable));
 
-            return MathParser.SimplifyExpressions(firstMathExpression.Differentiation(variable));
+            return MathParser.Simplify(firstMathExpression.Differentiate(variable));
         }
 
         // The local "variable" is ignored.
-        public IMathExpression Differentiation(Variable variable)
+        public IMathExpression Differentiate(Variable variable)
         {
             if (firstMathExpression is Derivative)
-                return MathParser.SimplifyExpressions(firstMathExpression.Differentiation(this.variable).Differentiation(this.variable));
+                return MathParser.Simplify(firstMathExpression.Differentiate(this.variable).Differentiate(this.variable));
 
-            return MathParser.SimplifyExpressions(firstMathExpression.Differentiation(this.variable));
+            return MathParser.Simplify(firstMathExpression.Differentiate(this.variable));
         }
 
         public IMathExpression Clone()

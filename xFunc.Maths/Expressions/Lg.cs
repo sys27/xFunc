@@ -38,7 +38,7 @@ namespace xFunc.Maths.Expressions
         {
             Ln ln = new Ln(new Number(10));
             Multiplication mul1 = new Multiplication(firstMathExpression.Clone(), ln);
-            Division div = new Division(firstMathExpression.Clone().Differentiation(variable), mul1);
+            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), mul1);
 
             return div;
         }

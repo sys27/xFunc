@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <param name="variable">This method always throws the <see cref="NotSupportedException"/> exception.</param>
         /// <returns>This method always throws the <see cref="NotSupportedException"/> exception.</returns>
         /// <exception cref="NotSupportedException">Always is thrown.</exception>
-        public override IMathExpression Differentiation(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }

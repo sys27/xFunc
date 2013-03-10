@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var sinh = new HyperbolicSine(firstMathExpression.Clone());
-            var mul = new Multiplication(firstMathExpression.Clone().Differentiation(variable), sinh);
+            var mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), sinh);
 
             return mul;
         }

@@ -39,26 +39,26 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Calculate(parameters) * secondMathExpression.Calculate(parameters);
         }
 
-        public override IMathExpression Differentiation(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             var first = MathParser.HasVar(firstMathExpression, variable);
             var second = MathParser.HasVar(secondMathExpression, variable);
 
             if (first && second)
             {
-                Multiplication mul1 = new Multiplication(firstMathExpression.Clone().Differentiation(variable), secondMathExpression.Clone());
-                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiation(variable));
+                Multiplication mul1 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
+                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
                 Addition add = new Addition(mul1, mul2);
 
                 return add;
             }
             if (first)
             {
-                return new Multiplication(firstMathExpression.Clone().Differentiation(variable), secondMathExpression.Clone());
+                return new Multiplication(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
             }
             if (second)
             {
-                return new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiation(variable));
+                return new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
             }
 
             return new Number(0);

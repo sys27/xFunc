@@ -50,12 +50,12 @@ namespace xFunc.Maths.Expressions
             return double.NaN;
         }
 
-        public IMathExpression Differentiation()
+        public IMathExpression Differentiate()
         {
             throw new NotSupportedException();
         }
 
-        public IMathExpression Differentiation(Variable variable)
+        public IMathExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }

@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             Tangent tan = new Tangent(firstMathExpression.Clone());
             Secant sec = new Secant(firstMathExpression.Clone());
             Multiplication mul1 = new Multiplication(tan, sec);
-            Multiplication mul2 = new Multiplication(firstMathExpression.Clone().Differentiation(variable), mul1);
+            Multiplication mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
 
             return mul2;
         }

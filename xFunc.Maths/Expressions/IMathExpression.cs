@@ -34,14 +34,14 @@ namespace xFunc.Maths.Expressions
         /// Calculates a derivative of the expression.
         /// </summary>
         /// <returns>Returns a derivative of the expression.</returns>
-        IMathExpression Differentiation();
+        IMathExpression Differentiate();
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>
         /// <param name="variable"></param>
         /// <returns>Returns a derivative of the expression of several variables.</returns>
         /// <seealso cref="Variable"/>
-        IMathExpression Differentiation(Variable variable);
+        IMathExpression Differentiate(Variable variable);
 
         /// <summary>
         /// Clones this instanse of the <see cref="IMathExpression"/>.

@@ -45,15 +45,15 @@ namespace xFunc.Maths
             this.lexer = lexer;
         }
 
-        public static IMathExpression SimplifyExpressions(IMathExpression expression)
+        public static IMathExpression Simplify(IMathExpression expression)
         {
-            IMathExpression exp = _SimplifyExpressions(expression);
+            IMathExpression exp = _Simplify(expression);
             exp.Parent = null;
 
             return exp;
         }
 
-        private static IMathExpression _SimplifyExpressions(IMathExpression expression)
+        private static IMathExpression _Simplify(IMathExpression expression)
         {
             if (expression is Number)
                 return expression;
@@ -63,13 +63,13 @@ namespace xFunc.Maths
             if (expression is BinaryMathExpression)
             {
                 BinaryMathExpression bin = expression as BinaryMathExpression;
-                bin.FirstMathExpression = _SimplifyExpressions(bin.FirstMathExpression);
-                bin.SecondMathExpression = _SimplifyExpressions(bin.SecondMathExpression);
+                bin.FirstMathExpression = _Simplify(bin.FirstMathExpression);
+                bin.SecondMathExpression = _Simplify(bin.SecondMathExpression);
             }
             else if (expression is UnaryMathExpression)
             {
                 UnaryMathExpression un = expression as UnaryMathExpression;
-                un.FirstMathExpression = _SimplifyExpressions(un.FirstMathExpression);
+                un.FirstMathExpression = _Simplify(un.FirstMathExpression);
             }
 
             Number zero = 0;
@@ -140,14 +140,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketAdd.FirstMathExpression as Number;
                         Addition result = new Addition(bracketAdd.SecondMathExpression, new Number(firstNumber.Value + secondNumber.Value));
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketAdd.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketAdd.SecondMathExpression as Number;
                         Addition result = new Addition(bracketAdd.FirstMathExpression, new Number(firstNumber.Value + secondNumber.Value));
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
 
@@ -173,14 +173,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketSub.FirstMathExpression as Number;
                         Subtraction result = new Subtraction(new Number(firstNumber.Value + secondNumber.Value), bracketSub.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketSub.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketSub.SecondMathExpression as Number;
                         Addition result = new Addition(new Number(firstNumber.Value - secondNumber.Value), bracketSub.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
             }
@@ -190,7 +190,7 @@ namespace xFunc.Maths
 
                 // sub zero
                 if (sub.FirstMathExpression.Equals(zero))
-                    return _SimplifyExpressions(new UnaryMinus(sub.SecondMathExpression));
+                    return _Simplify(new UnaryMinus(sub.SecondMathExpression));
                 if (sub.SecondMathExpression.Equals(zero))
                     return sub.FirstMathExpression;
 
@@ -217,14 +217,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketAdd.FirstMathExpression as Number;
                         Addition result = new Addition(bracketAdd.SecondMathExpression, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketAdd.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketAdd.SecondMathExpression as Number;
                         Addition result = new Addition(bracketAdd.FirstMathExpression, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
                 // 2 - (2 + x)
@@ -239,14 +239,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketAdd.FirstMathExpression as Number;
                         Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketAdd.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketAdd.SecondMathExpression as Number;
                         Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
                 // (2 - x) - 2
@@ -261,14 +261,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketSub.FirstMathExpression as Number;
                         Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketSub.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketSub.SecondMathExpression as Number;
                         Subtraction result = new Subtraction(bracketSub.FirstMathExpression, new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)));
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
                 // 2 - (2 - x)
@@ -283,14 +283,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketSub.FirstMathExpression as Number;
                         Addition result = new Addition(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketSub.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketSub.SecondMathExpression as Number;
                         Subtraction result = new Subtraction(new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)), bracketSub.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
             }
@@ -331,14 +331,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketMul.FirstMathExpression as Number;
                         Multiplication result = new Multiplication(new Number(firstNumber.Value * secondNumber.Value), bracketMul.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketMul.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketMul.SecondMathExpression as Number;
                         Multiplication result = new Multiplication(new Number(firstNumber.Value * secondNumber.Value), bracketMul.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
 
@@ -364,14 +364,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketDiv.FirstMathExpression as Number;
                         Division result = new Division(new Number(firstNumber.Value * secondNumber.Value), bracketDiv.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketDiv.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketDiv.SecondMathExpression as Number;
                         Multiplication result = new Multiplication(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
             }
@@ -401,14 +401,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketMul.FirstMathExpression as Number;
                         Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketMul.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketMul.SecondMathExpression as Number;
                         Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
                 // 2 / (2 * x)
@@ -423,14 +423,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketMul.FirstMathExpression as Number;
                         Division result = new Division(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketMul.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketMul.SecondMathExpression as Number;
                         Division result = new Division(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
                 // (2 / x) / 2
@@ -445,14 +445,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketDiv.FirstMathExpression as Number;
                         Division result = new Division(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketDiv.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketDiv.SecondMathExpression as Number;
                         Division result = new Division(bracketDiv.FirstMathExpression, new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)));
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
                 // 2 / (2 / x)
@@ -467,14 +467,14 @@ namespace xFunc.Maths
                         Number secondNumber = bracketDiv.FirstMathExpression as Number;
                         Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.SecondMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                     if (bracketDiv.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketDiv.SecondMathExpression as Number;
                         Division result = new Division(new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)), bracketDiv.FirstMathExpression);
 
-                        return _SimplifyExpressions(result);
+                        return _Simplify(result);
                     }
                 }
             }
@@ -525,14 +525,14 @@ namespace xFunc.Maths
             return expression;
         }
 
-        public static IMathExpression Differentiation(IMathExpression expression)
+        public static IMathExpression Differentiate(IMathExpression expression)
         {
-            return Differentiation(expression, new Variable('x'));
+            return Differentiate(expression, new Variable('x'));
         }
 
-        public static IMathExpression Differentiation(IMathExpression expression, Variable variable)
+        public static IMathExpression Differentiate(IMathExpression expression, Variable variable)
         {
-            return SimplifyExpressions(expression.Differentiation(variable));
+            return Simplify(expression.Differentiate(variable));
         }
 
         public static bool HasVar(IMathExpression expression, Variable arg)
@@ -642,7 +642,7 @@ namespace xFunc.Maths
             }
 
             if (simplify)
-                return SimplifyExpressions(mathExpression);
+                return Simplify(mathExpression);
 
             return mathExpression;
         }

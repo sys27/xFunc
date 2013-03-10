@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
             return Math.Log(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));
         }
 
-        public override IMathExpression Differentiation(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(firstMathExpression, variable))
             {
@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions
 
                 Ln ln = new Ln(secondMathExpression.Clone());
                 Multiplication mul = new Multiplication(firstMathExpression.Clone(), ln);
-                Division div = new Division(firstMathExpression.Clone().Differentiation(variable), mul);
+                Division div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
 
                 return div;
             }

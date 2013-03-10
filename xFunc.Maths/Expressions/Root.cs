@@ -34,14 +34,14 @@ namespace xFunc.Maths.Expressions
             return Math.Pow(firstMathExpression.Calculate(parameters), 1 / secondMathExpression.Calculate(parameters));
         }
 
-        public override IMathExpression Differentiation(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(firstMathExpression, variable) || MathParser.HasVar(secondMathExpression, variable))
             {
                 Division div = new Division(new Number(1), secondMathExpression.Clone());
                 Exponentiation inv = new Exponentiation(firstMathExpression.Clone(), div);
 
-                return inv.Differentiation(variable);
+                return inv.Differentiate(variable);
             }
             
             return new Number(0);

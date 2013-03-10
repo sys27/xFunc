@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             Subtraction sub = new Subtraction(sqr, new Number(1));
             Sqrt sqrt = new Sqrt(sub);
             Multiplication mul = new Multiplication(abs, sqrt);
-            Division div = new Division(firstMathExpression.Clone().Differentiation(variable), mul);
+            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
             UnaryMinus unary = new UnaryMinus(div);
 
             return unary;

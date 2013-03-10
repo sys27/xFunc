@@ -53,7 +53,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             Exponentiation involution = new Exponentiation(firstMathExpression.Clone(), new Number(2));
             Subtraction sub = new Subtraction(new Number(1), involution);
             Sqrt sqrt = new Sqrt(sub);
-            Division division = new Division(firstMathExpression.Clone().Differentiation(variable), sqrt);
+            Division division = new Division(firstMathExpression.Clone().Differentiate(variable), sqrt);
 
             return division;
         }

@@ -39,7 +39,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         public void DerivativeTest1()
         {
             IMathExpression exp = new Arcsec(new Multiplication(new Number(2), new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1))", deriv.ToString());
         }
@@ -53,7 +53,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Arcsec(mul);
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1))", deriv.ToString());
 

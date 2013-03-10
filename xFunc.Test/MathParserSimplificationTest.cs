@@ -12,7 +12,7 @@ namespace xFunc.Test
 
         private void SimpleTest(IMathExpression exp, IMathExpression expected)
         {
-            var simple = MathParser.SimplifyExpressions(exp);
+            var simple = MathParser.Simplify(exp);
 
             Assert.AreEqual(expected, simple);
         }

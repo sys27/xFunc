@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             var tanh = new HyperbolicTangent(firstMathExpression.Clone());
             var sech = Clone();
             var mul1 = new Multiplication(tanh, sech);
-            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiation(variable), mul1);
+            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
             var unMinus = new UnaryMinus(mul2);
 
             return unMinus;

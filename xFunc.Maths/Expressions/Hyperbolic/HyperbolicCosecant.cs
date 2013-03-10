@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             var coth = new HyperbolicCotangent(firstMathExpression.Clone());
             var csch = Clone();
             var mul1 = new Multiplication(coth, csch);
-            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiation(variable), mul1);
+            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
             var unMinus = new UnaryMinus(mul2);
 
             return unMinus;

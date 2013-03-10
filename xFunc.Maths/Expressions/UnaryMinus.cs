@@ -44,7 +44,7 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            return new UnaryMinus(firstMathExpression.Clone().Differentiation());
+            return new UnaryMinus(firstMathExpression.Clone().Differentiate());
         }
 
     }

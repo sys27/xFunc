@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             Cosine cos = new Cosine(firstMathExpression.Clone());
             Exponentiation inv = new Exponentiation(cos, new Number(2));
-            Division div = new Division(firstMathExpression.Clone().Differentiation(variable), inv);
+            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
 
             return div;
         }

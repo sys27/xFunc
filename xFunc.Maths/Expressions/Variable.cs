@@ -62,12 +62,12 @@ namespace xFunc.Maths.Expressions
             return new Variable(variable);
         }
 
-        public IMathExpression Differentiation()
+        public IMathExpression Differentiate()
         {
-            return Differentiation(new Variable('x'));
+            return Differentiate(new Variable('x'));
         }
 
-        public IMathExpression Differentiation(Variable variable)
+        public IMathExpression Differentiate(Variable variable)
         {
             if (Equals(variable))
                 return new Number(1);

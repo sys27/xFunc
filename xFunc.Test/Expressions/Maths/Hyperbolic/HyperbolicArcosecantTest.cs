@@ -23,7 +23,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         public void DerivativeTest()
         {
             IMathExpression exp = new HyperbolicArcosecant(new Multiplication(new Number(2), new Variable('x')));
-            IMathExpression deriv = exp.Differentiation();
+            IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(1 + ((2 * x) ^ 2))))", deriv.ToString());
         }

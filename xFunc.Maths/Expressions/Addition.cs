@@ -39,22 +39,22 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Calculate(parameters) + secondMathExpression.Calculate(parameters);
         }
 
-        public override IMathExpression Differentiation(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             var first = MathParser.HasVar(firstMathExpression, variable);
             var second = MathParser.HasVar(secondMathExpression, variable);
 
             if (first && second)
             {
-                return new Addition(firstMathExpression.Clone().Differentiation(variable), secondMathExpression.Differentiation(variable).Clone());
+                return new Addition(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Differentiate(variable).Clone());
             }
             if (first)
             {
-                return firstMathExpression.Clone().Differentiation(variable);
+                return firstMathExpression.Clone().Differentiate(variable);
             }
             if (second)
             {
-                return secondMathExpression.Differentiation(variable).Clone();
+                return secondMathExpression.Differentiate(variable).Clone();
             }
 
             return new Number(0);

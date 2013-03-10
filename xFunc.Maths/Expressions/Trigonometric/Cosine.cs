@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Sine sine = new Sine(firstMathExpression.Clone());
-            Multiplication multiplication = new Multiplication(sine, firstMathExpression.Clone().Differentiation(variable));
+            Multiplication multiplication = new Multiplication(sine, firstMathExpression.Clone().Differentiate(variable));
             UnaryMinus unMinus = new UnaryMinus(multiplication);
 
             return unMinus;

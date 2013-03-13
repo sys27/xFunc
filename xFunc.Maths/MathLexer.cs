@@ -40,6 +40,9 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="function">The string that contains the functions and operators.</param>
         /// <returns>The sequence of tokens.</returns>
+        /// <seealso cref="MathToken"/>
+        /// <exception cref="ArgumentNullException">Throws when the <paramref name="function"/> parameter is null or empty.</exception>
+        /// <exception cref="MathLexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
         public IEnumerable<MathToken> Tokenize(string function)
         {
             if (string.IsNullOrWhiteSpace(function))

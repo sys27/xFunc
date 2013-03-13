@@ -17,23 +17,49 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents an Absolute operation.
+    /// </summary>
     public class Absolute : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Absolute"/> class.
+        /// </summary>
         public Absolute() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Absolute"/> class.
+        /// </summary>
+        /// <param name="expression">The argument of function.</param>
+        /// <seealso cref="IMathExpression"/>
         public Absolute(IMathExpression expression) : base(expression) { }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return ToString("abs({0})");
         }
 
+        /// <summary>
+        /// Calculates this Absolute expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Abs(firstMathExpression.Calculate(parameters));
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>Returns a derivative of the expression of several variables.</returns>
+        /// <seealso cref="Variable"/>
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Division div = new Division(firstMathExpression.Clone(), Clone());
@@ -42,6 +68,10 @@ namespace xFunc.Maths.Expressions
             return mul;
         }
 
+        /// <summary>
+        /// Clones this instanse of the <see cref="And"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Absolute(firstMathExpression.Clone());

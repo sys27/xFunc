@@ -17,6 +17,10 @@ using System;
 namespace xFunc.Logics
 {
 
+    /// <summary>
+    /// Describes a type of token.
+    /// </summary>
+    /// <seealso cref="LogicToken"/>
     public enum LogicTokenType
     {
 

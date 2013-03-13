@@ -16,10 +16,19 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-    
+
+    /// <summary>
+    /// Defines methods to calculate logical expressions.
+    /// </summary>
     public interface ILogicExpression
     {
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection"/>
         bool Calculate(LogicParameterCollection parameters);
 
     }

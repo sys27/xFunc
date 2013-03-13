@@ -17,16 +17,32 @@ using System;
 namespace xFunc.Logics
 {
 
+    /// <summary>
+    /// Represents a token.
+    /// </summary>
+    /// <seealso cref="ILogicLexer.Tokenize"/>
     public class LogicToken
     {
 
         private LogicTokenType type;
         private char variable;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="LogicToken"/>.
+        /// </summary>
         public LogicToken() { }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="LogicToken"/>.
+        /// </summary>
+        /// <param name="type">A type of token.</param>
+        /// <seealso cref="LogicTokenType"/>
         public LogicToken(LogicTokenType type) : this(type, ' ') { }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="LogicToken"/> and sets the name of variable.
+        /// </summary>
+        /// <param name="variable">A name of variable.</param>
         public LogicToken(char variable) : this(LogicTokenType.Variable, variable) { }
 
         internal LogicToken(LogicTokenType type, char variable)
@@ -35,6 +51,11 @@ namespace xFunc.Logics
             this.variable = variable;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             LogicToken token = obj as LogicToken;
@@ -49,11 +70,19 @@ namespace xFunc.Logics
             return false;
         }
 
+        /// <summary>
+        /// Returns the hash code for this token.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
             return type.GetHashCode() ^ variable.GetHashCode();
         }
 
+        /// <summary>
+        /// Converts this instance of token into an equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this token.</returns>
         public override string ToString()
         {
             if (type == LogicTokenType.Variable)
@@ -64,6 +93,9 @@ namespace xFunc.Logics
             return type.ToString();
         }
 
+        /// <summary>
+        /// Get or Set the type of token.
+        /// </summary>
         public LogicTokenType Type
         {
             get
@@ -76,6 +108,9 @@ namespace xFunc.Logics
             }
         }
 
+        /// <summary>
+        /// Get or Set the name of variable.
+        /// </summary>
         public char Variable
         {
             get

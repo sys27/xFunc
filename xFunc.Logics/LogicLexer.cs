@@ -23,6 +23,11 @@ namespace xFunc.Logics
     public class LogicLexer : IMathLexer
     {
 
+        /// <summary>
+        /// Converts the string into a sequence of tokens.
+        /// </summary>
+        /// <param name="function">The string that contains the functions and operators.</param>
+        /// <returns>The sequence of tokens.</returns>
         public IEnumerable<LogicToken> Tokenize(string function)
         {
             if (string.IsNullOrWhiteSpace(function))

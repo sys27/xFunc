@@ -44,6 +44,8 @@ namespace xFunc.Maths.Expressions
             return string.Format(format, firstMathExpression, secondMathExpression);
         }
 
+        public abstract double Calculate();
+
         public abstract double Calculate(MathParameterCollection parameters);
 
         public abstract IMathExpression Clone();

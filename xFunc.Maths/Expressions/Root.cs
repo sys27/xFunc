@@ -29,6 +29,11 @@ namespace xFunc.Maths.Expressions
             return ToString("root({0}, {1})");
         }
 
+        public override double Calculate()
+        {
+            return Math.Pow(firstMathExpression.Calculate(), 1 / secondMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Pow(firstMathExpression.Calculate(parameters), 1 / secondMathExpression.Calculate(parameters));

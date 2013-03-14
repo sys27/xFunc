@@ -32,6 +32,11 @@ namespace xFunc.Maths.Expressions
             return ToString("-{0}");
         }
 
+        public override double Calculate()
+        {
+            return -firstMathExpression.Calculate();
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return -firstMathExpression.Calculate(parameters);

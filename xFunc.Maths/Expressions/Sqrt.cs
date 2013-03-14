@@ -29,6 +29,11 @@ namespace xFunc.Maths.Expressions
             return ToString("sqrt({0})");
         }
 
+        public override double Calculate()
+        {
+            return Math.Sqrt(FirstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Sqrt(FirstMathExpression.Calculate(parameters));

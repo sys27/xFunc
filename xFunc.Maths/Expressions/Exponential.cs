@@ -29,6 +29,11 @@ namespace xFunc.Maths.Expressions
             return ToString("exp({0})");
         }
 
+        public override double Calculate()
+        {
+            return Math.Exp(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Exp(firstMathExpression.Calculate(parameters));

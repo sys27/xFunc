@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("artanh({0})");
         }
 
+        public override double Calculate()
+        {
+            return MathExtentions.Atanh(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Atanh(firstMathExpression.Calculate(parameters));

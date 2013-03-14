@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("arsech({0})");
         }
 
+        public override double Calculate()
+        {
+            return MathExtentions.Asech(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Asech(firstMathExpression.Calculate(parameters));

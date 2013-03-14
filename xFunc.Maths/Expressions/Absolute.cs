@@ -45,6 +45,15 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Calculates this Absolute expression. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the calculation.</returns>
+        public override double Calculate()
+        {
+            return Math.Abs(firstMathExpression.Calculate());
+        }
+
+        /// <summary>
         /// Calculates this Absolute expression.
         /// </summary>
         /// <param name="parameters">A collection of variables that are used in the expression.</param>

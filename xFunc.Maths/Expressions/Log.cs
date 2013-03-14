@@ -29,6 +29,11 @@ namespace xFunc.Maths.Expressions
             return ToString("log({0}, {1})");
         }
 
+        public override double Calculate()
+        {
+            return Math.Log(firstMathExpression.Calculate(), secondMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Log(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));

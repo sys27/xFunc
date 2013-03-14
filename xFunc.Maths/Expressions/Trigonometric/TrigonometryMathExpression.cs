@@ -32,6 +32,18 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public abstract double CalculateRadian(MathParameterCollection parameters);
         public abstract double CalculateGradian(MathParameterCollection parameters);
 
+        public override double Calculate()
+        {
+            if (angleMeasurement == AngleMeasurement.Degree)
+                return CalculateDergee(null);
+            if (angleMeasurement == AngleMeasurement.Radian)
+                return CalculateRadian(null);
+            if (angleMeasurement == AngleMeasurement.Gradian)
+                return CalculateGradian(null);
+
+            return double.NaN;
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             if (angleMeasurement == AngleMeasurement.Degree)

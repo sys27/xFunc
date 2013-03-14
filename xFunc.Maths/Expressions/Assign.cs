@@ -40,6 +40,11 @@ namespace xFunc.Maths.Expressions
             return string.Format("{0} := {1}", variable, value);
         }
 
+        public double Calculate()
+        {
+            throw new NotSupportedException();
+        }
+
         public double Calculate(MathParameterCollection parameters)
         {
             if (parameters == null)

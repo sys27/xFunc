@@ -52,6 +52,11 @@ namespace xFunc.Maths.Expressions
             return number.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
+        public double Calculate()
+        {
+            return number;
+        }
+
         public double Calculate(MathParameterCollection parameters)
         {
             return number;

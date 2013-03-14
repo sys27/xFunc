@@ -44,6 +44,11 @@ namespace xFunc.Maths.Expressions
             return string.Format("deriv({0}, {1})", firstMathExpression, variable);
         }
 
+        public double Calculate()
+        {
+            return Differentiate().Calculate();
+        }
+
         public double Calculate(MathParameterCollection parameters)
         {
             return Differentiate().Calculate(parameters);

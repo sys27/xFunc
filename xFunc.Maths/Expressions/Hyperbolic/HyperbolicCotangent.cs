@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("coth({0})");
         }
 
+        public override double Calculate()
+        {
+            return MathExtentions.Coth(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Coth(firstMathExpression.Calculate(parameters));

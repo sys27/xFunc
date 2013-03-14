@@ -34,6 +34,11 @@ namespace xFunc.Maths.Expressions
             return ToString("{0} ^ {1}");
         }
 
+        public override double Calculate()
+        {
+            return Math.Pow(firstMathExpression.Calculate(), secondMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Pow(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));

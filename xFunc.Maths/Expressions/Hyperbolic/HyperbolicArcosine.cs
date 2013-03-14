@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("arcosh({0})");
         }
 
+        public override double Calculate()
+        {
+            return MathExtentions.Acosh(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Acosh(firstMathExpression.Calculate(parameters));

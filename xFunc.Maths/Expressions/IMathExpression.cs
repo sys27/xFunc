@@ -24,6 +24,11 @@ namespace xFunc.Maths.Expressions
     {
 
         /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the calculation.</returns>
+        double Calculate();
+        /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
         /// <param name="parameters">A collection of variables that are used in the expression.</param>

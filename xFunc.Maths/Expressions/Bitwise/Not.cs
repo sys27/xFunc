@@ -39,6 +39,15 @@ namespace xFunc.Maths.Expressions.Bitwise
         }
 
         /// <summary>
+        /// Calculates this bitwise NOT expression. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the calculation.</returns>
+        public override double Calculate()
+        {
+            return ~(int)firstMathExpression.Calculate();
+        }
+
+        /// <summary>
         /// Calculates this bitwise NOT expression.
         /// </summary>
         /// <param name="parameters">A collection of variables that are used in the expression.</param>

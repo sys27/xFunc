@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("sech({0})");
         }
 
+        public override double Calculate()
+        {
+            return MathExtentions.Sech(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Sech(firstMathExpression.Calculate(parameters));

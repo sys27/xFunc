@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("tanh({0})");
         }
 
+        public override double Calculate()
+        {
+            return Math.Tanh(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Tanh(firstMathExpression.Calculate(parameters));

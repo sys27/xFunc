@@ -37,6 +37,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("sinh({0})");
         }
 
+        public override double Calculate()
+        {
+            return Math.Sinh(firstMathExpression.Calculate());
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Sinh(firstMathExpression.Calculate(parameters));

@@ -52,6 +52,11 @@ namespace xFunc.Maths.Expressions
             return variable.ToString();
         }
 
+        public double Calculate()
+        {
+            throw new NotSupportedException();
+        }
+
         public double Calculate(MathParameterCollection parameters)
         {
             return parameters[variable];

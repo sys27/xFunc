@@ -34,6 +34,11 @@ namespace xFunc.Maths.Expressions
             return ToString("{0} + {1}");
         }
 
+        public override double Calculate()
+        {
+            return firstMathExpression.Calculate() + secondMathExpression.Calculate();
+        }
+
         public override double Calculate(MathParameterCollection parameters)
         {
             return firstMathExpression.Calculate(parameters) + secondMathExpression.Calculate(parameters);

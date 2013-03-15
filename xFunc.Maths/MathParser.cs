@@ -628,6 +628,20 @@ namespace xFunc.Maths
 
                         stack.Push(assign);
                     }
+                    else if (expression is Undefine)
+                    {
+                        if (stack.Count < 1)
+                            throw new MathParserException(Resource.InvalidNumberOfVariables);
+
+                        Undefine undef = (Undefine)expression;
+
+                        if (!(stack.Peek() is Variable))
+                            throw new MathParserException(Resource.InvalidExpression);
+
+                        undef.Variable = (Variable)stack.Pop();
+
+                        stack.Push(undef);
+                    }
                     else
                     {
                         throw new MathParserException(Resource.UnexpectedError);
@@ -777,6 +791,9 @@ namespace xFunc.Maths
                         break;
                     case MathTokenType.Assign:
                         preOutput.Add(new Assign());
+                        break;
+                    case MathTokenType.Undefine:
+                        preOutput.Add(new Undefine());
                         break;
                     case MathTokenType.Not:
                         preOutput.Add(new Not());

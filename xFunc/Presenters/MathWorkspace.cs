@@ -70,6 +70,12 @@ namespace xFunc.Presenters
                     assign.Calculate(parameters);
                     item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
                 }
+                else if (exp is Undefine)
+                {
+                    Undefine undef = exp as Undefine;
+                    undef.Calculate(parameters);
+                    item.Answer = string.Format(Resource.UndefineVariable, undef.Variable);
+                }
                 else
                 {
                     item.Answer = exp.Calculate(parameters).ToString(CultureInfo.InvariantCulture);

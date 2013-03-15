@@ -592,6 +592,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} variable is removed..
+        /// </summary>
+        public static string UndefineVariable {
+            get {
+                return ResourceManager.GetString("UndefineVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undo.
         /// </summary>
         public static string UndoButtonHeader {

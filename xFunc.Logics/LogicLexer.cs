@@ -179,6 +179,14 @@ namespace xFunc.Logics
 
                         continue;
                     }
+                    if (sub.StartsWith("undef"))
+                    {
+                        token.Type = LogicTokenType.Undefine;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
 
                     if (letter == 't')
                     {

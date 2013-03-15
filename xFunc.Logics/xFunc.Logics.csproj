@@ -57,6 +57,7 @@
     <Compile Include="Expressions\Or.cs" />
     <Compile Include="Expressions\TruthTable.cs" />
     <Compile Include="Expressions\UnaryLogicExpression.cs" />
+    <Compile Include="Expressions\Undefine.cs" />
     <Compile Include="Expressions\Variable.cs" />
     <Compile Include="Expressions\XOr.cs" />
     <Compile Include="IMathLexer.cs" />

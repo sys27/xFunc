@@ -63,6 +63,7 @@
     <Compile Include="Expressions\Logics\NOrTest.cs" />
     <Compile Include="Expressions\Logics\NotTest.cs" />
     <Compile Include="Expressions\Logics\OrTest.cs" />
+    <Compile Include="Expressions\Logics\UndefineTest.cs" />
     <Compile Include="Expressions\Logics\XOrTest.cs" />
     <Compile Include="Expressions\Maths\AbsoluteTest.cs" />
     <Compile Include="Expressions\Maths\AdditionTest.cs" />

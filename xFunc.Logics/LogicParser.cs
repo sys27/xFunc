@@ -86,6 +86,17 @@ namespace xFunc.Logics
 
                         stack.Push(assign);
                     }
+                    else if (expression is Undefine)
+                    {
+                        Undefine undef = expression as Undefine;
+
+                        if (!(stack.Peek() is Variable))
+                            throw new LogicParserException(Resource.InvalidExpression);
+
+                        undef.Variable = (Variable)stack.Pop();
+
+                        stack.Push(undef);
+                    }
                     else
                     {
                         throw new LogicParserException(Resource.UnexpectedError);
@@ -220,6 +231,9 @@ namespace xFunc.Logics
                         break;
                     case LogicTokenType.Assign:
                         preOutput.Add(new Assign());
+                        break;
+                    case LogicTokenType.Undefine:
+                        preOutput.Add(new Undefine());
                         break;
                     case LogicTokenType.TruthTable:
                         preOutput.Add(new TruthTable());

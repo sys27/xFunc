@@ -316,6 +316,6 @@
     <value>The value '{1}' was assigned to the variable '{0}'.</value>
   </data>
   <data name="UndefineVariable" xml:space="preserve">
-    <value>The {0} variable is removed.</value>
+    <value>The '{0}' variable is removed.</value>
   </data>
 </root>

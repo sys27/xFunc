@@ -316,6 +316,6 @@
     <value>Змінній '{0}' присвоєно '{1}' значення.</value>
   </data>
   <data name="UndefineVariable" xml:space="preserve">
-    <value>Змінна {0} видалена.</value>
+    <value>Змінна '{0}' видалена.</value>
   </data>
 </root>

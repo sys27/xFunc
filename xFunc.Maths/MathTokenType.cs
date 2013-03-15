@@ -29,113 +29,117 @@ namespace xFunc.Maths
         /// </summary>
         Assign         = 0,
         /// <summary>
+        /// undef()
+        /// </summary>
+        Undefine       = 1,
+        /// <summary>
         /// (
         /// </summary>
-        OpenBracket    = 1,
+        OpenBracket    = 2,
         /// <summary>
         /// )
         /// </summary>
-        CloseBracket   = 2,
+        CloseBracket   = 3,
         /// <summary>
         /// ,
         /// </summary>
-        Comma          = 3,
+        Comma          = 4,
         /// <summary>
         /// +
         /// </summary>
-        Addition       = 4,
+        Addition       = 5,
         /// <summary>
         /// -
         /// </summary>
-        Subtraction    = 5,
+        Subtraction    = 6,
         /// <summary>
         /// *
         /// </summary>
-        Multiplication = 6,
+        Multiplication = 7,
         /// <summary>
         /// /
         /// </summary>
-        Division       = 7,
+        Division       = 8,
         /// <summary>
         /// ^
         /// </summary>
-        Exponentiation = 8,
+        Exponentiation = 9,
         /// <summary>
         /// - (Unary)
         /// </summary>
-        UnaryMinus     = 9,
+        UnaryMinus     = 10,
         /// <summary>
         /// abs
         /// </summary>
-        Absolute       = 10,
+        Absolute       = 11,
         /// <summary>
         /// sin
         /// </summary>
-        Sine           = 11,
+        Sine           = 12,
         /// <summary>
         /// cos
         /// </summary>
-        Cosine         = 12,
+        Cosine         = 13,
         /// <summary>
         /// tg
         /// </summary>
-        Tangent        = 13,
+        Tangent        = 14,
         /// <summary>
         /// Cot
         /// </summary>
-        Cotangent      = 14,
+        Cotangent      = 15,
         /// <summary>
         /// sec
         /// </summary>
-        Secant         = 15,
+        Secant         = 16,
         /// <summary>
         /// csc
         /// </summary>
-        Cosecant       = 16,
+        Cosecant       = 17,
         /// <summary>
         /// Arcsin
         /// </summary>
-        Arcsine        = 17,
+        Arcsine        = 18,
         /// <summary>
         /// Arccos
         /// </summary>
-        Arccosine      = 18,
+        Arccosine      = 19,
         /// <summary>
         /// Arctan
         /// </summary>
-        Arctangent     = 19,
+        Arctangent     = 20,
         /// <summary>
         /// Arccot
         /// </summary>
-        Arccotangent   = 20,
+        Arccotangent   = 21,
         /// <summary>
         /// arcsec
         /// </summary>
-        Arcsecant      = 21,
+        Arcsecant      = 22,
         /// <summary>
         /// arccsc
         /// </summary>
-        Arccosecant    = 22,
+        Arccosecant    = 23,
         /// <summary>
         /// sqrt
         /// </summary>
-        Sqrt           = 23,
+        Sqrt           = 24,
         /// <summary>
         /// root
         /// </summary>
-        Root           = 24,
+        Root           = 25,
         /// <summary>
         /// Ln
         /// </summary>
-        Ln             = 25,
+        Ln             = 26,
         /// <summary>
         /// Lg
         /// </summary>
-        Lg             = 26,
+        Lg             = 27,
         /// <summary>
         /// Log
         /// </summary>
-        Log            = 27,
+        Log            = 28,
 
         /// <summary>
         /// sinh
@@ -206,7 +210,7 @@ namespace xFunc.Maths
         /// <summary>
         /// Exponential
         /// </summary>
-        E              = 28,
+        E              = 29,
         /// <summary>
         /// deriv
         /// </summary>

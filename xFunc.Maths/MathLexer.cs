@@ -503,6 +503,14 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("undef"))
+                    {
+                        token.Type = MathTokenType.Undefine;
+                        tokens.Add(token);
+                        i += 5;
+
+                        continue;
+                    }
 
                     if (sub.StartsWith("not"))
                     {

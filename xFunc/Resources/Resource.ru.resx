@@ -315,4 +315,7 @@
   <data name="AssignVariable" xml:space="preserve">
     <value>Переменной '{0}' присвоено '{1}' значение.</value>
   </data>
+  <data name="UndefineVariable" xml:space="preserve">
+    <value>Переменная {0} удалена.</value>
+  </data>
 </root>

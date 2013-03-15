@@ -62,9 +62,15 @@ namespace xFunc.Presenters
                 LogicWorkspaceItem item = new LogicWorkspaceItem(s, exp);
                 if (exp is Assign)
                 {
-                    Assign assign = (Assign)exp;
+                    Assign assign = exp as Assign;
                     assign.Calculate(parameters);
                     item.Answer = string.Format(Resource.AssignVariable, assign.Variable, assign.Value);
+                }
+                else if (exp is Undefine)
+                {
+                    Undefine undef = exp as Undefine;
+                    undef.Calculate(parameters);
+                    item.Answer = string.Format(Resource.UndefineVariable, undef.Variable);
                 }
                 else
                 {

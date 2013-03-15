@@ -592,7 +592,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} variable is removed..
+        ///   Looks up a localized string similar to The &apos;{0}&apos; variable is removed..
         /// </summary>
         public static string UndefineVariable {
             get {

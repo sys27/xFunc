@@ -29,13 +29,17 @@ namespace xFunc.Logics
         /// </summary>
         Assign         = 0,
         /// <summary>
+        /// undef()
+        /// </summary>
+        Undefine       = 1,
+        /// <summary>
         /// (
         /// </summary>
-        OpenBracket    = 1,
+        OpenBracket    = 2,
         /// <summary>
         /// )
         /// </summary>
-        CloseBracket   = 2,
+        CloseBracket   = 3,
 
         /// <summary>
         /// !

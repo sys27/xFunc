@@ -81,41 +81,16 @@ namespace xFunc.Presenters
 
         public void Clear()
         {
-            foreach (var exp in expressions)
-            {
-                if (exp.Expression is Assign)
-                {
-                    var assign = exp.Expression as Assign;
-
-                    parameters.Remove(assign.Variable.Character);
-                }
-            }
-
             expressions.Clear();
         }
 
         public void Remove(MathWorkspaceItem item)
         {
-            if (item.Expression is Assign)
-            {
-                var assign = item.Expression as Assign;
-
-                parameters.Remove(assign.Variable.Character);
-            }
-
             expressions.Remove(item);
         }
 
         public void RemoveAt(int index)
         {
-            var item = expressions[index];
-            if (item.Expression is Assign)
-            {
-                var assign = item.Expression as Assign;
-
-                parameters.Remove(assign.Variable.Character);
-            }
-
             expressions.RemoveAt(index);
         }
 

@@ -17,11 +17,23 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Specifies a measurement of angle.
+    /// </summary>
     public enum AngleMeasurement
     {
 
+        /// <summary>
+        /// Degree.
+        /// </summary>
         Degree,
+        /// <summary>
+        /// Radian.
+        /// </summary>
         Radian,
+        /// <summary>
+        /// Gradian.
+        /// </summary>
         Gradian
 
     }

@@ -17,13 +17,29 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents an Addition operation.
+    /// </summary>
     public class Addition : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Addition"/> class.
+        /// </summary>
         public Addition() : base(null, null) { }
 
-        public Addition(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Addition"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The left operand.</param>
+        /// <param name="secondMathExpression">The right operand.</param>
+        /// <seealso cref="IMathExpression"/>
+        public Addition(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             if (parentMathExpression is BinaryMathExpression)
@@ -34,11 +50,20 @@ namespace xFunc.Maths.Expressions
             return ToString("{0} + {1}");
         }
 
+        /// <summary>
+        /// Calculates this expression. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
             return firstMathExpression.Calculate() + secondMathExpression.Calculate();
         }
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
             return firstMathExpression.Calculate(parameters) + secondMathExpression.Calculate(parameters);
@@ -65,6 +90,10 @@ namespace xFunc.Maths.Expressions
             return new Number(0);
         }
 
+        /// <summary>
+        /// Clones this instanse of the <see cref="Addition"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Addition(firstMathExpression.Clone(), secondMathExpression.Clone());

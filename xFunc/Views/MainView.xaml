@@ -24,7 +24,7 @@ limitations under the License. -->
     <ribbon:RibbonWindow.Resources>
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="30" />
-            <Setter Property="Background" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Silver" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -403,7 +403,7 @@ limitations under the License. -->
                                             <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
                                             <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                                         </StackPanel>
-                                        <Button Grid.Column="2" Width="16" Height="16" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
+                                        <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
                                             <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
                                         </Button>
                                     </Grid>

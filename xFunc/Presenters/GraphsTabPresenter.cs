@@ -29,7 +29,7 @@ namespace xFunc.Presenters
 
         public void Add(string strExp)
         {
-            listOfGraphs.Add(new GraphItemViewModel(parser.Parse(strExp), true));
+            listOfGraphs.Add(new GraphItemViewModel(parser.Parse(strExp), true, null));
 
             while (listOfGraphs.Count > countOfGraphs)
                 listOfGraphs.RemoveAt(0);

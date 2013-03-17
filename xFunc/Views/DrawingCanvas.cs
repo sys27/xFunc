@@ -35,6 +35,16 @@ namespace xFunc.Views
             RemoveLogicalChild(visual);
         }
 
+        public void ClearVisuals()
+        {
+            foreach (var visual in visuals)
+            {
+                RemoveVisualChild(visual);
+                RemoveLogicalChild(visual);
+            }
+            visuals.Clear();
+        }
+
         protected override int VisualChildrenCount
         {
             get

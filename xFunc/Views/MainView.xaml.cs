@@ -608,7 +608,7 @@ namespace xFunc.Views
         private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
             if (graphsList.SelectedIndex >= 0)
-                plot.Expression = graphsList.Items[graphsList.SelectedIndex] as IMathExpression;
+                plot.Expression = (graphsList.Items[graphsList.SelectedIndex] as GraphItemViewModel).Expression;
             else
                 plot.Expression = null;
         }
@@ -659,7 +659,7 @@ namespace xFunc.Views
 
         private void removeGraph_Click(object o, RoutedEventArgs args)
         {
-            var item = ((Button)o).Tag as IMathExpression;
+            var item = ((Button)o).Tag as GraphItemViewModel;
 
             graphsPresenter.Remove(item);
         }
@@ -672,7 +672,7 @@ namespace xFunc.Views
             }
         }
 
-        public IEnumerable<IMathExpression> Graphs
+        public IEnumerable<GraphItemViewModel> Graphs
         {
             set
             {

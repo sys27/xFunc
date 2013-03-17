@@ -29,7 +29,7 @@ namespace xFunc.Views
     {
 
         IEnumerable<MathWorkspaceItemViewModel> MathExpressions { set; }
-        IEnumerable<IMathExpression> Graphs { set; }
+        IEnumerable<GraphItemViewModel> Graphs { set; }
         IEnumerable<LogicWorkspaceItemViewModel> LogicExpressions { set; }
 
     }

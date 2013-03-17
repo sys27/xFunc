@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 using xFunc.Maths.Expressions;
 
 namespace xFunc.ViewModels
@@ -12,11 +13,13 @@ namespace xFunc.ViewModels
 
         private bool isChecked;
         private IMathExpression exp;
+        private DrawingVisual visual;
 
-        public GraphItemViewModel(IMathExpression exp, bool isChecked)
+        public GraphItemViewModel(IMathExpression exp, bool isChecked, DrawingVisual visual)
         {
             this.exp = exp;
             this.isChecked = isChecked;
+            this.visual = visual;
         }
 
         public override string ToString()
@@ -41,6 +44,18 @@ namespace xFunc.ViewModels
             get
             {
                 return exp;
+            }
+        }
+
+        public DrawingVisual Visual
+        {
+            get
+            {
+                return visual;
+            }
+            set
+            {
+                visual = value;
             }
         }
 

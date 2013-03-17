@@ -608,9 +608,14 @@ namespace xFunc.Views
         private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
             if (graphsList.SelectedIndex >= 0)
-                plot.Expression = (graphsList.Items[graphsList.SelectedIndex] as GraphItemViewModel).Expression;
+                plot.Expression = graphsList.Items.Cast<GraphItemViewModel>();
             else
                 plot.Expression = null;
+        }
+
+        private void graphItem_Toggle(object o, RoutedEventArgs args)
+        {
+            plot.ReRender();
         }
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
@@ -676,6 +681,7 @@ namespace xFunc.Views
         {
             set
             {
+                graphsList.SelectedIndex = -1;
                 graphsList.ItemsSource = value;
                 graphsList.SelectedIndex = value.Count() - 1;
             }

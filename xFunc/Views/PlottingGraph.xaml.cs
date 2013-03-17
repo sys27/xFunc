@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using xFunc.Maths.Expressions;
 using xFunc.Resources;
+using xFunc.ViewModels;
 
 namespace xFunc.Views
 {
@@ -27,12 +29,8 @@ namespace xFunc.Views
     public partial class PlottingGraph : UserControl
     {
 
-        private IMathExpression exp;
+        private IEnumerable<GraphItemViewModel> exps;
         private MathParameterCollection parameters;
-
-        private DrawingVisual gridVisual;
-        private DrawingVisual oxoyVisual;
-        private DrawingVisual funcVisual;
 
         private double currentWidth;
         private double currentHeight;
@@ -146,20 +144,26 @@ namespace xFunc.Views
             ReRender();
         }
 
-        private void ReRender()
+        public void ReRender()
         {
+            canvas.ClearVisuals();
             DrawGrid();
             DrawOXOY();
-            DrawFunc();
+            if (exps != null)
+            {
+                foreach (var exp in exps)
+                {
+                    if (exp.IsChecked)
+                        DrawFunc(exp);
+                }
+            }
         }
 
         private void DrawGrid()
         {
-            canvas.DeleteVisual(gridVisual);
-
             if (renderGrid.IsChecked == true)
             {
-                gridVisual = new DrawingVisual();
+                var gridVisual = new DrawingVisual();
                 Pen pen = new Pen(Brushes.Blue, 0.5);
                 using (DrawingContext context = gridVisual.RenderOpen())
                 {
@@ -226,8 +230,7 @@ namespace xFunc.Views
 
         private void DrawOXOY()
         {
-            canvas.DeleteVisual(oxoyVisual);
-            oxoyVisual = new DrawingVisual();
+            var oxoyVisual = new DrawingVisual();
             Pen pen = new Pen(Brushes.Black, 1);
             using (DrawingContext context = oxoyVisual.RenderOpen())
             {
@@ -287,15 +290,9 @@ namespace xFunc.Views
             canvas.AddVisual(oxoyVisual);
         }
 
-        private void DrawFunc()
+        private void DrawFunc(GraphItemViewModel graph)
         {
-            if (exp == null)
-            {
-                canvas.DeleteVisual(funcVisual);
-
-                return;
-            }
-
+            var exp = graph.Expression;
             PathGeometry geometry = new PathGeometry();
             PathFigure figure = null;
 
@@ -327,25 +324,25 @@ namespace xFunc.Views
                 }
             }
 
-            canvas.DeleteVisual(funcVisual);
-            funcVisual = new DrawingVisual();
+            var funcVisual = new DrawingVisual();
             Pen pen = new Pen(Brushes.Red, 1);
             using (DrawingContext context = funcVisual.RenderOpen())
             {
                 context.DrawGeometry(Brushes.Red, pen, geometry);
             }
+            graph.Visual = funcVisual;
             canvas.AddVisual(funcVisual);
         }
 
-        public IMathExpression Expression
+        public IEnumerable<GraphItemViewModel> Expression
         {
             get
             {
-                return exp;
+                return exps;
             }
             set
             {
-                exp = value;
+                exps = value;
                 ReRender();
             }
         }

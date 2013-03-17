@@ -431,12 +431,14 @@ limitations under the License. -->
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Grid.Column="0" Text="{Binding}" FontSize="14" />
-                                                <Button Grid.Column="1" Width="16" Height="16" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeGraph_Click">
+                                                <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" Text="{Binding}" FontSize="14" Margin="4,0,0,0" />
+                                                <Button Grid.Column="2" Width="16" Height="16" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeGraph_Click">
                                                     <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
                                                 </Button>
                                             </Grid>

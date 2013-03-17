@@ -128,6 +128,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GraphItemViewModel.cs" />
     <Compile Include="ViewModels\LogicWorkspaceItemViewModel.cs" />
     <Compile Include="ViewModels\MathWorkspaceItemViewModel.cs" />
     <Compile Include="ViewModels\TruthTableRowViewModel.cs" />

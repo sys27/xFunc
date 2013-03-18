@@ -17,18 +17,40 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the AND operation.
+    /// </summary>
     public class And : BinaryLogicExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="And"/> class.
+        /// </summary>
+        /// <seealso cref="IMathExpression"/>
         public And() : base(null, null) { }
 
-        public And(ILogicExpression firstOperand, ILogicExpression secondOperand) : base(firstOperand, secondOperand) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="And"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The left operand.</param>
+        /// <param name="secondMathExpression">The right operand.</param>
+        /// <seealso cref="IMathExpression"/>
+        public And(ILogicExpression firstMathExpression, ILogicExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return ToString("&");
         }
 
+        /// <summary>
+        /// Calculates this AND expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
         public override bool Calculate(LogicParameterCollection parameters)
         {
             return firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters);

@@ -18,7 +18,7 @@ namespace xFunc.Maths.Expressions
 {
 
     /// <summary>
-    /// Represents an Absolute operation.
+    /// Represents the Absolute operation.
     /// </summary>
     public class Absolute : UnaryMathExpression
     {

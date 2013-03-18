@@ -17,23 +17,48 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents the Common logarithm function.
+    /// </summary>
     public class Lg : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lg"/> class.
+        /// </summary>
+        /// <seealso cref="IMathExpression"/>
         public Lg() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lg"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <seealso cref="IMathExpression"/>
         public Lg(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return ToString("lg({0})");
         }
 
+        /// <summary>
+        /// Calculates this Lg expression. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
             return Math.Log10(FirstMathExpression.Calculate());
         }
 
+        /// <summary>
+        /// Calculates this Lg expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Log10(FirstMathExpression.Calculate(parameters));
@@ -48,6 +73,10 @@ namespace xFunc.Maths.Expressions
             return div;
         }
 
+        /// <summary>
+        /// Clones this instanse of the <see cref="Lg"/> class.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Lg(firstMathExpression.Clone());

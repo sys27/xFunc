@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
 
         public Subtraction() : base(null, null) { }
 
-        public Subtraction(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
+        public Subtraction(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         public override string ToString()
         {

@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
 
         public Root() : base(null, null) { }
 
-        public Root(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
+        public Root(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         public override string ToString()
         {

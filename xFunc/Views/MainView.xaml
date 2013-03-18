@@ -755,7 +755,13 @@ limitations under the License. -->
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Row="0" Grid.Column="0" Tag="deriv" Click="InsertDoubleArgFunc_Click">
+                        <Button Grid.Row="0" Grid.Column="0" Tag=":=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource assign}" Width="12" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="undef" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource undef}" Width="46" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="deriv" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
                         </Button>
                     </Grid>

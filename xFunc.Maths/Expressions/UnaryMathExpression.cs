@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// The abstract base class that represents the unary operation.
+    /// </summary>
     public abstract class UnaryMathExpression : IMathExpression
     {
 

@@ -191,12 +191,19 @@ namespace xFunc.Views
 
                 logicPresenter.Remove(item);
             }
+            else if (tabControl.SelectedItem == graphsTab)
+            {
+                var item = (GraphItemViewModel)graphsList.SelectedItem;
+
+                graphsPresenter.Remove(item);
+            }
         }
 
         private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null);
+                              (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null) ||
+                              (tabControl.SelectedItem == graphsTab && graphsList.SelectedItem != null);
         }
 
         private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
@@ -205,11 +212,15 @@ namespace xFunc.Views
                 mathPresenter.Clear();
             else if (tabControl.SelectedItem == logicTab)
                 logicPresenter.Clear();
+            else if (tabControl.SelectedItem == graphsTab)
+                graphsPresenter.Clear();
         }
 
         private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            args.CanExecute = tabControl.SelectedItem == mathTab || tabControl.SelectedItem == logicTab;
+            args.CanExecute = tabControl.SelectedItem == mathTab || 
+                              tabControl.SelectedItem == logicTab ||
+                              tabControl.SelectedItem == graphsTab;
         }
 
         private void AboutCommand_Execute(object o, ExecutedRoutedEventArgs args)

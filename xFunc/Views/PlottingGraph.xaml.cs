@@ -68,6 +68,13 @@ namespace xFunc.Views
             centerY = Math.Ceiling(currentHeight / 2);
         }
 
+        private void DrawCurrentCoords()
+        {
+            double x = Mouse.GetPosition(this).X;
+            double y = Mouse.GetPosition(this).Y;
+            point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
+        }
+
         private void this_MouseLeftButtonDown(object o, MouseButtonEventArgs args)
         {
             startPoint = args.GetPosition(null);
@@ -77,9 +84,7 @@ namespace xFunc.Views
         {
             if (args.OriginalSource is DrawingCanvas)
             {
-                double x = args.GetPosition(this).X;
-                double y = args.GetPosition(this).Y;
-                point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
+                DrawCurrentCoords();
 
                 if (args.LeftButton == MouseButtonState.Pressed)
                 {
@@ -130,16 +135,13 @@ namespace xFunc.Views
                     }
                 }
             }
-
-            double x = args.GetPosition(null).X;
-            double y = args.GetPosition(null).Y;
-            point.Text = string.Format(CultureInfo.InvariantCulture, "x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
         }
 
         private void slider_ValueChanged(object o, RoutedPropertyChangedEventArgs<double> args)
         {
             double temp = 40;
             cm = temp / args.NewValue;
+            DrawCurrentCoords();
 
             ReRender();
         }

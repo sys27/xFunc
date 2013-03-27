@@ -27,5 +27,6 @@ packages
 *.nuspec
 *.diff
 *.design
+*.pfx
 
 Thumbs.db

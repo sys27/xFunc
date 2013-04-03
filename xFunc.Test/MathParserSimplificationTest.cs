@@ -35,6 +35,8 @@ namespace xFunc.Test
             SimpleTest(un, expected);
         }
 
+        #region Add
+
         [TestMethod]
         public void AddFirstZero()
         {
@@ -160,6 +162,10 @@ namespace xFunc.Test
             SimpleTest(add, expected);
         }
 
+        #endregion
+
+        #region Sub
+
         [TestMethod]
         public void SubFirstZero()
         {
@@ -272,6 +278,10 @@ namespace xFunc.Test
             SimpleTest(sub, expected);
         }
 
+        #endregion
+
+        #region Mul
+
         [TestMethod]
         public void MulByZero()
         {
@@ -375,6 +385,10 @@ namespace xFunc.Test
             SimpleTest(mul, expected);
         }
 
+        #endregion
+
+        #region Div
+
         [TestMethod]
         public void DivZero()
         {
@@ -405,9 +419,9 @@ namespace xFunc.Test
         [TestMethod]
         public void DivDiff_NumMulVar_DivNum()
         {
-            // (2 * x) / 2
-            var div = new Division(new Multiplication(new Number(2), new Variable('x')), new Number(2));
-            var expected = new Variable('x');
+            // (2 * x) / 4
+            var div = new Division(new Multiplication(new Number(2), new Variable('x')), new Number(4));
+            var expected = new Division(new Variable('x'), new Number(2));
 
             SimpleTest(div, expected);
         }
@@ -415,9 +429,9 @@ namespace xFunc.Test
         [TestMethod]
         public void DivDiff_VarMulNum_DivNum()
         {
-            // (x * 2) / 2
-            var div = new Division(new Multiplication(new Variable('x'), new Number(2)), new Number(2));
-            var expected = new Variable('x');
+            // (x * 2) / 4
+            var div = new Division(new Multiplication(new Variable('x'), new Number(2)), new Number(4));
+            var expected = new Division(new Variable('x'), new Number(2));
 
             SimpleTest(div, expected);
         }
@@ -481,6 +495,8 @@ namespace xFunc.Test
 
             SimpleTest(div, expected);
         }
+
+        #endregion
 
         [TestMethod]
         public void PowerZero()

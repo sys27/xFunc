@@ -399,14 +399,14 @@ namespace xFunc.Maths
                     if (bracketMul.FirstMathExpression is Number)
                     {
                         Number secondNumber = bracketMul.FirstMathExpression as Number;
-                        Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.SecondMathExpression);
+                        Division result = new Division(bracketMul.SecondMathExpression, new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)));
 
                         return _Simplify(result);
                     }
                     if (bracketMul.SecondMathExpression is Number)
                     {
                         Number secondNumber = bracketMul.SecondMathExpression as Number;
-                        Multiplication result = new Multiplication(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.FirstMathExpression);
+                        Division result = new Division(bracketMul.FirstMathExpression, new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)));
 
                         return _Simplify(result);
                     }

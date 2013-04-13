@@ -546,16 +546,20 @@ namespace xFunc.Maths
                     }
 
                     token.Type = MathTokenType.Variable;
-                    token.Variable = letter.ToString();
+
+                    int length = 1;
+                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(i + 1).StartsWith(s)); j++, length++) ;
+
+                    token.Variable = function.Substring(i, length);
                     tokens.Add(token);
-                    
-                    if (i + 1 < function.Length && char.IsLetter(function[i + 1]) && !notVar.Any(s => function.Substring(i + 1).StartsWith(s)))
+                    i += length;
+
+                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => function.Substring(i).StartsWith(s)))
                     {
                         token = new MathToken(MathTokenType.Multiplication);
                         tokens.Add(token);
                     }
 
-                    i++;
                     continue;
                 }
                 else

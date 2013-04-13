@@ -201,6 +201,20 @@ namespace xFunc.Test
             var exp = parser.Parse("sin(x) 2");
         }
 
+        [TestMethod]
+        public void StringVarParserTest()
+        {
+            lexer.Tokens = new List<MathToken>()
+            {
+                new MathToken("aaa"),
+                new MathToken(MathTokenType.Assign),
+                new MathToken(1)
+            };
+
+            var exp = parser.Parse("aaa := 1", false);
+            Assert.AreEqual("aaa := 1", exp.ToString());
+        }
+
     }
 
 }

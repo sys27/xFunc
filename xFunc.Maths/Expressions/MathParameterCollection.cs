@@ -20,13 +20,13 @@ namespace xFunc.Maths.Expressions
 {
 
     [Serializable]
-    public class MathParameterCollection : Dictionary<char, double>
+    public class MathParameterCollection : Dictionary<string, double>
     {
 
         public MathParameterCollection()
         {
-            Add('π', Math.PI);
-            Add('e', Math.E);
+            Add("π", Math.PI);
+            Add("e", Math.E);
         }
 
         protected MathParameterCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }

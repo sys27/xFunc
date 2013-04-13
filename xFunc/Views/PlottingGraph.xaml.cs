@@ -41,7 +41,7 @@ namespace xFunc.Views
 
         public PlottingGraph()
         {
-            this.parameters = new MathParameterCollection() { { 'x', 0 } };
+            this.parameters = new MathParameterCollection() { { "x", 0 } };
 
             InitializeComponent();
 
@@ -303,7 +303,7 @@ namespace xFunc.Views
             double tempY;
             for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
             {
-                parameters['x'] = x;
+                parameters["x"] = x;
                 y = exp.Calculate(parameters);
 
                 tempY = centerY - (y * cm);

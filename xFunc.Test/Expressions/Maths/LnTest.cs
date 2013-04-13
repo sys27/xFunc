@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Ln(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression exp = new Ln(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * x)", deriv.ToString());
@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             // ln(2x)
             Number num = new Number(2);
-            Variable x = new Variable('x');
+            Variable x = new Variable("x");
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Ln(mul);
@@ -49,7 +49,7 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             // ln(xy)
-            IMathExpression exp = new Ln(new Multiplication(new Variable('x'), new Variable('y')));
+            IMathExpression exp = new Ln(new Multiplication(new Variable("x"), new Variable("y")));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) / (x * y)", deriv.ToString());
         }
@@ -58,15 +58,15 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             // ln(xy)
-            IMathExpression exp = new Ln(new Multiplication(new Variable('x'), new Variable('y')));
-            IMathExpression deriv = exp.Differentiate(new Variable('y'));
+            IMathExpression exp = new Ln(new Multiplication(new Variable("x"), new Variable("y")));
+            IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("(x * 1) / (x * y)", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Ln(new Variable('y'));
+            IMathExpression exp = new Ln(new Variable("y"));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("0", deriv.ToString());
         }

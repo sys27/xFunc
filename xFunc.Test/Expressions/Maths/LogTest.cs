@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Log(new Variable('x'), new Number(2));
+            IMathExpression exp = new Log(new Variable("x"), new Number(2));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             // log(x, 2)
             Number num = new Number(2);
-            Variable x = new Variable('x');
+            Variable x = new Variable("x");
 
             IMathExpression exp = new Log(x, num);
             IMathExpression deriv = exp.Differentiate();
@@ -47,16 +47,16 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Log(new Variable('x'), new Number(2));
-            IMathExpression deriv = exp.Differentiate(new Variable('x'));
+            IMathExpression exp = new Log(new Variable("x"), new Number(2));
+            IMathExpression deriv = exp.Differentiate(new Variable("x"));
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Log(new Variable('x'), new Number(2));
-            IMathExpression deriv = exp.Differentiate(new Variable('y'));
+            IMathExpression exp = new Log(new Variable("x"), new Number(2));
+            IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

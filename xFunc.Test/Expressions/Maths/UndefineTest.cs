@@ -14,13 +14,13 @@ namespace xFunc.Test.Expressions.Maths
         public void CalculateTest()
         {
             MathParameterCollection parameters = new MathParameterCollection();
-            IMathExpression def = new Assign('a', new Number(1));
+            IMathExpression def = new Assign("a", new Number(1));
             def.Calculate(parameters);
-            Assert.AreEqual(1, parameters['a']);
+            Assert.AreEqual(1, parameters["a"]);
 
-            IMathExpression undef = new Undefine('a');
+            IMathExpression undef = new Undefine("a");
             undef.Calculate(parameters);
-            Assert.IsFalse(parameters.ContainsKey('a'));
+            Assert.IsFalse(parameters.ContainsKey("a"));
         }
 
     }

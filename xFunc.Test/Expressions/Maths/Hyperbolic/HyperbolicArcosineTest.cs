@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new HyperbolicArcosine(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression exp = new HyperbolicArcosine(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / sqrt(((2 * x) ^ 2) - 1)", deriv.ToString());

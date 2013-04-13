@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Differentiate()
         {
-            return Differentiate(new Variable('x'));
+            return Differentiate(new Variable("x"));
         }
 
         public abstract IMathExpression Differentiate(Variable variable);

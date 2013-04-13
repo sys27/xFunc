@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Root(new Variable('x'), new Number(3));
+            IMathExpression exp = new Root(new Variable("x"), new Number(3));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 * ((1 / 3) * (x ^ ((1 / 3) - 1)))", deriv.ToString());
@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             // root(x, 3)
             Number num = new Number(3);
-            Variable x = new Variable('x');
+            Variable x = new Variable("x");
 
             IMathExpression exp = new Root(x, num);
             IMathExpression deriv = exp.Differentiate();
@@ -47,7 +47,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Root(new Multiplication(new Variable('x'), new Variable('y')), new Number(3));
+            IMathExpression exp = new Root(new Multiplication(new Variable("x"), new Variable("y")), new Number(3));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) * ((1 / 3) * ((x * y) ^ ((1 / 3) - 1)))", deriv.ToString());
         }
@@ -55,7 +55,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Root(new Variable('y'), new Number(3));
+            IMathExpression exp = new Root(new Variable("y"), new Number(3));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("0", deriv.ToString());
         }

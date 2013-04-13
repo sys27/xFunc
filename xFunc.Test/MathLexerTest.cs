@@ -695,6 +695,20 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void StringVarAnd()
+        {
+            var tokens = lexer.Tokenize("func and 1");
+
+            var expected = new List<MathToken>()
+            {
+                new MathToken("func"),
+                new MathToken(MathTokenType.And),
+                new MathToken(1)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

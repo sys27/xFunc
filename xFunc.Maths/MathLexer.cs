@@ -548,7 +548,7 @@ namespace xFunc.Maths
                     token.Type = MathTokenType.Variable;
 
                     int length = 1;
-                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(i + 1).StartsWith(s)); j++, length++) ;
+                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++, length++) ;
 
                     token.Variable = function.Substring(i, length);
                     tokens.Add(token);

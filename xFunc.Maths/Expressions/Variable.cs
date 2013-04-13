@@ -21,19 +21,19 @@ namespace xFunc.Maths.Expressions
     {
 
         private IMathExpression parentMathExpression;
-        private char variable;
+        private string variable;
 
-        public Variable(char variable)
+        public Variable(string variable)
         {
             this.variable = variable;
         }
 
-        public static implicit operator char(Variable variable)
+        public static implicit operator string(Variable variable)
         {
             return variable.Character;
         }
 
-        public static implicit operator Variable(char variable)
+        public static implicit operator Variable(string variable)
         {
             return new Variable(variable);
         }
@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions
 
         public override string ToString()
         {
-            return variable.ToString();
+            return variable;
         }
 
         public double Calculate()
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Differentiate()
         {
-            return Differentiate(new Variable('x'));
+            return Differentiate(new Variable("x"));
         }
 
         public IMathExpression Differentiate(Variable variable)
@@ -80,7 +80,7 @@ namespace xFunc.Maths.Expressions
             return Clone();
         }
 
-        public char Character
+        public string Character
         {
             get
             {

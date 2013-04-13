@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Cotangent(new Variable('x'));
+            IMathExpression exp = new Cotangent(new Variable("x"));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(1 / (sin(x) ^ 2))", deriv.ToString());
@@ -47,7 +47,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = new Cotangent(new Multiplication(new Number(2), new Variable('x')));
+            IMathExpression exp = new Cotangent(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) / (sin(2 * x) ^ 2))", deriv.ToString());
@@ -58,7 +58,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             // cot(2x)
             Number num = new Number(2);
-            Variable x = new Variable('x');
+            Variable x = new Variable("x");
             Multiplication mul = new Multiplication(num, x);
 
             IMathExpression exp = new Cotangent(mul);
@@ -74,7 +74,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Cotangent(new Multiplication(new Variable('x'), new Variable('y')));
+            IMathExpression exp = new Cotangent(new Multiplication(new Variable("x"), new Variable("y")));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("-((1 * y) / (sin(x * y) ^ 2))", deriv.ToString());
         }
@@ -82,16 +82,16 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Cotangent(new Multiplication(new Variable('x'), new Variable('y')));
-            IMathExpression deriv = exp.Differentiate(new Variable('y'));
+            IMathExpression exp = new Cotangent(new Multiplication(new Variable("x"), new Variable("y")));
+            IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("-((x * 1) / (sin(x * y) ^ 2))", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Cotangent(new Variable('x'));
-            IMathExpression deriv = exp.Differentiate(new Variable('y'));
+            IMathExpression exp = new Cotangent(new Variable("x"));
+            IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

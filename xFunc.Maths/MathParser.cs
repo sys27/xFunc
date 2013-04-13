@@ -845,8 +845,7 @@ namespace xFunc.Maths
                         stackToken = stack.Pop();
                     }
 
-                    if (stackToken.Type == MathTokenType.OpenBracket)
-                        stack.Push(stackToken);
+                    stack.Push(stackToken);
                 }
                 else if (token.Type == MathTokenType.Number || token.Type == MathTokenType.Variable)
                 {

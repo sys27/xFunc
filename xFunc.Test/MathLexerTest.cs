@@ -251,7 +251,7 @@ namespace xFunc.Test
 
             var expected = new List<MathToken>()
             {
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.Assign),
                 new MathToken(2)
             };
@@ -298,7 +298,7 @@ namespace xFunc.Test
                 new MathToken(MathTokenType.UnaryMinus),
                 new MathToken(2),
                 new MathToken(MathTokenType.Multiplication),
-                new MathToken('x')
+                new MathToken("x")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -312,7 +312,7 @@ namespace xFunc.Test
             {
                 new MathToken(3),
                 new MathToken(MathTokenType.Multiplication),
-                new MathToken('π')
+                new MathToken("π")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -596,10 +596,10 @@ namespace xFunc.Test
                 new MathToken(MathTokenType.OpenBracket),
                 new MathToken(MathTokenType.Sine),
                 new MathToken(MathTokenType.OpenBracket),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.CloseBracket),
                 new MathToken(MathTokenType.Comma),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -660,9 +660,9 @@ namespace xFunc.Test
 
             var expected = new List<MathToken>()
             {
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.Multiplication),
-                new MathToken('y')
+                new MathToken("y")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -674,9 +674,9 @@ namespace xFunc.Test
 
             var expected = new List<MathToken>()
             {
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.And),
-                new MathToken('x')
+                new MathToken("x")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }

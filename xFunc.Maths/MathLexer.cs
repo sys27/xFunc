@@ -177,7 +177,7 @@ namespace xFunc.Maths
                     if (sub.StartsWith("pi"))
                     {
                         token.Type = MathTokenType.Variable;
-                        token.Variable = 'π';
+                        token.Variable = "π";
                         tokens.Add(token);
                         i += 2;
 
@@ -546,7 +546,7 @@ namespace xFunc.Maths
                     }
 
                     token.Type = MathTokenType.Variable;
-                    token.Variable = letter;
+                    token.Variable = letter.ToString();
                     tokens.Add(token);
                     
                     if (i + 1 < function.Length && char.IsLetter(function[i + 1]) && !notVar.Any(s => function.Substring(i + 1).StartsWith(s)))

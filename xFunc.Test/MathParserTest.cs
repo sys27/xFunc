@@ -26,8 +26,8 @@ namespace xFunc.Test
         [TestMethod]
         public void HasVarTest1()
         {
-            IMathExpression exp = new Sine(new Multiplication(new Number(2), new Variable('x')));
-            bool expected = MathParser.HasVar(exp, new Variable('x'));
+            IMathExpression exp = new Sine(new Multiplication(new Number(2), new Variable("x")));
+            bool expected = MathParser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, true);
         }
@@ -36,7 +36,7 @@ namespace xFunc.Test
         public void HasVarTest2()
         {
             IMathExpression exp = new Sine(new Multiplication(new Number(2), new Number(3)));
-            bool expected = MathParser.HasVar(exp, new Variable('x'));
+            bool expected = MathParser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, false);
         }
@@ -87,7 +87,7 @@ namespace xFunc.Test
             {
                 new MathToken(MathTokenType.Root),
                 new MathToken(MathTokenType.OpenBracket),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.Comma),
                 new MathToken(3),
                 new MathToken(MathTokenType.CloseBracket)
@@ -105,7 +105,7 @@ namespace xFunc.Test
             {
                 new MathToken(MathTokenType.Root),
                 new MathToken(MathTokenType.OpenBracket),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.CloseBracket)
             };
 
@@ -120,7 +120,7 @@ namespace xFunc.Test
             {
                 new MathToken(MathTokenType.Derivative),
                 new MathToken(MathTokenType.OpenBracket),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.CloseBracket)
             };
 
@@ -135,7 +135,7 @@ namespace xFunc.Test
             {
                 new MathToken(MathTokenType.Derivative),
                 new MathToken(MathTokenType.OpenBracket),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.Comma),
                 new MathToken(3),
                 new MathToken(MathTokenType.CloseBracket)
@@ -149,7 +149,7 @@ namespace xFunc.Test
         {
             lexer.Tokens = new List<MathToken>()
             {
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.Assign),
                 new MathToken(3)
             };
@@ -164,7 +164,7 @@ namespace xFunc.Test
         {
             lexer.Tokens = new List<MathToken>()
             {
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.Assign)
             };
 
@@ -193,7 +193,7 @@ namespace xFunc.Test
             {
                 new MathToken(MathTokenType.Sine),
                 new MathToken(MathTokenType.OpenBracket),
-                new MathToken('x'),
+                new MathToken("x"),
                 new MathToken(MathTokenType.CloseBracket),
                 new MathToken(2)
             };

@@ -26,7 +26,7 @@ namespace xFunc.Maths
 
         private MathTokenType type;
         private double number;
-        private char variable;
+        private string variable;
 
         /// <summary>
         /// Initializes a new instance of <see cref="MathToken"/>.
@@ -38,21 +38,21 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="type">A type of token.</param>
         /// <seealso cref="MathTokenType"/>
-        public MathToken(MathTokenType type) : this(type, 0, ' ') { }
+        public MathToken(MathTokenType type) : this(type, 0, string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="MathToken"/> and sets the value of number.
         /// </summary>
         /// <param name="number">A real number.</param>
-        public MathToken(double number) : this(MathTokenType.Number, number, ' ') { }
+        public MathToken(double number) : this(MathTokenType.Number, number, string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="MathToken"/> and sets the name of variable.
         /// </summary>
         /// <param name="variable">A name of variable.</param>
-        public MathToken(char variable) : this(MathTokenType.Variable, 0, variable) { }
+        public MathToken(string variable) : this(MathTokenType.Variable, 0, variable) { }
 
-        internal MathToken(MathTokenType type, double number, char variable)
+        internal MathToken(MathTokenType type, double number, string variable)
         {
             this.type = type;
             this.number = number;
@@ -140,7 +140,7 @@ namespace xFunc.Maths
         /// <summary>
         /// Get or Set the name of variable.
         /// </summary>
-        public char Variable
+        public string Variable
         {
             get
             {

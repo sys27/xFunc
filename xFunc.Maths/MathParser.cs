@@ -510,7 +510,7 @@ namespace xFunc.Maths
                 Ln ln = expression as Ln;
 
                 // ln(e)
-                if (ln.FirstMathExpression.Equals(new Variable('e')))
+                if (ln.FirstMathExpression.Equals(new Variable("e")))
                     return one;
             }
             else if (expression is Lg)
@@ -527,7 +527,7 @@ namespace xFunc.Maths
 
         public static IMathExpression Differentiate(IMathExpression expression)
         {
-            return Differentiate(expression, new Variable('x'));
+            return Differentiate(expression, new Variable("x"));
         }
 
         public static IMathExpression Differentiate(IMathExpression expression, Variable variable)

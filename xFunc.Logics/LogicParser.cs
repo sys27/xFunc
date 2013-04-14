@@ -112,10 +112,10 @@ namespace xFunc.Logics
 
         public LogicParameterCollection GetLogicParameters(string function)
         {
-            HashSet<char> c = new HashSet<char>(from t in lexer.Tokenize(function).AsParallel()
-                                                where t.Type == LogicTokenType.Variable
-                                                orderby t.Variable
-                                                select t.Variable);
+            HashSet<string> c = new HashSet<string>(from t in lexer.Tokenize(function).AsParallel()
+                                                    where t.Type == LogicTokenType.Variable
+                                                    orderby t.Variable
+                                                    select t.Variable);
 
             return new LogicParameterCollection(c);
         }

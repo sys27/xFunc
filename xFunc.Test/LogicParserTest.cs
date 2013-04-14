@@ -40,9 +40,9 @@ namespace xFunc.Test
             string function = "a | b & c & (a | c)";
             LogicParameterCollection expected = new LogicParameterCollection()
                                                 {
-                                                    'a',
-                                                    'b',
-                                                    'c'
+                                                    "a",
+                                                    "b",
+                                                    "c"
                                                 };
 
             LogicParameterCollection actual = logicParser.GetLogicParameters(function);

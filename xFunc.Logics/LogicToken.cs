@@ -25,7 +25,7 @@ namespace xFunc.Logics
     {
 
         private LogicTokenType type;
-        private char variable;
+        private string variable;
 
         /// <summary>
         /// Initializes a new instance of <see cref="LogicToken"/>.
@@ -37,15 +37,15 @@ namespace xFunc.Logics
         /// </summary>
         /// <param name="type">A type of token.</param>
         /// <seealso cref="LogicTokenType"/>
-        public LogicToken(LogicTokenType type) : this(type, ' ') { }
+        public LogicToken(LogicTokenType type) : this(type, string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="LogicToken"/> and sets the name of variable.
         /// </summary>
         /// <param name="variable">A name of variable.</param>
-        public LogicToken(char variable) : this(LogicTokenType.Variable, variable) { }
+        public LogicToken(string variable) : this(LogicTokenType.Variable, variable) { }
 
-        internal LogicToken(LogicTokenType type, char variable)
+        internal LogicToken(LogicTokenType type, string variable)
         {
             this.type = type;
             this.variable = variable;
@@ -111,7 +111,7 @@ namespace xFunc.Logics
         /// <summary>
         /// Get or Set the name of variable.
         /// </summary>
-        public char Variable
+        public string Variable
         {
             get
             {

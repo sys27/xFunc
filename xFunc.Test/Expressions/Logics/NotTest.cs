@@ -23,12 +23,12 @@ namespace xFunc.Test.Expressions.Logics
         {
             ILogicExpression exp = parser.Parse("!a");
             LogicParameterCollection parameters = new LogicParameterCollection();
-            parameters.Add('a');
+            parameters.Add("a");
 
-            parameters['a'] = true;
+            parameters["a"] = true;
             Assert.IsFalse(exp.Calculate(parameters));
 
-            parameters['a'] = false;
+            parameters["a"] = false;
             Assert.IsTrue(exp.Calculate(parameters));
         }
 

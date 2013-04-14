@@ -27,29 +27,29 @@ namespace xFunc.Test
         public void AddTest()
         {
             LogicParameterCollection target = new LogicParameterCollection();
-            target.Add('a');
-            target.Add('b');
+            target.Add("a");
+            target.Add("b");
 
-            target['a'] = true;
-            target['b'] = false;
+            target["a"] = true;
+            target["b"] = false;
 
             Assert.AreEqual(2, target.Bits);
-            Assert.IsTrue(target['a']);
-            Assert.IsFalse(target['b']);
+            Assert.IsTrue(target["a"]);
+            Assert.IsFalse(target["b"]);
         }
 
         [TestMethod]
         public void RemoveTest()
         {
             LogicParameterCollection target = new LogicParameterCollection();
-            target.Add('a');
-            target.Add('b');
+            target.Add("a");
+            target.Add("b");
 
-            target['a'] = true;
-            target['b'] = false;
+            target["a"] = true;
+            target["b"] = false;
 
-            target.Remove('a');
-            target.Remove('b');
+            target.Remove("a");
+            target.Remove("b");
 
             Assert.AreEqual(0, target.Count);
             Assert.AreEqual(0, target.Bits);

@@ -18,16 +18,16 @@ using System.Collections.Generic;
 namespace xFunc.Logics.Expressions
 {
 
-    public class LogicParameterCollection : List<char>
+    public class LogicParameterCollection : List<string>
     {
 
         private int bits;
 
         public LogicParameterCollection() { }
 
-        public LogicParameterCollection(IEnumerable<char> vars) : base(vars) { }
+        public LogicParameterCollection(IEnumerable<string> vars) : base(vars) { }
 
-        public bool this[char variable]
+        public bool this[string variable]
         {
             get
             {
@@ -60,13 +60,13 @@ namespace xFunc.Logics.Expressions
             }
         }
 
-        public new void Add(char character)
+        public new void Add(string character)
         {
             bits <<= Count;
             base.Add(character);
         }
 
-        public new void Remove(char character)
+        public new void Remove(string character)
         {
             bits >>= Count;
             base.Remove(character);

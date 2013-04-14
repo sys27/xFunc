@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using xFunc.Logics.Exceptions;
 using xFunc.Logics.Resources;
 
@@ -22,6 +23,16 @@ namespace xFunc.Logics
 
     public class LogicLexer : IMathLexer
     {
+
+        private HashSet<string> supportedOp;
+
+        public LogicLexer()
+        {
+            supportedOp = new HashSet<string>()
+            {
+                "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
+            };
+        }
 
         /// <summary>
         /// Converts the string into a sequence of tokens.
@@ -206,7 +217,15 @@ namespace xFunc.Logics
                     }
 
                     token.Type = LogicTokenType.Variable;
-                    token.Variable = letter;
+                    int length = 1;
+
+                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !supportedOp.Any(s => function.Substring(j).StartsWith(s)); j++, length++) ;
+                    token.Variable = function.Substring(i, length);
+                    tokens.Add(token);
+
+                    i += length;
+
+                    continue;
                 }
                 else
                 {

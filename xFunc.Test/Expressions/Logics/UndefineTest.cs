@@ -13,13 +13,13 @@ namespace xFunc.Test.Expressions.Logics
         public void CalculateTest()
         {
             LogicParameterCollection parameters = new LogicParameterCollection();
-            ILogicExpression def = new Assign(new Variable('a'), new Const(true));
+            ILogicExpression def = new Assign(new Variable("a"), new Const(true));
             def.Calculate(parameters);
-            Assert.AreEqual(true, parameters['a']);
+            Assert.AreEqual(true, parameters["a"]);
 
-            ILogicExpression undef = new Undefine(new Variable('a'));
+            ILogicExpression undef = new Undefine(new Variable("a"));
             undef.Calculate(parameters);
-            Assert.IsFalse(parameters.Contains('a'));
+            Assert.IsFalse(parameters.Contains("a"));
         }
 
     }

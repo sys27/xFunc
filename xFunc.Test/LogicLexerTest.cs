@@ -42,7 +42,7 @@ namespace xFunc.Test
             var expected = new List<LogicToken>()
             {
                 new LogicToken(LogicTokenType.OpenBracket),
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -56,7 +56,7 @@ namespace xFunc.Test
             var expected = new List<LogicToken>()
             {
                 new LogicToken(LogicTokenType.Not),
-                new LogicToken('a')
+                new LogicToken("a")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -68,9 +68,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.And),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -82,9 +82,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Or),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -96,9 +96,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Implication),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -110,9 +110,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Implication),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -124,9 +124,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Equality),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -138,9 +138,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Equality),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -152,9 +152,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.XOr),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -166,7 +166,7 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Assign),
                 new LogicToken(LogicTokenType.True)
             };
@@ -206,22 +206,22 @@ namespace xFunc.Test
             {
                 new LogicToken(LogicTokenType.Not),
                 new LogicToken(LogicTokenType.OpenBracket),
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
         [TestMethod]
-        public void AdnAsWord()
+        public void AndAsWord()
         {
             var tokens = lexer.Tokenize("a and b");
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.And),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -233,9 +233,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Or),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -247,9 +247,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Implication),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -261,9 +261,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.Equality),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -275,9 +275,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.NOr),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -289,9 +289,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.NAnd),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -303,9 +303,9 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.XOr),
-                new LogicToken('b')
+                new LogicToken("b")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -319,9 +319,9 @@ namespace xFunc.Test
             {
                 new LogicToken(LogicTokenType.TruthTable),
                 new LogicToken(LogicTokenType.OpenBracket),
-                new LogicToken('a'),
+                new LogicToken("a"),
                 new LogicToken(LogicTokenType.And),
-                new LogicToken('b'),
+                new LogicToken("b"),
                 new LogicToken(LogicTokenType.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -358,7 +358,21 @@ namespace xFunc.Test
 
             var expected = new List<LogicToken>()
             {
-                new LogicToken('a')
+                new LogicToken("a")
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void StringVarLexerTest()
+        {
+            var tokens = lexer.Tokenize("aaa := true");
+
+            var expected = new List<LogicToken>()
+            {
+                new LogicToken("aaa"),
+                new LogicToken(LogicTokenType.Assign),
+                new LogicToken(LogicTokenType.True)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }

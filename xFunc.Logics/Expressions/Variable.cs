@@ -20,9 +20,9 @@ namespace xFunc.Logics.Expressions
     public class Variable : ILogicExpression
     {
 
-        private char variable;
+        private string variable;
 
-        public Variable(char variable)
+        public Variable(string variable)
         {
             this.variable = variable;
         }
@@ -37,7 +37,7 @@ namespace xFunc.Logics.Expressions
             return parameters[variable];
         }
 
-        public char Character
+        public string Character
         {
             get
             {

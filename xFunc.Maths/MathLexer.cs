@@ -554,12 +554,6 @@ namespace xFunc.Maths
                     tokens.Add(token);
                     i += length;
 
-                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => function.Substring(i).StartsWith(s)))
-                    {
-                        token = new MathToken(MathTokenType.Multiplication);
-                        tokens.Add(token);
-                    }
-
                     continue;
                 }
                 else

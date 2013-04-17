@@ -547,12 +547,12 @@ namespace xFunc.Maths
 
                     token.Type = MathTokenType.Variable;
 
-                    int length = 1;
-                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++, length++) ;
+                    int j = i + 1;
+                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;
 
-                    token.Variable = function.Substring(i, length);
+                    token.Variable = function.Substring(i, j - i);
                     tokens.Add(token);
-                    i += length;
+                    i = j;
 
                     continue;
                 }

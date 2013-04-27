@@ -102,6 +102,7 @@
     <Compile Include="Expressions\Undefine.cs" />
     <Compile Include="Expressions\Variable.cs" />
     <Compile Include="IMathLexer.cs" />
+    <Compile Include="MathBuilder.cs" />
     <Compile Include="MathExtentions.cs" />
     <Compile Include="MathLexer.cs" />
     <Compile Include="MathParser.cs" />

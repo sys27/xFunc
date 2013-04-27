@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArsine : UnaryMathExpression
+    public class Sech : UnaryMathExpression
     {
 
-        public HyperbolicArsine()
+        public Sech()
             : base(null)
         {
 
         }
 
-        public HyperbolicArsine(IMathExpression firstMathExpression)
+        public Sech(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,32 +34,33 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("arsinh({0})");
+            return ToString("sech({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Asinh(firstMathExpression.Calculate());
+            return MathExtentions.Sech(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Asinh(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Sech(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArsine(firstMathExpression.Clone());
+            return new Sech(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            var add = new Addition(sqr, new Number(1));
-            var sqrt = new Sqrt(add);
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), sqrt);
+            var tanh = new Tanh(firstMathExpression.Clone());
+            var sech = Clone();
+            var mul1 = new Multiplication(tanh, sech);
+            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
+            var unMinus = new UnaryMinus(mul2);
 
-            return div;
+            return unMinus;
         }
 
     }

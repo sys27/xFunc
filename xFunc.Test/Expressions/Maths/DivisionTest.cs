@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // sin(x) / x
-            IMathExpression exp = new Division(new Sine(new Variable("x")), new Variable("x"));
+            IMathExpression exp = new Division(new Sin(new Variable("x")), new Variable("x"));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(((cos(x) * 1) * x) - (sin(x) * 1)) / (x ^ 2)", deriv.ToString());

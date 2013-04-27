@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = new HyperbolicSine(new Number(1));
+            var exp = new Sinh(new Number(1));
 
             Assert.AreEqual(Math.Sinh(1), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new HyperbolicSine(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Sinh(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * cosh(2 * x)", deriv.ToString());

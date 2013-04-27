@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = new HyperbolicArsecant(new Number(1));
+            var exp = new Arsech(new Number(1));
 
             Assert.AreEqual(MathExtentions.Asech(1), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new HyperbolicArsecant(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Arsech(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) / ((2 * x) * sqrt(1 - ((2 * x) ^ 2))))", deriv.ToString());

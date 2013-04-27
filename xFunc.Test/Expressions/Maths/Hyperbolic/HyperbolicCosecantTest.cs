@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = new HyperbolicCosecant(new Number(1));
+            var exp = new Csch(new Number(1));
 
             Assert.AreEqual(MathExtentions.Csch(1), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new HyperbolicCosecant(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Csch(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) * (coth(2 * x) * csch(2 * x)))", deriv.ToString());

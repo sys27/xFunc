@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = new HyperbolicCotangent(new Number(1));
+            var exp = new Coth(new Number(1));
 
             Assert.AreEqual(MathExtentions.Coth(1), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new HyperbolicCotangent(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Coth(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) / (sinh(2 * x) ^ 2))", deriv.ToString());

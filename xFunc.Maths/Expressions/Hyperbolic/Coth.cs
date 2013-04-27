@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArsecant : UnaryMathExpression
+    public class Coth : UnaryMathExpression
     {
 
-        public HyperbolicArsecant()
+        public Coth()
             : base(null)
         {
 
         }
 
-        public HyperbolicArsecant(IMathExpression firstMathExpression)
+        public Coth(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,31 +34,29 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("arsech({0})");
+            return ToString("coth({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Asech(firstMathExpression.Calculate());
+            return MathExtentions.Coth(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Asech(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Coth(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArsecant(firstMathExpression.Clone());
+            return new Coth(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var inv = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            var sub = new Subtraction(new Number(1), inv);
-            var sqrt = new Sqrt(sub);
-            var mul = new Multiplication(firstMathExpression.Clone(), sqrt);
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
+            var sinh = new Sinh(firstMathExpression.Clone());
+            var inv = new Exponentiation(sinh, new Number(2));
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
             var unMinus = new UnaryMinus(div);
 
             return unMinus;

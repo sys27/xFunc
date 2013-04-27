@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void CalculateTest()
         {
-            var exp = new HyperbolicTangent(new Number(1));
+            var exp = new Tanh(new Number(1));
 
             Assert.AreEqual(Math.Tanh(1), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new HyperbolicTangent(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Tanh(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (cosh(2 * x) ^ 2)", deriv.ToString());

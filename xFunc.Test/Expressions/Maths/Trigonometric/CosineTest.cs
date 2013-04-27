@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Cosine(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Cos(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
             Assert.AreEqual(Math.Cos(1), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Cosine(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Cos(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
             Assert.AreEqual(Math.Cos(1 * Math.PI / 180), exp.Calculate(null));
         }
@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Cosine(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Cos(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
             Assert.AreEqual(Math.Cos(1 * Math.PI / 200), exp.Calculate(null));
         }
@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Cosine(new Variable("x"));
+            IMathExpression exp = new Cos(new Variable("x"));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(sin(x) * 1)", deriv.ToString());
@@ -47,7 +47,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = new Cosine(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Cos(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
@@ -61,7 +61,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Variable x = new Variable("x");
             Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new Cosine(mul);
+            IMathExpression exp = new Cos(mul);
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
@@ -74,7 +74,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Cosine(new Multiplication(new Variable("x"), new Variable("y")));
+            IMathExpression exp = new Cos(new Multiplication(new Variable("x"), new Variable("y")));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("-(sin(x * y) * (1 * y))", deriv.ToString());
         }
@@ -82,7 +82,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Cosine(new Multiplication(new Variable("x"), new Variable("y")));
+            IMathExpression exp = new Cos(new Multiplication(new Variable("x"), new Variable("y")));
             IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("-(sin(x * y) * (x * 1))", deriv.ToString());
         }
@@ -90,7 +90,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Cosine(new Variable("x"));
+            IMathExpression exp = new Cos(new Variable("x"));
             IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }

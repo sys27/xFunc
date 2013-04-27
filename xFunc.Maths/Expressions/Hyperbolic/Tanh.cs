@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicCosine : UnaryMathExpression
+    public class Tanh : UnaryMathExpression
     {
 
-        public HyperbolicCosine()
+        public Tanh()
             : base(null)
         {
 
         }
 
-        public HyperbolicCosine(IMathExpression firstMathExpression)
+        public Tanh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,30 +34,31 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("cosh({0})");
+            return ToString("tanh({0})");
         }
 
         public override double Calculate()
         {
-            return Math.Cosh(firstMathExpression.Calculate());
+            return Math.Tanh(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Cosh(firstMathExpression.Calculate(parameters));
+            return Math.Tanh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicCosine(firstMathExpression.Clone());
+            return new Tanh(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sinh = new HyperbolicSine(firstMathExpression.Clone());
-            var mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), sinh);
+            var cosh = new Cosh(firstMathExpression.Clone());
+            var inv = new Exponentiation(cosh, new Number(2));
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
 
-            return mul;
+            return div;
         }
 
     }

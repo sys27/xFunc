@@ -54,12 +54,12 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Absolute abs = new Absolute(firstMathExpression.Clone());
-            Exponentiation sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            Subtraction sub = new Subtraction(sqr, new Number(1));
+            Abs abs = new Abs(firstMathExpression.Clone());
+            Pow sqr = new Pow(firstMathExpression.Clone(), new Number(2));
+            Sub sub = new Sub(sqr, new Number(1));
             Sqrt sqrt = new Sqrt(sub);
-            Multiplication mul = new Multiplication(abs, sqrt);
-            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
+            Mul mul = new Mul(abs, sqrt);
+            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
 
             return div;
         }

@@ -60,8 +60,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             Tan tan = new Tan(firstMathExpression.Clone());
             Sec sec = new Sec(firstMathExpression.Clone());
-            Multiplication mul1 = new Multiplication(tan, sec);
-            Multiplication mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
+            Mul mul1 = new Mul(tan, sec);
+            Mul mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
 
             return mul2;
         }

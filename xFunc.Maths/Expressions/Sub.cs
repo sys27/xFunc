@@ -17,31 +17,31 @@ using System;
 namespace xFunc.Maths.Expressions
 {
     
-    public class Multiplication : BinaryMathExpression
+    public class Sub : BinaryMathExpression
     {
 
-        public Multiplication() : base(null, null) { }
+        public Sub() : base(null, null) { }
 
-        public Multiplication(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
+        public Sub(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         public override string ToString()
         {
             if (parentMathExpression is BinaryMathExpression)
             {
-                return ToString("({0} * {1})");
+                return ToString("({0} - {1})");
             }
 
-            return ToString("{0} * {1}");
+            return ToString("{0} - {1}");
         }
 
         public override double Calculate()
         {
-            return firstMathExpression.Calculate() * secondMathExpression.Calculate();
+            return firstMathExpression.Calculate() - secondMathExpression.Calculate();
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return firstMathExpression.Calculate(parameters) * secondMathExpression.Calculate(parameters);
+            return firstMathExpression.Calculate(parameters) - secondMathExpression.Calculate(parameters);
         }
 
         public override IMathExpression Differentiate(Variable variable)
@@ -51,19 +51,15 @@ namespace xFunc.Maths.Expressions
 
             if (first && second)
             {
-                Multiplication mul1 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
-                Multiplication mul2 = new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
-                Addition add = new Addition(mul1, mul2);
-
-                return add;
+                return new Sub(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone().Differentiate(variable));
             }
             if (first)
             {
-                return new Multiplication(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
+                return firstMathExpression.Clone().Differentiate(variable);
             }
             if (second)
             {
-                return new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
+                return new UnaryMinus(secondMathExpression.Clone().Differentiate(variable));
             }
 
             return new Number(0);
@@ -71,7 +67,7 @@ namespace xFunc.Maths.Expressions
 
         public override IMathExpression Clone()
         {
-            return new Multiplication(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Sub(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest3()
         {
-            IMathExpression exp = new Assign(new Variable("x"), new Multiplication(new Number(4), new Addition(new Number(8), new Number(1))));
+            IMathExpression exp = new Assign(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);

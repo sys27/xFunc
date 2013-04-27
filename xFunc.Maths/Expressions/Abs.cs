@@ -20,20 +20,20 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Absolute operation.
     /// </summary>
-    public class Absolute : UnaryMathExpression
+    public class Abs : UnaryMathExpression
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Absolute"/> class.
+        /// Initializes a new instance of the <see cref="Abs"/> class.
         /// </summary>
-        public Absolute() : base(null) { }
+        public Abs() : base(null) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Absolute"/> class.
+        /// Initializes a new instance of the <see cref="Abs"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IMathExpression"/>
-        public Absolute(IMathExpression expression) : base(expression) { }
+        public Abs(IMathExpression expression) : base(expression) { }
 
         /// <summary>
         /// Converts this expression to the equivalent string.
@@ -71,8 +71,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable"/>
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Division div = new Division(firstMathExpression.Clone(), Clone());
-            Multiplication mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), div);
+            Div div = new Div(firstMathExpression.Clone(), Clone());
+            Mul mul = new Mul(firstMathExpression.Clone().Differentiate(variable), div);
 
             return mul;
         }
@@ -83,7 +83,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Absolute(firstMathExpression.Clone());
+            return new Abs(firstMathExpression.Clone());
         }
 
     }

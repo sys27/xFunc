@@ -47,7 +47,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Root(new Multiplication(new Variable("x"), new Variable("y")), new Number(3));
+            IMathExpression exp = new Root(new Mul(new Variable("x"), new Variable("y")), new Number(3));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) * ((1 / 3) * ((x * y) ^ ((1 / 3) - 1)))", deriv.ToString());
         }

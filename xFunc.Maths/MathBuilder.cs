@@ -38,6 +38,34 @@ namespace xFunc.Maths
             return this;
         }
 
+        public MathBuilder Abs()
+        {
+            expression = new Abs(expression);
+
+            return this;
+        }
+
+        public MathBuilder Abs(IMathExpression exp)
+        {
+            expression = new Abs(exp);
+
+            return this;
+        }
+
+        public MathBuilder Exp()
+        {
+            expression = new Exp(expression);
+
+            return this;
+        }
+
+        public MathBuilder Exp(IMathExpression exp)
+        {
+            expression = new Exp(exp);
+
+            return this;
+        }
+
         #region Trigonometric
 
         public MathBuilder Sin()
@@ -384,6 +412,52 @@ namespace xFunc.Maths
         public MathBuilder Arcsch(IMathExpression exp)
         {
             expression = new Arcsch(exp);
+
+            return this;
+        }
+
+        #endregion
+
+        #region Logarithm
+
+        public MathBuilder Ln()
+        {
+            expression = new Ln(expression);
+
+            return this;
+        }
+
+        public MathBuilder Ln(IMathExpression exp)
+        {
+            expression = new Ln(exp);
+
+            return this;
+        }
+
+        public MathBuilder Lg()
+        {
+            expression = new Lg(expression);
+
+            return this;
+        }
+
+        public MathBuilder Lg(IMathExpression exp)
+        {
+            expression = new Lg(exp);
+
+            return this;
+        }
+
+        public MathBuilder Log(IMathExpression b)
+        {
+            expression = new Log(expression, b);
+
+            return this;
+        }
+
+        public MathBuilder Log(IMathExpression exp, IMathExpression b)
+        {
+            expression = new Log(exp, b);
 
             return this;
         }

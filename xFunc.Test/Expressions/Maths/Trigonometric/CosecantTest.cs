@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new Csc(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Csc(new Mul(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());

@@ -67,8 +67,8 @@ namespace xFunc.Maths.Expressions
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Ln ln = new Ln(new Number(10));
-            Multiplication mul1 = new Multiplication(firstMathExpression.Clone(), ln);
-            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), mul1);
+            Mul mul1 = new Mul(firstMathExpression.Clone(), ln);
+            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), mul1);
 
             return div;
         }

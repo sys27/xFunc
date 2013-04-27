@@ -17,12 +17,12 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
-    public class Exponentiation : BinaryMathExpression
+    public class Pow : BinaryMathExpression
     {
 
-        public Exponentiation() : base(null, null) { }
+        public Pow() : base(null, null) { }
 
-        public Exponentiation(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
+        public Pow(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         public override string ToString()
         {
@@ -48,18 +48,18 @@ namespace xFunc.Maths.Expressions
         {
             if (MathParser.HasVar(firstMathExpression, variable))
             {
-                Subtraction sub = new Subtraction(secondMathExpression.Clone(), new Number(1));
-                Exponentiation inv = new Exponentiation(firstMathExpression.Clone(), sub);
-                Multiplication mul1 = new Multiplication(secondMathExpression.Clone(), inv);
-                Multiplication mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
+                Sub sub = new Sub(secondMathExpression.Clone(), new Number(1));
+                Pow inv = new Pow(firstMathExpression.Clone(), sub);
+                Mul mul1 = new Mul(secondMathExpression.Clone(), inv);
+                Mul mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
 
                 return mul2;
             }
             if (MathParser.HasVar(secondMathExpression, variable))
             {
                 Ln ln = new Ln(firstMathExpression.Clone());
-                Multiplication mul1 = new Multiplication(ln, Clone());
-                Multiplication mul2 = new Multiplication(mul1, secondMathExpression.Clone().Differentiate(variable));
+                Mul mul1 = new Mul(ln, Clone());
+                Mul mul2 = new Mul(mul1, secondMathExpression.Clone().Differentiate(variable));
 
                 return mul2;
             }
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions
 
         public override IMathExpression Clone()
         {
-            return new Exponentiation(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Pow(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

@@ -16,50 +16,59 @@ using System;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
-    
-    public class Cosine : TrigonometryMathExpression
+
+    public class Sec : TrigonometryMathExpression
     {
 
-        public Cosine() : base(null) { }
+        public Sec()
+            : base(null)
+        {
 
-        public Cosine(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        }
+
+        public Sec(IMathExpression firstMathExpression)
+            : base(firstMathExpression)
+        {
+
+        }
 
         public override string ToString()
         {
-            return ToString("cos({0})");
+            return ToString("sec({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return Math.Cos(radian);
+            return 1 / Math.Cos(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Cos(firstMathExpression.Calculate(parameters));
+            return 1 / Math.Cos(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return Math.Cos(radian);
+            return 1 / Math.Cos(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Sine sine = new Sine(firstMathExpression.Clone());
-            Multiplication multiplication = new Multiplication(sine, firstMathExpression.Clone().Differentiate(variable));
-            UnaryMinus unMinus = new UnaryMinus(multiplication);
+            Tan tan = new Tan(firstMathExpression.Clone());
+            Sec sec = new Sec(firstMathExpression.Clone());
+            Multiplication mul1 = new Multiplication(tan, sec);
+            Multiplication mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
 
-            return unMinus;
+            return mul2;
         }
 
         public override IMathExpression Clone()
         {
-            return new Cosine(firstMathExpression.Clone());
+            return new Sec(firstMathExpression.Clone());
         }
 
     }

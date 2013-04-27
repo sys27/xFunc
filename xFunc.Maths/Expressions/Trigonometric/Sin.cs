@@ -17,52 +17,48 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class Cotangent : TrigonometryMathExpression
+    public class Sin : TrigonometryMathExpression
     {
 
-        public Cotangent() : base(null) { }
+        public Sin() : base(null) { }
 
-        public Cotangent(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Sin(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("cot({0})");
+            return ToString("sin({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return MathExtentions.Cot(radian);
+            return Math.Sin(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            var x = firstMathExpression.Calculate(parameters);
-
-            return MathExtentions.Cot(x);
+            return Math.Sin(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return MathExtentions.Cot(radian);
+            return Math.Sin(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Sine sine = new Sine(firstMathExpression.Clone());
-            Exponentiation involution = new Exponentiation(sine, new Number(2));
-            Division division = new Division(firstMathExpression.Clone().Differentiate(variable), involution);
-            UnaryMinus unMinus = new UnaryMinus(division);
+            Cos cos = new Cos(firstMathExpression.Clone());
+            Multiplication mul = new Multiplication(cos, firstMathExpression.Clone().Differentiate(variable));
 
-            return unMinus;
+            return mul;
         }
 
         public override IMathExpression Clone()
         {
-            return new Cotangent(firstMathExpression.Clone());
+            return new Sin(firstMathExpression.Clone());
         }
 
     }

@@ -700,22 +700,22 @@ namespace xFunc.Maths
                         preOutput.Add(new Absolute());
                         break;
                     case MathTokenType.Sine:
-                        preOutput.Add(new Sine { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Sin { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Cosine:
-                        preOutput.Add(new Cosine { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Cos { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Tangent:
-                        preOutput.Add(new Tangent { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Tan { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Cotangent:
-                        preOutput.Add(new Cotangent { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Cot { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Secant:
-                        preOutput.Add(new Secant { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Sec { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Cosecant:
-                        preOutput.Add(new Cosecant { AngleMeasurement = angleMeasurement });
+                        preOutput.Add(new Csc { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Arcsine:
                         preOutput.Add(new Arcsin { AngleMeasurement = angleMeasurement });
@@ -736,40 +736,40 @@ namespace xFunc.Maths
                         preOutput.Add(new Arccot { AngleMeasurement = angleMeasurement });
                         break;
                     case MathTokenType.Sineh:
-                        preOutput.Add(new HyperbolicSine());
+                        preOutput.Add(new Sinh());
                         break;
                     case MathTokenType.Cosineh:
-                        preOutput.Add(new HyperbolicCosine());
+                        preOutput.Add(new Cosh());
                         break;
                     case MathTokenType.Tangenth:
-                        preOutput.Add(new HyperbolicTangent());
+                        preOutput.Add(new Tanh());
                         break;
                     case MathTokenType.Cotangenth:
-                        preOutput.Add(new HyperbolicCotangent());
+                        preOutput.Add(new Coth());
                         break;
                     case MathTokenType.Secanth:
-                        preOutput.Add(new HyperbolicSecant());
+                        preOutput.Add(new Sech());
                         break;
                     case MathTokenType.Cosecanth:
-                        preOutput.Add(new HyperbolicCosecant());
+                        preOutput.Add(new Csch());
                         break;
                     case MathTokenType.Arsineh:
-                        preOutput.Add(new HyperbolicArsine());
+                        preOutput.Add(new Arsinh());
                         break;
                     case MathTokenType.Arcosineh:
-                        preOutput.Add(new HyperbolicArcosine());
+                        preOutput.Add(new Arcosh());
                         break;
                     case MathTokenType.Artangenth:
-                        preOutput.Add(new HyperbolicArtangent());
+                        preOutput.Add(new Artanh());
                         break;
                     case MathTokenType.Arcotangenth:
-                        preOutput.Add(new HyperbolicArcotangent());
+                        preOutput.Add(new Arcoth());
                         break;
                     case MathTokenType.Arsecanth:
-                        preOutput.Add(new HyperbolicArsecant());
+                        preOutput.Add(new Arsech());
                         break;
                     case MathTokenType.Arcosecanth:
-                        preOutput.Add(new HyperbolicArcosecant());
+                        preOutput.Add(new Arcsch());
                         break;
                     case MathTokenType.Sqrt:
                         preOutput.Add(new Sqrt());

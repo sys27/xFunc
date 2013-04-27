@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArcotangent : UnaryMathExpression
+    public class Cosh : UnaryMathExpression
     {
 
-        public HyperbolicArcotangent()
+        public Cosh()
             : base(null)
         {
 
         }
 
-        public HyperbolicArcotangent(IMathExpression firstMathExpression)
+        public Cosh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,31 +34,30 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("arcoth({0})");
+            return ToString("cosh({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Acoth(firstMathExpression.Calculate());
+            return Math.Cosh(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Acoth(firstMathExpression.Calculate(parameters));
+            return Math.Cosh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArcotangent(firstMathExpression.Clone());
+            return new Cosh(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            var sub = new Subtraction(new Number(1), sqr);
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), sub);
+            var sinh = new Sinh(firstMathExpression.Clone());
+            var mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), sinh);
 
-            return div;
+            return mul;
         }
 
     }

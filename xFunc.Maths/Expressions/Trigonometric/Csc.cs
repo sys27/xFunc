@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class Secant : TrigonometryMathExpression
+    public class Csc : TrigonometryMathExpression
     {
 
-        public Secant()
+        public Csc()
             : base(null)
         {
 
         }
 
-        public Secant(IMathExpression firstMathExpression)
+        public Csc(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,41 +34,42 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public override string ToString()
         {
-            return ToString("sec({0})");
+            return ToString("csc({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return 1 / Math.Cos(radian);
+            return 1 / Math.Sin(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return 1 / Math.Cos(firstMathExpression.Calculate(parameters));
+            return 1 / Math.Sin(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return 1 / Math.Cos(radian);
+            return 1 / Math.Sin(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Tangent tan = new Tangent(firstMathExpression.Clone());
-            Secant sec = new Secant(firstMathExpression.Clone());
-            Multiplication mul1 = new Multiplication(tan, sec);
-            Multiplication mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
+            UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
+            Cot cot = new Cot(firstMathExpression.Clone());
+            Csc csc = new Csc(firstMathExpression.Clone());
+            Multiplication mul1 = new Multiplication(cot, csc);
+            Multiplication mul2 = new Multiplication(unary, mul1);
 
             return mul2;
         }
 
         public override IMathExpression Clone()
         {
-            return new Secant(firstMathExpression.Clone());
+            return new Csc(firstMathExpression.Clone());
         }
 
     }

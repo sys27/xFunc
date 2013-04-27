@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicCosecant : UnaryMathExpression
+    public class Arsinh : UnaryMathExpression
     {
 
-        public HyperbolicCosecant()
+        public Arsinh()
             : base(null)
         {
 
         }
 
-        public HyperbolicCosecant(IMathExpression firstMathExpression)
+        public Arsinh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,33 +34,32 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("csch({0})");
+            return ToString("arsinh({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Csch(firstMathExpression.Calculate());
+            return MathExtentions.Asinh(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Csch(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Asinh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicCosecant(firstMathExpression.Clone());
+            return new Arsinh(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var coth = new HyperbolicCotangent(firstMathExpression.Clone());
-            var csch = Clone();
-            var mul1 = new Multiplication(coth, csch);
-            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
-            var unMinus = new UnaryMinus(mul2);
+            var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
+            var add = new Addition(sqr, new Number(1));
+            var sqrt = new Sqrt(add);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), sqrt);
 
-            return unMinus;
+            return div;
         }
 
     }

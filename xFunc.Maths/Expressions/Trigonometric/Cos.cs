@@ -17,49 +17,49 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
     
-    public class Tangent : TrigonometryMathExpression
+    public class Cos : TrigonometryMathExpression
     {
 
-        public Tangent() : base(null) { }
+        public Cos() : base(null) { }
 
-        public Tangent(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Cos(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("tan({0})");
+            return ToString("cos({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return Math.Tan(radian);
+            return Math.Cos(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Tan(firstMathExpression.Calculate(parameters));
+            return Math.Cos(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return Math.Tan(radian);
+            return Math.Cos(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Cosine cos = new Cosine(firstMathExpression.Clone());
-            Exponentiation inv = new Exponentiation(cos, new Number(2));
-            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
+            Sin sine = new Sin(firstMathExpression.Clone());
+            Multiplication multiplication = new Multiplication(sine, firstMathExpression.Clone().Differentiate(variable));
+            UnaryMinus unMinus = new UnaryMinus(multiplication);
 
-            return div;
+            return unMinus;
         }
 
         public override IMathExpression Clone()
         {
-            return new Tangent(firstMathExpression.Clone());
+            return new Cos(firstMathExpression.Clone());
         }
 
     }

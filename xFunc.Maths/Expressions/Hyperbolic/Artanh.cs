@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArtangent : UnaryMathExpression
+    public class Artanh : UnaryMathExpression
     {
 
-        public HyperbolicArtangent()
+        public Artanh()
             : base(null)
         {
 
         }
 
-        public HyperbolicArtangent(IMathExpression firstMathExpression)
+        public Artanh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArtangent(firstMathExpression.Clone());
+            return new Artanh(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)

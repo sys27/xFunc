@@ -26,7 +26,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest2()
         {
-            IMathExpression exp = new Assign(new Variable("x"), new Sine(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian });
+            IMathExpression exp = new Assign(new Variable("x"), new Sin(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian });
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);

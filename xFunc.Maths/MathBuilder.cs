@@ -40,86 +40,86 @@ namespace xFunc.Maths
 
         #region Trigonometric
 
-        public MathBuilder Sine()
+        public MathBuilder Sin()
         {
-            expression = new Sine(expression);
+            expression = new Sin(expression);
 
             return this;
         }
 
-        public MathBuilder Sine(IMathExpression exp)
+        public MathBuilder Sin(IMathExpression exp)
         {
-            expression = new Sine(exp);
+            expression = new Sin(exp);
 
             return this;
         }
 
-        public MathBuilder Cosine()
+        public MathBuilder Cos()
         {
-            expression = new Cosine(expression);
+            expression = new Cos(expression);
 
             return this;
         }
 
-        public MathBuilder Cosine(IMathExpression exp)
+        public MathBuilder Cos(IMathExpression exp)
         {
-            expression = new Cosine(exp);
+            expression = new Cos(exp);
 
             return this;
         }
 
-        public MathBuilder Tangent()
+        public MathBuilder Tan()
         {
-            expression = new Tangent(expression);
+            expression = new Tan(expression);
 
             return this;
         }
 
-        public MathBuilder Tangent(IMathExpression exp)
+        public MathBuilder Tan(IMathExpression exp)
         {
-            expression = new Tangent(exp);
+            expression = new Tan(exp);
 
             return this;
         }
 
-        public MathBuilder Cotangent()
+        public MathBuilder Cot()
         {
-            expression = new Cotangent(expression);
+            expression = new Cot(expression);
 
             return this;
         }
 
-        public MathBuilder Cotangent(IMathExpression exp)
+        public MathBuilder Cot(IMathExpression exp)
         {
-            expression = new Cotangent(exp);
+            expression = new Cot(exp);
 
             return this;
         }
 
-        public MathBuilder Secant()
+        public MathBuilder Sec()
         {
-            expression = new Secant(expression);
+            expression = new Sec(expression);
 
             return this;
         }
 
-        public MathBuilder Secant(IMathExpression exp)
+        public MathBuilder Sec(IMathExpression exp)
         {
-            expression = new Secant(exp);
+            expression = new Sec(exp);
 
             return this;
         }
 
-        public MathBuilder Cosecant()
+        public MathBuilder Csc()
         {
-            expression = new Cosecant(expression);
+            expression = new Csc(expression);
 
             return this;
         }
 
-        public MathBuilder Cosecant(IMathExpression exp)
+        public MathBuilder Csc(IMathExpression exp)
         {
-            expression = new Cosecant(exp);
+            expression = new Csc(exp);
 
             return this;
         }
@@ -216,86 +216,86 @@ namespace xFunc.Maths
 
         #region Hyperbolic
 
-        public MathBuilder HyperbolicSine()
+        public MathBuilder Sinh()
         {
-            expression = new HyperbolicSine(expression);
+            expression = new Sinh(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicSine(IMathExpression exp)
+        public MathBuilder Sinh(IMathExpression exp)
         {
-            expression = new HyperbolicSine(exp);
+            expression = new Sinh(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicCosine()
+        public MathBuilder Cosh()
         {
-            expression = new HyperbolicCosine(expression);
+            expression = new Cosh(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicCosine(IMathExpression exp)
+        public MathBuilder Cosh(IMathExpression exp)
         {
-            expression = new HyperbolicCosine(exp);
+            expression = new Cosh(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicTangent()
+        public MathBuilder Tanh()
         {
-            expression = new HyperbolicTangent(expression);
+            expression = new Tanh(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicTangent(IMathExpression exp)
+        public MathBuilder Tanh(IMathExpression exp)
         {
-            expression = new HyperbolicTangent(exp);
+            expression = new Tanh(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicCotangent()
+        public MathBuilder Coth()
         {
-            expression = new HyperbolicCotangent(expression);
+            expression = new Coth(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicCotangent(IMathExpression exp)
+        public MathBuilder Coth(IMathExpression exp)
         {
-            expression = new HyperbolicCotangent(exp);
+            expression = new Coth(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicSecant()
+        public MathBuilder Sech()
         {
-            expression = new HyperbolicSecant(expression);
+            expression = new Sech(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicSecant(IMathExpression exp)
+        public MathBuilder Sech(IMathExpression exp)
         {
-            expression = new HyperbolicSecant(exp);
+            expression = new Sech(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicCosecant()
+        public MathBuilder Csch()
         {
-            expression = new HyperbolicCosecant(expression);
+            expression = new Csch(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicCosecant(IMathExpression exp)
+        public MathBuilder Csch(IMathExpression exp)
         {
-            expression = new HyperbolicCosecant(exp);
+            expression = new Csch(exp);
 
             return this;
         }
@@ -304,86 +304,86 @@ namespace xFunc.Maths
 
         #region Inverse hyperbolic
 
-        public MathBuilder HyperbolicArsine()
+        public MathBuilder Arsinh()
         {
-            expression = new HyperbolicArsine(expression);
+            expression = new Arsinh(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArsine(IMathExpression exp)
+        public MathBuilder Arsinh(IMathExpression exp)
         {
-            expression = new HyperbolicArsine(exp);
+            expression = new Arsinh(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArcosine()
+        public MathBuilder Arcosh()
         {
-            expression = new HyperbolicArcosine(expression);
+            expression = new Arcosh(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArcosine(IMathExpression exp)
+        public MathBuilder Arcosh(IMathExpression exp)
         {
-            expression = new HyperbolicArcosine(exp);
+            expression = new Arcosh(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArtangent()
+        public MathBuilder Artanh()
         {
-            expression = new HyperbolicArtangent(expression);
+            expression = new Artanh(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArtangent(IMathExpression exp)
+        public MathBuilder Artanh(IMathExpression exp)
         {
-            expression = new HyperbolicArtangent(exp);
+            expression = new Artanh(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArcotangent()
+        public MathBuilder Arcoth()
         {
-            expression = new HyperbolicArcotangent(expression);
+            expression = new Arcoth(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArcotangent(IMathExpression exp)
+        public MathBuilder Arcoth(IMathExpression exp)
         {
-            expression = new HyperbolicArcotangent(exp);
+            expression = new Arcoth(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArsecant()
+        public MathBuilder Arsech()
         {
-            expression = new HyperbolicArsecant(expression);
+            expression = new Arsech(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArsecant(IMathExpression exp)
+        public MathBuilder Arsech(IMathExpression exp)
         {
-            expression = new HyperbolicArsecant(exp);
+            expression = new Arsech(exp);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArcosecant()
+        public MathBuilder Arcsch()
         {
-            expression = new HyperbolicArcosecant(expression);
+            expression = new Arcsch(expression);
 
             return this;
         }
 
-        public MathBuilder HyperbolicArcosecant(IMathExpression exp)
+        public MathBuilder Arcsch(IMathExpression exp)
         {
-            expression = new HyperbolicArcosecant(exp);
+            expression = new Arcsch(exp);
 
             return this;
         }

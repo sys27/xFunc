@@ -17,59 +17,52 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
-    public class Cosecant : TrigonometryMathExpression
+    public class Cot : TrigonometryMathExpression
     {
 
-        public Cosecant()
-            : base(null)
-        {
+        public Cot() : base(null) { }
 
-        }
-
-        public Cosecant(IMathExpression firstMathExpression)
-            : base(firstMathExpression)
-        {
-
-        }
+        public Cot(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("csc({0})");
+            return ToString("cot({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return 1 / Math.Sin(radian);
+            return MathExtentions.Cot(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return 1 / Math.Sin(firstMathExpression.Calculate(parameters));
+            var x = firstMathExpression.Calculate(parameters);
+
+            return MathExtentions.Cot(x);
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return 1 / Math.Sin(radian);
+            return MathExtentions.Cot(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
-            Cotangent cot = new Cotangent(firstMathExpression.Clone());
-            Cosecant csc = new Cosecant(firstMathExpression.Clone());
-            Multiplication mul1 = new Multiplication(cot, csc);
-            Multiplication mul2 = new Multiplication(unary, mul1);
+            Sin sine = new Sin(firstMathExpression.Clone());
+            Exponentiation involution = new Exponentiation(sine, new Number(2));
+            Division division = new Division(firstMathExpression.Clone().Differentiate(variable), involution);
+            UnaryMinus unMinus = new UnaryMinus(division);
 
-            return mul2;
+            return unMinus;
         }
 
         public override IMathExpression Clone()
         {
-            return new Cosecant(firstMathExpression.Clone());
+            return new Cot(firstMathExpression.Clone());
         }
 
     }

@@ -16,49 +16,50 @@ using System;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
-
-    public class Sine : TrigonometryMathExpression
+    
+    public class Tan : TrigonometryMathExpression
     {
 
-        public Sine() : base(null) { }
+        public Tan() : base(null) { }
 
-        public Sine(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Tan(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
-            return ToString("sin({0})");
+            return ToString("tan({0})");
         }
 
         public override double CalculateDergee(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
 
-            return Math.Sin(radian);
+            return Math.Tan(radian);
         }
 
         public override double CalculateRadian(MathParameterCollection parameters)
         {
-            return Math.Sin(firstMathExpression.Calculate(parameters));
+            return Math.Tan(firstMathExpression.Calculate(parameters));
         }
 
         public override double CalculateGradian(MathParameterCollection parameters)
         {
             var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
 
-            return Math.Sin(radian);
+            return Math.Tan(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Cosine cos = new Cosine(firstMathExpression.Clone());
-            Multiplication mul = new Multiplication(cos, firstMathExpression.Clone().Differentiate(variable));
+            Cos cos = new Cos(firstMathExpression.Clone());
+            Exponentiation inv = new Exponentiation(cos, new Number(2));
+            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
 
-            return mul;
+            return div;
         }
 
         public override IMathExpression Clone()
         {
-            return new Sine(firstMathExpression.Clone());
+            return new Tan(firstMathExpression.Clone());
         }
 
     }

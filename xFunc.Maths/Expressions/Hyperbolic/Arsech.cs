@@ -54,11 +54,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var inv = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            var sub = new Subtraction(new Number(1), inv);
+            var inv = new Pow(firstMathExpression.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), inv);
             var sqrt = new Sqrt(sub);
-            var mul = new Multiplication(firstMathExpression.Clone(), sqrt);
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
+            var mul = new Mul(firstMathExpression.Clone(), sqrt);
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
             var unMinus = new UnaryMinus(div);
 
             return unMinus;

@@ -55,8 +55,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var sinh = new Sinh(firstMathExpression.Clone());
-            var inv = new Exponentiation(sinh, new Number(2));
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
+            var inv = new Pow(sinh, new Number(2));
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
             var unMinus = new UnaryMinus(div);
 
             return unMinus;

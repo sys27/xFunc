@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var cosh = new Cosh(firstMathExpression.Clone());
-            var mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), cosh);
+            var mul = new Mul(firstMathExpression.Clone().Differentiate(variable), cosh);
 
             return mul;
         }

@@ -54,10 +54,10 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            var sub = new Subtraction(sqr, new Number(1));
+            var sqr = new Pow(firstMathExpression.Clone(), new Number(2));
+            var sub = new Sub(sqr, new Number(1));
             var sqrt = new Sqrt(sub);
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), sqrt);
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), sqrt);
 
             return div;
         }

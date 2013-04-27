@@ -55,8 +55,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var cosh = new Cosh(firstMathExpression.Clone());
-            var inv = new Exponentiation(cosh, new Number(2));
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
+            var inv = new Pow(cosh, new Number(2));
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
 
             return div;
         }

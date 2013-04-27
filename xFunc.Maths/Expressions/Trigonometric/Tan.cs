@@ -51,8 +51,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Cos cos = new Cos(firstMathExpression.Clone());
-            Exponentiation inv = new Exponentiation(cos, new Number(2));
-            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
+            Pow inv = new Pow(cos, new Number(2));
+            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
 
             return div;
         }

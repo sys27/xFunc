@@ -73,8 +73,8 @@ namespace xFunc.Maths.Expressions
                     throw new NotSupportedException();
 
                 Ln ln = new Ln(secondMathExpression.Clone());
-                Multiplication mul = new Multiplication(firstMathExpression.Clone(), ln);
-                Division div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
+                Mul mul = new Mul(firstMathExpression.Clone(), ln);
+                Div div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
 
                 return div;
             }

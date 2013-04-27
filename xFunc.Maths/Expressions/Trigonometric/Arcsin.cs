@@ -50,10 +50,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Exponentiation involution = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            Subtraction sub = new Subtraction(new Number(1), involution);
+            Pow involution = new Pow(firstMathExpression.Clone(), new Number(2));
+            Sub sub = new Sub(new Number(1), involution);
             Sqrt sqrt = new Sqrt(sub);
-            Division division = new Division(firstMathExpression.Clone().Differentiate(variable), sqrt);
+            Div division = new Div(firstMathExpression.Clone().Differentiate(variable), sqrt);
 
             return division;
         }

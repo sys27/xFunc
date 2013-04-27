@@ -13,7 +13,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Absolute(new Number(-1));
+            IMathExpression exp = new Abs(new Number(-1));
 
             Assert.AreEqual(1, exp.Calculate(null));
         }
@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Absolute(new Variable("x")).Differentiate();
+            IMathExpression exp = new Abs(new Variable("x")).Differentiate();
 
             Assert.AreEqual("1 * (x / abs(x))", exp.ToString());
         }
@@ -31,9 +31,9 @@ namespace xFunc.Test.Expressions.Maths
         {
             Number num = new Number(2);
             Variable x = new Variable("x");
-            Multiplication mul = new Multiplication(num, x);
+            Mul mul = new Mul(num, x);
 
-            IMathExpression exp = new Absolute(mul);
+            IMathExpression exp = new Abs(mul);
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * ((2 * x) / abs(2 * x))", deriv.ToString());
@@ -46,7 +46,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Absolute(new Multiplication(new Variable("x"), new Variable("y")));
+            IMathExpression exp = new Abs(new Mul(new Variable("x"), new Variable("y")));
             IMathExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) * ((x * y) / abs(x * y))", deriv.ToString());
         }
@@ -54,7 +54,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Absolute(new Multiplication(new Variable("x"), new Variable("y")));
+            IMathExpression exp = new Abs(new Mul(new Variable("x"), new Variable("y")));
             IMathExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("(x * 1) * ((x * y) / abs(x * y))", deriv.ToString());
         }
@@ -62,7 +62,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression deriv = new Absolute(new Variable("x")).Differentiate(new Variable("y"));
+            IMathExpression deriv = new Abs(new Variable("x")).Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 
@@ -71,13 +71,13 @@ namespace xFunc.Test.Expressions.Maths
         {
             Variable x1 = "x";
             Number num1 = 2;
-            Multiplication mul1 = new Multiplication(num1, x1);
-            Absolute abs1 = new Absolute(mul1);
+            Mul mul1 = new Mul(num1, x1);
+            Abs abs1 = new Abs(mul1);
 
             Variable x2 = "x";
             Number num2 = 2;
-            Multiplication mul2 = new Multiplication(num2, x2);
-            Absolute abs2 = new Absolute(mul2);
+            Mul mul2 = new Mul(num2, x2);
+            Abs abs2 = new Abs(mul2);
 
             Assert.IsTrue(abs1.Equals(abs2));
             Assert.IsTrue(abs1.Equals(abs1));
@@ -88,13 +88,13 @@ namespace xFunc.Test.Expressions.Maths
         {
             Variable x1 = "x";
             Number num1 = 2;
-            Multiplication mul1 = new Multiplication(num1, x1);
-            Absolute abs1 = new Absolute(mul1);
+            Mul mul1 = new Mul(num1, x1);
+            Abs abs1 = new Abs(mul1);
 
             Variable x2 = "x";
             Number num2 = 3;
-            Multiplication mul2 = new Multiplication(num2, x2);
-            Absolute abs2 = new Absolute(mul2);
+            Mul mul2 = new Mul(num2, x2);
+            Abs abs2 = new Abs(mul2);
 
             Assert.IsFalse(abs1.Equals(abs2));
             Assert.IsFalse(abs1.Equals(mul2));

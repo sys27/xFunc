@@ -56,8 +56,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             var coth = new Coth(firstMathExpression.Clone());
             var csch = Clone();
-            var mul1 = new Multiplication(coth, csch);
-            var mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
+            var mul1 = new Mul(coth, csch);
+            var mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
             var unMinus = new UnaryMinus(mul2);
 
             return unMinus;

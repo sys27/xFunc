@@ -40,7 +40,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddFirstZero()
         {
-            var add = new Addition(new Number(0), new Variable("x"));
+            var add = new Add(new Number(0), new Variable("x"));
             var expected = new Variable("x");
 
             SimpleTest(add, expected);
@@ -49,7 +49,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddSecondZero()
         {
-            var add = new Addition(new Variable("x"), new Number(0));
+            var add = new Add(new Variable("x"), new Number(0));
             var expected = new Variable("x");
 
             SimpleTest(add, expected);
@@ -58,7 +58,7 @@ namespace xFunc.Test
         [TestMethod]
         public void AddTwoNumbers()
         {
-            var add = new Addition(new Number(3), new Number(2));
+            var add = new Add(new Number(3), new Number(2));
             var expected = new Number(5);
 
             SimpleTest(add, expected);
@@ -67,8 +67,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddFirstUnaryMinus()
         {
-            var add = new Addition(new UnaryMinus(new Variable("x")), new Number(2));
-            var expected = new Subtraction(new Number(2), new Variable("x"));
+            var add = new Add(new UnaryMinus(new Variable("x")), new Number(2));
+            var expected = new Sub(new Number(2), new Variable("x"));
 
             SimpleTest(add, expected);
         }
@@ -76,8 +76,8 @@ namespace xFunc.Test
         [TestMethod]
         public void AddSecondUnaryMinus()
         {
-            var add = new Addition(new Number(2), new UnaryMinus(new Variable("x")));
-            var expected = new Subtraction(new Number(2), new Variable("x"));
+            var add = new Add(new Number(2), new UnaryMinus(new Variable("x")));
+            var expected = new Sub(new Number(2), new Variable("x"));
 
             SimpleTest(add, expected);
         }
@@ -86,8 +86,8 @@ namespace xFunc.Test
         public void AddDiffNumAdd_NumAddVar_()
         {
             // 2 + (2 + x)
-            var add = new Addition(new Number(2), new Addition(new Number(2), new Variable("x")));
-            var expected = new Addition(new Variable("x"), new Number(4));
+            var add = new Add(new Number(2), new Add(new Number(2), new Variable("x")));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -96,8 +96,8 @@ namespace xFunc.Test
         public void AddDiffNumAdd_VarAddNum_()
         {
             // 2 + (x + 2)
-            var add = new Addition(new Number(2), new Addition(new Variable("x"), new Number(2)));
-            var expected = new Addition(new Variable("x"), new Number(4));
+            var add = new Add(new Number(2), new Add(new Variable("x"), new Number(2)));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -106,8 +106,8 @@ namespace xFunc.Test
         public void AddDiff_NumAddVar_AddNum()
         {
             // (2 + x) + 2
-            var add = new Addition(new Addition(new Number(2), new Variable("x")), new Number(2));
-            var expected = new Addition(new Variable("x"), new Number(4));
+            var add = new Add(new Add(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -116,8 +116,8 @@ namespace xFunc.Test
         public void AddDiff_VarAddNum_AddNum()
         {
             // (x + 2) + 2
-            var add = new Addition(new Addition(new Variable("x"), new Number(2)), new Number(2));
-            var expected = new Addition(new Variable("x"), new Number(4));
+            var add = new Add(new Add(new Variable("x"), new Number(2)), new Number(2));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
@@ -126,8 +126,8 @@ namespace xFunc.Test
         public void AddDiffNum_NumSubVar_()
         {
             // 2 + (2 - x)
-            var add = new Addition(new Number(2), new Subtraction(new Number(2), new Variable("x")));
-            var expected = new Subtraction(new Number(4), new Variable("x"));
+            var add = new Add(new Number(2), new Sub(new Number(2), new Variable("x")));
+            var expected = new Sub(new Number(4), new Variable("x"));
 
             SimpleTest(add, expected);
         }
@@ -136,7 +136,7 @@ namespace xFunc.Test
         public void AddDiffNum_VarSubNum_()
         {
             // 2 + (x - 2)
-            var add = new Addition(new Number(2), new Subtraction(new Variable("x"), new Number(2)));
+            var add = new Add(new Number(2), new Sub(new Variable("x"), new Number(2)));
             var expected = new Variable("x");
 
             SimpleTest(add, expected);
@@ -146,8 +146,8 @@ namespace xFunc.Test
         public void AddDiff_NumSubVar_AddNum()
         {
             // (2 - x) + 2
-            var add = new Addition(new Subtraction(new Number(2), new Variable("x")), new Number(2));
-            var expected = new Subtraction(new Number(4), new Variable("x"));
+            var add = new Add(new Sub(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Sub(new Number(4), new Variable("x"));
 
             SimpleTest(add, expected);
         }
@@ -156,7 +156,7 @@ namespace xFunc.Test
         public void AddDiff_VarSubNum_AddNum()
         {
             // (x - 2) + 2
-            var add = new Addition(new Subtraction(new Variable("x"), new Number(2)), new Number(2));
+            var add = new Add(new Sub(new Variable("x"), new Number(2)), new Number(2));
             var expected = new Variable("x");
 
             SimpleTest(add, expected);
@@ -169,7 +169,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubFirstZero()
         {
-            var sub = new Subtraction(new Number(0), new Variable("x"));
+            var sub = new Sub(new Number(0), new Variable("x"));
             var expected = new UnaryMinus(new Variable("x"));
 
             SimpleTest(sub, expected);
@@ -178,7 +178,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubSecondZero()
         {
-            var sub = new Subtraction(new Variable("x"), new Number(0));
+            var sub = new Sub(new Variable("x"), new Number(0));
             var expected = new Variable("x");
 
             SimpleTest(sub, expected);
@@ -187,7 +187,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubTwoNumbers()
         {
-            var sub = new Subtraction(new Number(3), new Number(2));
+            var sub = new Sub(new Number(3), new Number(2));
             var expected = new Number(1);
 
             SimpleTest(sub, expected);
@@ -196,8 +196,8 @@ namespace xFunc.Test
         [TestMethod]
         public void SubSecondUnaryMinus()
         {
-            var sub = new Subtraction(new Number(2), new UnaryMinus(new Variable("x")));
-            var expected = new Addition(new Number(2), new Variable("x"));
+            var sub = new Sub(new Number(2), new UnaryMinus(new Variable("x")));
+            var expected = new Add(new Number(2), new Variable("x"));
 
             SimpleTest(sub, expected);
         }
@@ -206,7 +206,7 @@ namespace xFunc.Test
         public void SubDiff_NumAddVar_SubNum()
         {
             // (2 + x) - 2
-            var sub = new Subtraction(new Addition(new Number(2), new Variable("x")), new Number(2));
+            var sub = new Sub(new Add(new Number(2), new Variable("x")), new Number(2));
             var expected = new Variable("x");
 
             SimpleTest(sub, expected);
@@ -216,7 +216,7 @@ namespace xFunc.Test
         public void SubDiff_VarAddNum_SubNum()
         {
             // (x + 2) - 2
-            var sub = new Subtraction(new Addition(new Variable("x"), new Number(2)), new Number(2));
+            var sub = new Sub(new Add(new Variable("x"), new Number(2)), new Number(2));
             var expected = new Variable("x");
 
             SimpleTest(sub, expected);
@@ -226,7 +226,7 @@ namespace xFunc.Test
         public void SubDiffNumSub_NumAddVar_()
         {
             // 2 - (2 + x)
-            var sub = new Subtraction(new Number(2), new Addition(new Number(2), new Variable("x")));
+            var sub = new Sub(new Number(2), new Add(new Number(2), new Variable("x")));
             var expected = new UnaryMinus(new Variable("x"));
 
             SimpleTest(sub, expected);
@@ -236,7 +236,7 @@ namespace xFunc.Test
         public void SubDiffNumSub_VarAddNum_()
         {
             // 2 - (x + 2)
-            var sub = new Subtraction(new Number(2), new Addition(new Variable("x"), new Number(2)));
+            var sub = new Sub(new Number(2), new Add(new Variable("x"), new Number(2)));
             var expected = new UnaryMinus(new Variable("x"));
 
             SimpleTest(sub, expected);
@@ -245,7 +245,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubDiff_NumSubVar_SubNum()
         {
-            var sub = new Subtraction(new Subtraction(new Number(2), new Variable("x")), new Number(2));
+            var sub = new Sub(new Sub(new Number(2), new Variable("x")), new Number(2));
             var expected = new UnaryMinus(new Variable("x"));
 
             SimpleTest(sub, expected);
@@ -254,8 +254,8 @@ namespace xFunc.Test
         [TestMethod]
         public void SubDiff_VarSubNum_SubNum()
         {
-            var sub = new Subtraction(new Subtraction(new Variable("x"), new Number(2)), new Number(2));
-            var expected = new Subtraction(new Variable("x"), new Number(4));
+            var sub = new Sub(new Sub(new Variable("x"), new Number(2)), new Number(2));
+            var expected = new Sub(new Variable("x"), new Number(4));
 
             SimpleTest(sub, expected);
         }
@@ -263,7 +263,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SubDiffNumSub_NumSubVar_()
         {
-            var sub = new Subtraction(new Number(2), new Subtraction(new Number(2), new Variable("x")));
+            var sub = new Sub(new Number(2), new Sub(new Number(2), new Variable("x")));
             var expected = new Variable("x");
 
             SimpleTest(sub, expected);
@@ -272,8 +272,8 @@ namespace xFunc.Test
         [TestMethod]
         public void SubDiffNumSub_VarSubNum_()
         {
-            var sub = new Subtraction(new Number(2), new Subtraction(new Variable("x"), new Number(2)));
-            var expected = new Subtraction(new Number(4), new Variable("x"));
+            var sub = new Sub(new Number(2), new Sub(new Variable("x"), new Number(2)));
+            var expected = new Sub(new Number(4), new Variable("x"));
 
             SimpleTest(sub, expected);
         }
@@ -285,7 +285,7 @@ namespace xFunc.Test
         [TestMethod]
         public void MulByZero()
         {
-            var mul = new Multiplication(new Variable("x"), new Number(0));
+            var mul = new Mul(new Variable("x"), new Number(0));
             var expected = new Number(0);
 
             SimpleTest(mul, expected);
@@ -294,7 +294,7 @@ namespace xFunc.Test
         [TestMethod]
         public void MulFirstOne()
         {
-            var mul = new Multiplication(new Number(1), new Variable("x"));
+            var mul = new Mul(new Number(1), new Variable("x"));
             var expected = new Variable("x");
 
             SimpleTest(mul, expected);
@@ -303,7 +303,7 @@ namespace xFunc.Test
         [TestMethod]
         public void MulSecondOne()
         {
-            var mul = new Multiplication(new Variable("x"), new Number(1));
+            var mul = new Mul(new Variable("x"), new Number(1));
             var expected = new Variable("x");
 
             SimpleTest(mul, expected);
@@ -312,8 +312,8 @@ namespace xFunc.Test
         [TestMethod]
         public void MulDiffNumMul_NumMulVar_()
         {
-            var mul = new Multiplication(new Number(2), new Multiplication(new Number(2), new Variable("x")));
-            var expected = new Multiplication(new Number(4), new Variable("x"));
+            var mul = new Mul(new Number(2), new Mul(new Number(2), new Variable("x")));
+            var expected = new Mul(new Number(4), new Variable("x"));
 
             SimpleTest(mul, expected);
         }
@@ -321,8 +321,8 @@ namespace xFunc.Test
         [TestMethod]
         public void MulDiffNumMul_VarMulNum_()
         {
-            var mul = new Multiplication(new Number(2), new Multiplication(new Variable("x"), new Number(2)));
-            var expected = new Multiplication(new Number(4), new Variable("x"));
+            var mul = new Mul(new Number(2), new Mul(new Variable("x"), new Number(2)));
+            var expected = new Mul(new Number(4), new Variable("x"));
 
             SimpleTest(mul, expected);
         }
@@ -330,8 +330,8 @@ namespace xFunc.Test
         [TestMethod]
         public void MulDiff_NumMulVar_MulNum()
         {
-            var mul = new Multiplication(new Multiplication(new Number(2), new Variable("x")), new Number(2));
-            var expected = new Multiplication(new Number(4), new Variable("x"));
+            var mul = new Mul(new Mul(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Mul(new Number(4), new Variable("x"));
 
             SimpleTest(mul, expected);
         }
@@ -339,8 +339,8 @@ namespace xFunc.Test
         [TestMethod]
         public void MulDiff_VarMulNum_MulNum()
         {
-            var mul = new Multiplication(new Multiplication(new Variable("x"), new Number(2)), new Number(2));
-            var expected = new Multiplication(new Number(4), new Variable("x"));
+            var mul = new Mul(new Mul(new Variable("x"), new Number(2)), new Number(2));
+            var expected = new Mul(new Number(4), new Variable("x"));
 
             SimpleTest(mul, expected);
         }
@@ -349,8 +349,8 @@ namespace xFunc.Test
         public void MulDiffNumMul_NumDivVar_()
         {
             // 2 * (2 / x)
-            var mul = new Multiplication(new Number(2), new Division(new Number(2), new Variable("x")));
-            var expected = new Division(new Number(4), new Variable("x"));
+            var mul = new Mul(new Number(2), new Div(new Number(2), new Variable("x")));
+            var expected = new Div(new Number(4), new Variable("x"));
 
             SimpleTest(mul, expected);
         }
@@ -359,7 +359,7 @@ namespace xFunc.Test
         public void MulDiffNumMul_VarDivNum_()
         {
             // 2 * (x / 2)
-            var mul = new Multiplication(new Number(2), new Division(new Variable("x"), new Number(2)));
+            var mul = new Mul(new Number(2), new Div(new Variable("x"), new Number(2)));
             var expected = new Variable("x");
 
             SimpleTest(mul, expected);
@@ -369,8 +369,8 @@ namespace xFunc.Test
         public void MulDiffl_NumDivVar_MulNum()
         {
             // (2 / x) * 2
-            var mul = new Multiplication(new Division(new Number(2), new Variable("x")), new Number(2));
-            var expected = new Division(new Number(4), new Variable("x"));
+            var mul = new Mul(new Div(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Div(new Number(4), new Variable("x"));
 
             SimpleTest(mul, expected);
         }
@@ -379,7 +379,7 @@ namespace xFunc.Test
         public void MulDiff_VarDivNum_MulNum()
         {
             // (x / 2) * 2
-            var mul = new Multiplication(new Division(new Variable("x"), new Number(2)), new Number(2));
+            var mul = new Mul(new Div(new Variable("x"), new Number(2)), new Number(2));
             var expected = new Variable("x");
 
             SimpleTest(mul, expected);
@@ -392,7 +392,7 @@ namespace xFunc.Test
         [TestMethod]
         public void DivZero()
         {
-            var div = new Division(new Number(0), new Variable("x"));
+            var div = new Div(new Number(0), new Variable("x"));
             var expected = new Number(0);
 
             SimpleTest(div, expected);
@@ -402,7 +402,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(DivideByZeroException))]
         public void DivByZero()
         {
-            var div = new Division(new Variable("x"), new Number(0));
+            var div = new Div(new Variable("x"), new Number(0));
 
             SimpleTest(div, null);
         }
@@ -410,7 +410,7 @@ namespace xFunc.Test
         [TestMethod]
         public void DivByOne()
         {
-            var div = new Division(new Variable("x"), new Number(1));
+            var div = new Div(new Variable("x"), new Number(1));
             var expected = new Variable("x");
 
             SimpleTest(div, expected);
@@ -420,8 +420,8 @@ namespace xFunc.Test
         public void DivDiff_NumMulVar_DivNum()
         {
             // (2 * x) / 4
-            var div = new Division(new Multiplication(new Number(2), new Variable("x")), new Number(4));
-            var expected = new Division(new Variable("x"), new Number(2));
+            var div = new Div(new Mul(new Number(2), new Variable("x")), new Number(4));
+            var expected = new Div(new Variable("x"), new Number(2));
 
             SimpleTest(div, expected);
         }
@@ -430,8 +430,8 @@ namespace xFunc.Test
         public void DivDiff_VarMulNum_DivNum()
         {
             // (x * 2) / 4
-            var div = new Division(new Multiplication(new Variable("x"), new Number(2)), new Number(4));
-            var expected = new Division(new Variable("x"), new Number(2));
+            var div = new Div(new Mul(new Variable("x"), new Number(2)), new Number(4));
+            var expected = new Div(new Variable("x"), new Number(2));
 
             SimpleTest(div, expected);
         }
@@ -440,8 +440,8 @@ namespace xFunc.Test
         public void DivDiffNumDiv_NumMulVar_()
         {
             // 2 / (2 * x)
-            var div = new Division(new Number(2), new Multiplication(new Number(2), new Variable("x")));
-            var expected = new Division(new Number(1), new Variable("x"));
+            var div = new Div(new Number(2), new Mul(new Number(2), new Variable("x")));
+            var expected = new Div(new Number(1), new Variable("x"));
 
             SimpleTest(div, expected);
         }
@@ -450,8 +450,8 @@ namespace xFunc.Test
         public void DivDiffNumDiv_VarMulNum_()
         {
             // 2 / (2 * x)
-            var div = new Division(new Number(2), new Multiplication(new Variable("x"), new Number(2)));
-            var expected = new Division(new Number(1), new Variable("x"));
+            var div = new Div(new Number(2), new Mul(new Variable("x"), new Number(2)));
+            var expected = new Div(new Number(1), new Variable("x"));
 
             SimpleTest(div, expected);
         }
@@ -460,8 +460,8 @@ namespace xFunc.Test
         public void DivDiff_NumDivVar_DivNum()
         {
             // (2 / x) / 2
-            var div = new Division(new Division(new Number(2), new Variable("x")), new Number(2));
-            var expected = new Division(new Number(1), new Variable("x"));
+            var div = new Div(new Div(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Div(new Number(1), new Variable("x"));
 
             SimpleTest(div, expected);
         }
@@ -470,8 +470,8 @@ namespace xFunc.Test
         public void DivDiff_VarDivNum_DivNum()
         {
             // (x / 2) / 2
-            var div = new Division(new Division(new Variable("x"), new Number(2)), new Number(2));
-            var expected = new Division(new Variable("x"), new Number(4));
+            var div = new Div(new Div(new Variable("x"), new Number(2)), new Number(2));
+            var expected = new Div(new Variable("x"), new Number(4));
 
             SimpleTest(div, expected);
         }
@@ -480,7 +480,7 @@ namespace xFunc.Test
         public void DivDiffNumDiv_NumDivVar_()
         {
             // 2 / (2 / x)
-            var div = new Division(new Number(2), new Division(new Number(2), new Variable("x")));
+            var div = new Div(new Number(2), new Div(new Number(2), new Variable("x")));
             var expected = new Variable("x");
 
             SimpleTest(div, expected);
@@ -490,8 +490,8 @@ namespace xFunc.Test
         public void DivDiffNumDiv_VarDivNum_()
         {
             // 2 / (x / 2)
-            var div = new Division(new Number(2), new Division(new Variable("x"), new Number(2)));
-            var expected = new Division(new Number(4), new Variable("x"));
+            var div = new Div(new Number(2), new Div(new Variable("x"), new Number(2)));
+            var expected = new Div(new Number(4), new Variable("x"));
 
             SimpleTest(div, expected);
         }
@@ -501,7 +501,7 @@ namespace xFunc.Test
         [TestMethod]
         public void PowerZero()
         {
-            var pow = new Exponentiation(new Variable("x"), new Number(0));
+            var pow = new Pow(new Variable("x"), new Number(0));
             var expected = new Number(1);
 
             SimpleTest(pow, expected);
@@ -510,7 +510,7 @@ namespace xFunc.Test
         [TestMethod]
         public void PowerOne()
         {
-            var pow = new Exponentiation(new Variable("x"), new Number(1));
+            var pow = new Pow(new Variable("x"), new Number(1));
             var expected = new Variable("x");
 
             SimpleTest(pow, expected);

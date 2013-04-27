@@ -17,12 +17,12 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
-    public class Exponential : UnaryMathExpression
+    public class Exp : UnaryMathExpression
     {
 
-        public Exponential() : base(null) { }
+        public Exp() : base(null) { }
 
-        public Exponential(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Exp(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         public override string ToString()
         {
@@ -41,14 +41,14 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Multiplication mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), Clone());
+            Mul mul = new Mul(firstMathExpression.Clone().Differentiate(variable), Clone());
 
             return mul;
         }
 
         public override IMathExpression Clone()
         {
-            return new Exponential(firstMathExpression.Clone());
+            return new Exp(firstMathExpression.Clone());
         }
 
     }

@@ -20,21 +20,21 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents an Addition operation.
     /// </summary>
-    public class Addition : BinaryMathExpression
+    public class Add : BinaryMathExpression
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Addition"/> class.
+        /// Initializes a new instance of the <see cref="Add"/> class.
         /// </summary>
-        public Addition() : base(null, null) { }
+        public Add() : base(null, null) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Addition"/> class.
+        /// Initializes a new instance of the <see cref="Add"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The left operand.</param>
         /// <param name="secondMathExpression">The right operand.</param>
         /// <seealso cref="IMathExpression"/>
-        public Addition(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
+        public Add(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         /// <summary>
         /// Converts this expression to the equivalent string.
@@ -76,7 +76,7 @@ namespace xFunc.Maths.Expressions
 
             if (first && second)
             {
-                return new Addition(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Differentiate(variable).Clone());
+                return new Add(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Differentiate(variable).Clone());
             }
             if (first)
             {
@@ -91,12 +91,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instanse of the <see cref="Addition"/>.
+        /// Clones this instanse of the <see cref="Add"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Addition(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Add(firstMathExpression.Clone(), secondMathExpression.Clone());
         }
 
     }

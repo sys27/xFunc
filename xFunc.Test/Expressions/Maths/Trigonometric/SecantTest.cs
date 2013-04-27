@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Sec(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Sec(new Mul(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
@@ -50,7 +50,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             // sec(2x)
             Number num = new Number(2);
             Variable x = new Variable("x");
-            Multiplication mul = new Multiplication(num, x);
+            Mul mul = new Mul(num, x);
 
             IMathExpression exp = new Sec(mul);
             IMathExpression deriv = exp.Differentiate();

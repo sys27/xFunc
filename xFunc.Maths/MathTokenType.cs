@@ -31,7 +31,7 @@ namespace xFunc.Maths
         /// <summary>
         /// undef()
         /// </summary>
-        Undefine       = 1,
+        Undefine       = 31,
         /// <summary>
         /// (
         /// </summary>

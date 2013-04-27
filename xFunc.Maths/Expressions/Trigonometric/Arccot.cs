@@ -50,9 +50,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Exponentiation involution = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            Addition add = new Addition(new Number(1), involution);
-            Division div = new Division(firstMathExpression.Clone().Differentiate(variable), add);
+            Pow involution = new Pow(firstMathExpression.Clone(), new Number(2));
+            Add add = new Add(new Number(1), involution);
+            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), add);
             UnaryMinus unMinus = new UnaryMinus(div);
 
             return unMinus;

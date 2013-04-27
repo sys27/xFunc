@@ -26,7 +26,7 @@ namespace xFunc.Test
         [TestMethod]
         public void HasVarTest1()
         {
-            IMathExpression exp = new Sin(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Sin(new Mul(new Number(2), new Variable("x")));
             bool expected = MathParser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, true);
@@ -35,7 +35,7 @@ namespace xFunc.Test
         [TestMethod]
         public void HasVarTest2()
         {
-            IMathExpression exp = new Sin(new Multiplication(new Number(2), new Number(3)));
+            IMathExpression exp = new Sin(new Mul(new Number(2), new Number(3)));
             bool expected = MathParser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, false);

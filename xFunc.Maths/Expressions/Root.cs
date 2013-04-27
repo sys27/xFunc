@@ -43,8 +43,8 @@ namespace xFunc.Maths.Expressions
         {
             if (MathParser.HasVar(firstMathExpression, variable) || MathParser.HasVar(secondMathExpression, variable))
             {
-                Division div = new Division(new Number(1), secondMathExpression.Clone());
-                Exponentiation inv = new Exponentiation(firstMathExpression.Clone(), div);
+                Div div = new Div(new Number(1), secondMathExpression.Clone());
+                Pow inv = new Pow(firstMathExpression.Clone(), div);
 
                 return inv.Differentiate(variable);
             }

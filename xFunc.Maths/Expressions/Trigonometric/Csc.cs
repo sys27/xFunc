@@ -61,8 +61,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
             UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
             Cot cot = new Cot(firstMathExpression.Clone());
             Csc csc = new Csc(firstMathExpression.Clone());
-            Multiplication mul1 = new Multiplication(cot, csc);
-            Multiplication mul2 = new Multiplication(unary, mul1);
+            Mul mul1 = new Mul(cot, csc);
+            Mul mul2 = new Mul(unary, mul1);
 
             return mul2;
         }

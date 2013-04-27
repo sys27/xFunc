@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Secant(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
             Assert.AreEqual(MathExtentions.Sec(Math.PI / 180), exp.Calculate(null));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Secant(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
             Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate(null));
         }
@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Secant(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
             Assert.AreEqual(MathExtentions.Sec(Math.PI / 200), exp.Calculate(null));
         }
@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Secant(new Multiplication(new Number(2), new Variable("x")));
+            IMathExpression exp = new Sec(new Multiplication(new Number(2), new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
@@ -52,7 +52,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Variable x = new Variable("x");
             Multiplication mul = new Multiplication(num, x);
 
-            IMathExpression exp = new Secant(mul);
+            IMathExpression exp = new Sec(mul);
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());

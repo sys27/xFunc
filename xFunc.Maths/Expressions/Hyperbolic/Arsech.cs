@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicTangent : UnaryMathExpression
+    public class Arsech : UnaryMathExpression
     {
 
-        public HyperbolicTangent()
+        public Arsech()
             : base(null)
         {
 
         }
 
-        public HyperbolicTangent(IMathExpression firstMathExpression)
+        public Arsech(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,31 +34,34 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("tanh({0})");
+            return ToString("arsech({0})");
         }
 
         public override double Calculate()
         {
-            return Math.Tanh(firstMathExpression.Calculate());
+            return MathExtentions.Asech(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Tanh(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Asech(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicTangent(firstMathExpression.Clone());
+            return new Arsech(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var cosh = new HyperbolicCosine(firstMathExpression.Clone());
-            var inv = new Exponentiation(cosh, new Number(2));
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
+            var inv = new Exponentiation(firstMathExpression.Clone(), new Number(2));
+            var sub = new Subtraction(new Number(1), inv);
+            var sqrt = new Sqrt(sub);
+            var mul = new Multiplication(firstMathExpression.Clone(), sqrt);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
+            var unMinus = new UnaryMinus(div);
 
-            return div;
+            return unMinus;
         }
 
     }

@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicArcosecant : UnaryMathExpression
+    public class Arcosh : UnaryMathExpression
     {
 
-        public HyperbolicArcosecant()
+        public Arcosh()
             : base(null)
         {
 
         }
 
-        public HyperbolicArcosecant(IMathExpression firstMathExpression)
+        public Arcosh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,35 +34,32 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("arcsch({0})");
+            return ToString("arcosh({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Acsch(firstMathExpression.Calculate());
+            return MathExtentions.Acosh(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Acsch(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Acosh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicArcosecant(firstMathExpression.Clone());
+            return new Arcosh(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var inv = new Exponentiation(firstMathExpression.Clone(), new Number(2));
-            var add = new Addition(new Number(1), inv);
-            var sqrt = new Sqrt(add);
-            var abs = new Absolute(firstMathExpression.Clone());
-            var mul = new Multiplication(abs, sqrt);
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), mul);
-            var unMinus = new UnaryMinus(div);
+            var sqr = new Exponentiation(firstMathExpression.Clone(), new Number(2));
+            var sub = new Subtraction(sqr, new Number(1));
+            var sqrt = new Sqrt(sub);
+            var div = new Division(firstMathExpression.Clone().Differentiate(variable), sqrt);
 
-            return unMinus;
+            return div;
         }
 
     }

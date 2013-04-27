@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicCotangent : UnaryMathExpression
+    public class Sinh : UnaryMathExpression
     {
 
-        public HyperbolicCotangent()
+        public Sinh()
             : base(null)
         {
 
         }
 
-        public HyperbolicCotangent(IMathExpression firstMathExpression)
+        public Sinh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,32 +34,30 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("coth({0})");
+            return ToString("sinh({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Coth(firstMathExpression.Calculate());
+            return Math.Sinh(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Coth(firstMathExpression.Calculate(parameters));
+            return Math.Sinh(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicCotangent(firstMathExpression.Clone());
+            return new Sinh(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sinh = new HyperbolicSine(firstMathExpression.Clone());
-            var inv = new Exponentiation(sinh, new Number(2));
-            var div = new Division(firstMathExpression.Clone().Differentiate(variable), inv);
-            var unMinus = new UnaryMinus(div);
+            var cosh = new Cosh(firstMathExpression.Clone());
+            var mul = new Multiplication(firstMathExpression.Clone().Differentiate(variable), cosh);
 
-            return unMinus;
+            return mul;
         }
 
     }

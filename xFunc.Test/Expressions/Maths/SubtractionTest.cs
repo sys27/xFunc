@@ -23,7 +23,7 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest1()
         {
             // x - sin(x)
-            IMathExpression exp = new Subtraction(new Variable("x"), new Sine(new Variable("x")));
+            IMathExpression exp = new Subtraction(new Variable("x"), new Sin(new Variable("x")));
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 - (cos(x) * 1)", deriv.ToString());

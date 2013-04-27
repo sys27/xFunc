@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
-    public class HyperbolicSecant : UnaryMathExpression
+    public class Csch : UnaryMathExpression
     {
 
-        public HyperbolicSecant()
+        public Csch()
             : base(null)
         {
 
         }
 
-        public HyperbolicSecant(IMathExpression firstMathExpression)
+        public Csch(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -34,29 +34,29 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override string ToString()
         {
-            return ToString("sech({0})");
+            return ToString("csch({0})");
         }
 
         public override double Calculate()
         {
-            return MathExtentions.Sech(firstMathExpression.Calculate());
+            return MathExtentions.Csch(firstMathExpression.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Sech(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Csch(firstMathExpression.Calculate(parameters));
         }
 
         public override IMathExpression Clone()
         {
-            return new HyperbolicSecant(firstMathExpression.Clone());
+            return new Csch(firstMathExpression.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var tanh = new HyperbolicTangent(firstMathExpression.Clone());
-            var sech = Clone();
-            var mul1 = new Multiplication(tanh, sech);
+            var coth = new Coth(firstMathExpression.Clone());
+            var csch = Clone();
+            var mul1 = new Multiplication(coth, csch);
             var mul2 = new Multiplication(firstMathExpression.Clone().Differentiate(variable), mul1);
             var unMinus = new UnaryMinus(mul2);
 

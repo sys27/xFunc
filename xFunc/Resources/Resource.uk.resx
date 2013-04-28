@@ -318,4 +318,19 @@
   <data name="UndefineVariable" xml:space="preserve">
     <value>Змінна '{0}' видалена.</value>
   </data>
+  <data name="CopyAnswerMenuItem" xml:space="preserve">
+    <value>Копіювати "Відповідь"</value>
+  </data>
+  <data name="CopyExpressionMenuItem" xml:space="preserve">
+    <value>Копіювати "Вираз"</value>
+  </data>
+  <data name="DeleteMenuItem" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="ToClipboardMenuItem" xml:space="preserve">
+    <value>До буфера обміну</value>
+  </data>
+  <data name="ToInputMenuItem" xml:space="preserve">
+    <value>У поле для введеня</value>
+  </data>
 </root>

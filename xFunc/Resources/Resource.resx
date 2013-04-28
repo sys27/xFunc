@@ -318,4 +318,19 @@
   <data name="UndefineVariable" xml:space="preserve">
     <value>The '{0}' variable is removed.</value>
   </data>
+  <data name="CopyAnswerMenuItem" xml:space="preserve">
+    <value>Copy "Answer"</value>
+  </data>
+  <data name="CopyExpressionMenuItem" xml:space="preserve">
+    <value>Copy "Expression"</value>
+  </data>
+  <data name="DeleteMenuItem" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ToClipboardMenuItem" xml:space="preserve">
+    <value>To Clipboard</value>
+  </data>
+  <data name="ToInputMenuItem" xml:space="preserve">
+    <value>To Input</value>
+  </data>
 </root>

@@ -54,16 +54,33 @@ limitations under the License. -->
                 </Setter.Value>
             </Setter>
         </Style>
+        <ContextMenu x:Key="expMenu">
+            <MenuItem Header="{x:Static res:Resource.CopyExpressionMenuItem}">
+                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyExpToClipCommand" />
+                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:MainView.CopyExpToInputCommand" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resource.CopyAnswerMenuItem}">
+                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyAnswerToClipCommand" />
+                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:MainView.CopyAnswerToInputCommand" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{x:Static res:Resource.DeleteMenuItem}" Command="views:MainView.DeleteExpCommand" />
+        </ContextMenu>
     </ribbon:RibbonWindow.Resources>
     <ribbon:RibbonWindow.CommandBindings>
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
-        
+
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
 
         <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
+
+        <CommandBinding Command="views:MainView.CopyExpToClipCommand" Executed="CopyExpToClip_Execute" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="views:MainView.CopyAnswerToClipCommand" Executed="CopyAnswerToClip_Execute" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="views:MainView.CopyExpToInputCommand" Executed="CopyExpToInput_Execute" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="views:MainView.CopyAnswerToInputCommand" Executed="CopyAnswerToInput_Execute" CanExecute="Copy_CanExecute" />
     </ribbon:RibbonWindow.CommandBindings>
     <ribbon:RibbonWindow.InputBindings>
         <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
@@ -344,7 +361,7 @@ limitations under the License. -->
                         <RowDefinition Height="*" />
                         <RowDefinition Height="128" />
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="mathExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                    <ListBox x:Name="mathExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type viewModels:MathWorkspaceItemViewModel}">
                                 <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
@@ -383,7 +400,7 @@ limitations under the License. -->
                         <RowDefinition Height="128" />
                     </Grid.RowDefinitions>
 
-                    <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                    <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type viewModels:LogicWorkspaceItemViewModel}">
                                 <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">

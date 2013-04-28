@@ -205,11 +205,29 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy &quot;Answer&quot;.
+        /// </summary>
+        public static string CopyAnswerMenuItem {
+            get {
+                return ResourceManager.GetString("CopyAnswerMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy.
         /// </summary>
         public static string CopyButtonHeader {
             get {
                 return ResourceManager.GetString("CopyButtonHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy &quot;Expression&quot;.
+        /// </summary>
+        public static string CopyExpressionMenuItem {
+            get {
+                return ResourceManager.GetString("CopyExpressionMenuItem", resourceCulture);
             }
         }
         
@@ -309,6 +327,15 @@ namespace xFunc.Resources {
         public static string DeleteExpScreenTipTitle {
             get {
                 return ResourceManager.GetString("DeleteExpScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteMenuItem {
+            get {
+                return ResourceManager.GetString("DeleteMenuItem", resourceCulture);
             }
         }
         
@@ -570,6 +597,24 @@ namespace xFunc.Resources {
         public static string StandartExpanderHeader {
             get {
                 return ResourceManager.GetString("StandartExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Clipboard.
+        /// </summary>
+        public static string ToClipboardMenuItem {
+            get {
+                return ResourceManager.GetString("ToClipboardMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Input.
+        /// </summary>
+        public static string ToInputMenuItem {
+            get {
+                return ResourceManager.GetString("ToInputMenuItem", resourceCulture);
             }
         }
         

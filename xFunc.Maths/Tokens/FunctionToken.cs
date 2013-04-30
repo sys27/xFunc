@@ -13,6 +13,17 @@ namespace xFunc.Maths.Tokens
             this.function = function;
         }
 
+        public override bool Equals(object obj)
+        {
+            FunctionToken token = obj as FunctionToken;
+            if (token != null && this.Function == token.Function)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Functions Function
         {
             get

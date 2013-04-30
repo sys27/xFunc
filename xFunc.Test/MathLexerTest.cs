@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Exceptions;
+using xFunc.Maths.Tokens;
 
 namespace xFunc.Test
 {
@@ -20,16 +21,16 @@ namespace xFunc.Test
             lexer = new MathLexer();
         }
 
-        private void FuncTest(string func, MathTokenType type)
+        private void FuncTest(string func, Functions type)
         {
             var tokens = lexer.Tokenize(func + "(3)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(type),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(3),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(type),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -53,11 +54,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("(2)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(2),
-                new MathToken(MathTokenType.CloseBracket)
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -67,11 +68,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 + 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.Addition),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -81,11 +82,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("(+2)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(2),
-                new MathToken(MathTokenType.CloseBracket)
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -95,9 +96,9 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("+2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2)
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -107,11 +108,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 - 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.Subtraction),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -121,12 +122,12 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("(-2)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(MathTokenType.UnaryMinus),
-                new MathToken(2),
-                new MathToken(MathTokenType.CloseBracket)
+                new SymbolToken(Symbols.OpenBracket),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -136,10 +137,10 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("-2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.UnaryMinus),
-                new MathToken(2)
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -149,11 +150,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 * 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.Multiplication),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -163,11 +164,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 / 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.Division),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.Division),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -177,11 +178,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 ^ 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.Exponentiation),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.Exponentiation),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -191,14 +192,14 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("log(2, 2)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.Log),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(2),
-                new MathToken(MathTokenType.Comma),
-                new MathToken(2),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Log),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -208,10 +209,10 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("~2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.Not),
-                new MathToken(2)
+                new OperationToken(Operations.Not),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -221,11 +222,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 & 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.And),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.And),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -235,11 +236,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("2 | 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(2),
-                new MathToken(MathTokenType.Or),
-                new MathToken(2)
+                new NumberToken(2),
+                new OperationToken(Operations.Or),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -249,11 +250,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("x := 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken("x"),
-                new MathToken(MathTokenType.Assign),
-                new MathToken(2)
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -263,12 +264,12 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("-2764786 + 46489879");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.UnaryMinus),
-                new MathToken(2764786),
-                new MathToken(MathTokenType.Addition),
-                new MathToken(46489879)
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2764786),
+                new OperationToken(Operations.Addition),
+                new NumberToken(46489879)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -278,12 +279,12 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("-45.3 + 87.64");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.UnaryMinus),
-                new MathToken(45.3),
-                new MathToken(MathTokenType.Addition),
-                new MathToken(87.64)
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(45.3),
+                new OperationToken(Operations.Addition),
+                new NumberToken(87.64)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -293,12 +294,12 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("-2x");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.UnaryMinus),
-                new MathToken(2),
-                new MathToken(MathTokenType.Multiplication),
-                new MathToken("x")
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("x")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -308,11 +309,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("3pi");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(3),
-                new MathToken(MathTokenType.Multiplication),
-                new MathToken("π")
+                new NumberToken(3),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("π")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -320,223 +321,223 @@ namespace xFunc.Test
         [TestMethod]
         public void Exp()
         {
-            FuncTest("exp", MathTokenType.E);
+            FuncTest("exp", Functions.Exp);
         }
 
         [TestMethod]
         public void Abs()
         {
-            FuncTest("abs", MathTokenType.Absolute);
+            FuncTest("abs", Functions.Absolute);
         }
 
         [TestMethod]
         public void Sh()
         {
-            FuncTest("sh", MathTokenType.Sineh);
+            FuncTest("sh", Functions.Sineh);
         }
 
         [TestMethod]
         public void Sinh()
         {
-            FuncTest("sinh", MathTokenType.Sineh);
+            FuncTest("sinh", Functions.Sineh);
         }
 
         [TestMethod]
         public void Ch()
         {
-            FuncTest("ch", MathTokenType.Cosineh);
+            FuncTest("ch", Functions.Cosineh);
         }
 
         [TestMethod]
         public void Cosh()
         {
-            FuncTest("cosh", MathTokenType.Cosineh);
+            FuncTest("cosh", Functions.Cosineh);
         }
 
         [TestMethod]
         public void Th()
         {
-            FuncTest("th", MathTokenType.Tangenth);
+            FuncTest("th", Functions.Tangenth);
         }
 
         [TestMethod]
         public void Tanh()
         {
-            FuncTest("tanh", MathTokenType.Tangenth);
+            FuncTest("tanh", Functions.Tangenth);
         }
 
         [TestMethod]
         public void Cth()
         {
-            FuncTest("cth", MathTokenType.Cotangenth);
+            FuncTest("cth", Functions.Cotangenth);
         }
 
         [TestMethod]
         public void Coth()
         {
-            FuncTest("coth", MathTokenType.Cotangenth);
+            FuncTest("coth", Functions.Cotangenth);
         }
 
         [TestMethod]
         public void Sech()
         {
-            FuncTest("sech", MathTokenType.Secanth);
+            FuncTest("sech", Functions.Secanth);
         }
 
         [TestMethod]
         public void Csch()
         {
-            FuncTest("csch", MathTokenType.Cosecanth);
+            FuncTest("csch", Functions.Cosecanth);
         }
 
         [TestMethod]
         public void Arsinh()
         {
-            FuncTest("arsinh", MathTokenType.Arsineh);
+            FuncTest("arsinh", Functions.Arsineh);
         }
 
         [TestMethod]
         public void Arcosh()
         {
-            FuncTest("arcosh", MathTokenType.Arcosineh);
+            FuncTest("arcosh", Functions.Arcosineh);
         }
 
         [TestMethod]
         public void Artanh()
         {
-            FuncTest("artanh", MathTokenType.Artangenth);
+            FuncTest("artanh", Functions.Artangenth);
         }
 
         [TestMethod]
         public void Arcoth()
         {
-            FuncTest("arcoth", MathTokenType.Arcotangenth);
+            FuncTest("arcoth", Functions.Arcotangenth);
         }
 
         [TestMethod]
         public void Arsech()
         {
-            FuncTest("arsech", MathTokenType.Arsecanth);
+            FuncTest("arsech", Functions.Arsecanth);
         }
 
         [TestMethod]
         public void Arcsch()
         {
-            FuncTest("arcsch", MathTokenType.Arcosecanth);
+            FuncTest("arcsch", Functions.Arcosecanth);
         }
 
         [TestMethod]
         public void Sin()
         {
-            FuncTest("sin", MathTokenType.Sine);
+            FuncTest("sin", Functions.Sine);
         }
 
         [TestMethod]
         public void Cosec()
         {
-            FuncTest("cosec", MathTokenType.Cosecant);
+            FuncTest("cosec", Functions.Cosecant);
         }
 
         [TestMethod]
         public void Csc()
         {
-            FuncTest("csc", MathTokenType.Cosecant);
+            FuncTest("csc", Functions.Cosecant);
         }
 
         [TestMethod]
         public void Cos()
         {
-            FuncTest("cos", MathTokenType.Cosine);
+            FuncTest("cos", Functions.Cosine);
         }
 
         [TestMethod]
         public void Tg()
         {
-            FuncTest("tg", MathTokenType.Tangent);
+            FuncTest("tg", Functions.Tangent);
         }
 
         [TestMethod]
         public void Tan()
         {
-            FuncTest("tan", MathTokenType.Tangent);
+            FuncTest("tan", Functions.Tangent);
         }
 
         [TestMethod]
         public void Ctg()
         {
-            FuncTest("ctg", MathTokenType.Cotangent);
+            FuncTest("ctg", Functions.Cotangent);
         }
 
         [TestMethod]
         public void Cot()
         {
-            FuncTest("cot", MathTokenType.Cotangent);
+            FuncTest("cot", Functions.Cotangent);
         }
 
         [TestMethod]
         public void Sec()
         {
-            FuncTest("sec", MathTokenType.Secant);
+            FuncTest("sec", Functions.Secant);
         }
 
         [TestMethod]
         public void Arcsin()
         {
-            FuncTest("arcsin", MathTokenType.Arcsine);
+            FuncTest("arcsin", Functions.Arcsine);
         }
 
         [TestMethod]
         public void Arccosec()
         {
-            FuncTest("arccosec", MathTokenType.Arccosecant);
+            FuncTest("arccosec", Functions.Arccosecant);
         }
 
         [TestMethod]
         public void Arccsc()
         {
-            FuncTest("arccsc", MathTokenType.Arccosecant);
+            FuncTest("arccsc", Functions.Arccosecant);
         }
 
         [TestMethod]
         public void Arccos()
         {
-            FuncTest("arccos", MathTokenType.Arccosine);
+            FuncTest("arccos", Functions.Arccosine);
         }
 
         [TestMethod]
         public void Arctg()
         {
-            FuncTest("arctg", MathTokenType.Arctangent);
+            FuncTest("arctg", Functions.Arctangent);
         }
 
         [TestMethod]
         public void Arctan()
         {
-            FuncTest("arctan", MathTokenType.Arctangent);
+            FuncTest("arctan", Functions.Arctangent);
         }
 
         [TestMethod]
         public void Arcctg()
         {
-            FuncTest("arcctg", MathTokenType.Arccotangent);
+            FuncTest("arcctg", Functions.Arccotangent);
         }
 
         [TestMethod]
         public void Arccot()
         {
-            FuncTest("arccot", MathTokenType.Arccotangent);
+            FuncTest("arccot", Functions.Arccotangent);
         }
 
         [TestMethod]
         public void Arcsec()
         {
-            FuncTest("arcsec", MathTokenType.Arcsecant);
+            FuncTest("arcsec", Functions.Arcsecant);
         }
 
         [TestMethod]
         public void Sqrt()
         {
-            FuncTest("sqrt", MathTokenType.Sqrt);
+            FuncTest("sqrt", Functions.Sqrt);
         }
 
         [TestMethod]
@@ -544,14 +545,14 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("root(27, 3)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.Root),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(27),
-                new MathToken(MathTokenType.Comma),
-                new MathToken(3),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Root),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(27),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -559,13 +560,13 @@ namespace xFunc.Test
         [TestMethod]
         public void Lg()
         {
-            FuncTest("lg", MathTokenType.Lg);
+            FuncTest("lg", Functions.Lg);
         }
 
         [TestMethod]
         public void Ln()
         {
-            FuncTest("ln", MathTokenType.Ln);
+            FuncTest("ln", Functions.Ln);
         }
 
         [TestMethod]
@@ -573,14 +574,14 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("log(2, 2)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.Log),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(2),
-                new MathToken(MathTokenType.Comma),
-                new MathToken(2),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Log),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -590,17 +591,17 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("deriv(sin(x), x)");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(MathTokenType.Derivative),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(MathTokenType.Sine),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken("x"),
-                new MathToken(MathTokenType.CloseBracket),
-                new MathToken(MathTokenType.Comma),
-                new MathToken("x"),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Derivative),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Sine),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -608,7 +609,14 @@ namespace xFunc.Test
         [TestMethod]
         public void NotAsWord()
         {
-            FuncTest("not", MathTokenType.Not);
+            var tokens = lexer.Tokenize("~2");
+
+            var expected = new List<IToken>()
+            {
+                new OperationToken(Operations.Not),
+                new NumberToken(2)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
         [TestMethod]
@@ -616,11 +624,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("1 and 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(1),
-                new MathToken(MathTokenType.And),
-                new MathToken(2)
+                new NumberToken(1),
+                new OperationToken(Operations.And),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -630,11 +638,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("1 or 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(1),
-                new MathToken(MathTokenType.Or),
-                new MathToken(2)
+                new NumberToken(1),
+                new OperationToken(Operations.Or),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -644,11 +652,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("1 xor 2");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken(1),
-                new MathToken(MathTokenType.XOr),
-                new MathToken(2)
+                new NumberToken(1),
+                new OperationToken(Operations.XOr),
+                new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -658,11 +666,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("x * y");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken("x"),
-                new MathToken(MathTokenType.Multiplication),
-                new MathToken("y")
+                new VariableToken("x"),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("y")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -672,11 +680,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("x and x");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken("x"),
-                new MathToken(MathTokenType.And),
-                new MathToken("x")
+                new VariableToken("x"),
+                new OperationToken(Operations.And),
+                new VariableToken("x")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -686,11 +694,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("aaa := 1");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken("aaa"),
-                new MathToken(MathTokenType.Assign),
-                new MathToken(1)
+                new VariableToken("aaa"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(1)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
@@ -700,11 +708,11 @@ namespace xFunc.Test
         {
             var tokens = lexer.Tokenize("func and 1");
 
-            var expected = new List<MathToken>()
+            var expected = new List<IToken>()
             {
-                new MathToken("func"),
-                new MathToken(MathTokenType.And),
-                new MathToken(1)
+                new VariableToken("func"),
+                new OperationToken(Operations.And),
+                new NumberToken(1)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }

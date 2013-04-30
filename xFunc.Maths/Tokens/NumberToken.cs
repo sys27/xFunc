@@ -13,6 +13,17 @@ namespace xFunc.Maths.Tokens
             this.number = number;
         }
 
+        public override bool Equals(object obj)
+        {
+            NumberToken token = obj as NumberToken;
+            if (token != null && this.Number == token.Number)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public double Number
         {
             get

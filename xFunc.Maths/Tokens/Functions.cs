@@ -129,23 +129,6 @@ namespace xFunc.Maths.Tokens
         Arcosecanth,
 
         /// <summary>
-        /// not
-        /// </summary>
-        Not,
-        /// <summary>
-        /// and
-        /// </summary>
-        And,
-        /// <summary>
-        /// or
-        /// </summary>
-        Or,
-        /// <summary>
-        /// xor
-        /// </summary>
-        XOr,
-
-        /// <summary>
         /// Exponential
         /// </summary>
         Exp,

@@ -7,10 +7,6 @@ namespace xFunc.Maths.Tokens
     {
 
         /// <summary>
-        /// undef()
-        /// </summary>
-        Undefine,
-        /// <summary>
         /// abs
         /// </summary>
         Absolute,
@@ -156,7 +152,11 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// deriv
         /// </summary>
-        Derivative
+        Derivative,
+        /// <summary>
+        /// undef()
+        /// </summary>
+        Undefine
 
     }
 

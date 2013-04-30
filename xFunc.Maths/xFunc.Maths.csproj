@@ -129,6 +129,7 @@
     <Compile Include="Tokens\NumberToken.cs" />
     <Compile Include="Tokens\Operations.cs" />
     <Compile Include="Tokens\OperationToken.cs" />
+    <Compile Include="Tokens\Symbols.cs" />
     <Compile Include="Tokens\SymbolToken.cs" />
     <Compile Include="Tokens\UserFunctionToken.cs" />
     <Compile Include="Tokens\VariableToken.cs" />

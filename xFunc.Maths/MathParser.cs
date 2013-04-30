@@ -838,34 +838,40 @@ namespace xFunc.Maths
             Stack<IToken> stack = new Stack<IToken>();
 
             // todo: implement
+            //var openBracketToken = new SymbolToken(Symbols.OpenBracket);
             //foreach (var token in tokens)
             //{
-            //    MathToken stackToken;
-            //    if (token.Type == MathTokenType.OpenBracket)
+            //    IToken stackToken;
+            //    if (token is SymbolToken)
             //    {
-            //        stack.Push(token);
-            //    }
-            //    else if (token.Type == MathTokenType.CloseBracket)
-            //    {
-            //        stackToken = stack.Pop();
-            //        while (stackToken.Type != MathTokenType.OpenBracket)
+            //        var t = token as SymbolToken;
+            //        if (t.Symbol == Symbols.OpenBracket)
             //        {
-            //            output.Add(stackToken);
-            //            stackToken = stack.Pop();
+            //            stack.Push(token);
             //        }
-            //    }
-            //    else if (token.Type == MathTokenType.Comma)
-            //    {
-            //        stackToken = stack.Pop();
-            //        while (stackToken.Type != MathTokenType.OpenBracket)
+            //        else if (t.Symbol == Symbols.CloseBracket)
             //        {
-            //            output.Add(stackToken);
             //            stackToken = stack.Pop();
+            //            while (!stackToken.Equals(openBracketToken))
+            //            {
+            //                output.Add(stackToken);
+            //                stackToken = stack.Pop();
+            //            }
             //        }
+            //        else if (t.Symbol == Symbols.Comma)
+            //        {
+            //            stackToken = stack.Pop();
+                        
+            //            while (!stackToken.Equals(openBracketToken))
+            //            {
+            //                output.Add(stackToken);
+            //                stackToken = stack.Pop();
+            //            }
 
-            //        stack.Push(stackToken);
+            //            stack.Push(stackToken);
+            //        }
             //    }
-            //    else if (token.Type == MathTokenType.Number || token.Type == MathTokenType.Variable)
+            //    else if (token is NumberToken || token is VariableToken)
             //    {
             //        output.Add(token);
             //    }
@@ -873,7 +879,7 @@ namespace xFunc.Maths
             //    {
             //        while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
             //        {
-            //            if (stackToken.Type == MathTokenType.OpenBracket)
+            //            if (!stackToken.Equals(openBracketToken))
             //                break;
             //            output.Add(stack.Pop());
             //        }

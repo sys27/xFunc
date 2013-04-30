@@ -666,23 +666,166 @@ namespace xFunc.Maths
         {
             List<IMathExpression> preOutput = new List<IMathExpression>();
 
-            // todo: implement
             foreach (var token in tokens)
             {
                 if (token is OperationToken)
                 {
+                    var t = token as OperationToken;
+                    switch (t.Operation)
+                    {
+                        case Operations.Addition:
+                            preOutput.Add(new Add());
+                            break;
+                        case Operations.Subtraction:
+                            preOutput.Add(new Sub());
+                            break;
+                        case Operations.Multiplication:
+                            preOutput.Add(new Mul());
+                            break;
+                        case Operations.Division:
+                            preOutput.Add(new Div());
+                            break;
+                        case Operations.Exponentiation:
+                            preOutput.Add(new Pow());
+                            break;
+                        case Operations.UnaryMinus:
+                            preOutput.Add(new UnaryMinus());
+                            break;
+                        case Operations.Assign:
+                            preOutput.Add(new Assign());
+                            break;
+                        case Operations.Not:
+                            preOutput.Add(new Not());
+                            break;
+                        case Operations.And:
+                            preOutput.Add(new And());
+                            break;
+                        case Operations.Or:
+                            preOutput.Add(new Or());
+                            break;
+                        case Operations.XOr:
+                            preOutput.Add(new XOr());
+                            break;
+                    }
                 }
-                else if (token is SymbolToken)
+                else if (token is NumberToken)
                 {
-                }
-                else if (token is Number)
-                {
+                    var t = token as NumberToken;
+
+                    preOutput.Add(new Number(t.Number));
                 }
                 else if (token is VariableToken)
                 {
+                    var t = token as VariableToken;
+
+                    preOutput.Add(new Variable(t.Variable));
                 }
                 else if (token is FunctionToken)
                 {
+                    var t = token as FunctionToken;
+
+                    switch (t.Function)
+                    {
+                        case Functions.Absolute:
+                            preOutput.Add(new Abs());
+                            break;
+                        case Functions.Sine:
+                            preOutput.Add(new Sin() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Cosine:
+                            preOutput.Add(new Cos() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Tangent:
+                            preOutput.Add(new Tan() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Cotangent:
+                            preOutput.Add(new Cot() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Secant:
+                            preOutput.Add(new Sec() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Cosecant:
+                            preOutput.Add(new Csc() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Arcsine:
+                            preOutput.Add(new Arcsin() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Arccosine:
+                            preOutput.Add(new Arccos() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Arctangent:
+                            preOutput.Add(new Arctan() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Arccotangent:
+                            preOutput.Add(new Arccot() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Arcsecant:
+                            preOutput.Add(new Arcsec() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Arccosecant:
+                            preOutput.Add(new Arccsc() { AngleMeasurement = this.AngleMeasurement });
+                            break;
+                        case Functions.Sqrt:
+                            preOutput.Add(new Sqrt());
+                            break;
+                        case Functions.Root:
+                            preOutput.Add(new Root());
+                            break;
+                        case Functions.Ln:
+                            preOutput.Add(new Ln());
+                            break;
+                        case Functions.Lg:
+                            preOutput.Add(new Lg());
+                            break;
+                        case Functions.Log:
+                            preOutput.Add(new Log());
+                            break;
+                        case Functions.Sineh:
+                            preOutput.Add(new Sinh());
+                            break;
+                        case Functions.Cosineh:
+                            preOutput.Add(new Cosh());
+                            break;
+                        case Functions.Tangenth:
+                            preOutput.Add(new Tanh());
+                            break;
+                        case Functions.Cotangenth:
+                            preOutput.Add(new Coth());
+                            break;
+                        case Functions.Secanth:
+                            preOutput.Add(new Sech());
+                            break;
+                        case Functions.Cosecanth:
+                            preOutput.Add(new Csch());
+                            break;
+                        case Functions.Arsineh:
+                            preOutput.Add(new Arsech());
+                            break;
+                        case Functions.Arcosineh:
+                            preOutput.Add(new Arcosh());
+                            break;
+                        case Functions.Artangenth:
+                            preOutput.Add(new Artanh());
+                            break;
+                        case Functions.Arcotangenth:
+                            preOutput.Add(new Arcoth());
+                            break;
+                        case Functions.Arsecanth:
+                            preOutput.Add(new Arsech());
+                            break;
+                        case Functions.Arcosecanth:
+                            preOutput.Add(new Arcsch());
+                            break;
+                        case Functions.Exp:
+                            preOutput.Add(new Exp());
+                            break;
+                        case Functions.Derivative:
+                            preOutput.Add(new Derivative());
+                            break;
+                        case Functions.Undefine:
+                            preOutput.Add(new Undefine());
+                            break;
+                    }
                 }
             }
 

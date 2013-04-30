@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using xFunc.Maths.Tokens;
 
 namespace xFunc.Maths
 {
@@ -26,7 +27,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="function">The string that contains the functions and operators.</param>
         /// <returns>The sequence of tokens.</returns>
-        IEnumerable<MathToken> Tokenize(string function);
+        IEnumerable<IToken> Tokenize(string function);
 
     }
 

@@ -1,10 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using xFunc.Maths;
+using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Exceptions;
-using System.Collections.Generic;
+using xFunc.Maths.Tokens;
 
 namespace xFunc.Test
 {
@@ -51,14 +52,14 @@ namespace xFunc.Test
         [TestMethod]
         public void ParseLog()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Log),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(9),
-                new MathToken(MathTokenType.Comma),
-                new MathToken(3),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Log),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(9),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse("log(9, 3)", false);
@@ -69,12 +70,12 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ParseLogWithOneParam()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Log),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken(9),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Log),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse("log(9)");
@@ -83,14 +84,14 @@ namespace xFunc.Test
         [TestMethod]
         public void ParseRoot()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Root),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken("x"),
-                new MathToken(MathTokenType.Comma),
-                new MathToken(3),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Root),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse("root(x, 3)", false);
@@ -101,12 +102,12 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ParseRootWithOneParam()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Root),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken("x"),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Root),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse("root(x)");
@@ -116,12 +117,12 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ParseDerivWithOneParam()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Derivative),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken("x"),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Derivative),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse("deriv(x)");
@@ -131,14 +132,14 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ParseDerivSecondParamIsNotVar()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Derivative),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken("x"),
-                new MathToken(MathTokenType.Comma),
-                new MathToken(3),
-                new MathToken(MathTokenType.CloseBracket)
+                new FunctionToken(Functions.Derivative),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse("deriv(x, 3)");
@@ -147,11 +148,11 @@ namespace xFunc.Test
         [TestMethod]
         public void ParseAssign()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken("x"),
-                new MathToken(MathTokenType.Assign),
-                new MathToken(3)
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(3)
             };
 
             var exp = parser.Parse("x := 3", false);
@@ -162,10 +163,10 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ParseAssignWithOneParam()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken("x"),
-                new MathToken(MathTokenType.Assign)
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign)
             };
 
             var exp = parser.Parse("x := ");
@@ -175,11 +176,11 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ParseAssignFirstParamIsNotVar()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(5),
-                new MathToken(MathTokenType.Assign),
-                new MathToken(3)
+                new NumberToken(5),
+                new OperationToken(Operations.Assign),
+                new NumberToken(3)
             };
 
             var exp = parser.Parse("5 := 3");
@@ -189,13 +190,13 @@ namespace xFunc.Test
         [ExpectedException(typeof(MathParserException))]
         public void ErrorWhileParsingTree()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken(MathTokenType.Sine),
-                new MathToken(MathTokenType.OpenBracket),
-                new MathToken("x"),
-                new MathToken(MathTokenType.CloseBracket),
-                new MathToken(2)
+                new FunctionToken(Functions.Sine),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new NumberToken(2)
             };
 
             var exp = parser.Parse("sin(x) 2");
@@ -204,11 +205,11 @@ namespace xFunc.Test
         [TestMethod]
         public void StringVarParserTest()
         {
-            lexer.Tokens = new List<MathToken>()
+            lexer.Tokens = new List<IToken>()
             {
-                new MathToken("aaa"),
-                new MathToken(MathTokenType.Assign),
-                new MathToken(1)
+                new VariableToken("aaa"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(1)
             };
 
             var exp = parser.Parse("aaa := 1", false);

@@ -30,10 +30,28 @@ namespace xFunc.Maths.Tokens
         /// - (Unary)
         /// </summary>
         UnaryMinus,
+
         /// <summary>
         /// :=
         /// </summary>
-        Assign
+        Assign,
+
+        /// <summary>
+        /// ~, not
+        /// </summary>
+        Not,
+        /// <summary>
+        /// &, and
+        /// </summary>
+        And,
+        /// <summary>
+        /// |, or
+        /// </summary>
+        Or,
+        /// <summary>
+        /// xor
+        /// </summary>
+        XOr
 
     }
 

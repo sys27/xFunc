@@ -8,7 +8,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
 {
 
     [TestClass]
-    public class SineMathExpressionTest
+    public class SineTest
     {
 
         [TestMethod]

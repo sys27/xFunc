@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Tokens;
 
 namespace xFunc.Test
 {
@@ -11,23 +12,23 @@ namespace xFunc.Test
     public class MathLexerMock : IMathLexer
     {
 
-        private List<MathToken> tokens;
+        private List<IToken> tokens;
 
         public MathLexerMock()
         {
         }
 
-        public MathLexerMock(IEnumerable<MathToken> tokens)
+        public MathLexerMock(IEnumerable<IToken> tokens)
         {
-            this.tokens = new List<MathToken>(tokens);
+            this.tokens = new List<IToken>(tokens);
         }
 
-        public IEnumerable<MathToken> Tokenize(string function)
+        public IEnumerable<IToken> Tokenize(string function)
         {
             return tokens;
         }
 
-        public IEnumerable<MathToken> Tokens
+        public IEnumerable<IToken> Tokens
         {
             get
             {
@@ -35,7 +36,7 @@ namespace xFunc.Test
             }
             set
             {
-                tokens = new List<MathToken>(value);
+                tokens = new List<IToken>(value);
             }
         }
 

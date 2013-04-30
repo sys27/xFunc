@@ -6,14 +6,14 @@ namespace xFunc.Maths.Tokens
     public class SymbolToken : IToken
     {
 
-        private char symbol;
+        private Symbols symbol;
 
-        public SymbolToken(char symbol)
+        public SymbolToken(Symbols symbol)
         {
             this.symbol = symbol;
         }
 
-        public char Symbol
+        public Symbols Symbol
         {
             get
             {

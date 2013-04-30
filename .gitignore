@@ -29,4 +29,7 @@ packages
 *.design
 *.pfx
 
+[Pp]laylist\
+*.playlist
+
 Thumbs.db

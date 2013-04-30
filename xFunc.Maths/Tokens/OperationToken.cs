@@ -13,6 +13,17 @@ namespace xFunc.Maths.Tokens
             this.operation = operation;
         }
 
+        public override bool Equals(object obj)
+        {
+            OperationToken token = obj as OperationToken;
+            if (token != null && this.Operation == token.Operation)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Operations Operation
         {
             get

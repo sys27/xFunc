@@ -20,6 +20,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Expressions.Bitwise;
+using xFunc.Maths.Tokens;
 
 namespace xFunc.Maths
 {
@@ -571,8 +572,8 @@ namespace xFunc.Maths
 
             if (function != lastFunc)
             {
-                IEnumerable<MathToken> tokens = lexer.Tokenize(function);
-                IEnumerable<MathToken> rpn = ConvertToReversePolishNotation(tokens);
+                IEnumerable<IToken> tokens = lexer.Tokenize(function);
+                IEnumerable<IToken> rpn = ConvertToReversePolishNotation(tokens);
                 IEnumerable<IMathExpression> expressions = ConvertTokensToExpressions(rpn);
 
                 Stack<IMathExpression> stack = new Stack<IMathExpression>();
@@ -661,212 +662,86 @@ namespace xFunc.Maths
             return mathExpression;
         }
 
-        private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<MathToken> tokens)
+        private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
         {
             List<IMathExpression> preOutput = new List<IMathExpression>();
 
+            // todo: implement
             foreach (var token in tokens)
             {
-                switch (token.Type)
+                if (token is OperationToken)
                 {
-                    case MathTokenType.Number:
-                        preOutput.Add(new Number(token.Number));
-                        break;
-                    case MathTokenType.Variable:
-                        preOutput.Add(new Variable(token.Variable));
-                        break;
-                    case MathTokenType.UnaryMinus:
-                        preOutput.Add(new UnaryMinus());
-                        break;
-                    case MathTokenType.E:
-                        preOutput.Add(new Exp());
-                        break;
-                    case MathTokenType.Addition:
-                        preOutput.Add(new Add());
-                        break;
-                    case MathTokenType.Subtraction:
-                        preOutput.Add(new Sub());
-                        break;
-                    case MathTokenType.Multiplication:
-                        preOutput.Add(new Mul());
-                        break;
-                    case MathTokenType.Division:
-                        preOutput.Add(new Div());
-                        break;
-                    case MathTokenType.Exponentiation:
-                        preOutput.Add(new Pow());
-                        break;
-                    case MathTokenType.Absolute:
-                        preOutput.Add(new Abs());
-                        break;
-                    case MathTokenType.Sine:
-                        preOutput.Add(new Sin { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Cosine:
-                        preOutput.Add(new Cos { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Tangent:
-                        preOutput.Add(new Tan { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Cotangent:
-                        preOutput.Add(new Cot { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Secant:
-                        preOutput.Add(new Sec { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Cosecant:
-                        preOutput.Add(new Csc { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Arcsine:
-                        preOutput.Add(new Arcsin { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Arccosine:
-                        preOutput.Add(new Arccos { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Arctangent:
-                        preOutput.Add(new Arctan { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Arcsecant:
-                        preOutput.Add(new Arcsec { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Arccosecant:
-                        preOutput.Add(new Arccsc { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Arccotangent:
-                        preOutput.Add(new Arccot { AngleMeasurement = angleMeasurement });
-                        break;
-                    case MathTokenType.Sineh:
-                        preOutput.Add(new Sinh());
-                        break;
-                    case MathTokenType.Cosineh:
-                        preOutput.Add(new Cosh());
-                        break;
-                    case MathTokenType.Tangenth:
-                        preOutput.Add(new Tanh());
-                        break;
-                    case MathTokenType.Cotangenth:
-                        preOutput.Add(new Coth());
-                        break;
-                    case MathTokenType.Secanth:
-                        preOutput.Add(new Sech());
-                        break;
-                    case MathTokenType.Cosecanth:
-                        preOutput.Add(new Csch());
-                        break;
-                    case MathTokenType.Arsineh:
-                        preOutput.Add(new Arsinh());
-                        break;
-                    case MathTokenType.Arcosineh:
-                        preOutput.Add(new Arcosh());
-                        break;
-                    case MathTokenType.Artangenth:
-                        preOutput.Add(new Artanh());
-                        break;
-                    case MathTokenType.Arcotangenth:
-                        preOutput.Add(new Arcoth());
-                        break;
-                    case MathTokenType.Arsecanth:
-                        preOutput.Add(new Arsech());
-                        break;
-                    case MathTokenType.Arcosecanth:
-                        preOutput.Add(new Arcsch());
-                        break;
-                    case MathTokenType.Sqrt:
-                        preOutput.Add(new Sqrt());
-                        break;
-                    case MathTokenType.Root:
-                        preOutput.Add(new Root());
-                        break;
-                    case MathTokenType.Lg:
-                        preOutput.Add(new Lg());
-                        break;
-                    case MathTokenType.Ln:
-                        preOutput.Add(new Ln());
-                        break;
-                    case MathTokenType.Log:
-                        preOutput.Add(new Log());
-                        break;
-                    case MathTokenType.Derivative:
-                        preOutput.Add(new Derivative());
-                        break;
-                    case MathTokenType.Assign:
-                        preOutput.Add(new Assign());
-                        break;
-                    case MathTokenType.Undefine:
-                        preOutput.Add(new Undefine());
-                        break;
-                    case MathTokenType.Not:
-                        preOutput.Add(new Not());
-                        break;
-                    case MathTokenType.And:
-                        preOutput.Add(new And());
-                        break;
-                    case MathTokenType.Or:
-                        preOutput.Add(new Or());
-                        break;
-                    case MathTokenType.XOr:
-                        preOutput.Add(new XOr());
-                        break;
-                    default:
-                        throw new MathParserException(Resource.NotSupportedToken);
+                }
+                else if (token is SymbolToken)
+                {
+                }
+                else if (token is Number)
+                {
+                }
+                else if (token is VariableToken)
+                {
+                }
+                else if (token is FunctionToken)
+                {
                 }
             }
 
             return preOutput;
         }
 
-        private IEnumerable<MathToken> ConvertToReversePolishNotation(IEnumerable<MathToken> tokens)
+        private IEnumerable<IToken> ConvertToReversePolishNotation(IEnumerable<IToken> tokens)
         {
-            List<MathToken> output = new List<MathToken>();
-            Stack<MathToken> stack = new Stack<MathToken>();
+            List<IToken> output = new List<IToken>();
+            Stack<IToken> stack = new Stack<IToken>();
 
-            foreach (var token in tokens)
-            {
-                MathToken stackToken;
-                if (token.Type == MathTokenType.OpenBracket)
-                {
-                    stack.Push(token);
-                }
-                else if (token.Type == MathTokenType.CloseBracket)
-                {
-                    stackToken = stack.Pop();
-                    while (stackToken.Type != MathTokenType.OpenBracket)
-                    {
-                        output.Add(stackToken);
-                        stackToken = stack.Pop();
-                    }
-                }
-                else if (token.Type == MathTokenType.Comma)
-                {
-                    stackToken = stack.Pop();
-                    while (stackToken.Type != MathTokenType.OpenBracket)
-                    {
-                        output.Add(stackToken);
-                        stackToken = stack.Pop();
-                    }
+            // todo: implement
+            //foreach (var token in tokens)
+            //{
+            //    MathToken stackToken;
+            //    if (token.Type == MathTokenType.OpenBracket)
+            //    {
+            //        stack.Push(token);
+            //    }
+            //    else if (token.Type == MathTokenType.CloseBracket)
+            //    {
+            //        stackToken = stack.Pop();
+            //        while (stackToken.Type != MathTokenType.OpenBracket)
+            //        {
+            //            output.Add(stackToken);
+            //            stackToken = stack.Pop();
+            //        }
+            //    }
+            //    else if (token.Type == MathTokenType.Comma)
+            //    {
+            //        stackToken = stack.Pop();
+            //        while (stackToken.Type != MathTokenType.OpenBracket)
+            //        {
+            //            output.Add(stackToken);
+            //            stackToken = stack.Pop();
+            //        }
 
-                    stack.Push(stackToken);
-                }
-                else if (token.Type == MathTokenType.Number || token.Type == MathTokenType.Variable)
-                {
-                    output.Add(token);
-                }
-                else
-                {
-                    while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
-                    {
-                        if (stackToken.Type == MathTokenType.OpenBracket)
-                            break;
-                        output.Add(stack.Pop());
-                    }
+            //        stack.Push(stackToken);
+            //    }
+            //    else if (token.Type == MathTokenType.Number || token.Type == MathTokenType.Variable)
+            //    {
+            //        output.Add(token);
+            //    }
+            //    else
+            //    {
+            //        while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
+            //        {
+            //            if (stackToken.Type == MathTokenType.OpenBracket)
+            //                break;
+            //            output.Add(stack.Pop());
+            //        }
 
-                    stack.Push(token);
-                }
-            }
-            if (stack.Count != 0)
-            {
-                output.AddRange(stack);
-            }
+            //        stack.Push(token);
+            //    }
+            //}
+            //if (stack.Count != 0)
+            //{
+            //    output.AddRange(stack);
+            //}
 
             return output;
         }

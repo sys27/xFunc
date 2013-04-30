@@ -13,6 +13,17 @@ namespace xFunc.Maths.Tokens
             this.symbol = symbol;
         }
 
+        public override bool Equals(object obj)
+        {
+            SymbolToken token = obj as SymbolToken;
+            if (token != null && this.Symbol == token.Symbol)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Symbols Symbol
         {
             get

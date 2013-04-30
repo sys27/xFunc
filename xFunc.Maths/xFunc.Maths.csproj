@@ -123,6 +123,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Tokens\FunctionToken.cs" />
+    <Compile Include="Tokens\IToken.cs" />
+    <Compile Include="Tokens\NumberToken.cs" />
+    <Compile Include="Tokens\OperationToken.cs" />
+    <Compile Include="Tokens\UserFunctionToken.cs" />
+    <Compile Include="Tokens\VariableToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.uk.resx">

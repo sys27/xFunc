@@ -7,10 +7,13 @@ namespace xFunc.Maths.Tokens
     {
 
         private Symbols symbol;
+        private int priority;
 
         public SymbolToken(Symbols symbol)
         {
             this.symbol = symbol;
+
+            SetPriority();
         }
 
         public override bool Equals(object obj)
@@ -22,6 +25,30 @@ namespace xFunc.Maths.Tokens
             }
 
             return false;
+        }
+
+        private void SetPriority()
+        {
+            switch (symbol)
+            {
+                case Symbols.OpenBracket:
+                    priority = 1;
+                    break;
+                case Symbols.CloseBracket:
+                    priority = 2;
+                    break;
+                case Symbols.Comma:
+                    priority = 3;
+                    break;
+            }
+        }
+
+        public int Priority
+        {
+            get
+            {
+                return priority;
+            }
         }
 
         public Symbols Symbol

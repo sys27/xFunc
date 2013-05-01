@@ -56,6 +56,7 @@
     <Compile Include="Expressions\Bitwise\XOr.cs" />
     <Compile Include="Expressions\Bitwise\Or.cs" />
     <Compile Include="Expressions\Bitwise\Not.cs" />
+    <Compile Include="Expressions\MathFunctionCollection.cs" />
     <Compile Include="Expressions\Trigonometric\Arccos.cs" />
     <Compile Include="Expressions\Trigonometric\Arccot.cs" />
     <Compile Include="Expressions\Trigonometric\Arccsc.cs" />

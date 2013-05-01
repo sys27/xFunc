@@ -24,6 +24,14 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        public int Priority
+        {
+            get
+            {
+                return 102;
+            }
+        }
+
         public string Variable
         {
             get

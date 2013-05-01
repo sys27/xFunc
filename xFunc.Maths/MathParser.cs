@@ -837,60 +837,59 @@ namespace xFunc.Maths
             List<IToken> output = new List<IToken>();
             Stack<IToken> stack = new Stack<IToken>();
 
-            // todo: implement
-            //var openBracketToken = new SymbolToken(Symbols.OpenBracket);
-            //foreach (var token in tokens)
-            //{
-            //    IToken stackToken;
-            //    if (token is SymbolToken)
-            //    {
-            //        var t = token as SymbolToken;
-            //        if (t.Symbol == Symbols.OpenBracket)
-            //        {
-            //            stack.Push(token);
-            //        }
-            //        else if (t.Symbol == Symbols.CloseBracket)
-            //        {
-            //            stackToken = stack.Pop();
-            //            while (!stackToken.Equals(openBracketToken))
-            //            {
-            //                output.Add(stackToken);
-            //                stackToken = stack.Pop();
-            //            }
-            //        }
-            //        else if (t.Symbol == Symbols.Comma)
-            //        {
-            //            stackToken = stack.Pop();
-                        
-            //            while (!stackToken.Equals(openBracketToken))
-            //            {
-            //                output.Add(stackToken);
-            //                stackToken = stack.Pop();
-            //            }
+            var openBracketToken = new SymbolToken(Symbols.OpenBracket);
+            foreach (var token in tokens)
+            {
+                IToken stackToken;
+                if (token is SymbolToken)
+                {
+                    var t = token as SymbolToken;
+                    if (t.Symbol == Symbols.OpenBracket)
+                    {
+                        stack.Push(token);
+                    }
+                    else if (t.Symbol == Symbols.CloseBracket)
+                    {
+                        stackToken = stack.Pop();
+                        while (!stackToken.Equals(openBracketToken))
+                        {
+                            output.Add(stackToken);
+                            stackToken = stack.Pop();
+                        }
+                    }
+                    else if (t.Symbol == Symbols.Comma)
+                    {
+                        stackToken = stack.Pop();
 
-            //            stack.Push(stackToken);
-            //        }
-            //    }
-            //    else if (token is NumberToken || token is VariableToken)
-            //    {
-            //        output.Add(token);
-            //    }
-            //    else
-            //    {
-            //        while (stack.Count != 0 && (stackToken = stack.Peek()).Type >= token.Type)
-            //        {
-            //            if (!stackToken.Equals(openBracketToken))
-            //                break;
-            //            output.Add(stack.Pop());
-            //        }
+                        while (!stackToken.Equals(openBracketToken))
+                        {
+                            output.Add(stackToken);
+                            stackToken = stack.Pop();
+                        }
 
-            //        stack.Push(token);
-            //    }
-            //}
-            //if (stack.Count != 0)
-            //{
-            //    output.AddRange(stack);
-            //}
+                        stack.Push(stackToken);
+                    }
+                }
+                else if (token is NumberToken || token is VariableToken)
+                {
+                    output.Add(token);
+                }
+                else
+                {
+                    while (stack.Count != 0 && (stackToken = stack.Peek()).Priority >= token.Priority)
+                    {
+                        if (!stackToken.Equals(openBracketToken))
+                            break;
+                        output.Add(stack.Pop());
+                    }
+
+                    stack.Push(token);
+                }
+            }
+            if (stack.Count != 0)
+            {
+                output.AddRange(stack);
+            }
 
             return output;
         }

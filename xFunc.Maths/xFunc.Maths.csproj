@@ -100,6 +100,7 @@
     <Compile Include="Expressions\UnaryMathExpression.cs" />
     <Compile Include="Expressions\UnaryMinus.cs" />
     <Compile Include="Expressions\Undefine.cs" />
+    <Compile Include="Expressions\UserFunction.cs" />
     <Compile Include="Expressions\Variable.cs" />
     <Compile Include="IMathLexer.cs" />
     <Compile Include="MathExtentions.cs" />

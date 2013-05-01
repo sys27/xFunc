@@ -717,6 +717,38 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void UserFunc()
+        {
+            var tokens = lexer.Tokenize("func(x)");
+
+            var expected = new List<IToken>()
+            {
+                new UserFunctionToken("func"),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void UserFuncTwoVars()
+        {
+            var tokens = lexer.Tokenize("func(x, y)");
+
+            var expected = new List<IToken>()
+            {
+                new UserFunctionToken("func"),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("y"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

@@ -582,7 +582,7 @@ limitations under the License. -->
                         <Button Grid.Row="0" Grid.Column="0" Tag="^2" Click="InsertInv_Click">
                             <Rectangle Fill="{StaticResource sqr}" Width="20" Height="16" />
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="1" Tag="^y" Click="InsertInv_Click">
+                        <Button Grid.Row="0" Grid.Column="1" Tag="^" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource inv}" Width="20" Height="16" />
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="sqrt" Click="InsertFunc_Click">

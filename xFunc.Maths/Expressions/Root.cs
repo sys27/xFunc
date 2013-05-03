@@ -39,6 +39,11 @@ namespace xFunc.Maths.Expressions
             return Math.Pow(firstMathExpression.Calculate(parameters), 1 / secondMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Pow(firstMathExpression.Calculate(parameters, functions), 1 / secondMathExpression.Calculate(parameters, functions));
+        }
+
         public override IMathExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(firstMathExpression, variable) || MathParser.HasVar(secondMathExpression, variable))
@@ -48,7 +53,7 @@ namespace xFunc.Maths.Expressions
 
                 return inv.Differentiate(variable);
             }
-            
+
             return new Number(0);
         }
 

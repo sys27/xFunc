@@ -37,21 +37,21 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("sec({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters)
+        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
             return 1 / Math.Cos(radian);
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters)
+        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return 1 / Math.Cos(firstMathExpression.Calculate(parameters));
+            return 1 / Math.Cos(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters)
+        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
 
             return 1 / Math.Cos(radian);
         }

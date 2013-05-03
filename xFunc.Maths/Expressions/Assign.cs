@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     public class Assign : IMathExpression
     {
 
-        private Variable variable;
+        private IMathExpression key;
         private IMathExpression value;
 
         public Assign()
@@ -29,15 +29,15 @@ namespace xFunc.Maths.Expressions
 
         }
 
-        public Assign(Variable variable, IMathExpression value)
+        public Assign(IMathExpression key, IMathExpression value)
         {
-            this.variable = variable;
+            this.Key = key;
             this.value = value;
         }
 
         public override string ToString()
         {
-            return string.Format("{0} := {1}", variable, value);
+            return string.Format("{0} := {1}", key, value);
         }
 
         public double Calculate()
@@ -47,10 +47,29 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters)
         {
+            // todo: ...
+            throw new NotSupportedException();
+        }
+
+        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
+            if (functions == null)
+                throw new ArgumentNullException("functions");
 
-            parameters[variable.Character] = value.Calculate(parameters);
+            if (key is Variable)
+            {
+                var e = key as Variable;
+
+                parameters[e.Character] = value.Calculate(parameters);
+            }
+            else if (key is UserFunction)
+            {
+                var e = key as UserFunction;
+
+                functions[e] = value;
+            }
 
             return double.NaN;
         }
@@ -67,18 +86,35 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Clone()
         {
-            return new Assign((Variable)variable.Clone(), value.Clone());
+            return new Assign(key.Clone(), value.Clone());
         }
 
-        public Variable Variable
+        public IMathExpression Parent
         {
             get
             {
-                return variable;
+                return null;
             }
             set
             {
-                variable = value;
+            }
+        }
+
+        public IMathExpression Key
+        {
+            get
+            {
+                return key;
+            }
+            set
+            {
+                if (!(value is Variable || value is UserFunction))
+                {
+                    // todo: ...
+                    throw new NotSupportedException();
+                }
+
+                key = value;
             }
         }
 
@@ -91,17 +127,6 @@ namespace xFunc.Maths.Expressions
             set
             {
                 this.value = value;
-            }
-        }
-
-        public IMathExpression Parent
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
             }
         }
 

@@ -63,6 +63,11 @@ namespace xFunc.Maths.Expressions
             return Math.Abs(firstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Abs(firstMathExpression.Calculate(parameters, functions));
+        }
+
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>

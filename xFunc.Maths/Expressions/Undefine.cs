@@ -34,6 +34,11 @@ namespace xFunc.Maths.Expressions
             return double.NaN;
         }
 
+        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            throw new NotImplementedException();
+        }
+
         public IMathExpression Differentiate()
         {
             throw new NotSupportedException();

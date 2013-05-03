@@ -71,6 +71,11 @@ namespace xFunc.Maths.Expressions.Bitwise
             return ~(int)firstMathExpression.Calculate(parameters);
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return ~(int)firstMathExpression.Calculate(parameters, functions);
+        }
+
         /// <summary>
         /// Clones this instanse of the <see cref="Not"/>.
         /// </summary>

@@ -8,13 +8,10 @@ namespace xFunc.Maths.Expressions
 {
 
     [Serializable]
-    public class MathFunctionCollection : Dictionary<string, IMathExpression>
+    public class MathFunctionCollection : Dictionary<UserFunction, IMathExpression>
     {
 
-        public MathFunctionCollection()
-        {
-
-        }
+        public MathFunctionCollection() { }
 
         protected MathFunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 

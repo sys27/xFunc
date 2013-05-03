@@ -62,6 +62,11 @@ namespace xFunc.Maths.Expressions
             return parameters[variable];
         }
 
+        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return parameters[variable];
+        }
+
         public IMathExpression Clone()
         {
             return new Variable(variable);

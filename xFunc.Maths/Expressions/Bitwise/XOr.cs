@@ -77,6 +77,11 @@ namespace xFunc.Maths.Expressions.Bitwise
             return (int)firstMathExpression.Calculate(parameters) ^ (int)secondMathExpression.Calculate(parameters);
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection fucntions)
+        {
+            return (int)firstMathExpression.Calculate(parameters, fucntions) ^ (int)secondMathExpression.Calculate(parameters, fucntions);
+        }
+
         /// <summary>
         /// Clones this instanse of the <see cref="XOr"/>.
         /// </summary>

@@ -77,6 +77,11 @@ namespace xFunc.Maths.Expressions.Bitwise
             return (int)firstMathExpression.Calculate(parameters) | (int)secondMathExpression.Calculate(parameters);
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return (int)firstMathExpression.Calculate(parameters, functions) | (int)secondMathExpression.Calculate(parameters, functions);
+        }
+
         /// <summary>
         /// Clones this instanse of the <see cref="Or"/>.
         /// </summary>

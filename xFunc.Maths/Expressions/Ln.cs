@@ -64,6 +64,11 @@ namespace xFunc.Maths.Expressions
             return Math.Log(FirstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Log(FirstMathExpression.Calculate(parameters, functions));
+        }
+
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Div div = new Div(firstMathExpression.Clone().Differentiate(variable), firstMathExpression.Clone());

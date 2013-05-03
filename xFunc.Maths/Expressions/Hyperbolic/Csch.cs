@@ -47,6 +47,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return MathExtentions.Csch(firstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return MathExtentions.Csch(firstMathExpression.Calculate(parameters, functions));
+        }
+
         public override IMathExpression Clone()
         {
             return new Csch(firstMathExpression.Clone());

@@ -16,7 +16,7 @@ using System;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
-    
+
     public class Cos : TrigonometryMathExpression
     {
 
@@ -29,21 +29,21 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("cos({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters)
+        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
             return Math.Cos(radian);
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters)
+        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Cos(firstMathExpression.Calculate(parameters));
+            return Math.Cos(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters)
+        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
 
             return Math.Cos(radian);
         }

@@ -35,6 +35,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         /// <seealso cref="MathParameterCollection"/>
         double Calculate(MathParameterCollection parameters);
+        double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>

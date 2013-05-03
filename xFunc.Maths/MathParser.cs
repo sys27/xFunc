@@ -622,10 +622,11 @@ namespace xFunc.Maths
                         Assign assign = (Assign)expression;
                         assign.Value = stack.Pop();
 
-                        if (!(stack.Peek() is Variable))
+                        var peek = stack.Peek();
+                        if (!(peek is Variable || peek is UserFunction))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        assign.Variable = (Variable)stack.Pop();
+                        assign.Key = stack.Pop();
 
                         stack.Push(assign);
                     }

@@ -63,6 +63,11 @@ namespace xFunc.Maths.Expressions
             return Math.Sqrt(FirstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Sqrt(FirstMathExpression.Calculate(parameters, functions));
+        }
+
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Mul mul = new Mul(new Number(2), Clone());

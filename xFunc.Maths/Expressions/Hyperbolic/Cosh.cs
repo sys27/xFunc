@@ -47,6 +47,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return Math.Cosh(firstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Cosh(firstMathExpression.Calculate(parameters, functions));
+        }
+
         public override IMathExpression Clone()
         {
             return new Cosh(firstMathExpression.Clone());

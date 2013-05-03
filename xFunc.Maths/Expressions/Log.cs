@@ -65,6 +65,11 @@ namespace xFunc.Maths.Expressions
             return Math.Log(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Log(firstMathExpression.Calculate(parameters, functions), secondMathExpression.Calculate(parameters, functions));
+        }
+
         public override IMathExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(firstMathExpression, variable))

@@ -37,19 +37,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("arcsec({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters)
+        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 180;
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters, functions)) / Math.PI * 180;
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters)
+        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return MathExtentions.Asec(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters)
+        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return MathExtentions.Asec(firstMathExpression.Calculate(parameters)) / Math.PI * 200;
+            return MathExtentions.Asec(firstMathExpression.Calculate(parameters, functions)) / Math.PI * 200;
         }
 
         protected override IMathExpression _Differentiation(Variable variable)

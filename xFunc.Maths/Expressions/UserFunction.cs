@@ -37,19 +37,47 @@ namespace xFunc.Maths.Expressions
             this.arguments = args;
         }
 
+        public override bool Equals(object obj)
+        {
+            var exp = obj as UserFunction;
+            if (exp != null && this.function == exp.Function)
+            {
+                if (this.arguments != null && exp.Arguments != null && this.arguments.Length == exp.arguments.Length)
+                    return true;
+                if (this.arguments == null && exp.Arguments == null)
+                    return true;
+
+                return false;
+            }
+
+            return false;
+        }
+
         public double Calculate()
         {
-            throw new NotImplementedException();
+            // todo: ...
+            throw new NotSupportedException();
         }
 
         public double Calculate(MathParameterCollection parameters)
         {
-            throw new NotImplementedException();
+            // todo: ...
+            throw new NotSupportedException();
         }
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            throw new NotSupportedException();
+            var func = functions.Keys.First(uf => uf.Equals(this));
+            var newParameters = new MathParameterCollection(parameters);
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                var arg = func.Arguments[i] as Variable;
+                newParameters[arg.Character] = this.arguments[i].Calculate(parameters, functions);
+            }
+
+            var result = functions[this].Calculate(newParameters, functions);
+
+            return result;
         }
 
         public IMathExpression Differentiate()

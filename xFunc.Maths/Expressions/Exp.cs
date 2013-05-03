@@ -39,6 +39,11 @@ namespace xFunc.Maths.Expressions
             return Math.Exp(firstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Exp(firstMathExpression.Calculate(parameters, functions));
+        }
+
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Mul mul = new Mul(firstMathExpression.Clone().Differentiate(variable), Clone());

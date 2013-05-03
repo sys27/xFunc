@@ -29,6 +29,8 @@ namespace xFunc.Maths.Expressions
             Add("e", Math.E);
         }
 
+        public MathParameterCollection(IDictionary<string, double> dictionary) : base(dictionary) { }
+
         protected MathParameterCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     }

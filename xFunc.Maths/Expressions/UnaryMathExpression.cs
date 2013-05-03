@@ -51,6 +51,8 @@ namespace xFunc.Maths.Expressions
 
         public abstract double Calculate(MathParameterCollection parameters);
 
+        public abstract double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
+
         public abstract IMathExpression Clone();
 
         public IMathExpression Differentiate()

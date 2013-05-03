@@ -28,18 +28,18 @@ namespace xFunc.Maths.Expressions.Trigonometric
             angleMeasurement = AngleMeasurement.Degree;
         }
 
-        public abstract double CalculateDergee(MathParameterCollection parameters);
-        public abstract double CalculateRadian(MathParameterCollection parameters);
-        public abstract double CalculateGradian(MathParameterCollection parameters);
+        public abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);
+        public abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
+        public abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);
 
         public override double Calculate()
         {
             if (angleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(null);
+                return CalculateDergee(null, null);
             if (angleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(null);
+                return CalculateRadian(null, null);
             if (angleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(null);
+                return CalculateGradian(null, null);
 
             return double.NaN;
         }
@@ -47,11 +47,23 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public override double Calculate(MathParameterCollection parameters)
         {
             if (angleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(parameters);
+                return CalculateDergee(parameters, null);
             if (angleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(parameters);
+                return CalculateRadian(parameters, null);
             if (angleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(parameters);
+                return CalculateGradian(parameters, null);
+
+            return double.NaN;
+        }
+
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            if (angleMeasurement == AngleMeasurement.Degree)
+                return CalculateDergee(parameters, functions);
+            if (angleMeasurement == AngleMeasurement.Radian)
+                return CalculateRadian(parameters, functions);
+            if (angleMeasurement == AngleMeasurement.Gradian)
+                return CalculateGradian(parameters, functions);
 
             return double.NaN;
         }

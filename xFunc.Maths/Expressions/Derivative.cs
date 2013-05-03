@@ -54,6 +54,11 @@ namespace xFunc.Maths.Expressions
             return Differentiate().Calculate(parameters);
         }
 
+        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Differentiate().Calculate(parameters, functions);
+        }
+
         public IMathExpression Differentiate()
         {
             if (firstMathExpression is Derivative)

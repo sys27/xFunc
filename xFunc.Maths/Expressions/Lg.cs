@@ -64,6 +64,11 @@ namespace xFunc.Maths.Expressions
             return Math.Log10(FirstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return Math.Log10(FirstMathExpression.Calculate(parameters, functions));
+        }
+
         protected override IMathExpression _Differentiation(Variable variable)
         {
             Ln ln = new Ln(new Number(10));

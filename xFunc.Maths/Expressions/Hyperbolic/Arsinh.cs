@@ -47,6 +47,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return MathExtentions.Asinh(firstMathExpression.Calculate(parameters));
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return MathExtentions.Asinh(firstMathExpression.Calculate(parameters, functions));
+        }
+
         public override IMathExpression Clone()
         {
             return new Arsinh(firstMathExpression.Clone());

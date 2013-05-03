@@ -62,6 +62,11 @@ namespace xFunc.Maths.Expressions
             return number;
         }
 
+        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return number;
+        }
+
         public IMathExpression Differentiate()
         {
             return new Number(0);

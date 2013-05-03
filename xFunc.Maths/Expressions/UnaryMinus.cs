@@ -42,6 +42,11 @@ namespace xFunc.Maths.Expressions
             return -firstMathExpression.Calculate(parameters);
         }
 
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        {
+            return -firstMathExpression.Calculate(parameters, functions);
+        }
+
         public override IMathExpression Clone()
         {
             return new UnaryMinus(firstMathExpression.Clone());

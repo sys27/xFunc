@@ -29,23 +29,23 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("cot({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters)
+        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
             return MathExtentions.Cot(radian);
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters)
+        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var x = firstMathExpression.Calculate(parameters);
+            var x = firstMathExpression.Calculate(parameters, functions);
 
             return MathExtentions.Cot(x);
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters)
+        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
 
             return MathExtentions.Cot(radian);
         }

@@ -29,21 +29,21 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("sin({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters)
+        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 180;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
             return Math.Sin(radian);
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters)
+        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Sin(firstMathExpression.Calculate(parameters));
+            return Math.Sin(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters)
+        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters) * Math.PI / 200;
+            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
 
             return Math.Sin(radian);
         }

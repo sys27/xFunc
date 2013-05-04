@@ -2,11 +2,11 @@
 
 namespace xFunc.Maths.Expressions
 {
-    
+
     public class Undefine : IMathExpression
     {
 
-        private Variable variable;
+        private IMathExpression key;
 
         public Undefine()
             : this(null)
@@ -14,9 +14,9 @@ namespace xFunc.Maths.Expressions
 
         }
 
-        public Undefine(Variable variable)
+        public Undefine(Variable key)
         {
-            this.variable = variable;
+            this.Key = key;
         }
 
         public double Calculate()
@@ -29,14 +29,42 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
-            parameters.Remove(variable.Character);
+            if (key is Variable)
+            {
+                var e = key as Variable;
+
+                parameters.Remove(e.Character);
+            }
+            else
+            {
+                // todo: ...
+                throw new NotSupportedException();
+            }
 
             return double.NaN;
         }
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            throw new NotImplementedException();
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+            if (functions == null)
+                throw new ArgumentNullException("functions");
+
+            if (key is Variable)
+            {
+                var e = key as Variable;
+
+                parameters.Remove(e.Character);
+            }
+            else if (key is UserFunction)
+            {
+                var e = key as UserFunction;
+
+                functions.Remove(e);
+            }
+
+            return double.NaN;
         }
 
         public IMathExpression Differentiate()
@@ -51,7 +79,7 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Clone()
         {
-            return new Undefine((Variable)variable.Clone());
+            return new Undefine((Variable)key.Clone());
         }
 
         public IMathExpression Parent
@@ -65,15 +93,21 @@ namespace xFunc.Maths.Expressions
             }
         }
 
-        public Variable Variable
+        public IMathExpression Key
         {
             get
             {
-                return variable;
+                return key;
             }
             set
             {
-                variable = value;
+                if (value != null && !(value is Variable || value is UserFunction))
+                {
+                    // todo: ...
+                    throw new NotSupportedException();
+                }
+
+                key = value;
             }
         }
 

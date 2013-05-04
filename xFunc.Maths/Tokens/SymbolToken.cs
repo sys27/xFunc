@@ -2,7 +2,7 @@
 
 namespace xFunc.Maths.Tokens
 {
-   
+
     public class SymbolToken : IToken
     {
 
@@ -25,6 +25,11 @@ namespace xFunc.Maths.Tokens
             }
 
             return false;
+        }
+
+        public override string ToString()
+        {
+            return "Symbol: " + symbol;
         }
 
         private void SetPriority()

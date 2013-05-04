@@ -641,7 +641,7 @@ namespace xFunc.Maths
                         if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        undef.Variable = (Variable)stack.Pop();
+                        undef.Key = (Variable)stack.Pop();
 
                         stack.Push(undef);
                     }

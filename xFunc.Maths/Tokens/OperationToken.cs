@@ -27,6 +27,11 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        public override string ToString()
+        {
+            return "Operation: " + operation;
+        }
+
         private void SetPriority()
         {
             switch (operation)

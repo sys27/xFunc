@@ -2,7 +2,7 @@
 
 namespace xFunc.Maths.Tokens
 {
-    
+
     public class NumberToken : IToken
     {
 
@@ -22,6 +22,11 @@ namespace xFunc.Maths.Tokens
             }
 
             return false;
+        }
+
+        public override string ToString()
+        {
+            return "Number: " + number;
         }
 
         public int Priority

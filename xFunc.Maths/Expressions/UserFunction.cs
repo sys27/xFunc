@@ -31,6 +31,8 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        public UserFunction(string function) : this(function, null) { }
+
         public UserFunction(string function, IMathExpression[] args)
         {
             this.function = function;
@@ -51,6 +53,26 @@ namespace xFunc.Maths.Expressions
             }
 
             return false;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(function);
+            builder.Append('(');
+            if (arguments != null)
+            {
+                for (int i = 0; i < arguments.Length; i++)
+                {
+                    builder.Append(arguments[i]);
+                    builder.Append(',');
+                }
+                if (arguments.Length > 0)
+                    builder.Remove(builder.Length - 1, 1);
+            }
+            builder.Append(')');
+
+            return builder.ToString();
         }
 
         public double Calculate()
@@ -119,6 +141,10 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return arguments;
+            }
+            set
+            {
+                arguments = value;
             }
         }
 

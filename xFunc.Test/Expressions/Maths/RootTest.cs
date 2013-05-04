@@ -11,11 +11,19 @@ namespace xFunc.Test.Expressions.Maths
     {
         
         [TestMethod]
-        public void CalculateTest()
+        public void CalculateRootTest1()
         {
             IMathExpression exp = new Root(new Number(8), new Number(3));
 
             Assert.AreEqual(Math.Pow(8, 1.0 / 3.0), exp.Calculate(null));
+        }
+
+        [TestMethod]
+        public void CalculateRootTest2()
+        {
+            IMathExpression exp = new Root(new Number(-8), new Number(3));
+
+            Assert.AreEqual(-2, exp.Calculate(null));
         }
 
         [TestMethod]

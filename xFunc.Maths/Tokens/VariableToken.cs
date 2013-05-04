@@ -24,6 +24,11 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        public override string ToString()
+        {
+            return "Variable: " + variable;
+        }
+
         public int Priority
         {
             get

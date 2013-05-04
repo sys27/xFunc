@@ -216,6 +216,66 @@ namespace xFunc.Test
             Assert.AreEqual("aaa := 1", exp.ToString());
         }
 
+        [TestMethod]
+        public void AssignUserFuncTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new UserFunctionToken("func"),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new OperationToken(Operations.Assign),
+                new FunctionToken(Functions.Sine),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("func(x) := sin(x)", false);
+            Assert.AreEqual("func(x) := sin(x)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void UserFunc()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sine),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new OperationToken(Operations.Addition),
+                new UserFunctionToken("func"),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("sin(x) + func(x)", false);
+            Assert.AreEqual("sin(x) + func(x)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void ParserTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Cosine),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new OperationToken(Operations.Addition),
+                new FunctionToken(Functions.Sine),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("cos(x) + sin(x)", false);
+            Assert.AreEqual("cos(x) + sin(x)", exp.ToString());
+        }
+
     }
 
 }

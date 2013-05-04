@@ -108,7 +108,7 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (!(value is Variable || value is UserFunction))
+                if (value != null && !(value is Variable || value is UserFunction))
                 {
                     // todo: ...
                     throw new NotSupportedException();

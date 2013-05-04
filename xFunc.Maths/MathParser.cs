@@ -14,12 +14,13 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Expressions.Hyperbolic;
-using xFunc.Maths.Resources;
 using xFunc.Maths.Expressions.Bitwise;
+using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
 namespace xFunc.Maths
@@ -619,7 +620,7 @@ namespace xFunc.Maths
                         if (stack.Count < 2)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
-                        Assign assign = (Assign)expression;
+                        var assign = expression as Assign;
                         assign.Value = stack.Pop();
 
                         var peek = stack.Peek();
@@ -635,7 +636,7 @@ namespace xFunc.Maths
                         if (stack.Count < 1)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
-                        Undefine undef = (Undefine)expression;
+                        var undef = expression as Undefine;
 
                         if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
@@ -643,6 +644,16 @@ namespace xFunc.Maths
                         undef.Variable = (Variable)stack.Pop();
 
                         stack.Push(undef);
+                    }
+                    else if (expression is UserFunction)
+                    {
+                        var func = expression as UserFunction;
+
+                        // todo: fix
+                        func.Arguments = stack.ToArray();
+                        stack.Clear();
+
+                        stack.Push(func);
                     }
                     else
                     {
@@ -662,7 +673,7 @@ namespace xFunc.Maths
 
             return mathExpression;
         }
-
+        
         private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
         {
             List<IMathExpression> preOutput = new List<IMathExpression>();
@@ -828,6 +839,11 @@ namespace xFunc.Maths
                             break;
                     }
                 }
+                else if (token is UserFunctionToken)
+                {
+                    var t = token as UserFunctionToken;
+                    preOutput.Add(new UserFunction(t.Function));
+                }
             }
 
             return preOutput;
@@ -835,8 +851,8 @@ namespace xFunc.Maths
 
         private IEnumerable<IToken> ConvertToReversePolishNotation(IEnumerable<IToken> tokens)
         {
-            List<IToken> output = new List<IToken>();
-            Stack<IToken> stack = new Stack<IToken>();
+            var output = new List<IToken>();
+            var stack = new Stack<IToken>();
 
             var openBracketToken = new SymbolToken(Symbols.OpenBracket);
             foreach (var token in tokens)
@@ -879,7 +895,7 @@ namespace xFunc.Maths
                 {
                     while (stack.Count != 0 && (stackToken = stack.Peek()).Priority >= token.Priority)
                     {
-                        if (!stackToken.Equals(openBracketToken))
+                        if (stackToken.Equals(openBracketToken))
                             break;
                         output.Add(stack.Pop());
                     }

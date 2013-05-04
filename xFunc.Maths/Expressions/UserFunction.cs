@@ -55,6 +55,12 @@ namespace xFunc.Maths.Expressions
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            // todo: ...
+            return function.GetHashCode();
+        }
+
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
@@ -97,9 +103,7 @@ namespace xFunc.Maths.Expressions
                 newParameters[arg.Character] = this.arguments[i].Calculate(parameters, functions);
             }
 
-            var result = functions[this].Calculate(newParameters, functions);
-
-            return result;
+            return functions[this].Calculate(newParameters, functions);
         }
 
         public IMathExpression Differentiate()

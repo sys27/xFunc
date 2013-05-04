@@ -31,6 +31,7 @@ namespace xFunc.Presenters
         private List<MathWorkspaceItem> expressions;
 
         private MathParameterCollection parameters;
+        private MathFunctionCollection functions;
 
         public MathWorkspace()
             : this(20)
@@ -44,6 +45,7 @@ namespace xFunc.Presenters
             expressions = new List<MathWorkspaceItem>(countOfExps);
             parser = new MathParser();
             parameters = new MathParameterCollection();
+            functions = new MathFunctionCollection();
         }
 
         public void Add(string strExp)
@@ -67,18 +69,18 @@ namespace xFunc.Presenters
                 else if (exp is Assign)
                 {
                     Assign assign = exp as Assign;
-                    assign.Calculate(parameters);
+                    assign.Calculate(parameters, functions);
                     item.Answer = string.Format(Resource.AssignVariable, assign.Key, assign.Value);
                 }
                 else if (exp is Undefine)
                 {
                     Undefine undef = exp as Undefine;
-                    undef.Calculate(parameters);
-                    item.Answer = string.Format(Resource.UndefineVariable, undef.Variable);
+                    undef.Calculate(parameters, functions);
+                    item.Answer = string.Format(Resource.UndefineVariable, undef.Key);
                 }
                 else
                 {
-                    item.Answer = exp.Calculate(parameters).ToString(CultureInfo.InvariantCulture);
+                    item.Answer = exp.Calculate(parameters, functions).ToString(CultureInfo.InvariantCulture);
                 }
 
                 expressions.Add(item);

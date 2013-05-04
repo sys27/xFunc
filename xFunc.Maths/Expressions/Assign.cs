@@ -47,8 +47,22 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters)
         {
-            // todo: ...
-            throw new NotSupportedException();
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
+            if (key is Variable)
+            {
+                var e = key as Variable;
+
+                parameters[e.Character] = value.Calculate(parameters);
+            }
+            else
+            {
+                // todo: ...
+                throw new NotSupportedException();
+            }
+
+            return double.NaN;
         }
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)

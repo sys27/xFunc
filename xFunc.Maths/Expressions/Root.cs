@@ -31,17 +31,24 @@ namespace xFunc.Maths.Expressions
 
         public override double Calculate()
         {
-            return Math.Pow(firstMathExpression.Calculate(), 1 / secondMathExpression.Calculate());
+            return Calculate(null, null);
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Pow(firstMathExpression.Calculate(parameters), 1 / secondMathExpression.Calculate(parameters));
+            return Calculate(parameters, null);
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Pow(firstMathExpression.Calculate(parameters, functions), 1 / secondMathExpression.Calculate(parameters, functions));
+            var first = firstMathExpression.Calculate(parameters, functions);
+            var second = 1 / secondMathExpression.Calculate(parameters, functions);
+            if (first < 0 && second % 2 != 0)
+            {
+                return -Math.Pow(-first, second);
+            }
+
+            return Math.Pow(first, second);
         }
 
         public override IMathExpression Differentiate(Variable variable)

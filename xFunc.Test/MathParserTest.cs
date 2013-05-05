@@ -241,10 +241,7 @@ namespace xFunc.Test
         {
             lexer.Tokens = new List<IToken>()
             {
-                new FunctionToken(Functions.Sine),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket),
+                new NumberToken(1),
                 new OperationToken(Operations.Addition),
                 new UserFunctionToken("func"),
                 new SymbolToken(Symbols.OpenBracket),
@@ -252,8 +249,8 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("sin(x) + func(x)", false);
-            Assert.AreEqual("sin(x) + func(x)", exp.ToString());
+            var exp = parser.Parse("1 + func(x)", false);
+            Assert.AreEqual("1 + func(x)", exp.ToString());
         }
 
         [TestMethod]

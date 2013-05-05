@@ -21,16 +21,20 @@ namespace xFunc.Maths.Tokens
     {
 
         private string function;
+        private int countOfParams;
 
-        public UserFunctionToken(string function)
+        public UserFunctionToken(string function) : this(function, -1) { }
+
+        public UserFunctionToken(string function, int countOfParams)
         {
             this.function = function;
+            this.countOfParams = countOfParams;
         }
 
         public override bool Equals(object obj)
         {
             UserFunctionToken token = obj as UserFunctionToken;
-            if (token != null && this.Function == token.Function)
+            if (token != null && this.Function == token.Function && this.countOfParams == token.CountOfParams)
             {
                 return true;
             }
@@ -56,6 +60,18 @@ namespace xFunc.Maths.Tokens
             get
             {
                 return function;
+            }
+        }
+
+        public int CountOfParams
+        {
+            get
+            {
+                return countOfParams;
+            }
+            set
+            {
+                countOfParams = value;
             }
         }
 

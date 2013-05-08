@@ -749,6 +749,27 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(MathLexerException))]
+        public void NotBalancedOpen()
+        {
+            var tokens = lexer.Tokenize("sin(2(");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MathLexerException))]
+        public void NotBalancedClose()
+        {
+            var tokens = lexer.Tokenize("sin)2)");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MathLexerException))]
+        public void NotBalancedFirstClose()
+        {
+            var tokens = lexer.Tokenize("sin)2(");
+        }
+
     }
 
 }

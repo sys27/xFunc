@@ -47,18 +47,17 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters)
         {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-
             if (key is Variable)
             {
+                if (parameters == null)
+                    throw new ArgumentNullException("parameters");
+
                 var e = key as Variable;
 
                 parameters[e.Character] = value.Calculate(parameters);
             }
             else
             {
-                // todo: ...
                 throw new NotSupportedException();
             }
 
@@ -67,19 +66,20 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-            if (functions == null)
-                throw new ArgumentNullException("functions");
-
             if (key is Variable)
             {
+                if (parameters == null)
+                    throw new ArgumentNullException("parameters");
+
                 var e = key as Variable;
 
                 parameters[e.Character] = value.Calculate(parameters);
             }
             else if (key is UserFunction)
             {
+                if (functions == null)
+                    throw new ArgumentNullException("functions");
+
                 var e = key as UserFunction;
 
                 functions[e] = value;
@@ -122,9 +122,8 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value != null && !(value is Variable || value is UserFunction))
+                if (!(value is Variable || value is UserFunction))
                 {
-                    // todo: ...
                     throw new NotSupportedException();
                 }
 

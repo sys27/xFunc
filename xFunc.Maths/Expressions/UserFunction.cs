@@ -57,8 +57,7 @@ namespace xFunc.Maths.Expressions
 
         public override int GetHashCode()
         {
-            // todo: ...
-            return function.GetHashCode();
+            return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ arguments.GetHashCode();
         }
 
         public override string ToString()
@@ -83,13 +82,11 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate()
         {
-            // todo: ...
             throw new NotSupportedException();
         }
 
         public double Calculate(MathParameterCollection parameters)
         {
-            // todo: ...
             throw new NotSupportedException();
         }
 

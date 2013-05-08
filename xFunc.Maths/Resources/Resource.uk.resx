@@ -126,6 +126,9 @@
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>Функція має невірну кількість змінних.</value>
   </data>
+  <data name="NotBalanced" xml:space="preserve">
+    <value>Дужки не збалансовані.</value>
+  </data>
   <data name="NotSpecifiedFunction" xml:space="preserve">
     <value>Функція не задана.</value>
   </data>

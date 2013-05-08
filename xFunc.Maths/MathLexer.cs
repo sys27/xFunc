@@ -36,6 +36,22 @@ namespace xFunc.Maths
             notVar = new HashSet<string> { "and", "or", "xor" };
         }
 
+        private bool IsBalanced(string str)
+        {
+            int brackets = 0;
+
+            foreach (var item in str)
+            {
+                if (item == '(') brackets++;
+                else if (item == ')') brackets--;
+
+                if (brackets < 0)
+                    return false;
+            }
+
+            return brackets == 0;
+        }
+
         /// <summary>
         /// Converts the string into a sequence of tokens.
         /// </summary>
@@ -50,6 +66,8 @@ namespace xFunc.Maths
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");
+            if (!IsBalanced(function))
+                throw new MathLexerException(Resource.NotBalanced);
             var tokens = new List<IToken>();
 
             for (int i = 0; i < function.Length; )

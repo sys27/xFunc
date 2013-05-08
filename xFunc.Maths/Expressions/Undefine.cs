@@ -37,7 +37,6 @@ namespace xFunc.Maths.Expressions
             }
             else
             {
-                // todo: ...
                 throw new NotSupportedException();
             }
 
@@ -101,9 +100,8 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value != null && !(value is Variable || value is UserFunction))
+                if (!(value is Variable || value is UserFunction))
                 {
-                    // todo: ...
                     throw new NotSupportedException();
                 }
 

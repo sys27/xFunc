@@ -377,6 +377,27 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(LogicLexerException))]
+        public void NotBalancedOpen()
+        {
+            var tokens = lexer.Tokenize("table(a(");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LogicLexerException))]
+        public void NotBalancedClose()
+        {
+            var tokens = lexer.Tokenize("table)a)");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LogicLexerException))]
+        public void NotBalancedFirstClose()
+        {
+            var tokens = lexer.Tokenize("table)a(");
+        }
+
     }
 
 }

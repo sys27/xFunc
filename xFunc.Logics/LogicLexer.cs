@@ -34,6 +34,22 @@ namespace xFunc.Logics
             };
         }
 
+        private bool IsBalanced(string str)
+        {
+            int brackets = 0;
+
+            foreach (var item in str)
+            {
+                if (item == '(') brackets++;
+                else if (item == ')') brackets--;
+
+                if (brackets < 0)
+                    return false;
+            }
+
+            return brackets == 0;
+        }
+
         /// <summary>
         /// Converts the string into a sequence of tokens.
         /// </summary>
@@ -45,12 +61,14 @@ namespace xFunc.Logics
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");
-            List<LogicToken> tokens = new List<LogicToken>();
+            if (!IsBalanced(function))
+                throw new LogicLexerException(Resource.NotBalanced);
+            var tokens = new List<LogicToken>();
 
             for (int i = 0; i < function.Length; )
             {
                 char letter = function[i];
-                LogicToken token = new LogicToken();
+                var token = new LogicToken();
                 if (letter == '(')
                 {
                     token.Type = LogicTokenType.OpenBracket;

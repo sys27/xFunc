@@ -88,6 +88,15 @@ namespace xFunc.Logics.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brackets are not balanced..
+        /// </summary>
+        internal static string NotBalanced {
+            get {
+                return ResourceManager.GetString("NotBalanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The function is not specified..
         /// </summary>
         internal static string NotSpecifiedFunction {

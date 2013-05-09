@@ -126,6 +126,9 @@
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>The function has an invalid number of variables.</value>
   </data>
+  <data name="NotBalanced" xml:space="preserve">
+    <value>Brackets are not balanced.</value>
+  </data>
   <data name="NotSpecifiedFunction" xml:space="preserve">
     <value>The function is not specified.</value>
   </data>

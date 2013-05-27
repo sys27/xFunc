@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Arccsc(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Arccsc(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("arccsc({0})");

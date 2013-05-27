@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Arccos(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Arccos(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("arccos({0})");

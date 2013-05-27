@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Arcsin(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Arcsin(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("arcsin({0})");

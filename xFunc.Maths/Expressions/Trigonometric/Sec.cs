@@ -32,6 +32,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         }
 
+        public Sec(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("sec({0})");
@@ -58,8 +60,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Tan tan = new Tan(firstMathExpression.Clone());
-            Sec sec = new Sec(firstMathExpression.Clone());
+            Tan tan = new Tan(firstMathExpression.Clone(), this.angleMeasurement);
+            Sec sec = new Sec(firstMathExpression.Clone(), this.angleMeasurement);
             Mul mul1 = new Mul(tan, sec);
             Mul mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
 

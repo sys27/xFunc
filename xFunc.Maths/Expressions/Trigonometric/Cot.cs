@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Cot(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Cot(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("cot({0})");
@@ -52,7 +54,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Sin sine = new Sin(firstMathExpression.Clone());
+            Sin sine = new Sin(firstMathExpression.Clone(), this.angleMeasurement);
             Pow involution = new Pow(sine, new Number(2));
             Div division = new Div(firstMathExpression.Clone().Differentiate(variable), involution);
             UnaryMinus unMinus = new UnaryMinus(division);

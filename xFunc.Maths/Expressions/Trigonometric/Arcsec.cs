@@ -32,6 +32,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         }
 
+        public Arcsec(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("arcsec({0})");

@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Arctan(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Arctan(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("arctan({0})");

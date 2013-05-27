@@ -22,10 +22,12 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected AngleMeasurement angleMeasurement;
 
-        public TrigonometryMathExpression(IMathExpression firstMathExpression)
+        public TrigonometryMathExpression(IMathExpression firstMathExpression) : this(firstMathExpression, AngleMeasurement.Degree) { }
+
+        public TrigonometryMathExpression(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement)
             : base(firstMathExpression)
         {
-            angleMeasurement = AngleMeasurement.Degree;
+            this.angleMeasurement = angleMeasurement;
         }
 
         public abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);

@@ -32,6 +32,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         }
 
+        public Csc(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("csc({0})");
@@ -59,8 +61,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected override IMathExpression _Differentiation(Variable variable)
         {
             UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
-            Cot cot = new Cot(firstMathExpression.Clone());
-            Csc csc = new Csc(firstMathExpression.Clone());
+            Cot cot = new Cot(firstMathExpression.Clone(), this.angleMeasurement);
+            Csc csc = new Csc(firstMathExpression.Clone(), this.angleMeasurement);
             Mul mul1 = new Mul(cot, csc);
             Mul mul2 = new Mul(unary, mul1);
 

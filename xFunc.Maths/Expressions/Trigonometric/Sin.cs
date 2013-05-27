@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Sin(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Sin(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("sin({0})");
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Cos cos = new Cos(firstMathExpression.Clone());
+            Cos cos = new Cos(firstMathExpression.Clone(), this.angleMeasurement);
             Mul mul = new Mul(cos, firstMathExpression.Clone().Differentiate(variable));
 
             return mul;

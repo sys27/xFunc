@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Tan(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        public Tan(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
+
         public override string ToString()
         {
             return ToString("tan({0})");
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Cos cos = new Cos(firstMathExpression.Clone());
+            Cos cos = new Cos(firstMathExpression.Clone(), this.angleMeasurement);
             Pow inv = new Pow(cos, new Number(2));
             Div div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
 

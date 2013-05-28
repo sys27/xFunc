@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 
@@ -68,6 +67,18 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             num.Value = 5;
             Assert.AreEqual("tan(5 * x)", exp.ToString());
             Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void DerivativeTestWithAngle()
+        {
+            var exp = new Tan(new Variable("x"), AngleMeasurement.Radian);
+            var deriv = exp.Differentiate();
+
+            var div = deriv as Div;
+            var pow = div.SecondMathExpression as Pow;
+            var cos = pow.FirstMathExpression as Cos;
+            Assert.AreEqual(AngleMeasurement.Radian, cos.AngleMeasurement);
         }
 
         [TestMethod]

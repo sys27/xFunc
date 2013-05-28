@@ -44,6 +44,21 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());
         }
 
+        [TestMethod]
+        public void DerivativeTestWithAngle()
+        {
+            var exp = new Csc(new Variable("x"), AngleMeasurement.Radian);
+            var deriv = exp.Differentiate();
+
+            var mul1 = deriv as Mul;
+            var mul2 = mul1.SecondMathExpression as Mul;
+            var cot = mul2.FirstMathExpression as Cot;
+            var csc = mul2.SecondMathExpression as Csc;
+
+            Assert.AreEqual(AngleMeasurement.Radian, cot.AngleMeasurement);
+            Assert.AreEqual(AngleMeasurement.Radian, csc.AngleMeasurement);
+        }
+
     }
 
 }

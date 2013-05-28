@@ -62,5 +62,20 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
         }
 
+        [TestMethod]
+        public void DerivativeTestWithAngle()
+        {
+            var exp = new Sec(new Variable("x"), AngleMeasurement.Radian);
+            var deriv = exp.Differentiate();
+
+            var mul1 = deriv as Mul;
+            var mul2 = mul1.SecondMathExpression as Mul;
+            var tan = mul2.FirstMathExpression as Tan;
+            var sec = mul2.SecondMathExpression as Sec;
+
+            Assert.AreEqual(AngleMeasurement.Radian, tan.AngleMeasurement);
+            Assert.AreEqual(AngleMeasurement.Radian, sec.AngleMeasurement);
+        }
+
     }
 }

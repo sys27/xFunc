@@ -72,6 +72,19 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         }
 
         [TestMethod]
+        public void DerivativeTestWithAngle()
+        {
+            var exp = new Cos(new Variable("x"), AngleMeasurement.Radian);
+            var deriv = exp.Differentiate();
+
+            var un = deriv as UnaryMinus;
+            var mul = un.FirstMathExpression as Mul;
+            var sin = mul.FirstMathExpression as Sin;
+
+            Assert.AreEqual(AngleMeasurement.Radian, sin.AngleMeasurement);
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = new Cos(new Mul(new Variable("x"), new Variable("y")));

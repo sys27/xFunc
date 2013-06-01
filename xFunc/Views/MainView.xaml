@@ -760,7 +760,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="additionalToolBar" Header="{x:Static res:Resource.AdditionalExpanderHeader}">
+                <Expander x:Name="additionalMathToolBar" Header="{x:Static res:Resource.AdditionalMathExpanderHeader}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -841,6 +841,26 @@ limitations under the License. -->
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="false" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource false}" Width="26" Height="16" />
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Expander x:Name="additionalLogicToolBar" Header="{x:Static res:Resource.AdditionalLogicExpanderHeader}" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag=":=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource assign}" Width="12" Height="20" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="undef" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource undef}" Width="46" Height="20" />
                         </Button>
                     </Grid>
                 </Expander>

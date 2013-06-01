@@ -38,7 +38,7 @@
     <Setting Name="ConstantsMathExpanded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="AdditionalExpanded" Type="System.Boolean" Scope="User">
+    <Setting Name="AdditionalMathExpanded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConstantsLogicExpanded" Type="System.Boolean" Scope="User">
@@ -55,6 +55,9 @@
     </Setting>
     <Setting Name="Lang" Type="System.String" Scope="User">
       <Value Profile="(Default)">Auto</Value>
+    </Setting>
+    <Setting Name="AdditionalLogicExpanded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

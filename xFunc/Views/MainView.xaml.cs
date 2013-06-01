@@ -118,10 +118,11 @@ namespace xFunc.Views
             hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
             bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
             constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
-            additionalToolBar.IsExpanded = Settings.Default.AdditionalExpanded;
+            additionalMathToolBar.IsExpanded = Settings.Default.AdditionalMathExpanded;
 
             standartLogicToolBar.IsExpanded = Settings.Default.StandartLogicExpanded;
             constantsLogicToolBar.IsExpanded = Settings.Default.ConstantsLogicExpanded;
+            additionalLogicToolBar.IsExpanded = Settings.Default.AdditionalLogicExpanded;
         }
 
         private void SaveSettings()
@@ -145,10 +146,11 @@ namespace xFunc.Views
             Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
             Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
             Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
-            Settings.Default.AdditionalExpanded = additionalToolBar.IsExpanded;
+            Settings.Default.AdditionalMathExpanded = additionalMathToolBar.IsExpanded;
 
             Settings.Default.StandartLogicExpanded = standartLogicToolBar.IsExpanded;
             Settings.Default.ConstantsLogicExpanded = constantsLogicToolBar.IsExpanded;
+            Settings.Default.AdditionalLogicExpanded = additionalLogicToolBar.IsExpanded;
 
             Settings.Default.Save();
         }
@@ -682,10 +684,11 @@ namespace xFunc.Views
                 hyperbolicToolBar.Visibility = Visibility.Collapsed;
                 bitwiseToolBar.Visibility = Visibility.Collapsed;
                 constantsMathToolBar.Visibility = Visibility.Collapsed;
-                additionalToolBar.Visibility = Visibility.Collapsed;
+                additionalMathToolBar.Visibility = Visibility.Collapsed;
 
                 standartLogicToolBar.Visibility = Visibility.Visible;
                 constantsLogicToolBar.Visibility = Visibility.Visible;
+                additionalLogicToolBar.Visibility = Visibility.Visible;
             }
             else
             {
@@ -695,10 +698,11 @@ namespace xFunc.Views
                 hyperbolicToolBar.Visibility = Visibility.Visible;
                 bitwiseToolBar.Visibility = Visibility.Visible;
                 constantsMathToolBar.Visibility = Visibility.Visible;
-                additionalToolBar.Visibility = Visibility.Visible;
+                additionalMathToolBar.Visibility = Visibility.Visible;
 
                 standartLogicToolBar.Visibility = Visibility.Collapsed;
                 constantsLogicToolBar.Visibility = Visibility.Collapsed;
+                additionalLogicToolBar.Visibility = Visibility.Collapsed;
             }
         }
 

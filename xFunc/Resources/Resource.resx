@@ -126,7 +126,7 @@
   <data name="AboutWindowTitle" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="AdditionalExpanderHeader" xml:space="preserve">
+  <data name="AdditionalMathExpanderHeader" xml:space="preserve">
     <value>Additional</value>
   </data>
   <data name="AnglesGroupHeader" xml:space="preserve">
@@ -332,5 +332,8 @@
   </data>
   <data name="ToInputMenuItem" xml:space="preserve">
     <value>To Input</value>
+  </data>
+  <data name="AdditionalLogicExpanderHeader" xml:space="preserve">
+    <value>Additional</value>
   </data>
 </root>

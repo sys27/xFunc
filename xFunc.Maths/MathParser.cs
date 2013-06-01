@@ -35,6 +35,9 @@ namespace xFunc.Maths
 
         private AngleMeasurement angleMeasurement;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathParser"/> class.
+        /// </summary>
         public MathParser()
             : this(new MathLexer())
         {

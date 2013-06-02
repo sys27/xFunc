@@ -16,8 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using xFunc.Maths.Exceptions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
@@ -42,17 +40,14 @@ namespace xFunc.Maths
         {
             int brackets = 0;
 
-            Parallel.ForEach(str, (item, state) =>
+            foreach (var item in str)
             {
-                if (item == '(') Interlocked.Increment(ref brackets);
-                else if (item == ')') Interlocked.Decrement(ref brackets);
+                if (item == '(') brackets++;
+                else if (item == ')') brackets--;
 
                 if (brackets < 0)
-                {
-                    state.Break();
-                    Interlocked.Exchange(ref brackets, -1);
-                }
-            });
+                    return false;
+            }
 
             return brackets == 0;
         }

@@ -57,7 +57,9 @@ namespace xFunc.Maths.Expressions
 
         public override int GetHashCode()
         {
-            return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ arguments.GetHashCode();
+            // todo: test
+            //return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ arguments.GetHashCode();
+            return function.GetHashCode();
         }
 
         public override string ToString()

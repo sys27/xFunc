@@ -20,7 +20,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using xFunc.Logics.Exceptions;
+using xFunc.Logics;
 using xFunc.Logics.Expressions;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;

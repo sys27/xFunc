@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Exceptions
+namespace xFunc.Maths
 {
 
     [Serializable]

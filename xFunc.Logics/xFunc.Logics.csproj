@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\LogicLexerException.cs" />
-    <Compile Include="Exceptions\LogicParserException.cs" />
+    <Compile Include="LogicLexerException.cs" />
+    <Compile Include="LogicParserException.cs" />
     <Compile Include="Expressions\And.cs" />
     <Compile Include="Expressions\Assign.cs" />
     <Compile Include="Expressions\BinaryLogicExpression.cs" />

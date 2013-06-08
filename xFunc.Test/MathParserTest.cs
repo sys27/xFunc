@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using xFunc.Maths;
-using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
@@ -221,7 +220,7 @@ namespace xFunc.Test
         {
             lexer.Tokens = new List<IToken>()
             {
-                new UserFunctionToken("func"),
+                new UserFunctionToken("func", 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket),
@@ -239,11 +238,12 @@ namespace xFunc.Test
         [TestMethod]
         public void UserFunc()
         {
+            // 1 + func(x)
             lexer.Tokens = new List<IToken>()
             {
                 new NumberToken(1),
                 new OperationToken(Operations.Addition),
-                new UserFunctionToken("func"),
+                new UserFunctionToken("func", 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket)

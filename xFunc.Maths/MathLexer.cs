@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using xFunc.Maths.Exceptions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
@@ -530,6 +529,82 @@ namespace xFunc.Maths
                 }
 
                 i++;
+            }
+
+            return CountUserFuncParams(tokens);
+        }
+
+        private int _CountUserFuncParams(IEnumerable<IToken> tokens, int index)
+        {
+            var userFunc = tokens.ElementAt(index) as UserFunctionToken;
+
+            int countOfParams = 0;
+            int brackets = 1;
+            bool oneParam = true;
+            int i = index + 2;
+            for (; i < tokens.Count(); )
+            {
+                var token = tokens.ElementAt(i);
+                if (token is SymbolToken)
+                {
+                    var symbol = token as SymbolToken;
+                    if (symbol.Symbol == Symbols.CloseBracket)
+                    {
+                        brackets--;
+                        if (brackets == 0)
+                            break;
+                    }
+                    else if (symbol.Symbol == Symbols.OpenBracket)
+                    {
+                        brackets++;
+
+                        if (oneParam)
+                        {
+                            countOfParams++;
+                            oneParam = false;
+                        }
+                    }
+                    else if (symbol.Symbol == Symbols.Comma)
+                    {
+                        oneParam = true;
+                    }
+
+                    i++;
+                }
+                else if (token is UserFunctionToken)
+                {
+                    if (oneParam)
+                    {
+                        countOfParams++;
+                        oneParam = false;
+                    }
+
+                    i += _CountUserFuncParams(tokens, i);
+                }
+                else
+                {
+                    if (oneParam)
+                    {
+                        countOfParams++;
+                        oneParam = false;
+                    }
+
+                    i++;
+                }
+            }
+
+            userFunc.CountOfParams = countOfParams;
+            return i;
+        }
+
+        private IEnumerable<IToken> CountUserFuncParams(IEnumerable<IToken> tokens)
+        {
+            for (int i = 0; i < tokens.Count(); )
+            {
+                if (tokens.ElementAt(i) is UserFunctionToken)
+                    i += _CountUserFuncParams(tokens, i);
+                else
+                    i++;
             }
 
             return tokens;

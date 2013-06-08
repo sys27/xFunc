@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths;
-using xFunc.Maths.Exceptions;
 using xFunc.Maths.Tokens;
 
 namespace xFunc.Test
@@ -724,7 +723,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new UserFunctionToken("func"),
+                new UserFunctionToken("func", 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket)
@@ -739,13 +738,34 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new UserFunctionToken("func"),
+                new UserFunctionToken("func", 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new VariableToken("y"),
                 new SymbolToken(Symbols.CloseBracket)
             };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void UserFuncInUserFunc()
+        {
+            var tokens = lexer.Tokenize("f(x, g(y))");
+
+            var expected = new List<IToken>()
+            {
+                new UserFunctionToken("f", 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new UserFunctionToken("g", 1),
+                 new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("y"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 

@@ -14,7 +14,6 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-using xFunc.Maths.Exceptions;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Bitwise;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -651,9 +650,12 @@ namespace xFunc.Maths
                     {
                         var func = expression as UserFunction;
 
-                        // todo: fix
-                        func.Arguments = stack.ToArray();
-                        stack.Clear();
+                        IMathExpression[] arg = new IMathExpression[func.CountOfParams];
+                        for (int i = func.CountOfParams, j = 0; i > 0; i--, j++)
+                        {
+                            arg[j] = stack.Pop();
+                        }
+                        func.Arguments = arg;
 
                         stack.Push(func);
                     }
@@ -675,7 +677,7 @@ namespace xFunc.Maths
 
             return mathExpression;
         }
-        
+
         private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
         {
             List<IMathExpression> preOutput = new List<IMathExpression>();
@@ -844,7 +846,7 @@ namespace xFunc.Maths
                 else if (token is UserFunctionToken)
                 {
                     var t = token as UserFunctionToken;
-                    preOutput.Add(new UserFunction(t.Function));
+                    preOutput.Add(new UserFunction(t.Function, t.CountOfParams));
                 }
             }
 

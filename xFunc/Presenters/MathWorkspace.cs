@@ -70,7 +70,10 @@ namespace xFunc.Presenters
                 {
                     Assign assign = exp as Assign;
                     assign.Calculate(parameters, functions);
-                    item.Answer = string.Format(Resource.AssignVariable, assign.Key, assign.Value);
+                    if (assign.Key is Variable)
+                        item.Answer = string.Format(Resource.AssignVariable, assign.Key, assign.Value);
+                    else if (assign.Key is UserFunction)
+                        item.Answer = string.Format(Resource.AssignFunction, assign.Key, assign.Value);
                 }
                 else if (exp is Undefine)
                 {

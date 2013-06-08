@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using xFunc.Logics.Exceptions;
 using xFunc.Logics.Expressions;
 using xFunc.Logics.Resources;
 

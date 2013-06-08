@@ -14,20 +14,20 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Logics.Exceptions
+namespace xFunc.Logics
 {
 
     [Serializable]
-    public class LogicLexerException : Exception
+    public class LogicParserException : Exception
     {
 
-        public LogicLexerException() { }
+        public LogicParserException() { }
 
-        public LogicLexerException(string message) : base(message) { }
-        
-        public LogicLexerException(string message, Exception inner) : base(message, inner) { }
-        
-        protected LogicLexerException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        public LogicParserException(string message) : base(message) { }
+
+        public LogicParserException(string message, Exception inner) : base(message, inner) { }
+
+        protected LogicParserException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 
     }
 

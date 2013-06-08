@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\MathLexerException.cs" />
-    <Compile Include="Exceptions\MathParserException.cs" />
+    <Compile Include="MathLexerException.cs" />
+    <Compile Include="MathParserException.cs" />
     <Compile Include="Expressions\Abs.cs" />
     <Compile Include="Expressions\Add.cs" />
     <Compile Include="Expressions\AngleMeasurement.cs" />

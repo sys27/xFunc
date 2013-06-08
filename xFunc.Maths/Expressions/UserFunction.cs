@@ -25,18 +25,21 @@ namespace xFunc.Maths.Expressions
 
         private string function;
         private IMathExpression[] arguments;
+        private int countOfParams;
 
         public UserFunction()
+            : this(null, null, -1)
         {
 
         }
 
-        public UserFunction(string function) : this(function, null) { }
+        public UserFunction(string function, int countOfParams) : this(function, null, countOfParams) { }
 
-        public UserFunction(string function, IMathExpression[] args)
+        public UserFunction(string function, IMathExpression[] args, int countOfParams)
         {
             this.function = function;
             this.arguments = args;
+            this.countOfParams = countOfParams;
         }
 
         public override bool Equals(object obj)
@@ -57,9 +60,7 @@ namespace xFunc.Maths.Expressions
 
         public override int GetHashCode()
         {
-            // todo: test
-            //return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ arguments.GetHashCode();
-            return function.GetHashCode();
+            return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ countOfParams.GetHashCode();
         }
 
         public override string ToString()
@@ -117,7 +118,7 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Clone()
         {
-            return new UserFunction(function, arguments);
+            return new UserFunction(function, arguments, countOfParams);
         }
 
         public IMathExpression Parent
@@ -148,6 +149,14 @@ namespace xFunc.Maths.Expressions
             set
             {
                 arguments = value;
+            }
+        }
+
+        public int CountOfParams
+        {
+            get
+            {
+                return countOfParams;
             }
         }
 

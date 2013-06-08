@@ -124,6 +124,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The expression &apos;{1}&apos; was assigned to the function &apos;{0}&apos;..
+        /// </summary>
+        public static string AssignFunction {
+            get {
+                return ResourceManager.GetString("AssignFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value &apos;{1}&apos; was assigned to the variable &apos;{0}&apos;..
         /// </summary>
         public static string AssignVariable {

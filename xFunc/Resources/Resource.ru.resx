@@ -336,4 +336,7 @@
   <data name="AdditionalLogicExpanderHeader" xml:space="preserve">
     <value>Дополнительные</value>
   </data>
+  <data name="AssignFunction" xml:space="preserve">
+    <value>Функции '{0}' присвоено выражение '{1}'.</value>
+  </data>
 </root>

@@ -213,9 +213,6 @@
   <data name="IndexOutOfRangeExceptionError" xml:space="preserve">
     <value>Perhaps, variables have entered incorrectly.</value>
   </data>
-  <data name="InsertRibbonTab" xml:space="preserve">
-    <value>Insert</value>
-  </data>
   <data name="LogicTab" xml:space="preserve">
     <value>Logic Expressions</value>
   </data>
@@ -278,9 +275,6 @@
   </data>
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>The variable not found.</value>
-  </data>
-  <data name="VariablesGroupHeader" xml:space="preserve">
-    <value>Variables</value>
   </data>
   <data name="VersionTextBox" xml:space="preserve">
     <value>Version:</value>

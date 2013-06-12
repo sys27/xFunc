@@ -175,12 +175,12 @@ namespace xFunc.Maths
                     var number = double.Parse(strNumber, CultureInfo.InvariantCulture);
                     tokens.Add(new NumberToken(number));
 
-                    if (i + length < function.Length && char.IsLetter(function[i + length]) && !notVar.Any(s => function.Substring(i + length).StartsWith(s)))
+                    i += length;
+                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => function.Substring(i).StartsWith(s)))
                     {
                         tokens.Add(new OperationToken(Operations.Multiplication));
                     }
 
-                    i += length;
                     continue;
                 }
                 else if (char.IsLetter(letter))

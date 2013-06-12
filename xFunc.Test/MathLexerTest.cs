@@ -829,6 +829,56 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void ZeroTest()
+        {
+            var tokens = lexer.Tokenize("0-2");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(0),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void BinError1()
+        {
+            var tokens = lexer.Tokenize("0b*01100110");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void BinError2()
+        {
+            var tokens = lexer.Tokenize("0b-01100110");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void HexError1()
+        {
+            var tokens = lexer.Tokenize("0x*FF00");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void HexError2()
+        {
+            var tokens = lexer.Tokenize("0x-FF00");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void HexError3()
+        {
+            var tokens = lexer.Tokenize("0xJFF00");
+        }
+
     }
 
 }

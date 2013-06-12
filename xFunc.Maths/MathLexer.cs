@@ -159,8 +159,60 @@ namespace xFunc.Maths
                 }
                 else if (char.IsDigit(letter))
                 {
-                    int length = 1;
+                    int length;
                     int j;
+                    string strNumber;
+                    double number;
+
+                    if (letter == '0' && i < function.Length)
+                    {
+                        var nextLetter = function[i + 1];
+                        if (nextLetter == 'x')
+                        {
+                            i += 2;
+
+                            length = 1;
+                            for (j = i + 1; j < function.Length && (char.IsDigit(function[j]) || (function[j] >= 97 && function[j] <= 102)); j++)
+                                length++;
+
+                            strNumber = function.Substring(i, length);
+                            number = Convert.ToInt64(strNumber, 16);
+                            tokens.Add(new NumberToken(number));
+
+                            i += length;
+                            continue;
+                        }
+                        else if (nextLetter == 'b')
+                        {
+                            i += 2;
+
+                            length = 1;
+                            for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
+                                length++;
+
+                            strNumber = function.Substring(i, length);
+                            number = Convert.ToInt64(strNumber, 2);
+                            tokens.Add(new NumberToken(number));
+
+                            i += length;
+                            continue;
+                        }
+                        else if (char.IsDigit(nextLetter))
+                        {
+                            length = 1;
+                            for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
+                                length++;
+
+                            strNumber = function.Substring(i, length);
+                            number = Convert.ToInt64(strNumber, 8);
+                            tokens.Add(new NumberToken(number));
+
+                            i += length;
+                            continue;
+                        }
+                    }
+
+                    length = 1;
                     for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
                         length++;
 
@@ -171,8 +223,8 @@ namespace xFunc.Maths
                             length++;
                     }
 
-                    var strNumber = function.Substring(i, length);
-                    var number = double.Parse(strNumber, CultureInfo.InvariantCulture);
+                    strNumber = function.Substring(i, length);
+                    number = double.Parse(strNumber, CultureInfo.InvariantCulture);
                     tokens.Add(new NumberToken(number));
 
                     i += length;

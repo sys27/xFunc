@@ -475,15 +475,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert.
-        /// </summary>
-        public static string InsertRibbonTab {
-            get {
-                return ResourceManager.GetString("InsertRibbonTab", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Logic Expressions.
         /// </summary>
         public static string LogicTab {
@@ -696,15 +687,6 @@ namespace xFunc.Resources {
         public static string VariableNotFoundExceptionError {
             get {
                 return ResourceManager.GetString("VariableNotFoundExceptionError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Variables.
-        /// </summary>
-        public static string VariablesGroupHeader {
-            get {
-                return ResourceManager.GetString("VariablesGroupHeader", resourceCulture);
             }
         }
         

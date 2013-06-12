@@ -213,9 +213,6 @@
   <data name="IndexOutOfRangeExceptionError" xml:space="preserve">
     <value>Можливо, змінні були введені неправильно.</value>
   </data>
-  <data name="InsertRibbonTab" xml:space="preserve">
-    <value>Вставити</value>
-  </data>
   <data name="LogicTab" xml:space="preserve">
     <value>Логічні</value>
   </data>
@@ -278,9 +275,6 @@
   </data>
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>Змінна не знайдена.</value>
-  </data>
-  <data name="VariablesGroupHeader" xml:space="preserve">
-    <value>Змінні</value>
   </data>
   <data name="VersionTextBox" xml:space="preserve">
     <value>Версія:</value>

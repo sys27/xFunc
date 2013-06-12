@@ -790,6 +790,45 @@ namespace xFunc.Test
             var tokens = lexer.Tokenize("sin)2(");
         }
 
+        [TestMethod]
+        public void HexTest()
+        {
+            var tokens = lexer.Tokenize("0xFF00");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(65280)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void OctTest()
+        {
+            var tokens = lexer.Tokenize("0436");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(286)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void BinTest()
+        {
+            var tokens = lexer.Tokenize("0b01100110");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(102)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

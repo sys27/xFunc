@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     {
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables.
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
         /// </summary>
         /// <returns>A result of the calculation.</returns>
         double Calculate();
@@ -35,6 +35,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         /// <seealso cref="MathParameterCollection"/>
         double Calculate(MathParameterCollection parameters);
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="MathParameterCollection"/>
+        /// <seealso cref="MathFunctionCollection"/>
         double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
         /// <summary>
         /// Calculates a derivative of the expression.

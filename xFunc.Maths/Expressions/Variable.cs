@@ -17,39 +17,65 @@ using System;
 namespace xFunc.Maths.Expressions
 {
     
+    /// <summary>
+    /// Represents variables in expressions.
+    /// </summary>
     public class Variable : IMathExpression
     {
 
         private IMathExpression parentMathExpression;
-        private string variable;
+        private string name;
 
-        public Variable(string variable)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Variable"/> class.
+        /// </summary>
+        /// <param name="name">A name of variable.</param>
+        public Variable(string name)
         {
-            this.variable = variable;
+            this.name = name;
         }
 
+        /// <summary>
+        /// Defines an implicit conversion of a Variable object to a string object.
+        /// </summary>
+        /// <param name="variable">The value to convert.</param>
+        /// <returns>An object that contains the converted value.</returns>
         public static implicit operator string(Variable variable)
         {
-            return variable.Character;
+            return variable.Name;
         }
 
+        /// <summary>
+        /// Defines an implicit conversion of a string object to a Variable object.
+        /// </summary>
+        /// <param name="variable">The value to convert.</param>
+        /// <returns>An object that contains the converted value.</returns>
         public static implicit operator Variable(string variable)
         {
             return new Variable(variable);
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             Variable @var = obj as Variable;
-            if (@var != null && @var.Character == variable)
+            if (@var != null && @var.Name == name)
                 return true;
 
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return variable;
+            return name;
         }
 
         public double Calculate()
@@ -59,17 +85,21 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters)
         {
-            return parameters[variable];
+            return parameters[name];
         }
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return parameters[variable];
+            return parameters[name];
         }
 
+        /// <summary>
+        /// Clones this instanse of the <see cref="Variable"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="Variable"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
-            return new Variable(variable);
+            return new Variable(name);
         }
 
         public IMathExpression Differentiate()
@@ -85,14 +115,20 @@ namespace xFunc.Maths.Expressions
             return Clone();
         }
 
-        public string Character
+        /// <summary>
+        /// A name of this variable.
+        /// </summary>
+        public string Name
         {
             get
             {
-                return variable;
+                return name;
             }
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         public IMathExpression Parent
         {
             get

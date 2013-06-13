@@ -93,7 +93,7 @@ namespace xFunc.Maths.Expressions
             for (int i = 0; i < arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Character] = this.arguments[i].Calculate(parameters, functions);
+                newParameters[arg.Name] = this.arguments[i].Calculate(parameters, functions);
             }
 
             return functions[this].Calculate(newParameters, functions);

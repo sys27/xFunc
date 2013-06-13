@@ -333,4 +333,7 @@
   <data name="AssignFunction" xml:space="preserve">
     <value>Функции '{0}' присвоено выражение '{1}'.</value>
   </data>
+  <data name="UndefineFunction" xml:space="preserve">
+    <value>Функция '{0}' удалена.</value>
+  </data>
 </root>

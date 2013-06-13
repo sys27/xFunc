@@ -646,6 +646,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; function is removed..
+        /// </summary>
+        public static string UndefineFunction {
+            get {
+                return ResourceManager.GetString("UndefineFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; variable is removed..
         /// </summary>
         public static string UndefineVariable {

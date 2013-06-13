@@ -333,4 +333,7 @@
   <data name="AssignFunction" xml:space="preserve">
     <value>The expression '{1}' was assigned to the function '{0}'.</value>
   </data>
+  <data name="UndefineFunction" xml:space="preserve">
+    <value>The '{0}' function is removed.</value>
+  </data>
 </root>

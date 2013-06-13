@@ -639,10 +639,11 @@ namespace xFunc.Maths
 
                         var undef = expression as Undefine;
 
-                        if (!(stack.Peek() is Variable))
+                        var peek = stack.Peek();
+                        if (!(peek is Variable || peek is UserFunction))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        undef.Key = (Variable)stack.Pop();
+                        undef.Key = stack.Pop();
 
                         stack.Push(undef);
                     }

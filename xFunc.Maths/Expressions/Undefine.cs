@@ -14,9 +14,14 @@ namespace xFunc.Maths.Expressions
 
         }
 
-        public Undefine(Variable key)
+        public Undefine(IMathExpression key)
         {
             this.Key = key;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("undef({0})", key.ToString());
         }
 
         public double Calculate()
@@ -26,11 +31,11 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters)
         {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-
             if (key is Variable)
             {
+                if (parameters == null)
+                    throw new ArgumentNullException("parameters");
+
                 var e = key as Variable;
 
                 parameters.Remove(e.Character);
@@ -45,19 +50,20 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-            if (functions == null)
-                throw new ArgumentNullException("functions");
-
             if (key is Variable)
             {
+                if (parameters == null)
+                    throw new ArgumentNullException("parameters");
+
                 var e = key as Variable;
 
                 parameters.Remove(e.Character);
             }
             else if (key is UserFunction)
             {
+                if (functions == null)
+                    throw new ArgumentNullException("functions");
+
                 var e = key as UserFunction;
 
                 functions.Remove(e);

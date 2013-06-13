@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
 
                 var e = key as Variable;
 
-                parameters[e.Character] = value.Calculate(parameters);
+                parameters[e.Name] = value.Calculate(parameters);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions
 
                 var e = key as Variable;
 
-                parameters[e.Character] = value.Calculate(parameters);
+                parameters[e.Name] = value.Calculate(parameters);
             }
             else if (key is UserFunction)
             {

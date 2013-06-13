@@ -38,7 +38,7 @@ namespace xFunc.Maths.Expressions
 
                 var e = key as Variable;
 
-                parameters.Remove(e.Character);
+                parameters.Remove(e.Name);
             }
             else
             {
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
 
                 var e = key as Variable;
 
-                parameters.Remove(e.Character);
+                parameters.Remove(e.Name);
             }
             else if (key is UserFunction)
             {

@@ -79,7 +79,10 @@ namespace xFunc.Presenters
                 {
                     Undefine undef = exp as Undefine;
                     undef.Calculate(parameters, functions);
-                    item.Answer = string.Format(Resource.UndefineVariable, undef.Key);
+                    if(undef.Key is Variable)
+                        item.Answer = string.Format(Resource.UndefineVariable, undef.Key);
+                    else if (undef.Key is UserFunction)
+                        item.Answer = string.Format(Resource.UndefineFunction, undef.Key);
                 }
                 else
                 {

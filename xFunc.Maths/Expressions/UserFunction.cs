@@ -45,15 +45,8 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             var exp = obj as UserFunction;
-            if (exp != null && this.function == exp.Function)
-            {
-                if (this.arguments != null && exp.Arguments != null && this.arguments.Length == exp.arguments.Length)
-                    return true;
-                if (this.arguments == null && exp.Arguments == null)
-                    return true;
-
-                return false;
-            }
+            if (exp != null && this.function == exp.function && this.countOfParams == exp.countOfParams)
+                return true;
 
             return false;
         }

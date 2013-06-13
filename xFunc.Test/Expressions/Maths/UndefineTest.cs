@@ -11,16 +11,30 @@ namespace xFunc.Test.Expressions.Maths
     {
 
         [TestMethod]
-        public void CalculateTest()
+        public void UndefVarTest()
         {
             MathParameterCollection parameters = new MathParameterCollection();
-            IMathExpression def = new Assign(new Variable("a"), new Number(1));
-            def.Calculate(parameters);
-            Assert.AreEqual(1, parameters["a"]);
+            parameters.Add("a", 1);
 
-            IMathExpression undef = new Undefine("a");
+            var undef = new Undefine(new Variable("a"));
             undef.Calculate(parameters);
             Assert.IsFalse(parameters.ContainsKey("a"));
+        }
+
+        [TestMethod]
+        public void UndefFuncTest()
+        {
+            var key1 = new UserFunction("f", 0);
+            var key2 = new UserFunction("f", 1);
+
+            MathFunctionCollection functions = new MathFunctionCollection();
+            functions.Add(key1, new Number(1));
+            functions.Add(key2, new Number(2));
+
+            var undef = new Undefine(key1);
+            undef.Calculate(null, functions);
+            Assert.IsFalse(functions.ContainsKey(key1));
+            Assert.IsTrue(functions.ContainsKey(key2));
         }
 
     }

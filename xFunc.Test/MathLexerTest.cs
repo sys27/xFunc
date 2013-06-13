@@ -760,8 +760,27 @@ namespace xFunc.Test
                 new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new UserFunctionToken("g", 1),
-                 new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("y"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void UndefFunc()
+        {
+            var tokens = lexer.Tokenize("undef(f(x))");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Undefine),
+                new SymbolToken(Symbols.OpenBracket),
+                new UserFunctionToken("f", 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket),
                 new SymbolToken(Symbols.CloseBracket)
             };

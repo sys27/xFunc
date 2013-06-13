@@ -238,7 +238,6 @@ namespace xFunc.Test
         [TestMethod]
         public void UserFunc()
         {
-            // 1 + func(x)
             lexer.Tokens = new List<IToken>()
             {
                 new NumberToken(1),
@@ -251,6 +250,24 @@ namespace xFunc.Test
 
             var exp = parser.Parse("1 + func(x)", false);
             Assert.AreEqual("1 + func(x)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void UndefParseTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Undefine),
+                new SymbolToken(Symbols.OpenBracket),
+                new UserFunctionToken("f", 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("undef(f(x))", false);
+            Assert.AreEqual("undef(f(x))", exp.ToString());
         }
 
         [TestMethod]

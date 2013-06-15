@@ -70,6 +70,15 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Returns a hash function for this type.
+        /// </summary>
+        /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
+        public override int GetHashCode()
+        {
+            return name.GetHashCode() ^ 1048592;
+        }
+
+        /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>

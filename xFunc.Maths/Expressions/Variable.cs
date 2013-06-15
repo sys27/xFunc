@@ -78,16 +78,32 @@ namespace xFunc.Maths.Expressions
             return name;
         }
 
+        /// <summary>
+        /// Do not use this method. It always throws an exception.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public double Calculate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Gets value of this variable from <paramref name="parameters"/>.
+        /// </summary>
+        /// <param name="parameters">Collection of variables.</param>
+        /// <returns>A value of this variable.</returns>
         public double Calculate(MathParameterCollection parameters)
         {
             return parameters[name];
         }
 
+        /// <summary>
+        /// Gets value of this variable from <paramref name="parameters"/>.
+        /// </summary>
+        /// <param name="parameters">Collection of variables.</param>
+        /// <param name="functions">Collection of functions.</param>
+        /// <returns>A value of this variable.</returns>
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return parameters[name];

@@ -20,7 +20,7 @@ using xFunc.Logics.Resources;
 namespace xFunc.Logics
 {
 
-    public class LogicLexer : IMathLexer
+    public class LogicLexer : ILogicLexer
     {
 
         private HashSet<string> supportedOp;

@@ -18,7 +18,7 @@ using System.Collections.Generic;
 namespace xFunc.Logics
 {
 
-    public interface IMathLexer
+    public interface ILogicLexer
     {
 
         /// <summary>

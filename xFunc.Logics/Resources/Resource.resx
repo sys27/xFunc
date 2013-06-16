@@ -133,7 +133,7 @@
     <value>The function is not specified.</value>
   </data>
   <data name="NotSupportedSymbol" xml:space="preserve">
-    <value>The symbol {0} is not supported.</value>
+    <value>The symbol '{0}' is not supported.</value>
   </data>
   <data name="NotSupportedToken" xml:space="preserve">
     <value>The type of token is not supported.</value>

@@ -133,7 +133,7 @@
     <value>Функція не задана.</value>
   </data>
   <data name="NotSupportedSymbol" xml:space="preserve">
-    <value>Символ {0} не підтримується програмою.</value>
+    <value>Символ '{0}' не підтримується програмою.</value>
   </data>
   <data name="NotSupportedToken" xml:space="preserve">
     <value>Тип токена не підходить.</value>

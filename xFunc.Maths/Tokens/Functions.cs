@@ -146,6 +146,12 @@ namespace xFunc.Maths.Tokens
         /// Exponential
         /// </summary>
         Exp,
+
+        /// <summary>
+        /// Greatest common divisor
+        /// </summary>
+        GCD,
+
         /// <summary>
         /// deriv
         /// </summary>

@@ -568,6 +568,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("lcm") || sub.StartsWith("scm"))
+                    {
+                        tokens.Add(new FunctionToken(Functions.LCM));
+                        i += 3;
+
+                        continue;
+                    }
 
                     int j = i + 1;
                     for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;

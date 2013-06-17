@@ -307,6 +307,23 @@ namespace xFunc.Test
             Assert.AreEqual("gcd(12, 16)", exp.ToString());
         }
 
+        [TestMethod]
+        public void LCMTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.LCM),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("lcm(12, 16)", false);
+            Assert.AreEqual("lcm(12, 16)", exp.ToString());
+        }
+
     }
 
 }

@@ -916,6 +916,24 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void LCMTest()
+        {
+            var tokens = lexer.Tokenize("lcm(12, 16)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.LCM),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

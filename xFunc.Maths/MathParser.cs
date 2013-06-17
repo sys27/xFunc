@@ -839,6 +839,9 @@ namespace xFunc.Maths
                         case Functions.GCD:
                             preOutput.Add(new GCD());
                             break;
+                        case Functions.LCM:
+                            preOutput.Add(new LCM());
+                            break;
                         case Functions.Derivative:
                             preOutput.Add(new Derivative());
                             break;

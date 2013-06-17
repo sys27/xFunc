@@ -151,6 +151,10 @@ namespace xFunc.Maths.Tokens
         /// Greatest common divisor
         /// </summary>
         GCD,
+        /// <summary>
+        /// Least common multiple
+        /// </summary>
+        LCM,
 
         /// <summary>
         /// deriv

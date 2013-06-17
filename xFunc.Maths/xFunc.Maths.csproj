@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Expressions\GCD.cs" />
+    <Compile Include="Expressions\LCM.cs" />
     <Compile Include="MathLexerException.cs" />
     <Compile Include="MathParserException.cs" />
     <Compile Include="Expressions\Abs.cs" />

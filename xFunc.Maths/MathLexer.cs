@@ -561,6 +561,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("gcd") || sub.StartsWith("gcf") || sub.StartsWith("hcf"))
+                    {
+                        tokens.Add(new FunctionToken(Functions.GCD));
+                        i += 3;
+
+                        continue;
+                    }
 
                     int j = i + 1;
                     for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;

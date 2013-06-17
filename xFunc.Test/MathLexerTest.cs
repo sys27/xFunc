@@ -898,6 +898,24 @@ namespace xFunc.Test
             var tokens = lexer.Tokenize("0xJFF00");
         }
 
+        [TestMethod]
+        public void GCDTest()
+        {
+            var tokens = lexer.Tokenize("gcd(12, 16)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.GCD),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

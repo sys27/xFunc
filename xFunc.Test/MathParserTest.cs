@@ -290,6 +290,23 @@ namespace xFunc.Test
             Assert.AreEqual("cos(x) + sin(x)", exp.ToString());
         }
 
+        [TestMethod]
+        public void GCDTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.GCD),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("gcd(12, 16)", false);
+            Assert.AreEqual("gcd(12, 16)", exp.ToString());
+        }
+
     }
 
 }

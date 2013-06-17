@@ -836,6 +836,9 @@ namespace xFunc.Maths
                         case Functions.Exp:
                             preOutput.Add(new Exp());
                             break;
+                        case Functions.GCD:
+                            preOutput.Add(new GCD());
+                            break;
                         case Functions.Derivative:
                             preOutput.Add(new Derivative());
                             break;

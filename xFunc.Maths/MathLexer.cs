@@ -245,287 +245,287 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("exp"))
+                    if (sub.StartsWith("exp("))
                     {
                         tokens.Add(new FunctionToken(Functions.Exp));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("abs"))
+                    if (sub.StartsWith("abs("))
                     {
                         tokens.Add(new FunctionToken(Functions.Absolute));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("sh"))
+                    if (sub.StartsWith("sh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Sineh));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("sinh"))
+                    if (sub.StartsWith("sinh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Sineh));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("ch"))
+                    if (sub.StartsWith("ch("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosineh));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("cosh"))
+                    if (sub.StartsWith("cosh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosineh));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("th"))
+                    if (sub.StartsWith("th("))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangenth));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("tanh"))
+                    if (sub.StartsWith("tanh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangenth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("cth"))
+                    if (sub.StartsWith("cth("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangenth));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("coth"))
+                    if (sub.StartsWith("coth("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangenth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("sech"))
+                    if (sub.StartsWith("sech("))
                     {
                         tokens.Add(new FunctionToken(Functions.Secanth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("csch"))
+                    if (sub.StartsWith("csch("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosecanth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("arsinh"))
+                    if (sub.StartsWith("arsinh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsineh));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcosh"))
+                    if (sub.StartsWith("arcosh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcosineh));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("artanh"))
+                    if (sub.StartsWith("artanh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Artangenth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcoth"))
+                    if (sub.StartsWith("arcoth("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcotangenth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arsech"))
+                    if (sub.StartsWith("arsech("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsecanth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcsch"))
+                    if (sub.StartsWith("arcsch("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcosecanth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("sin"))
+                    if (sub.StartsWith("sin("))
                     {
                         tokens.Add(new FunctionToken(Functions.Sine));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("cosec"))
+                    if (sub.StartsWith("cosec("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosecant));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("csc"))
+                    if (sub.StartsWith("csc("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosecant));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("cos"))
+                    if (sub.StartsWith("cos("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosine));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("tg"))
+                    if (sub.StartsWith("tg("))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangent));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("tan"))
+                    if (sub.StartsWith("tan("))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangent));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("cot") || sub.StartsWith("ctg"))
+                    if (sub.StartsWith("cot(") || sub.StartsWith("ctg("))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangent));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("sec"))
+                    if (sub.StartsWith("sec("))
                     {
                         tokens.Add(new FunctionToken(Functions.Secant));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcsin"))
+                    if (sub.StartsWith("arcsin("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcsine));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccosec"))
+                    if (sub.StartsWith("arccosec("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccosecant));
                         i += 8;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccsc"))
+                    if (sub.StartsWith("arccsc("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccosecant));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccos"))
+                    if (sub.StartsWith("arccos("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccosine));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arctg"))
+                    if (sub.StartsWith("arctg("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arctangent));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("arctan"))
+                    if (sub.StartsWith("arctan("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arctangent));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccot") || sub.StartsWith("arcctg"))
+                    if (sub.StartsWith("arccot(") || sub.StartsWith("arcctg("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccotangent));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcsec"))
+                    if (sub.StartsWith("arcsec("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcsecant));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("sqrt"))
+                    if (sub.StartsWith("sqrt("))
                     {
                         tokens.Add(new FunctionToken(Functions.Sqrt));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("root"))
+                    if (sub.StartsWith("root("))
                     {
                         tokens.Add(new FunctionToken(Functions.Root));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("lg"))
+                    if (sub.StartsWith("lg("))
                     {
                         tokens.Add(new FunctionToken(Functions.Lg));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("ln"))
+                    if (sub.StartsWith("ln("))
                     {
                         tokens.Add(new FunctionToken(Functions.Ln));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("log"))
+                    if (sub.StartsWith("log("))
                     {
                         tokens.Add(new FunctionToken(Functions.Log));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("deriv"))
+                    if (sub.StartsWith("deriv("))
                     {
                         tokens.Add(new FunctionToken(Functions.Derivative));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("undef"))
+                    if (sub.StartsWith("undef("))
                     {
                         tokens.Add(new FunctionToken(Functions.Undefine));
                         i += 5;
@@ -533,7 +533,7 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    if (sub.StartsWith("not"))
+                    if (sub.StartsWith("not("))
                     {
                         tokens.Add(new OperationToken(Operations.Not));
                         i += 3;
@@ -561,14 +561,14 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("gcd") || sub.StartsWith("gcf") || sub.StartsWith("hcf"))
+                    if (sub.StartsWith("gcd(") || sub.StartsWith("gcf(") || sub.StartsWith("hcf("))
                     {
                         tokens.Add(new FunctionToken(Functions.GCD));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("lcm") || sub.StartsWith("scm"))
+                    if (sub.StartsWith("lcm(") || sub.StartsWith("scm("))
                     {
                         tokens.Add(new FunctionToken(Functions.LCM));
                         i += 3;

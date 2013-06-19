@@ -135,7 +135,7 @@ namespace xFunc.Logics
 
                         continue;
                     }
-                    if (sub.StartsWith("not"))
+                    if (sub.StartsWith("not("))
                     {
                         token.Type = LogicTokenType.Not;
                         tokens.Add(token);
@@ -199,7 +199,7 @@ namespace xFunc.Logics
 
                         continue;
                     }
-                    if (sub.StartsWith("table"))
+                    if (sub.StartsWith("table("))
                     {
                         token.Type = LogicTokenType.TruthTable;
                         tokens.Add(token);
@@ -207,7 +207,7 @@ namespace xFunc.Logics
 
                         continue;
                     }
-                    if (sub.StartsWith("undef"))
+                    if (sub.StartsWith("undef("))
                     {
                         token.Type = LogicTokenType.Undefine;
                         tokens.Add(token);

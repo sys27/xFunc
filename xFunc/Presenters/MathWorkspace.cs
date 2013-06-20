@@ -64,7 +64,7 @@ namespace xFunc.Presenters
                 MathWorkspaceItem item = new MathWorkspaceItem(s, exp);
                 if (exp is Derivative)
                 {
-                    item.Answer = exp.Differentiate().ToString();
+                    item.Answer = MathParser.Differentiate(exp, null).ToString();
                 }
                 else if (exp is Assign)
                 {

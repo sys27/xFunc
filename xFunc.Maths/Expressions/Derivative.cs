@@ -62,18 +62,18 @@ namespace xFunc.Maths.Expressions
         public IMathExpression Differentiate()
         {
             if (firstMathExpression is Derivative)
-                return MathParser.Simplify(firstMathExpression.Differentiate(variable).Differentiate(variable));
+                return firstMathExpression.Differentiate(variable).Differentiate(variable);
 
-            return MathParser.Simplify(firstMathExpression.Differentiate(variable));
+            return firstMathExpression.Differentiate(variable);
         }
 
         // The local "variable" is ignored.
         public IMathExpression Differentiate(Variable variable)
         {
             if (firstMathExpression is Derivative)
-                return MathParser.Simplify(firstMathExpression.Differentiate(this.variable).Differentiate(this.variable));
+                return firstMathExpression.Differentiate(this.variable).Differentiate(this.variable);
 
-            return MathParser.Simplify(firstMathExpression.Differentiate(this.variable));
+            return firstMathExpression.Differentiate(this.variable);
         }
 
         public IMathExpression Clone()

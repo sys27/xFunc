@@ -311,6 +311,9 @@ namespace xFunc.Maths
                 if (mul.SecondMathExpression.Equals(one))
                     return mul.FirstMathExpression;
 
+                if (mul.FirstMathExpression is Number && mul.SecondMathExpression is Number)
+                    return new Number(mul.Calculate());
+
                 // 2 * (2 * x)
                 // 2 * (x * 2)
                 // (2 * x) * 2
@@ -391,6 +394,9 @@ namespace xFunc.Maths
                 // x / 1
                 if (div.SecondMathExpression.Equals(one))
                     return div.FirstMathExpression;
+
+                if (div.FirstMathExpression is Number && div.SecondMathExpression is Number)
+                    return new Number(div.Calculate());
 
                 // (2 * x) / 2
                 // (x * 2) / 2

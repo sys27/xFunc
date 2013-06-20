@@ -310,6 +310,15 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void MulTwoNumbers()
+        {
+            var mul = new Mul(new Number(2), new Number(3));
+            var expected = new Number(6);
+
+            SimpleTest(mul, expected);
+        }
+
+        [TestMethod]
         public void MulDiffNumMul_NumMulVar_()
         {
             var mul = new Mul(new Number(2), new Mul(new Number(2), new Variable("x")));
@@ -412,6 +421,15 @@ namespace xFunc.Test
         {
             var div = new Div(new Variable("x"), new Number(1));
             var expected = new Variable("x");
+
+            SimpleTest(div, expected);
+        }
+
+        [TestMethod]
+        public void DivTwoNumbers()
+        {
+            var div = new Div(new Number(8), new Number(2));
+            var expected = new Number(4);
 
             SimpleTest(div, expected);
         }

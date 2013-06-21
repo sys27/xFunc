@@ -20,7 +20,9 @@ namespace xFunc.Test
         public void TestInit()
         {
             lexer = new MathLexerMock();
-            parser = new MathParser(lexer);
+            var simplifier = new MathSimplifier();
+            var differentiator = new MathDifferentiator(simplifier);
+            parser = new MathParser(lexer, simplifier, differentiator);
         }
 
         [TestMethod]

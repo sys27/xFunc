@@ -22,7 +22,7 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Maths
 {
 
-    public class MathLexer : IMathLexer
+    public class MathLexer : ILexer
     {
 
         private readonly HashSet<string> notVar;

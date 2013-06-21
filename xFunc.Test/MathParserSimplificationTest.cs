@@ -10,9 +10,16 @@ namespace xFunc.Test
     public class MathParserSimplificationTest
     {
 
+        ISimplifier simplifier;
+
+        public MathParserSimplificationTest()
+        {
+            simplifier = new MathSimplifier();
+        }
+
         private void SimpleTest(IMathExpression exp, IMathExpression expected)
         {
-            var simple = MathParser.Simplify(exp);
+            var simple = simplifier.Simplify(exp);
 
             Assert.AreEqual(expected, simple);
         }

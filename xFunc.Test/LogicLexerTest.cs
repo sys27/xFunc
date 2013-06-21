@@ -11,7 +11,7 @@ namespace xFunc.Test
     public class LogicLexerTest
     {
 
-        private ILogicLexer lexer;
+        private ILexer lexer;
 
         [TestInitialize]
         public void TestInit()

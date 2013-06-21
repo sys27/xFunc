@@ -19,7 +19,7 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Maths
 {
 
-    public interface IMathLexer
+    public interface ILexer
     {
 
         /// <summary>

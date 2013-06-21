@@ -9,7 +9,7 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Test
 {
 
-    public class MathLexerMock : IMathLexer
+    public class MathLexerMock : ILexer
     {
 
         private List<IToken> tokens;

@@ -20,7 +20,7 @@ namespace xFunc.Logics
     /// <summary>
     /// Represents a token.
     /// </summary>
-    /// <seealso cref="ILogicLexer.Tokenize"/>
+    /// <seealso cref="ILexer.Tokenize"/>
     public class LogicToken
     {
 

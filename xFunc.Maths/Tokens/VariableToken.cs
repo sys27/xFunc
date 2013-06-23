@@ -17,16 +17,28 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represents a variable token.
+    /// </summary>
     public class VariableToken : IToken
     {
 
         private string variable;
 
+        /// <summary>
+        /// Initializes the <see cref="VariableToken"/> class.
+        /// </summary>
+        /// <param name="variable">A name of variable.</param>
         public VariableToken(string variable)
         {
             this.variable = variable;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             VariableToken token = obj as VariableToken;
@@ -38,11 +50,18 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return "Variable: " + variable;
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -51,6 +70,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets a name of variable.
+        /// </summary>
         public string Variable
         {
             get

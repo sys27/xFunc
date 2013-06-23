@@ -7,6 +7,11 @@ namespace xFunc.Maths
     public class MathSimplifier : ISimplifier
     {
 
+        /// <summary>
+        /// Simplifies the <paramref name="expression"/>.
+        /// </summary>
+        /// <param name="expression">A expression to simplify.</param>
+        /// <returns>A simplified expression.</returns>
         public IMathExpression Simplify(IMathExpression expression)
         {
             IMathExpression exp = _Simplify(expression);

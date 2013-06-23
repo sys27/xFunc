@@ -17,16 +17,28 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represents a number token.
+    /// </summary>
     public class NumberToken : IToken
     {
 
         private double number;
 
+        /// <summary>
+        /// Initializes the <see cref="NumberToken"/> class.
+        /// </summary>
+        /// <param name="number">A number.</param>
         public NumberToken(double number)
         {
             this.number = number;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             NumberToken token = obj as NumberToken;
@@ -38,11 +50,18 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return "Number: " + number;
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -51,6 +70,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets the number.
+        /// </summary>
         public double Number
         {
             get

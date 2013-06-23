@@ -17,12 +17,19 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represents a operation token.
+    /// </summary>
     public class OperationToken : IToken
     {
 
         private Operations operation;
         private int priority;
 
+        /// <summary>
+        /// Initializes the <see cref="OperationToken"/> class.
+        /// </summary>
+        /// <param name="operation">A operation.</param>
         public OperationToken(Operations operation)
         {
             this.operation = operation;
@@ -30,6 +37,11 @@ namespace xFunc.Maths.Tokens
             SetPriority();
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             OperationToken token = obj as OperationToken;
@@ -41,6 +53,10 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return "Operation: " + operation;
@@ -86,6 +102,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -94,6 +113,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets the operation.
+        /// </summary>
         public Operations Operation
         {
             get

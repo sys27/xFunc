@@ -17,12 +17,19 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represents a symbol token.
+    /// </summary>
     public class SymbolToken : IToken
     {
 
         private Symbols symbol;
         private int priority;
 
+        /// <summary>
+        /// Initializes the <see cref="SymbolToken"/> class.
+        /// </summary>
+        /// <param name="symbol">A symbol.</param>
         public SymbolToken(Symbols symbol)
         {
             this.symbol = symbol;
@@ -30,6 +37,11 @@ namespace xFunc.Maths.Tokens
             SetPriority();
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             SymbolToken token = obj as SymbolToken;
@@ -41,6 +53,10 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return "Symbol: " + symbol;
@@ -62,6 +78,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -70,6 +89,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets the symbol.
+        /// </summary>
         public Symbols Symbol
         {
             get

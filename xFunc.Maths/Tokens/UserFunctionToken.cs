@@ -17,20 +17,37 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represents a user-function token.
+    /// </summary>
     public class UserFunctionToken : IToken
     {
 
         private string function;
         private int countOfParams;
 
+        /// <summary>
+        /// Initializes the <see cref="UserFunctionToken"/> class.
+        /// </summary>
+        /// <param name="variable">A name of function.</param>
         public UserFunctionToken(string function) : this(function, -1) { }
 
+        /// <summary>
+        /// Initializes the <see cref="UserFunctionToken"/> class.
+        /// </summary>
+        /// <param name="variable">A name of function.</param>
+        /// <param name="countOfParams">A count of parameters.</param>
         public UserFunctionToken(string function, int countOfParams)
         {
             this.function = function;
             this.countOfParams = countOfParams;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             UserFunctionToken token = obj as UserFunctionToken;
@@ -42,11 +59,18 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return "User Function: " + function;
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -55,6 +79,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets the name of function.
+        /// </summary>
         public string Function
         {
             get
@@ -63,6 +90,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// The count of parameters.
+        /// </summary>
         public int CountOfParams
         {
             get

@@ -17,16 +17,36 @@ using System;
 namespace xFunc.Logics
 {
 
+    /// <summary>
+    /// The exception that is thrown in <see cref="LogicParser"/>.
+    /// </summary>
     [Serializable]
     public class LogicParserException : Exception
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicParserException"/> class.
+        /// </summary>
         public LogicParserException() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicParserException"/> class with a specified error message.
+        /// </summary>
+        /// <param name="message">A <see cref="String"/> that describes the error.</param>
         public LogicParserException(string message) : base(message) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicParserException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// </summary>
+        /// <param name="message">A <see cref="String"/> that describes the error.</param>
+        /// <param name="inner">The exception that is the cause of the current exception.</param>
         public LogicParserException(string message, Exception inner) : base(message, inner) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicParserException"/> class with serialized data.
+        /// </summary>
+        /// <param name="info">The object that holds the serialized object data.</param>
+        /// <param name="context">The contextual information about the source or destination.</param>
         protected LogicParserException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 
     }

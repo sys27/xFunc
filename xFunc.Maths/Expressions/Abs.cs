@@ -63,6 +63,12 @@ namespace xFunc.Maths.Expressions
             return Math.Abs(firstMathExpression.Calculate(parameters));
         }
 
+        /// <summary>
+        /// Calculates this Absolute expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Abs(firstMathExpression.Calculate(parameters, functions));

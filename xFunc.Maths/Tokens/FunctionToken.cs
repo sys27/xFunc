@@ -17,16 +17,28 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represents a function token.
+    /// </summary>
     public class FunctionToken : IToken
     {
 
         private Functions function;
 
+        /// <summary>
+        /// Initializes the <see cref="FunctionToken"/> class.
+        /// </summary>
+        /// <param name="function">A function.</param>
         public FunctionToken(Functions function)
         {
             this.function = function;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             FunctionToken token = obj as FunctionToken;
@@ -38,11 +50,18 @@ namespace xFunc.Maths.Tokens
             return false;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
             return "Function: " + function;
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -51,6 +70,9 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets the function.
+        /// </summary>
         public Functions Function
         {
             get

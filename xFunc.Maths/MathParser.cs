@@ -483,7 +483,7 @@ namespace xFunc.Maths
         }
 
         /// <summary>
-        /// Get or Set a measurement of angles.
+        /// Gets or Sets a measurement of angles.
         /// </summary>
         /// <seealso cref="AngleMeasurement"/>
         public AngleMeasurement AngleMeasurement

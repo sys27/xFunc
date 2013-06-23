@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Specifies operations.
+    /// </summary>
     public enum Operations
     {
 

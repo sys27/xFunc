@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Describes special symbols. 
+    /// </summary>
     public enum Symbols
     {
 

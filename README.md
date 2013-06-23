@@ -14,4 +14,5 @@ xFunc is a simple and easy to use application that allows you to build mathemati
 ### More:
 
 * [CodePlex](http://xfunc.codeplex.com/)
+* [NuGet](https://nuget.org/packages?q=xFunc)
 * [e-x-it.blogspot.com (rus)](http://e-x-it.blogspot.com/2012/12/xfunc-14.html)

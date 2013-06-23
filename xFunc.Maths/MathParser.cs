@@ -83,6 +83,11 @@ namespace xFunc.Maths
             return false;
         }
 
+        /// <summary>
+        /// Simplifies the <paramref name="expression"/>.
+        /// </summary>
+        /// <param name="expression">A expression to simplify.</param>
+        /// <returns>A simplified expression.</returns>
         public IMathExpression Simplify(IMathExpression expression)
         {
             return simplifier.Simplify(expression);
@@ -458,6 +463,9 @@ namespace xFunc.Maths
             return output;
         }
 
+        /// <summary>
+        /// Gets or Sets a implementation of <see cref="ILexer"/>.
+        /// </summary>
         public ILexer Lexer
         {
             get
@@ -470,6 +478,9 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Gets or Sets a implementation of <see cref="ISimplifier"/>.
+        /// </summary>
         public ISimplifier Simplifier
         {
             get

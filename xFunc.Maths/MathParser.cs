@@ -37,7 +37,7 @@ namespace xFunc.Maths
         private AngleMeasurement angleMeasurement;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParser"/> class.
+        /// Initializes a new instance of the <see cref="MathParser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IDifferentiator"/>.
         /// </summary>
         public MathParser()
         {
@@ -53,6 +53,12 @@ namespace xFunc.Maths
             this.differentiator = differentiator;
         }
 
+        /// <summary>
+        /// Checks the <paramref name="expression"/> parameter has <paramref name="arg"/>.
+        /// </summary>
+        /// <param name="expression">A expression that is checked.</param>
+        /// <param name="arg">A variable that can be contained in the expression.</param>
+        /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
         public static bool HasVar(IMathExpression expression, Variable arg)
         {
             if (expression is BinaryMathExpression)

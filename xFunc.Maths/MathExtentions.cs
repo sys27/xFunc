@@ -174,6 +174,33 @@ namespace xFunc.Maths
             return Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
         }
 
+        /// <summary>
+        /// Computes the greatest common divisor.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>The greatest common divisor.</returns>
+        public static double GCD(double a, double b)
+        {
+            while (b != 0)
+                b = a % (a = b);
+
+            return a;
+        }
+
+        /// <summary>
+        /// Computes the least common multiple.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>The least common multiple.</returns>
+        public static double LCM(double a, double b)
+        {
+            var numerator = Math.Abs(a * b);
+
+            return numerator / GCD(a, b);
+        }
+
     }
 
 }

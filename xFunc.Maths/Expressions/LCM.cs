@@ -49,12 +49,7 @@ namespace xFunc.Maths.Expressions
             var a = firstMathExpression.Calculate();
             var b = secondMathExpression.Calculate();
 
-            var numerator = Math.Abs(a * b);
-
-            while (b != 0)
-                b = a % (a = b);
-
-            return numerator / a;
+            return MathExtentions.LCM(a, b);
         }
 
         public override double Calculate(MathParameterCollection parameters)
@@ -62,12 +57,7 @@ namespace xFunc.Maths.Expressions
             var a = firstMathExpression.Calculate(parameters);
             var b = secondMathExpression.Calculate(parameters);
 
-            var numerator = Math.Abs(a * b);
-
-            while (b != 0)
-                b = a % (a = b);
-
-            return numerator / a;
+            return MathExtentions.LCM(a, b);
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
@@ -75,12 +65,7 @@ namespace xFunc.Maths.Expressions
             var a = firstMathExpression.Calculate(parameters, functions);
             var b = secondMathExpression.Calculate(parameters, functions);
 
-            var numerator = Math.Abs(a * b);
-
-            while (b != 0)
-                b = a % (a = b);
-
-            return numerator / a;
+            return MathExtentions.LCM(a, b);
         }
 
         public override IMathExpression Clone()

@@ -16,7 +16,7 @@ using System;
 
 namespace xFunc.Maths.Expressions
 {
-    
+
     /// <summary>
     /// Represents a greatest common divisor.
     /// </summary>
@@ -49,10 +49,7 @@ namespace xFunc.Maths.Expressions
             var a = firstMathExpression.Calculate();
             var b = secondMathExpression.Calculate();
 
-            while (b != 0)
-                b = a % (a = b);
-
-            return a;
+            return MathExtentions.GCD(a, b);
         }
 
         public override double Calculate(MathParameterCollection parameters)
@@ -60,10 +57,7 @@ namespace xFunc.Maths.Expressions
             var a = firstMathExpression.Calculate(parameters);
             var b = secondMathExpression.Calculate(parameters);
 
-            while (b != 0)
-                b = a % (a = b);
-
-            return a;
+            return MathExtentions.GCD(a, b);
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
@@ -71,10 +65,7 @@ namespace xFunc.Maths.Expressions
             var a = firstMathExpression.Calculate(parameters, functions);
             var b = secondMathExpression.Calculate(parameters, functions);
 
-            while (b != 0)
-                b = a % (a = b);
-
-            return a;
+            return MathExtentions.GCD(a, b);
         }
 
         public override IMathExpression Clone()

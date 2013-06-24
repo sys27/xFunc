@@ -39,6 +39,10 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Equals(exp.FirstMathExpression) && variable.Equals(exp.Variable);
         }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return string.Format("deriv({0}, {1})", firstMathExpression, variable);
@@ -109,6 +113,9 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         public IMathExpression Parent
         {
             get

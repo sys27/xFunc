@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		xFunc.vsmdi = xFunc.vsmdi
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Maths", "xFunc.Maths\xFunc.Maths.csproj", "{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Maths", "xFunc.Maths\xFunc.Maths (.Net 4.0).csproj", "{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Logics", "xFunc.Logics\xFunc.Logics.csproj", "{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Logics", "xFunc.Logics\xFunc.Logics (.Net 4.0).csproj", "{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

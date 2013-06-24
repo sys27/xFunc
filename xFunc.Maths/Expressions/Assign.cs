@@ -23,6 +23,9 @@ namespace xFunc.Maths.Expressions
         private IMathExpression key;
         private IMathExpression value;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="Assign"/>.
+        /// </summary>
         public Assign()
             : this(null, null)
         {
@@ -35,6 +38,10 @@ namespace xFunc.Maths.Expressions
             this.value = value;
         }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return string.Format("{0} := {1}", key, value);
@@ -98,11 +105,18 @@ namespace xFunc.Maths.Expressions
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Clones this instanse of the <see cref="Assign"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
             return new Assign(key.Clone(), value.Clone());
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         public IMathExpression Parent
         {
             get

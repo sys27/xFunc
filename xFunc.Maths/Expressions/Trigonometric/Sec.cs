@@ -34,6 +34,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         public Sec(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return ToString("sec({0})");

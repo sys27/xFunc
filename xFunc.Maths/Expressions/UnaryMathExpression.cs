@@ -86,6 +86,9 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         public IMathExpression Parent
         {
             get

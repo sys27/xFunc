@@ -24,6 +24,10 @@ namespace xFunc.Maths.Expressions
 
         public Mul(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             if (parentMathExpression is BinaryMathExpression)

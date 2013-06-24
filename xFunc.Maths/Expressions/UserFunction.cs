@@ -56,6 +56,10 @@ namespace xFunc.Maths.Expressions
             return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ countOfParams.GetHashCode();
         }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
@@ -114,6 +118,9 @@ namespace xFunc.Maths.Expressions
             return new UserFunction(function, arguments, countOfParams);
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         public IMathExpression Parent
         {
             get

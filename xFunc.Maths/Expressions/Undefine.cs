@@ -19,6 +19,10 @@ namespace xFunc.Maths.Expressions
             this.Key = key;
         }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return string.Format("undef({0})", key.ToString());
@@ -87,6 +91,9 @@ namespace xFunc.Maths.Expressions
             return new Undefine((Variable)key.Clone());
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
         public IMathExpression Parent
         {
             get

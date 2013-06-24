@@ -35,6 +35,10 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        /// <summary>
+        /// Converts this expression to the equivalent string.
+        /// </summary>
+        /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
             return ToString("lcm({0}, {1})");

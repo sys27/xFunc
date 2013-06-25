@@ -42,7 +42,11 @@ namespace xFunc.Logics
 
         public ILogicExpression Parse(string function)
         {
+#if NET40_OR_GREATER
             if (string.IsNullOrWhiteSpace(function))
+#elif NET20 || NET30 || NET35
+            if (StringExtention.IsNullOrWhiteSpace(function))
+#endif
                 throw new ArgumentNullException("function");
 
             if (function != lastFunc)
@@ -111,10 +115,17 @@ namespace xFunc.Logics
 
         public LogicParameterCollection GetLogicParameters(string function)
         {
+#if NET40_OR_GREATER
             HashSet<string> c = new HashSet<string>(from t in lexer.Tokenize(function).AsParallel()
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable
                                                     select t.Variable);
+#else
+            HashSet<string> c = new HashSet<string>(from t in lexer.Tokenize(function)
+                                                    where t.Type == LogicTokenType.Variable
+                                                    orderby t.Variable
+                                                    select t.Variable);
+#endif
 
             return new LogicParameterCollection(c);
         }

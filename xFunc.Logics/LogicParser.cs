@@ -127,7 +127,7 @@ namespace xFunc.Logics
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable
                                                     select t.Variable);
-#elif NET30
+#elif NET20 || NET30
             var tokens = lexer.Tokenize(function);
             List<string> c = new List<string>();
 

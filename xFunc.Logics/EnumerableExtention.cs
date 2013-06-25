@@ -1,4 +1,4 @@
-﻿#if NET30
+﻿#if NET20 || NET30
 
 using System;
 using System.Collections.Generic;

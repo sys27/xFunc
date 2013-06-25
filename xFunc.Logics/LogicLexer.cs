@@ -27,7 +27,7 @@ namespace xFunc.Logics
 
 #if NET35_OR_GREATER
         private readonly HashSet<string> supportedOp;
-#elif NET30
+#elif NET20 || NET30
         private readonly List<string> supportedOp;
 #endif
 
@@ -38,7 +38,7 @@ namespace xFunc.Logics
             {
                 "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
             };
-#elif NET30
+#elif NET20 || NET30
             supportedOp = new List<string>
             {
                 "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
@@ -253,11 +253,7 @@ namespace xFunc.Logics
                     token.Type = LogicTokenType.Variable;
                     int length = 1;
 
-#if NET35_OR_GREATER
                     for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !supportedOp.Any(s => function.Substring(j).StartsWith(s)); j++, length++) ;
-#elif NET30
-                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !EnumerableExtention.Any(supportedOp, s => function.Substring(j).StartsWith(s)); j++, length++) ;
-#endif
                     token.Variable = function.Substring(i, length);
                     tokens.Add(token);
 

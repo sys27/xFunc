@@ -14,7 +14,9 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if NET35_OR_GREATER
 using System.Linq;
+#endif
 using xFunc.Logics.Resources;
 
 namespace xFunc.Logics
@@ -23,14 +25,25 @@ namespace xFunc.Logics
     public class LogicLexer : ILexer
     {
 
-        private HashSet<string> supportedOp;
+#if NET35_OR_GREATER
+        private readonly HashSet<string> supportedOp;
+#elif NET30
+        private readonly List<string> supportedOp;
+#endif
 
         public LogicLexer()
         {
-            supportedOp = new HashSet<string>()
+#if NET35_OR_GREATER
+            supportedOp = new HashSet<string>
             {
                 "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
             };
+#elif NET30
+            supportedOp = new List<string>
+            {
+                "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
+            };
+#endif
         }
 
         private bool IsBalanced(string str)
@@ -240,7 +253,11 @@ namespace xFunc.Logics
                     token.Type = LogicTokenType.Variable;
                     int length = 1;
 
+#if NET35_OR_GREATER
                     for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !supportedOp.Any(s => function.Substring(j).StartsWith(s)); j++, length++) ;
+#elif NET30
+                    for (int j = i + 1; j < function.Length && char.IsLetter(function[j]) && !EnumerableExtention.Any(supportedOp, s => function.Substring(j).StartsWith(s)); j++, length++) ;
+#endif
                     token.Variable = function.Substring(i, length);
                     tokens.Add(token);
 

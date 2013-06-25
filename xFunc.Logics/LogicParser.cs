@@ -14,7 +14,9 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if NET35_OR_GREATER
 using System.Linq;
+#endif
 using xFunc.Logics.Expressions;
 using xFunc.Logics.Resources;
 
@@ -120,11 +122,19 @@ namespace xFunc.Logics
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable
                                                     select t.Variable);
-#else
+#elif NET35
             HashSet<string> c = new HashSet<string>(from t in lexer.Tokenize(function)
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable
                                                     select t.Variable);
+#elif NET30
+            var tokens = lexer.Tokenize(function);
+            List<string> c = new List<string>();
+
+            foreach (var token in tokens)
+                if (token.Type == LogicTokenType.Variable && !c.Contains(token.Variable))
+                    c.Add(token.Variable);
+            c.Sort(StringComparer.InvariantCulture);
 #endif
 
             return new LogicParameterCollection(c);

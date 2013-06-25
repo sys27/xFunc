@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\net45\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET45;NET40_OR_GREATER;NET35_OR_GREATER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET45;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -27,7 +27,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\net45\Release\</OutputPath>
-    <DefineConstants>TRACE;NET45;NET40_OR_GREATER;NET35_OR_GREATER</DefineConstants>
+    <DefineConstants>TRACE;NET45;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>

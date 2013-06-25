@@ -14,7 +14,9 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if NET35_OR_GREATER
 using System.Linq;
+#endif
 using System.Text;
 
 namespace xFunc.Maths.Expressions

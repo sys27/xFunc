@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <AssemblyName>xFunc.Maths</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -17,22 +17,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\net45\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET45;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER</DefineConstants>
+    <OutputPath>bin\net30\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET30;NET30_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\net45\Release\</OutputPath>
-    <DefineConstants>TRACE;NET45;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER</DefineConstants>
+    <OutputPath>bin\net30\Release\</OutputPath>
+    <DefineConstants>TRACE;NET30;NET30_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\net45\Release\xFunc.Maths.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\net30\Release\xFunc.Maths.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -42,9 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -52,6 +47,7 @@
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\LCM.cs" />
     <Compile Include="IDifferentiator.cs" />
+    <Compile Include="EnumerableExtention.cs" />
     <Compile Include="ISimplifier.cs" />
     <Compile Include="MathDifferentiator.cs" />
     <Compile Include="MathLexerException.cs" />
@@ -131,6 +127,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="StringExtention.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />

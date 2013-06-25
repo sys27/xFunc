@@ -112,16 +112,19 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>An error occurred while parsing the tree.</value>
   </data>
   <data name="InvalidExpression" xml:space="preserve">
     <value>The expression is invalid.</value>
+  </data>
+  <data name="InvalidInFirst" xml:space="preserve">
+    <value>No item satisfied the predicate or the source collection was empty.</value>
   </data>
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>The function has an invalid number of variables.</value>

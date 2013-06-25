@@ -29,7 +29,7 @@ namespace xFunc.Maths
 
 #if NET35_OR_GREATER
         private readonly HashSet<string> notVar;
-#elif NET30
+#elif NET20 || NET30
         private readonly List<string> notVar;
 #endif
 
@@ -40,7 +40,7 @@ namespace xFunc.Maths
         {
 #if NET35_OR_GREATER
             notVar = new HashSet<string> { "and", "or", "xor" };
-#elif NET30
+#elif NET20 || NET30
             notVar = new List<string> { "and", "or", "xor" };
 #endif
         }
@@ -242,19 +242,12 @@ namespace xFunc.Maths
                     tokens.Add(new NumberToken(number));
 
                     i += length;
-#if NET35_OR_GREATER
+
                     var f = function.Substring(i);
                     if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => f.StartsWith(s)))
                     {
                         tokens.Add(new OperationToken(Operations.Multiplication));
                     }
-#elif NET30
-                    var f = function.Substring(i);
-                    if (i < function.Length && char.IsLetter(function[i]) && !EnumerableExtention.Any(notVar, s => f.StartsWith(s)))
-                    {
-                        tokens.Add(new OperationToken(Operations.Multiplication));
-                    }
-#endif
 
                     continue;
                 }
@@ -600,11 +593,7 @@ namespace xFunc.Maths
                     }
 
                     int j = i + 1;
-#if NET35_OR_GREATER
                     for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;
-#elif NET30
-                    for (; j < function.Length && char.IsLetter(function[j]) && !EnumerableExtention.Any(notVar, s => function.Substring(j).StartsWith(s)); j++) ;
-#endif
 
                     var str = function.Substring(i, j - i);
                     i = j;

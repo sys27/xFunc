@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\net30\Debug\</OutputPath>
+    <OutputPath>bin\net20\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\net30\Release\</OutputPath>
+    <OutputPath>bin\net20\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -110,11 +110,11 @@
     <Compile Include="MathParserSimplificationTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xFunc.Logics\xFunc.Logics %28.Net 3.0%29.csproj">
+    <ProjectReference Include="..\xFunc.Logics\xFunc.Logics %28.Net 2.0%29.csproj">
       <Project>{dfc61417-f3cc-47d5-b2de-4029be939a4c}</Project>
       <Name>xFunc.Logics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths %28.Net 3.0%29.csproj">
+    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths %28.Net 2.0%29.csproj">
       <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
       <Name>xFunc.Maths</Name>
     </ProjectReference>

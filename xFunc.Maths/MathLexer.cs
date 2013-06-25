@@ -61,7 +61,11 @@ namespace xFunc.Maths
         /// <exception cref="MathLexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
         public IEnumerable<IToken> Tokenize(string function)
         {
+#if NET40_OR_GREATER
             if (string.IsNullOrWhiteSpace(function))
+#elif NET20 || NET30 || NET35
+            if (StringExtention.IsNullOrWhiteSpace(function))
+#endif
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");

@@ -600,7 +600,11 @@ namespace xFunc.Maths
                     }
 
                     int j = i + 1;
+#if NET35_OR_GREATER
+                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;
+#elif NET30
                     for (; j < function.Length && char.IsLetter(function[j]) && !EnumerableExtention.Any(notVar, s => function.Substring(j).StartsWith(s)); j++) ;
+#endif
 
                     var str = function.Substring(i, j - i);
                     i = j;

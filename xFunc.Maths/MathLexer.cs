@@ -15,7 +15,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+#if NET35_OR_GREATER
 using System.Linq;
+#endif
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
@@ -25,14 +27,22 @@ namespace xFunc.Maths
     public class MathLexer : ILexer
     {
 
+#if NET35_OR_GREATER
         private readonly HashSet<string> notVar;
+#elif NET30
+        private readonly List<string> notVar;
+#endif
 
         /// <summary>
         /// Initializes a new instance of <see cref="MathLexer"/>.
         /// </summary>
         public MathLexer()
         {
+#if NET35_OR_GREATER
             notVar = new HashSet<string> { "and", "or", "xor" };
+#elif NET30
+            notVar = new List<string> { "and", "or", "xor" };
+#endif
         }
 
         private bool IsBalanced(string str)
@@ -232,10 +242,19 @@ namespace xFunc.Maths
                     tokens.Add(new NumberToken(number));
 
                     i += length;
-                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => function.Substring(i).StartsWith(s)))
+#if NET35_OR_GREATER
+                    var f = function.Substring(i);
+                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => f.StartsWith(s)))
                     {
                         tokens.Add(new OperationToken(Operations.Multiplication));
                     }
+#elif NET30
+                    var f = function.Substring(i);
+                    if (i < function.Length && char.IsLetter(function[i]) && !EnumerableExtention.Any(notVar, s => f.StartsWith(s)))
+                    {
+                        tokens.Add(new OperationToken(Operations.Multiplication));
+                    }
+#endif
 
                     continue;
                 }
@@ -581,7 +600,7 @@ namespace xFunc.Maths
                     }
 
                     int j = i + 1;
-                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;
+                    for (; j < function.Length && char.IsLetter(function[j]) && !EnumerableExtention.Any(notVar, s => function.Substring(j).StartsWith(s)); j++) ;
 
                     var str = function.Substring(i, j - i);
                     i = j;
@@ -604,17 +623,17 @@ namespace xFunc.Maths
             return CountUserFuncParams(tokens);
         }
 
-        private int _CountUserFuncParams(IEnumerable<IToken> tokens, int index)
+        private int _CountUserFuncParams(List<IToken> tokens, int index)
         {
-            var userFunc = tokens.ElementAt(index) as UserFunctionToken;
+            var userFunc = tokens[index] as UserFunctionToken;
 
             int countOfParams = 0;
             int brackets = 1;
             bool oneParam = true;
             int i = index + 2;
-            for (; i < tokens.Count(); )
+            for (; i < tokens.Count; )
             {
-                var token = tokens.ElementAt(i);
+                var token = tokens[i];
                 if (token is SymbolToken)
                 {
                     var symbol = token as SymbolToken;
@@ -667,11 +686,11 @@ namespace xFunc.Maths
             return i;
         }
 
-        private IEnumerable<IToken> CountUserFuncParams(IEnumerable<IToken> tokens)
+        private IEnumerable<IToken> CountUserFuncParams(List<IToken> tokens)
         {
-            for (int i = 0; i < tokens.Count(); )
+            for (int i = 0; i < tokens.Count; )
             {
-                if (tokens.ElementAt(i) is UserFunctionToken)
+                if (tokens[i] is UserFunctionToken)
                     i += _CountUserFuncParams(tokens, i);
                 else
                     i++;

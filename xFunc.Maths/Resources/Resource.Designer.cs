@@ -79,6 +79,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No item satisfied the predicate or the source collection was empty..
+        /// </summary>
+        internal static string InvalidInFirst {
+            get {
+                return ResourceManager.GetString("InvalidInFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The function has an invalid number of variables..
         /// </summary>
         internal static string InvalidNumberOfVariables {

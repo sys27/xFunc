@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3EBDDB0-2F08-4CCC-BEDE-5F26F36B9602}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xFunc.Maths</RootNamespace>
+    <AssemblyName>xFunc.Maths</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile46</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\portable\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;PORTABLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\portable\Release\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\portable\Release\xFunc.Maths.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <EmbeddedResource Include="Resources\Resource.uk.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.uk.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Expressions\Abs.cs" />
+    <Compile Include="Expressions\Add.cs" />
+    <Compile Include="Expressions\AngleMeasurement.cs" />
+    <Compile Include="Expressions\Assign.cs" />
+    <Compile Include="Expressions\BinaryMathExpression.cs" />
+    <Compile Include="Expressions\Bitwise\And.cs" />
+    <Compile Include="Expressions\Bitwise\Not.cs" />
+    <Compile Include="Expressions\Bitwise\Or.cs" />
+    <Compile Include="Expressions\Bitwise\XOr.cs" />
+    <Compile Include="Expressions\Derivative.cs" />
+    <Compile Include="Expressions\Div.cs" />
+    <Compile Include="Expressions\Exp.cs" />
+    <Compile Include="Expressions\GCD.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arcosh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arcoth.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arcsch.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arsech.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arsinh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Artanh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Cosh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Coth.cs" />
+    <Compile Include="Expressions\Hyperbolic\Csch.cs" />
+    <Compile Include="Expressions\Hyperbolic\Sech.cs" />
+    <Compile Include="Expressions\Hyperbolic\Sinh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Tanh.cs" />
+    <Compile Include="Expressions\IMathExpression.cs" />
+    <Compile Include="Expressions\LCM.cs" />
+    <Compile Include="Expressions\Lg.cs" />
+    <Compile Include="Expressions\Ln.cs" />
+    <Compile Include="Expressions\Log.cs" />
+    <Compile Include="Expressions\MathFunctionCollection.cs" />
+    <Compile Include="Expressions\MathParameterCollection.cs" />
+    <Compile Include="Expressions\Mul.cs" />
+    <Compile Include="Expressions\Number.cs" />
+    <Compile Include="Expressions\Pow.cs" />
+    <Compile Include="Expressions\Root.cs" />
+    <Compile Include="Expressions\Sqrt.cs" />
+    <Compile Include="Expressions\Sub.cs" />
+    <Compile Include="Expressions\Trigonometric\Arccos.cs" />
+    <Compile Include="Expressions\Trigonometric\Arccot.cs" />
+    <Compile Include="Expressions\Trigonometric\Arccsc.cs" />
+    <Compile Include="Expressions\Trigonometric\Arcsec.cs" />
+    <Compile Include="Expressions\Trigonometric\Arcsin.cs" />
+    <Compile Include="Expressions\Trigonometric\Arctan.cs" />
+    <Compile Include="Expressions\Trigonometric\Cos.cs" />
+    <Compile Include="Expressions\Trigonometric\Cot.cs" />
+    <Compile Include="Expressions\Trigonometric\Csc.cs" />
+    <Compile Include="Expressions\Trigonometric\Sec.cs" />
+    <Compile Include="Expressions\Trigonometric\Sin.cs" />
+    <Compile Include="Expressions\Trigonometric\Tan.cs" />
+    <Compile Include="Expressions\Trigonometric\TrigonometryMathExpression.cs" />
+    <Compile Include="Expressions\UnaryMathExpression.cs" />
+    <Compile Include="Expressions\UnaryMinus.cs" />
+    <Compile Include="Expressions\Undefine.cs" />
+    <Compile Include="Expressions\UserFunction.cs" />
+    <Compile Include="Expressions\Variable.cs" />
+    <Compile Include="IDifferentiator.cs" />
+    <Compile Include="ILexer.cs" />
+    <Compile Include="ISimplifier.cs" />
+    <Compile Include="MathDifferentiator.cs" />
+    <Compile Include="MathExtentions.cs" />
+    <Compile Include="MathLexer.cs" />
+    <Compile Include="MathLexerException.cs" />
+    <Compile Include="MathParser.cs" />
+    <Compile Include="MathParserException.cs" />
+    <Compile Include="MathSimplifier.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.uk.Designer.cs">
+      <DependentUpon>Resource.uk.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Resource.Designer.cs">
+      <DependentUpon>Resource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Resource.ru.Designer.cs">
+      <DependentUpon>Resource.ru.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Tokens\Functions.cs" />
+    <Compile Include="Tokens\FunctionToken.cs" />
+    <Compile Include="Tokens\IToken.cs" />
+    <Compile Include="Tokens\NumberToken.cs" />
+    <Compile Include="Tokens\Operations.cs" />
+    <Compile Include="Tokens\OperationToken.cs" />
+    <Compile Include="Tokens\Symbols.cs" />
+    <Compile Include="Tokens\SymbolToken.cs" />
+    <Compile Include="Tokens\UserFunctionToken.cs" />
+    <Compile Include="Tokens\VariableToken.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.pfx" />
+    <None Include="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

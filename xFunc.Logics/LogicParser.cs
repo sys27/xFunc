@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
 #endif
 using xFunc.Logics.Expressions;
@@ -44,7 +44,7 @@ namespace xFunc.Logics
 
         public ILogicExpression Parse(string function)
         {
-#if NET40_OR_GREATER
+#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
 #elif NET20 || NET30 || NET35
             if (StringExtention.IsNullOrWhiteSpace(function))
@@ -122,7 +122,7 @@ namespace xFunc.Logics
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable
                                                     select t.Variable);
-#elif NET35
+#elif NET35 || PORTABLE
             HashSet<string> c = new HashSet<string>(from t in lexer.Tokenize(function)
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable

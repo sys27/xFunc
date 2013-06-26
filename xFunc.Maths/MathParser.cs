@@ -110,7 +110,7 @@ namespace xFunc.Maths
 
         public IMathExpression Parse(string function, bool simplify)
         {
-#if NET40_OR_GREATER
+#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
 #elif NET20 || NET30 || NET35
             if (StringExtention.IsNullOrWhiteSpace(function))

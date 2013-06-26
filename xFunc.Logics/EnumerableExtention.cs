@@ -8,16 +8,16 @@ namespace System.Runtime.CompilerServices
 {
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public class ExtensionAttribute : Attribute { }
+    internal class ExtensionAttribute : Attribute { }
 
 }
 
 namespace xFunc.Logics
 {
 
-    public delegate V Func<in T, out V>(T arg);
+    internal delegate V Func<in T, out V>(T arg);
 
-    public static class EnumerableExtention
+    internal static class EnumerableExtention
     {
 
         public static bool Any<T>(this IEnumerable<T> value, Func<T, bool> predicate)

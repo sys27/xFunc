@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
 #endif
 using xFunc.Logics.Resources;
@@ -25,7 +25,7 @@ namespace xFunc.Logics
     public class LogicLexer : ILexer
     {
 
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
         private readonly HashSet<string> supportedOp;
 #elif NET20 || NET30
         private readonly List<string> supportedOp;
@@ -33,7 +33,7 @@ namespace xFunc.Logics
 
         public LogicLexer()
         {
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
             supportedOp = new HashSet<string>
             {
                 "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
@@ -69,7 +69,7 @@ namespace xFunc.Logics
         /// <returns>The sequence of tokens.</returns>
         public IEnumerable<LogicToken> Tokenize(string function)
         {
-#if NET40_OR_GREATER
+#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
 #elif NET20 || NET30 || NET35
             if (StringExtention.IsNullOrWhiteSpace(function))

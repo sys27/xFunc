@@ -13,6 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+#if !PORTABLE
+using System.Runtime.Serialization;
+#endif
 
 namespace xFunc.Logics
 {
@@ -20,7 +23,9 @@ namespace xFunc.Logics
     /// <summary>
     /// The exception that is thrown in <see cref="LogicParser"/>.
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class LogicParserException : Exception
     {
 
@@ -42,12 +47,14 @@ namespace xFunc.Logics
         /// <param name="inner">The exception that is the cause of the current exception.</param>
         public LogicParserException(string message, Exception inner) : base(message, inner) { }
 
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the <see cref="LogicParserException"/> class with serialized data.
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected LogicParserException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        protected LogicParserException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+#endif
 
     }
 

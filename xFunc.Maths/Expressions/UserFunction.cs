@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
 #endif
 using System.Text;

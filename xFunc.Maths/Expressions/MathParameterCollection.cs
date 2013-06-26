@@ -14,12 +14,16 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if !PORTABLE
 using System.Runtime.Serialization;
+#endif
 
 namespace xFunc.Maths.Expressions
 {
 
+#if !PORTABLE
     [Serializable]
+#endif
     public class MathParameterCollection : Dictionary<string, double>
     {
 
@@ -31,7 +35,9 @@ namespace xFunc.Maths.Expressions
 
         public MathParameterCollection(IDictionary<string, double> dictionary) : base(dictionary) { }
 
+#if !PORTABLE
         protected MathParameterCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
+#endif
 
     }
 

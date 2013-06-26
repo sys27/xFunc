@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
 #endif
 using xFunc.Maths.Resources;
@@ -27,7 +27,7 @@ namespace xFunc.Maths
     public class MathLexer : ILexer
     {
 
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
         private readonly HashSet<string> notVar;
 #elif NET20 || NET30
         private readonly List<string> notVar;
@@ -38,7 +38,7 @@ namespace xFunc.Maths
         /// </summary>
         public MathLexer()
         {
-#if NET35_OR_GREATER
+#if NET35_OR_GREATER || PORTABLE
             notVar = new HashSet<string> { "and", "or", "xor" };
 #elif NET20 || NET30
             notVar = new List<string> { "and", "or", "xor" };
@@ -71,7 +71,7 @@ namespace xFunc.Maths
         /// <exception cref="MathLexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
         public IEnumerable<IToken> Tokenize(string function)
         {
-#if NET40_OR_GREATER
+#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
 #elif NET20 || NET30 || NET35
             if (StringExtention.IsNullOrWhiteSpace(function))

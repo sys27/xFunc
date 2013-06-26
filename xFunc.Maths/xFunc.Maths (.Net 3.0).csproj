@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\net30\Debug\</OutputPath>
+    <OutputPath>bin\Debug\net30\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET30;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,12 +25,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\net30\Release\</OutputPath>
+    <OutputPath>bin\Release\net30\</OutputPath>
     <DefineConstants>TRACE;NET30;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\net30\Release\xFunc.Maths.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\net30\xFunc.Maths.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

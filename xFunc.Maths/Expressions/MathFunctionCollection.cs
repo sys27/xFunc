@@ -14,18 +14,24 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if !PORTABLE
 using System.Runtime.Serialization;
+#endif
 
 namespace xFunc.Maths.Expressions
 {
 
+#if !PORTABLE
     [Serializable]
+#endif
     public class MathFunctionCollection : Dictionary<UserFunction, IMathExpression>
     {
 
         public MathFunctionCollection() { }
 
+#if !PORTABLE
         protected MathFunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
+#endif
 
     }
 

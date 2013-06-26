@@ -13,6 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+#if !PORTABLE
+using System.Runtime.Serialization;
+#endif
 
 namespace xFunc.Maths
 {
@@ -20,7 +23,9 @@ namespace xFunc.Maths
     /// <summary>
     /// The exception that is thrown in <see cref="MathLexer"/>.
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class MathLexerException : Exception
     {
 
@@ -42,12 +47,14 @@ namespace xFunc.Maths
         /// <param name="inner">The exception that is the cause of the current exception.</param>
         public MathLexerException(string message, Exception inner) : base(message, inner) { }
         
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the <see cref="MathLexerException"/> class with serialized data.
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected MathLexerException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        protected MathLexerException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+#endif
 
     }
 

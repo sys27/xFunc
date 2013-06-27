@@ -259,6 +259,43 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void DefineVar()
+        {
+            var tokens = lexer.Tokenize("def(x, 2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Define),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void DefineFunc()
+        {
+            var tokens = lexer.Tokenize("def(f(x), 2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Define),
+                new SymbolToken(Symbols.OpenBracket),
+                new UserFunctionToken("f", 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
         public void Integer()
         {
             var tokens = lexer.Tokenize("-2764786 + 46489879");

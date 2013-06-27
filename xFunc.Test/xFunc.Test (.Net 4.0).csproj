@@ -92,7 +92,7 @@
     <Compile Include="Expressions\Maths\RootTest.cs" />
     <Compile Include="Expressions\Maths\SqrtTest.cs" />
     <Compile Include="Expressions\Maths\SubtractionTest.cs" />
-    <Compile Include="Expressions\Maths\AssignTest.cs" />
+    <Compile Include="Expressions\Maths\DefineTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\SecantTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\CosecantTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArcsecTest.cs" />

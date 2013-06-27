@@ -17,22 +17,22 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
-    public class Assign : IMathExpression
+    public class Define : IMathExpression
     {
 
         private IMathExpression key;
         private IMathExpression value;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Assign"/>.
+        /// Initializes a new instance of <see cref="Define"/>.
         /// </summary>
-        public Assign()
+        public Define()
             : this(null, null)
         {
 
         }
 
-        public Assign(IMathExpression key, IMathExpression value)
+        public Define(IMathExpression key, IMathExpression value)
         {
             this.Key = key;
             this.value = value;
@@ -106,12 +106,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instanse of the <see cref="Assign"/>.
+        /// Clones this instanse of the <see cref="Define"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
-            return new Assign(key.Clone(), value.Clone());
+            return new Define(key.Clone(), value.Clone());
         }
 
         /// <summary>

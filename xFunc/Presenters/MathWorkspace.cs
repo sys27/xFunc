@@ -66,9 +66,9 @@ namespace xFunc.Presenters
                 {
                     item.Answer = parser.Differentiate(exp, null).ToString();
                 }
-                else if (exp is Assign)
+                else if (exp is Define)
                 {
-                    Assign assign = exp as Assign;
+                    Define assign = exp as Define;
                     assign.Calculate(parameters, functions);
                     if (assign.Key is Variable)
                         item.Answer = string.Format(Resource.AssignVariable, assign.Key, assign.Value);

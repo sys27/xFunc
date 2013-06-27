@@ -541,6 +541,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("def("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Define));
+                        i += 3;
+
+                        continue;
+                    }
                     if (sub.StartsWith("undef("))
                     {
                         tokens.Add(new FunctionToken(Functions.Undefine));

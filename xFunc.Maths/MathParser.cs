@@ -161,12 +161,12 @@ namespace xFunc.Maths
 
                         stack.Push(binExp);
                     }
-                    else if (expression is Assign)
+                    else if (expression is Define)
                     {
                         if (stack.Count < 2)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
-                        var assign = expression as Assign;
+                        var assign = expression as Define;
                         assign.Value = stack.Pop();
 
                         var peek = stack.Peek();
@@ -254,7 +254,7 @@ namespace xFunc.Maths
                             preOutput.Add(new UnaryMinus());
                             break;
                         case Operations.Assign:
-                            preOutput.Add(new Assign());
+                            preOutput.Add(new Define());
                             break;
                         case Operations.Not:
                             preOutput.Add(new Not());
@@ -389,6 +389,9 @@ namespace xFunc.Maths
                             break;
                         case Functions.Derivative:
                             preOutput.Add(new Derivative());
+                            break;
+                        case Functions.Define:
+                            preOutput.Add(new Define());
                             break;
                         case Functions.Undefine:
                             preOutput.Add(new Undefine());

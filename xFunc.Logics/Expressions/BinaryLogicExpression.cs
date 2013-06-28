@@ -23,7 +23,7 @@ namespace xFunc.Logics.Expressions
         protected ILogicExpression firstOperand;
         protected ILogicExpression secondOperand;
 
-        public BinaryLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
+        protected BinaryLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
         {
             this.firstOperand = firstOperand;
             this.secondOperand = secondOperand;

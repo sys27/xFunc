@@ -27,6 +27,9 @@ namespace xFunc.Maths
 
         public IMathExpression Differentiate(IMathExpression expression, Variable variable)
         {
+            if (expression == null)
+                throw new ArgumentNullException("expression");
+
             return simplifier.Simplify(expression.Differentiate(variable));
         }
 

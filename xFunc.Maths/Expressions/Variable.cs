@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that contains the converted value.</returns>
         public static implicit operator string(Variable variable)
         {
-            return variable.Name;
+            return variable == null ? null : variable.Name;
         }
 
         /// <summary>
@@ -104,6 +104,9 @@ namespace xFunc.Maths.Expressions
         /// <returns>A value of this variable.</returns>
         public double Calculate(MathParameterCollection parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
             return parameters[name];
         }
 
@@ -115,6 +118,9 @@ namespace xFunc.Maths.Expressions
         /// <returns>A value of this variable.</returns>
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
             return parameters[name];
         }
 

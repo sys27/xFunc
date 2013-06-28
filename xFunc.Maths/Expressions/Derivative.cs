@@ -26,7 +26,11 @@ namespace xFunc.Maths.Expressions
 
         public Derivative() { }
 
-        public Derivative(IMathExpression firstMathExpression, Variable variable) { }
+        public Derivative(IMathExpression firstMathExpression, Variable variable)
+        {
+            this.firstMathExpression = firstMathExpression;
+            this.variable = variable;
+        }
 
         public override bool Equals(object obj)
         {

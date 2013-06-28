@@ -50,6 +50,9 @@ namespace xFunc.Presenters
 
         public void Remove(LogicWorkspaceItemViewModel item)
         {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
             workspace.Remove(item.Item);
 
             UpdateList();

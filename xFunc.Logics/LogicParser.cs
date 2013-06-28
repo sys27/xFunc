@@ -155,12 +155,12 @@ namespace xFunc.Logics
         {
             if (expression is UnaryLogicExpression)
             {
-                UnaryLogicExpression un = (UnaryLogicExpression)expression;
+                UnaryLogicExpression un = expression as UnaryLogicExpression;
                 ConvertToColletion(un.FirstMathExpression, collection);
             }
             else if (expression is BinaryLogicExpression)
             {
-                BinaryLogicExpression bin = (BinaryLogicExpression)expression;
+                BinaryLogicExpression bin = expression as BinaryLogicExpression;
                 ConvertToColletion(bin.FirstOperand, collection);
                 ConvertToColletion(bin.SecondOperand, collection);
             }

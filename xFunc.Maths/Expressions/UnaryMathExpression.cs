@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         protected IMathExpression parentMathExpression;
         protected IMathExpression firstMathExpression;
 
-        public UnaryMathExpression(IMathExpression firstMathExpression)
+        protected UnaryMathExpression(IMathExpression firstMathExpression)
         {
             FirstMathExpression = firstMathExpression;
         }

@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
         protected IMathExpression firstMathExpression;
         protected IMathExpression secondMathExpression;
 
-        public BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
+        protected BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
         {
             FirstMathExpression = firstMathExpression;
             SecondMathExpression = secondMathExpression;

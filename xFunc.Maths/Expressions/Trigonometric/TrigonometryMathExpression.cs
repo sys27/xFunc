@@ -22,9 +22,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected AngleMeasurement angleMeasurement;
 
-        public TrigonometryMathExpression(IMathExpression firstMathExpression) : this(firstMathExpression, AngleMeasurement.Degree) { }
+        protected TrigonometryMathExpression(IMathExpression firstMathExpression)
+            : this(firstMathExpression, AngleMeasurement.Degree) { }
 
-        public TrigonometryMathExpression(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement)
+        protected TrigonometryMathExpression(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement)
             : base(firstMathExpression)
         {
             this.angleMeasurement = angleMeasurement;

@@ -94,6 +94,9 @@ namespace xFunc.Maths.Expressions
 
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
+            if (functions == null)
+                throw new ArgumentNullException("functions");
+
             var func = functions.Keys.First(uf => uf.Equals(this));
             var newParameters = new MathParameterCollection(parameters);
             for (int i = 0; i < arguments.Length; i++)

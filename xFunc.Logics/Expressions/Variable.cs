@@ -34,6 +34,9 @@ namespace xFunc.Logics.Expressions
 
         public bool Calculate(LogicParameterCollection parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
             return parameters[variable];
         }
 

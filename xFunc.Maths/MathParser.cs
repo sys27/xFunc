@@ -75,7 +75,7 @@ namespace xFunc.Maths
 
                 return HasVar(un.FirstMathExpression, arg);
             }
-            if (expression.Equals(arg))
+            if (expression != null && expression.Equals(arg))
             {
                 return true;
             }
@@ -135,7 +135,7 @@ namespace xFunc.Maths
                         if ((expression is Log || expression is Root) && stack.Count < 2)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
-                        BinaryMathExpression binExp = (BinaryMathExpression)expression;
+                        BinaryMathExpression binExp = expression as BinaryMathExpression;
                         binExp.SecondMathExpression = stack.Pop();
                         binExp.FirstMathExpression = stack.Pop();
 
@@ -143,7 +143,7 @@ namespace xFunc.Maths
                     }
                     else if (expression is UnaryMathExpression)
                     {
-                        UnaryMathExpression unaryMathExp = (UnaryMathExpression)expression;
+                        UnaryMathExpression unaryMathExp = expression as UnaryMathExpression;
                         unaryMathExp.FirstMathExpression = stack.Pop();
 
                         stack.Push(unaryMathExp);
@@ -155,7 +155,7 @@ namespace xFunc.Maths
                         if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        Derivative binExp = (Derivative)expression;
+                        Derivative binExp = expression as Derivative;
                         binExp.Variable = (Variable)stack.Pop();
                         binExp.FirstMathExpression = stack.Pop();
 

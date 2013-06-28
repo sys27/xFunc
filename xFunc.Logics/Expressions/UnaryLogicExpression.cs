@@ -22,7 +22,7 @@ namespace xFunc.Logics.Expressions
 
         protected ILogicExpression firstMathExpression;
 
-        public UnaryLogicExpression(ILogicExpression firstMathExpression)
+        protected UnaryLogicExpression(ILogicExpression firstMathExpression)
         {
             this.firstMathExpression = firstMathExpression;
         }

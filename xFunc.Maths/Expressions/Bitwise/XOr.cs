@@ -77,9 +77,9 @@ namespace xFunc.Maths.Expressions.Bitwise
             return (int)firstMathExpression.Calculate(parameters) ^ (int)secondMathExpression.Calculate(parameters);
         }
 
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection fucntions)
+        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return (int)firstMathExpression.Calculate(parameters, fucntions) ^ (int)secondMathExpression.Calculate(parameters, fucntions);
+            return (int)firstMathExpression.Calculate(parameters, functions) ^ (int)secondMathExpression.Calculate(parameters, functions);
         }
 
         /// <summary>

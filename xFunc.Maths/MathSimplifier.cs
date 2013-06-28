@@ -3,9 +3,12 @@ using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths
 {
-    
+
     public class MathSimplifier : ISimplifier
     {
+
+        private Number zero = 0;
+        private Number one = 1;
 
         /// <summary>
         /// Simplifies the <paramref name="expression"/>.
@@ -38,9 +41,6 @@ namespace xFunc.Maths
                 UnaryMathExpression un = expression as UnaryMathExpression;
                 un.FirstMathExpression = _Simplify(un.FirstMathExpression);
             }
-
-            Number zero = 0;
-            Number one = 1;
 
             if (expression is UnaryMinus)
             {

@@ -18,7 +18,7 @@ Please, if you have a bug or a feature request, [create](https://github.com/sys2
 
 ## License
 
-xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
+xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 ## More:
 

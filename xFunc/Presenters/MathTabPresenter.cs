@@ -16,7 +16,7 @@ namespace xFunc.Presenters
         private IMainView view;
 
         private MathWorkspace workspace;
-
+        
         public MathTabPresenter(IMainView view)
         {
             this.view = view;
@@ -76,6 +76,18 @@ namespace xFunc.Presenters
             set
             {
                 workspace.Parser.AngleMeasurement = value;
+            }
+        }
+
+        public NumberSystems Base
+        {
+            get
+            {
+                return workspace.Base;
+            }
+            set
+            {
+                workspace.Base = value;
             }
         }
 

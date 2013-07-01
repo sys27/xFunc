@@ -201,6 +201,23 @@ namespace xFunc.Maths
             return numerator / GCD(a, b);
         }
 
+        public static string ToNewBase(int number, NumberSystems numberSystem)
+        {
+            switch (numberSystem)
+            {
+                case NumberSystems.Decimal:
+                    return number.ToString();
+                case NumberSystems.Binary:
+                    return "0b" + Convert.ToString(number, 2);
+                case NumberSystems.Octal:
+                    return "0" + Convert.ToString(number, 8);
+                case NumberSystems.Hexidecimal:
+                    return "0x" + Convert.ToString(number, 16);
+                default:
+                    return null;
+            }
+        }
+
     }
 
 }

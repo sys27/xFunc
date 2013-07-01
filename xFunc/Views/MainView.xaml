@@ -216,7 +216,7 @@ limitations under the License. -->
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
-                    <TextBox x:Name="mathExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" FontFamily="Lucida Calligraphy" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="mathExpressionBox_KeyUp" />
+                    <TextBox x:Name="mathExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="mathExpressionBox_KeyUp" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
@@ -255,7 +255,7 @@ limitations under the License. -->
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
-                    <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" FontFamily="Lucida Calligraphy" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
+                    <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="graphsTab" Header="{x:Static res:Resource.GraphsTab}">
@@ -288,7 +288,7 @@ limitations under the License. -->
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <TextBox x:Name="graphExpressionBox" FontFamily="Lucida Calligraphy" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
+                                <TextBox x:Name="graphExpressionBox" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
                             </StackPanel>
                         </ScrollViewer>
                     </Border>
@@ -302,7 +302,7 @@ limitations under the License. -->
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="truthTableExpressionBox" Grid.Row="0" FontFamily="Lucida Calligraphy" FontSize="16" Foreground="Black" KeyUp="truthTableExpressionBox_KeyUp" />
+                    <TextBox x:Name="truthTableExpressionBox" Grid.Row="0" FontSize="16" Foreground="Black" KeyUp="truthTableExpressionBox_KeyUp" />
                     <ListView x:Name="truthTableList" Grid.Row="1">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">

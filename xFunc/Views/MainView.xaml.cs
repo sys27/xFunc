@@ -44,6 +44,11 @@ namespace xFunc.Views
         public static RoutedCommand RadianCommand = new RoutedCommand();
         public static RoutedCommand GradianCommand = new RoutedCommand();
 
+        public static RoutedCommand BinCommand = new RoutedCommand();
+        public static RoutedCommand OctCommand = new RoutedCommand();
+        public static RoutedCommand DecCommand = new RoutedCommand();
+        public static RoutedCommand HexCommand = new RoutedCommand();
+
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
@@ -79,6 +84,21 @@ namespace xFunc.Views
                     gradianButton.IsChecked = true;
                     break;
             }
+            switch (mathPresenter.Base)
+            {
+                case NumberSystems.Binary:
+                    binButton.IsChecked = true;
+                    break;
+                case NumberSystems.Octal:
+                    octButton.IsChecked = true;
+                    break;
+                case NumberSystems.Decimal:
+                    decButton.IsChecked = true;
+                    break;
+                case NumberSystems.Hexidecimal:
+                    hexButton.IsChecked = true;
+                    break;
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -109,6 +129,7 @@ namespace xFunc.Views
             Height = Settings.Default.WindowHeight;
 
             mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
+            mathPresenter.Base = Settings.Default.NumberBase;
 
             tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
 
@@ -137,6 +158,7 @@ namespace xFunc.Views
             Settings.Default.WindowHeight = Height;
 
             Settings.Default.AngleMeasurement = mathPresenter.AngleMeasurement;
+            Settings.Default.NumberBase = mathPresenter.Base;
 
             Settings.Default.SelectedTabIndex = tabControl.SelectedIndex;
 
@@ -180,6 +202,47 @@ namespace xFunc.Views
         }
 
         private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = tabControl.SelectedItem == mathTab;
+        }
+
+        private void BinCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            octButton.IsChecked = false;
+            decButton.IsChecked = false;
+            hexButton.IsChecked = false;
+            mathPresenter.Base = NumberSystems.Binary;
+            binButton.IsChecked = true;
+        }
+
+        private void OctCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            binButton.IsChecked = false;
+            decButton.IsChecked = false;
+            hexButton.IsChecked = false;
+            mathPresenter.Base = NumberSystems.Octal;
+            octButton.IsChecked = true;
+        }
+
+        private void DecCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            binButton.IsChecked = false;
+            octButton.IsChecked = false;
+            hexButton.IsChecked = false;
+            mathPresenter.Base = NumberSystems.Decimal;
+            decButton.IsChecked = true;
+        }
+
+        private void HexCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            binButton.IsChecked = false;
+            octButton.IsChecked = false;
+            decButton.IsChecked = false;
+            mathPresenter.Base = NumberSystems.Hexidecimal;
+            hexButton.IsChecked = true;
+        }
+
+        private void BaseCommands_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
         }

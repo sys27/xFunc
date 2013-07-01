@@ -24,4 +24,4 @@ xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICE
 
 * [CodePlex](http://xfunc.codeplex.com/)
 * [NuGet](https://nuget.org/packages?q=xFunc)
-* [e-x-it.blogspot.com (rus)](http://e-x-it.blogspot.com/2012/12/xfunc-14.html)
+* [e-x-it.blogspot.com (rus)](http://e-x-it.blogspot.com/2012/02/c.html)

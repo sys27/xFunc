@@ -107,7 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MathLexerTest.cs" />
     <Compile Include="LogicLexerTest.cs" />
-    <Compile Include="MathParserSimplificationTest.cs" />
+    <Compile Include="SimplifierTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Logics\xFunc.Logics %28.Net 2.0%29.csproj">

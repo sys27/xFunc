@@ -71,6 +71,11 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        
+        <CommandBinding Command="views:MainView.BinCommand" Executed="BinCommand_Execute" CanExecute="BaseCommands_CanExecute" />
+        <CommandBinding Command="views:MainView.OctCommand" Executed="OctCommand_Execute" CanExecute="BaseCommands_CanExecute" />
+        <CommandBinding Command="views:MainView.DecCommand" Executed="DecCommand_Execute" CanExecute="BaseCommands_CanExecute" />
+        <CommandBinding Command="views:MainView.HexCommand" Executed="HexCommand_Execute" CanExecute="BaseCommands_CanExecute" />
 
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
@@ -171,6 +176,12 @@ limitations under the License. -->
             <ribbon:RibbonTabItem Header="{x:Static res:Resource.ViewRibbonTab}">
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.FontGroupHeader}">
                     <ribbon:Spinner x:Name="fontSizeSpinner" Header="{x:Static res:Resource.FontSizeSpinner}" Width="90" Minimum="8" Maximum="96" Value="24" TextBlock.TextAlignment="Right" />
+                </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="Answer Base">
+                    <ribbon:ToggleButton x:Name="binButton" Header="Bin" LargeIcon="../Images/Bin.png" Command="views:MainView.BinCommand" />
+                    <ribbon:ToggleButton x:Name="octButton" Header="Oct" LargeIcon="../Images/Oct.png" Command="views:MainView.OctCommand" />
+                    <ribbon:ToggleButton x:Name="decButton" Header="Dec" LargeIcon="../Images/Dec.png" Command="views:MainView.DecCommand" />
+                    <ribbon:ToggleButton x:Name="hexButton" Header="Hex" LargeIcon="../Images/Hex.png" Command="views:MainView.HexCommand" />
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>

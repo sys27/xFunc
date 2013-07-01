@@ -104,6 +104,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\GraphItemViewModel.cs" />
     <Compile Include="ViewModels\LogicWorkspaceItemViewModel.cs" />
     <Compile Include="ViewModels\MathWorkspaceItemViewModel.cs" />
@@ -220,6 +221,12 @@
   <ItemGroup>
     <Resource Include="Images\Delete.png" />
     <Resource Include="Images\DeleteLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bin.png" />
+    <Resource Include="Images\Dec.png" />
+    <Resource Include="Images\Hex.png" />
+    <Resource Include="Images\Oct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instanse of the <see cref="Add"/>.
+        /// Clones this instance of the <see cref="Add"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()

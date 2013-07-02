@@ -4,6 +4,9 @@ using xFunc.Maths.Expressions;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The default implementation of <see cref="ISimplifier"/>/
+    /// </summary>
     public class MathSimplifier : ISimplifier
     {
 

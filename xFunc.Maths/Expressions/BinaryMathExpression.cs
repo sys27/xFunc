@@ -17,19 +17,41 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// The base class for binary operations.
+    /// </summary>
     public abstract class BinaryMathExpression : IMathExpression
     {
 
+        /// <summary>
+        /// The parent expression of this expression.
+        /// </summary>
         protected IMathExpression parentMathExpression;
+        /// <summary>
+        /// The left (first) operand.
+        /// </summary>
         protected IMathExpression firstMathExpression;
+        /// <summary>
+        /// The right (second) operand.
+        /// </summary>
         protected IMathExpression secondMathExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryMathExpression"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The left (first) operand.</param>
+        /// <param name="secondMathExpression">The right (second) operand.</param>
         protected BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
         {
             FirstMathExpression = firstMathExpression;
             SecondMathExpression = secondMathExpression;
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -41,6 +63,11 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Equals(exp.FirstMathExpression) && secondMathExpression.Equals(exp.SecondMathExpression);
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <param name="format">The format of result string.</param>
+        /// <returns>A string that represents the current object.</returns>
         protected string ToString(string format)
         {
             return string.Format(format, firstMathExpression, secondMathExpression);
@@ -52,6 +79,10 @@ namespace xFunc.Maths.Expressions
 
         public abstract double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
 
+        /// <summary>
+        /// Creates the clone of this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="BinaryMathExpression"/> that is a clone of this instance.</returns>
         public abstract IMathExpression Clone();
 
         public IMathExpression Differentiate()
@@ -61,6 +92,9 @@ namespace xFunc.Maths.Expressions
 
         public abstract IMathExpression Differentiate(Variable variable);
 
+        /// <summary>
+        /// The left (first) operand.
+        /// </summary>
         public IMathExpression FirstMathExpression
         {
             get
@@ -75,6 +109,9 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// The right (second) operand.
+        /// </summary>
         public IMathExpression SecondMathExpression
         {
             get

@@ -83,7 +83,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         }
 
         /// <summary>
-        /// Clones this instanse of the <see cref="And"/>.
+        /// Clones this instance of the <see cref="And"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()

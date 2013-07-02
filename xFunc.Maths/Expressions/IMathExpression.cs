@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions
         IMathExpression Differentiate(Variable variable);
 
         /// <summary>
-        /// Clones this instanse of the <see cref="IMathExpression"/>.
+        /// Clones this instance of the <see cref="IMathExpression"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         IMathExpression Clone();

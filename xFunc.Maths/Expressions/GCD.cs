@@ -23,6 +23,9 @@ namespace xFunc.Maths.Expressions
     public class GCD : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GCD"/> class.
+        /// </summary>
         public GCD()
             : base(null, null)
         {
@@ -68,6 +71,10 @@ namespace xFunc.Maths.Expressions
             return MathExtentions.GCD(a, b);
         }
 
+        /// <summary>
+        /// Clones this instance of the <see cref="GCD"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="GCD"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new GCD(firstMathExpression.Clone(), secondMathExpression.Clone());

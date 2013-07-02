@@ -23,6 +23,9 @@ namespace xFunc.Maths.Expressions
     public class LCM : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LCM"/> class.
+        /// </summary>
         public LCM()
             : base(null, null)
         {
@@ -68,6 +71,10 @@ namespace xFunc.Maths.Expressions
             return MathExtentions.LCM(a, b);
         }
 
+        /// <summary>
+        /// Clones this instance of the <see cref="LCM"/>.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="LCM"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new LCM(firstMathExpression.Clone(), secondMathExpression.Clone());

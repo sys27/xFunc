@@ -125,7 +125,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instanse of the <see cref="Variable"/>.
+        /// Clones this instance of the <see cref="Variable"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="Variable"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()

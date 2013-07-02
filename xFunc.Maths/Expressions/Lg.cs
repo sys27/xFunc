@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instanse of the <see cref="Lg"/> class.
+        /// Clones this instance of the <see cref="Lg"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()

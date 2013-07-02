@@ -65,6 +65,12 @@ namespace xFunc.Maths.Expressions
             return Math.Log(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));
         }
 
+        /// <summary>
+        /// Calculates this Log expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Log(firstMathExpression.Calculate(parameters, functions), secondMathExpression.Calculate(parameters, functions));

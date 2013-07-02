@@ -64,6 +64,12 @@ namespace xFunc.Maths.Expressions
             return Math.Log(FirstMathExpression.Calculate(parameters));
         }
 
+        /// <summary>
+        /// Calculates this Ln expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Log(FirstMathExpression.Calculate(parameters, functions));

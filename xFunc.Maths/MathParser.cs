@@ -155,11 +155,18 @@ namespace xFunc.Maths
                         if (!(stack.Peek() is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        Derivative binExp = expression as Derivative;
+                        var binExp = expression as Derivative;
                         binExp.Variable = (Variable)stack.Pop();
                         binExp.FirstMathExpression = stack.Pop();
 
                         stack.Push(binExp);
+                    }
+                    else if (expression is Simplify)
+                    {
+                        var simp = expression as Simplify;
+                        simp.FirstMathExpression = stack.Pop();
+
+                        stack.Push(simp);
                     }
                     else if (expression is Define)
                     {
@@ -389,6 +396,9 @@ namespace xFunc.Maths
                             break;
                         case Functions.Derivative:
                             preOutput.Add(new Derivative());
+                            break;
+                        case Functions.Simplify:
+                            preOutput.Add(new Simplify());
                             break;
                         case Functions.Define:
                             preOutput.Add(new Define());

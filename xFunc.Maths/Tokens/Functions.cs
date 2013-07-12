@@ -164,11 +164,15 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Derivative,
         /// <summary>
+        /// simplify
+        /// </summary>
+        Simplify,
+        /// <summary>
         /// def
         /// </summary>
         Define,
         /// <summary>
-        /// undef()
+        /// undef
         /// </summary>
         Undefine
 

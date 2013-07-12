@@ -99,6 +99,7 @@
     <Compile Include="Expressions\Trigonometric\Sin.cs" />
     <Compile Include="Expressions\Sqrt.cs" />
     <Compile Include="Expressions\Sub.cs" />
+    <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Trigonometric\Tan.cs" />
     <Compile Include="Expressions\Trigonometric\TrigonometryMathExpression.cs" />
     <Compile Include="Expressions\UnaryMathExpression.cs" />

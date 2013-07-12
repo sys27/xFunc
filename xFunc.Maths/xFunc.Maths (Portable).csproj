@@ -113,6 +113,7 @@
     <Compile Include="Expressions\Root.cs" />
     <Compile Include="Expressions\Sqrt.cs" />
     <Compile Include="Expressions\Sub.cs" />
+    <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Trigonometric\Arccos.cs" />
     <Compile Include="Expressions\Trigonometric\Arccot.cs" />
     <Compile Include="Expressions\Trigonometric\Arccsc.cs" />

@@ -326,6 +326,21 @@ namespace xFunc.Test
             Assert.AreEqual("lcm(12, 16)", exp.ToString());
         }
 
+        [TestMethod]
+        public void SimplifyTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Simplify),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("simplify(x)", false);
+            Assert.AreEqual("simplify(x)", exp.ToString());
+        }
+
     }
 
 }

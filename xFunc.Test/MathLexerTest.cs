@@ -971,6 +971,22 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void SimplifyTest()
+        {
+            var tokens = lexer.Tokenize("simplify(x)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Simplify),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

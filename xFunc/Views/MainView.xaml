@@ -619,6 +619,9 @@ limitations under the License. -->
                         <Button Grid.Row="0" Grid.Column="2" Tag="deriv" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
                         </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="simplify" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource simplify}" Width="48" Height="20" />
+                        </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="gcd" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource gcd}" Width="46" Height="20" />

@@ -35,14 +35,19 @@ namespace xFunc.Maths
 
             if (expression is BinaryMathExpression)
             {
-                BinaryMathExpression bin = expression as BinaryMathExpression;
+                var bin = expression as BinaryMathExpression;
                 bin.FirstMathExpression = _Simplify(bin.FirstMathExpression);
                 bin.SecondMathExpression = _Simplify(bin.SecondMathExpression);
             }
             else if (expression is UnaryMathExpression)
             {
-                UnaryMathExpression un = expression as UnaryMathExpression;
+                var un = expression as UnaryMathExpression;
                 un.FirstMathExpression = _Simplify(un.FirstMathExpression);
+            }
+            else if (expression is Simplify)
+            {
+                var simp = expression as Simplify;
+                simp.FirstMathExpression = _Simplify(simp.FirstMathExpression);
             }
 
             if (expression is UnaryMinus)

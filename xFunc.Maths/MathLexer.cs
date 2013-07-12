@@ -541,6 +541,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("simplify("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Simplify));
+                        i += 8;
+
+                        continue;
+                    }
                     if (sub.StartsWith("def("))
                     {
                         tokens.Add(new FunctionToken(Functions.Define));

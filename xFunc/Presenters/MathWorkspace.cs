@@ -68,6 +68,12 @@ namespace xFunc.Presenters
                 {
                     item.Answer = parser.Differentiate(exp, null).ToString();
                 }
+                else if (exp is Simplify)
+                {
+                    var simp = exp as Simplify;
+
+                    item.Answer = simp.FirstMathExpression.ToString();
+                }
                 else if (exp is Define)
                 {
                     Define assign = exp as Define;
@@ -81,7 +87,7 @@ namespace xFunc.Presenters
                 {
                     Undefine undef = exp as Undefine;
                     undef.Calculate(parameters, functions);
-                    if(undef.Key is Variable)
+                    if (undef.Key is Variable)
                         item.Answer = string.Format(Resource.UndefineVariable, undef.Key);
                     else if (undef.Key is UserFunction)
                         item.Answer = string.Format(Resource.UndefineFunction, undef.Key);

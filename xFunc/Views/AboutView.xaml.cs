@@ -27,7 +27,7 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
-            versionNumber.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            versionNumber.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             link.RequestNavigate += (o, args) => Process.Start(args.Uri.ToString());
         }
 

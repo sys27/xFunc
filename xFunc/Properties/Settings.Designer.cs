@@ -254,9 +254,9 @@ namespace xFunc.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Decimal")]
-        public global::xFunc.Maths.NumberSystems NumberBase {
+        public global::xFunc.Maths.NumeralSystem NumberBase {
             get {
-                return ((global::xFunc.Maths.NumberSystems)(this["NumberBase"]));
+                return ((global::xFunc.Maths.NumeralSystem)(this["NumberBase"]));
             }
             set {
                 this["NumberBase"] = value;

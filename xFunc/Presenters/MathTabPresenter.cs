@@ -79,7 +79,7 @@ namespace xFunc.Presenters
             }
         }
 
-        public NumberSystems Base
+        public NumeralSystem Base
         {
             get
             {

@@ -30,7 +30,7 @@ namespace xFunc.Presenters
         private int countOfExps;
         private List<MathWorkspaceItem> expressions;
 
-        private NumberSystems numberSystem;
+        private NumeralSystem numberSystem;
 
         private MathParameterCollection parameters;
         private MathFunctionCollection functions;
@@ -94,7 +94,7 @@ namespace xFunc.Presenters
                 }
                 else
                 {
-                    if (numberSystem == NumberSystems.Decimal)
+                    if (numberSystem == NumeralSystem.Decimal)
                         item.Answer = exp.Calculate(parameters, functions).ToString(CultureInfo.InvariantCulture);
                     else
                         item.Answer = MathExtentions.ToNewBase((int)exp.Calculate(parameters, functions), numberSystem);
@@ -147,7 +147,7 @@ namespace xFunc.Presenters
             }
         }
 
-        public NumberSystems Base
+        public NumeralSystem Base
         {
             get
             {

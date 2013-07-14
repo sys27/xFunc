@@ -17,11 +17,22 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents the Exponentiation operation.
+    /// </summary>
     public class Pow : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pow"/> class.
+        /// </summary>
         public Pow() : base(null, null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pow"/> class.
+        /// </summary>
+        /// <param name="firstOperand">The base.</param>
+        /// <param name="secondOperand">The exponent.</param>
         public Pow(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         /// <summary>
@@ -38,16 +49,31 @@ namespace xFunc.Maths.Expressions
             return ToString("{0} ^ {1}");
         }
 
+        /// <summary>
+        /// Returns a specified number raised to the specified power.
+        /// </summary>
+        /// <returns>A specified number raised to the specified power.</returns>
         public override double Calculate()
         {
             return Math.Pow(firstMathExpression.Calculate(), secondMathExpression.Calculate());
         }
 
+        /// <summary>
+        /// Returns a specified number raised to the specified power.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A specified number raised to the specified power.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
             return Math.Pow(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));
         }
 
+        /// <summary>
+        /// Returns a specified number raised to the specified power.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions.</param>
+        /// <returns>A specified number raised to the specified power.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Pow(firstMathExpression.Calculate(parameters, functions), secondMathExpression.Calculate(parameters, functions));
@@ -76,6 +102,10 @@ namespace xFunc.Maths.Expressions
             return new Number(0);
         }
 
+        /// <summary>
+        /// Clones this instance of the <see cref="Pow"/> class.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Pow(firstMathExpression.Clone(), secondMathExpression.Clone());

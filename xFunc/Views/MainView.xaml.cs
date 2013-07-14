@@ -86,16 +86,16 @@ namespace xFunc.Views
             }
             switch (mathPresenter.Base)
             {
-                case NumberSystems.Binary:
+                case NumeralSystem.Binary:
                     binButton.IsChecked = true;
                     break;
-                case NumberSystems.Octal:
+                case NumeralSystem.Octal:
                     octButton.IsChecked = true;
                     break;
-                case NumberSystems.Decimal:
+                case NumeralSystem.Decimal:
                     decButton.IsChecked = true;
                     break;
-                case NumberSystems.Hexidecimal:
+                case NumeralSystem.Hexidecimal:
                     hexButton.IsChecked = true;
                     break;
             }
@@ -211,7 +211,7 @@ namespace xFunc.Views
             octButton.IsChecked = false;
             decButton.IsChecked = false;
             hexButton.IsChecked = false;
-            mathPresenter.Base = NumberSystems.Binary;
+            mathPresenter.Base = NumeralSystem.Binary;
             binButton.IsChecked = true;
         }
 
@@ -220,7 +220,7 @@ namespace xFunc.Views
             binButton.IsChecked = false;
             decButton.IsChecked = false;
             hexButton.IsChecked = false;
-            mathPresenter.Base = NumberSystems.Octal;
+            mathPresenter.Base = NumeralSystem.Octal;
             octButton.IsChecked = true;
         }
 
@@ -229,7 +229,7 @@ namespace xFunc.Views
             binButton.IsChecked = false;
             octButton.IsChecked = false;
             hexButton.IsChecked = false;
-            mathPresenter.Base = NumberSystems.Decimal;
+            mathPresenter.Base = NumeralSystem.Decimal;
             decButton.IsChecked = true;
         }
 
@@ -238,7 +238,7 @@ namespace xFunc.Views
             binButton.IsChecked = false;
             octButton.IsChecked = false;
             decButton.IsChecked = false;
-            mathPresenter.Base = NumberSystems.Hexidecimal;
+            mathPresenter.Base = NumeralSystem.Hexidecimal;
             hexButton.IsChecked = true;
         }
 

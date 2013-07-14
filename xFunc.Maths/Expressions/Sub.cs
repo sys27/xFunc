@@ -17,11 +17,22 @@ using System;
 namespace xFunc.Maths.Expressions
 {
     
+    /// <summary>
+    /// Represents the Subtraction operation.
+    /// </summary>
     public class Sub : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sub"/> class.
+        /// </summary>
         public Sub() : base(null, null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sub"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The minuend.</param>
+        /// <param name="secondMathExpression">The subtrahend.</param>
         public Sub(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         /// <summary>
@@ -38,16 +49,31 @@ namespace xFunc.Maths.Expressions
             return ToString("{0} - {1}");
         }
 
+        /// <summary>
+        /// Calculates this expression. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
             return firstMathExpression.Calculate() - secondMathExpression.Calculate();
         }
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
             return firstMathExpression.Calculate(parameters) - secondMathExpression.Calculate(parameters);
         }
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return firstMathExpression.Calculate(parameters, functions) - secondMathExpression.Calculate(parameters, functions);
@@ -73,7 +99,11 @@ namespace xFunc.Maths.Expressions
 
             return new Number(0);
         }
-
+        
+        /// <summary>
+        /// Clones this instance of the <see cref="Sub"/> class.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Sub(firstMathExpression.Clone(), secondMathExpression.Clone());

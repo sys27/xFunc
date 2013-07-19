@@ -31,6 +31,9 @@ namespace xFunc.Logics
         private readonly List<string> supportedOp;
 #endif
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicLexer"/> class.
+        /// </summary>
         public LogicLexer()
         {
 #if NET35_OR_GREATER || PORTABLE

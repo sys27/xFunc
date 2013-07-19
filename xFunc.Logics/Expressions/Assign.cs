@@ -23,22 +23,41 @@ namespace xFunc.Logics.Expressions
         private Variable variable;
         private ILogicExpression value;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Assign"/> class.
+        /// </summary>
         public Assign()
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Assign"/> class.
+        /// </summary>
+        /// <param name="variable">The variable.</param>
+        /// <param name="value">The value.</param>
         public Assign(Variable variable, ILogicExpression value)
         {
             this.variable = variable;
             this.value = value;
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return string.Format("{0} := {1}", variable, value);
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
+        /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
         public bool Calculate(LogicParameterCollection parameters)
         {
             if (parameters == null)
@@ -51,6 +70,10 @@ namespace xFunc.Logics.Expressions
             return false;
         }
 
+        /// <summary>
+        /// Gets or sets the variable.
+        /// </summary>
+        /// <value>The variable.</value>
         public Variable Variable
         {
             get
@@ -63,6 +86,10 @@ namespace xFunc.Logics.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>The value.</value>
         public ILogicExpression Value
         {
             get

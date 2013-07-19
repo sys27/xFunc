@@ -20,23 +20,41 @@ namespace xFunc.Logics.Expressions
     public class Or : BinaryLogicExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Or"/> class.
+        /// </summary>
         public Or()
             : base(null, null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Or"/> class.
+        /// </summary>
+        /// <param name="firstOperand">The first (left) operand.</param>
+        /// <param name="secondOperand">The second (right) operand.</param>
         public Or(ILogicExpression firstOperand, ILogicExpression secondOperand)
             : base(firstOperand, secondOperand)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return ToString("|");
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
         public override bool Calculate(LogicParameterCollection parameters)
         {
             return firstOperand.Calculate(parameters) | secondOperand.Calculate(parameters);

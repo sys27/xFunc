@@ -20,23 +20,40 @@ namespace xFunc.Logics.Expressions
     public class XOr : BinaryLogicExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XOr"/> class.
+        /// </summary>
         public XOr()
             : base(null, null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XOr"/> class.
+        /// </summary>
+        /// <param name="firstOperand">The first (left) operand.</param>
+        /// <param name="secondOperand">The second (right) operand.</param>
         public XOr(ILogicExpression firstOperand, ILogicExpression secondOperand)
             : base(firstOperand, secondOperand)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return ToString("⊕");
         }
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>A result of calculation.</returns>
         public override bool Calculate(LogicParameterCollection parameters)
         {
             return !(firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters)) & (firstOperand.Calculate(parameters) | secondOperand.Calculate(parameters));

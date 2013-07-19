@@ -30,7 +30,7 @@ namespace xFunc.Logics
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathLexerException"/> class.
+        /// Initializes a new instance of the <see cref="LogicLexerException"/> class.
         /// </summary>
         public LogicLexerException() { }
 

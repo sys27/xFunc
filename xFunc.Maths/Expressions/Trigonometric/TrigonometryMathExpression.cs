@@ -20,11 +20,23 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public abstract class TrigonometryMathExpression : UnaryMathExpression
     {
 
+        /// <summary>
+        /// The angle measurement.
+        /// </summary>
         protected AngleMeasurement angleMeasurement;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         protected TrigonometryMathExpression(IMathExpression firstMathExpression)
             : this(firstMathExpression, AngleMeasurement.Degree) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="angleMeasurement">The angle measurement.</param>
         protected TrigonometryMathExpression(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement)
             : base(firstMathExpression)
         {
@@ -35,6 +47,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
         public abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <returns>The result of calculation.</returns>
         public override double Calculate()
         {
             if (angleMeasurement == AngleMeasurement.Degree)
@@ -47,6 +63,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return double.NaN;
         }
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>The result of calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
             if (angleMeasurement == AngleMeasurement.Degree)
@@ -59,6 +80,12 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return double.NaN;
         }
 
+        /// <summary>
+        /// Calculates this expression.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="functions">The functions.</param>
+        /// <returns>The result of calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             if (angleMeasurement == AngleMeasurement.Degree)
@@ -71,6 +98,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return double.NaN;
         }
 
+        /// <summary>
+        /// Gets or sets the angle measurement.
+        /// </summary>
+        /// <value>The angle measurement.</value>
         public AngleMeasurement AngleMeasurement
         {
             get

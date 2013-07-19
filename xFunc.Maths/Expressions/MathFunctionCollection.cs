@@ -27,9 +27,17 @@ namespace xFunc.Maths.Expressions
     public class MathFunctionCollection : Dictionary<UserFunction, IMathExpression>
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathFunctionCollection"/> class.
+        /// </summary>
         public MathFunctionCollection() { }
 
 #if !PORTABLE
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathFunctionCollection"/> class.
+        /// </summary>
+        /// <param name="info">The info.</param>
+        /// <param name="context">The context.</param>
         protected MathFunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
 

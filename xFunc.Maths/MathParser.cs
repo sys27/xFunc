@@ -46,6 +46,12 @@ namespace xFunc.Maths
             this.differentiator = new MathDifferentiator(this.simplifier);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathParser"/> class.
+        /// </summary>
+        /// <param name="lexer">The lexer.</param>
+        /// <param name="simplifier">The simplifier.</param>
+        /// <param name="differentiator">The differentiator.</param>
         public MathParser(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
         {
             this.lexer = lexer;
@@ -93,21 +99,45 @@ namespace xFunc.Maths
             return simplifier.Simplify(expression);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <returns>Returns the derivative.</returns>
         public IMathExpression Differentiate(IMathExpression expression)
         {
             return differentiator.Differentiate(expression);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         public IMathExpression Differentiate(IMathExpression expression, Variable variable)
         {
             return differentiator.Differentiate(expression, variable);
         }
 
+        /// <summary>
+        /// Parses the specified function.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>The parsed expression.</returns>
         public IMathExpression Parse(string function)
         {
             return Parse(function, true);
         }
 
+        /// <summary>
+        /// Parses the specified function.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <param name="simplify">if set to <c>true</c>, simplifies the expression.</param>
+        /// <returns>The parsed expression.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
+        /// <exception cref="MathParserException">Error while parsing.</exception>
         public IMathExpression Parse(string function, bool simplify)
         {
 #if NET40_OR_GREATER || PORTABLE

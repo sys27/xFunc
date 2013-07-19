@@ -20,10 +20,22 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Tan : TrigonometryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tan"/> class.
+        /// </summary>
         public Tan() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tan"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Tan(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tan"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="angleMeasurement">The angle measurement.</param>
         public Tan(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
@@ -63,6 +75,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return div;
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Tan(firstMathExpression.Clone());

@@ -8,12 +8,19 @@ namespace xFunc.Maths.Expressions
 
         private IMathExpression key;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Undefine"/> class.
+        /// </summary>
         public Undefine()
             : this(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Undefine"/> class.
+        /// </summary>
+        /// <param name="key">The key.</param>
         public Undefine(IMathExpression key)
         {
             this.Key = key;
@@ -86,6 +93,10 @@ namespace xFunc.Maths.Expressions
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
             return new Undefine((Variable)key.Clone());
@@ -105,6 +116,11 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>The key.</value>
+        /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
         public IMathExpression Key
         {
             get

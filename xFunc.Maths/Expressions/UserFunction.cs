@@ -29,14 +29,28 @@ namespace xFunc.Maths.Expressions
         private IMathExpression[] arguments;
         private int countOfParams;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFunction"/> class.
+        /// </summary>
         public UserFunction()
             : this(null, null, -1)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFunction"/> class.
+        /// </summary>
+        /// <param name="function">The name of function.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
         public UserFunction(string function, int countOfParams) : this(function, null, countOfParams) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFunction"/> class.
+        /// </summary>
+        /// <param name="function">The name of function.</param>
+        /// <param name="args">Arguments.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
         public UserFunction(string function, IMathExpression[] args, int countOfParams)
         {
             this.function = function;
@@ -44,6 +58,11 @@ namespace xFunc.Maths.Expressions
             this.countOfParams = countOfParams;
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             var exp = obj as UserFunction;
@@ -53,6 +72,10 @@ namespace xFunc.Maths.Expressions
             return false;
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
             return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ countOfParams.GetHashCode();
@@ -118,13 +141,17 @@ namespace xFunc.Maths.Expressions
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
             return new UserFunction(function, arguments, countOfParams);
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// This property always returns <c>null</c>.
         /// </summary>
         public IMathExpression Parent
         {
@@ -137,6 +164,10 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the name of function.
+        /// </summary>
+        /// <value>The name of function.</value>
         public string Function
         {
             get
@@ -145,6 +176,10 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the arguments.
+        /// </summary>
+        /// <value>The arguments.</value>
         public IMathExpression[] Arguments
         {
             get
@@ -157,6 +192,10 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>The count of parameters.</value>
         public int CountOfParams
         {
             get

@@ -20,18 +20,30 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arcsec : TrigonometryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arcsec"/> class.
+        /// </summary>
         public Arcsec()
             : base(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arcsec"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Arcsec(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arcsec"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="angleMeasurement">The angle measurement.</param>
         public Arcsec(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
@@ -70,6 +82,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return div;
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Arcsec(firstMathExpression.Clone());

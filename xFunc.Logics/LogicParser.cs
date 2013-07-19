@@ -31,17 +31,31 @@ namespace xFunc.Logics
         private string lastFunc = string.Empty;
         private ILogicExpression logicExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicParser"/> class.
+        /// </summary>
         public LogicParser()
             : this(new LogicLexer())
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogicParser"/> class.
+        /// </summary>
+        /// <param name="lexer">The lexer.</param>
         public LogicParser(ILexer lexer)
         {
             this.lexer = lexer;
         }
 
+        /// <summary>
+        /// Parses the specified function.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>The parsed expression.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
+        /// <exception cref="LogicParserException">Error while parsing.</exception>
         public ILogicExpression Parse(string function)
         {
 #if NET40_OR_GREATER || PORTABLE
@@ -115,6 +129,11 @@ namespace xFunc.Logics
             return logicExpression;
         }
 
+        /// <summary>
+        /// Gets parameters of expression.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>A collection of parameters.</returns>
         public LogicParameterCollection GetLogicParameters(string function)
         {
 #if NET40_OR_GREATER

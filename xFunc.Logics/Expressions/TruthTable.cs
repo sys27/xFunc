@@ -20,10 +20,23 @@ namespace xFunc.Logics.Expressions
     public class TruthTable : UnaryLogicExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TruthTable"/> class.
+        /// </summary>
         public TruthTable() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TruthTable"/> class.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
         public TruthTable(ILogicExpression expression) : base(expression) { }
 
+        /// <summary>
+        /// Always throws <see cref="NotSupportedException"/>.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns></returns>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public override bool Calculate(LogicParameterCollection parameters)
         {
             throw new NotSupportedException();

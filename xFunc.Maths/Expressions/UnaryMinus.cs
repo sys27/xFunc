@@ -20,8 +20,15 @@ namespace xFunc.Maths.Expressions
     public class UnaryMinus : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
+        /// </summary>
         public UnaryMinus() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The expression.</param>
         public UnaryMinus(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
@@ -51,6 +58,10 @@ namespace xFunc.Maths.Expressions
             return -firstMathExpression.Calculate(parameters, functions);
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new UnaryMinus(firstMathExpression.Clone());

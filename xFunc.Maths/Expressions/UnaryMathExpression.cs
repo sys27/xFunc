@@ -26,11 +26,20 @@ namespace xFunc.Maths.Expressions
         protected IMathExpression parentMathExpression;
         protected IMathExpression firstMathExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnaryMathExpression"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The expression.</param>
         protected UnaryMathExpression(IMathExpression firstMathExpression)
         {
             FirstMathExpression = firstMathExpression;
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -42,6 +51,11 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Equals(exp.FirstMathExpression);
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         protected string ToString(string format)
         {
             return string.Format(format, firstMathExpression);
@@ -53,6 +67,10 @@ namespace xFunc.Maths.Expressions
 
         public abstract double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public abstract IMathExpression Clone();
 
         public IMathExpression Differentiate()
@@ -72,6 +90,10 @@ namespace xFunc.Maths.Expressions
 
         protected abstract IMathExpression _Differentiation(Variable variable);
 
+        /// <summary>
+        /// Gets or sets the expression.
+        /// </summary>
+        /// <value>The expression.</value>
         public IMathExpression FirstMathExpression
         {
             get

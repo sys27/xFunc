@@ -20,12 +20,19 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Arcosh : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arcosh"/> class.
+        /// </summary>
         public Arcosh()
             : base(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arcosh"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Arcosh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
@@ -56,6 +63,10 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return MathExtentions.Acosh(firstMathExpression.Calculate(parameters, functions));
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Arcosh(firstMathExpression.Clone());

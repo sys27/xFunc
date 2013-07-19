@@ -20,8 +20,16 @@ namespace xFunc.Maths.Expressions
     public class Mul : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Mul"/> class.
+        /// </summary>
         public Mul() : base(null, null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Mul"/> class.
+        /// </summary>
+        /// <param name="firstOperand">The first (left) operand.</param>
+        /// <param name="secondOperand">The second (right) operand.</param>
         public Mul(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         /// <summary>
@@ -78,6 +86,10 @@ namespace xFunc.Maths.Expressions
             return new Number(0);
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Mul(firstMathExpression.Clone(), secondMathExpression.Clone());

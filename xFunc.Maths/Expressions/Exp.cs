@@ -20,8 +20,15 @@ namespace xFunc.Maths.Expressions
     public class Exp : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exp"/> class.
+        /// </summary>
         public Exp() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exp"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Exp(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
@@ -55,6 +62,10 @@ namespace xFunc.Maths.Expressions
             return mul;
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Exp(firstMathExpression.Clone());

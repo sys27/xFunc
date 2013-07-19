@@ -20,8 +20,16 @@ namespace xFunc.Maths.Expressions
     public class Div : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Div"/> class.
+        /// </summary>
         public Div() : base(null, null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Div"/> class.
+        /// </summary>
+        /// <param name="firstOperand">The first (left) operand.</param>
+        /// <param name="secondOperand">The second (right) operand.</param>
         public Div(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         /// <summary>
@@ -85,6 +93,10 @@ namespace xFunc.Maths.Expressions
             return new Number(0);
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Div(firstMathExpression.Clone(), secondMathExpression.Clone());

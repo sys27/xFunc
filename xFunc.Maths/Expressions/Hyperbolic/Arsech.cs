@@ -20,12 +20,19 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Arsech : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arsech"/> class.
+        /// </summary>
         public Arsech()
             : base(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arsech"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Arsech(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
@@ -56,6 +63,10 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return MathExtentions.Asech(firstMathExpression.Calculate(parameters, functions));
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Arsech(firstMathExpression.Clone());

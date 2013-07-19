@@ -22,16 +22,31 @@ namespace xFunc.Logics.Expressions
 
         private string variable;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Variable"/> class.
+        /// </summary>
+        /// <param name="variable">The name of variable.</param>
         public Variable(string variable)
         {
             this.variable = variable;
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return variable.ToString();
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
+        /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
         public bool Calculate(LogicParameterCollection parameters)
         {
             if (parameters == null)
@@ -40,6 +55,10 @@ namespace xFunc.Logics.Expressions
             return parameters[variable];
         }
 
+        /// <summary>
+        /// Gets the name of variable.
+        /// </summary>
+        /// <value>The name of variable.</value>
         public string Character
         {
             get

@@ -20,23 +20,40 @@ namespace xFunc.Logics.Expressions
     public class Not : UnaryLogicExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Not"/> class.
+        /// </summary>
         public Not()
             : base(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Not"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The expression.</param>
         public Not(ILogicExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return ToString("!");
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
         public override bool Calculate(LogicParameterCollection parameters)
         {
             return !firstMathExpression.Calculate(parameters);

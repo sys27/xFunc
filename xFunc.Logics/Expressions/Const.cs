@@ -22,21 +22,38 @@ namespace xFunc.Logics.Expressions
 
         private bool value;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Const"/> class.
+        /// </summary>
         public Const()
         {
             
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Const"/> class.
+        /// </summary>
+        /// <param name="value">The value of constant.</param>
         public Const(bool value)
         {
             this.value = value;
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return value.ToString();
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
         public bool Calculate(LogicParameterCollection parameters)
         {
             return value;

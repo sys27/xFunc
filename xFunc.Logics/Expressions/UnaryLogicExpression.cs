@@ -22,11 +22,20 @@ namespace xFunc.Logics.Expressions
 
         protected ILogicExpression firstMathExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnaryLogicExpression"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The expression.</param>
         protected UnaryLogicExpression(ILogicExpression firstMathExpression)
         {
             this.firstMathExpression = firstMathExpression;
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <param name="operand">The operand.</param>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         protected string ToString(string operand)
         {
             if (firstMathExpression is Variable)
@@ -35,8 +44,18 @@ namespace xFunc.Logics.Expressions
             return string.Format("{0}({1})", operand, firstMathExpression);
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
         public abstract bool Calculate(LogicParameterCollection parameters);
 
+        /// <summary>
+        /// Gets or sets the expression.
+        /// </summary>
+        /// <value>The expression.</value>
         public ILogicExpression FirstMathExpression
         {
             get

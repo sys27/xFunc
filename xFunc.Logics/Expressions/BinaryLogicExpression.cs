@@ -23,12 +23,22 @@ namespace xFunc.Logics.Expressions
         protected ILogicExpression firstOperand;
         protected ILogicExpression secondOperand;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryLogicExpression"/> class.
+        /// </summary>
+        /// <param name="firstOperand">The first (left) operand.</param>
+        /// <param name="secondOperand">The second (right) operand.</param>
         protected BinaryLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
         {
             this.firstOperand = firstOperand;
             this.secondOperand = secondOperand;
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <param name="operand">The operand.</param>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         protected string ToString(string operand)
         {
             string first;
@@ -47,8 +57,18 @@ namespace xFunc.Logics.Expressions
             return first + " " + operand + " " + second;
         }
 
+        /// <summary>
+        /// Calculates this logical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>A result of the calculation.</returns>
+        /// <seealso cref="LogicParameterCollection" />
         public abstract bool Calculate(LogicParameterCollection parameters);
 
+        /// <summary>
+        /// Gets or sets the first (left) operand.
+        /// </summary>
+        /// <value>The first (left) operand.</value>
         public ILogicExpression FirstOperand
         {
             get
@@ -61,6 +81,10 @@ namespace xFunc.Logics.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the second (right) operand.
+        /// </summary>
+        /// <value>The second (right) operand.</value>
         public ILogicExpression SecondOperand
         {
             get

@@ -18,7 +18,7 @@ namespace xFunc.Maths
 {
 
     /// <summary>
-    /// Provides static methods for trigonometric and hyperbolic functions.
+    /// Provides static methods for additional functions.
     /// </summary>
     public static class MathExtentions
     {

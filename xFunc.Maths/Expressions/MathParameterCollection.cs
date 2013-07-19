@@ -27,15 +27,27 @@ namespace xFunc.Maths.Expressions
     public class MathParameterCollection : Dictionary<string, double>
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathParameterCollection"/> class.
+        /// </summary>
         public MathParameterCollection()
         {
             Add("π", Math.PI);
             Add("e", Math.E);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathParameterCollection"/> class.
+        /// </summary>
+        /// <param name="dictionary">The dictionary.</param>
         public MathParameterCollection(IDictionary<string, double> dictionary) : base(dictionary) { }
 
 #if !PORTABLE
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathParameterCollection"/> class.
+        /// </summary>
+        /// <param name="info">The info.</param>
+        /// <param name="context">The context.</param>
         protected MathParameterCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
 

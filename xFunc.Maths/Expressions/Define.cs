@@ -32,6 +32,11 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Define"/> class.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
         public Define(IMathExpression key, IMathExpression value)
         {
             this.Key = key;
@@ -128,6 +133,11 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>The key.</value>
+        /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
         public IMathExpression Key
         {
             get
@@ -145,6 +155,10 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>The value.</value>
         public IMathExpression Value
         {
             get

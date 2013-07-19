@@ -20,8 +20,16 @@ namespace xFunc.Maths.Expressions
     public class Root : BinaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Root"/> class.
+        /// </summary>
         public Root() : base(null, null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Root"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The first operand.</param>
+        /// <param name="secondMathExpression">The second operand.</param>
         public Root(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         /// <summary>
@@ -68,6 +76,10 @@ namespace xFunc.Maths.Expressions
             return new Number(0);
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Root(firstMathExpression.Clone(), secondMathExpression.Clone());

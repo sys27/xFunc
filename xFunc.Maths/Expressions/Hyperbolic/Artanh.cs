@@ -20,12 +20,19 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Artanh : UnaryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Artanh"/> class.
+        /// </summary>
         public Artanh()
             : base(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Artanh"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Artanh(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
@@ -56,6 +63,10 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return MathExtentions.Atanh(firstMathExpression.Calculate(parameters, functions));
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Artanh(firstMathExpression.Clone());

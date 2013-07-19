@@ -24,8 +24,16 @@ namespace xFunc.Maths.Expressions
         private IMathExpression firstMathExpression;
         private Variable variable;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Derivative"/> class.
+        /// </summary>
         public Derivative() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Derivative"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The expression.</param>
+        /// <param name="variable">The variable.</param>
         public Derivative(IMathExpression firstMathExpression, Variable variable)
         {
             this.firstMathExpression = firstMathExpression;
@@ -84,6 +92,10 @@ namespace xFunc.Maths.Expressions
             return firstMathExpression.Differentiate(this.variable);
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
             return new Derivative(firstMathExpression.Clone(), (Variable)variable.Clone());

@@ -8,13 +8,25 @@ namespace xFunc.Maths.Expressions
 
         private IMathExpression firstMathExpression;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Simplify"/> class.
+        /// </summary>
         public Simplify() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Simplify"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Simplify(IMathExpression firstMathExpression)
         {
             this.firstMathExpression = firstMathExpression;
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             var simp = obj as Simplify;
@@ -24,6 +36,10 @@ namespace xFunc.Maths.Expressions
             return false;
         }
 
+        /// <summary>
+        /// Returns a <see cref="String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return string.Format("simplify({0})", firstMathExpression.ToString());
@@ -54,11 +70,18 @@ namespace xFunc.Maths.Expressions
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
             return new Simplify(firstMathExpression.Clone());
         }
 
+        /// <summary>
+        /// This property always returns <c>null</c>.
+        /// </summary>
         public IMathExpression Parent
         {
             get

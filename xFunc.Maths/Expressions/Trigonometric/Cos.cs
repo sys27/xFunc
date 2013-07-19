@@ -20,10 +20,22 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Cos : TrigonometryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cos"/> class.
+        /// </summary>
         public Cos() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cos"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Cos(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cos"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="angleMeasurement">The angle measurement.</param>
         public Cos(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
@@ -63,6 +75,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return unMinus;
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Cos(firstMathExpression.Clone());

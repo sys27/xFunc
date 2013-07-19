@@ -20,10 +20,22 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arccos : TrigonometryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arccos"/> class.
+        /// </summary>
         public Arccos() : base(null) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arccos"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Arccos(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arccos"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="angleMeasurement">The angle measurement.</param>
         public Arccos(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
@@ -65,6 +77,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return unMinus;
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Arccos(firstMathExpression.Clone());

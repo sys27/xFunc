@@ -32,6 +32,11 @@ namespace xFunc.Maths.Expressions
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LCM"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The first operand.</param>
+        /// <param name="secondMathExpression">The second operand.</param>
         public LCM(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
             : base(firstMathExpression, secondMathExpression)
         {

@@ -20,18 +20,30 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Csc : TrigonometryMathExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Csc"/> class.
+        /// </summary>
         public Csc()
             : base(null)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Csc"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
         public Csc(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Csc"/> class.
+        /// </summary>
+        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="angleMeasurement">The angle measurement.</param>
         public Csc(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
@@ -73,6 +85,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return mul2;
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
             return new Csc(firstMathExpression.Clone());

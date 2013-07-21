@@ -58,24 +58,23 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("csc({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
-            // todo: ...
-            return 1 / Math.Sin(radian);
+            return MathExtentions.Csc(radian);
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return 1 / Math.Sin(firstMathExpression.Calculate(parameters, functions));
+            return MathExtentions.Csc(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
 
-            return 1 / Math.Sin(radian);
+            return MathExtentions.Csc(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)

@@ -50,19 +50,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("cos({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
             return Math.Cos(radian);
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Cos(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
 

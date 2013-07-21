@@ -61,10 +61,34 @@ namespace xFunc.Maths.Expressions
             return string.Format(format, firstMathExpression);
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public abstract double Calculate();
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
         public abstract double Calculate(MathParameterCollection parameters);
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         public abstract double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
 
         /// <summary>

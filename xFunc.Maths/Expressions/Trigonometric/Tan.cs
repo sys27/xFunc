@@ -16,7 +16,10 @@ using System;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
-    
+
+    /// <summary>
+    /// Represents the Tangent function.
+    /// </summary>
     public class Tan : TrigonometryMathExpression
     {
 

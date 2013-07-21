@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Cotangent function.
+    /// </summary>
     public class Cot : TrigonometryMathExpression
     {
 

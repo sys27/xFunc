@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Cosecant function.
+    /// </summary>
     public class Csc : TrigonometryMathExpression
     {
 
@@ -59,6 +62,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
 
+            // todo: ...
             return 1 / Math.Sin(radian);
         }
 

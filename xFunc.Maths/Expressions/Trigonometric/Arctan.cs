@@ -50,19 +50,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("arctan({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = firstMathExpression.Calculate(parameters, functions);
 
             return Math.Atan(radian) / Math.PI * 180;
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Atan(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = firstMathExpression.Calculate(parameters, functions);
 

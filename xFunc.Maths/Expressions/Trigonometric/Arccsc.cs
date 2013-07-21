@@ -50,17 +50,17 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("arccsc({0})");
         }
 
-        public override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return MathExtentions.Acsc(firstMathExpression.Calculate(parameters, functions)) / Math.PI * 180;
         }
 
-        public override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return MathExtentions.Acsc(firstMathExpression.Calculate(parameters, functions));
         }
 
-        public override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
+        protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return MathExtentions.Acsc(firstMathExpression.Calculate(parameters, functions)) / Math.PI * 200;
         }

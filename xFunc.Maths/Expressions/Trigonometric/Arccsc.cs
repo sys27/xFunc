@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Arccosecant function.
+    /// </summary>
     public class Arccsc : TrigonometryMathExpression
     {
 

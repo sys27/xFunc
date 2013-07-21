@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
+    /// </summary>
     public abstract class TrigonometryMathExpression : UnaryMathExpression
     {
 
@@ -43,6 +46,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
             this.angleMeasurement = angleMeasurement;
         }
 
+        // todo: protected
         public abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);
         public abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
         public abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);

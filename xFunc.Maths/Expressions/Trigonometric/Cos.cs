@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Cosine function.
+    /// </summary>
     public class Cos : TrigonometryMathExpression
     {
 

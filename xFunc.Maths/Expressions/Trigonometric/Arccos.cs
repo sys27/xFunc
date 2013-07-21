@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Arccosine function.
+    /// </summary>
     public class Arccos : TrigonometryMathExpression
     {
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Properties;
+using xFunc.Resources;
 using xFunc.ViewModels;
 using xFunc.Views;
 
@@ -29,7 +30,11 @@ namespace xFunc.Presenters
 
         public void Add(string strExp)
         {
-            listOfGraphs.Add(new GraphItemViewModel(parser.Parse(strExp), true, null));
+            var exp = parser.Parse(strExp);
+            if (!MathParser.HasVar(exp, "x"))
+                throw new MathParserException(Resource.VariableNotFoundExceptionError);
+
+            listOfGraphs.Add(new GraphItemViewModel(exp, true, null));
 
             while (listOfGraphs.Count > countOfGraphs)
                 listOfGraphs.RemoveAt(0);

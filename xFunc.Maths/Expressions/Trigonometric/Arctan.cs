@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Arctangent function.
+    /// </summary>
     public class Arctan : TrigonometryMathExpression
     {
 

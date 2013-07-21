@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
 
+    /// <summary>
+    /// Represents the Secant function.
+    /// </summary>
     public class Sec : TrigonometryMathExpression
     {
 

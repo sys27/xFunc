@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents the unary minus.
+    /// </summary>
     public class UnaryMinus : UnaryMathExpression
     {
 
@@ -43,16 +46,40 @@ namespace xFunc.Maths.Expressions
             return ToString("-{0}");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public override double Calculate()
         {
             return -firstMathExpression.Calculate();
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
         public override double Calculate(MathParameterCollection parameters)
         {
             return -firstMathExpression.Calculate(parameters);
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return -firstMathExpression.Calculate(parameters, functions);

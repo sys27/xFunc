@@ -46,10 +46,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
             this.angleMeasurement = angleMeasurement;
         }
 
-        // todo: protected
-        public abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);
-        public abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
-        public abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);
+        protected abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);
+        protected abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
+        protected abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);
 
         /// <summary>
         /// Calculates this expression.

@@ -5,12 +5,17 @@ using System.Resources;
 
 [assembly: AssemblyTitle("xFunc.Logics")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("xFunc.Logics")]
 [assembly: AssemblyCopyright("Copyright © 2012-2013 Dmitry Kischenko")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+#endif
 
 #if !PORTABLE
 [assembly: ComVisible(false)]
@@ -19,4 +24,5 @@ using System.Resources;
 
 [assembly: AssemblyVersion("2.3.3")]
 [assembly: AssemblyFileVersion("2.3.3")]
+[assembly: AssemblyInformationalVersion("2.3.3")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

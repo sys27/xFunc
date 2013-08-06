@@ -17,9 +17,15 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// The abstract base class that represents the unary operation.
+    /// </summary>
     public abstract class UnaryLogicExpression : ILogicExpression
     {
 
+        /// <summary>
+        /// The (first) operand.
+        /// </summary>
         protected ILogicExpression firstMathExpression;
 
         /// <summary>

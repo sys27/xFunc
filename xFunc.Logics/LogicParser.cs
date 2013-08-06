@@ -159,6 +159,12 @@ namespace xFunc.Logics
             return new LogicParameterCollection(c);
         }
 
+        /// <summary>
+        /// Converts the logic expression to collection.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="expression"/> variable is null.</exception>
         public IEnumerable<ILogicExpression> ConvertLogicExpressionToCollection(ILogicExpression expression)
         {
             if (expression == null)

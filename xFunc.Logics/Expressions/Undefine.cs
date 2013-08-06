@@ -2,7 +2,10 @@
 
 namespace xFunc.Logics.Expressions
 {
-    
+
+    /// <summary>
+    /// Represents the Undefine operation.
+    /// </summary>
     public class Undefine : ILogicExpression
     {
 

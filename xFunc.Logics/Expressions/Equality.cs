@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the Equality operation.
+    /// </summary>
     public class Equality : BinaryLogicExpression
     {
 

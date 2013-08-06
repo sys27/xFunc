@@ -16,7 +16,10 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-    
+
+    /// <summary>
+    /// Represents the Variable expression.
+    /// </summary>
     public class Variable : ILogicExpression
     {
 

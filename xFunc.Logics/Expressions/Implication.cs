@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the Implication operation.
+    /// </summary>
     public class Implication : BinaryLogicExpression
     {
 

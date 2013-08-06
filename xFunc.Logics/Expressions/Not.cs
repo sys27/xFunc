@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the Not operation.
+    /// </summary>
     public class Not : UnaryLogicExpression
     {
 

@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the Or operation.
+    /// </summary>
     public class Or : BinaryLogicExpression
     {
 

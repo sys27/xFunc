@@ -16,7 +16,10 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-    
+
+    /// <summary>
+    /// Represents the NAnd operation.
+    /// </summary>
     public class NAnd : BinaryLogicExpression
     {
 

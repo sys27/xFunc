@@ -23,7 +23,13 @@ namespace xFunc.Maths.Expressions
     public abstract class UnaryMathExpression : IMathExpression
     {
 
+        /// <summary>
+        /// The parent expression of this expression.
+        /// </summary>
         protected IMathExpression parentMathExpression;
+        /// <summary>
+        /// The (first) operand.
+        /// </summary>
         protected IMathExpression firstMathExpression;
 
         /// <summary>

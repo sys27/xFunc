@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the Assign operation.
+    /// </summary>
     public class Assign : ILogicExpression
     {
 

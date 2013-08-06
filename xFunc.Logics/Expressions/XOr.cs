@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the XOr operation.
+    /// </summary>
     public class XOr : BinaryLogicExpression
     {
 

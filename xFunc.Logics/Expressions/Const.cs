@@ -16,7 +16,10 @@ using System;
 
 namespace xFunc.Logics.Expressions
 {
-    
+
+    /// <summary>
+    /// Reprenents True or False.
+    /// </summary>
     public class Const : ILogicExpression
     {
 

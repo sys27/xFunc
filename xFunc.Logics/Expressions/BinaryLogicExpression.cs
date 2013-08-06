@@ -17,10 +17,19 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// The base class for binary operations.
+    /// </summary>
     public abstract class BinaryLogicExpression : ILogicExpression
     {
 
+        /// <summary>
+        /// The left (first) operand.
+        /// </summary>
         protected ILogicExpression firstOperand;
+        /// <summary>
+        /// The right (second) operand.
+        /// </summary>
         protected ILogicExpression secondOperand;
 
         /// <summary>

@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the NOr operation.
+    /// </summary>
     public class NOr : BinaryLogicExpression
     {
 

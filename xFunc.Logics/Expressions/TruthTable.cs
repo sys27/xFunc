@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Logics.Expressions
 {
 
+    /// <summary>
+    /// Represents the TruthTable operation.
+    /// </summary>
     public class TruthTable : UnaryLogicExpression
     {
 

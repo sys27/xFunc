@@ -337,16 +337,22 @@ namespace xFunc.Views
                 logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString();
         }
 
+        private TextBox GetSelectedTextBox()
+        {
+            if (tabControl.SelectedItem == mathTab)
+                return mathExpressionBox;
+            if (tabControl.SelectedItem == logicTab)
+                return logicExpressionBox;
+            if (tabControl.SelectedItem == graphsTab)
+                return graphExpressionBox;
+
+            return null;
+        }
+
         private void InsertChar_Click(object o, RoutedEventArgs args)
         {
             var tag = ((Button)o).Tag.ToString();
-            TextBox tb = null;
-            if (tabControl.SelectedItem == mathTab)
-                tb = mathExpressionBox;
-            else if (tabControl.SelectedItem == logicTab)
-                tb = logicExpressionBox;
-            else if (tabControl.SelectedItem == graphsTab)
-                tb = graphExpressionBox;
+            TextBox tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
             tb.Text = tb.Text.Insert(prevSelectionStart, tag);
@@ -357,13 +363,7 @@ namespace xFunc.Views
         private void InsertFunc_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            TextBox tb = null;
-            if (tabControl.SelectedItem == mathTab)
-                tb = mathExpressionBox;
-            else if (tabControl.SelectedItem == logicTab)
-                tb = logicExpressionBox;
-            else if (tabControl.SelectedItem == graphsTab)
-                tb = graphExpressionBox;
+            TextBox tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
 
@@ -386,13 +386,7 @@ namespace xFunc.Views
         private void InsertInv_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            TextBox tb = null;
-            if (tabControl.SelectedItem == mathTab)
-                tb = mathExpressionBox;
-            else if (tabControl.SelectedItem == logicTab)
-                tb = logicExpressionBox;
-            else if (tabControl.SelectedItem == graphsTab)
-                tb = graphExpressionBox;
+            TextBox tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
 
@@ -415,13 +409,7 @@ namespace xFunc.Views
         private void InsertDoubleArgFunc_Click(object o, RoutedEventArgs args)
         {
             string func = ((Button)o).Tag.ToString();
-            TextBox tb = null;
-            if (tabControl.SelectedItem == mathTab)
-                tb = mathExpressionBox;
-            else if (tabControl.SelectedItem == logicTab)
-                tb = logicExpressionBox;
-            else if (tabControl.SelectedItem == graphsTab)
-                tb = graphExpressionBox;
+            TextBox tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
 

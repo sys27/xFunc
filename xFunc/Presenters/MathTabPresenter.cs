@@ -71,11 +71,11 @@ namespace xFunc.Presenters
         {
             get
             {
-                return workspace.Parser.AngleMeasurement;
+                return workspace.MathProcessor.AngleMeasurement;
             }
             set
             {
-                workspace.Parser.AngleMeasurement = value;
+                workspace.MathProcessor.AngleMeasurement = value;
             }
         }
 

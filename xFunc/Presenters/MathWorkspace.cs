@@ -25,7 +25,7 @@ namespace xFunc.Presenters
     public class MathWorkspace
     {
 
-        private MathParser parser;
+        private MathProcessor mathProcessor;
 
         private int countOfExps;
         private List<MathWorkspaceItem> expressions;
@@ -45,7 +45,7 @@ namespace xFunc.Presenters
         {
             this.countOfExps = countOfExps;
             expressions = new List<MathWorkspaceItem>(countOfExps);
-            parser = new MathParser();
+            mathProcessor = new MathProcessor();
             parameters = new MathParameterCollection();
             functions = new MathFunctionCollection();
         }
@@ -62,11 +62,11 @@ namespace xFunc.Presenters
 
             foreach (var s in exps)
             {
-                IMathExpression exp = parser.Parse(s);
+                IMathExpression exp = mathProcessor.Parse(s);
                 MathWorkspaceItem item = new MathWorkspaceItem(s, exp);
                 if (exp is Derivative)
                 {
-                    item.Answer = parser.Differentiate(exp, null).ToString();
+                    item.Answer = mathProcessor.Differentiate(exp, null).ToString();
                 }
                 else if (exp is Simplify)
                 {
@@ -119,11 +119,11 @@ namespace xFunc.Presenters
             expressions.RemoveAt(index);
         }
 
-        public MathParser Parser
+        public MathProcessor MathProcessor
         {
             get
             {
-                return parser;
+                return mathProcessor;
             }
         }
 

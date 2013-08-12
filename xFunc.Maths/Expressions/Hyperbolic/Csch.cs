@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
+    /// <summary>
+    /// Represents the Hyperbolic cosecant function.
+    /// </summary>
     public class Csch : UnaryMathExpression
     {
 

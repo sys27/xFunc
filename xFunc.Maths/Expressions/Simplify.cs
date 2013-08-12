@@ -16,7 +16,10 @@ using System;
 
 namespace xFunc.Maths.Expressions
 {
-    
+
+    /// <summary>
+    /// Represents the Simplify operation.
+    /// </summary>
     public class Simplify  : IMathExpression
     {
 

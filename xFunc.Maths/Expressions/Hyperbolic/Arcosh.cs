@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
+    /// <summary>
+    /// Represents the Arcosh function.
+    /// </summary>
     public class Arcosh : UnaryMathExpression
     {
 

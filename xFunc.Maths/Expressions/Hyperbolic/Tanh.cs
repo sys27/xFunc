@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
+    /// <summary>
+    /// Represents the Hyperbolic tangent function.
+    /// </summary>
     public class Tanh : UnaryMathExpression
     {
 

@@ -3,6 +3,9 @@
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents the Undefice operation.
+    /// </summary>
     public class Undefine : IMathExpression
     {
 

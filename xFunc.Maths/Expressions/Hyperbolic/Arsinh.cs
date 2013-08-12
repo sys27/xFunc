@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
+    /// <summary>
+    /// Represents the Arsinh function.
+    /// </summary>
     public class Arsinh : UnaryMathExpression
     {
 

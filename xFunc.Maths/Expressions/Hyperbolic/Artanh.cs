@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
+    /// <summary>
+    /// Represents the Artanh function.
+    /// </summary>
     public class Artanh : UnaryMathExpression
     {
 

@@ -22,6 +22,9 @@ using System.Text;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents user-defined functions.
+    /// </summary>
     public class UserFunction : IMathExpression
     {
 

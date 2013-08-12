@@ -22,6 +22,9 @@ namespace xFunc.Maths.Expressions
 {
 
 #if !PORTABLE
+    /// <summary>
+    /// Strongly typed dictionaty that contains value of variables.
+    /// </summary>
     [Serializable]
 #endif
     public class MathParameterCollection : Dictionary<string, double>

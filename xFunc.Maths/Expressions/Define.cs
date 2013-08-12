@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents the Define operation.
+    /// </summary>
     public class Define : IMathExpression
     {
 

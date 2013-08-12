@@ -22,6 +22,9 @@ namespace xFunc.Maths.Expressions
 {
 
 #if !PORTABLE
+    /// <summary>
+    /// Strongly typed dictionaty that contains user-defined functions.
+    /// </summary>
     [Serializable]
 #endif
     public class MathFunctionCollection : Dictionary<UserFunction, IMathExpression>

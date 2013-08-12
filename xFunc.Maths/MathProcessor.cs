@@ -12,6 +12,9 @@ namespace xFunc.Maths
         private IDifferentiator differentiator;
         private MathParser parser;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathProcessor"/> class.
+        /// </summary>
         public MathProcessor()
         {
             lexer = new MathLexer();
@@ -20,6 +23,12 @@ namespace xFunc.Maths
             parser = new MathParser(lexer, simplifier);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathProcessor"/> class.
+        /// </summary>
+        /// <param name="lexer">The lexer.</param>
+        /// <param name="simplifier">The simplifier.</param>
+        /// <param name="differentiator">The differentiator.</param>
         public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
         {
             this.lexer = lexer;
@@ -85,6 +94,10 @@ namespace xFunc.Maths
             return parser.Parse(function);
         }
 
+        /// <summary>
+        /// Gets or Sets a measurement of angles.
+        /// </summary>
+        /// <seealso cref="AngleMeasurement"/>
         public AngleMeasurement AngleMeasurement
         {
             get

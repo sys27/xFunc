@@ -29,7 +29,6 @@ namespace xFunc.Maths
 
         private ILexer lexer;
         private ISimplifier simplifier;
-        private IDifferentiator differentiator;
 
         private string lastFunc = string.Empty;
         private IMathExpression mathExpression;
@@ -43,7 +42,6 @@ namespace xFunc.Maths
         {
             this.lexer = new MathLexer();
             this.simplifier = new MathSimplifier();
-            this.differentiator = new MathDifferentiator(this.simplifier);
         }
 
         /// <summary>
@@ -52,11 +50,10 @@ namespace xFunc.Maths
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
-        public MathParser(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
+        public MathParser(ILexer lexer, ISimplifier simplifier)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
-            this.differentiator = differentiator;
         }
 
         /// <summary>
@@ -87,37 +84,6 @@ namespace xFunc.Maths
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Simplifies the <paramref name="expression"/>.
-        /// </summary>
-        /// <param name="expression">A expression to simplify.</param>
-        /// <returns>A simplified expression.</returns>
-        public IMathExpression Simplify(IMathExpression expression)
-        {
-            return simplifier.Simplify(expression);
-        }
-
-        /// <summary>
-        /// Differentiates the specified expression.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <returns>Returns the derivative.</returns>
-        public IMathExpression Differentiate(IMathExpression expression)
-        {
-            return differentiator.Differentiate(expression);
-        }
-
-        /// <summary>
-        /// Differentiates the specified expression.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <param name="variable">The variable.</param>
-        /// <returns>Returns the derivative.</returns>
-        public IMathExpression Differentiate(IMathExpression expression, Variable variable)
-        {
-            return differentiator.Differentiate(expression, variable);
         }
 
         /// <summary>

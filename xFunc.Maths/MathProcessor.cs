@@ -66,7 +66,7 @@ namespace xFunc.Maths
         /// <returns>The parsed expression.</returns>
         public IMathExpression Parse(string function)
         {
-            return parser.Parse(function);
+            return Parse(function, true);
         }
 
         /// <summary>
@@ -79,7 +79,10 @@ namespace xFunc.Maths
         /// <exception cref="MathParserException">Error while parsing.</exception>
         public IMathExpression Parse(string function, bool simplify)
         {
-            return parser.Parse(function, simplify);
+            if (simplify)
+                return simplifier.Simplify(parser.Parse(function));
+
+            return parser.Parse(function);
         }
 
         public AngleMeasurement AngleMeasurement

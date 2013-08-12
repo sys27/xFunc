@@ -93,19 +93,6 @@ namespace xFunc.Maths
         /// <returns>The parsed expression.</returns>
         public IMathExpression Parse(string function)
         {
-            return Parse(function, true);
-        }
-
-        /// <summary>
-        /// Parses the specified function.
-        /// </summary>
-        /// <param name="function">The function.</param>
-        /// <param name="simplify">if set to <c>true</c>, simplifies the expression.</param>
-        /// <returns>The parsed expression.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
-        /// <exception cref="MathParserException">Error while parsing.</exception>
-        public IMathExpression Parse(string function, bool simplify)
-        {
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
 #elif NET20 || NET30 || NET35
@@ -220,9 +207,6 @@ namespace xFunc.Maths
                 lastFunc = function;
                 mathExpression = stack.Pop();
             }
-
-            if (simplify)
-                return simplifier.Simplify(mathExpression);
 
             return mathExpression;
         }

@@ -63,7 +63,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("log(9, 3)", false);
+            var exp = parser.Parse("log(9, 3)");
             Assert.AreEqual("log(9, 3)", exp.ToString());
         }
 
@@ -95,7 +95,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("root(x, 3)", false);
+            var exp = parser.Parse("root(x, 3)");
             Assert.AreEqual("root(x, 3)", exp.ToString());
         }
 
@@ -156,7 +156,7 @@ namespace xFunc.Test
                 new NumberToken(3)
             };
 
-            var exp = parser.Parse("x := 3", false);
+            var exp = parser.Parse("x := 3");
             Assert.AreEqual("x := 3", exp.ToString());
         }
 
@@ -213,7 +213,7 @@ namespace xFunc.Test
                 new NumberToken(1)
             };
 
-            var exp = parser.Parse("aaa := 1", false);
+            var exp = parser.Parse("aaa := 1");
             Assert.AreEqual("aaa := 1", exp.ToString());
         }
 
@@ -233,7 +233,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("func(x) := sin(x)", false);
+            var exp = parser.Parse("func(x) := sin(x)");
             Assert.AreEqual("func(x) := sin(x)", exp.ToString());
         }
 
@@ -250,7 +250,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("1 + func(x)", false);
+            var exp = parser.Parse("1 + func(x)");
             Assert.AreEqual("1 + func(x)", exp.ToString());
         }
 
@@ -268,7 +268,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("undef(f(x))", false);
+            var exp = parser.Parse("undef(f(x))");
             Assert.AreEqual("undef(f(x))", exp.ToString());
         }
 
@@ -288,7 +288,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("cos(x) + sin(x)", false);
+            var exp = parser.Parse("cos(x) + sin(x)");
             Assert.AreEqual("cos(x) + sin(x)", exp.ToString());
         }
 
@@ -305,7 +305,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("gcd(12, 16)", false);
+            var exp = parser.Parse("gcd(12, 16)");
             Assert.AreEqual("gcd(12, 16)", exp.ToString());
         }
 
@@ -322,7 +322,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("lcm(12, 16)", false);
+            var exp = parser.Parse("lcm(12, 16)");
             Assert.AreEqual("lcm(12, 16)", exp.ToString());
         }
 
@@ -337,7 +337,7 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("simplify(x)", false);
+            var exp = parser.Parse("simplify(x)");
             Assert.AreEqual("simplify(x)", exp.ToString());
         }
 

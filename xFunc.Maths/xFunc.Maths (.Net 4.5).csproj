@@ -115,6 +115,7 @@
     <Compile Include="MathExtentions.cs" />
     <Compile Include="MathLexer.cs" />
     <Compile Include="MathParser.cs" />
+    <Compile Include="MathProcessor.cs" />
     <Compile Include="MathSimplifier.cs" />
     <Compile Include="NumberSystems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

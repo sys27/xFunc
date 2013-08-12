@@ -22,7 +22,7 @@ namespace xFunc.Test
             lexer = new MathLexerMock();
             var simplifier = new MathSimplifier();
             var differentiator = new MathDifferentiator(simplifier);
-            parser = new MathParser(lexer, simplifier, differentiator);
+            parser = new MathParser(lexer, simplifier);
         }
 
         [TestMethod]

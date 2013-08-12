@@ -141,6 +141,7 @@
     <Compile Include="MathLexerException.cs" />
     <Compile Include="MathParser.cs" />
     <Compile Include="MathParserException.cs" />
+    <Compile Include="MathProcessor.cs" />
     <Compile Include="MathSimplifier.cs" />
     <Compile Include="NumberSystems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

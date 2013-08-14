@@ -83,18 +83,18 @@ namespace xFunc.Maths.Expressions
         {
             if (MathParser.HasVar(firstMathExpression, variable))
             {
-                Sub sub = new Sub(secondMathExpression.Clone(), new Number(1));
-                Pow inv = new Pow(firstMathExpression.Clone(), sub);
-                Mul mul1 = new Mul(secondMathExpression.Clone(), inv);
-                Mul mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
+                var sub = new Sub(secondMathExpression.Clone(), new Number(1));
+                var inv = new Pow(firstMathExpression.Clone(), sub);
+                var mul1 = new Mul(secondMathExpression.Clone(), inv);
+                var mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
 
                 return mul2;
             }
             if (MathParser.HasVar(secondMathExpression, variable))
             {
-                Ln ln = new Ln(firstMathExpression.Clone());
-                Mul mul1 = new Mul(ln, Clone());
-                Mul mul2 = new Mul(mul1, secondMathExpression.Clone().Differentiate(variable));
+                var ln = new Ln(firstMathExpression.Clone());
+                var mul1 = new Mul(ln, Clone());
+                var mul2 = new Mul(mul1, secondMathExpression.Clone().Differentiate(variable));
 
                 return mul2;
             }

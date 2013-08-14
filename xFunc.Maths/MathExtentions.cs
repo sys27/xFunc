@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Globalization;
 
 namespace xFunc.Maths
 {
@@ -212,7 +213,7 @@ namespace xFunc.Maths
             switch (numeralSystem)
             {
                 case NumeralSystem.Decimal:
-                    return number.ToString();
+                    return number.ToString(CultureInfo.InvariantCulture);
                 case NumeralSystem.Binary:
                     return "0b" + Convert.ToString(number, 2);
                 case NumeralSystem.Octal:

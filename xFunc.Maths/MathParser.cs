@@ -49,7 +49,6 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
-        /// <param name="differentiator">The differentiator.</param>
         public MathParser(ILexer lexer, ISimplifier simplifier)
         {
             this.lexer = lexer;
@@ -106,7 +105,7 @@ namespace xFunc.Maths
                 IEnumerable<IToken> rpn = ConvertToReversePolishNotation(tokens);
                 IEnumerable<IMathExpression> expressions = ConvertTokensToExpressions(rpn);
 
-                Stack<IMathExpression> stack = new Stack<IMathExpression>();
+                var stack = new Stack<IMathExpression>();
                 foreach (var expression in expressions)
                 {
                     if (expression is Number || expression is Variable)
@@ -118,7 +117,7 @@ namespace xFunc.Maths
                         if ((expression is Log || expression is Root) && stack.Count < 2)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
-                        BinaryMathExpression binExp = expression as BinaryMathExpression;
+                        var binExp = expression as BinaryMathExpression;
                         binExp.SecondMathExpression = stack.Pop();
                         binExp.FirstMathExpression = stack.Pop();
 
@@ -126,7 +125,7 @@ namespace xFunc.Maths
                     }
                     else if (expression is UnaryMathExpression)
                     {
-                        UnaryMathExpression unaryMathExp = expression as UnaryMathExpression;
+                        var unaryMathExp = expression as UnaryMathExpression;
                         unaryMathExp.FirstMathExpression = stack.Pop();
 
                         stack.Push(unaryMathExp);
@@ -213,7 +212,7 @@ namespace xFunc.Maths
 
         private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
         {
-            List<IMathExpression> preOutput = new List<IMathExpression>();
+            var preOutput = new List<IMathExpression>();
 
             foreach (var token in tokens)
             {

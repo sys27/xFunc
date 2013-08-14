@@ -60,9 +60,7 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Mul mul = new Mul(firstMathExpression.Clone().Differentiate(variable), Clone());
-
-            return mul;
+            return new Mul(firstMathExpression.Clone().Differentiate(variable), Clone());
         }
 
         /// <summary>

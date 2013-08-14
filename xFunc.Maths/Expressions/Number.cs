@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            Number num = obj as Number;
+            var num = obj as Number;
             if (num == null)
                 return false;
 

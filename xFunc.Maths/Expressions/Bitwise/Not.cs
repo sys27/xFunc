@@ -71,6 +71,12 @@ namespace xFunc.Maths.Expressions.Bitwise
             return ~(int)firstMathExpression.Calculate(parameters);
         }
 
+        /// <summary>
+        /// Calculates this bitwise NOT expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of user-defined functions.</param>
+        /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return ~(int)firstMathExpression.Calculate(parameters, functions);

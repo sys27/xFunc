@@ -77,9 +77,7 @@ namespace xFunc.Maths.Expressions
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), firstMathExpression.Clone());
-
-            return div;
+            return new Div(firstMathExpression.Clone().Differentiate(variable), firstMathExpression.Clone());
         }
 
         /// <summary>

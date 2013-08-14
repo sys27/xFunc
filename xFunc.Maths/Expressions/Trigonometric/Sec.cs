@@ -79,10 +79,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Tan tan = new Tan(firstMathExpression.Clone(), this.angleMeasurement);
-            Sec sec = new Sec(firstMathExpression.Clone(), this.angleMeasurement);
-            Mul mul1 = new Mul(tan, sec);
-            Mul mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
+            var tan = new Tan(firstMathExpression.Clone(), angleMeasurement);
+            var sec = new Sec(firstMathExpression.Clone(), angleMeasurement);
+            var mul1 = new Mul(tan, sec);
+            var mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
 
             return mul2;
         }

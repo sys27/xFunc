@@ -71,11 +71,11 @@ namespace xFunc.Maths.Expressions
 
             if (first && second)
             {
-                Mul mul1 = new Mul(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
-                Mul mul2 = new Mul(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
-                Sub sub = new Sub(mul1, mul2);
-                Pow inv = new Pow(secondMathExpression.Clone(), new Number(2));
-                Div division = new Div(sub, inv);
+                var mul1 = new Mul(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
+                var mul2 = new Mul(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
+                var sub = new Sub(mul1, mul2);
+                var inv = new Pow(secondMathExpression.Clone(), new Number(2));
+                var division = new Div(sub, inv);
 
                 return division;
             }
@@ -85,10 +85,10 @@ namespace xFunc.Maths.Expressions
             }
             if (second)
             {
-                Mul mul2 = new Mul(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
-                UnaryMinus unMinus = new UnaryMinus(mul2);
-                Pow inv = new Pow(secondMathExpression.Clone(), new Number(2));
-                Div division = new Div(unMinus, inv);
+                var mul2 = new Mul(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
+                var unMinus = new UnaryMinus(mul2);
+                var inv = new Pow(secondMathExpression.Clone(), new Number(2));
+                var division = new Div(unMinus, inv);
 
                 return division;
             }

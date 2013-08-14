@@ -44,10 +44,11 @@ namespace xFunc.Maths.Expressions
         {
             if (this == obj)
                 return true;
-            if (obj == null || GetType() != obj.GetType())
+
+            var exp = obj as Derivative;
+            if (exp == null)
                 return false;
 
-            Derivative exp = obj as Derivative;
             return firstMathExpression.Equals(exp.FirstMathExpression) && variable.Equals(exp.Variable);
         }
 

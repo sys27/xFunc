@@ -71,11 +71,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Pow involution = new Pow(firstMathExpression.Clone(), new Number(2));
-            Sub sub = new Sub(new Number(1), involution);
-            Sqrt sqrt = new Sqrt(sub);
-            Div division = new Div(firstMathExpression.Clone().Differentiate(variable), sqrt);
-            UnaryMinus unMinus = new UnaryMinus(division);
+            var involution = new Pow(firstMathExpression.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), involution);
+            var sqrt = new Sqrt(sub);
+            var division = new Div(firstMathExpression.Clone().Differentiate(variable), sqrt);
+            var unMinus = new UnaryMinus(division);
 
             return unMinus;
         }

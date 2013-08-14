@@ -70,8 +70,8 @@ namespace xFunc.Maths.Expressions
         {
             if (MathParser.HasVar(firstMathExpression, variable) || MathParser.HasVar(secondMathExpression, variable))
             {
-                Div div = new Div(new Number(1), secondMathExpression.Clone());
-                Pow inv = new Pow(firstMathExpression.Clone(), div);
+                var div = new Div(new Number(1), secondMathExpression.Clone());
+                var inv = new Pow(firstMathExpression.Clone(), div);
 
                 return inv.Differentiate(variable);
             }

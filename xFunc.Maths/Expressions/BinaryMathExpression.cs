@@ -56,10 +56,11 @@ namespace xFunc.Maths.Expressions
         {
             if (this == obj)
                 return true;
-            if (obj == null || GetType() != obj.GetType())
+
+            var exp = obj as BinaryMathExpression;
+            if (exp == null)
                 return false;
 
-            BinaryMathExpression exp = obj as BinaryMathExpression;
             return firstMathExpression.Equals(exp.FirstMathExpression) && secondMathExpression.Equals(exp.SecondMathExpression);
         }
 

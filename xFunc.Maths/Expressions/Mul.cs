@@ -71,9 +71,9 @@ namespace xFunc.Maths.Expressions
 
             if (first && second)
             {
-                Mul mul1 = new Mul(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
-                Mul mul2 = new Mul(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
-                Add add = new Add(mul1, mul2);
+                var mul1 = new Mul(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone());
+                var mul2 = new Mul(firstMathExpression.Clone(), secondMathExpression.Clone().Differentiate(variable));
+                var add = new Add(mul1, mul2);
 
                 return add;
             }

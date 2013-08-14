@@ -67,13 +67,13 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Abs abs = new Abs(firstMathExpression.Clone());
-            Pow sqr = new Pow(firstMathExpression.Clone(), new Number(2));
-            Sub sub = new Sub(sqr, new Number(1));
-            Sqrt sqrt = new Sqrt(sub);
-            Mul mul = new Mul(abs, sqrt);
-            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
-            UnaryMinus unary = new UnaryMinus(div);
+            var abs = new Abs(firstMathExpression.Clone());
+            var sqr = new Pow(firstMathExpression.Clone(), new Number(2));
+            var sub = new Sub(sqr, new Number(1));
+            var sqrt = new Sqrt(sub);
+            var mul = new Mul(abs, sqrt);
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
+            var unary = new UnaryMinus(div);
 
             return unary;
         }

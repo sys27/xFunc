@@ -71,9 +71,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Pow involution = new Pow(firstMathExpression.Clone(), new Number(2));
-            Add add = new Add(new Number(1), involution);
-            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), add);
+            var involution = new Pow(firstMathExpression.Clone(), new Number(2));
+            var add = new Add(new Number(1), involution);
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), add);
 
             return div;
         }

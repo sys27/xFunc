@@ -71,9 +71,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Cos cos = new Cos(firstMathExpression.Clone(), this.angleMeasurement);
-            Pow inv = new Pow(cos, new Number(2));
-            Div div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
+            var cos = new Cos(firstMathExpression.Clone(), angleMeasurement);
+            var inv = new Pow(cos, new Number(2));
+            var div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
 
             return div;
         }

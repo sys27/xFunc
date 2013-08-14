@@ -102,7 +102,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
-            return new Undefine((Variable)key.Clone());
+            return new Undefine(key.Clone());
         }
 
         /// <summary>

@@ -79,11 +79,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            UnaryMinus unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
-            Cot cot = new Cot(firstMathExpression.Clone(), this.angleMeasurement);
-            Csc csc = new Csc(firstMathExpression.Clone(), this.angleMeasurement);
-            Mul mul1 = new Mul(cot, csc);
-            Mul mul2 = new Mul(unary, mul1);
+            var unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
+            var cot = new Cot(firstMathExpression.Clone(), angleMeasurement);
+            var csc = new Csc(firstMathExpression.Clone(), angleMeasurement);
+            var mul1 = new Mul(cot, csc);
+            var mul2 = new Mul(unary, mul1);
 
             return mul2;
         }

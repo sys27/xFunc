@@ -73,10 +73,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Sin sine = new Sin(firstMathExpression.Clone(), this.angleMeasurement);
-            Pow involution = new Pow(sine, new Number(2));
-            Div division = new Div(firstMathExpression.Clone().Differentiate(variable), involution);
-            UnaryMinus unMinus = new UnaryMinus(division);
+            var sine = new Sin(firstMathExpression.Clone(), angleMeasurement);
+            var involution = new Pow(sine, new Number(2));
+            var division = new Div(firstMathExpression.Clone().Differentiate(variable), involution);
+            var unMinus = new UnaryMinus(division);
 
             return unMinus;
         }

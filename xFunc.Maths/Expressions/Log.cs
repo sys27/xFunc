@@ -83,9 +83,9 @@ namespace xFunc.Maths.Expressions
                 if (!(secondMathExpression is Number))
                     throw new NotSupportedException();
 
-                Ln ln = new Ln(secondMathExpression.Clone());
-                Mul mul = new Mul(firstMathExpression.Clone(), ln);
-                Div div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
+                var ln = new Ln(secondMathExpression.Clone());
+                var mul = new Mul(firstMathExpression.Clone(), ln);
+                var div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
 
                 return div;
             }

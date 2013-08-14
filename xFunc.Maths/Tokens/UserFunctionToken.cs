@@ -29,13 +29,13 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.
         /// </summary>
-        /// <param name="variable">A name of function.</param>
+        /// <param name="function">A name of function.</param>
         public UserFunctionToken(string function) : this(function, -1) { }
 
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.
         /// </summary>
-        /// <param name="variable">A name of function.</param>
+        /// <param name="function">A name of function.</param>
         /// <param name="countOfParams">A count of parameters.</param>
         public UserFunctionToken(string function, int countOfParams)
         {
@@ -50,7 +50,7 @@ namespace xFunc.Maths.Tokens
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            UserFunctionToken token = obj as UserFunctionToken;
+            var token = obj as UserFunctionToken;
             if (token != null && this.Function == token.Function && this.countOfParams == token.CountOfParams)
             {
                 return true;

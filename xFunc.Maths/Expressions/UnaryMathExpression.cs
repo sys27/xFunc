@@ -50,10 +50,11 @@ namespace xFunc.Maths.Expressions
         {
             if (this == obj)
                 return true;
-            if (obj == null || GetType() != obj.GetType())
+
+            var exp = obj as UnaryMathExpression;
+            if (exp == null)
                 return false;
 
-            UnaryMathExpression exp = obj as UnaryMathExpression;
             return firstMathExpression.Equals(exp.FirstMathExpression);
         }
 

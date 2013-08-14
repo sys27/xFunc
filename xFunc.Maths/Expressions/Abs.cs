@@ -82,14 +82,14 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable"/>
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Div div = new Div(firstMathExpression.Clone(), Clone());
-            Mul mul = new Mul(firstMathExpression.Clone().Differentiate(variable), div);
+            var div = new Div(firstMathExpression.Clone(), Clone());
+            var mul = new Mul(firstMathExpression.Clone().Differentiate(variable), div);
 
             return mul;
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="And"/> class.
+        /// Clones this instance of the <see cref="xFunc.Maths.Expressions.Bitwise.And"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()

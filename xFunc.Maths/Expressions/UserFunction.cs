@@ -90,14 +90,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.Append(function);
             builder.Append('(');
             if (arguments != null)
             {
-                for (int i = 0; i < arguments.Length; i++)
+                foreach (var arg in arguments)
                 {
-                    builder.Append(arguments[i]);
+                    builder.Append(arg);
                     builder.Append(',');
                 }
                 if (arguments.Length > 0)

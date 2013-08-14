@@ -196,7 +196,7 @@ namespace xFunc.Maths
                             i += length;
                             continue;
                         }
-                        else if (nextLetter == 'b')
+                        if (nextLetter == 'b')
                         {
                             i += 2;
 
@@ -211,7 +211,7 @@ namespace xFunc.Maths
                             i += length;
                             continue;
                         }
-                        else if (char.IsDigit(nextLetter))
+                        if (char.IsDigit(nextLetter))
                         {
                             length = 1;
                             for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
@@ -244,7 +244,7 @@ namespace xFunc.Maths
                     i += length;
 
                     var f = function.Substring(i);
-                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => f.StartsWith(s)))
+                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(f.StartsWith))
                     {
                         tokens.Add(new OperationToken(Operations.Multiplication));
                     }

@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            Variable @var = obj as Variable;
+            var @var = obj as Variable;
             if (@var != null && @var.Name == name)
                 return true;
 

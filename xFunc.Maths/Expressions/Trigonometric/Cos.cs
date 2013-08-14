@@ -71,9 +71,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            Sin sine = new Sin(firstMathExpression.Clone(), this.angleMeasurement);
-            Mul multiplication = new Mul(sine, firstMathExpression.Clone().Differentiate(variable));
-            UnaryMinus unMinus = new UnaryMinus(multiplication);
+            var sine = new Sin(firstMathExpression.Clone(), angleMeasurement);
+            var multiplication = new Mul(sine, firstMathExpression.Clone().Differentiate(variable));
+            var unMinus = new UnaryMinus(multiplication);
 
             return unMinus;
         }

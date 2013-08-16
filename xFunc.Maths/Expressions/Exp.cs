@@ -45,22 +45,22 @@ namespace xFunc.Maths.Expressions
 
         public override double Calculate()
         {
-            return Math.Exp(firstMathExpression.Calculate());
+            return Math.Exp(argument.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Exp(firstMathExpression.Calculate(parameters));
+            return Math.Exp(argument.Calculate(parameters));
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Exp(firstMathExpression.Calculate(parameters, functions));
+            return Math.Exp(argument.Calculate(parameters, functions));
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            return new Mul(firstMathExpression.Clone().Differentiate(variable), Clone());
+            return new Mul(argument.Clone().Differentiate(variable), Clone());
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Exp(firstMathExpression.Clone());
+            return new Exp(argument.Clone());
         }
 
     }

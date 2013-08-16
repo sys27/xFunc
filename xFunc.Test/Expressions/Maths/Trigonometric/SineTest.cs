@@ -78,7 +78,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             var deriv = exp.Differentiate();
 
             var mul = deriv as Mul;
-            var cos = mul.FirstMathExpression as Cos;
+            var cos = mul.Left as Cos;
             Assert.AreEqual(AngleMeasurement.Radian, cos.AngleMeasurement);
         }
 

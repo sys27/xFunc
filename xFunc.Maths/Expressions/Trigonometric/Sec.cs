@@ -60,29 +60,29 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 180;
 
             return 1 / Math.Cos(radian);
         }
 
         protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return 1 / Math.Cos(firstMathExpression.Calculate(parameters, functions));
+            return 1 / Math.Cos(argument.Calculate(parameters, functions));
         }
 
         protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 200;
 
             return 1 / Math.Cos(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var tan = new Tan(firstMathExpression.Clone(), angleMeasurement);
-            var sec = new Sec(firstMathExpression.Clone(), angleMeasurement);
+            var tan = new Tan(argument.Clone(), angleMeasurement);
+            var sec = new Sec(argument.Clone(), angleMeasurement);
             var mul1 = new Mul(tan, sec);
-            var mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
+            var mul2 = new Mul(argument.Clone().Differentiate(variable), mul1);
 
             return mul2;
         }
@@ -93,7 +93,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Sec(firstMathExpression.Clone());
+            return new Sec(argument.Clone());
         }
 
     }

@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     public class Simplify  : IMathExpression
     {
 
-        private IMathExpression firstMathExpression;
+        private IMathExpression expression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
@@ -33,10 +33,10 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Simplify(IMathExpression firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Simplify(IMathExpression expression)
         {
-            this.firstMathExpression = firstMathExpression;
+            this.expression = expression;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             var simp = obj as Simplify;
-            if (simp != null && firstMathExpression.Equals(simp.firstMathExpression))
+            if (simp != null && expression.Equals(simp.expression))
                 return true;
 
             return false;
@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.Format("simplify({0})", firstMathExpression.ToString());
+            return string.Format("simplify({0})", expression.ToString());
         }
 
         public double Calculate()
@@ -93,7 +93,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
-            return new Simplify(firstMathExpression.Clone());
+            return new Simplify(expression.Clone());
         }
 
         /// <summary>
@@ -110,15 +110,15 @@ namespace xFunc.Maths.Expressions
             }
         }
 
-        public IMathExpression FirstMathExpression
+        public IMathExpression Expression
         {
             get
             {
-                return firstMathExpression;
+                return expression;
             }
             set
             {
-                firstMathExpression = value;
+                expression = value;
             }
         }
 

@@ -54,24 +54,24 @@ namespace xFunc.Maths.Expressions
 
         public override double Calculate()
         {
-            var a = firstMathExpression.Calculate();
-            var b = secondMathExpression.Calculate();
+            var a = left.Calculate();
+            var b = right.Calculate();
 
             return MathExtentions.GCD(a, b);
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            var a = firstMathExpression.Calculate(parameters);
-            var b = secondMathExpression.Calculate(parameters);
+            var a = left.Calculate(parameters);
+            var b = right.Calculate(parameters);
 
             return MathExtentions.GCD(a, b);
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var a = firstMathExpression.Calculate(parameters, functions);
-            var b = secondMathExpression.Calculate(parameters, functions);
+            var a = left.Calculate(parameters, functions);
+            var b = right.Calculate(parameters, functions);
 
             return MathExtentions.GCD(a, b);
         }
@@ -82,7 +82,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="GCD"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new GCD(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new GCD(left.Clone(), right.Clone());
         }
 
         public override IMathExpression Differentiate(Variable variable)

@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     public class Variable : IMathExpression
     {
 
-        private IMathExpression parentMathExpression;
+        private IMathExpression parent;
         private string name;
 
         /// <summary>
@@ -164,11 +164,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parentMathExpression;
+                return parent;
             }
             set
             {
-                parentMathExpression = value;
+                parent = value;
             }
         }
 

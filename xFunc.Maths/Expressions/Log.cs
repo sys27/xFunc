@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return Math.Log(firstMathExpression.Calculate(), secondMathExpression.Calculate());
+            return Math.Log(left.Calculate(), right.Calculate());
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Log(firstMathExpression.Calculate(parameters), secondMathExpression.Calculate(parameters));
+            return Math.Log(left.Calculate(parameters), right.Calculate(parameters));
         }
 
         /// <summary>
@@ -73,19 +73,19 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Log(firstMathExpression.Calculate(parameters, functions), secondMathExpression.Calculate(parameters, functions));
+            return Math.Log(left.Calculate(parameters, functions), right.Calculate(parameters, functions));
         }
 
         public override IMathExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(firstMathExpression, variable))
+            if (MathParser.HasVar(left, variable))
             {
-                if (!(secondMathExpression is Number))
+                if (!(right is Number))
                     throw new NotSupportedException();
 
-                var ln = new Ln(secondMathExpression.Clone());
-                var mul = new Mul(firstMathExpression.Clone(), ln);
-                var div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
+                var ln = new Ln(right.Clone());
+                var mul = new Mul(left.Clone(), ln);
+                var div = new Div(left.Clone().Differentiate(variable), mul);
 
                 return div;
             }
@@ -99,7 +99,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Log(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Log(left.Clone(), right.Clone());
         }
 
     }

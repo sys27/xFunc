@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return ~(int)firstMathExpression.Calculate();
+            return ~(int)argument.Calculate();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return ~(int)firstMathExpression.Calculate(parameters);
+            return ~(int)argument.Calculate(parameters);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return ~(int)firstMathExpression.Calculate(parameters, functions);
+            return ~(int)argument.Calculate(parameters, functions);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Not(firstMathExpression.Clone());
+            return new Not(argument.Clone());
         }
 
         /// <summary>

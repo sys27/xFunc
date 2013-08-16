@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (parentMathExpression is BinaryMathExpression)
+            if (parent is BinaryMathExpression)
             {
                 return ToString("({0} or {1})");
             }
@@ -64,7 +64,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return (int)firstMathExpression.Calculate() | (int)secondMathExpression.Calculate();
+            return (int)left.Calculate() | (int)right.Calculate();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return (int)firstMathExpression.Calculate(parameters) | (int)secondMathExpression.Calculate(parameters);
+            return (int)left.Calculate(parameters) | (int)right.Calculate(parameters);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return (int)firstMathExpression.Calculate(parameters, functions) | (int)secondMathExpression.Calculate(parameters, functions);
+            return (int)left.Calculate(parameters, functions) | (int)right.Calculate(parameters, functions);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Or(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Or(left.Clone(), right.Clone());
         }
 
         /// <summary>

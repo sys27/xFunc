@@ -66,16 +66,16 @@ namespace xFunc.Maths
             if (expression is BinaryMathExpression)
             {
                 var bin = expression as BinaryMathExpression;
-                if (HasVar(bin.FirstMathExpression, arg))
+                if (HasVar(bin.Left, arg))
                     return true;
 
-                return HasVar(bin.SecondMathExpression, arg);
+                return HasVar(bin.Right, arg);
             }
             if (expression is UnaryMathExpression)
             {
                 var un = expression as UnaryMathExpression;
 
-                return HasVar(un.FirstMathExpression, arg);
+                return HasVar(un.Argument, arg);
             }
             if (expression != null && expression.Equals(arg))
             {
@@ -118,15 +118,15 @@ namespace xFunc.Maths
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
                         var binExp = expression as BinaryMathExpression;
-                        binExp.SecondMathExpression = stack.Pop();
-                        binExp.FirstMathExpression = stack.Pop();
+                        binExp.Right = stack.Pop();
+                        binExp.Left = stack.Pop();
 
                         stack.Push(binExp);
                     }
                     else if (expression is UnaryMathExpression)
                     {
                         var unaryMathExp = expression as UnaryMathExpression;
-                        unaryMathExp.FirstMathExpression = stack.Pop();
+                        unaryMathExp.Argument = stack.Pop();
 
                         stack.Push(unaryMathExp);
                     }
@@ -139,14 +139,14 @@ namespace xFunc.Maths
 
                         var binExp = expression as Derivative;
                         binExp.Variable = (Variable)stack.Pop();
-                        binExp.FirstMathExpression = stack.Pop();
+                        binExp.Expression = stack.Pop();
 
                         stack.Push(binExp);
                     }
                     else if (expression is Simplify)
                     {
                         var simp = expression as Simplify;
-                        simp.FirstMathExpression = stack.Pop();
+                        simp.Expression = stack.Pop();
 
                         stack.Push(simp);
                     }

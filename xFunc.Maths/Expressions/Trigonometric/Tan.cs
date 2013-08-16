@@ -52,28 +52,28 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 180;
 
             return Math.Tan(radian);
         }
 
         protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Tan(firstMathExpression.Calculate(parameters, functions));
+            return Math.Tan(argument.Calculate(parameters, functions));
         }
 
         protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 200;
 
             return Math.Tan(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var cos = new Cos(firstMathExpression.Clone(), angleMeasurement);
+            var cos = new Cos(argument.Clone(), angleMeasurement);
             var inv = new Pow(cos, new Number(2));
-            var div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
+            var div = new Div(argument.Clone().Differentiate(variable), inv);
 
             return div;
         }
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Tan(firstMathExpression.Clone());
+            return new Tan(argument.Clone());
         }
 
     }

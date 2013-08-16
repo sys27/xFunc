@@ -53,17 +53,17 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override double Calculate()
         {
-            return Math.Tanh(firstMathExpression.Calculate());
+            return Math.Tanh(argument.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Tanh(firstMathExpression.Calculate(parameters));
+            return Math.Tanh(argument.Calculate(parameters));
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Tanh(firstMathExpression.Calculate(parameters, functions));
+            return Math.Tanh(argument.Calculate(parameters, functions));
         }
 
         /// <summary>
@@ -72,14 +72,14 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Tanh(firstMathExpression.Clone());
+            return new Tanh(argument.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var cosh = new Cosh(firstMathExpression.Clone());
+            var cosh = new Cosh(argument.Clone());
             var inv = new Pow(cosh, new Number(2));
-            var div = new Div(firstMathExpression.Clone().Differentiate(variable), inv);
+            var div = new Div(argument.Clone().Differentiate(variable), inv);
 
             return div;
         }

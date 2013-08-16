@@ -60,28 +60,28 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 180;
 
             return MathExtentions.Csc(radian);
         }
 
         protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return MathExtentions.Csc(firstMathExpression.Calculate(parameters, functions));
+            return MathExtentions.Csc(argument.Calculate(parameters, functions));
         }
 
         protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 200;
 
             return MathExtentions.Csc(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var unary = new UnaryMinus(firstMathExpression.Clone().Differentiate(variable));
-            var cot = new Cot(firstMathExpression.Clone(), angleMeasurement);
-            var csc = new Csc(firstMathExpression.Clone(), angleMeasurement);
+            var unary = new UnaryMinus(argument.Clone().Differentiate(variable));
+            var cot = new Cot(argument.Clone(), angleMeasurement);
+            var csc = new Csc(argument.Clone(), angleMeasurement);
             var mul1 = new Mul(cot, csc);
             var mul2 = new Mul(unary, mul1);
 
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Csc(firstMathExpression.Clone());
+            return new Csc(argument.Clone());
         }
 
     }

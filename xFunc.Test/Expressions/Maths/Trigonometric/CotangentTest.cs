@@ -78,9 +78,9 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             var deriv = exp.Differentiate();
 
             var un = deriv as UnaryMinus;
-            var div = un.FirstMathExpression as Div;
-            var pow = div.SecondMathExpression as Pow;
-            var sin = pow.FirstMathExpression as Sin;
+            var div = un.Argument as Div;
+            var pow = div.Right as Pow;
+            var sin = pow.Left as Sin;
 
             Assert.AreEqual(AngleMeasurement.Radian, sin.AngleMeasurement);
         }

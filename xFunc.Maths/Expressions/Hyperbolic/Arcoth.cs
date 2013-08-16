@@ -53,17 +53,17 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override double Calculate()
         {
-            return MathExtentions.Acoth(firstMathExpression.Calculate());
+            return MathExtentions.Acoth(argument.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Acoth(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Acoth(argument.Calculate(parameters));
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return MathExtentions.Acoth(firstMathExpression.Calculate(parameters, functions));
+            return MathExtentions.Acoth(argument.Calculate(parameters, functions));
         }
 
         /// <summary>
@@ -72,14 +72,14 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Arcoth(firstMathExpression.Clone());
+            return new Arcoth(argument.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sqr = new Pow(firstMathExpression.Clone(), new Number(2));
+            var sqr = new Pow(argument.Clone(), new Number(2));
             var sub = new Sub(new Number(1), sqr);
-            var div = new Div(firstMathExpression.Clone().Differentiate(variable), sub);
+            var div = new Div(argument.Clone().Differentiate(variable), sub);
 
             return div;
         }

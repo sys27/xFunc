@@ -52,29 +52,29 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions);
+            var radian = argument.Calculate(parameters, functions);
 
             return Math.Acos(radian) / Math.PI * 180;
         }
 
         protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Acos(firstMathExpression.Calculate(parameters, functions));
+            return Math.Acos(argument.Calculate(parameters, functions));
         }
 
         protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions);
+            var radian = argument.Calculate(parameters, functions);
 
             return Math.Acos(radian) / Math.PI * 200;
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var involution = new Pow(firstMathExpression.Clone(), new Number(2));
+            var involution = new Pow(argument.Clone(), new Number(2));
             var sub = new Sub(new Number(1), involution);
             var sqrt = new Sqrt(sub);
-            var division = new Div(firstMathExpression.Clone().Differentiate(variable), sqrt);
+            var division = new Div(argument.Clone().Differentiate(variable), sqrt);
             var unMinus = new UnaryMinus(division);
 
             return unMinus;
@@ -86,7 +86,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Arccos(firstMathExpression.Clone());
+            return new Arccos(argument.Clone());
         }
 
     }

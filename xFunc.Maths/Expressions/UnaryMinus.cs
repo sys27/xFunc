@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (firstMathExpression is BinaryMathExpression)
+            if (argument is BinaryMathExpression)
                 return ToString("-({0})");
 
             return ToString("-{0}");
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override double Calculate()
         {
-            return -firstMathExpression.Calculate();
+            return -argument.Calculate();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="MathParameterCollection" />
         public override double Calculate(MathParameterCollection parameters)
         {
-            return -firstMathExpression.Calculate(parameters);
+            return -argument.Calculate(parameters);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="MathFunctionCollection" />
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return -firstMathExpression.Calculate(parameters, functions);
+            return -argument.Calculate(parameters, functions);
         }
 
         /// <summary>
@@ -91,12 +91,12 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new UnaryMinus(firstMathExpression.Clone());
+            return new UnaryMinus(argument.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            return new UnaryMinus(firstMathExpression.Clone().Differentiate());
+            return new UnaryMinus(argument.Clone().Differentiate());
         }
 
     }

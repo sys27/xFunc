@@ -26,15 +26,15 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IMathExpression parentMathExpression;
+        protected IMathExpression parent;
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        protected IMathExpression firstMathExpression;
+        protected IMathExpression left;
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        protected IMathExpression secondMathExpression;
+        protected IMathExpression right;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryMathExpression"/> class.
@@ -43,8 +43,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="secondMathExpression">The right (second) operand.</param>
         protected BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
         {
-            FirstMathExpression = firstMathExpression;
-            SecondMathExpression = secondMathExpression;
+            Left = firstMathExpression;
+            Right = secondMathExpression;
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
             if (exp == null)
                 return false;
 
-            return firstMathExpression.Equals(exp.FirstMathExpression) && secondMathExpression.Equals(exp.SecondMathExpression);
+            return left.Equals(exp.Left) && right.Equals(exp.Right);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A string that represents the current object.</returns>
         protected string ToString(string format)
         {
-            return string.Format(format, firstMathExpression, secondMathExpression);
+            return string.Format(format, left, right);
         }
 
         /// <summary>
@@ -120,34 +120,34 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        public IMathExpression FirstMathExpression
+        public IMathExpression Left
         {
             get
             {
-                return firstMathExpression;
+                return left;
             }
             set
             {
-                firstMathExpression = value;
-                if (firstMathExpression != null)
-                    firstMathExpression.Parent = this;
+                left = value;
+                if (left != null)
+                    left.Parent = this;
             }
         }
 
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        public IMathExpression SecondMathExpression
+        public IMathExpression Right
         {
             get
             {
-                return secondMathExpression;
+                return right;
             }
             set
             {
-                secondMathExpression = value;
-                if (secondMathExpression != null)
-                    secondMathExpression.Parent = this;
+                right = value;
+                if (right != null)
+                    right.Parent = this;
             }
         }
 
@@ -158,11 +158,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parentMathExpression;
+                return parent;
             }
             set
             {
-                parentMathExpression = value;
+                parent = value;
             }
         }
 

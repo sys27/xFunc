@@ -78,8 +78,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             var deriv = exp.Differentiate();
 
             var un = deriv as UnaryMinus;
-            var mul = un.FirstMathExpression as Mul;
-            var sin = mul.FirstMathExpression as Sin;
+            var mul = un.Argument as Mul;
+            var sin = mul.Left as Sin;
 
             Assert.AreEqual(AngleMeasurement.Radian, sin.AngleMeasurement);
         }

@@ -53,17 +53,17 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
         public override double Calculate()
         {
-            return MathExtentions.Csch(firstMathExpression.Calculate());
+            return MathExtentions.Csch(argument.Calculate());
         }
 
         public override double Calculate(MathParameterCollection parameters)
         {
-            return MathExtentions.Csch(firstMathExpression.Calculate(parameters));
+            return MathExtentions.Csch(argument.Calculate(parameters));
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return MathExtentions.Csch(firstMathExpression.Calculate(parameters, functions));
+            return MathExtentions.Csch(argument.Calculate(parameters, functions));
         }
 
         /// <summary>
@@ -72,15 +72,15 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Csch(firstMathExpression.Clone());
+            return new Csch(argument.Clone());
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var coth = new Coth(firstMathExpression.Clone());
+            var coth = new Coth(argument.Clone());
             var csch = Clone();
             var mul1 = new Mul(coth, csch);
-            var mul2 = new Mul(firstMathExpression.Clone().Differentiate(variable), mul1);
+            var mul2 = new Mul(argument.Clone().Differentiate(variable), mul1);
             var unMinus = new UnaryMinus(mul2);
 
             return unMinus;

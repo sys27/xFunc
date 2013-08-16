@@ -72,7 +72,7 @@ namespace xFunc.Presenters
                 {
                     var simp = exp as Simplify;
 
-                    item.Answer = simp.FirstMathExpression.ToString();
+                    item.Answer = simp.Expression.ToString();
                 }
                 else if (exp is Define)
                 {

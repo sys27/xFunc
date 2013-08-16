@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return Math.Sqrt(FirstMathExpression.Calculate());
+            return Math.Sqrt(Argument.Calculate());
         }
 
         /// <summary>
@@ -60,18 +60,18 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Sqrt(FirstMathExpression.Calculate(parameters));
+            return Math.Sqrt(Argument.Calculate(parameters));
         }
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Sqrt(FirstMathExpression.Calculate(parameters, functions));
+            return Math.Sqrt(Argument.Calculate(parameters, functions));
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var mul = new Mul(new Number(2), Clone());
-            var div = new Div(firstMathExpression.Clone().Differentiate(variable), mul);
+            var div = new Div(argument.Clone().Differentiate(variable), mul);
 
             return div;
         }
@@ -82,7 +82,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Sqrt(firstMathExpression.Clone());
+            return new Sqrt(argument.Clone());
         }
 
     }

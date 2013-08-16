@@ -56,8 +56,8 @@ namespace xFunc.Maths.Expressions
 
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var first = firstMathExpression.Calculate(parameters, functions);
-            var second = 1 / secondMathExpression.Calculate(parameters, functions);
+            var first = left.Calculate(parameters, functions);
+            var second = 1 / right.Calculate(parameters, functions);
             if (first < 0 && second % 2 != 0)
             {
                 return -Math.Pow(-first, second);
@@ -68,10 +68,10 @@ namespace xFunc.Maths.Expressions
 
         public override IMathExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(firstMathExpression, variable) || MathParser.HasVar(secondMathExpression, variable))
+            if (MathParser.HasVar(left, variable) || MathParser.HasVar(right, variable))
             {
-                var div = new Div(new Number(1), secondMathExpression.Clone());
-                var inv = new Pow(firstMathExpression.Clone(), div);
+                var div = new Div(new Number(1), right.Clone());
+                var inv = new Pow(left.Clone(), div);
 
                 return inv.Differentiate(variable);
             }
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Root(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Root(left.Clone(), right.Clone());
         }
 
     }

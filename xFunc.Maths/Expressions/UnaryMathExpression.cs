@@ -26,19 +26,19 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IMathExpression parentMathExpression;
+        protected IMathExpression parent;
         /// <summary>
         /// The (first) operand.
         /// </summary>
-        protected IMathExpression firstMathExpression;
+        protected IMathExpression argument;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryMathExpression"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The expression.</param>
-        protected UnaryMathExpression(IMathExpression firstMathExpression)
+        /// <param name="argument">The expression.</param>
+        protected UnaryMathExpression(IMathExpression argument)
         {
-            FirstMathExpression = firstMathExpression;
+            Argument = argument;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions
             if (exp == null)
                 return false;
 
-            return firstMathExpression.Equals(exp.FirstMathExpression);
+            return argument.Equals(exp.Argument);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A <see cref="String" /> that represents this instance.</returns>
         protected string ToString(string format)
         {
-            return string.Format(format, firstMathExpression);
+            return string.Format(format, argument);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(firstMathExpression, variable))
+            if (MathParser.HasVar(argument, variable))
             {
                 return _Differentiation(variable);
             }
@@ -125,17 +125,17 @@ namespace xFunc.Maths.Expressions
         /// Gets or sets the expression.
         /// </summary>
         /// <value>The expression.</value>
-        public IMathExpression FirstMathExpression
+        public IMathExpression Argument
         {
             get
             {
-                return firstMathExpression;
+                return argument;
             }
             set
             {
-                firstMathExpression = value;
-                if (firstMathExpression != null)
-                    firstMathExpression.Parent = this;
+                argument = value;
+                if (argument != null)
+                    argument.Parent = this;
             }
         }
 
@@ -146,11 +146,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parentMathExpression;
+                return parent;
             }
             set
             {
-                parentMathExpression = value;
+                parent = value;
             }
         }
 

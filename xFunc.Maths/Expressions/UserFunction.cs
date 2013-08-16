@@ -108,16 +108,42 @@ namespace xFunc.Maths.Expressions
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Always throws an exception.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public double Calculate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Always throws an exception.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <seealso cref="MathParameterCollection" />
         public double Calculate(MathParameterCollection parameters)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
+        /// <exception cref="System.ArgumentNullException"><paramref name="functions"/> is null.</exception>
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             if (functions == null)

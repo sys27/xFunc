@@ -52,14 +52,25 @@ namespace xFunc.Maths.Expressions
             return ToString("lcm({0}, {1})");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public override double Calculate()
         {
-            var a = left.Calculate();
-            var b = right.Calculate();
-
-            return MathExtentions.LCM(a, b);
+            return MathExtentions.LCM(left.Calculate(), right.Calculate());
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
         public override double Calculate(MathParameterCollection parameters)
         {
             var a = left.Calculate(parameters);
@@ -68,6 +79,16 @@ namespace xFunc.Maths.Expressions
             return MathExtentions.LCM(a, b);
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var a = left.Calculate(parameters, functions);

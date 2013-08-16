@@ -69,9 +69,9 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             var deriv = exp.Differentiate();
 
             var mul1 = deriv as Mul;
-            var mul2 = mul1.SecondMathExpression as Mul;
-            var tan = mul2.FirstMathExpression as Tan;
-            var sec = mul2.SecondMathExpression as Sec;
+            var mul2 = mul1.Right as Mul;
+            var tan = mul2.Left as Tan;
+            var sec = mul2.Right as Sec;
 
             Assert.AreEqual(AngleMeasurement.Radian, tan.AngleMeasurement);
             Assert.AreEqual(AngleMeasurement.Radian, sec.AngleMeasurement);

@@ -52,30 +52,30 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
         protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 180;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 180;
 
             return MathExtentions.Cot(radian);
         }
 
         protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var x = firstMathExpression.Calculate(parameters, functions);
+            var x = argument.Calculate(parameters, functions);
 
             return MathExtentions.Cot(x);
         }
 
         protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            var radian = firstMathExpression.Calculate(parameters, functions) * Math.PI / 200;
+            var radian = argument.Calculate(parameters, functions) * Math.PI / 200;
 
             return MathExtentions.Cot(radian);
         }
 
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sine = new Sin(firstMathExpression.Clone(), angleMeasurement);
+            var sine = new Sin(argument.Clone(), angleMeasurement);
             var involution = new Pow(sine, new Number(2));
-            var division = new Div(firstMathExpression.Clone().Differentiate(variable), involution);
+            var division = new Div(argument.Clone().Differentiate(variable), involution);
             var unMinus = new UnaryMinus(division);
 
             return unMinus;
@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Cot(firstMathExpression.Clone());
+            return new Cot(argument.Clone());
         }
 
     }

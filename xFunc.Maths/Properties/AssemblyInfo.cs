@@ -22,7 +22,7 @@ using System.Resources;
 [assembly: Guid("cab94f81-2f6d-40bd-8a94-272845642538")]
 #endif
 
-[assembly: AssemblyVersion("2.4.0")]
-[assembly: AssemblyFileVersion("2.4.0")]
-[assembly: AssemblyInformationalVersion("2.4.0")]
+[assembly: AssemblyVersion("2.4.1")]
+[assembly: AssemblyFileVersion("2.4.1")]
+[assembly: AssemblyInformationalVersion("2.4.1")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

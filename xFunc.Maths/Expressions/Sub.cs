@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (parentMathExpression is BinaryMathExpression)
+            if (parent is BinaryMathExpression)
             {
                 return ToString("({0} - {1})");
             }
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return firstMathExpression.Calculate() - secondMathExpression.Calculate();
+            return left.Calculate() - right.Calculate();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return firstMathExpression.Calculate(parameters) - secondMathExpression.Calculate(parameters);
+            return left.Calculate(parameters) - right.Calculate(parameters);
         }
 
         /// <summary>
@@ -76,25 +76,25 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return firstMathExpression.Calculate(parameters, functions) - secondMathExpression.Calculate(parameters, functions);
+            return left.Calculate(parameters, functions) - right.Calculate(parameters, functions);
         }
 
         public override IMathExpression Differentiate(Variable variable)
         {
-            var first = MathParser.HasVar(firstMathExpression, variable);
-            var second = MathParser.HasVar(secondMathExpression, variable);
+            var first = MathParser.HasVar(left, variable);
+            var second = MathParser.HasVar(right, variable);
 
             if (first && second)
             {
-                return new Sub(firstMathExpression.Clone().Differentiate(variable), secondMathExpression.Clone().Differentiate(variable));
+                return new Sub(left.Clone().Differentiate(variable), right.Clone().Differentiate(variable));
             }
             if (first)
             {
-                return firstMathExpression.Clone().Differentiate(variable);
+                return left.Clone().Differentiate(variable);
             }
             if (second)
             {
-                return new UnaryMinus(secondMathExpression.Clone().Differentiate(variable));
+                return new UnaryMinus(right.Clone().Differentiate(variable));
             }
 
             return new Number(0);
@@ -106,7 +106,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Sub(firstMathExpression.Clone(), secondMathExpression.Clone());
+            return new Sub(left.Clone(), right.Clone());
         }
 
     }

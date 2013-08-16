@@ -20,8 +20,8 @@ namespace xFunc.Maths.Expressions
     public class Derivative : IMathExpression
     {
 
-        private IMathExpression parentMathExpression;
-        private IMathExpression firstMathExpression;
+        private IMathExpression parent;
+        private IMathExpression expression;
         private Variable variable;
 
         /// <summary>
@@ -32,11 +32,11 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The expression.</param>
+        /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
-        public Derivative(IMathExpression firstMathExpression, Variable variable)
+        public Derivative(IMathExpression expression, Variable variable)
         {
-            this.firstMathExpression = firstMathExpression;
+            this.expression = expression;
             this.variable = variable;
         }
 
@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions
             if (exp == null)
                 return false;
 
-            return firstMathExpression.Equals(exp.FirstMathExpression) && variable.Equals(exp.Variable);
+            return expression.Equals(exp.Expression) && variable.Equals(exp.Variable);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return string.Format("deriv({0}, {1})", firstMathExpression, variable);
+            return string.Format("deriv({0}, {1})", expression, variable);
         }
 
         public double Calculate()
@@ -78,19 +78,19 @@ namespace xFunc.Maths.Expressions
 
         public IMathExpression Differentiate()
         {
-            if (firstMathExpression is Derivative)
-                return firstMathExpression.Differentiate(variable).Differentiate(variable);
+            if (expression is Derivative)
+                return expression.Differentiate(variable).Differentiate(variable);
 
-            return firstMathExpression.Differentiate(variable);
+            return expression.Differentiate(variable);
         }
 
         // The local "variable" is ignored.
         public IMathExpression Differentiate(Variable variable)
         {
-            if (firstMathExpression is Derivative)
-                return firstMathExpression.Differentiate(this.variable).Differentiate(this.variable);
+            if (expression is Derivative)
+                return expression.Differentiate(this.variable).Differentiate(this.variable);
 
-            return firstMathExpression.Differentiate(this.variable);
+            return expression.Differentiate(this.variable);
         }
 
         /// <summary>
@@ -99,20 +99,20 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public IMathExpression Clone()
         {
-            return new Derivative(firstMathExpression.Clone(), (Variable)variable.Clone());
+            return new Derivative(expression.Clone(), (Variable)variable.Clone());
         }
 
-        public IMathExpression FirstMathExpression
+        public IMathExpression Expression
         {
             get
             {
-                return firstMathExpression;
+                return expression;
             }
             set
             {
-                firstMathExpression = value;
-                if (firstMathExpression != null)
-                    firstMathExpression.Parent = this;
+                expression = value;
+                if (expression != null)
+                    expression.Parent = this;
             }
         }
 
@@ -137,11 +137,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parentMathExpression;
+                return parent;
             }
             set
             {
-                parentMathExpression = value;
+                parent = value;
             }
         }
 

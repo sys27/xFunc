@@ -40,6 +40,11 @@ namespace xFunc.Maths.Expressions
             this.variable = variable;
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -102,6 +107,12 @@ namespace xFunc.Maths.Expressions
             return new Derivative(expression.Clone(), (Variable)variable.Clone());
         }
 
+        /// <summary>
+        /// Gets or sets the expression.
+        /// </summary>
+        /// <value>
+        /// The expression.
+        /// </value>
         public IMathExpression Expression
         {
             get
@@ -116,6 +127,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the variable.
+        /// </summary>
+        /// <value>
+        /// The variable.
+        /// </value>
         public Variable Variable
         {
             get

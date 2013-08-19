@@ -38,11 +38,28 @@ namespace xFunc.Maths.Expressions
             return string.Format("undef({0})", key.ToString());
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public double Calculate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
+        /// <exception cref="NotSupportedException">If <c>key</c> is not a <see cref="Variable"/>.</exception>
         public double Calculate(MathParameterCollection parameters)
         {
             if (key is Variable)

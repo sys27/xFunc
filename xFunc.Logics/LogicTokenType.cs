@@ -46,7 +46,7 @@ namespace xFunc.Logics
         /// </summary>
         Not            = 70,
         /// <summary>
-        /// &
+        /// &amp;
         /// </summary>
         And            = 62,
         /// <summary>

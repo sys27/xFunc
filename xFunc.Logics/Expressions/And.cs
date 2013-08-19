@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="And"/> class.
         /// </summary>
-        /// <seealso cref="IMathExpression"/>
+        /// <seealso cref="ILogicExpression"/>
         public And() : base(null, null) { }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace xFunc.Logics.Expressions
         /// </summary>
         /// <param name="firstMathExpression">The left operand.</param>
         /// <param name="secondMathExpression">The right operand.</param>
-        /// <seealso cref="IMathExpression"/>
+        /// <seealso cref="ILogicExpression"/>
         public And(ILogicExpression firstMathExpression, ILogicExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         /// <summary>

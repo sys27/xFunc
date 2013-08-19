@@ -68,8 +68,8 @@ namespace xFunc.Test
             Assert.IsTrue(actual is And);
 
             And a = (And)actual;
-            Assert.IsTrue(a.FirstOperand is Or);
-            Assert.IsTrue(a.SecondOperand is Variable);
+            Assert.IsTrue(a.Left is Or);
+            Assert.IsTrue(a.Right is Variable);
         }
 
     }

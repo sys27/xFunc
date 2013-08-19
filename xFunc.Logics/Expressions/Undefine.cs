@@ -41,7 +41,7 @@ namespace xFunc.Logics.Expressions
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
-            parameters.Remove(variable.Character);
+            parameters.Remove(variable.Name);
 
             return false;
         }

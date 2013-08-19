@@ -59,7 +59,7 @@ namespace xFunc.Logics.Expressions
         /// <seealso cref="LogicParameterCollection" />
         public override bool Calculate(LogicParameterCollection parameters)
         {
-            return !firstMathExpression.Calculate(parameters);
+            return !argument.Calculate(parameters);
         }
 
     }

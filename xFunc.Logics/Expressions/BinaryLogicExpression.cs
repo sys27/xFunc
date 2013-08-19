@@ -26,21 +26,21 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        protected ILogicExpression firstOperand;
+        protected ILogicExpression left;
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        protected ILogicExpression secondOperand;
+        protected ILogicExpression right;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryLogicExpression"/> class.
         /// </summary>
-        /// <param name="firstOperand">The first (left) operand.</param>
-        /// <param name="secondOperand">The second (right) operand.</param>
-        protected BinaryLogicExpression(ILogicExpression firstOperand, ILogicExpression secondOperand)
+        /// <param name="left">The first (left) operand.</param>
+        /// <param name="right">The second (right) operand.</param>
+        protected BinaryLogicExpression(ILogicExpression left, ILogicExpression right)
         {
-            this.firstOperand = firstOperand;
-            this.secondOperand = secondOperand;
+            this.left = left;
+            this.right = right;
         }
 
         /// <summary>
@@ -53,15 +53,15 @@ namespace xFunc.Logics.Expressions
             string first;
             string second;
 
-            if (firstOperand is Variable || firstOperand is Const)
-                first = firstOperand.ToString();
+            if (left is Variable || left is Const)
+                first = left.ToString();
             else
-                first = "(" + firstOperand + ")";
+                first = "(" + left + ")";
 
-            if (secondOperand is Variable || secondOperand is Const)
-                second = secondOperand.ToString();
+            if (right is Variable || right is Const)
+                second = right.ToString();
             else
-                second = "(" + secondOperand + ")";
+                second = "(" + right + ")";
 
             return first + " " + operand + " " + second;
         }
@@ -78,15 +78,15 @@ namespace xFunc.Logics.Expressions
         /// Gets or sets the first (left) operand.
         /// </summary>
         /// <value>The first (left) operand.</value>
-        public ILogicExpression FirstOperand
+        public ILogicExpression Left
         {
             get
             {
-                return firstOperand;
+                return left;
             }
             set
             {
-                firstOperand = value;
+                left = value;
             }
         }
 
@@ -94,15 +94,15 @@ namespace xFunc.Logics.Expressions
         /// Gets or sets the second (right) operand.
         /// </summary>
         /// <value>The second (right) operand.</value>
-        public ILogicExpression SecondOperand
+        public ILogicExpression Right
         {
             get
             {
-                return secondOperand;
+                return right;
             }
             set
             {
-                secondOperand = value;
+                right = value;
             }
         }
 

@@ -81,15 +81,15 @@ namespace xFunc.Logics
                     else if (expression is UnaryLogicExpression)
                     {
                         UnaryLogicExpression unaryLogicExp = expression as UnaryLogicExpression;
-                        unaryLogicExp.FirstMathExpression = stack.Pop();
+                        unaryLogicExp.Argument = stack.Pop();
 
                         stack.Push(unaryLogicExp);
                     }
                     else if (expression is BinaryLogicExpression)
                     {
                         BinaryLogicExpression binLoginExp = expression as BinaryLogicExpression;
-                        binLoginExp.SecondOperand = stack.Pop();
-                        binLoginExp.FirstOperand = stack.Pop();
+                        binLoginExp.Right = stack.Pop();
+                        binLoginExp.Left = stack.Pop();
 
                         stack.Push(binLoginExp);
                     }
@@ -181,13 +181,13 @@ namespace xFunc.Logics
             if (expression is UnaryLogicExpression)
             {
                 UnaryLogicExpression un = expression as UnaryLogicExpression;
-                ConvertToColletion(un.FirstMathExpression, collection);
+                ConvertToColletion(un.Argument, collection);
             }
             else if (expression is BinaryLogicExpression)
             {
                 BinaryLogicExpression bin = expression as BinaryLogicExpression;
-                ConvertToColletion(bin.FirstOperand, collection);
-                ConvertToColletion(bin.SecondOperand, collection);
+                ConvertToColletion(bin.Left, collection);
+                ConvertToColletion(bin.Right, collection);
             }
             else if (expression is Variable)
             {

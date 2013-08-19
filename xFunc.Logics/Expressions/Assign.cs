@@ -67,8 +67,8 @@ namespace xFunc.Logics.Expressions
                 throw new ArgumentNullException("parameters");
 
             var localValue = value.Calculate(parameters);
-            parameters.Add(variable.Character);
-            parameters[variable.Character] = localValue;
+            parameters.Add(variable.Name);
+            parameters[variable.Name] = localValue;
 
             return false;
         }

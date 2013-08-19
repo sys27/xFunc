@@ -62,7 +62,7 @@ namespace xFunc.Logics.Expressions
         /// Gets the name of variable.
         /// </summary>
         /// <value>The name of variable.</value>
-        public string Character
+        public string Name
         {
             get
             {

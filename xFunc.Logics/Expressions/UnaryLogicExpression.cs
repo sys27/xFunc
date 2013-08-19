@@ -26,15 +26,15 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// The (first) operand.
         /// </summary>
-        protected ILogicExpression firstMathExpression;
+        protected ILogicExpression argument;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryLogicExpression"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The expression.</param>
-        protected UnaryLogicExpression(ILogicExpression firstMathExpression)
+        /// <param name="argument">The expression.</param>
+        protected UnaryLogicExpression(ILogicExpression argument)
         {
-            this.firstMathExpression = firstMathExpression;
+            this.argument = argument;
         }
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace xFunc.Logics.Expressions
         /// <returns>A <see cref="String" /> that represents this instance.</returns>
         protected string ToString(string operand)
         {
-            if (firstMathExpression is Variable)
-                return string.Format("{0}{1}", operand, firstMathExpression);
+            if (argument is Variable)
+                return string.Format("{0}{1}", operand, argument);
 
-            return string.Format("{0}({1})", operand, firstMathExpression);
+            return string.Format("{0}({1})", operand, argument);
         }
 
         /// <summary>
@@ -62,15 +62,15 @@ namespace xFunc.Logics.Expressions
         /// Gets or sets the expression.
         /// </summary>
         /// <value>The expression.</value>
-        public ILogicExpression FirstMathExpression
+        public ILogicExpression Argument
         {
             get
             {
-                return firstMathExpression;
+                return argument;
             }
             set
             {
-                firstMathExpression = value;
+                argument = value;
             }
         }
 

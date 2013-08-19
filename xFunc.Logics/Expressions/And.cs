@@ -53,7 +53,7 @@ namespace xFunc.Logics.Expressions
         /// <returns>A result of the calculation.</returns>
         public override bool Calculate(LogicParameterCollection parameters)
         {
-            return firstOperand.Calculate(parameters) & secondOperand.Calculate(parameters);
+            return left.Calculate(parameters) & right.Calculate(parameters);
         }
 
     }

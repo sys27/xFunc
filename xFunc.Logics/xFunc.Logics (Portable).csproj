@@ -75,6 +75,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Expressions\And.cs" />
     <Compile Include="Expressions\Assign.cs" />
     <Compile Include="Expressions\BinaryLogicExpression.cs" />

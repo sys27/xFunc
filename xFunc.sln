@@ -1,20 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc", "xFunc\xFunc.csproj", "{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Test", "xFunc.Test\xFunc.Test (.Net 4.0).csproj", "{E762246C-21B2-47D9-9D80-54E9E0ED3150}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Test (.Net 4.0)", "xFunc.Test\xFunc.Test (.Net 4.0).csproj", "{E762246C-21B2-47D9-9D80-54E9E0ED3150}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{716F4D54-B652-4140-9275-5CEA8054C7B2}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 		xFunc.vsmdi = xFunc.vsmdi
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Maths", "xFunc.Maths\xFunc.Maths (.Net 4.0).csproj", "{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Maths (.Net 4.0)", "xFunc.Maths\xFunc.Maths (.Net 4.0).csproj", "{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Logics", "xFunc.Logics\xFunc.Logics (.Net 4.0).csproj", "{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Logics (.Net 4.0)", "xFunc.Logics\xFunc.Logics (.Net 4.0).csproj", "{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

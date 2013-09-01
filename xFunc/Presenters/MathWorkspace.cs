@@ -29,8 +29,6 @@ namespace xFunc.Presenters
 
         private int countOfExps;
         private List<MathWorkspaceItem> expressions;
-
-        private NumeralSystem numberSystem;
         
         public MathWorkspace()
             : this(20)
@@ -57,43 +55,8 @@ namespace xFunc.Presenters
 
             foreach (var s in exps)
             {
-                IMathExpression exp = mathProcessor.Parse(s);
-                MathWorkspaceItem item = new MathWorkspaceItem(s, exp);
-                if (exp is Derivative)
-                {
-                    item.Answer = mathProcessor.Differentiate(exp, null).ToString();
-                }
-                else if (exp is Simplify)
-                {
-                    var simp = exp as Simplify;
-
-                    item.Answer = simp.Expression.ToString();
-                }
-                else if (exp is Define)
-                {
-                    Define assign = exp as Define;
-                    assign.Calculate(parameters, functions);
-                    if (assign.Key is Variable)
-                        item.Answer = string.Format(Resource.AssignVariable, assign.Key, assign.Value);
-                    else if (assign.Key is UserFunction)
-                        item.Answer = string.Format(Resource.AssignFunction, assign.Key, assign.Value);
-                }
-                else if (exp is Undefine)
-                {
-                    Undefine undef = exp as Undefine;
-                    undef.Calculate(parameters, functions);
-                    if (undef.Key is Variable)
-                        item.Answer = string.Format(Resource.UndefineVariable, undef.Key);
-                    else if (undef.Key is UserFunction)
-                        item.Answer = string.Format(Resource.UndefineFunction, undef.Key);
-                }
-                else
-                {
-                    if (numberSystem == NumeralSystem.Decimal)
-                        item.Answer = exp.Calculate(parameters, functions).ToString(CultureInfo.InvariantCulture);
-                    else
-                        item.Answer = MathExtentions.ToNewBase((int)exp.Calculate(parameters, functions), numberSystem);
-                }
+                var result = mathProcessor.Solve(s);
+                var item = new MathWorkspaceItem(s, result);
 
                 expressions.Add(item);
             }
@@ -146,11 +109,11 @@ namespace xFunc.Presenters
         {
             get
             {
-                return numberSystem;
+                return mathProcessor.Base;
             }
             set
             {
-                numberSystem = value;
+                mathProcessor.Base = value;
             }
         }
 

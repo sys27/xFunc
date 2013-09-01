@@ -306,12 +306,6 @@
   <data name="ExpListGroupHeader" xml:space="preserve">
     <value>Список виразів</value>
   </data>
-  <data name="AssignVariable" xml:space="preserve">
-    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
-  </data>
-  <data name="UndefineVariable" xml:space="preserve">
-    <value>Змінна '{0}' видалена.</value>
-  </data>
   <data name="CopyAnswerMenuItem" xml:space="preserve">
     <value>Копіювати "Відповідь"</value>
   </data>
@@ -333,7 +327,13 @@
   <data name="AssignFunction" xml:space="preserve">
     <value>Функції '{0}' присвоєно вираз "{1} '.</value>
   </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
+  </data>
   <data name="UndefineFunction" xml:space="preserve">
     <value>Функція '{0}' видалена.</value>
+  </data>
+  <data name="UndefineVariable" xml:space="preserve">
+    <value>Змінна '{0}' видалена.</value>
   </data>
 </root>

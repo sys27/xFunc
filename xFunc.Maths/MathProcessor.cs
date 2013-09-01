@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Resources;
+using xFunc.Maths.Results;
 
 namespace xFunc.Maths
 {
@@ -14,6 +17,8 @@ namespace xFunc.Maths
 
         private MathParameterCollection parameters;
         private MathFunctionCollection userFunctions;
+
+        private NumeralSystem numberSystem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MathProcessor"/> class.
@@ -59,9 +64,43 @@ namespace xFunc.Maths
             this.userFunctions = userFunctions;
         }
 
-        public void Solve(string function)
+        public IResult Solve(string function)
         {
-            var func = this.Parse(function, true);
+            var exp = this.Parse(function, true);
+
+            if (exp is Derivative)
+            {
+                return new ExpressionResult(Differentiate(exp, null));
+            }
+            if (exp is Simplify)
+            {
+                return new ExpressionResult((exp as Simplify).Expression);
+            }
+            if (exp is Define)
+            {
+                Define assign = exp as Define;
+                assign.Calculate(parameters, userFunctions);
+
+                if (assign.Key is Variable)
+                    return new StringResult(string.Format(Resource.AssignVariable, assign.Key, assign.Value));
+                else
+                    return new StringResult(string.Format(Resource.AssignFunction, assign.Key, assign.Value));
+            }
+            if (exp is Undefine)
+            {
+                Undefine undef = exp as Undefine;
+                undef.Calculate(parameters, userFunctions);
+
+                if (undef.Key is Variable)
+                    return new StringResult(string.Format(Resource.UndefineVariable, undef.Key));
+                else if (undef.Key is UserFunction)
+                    return new StringResult(string.Format(Resource.UndefineFunction, undef.Key));
+            }
+
+            if (numberSystem == NumeralSystem.Decimal)
+                return new NumberResult(exp.Calculate(parameters, userFunctions));
+            else
+                return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters, userFunctions), numberSystem));
         }
 
         /// <summary>
@@ -134,6 +173,24 @@ namespace xFunc.Maths
             set
             {
                 parser.AngleMeasurement = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the numeral system.
+        /// </summary>
+        /// <value>
+        /// The numeral system.
+        /// </value>
+        public NumeralSystem Base
+        {
+            get
+            {
+                return numberSystem;
+            }
+            set
+            {
+                numberSystem = value;
             }
         }
 

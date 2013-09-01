@@ -306,12 +306,6 @@
   <data name="ExpListGroupHeader" xml:space="preserve">
     <value>Список выражений</value>
   </data>
-  <data name="AssignVariable" xml:space="preserve">
-    <value>Переменной '{0}' присвоено '{1}' значение.</value>
-  </data>
-  <data name="UndefineVariable" xml:space="preserve">
-    <value>Переменная '{0}' удалена.</value>
-  </data>
   <data name="CopyAnswerMenuItem" xml:space="preserve">
     <value>Копировать "Ответ"</value>
   </data>
@@ -333,7 +327,13 @@
   <data name="AssignFunction" xml:space="preserve">
     <value>Функции '{0}' присвоено выражение '{1}'.</value>
   </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>Переменной '{0}' присвоено '{1}' значение.</value>
+  </data>
   <data name="UndefineFunction" xml:space="preserve">
     <value>Функция '{0}' удалена.</value>
+  </data>
+  <data name="UndefineVariable" xml:space="preserve">
+    <value>Переменная '{0}' удалена.</value>
   </data>
 </root>

@@ -61,6 +61,24 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The expression &apos;{1}&apos; was assigned to the function &apos;{0}&apos;..
+        /// </summary>
+        internal static string AssignFunction {
+            get {
+                return ResourceManager.GetString("AssignFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value &apos;{1}&apos; was assigned to the variable &apos;{0}&apos;..
+        /// </summary>
+        internal static string AssignVariable {
+            get {
+                return ResourceManager.GetString("AssignVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while parsing the tree..
         /// </summary>
         internal static string ErrorWhileParsingTree {
@@ -129,6 +147,24 @@ namespace xFunc.Maths.Resources {
         internal static string NotSupportedToken {
             get {
                 return ResourceManager.GetString("NotSupportedToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; function is removed..
+        /// </summary>
+        internal static string UndefineFunction {
+            get {
+                return ResourceManager.GetString("UndefineFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; variable is removed..
+        /// </summary>
+        internal static string UndefineVariable {
+            get {
+                return ResourceManager.GetString("UndefineVariable", resourceCulture);
             }
         }
         

@@ -12,6 +12,9 @@ namespace xFunc.Maths
         private IDifferentiator differentiator;
         private MathParser parser;
 
+        private MathParameterCollection parameters;
+        private MathFunctionCollection userFunctions;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MathProcessor"/> class.
         /// </summary>
@@ -21,6 +24,9 @@ namespace xFunc.Maths
             simplifier = new MathSimplifier();
             differentiator = new MathDifferentiator(simplifier);
             parser = new MathParser(lexer, simplifier);
+
+            parameters = new MathParameterCollection();
+            userFunctions = new MathFunctionCollection();
         }
 
         /// <summary>
@@ -30,11 +36,32 @@ namespace xFunc.Maths
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
+            : this(lexer, simplifier, differentiator, new MathParameterCollection(), new MathFunctionCollection())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MathProcessor" /> class.
+        /// </summary>
+        /// <param name="lexer">The lexer.</param>
+        /// <param name="simplifier">The simplifier.</param>
+        /// <param name="differentiator">The differentiator.</param>
+        /// <param name="parameters">The collection of parameters.</param>
+        /// <param name="userFunctions">The collection of functions.</param>
+        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, MathParameterCollection parameters, MathFunctionCollection userFunctions)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
             this.differentiator = differentiator;
-            parser = new MathParser(lexer, simplifier);
+            this.parser = new MathParser(lexer, simplifier);
+
+            this.parameters = parameters;
+            this.userFunctions = userFunctions;
+        }
+
+        public void Solve(string function)
+        {
+            var func = this.Parse(function, true);
         }
 
         /// <summary>
@@ -107,6 +134,34 @@ namespace xFunc.Maths
             set
             {
                 parser.AngleMeasurement = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the parameters.
+        /// </summary>
+        /// <value>
+        /// The parameters.
+        /// </value>
+        public MathParameterCollection Parameters
+        {
+            get
+            {
+                return parameters;
+            }
+        }
+
+        /// <summary>
+        /// Gets the functions.
+        /// </summary>
+        /// <value>
+        /// The functions.
+        /// </value>
+        public MathFunctionCollection UserFunctions
+        {
+            get
+            {
+                return userFunctions;
             }
         }
 

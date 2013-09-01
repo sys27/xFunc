@@ -112,11 +112,17 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AssignFunction" xml:space="preserve">
+    <value>Функції '{0}' присвоєно вираз "{1} '.</value>
+  </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
+  </data>
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>При побудові дерева сталася помилка.</value>
   </data>
@@ -140,6 +146,12 @@
   </data>
   <data name="NotSupportedToken" xml:space="preserve">
     <value>Тип токена не підходить.</value>
+  </data>
+  <data name="UndefineFunction" xml:space="preserve">
+    <value>Функція '{0}' видалена.</value>
+  </data>
+  <data name="UndefineVariable" xml:space="preserve">
+    <value>Змінна '{0}' видалена.</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Неочікувана помилка.</value>

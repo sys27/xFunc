@@ -1,6 +1,7 @@
 ﻿using System;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Results;
 using xFunc.Presenters;
 
 namespace xFunc.ViewModels
@@ -42,11 +43,11 @@ namespace xFunc.ViewModels
             }
         }
 
-        public IMathExpression Expression
+        public IResult Result
         {
             get
             {
-                return item.Expression;
+                return item.Result;
             }
         }
 

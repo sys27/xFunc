@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Results;
 
 namespace xFunc.Presenters
 {
@@ -22,7 +23,7 @@ namespace xFunc.Presenters
     {
 
         private string strExp;
-        private IMathExpression exp;
+        private IResult result;
         private string answer;
 
         public MathWorkspaceItem()
@@ -30,17 +31,11 @@ namespace xFunc.Presenters
 
         }
 
-        public MathWorkspaceItem(string strExp, IMathExpression exp)
-            : this(strExp, exp, null)
-        {
-
-        }
-
-        public MathWorkspaceItem(string strExp, IMathExpression exp, string answer)
+        public MathWorkspaceItem(string strExp, IResult result)
         {
             this.strExp = strExp;
-            this.exp = exp;
-            this.answer = answer;
+            this.result = result;
+            this.answer = result.ToString();
         }
 
         public string StringExpression
@@ -51,11 +46,11 @@ namespace xFunc.Presenters
             }
         }
 
-        public IMathExpression Expression
+        public IResult Result
         {
             get
             {
-                return exp;
+                return result;
             }
         }
 

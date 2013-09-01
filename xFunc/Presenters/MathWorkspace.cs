@@ -31,10 +31,7 @@ namespace xFunc.Presenters
         private List<MathWorkspaceItem> expressions;
 
         private NumeralSystem numberSystem;
-
-        private MathParameterCollection parameters;
-        private MathFunctionCollection functions;
-
+        
         public MathWorkspace()
             : this(20)
         {
@@ -46,8 +43,6 @@ namespace xFunc.Presenters
             this.countOfExps = countOfExps;
             expressions = new List<MathWorkspaceItem>(countOfExps);
             mathProcessor = new MathProcessor();
-            parameters = new MathParameterCollection();
-            functions = new MathFunctionCollection();
         }
 
         public void Add(string strExp)

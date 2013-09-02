@@ -41,13 +41,15 @@ namespace xFunc.Maths.Tokens
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            var token = obj as VariableToken;
-            if (token != null && this.Variable == token.Variable)
-            {
+            if (this == obj)
                 return true;
-            }
 
-            return false;
+            if (typeof(VariableToken) != obj.GetType())
+                return false;
+
+            var token = obj as VariableToken;
+
+            return variable == token.variable;
         }
 
         /// <summary>

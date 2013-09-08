@@ -66,16 +66,40 @@ namespace xFunc.Maths.Expressions
             return string.Format("deriv({0}, {1})", expression, variable);
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public double Calculate()
         {
             return Differentiate().Calculate();
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
         public double Calculate(MathParameterCollection parameters)
         {
             return Differentiate().Calculate(parameters);
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Differentiate().Calculate(parameters, functions);

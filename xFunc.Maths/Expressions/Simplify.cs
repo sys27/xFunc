@@ -62,16 +62,43 @@ namespace xFunc.Maths.Expressions
             return string.Format("simplify({0})", expression.ToString());
         }
 
+        /// <summary>
+        /// Throws <see cref="NotSupportedException"/>.
+        /// </summary>
+        /// <returns>
+        /// The exception.
+        /// </returns>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public double Calculate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// The exception.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <exception cref="NotSupportedException">Always.</exception>
         public double Calculate(MathParameterCollection parameters)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// The exception.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
+        /// <exception cref="NotSupportedException">Always.</exception>
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             throw new NotSupportedException();
@@ -110,6 +137,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets or sets the expression.
+        /// </summary>
+        /// <value>
+        /// The expression.
+        /// </value>
         public IMathExpression Expression
         {
             get

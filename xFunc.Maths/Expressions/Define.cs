@@ -55,11 +55,28 @@ namespace xFunc.Maths.Expressions
             return string.Format("{0} := {1}", key, value);
         }
 
+        /// <summary>
+        /// Throws <see cref="System.NotSupportedException"/>
+        /// </summary>
+        /// <returns>
+        /// The exception.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public double Calculate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Throws <see cref="System.NotSupportedException" />
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// The exception.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <exception cref="System.ArgumentNullException"><paramref name="parameters"/> is null.</exception>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public double Calculate(MathParameterCollection parameters)
         {
             if (key is Variable)
@@ -79,6 +96,17 @@ namespace xFunc.Maths.Expressions
             return double.NaN;
         }
 
+        /// <summary>
+        /// Throws <see cref="System.NotSupportedException" />
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// The exception.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> or <paramref name="functions"/> is null.</exception>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             if (key is Variable)

@@ -51,16 +51,40 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return ToString("arcoth({0})");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public override double Calculate()
         {
             return MathExtentions.Acoth(argument.Calculate());
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
         public override double Calculate(MathParameterCollection parameters)
         {
             return MathExtentions.Acoth(argument.Calculate(parameters));
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return MathExtentions.Acoth(argument.Calculate(parameters, functions));

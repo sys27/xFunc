@@ -81,397 +81,19 @@ namespace xFunc.Maths
             }
             else if (expression is Add)
             {
-                Add add = expression as Add;
-
-                // plus zero
-                if (add.Left.Equals(zero))
-                    return add.Right;
-                if (add.Right.Equals(zero))
-                    return add.Left;
-
-                if (add.Left is Number && add.Right is Number)
-                    return new Number(add.Calculate(null));
-
-                if (add.Left is UnaryMinus)
-                {
-                    IMathExpression temp = add.Left;
-                    add.Left = add.Right;
-                    add.Right = temp;
-                }
-                if (add.Right is UnaryMinus)
-                {
-                    UnaryMinus unMinus = add.Right as UnaryMinus;
-                    Sub sub = new Sub(add.Left, unMinus.Argument);
-
-                    return sub;
-                }
-
-                // 2 + (2 + x)
-                // 2 + (x + 2)
-                // (2 + x) + 2
-                // (x + 2) + 2
-                Add bracketAdd = null;
-                Number firstNumber = null;
-                if (add.Left is Add && add.Right is Number)
-                {
-                    bracketAdd = add.Left as Add;
-                    firstNumber = add.Right as Number;
-                }
-                else if (add.Right is Add && add.Left is Number)
-                {
-                    bracketAdd = add.Right as Add;
-                    firstNumber = add.Left as Number;
-                }
-                if (bracketAdd != null)
-                {
-                    if (bracketAdd.Left is Number)
-                    {
-                        Number secondNumber = bracketAdd.Left as Number;
-                        Add result = new Add(bracketAdd.Right, new Number(firstNumber.Value + secondNumber.Value));
-
-                        return _Simplify(result);
-                    }
-                    if (bracketAdd.Right is Number)
-                    {
-                        Number secondNumber = bracketAdd.Right as Number;
-                        Add result = new Add(bracketAdd.Left, new Number(firstNumber.Value + secondNumber.Value));
-
-                        return _Simplify(result);
-                    }
-                }
-
-                // 2 + (2 - x)
-                // 2 + (x - 2)
-                // (2 - x) + 2
-                // (x - 2) + 2
-                Sub bracketSub = null;
-                if (add.Left is Sub && add.Right is Number)
-                {
-                    bracketSub = add.Left as Sub;
-                    firstNumber = add.Right as Number;
-                }
-                else if (add.Right is Sub && add.Left is Number)
-                {
-                    bracketSub = add.Right as Sub;
-                    firstNumber = add.Left as Number;
-                }
-                if (bracketSub != null)
-                {
-                    if (bracketSub.Left is Number)
-                    {
-                        Number secondNumber = bracketSub.Left as Number;
-                        Sub result = new Sub(new Number(firstNumber.Value + secondNumber.Value), bracketSub.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketSub.Right is Number)
-                    {
-                        Number secondNumber = bracketSub.Right as Number;
-                        Add result = new Add(new Number(firstNumber.Value - secondNumber.Value), bracketSub.Left);
-
-                        return _Simplify(result);
-                    }
-                }
+                return SimplifyAdd(expression as Add);
             }
             else if (expression is Sub)
             {
-                Sub sub = expression as Sub;
-
-                // sub zero
-                if (sub.Left.Equals(zero))
-                    return _Simplify(new UnaryMinus(sub.Right));
-                if (sub.Right.Equals(zero))
-                    return sub.Left;
-
-                if (sub.Left is Number && sub.Right is Number)
-                    return new Number(sub.Calculate(null));
-
-                if (sub.Right is UnaryMinus)
-                {
-                    UnaryMinus unMinus = sub.Right as UnaryMinus;
-                    Add add = new Add(sub.Left, unMinus.Argument);
-
-                    return add;
-                }
-
-                // (2 + x) - 2
-                // (x + 2) - 2
-                if (sub.Left is Add && sub.Right is Number)
-                {
-                    Add bracketAdd = sub.Left as Add;
-                    Number firstNumber = sub.Right as Number;
-
-                    if (bracketAdd.Left is Number)
-                    {
-                        Number secondNumber = bracketAdd.Left as Number;
-                        Add result = new Add(bracketAdd.Right, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
-
-                        return _Simplify(result);
-                    }
-                    if (bracketAdd.Right is Number)
-                    {
-                        Number secondNumber = bracketAdd.Right as Number;
-                        Add result = new Add(bracketAdd.Left, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
-
-                        return _Simplify(result);
-                    }
-                }
-                // 2 - (2 + x)
-                // 2 - (x + 2)
-                else if (sub.Right is Add && sub.Left is Number)
-                {
-                    Add bracketAdd = sub.Right as Add;
-                    Number firstNumber = sub.Left as Number;
-
-                    if (bracketAdd.Left is Number)
-                    {
-                        Number secondNumber = bracketAdd.Left as Number;
-                        Sub result = new Sub(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketAdd.Right is Number)
-                    {
-                        Number secondNumber = bracketAdd.Right as Number;
-                        Sub result = new Sub(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.Left);
-
-                        return _Simplify(result);
-                    }
-                }
-                // (2 - x) - 2
-                // (x - 2) - 2
-                else if (sub.Left is Sub && sub.Right is Number)
-                {
-                    Sub bracketSub = sub.Left as Sub;
-                    Number firstNumber = sub.Right as Number;
-
-                    if (bracketSub.Left is Number)
-                    {
-                        Number secondNumber = bracketSub.Left as Number;
-                        Sub result = new Sub(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketSub.Right is Number)
-                    {
-                        Number secondNumber = bracketSub.Right as Number;
-                        Sub result = new Sub(bracketSub.Left, new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)));
-
-                        return _Simplify(result);
-                    }
-                }
-                // 2 - (2 - x)
-                // 2 - (x - 2)
-                else if (sub.Right is Sub && sub.Left is Number)
-                {
-                    Sub bracketSub = sub.Right as Sub;
-                    Number firstNumber = sub.Left as Number;
-
-                    if (bracketSub.Left is Number)
-                    {
-                        Number secondNumber = bracketSub.Left as Number;
-                        Add result = new Add(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketSub.Right is Number)
-                    {
-                        Number secondNumber = bracketSub.Right as Number;
-                        Sub result = new Sub(new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)), bracketSub.Left);
-
-                        return _Simplify(result);
-                    }
-                }
+                return SimplifySub(expression as Sub);
             }
             else if (expression is Mul)
             {
-                Mul mul = expression as Mul;
-
-                // mul by zero
-                if (mul.Left.Equals(zero) || mul.Right.Equals(zero))
-                    return zero;
-
-                // mul by 1
-                if (mul.Left.Equals(one))
-                    return mul.Right;
-                if (mul.Right.Equals(one))
-                    return mul.Left;
-
-                if (mul.Left is Number && mul.Right is Number)
-                    return new Number(mul.Calculate());
-
-                // 2 * (2 * x)
-                // 2 * (x * 2)
-                // (2 * x) * 2
-                // (x * 2) * 2
-                Mul bracketMul = null;
-                Number firstNumber = null;
-                if (mul.Left is Mul && mul.Right is Number)
-                {
-                    bracketMul = mul.Left as Mul;
-                    firstNumber = mul.Right as Number;
-                }
-                else if (mul.Right is Mul && mul.Left is Number)
-                {
-                    bracketMul = mul.Right as Mul;
-                    firstNumber = mul.Left as Number;
-                }
-                if (bracketMul != null)
-                {
-                    if (bracketMul.Left is Number)
-                    {
-                        Number secondNumber = bracketMul.Left as Number;
-                        Mul result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketMul.Right is Number)
-                    {
-                        Number secondNumber = bracketMul.Right as Number;
-                        Mul result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Left);
-
-                        return _Simplify(result);
-                    }
-                }
-
-                // 2 * (2 / x)
-                // 2 * (x / 2)
-                // (2 / x) * 2
-                // (x / 2) * 2
-                Div bracketDiv = null;
-                if (mul.Left is Div && mul.Right is Number)
-                {
-                    bracketDiv = mul.Left as Div;
-                    firstNumber = mul.Right as Number;
-                }
-                else if (mul.Right is Div && mul.Left is Number)
-                {
-                    bracketDiv = mul.Right as Div;
-                    firstNumber = mul.Left as Number;
-                }
-                if (bracketDiv != null)
-                {
-                    if (bracketDiv.Left is Number)
-                    {
-                        Number secondNumber = bracketDiv.Left as Number;
-                        Div result = new Div(new Number(firstNumber.Value * secondNumber.Value), bracketDiv.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketDiv.Right is Number)
-                    {
-                        Number secondNumber = bracketDiv.Right as Number;
-                        Mul result = new Mul(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.Left);
-
-                        return _Simplify(result);
-                    }
-                }
+                return SimplifyMul(expression as Mul);
             }
             else if (expression is Div)
             {
-                Div div = expression as Div;
-
-                // 0 / x
-                if (div.Left.Equals(zero))
-                    return zero;
-                // x / 0
-                if (div.Right.Equals(zero))
-                    throw new DivideByZeroException();
-                // x / 1
-                if (div.Right.Equals(one))
-                    return div.Left;
-
-                if (div.Left is Number && div.Right is Number)
-                    return new Number(div.Calculate());
-
-                // (2 * x) / 2
-                // (x * 2) / 2
-                if (div.Left is Mul && div.Right is Number)
-                {
-                    Mul bracketMul = div.Left as Mul;
-                    Number firstNumber = div.Right as Number;
-
-                    if (bracketMul.Left is Number)
-                    {
-                        Number secondNumber = bracketMul.Left as Number;
-                        Div result = new Div(bracketMul.Right, new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)));
-
-                        return _Simplify(result);
-                    }
-                    if (bracketMul.Right is Number)
-                    {
-                        Number secondNumber = bracketMul.Right as Number;
-                        Div result = new Div(bracketMul.Left, new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)));
-
-                        return _Simplify(result);
-                    }
-                }
-                // 2 / (2 * x)
-                // 2 / (x * 2)
-                else if (div.Right is Mul && div.Left is Number)
-                {
-                    Mul bracketMul = div.Right as Mul;
-                    Number firstNumber = div.Left as Number;
-
-                    if (bracketMul.Left is Number)
-                    {
-                        Number secondNumber = bracketMul.Left as Number;
-                        Div result = new Div(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketMul.Right is Number)
-                    {
-                        Number secondNumber = bracketMul.Right as Number;
-                        Div result = new Div(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.Left);
-
-                        return _Simplify(result);
-                    }
-                }
-                // (2 / x) / 2
-                // (x / 2) / 2
-                else if (div.Left is Div && div.Right is Number)
-                {
-                    Div bracketDiv = div.Left as Div;
-                    Number firstNumber = div.Right as Number;
-
-                    if (bracketDiv.Left is Number)
-                    {
-                        Number secondNumber = bracketDiv.Left as Number;
-                        Div result = new Div(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketDiv.Right is Number)
-                    {
-                        Number secondNumber = bracketDiv.Right as Number;
-                        Div result = new Div(bracketDiv.Left, new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)));
-
-                        return _Simplify(result);
-                    }
-                }
-                // 2 / (2 / x)
-                // 2 / (x / 2)
-                else if (div.Right is Div && div.Left is Number)
-                {
-                    Div bracketDiv = div.Right as Div;
-                    Number firstNumber = div.Left as Number;
-
-                    if (bracketDiv.Left is Number)
-                    {
-                        Number secondNumber = bracketDiv.Left as Number;
-                        Mul result = new Mul(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.Right);
-
-                        return _Simplify(result);
-                    }
-                    if (bracketDiv.Right is Number)
-                    {
-                        Number secondNumber = bracketDiv.Right as Number;
-                        Div result = new Div(new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)), bracketDiv.Left);
-
-                        return _Simplify(result);
-                    }
-                }
+                return SimplifyDiv(expression as Div);
             }
             else if (expression is Pow)
             {
@@ -518,6 +140,404 @@ namespace xFunc.Maths
             }
 
             return expression;
+        }
+
+        private IMathExpression SimplifyAdd(Add add)
+        {
+            // plus zero
+            if (add.Left.Equals(zero))
+                return add.Right;
+            if (add.Right.Equals(zero))
+                return add.Left;
+
+            if (add.Left is Number && add.Right is Number)
+                return new Number(add.Calculate(null));
+
+            if (add.Left is UnaryMinus)
+            {
+                IMathExpression temp = add.Left;
+                add.Left = add.Right;
+                add.Right = temp;
+            }
+            if (add.Right is UnaryMinus)
+            {
+                UnaryMinus unMinus = add.Right as UnaryMinus;
+                Sub sub = new Sub(add.Left, unMinus.Argument);
+
+                return sub;
+            }
+
+            // 2 + (2 + x)
+            // 2 + (x + 2)
+            // (2 + x) + 2
+            // (x + 2) + 2
+            Add bracketAdd = null;
+            Number firstNumber = null;
+            if (add.Left is Add && add.Right is Number)
+            {
+                bracketAdd = add.Left as Add;
+                firstNumber = add.Right as Number;
+            }
+            else if (add.Right is Add && add.Left is Number)
+            {
+                bracketAdd = add.Right as Add;
+                firstNumber = add.Left as Number;
+            }
+            if (bracketAdd != null)
+            {
+                if (bracketAdd.Left is Number)
+                {
+                    Number secondNumber = bracketAdd.Left as Number;
+                    Add result = new Add(bracketAdd.Right, new Number(firstNumber.Value + secondNumber.Value));
+
+                    return _Simplify(result);
+                }
+                if (bracketAdd.Right is Number)
+                {
+                    Number secondNumber = bracketAdd.Right as Number;
+                    Add result = new Add(bracketAdd.Left, new Number(firstNumber.Value + secondNumber.Value));
+
+                    return _Simplify(result);
+                }
+            }
+
+            // 2 + (2 - x)
+            // 2 + (x - 2)
+            // (2 - x) + 2
+            // (x - 2) + 2
+            Sub bracketSub = null;
+            if (add.Left is Sub && add.Right is Number)
+            {
+                bracketSub = add.Left as Sub;
+                firstNumber = add.Right as Number;
+            }
+            else if (add.Right is Sub && add.Left is Number)
+            {
+                bracketSub = add.Right as Sub;
+                firstNumber = add.Left as Number;
+            }
+            if (bracketSub != null)
+            {
+                if (bracketSub.Left is Number)
+                {
+                    Number secondNumber = bracketSub.Left as Number;
+                    Sub result = new Sub(new Number(firstNumber.Value + secondNumber.Value), bracketSub.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketSub.Right is Number)
+                {
+                    Number secondNumber = bracketSub.Right as Number;
+                    Add result = new Add(new Number(firstNumber.Value - secondNumber.Value), bracketSub.Left);
+
+                    return _Simplify(result);
+                }
+            }
+
+            return add;
+        }
+
+        private IMathExpression SimplifySub(Sub sub)
+        {
+            // sub zero
+            if (sub.Left.Equals(zero))
+                return _Simplify(new UnaryMinus(sub.Right));
+            if (sub.Right.Equals(zero))
+                return sub.Left;
+
+            if (sub.Left is Number && sub.Right is Number)
+                return new Number(sub.Calculate(null));
+
+            if (sub.Right is UnaryMinus)
+            {
+                UnaryMinus unMinus = sub.Right as UnaryMinus;
+                Add add = new Add(sub.Left, unMinus.Argument);
+
+                return add;
+            }
+
+            // (2 + x) - 2
+            // (x + 2) - 2
+            if (sub.Left is Add && sub.Right is Number)
+            {
+                Add bracketAdd = sub.Left as Add;
+                Number firstNumber = sub.Right as Number;
+
+                if (bracketAdd.Left is Number)
+                {
+                    Number secondNumber = bracketAdd.Left as Number;
+                    Add result = new Add(bracketAdd.Right, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
+
+                    return _Simplify(result);
+                }
+                if (bracketAdd.Right is Number)
+                {
+                    Number secondNumber = bracketAdd.Right as Number;
+                    Add result = new Add(bracketAdd.Left, new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)));
+
+                    return _Simplify(result);
+                }
+            }
+            // 2 - (2 + x)
+            // 2 - (x + 2)
+            else if (sub.Right is Add && sub.Left is Number)
+            {
+                Add bracketAdd = sub.Right as Add;
+                Number firstNumber = sub.Left as Number;
+
+                if (bracketAdd.Left is Number)
+                {
+                    Number secondNumber = bracketAdd.Left as Number;
+                    Sub result = new Sub(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketAdd.Right is Number)
+                {
+                    Number secondNumber = bracketAdd.Right as Number;
+                    Sub result = new Sub(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketAdd.Left);
+
+                    return _Simplify(result);
+                }
+            }
+            // (2 - x) - 2
+            // (x - 2) - 2
+            else if (sub.Left is Sub && sub.Right is Number)
+            {
+                Sub bracketSub = sub.Left as Sub;
+                Number firstNumber = sub.Right as Number;
+
+                if (bracketSub.Left is Number)
+                {
+                    Number secondNumber = bracketSub.Left as Number;
+                    Sub result = new Sub(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketSub.Right is Number)
+                {
+                    Number secondNumber = bracketSub.Right as Number;
+                    Sub result = new Sub(bracketSub.Left, new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)));
+
+                    return _Simplify(result);
+                }
+            }
+            // 2 - (2 - x)
+            // 2 - (x - 2)
+            else if (sub.Right is Sub && sub.Left is Number)
+            {
+                Sub bracketSub = sub.Right as Sub;
+                Number firstNumber = sub.Left as Number;
+
+                if (bracketSub.Left is Number)
+                {
+                    Number secondNumber = bracketSub.Left as Number;
+                    Add result = new Add(new Number(firstNumber.Calculate(null) - secondNumber.Calculate(null)), bracketSub.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketSub.Right is Number)
+                {
+                    Number secondNumber = bracketSub.Right as Number;
+                    Sub result = new Sub(new Number(firstNumber.Calculate(null) + secondNumber.Calculate(null)), bracketSub.Left);
+
+                    return _Simplify(result);
+                }
+            }
+
+            return sub;
+        }
+
+        private IMathExpression SimplifyMul(Mul mul)
+        {
+            // mul by zero
+            if (mul.Left.Equals(zero) || mul.Right.Equals(zero))
+                return zero;
+
+            // mul by 1
+            if (mul.Left.Equals(one))
+                return mul.Right;
+            if (mul.Right.Equals(one))
+                return mul.Left;
+
+            if (mul.Left is Number && mul.Right is Number)
+                return new Number(mul.Calculate());
+
+            // 2 * (2 * x)
+            // 2 * (x * 2)
+            // (2 * x) * 2
+            // (x * 2) * 2
+            Mul bracketMul = null;
+            Number firstNumber = null;
+            if (mul.Left is Mul && mul.Right is Number)
+            {
+                bracketMul = mul.Left as Mul;
+                firstNumber = mul.Right as Number;
+            }
+            else if (mul.Right is Mul && mul.Left is Number)
+            {
+                bracketMul = mul.Right as Mul;
+                firstNumber = mul.Left as Number;
+            }
+            if (bracketMul != null)
+            {
+                if (bracketMul.Left is Number)
+                {
+                    Number secondNumber = bracketMul.Left as Number;
+                    Mul result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketMul.Right is Number)
+                {
+                    Number secondNumber = bracketMul.Right as Number;
+                    Mul result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Left);
+
+                    return _Simplify(result);
+                }
+            }
+
+            // 2 * (2 / x)
+            // 2 * (x / 2)
+            // (2 / x) * 2
+            // (x / 2) * 2
+            Div bracketDiv = null;
+            if (mul.Left is Div && mul.Right is Number)
+            {
+                bracketDiv = mul.Left as Div;
+                firstNumber = mul.Right as Number;
+            }
+            else if (mul.Right is Div && mul.Left is Number)
+            {
+                bracketDiv = mul.Right as Div;
+                firstNumber = mul.Left as Number;
+            }
+            if (bracketDiv != null)
+            {
+                if (bracketDiv.Left is Number)
+                {
+                    Number secondNumber = bracketDiv.Left as Number;
+                    Div result = new Div(new Number(firstNumber.Value * secondNumber.Value), bracketDiv.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketDiv.Right is Number)
+                {
+                    Number secondNumber = bracketDiv.Right as Number;
+                    Mul result = new Mul(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.Left);
+
+                    return _Simplify(result);
+                }
+            }
+
+            return mul;
+        }
+
+        private IMathExpression SimplifyDiv(Div div)
+        {
+            // 0 / x
+            if (div.Left.Equals(zero))
+                return zero;
+            // x / 0
+            if (div.Right.Equals(zero))
+                throw new DivideByZeroException();
+            // x / 1
+            if (div.Right.Equals(one))
+                return div.Left;
+
+            if (div.Left is Number && div.Right is Number)
+                return new Number(div.Calculate());
+
+            // (2 * x) / 2
+            // (x * 2) / 2
+            if (div.Left is Mul && div.Right is Number)
+            {
+                Mul bracketMul = div.Left as Mul;
+                Number firstNumber = div.Right as Number;
+
+                if (bracketMul.Left is Number)
+                {
+                    Number secondNumber = bracketMul.Left as Number;
+                    Div result = new Div(bracketMul.Right, new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)));
+
+                    return _Simplify(result);
+                }
+                if (bracketMul.Right is Number)
+                {
+                    Number secondNumber = bracketMul.Right as Number;
+                    Div result = new Div(bracketMul.Left, new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)));
+
+                    return _Simplify(result);
+                }
+            }
+            // 2 / (2 * x)
+            // 2 / (x * 2)
+            else if (div.Right is Mul && div.Left is Number)
+            {
+                Mul bracketMul = div.Right as Mul;
+                Number firstNumber = div.Left as Number;
+
+                if (bracketMul.Left is Number)
+                {
+                    Number secondNumber = bracketMul.Left as Number;
+                    Div result = new Div(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketMul.Right is Number)
+                {
+                    Number secondNumber = bracketMul.Right as Number;
+                    Div result = new Div(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketMul.Left);
+
+                    return _Simplify(result);
+                }
+            }
+            // (2 / x) / 2
+            // (x / 2) / 2
+            else if (div.Left is Div && div.Right is Number)
+            {
+                Div bracketDiv = div.Left as Div;
+                Number firstNumber = div.Right as Number;
+
+                if (bracketDiv.Left is Number)
+                {
+                    Number secondNumber = bracketDiv.Left as Number;
+                    Div result = new Div(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketDiv.Right is Number)
+                {
+                    Number secondNumber = bracketDiv.Right as Number;
+                    Div result = new Div(bracketDiv.Left, new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)));
+
+                    return _Simplify(result);
+                }
+            }
+            // 2 / (2 / x)
+            // 2 / (x / 2)
+            else if (div.Right is Div && div.Left is Number)
+            {
+                Div bracketDiv = div.Right as Div;
+                Number firstNumber = div.Left as Number;
+
+                if (bracketDiv.Left is Number)
+                {
+                    Number secondNumber = bracketDiv.Left as Number;
+                    Mul result = new Mul(new Number(firstNumber.Calculate(null) / secondNumber.Calculate(null)), bracketDiv.Right);
+
+                    return _Simplify(result);
+                }
+                if (bracketDiv.Right is Number)
+                {
+                    Number secondNumber = bracketDiv.Right as Number;
+                    Div result = new Div(new Number(firstNumber.Calculate(null) * secondNumber.Calculate(null)), bracketDiv.Left);
+
+                    return _Simplify(result);
+                }
+            }
+
+            return div;
         }
 
     }

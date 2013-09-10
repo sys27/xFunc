@@ -77,7 +77,7 @@ namespace xFunc.Maths
 
                 return HasVar(un.Argument, arg);
             }
-            if (expression != null && expression.Equals(arg))
+            if (expression is Variable && expression.Equals(arg))
             {
                 return true;
             }

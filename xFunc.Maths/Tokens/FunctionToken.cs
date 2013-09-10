@@ -44,12 +44,12 @@ namespace xFunc.Maths.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(VariableToken) != obj.GetType())
+            if (typeof(FunctionToken) != obj.GetType())
                 return false;
 
             var token = obj as FunctionToken;
             
-            return this.Function == token.Function;
+            return this.function == token.function;
         }
 
         /// <summary>

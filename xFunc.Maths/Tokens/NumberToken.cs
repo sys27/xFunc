@@ -44,7 +44,7 @@ namespace xFunc.Maths.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(VariableToken) != obj.GetType())
+            if (typeof(NumberToken) != obj.GetType())
                 return false;
 
             var token = obj as NumberToken;

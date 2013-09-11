@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Linq;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
 {
@@ -137,6 +139,10 @@ namespace xFunc.Maths
                 // lg(10)
                 if (lg.Argument.Equals(new Number(10)))
                     return one;
+            }
+            else if (expression is TrigonometryMathExpression)
+            {
+                return SimplifyTrig((TrigonometryMathExpression)expression);
             }
 
             return expression;
@@ -538,6 +544,16 @@ namespace xFunc.Maths
             }
 
             return div;
+        }
+
+        private IMathExpression SimplifyTrig(TrigonometryMathExpression trig)
+        {
+            var attr = (ReverseFunctionAttribute)trig.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false).First();
+
+            if (trig.Argument.GetType().Equals(attr.ReverseType))
+                return ((UnaryMathExpression)trig.Argument).Argument;
+
+            return trig;
         }
 
     }

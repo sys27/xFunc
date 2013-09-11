@@ -20,6 +20,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Sine function.
     /// </summary>
+    [ReverseFunction(typeof(Arcsin))]
     public class Sin : TrigonometryMathExpression
     {
 

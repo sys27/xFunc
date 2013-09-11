@@ -20,6 +20,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Cosecant function.
     /// </summary>
+    [ReverseFunction(typeof(Arccsc))]
     public class Csc : TrigonometryMathExpression
     {
 

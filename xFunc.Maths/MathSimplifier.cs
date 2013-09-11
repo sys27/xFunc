@@ -548,9 +548,9 @@ namespace xFunc.Maths
 
         private IMathExpression SimplifyTrig(TrigonometryMathExpression trig)
         {
-            var attr = (ReverseFunctionAttribute)trig.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false).First();
+            var attr = (ReverseFunctionAttribute)trig.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false).FirstOrDefault();
 
-            if (trig.Argument.GetType().Equals(attr.ReverseType))
+            if (attr != null && trig.Argument.GetType().Equals(attr.ReverseType))
                 return ((UnaryMathExpression)trig.Argument).Argument;
 
             return trig;

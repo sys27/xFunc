@@ -20,7 +20,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Hyperbolic secant function.
     /// </summary>
-    public class Sech : UnaryMathExpression
+    [ReverseFunction(typeof(Arsech))]
+    public class Sech : HyperbolicMathExpression
     {
 
         /// <summary>

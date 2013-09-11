@@ -20,7 +20,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Arsech function.
     /// </summary>
-    public class Arsech : UnaryMathExpression
+    [ReverseFunction(typeof(Sech))]
+    public class Arsech : HyperbolicMathExpression
     {
 
         /// <summary>

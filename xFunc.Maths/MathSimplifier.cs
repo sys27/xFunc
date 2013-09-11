@@ -15,6 +15,7 @@
 using System;
 using System.Linq;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
@@ -140,9 +141,9 @@ namespace xFunc.Maths
                 if (lg.Argument.Equals(new Number(10)))
                     return one;
             }
-            else if (expression is TrigonometryMathExpression)
+            else if (expression is TrigonometryMathExpression || expression is HyperbolicMathExpression)
             {
-                return SimplifyTrig((TrigonometryMathExpression)expression);
+                return SimplifyTrig((UnaryMathExpression)expression);
             }
 
             return expression;
@@ -546,14 +547,14 @@ namespace xFunc.Maths
             return div;
         }
 
-        private IMathExpression SimplifyTrig(TrigonometryMathExpression trig)
+        private IMathExpression SimplifyTrig(UnaryMathExpression unary)
         {
-            var attr = (ReverseFunctionAttribute)trig.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false).FirstOrDefault();
+            var attr = (ReverseFunctionAttribute)unary.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false).FirstOrDefault();
 
-            if (attr != null && trig.Argument.GetType().Equals(attr.ReverseType))
-                return ((UnaryMathExpression)trig.Argument).Argument;
+            if (attr != null && unary.Argument.GetType().Equals(attr.ReverseType))
+                return ((UnaryMathExpression)unary.Argument).Argument;
 
-            return trig;
+            return unary;
         }
 
     }

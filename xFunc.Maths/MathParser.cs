@@ -347,7 +347,7 @@ namespace xFunc.Maths
                             preOutput.Add(new Csch());
                             break;
                         case Functions.Arsineh:
-                            preOutput.Add(new Arsech());
+                            preOutput.Add(new Arsinh());
                             break;
                         case Functions.Arcosineh:
                             preOutput.Add(new Arcosh());

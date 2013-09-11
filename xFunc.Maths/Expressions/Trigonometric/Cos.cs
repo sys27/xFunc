@@ -20,6 +20,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Cosine function.
     /// </summary>
+    [ReverseFunction(typeof(Arccos))]
     public class Cos : TrigonometryMathExpression
     {
 

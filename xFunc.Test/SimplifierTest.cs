@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Test
 {
@@ -576,6 +577,118 @@ namespace xFunc.Test
 
             SimpleTest(log, expected);
         }
+
+        #region Trigonometric
+
+        [TestMethod]
+        public void ArcsinSin()
+        {
+            var exp = new Arcsin(new Sin(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArccosCos()
+        {
+            var exp = new Arccos(new Cos(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArctanTan()
+        {
+            var exp = new Arctan(new Tan(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArccotCot()
+        {
+            var exp = new Arccot(new Cot(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArcsecSec()
+        {
+            var exp = new Arcsec(new Sec(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArccscCsc()
+        {
+            var exp = new Arccsc(new Csc(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void SinArcsin()
+        {
+            var exp = new Sin(new Arcsin(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void CosArccos()
+        {
+            var exp = new Cos(new Arccos(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void TanArctan()
+        {
+            var exp = new Tan(new Arctan(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void CotArccot()
+        {
+            var exp = new Cot(new Arccot(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void SecArcsec()
+        {
+            var exp = new Sec(new Arcsec(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void CscArccsc()
+        {
+            var exp = new Csc(new Arccsc(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        #endregion
 
     }
 

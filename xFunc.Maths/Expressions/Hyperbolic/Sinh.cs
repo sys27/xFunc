@@ -20,7 +20,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Hyperbolic sine function.
     /// </summary>
-    public class Sinh : UnaryMathExpression
+    [ReverseFunction(typeof(Arsinh))]
+    public class Sinh : HyperbolicMathExpression
     {
 
         /// <summary>

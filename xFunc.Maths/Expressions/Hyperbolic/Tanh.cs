@@ -20,7 +20,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Hyperbolic tangent function.
     /// </summary>
-    public class Tanh : UnaryMathExpression
+    [ReverseFunction(typeof(Artanh))]
+    public class Tanh : HyperbolicMathExpression
     {
 
         /// <summary>

@@ -64,6 +64,11 @@ namespace xFunc.Maths
             this.userFunctions = userFunctions;
         }
 
+        /// <summary>
+        /// Solves the specified expression.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>The result of solving.</returns>
         public IResult Solve(string function)
         {
             var exp = this.Parse(function, true);
@@ -83,8 +88,8 @@ namespace xFunc.Maths
 
                 if (assign.Key is Variable)
                     return new StringResult(string.Format(Resource.AssignVariable, assign.Key, assign.Value));
-                else
-                    return new StringResult(string.Format(Resource.AssignFunction, assign.Key, assign.Value));
+
+                return new StringResult(string.Format(Resource.AssignFunction, assign.Key, assign.Value));
             }
             if (exp is Undefine)
             {
@@ -93,14 +98,14 @@ namespace xFunc.Maths
 
                 if (undef.Key is Variable)
                     return new StringResult(string.Format(Resource.UndefineVariable, undef.Key));
-                else if (undef.Key is UserFunction)
-                    return new StringResult(string.Format(Resource.UndefineFunction, undef.Key));
+
+                return new StringResult(string.Format(Resource.UndefineFunction, undef.Key));
             }
 
             if (numberSystem == NumeralSystem.Decimal)
                 return new NumberResult(exp.Calculate(parameters, userFunctions));
-            else
-                return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters, userFunctions), numberSystem));
+
+            return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters, userFunctions), numberSystem));
         }
 
         /// <summary>

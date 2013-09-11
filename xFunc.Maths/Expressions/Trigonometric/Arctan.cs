@@ -20,6 +20,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Arctangent function.
     /// </summary>
+    [ReverseFunction(typeof(Tan))]
     public class Arctan : TrigonometryMathExpression
     {
 

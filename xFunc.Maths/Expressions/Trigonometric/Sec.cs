@@ -20,6 +20,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Secant function.
     /// </summary>
+    [ReverseFunction(typeof(Arcsec))]
     public class Sec : TrigonometryMathExpression
     {
 

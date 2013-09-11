@@ -137,6 +137,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Results\IResult.cs" />
+    <Compile Include="Results\ExpressionResult.cs" />
+    <Compile Include="Results\NumberResult.cs" />
+    <Compile Include="Results\StringResult.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />

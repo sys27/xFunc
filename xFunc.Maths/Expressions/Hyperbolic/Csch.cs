@@ -20,7 +20,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Hyperbolic cosecant function.
     /// </summary>
-    public class Csch : UnaryMathExpression
+    [ReverseFunction(typeof(Arcsch))]
+    public class Csch : HyperbolicMathExpression
     {
 
         /// <summary>

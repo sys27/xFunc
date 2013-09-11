@@ -50,6 +50,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Expressions\GCD.cs" />
+    <Compile Include="Expressions\Hyperbolic\HyperbolicMathExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Hyperbolic;
 
 namespace xFunc.Test
 {
@@ -683,6 +684,118 @@ namespace xFunc.Test
         public void CscArccsc()
         {
             var exp = new Csc(new Arccsc(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        #endregion
+
+        #region Hyperbolic
+
+        [TestMethod]
+        public void ArsinhSinh()
+        {
+            var exp = new Arsinh(new Sinh(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArcoshCosh()
+        {
+            var exp = new Arcosh(new Cosh(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArtanhTanh()
+        {
+            var exp = new Artanh(new Tanh(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArcothCoth()
+        {
+            var exp = new Arcoth(new Coth(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArsechSech()
+        {
+            var exp = new Arsech(new Sech(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void ArcschCsch()
+        {
+            var exp = new Arcsch(new Csch(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void SinhArsinh()
+        {
+            var exp = new Sinh(new Arsinh(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void CoshArcosh()
+        {
+            var exp = new Cosh(new Arcosh(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void TanhArtanh()
+        {
+            var exp = new Tanh(new Artanh(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void CothArcoth()
+        {
+            var exp = new Coth(new Arcoth(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void SechArsech()
+        {
+            var exp = new Sech(new Arsech(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(exp, expected);
+        }
+
+        [TestMethod]
+        public void CschArcsch()
+        {
+            var exp = new Csch(new Arcsch(new Variable("x")));
             var expected = new Variable("x");
 
             SimpleTest(exp, expected);

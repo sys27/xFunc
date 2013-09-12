@@ -56,7 +56,6 @@
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="ISimplifier.cs" />
-    <Compile Include="ISolver.cs" />
     <Compile Include="MathDifferentiator.cs" />
     <Compile Include="MathLexerException.cs" />
     <Compile Include="MathParserException.cs" />
@@ -120,7 +119,6 @@
     <Compile Include="MathParser.cs" />
     <Compile Include="MathProcessor.cs" />
     <Compile Include="MathSimplifier.cs" />
-    <Compile Include="MathSolver.cs" />
     <Compile Include="NumberSystems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.uk.Designer.cs">

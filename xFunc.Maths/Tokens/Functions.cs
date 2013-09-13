@@ -158,6 +158,10 @@ namespace xFunc.Maths.Tokens
         /// Least common multiple
         /// </summary>
         LCM,
+        /// <summary>
+        /// fact
+        /// </summary>
+        Factorial,
 
         /// <summary>
         /// deriv

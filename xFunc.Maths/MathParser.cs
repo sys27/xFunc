@@ -373,6 +373,9 @@ namespace xFunc.Maths
                         case Functions.LCM:
                             preOutput.Add(new LCM());
                             break;
+                        case Functions.Factorial:
+                            preOutput.Add(new Fact());
+                            break;
                         case Functions.Derivative:
                             preOutput.Add(new Derivative());
                             break;

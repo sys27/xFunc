@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -549,9 +548,12 @@ namespace xFunc.Maths
 
         private IMathExpression SimplifyTrig(UnaryMathExpression unary)
         {
-            var attr = (ReverseFunctionAttribute)unary.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false).FirstOrDefault();
+            var attrs = unary.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false);
+            ReverseFunctionAttribute attr = null;
+            if (attrs != null && attrs.Length > 0)
+                attr = (ReverseFunctionAttribute)attrs[0];
 
-            if (attr != null && unary.Argument.GetType().Equals(attr.ReverseType))
+            if (unary.Argument.GetType().Equals(attr.ReverseType))
                 return ((UnaryMathExpression)unary.Argument).Argument;
 
             return unary;

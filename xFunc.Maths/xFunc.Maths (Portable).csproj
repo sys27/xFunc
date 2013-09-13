@@ -91,6 +91,7 @@
     <Compile Include="Expressions\Div.cs" />
     <Compile Include="Expressions\Exp.cs" />
     <Compile Include="Expressions\GCD.cs" />
+    <Compile Include="Expressions\Hyperbolic\HyperbolicMathExpression.cs" />
     <Compile Include="Expressions\Hyperbolic\Arcosh.cs" />
     <Compile Include="Expressions\Hyperbolic\Arcoth.cs" />
     <Compile Include="Expressions\Hyperbolic\Arcsch.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Expressions\Hyperbolic\Tanh.cs" />
     <Compile Include="Expressions\IMathExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />
+    <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Lg.cs" />
     <Compile Include="Expressions\Ln.cs" />
     <Compile Include="Expressions\Log.cs" />

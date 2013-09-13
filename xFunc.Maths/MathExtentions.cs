@@ -225,6 +225,24 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Computes the factorial.
+        /// </summary>
+        /// <param name="n">An argument.</param>
+        /// <returns></returns>
+        public static double Fact(double n)
+        {
+            if (n < 0)
+                return double.NaN;
+
+            double result = 1;
+
+            for (double i = n; i > 0; i--)
+                result *= i;
+
+            return result;
+        }
+
     }
 
 }

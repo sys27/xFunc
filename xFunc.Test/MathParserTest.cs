@@ -341,6 +341,21 @@ namespace xFunc.Test
             Assert.AreEqual("simplify(x)", exp.ToString());
         }
 
+        [TestMethod]
+        public void FactorialTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Factorial),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("fact(4)");
+            Assert.AreEqual("fact(4)", exp.ToString());
+        }
+
     }
 
 }

@@ -49,6 +49,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Expressions\Fact.cs" />
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\Hyperbolic\HyperbolicMathExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />

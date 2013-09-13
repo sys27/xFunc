@@ -605,6 +605,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("fact("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Factorial));
+                        i += 4;
+
+                        continue;
+                    }
 
                     int j = i + 1;
                     for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;

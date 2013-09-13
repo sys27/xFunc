@@ -101,6 +101,7 @@
     <Compile Include="Expressions\Maths\UndefineTest.cs" />
     <Compile Include="Expressions\Maths\GCDTest.cs" />
     <Compile Include="Expressions\Maths\LCMTest.cs" />
+    <Compile Include="Expressions\Maths\FactTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathLexerMock.cs" />
     <Compile Include="MathParserTest.cs" />

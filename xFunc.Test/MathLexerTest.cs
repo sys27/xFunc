@@ -987,6 +987,22 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void FactorialTest()
+        {
+            var tokens = lexer.Tokenize("fact(4)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Factorial),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

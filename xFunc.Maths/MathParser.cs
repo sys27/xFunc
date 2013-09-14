@@ -239,6 +239,9 @@ namespace xFunc.Maths
                         case Operations.UnaryMinus:
                             preOutput.Add(new UnaryMinus());
                             break;
+                        case Operations.Factorial:
+                            preOutput.Add(new Fact());
+                            break;
                         case Operations.Assign:
                             preOutput.Add(new Define());
                             break;

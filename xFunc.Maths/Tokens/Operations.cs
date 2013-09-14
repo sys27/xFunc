@@ -47,6 +47,10 @@ namespace xFunc.Maths.Tokens
         /// - (Unary)
         /// </summary>
         UnaryMinus,
+        /// <summary>
+        /// !
+        /// </summary>
+        Factorial,
 
         /// <summary>
         /// :=

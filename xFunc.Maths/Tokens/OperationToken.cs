@@ -95,6 +95,9 @@ namespace xFunc.Maths.Tokens
                     priority = 12;
                     break;
                 case Operations.UnaryMinus:
+                    priority = 14;
+                    break;
+                case Operations.Factorial:
                     priority = 13;
                     break;
                 case Operations.Assign:

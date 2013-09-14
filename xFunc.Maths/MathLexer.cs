@@ -171,6 +171,13 @@ namespace xFunc.Maths
 
                     continue;
                 }
+                else if (letter == '!')
+                {
+                    tokens.Add(new OperationToken(Operations.Factorial));
+                    i++;
+
+                    continue;
+                }
                 else if (char.IsDigit(letter))
                 {
                     int length;

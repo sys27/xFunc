@@ -433,9 +433,21 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void Arsh()
+        {
+            FuncTest("arsh", Functions.Arsineh);
+        }
+
+        [TestMethod]
         public void Arcosh()
         {
             FuncTest("arcosh", Functions.Arcosineh);
+        }
+
+        [TestMethod]
+        public void Arch()
+        {
+            FuncTest("arch", Functions.Arcosineh);
         }
 
         [TestMethod]
@@ -445,15 +457,33 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void Arth()
+        {
+            FuncTest("arth", Functions.Artangenth);
+        }
+
+        [TestMethod]
         public void Arcoth()
         {
             FuncTest("arcoth", Functions.Arcotangenth);
         }
 
         [TestMethod]
+        public void Arcth()
+        {
+            FuncTest("arcth", Functions.Arcotangenth);
+        }
+
+        [TestMethod]
         public void Arsech()
         {
             FuncTest("arsech", Functions.Arsecanth);
+        }
+
+        [TestMethod]
+        public void Arsch()
+        {
+            FuncTest("arsch", Functions.Arsecanth);
         }
 
         [TestMethod]

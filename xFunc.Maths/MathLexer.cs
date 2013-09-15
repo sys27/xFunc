@@ -352,10 +352,24 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("arsh("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Arsineh));
+                        i += 4;
+
+                        continue;
+                    }
                     if (sub.StartsWith("arsinh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsineh));
                         i += 6;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arch("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Arcosineh));
+                        i += 4;
 
                         continue;
                     }
@@ -366,6 +380,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("arth("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Artangenth));
+                        i += 4;
+
+                        continue;
+                    }
                     if (sub.StartsWith("artanh("))
                     {
                         tokens.Add(new FunctionToken(Functions.Artangenth));
@@ -373,10 +394,24 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("arcth("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Arcotangenth));
+                        i += 5;
+
+                        continue;
+                    }
                     if (sub.StartsWith("arcoth("))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcotangenth));
                         i += 6;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("arsch("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Arsecanth));
+                        i += 5;
 
                         continue;
                     }

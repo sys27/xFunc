@@ -78,6 +78,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Expressions\Fact.cs" />
     <Compile Include="Expressions\Abs.cs" />
     <Compile Include="Expressions\Add.cs" />
     <Compile Include="Expressions\AngleMeasurement.cs" />

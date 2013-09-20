@@ -32,6 +32,12 @@ if errorlevel 0 echo %t% completed!
 if errorlevel 1 goto err
 pause
 
+echo %t% xFunc for .Net 4.5.1 ...
+msbuild "xFunc (Libs for .Net 4.5.1).sln" /nologo /t:%t% /m /clp:ErrorsOnly /p:Configuration=Release
+if errorlevel 0 echo %t% completed! 
+if errorlevel 1 goto err
+pause
+
 echo %t% xFunc for Portable ...
 msbuild "xFunc (Libs for Portable).sln" /nologo /t:%t% /m /clp:ErrorsOnly /p:Configuration=Release
 if errorlevel 0 echo %t% completed! 

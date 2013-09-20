@@ -10,7 +10,7 @@ xFunc is a simple and easy to use application that allows you to build mathemati
 * Derivative and simplifying expressions;
 * Plotting graphs;
 * Truth tables;
-* Supported Framework: .Net 2.0/3.0/3.5/4.0/4.5 and Portable (.Net 4.0 or higher, Silverlight 4 or higher and Windows Store App)
+* Supported Framework: .Net 2.0/3.0/3.5/4.0/4.5/4.5.1 and Portable (.Net 4.0 or higher, Silverlight 4 or higher and Windows Store App)
 
 ## Bug Tracker
 

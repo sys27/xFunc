@@ -18,6 +18,9 @@ using xFunc.Maths.Expressions;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The interface for differentiator.
+    /// </summary>
     public interface IDifferentiator
     {
 

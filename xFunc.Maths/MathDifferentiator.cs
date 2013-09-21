@@ -18,6 +18,9 @@ using xFunc.Maths.Expressions;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The differentiator of expressions.
+    /// </summary>
     public class MathDifferentiator : IDifferentiator
     {
 

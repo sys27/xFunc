@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents the Deriv function.
+    /// </summary>
     public class Derivative : IMathExpression
     {
 

@@ -7,6 +7,9 @@ using xFunc.Maths.Results;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The main point of this library. Bring together all features.
+    /// </summary>
     public class MathProcessor
     {
 

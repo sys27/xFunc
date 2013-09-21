@@ -113,11 +113,25 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="BinaryMathExpression"/> that is a clone of this instance.</returns>
         public abstract IMathExpression Clone();
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <returns>
+        /// Returns a derivative of the expression.
+        /// </returns>
         public IMathExpression Differentiate()
         {
             return Differentiate(new Variable("x"));
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         public abstract IMathExpression Differentiate(Variable variable);
 
         /// <summary>

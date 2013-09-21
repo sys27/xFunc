@@ -108,6 +108,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return 1 / Math.Cos(radian);
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var tan = new Tan(argument.Clone(), angleMeasurement);

@@ -89,6 +89,15 @@ namespace xFunc.Maths.Expressions
             return new Fact(argument.Clone());
         }
 
+        /// <summary>
+        /// Always throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Throws an exception.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="NotSupportedException">Always.</exception>
         protected override IMathExpression _Differentiation(Variable variable)
         {
             throw new NotSupportedException();

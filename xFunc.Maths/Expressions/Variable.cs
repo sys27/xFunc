@@ -133,11 +133,25 @@ namespace xFunc.Maths.Expressions
             return new Variable(name);
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <returns>
+        /// Returns a derivative of the expression.
+        /// </returns>
         public IMathExpression Differentiate()
         {
             return Differentiate(new Variable("x"));
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         public IMathExpression Differentiate(Variable variable)
         {
             if (Equals(variable))

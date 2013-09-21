@@ -106,6 +106,15 @@ namespace xFunc.Maths.Expressions
             return new LCM(left.Clone(), right.Clone());
         }
 
+        /// <summary>
+        /// Always throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Throws an exception.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="NotSupportedException">Always.</exception>
         public override IMathExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();

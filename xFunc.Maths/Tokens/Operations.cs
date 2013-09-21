@@ -62,7 +62,7 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Not,
         /// <summary>
-        /// &, and
+        /// &amp;, and
         /// </summary>
         And,
         /// <summary>

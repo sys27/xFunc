@@ -57,6 +57,9 @@ namespace xFunc.Maths.Expressions
             if (this == obj)
                 return true;
 
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
             var exp = obj as BinaryMathExpression;
             if (exp == null)
                 return false;

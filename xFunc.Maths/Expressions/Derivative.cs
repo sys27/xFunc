@@ -121,6 +121,12 @@ namespace xFunc.Maths.Expressions
             return Differentiate().Calculate(parameters, functions);
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <returns>
+        /// Returns a derivative of the expression.
+        /// </returns>
         public IMathExpression Differentiate()
         {
             if (expression is Derivative)
@@ -129,7 +135,17 @@ namespace xFunc.Maths.Expressions
             return expression.Differentiate(variable);
         }
 
-        // The local "variable" is ignored.
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <remarks>
+        /// This method ignores the local <paramref name="variable"/>.
+        /// </remarks>
         public IMathExpression Differentiate(Variable variable)
         {
             if (expression is Derivative)

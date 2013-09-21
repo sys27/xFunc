@@ -88,6 +88,14 @@ namespace xFunc.Maths.Expressions
             return left.Calculate(parameters, functions) * right.Calculate(parameters, functions);
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         public override IMathExpression Differentiate(Variable variable)
         {
             var first = MathParser.HasVar(left, variable);

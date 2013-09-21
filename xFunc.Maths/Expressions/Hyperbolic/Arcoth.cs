@@ -100,6 +100,14 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new Arcoth(argument.Clone());
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var sqr = new Pow(argument.Clone(), new Number(2));

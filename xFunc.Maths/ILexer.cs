@@ -19,6 +19,9 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The interface for mathematical lexer.
+    /// </summary>
     public interface ILexer
     {
 

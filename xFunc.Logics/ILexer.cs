@@ -18,6 +18,9 @@ using System.Collections.Generic;
 namespace xFunc.Logics
 {
 
+    /// <summary>
+    /// The interface for logical lexer.
+    /// </summary>
     public interface ILexer
     {
 

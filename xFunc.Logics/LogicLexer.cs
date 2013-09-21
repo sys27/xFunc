@@ -22,6 +22,9 @@ using xFunc.Logics.Resources;
 namespace xFunc.Logics
 {
 
+    /// <summary>
+    /// The lexer for logical expressions.
+    /// </summary>
     public class LogicLexer : ILexer
     {
 

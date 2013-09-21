@@ -51,6 +51,16 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return ToString("cos({0})");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression (using degree).
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         protected override double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = argument.Calculate(parameters, functions) * Math.PI / 180;
@@ -58,11 +68,31 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return Math.Cos(radian);
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression (using radian).
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         protected override double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Cos(argument.Calculate(parameters, functions));
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression (using gradian).
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         protected override double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             var radian = argument.Calculate(parameters, functions) * Math.PI / 200;

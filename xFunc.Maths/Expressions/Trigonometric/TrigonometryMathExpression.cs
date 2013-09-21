@@ -46,14 +46,46 @@ namespace xFunc.Maths.Expressions.Trigonometric
             this.angleMeasurement = angleMeasurement;
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression (using degree).
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         protected abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);
+        /// <summary>
+        /// Calculates this mathemarical expression (using radian).
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         protected abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
+        /// <summary>
+        /// Calculates this mathemarical expression (using gradian).
+        /// </summary>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         protected abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);
 
         /// <summary>
-        /// Calculates this expression.
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
         /// </summary>
-        /// <returns>The result of calculation.</returns>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public override double Calculate()
         {
             if (angleMeasurement == AngleMeasurement.Degree)
@@ -67,10 +99,13 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>The result of calculation.</returns>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
         public override double Calculate(MathParameterCollection parameters)
         {
             if (angleMeasurement == AngleMeasurement.Degree)
@@ -84,11 +119,15 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <param name="functions">The functions.</param>
-        /// <returns>The result of calculation.</returns>
+        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="MathFunctionCollection" />
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             if (angleMeasurement == AngleMeasurement.Degree)

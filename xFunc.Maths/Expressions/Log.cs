@@ -76,11 +76,21 @@ namespace xFunc.Maths.Expressions
             return Math.Log(left.Calculate(parameters, functions), right.Calculate(parameters, functions));
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="NotSupportedException">The base of log is not a number.</exception>
         public override IMathExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(left, variable))
             {
                 if (!(right is Number))
+                    // todo: error message
                     throw new NotSupportedException();
 
                 var ln = new Ln(right.Clone());

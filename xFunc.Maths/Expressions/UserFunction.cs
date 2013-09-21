@@ -78,10 +78,24 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
-        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
-            return arguments == null ? function.GetHashCode() : function.GetHashCode() ^ countOfParams.GetHashCode();
+            int hash = 1721;
+
+            hash = (hash * 5701) + function.GetHashCode();
+            if (arguments != null)
+            {
+                foreach (var arg in arguments)
+                {
+                    hash = (hash * 5701) + arg.GetHashCode();
+                }
+            }
+            hash = (hash * 5701) + countOfParams.GetHashCode();
+
+            return hash;
         }
 
         /// <summary>

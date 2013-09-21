@@ -17,7 +17,10 @@ using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths
 {
-   
+
+    /// <summary>
+    /// The interface for mathematical expression simplifier.
+    /// </summary>
     public interface ISimplifier
     {
 

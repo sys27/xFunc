@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
         public override int GetHashCode()
         {
-            return name.GetHashCode() ^ 1048592;
+            return name.GetHashCode() ^ 9239;
         }
 
         /// <summary>

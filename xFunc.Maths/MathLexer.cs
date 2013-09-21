@@ -24,6 +24,9 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The lexer for mathematical expressions.
+    /// </summary>
     public class MathLexer : ILexer
     {
 

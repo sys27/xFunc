@@ -23,6 +23,9 @@ using xFunc.Logics.Resources;
 namespace xFunc.Logics
 {
 
+    /// <summary>
+    /// The parser for logical expressions.
+    /// </summary>
     public class LogicParser
     {
 

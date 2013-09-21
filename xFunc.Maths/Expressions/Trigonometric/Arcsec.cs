@@ -104,6 +104,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
             return MathExtentions.Asec(argument.Calculate(parameters, functions)) / Math.PI * 200;
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var abs = new Abs(argument.Clone());

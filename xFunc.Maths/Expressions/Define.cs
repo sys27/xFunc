@@ -166,11 +166,28 @@ namespace xFunc.Maths.Expressions
             return double.NaN;
         }
 
+        /// <summary>
+        /// Always throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <returns>
+        /// Throws an exception.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="NotSupportedException">Always.</exception>
         public IMathExpression Differentiate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Always throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Throws an exception.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="NotSupportedException">Always.</exception>
         public IMathExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();

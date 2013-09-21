@@ -94,6 +94,14 @@ namespace xFunc.Maths.Expressions
             return new UnaryMinus(argument.Clone());
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable"></param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
             return new UnaryMinus(argument.Clone().Differentiate());

@@ -43,6 +43,17 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public Sin(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(3209);
+        }
+
+        /// <summary>
         /// Converts this expression to the equivalent string.
         /// </summary>
         /// <returns>The string that represents this expression.</returns>

@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Pow"/> class.
         /// </summary>
-        public Pow() : base(null, null) { }
+        internal Pow() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Pow"/> class.

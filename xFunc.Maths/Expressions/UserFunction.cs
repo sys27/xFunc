@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.
         /// </summary>
-        public UserFunction()
+        internal UserFunction()
             : this(null, null, -1)
         {
 

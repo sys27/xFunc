@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Not"/> class.
         /// </summary>
-        public Not()
+        internal Not()
             : base(null)
         {
 

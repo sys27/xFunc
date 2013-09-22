@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="XOr"/> class.
         /// </summary>
-        public XOr()
+        internal XOr()
             : base(null, null)
         {
 

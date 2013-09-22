@@ -12,11 +12,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
-        public Fact()
-            : base(null)
-        {
-
-        }
+        internal Fact() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Fact"/> class.

@@ -14,11 +14,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>
-        public Undefine()
-            : this(null)
-        {
-
-        }
+        internal Undefine() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
@@ -208,7 +204,10 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value != null && !(value is Variable || value is UserFunction))
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
+                if (!(value is Variable || value is UserFunction))
                 {
                     throw new NotSupportedException();
                 }

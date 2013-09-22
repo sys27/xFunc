@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Or"/> class.
         /// </summary>
-        public Or()
+        internal Or()
             : base(null, null)
         {
 

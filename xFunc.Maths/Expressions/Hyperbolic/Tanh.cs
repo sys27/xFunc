@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Tanh"/> class.
         /// </summary>
-        public Tanh()
-            : base(null)
-        {
-
-        }
+        internal Tanh() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Tanh"/> class.

@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Div"/> class.
         /// </summary>
-        public Div() : base(null, null) { }
+        internal Div() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Div"/> class.

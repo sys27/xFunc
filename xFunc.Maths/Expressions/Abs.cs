@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Abs"/> class.
         /// </summary>
-        public Abs() : base(null) { }
+        internal Abs() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Abs"/> class.

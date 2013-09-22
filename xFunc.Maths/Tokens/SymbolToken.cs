@@ -44,6 +44,9 @@ namespace xFunc.Maths.Tokens
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
+            if (obj == null)
+                return false;
+
             if (this == obj)
                 return true;
 

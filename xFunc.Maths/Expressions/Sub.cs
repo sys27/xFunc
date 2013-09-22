@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Sub"/> class.
         /// </summary>
-        public Sub() : base(null, null) { }
+        internal Sub() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sub"/> class.

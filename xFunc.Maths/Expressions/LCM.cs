@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.
         /// </summary>
-        public LCM()
-            : base(null, null)
-        {
-
-        }
+        internal LCM() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.

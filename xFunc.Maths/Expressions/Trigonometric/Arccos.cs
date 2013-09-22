@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccos"/> class.
         /// </summary>
-        public Arccos() : base(null) { }
+        internal Arccos() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccos"/> class.

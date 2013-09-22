@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Cos"/> class.
         /// </summary>
-        public Cos() : base(null) { }
+        internal Cos() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cos"/> class.

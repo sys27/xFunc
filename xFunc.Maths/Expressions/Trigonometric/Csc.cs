@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Csc"/> class.
         /// </summary>
-        public Csc()
-            : base(null)
-        {
-
-        }
+        internal Csc() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Csc"/> class.

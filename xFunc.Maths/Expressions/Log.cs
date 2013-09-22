@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
         /// <seealso cref="IMathExpression"/>
-        public Log() : base(null, null) { }
+        internal Log() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.

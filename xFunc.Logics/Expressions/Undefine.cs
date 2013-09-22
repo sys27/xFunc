@@ -14,7 +14,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>
-        public Undefine()
+        internal Undefine()
             : this(null)
         {
 

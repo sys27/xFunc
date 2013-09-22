@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Add"/> class.
         /// </summary>
-        public Add() : base(null, null) { }
+        internal Add() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Add"/> class.

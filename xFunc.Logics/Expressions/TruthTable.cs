@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="TruthTable"/> class.
         /// </summary>
-        public TruthTable() : base(null) { }
+        internal TruthTable() : base(null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TruthTable"/> class.

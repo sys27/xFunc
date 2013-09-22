@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="GCD"/> class.
         /// </summary>
-        public GCD()
-            : base(null, null)
-        {
-
-        }
+        internal GCD() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GCD"/> class.

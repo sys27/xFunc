@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Sqrt"/> class.
         /// </summary>
-        public Sqrt() : base(null) { }
+        internal Sqrt() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sqrt"/> class.

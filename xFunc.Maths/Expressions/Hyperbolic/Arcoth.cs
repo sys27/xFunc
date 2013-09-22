@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcoth"/> class.
         /// </summary>
-        public Arcoth()
-            : base(null)
-        {
-
-        }
+        internal Arcoth() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcoth"/> class.

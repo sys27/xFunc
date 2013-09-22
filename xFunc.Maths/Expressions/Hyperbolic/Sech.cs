@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Sech"/> class.
         /// </summary>
-        public Sech()
-            : base(null)
-        {
-
-        }
+        internal Sech() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sech"/> class.

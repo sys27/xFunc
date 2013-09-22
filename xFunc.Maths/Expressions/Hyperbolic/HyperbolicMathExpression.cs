@@ -22,6 +22,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// </summary>
     public abstract class HyperbolicMathExpression : UnaryMathExpression
     {
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HyperbolicMathExpression"/> class.
+        /// </summary>
+        protected HyperbolicMathExpression() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HyperbolicMathExpression"/> class.
@@ -30,7 +35,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected HyperbolicMathExpression(IMathExpression argument)
             : base(argument)
         {
-
         }
 
     }

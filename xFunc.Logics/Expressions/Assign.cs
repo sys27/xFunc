@@ -29,7 +29,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Assign"/> class.
         /// </summary>
-        public Assign()
+        internal Assign()
         {
 
         }

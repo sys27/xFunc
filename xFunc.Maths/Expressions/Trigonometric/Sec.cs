@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Sec"/> class.
         /// </summary>
-        public Sec()
-            : base(null)
-        {
-
-        }
+        internal Sec() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sec"/> class.

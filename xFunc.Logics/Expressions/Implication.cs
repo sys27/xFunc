@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Implication"/> class.
         /// </summary>
-        public Implication()
+        internal Implication()
             : base(null, null)
         {
 

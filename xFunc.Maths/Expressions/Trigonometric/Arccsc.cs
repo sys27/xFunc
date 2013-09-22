@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccsc"/> class.
         /// </summary>
-        public Arccsc() : base(null) { }
+        internal Arccsc() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccsc"/> class.

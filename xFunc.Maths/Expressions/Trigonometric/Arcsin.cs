@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcsin"/> class.
         /// </summary>
-        public Arcsin() : base(null) { }
+        internal Arcsin() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcsin"/> class.

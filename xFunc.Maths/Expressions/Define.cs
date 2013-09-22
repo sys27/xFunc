@@ -29,11 +29,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of <see cref="Define"/>.
         /// </summary>
-        public Define()
-            : this(null, null)
-        {
-
-        }
+        internal Define() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Define"/> class.
@@ -229,7 +225,10 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value != null && !(value is Variable || value is UserFunction))
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
+                if (!(value is Variable || value is UserFunction))
                 {
                     throw new NotSupportedException();
                 }
@@ -250,6 +249,9 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
                 this.value = value;
             }
         }

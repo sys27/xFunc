@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcsec"/> class.
         /// </summary>
-        public Arcsec()
-            : base(null)
-        {
-
-        }
+        internal Arcsec() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcsec"/> class.

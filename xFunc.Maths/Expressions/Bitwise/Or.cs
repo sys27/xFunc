@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="Or"/> class.
         /// </summary>
-        public Or()
-            : base(null, null)
-        {
-
-        }
+        internal Or() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Or"/> class.

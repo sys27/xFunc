@@ -28,7 +28,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
         /// </summary>
-        public Simplify() { }
+        internal Simplify() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
@@ -178,6 +178,9 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
                 expression = value;
             }
         }

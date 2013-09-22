@@ -30,7 +30,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative"/> class.
         /// </summary>
-        public Derivative() { }
+        internal Derivative() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative"/> class.
@@ -180,6 +180,9 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
                 expression = value;
                 if (expression != null)
                     expression.Parent = this;
@@ -200,6 +203,9 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+
                 variable = value;
                 if (variable != null)
                     variable.Parent = this;

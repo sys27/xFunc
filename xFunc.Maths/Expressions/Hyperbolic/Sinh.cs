@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Sinh"/> class.
         /// </summary>
-        public Sinh()
-            : base(null)
-        {
-
-        }
+        internal Sinh() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sinh"/> class.

@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccot"/> class.
         /// </summary>
-        public Arccot() : base(null) { }
+        internal Arccot() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccot"/> class.

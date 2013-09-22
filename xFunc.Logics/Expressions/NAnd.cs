@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="NAnd"/> class.
         /// </summary>
-        public NAnd()
+        internal NAnd()
             : base(null, null)
         {
 

@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="And"/> class.
         /// </summary>
-        public And()
-            : base(null, null)
-        {
-
-        }
+        internal And() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="And"/> class.

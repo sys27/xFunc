@@ -31,6 +31,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
         /// </summary>
+        protected TrigonometryMathExpression() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
+        /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
         protected TrigonometryMathExpression(IMathExpression firstMathExpression)
             : this(firstMathExpression, AngleMeasurement.Degree) { }

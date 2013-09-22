@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Root"/> class.
         /// </summary>
-        public Root() : base(null, null) { }
+        internal Root() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Root"/> class.

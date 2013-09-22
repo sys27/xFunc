@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Equality"/> class.
         /// </summary>
-        public Equality()
+        internal Equality()
             : base(null, null)
         {
 

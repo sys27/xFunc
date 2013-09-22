@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Mul"/> class.
         /// </summary>
-        public Mul() : base(null, null) { }
+        internal Mul() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Mul"/> class.

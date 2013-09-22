@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="Not"/> class.
         /// </summary>
-        public Not()
-            : base(null)
-        {
-
-        }
+        internal Not() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Not"/> class.

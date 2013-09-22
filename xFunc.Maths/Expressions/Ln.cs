@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Ln"/> class.
         /// </summary>
         /// <seealso cref="IMathExpression"/>
-        public Ln() : base(null) { }
+        internal Ln() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ln"/> class.

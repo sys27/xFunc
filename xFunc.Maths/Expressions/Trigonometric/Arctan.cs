@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arctan"/> class.
         /// </summary>
-        public Arctan() : base(null) { }
+        internal Arctan() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arctan"/> class.

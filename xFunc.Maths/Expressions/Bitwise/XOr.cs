@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="XOr"/> class.
         /// </summary>
-        public XOr()
-            : base(null, null)
-        {
-
-        }
+        internal XOr() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XOr"/> class.

@@ -26,7 +26,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="NOr"/> class.
         /// </summary>
-        public NOr()
+        internal NOr()
             : base(null, null)
         {
 

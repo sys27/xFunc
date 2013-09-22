@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Exp"/> class.
         /// </summary>
-        public Exp() : base(null) { }
+        internal Exp() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Exp"/> class.

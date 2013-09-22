@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Cot"/> class.
         /// </summary>
-        public Cot() : base(null) { }
+        internal Cot() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cot"/> class.

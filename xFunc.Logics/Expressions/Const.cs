@@ -28,7 +28,7 @@ namespace xFunc.Logics.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Const"/> class.
         /// </summary>
-        public Const()
+        internal Const()
         {
             
         }

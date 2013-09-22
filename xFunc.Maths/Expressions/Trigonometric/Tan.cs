@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Tan"/> class.
         /// </summary>
-        public Tan() : base(null) { }
+        internal Tan() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Tan"/> class.

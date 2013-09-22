@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Arsinh"/> class.
         /// </summary>
-        public Arsinh()
-            : base(null)
-        {
-
-        }
+        internal Arsinh() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Arsinh"/> class.

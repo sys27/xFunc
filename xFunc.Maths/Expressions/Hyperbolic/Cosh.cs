@@ -27,11 +27,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Cosh"/> class.
         /// </summary>
-        public Cosh()
-            : base(null)
-        {
-
-        }
+        internal Cosh() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cosh"/> class.

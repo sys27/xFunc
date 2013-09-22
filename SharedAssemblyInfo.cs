@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyVersion("2.5.7")]
-[assembly: AssemblyFileVersion("2.5.7")]
-[assembly: AssemblyInformationalVersion("2.5.7")]
+[assembly: AssemblyVersion("2.5.8")]
+[assembly: AssemblyFileVersion("2.5.8")]
+[assembly: AssemblyInformationalVersion("2.5.8")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

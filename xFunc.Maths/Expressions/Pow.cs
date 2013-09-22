@@ -36,6 +36,17 @@ namespace xFunc.Maths.Expressions
         public Pow(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(2273, 127);
+        }
+
+        /// <summary>
         /// Converts this expression to the equivalent string.
         /// </summary>
         /// <returns>The string that represents this expression.</returns>

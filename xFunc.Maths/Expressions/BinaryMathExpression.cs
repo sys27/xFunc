@@ -75,6 +75,35 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return GetHashCode(6871, 6803);
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <param name="first">The first.</param>
+        /// <param name="second">The second.</param>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        protected int GetHashCode(int first, int second)
+        {
+            int hash = first;
+
+            hash = hash * second + left.GetHashCode();
+            hash = hash * second + second.GetHashCode();
+
+            return hash;
+        }
+
+        /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <param name="format">The format of result string.</param>

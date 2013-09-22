@@ -38,6 +38,17 @@ namespace xFunc.Maths.Expressions
         public Log(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(8837, 7019);
+        }
+
+        /// <summary>
         /// Converts this expression to the equivalent string.
         /// </summary>
         /// <returns>The string that represents this expression.</returns>

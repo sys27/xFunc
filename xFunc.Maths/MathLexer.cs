@@ -32,7 +32,7 @@ namespace xFunc.Maths
 
 #if NET35_OR_GREATER || PORTABLE
         private readonly HashSet<string> notVar;
-#elif NET20 || NET30
+#elif NET20_OR_GREATER
         private readonly List<string> notVar;
 #endif
 
@@ -43,7 +43,7 @@ namespace xFunc.Maths
         {
 #if NET35_OR_GREATER || PORTABLE
             notVar = new HashSet<string> { "and", "or", "xor" };
-#elif NET20 || NET30
+#elif NET20_OR_GREATER
             notVar = new List<string> { "and", "or", "xor" };
 #endif
         }
@@ -76,7 +76,7 @@ namespace xFunc.Maths
         {
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
-#elif NET20 || NET30 || NET35
+#elif NET20_OR_GREATER
             if (StringExtention.IsNullOrWhiteSpace(function))
 #endif
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);

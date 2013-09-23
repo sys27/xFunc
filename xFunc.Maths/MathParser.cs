@@ -97,7 +97,7 @@ namespace xFunc.Maths
         {
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
-#elif NET20 || NET30 || NET35
+#elif NET20_OR_GREATER
             if (StringExtention.IsNullOrWhiteSpace(function))
 #endif
                 throw new ArgumentNullException("function");

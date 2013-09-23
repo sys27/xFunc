@@ -112,6 +112,8 @@
     <Compile Include="Expressions\Ln.cs" />
     <Compile Include="Expressions\Log.cs" />
     <Compile Include="Expressions\MathFunctionCollection.cs" />
+    <Compile Include="Expressions\MathParameter.cs" />
+    <Compile Include="Expressions\MathParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\MathParameterCollection.cs" />
     <Compile Include="Expressions\Mul.cs" />
     <Compile Include="Expressions\Number.cs" />

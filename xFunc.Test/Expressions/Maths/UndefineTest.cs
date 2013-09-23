@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using xFunc.Maths.Expressions;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.Test.Expressions.Maths
 {
@@ -35,6 +35,16 @@ namespace xFunc.Test.Expressions.Maths
             undef.Calculate(null, functions);
             Assert.IsFalse(functions.ContainsKey(key1));
             Assert.IsTrue(functions.ContainsKey(key2));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MathParameterIsReadOnlyException))]
+        public void UndefConstTest()
+        {
+            MathParameterCollection parameters = new MathParameterCollection();
+
+            var undef = new Undefine(new Variable("π"));
+            undef.Calculate(parameters);
         }
 
     }

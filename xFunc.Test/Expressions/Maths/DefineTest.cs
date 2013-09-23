@@ -12,7 +12,7 @@ namespace xFunc.Test.Expressions.Maths
     {
 
         [TestMethod]
-        public void CalculateTest1()
+        public void SimpDefineTest()
         {
             IMathExpression exp = new Define(new Variable("x"), new Number(1));
             MathParameterCollection parameters = new MathParameterCollection();
@@ -24,7 +24,7 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void CalculateTest2()
+        public void DefineWithFuncTest()
         {
             IMathExpression exp = new Define(new Variable("x"), new Sin(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian });
             MathParameterCollection parameters = new MathParameterCollection();
@@ -36,7 +36,7 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void CalculateTest3()
+        public void DefineExpTest()
         {
             IMathExpression exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
             MathParameterCollection parameters = new MathParameterCollection();
@@ -45,6 +45,16 @@ namespace xFunc.Test.Expressions.Maths
 
             Assert.AreEqual(36, parameters["x"]);
             Assert.AreEqual(double.NaN, answer);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MathParameterIsReadOnlyException))]
+        public void OverrideConstTest()
+        {
+            IMathExpression exp = new Define(new Variable("π"), new Number(1));
+            MathParameterCollection parameters = new MathParameterCollection();
+
+            double answer = exp.Calculate(parameters);
         }
 
     }

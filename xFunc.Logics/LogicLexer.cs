@@ -30,7 +30,7 @@ namespace xFunc.Logics
 
 #if NET35_OR_GREATER || PORTABLE
         private readonly HashSet<string> supportedOp;
-#elif NET20 || NET30
+#elif NET20_OR_GREATER
         private readonly List<string> supportedOp;
 #endif
 
@@ -44,7 +44,7 @@ namespace xFunc.Logics
             {
                 "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
             };
-#elif NET20 || NET30
+#elif NET20_OR_GREATER
             supportedOp = new List<string>
             {
                 "not", "and", "or", "xor", "nand", "nor", "impl", "eq"
@@ -77,7 +77,7 @@ namespace xFunc.Logics
         {
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
-#elif NET20 || NET30 || NET35
+#elif NET20_OR_GREATER
             if (StringExtention.IsNullOrWhiteSpace(function))
 #endif
                 throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);

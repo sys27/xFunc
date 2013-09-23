@@ -147,6 +147,9 @@
   <data name="NotSupportedToken" xml:space="preserve">
     <value>Тип токена не підходить.</value>
   </data>
+  <data name="ReadOnlyError" xml:space="preserve">
+    <value>Ви не можете змінити значення "{0}".</value>
+  </data>
   <data name="UndefineFunction" xml:space="preserve">
     <value>Функція '{0}' видалена.</value>
   </data>

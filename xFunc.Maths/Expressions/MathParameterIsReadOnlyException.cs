@@ -19,10 +19,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="MathParameterIsReadOnlyException"/> class.
         /// </summary>
         public MathParameterIsReadOnlyException()
-            : this("")
-        {
-            // todo: message
-        }
+            : this("You cannot change the read-only variable.") { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MathParameterIsReadOnlyException" /> class.

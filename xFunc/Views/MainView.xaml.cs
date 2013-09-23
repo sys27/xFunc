@@ -453,6 +453,10 @@ namespace xFunc.Views
             {
                 statusBox.Text = mpe.Message;
             }
+            catch (MathParameterIsReadOnlyException mpiroe)
+            {
+                statusBox.Text = mpiroe.Message;
+            }
             catch (DivideByZeroException dbze)
             {
                 statusBox.Text = dbze.Message;

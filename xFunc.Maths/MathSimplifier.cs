@@ -64,6 +64,15 @@ namespace xFunc.Maths
             {
                 var simp = expression as Simplify;
                 simp.Expression = _Simplify(simp.Expression);
+
+                return simp;
+            }
+            else if (expression is Derivative)
+            {
+                var deriv = expression as Derivative;
+                deriv.Expression = _Simplify(deriv.Expression);
+
+                return deriv;
             }
 
             if (expression is UnaryMinus)

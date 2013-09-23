@@ -18,6 +18,7 @@ using System.Collections.Generic;
 #if NET35_OR_GREATER || PORTABLE
 using System.Linq;
 #endif
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -106,8 +107,7 @@ namespace xFunc.Maths.Expressions
                 else if (!param.IsReadOnly)
                     param.Value = value;
                 else
-                    // todo: error message
-                    throw new MathParameterIsReadOnlyException();
+                    throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
             }
         }
 
@@ -121,8 +121,7 @@ namespace xFunc.Maths.Expressions
             if (param == null)
                 throw new ArgumentNullException("param");
             if (param.IsReadOnly)
-                // todo: error message
-                throw new MathParameterIsReadOnlyException();
+                throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
 
             collection.Add(param);
         }
@@ -160,8 +159,7 @@ namespace xFunc.Maths.Expressions
             if (param == null)
                 throw new ArgumentNullException("param");
             if (param.IsReadOnly)
-                // todo: error message
-                throw new MathParameterIsReadOnlyException();
+                throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
 
             collection.Remove(param);
         }

@@ -63,7 +63,7 @@ namespace xFunc.Logics
         {
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
-#elif NET20 || NET30 || NET35
+#elif NET20_OR_GREATER
             if (StringExtention.IsNullOrWhiteSpace(function))
 #endif
                 throw new ArgumentNullException("function");
@@ -149,7 +149,7 @@ namespace xFunc.Logics
                                                     where t.Type == LogicTokenType.Variable
                                                     orderby t.Variable
                                                     select t.Variable);
-#elif NET20 || NET30
+#elif NET20_OR_GREATER
             var tokens = lexer.Tokenize(function);
             List<string> c = new List<string>();
 

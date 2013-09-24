@@ -63,8 +63,8 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("log(9, 3)");
-            Assert.AreEqual("log(9, 3)", exp.ToString());
+            var exp = parser.Parse("log(3, 9)");
+            Assert.AreEqual("log(3, 9)", exp.ToString());
         }
 
         [TestMethod]

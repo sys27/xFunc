@@ -32,10 +32,10 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The left operand.</param>
-        /// <param name="secondMathExpression">The right operand.</param>
+        /// <param name="arg">The left operand.</param>
+        /// <param name="base">The right operand.</param>
         /// <seealso cref="IMathExpression"/>
-        public Log(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
+        public Log(IMathExpression arg, IMathExpression @base) : base(@base, arg) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return ToString("log({0}, {1})");
+            return ToString("log({1}, {0})");
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return Math.Log(left.Calculate(), right.Calculate());
+            return Math.Log(right.Calculate(), left.Calculate());
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return Math.Log(left.Calculate(parameters), right.Calculate(parameters));
+            return Math.Log(right.Calculate(parameters), left.Calculate(parameters));
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return Math.Log(left.Calculate(parameters, functions), right.Calculate(parameters, functions));
+            return Math.Log(right.Calculate(parameters, functions), left.Calculate(parameters, functions));
         }
 
         /// <summary>
@@ -98,15 +98,15 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException">The base of log is not a number.</exception>
         public override IMathExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(left, variable))
+            if (MathParser.HasVar(right, variable))
             {
-                if (!(right is Number))
+                if (!(left is Number))
                     // todo: error message
                     throw new NotSupportedException();
 
-                var ln = new Ln(right.Clone());
-                var mul = new Mul(left.Clone(), ln);
-                var div = new Div(left.Clone().Differentiate(variable), mul);
+                var ln = new Ln(left.Clone());
+                var mul = new Mul(right.Clone(), ln);
+                var div = new Div(right.Clone().Differentiate(variable), mul);
 
                 return div;
             }
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new Log(left.Clone(), right.Clone());
+            return new Log(right.Clone(), left.Clone());
         }
 
     }

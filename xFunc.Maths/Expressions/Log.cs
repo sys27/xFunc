@@ -98,12 +98,16 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException">The base of log is not a number.</exception>
         public override IMathExpression Differentiate(Variable variable)
         {
+            if (MathParser.HasVar(left, variable))
+            {
+                var ln1 = new Ln(right.Clone());
+                var ln2 = new Ln(left.Clone());
+                var div = new Div(ln1, ln2);
+
+                return div.Differentiate(variable);
+            }
             if (MathParser.HasVar(right, variable))
             {
-                if (!(left is Number))
-                    // todo: error message
-                    throw new NotSupportedException();
-
                 var ln = new Ln(left.Clone());
                 var mul = new Mul(right.Clone(), ln);
                 var div = new Div(right.Clone().Differentiate(variable), mul);

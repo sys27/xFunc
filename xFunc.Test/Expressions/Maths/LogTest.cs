@@ -45,6 +45,15 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        public void DerivativeTest3()
+        {
+            IMathExpression exp = new Log(new Number(2), new Variable("x"));
+            IMathExpression deriv = exp.Differentiate();
+
+            Assert.AreEqual("-(ln(2) * (1 / x)) / (ln(x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
         public void PartialDerivativeTest1()
         {
             IMathExpression exp = new Log(new Variable("x"), new Number(2));

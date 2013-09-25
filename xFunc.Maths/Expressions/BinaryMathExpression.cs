@@ -46,12 +46,12 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryMathExpression"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The left (first) operand.</param>
-        /// <param name="secondMathExpression">The right (second) operand.</param>
-        protected BinaryMathExpression(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
+        /// <param name="left">The left (first) operand.</param>
+        /// <param name="right">The right (second) operand.</param>
+        protected BinaryMathExpression(IMathExpression left, IMathExpression right)
         {
-            Left = firstMathExpression;
-            Right = secondMathExpression;
+            Left = left;
+            Right = right;
         }
 
         /// <summary>

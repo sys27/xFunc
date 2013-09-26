@@ -15,7 +15,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = new Log(new Number(10), new Number(2));
 
-            Assert.AreEqual(Math.Log(10, 2), exp.Calculate(null));
+            Assert.AreEqual(Math.Log(10, 2), exp.Calculate());
         }
 
         [TestMethod]

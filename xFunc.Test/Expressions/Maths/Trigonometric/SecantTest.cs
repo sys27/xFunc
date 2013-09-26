@@ -16,7 +16,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
-            Assert.AreEqual(MathExtentions.Sec(Math.PI / 180), exp.Calculate(null));
+            Assert.AreEqual(MathExtentions.Sec(Math.PI / 180), exp.Calculate());
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
-            Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate(null));
+            Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate());
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
-            Assert.AreEqual(MathExtentions.Sec(Math.PI / 200), exp.Calculate(null));
+            Assert.AreEqual(MathExtentions.Sec(Math.PI / 200), exp.Calculate());
         }
 
         [TestMethod]

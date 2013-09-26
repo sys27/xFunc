@@ -15,7 +15,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = new Sqrt(new Number(4));
 
-            Assert.AreEqual(Math.Sqrt(4), exp.Calculate(null));
+            Assert.AreEqual(Math.Sqrt(4), exp.Calculate());
         }
 
         [TestMethod]

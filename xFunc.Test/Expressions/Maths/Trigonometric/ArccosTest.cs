@@ -16,7 +16,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IMathExpression exp = new Arccos(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
 
-            Assert.AreEqual(Math.Acos(1), exp.Calculate(null));
+            Assert.AreEqual(Math.Acos(1), exp.Calculate());
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IMathExpression exp = new Arccos(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
 
-            Assert.AreEqual(Math.Acos(1) / Math.PI * 180, exp.Calculate(null));
+            Assert.AreEqual(Math.Acos(1) / Math.PI * 180, exp.Calculate());
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IMathExpression exp = new Arccos(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
 
-            Assert.AreEqual(Math.Acos(1) / Math.PI * 200, exp.Calculate(null));
+            Assert.AreEqual(Math.Acos(1) / Math.PI * 200, exp.Calculate());
         }
 
         [TestMethod]

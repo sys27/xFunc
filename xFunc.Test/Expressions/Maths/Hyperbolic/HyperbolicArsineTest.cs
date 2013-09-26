@@ -16,7 +16,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         {
             var exp = new Arsinh(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Asinh(1), exp.Calculate(null));
+            Assert.AreEqual(MathExtentions.Asinh(1), exp.Calculate());
         }
 
         [TestMethod]

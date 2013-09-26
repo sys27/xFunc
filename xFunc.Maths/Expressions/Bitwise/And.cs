@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return (int)left.Calculate() & (int)right.Calculate();
+            return (int)Math.Round(left.Calculate(), MidpointRounding.AwayFromZero) & (int)Math.Round(right.Calculate(), MidpointRounding.AwayFromZero);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
-            return (int)left.Calculate(parameters) & (int)right.Calculate(parameters);
+            return (int)Math.Round(left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round(right.Calculate(parameters), MidpointRounding.AwayFromZero);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
-            return (int)left.Calculate(parameters, functions) & (int)right.Calculate(parameters, functions);
+            return (int)Math.Round(left.Calculate(parameters, functions), MidpointRounding.AwayFromZero) & (int)Math.Round(right.Calculate(parameters, functions), MidpointRounding.AwayFromZero);
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
         {
             var exp = new Sinh(new Number(1));
 
-            Assert.AreEqual(Math.Sinh(1), exp.Calculate(null));
+            Assert.AreEqual(Math.Sinh(1), exp.Calculate());
         }
 
         [TestMethod]

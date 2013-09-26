@@ -15,7 +15,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = new Abs(new Number(-1));
 
-            Assert.AreEqual(1, exp.Calculate(null));
+            Assert.AreEqual(1, exp.Calculate());
         }
 
         [TestMethod]

@@ -36,6 +36,17 @@ namespace xFunc.Maths.Expressions
         public Abs(IMathExpression expression) : base(expression) { }
 
         /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(6329);
+        }
+
+        /// <summary>
         /// Converts this expression to the equivalent string.
         /// </summary>
         /// <returns>The string that represents this expression.</returns>
@@ -72,17 +83,6 @@ namespace xFunc.Maths.Expressions
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
             return Math.Abs(argument.Calculate(parameters, functions));
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode(6329);
         }
 
         /// <summary>

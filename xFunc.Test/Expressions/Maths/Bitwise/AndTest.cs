@@ -12,11 +12,19 @@ namespace xFunc.Test.Expressions.Maths.Bitwise
     {
         
         [TestMethod]
-        public void CalculateTest()
+        public void CalculateTest1()
         {
-            IMathExpression exp = new And(new Number(1), new Number(3));
+            var exp = new And(new Number(1), new Number(3));
 
-            Assert.AreEqual(1, exp.Calculate(null));
+            Assert.AreEqual(1, exp.Calculate());
+        }
+
+        [TestMethod]
+        public void CalculateTest2()
+        {
+            var exp = new And(new Number(1.5), new Number(2.5));
+
+            Assert.AreEqual(2, exp.Calculate());
         }
 
     }

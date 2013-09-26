@@ -15,7 +15,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = new Root(new Number(8), new Number(3));
 
-            Assert.AreEqual(Math.Pow(8, 1.0 / 3.0), exp.Calculate(null));
+            Assert.AreEqual(Math.Pow(8, 1.0 / 3.0), exp.Calculate());
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IMathExpression exp = new Root(new Number(-8), new Number(3));
 
-            Assert.AreEqual(-2, exp.Calculate(null));
+            Assert.AreEqual(-2, exp.Calculate());
         }
 
         [TestMethod]

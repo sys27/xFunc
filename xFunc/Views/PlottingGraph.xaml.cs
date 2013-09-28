@@ -47,17 +47,12 @@ namespace xFunc.Views
 
             this.SizeChanged += this_SizeChanged;
             this.MouseLeftButtonDown += this_MouseLeftButtonDown;
+            this.MouseDoubleClick += this_MouseDoubleClick;
             this.MouseMove += this_MouseMove;
             this.MouseWheel += this_MouseWheel;
             slider.ValueChanged += slider_ValueChanged;
             renderGrid.Checked += (o, args) => { ReRender(); };
             renderGrid.Unchecked += (o, args) => { ReRender(); };
-        }
-
-        private void this_SizeChanged(object o, SizeChangedEventArgs args)
-        {
-            InitCoords();
-            ReRender();
         }
 
         private void InitCoords()
@@ -75,9 +70,22 @@ namespace xFunc.Views
             point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
         }
 
+        private void this_SizeChanged(object o, SizeChangedEventArgs args)
+        {
+            InitCoords();
+            ReRender();
+        }
+
         private void this_MouseLeftButtonDown(object o, MouseButtonEventArgs args)
         {
             startPoint = args.GetPosition(null);
+        }
+
+        private void this_MouseDoubleClick(object o, MouseButtonEventArgs args)
+        {
+            InitCoords();
+            slider.Value = 1;
+            ReRender();
         }
 
         private void this_MouseMove(object o, MouseEventArgs args)

@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public MathParameterCollection()
         {
-#if NET40_OR_GREATER
+#if NET40_OR_GREATER || PORTABLE
             collection = new HashSet<MathParameter>();
 #elif NET20_OR_GREATER
             collection = new List<MathParameter>();
@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="parameters">The parameters.</param>
         public MathParameterCollection(IEnumerable<MathParameter> parameters)
         {
-#if NET40_OR_GREATER
+#if NET40_OR_GREATER || PORTABLE
             collection = new HashSet<MathParameter>(parameters);
 #elif NET20_OR_GREATER
             collection = new List<MathParameter>(parameters);

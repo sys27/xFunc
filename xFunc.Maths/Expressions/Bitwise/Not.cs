@@ -65,7 +65,11 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
+#if PORTABLE
+            return ~(int)Math.Round(argument.Calculate());
+#else
             return ~(int)Math.Round(argument.Calculate(), MidpointRounding.AwayFromZero);
+#endif
         }
 
         /// <summary>
@@ -75,7 +79,11 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters)
         {
+#if PORTABLE
+            return ~(int)Math.Round(argument.Calculate(parameters));
+#else
             return ~(int)Math.Round(argument.Calculate(parameters), MidpointRounding.AwayFromZero);
+#endif
         }
 
         /// <summary>
@@ -86,7 +94,11 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>A result of the calculation.</returns>
         public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
         {
+#if PORTABLE
+            return ~(int)Math.Round(argument.Calculate(parameters, functions));
+#else
             return ~(int)Math.Round(argument.Calculate(parameters, functions), MidpointRounding.AwayFromZero);
+#endif
         }
 
         /// <summary>

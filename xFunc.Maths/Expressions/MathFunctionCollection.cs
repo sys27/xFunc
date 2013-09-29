@@ -21,10 +21,10 @@ using System.Runtime.Serialization;
 namespace xFunc.Maths.Expressions
 {
 
-#if !PORTABLE
     /// <summary>
     /// Strongly typed dictionaty that contains user-defined functions.
     /// </summary>
+#if !PORTABLE
     [Serializable]
 #endif
     public class MathFunctionCollection : Dictionary<UserFunction, IMathExpression>

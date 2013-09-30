@@ -15,7 +15,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -98,6 +100,25 @@ namespace xFunc.Views
                 case NumeralSystem.Hexidecimal:
                     hexButton.IsChecked = true;
                     break;
+            }
+        }
+
+        private void this_Loaded(object o, RoutedEventArgs args)
+        {
+            if (Settings.Default.CheckUpdates)
+            {
+                var updater = new Updater();
+                var updaterTask = Task.Factory.StartNew(() => updater.CheckUpdates());
+                updaterTask.ContinueWith(t =>
+                {
+                    if (t.Result != null)
+                    {
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            this.updateText.Text = Resource.AvailableUpdate;
+                        }));
+                    }
+                });
             }
         }
 

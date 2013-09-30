@@ -12,7 +12,7 @@ namespace xFunc.Presenters
     {
 
         private const string checkUri = "http://xfunc.codeplex.com/releases/";
-        private const int currentRelease = 012727;
+        private const int currentRelease = 112799;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Updater"/> class.

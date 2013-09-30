@@ -336,4 +336,7 @@
   <data name="UndefineVariable" xml:space="preserve">
     <value>The '{0}' variable is removed.</value>
   </data>
+  <data name="AvailableUpdate" xml:space="preserve">
+    <value>An update is available.</value>
+  </data>
 </root>

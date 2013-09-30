@@ -20,7 +20,8 @@ limitations under the License. -->
                      xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                      xmlns:views="clr-namespace:xFunc.Views"
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
-                     Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display">
+                     Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
+                     Loaded="this_Loaded">
     <ribbon:RibbonWindow.Resources>
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="30" />
@@ -721,6 +722,10 @@ limitations under the License. -->
         <ribbon:StatusBar Grid.Row="3" Grid.ColumnSpan="2">
             <ribbon:StatusBarItem HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock x:Name="statusBox" />
+            </ribbon:StatusBarItem>
+            <Separator />
+            <ribbon:StatusBarItem HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock x:Name="updateText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </ribbon:StatusBarItem>
         </ribbon:StatusBar>
     </Grid>

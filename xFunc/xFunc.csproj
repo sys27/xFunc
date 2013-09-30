@@ -86,6 +86,7 @@
     <Compile Include="Presenters\MathWorkspace.cs" />
     <Compile Include="Presenters\MathWorkspaceItem.cs" />
     <Compile Include="Presenters\TruthTableTabPresenter.cs" />
+    <Compile Include="Presenters\Updater.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

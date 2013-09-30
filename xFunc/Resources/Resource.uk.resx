@@ -336,4 +336,7 @@
   <data name="UndefineVariable" xml:space="preserve">
     <value>Змінна '{0}' видалена.</value>
   </data>
+  <data name="AvailableUpdate" xml:space="preserve">
+    <value>Доступно оновлення.</value>
+  </data>
 </root>

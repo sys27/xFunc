@@ -59,8 +59,11 @@
     <Setting Name="AdditionalLogicExpanded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="NumberBase" Type="xFunc.Maths.NumberSystems" Scope="User">
+    <Setting Name="NumberBase" Type="xFunc.Maths.NumeralSystem" Scope="User">
       <Value Profile="(Default)">Decimal</Value>
+    </Setting>
+    <Setting Name="CheckUpdates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

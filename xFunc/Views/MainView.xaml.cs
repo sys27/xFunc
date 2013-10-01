@@ -41,6 +41,7 @@ namespace xFunc.Views
         private LogicTabPresenter logicPresenter;
         private GraphsTabPresenter graphsPresenter;
         private TruthTableTabPresenter truthTablePresenter;
+        private Updater updater;
 
         public static RoutedCommand DegreeCommand = new RoutedCommand();
         public static RoutedCommand RadianCommand = new RoutedCommand();
@@ -71,6 +72,7 @@ namespace xFunc.Views
             logicPresenter = new LogicTabPresenter(this);
             graphsPresenter = new GraphsTabPresenter(this);
             truthTablePresenter = new TruthTableTabPresenter(this);
+            updater = new Updater();
 
             LoadSettings();
 
@@ -107,19 +109,41 @@ namespace xFunc.Views
         {
             if (Settings.Default.CheckUpdates)
             {
-                var updater = new Updater();
                 var updaterTask = Task.Factory.StartNew(() => updater.CheckUpdates());
                 updaterTask.ContinueWith(t =>
                 {
-                    if (t.Result != null)
+                    if (t.Result)
                     {
                         this.Dispatcher.BeginInvoke(new Action(() =>
                         {
                             this.updateText.Text = Resource.AvailableUpdate;
+                            this.statusUpdate.Visibility = Visibility.Visible;
                         }));
                     }
                 });
             }
+        }
+
+        private void UpdateText_MouseUp(object o, MouseButtonEventArgs args)
+        {
+            if (updater.HasUpdates)
+            {
+                Process.Start(updater.UpdateUrl);
+            }
+        }
+
+        private void hideNotification_Click(object o, RoutedEventArgs args)
+        {
+            this.updateText.Text = string.Empty;
+            this.statusUpdate.Visibility = Visibility.Collapsed;
+        }
+
+        private void dontCheckUpdates_Click(object o, RoutedEventArgs args)
+        {
+            hideNotification_Click(o, args);
+
+            Settings.Default.CheckUpdates = false;
+            Settings.Default.Save();
         }
 
         protected override void OnClosing(CancelEventArgs e)

@@ -13,6 +13,8 @@ namespace xFunc.Presenters
 
         private const string checkUri = "http://xfunc.codeplex.com/releases/";
         private const int currentRelease = 112799;
+        private string updateUri;
+        private bool hasUpdates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Updater"/> class.
@@ -25,10 +27,8 @@ namespace xFunc.Presenters
         /// Checks the updates.
         /// </summary>
         /// <returns>The url to download a new release.</returns>
-        internal string CheckUpdates()
+        internal bool CheckUpdates()
         {
-            string url = null;
-
             try
             {
                 var request = WebRequest.Create(checkUri);
@@ -39,7 +39,10 @@ namespace xFunc.Presenters
                 var release = int.Parse(releaseNumber);
 
                 if (release > currentRelease)
-                    url = responseUri;
+                {
+                    updateUri = responseUri;
+                    hasUpdates = true;
+                }
             }
             catch (SecurityException)
             {
@@ -48,7 +51,23 @@ namespace xFunc.Presenters
             {
             }
 
-            return url;
+            return hasUpdates;
+        }
+
+        internal bool HasUpdates
+        {
+            get
+            {
+                return hasUpdates;
+            }
+        }
+
+        internal string UpdateUrl
+        {
+            get
+            {
+                return updateUri;
+            }
         }
 
     }

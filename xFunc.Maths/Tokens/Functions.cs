@@ -178,7 +178,12 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// undef
         /// </summary>
-        Undefine
+        Undefine,
+
+        /// <summary>
+        /// The user function
+        /// </summary>
+        UserFunction
 
     }
 

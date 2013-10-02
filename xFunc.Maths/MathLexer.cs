@@ -727,7 +727,7 @@ namespace xFunc.Maths
                         oneParam = false;
                     }
 
-                    i += _CountUserFuncParams(tokens, i);
+                    i += _CountUserFuncParams(tokens, i) - 1;
                 }
                 else
                 {

@@ -24,14 +24,26 @@ namespace xFunc.Maths.Tokens
     {
 
         private Functions function;
+        protected int countOfParams;
 
         /// <summary>
-        /// Initializes the <see cref="FunctionToken"/> class.
+        /// Initializes the <see cref="FunctionToken" /> class.
         /// </summary>
         /// <param name="function">A function.</param>
-        public FunctionToken(Functions function)
+        public FunctionToken(Functions function) :
+            this(function, -1)
+        {
+        }
+
+        /// <summary>
+        /// Initializes the <see cref="FunctionToken" /> class.
+        /// </summary>
+        /// <param name="function">A function.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
+        public FunctionToken(Functions function, int countOfParams)
         {
             this.function = function;
+            this.countOfParams = countOfParams;
         }
 
         /// <summary>
@@ -51,8 +63,8 @@ namespace xFunc.Maths.Tokens
                 return false;
 
             var token = obj as FunctionToken;
-            
-            return this.function == token.function;
+
+            return this.function == token.function && this.countOfParams == token.countOfParams;
         }
 
         /// <summary>
@@ -63,7 +75,12 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return function.GetHashCode();
+            int hash = 6949;
+
+            hash = hash * 5437 + function.GetHashCode();
+            hash = hash * 5437 + countOfParams.GetHashCode();
+
+            return hash;
         }
 
         /// <summary>
@@ -72,7 +89,7 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return "Function: " + function;
+            return string.Format("Function: {0} ({1})", function, countOfParams);
         }
 
         /// <summary>
@@ -94,6 +111,24 @@ namespace xFunc.Maths.Tokens
             get
             {
                 return function;
+            }
+        }
+
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
+        public int CountOfParams
+        {
+            get
+            {
+                return countOfParams;
+            }
+            internal set
+            {
+                countOfParams = value;
             }
         }
 

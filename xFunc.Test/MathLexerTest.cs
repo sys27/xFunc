@@ -26,7 +26,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(type),
+                new FunctionToken(type, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(3),
                 new SymbolToken(Symbols.CloseBracket)
@@ -193,7 +193,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Log),
+                new FunctionToken(Functions.Log, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -265,7 +265,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Define),
+                new FunctionToken(Functions.Define, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
@@ -282,7 +282,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Define),
+                new FunctionToken(Functions.Define, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new UserFunctionToken("f", 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -613,7 +613,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Root),
+                new FunctionToken(Functions.Root, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(27),
                 new SymbolToken(Symbols.Comma),
@@ -642,7 +642,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Log),
+                new FunctionToken(Functions.Log, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -659,9 +659,9 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Derivative),
+                new FunctionToken(Functions.Derivative, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new FunctionToken(Functions.Sine),
+                new FunctionToken(Functions.Sine, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket),
@@ -843,7 +843,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Undefine),
+                new FunctionToken(Functions.Undefine, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new UserFunctionToken("f", 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -972,7 +972,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.GCD),
+                new FunctionToken(Functions.GCD, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(12),
                 new SymbolToken(Symbols.Comma),
@@ -990,7 +990,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.LCM),
+                new FunctionToken(Functions.LCM, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(12),
                 new SymbolToken(Symbols.Comma),
@@ -1008,7 +1008,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Simplify),
+                new FunctionToken(Functions.Simplify, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket)
@@ -1024,7 +1024,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new FunctionToken(Functions.Factorial),
+                new FunctionToken(Functions.Factorial, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(4),
                 new SymbolToken(Symbols.CloseBracket)

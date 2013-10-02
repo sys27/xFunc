@@ -24,6 +24,9 @@ namespace xFunc.Maths.Tokens
     {
 
         private Functions function;
+        /// <summary>
+        /// The count of parameters
+        /// </summary>
         protected int countOfParams;
 
         /// <summary>

@@ -684,7 +684,7 @@ namespace xFunc.Maths
 
         private int _CountUserFuncParams(List<IToken> tokens, int index)
         {
-            var userFunc = tokens[index] as UserFunctionToken;
+            var func = tokens[index] as FunctionToken;
 
             int countOfParams = 0;
             int brackets = 1;
@@ -719,7 +719,7 @@ namespace xFunc.Maths
 
                     i++;
                 }
-                else if (token is UserFunctionToken)
+                else if (token is FunctionToken)
                 {
                     if (oneParam)
                     {
@@ -741,7 +741,7 @@ namespace xFunc.Maths
                 }
             }
 
-            userFunc.CountOfParams = countOfParams;
+            func.CountOfParams = countOfParams;
             return i;
         }
 
@@ -749,7 +749,7 @@ namespace xFunc.Maths
         {
             for (int i = 0; i < tokens.Count; )
             {
-                if (tokens[i] is UserFunctionToken)
+                if (tokens[i] is FunctionToken)
                     i += _CountUserFuncParams(tokens, i);
                 else
                     i++;

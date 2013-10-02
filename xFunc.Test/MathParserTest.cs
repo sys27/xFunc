@@ -227,7 +227,7 @@ namespace xFunc.Test
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket),
                 new OperationToken(Operations.Assign),
-                new FunctionToken(Functions.Sine),
+                new FunctionToken(Functions.Sine, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
                 new SymbolToken(Symbols.CloseBracket)
@@ -259,7 +259,7 @@ namespace xFunc.Test
         {
             lexer.Tokens = new List<IToken>()
             {
-                new FunctionToken(Functions.Undefine),
+                new FunctionToken(Functions.Undefine, 1),
                 new SymbolToken(Symbols.OpenBracket),
                 new UserFunctionToken("f", 1),
                 new SymbolToken(Symbols.OpenBracket),

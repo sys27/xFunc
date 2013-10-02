@@ -20,11 +20,10 @@ namespace xFunc.Maths.Tokens
     /// <summary>
     /// Represents a user-function token.
     /// </summary>
-    public class UserFunctionToken : IToken
+    public class UserFunctionToken : FunctionToken
     {
 
         private string function;
-        private int countOfParams;
 
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.
@@ -38,9 +37,9 @@ namespace xFunc.Maths.Tokens
         /// <param name="function">A name of function.</param>
         /// <param name="countOfParams">A count of parameters.</param>
         public UserFunctionToken(string function, int countOfParams)
+            : base(Functions.UserFunction, countOfParams)
         {
             this.function = function;
-            this.countOfParams = countOfParams;
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace xFunc.Maths.Tokens
 
             var token = obj as UserFunctionToken;
 
-            return this.Function == token.Function && this.countOfParams == token.CountOfParams;
+            return this.function == token.function && this.countOfParams == token.countOfParams;
         }
 
         /// <summary>
@@ -72,7 +71,12 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return function.GetHashCode() ^ countOfParams.GetHashCode();
+            int hash = 4909;
+
+            hash = hash * 1877 + function.GetHashCode();
+            hash = hash * 1877 + countOfParams.GetHashCode();
+
+            return hash;
         }
 
         /// <summary>
@@ -85,17 +89,6 @@ namespace xFunc.Maths.Tokens
         }
 
         /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        public int Priority
-        {
-            get
-            {
-                return 100;
-            }
-        }
-
-        /// <summary>
         /// Gets the name of function.
         /// </summary>
         public string Function
@@ -103,21 +96,6 @@ namespace xFunc.Maths.Tokens
             get
             {
                 return function;
-            }
-        }
-
-        /// <summary>
-        /// The count of parameters.
-        /// </summary>
-        public int CountOfParams
-        {
-            get
-            {
-                return countOfParams;
-            }
-            set
-            {
-                countOfParams = value;
             }
         }
 

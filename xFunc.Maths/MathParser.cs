@@ -279,7 +279,7 @@ namespace xFunc.Maths
                 else if (token is UserFunctionToken)
                 {
                     var t = token as UserFunctionToken;
-                    preOutput.Add(new UserFunction(t.Function, t.CountOfParams));
+                    preOutput.Add(new UserFunction(t.FunctionName, t.CountOfParams));
                 }
                 else if (token is FunctionToken)
                 {

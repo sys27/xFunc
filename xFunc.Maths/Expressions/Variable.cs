@@ -186,6 +186,34 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the minimum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public int MinCountOfParams
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public int MaxCountOfParams
+        {
+            get
+            {
+                return -1;
+            }
+        }
+
     }
 
 }

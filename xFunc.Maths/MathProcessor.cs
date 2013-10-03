@@ -18,9 +18,7 @@ namespace xFunc.Maths
         private IDifferentiator differentiator;
         private MathParser parser;
 
-        private MathParameterCollection parameters;
-        private MathFunctionCollection userFunctions;
-
+        private ExpressionParameters parameters;
         private NumeralSystem numberSystem;
 
         /// <summary>
@@ -33,8 +31,7 @@ namespace xFunc.Maths
             differentiator = new MathDifferentiator(simplifier);
             parser = new MathParser(lexer, simplifier);
 
-            parameters = new MathParameterCollection();
-            userFunctions = new MathFunctionCollection();
+            parameters = new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection());
         }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace xFunc.Maths
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(lexer, simplifier, differentiator, new MathParameterCollection(), new MathFunctionCollection())
+            : this(lexer, simplifier, differentiator, new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection()))
         {
         }
 
@@ -56,7 +53,7 @@ namespace xFunc.Maths
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="parameters">The collection of parameters.</param>
         /// <param name="userFunctions">The collection of functions.</param>
-        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, MathParameterCollection parameters, MathFunctionCollection userFunctions)
+        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
@@ -64,7 +61,6 @@ namespace xFunc.Maths
             this.parser = new MathParser(lexer, simplifier);
 
             this.parameters = parameters;
-            this.userFunctions = userFunctions;
         }
 
         /// <summary>
@@ -88,7 +84,7 @@ namespace xFunc.Maths
             if (exp is Define)
             {
                 Define assign = exp as Define;
-                assign.Calculate(parameters, userFunctions);
+                assign.Calculate(parameters);
 
                 if (assign.Key is Variable)
                     return new StringResult(string.Format(Resource.AssignVariable, assign.Key, assign.Value));
@@ -98,7 +94,7 @@ namespace xFunc.Maths
             if (exp is Undefine)
             {
                 Undefine undef = exp as Undefine;
-                undef.Calculate(parameters, userFunctions);
+                undef.Calculate(parameters);
 
                 if (undef.Key is Variable)
                     return new StringResult(string.Format(Resource.UndefineVariable, undef.Key));
@@ -107,9 +103,9 @@ namespace xFunc.Maths
             }
 
             if (numberSystem == NumeralSystem.Decimal)
-                return new NumberResult(exp.Calculate(parameters, userFunctions));
+                return new NumberResult(exp.Calculate(parameters));
 
-            return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters, userFunctions), numberSystem));
+            return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters), numberSystem));
         }
 
         /// <summary>
@@ -177,11 +173,11 @@ namespace xFunc.Maths
         {
             get
             {
-                return parser.AngleMeasurement;
+                return parameters.Angleeasurement;
             }
             set
             {
-                parser.AngleMeasurement = value;
+                parameters.Angleeasurement = value;
             }
         }
 
@@ -213,7 +209,7 @@ namespace xFunc.Maths
         {
             get
             {
-                return parameters;
+                return parameters.Parameters;
             }
         }
 
@@ -227,7 +223,7 @@ namespace xFunc.Maths
         {
             get
             {
-                return userFunctions;
+                return parameters.Functions;
             }
         }
 

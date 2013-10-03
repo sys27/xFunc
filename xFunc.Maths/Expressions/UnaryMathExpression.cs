@@ -110,24 +110,12 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        public abstract double Calculate(MathParameterCollection parameters);
-
-        /// <summary>
-        /// Calculates this mathemarical expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        public abstract double Calculate(MathParameterCollection parameters, MathFunctionCollection functions);
+        /// <seealso cref="ExpressionParameters" />
+        public abstract double Calculate(ExpressionParameters parameters);
 
         /// <summary>
         /// Clones this instance.

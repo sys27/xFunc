@@ -102,35 +102,6 @@ namespace xFunc.Maths.Expressions
         /// Throws <see cref="System.NotSupportedException" />
         /// </summary>
         /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <returns>
-        /// The exception.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <exception cref="System.ArgumentNullException"><paramref name="parameters"/> is null.</exception>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        public double Calculate(MathParameterCollection parameters)
-        {
-            if (key is Variable)
-            {
-                if (parameters == null)
-                    throw new ArgumentNullException("parameters");
-
-                var e = key as Variable;
-
-                parameters[e.Name] = value.Calculate(parameters);
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
-
-            return double.NaN;
-        }
-
-        /// <summary>
-        /// Throws <see cref="System.NotSupportedException" />
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
         /// <param name="functions">A collection of functions that are used in the expression.</param>
         /// <returns>
         /// The exception.
@@ -138,25 +109,22 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="MathParameterCollection" />
         /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> or <paramref name="functions"/> is null.</exception>
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        public double Calculate(ExpressionParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
             if (key is Variable)
             {
-                if (parameters == null)
-                    throw new ArgumentNullException("parameters");
-
                 var e = key as Variable;
 
-                parameters[e.Name] = value.Calculate(parameters);
+                parameters.Parameters[e.Name] = value.Calculate(parameters);
             }
             else if (key is UserFunction)
             {
-                if (functions == null)
-                    throw new ArgumentNullException("functions");
-
                 var e = key as UserFunction;
 
-                functions[e] = value;
+                parameters.Functions[e] = value;
             }
 
             return double.NaN;

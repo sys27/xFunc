@@ -260,6 +260,8 @@ namespace xFunc.Maths
                         case Operations.XOr:
                             preOutput.Add(new XOr());
                             break;
+                        default:
+                            throw new MathParserException(Resource.ErrorWhileParsingTree);
                     }
                 }
                 else if (token is NumberToken)
@@ -273,6 +275,11 @@ namespace xFunc.Maths
                     var t = token as VariableToken;
 
                     preOutput.Add(new Variable(t.Variable));
+                }
+                else if (token is UserFunctionToken)
+                {
+                    var t = token as UserFunctionToken;
+                    preOutput.Add(new UserFunction(t.Function, t.CountOfParams));
                 }
                 else if (token is FunctionToken)
                 {
@@ -394,13 +401,10 @@ namespace xFunc.Maths
                         case Functions.Undefine:
                             preOutput.Add(new Undefine());
                             break;
+                        default:
+                            throw new MathParserException(Resource.ErrorWhileParsingTree);
                     }
-                }
-                else if (token is UserFunctionToken)
-                {
-                    var t = token as UserFunctionToken;
-                    preOutput.Add(new UserFunction(t.Function, t.CountOfParams));
-                }
+                }                
             }
 
             return preOutput;

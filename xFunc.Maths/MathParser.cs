@@ -188,8 +188,8 @@ namespace xFunc.Maths
                     {
                         var func = expression as UserFunction;
 
-                        IMathExpression[] arg = new IMathExpression[func.CountOfParams];
-                        for (int i = func.CountOfParams, j = 0; i > 0; i--, j++)
+                        IMathExpression[] arg = new IMathExpression[func.MaxCountOfParams];
+                        for (int i = func.MaxCountOfParams, j = 0; i > 0; i--, j++)
                         {
                             arg[j] = stack.Pop();
                         }

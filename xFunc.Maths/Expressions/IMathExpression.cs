@@ -68,6 +68,22 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         IMathExpression Parent { get; set; }
 
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        int MinCountOfParams { get; }
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        int MaxCountOfParams { get; }
+
     }
 
 }

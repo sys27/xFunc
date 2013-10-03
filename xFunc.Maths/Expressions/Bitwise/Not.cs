@@ -75,29 +75,17 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Calculates this bitwise NOT expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate(MathParameterCollection parameters)
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public override double Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
             return ~(int)Math.Round(argument.Calculate(parameters));
 #else
             return ~(int)Math.Round(argument.Calculate(parameters), MidpointRounding.AwayFromZero);
-#endif
-        }
-
-        /// <summary>
-        /// Calculates this bitwise NOT expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of user-defined functions.</param>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-#if PORTABLE
-            return ~(int)Math.Round(argument.Calculate(parameters, functions));
-#else
-            return ~(int)Math.Round(argument.Calculate(parameters, functions), MidpointRounding.AwayFromZero);
 #endif
         }
 

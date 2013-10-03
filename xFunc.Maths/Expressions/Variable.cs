@@ -102,26 +102,12 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">Collection of variables.</param>
         /// <returns>A value of this variable.</returns>
-        public double Calculate(MathParameterCollection parameters)
+        public double Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
-            return parameters[name];
-        }
-
-        /// <summary>
-        /// Gets value of this variable from <paramref name="parameters"/>.
-        /// </summary>
-        /// <param name="parameters">Collection of variables.</param>
-        /// <param name="functions">Collection of functions.</param>
-        /// <returns>A value of this variable.</returns>
-        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
-
-            return parameters[name];
+            return parameters.Parameters[name];
         }
 
         /// <summary>

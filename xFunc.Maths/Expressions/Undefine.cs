@@ -79,64 +79,28 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
+        /// <seealso cref="ExpressionParameters" />
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
-        /// <exception cref="NotSupportedException">If <c>key</c> is not a <see cref="Variable"/>.</exception>
-        public double Calculate(MathParameterCollection parameters)
+        public double Calculate(ExpressionParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
             if (key is Variable)
             {
-                if (parameters == null)
-                    throw new ArgumentNullException("parameters");
-
                 var e = key as Variable;
 
-                parameters.Remove(e.Name);
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
-
-            return double.NaN;
-        }
-
-        /// <summary>
-        /// Removes a variable or a function from collection.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
-        /// <returns>
-        /// NaN.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        /// <exception cref="System.ArgumentNullException">
-        /// <paramref name="parameters"/> or <paramref name="functions"/> is null.
-        /// </exception>
-        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            if (key is Variable)
-            {
-                if (parameters == null)
-                    throw new ArgumentNullException("parameters");
-
-                var e = key as Variable;
-
-                parameters.Remove(e.Name);
+                parameters.Parameters.Remove(e.Name);
             }
             else if (key is UserFunction)
             {
-                if (functions == null)
-                    throw new ArgumentNullException("functions");
-
                 var e = key as UserFunction;
 
-                functions.Remove(e);
+                parameters.Functions.Remove(e);
             }
 
             return double.NaN;

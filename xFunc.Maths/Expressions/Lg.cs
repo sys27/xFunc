@@ -68,22 +68,14 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates this Lg expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate(MathParameterCollection parameters)
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public override double Calculate(ExpressionParameters parameters)
         {
             return Math.Log10(Argument.Calculate(parameters));
-        }
-
-        /// <summary>
-        /// Calculates this Lg expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions.</param>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            return Math.Log10(Argument.Calculate(parameters, functions));
         }
 
         /// <summary>

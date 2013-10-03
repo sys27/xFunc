@@ -54,36 +54,30 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathemarical expression (using degree).
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        protected abstract double CalculateDergee(MathParameterCollection parameters, MathFunctionCollection functions);
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double CalculateDergee(ExpressionParameters parameters);
         /// <summary>
         /// Calculates this mathemarical expression (using radian).
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        protected abstract double CalculateRadian(MathParameterCollection parameters, MathFunctionCollection functions);
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double CalculateRadian(ExpressionParameters parameters);
         /// <summary>
         /// Calculates this mathemarical expression (using gradian).
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        protected abstract double CalculateGradian(MathParameterCollection parameters, MathFunctionCollection functions);
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double CalculateGradian(ExpressionParameters parameters);
 
         /// <summary>
         /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
@@ -94,11 +88,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public override double Calculate()
         {
             if (angleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(null, null);
+                return CalculateDergee(null);
             if (angleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(null, null);
+                return CalculateRadian(null);
             if (angleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(null, null);
+                return CalculateGradian(null);
 
             return double.NaN;
         }
@@ -106,41 +100,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        public override double Calculate(MathParameterCollection parameters)
+        /// <seealso cref="ExpressionParameters" />
+        public override double Calculate(ExpressionParameters parameters)
         {
             if (angleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(parameters, null);
+                return CalculateDergee(parameters);
             if (angleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(parameters, null);
+                return CalculateRadian(parameters);
             if (angleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(parameters, null);
-
-            return double.NaN;
-        }
-
-        /// <summary>
-        /// Calculates this mathemarical expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            if (angleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(parameters, functions);
-            if (angleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(parameters, functions);
-            if (angleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(parameters, functions);
+                return CalculateGradian(parameters);
 
             return double.NaN;
         }

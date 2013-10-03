@@ -140,38 +140,11 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        /// <seealso cref="MathParameterCollection" />
-        public double Calculate(MathParameterCollection parameters)
+        /// <exception cref="NotSupportedException">Always.</exception>
+        /// <seealso cref="ExpressionParameters" />
+        public double Calculate(ExpressionParameters parameters)
         {
             throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// Calculates this mathemarical expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        /// <exception cref="System.ArgumentNullException"><paramref name="functions"/> is null.</exception>
-        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            if (functions == null)
-                throw new ArgumentNullException("functions");
-
-            var func = functions.Keys.First(uf => uf.Equals(this));
-            var newParameters = new MathParameterCollection(parameters);
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Name] = this.arguments[i].Calculate(parameters, functions);
-            }
-
-            return functions[this].Calculate(newParameters, functions);
         }
 
         /// <summary>

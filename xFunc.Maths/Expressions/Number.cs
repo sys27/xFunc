@@ -99,25 +99,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a number. Don't use this method if your expression has variables.
+        /// Returns a number.
         /// </summary>
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the calculation.</returns>
-        /// <seealso cref="MathParameterCollection"/>
-        public double Calculate(MathParameterCollection parameters)
-        {
-            return number;
-        }
-
-        /// <summary>
-        /// Returns a number. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <param name="parameters">A collection of variables.</param>
-        /// <param name="functions">A collection of functions.</param>
-        /// <returns>A result of the calculation.</returns>
-        /// <seealso cref="MathParameterCollection"/>
-        /// <seealso cref="MathFunctionCollection"/>
-        public double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
+        /// <seealso cref="ExpressionParameters"/>
+        public double Calculate(ExpressionParameters parameters)
         {
             return number;
         }

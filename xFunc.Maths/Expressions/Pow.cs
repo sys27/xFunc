@@ -72,22 +72,14 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns a specified number raised to the specified power.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <returns>A specified number raised to the specified power.</returns>
-        public override double Calculate(MathParameterCollection parameters)
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A specified number raised to the specified power.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public override double Calculate(ExpressionParameters parameters)
         {
             return Math.Pow(left.Calculate(parameters), right.Calculate(parameters));
-        }
-
-        /// <summary>
-        /// Returns a specified number raised to the specified power.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions.</param>
-        /// <returns>A specified number raised to the specified power.</returns>
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            return Math.Pow(left.Calculate(parameters, functions), right.Calculate(parameters, functions));
         }
 
         /// <summary>

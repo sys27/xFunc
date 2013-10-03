@@ -63,36 +63,21 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override double Calculate()
         {
-            return Calculate(null, null);
+            return Calculate(null);
         }
 
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        public override double Calculate(MathParameterCollection parameters)
+        /// <seealso cref="ExpressionParameters" />
+        public override double Calculate(ExpressionParameters parameters)
         {
-            return Calculate(parameters, null);
-        }
-
-        /// <summary>
-        /// Calculates this mathemarical expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            var first = left.Calculate(parameters, functions);
-            var second = 1 / right.Calculate(parameters, functions);
+            var first = left.Calculate(parameters);
+            var second = 1 / right.Calculate(parameters);
             if (first < 0 && second % 2 != 0)
             {
                 return -Math.Pow(-first, second);

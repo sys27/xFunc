@@ -69,29 +69,14 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        public override double Calculate(MathParameterCollection parameters)
+        /// <seealso cref="ExpressionParameters" />
+        public override double Calculate(ExpressionParameters parameters)
         {
             return Math.Sqrt(Argument.Calculate(parameters));
-        }
-
-        /// <summary>
-        /// Calculates this mathemarical expression.
-        /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <seealso cref="MathFunctionCollection" />
-        public override double Calculate(MathParameterCollection parameters, MathFunctionCollection functions)
-        {
-            return Math.Sqrt(Argument.Calculate(parameters, functions));
         }
 
         /// <summary>

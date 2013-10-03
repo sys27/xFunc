@@ -32,7 +32,7 @@ namespace xFunc.Test.Expressions.Maths
             functions.Add(key2, new Number(2));
 
             var undef = new Undefine(key1);
-            undef.Calculate(null, functions);
+            undef.Calculate(functions);
             Assert.IsFalse(functions.ContainsKey(key1));
             Assert.IsTrue(functions.ContainsKey(key2));
         }

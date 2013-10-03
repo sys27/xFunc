@@ -23,23 +23,23 @@ namespace xFunc.Maths.Tokens
     public class UserFunctionToken : FunctionToken
     {
 
-        private string function;
+        private string functionName;
 
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.
         /// </summary>
-        /// <param name="function">A name of function.</param>
-        public UserFunctionToken(string function) : this(function, -1) { }
+        /// <param name="functionName">A name of function.</param>
+        public UserFunctionToken(string functionName) : this(functionName, -1) { }
 
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.
         /// </summary>
-        /// <param name="function">A name of function.</param>
+        /// <param name="functionName">A name of function.</param>
         /// <param name="countOfParams">A count of parameters.</param>
-        public UserFunctionToken(string function, int countOfParams)
+        public UserFunctionToken(string functionName, int countOfParams)
             : base(Functions.UserFunction, countOfParams)
         {
-            this.function = function;
+            this.functionName = functionName;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace xFunc.Maths.Tokens
 
             var token = obj as UserFunctionToken;
 
-            return this.function == token.function && this.countOfParams == token.countOfParams;
+            return this.functionName == token.functionName && this.countOfParams == token.countOfParams;
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Tokens
         {
             int hash = 4909;
 
-            hash = hash * 1877 + function.GetHashCode();
+            hash = hash * 1877 + functionName.GetHashCode();
             hash = hash * 1877 + countOfParams.GetHashCode();
 
             return hash;
@@ -85,17 +85,17 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return "User Function: " + function;
+            return "User Function: " + functionName;
         }
 
         /// <summary>
         /// Gets the name of function.
         /// </summary>
-        public string Function
+        public string FunctionName
         {
             get
             {
-                return function;
+                return functionName;
             }
         }
 

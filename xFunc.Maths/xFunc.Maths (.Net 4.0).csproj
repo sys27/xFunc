@@ -59,8 +59,10 @@
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="IDifferentiator.cs" />
+    <Compile Include="IExpressionFactory.cs" />
     <Compile Include="ISimplifier.cs" />
     <Compile Include="MathDifferentiator.cs" />
+    <Compile Include="MathExpressionFactory.cs" />
     <Compile Include="MathLexerException.cs" />
     <Compile Include="MathParserException.cs" />
     <Compile Include="Expressions\Abs.cs" />

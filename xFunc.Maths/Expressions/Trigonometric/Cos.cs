@@ -36,13 +36,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public Cos(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Cos"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public Cos(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -115,7 +108,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sine = new Sin(argument.Clone(), angleMeasurement);
+            var sine = new Sin(argument.Clone());
             var multiplication = new Mul(sine, argument.Clone().Differentiate(variable));
             var unMinus = new UnaryMinus(multiplication);
 

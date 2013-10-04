@@ -23,7 +23,7 @@ namespace xFunc.Presenters
         {
             this.view = view;
 
-            parser = new MathParser { AngleMeasurement = AngleMeasurement.Radian };
+            parser = new MathParser();
             countOfGraphs = Settings.Default.MaxCountOfExpressions;
             listOfGraphs = new List<GraphItemViewModel>(countOfGraphs);
         }

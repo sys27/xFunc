@@ -36,15 +36,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public Sec(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
-
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sec"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public Sec(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -119,8 +111,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var tan = new Tan(argument.Clone(), angleMeasurement);
-            var sec = new Sec(argument.Clone(), angleMeasurement);
+            var tan = new Tan(argument.Clone());
+            var sec = new Sec(argument.Clone());
             var mul1 = new Mul(tan, sec);
             var mul2 = new Mul(argument.Clone().Differentiate(variable), mul1);
 

@@ -14,25 +14,25 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Sin(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Sin(new Number(1));
 
-            Assert.AreEqual(Math.Sin(1), exp.Calculate());
+            Assert.AreEqual(Math.Sin(1), exp.Calculate(AngleMeasurement.Radian));
         }
 
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Sin(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Sin(new Number(1));
 
-            Assert.AreEqual(Math.Sin(1 * Math.PI / 180), exp.Calculate());
+            Assert.AreEqual(Math.Sin(1 * Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Sin(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Sin(new Number(1));
 
-            Assert.AreEqual(Math.Sin(1 * Math.PI / 200), exp.Calculate());
+            Assert.AreEqual(Math.Sin(1 * Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
         [TestMethod]
@@ -69,17 +69,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             num.Value = 3;
             Assert.AreEqual("sin(3 * x)", exp.ToString());
             Assert.AreEqual("cos(2 * x) * (2 * 1)", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void DerivativeTestWithAngle()
-        {
-            var exp = new Sin(new Variable("x"), AngleMeasurement.Radian);
-            var deriv = exp.Differentiate();
-
-            var mul = deriv as Mul;
-            var cos = mul.Left as Cos;
-            Assert.AreEqual(AngleMeasurement.Radian, cos.AngleMeasurement);
         }
 
         [TestMethod]

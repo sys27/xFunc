@@ -14,25 +14,25 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Cot(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Cot(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Cot(1), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Cot(1), exp.Calculate(AngleMeasurement.Radian));
         }
 
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Cot(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Cot(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Cot(1 * Math.PI / 180), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Cot(1 * Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Cot(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Cot(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Cot(1 * Math.PI / 200), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Cot(1 * Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
         [TestMethod]
@@ -69,20 +69,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             num.Value = 3;
             Assert.AreEqual("cot(3 * x)", exp.ToString());
             Assert.AreEqual("-((2 * 1) / (sin(2 * x) ^ 2))", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void DerivativeTestWithAngle()
-        {
-            var exp = new Cot(new Variable("x"), AngleMeasurement.Radian);
-            var deriv = exp.Differentiate();
-
-            var un = deriv as UnaryMinus;
-            var div = un.Argument as Div;
-            var pow = div.Right as Pow;
-            var sin = pow.Left as Sin;
-
-            Assert.AreEqual(AngleMeasurement.Radian, sin.AngleMeasurement);
         }
 
         [TestMethod]

@@ -36,8 +36,6 @@ namespace xFunc.Maths
         private string lastFunc = string.Empty;
         private IMathExpression mathExpression;
 
-        private AngleMeasurement angleMeasurement;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MathParser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IDifferentiator"/>.
         /// </summary>
@@ -291,40 +289,40 @@ namespace xFunc.Maths
                             preOutput.Add(new Abs());
                             break;
                         case Functions.Sine:
-                            preOutput.Add(new Sin() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Sin());
                             break;
                         case Functions.Cosine:
-                            preOutput.Add(new Cos() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Cos());
                             break;
                         case Functions.Tangent:
-                            preOutput.Add(new Tan() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Tan());
                             break;
                         case Functions.Cotangent:
-                            preOutput.Add(new Cot() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Cot());
                             break;
                         case Functions.Secant:
-                            preOutput.Add(new Sec() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Sec());
                             break;
                         case Functions.Cosecant:
-                            preOutput.Add(new Csc() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Csc());
                             break;
                         case Functions.Arcsine:
-                            preOutput.Add(new Arcsin() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Arcsin());
                             break;
                         case Functions.Arccosine:
-                            preOutput.Add(new Arccos() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Arccos());
                             break;
                         case Functions.Arctangent:
-                            preOutput.Add(new Arctan() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Arctan());
                             break;
                         case Functions.Arccotangent:
-                            preOutput.Add(new Arccot() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Arccot());
                             break;
                         case Functions.Arcsecant:
-                            preOutput.Add(new Arcsec() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Arcsec());
                             break;
                         case Functions.Arccosecant:
-                            preOutput.Add(new Arccsc() { AngleMeasurement = this.AngleMeasurement });
+                            preOutput.Add(new Arccsc());
                             break;
                         case Functions.Sqrt:
                             preOutput.Add(new Sqrt());
@@ -499,24 +497,6 @@ namespace xFunc.Maths
             set
             {
                 simplifier = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or Sets a measurement of angles.
-        /// </summary>
-        /// <seealso cref="AngleMeasurement"/>
-        public AngleMeasurement AngleMeasurement
-        {
-            get
-            {
-                return angleMeasurement;
-            }
-            set
-            {
-                lastFunc = string.Empty;
-                mathExpression = null;
-                angleMeasurement = value;
             }
         }
 

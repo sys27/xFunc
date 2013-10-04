@@ -36,13 +36,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public Arcsin(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsin"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public Arcsin(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

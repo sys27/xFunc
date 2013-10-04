@@ -115,6 +115,24 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of parameters is less than expected..
+        /// </summary>
+        internal static string LessParams {
+            get {
+                return ResourceManager.GetString("LessParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of parameters is more than expected..
+        /// </summary>
+        internal static string MoreParams {
+            get {
+                return ResourceManager.GetString("MoreParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brackets are not balanced..
         /// </summary>
         internal static string NotBalanced {

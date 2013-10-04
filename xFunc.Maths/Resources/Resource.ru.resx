@@ -135,6 +135,12 @@
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>Функция имеет неверное количество переменных.</value>
   </data>
+  <data name="LessParams" xml:space="preserve">
+    <value>Количество параметров меньше, чем ожидается.</value>
+  </data>
+  <data name="MoreParams" xml:space="preserve">
+    <value>Количество параметров больше, чем ожидается.</value>
+  </data>
   <data name="NotBalanced" xml:space="preserve">
     <value>Скобки не сбалансированы.</value>
   </data>

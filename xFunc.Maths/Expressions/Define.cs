@@ -99,16 +99,14 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Throws <see cref="System.NotSupportedException" />
+        /// Calculates this expression.
         /// </summary>
-        /// <param name="parameters">A collection of variables that are used in the expression.</param>
-        /// <param name="functions">A collection of functions that are used in the expression.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// The exception.
         /// </returns>
-        /// <seealso cref="MathParameterCollection" />
-        /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> or <paramref name="functions"/> is null.</exception>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <seealso cref="ExpressionParameters" />
+        /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> is null.</exception>
         public double Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)

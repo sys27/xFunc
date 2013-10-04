@@ -135,6 +135,12 @@
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>The function has an invalid number of variables.</value>
   </data>
+  <data name="LessParams" xml:space="preserve">
+    <value>The number of parameters is less than expected.</value>
+  </data>
+  <data name="MoreParams" xml:space="preserve">
+    <value>The number of parameters is more than expected.</value>
+  </data>
   <data name="NotBalanced" xml:space="preserve">
     <value>Brackets are not balanced.</value>
   </data>

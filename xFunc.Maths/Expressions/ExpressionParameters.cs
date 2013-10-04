@@ -18,7 +18,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         public ExpressionParameters(AngleMeasurement angleMeasuremnt)
-            : this(angleMeasuremnt, null, null)
+            : this(angleMeasuremnt, new MathParameterCollection(), new MathFunctionCollection())
         {
         }
 
@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
         public ExpressionParameters(MathParameterCollection parameters)
-            : this(AngleMeasurement.Degree, parameters, null)
+            : this(AngleMeasurement.Degree, parameters, new MathFunctionCollection())
         {
         }
 
@@ -36,7 +36,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="functions">The collection of user functions.</param>
         public ExpressionParameters(MathFunctionCollection functions)
-            : this(AngleMeasurement.Degree, null, functions)
+            : this(AngleMeasurement.Degree, new MathParameterCollection(), functions)
         {
         }
 
@@ -46,7 +46,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         /// <param name="parameters">The collection of variables' values.</param>
         public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathParameterCollection parameters)
-            : this(angleMeasuremnt, parameters, null)
+            : this(angleMeasuremnt, parameters, new MathFunctionCollection())
         {
         }
 
@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         /// <param name="functions">The collection of user functions.</param>
         public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathFunctionCollection functions)
-            : this(angleMeasuremnt, null, functions)
+            : this(angleMeasuremnt, new MathParameterCollection(), functions)
         {
         }
 

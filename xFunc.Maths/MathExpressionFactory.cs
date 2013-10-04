@@ -9,9 +9,20 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// Factory of mathematic expressions.
+    /// </summary>
     public class MathExpressionFactory : IExpressionFactory
     {
 
+        /// <summary>
+        /// Creates a expression from specified token.
+        /// </summary>
+        /// <param name="token">The token.</param>
+        /// <returns>
+        /// The expression.
+        /// </returns>
+        /// <exception cref="MathParserException">This factory don't support specified token.</exception>
         public IMathExpression Create(IToken token)
         {
             if (token is OperationToken)

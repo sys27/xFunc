@@ -86,13 +86,6 @@ namespace xFunc.Maths.Expressions
             int hash = 1721;
 
             hash = (hash * 5701) + function.GetHashCode();
-            if (arguments != null)
-            {
-                foreach (var arg in arguments)
-                {
-                    hash = (hash * 5701) + arg.GetHashCode();
-                }
-            }
             hash = (hash * 5701) + countOfParams.GetHashCode();
 
             return hash;
@@ -144,7 +137,18 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public double Calculate(ExpressionParameters parameters)
         {
-            throw new NotSupportedException();
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
+
+            var func = parameters.Functions.Keys.First(uf => uf.Equals(this));
+            var newParameters = new MathParameterCollection(parameters.Parameters);
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                var arg = func.Arguments[i] as Variable;
+                newParameters[arg.Name] = this.arguments[i].Calculate(parameters);
+            }
+
+            return parameters.Functions[this].Calculate(newParameters);
         }
 
         /// <summary>

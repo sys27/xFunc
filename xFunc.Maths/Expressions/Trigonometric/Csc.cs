@@ -36,15 +36,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public Csc(IMathExpression firstMathExpression)
             : base(firstMathExpression)
         {
-
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Csc"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public Csc(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -120,8 +112,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var unary = new UnaryMinus(argument.Clone().Differentiate(variable));
-            var cot = new Cot(argument.Clone(), angleMeasurement);
-            var csc = new Csc(argument.Clone(), angleMeasurement);
+            var cot = new Cot(argument.Clone());
+            var csc = new Csc(argument.Clone());
             var mul1 = new Mul(cot, csc);
             var mul2 = new Mul(unary, mul1);
 

@@ -40,13 +40,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsec"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public Arcsec(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

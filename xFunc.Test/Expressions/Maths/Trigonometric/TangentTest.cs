@@ -13,25 +13,25 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Tan(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Tan(new Number(1));
 
-            Assert.AreEqual(Math.Tan(1), exp.Calculate());
+            Assert.AreEqual(Math.Tan(1), exp.Calculate(AngleMeasurement.Radian));
         }
 
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Tan(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Tan(new Number(1));
 
-            Assert.AreEqual(Math.Tan(1 * Math.PI / 180), exp.Calculate());
+            Assert.AreEqual(Math.Tan(1 * Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Tan(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Tan(new Number(1));
 
-            Assert.AreEqual(Math.Tan(1 * Math.PI / 200), exp.Calculate());
+            Assert.AreEqual(Math.Tan(1 * Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
         [TestMethod]
@@ -67,18 +67,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             num.Value = 5;
             Assert.AreEqual("tan(5 * x)", exp.ToString());
             Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void DerivativeTestWithAngle()
-        {
-            var exp = new Tan(new Variable("x"), AngleMeasurement.Radian);
-            var deriv = exp.Differentiate();
-
-            var div = deriv as Div;
-            var pow = div.Right as Pow;
-            var cos = pow.Left as Cos;
-            Assert.AreEqual(AngleMeasurement.Radian, cos.AngleMeasurement);
         }
 
         [TestMethod]

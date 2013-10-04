@@ -14,25 +14,25 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Sec(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Sec(Math.PI / 180), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Sec(Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
 
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Sec(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate(AngleMeasurement.Radian));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Sec(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Sec(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Sec(Math.PI / 200), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Sec(Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
         [TestMethod]
@@ -60,21 +60,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             num.Value = 4;
             Assert.AreEqual("sec(4 * x)", exp.ToString());
             Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void DerivativeTestWithAngle()
-        {
-            var exp = new Sec(new Variable("x"), AngleMeasurement.Radian);
-            var deriv = exp.Differentiate();
-
-            var mul1 = deriv as Mul;
-            var mul2 = mul1.Right as Mul;
-            var tan = mul2.Left as Tan;
-            var sec = mul2.Right as Sec;
-
-            Assert.AreEqual(AngleMeasurement.Radian, tan.AngleMeasurement);
-            Assert.AreEqual(AngleMeasurement.Radian, sec.AngleMeasurement);
         }
 
     }

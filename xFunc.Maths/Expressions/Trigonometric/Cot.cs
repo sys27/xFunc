@@ -36,13 +36,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public Cot(IMathExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Cot"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public Cot(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement) : base(firstMathExpression, angleMeasurement) { }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -117,7 +110,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
-            var sine = new Sin(argument.Clone(), angleMeasurement);
+            var sine = new Sin(argument.Clone());
             var involution = new Pow(sine, new Number(2));
             var division = new Div(argument.Clone().Differentiate(variable), involution);
             var unMinus = new UnaryMinus(division);

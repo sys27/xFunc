@@ -14,25 +14,25 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Csc(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Csc(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Csc(Math.PI / 180), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Csc(Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
 
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Csc(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Csc(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Csc(1), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Csc(1), exp.Calculate(AngleMeasurement.Radian));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Csc(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Csc(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Csc(Math.PI / 200), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Csc(Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
         [TestMethod]
@@ -42,21 +42,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             IMathExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void DerivativeTestWithAngle()
-        {
-            var exp = new Csc(new Variable("x"), AngleMeasurement.Radian);
-            var deriv = exp.Differentiate();
-
-            var mul1 = deriv as Mul;
-            var mul2 = mul1.Right as Mul;
-            var cot = mul2.Left as Cot;
-            var csc = mul2.Right as Csc;
-
-            Assert.AreEqual(AngleMeasurement.Radian, cot.AngleMeasurement);
-            Assert.AreEqual(AngleMeasurement.Radian, csc.AngleMeasurement);
         }
 
     }

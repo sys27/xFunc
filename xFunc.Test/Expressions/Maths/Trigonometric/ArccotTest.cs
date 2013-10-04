@@ -14,25 +14,25 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Arccot(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian };
+            IMathExpression exp = new Arccot(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Acot(1), exp.Calculate());
+            Assert.AreEqual(MathExtentions.Acot(1), exp.Calculate(AngleMeasurement.Radian));
         }
 
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Arccot(new Number(1)) { AngleMeasurement = AngleMeasurement.Degree };
+            IMathExpression exp = new Arccot(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Acot(1) / Math.PI * 180, exp.Calculate());
+            Assert.AreEqual(MathExtentions.Acot(1) / Math.PI * 180, exp.Calculate(AngleMeasurement.Degree));
         }
 
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Arccot(new Number(1)) { AngleMeasurement = AngleMeasurement.Gradian };
+            IMathExpression exp = new Arccot(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Acot(1) / Math.PI * 200, exp.Calculate());
+            Assert.AreEqual(MathExtentions.Acot(1) / Math.PI * 200, exp.Calculate(AngleMeasurement.Gradian));
         }
 
         [TestMethod]

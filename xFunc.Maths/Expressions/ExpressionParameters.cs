@@ -25,6 +25,16 @@ namespace xFunc.Maths.Expressions
         {
         }
 
+        public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathParameterCollection parameters)
+            : this(angleMeasuremnt, parameters, null)
+        {
+        }
+
+        public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathFunctionCollection functions)
+            : this(angleMeasuremnt, null, functions)
+        {
+        }
+
         public ExpressionParameters(MathParameterCollection parameters, MathFunctionCollection functions)
             : this(AngleMeasurement.Degree, parameters, functions)
         {

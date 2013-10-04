@@ -24,11 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     {
 
         /// <summary>
-        /// The angle measurement.
-        /// </summary>
-        protected AngleMeasurement angleMeasurement;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
         /// </summary>
         protected TrigonometryMathExpression() { }
@@ -38,17 +33,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
         protected TrigonometryMathExpression(IMathExpression firstMathExpression)
-            : this(firstMathExpression, AngleMeasurement.Degree) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
-        /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        protected TrigonometryMathExpression(IMathExpression firstMathExpression, AngleMeasurement angleMeasurement)
             : base(firstMathExpression)
         {
-            this.angleMeasurement = angleMeasurement;
         }
 
         /// <summary>
@@ -87,14 +73,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </returns>
         public override double Calculate()
         {
-            if (angleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(null);
-            if (angleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(null);
-            if (angleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(null);
-
-            return double.NaN;
+            return CalculateDergee(null);
         }
 
         /// <summary>
@@ -107,30 +86,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
-            if (angleMeasurement == AngleMeasurement.Degree)
+            if (parameters.Angleeasurement == AngleMeasurement.Degree)
                 return CalculateDergee(parameters);
-            if (angleMeasurement == AngleMeasurement.Radian)
+            if (parameters.Angleeasurement == AngleMeasurement.Radian)
                 return CalculateRadian(parameters);
-            if (angleMeasurement == AngleMeasurement.Gradian)
+            if (parameters.Angleeasurement == AngleMeasurement.Gradian)
                 return CalculateGradian(parameters);
 
             return double.NaN;
-        }
-
-        /// <summary>
-        /// Gets or sets the angle measurement.
-        /// </summary>
-        /// <value>The angle measurement.</value>
-        public AngleMeasurement AngleMeasurement
-        {
-            get
-            {
-                return angleMeasurement;
-            }
-            set
-            {
-                angleMeasurement = value;
-            }
         }
 
     }

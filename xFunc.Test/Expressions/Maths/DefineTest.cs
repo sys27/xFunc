@@ -26,10 +26,11 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DefineWithFuncTest()
         {
-            IMathExpression exp = new Define(new Variable("x"), new Sin(new Number(1)) { AngleMeasurement = AngleMeasurement.Radian });
+            IMathExpression exp = new Define(new Variable("x"), new Sin(new Number(1)));
             MathParameterCollection parameters = new MathParameterCollection();
+            ExpressionParameters expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
 
-            double answer = exp.Calculate(parameters);
+            double answer = exp.Calculate(expParams);
 
             Assert.AreEqual(Math.Sin(1), parameters["x"]);
             Assert.AreEqual(double.NaN, answer);

@@ -29,7 +29,7 @@ namespace xFunc.Maths
             lexer = new MathLexer();
             simplifier = new MathSimplifier();
             differentiator = new MathDifferentiator(simplifier);
-            parser = new MathParser(lexer, simplifier);
+            parser = new MathParser(lexer, simplifier, new MathExpressionFactory());
 
             parameters = new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection());
         }
@@ -41,7 +41,7 @@ namespace xFunc.Maths
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(lexer, simplifier, differentiator, new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection()))
+            : this(lexer, simplifier, differentiator, new MathExpressionFactory(), new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection()))
         {
         }
 
@@ -51,14 +51,14 @@ namespace xFunc.Maths
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
+        /// <param name="factory">The expression factory.</param>
         /// <param name="parameters">The collection of parameters.</param>
-        /// <param name="userFunctions">The collection of functions.</param>
-        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
+        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, IExpressionFactory factory, ExpressionParameters parameters)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
             this.differentiator = differentiator;
-            this.parser = new MathParser(lexer, simplifier);
+            this.parser = new MathParser(lexer, simplifier, factory);
 
             this.parameters = parameters;
         }
@@ -173,11 +173,11 @@ namespace xFunc.Maths
         {
             get
             {
-                return parameters.Angleeasurement;
+                return parameters.AngleMeasurement;
             }
             set
             {
-                parameters.Angleeasurement = value;
+                parameters.AngleMeasurement = value;
             }
         }
 

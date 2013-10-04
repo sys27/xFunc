@@ -86,11 +86,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
-            if (parameters.Angleeasurement == AngleMeasurement.Degree)
+            if (parameters.AngleMeasurement == AngleMeasurement.Degree)
                 return CalculateDergee(parameters);
-            if (parameters.Angleeasurement == AngleMeasurement.Radian)
+            if (parameters.AngleMeasurement == AngleMeasurement.Radian)
                 return CalculateRadian(parameters);
-            if (parameters.Angleeasurement == AngleMeasurement.Gradian)
+            if (parameters.AngleMeasurement == AngleMeasurement.Gradian)
                 return CalculateGradian(parameters);
 
             return double.NaN;

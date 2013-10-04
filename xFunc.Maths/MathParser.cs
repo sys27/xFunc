@@ -32,28 +32,30 @@ namespace xFunc.Maths
 
         private ILexer lexer;
         private ISimplifier simplifier;
+        private IExpressionFactory factory;
 
         private string lastFunc = string.Empty;
         private IMathExpression mathExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IDifferentiator"/>.
+        /// Initializes a new instance of the <see cref="MathParser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IExpressionFactory"/>.
         /// </summary>
         public MathParser()
+            : this(new MathLexer(), new MathSimplifier(), new MathExpressionFactory())
         {
-            this.lexer = new MathLexer();
-            this.simplifier = new MathSimplifier();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParser"/> class.
+        /// Initializes a new instance of the <see cref="MathParser" /> class.
         /// </summary>
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
-        public MathParser(ILexer lexer, ISimplifier simplifier)
+        /// <param name="factory">The factory.</param>
+        public MathParser(ILexer lexer, ISimplifier simplifier, IExpressionFactory factory)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
+            this.factory = factory;
         }
 
         /// <summary>
@@ -217,192 +219,9 @@ namespace xFunc.Maths
 
             foreach (var token in tokens)
             {
-                if (token is OperationToken)
-                {
-                    var t = token as OperationToken;
-                    switch (t.Operation)
-                    {
-                        case Operations.Addition:
-                            preOutput.Add(new Add());
-                            break;
-                        case Operations.Subtraction:
-                            preOutput.Add(new Sub());
-                            break;
-                        case Operations.Multiplication:
-                            preOutput.Add(new Mul());
-                            break;
-                        case Operations.Division:
-                            preOutput.Add(new Div());
-                            break;
-                        case Operations.Exponentiation:
-                            preOutput.Add(new Pow());
-                            break;
-                        case Operations.UnaryMinus:
-                            preOutput.Add(new UnaryMinus());
-                            break;
-                        case Operations.Factorial:
-                            preOutput.Add(new Fact());
-                            break;
-                        case Operations.Assign:
-                            preOutput.Add(new Define());
-                            break;
-                        case Operations.Not:
-                            preOutput.Add(new Not());
-                            break;
-                        case Operations.And:
-                            preOutput.Add(new And());
-                            break;
-                        case Operations.Or:
-                            preOutput.Add(new Or());
-                            break;
-                        case Operations.XOr:
-                            preOutput.Add(new XOr());
-                            break;
-                        default:
-                            throw new MathParserException(Resource.ErrorWhileParsingTree);
-                    }
-                }
-                else if (token is NumberToken)
-                {
-                    var t = token as NumberToken;
+                var exp = factory.Create(token);
 
-                    preOutput.Add(new Number(t.Number));
-                }
-                else if (token is VariableToken)
-                {
-                    var t = token as VariableToken;
-
-                    preOutput.Add(new Variable(t.Variable));
-                }
-                else if (token is UserFunctionToken)
-                {
-                    var t = token as UserFunctionToken;
-                    preOutput.Add(new UserFunction(t.FunctionName, t.CountOfParams));
-                }
-                else if (token is FunctionToken)
-                {
-                    var t = token as FunctionToken;
-
-                    switch (t.Function)
-                    {
-                        case Functions.Absolute:
-                            preOutput.Add(new Abs());
-                            break;
-                        case Functions.Sine:
-                            preOutput.Add(new Sin());
-                            break;
-                        case Functions.Cosine:
-                            preOutput.Add(new Cos());
-                            break;
-                        case Functions.Tangent:
-                            preOutput.Add(new Tan());
-                            break;
-                        case Functions.Cotangent:
-                            preOutput.Add(new Cot());
-                            break;
-                        case Functions.Secant:
-                            preOutput.Add(new Sec());
-                            break;
-                        case Functions.Cosecant:
-                            preOutput.Add(new Csc());
-                            break;
-                        case Functions.Arcsine:
-                            preOutput.Add(new Arcsin());
-                            break;
-                        case Functions.Arccosine:
-                            preOutput.Add(new Arccos());
-                            break;
-                        case Functions.Arctangent:
-                            preOutput.Add(new Arctan());
-                            break;
-                        case Functions.Arccotangent:
-                            preOutput.Add(new Arccot());
-                            break;
-                        case Functions.Arcsecant:
-                            preOutput.Add(new Arcsec());
-                            break;
-                        case Functions.Arccosecant:
-                            preOutput.Add(new Arccsc());
-                            break;
-                        case Functions.Sqrt:
-                            preOutput.Add(new Sqrt());
-                            break;
-                        case Functions.Root:
-                            preOutput.Add(new Root());
-                            break;
-                        case Functions.Ln:
-                            preOutput.Add(new Ln());
-                            break;
-                        case Functions.Lg:
-                            preOutput.Add(new Lg());
-                            break;
-                        case Functions.Log:
-                            preOutput.Add(new Log());
-                            break;
-                        case Functions.Sineh:
-                            preOutput.Add(new Sinh());
-                            break;
-                        case Functions.Cosineh:
-                            preOutput.Add(new Cosh());
-                            break;
-                        case Functions.Tangenth:
-                            preOutput.Add(new Tanh());
-                            break;
-                        case Functions.Cotangenth:
-                            preOutput.Add(new Coth());
-                            break;
-                        case Functions.Secanth:
-                            preOutput.Add(new Sech());
-                            break;
-                        case Functions.Cosecanth:
-                            preOutput.Add(new Csch());
-                            break;
-                        case Functions.Arsineh:
-                            preOutput.Add(new Arsinh());
-                            break;
-                        case Functions.Arcosineh:
-                            preOutput.Add(new Arcosh());
-                            break;
-                        case Functions.Artangenth:
-                            preOutput.Add(new Artanh());
-                            break;
-                        case Functions.Arcotangenth:
-                            preOutput.Add(new Arcoth());
-                            break;
-                        case Functions.Arsecanth:
-                            preOutput.Add(new Arsech());
-                            break;
-                        case Functions.Arcosecanth:
-                            preOutput.Add(new Arcsch());
-                            break;
-                        case Functions.Exp:
-                            preOutput.Add(new Exp());
-                            break;
-                        case Functions.GCD:
-                            preOutput.Add(new GCD());
-                            break;
-                        case Functions.LCM:
-                            preOutput.Add(new LCM());
-                            break;
-                        case Functions.Factorial:
-                            preOutput.Add(new Fact());
-                            break;
-                        case Functions.Derivative:
-                            preOutput.Add(new Derivative());
-                            break;
-                        case Functions.Simplify:
-                            preOutput.Add(new Simplify());
-                            break;
-                        case Functions.Define:
-                            preOutput.Add(new Define());
-                            break;
-                        case Functions.Undefine:
-                            preOutput.Add(new Undefine());
-                            break;
-                        default:
-                            throw new MathParserException(Resource.ErrorWhileParsingTree);
-                    }
-                }                
+                preOutput.Add(exp);
             }
 
             return preOutput;

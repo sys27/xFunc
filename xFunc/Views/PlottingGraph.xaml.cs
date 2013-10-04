@@ -30,7 +30,7 @@ namespace xFunc.Views
     {
 
         private IEnumerable<GraphItemViewModel> exps;
-        private MathParameterCollection parameters;
+        private ExpressionParameters parameters;
 
         private double currentWidth;
         private double currentHeight;
@@ -41,7 +41,7 @@ namespace xFunc.Views
 
         public PlottingGraph()
         {
-            this.parameters = new MathParameterCollection() { { "x", 0 } };
+            this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new MathParameterCollection() { { "x", 0 } });
 
             InitializeComponent();
 
@@ -311,7 +311,7 @@ namespace xFunc.Views
             double tempY;
             for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
             {
-                parameters["x"] = x;
+                parameters.Parameters["x"] = x;
                 y = exp.Calculate(parameters);
 
                 tempY = centerY - (y * cm);

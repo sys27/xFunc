@@ -221,6 +221,16 @@ namespace xFunc.Maths
             {
                 var exp = factory.Create(token);
 
+                if (token is FunctionToken)
+                {
+                    var t = token as FunctionToken;
+
+                    if (t.CountOfParams < exp.MinCountOfParams)
+                        throw new MathParserException(Resource.LessParams);
+                    if (exp.MaxCountOfParams != -1 && t.CountOfParams > exp.MaxCountOfParams)
+                        throw new MathParserException(Resource.MoreParams);
+                }
+
                 preOutput.Add(exp);
             }
 

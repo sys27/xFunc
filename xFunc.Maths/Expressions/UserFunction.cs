@@ -25,12 +25,10 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents user-defined functions.
     /// </summary>
-    public class UserFunction : IMathExpression
+    public class UserFunction : DifferentParametersExpression
     {
 
         private string function;
-        private IMathExpression[] arguments;
-        private int countOfParams;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.
@@ -38,7 +36,15 @@ namespace xFunc.Maths.Expressions
         internal UserFunction()
             : this(null, null, -1)
         {
+        }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserFunction"/> class.
+        /// </summary>
+        /// <param name="function">The name of function.</param>
+        internal UserFunction(string function)
+            : this(function, null, -1)
+        {
         }
 
         /// <summary>
@@ -55,6 +61,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">Arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         public UserFunction(string function, IMathExpression[] args, int countOfParams)
+            : base(args, countOfParams)
         {
             this.function = function;
             this.arguments = args;
@@ -122,7 +129,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public double Calculate()
+        public override double Calculate()
         {
             throw new NotSupportedException();
         }
@@ -135,7 +142,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public double Calculate(ExpressionParameters parameters)
+        public override double Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
@@ -157,7 +164,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns a derivative of the expression.
         /// </returns>
-        public IMathExpression Differentiate()
+        public override IMathExpression Differentiate()
         {
             return Differentiate(new Variable("x"));
         }
@@ -170,7 +177,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public IMathExpression Differentiate(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
             throw new NotImplementedException();
         }
@@ -179,23 +186,9 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public IMathExpression Clone()
+        public override IMathExpression Clone()
         {
             return new UserFunction(function, arguments, countOfParams);
-        }
-
-        /// <summary>
-        /// This property always returns <c>null</c>.
-        /// </summary>
-        public IMathExpression Parent
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-            }
         }
 
         /// <summary>
@@ -211,28 +204,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>The arguments.</value>
-        public IMathExpression[] Arguments
-        {
-            get
-            {
-                return arguments;
-            }
-            set
-            {
-                arguments = value;
-            }
-        }
-
-        /// <summary>
         /// Gets the minimum count of parameters. -1 - Infinity.
         /// </summary>
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinCountOfParams
+        public override int MinCountOfParams
         {
             get
             {
@@ -246,7 +223,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxCountOfParams
+        public override int MaxCountOfParams
         {
             get
             {

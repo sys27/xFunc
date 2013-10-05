@@ -26,6 +26,7 @@ namespace xFunc.Maths.Expressions
         private IMathExpression parent;
         private IMathExpression expression;
         private Variable variable;
+        private int countOfParams;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative"/> class.
@@ -237,6 +238,24 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return 2;
+            }
+        }
+
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
+        public int CountOfParams
+        {
+            get
+            {
+                return countOfParams;
+            }
+            set
+            {
+                countOfParams = value;
             }
         }
 

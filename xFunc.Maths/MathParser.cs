@@ -133,18 +133,20 @@ namespace xFunc.Maths
 
                         stack.Push(unaryMathExp);
                     }
-                    else if (expression is Derivative)
+                    else if (expression is DifferentParametersExpression)
                     {
-                        if (stack.Count < 2)
-                            throw new MathParserException(Resource.InvalidNumberOfVariables);
-                        if (!(stack.Peek() is Variable))
+                        var func = expression as DifferentParametersExpression;
+
+                        IMathExpression[] arg = new IMathExpression[func.CountOfParams];
+                        for (int i = func.CountOfParams - 1; i >= 0; i--)
+                            arg[i] = stack.Pop();
+
+                        if (func is Derivative && func.CountOfParams == 2 && !(arg[1] is Variable))
                             throw new MathParserException(Resource.InvalidExpression);
 
-                        var binExp = expression as Derivative;
-                        binExp.Variable = (Variable)stack.Pop();
-                        binExp.Expression = stack.Pop();
+                        func.Arguments = arg;
 
-                        stack.Push(binExp);
+                        stack.Push(func);
                     }
                     else if (expression is Simplify)
                     {
@@ -183,19 +185,6 @@ namespace xFunc.Maths
                         undef.Key = stack.Pop();
 
                         stack.Push(undef);
-                    }
-                    else if (expression is UserFunction)
-                    {
-                        var func = expression as UserFunction;
-
-                        IMathExpression[] arg = new IMathExpression[func.CountOfParams];
-                        for (int i = func.CountOfParams, j = 0; i > 0; i--, j++)
-                        {
-                            arg[j] = stack.Pop();
-                        }
-                        func.Arguments = arg;
-
-                        stack.Push(func);
                     }
                     else
                     {

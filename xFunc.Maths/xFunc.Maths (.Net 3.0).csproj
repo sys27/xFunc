@@ -47,6 +47,10 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Expressions\DifferentParametersExpression.cs" />
+    <Compile Include="Expressions\ExpressionParameters.cs" />
+    <Compile Include="IExpressionFactory.cs" />
+    <Compile Include="MathExpressionFactory.cs" />
     <Compile Include="Expressions\Fact.cs" />
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\Hyperbolic\HyperbolicMathExpression.cs" />

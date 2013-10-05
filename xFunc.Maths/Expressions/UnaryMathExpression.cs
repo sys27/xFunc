@@ -223,6 +223,20 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
+        public int CountOfParams
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
     }
 
 }

@@ -159,7 +159,7 @@ namespace xFunc.Maths
 
         private IMathExpression CreateUserFunction(UserFunctionToken token)
         {
-            return new UserFunction(token.FunctionName, token.CountOfParams);
+            return new UserFunction(token.FunctionName);
         }
 
     }

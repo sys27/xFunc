@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -20,18 +21,30 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Deriv function.
     /// </summary>
-    public class Derivative : IMathExpression
+    public class Derivative : DifferentParametersExpression
     {
-
-        private IMathExpression parent;
-        private IMathExpression expression;
-        private Variable variable;
-        private int countOfParams;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative"/> class.
         /// </summary>
-        internal Derivative() { }
+        internal Derivative()
+            : base(null, -1) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Derivative"/> class.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
+        public Derivative(IMathExpression[] args, int countOfParams)
+            : base(args, countOfParams)
+        {
+            if (args == null)
+                throw new ArgumentNullException("args");
+            if (args.Length != countOfParams)
+                throw new ArgumentException();
+            if (countOfParams == 2 && !(args[1] is Variable))
+                throw new ArgumentException(Resource.InvalidExpression);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative"/> class.
@@ -39,9 +52,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         public Derivative(IMathExpression expression, Variable variable)
+            : base(new[] { expression, variable }, 2)
         {
-            this.expression = expression;
-            this.variable = variable;
         }
 
         /// <summary>
@@ -58,7 +70,8 @@ namespace xFunc.Maths.Expressions
             if (exp == null)
                 return false;
 
-            return expression.Equals(exp.Expression) && variable.Equals(exp.Variable);
+            return Expression.Equals(exp.Expression) &&
+                   (countOfParams == 2 && Variable.Equals(exp.Variable));
         }
 
         /// <summary>
@@ -71,8 +84,9 @@ namespace xFunc.Maths.Expressions
         {
             int hash = 587;
 
-            hash = (hash * 1249) + expression.GetHashCode();
-            hash = (hash * 1249) + variable.GetHashCode();
+            hash = (hash * 1249) + Expression.GetHashCode();
+            if (countOfParams == 2)
+                hash = (hash * 1249) + Variable.GetHashCode();
 
             return hash;
         }
@@ -83,7 +97,10 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return string.Format("deriv({0}, {1})", expression, variable);
+            if (countOfParams == 1)
+                return string.Format("deriv({0})", Expression);
+
+            return string.Format("deriv({0}, {1})", Expression, Variable);
         }
 
         /// <summary>
@@ -92,7 +109,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public double Calculate()
+        public override double Calculate()
         {
             return Differentiate().Calculate();
         }
@@ -105,7 +122,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public double Calculate(ExpressionParameters parameters)
+        public override double Calculate(ExpressionParameters parameters)
         {
             return Differentiate().Calculate(parameters);
         }
@@ -116,12 +133,12 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns a derivative of the expression.
         /// </returns>
-        public IMathExpression Differentiate()
+        public override IMathExpression Differentiate()
         {
-            if (expression is Derivative)
-                return expression.Differentiate(variable).Differentiate(variable);
+            if (countOfParams == 1)
+                return _Differentiate(new Variable("x"));
 
-            return expression.Differentiate(variable);
+            return _Differentiate(Variable);
         }
 
         /// <summary>
@@ -135,21 +152,33 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// This method ignores the local <paramref name="variable"/>.
         /// </remarks>
-        public IMathExpression Differentiate(Variable variable)
+        public override IMathExpression Differentiate(Variable variable)
         {
-            if (expression is Derivative)
-                return expression.Differentiate(this.variable).Differentiate(this.variable);
+            if (countOfParams == 1)
+                return _Differentiate(new Variable("x"));
 
-            return expression.Differentiate(this.variable);
+            return _Differentiate(this.Variable);
+        }
+
+        private IMathExpression _Differentiate(Variable variable)
+        {
+            if (Expression is Derivative)
+                return Expression.Differentiate(variable).Differentiate(variable);
+
+            return Expression.Differentiate(variable);
         }
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public IMathExpression Clone()
+        public override IMathExpression Clone()
         {
-            return new Derivative(expression.Clone(), (Variable)variable.Clone());
+            var args = new IMathExpression[arguments.Length];
+            for (int i = 0; i < arguments.Length; i++)
+                args[i] = arguments[i].Clone();
+
+            return new Derivative(args, countOfParams);
         }
 
         /// <summary>
@@ -162,16 +191,15 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return expression;
+                return arguments[0];
             }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                expression = value;
-                if (expression != null)
-                    expression.Parent = this;
+                arguments[0] = value;
+                arguments[0].Parent = this;
             }
         }
 
@@ -185,31 +213,15 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return variable;
+                return (Variable)arguments[1];
             }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                variable = value;
-                if (variable != null)
-                    variable.Parent = this;
-            }
-        }
-
-        /// <summary>
-        /// Get or Set the parent expression.
-        /// </summary>
-        public IMathExpression Parent
-        {
-            get
-            {
-                return parent;
-            }
-            set
-            {
-                parent = value;
+                arguments[1] = value;
+                arguments[1].Parent = this;
             }
         }
 
@@ -219,7 +231,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinCountOfParams
+        public override int MinCountOfParams
         {
             get
             {
@@ -233,29 +245,11 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxCountOfParams
+        public override int MaxCountOfParams
         {
             get
             {
                 return 2;
-            }
-        }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int CountOfParams
-        {
-            get
-            {
-                return countOfParams;
-            }
-            set
-            {
-                countOfParams = value;
             }
         }
 

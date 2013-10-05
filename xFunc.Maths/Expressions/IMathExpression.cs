@@ -75,6 +75,14 @@ namespace xFunc.Maths.Expressions
         /// </value>
         int MaxCountOfParams { get; }
 
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
+        int CountOfParams { get; }
+
     }
 
 }

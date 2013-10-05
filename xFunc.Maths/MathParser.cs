@@ -188,8 +188,8 @@ namespace xFunc.Maths
                     {
                         var func = expression as UserFunction;
 
-                        IMathExpression[] arg = new IMathExpression[func.MaxCountOfParams];
-                        for (int i = func.MaxCountOfParams, j = 0; i > 0; i--, j++)
+                        IMathExpression[] arg = new IMathExpression[func.CountOfParams];
+                        for (int i = func.CountOfParams, j = 0; i > 0; i--, j++)
                         {
                             arg[j] = stack.Pop();
                         }
@@ -229,6 +229,10 @@ namespace xFunc.Maths
                         throw new MathParserException(Resource.LessParams);
                     if (exp.MaxCountOfParams != -1 && t.CountOfParams > exp.MaxCountOfParams)
                         throw new MathParserException(Resource.MoreParams);
+
+                    var diff = exp as DifferentParametersExpression;
+                    if (diff != null)
+                        diff.CountOfParams = t.CountOfParams;
                 }
 
                 preOutput.Add(exp);

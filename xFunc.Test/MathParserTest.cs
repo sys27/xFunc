@@ -115,18 +115,22 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
         public void ParseDerivWithOneParam()
         {
             lexer.Tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Derivative, 1),
                 new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Sine, 1),
+                new SymbolToken(Symbols.OpenBracket),
                 new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("deriv(x)");
+            var exp = parser.Parse("deriv(sin(x))");
+            var diff = exp.Differentiate();
+            Assert.AreEqual("cos(x) * 1", diff.ToString());
         }
 
         [TestMethod]

@@ -184,6 +184,20 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
+        public int CountOfParams
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the key.
         /// </summary>
         /// <value>The key.</value>

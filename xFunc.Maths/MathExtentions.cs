@@ -14,7 +14,9 @@
 // limitations under the License.
 using System;
 using System.Globalization;
+#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
+#endif
 
 namespace xFunc.Maths
 {

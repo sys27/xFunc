@@ -16,9 +16,29 @@ namespace xFunc.Maths
 {
 
     internal delegate V Func<in T, out V>(T arg);
+    internal delegate V Func<in T1, in T2, out V>(T1 arg1, T2 args2);
 
     internal static class EnumerableExtention
     {
+
+        public static T Aggregate<T>(this IEnumerable<T> value, Func<T, T, T> func)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+            if (func == null)
+                throw new ArgumentNullException("func");
+
+            using (var enumerator = value.GetEnumerator())
+            {
+                if (!enumerator.MoveNext())
+                    throw new InvalidOperationException("No elements in source list");
+
+                T folded = enumerator.Current;
+                while (enumerator.MoveNext())
+                    folded = func(folded, enumerator.Current);
+                return folded;
+            }
+        }
 
         public static bool Any<T>(this IEnumerable<T> value, Func<T, bool> predicate)
         {
@@ -70,7 +90,7 @@ namespace xFunc.Maths
 
             throw new InvalidOperationException(Resource.InvalidInFirst);
         }
-        
+
         public static T First<T>(this IEnumerable<T> value, Func<T, bool> predicate)
         {
             if (value == null)
@@ -120,6 +140,17 @@ namespace xFunc.Maths
             return null;
         }
 
+        public static IEnumerable<V> Select<T, V>(this IEnumerable<T> value, Func<T, V> func)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+            if (func == null)
+                throw new ArgumentNullException("func");
+
+            foreach (var item in value)
+                yield return func(item);
+        }
+
         public static IEnumerable<T> Where<T>(this IEnumerable<T> value, Func<T, bool> predicate)
         {
             if (value == null)
@@ -130,6 +161,14 @@ namespace xFunc.Maths
             foreach (var item in value)
                 if (predicate(item))
                     yield return item;
+        }
+
+        public static T[] ToArray<T>(this IEnumerable<T> value)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+
+            return new List<T>(value).ToArray();
         }
 
     }

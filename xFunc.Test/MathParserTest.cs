@@ -314,6 +314,25 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void GCDOfThreeTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.GCD, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(8),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("gcd(12, 16, 8)");
+            Assert.AreEqual("gcd(12, 16, 8)", exp.ToString());
+        }
+
+        [TestMethod]
         public void LCMTest()
         {
             lexer.Tokens = new List<IToken>()

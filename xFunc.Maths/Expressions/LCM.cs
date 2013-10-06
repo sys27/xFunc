@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Linq;
 
 namespace xFunc.Maths.Expressions
 {
@@ -20,13 +21,32 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents a least common multiple.
     /// </summary>
-    public class LCM : BinaryMathExpression
+    public class LCM : DifferentParametersExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.
         /// </summary>
-        internal LCM() { }
+        internal LCM()
+            : base(null, -1)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LCM"/> class.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
+        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        public LCM(IMathExpression[] args, int countOfParams)
+            : base(args, countOfParams)
+        {
+            if (args == null)
+                throw new ArgumentNullException("args");
+            if (args.Length < 2 && args.Length != countOfParams)
+                throw new ArgumentException();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.
@@ -34,9 +54,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="firstMathExpression">The first operand.</param>
         /// <param name="secondMathExpression">The second operand.</param>
         public LCM(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
-            : base(firstMathExpression, secondMathExpression)
+            : base(new[] { firstMathExpression, secondMathExpression }, 2)
         {
-
         }
 
         /// <summary>
@@ -56,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return ToString("lcm({0}, {1})");
+            return base.ToString("lcm");
         }
 
         /// <summary>
@@ -67,7 +86,9 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override double Calculate()
         {
-            return MathExtentions.LCM(left.Calculate(), right.Calculate());
+            var numbers = arguments.Select(item => item.Calculate()).ToArray();
+
+            return MathExtentions.LCM(numbers);
         }
 
         /// <summary>
@@ -80,10 +101,9 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
-            var a = left.Calculate(parameters);
-            var b = right.Calculate(parameters);
+            var numbers = arguments.Select(item => item.Calculate(parameters)).ToArray();
 
-            return MathExtentions.LCM(a, b);
+            return MathExtentions.LCM(numbers);
         }
 
         /// <summary>
@@ -92,7 +112,19 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="LCM"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            return new LCM(left.Clone(), right.Clone());
+            return new LCM(CloneArguments(), arguments.Length);
+        }
+
+        /// <summary>
+        /// Always throws <see cref="NotSupportedException" />.
+        /// </summary>
+        /// <returns>
+        /// Throws an exception.
+        /// </returns>
+        /// <exception cref="NotSupportedException">Always.</exception>
+        public override IMathExpression Differentiate()
+        {
+            throw new NotSupportedException();
         }
 
         /// <summary>
@@ -107,6 +139,34 @@ namespace xFunc.Maths.Expressions
         public override IMathExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int MinCountOfParams
+        {
+            get
+            {
+                return 2;
+            }
+        }
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int MaxCountOfParams
+        {
+            get
+            {
+                return -1;
+            }
         }
 
     }

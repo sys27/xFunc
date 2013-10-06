@@ -82,13 +82,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = 587;
-
-            hash = (hash * 1249) + Expression.GetHashCode();
-            if (countOfParams == 2)
-                hash = (hash * 1249) + Variable.GetHashCode();
-
-            return hash;
+            return base.GetHashCode(587, 1249);
         }
 
         /// <summary>
@@ -174,11 +168,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
         public override IMathExpression Clone()
         {
-            var args = new IMathExpression[arguments.Length];
-            for (int i = 0; i < arguments.Length; i++)
-                args[i] = arguments[i].Clone();
-
-            return new Derivative(args, countOfParams);
+            return new Derivative(CloneArguments(), countOfParams);
         }
 
         /// <summary>

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace xFunc.Maths
 {
@@ -190,6 +191,23 @@ namespace xFunc.Maths
         }
 
         /// <summary>
+        /// Computes the polynomial greatest common divisor.
+        /// </summary>
+        /// <param name="numbers">The numbers.</param>
+        /// <returns>The greatest common divisor.</returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="numbers"/> is null.</exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        public static double GCD(params double[] numbers)
+        {
+            if (numbers == null)
+                throw new ArgumentNullException("numbers");
+            if (numbers.Length < 2)
+                throw new ArgumentException();
+
+            return numbers.Aggregate(GCD);
+        }
+
+        /// <summary>
         /// Computes the least common multiple.
         /// </summary>
         /// <param name="a"></param>
@@ -200,6 +218,23 @@ namespace xFunc.Maths
             var numerator = Math.Abs(a * b);
 
             return numerator / GCD(a, b);
+        }
+
+        /// <summary>
+        /// Computes the polynomial least common multiple.
+        /// </summary>
+        /// <param name="numbers">The numbers.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="numbers"/> is null.</exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        public static double LCM(params double[] numbers)
+        {
+            if (numbers == null)
+                throw new ArgumentNullException("numbers");
+            if (numbers.Length < 2)
+                throw new ArgumentException();
+
+            return numbers.Aggregate(LCM);
         }
 
         /// <summary>

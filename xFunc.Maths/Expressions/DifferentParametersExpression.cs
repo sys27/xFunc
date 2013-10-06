@@ -1,4 +1,19 @@
-﻿using System;
+﻿// Copyright 2012-2013 Dmitry Kischenko
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); 
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software 
+// distributed under the License is distributed on an "AS IS" BASIS, 
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+// express or implied. 
+// See the License for the specific language governing permissions and 
+// limitations under the License.
+using System;
+using System.Text;
 
 namespace xFunc.Maths.Expressions
 {
@@ -40,6 +55,43 @@ namespace xFunc.Maths.Expressions
         {
             this.arguments = arguments;
             this.countOfParams = countOfParams;
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <param name="first">The first.</param>
+        /// <param name="second">The second.</param>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        protected int GetHashCode(int first, int second)
+        {
+            int hash = first;
+
+            foreach (var item in arguments)
+                hash = hash * second + item.GetHashCode();
+
+            return hash;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        protected string ToString(string function)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(function).Append('(');
+            foreach (var item in arguments)
+                sb.Append(item.ToString()).Append(", ");
+            sb.Remove(sb.Length - 2, 2).Append(')');
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -85,6 +137,19 @@ namespace xFunc.Maths.Expressions
         /// Returns the new instance of <see cref="IMathExpression" /> that is a clone of this instance.
         /// </returns>
         public abstract IMathExpression Clone();
+
+        /// <summary>
+        /// Closes the arguments.
+        /// </summary>
+        /// <returns>The new array of <see cref="IMathExpression"/>.</returns>
+        protected IMathExpression[] CloneArguments()
+        {
+            var args = new IMathExpression[arguments.Length];
+            for (int i = 0; i < arguments.Length; i++)
+                args[i] = arguments[i].Clone();
+
+            return args;
+        }
 
         /// <summary>
         /// Get or Set the parent expression.

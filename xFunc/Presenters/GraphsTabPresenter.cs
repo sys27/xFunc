@@ -24,7 +24,7 @@ namespace xFunc.Presenters
             this.view = view;
 
             parser = new MathParser();
-            countOfGraphs = Settings.Default.MaxCountOfExpressions;
+            countOfGraphs = Settings.Default.MaxCountOfExpressions >= 20 ? 20 : Settings.Default.MaxCountOfExpressions;
             listOfGraphs = new List<GraphItemViewModel>(countOfGraphs);
         }
 

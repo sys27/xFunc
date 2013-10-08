@@ -27,9 +27,9 @@ namespace xFunc.Presenters
         private void UpdateList()
         {
             var vm = new List<MathWorkspaceItemViewModel>();
-            for (int i = 0; i < workspace.Expressions.Count(); i++)
+            for (int i = 0; i < workspace.Count; i++)
             {
-                vm.Add(new MathWorkspaceItemViewModel(i + 1, workspace.Expressions.ElementAt(i)));
+                vm.Add(new MathWorkspaceItemViewModel(i + 1, workspace[i]));
             }
 
             view.MathExpressions = vm;

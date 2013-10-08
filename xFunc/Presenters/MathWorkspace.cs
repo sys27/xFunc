@@ -29,18 +29,25 @@ namespace xFunc.Presenters
 
         private int countOfExps;
         private List<MathWorkspaceItem> expressions;
-        
+
         public MathWorkspace()
             : this(20)
         {
-
         }
 
         public MathWorkspace(int countOfExps)
         {
             this.countOfExps = countOfExps;
-            expressions = new List<MathWorkspaceItem>(countOfExps);
+            expressions = new List<MathWorkspaceItem>(countOfExps >= 20 ? 20 : countOfExps);
             mathProcessor = new MathProcessor();
+        }
+
+        public MathWorkspaceItem this[int index]
+        {
+            get
+            {
+                return expressions[index];
+            }
         }
 
         public void Add(string strExp)
@@ -77,6 +84,14 @@ namespace xFunc.Presenters
             expressions.RemoveAt(index);
         }
 
+        public int Count
+        {
+            get
+            {
+                return expressions.Count;
+            }
+        }
+
         public MathProcessor MathProcessor
         {
             get
@@ -94,14 +109,6 @@ namespace xFunc.Presenters
             set
             {
                 countOfExps = value;
-            }
-        }
-
-        public IEnumerable<MathWorkspaceItem> Expressions
-        {
-            get
-            {
-                return expressions.AsReadOnly();
             }
         }
 

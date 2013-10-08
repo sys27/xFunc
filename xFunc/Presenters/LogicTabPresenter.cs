@@ -26,10 +26,8 @@ namespace xFunc.Presenters
         private void UpdateList()
         {
             var vm = new List<LogicWorkspaceItemViewModel>();
-            for (int i = 0; i < workspace.Expressions.Count(); i++)
-            {
-                vm.Add(new LogicWorkspaceItemViewModel(i + 1, workspace.Expressions.ElementAt(i)));
-            }
+            for (int i = 0; i < workspace.Count; i++)
+                vm.Add(new LogicWorkspaceItemViewModel(i + 1, workspace[i]));
 
             view.LogicExpressions = vm;
         }

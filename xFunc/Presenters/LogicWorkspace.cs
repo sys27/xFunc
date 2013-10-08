@@ -34,16 +34,23 @@ namespace xFunc.Presenters
         public LogicWorkspace()
             : this(20)
         {
-
         }
 
         public LogicWorkspace(int countOfExps)
         {
             this.countOfExps = countOfExps;
 
-            expressions = new List<LogicWorkspaceItem>(countOfExps);
+            expressions = new List<LogicWorkspaceItem>(countOfExps >= 20 ? 20 : countOfExps);
             parser = new LogicParser();
             parameters = new LogicParameterCollection();
+        }
+
+        public LogicWorkspaceItem this[int index]
+        {
+            get
+            {
+                return expressions[index];
+            }
         }
 
         public void Add(string strExp)
@@ -96,6 +103,14 @@ namespace xFunc.Presenters
             expressions.RemoveAt(index);
         }
 
+        public int Count
+        {
+            get
+            {
+                return expressions.Count;
+            }
+        }
+
         public LogicParser Parser
         {
             get
@@ -111,15 +126,7 @@ namespace xFunc.Presenters
                 return countOfExps;
             }
         }
-
-        public IEnumerable<LogicWorkspaceItem> Expressions
-        {
-            get
-            {
-                return expressions.AsReadOnly();
-            }
-        }
-
+        
     }
 
 }

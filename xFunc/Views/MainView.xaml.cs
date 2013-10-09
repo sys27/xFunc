@@ -390,6 +390,8 @@ namespace xFunc.Views
                 return logicExpressionBox;
             if (tabControl.SelectedItem == graphsTab)
                 return graphExpressionBox;
+            if (tabControl.SelectedItem == truthTableTab)
+                return truthTableExpressionBox;
 
             return null;
         }

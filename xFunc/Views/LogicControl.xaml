@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="xFunc.Views.LogicControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:xFunc.ViewModels"
+             xmlns:views="clr-namespace:xFunc.Views"
+             xmlns:res="clr-namespace:xFunc.Resources"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="640" d:DesignHeight="360">
+    <UserControl.Resources>
+        <ContextMenu x:Key="expMenu">
+            <MenuItem Header="{x:Static res:Resource.CopyExpressionMenuItem}">
+                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyExpToClipCommand" />
+                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:MainView.CopyExpToInputCommand" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resource.CopyAnswerMenuItem}">
+                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyAnswerToClipCommand" />
+                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:MainView.CopyAnswerToInputCommand" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{x:Static res:Resource.DeleteMenuItem}" Command="views:MainView.DeleteExpCommand" />
+        </ContextMenu>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="128" />
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModels:LogicWorkspaceItemViewModel}">
+                    <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Margin="0,0,8,0" BorderBrush="Silver" BorderThickness="0,0,0,1" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding Path=Index}" FontSize="14" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <TextBlock Text="{x:Static res:Resource.ExpressionTextBox}" />
+                                <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
+                                <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
+                                <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
+                            </StackPanel>
+                            <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
+                                <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
+                            </Button>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
+        <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
+    </Grid>
+</UserControl>

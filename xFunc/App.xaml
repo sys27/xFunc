@@ -20,6 +20,7 @@ limitations under the License. -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />
                 <ResourceDictionary Source="Operations.xaml" />
+                <ResourceDictionary Source="StylesForControls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -9,10 +9,8 @@ using xFunc.Logics.Expressions;
 namespace xFunc.Presenters
 {
 
-    public class TruthTableTabPresenter
+    public class TruthTablePresenter
     {
-
-        private IMainView view;
 
         private LogicParser parser;
         private ILogicExpression expression;
@@ -20,10 +18,8 @@ namespace xFunc.Presenters
         private LogicParameterCollection parameters;
         private List<TruthTableRowViewModel> table;
 
-        public TruthTableTabPresenter(IMainView view)
+        public TruthTablePresenter()
         {
-            this.view = view;
-
             parser = new LogicParser();
         }
 

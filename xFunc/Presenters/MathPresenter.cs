@@ -10,14 +10,14 @@ using xFunc.Views;
 namespace xFunc.Presenters
 {
 
-    public class MathTabPresenter
+    public class MathPresenter
     {
 
         private IMainView view;
 
         private MathWorkspace workspace;
         
-        public MathTabPresenter(IMainView view)
+        public MathPresenter(IMainView view)
         {
             this.view = view;
 

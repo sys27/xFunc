@@ -10,16 +10,16 @@ using xFunc.Views;
 namespace xFunc.Presenters
 {
 
-    public class GraphsTabPresenter
+    public class GraphsPresenter
     {
 
-        private IMainView view;
+        private IGraphsView view;
 
         private MathParser parser;
         private int countOfGraphs;
         private List<GraphItemViewModel> listOfGraphs;
 
-        public GraphsTabPresenter(IMainView view)
+        public GraphsPresenter(IGraphsView view)
         {
             this.view = view;
 

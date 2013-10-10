@@ -25,12 +25,10 @@ using xFunc.ViewModels;
 namespace xFunc.Views
 {
 
-    public interface IMainView
+    public interface IMainView : IView
     {
 
         IEnumerable<MathWorkspaceItemViewModel> MathExpressions { set; }
-        IEnumerable<GraphItemViewModel> Graphs { set; }
-        IEnumerable<LogicWorkspaceItemViewModel> LogicExpressions { set; }
 
     }
 

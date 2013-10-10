@@ -23,38 +23,6 @@ limitations under the License. -->
                      Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
                      Loaded="this_Loaded">
     <ribbon:RibbonWindow.Resources>
-        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Silver" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="Black" />
-                                <Setter Property="Background" Value="#FFE0E0E0" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="BorderBrush" Value="White" />
-                                <Setter Property="BorderThickness" Value="2" />
-                                <Setter Property="Background" Value="#FFD5D5D5" />
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Background" Value="#FFE0E0E0" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <ContextMenu x:Key="expMenu">
             <MenuItem Header="{x:Static res:Resource.CopyExpressionMenuItem}">
                 <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyExpToClipCommand" />
@@ -188,11 +156,6 @@ limitations under the License. -->
         </ribbon:Ribbon>
 
         <TabControl x:Name="tabControl" Grid.Row="1" SelectionChanged="tabControl_SelectionChanged">
-            <TabControl.Resources>
-                <Style x:Key="listBoxItemStyle" TargetType="{x:Type ListBoxItem}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </TabControl.Resources>
             <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -232,101 +195,13 @@ limitations under the License. -->
                 </Grid>
             </TabItem>
             <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="128" />
-                    </Grid.RowDefinitions>
-
-                    <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type viewModels:LogicWorkspaceItemViewModel}">
-                                <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Border Grid.Column="0" Margin="0,0,8,0" BorderBrush="Silver" BorderThickness="0,0,0,1" VerticalAlignment="Top">
-                                            <TextBlock Text="{Binding Path=Index}" FontSize="14" />
-                                        </Border>
-                                        <StackPanel Grid.Column="1" Orientation="Vertical">
-                                            <TextBlock Text="{x:Static res:Resource.ExpressionTextBox}" />
-                                            <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
-                                            <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
-                                            <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
-                                        </StackPanel>
-                                        <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
-                                            <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
-                                        </Button>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
-                    <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
-                </Grid>
+                <views:LogicControl x:Name="logicControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
             <TabItem x:Name="graphsTab" Header="{x:Static res:Resource.GraphsTab}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="4*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <StackPanel Margin="6,4,8,4">
-                                <TextBlock Text="{x:Static res:Resource.ExpressionsTextBox}" FontSize="14" />
-                                <ListBox x:Name="graphsList" BorderBrush="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" Background="White" SelectionChanged="graphsList_SelectionChanged">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <CheckBox Grid.Column="0" IsChecked="{Binding Path=IsChecked}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="graphItem_Toggle" Unchecked="graphItem_Toggle" />
-                                                <TextBlock Grid.Column="1" Text="{Binding}" FontSize="14" Margin="4,0,0,0" />
-                                                <Button Grid.Column="2" Width="16" Height="16" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeGraph_Click">
-                                                    <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
-                                                </Button>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                                <TextBox x:Name="graphExpressionBox" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Margin="0,4,0,0" KeyUp="graphExpBox_KeyUp" />
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Border>
-                    <views:PlottingGraph x:Name="plot" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" />
-                </Grid>
+                <views:GraphsControl x:Name="graphsControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
             <TabItem x:Name="truthTableTab" Header="{x:Static res:Resource.TruthTableTab}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <TextBox x:Name="truthTableExpressionBox" Grid.Row="0" FontSize="16" Foreground="Black" KeyUp="truthTableExpressionBox_KeyUp" />
-                    <ListView x:Name="truthTableList" Grid.Row="1">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                <Setter Property="Foreground" Value="Black" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView x:Name="truthTableGridView" />
-                        </ListView.View>
-                    </ListView>
-                </Grid>
+                <views:TruthTableControl x:Name="truthTableControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
         </TabControl>
 

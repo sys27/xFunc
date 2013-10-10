@@ -9,14 +9,14 @@ using xFunc.Views;
 namespace xFunc.Presenters
 {
 
-    public class LogicTabPresenter
+    public class LogicPresenter
     {
 
-        private IMainView view;
+        private ILogicView view;
 
         private LogicWorkspace workspace;
 
-        public LogicTabPresenter(IMainView view)
+        public LogicPresenter(ILogicView view)
         {
             this.view = view;
 

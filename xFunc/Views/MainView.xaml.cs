@@ -37,10 +37,10 @@ namespace xFunc.Views
     public partial class MainView : Fluent.RibbonWindow, IMainView
     {
 
-        private MathTabPresenter mathPresenter;
-        private LogicTabPresenter logicPresenter;
-        private GraphsTabPresenter graphsPresenter;
-        private TruthTableTabPresenter truthTablePresenter;
+        private MathPresenter mathPresenter;
+        private LogicPresenter logicPresenter;
+        private GraphsPresenter graphsPresenter;
+        private TruthTablePresenter truthTablePresenter;
         private Updater updater;
 
         public static RoutedCommand DegreeCommand = new RoutedCommand();
@@ -68,10 +68,13 @@ namespace xFunc.Views
 
             mathExpressionBox.Focus();
 
-            mathPresenter = new MathTabPresenter(this);
-            logicPresenter = new LogicTabPresenter(this);
-            graphsPresenter = new GraphsTabPresenter(this);
-            truthTablePresenter = new TruthTableTabPresenter(this);
+            mathPresenter = new MathPresenter(this);
+            logicPresenter = new LogicPresenter(this.logicControl);
+            this.logicControl.Presenter = logicPresenter;
+            graphsPresenter = new GraphsPresenter(this.graphsControl);
+            this.graphsControl.Presenter = graphsPresenter;
+            truthTablePresenter = new TruthTablePresenter();
+            this.truthTableControl.Presenter = truthTablePresenter;
             updater = new Updater();
 
             LoadSettings();
@@ -294,6 +297,7 @@ namespace xFunc.Views
 
         private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
             {
                 var item = (MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem;
@@ -302,23 +306,24 @@ namespace xFunc.Views
             }
             else if (tabControl.SelectedItem == logicTab)
             {
-                var item = (LogicWorkspaceItemViewModel)logicExpsListBox.SelectedItem;
+                //var item = (LogicWorkspaceItemViewModel)logicExpsListBox.SelectedItem;
 
-                logicPresenter.Remove(item);
+                //logicPresenter.Remove(item);
             }
             else if (tabControl.SelectedItem == graphsTab)
             {
-                var item = (GraphItemViewModel)graphsList.SelectedItem;
+                //var item = (GraphItemViewModel)graphsList.SelectedItem;
 
-                graphsPresenter.Remove(item);
+                //graphsPresenter.Remove(item);
             }
         }
 
         private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == graphsTab && graphsList.SelectedItem != null);
+            // todo: !!!
+            //args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
+            //                  (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null) ||
+            //                  (tabControl.SelectedItem == graphsTab && graphsList.SelectedItem != null);
         }
 
         private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
@@ -346,52 +351,58 @@ namespace xFunc.Views
 
         private void Copy_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null);
+            // todo: !!!
+            //args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
+            //                  (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null);
         }
 
         private void CopyExpToClip_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
                 Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString());
-            else if (tabControl.SelectedItem == logicTab)
-                Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString());
+            //else if (tabControl.SelectedItem == logicTab)
+            //    Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString());
         }
 
         private void CopyAnswerToClip_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
                 Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString());
-            else if (tabControl.SelectedItem == logicTab)
-                Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString());
+            //else if (tabControl.SelectedItem == logicTab)
+            //    Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString());
         }
 
         private void CopyExpToInput_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
                 mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString();
-            else if (tabControl.SelectedItem == logicTab)
-                logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString();
+            //else if (tabControl.SelectedItem == logicTab)
+            //    logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString();
         }
 
         private void CopyAnswerToInput_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
                 mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString();
-            else if (tabControl.SelectedItem == logicTab)
-                logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString();
+            //else if (tabControl.SelectedItem == logicTab)
+            //    logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString();
         }
 
         private TextBox GetSelectedTextBox()
         {
+            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
                 return mathExpressionBox;
             if (tabControl.SelectedItem == logicTab)
-                return logicExpressionBox;
+                return null;
             if (tabControl.SelectedItem == graphsTab)
-                return graphExpressionBox;
+                return null;
             if (tabControl.SelectedItem == truthTableTab)
-                return truthTableExpressionBox;
+                return null;
 
             return null;
         }
@@ -544,236 +555,12 @@ namespace xFunc.Views
             mathExpressionBox.Text = string.Empty;
         }
 
-        private void GenerateTruthTable(IEnumerable<ILogicExpression> exps, LogicParameterCollection parameters)
-        {
-            truthTableGridView.Columns.Clear();
-
-            truthTableGridView.Columns.Add(new GridViewColumn
-            {
-                Header = "#",
-                DisplayMemberBinding = new Binding("Index")
-            });
-            for (int i = 0; i < parameters.Count; i++)
-            {
-                truthTableGridView.Columns.Add(new GridViewColumn
-                {
-                    Header = parameters[i],
-                    DisplayMemberBinding = new Binding(string.Format("VarsValues[{0}]", i))
-                });
-            }
-            for (int i = 0; i < exps.Count() - 1; i++)
-            {
-                truthTableGridView.Columns.Add(new GridViewColumn
-                {
-                    Header = exps.ElementAt(i),
-                    DisplayMemberBinding = new Binding(string.Format("Values[{0}]", i))
-                });
-            }
-            if (exps.Count() != 0)
-                truthTableGridView.Columns.Add(new GridViewColumn
-                {
-                    Header = exps.ElementAt(exps.Count() - 1),
-                    DisplayMemberBinding = new Binding("Result")
-                });
-        }
-
         private void mathExpressionBox_KeyUp(object o, KeyEventArgs args)
         {
             if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(mathExpressionBox.Text))
             {
                 MathExpEnter();
             }
-        }
-
-        private void logicExpressionBox_KeyUp(object o, KeyEventArgs args)
-        {
-            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(logicExpressionBox.Text))
-            {
-                try
-                {
-                    logicPresenter.Add(logicExpressionBox.Text);
-                    var count = logicExpsListBox.Items.Count;
-                    if (count > 0)
-                        logicExpsListBox.ScrollIntoView(logicExpsListBox.Items[count - 1]);
-                    statusBox.Text = string.Empty;
-                }
-                catch (LogicLexerException lle)
-                {
-                    statusBox.Text = lle.Message;
-                }
-                catch (LogicParserException lpe)
-                {
-                    statusBox.Text = lpe.Message;
-                }
-                catch (DivideByZeroException dbze)
-                {
-                    statusBox.Text = dbze.Message;
-                }
-                catch (ArgumentNullException ane)
-                {
-                    statusBox.Text = ane.Message;
-                }
-                catch (ArgumentException ae)
-                {
-                    statusBox.Text = ae.Message;
-                }
-                catch (FormatException fe)
-                {
-                    statusBox.Text = fe.Message;
-                }
-                catch (OverflowException oe)
-                {
-                    statusBox.Text = oe.Message;
-                }
-                catch (KeyNotFoundException)
-                {
-                    statusBox.Text = Resource.VariableNotFoundExceptionError;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
-                }
-                catch (InvalidOperationException ioe)
-                {
-                    statusBox.Text = ioe.Message;
-                }
-                catch (NotSupportedException)
-                {
-                    statusBox.Text = Resource.NotSupportedOperationError;
-                }
-
-                logicExpressionBox.Text = string.Empty;
-            }
-        }
-
-        private void graphExpBox_KeyUp(object o, KeyEventArgs args)
-        {
-            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(graphExpressionBox.Text))
-            {
-                try
-                {
-                    graphsPresenter.Add(graphExpressionBox.Text);
-                    statusBox.Text = string.Empty;
-                }
-                catch (MathLexerException mle)
-                {
-                    statusBox.Text = mle.Message;
-                }
-                catch (MathParserException mpe)
-                {
-                    statusBox.Text = mpe.Message;
-                }
-                catch (DivideByZeroException dbze)
-                {
-                    statusBox.Text = dbze.Message;
-                }
-                catch (ArgumentNullException ane)
-                {
-                    statusBox.Text = ane.Message;
-                }
-                catch (ArgumentException ae)
-                {
-                    statusBox.Text = ae.Message;
-                }
-                catch (FormatException fe)
-                {
-                    statusBox.Text = fe.Message;
-                }
-                catch (OverflowException oe)
-                {
-                    statusBox.Text = oe.Message;
-                }
-                catch (KeyNotFoundException)
-                {
-                    statusBox.Text = Resource.VariableNotFoundExceptionError;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
-                }
-                catch (InvalidOperationException ioe)
-                {
-                    statusBox.Text = ioe.Message;
-                }
-                catch (NotSupportedException)
-                {
-                    statusBox.Text = Resource.NotSupportedOperationError;
-                }
-
-                graphExpressionBox.Text = string.Empty;
-            }
-        }
-
-        private void truthTableExpressionBox_KeyUp(object o, KeyEventArgs args)
-        {
-            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(truthTableExpressionBox.Text))
-            {
-                try
-                {
-                    truthTablePresenter.Generate(truthTableExpressionBox.Text);
-                    GenerateTruthTable(truthTablePresenter.Expressions, truthTablePresenter.Parameters);
-                    truthTableList.ItemsSource = truthTablePresenter.Table;
-
-                    statusBox.Text = string.Empty;
-                }
-                catch (LogicLexerException lle)
-                {
-                    statusBox.Text = lle.Message;
-                }
-                catch (LogicParserException lpe)
-                {
-                    statusBox.Text = lpe.Message;
-                }
-                catch (DivideByZeroException dbze)
-                {
-                    statusBox.Text = dbze.Message;
-                }
-                catch (ArgumentNullException ane)
-                {
-                    statusBox.Text = ane.Message;
-                }
-                catch (ArgumentException ae)
-                {
-                    statusBox.Text = ae.Message;
-                }
-                catch (FormatException fe)
-                {
-                    statusBox.Text = fe.Message;
-                }
-                catch (OverflowException oe)
-                {
-                    statusBox.Text = oe.Message;
-                }
-                catch (KeyNotFoundException)
-                {
-                    statusBox.Text = Resource.VariableNotFoundExceptionError;
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    statusBox.Text = Resource.IndexOutOfRangeExceptionError;
-                }
-                catch (InvalidOperationException ioe)
-                {
-                    statusBox.Text = ioe.Message;
-                }
-                catch (NotSupportedException)
-                {
-                    statusBox.Text = Resource.NotSupportedOperationError;
-                }
-            }
-        }
-
-        private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
-        {
-            if (graphsList.SelectedIndex >= 0)
-                plot.Expression = graphsList.Items.Cast<GraphItemViewModel>();
-            else
-                plot.Expression = null;
-        }
-
-        private void graphItem_Toggle(object o, RoutedEventArgs args)
-        {
-            plot.ReRender();
         }
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
@@ -815,43 +602,11 @@ namespace xFunc.Views
             mathPresenter.Remove(item);
         }
 
-        private void removeLogic_Click(object o, RoutedEventArgs args)
-        {
-            var item = ((Button)o).Tag as LogicWorkspaceItemViewModel;
-
-            logicPresenter.Remove(item);
-        }
-
-        private void removeGraph_Click(object o, RoutedEventArgs args)
-        {
-            var item = ((Button)o).Tag as GraphItemViewModel;
-
-            graphsPresenter.Remove(item);
-        }
-
         public IEnumerable<MathWorkspaceItemViewModel> MathExpressions
         {
             set
             {
                 mathExpsListBox.ItemsSource = value;
-            }
-        }
-
-        public IEnumerable<GraphItemViewModel> Graphs
-        {
-            set
-            {
-                graphsList.SelectedIndex = -1;
-                graphsList.ItemsSource = value;
-                graphsList.SelectedIndex = value.Count() - 1;
-            }
-        }
-
-        public IEnumerable<LogicWorkspaceItemViewModel> LogicExpressions
-        {
-            set
-            {
-                logicExpsListBox.ItemsSource = value;
             }
         }
 

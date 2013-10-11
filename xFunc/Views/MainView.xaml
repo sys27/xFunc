@@ -36,11 +36,6 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
 
         <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
-
-        <CommandBinding Command="views:MainView.CopyExpToClipCommand" Executed="CopyExpToClip_Execute" CanExecute="Copy_CanExecute" />
-        <CommandBinding Command="views:MainView.CopyAnswerToClipCommand" Executed="CopyAnswerToClip_Execute" CanExecute="Copy_CanExecute" />
-        <CommandBinding Command="views:MainView.CopyExpToInputCommand" Executed="CopyExpToInput_Execute" CanExecute="Copy_CanExecute" />
-        <CommandBinding Command="views:MainView.CopyAnswerToInputCommand" Executed="CopyAnswerToInput_Execute" CanExecute="Copy_CanExecute" />
     </ribbon:RibbonWindow.CommandBindings>
     <ribbon:RibbonWindow.InputBindings>
         <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
@@ -143,7 +138,7 @@ limitations under the License. -->
 
         <TabControl x:Name="tabControl" Grid.Row="1" SelectionChanged="tabControl_SelectionChanged">
             <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
-                <views:MathControl x:Name="mathControl" Status="{Binding Path=Text,ElementName=statusBox, Mode=OneWayToSource}" />
+                <views:MathControl x:Name="mathControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
             <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
                 <views:LogicControl x:Name="logicControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />

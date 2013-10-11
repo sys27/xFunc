@@ -120,13 +120,16 @@
     </Compile>
     <Compile Include="Views\IGraphsView.cs" />
     <Compile Include="Views\ILogicView.cs" />
-    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IMathView.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\LogicControl.xaml.cs">
       <DependentUpon>LogicControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MathControl.xaml.cs">
+      <DependentUpon>MathControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlottingGraph.xaml.cs">
       <DependentUpon>PlottingGraph.xaml</DependentUpon>
@@ -163,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MathControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

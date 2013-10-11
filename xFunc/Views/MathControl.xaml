@@ -1,8 +1,7 @@
-﻿<UserControl x:Class="xFunc.Views.LogicControl"
+﻿<UserControl x:Class="xFunc.Views.MathControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:xFunc.ViewModels"
-             xmlns:views="clr-namespace:xFunc.Views"
              xmlns:res="clr-namespace:xFunc.Resources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -13,10 +12,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="128" />
         </Grid.RowDefinitions>
-
-        <ListBox x:Name="logicExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
+        
+        <ListBox x:Name="mathExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:LogicWorkspaceItemViewModel}">
+                <DataTemplate DataType="{x:Type viewModels:MathWorkspaceItemViewModel}">
                     <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -34,7 +33,7 @@
                                 <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
                                 <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
                             </StackPanel>
-                            <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeLogic_Click">
+                            <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeMath_Click">
                                 <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
                             </Button>
                         </Grid>
@@ -43,6 +42,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
-        <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
+        <TextBox x:Name="mathExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="mathExpressionBox_KeyUp" />
     </Grid>
 </UserControl>

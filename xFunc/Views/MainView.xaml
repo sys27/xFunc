@@ -22,20 +22,6 @@ limitations under the License. -->
                      Title="xFunc" Width="1024" Height="576" MinWidth="450"
                      Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
                      Loaded="this_Loaded">
-    <ribbon:RibbonWindow.Resources>
-        <ContextMenu x:Key="expMenu">
-            <MenuItem Header="{x:Static res:Resource.CopyExpressionMenuItem}">
-                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyExpToClipCommand" />
-                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:MainView.CopyExpToInputCommand" />
-            </MenuItem>
-            <MenuItem Header="{x:Static res:Resource.CopyAnswerMenuItem}">
-                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:MainView.CopyAnswerToClipCommand" />
-                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:MainView.CopyAnswerToInputCommand" />
-            </MenuItem>
-            <Separator />
-            <MenuItem Header="{x:Static res:Resource.DeleteMenuItem}" Command="views:MainView.DeleteExpCommand" />
-        </ContextMenu>
-    </ribbon:RibbonWindow.Resources>
     <ribbon:RibbonWindow.CommandBindings>
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
@@ -157,42 +143,7 @@ limitations under the License. -->
 
         <TabControl x:Name="tabControl" Grid.Row="1" SelectionChanged="tabControl_SelectionChanged">
             <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="128" />
-                    </Grid.RowDefinitions>
-                    <ListBox x:Name="mathExpsListBox" Grid.Row="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" ContextMenu="{StaticResource expMenu}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type viewModels:MathWorkspaceItemViewModel}">
-                                <Border BorderBrush="Silver" BorderThickness="0,0,0,1" Padding="5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Border Grid.Column="0" Margin="0,0,8,0" BorderBrush="Silver" BorderThickness="0,0,0,1" VerticalAlignment="Top">
-                                            <TextBlock Text="{Binding Path=Index}" FontSize="14" />
-                                        </Border>
-                                        <StackPanel Grid.Column="1" Orientation="Vertical">
-                                            <TextBlock Text="{x:Static res:Resource.ExpressionTextBox}" />
-                                            <TextBlock FontSize="16" Margin="20,2,0,5" Text="{Binding Path=StringExpression}" />
-                                            <TextBlock Text="{x:Static res:Resource.AnswerTextBox}" />
-                                            <TextBlock Text="{Binding Path=Answer}" FontSize="16" Margin="20,2,0,0" />
-                                        </StackPanel>
-                                        <Button Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeMath_Click">
-                                            <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
-                                        </Button>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
-                    <TextBox x:Name="mathExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="mathExpressionBox_KeyUp" />
-                </Grid>
+                <views:MathControl x:Name="mathControl" />
             </TabItem>
             <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
                 <views:LogicControl x:Name="logicControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />

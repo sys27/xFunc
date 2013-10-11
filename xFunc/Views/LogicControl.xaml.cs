@@ -24,6 +24,13 @@ namespace xFunc.Views
 
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(string), typeof(LogicControl));
 
+        public static RoutedCommand CopyExpToClipCommand = new RoutedCommand();
+        public static RoutedCommand CopyAnswerToClipCommand = new RoutedCommand();
+        public static RoutedCommand CopyExpToInputCommand = new RoutedCommand();
+        public static RoutedCommand CopyAnswerToInputCommand = new RoutedCommand();
+
+        public static RoutedCommand DeleteExpCommand = new RoutedCommand();
+
         private LogicPresenter presenter;
 
         public LogicControl()
@@ -104,6 +111,43 @@ namespace xFunc.Views
             var item = ((Button)o).Tag as LogicWorkspaceItemViewModel;
 
             presenter.Remove(item);
+        }
+
+        private void Copy_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = logicExpsListBox.SelectedItem != null;
+        }
+
+        private void CopyExpToClip_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString());
+        }
+
+        private void CopyAnswerToClip_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString());
+        }
+
+        private void CopyExpToInput_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString();
+        }
+
+        private void CopyAnswerToInput_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString();
+        }
+
+        private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            var item = (LogicWorkspaceItemViewModel)logicExpsListBox.SelectedItem;
+
+            presenter.Remove(item);
+        }
+
+        private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = logicExpsListBox.SelectedItem != null;
         }
 
         public string Status

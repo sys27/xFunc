@@ -66,9 +66,6 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
-            // todo: !!!
-            //mathExpressionBox.Focus();
-
             mathPresenter = new MathPresenter(this.mathControl);
             this.mathControl.Presenter = mathPresenter;
             logicPresenter = new LogicPresenter(this.logicControl);
@@ -80,6 +77,8 @@ namespace xFunc.Views
             updater = new Updater();
 
             LoadSettings();
+
+            SetFocus();
 
             switch (mathPresenter.AngleMeasurement)
             {
@@ -225,6 +224,18 @@ namespace xFunc.Views
             Settings.Default.AdditionalLogicExpanded = additionalLogicToolBar.IsExpanded;
 
             Settings.Default.Save();
+        }
+
+        private void SetFocus()
+        {
+            if (tabControl.SelectedItem == mathTab)
+                this.mathControl.mathExpressionBox.Focus();
+            if (tabControl.SelectedItem == logicTab)
+                this.logicControl.logicExpressionBox.Focus();
+            if (tabControl.SelectedItem == graphsTab)
+                this.graphsControl.graphExpressionBox.Focus();
+            if (tabControl.SelectedItem == truthTableTab)
+                this.truthTableControl.truthTableExpressionBox.Focus();
         }
 
         private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)
@@ -396,15 +407,14 @@ namespace xFunc.Views
 
         private TextBox GetSelectedTextBox()
         {
-            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
-                return null;
+                return this.mathControl.mathExpressionBox;
             if (tabControl.SelectedItem == logicTab)
-                return null;
+                return this.logicControl.logicExpressionBox;
             if (tabControl.SelectedItem == graphsTab)
-                return null;
+                return this.graphsControl.graphExpressionBox;
             if (tabControl.SelectedItem == truthTableTab)
-                return null;
+                return this.truthTableControl.truthTableExpressionBox;
 
             return null;
         }
@@ -492,7 +502,7 @@ namespace xFunc.Views
         private void EnterButton_Click(object o, RoutedEventArgs args)
         {
             // todo: !!!
-            //if (!string.IsNullOrWhiteSpace(mathExpressionBox.Text))
+            //if (!string.IsNullOrWhiteSpace(this.mathControl.mathExpressionBox.Text))
             //    MathExpEnter();
         }
 

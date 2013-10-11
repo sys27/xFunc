@@ -143,7 +143,7 @@ limitations under the License. -->
 
         <TabControl x:Name="tabControl" Grid.Row="1" SelectionChanged="tabControl_SelectionChanged">
             <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
-                <views:MathControl x:Name="mathControl" />
+                <views:MathControl x:Name="mathControl" Status="{Binding Path=Text,ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
             <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
                 <views:LogicControl x:Name="logicControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />

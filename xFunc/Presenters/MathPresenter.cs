@@ -13,11 +13,11 @@ namespace xFunc.Presenters
     public class MathPresenter
     {
 
-        private IMainView view;
+        private IMathView view;
 
         private MathWorkspace workspace;
-        
-        public MathPresenter(IMainView view)
+
+        public MathPresenter(IMathView view)
         {
             this.view = view;
 

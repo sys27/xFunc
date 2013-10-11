@@ -34,7 +34,7 @@ using xFunc.ViewModels;
 namespace xFunc.Views
 {
 
-    public partial class MainView : Fluent.RibbonWindow, IMainView
+    public partial class MainView : Fluent.RibbonWindow
     {
 
         private MathPresenter mathPresenter;
@@ -66,9 +66,11 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
-            mathExpressionBox.Focus();
+            // todo: !!!
+            //mathExpressionBox.Focus();
 
-            mathPresenter = new MathPresenter(this);
+            mathPresenter = new MathPresenter(this.mathControl);
+            this.mathControl.Presenter = mathPresenter;
             logicPresenter = new LogicPresenter(this.logicControl);
             this.logicControl.Presenter = logicPresenter;
             graphsPresenter = new GraphsPresenter(this.graphsControl);
@@ -300,9 +302,9 @@ namespace xFunc.Views
             // todo: !!!
             if (tabControl.SelectedItem == mathTab)
             {
-                var item = (MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem;
+                //var item = (MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem;
 
-                mathPresenter.Remove(item);
+                //mathPresenter.Remove(item);
             }
             else if (tabControl.SelectedItem == logicTab)
             {
@@ -359,8 +361,8 @@ namespace xFunc.Views
         private void CopyExpToClip_Execute(object o, ExecutedRoutedEventArgs args)
         {
             // todo: !!!
-            if (tabControl.SelectedItem == mathTab)
-                Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString());
+            //if (tabControl.SelectedItem == mathTab)
+            //    Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString());
             //else if (tabControl.SelectedItem == logicTab)
             //    Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString());
         }
@@ -368,8 +370,8 @@ namespace xFunc.Views
         private void CopyAnswerToClip_Execute(object o, ExecutedRoutedEventArgs args)
         {
             // todo: !!!
-            if (tabControl.SelectedItem == mathTab)
-                Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString());
+            //if (tabControl.SelectedItem == mathTab)
+            //    Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString());
             //else if (tabControl.SelectedItem == logicTab)
             //    Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString());
         }
@@ -377,8 +379,8 @@ namespace xFunc.Views
         private void CopyExpToInput_Execute(object o, ExecutedRoutedEventArgs args)
         {
             // todo: !!!
-            if (tabControl.SelectedItem == mathTab)
-                mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString();
+            //if (tabControl.SelectedItem == mathTab)
+            //    mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString();
             //else if (tabControl.SelectedItem == logicTab)
             //    logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString();
         }
@@ -386,8 +388,8 @@ namespace xFunc.Views
         private void CopyAnswerToInput_Execute(object o, ExecutedRoutedEventArgs args)
         {
             // todo: !!!
-            if (tabControl.SelectedItem == mathTab)
-                mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString();
+            //if (tabControl.SelectedItem == mathTab)
+            //    mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString();
             //else if (tabControl.SelectedItem == logicTab)
             //    logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString();
         }
@@ -396,7 +398,7 @@ namespace xFunc.Views
         {
             // todo: !!!
             if (tabControl.SelectedItem == mathTab)
-                return mathExpressionBox;
+                return null;
             if (tabControl.SelectedItem == logicTab)
                 return null;
             if (tabControl.SelectedItem == graphsTab)
@@ -489,78 +491,9 @@ namespace xFunc.Views
 
         private void EnterButton_Click(object o, RoutedEventArgs args)
         {
-            if (!string.IsNullOrWhiteSpace(mathExpressionBox.Text))
-                MathExpEnter();
-        }
-
-        private void MathExpEnter()
-        {
-            try
-            {
-                mathPresenter.Add(mathExpressionBox.Text);
-                var count = mathExpsListBox.Items.Count;
-                if (count > 0)
-                    mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[count - 1]);
-                statusBox.Text = string.Empty;
-            }
-            catch (MathLexerException mle)
-            {
-                statusBox.Text = mle.Message;
-            }
-            catch (MathParserException mpe)
-            {
-                statusBox.Text = mpe.Message;
-            }
-            catch (MathParameterIsReadOnlyException mpiroe)
-            {
-                statusBox.Text = mpiroe.Message;
-            }
-            catch (DivideByZeroException dbze)
-            {
-                statusBox.Text = dbze.Message;
-            }
-            catch (ArgumentNullException ane)
-            {
-                statusBox.Text = ane.Message;
-            }
-            catch (ArgumentException ae)
-            {
-                statusBox.Text = ae.Message;
-            }
-            catch (FormatException fe)
-            {
-                statusBox.Text = fe.Message;
-            }
-            catch (OverflowException oe)
-            {
-                statusBox.Text = oe.Message;
-            }
-            catch (KeyNotFoundException)
-            {
-                statusBox.Text = Resource.VariableNotFoundExceptionError;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                statusBox.Text = Resource.IndexOutOfRangeExceptionError;
-            }
-            catch (InvalidOperationException ioe)
-            {
-                statusBox.Text = ioe.Message;
-            }
-            catch (NotSupportedException)
-            {
-                statusBox.Text = Resource.NotSupportedOperationError;
-            }
-
-            mathExpressionBox.Text = string.Empty;
-        }
-
-        private void mathExpressionBox_KeyUp(object o, KeyEventArgs args)
-        {
-            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(mathExpressionBox.Text))
-            {
-                MathExpEnter();
-            }
+            // todo: !!!
+            //if (!string.IsNullOrWhiteSpace(mathExpressionBox.Text))
+            //    MathExpEnter();
         }
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
@@ -592,21 +525,6 @@ namespace xFunc.Views
                 standartLogicToolBar.Visibility = Visibility.Collapsed;
                 constantsLogicToolBar.Visibility = Visibility.Collapsed;
                 additionalLogicToolBar.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void removeMath_Click(object o, RoutedEventArgs args)
-        {
-            var item = ((Button)o).Tag as MathWorkspaceItemViewModel;
-
-            mathPresenter.Remove(item);
-        }
-
-        public IEnumerable<MathWorkspaceItemViewModel> MathExpressions
-        {
-            set
-            {
-                mathExpsListBox.ItemsSource = value;
             }
         }
 

@@ -8,6 +8,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignWidth="640" d:DesignHeight="360">
+    <UserControl.Resources>
+        <ContextMenu x:Key="expMenu">
+            <MenuItem Header="{x:Static res:Resource.CopyExpressionMenuItem}">
+                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:LogicControl.CopyExpToClipCommand" />
+                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:LogicControl.CopyExpToInputCommand" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resource.CopyAnswerMenuItem}">
+                <MenuItem Header="{x:Static res:Resource.ToClipboardMenuItem}" Command="views:LogicControl.CopyAnswerToClipCommand" />
+                <MenuItem Header="{x:Static res:Resource.ToInputMenuItem}" Command="views:LogicControl.CopyAnswerToInputCommand" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{x:Static res:Resource.DeleteMenuItem}" Command="views:LogicControl.DeleteExpCommand" />
+        </ContextMenu>
+    </UserControl.Resources>
+    
+    <UserControl.CommandBindings>
+        <CommandBinding Command="views:LogicControl.CopyExpToClipCommand" Executed="CopyExpToClip_Execute" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="views:LogicControl.CopyAnswerToClipCommand" Executed="CopyAnswerToClip_Execute" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="views:LogicControl.CopyExpToInputCommand" Executed="CopyExpToInput_Execute" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="views:LogicControl.CopyAnswerToInputCommand" Executed="CopyAnswerToInput_Execute" CanExecute="Copy_CanExecute" />
+
+        <CommandBinding Command="views:LogicControl.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
+    </UserControl.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -43,6 +67,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="3" />
-        <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="{Binding Path=Value, ElementName=fontSizeSpinner}" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
+        <TextBox x:Name="logicExpressionBox" Grid.Row="1" Margin="0,3,0,0" FontSize="24" Foreground="Black" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" KeyUp="logicExpressionBox_KeyUp" />
     </Grid>
 </UserControl>

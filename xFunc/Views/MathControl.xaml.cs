@@ -25,6 +25,13 @@ namespace xFunc.Views
 
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(string), typeof(MathControl));
 
+        public static RoutedCommand CopyExpToClipCommand = new RoutedCommand();
+        public static RoutedCommand CopyAnswerToClipCommand = new RoutedCommand();
+        public static RoutedCommand CopyExpToInputCommand = new RoutedCommand();
+        public static RoutedCommand CopyAnswerToInputCommand = new RoutedCommand();
+
+        public static RoutedCommand DeleteExpCommand = new RoutedCommand();
+
         private MathPresenter presenter;
 
         public MathControl()
@@ -39,7 +46,7 @@ namespace xFunc.Views
             InitializeComponent();
         }
 
-        private void MathExpEnter()
+        internal void MathExpEnter()
         {
             try
             {
@@ -114,6 +121,43 @@ namespace xFunc.Views
             var item = ((Button)o).Tag as MathWorkspaceItemViewModel;
 
             presenter.Remove(item);
+        }
+
+        private void Copy_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = mathExpsListBox.SelectedItem != null;
+        }
+
+        private void CopyExpToClip_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString());
+        }
+
+        private void CopyAnswerToClip_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString());
+        }
+
+        private void CopyExpToInput_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString();
+        }
+
+        private void CopyAnswerToInput_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString();
+        }
+
+        private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            var item = (MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem;
+
+            presenter.Remove(item);
+        }
+
+        private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = mathExpsListBox.SelectedItem != null;
         }
 
         public string Status

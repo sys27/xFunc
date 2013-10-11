@@ -57,11 +57,6 @@ namespace xFunc.Views
 
         public static RoutedCommand AboutCommand = new RoutedCommand();
 
-        public static RoutedCommand CopyExpToClipCommand = new RoutedCommand();
-        public static RoutedCommand CopyAnswerToClipCommand = new RoutedCommand();
-        public static RoutedCommand CopyExpToInputCommand = new RoutedCommand();
-        public static RoutedCommand CopyAnswerToInputCommand = new RoutedCommand();
-
         public MainView()
         {
             InitializeComponent();
@@ -310,33 +305,31 @@ namespace xFunc.Views
 
         private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            // todo: !!!
             if (tabControl.SelectedItem == mathTab)
             {
-                //var item = (MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem;
+                var item = (MathWorkspaceItemViewModel)this.mathControl.mathExpsListBox.SelectedItem;
 
-                //mathPresenter.Remove(item);
+                mathPresenter.Remove(item);
             }
             else if (tabControl.SelectedItem == logicTab)
             {
-                //var item = (LogicWorkspaceItemViewModel)logicExpsListBox.SelectedItem;
+                var item = (LogicWorkspaceItemViewModel)this.logicControl.logicExpsListBox.SelectedItem;
 
-                //logicPresenter.Remove(item);
+                logicPresenter.Remove(item);
             }
             else if (tabControl.SelectedItem == graphsTab)
             {
-                //var item = (GraphItemViewModel)graphsList.SelectedItem;
+                var item = (GraphItemViewModel)this.graphsControl.graphsList.SelectedItem;
 
-                //graphsPresenter.Remove(item);
+                graphsPresenter.Remove(item);
             }
         }
 
         private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            // todo: !!!
-            //args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
-            //                  (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null) ||
-            //                  (tabControl.SelectedItem == graphsTab && graphsList.SelectedItem != null);
+            args.CanExecute = (tabControl.SelectedItem == mathTab && this.mathControl.mathExpsListBox.SelectedItem != null) ||
+                              (tabControl.SelectedItem == logicTab && this.logicControl.logicExpsListBox.SelectedItem != null) ||
+                              (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
         }
 
         private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
@@ -360,49 +353,6 @@ namespace xFunc.Views
         {
             AboutView aboutView = new AboutView { Owner = this };
             aboutView.ShowDialog();
-        }
-
-        private void Copy_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        {
-            // todo: !!!
-            //args.CanExecute = (tabControl.SelectedItem == mathTab && mathExpsListBox.SelectedItem != null) ||
-            //                  (tabControl.SelectedItem == logicTab && logicExpsListBox.SelectedItem != null);
-        }
-
-        private void CopyExpToClip_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            // todo: !!!
-            //if (tabControl.SelectedItem == mathTab)
-            //    Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString());
-            //else if (tabControl.SelectedItem == logicTab)
-            //    Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString());
-        }
-
-        private void CopyAnswerToClip_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            // todo: !!!
-            //if (tabControl.SelectedItem == mathTab)
-            //    Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString());
-            //else if (tabControl.SelectedItem == logicTab)
-            //    Clipboard.SetText((logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString());
-        }
-
-        private void CopyExpToInput_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            // todo: !!!
-            //if (tabControl.SelectedItem == mathTab)
-            //    mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString();
-            //else if (tabControl.SelectedItem == logicTab)
-            //    logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).StringExpression.ToString();
-        }
-
-        private void CopyAnswerToInput_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            // todo: !!!
-            //if (tabControl.SelectedItem == mathTab)
-            //    mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString();
-            //else if (tabControl.SelectedItem == logicTab)
-            //    logicExpressionBox.Text = (logicExpsListBox.SelectedItem as LogicWorkspaceItemViewModel).Answer.ToString();
         }
 
         private TextBox GetSelectedTextBox()
@@ -501,9 +451,8 @@ namespace xFunc.Views
 
         private void EnterButton_Click(object o, RoutedEventArgs args)
         {
-            // todo: !!!
-            //if (!string.IsNullOrWhiteSpace(this.mathControl.mathExpressionBox.Text))
-            //    MathExpEnter();
+            if (!string.IsNullOrWhiteSpace(this.mathControl.mathExpressionBox.Text))
+                this.mathControl.MathExpEnter();
         }
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)

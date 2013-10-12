@@ -54,6 +54,8 @@ namespace xFunc.Views
         public static RoutedCommand DecCommand = new RoutedCommand();
         public static RoutedCommand HexCommand = new RoutedCommand();
 
+        public static RoutedCommand VariablesCommand = new RoutedCommand();
+
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
@@ -307,6 +309,25 @@ namespace xFunc.Views
         private void BaseCommands_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
+        }
+
+        private void VariablesCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            if (tabControl.SelectedItem == mathTab)
+            {
+                var variableView = new VariableView()
+                {
+                    DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.IsReadOnly)),
+                    Owner = this
+                };
+                variableView.Show();
+            }
+        }
+
+        private void VariablesCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = tabControl.SelectedItem == mathTab ||
+                              tabControl.SelectedItem == logicTab;
         }
 
         private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)

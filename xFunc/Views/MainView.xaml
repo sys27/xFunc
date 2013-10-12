@@ -31,6 +31,8 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.OctCommand" Executed="OctCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.DecCommand" Executed="DecCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.HexCommand" Executed="HexCommand_Execute" CanExecute="BaseCommands_CanExecute" />
+        
+        <CommandBinding Command="views:MainView.VariablesCommand" Executed="VariablesCommand_Execute" CanExecute="VariablesCommand_CanExecute" />
 
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
@@ -129,6 +131,11 @@ limitations under the License. -->
                     <ribbon:ToggleButton x:Name="octButton" Header="Oct" LargeIcon="../Images/Oct.png" Command="views:MainView.OctCommand" />
                     <ribbon:ToggleButton x:Name="decButton" Header="Dec" LargeIcon="../Images/Dec.png" Command="views:MainView.DecCommand" />
                     <ribbon:ToggleButton x:Name="hexButton" Header="Hex" LargeIcon="../Images/Hex.png" Command="views:MainView.HexCommand" />
+                </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox>
+                    <ribbon:Button Command="views:MainView.VariablesCommand">
+                        
+                    </ribbon:Button>
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>

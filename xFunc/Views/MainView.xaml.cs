@@ -37,6 +37,8 @@ namespace xFunc.Views
     public partial class MainView : Fluent.RibbonWindow
     {
 
+        private MathProcessor processor;
+
         private MathPresenter mathPresenter;
         private LogicPresenter logicPresenter;
         private GraphsPresenter graphsPresenter;
@@ -61,11 +63,13 @@ namespace xFunc.Views
         {
             InitializeComponent();
 
-            mathPresenter = new MathPresenter(this.mathControl);
+            processor = new MathProcessor();
+
+            mathPresenter = new MathPresenter(this.mathControl, processor);
             this.mathControl.Presenter = mathPresenter;
             logicPresenter = new LogicPresenter(this.logicControl);
             this.logicControl.Presenter = logicPresenter;
-            graphsPresenter = new GraphsPresenter(this.graphsControl);
+            graphsPresenter = new GraphsPresenter(this.graphsControl, processor);
             this.graphsControl.Presenter = graphsPresenter;
             truthTablePresenter = new TruthTablePresenter();
             this.truthTableControl.Presenter = truthTablePresenter;

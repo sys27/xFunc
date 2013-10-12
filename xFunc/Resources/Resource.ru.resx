@@ -183,12 +183,6 @@
   <data name="ExpressionTextBox" xml:space="preserve">
     <value>Выражение:</value>
   </data>
-  <data name="FontGroupHeader" xml:space="preserve">
-    <value>Шрифт</value>
-  </data>
-  <data name="FontSizeSpinner" xml:space="preserve">
-    <value>Размер:</value>
-  </data>
   <data name="GradianButtonHeader" xml:space="preserve">
     <value>Грады</value>
   </data>

@@ -394,24 +394,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Font.
-        /// </summary>
-        public static string FontGroupHeader {
-            get {
-                return ResourceManager.GetString("FontGroupHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Size:.
-        /// </summary>
-        public static string FontSizeSpinner {
-            get {
-                return ResourceManager.GetString("FontSizeSpinner", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Gradian.
         /// </summary>
         public static string GradianButtonHeader {

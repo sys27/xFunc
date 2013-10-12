@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using xFunc.Maths;
@@ -22,12 +23,10 @@ using xFunc.Resources;
 namespace xFunc.Presenters
 {
 
-    public class MathWorkspace
+    public class MathWorkspace : IList<MathWorkspaceItem>
     {
 
-        private MathProcessor mathProcessor;
-
-        private int countOfExps;
+        private int maxCountOfExps;
         private List<MathWorkspaceItem> expressions;
 
         public MathWorkspace()
@@ -35,11 +34,10 @@ namespace xFunc.Presenters
         {
         }
 
-        public MathWorkspace(int countOfExps)
+        public MathWorkspace(int maxCountOfExps)
         {
-            this.countOfExps = countOfExps;
-            expressions = new List<MathWorkspaceItem>(countOfExps >= 20 ? 20 : countOfExps);
-            mathProcessor = new MathProcessor();
+            this.maxCountOfExps = maxCountOfExps;
+            expressions = new List<MathWorkspaceItem>(maxCountOfExps >= 20 ? 20 : maxCountOfExps);
         }
 
         public MathWorkspaceItem this[int index]
@@ -48,25 +46,49 @@ namespace xFunc.Presenters
             {
                 return expressions[index];
             }
+            set
+            {
+                expressions[index] = value;
+            }
         }
 
-        public void Add(string strExp)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            if (string.IsNullOrWhiteSpace(strExp))
-                throw new ArgumentNullException("strExp");
+            return expressions.GetEnumerator();
+        }
 
-            string[] exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        public IEnumerator<MathWorkspaceItem> GetEnumerator()
+        {
+            return expressions.GetEnumerator();
+        }
 
-            while (expressions.Count + exps.Length > countOfExps)
+        public void Add(MathWorkspaceItem item)
+        {
+            if (expressions.Count >= maxCountOfExps)
                 expressions.RemoveAt(0);
 
-            foreach (var s in exps)
-            {
-                var result = mathProcessor.Solve(s);
-                var item = new MathWorkspaceItem(s, result);
+            expressions.Add(item);
+        }
 
-                expressions.Add(item);
-            }
+        public void AddRange(IEnumerable<MathWorkspaceItem> items)
+        {
+            while (expressions.Count >= maxCountOfExps)
+                expressions.RemoveAt(0);
+
+            expressions.AddRange(items);
+        }
+
+        public int IndexOf(MathWorkspaceItem item)
+        {
+            return expressions.IndexOf(item);
+        }
+
+        public void Insert(int index, MathWorkspaceItem item)
+        {
+            if (expressions.Count >= maxCountOfExps)
+                expressions.RemoveAt(0);
+
+            expressions.Insert(index, item);
         }
 
         public void Clear()
@@ -74,14 +96,24 @@ namespace xFunc.Presenters
             expressions.Clear();
         }
 
-        public void Remove(MathWorkspaceItem item)
+        public bool Remove(MathWorkspaceItem item)
         {
-            expressions.Remove(item);
+            return expressions.Remove(item);
         }
 
         public void RemoveAt(int index)
         {
             expressions.RemoveAt(index);
+        }
+
+        public bool Contains(MathWorkspaceItem item)
+        {
+            return expressions.Contains(item);
+        }
+
+        public void CopyTo(MathWorkspaceItem[] items, int index)
+        {
+            expressions.CopyTo(items, index);
         }
 
         public int Count
@@ -92,35 +124,23 @@ namespace xFunc.Presenters
             }
         }
 
-        public MathProcessor MathProcessor
+        public bool IsReadOnly
         {
             get
             {
-                return mathProcessor;
+                return false;
             }
         }
 
-        public int CountOfExpressions
+        public int MaxCountOfExpressions
         {
             get
             {
-                return countOfExps;
+                return maxCountOfExps;
             }
             set
             {
-                countOfExps = value;
-            }
-        }
-
-        public NumeralSystem Base
-        {
-            get
-            {
-                return mathProcessor.Base;
-            }
-            set
-            {
-                mathProcessor.Base = value;
+                maxCountOfExps = value;
             }
         }
 

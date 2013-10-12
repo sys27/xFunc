@@ -237,6 +237,8 @@ namespace xFunc.Views
                 this.truthTableControl.truthTableExpressionBox.Focus();
         }
 
+        #region Commands
+
         private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             radianButton.IsChecked = false;
@@ -358,6 +360,8 @@ namespace xFunc.Views
             AboutView aboutView = new AboutView { Owner = this };
             aboutView.ShowDialog();
         }
+
+        #endregion Commands
 
         private TextBox GetSelectedTextBox()
         {

@@ -14,6 +14,9 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if NET35_OR_GREATER || PORTABLE
+using System.Linq;
+#endif
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Bitwise;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -79,6 +82,12 @@ namespace xFunc.Maths
                 var un = expression as UnaryMathExpression;
 
                 return HasVar(un.Argument, arg);
+            }
+            if (expression is DifferentParametersExpression)
+            {
+                var paramExp = expression as DifferentParametersExpression;
+
+                return paramExp.Arguments.Any(e => HasVar(e, arg));
             }
             if (expression is Variable && expression.Equals(arg))
             {

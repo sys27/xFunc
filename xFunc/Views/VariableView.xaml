@@ -19,18 +19,34 @@ limitations under the License. -->
         xmlns:res="clr-namespace:xFunc.Resources"
         Title="{x:Static res:Resource.VariablesTitle}" Width="220" Height="280"
         ShowInTaskbar="False">
-    <ListBox ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
-        <ListBox.ItemTemplate>
-            <DataTemplate DataType="viewModes:VariableViewModel">
-                <TextBlock x:Name="textBlock">
-                    <Run Text="{Binding Path=Variable, Mode=OneWay}" /><Run>=</Run><Run Text="{Binding Path=Value, Mode=OneWay}" />
-                </TextBlock>
-                <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Path=IsReadOnly, Mode=OneWay}" Value="True">
-                        <Setter TargetName="textBlock" Property="Foreground" Value="Gray" />
+    <ListView ItemsSource="{Binding}">
+        <ListView.ItemContainerStyle>
+            <Style TargetType="{x:Type ListViewItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsReadOnly}" Value="True">
+                        <Setter Property="Foreground" Value="Gray" />
                     </DataTrigger>
-                </DataTemplate.Triggers>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+                </Style.Triggers>
+            </Style>
+        </ListView.ItemContainerStyle>
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="{x:Static res:Resource.VarNameHeader}">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Variable}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="{x:Static res:Resource.VarValueHeader}">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Value}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+    </ListView>
 </Window>

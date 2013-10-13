@@ -23,6 +23,8 @@ namespace xFunc.Views
         {
             this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.IsReadOnly));
 
+            this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();
+
             InitializeComponent();
         }
 

@@ -24,6 +24,8 @@ namespace xFunc.Views
         {
             this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key.ToString(), f.Value.ToString()));
 
+            this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();
+
             InitializeComponent();
         }
 

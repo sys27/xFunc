@@ -18,7 +18,7 @@ limitations under the License. -->
         xmlns:viewModes="clr-namespace:xFunc.ViewModels"
         xmlns:res="clr-namespace:xFunc.Resources"
         Title="{x:Static res:Resource.VariablesTitle}" Width="220" Height="280"
-        ResizeMode="NoResize" ShowInTaskbar="False">
+        ShowInTaskbar="False">
     <ListBox ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
         <ListBox.ItemTemplate>
             <DataTemplate DataType="viewModes:VariableViewModel">

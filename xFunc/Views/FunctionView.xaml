@@ -19,13 +19,24 @@ limitations under the License. -->
         xmlns:res="clr-namespace:xFunc.Resources"
         Title="{x:Static res:Resource.FunctionsTitle}" Width="220" Height="280"
         ShowInTaskbar="False">
-    <ListBox ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
-        <ListBox.ItemTemplate>
-            <DataTemplate DataType="viewModes:FunctionViewModel">
-                <TextBlock x:Name="textBlock">
-                    <Run Text="{Binding Path=Function, Mode=OneWay}" /><Run>=</Run><Run Text="{Binding Path=Value, Mode=OneWay}" />
-                </TextBlock>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <ListView ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="{x:Static res:Resource.FuncNameHeader}">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Function}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="{x:Static res:Resource.FuncValueHeader}">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Value}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+    </ListView>
 </Window>

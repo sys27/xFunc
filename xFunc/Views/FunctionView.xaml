@@ -12,24 +12,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. 
 See the License for the specific language governing permissions and 
 limitations under the License. -->
-<Window x:Class="xFunc.Views.VariableView"
+<Window x:Class="xFunc.Views.FunctionView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModes="clr-namespace:xFunc.ViewModels"
         xmlns:res="clr-namespace:xFunc.Resources"
-        Title="{x:Static res:Resource.VariablesTitle}" Width="220" Height="280"
+        Title="{x:Static res:Resource.FunctionsTitle}" Width="220" Height="280"
         ResizeMode="NoResize" ShowInTaskbar="False">
     <ListBox ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
         <ListBox.ItemTemplate>
-            <DataTemplate DataType="viewModes:VariableViewModel">
+            <DataTemplate DataType="viewModes:FunctionViewModel">
                 <TextBlock x:Name="textBlock">
-                    <Run Text="{Binding Path=Variable, Mode=OneWay}" /><Run>=</Run><Run Text="{Binding Path=Value, Mode=OneWay}" />
+                    <Run Text="{Binding Path=Function, Mode=OneWay}" /><Run>=</Run><Run Text="{Binding Path=Value, Mode=OneWay}" />
                 </TextBlock>
-                <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Path=IsReadOnly, Mode=OneWay}" Value="True">
-                        <Setter TargetName="textBlock" Property="Foreground" Value="Gray" />
-                    </DataTrigger>
-                </DataTemplate.Triggers>
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>

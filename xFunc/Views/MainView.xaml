@@ -31,8 +31,9 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.OctCommand" Executed="OctCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.DecCommand" Executed="DecCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.HexCommand" Executed="HexCommand_Execute" CanExecute="BaseCommands_CanExecute" />
-        
+
         <CommandBinding Command="views:MainView.VariablesCommand" Executed="VariablesCommand_Execute" CanExecute="VariablesCommand_CanExecute" />
+        <CommandBinding Command="views:MainView.FunctionsCommand" Executed="FunctionsCommand_Execute" CanExecute="FunctionsCommand_CanExecute" />
 
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
@@ -112,6 +113,12 @@ limitations under the License. -->
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
                 </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.AnswerBaseGroupHeader}">
+                    <ribbon:ToggleButton x:Name="binButton" Header="Bin" LargeIcon="../Images/Bin.png" Command="views:MainView.BinCommand" />
+                    <ribbon:ToggleButton x:Name="octButton" Header="Oct" LargeIcon="../Images/Oct.png" Command="views:MainView.OctCommand" />
+                    <ribbon:ToggleButton x:Name="decButton" Header="Dec" LargeIcon="../Images/Dec.png" Command="views:MainView.DecCommand" />
+                    <ribbon:ToggleButton x:Name="hexButton" Header="Hex" LargeIcon="../Images/Hex.png" Command="views:MainView.HexCommand" />
+                </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ExpListGroupHeader}">
                     <ribbon:Button Header="{x:Static res:Resource.DeleteExpButtonHeader}" Icon="../Images/Delete.png" LargeIcon="../Images/DeleteLarge.png" Command="views:MainView.DeleteExpCommand">
                         <ribbon:Button.ToolTip>
@@ -126,15 +133,16 @@ limitations under the License. -->
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
             <ribbon:RibbonTabItem Header="{x:Static res:Resource.ViewRibbonTab}">
-                <ribbon:RibbonGroupBox Header="Answer Base">
-                    <ribbon:ToggleButton x:Name="binButton" Header="Bin" LargeIcon="../Images/Bin.png" Command="views:MainView.BinCommand" />
-                    <ribbon:ToggleButton x:Name="octButton" Header="Oct" LargeIcon="../Images/Oct.png" Command="views:MainView.OctCommand" />
-                    <ribbon:ToggleButton x:Name="decButton" Header="Dec" LargeIcon="../Images/Dec.png" Command="views:MainView.DecCommand" />
-                    <ribbon:ToggleButton x:Name="hexButton" Header="Hex" LargeIcon="../Images/Hex.png" Command="views:MainView.HexCommand" />
-                </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox>
-                    <ribbon:Button Command="views:MainView.VariablesCommand">
-                        
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ParamGroupHeader}">
+                    <ribbon:Button Header="{x:Static res:Resource.VariablesButtonHeader}" Icon="..\Images\Variable.png" LargeIcon="..\Images\VariableLarge.png" Command="views:MainView.VariablesCommand">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="" Text="" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button Header="{x:Static res:Resource.FunctionButtonHeader}" Icon="..\Images\Function.png" LargeIcon="..\Images\FunctionLarge.png" Command="views:MainView.FunctionsCommand">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="" Text="" />
+                        </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>

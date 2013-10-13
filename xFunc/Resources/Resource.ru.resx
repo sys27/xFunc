@@ -351,4 +351,28 @@
   <data name="FunctionsTitle" xml:space="preserve">
     <value>Функции</value>
   </data>
+  <data name="FuncNameHeader" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="FuncValueHeader" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="VarNameHeader" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="VarValueHeader" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="FuncScreenTitText" xml:space="preserve">
+    <value>Отображает окно со всеме введенными функциями.</value>
+  </data>
+  <data name="FuncScreenTitTitle" xml:space="preserve">
+    <value>Функции</value>
+  </data>
+  <data name="VarScreenTitText" xml:space="preserve">
+    <value>Отображает окно со всеме введенными переменными.</value>
+  </data>
+  <data name="VarScreenTitTitle" xml:space="preserve">
+    <value>Переменные</value>
+  </data>
 </root>

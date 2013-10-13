@@ -136,12 +136,12 @@ limitations under the License. -->
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ParamGroupHeader}">
                     <ribbon:Button Header="{x:Static res:Resource.VariablesButtonHeader}" Icon="..\Images\Variable.png" LargeIcon="..\Images\VariableLarge.png" Command="views:MainView.VariablesCommand">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="" Text="" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.VarScreenTitTitle}" Text="{x:Static res:Resource.VarScreenTitText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                     <ribbon:Button Header="{x:Static res:Resource.FunctionButtonHeader}" Icon="..\Images\Function.png" LargeIcon="..\Images\FunctionLarge.png" Command="views:MainView.FunctionsCommand">
                         <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="" Text="" />
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.FuncScreenTitTitle}" Text="{x:Static res:Resource.FuncScreenTitText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>

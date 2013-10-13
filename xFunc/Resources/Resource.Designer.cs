@@ -403,6 +403,33 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string FuncNameHeader {
+            get {
+                return ResourceManager.GetString("FuncNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows the window with all entered functions..
+        /// </summary>
+        public static string FuncScreenTitText {
+            get {
+                return ResourceManager.GetString("FuncScreenTitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Functions.
+        /// </summary>
+        public static string FuncScreenTitTitle {
+            get {
+                return ResourceManager.GetString("FuncScreenTitTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Functions.
         /// </summary>
         public static string FunctionButtonHeader {
@@ -417,6 +444,15 @@ namespace xFunc.Resources {
         public static string FunctionsTitle {
             get {
                 return ResourceManager.GetString("FunctionsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string FuncValueHeader {
+            get {
+                return ResourceManager.GetString("FuncValueHeader", resourceCulture);
             }
         }
         
@@ -741,6 +777,42 @@ namespace xFunc.Resources {
         public static string VariablesTitle {
             get {
                 return ResourceManager.GetString("VariablesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string VarNameHeader {
+            get {
+                return ResourceManager.GetString("VarNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows the window with all entered variables..
+        /// </summary>
+        public static string VarScreenTitText {
+            get {
+                return ResourceManager.GetString("VarScreenTitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string VarScreenTitTitle {
+            get {
+                return ResourceManager.GetString("VarScreenTitTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string VarValueHeader {
+            get {
+                return ResourceManager.GetString("VarValueHeader", resourceCulture);
             }
         }
         

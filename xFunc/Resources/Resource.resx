@@ -333,4 +333,22 @@
   <data name="AvailableUpdate" xml:space="preserve">
     <value>An update is available.</value>
   </data>
+  <data name="VariablesTitle" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="AnswerBaseGroupHeader" xml:space="preserve">
+    <value>Answer Base</value>
+  </data>
+  <data name="FunctionButtonHeader" xml:space="preserve">
+    <value>Functions</value>
+  </data>
+  <data name="ParamGroupHeader" xml:space="preserve">
+    <value>Expression Parameters</value>
+  </data>
+  <data name="VariablesButtonHeader" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="FunctionsTitle" xml:space="preserve">
+    <value>Functions</value>
+  </data>
 </root>

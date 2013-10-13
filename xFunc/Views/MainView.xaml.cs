@@ -45,6 +45,8 @@ namespace xFunc.Views
         private TruthTablePresenter truthTablePresenter;
         private Updater updater;
 
+        #region Commands
+
         public static RoutedCommand DegreeCommand = new RoutedCommand();
         public static RoutedCommand RadianCommand = new RoutedCommand();
         public static RoutedCommand GradianCommand = new RoutedCommand();
@@ -55,11 +57,17 @@ namespace xFunc.Views
         public static RoutedCommand HexCommand = new RoutedCommand();
 
         public static RoutedCommand VariablesCommand = new RoutedCommand();
+        public static RoutedCommand FunctionsCommand = new RoutedCommand();
 
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
         public static RoutedCommand AboutCommand = new RoutedCommand();
+
+        #endregion Commands
+
+        private VariableView variableView;
+        private FunctionView functionView;
 
         public MainView()
         {
@@ -313,21 +321,40 @@ namespace xFunc.Views
 
         private void VariablesCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            if (tabControl.SelectedItem == mathTab)
+            if (variableView == null)
             {
-                var variableView = new VariableView()
-                {
-                    DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.IsReadOnly)),
-                    Owner = this
-                };
-                variableView.Show();
+                variableView = new VariableView(this.processor) { Owner = this };
+                variableView.Closed += (lo, larg) => variableView = null;
             }
+
+            if (variableView.Visibility == Visibility.Visible)
+                variableView.Activate();
+            else
+                variableView.Visibility = Visibility.Visible;
         }
 
         private void VariablesCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            args.CanExecute = tabControl.SelectedItem == mathTab ||
-                              tabControl.SelectedItem == logicTab;
+            args.CanExecute = tabControl.SelectedItem == mathTab;
+        }
+
+        private void FunctionsCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            if (functionView == null)
+            {
+                functionView = new FunctionView(processor) { Owner = this };
+                functionView.Closed += (lo, larg) => functionView = null;
+            }
+
+            if (functionView.Visibility == Visibility.Visible)
+                functionView.Activate();
+            else
+                functionView.Visibility = Visibility.Visible;
+        }
+
+        private void FunctionsCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = tabControl.SelectedItem == mathTab;
         }
 
         private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)

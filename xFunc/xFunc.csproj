@@ -107,6 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FunctionViewModel.cs" />
     <Compile Include="ViewModels\GraphItemViewModel.cs" />
     <Compile Include="ViewModels\LogicWorkspaceItemViewModel.cs" />
     <Compile Include="ViewModels\MathWorkspaceItemViewModel.cs" />
@@ -116,6 +117,9 @@
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DrawingCanvas.cs" />
+    <Compile Include="Views\FunctionView.xaml.cs">
+      <DependentUpon>FunctionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GraphsControl.xaml.cs">
       <DependentUpon>GraphsControl.xaml</DependentUpon>
     </Compile>
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FunctionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,6 +283,14 @@
     <Resource Include="Images\Dec.png" />
     <Resource Include="Images\Hex.png" />
     <Resource Include="Images\Oct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Variable.png" />
+    <Resource Include="Images\VariableLarge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Function.png" />
+    <Resource Include="Images\FunctionLarge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

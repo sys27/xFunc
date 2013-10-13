@@ -323,8 +323,22 @@ namespace xFunc.Views
         {
             if (variableView == null)
             {
-                variableView = new VariableView(this.processor) { Owner = this };
-                variableView.Closed += (lo, larg) => variableView = null;
+                variableView = new VariableView(this.processor)
+                {
+                    Owner = this,
+                    Top = Settings.Default.VarWindowTop == -1 ? this.Top + 100 : Settings.Default.VarWindowTop,
+                    Left = Settings.Default.VarWindowLeft == -1 ? this.Left + this.Width - 300 : Settings.Default.VarWindowLeft,
+                    Width = Settings.Default.VarWindowWidth,
+                    Height = Settings.Default.VarWindowHeight
+                };
+                variableView.Closed += (lo, larg) =>
+                {
+                    Settings.Default.VarWindowTop = variableView.Top;
+                    Settings.Default.VarWindowLeft = variableView.Left;
+                    Settings.Default.VarWindowWidth = variableView.Width;
+                    Settings.Default.VarWindowHeight = variableView.Height;
+                    variableView = null;
+                };
             }
 
             if (variableView.Visibility == Visibility.Visible)
@@ -342,8 +356,22 @@ namespace xFunc.Views
         {
             if (functionView == null)
             {
-                functionView = new FunctionView(processor) { Owner = this };
-                functionView.Closed += (lo, larg) => functionView = null;
+                functionView = new FunctionView(processor)
+                {
+                    Owner = this,
+                    Top = Settings.Default.FuncWindowTop == -1 ? this.Top + 100 : Settings.Default.FuncWindowTop,
+                    Left = Settings.Default.FuncWindowLeft == -1 ? this.Left + this.Width - 300 : Settings.Default.FuncWindowLeft,
+                    Width = Settings.Default.FuncWindowWidth,
+                    Height = Settings.Default.FuncWindowHeight
+                };
+                functionView.Closed += (lo, larg) =>
+                {
+                    Settings.Default.FuncWindowTop = functionView.Top;
+                    Settings.Default.FuncWindowLeft = functionView.Left;
+                    Settings.Default.FuncWindowWidth = functionView.Width;
+                    Settings.Default.FuncWindowHeight = functionView.Height;
+                    functionView = null;
+                };
             }
 
             if (functionView.Visibility == Visibility.Visible)

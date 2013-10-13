@@ -274,5 +274,101 @@ namespace xFunc.Properties {
                 this["CheckUpdates"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double VarWindowTop {
+            get {
+                return ((double)(this["VarWindowTop"]));
+            }
+            set {
+                this["VarWindowTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double VarWindowLeft {
+            get {
+                return ((double)(this["VarWindowLeft"]));
+            }
+            set {
+                this["VarWindowLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double FuncWindowTop {
+            get {
+                return ((double)(this["FuncWindowTop"]));
+            }
+            set {
+                this["FuncWindowTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double FuncWindowLeft {
+            get {
+                return ((double)(this["FuncWindowLeft"]));
+            }
+            set {
+                this["FuncWindowLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("220")]
+        public double VarWindowWidth {
+            get {
+                return ((double)(this["VarWindowWidth"]));
+            }
+            set {
+                this["VarWindowWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("280")]
+        public double VarWindowHeight {
+            get {
+                return ((double)(this["VarWindowHeight"]));
+            }
+            set {
+                this["VarWindowHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("220")]
+        public double FuncWindowWidth {
+            get {
+                return ((double)(this["FuncWindowWidth"]));
+            }
+            set {
+                this["FuncWindowWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("280")]
+        public double FuncWindowHeight {
+            get {
+                return ((double)(this["FuncWindowHeight"]));
+            }
+            set {
+                this["FuncWindowHeight"] = value;
+            }
+        }
     }
 }

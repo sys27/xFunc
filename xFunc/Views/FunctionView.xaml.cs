@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -16,12 +17,12 @@ using xFunc.ViewModels;
 namespace xFunc.Views
 {
 
-    public partial class VariableView : Window
+    public partial class FunctionView : Window
     {
 
-        public VariableView(MathProcessor processor)
+        public FunctionView(MathProcessor processor)
         {
-            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.IsReadOnly));
+            this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key.ToString(), f.Value.ToString()));
 
             InitializeComponent();
         }

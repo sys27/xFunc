@@ -333,4 +333,22 @@
   <data name="AvailableUpdate" xml:space="preserve">
     <value>Доступно обновление.</value>
   </data>
+  <data name="VariablesTitle" xml:space="preserve">
+    <value>Переменные</value>
+  </data>
+  <data name="AnswerBaseGroupHeader" xml:space="preserve">
+    <value>Система счисления</value>
+  </data>
+  <data name="FunctionButtonHeader" xml:space="preserve">
+    <value>Функции</value>
+  </data>
+  <data name="ParamGroupHeader" xml:space="preserve">
+    <value>Параметры выражения</value>
+  </data>
+  <data name="VariablesButtonHeader" xml:space="preserve">
+    <value>Переменные</value>
+  </data>
+  <data name="FunctionsTitle" xml:space="preserve">
+    <value>Функции</value>
+  </data>
 </root>

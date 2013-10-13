@@ -115,6 +115,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Answer Base.
+        /// </summary>
+        public static string AnswerBaseGroupHeader {
+            get {
+                return ResourceManager.GetString("AnswerBaseGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Answer:.
         /// </summary>
         public static string AnswerTextBox {
@@ -394,6 +403,24 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Functions.
+        /// </summary>
+        public static string FunctionButtonHeader {
+            get {
+                return ResourceManager.GetString("FunctionButtonHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Functions.
+        /// </summary>
+        public static string FunctionsTitle {
+            get {
+                return ResourceManager.GetString("FunctionsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gradian.
         /// </summary>
         public static string GradianButtonHeader {
@@ -498,6 +525,15 @@ namespace xFunc.Resources {
         public static string NumberAndArithmeticExpanderHeader {
             get {
                 return ResourceManager.GetString("NumberAndArithmeticExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expression Parameters.
+        /// </summary>
+        public static string ParamGroupHeader {
+            get {
+                return ResourceManager.GetString("ParamGroupHeader", resourceCulture);
             }
         }
         
@@ -687,6 +723,24 @@ namespace xFunc.Resources {
         public static string VariableNotFoundExceptionError {
             get {
                 return ResourceManager.GetString("VariableNotFoundExceptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string VariablesButtonHeader {
+            get {
+                return ResourceManager.GetString("VariablesButtonHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string VariablesTitle {
+            get {
+                return ResourceManager.GetString("VariablesTitle", resourceCulture);
             }
         }
         

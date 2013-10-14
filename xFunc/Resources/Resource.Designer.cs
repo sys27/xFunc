@@ -824,14 +824,5 @@ namespace xFunc.Resources {
                 return ResourceManager.GetString("VersionTextBox", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View.
-        /// </summary>
-        public static string ViewRibbonTab {
-            get {
-                return ResourceManager.GetString("ViewRibbonTab", resourceCulture);
-            }
-        }
     }
 }

@@ -48,6 +48,8 @@ namespace xFunc.Maths.Expressions
 
             collection.Add(new MathParameter("π", Math.PI, true));
             collection.Add(new MathParameter("e", Math.E, true));
+            collection.Add(new MathParameter("g", 9.80665, true));
+            collection.Add(new MathParameter("c", 299792458, true));
         }
 
         /// <summary>

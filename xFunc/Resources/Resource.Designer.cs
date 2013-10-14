@@ -133,6 +133,60 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inverse cosecant of a number. Example: arccsc(90) or arccosec(90).
+        /// </summary>
+        public static string ArccosecantToolTip {
+            get {
+                return ResourceManager.GetString("ArccosecantToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse cosine of a number. Example: arccos(90).
+        /// </summary>
+        public static string ArccosineToolTip {
+            get {
+                return ResourceManager.GetString("ArccosineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse cotangent of a number. Example: arccot(90) or arcctg(90).
+        /// </summary>
+        public static string ArccotangentToolTip {
+            get {
+                return ResourceManager.GetString("ArccotangentToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse secant of a number. Example: arcsec(90).
+        /// </summary>
+        public static string ArcsecantToolTip {
+            get {
+                return ResourceManager.GetString("ArcsecantToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse sine of a number. Example: arcsin(1).
+        /// </summary>
+        public static string ArcsineToolTip {
+            get {
+                return ResourceManager.GetString("ArcsineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse tangent of a number. Example: arctan(90) or arctg(90).
+        /// </summary>
+        public static string ArctangentToolTip {
+            get {
+                return ResourceManager.GetString("ArctangentToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The expression &apos;{1}&apos; was assigned to the function &apos;{0}&apos;..
         /// </summary>
         public static string AssignFunction {
@@ -282,6 +336,33 @@ namespace xFunc.Resources {
         public static string CopyScreenTipTitle {
             get {
                 return ResourceManager.GetString("CopyScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cosecant of a number. Example: csc(90) or cosec(90).
+        /// </summary>
+        public static string CosecantToolTip {
+            get {
+                return ResourceManager.GetString("CosecantToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cosine of a number. Example: cos(90).
+        /// </summary>
+        public static string CosineToolTip {
+            get {
+                return ResourceManager.GetString("CosineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cotangent of a number. Example: cot(90) or ctg(90).
+        /// </summary>
+        public static string CotangentToolTip {
+            get {
+                return ResourceManager.GetString("CotangentToolTip", resourceCulture);
             }
         }
         
@@ -655,6 +736,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Secant of a number. Example: sec(90).
+        /// </summary>
+        public static string SecantToolTip {
+            get {
+                return ResourceManager.GetString("SecantToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Grid.
         /// </summary>
         public static string ShowGridCheckBox {
@@ -664,11 +754,29 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sine of a number. Example: sin(90).
+        /// </summary>
+        public static string SineToolTip {
+            get {
+                return ResourceManager.GetString("SineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Standart.
         /// </summary>
         public static string StandartExpanderHeader {
             get {
                 return ResourceManager.GetString("StandartExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tangent of a number. Example: tan(90) or tg(90).
+        /// </summary>
+        public static string TangentToolTip {
+            get {
+                return ResourceManager.GetString("TangentToolTip", resourceCulture);
             }
         }
         

@@ -372,4 +372,40 @@
   <data name="VarScreenTitTitle" xml:space="preserve">
     <value>Variables</value>
   </data>
+  <data name="ArccosecantToolTip" xml:space="preserve">
+    <value>Inverse cosecant of a number. Example: arccsc(90) or arccosec(90)</value>
+  </data>
+  <data name="ArccosineToolTip" xml:space="preserve">
+    <value>Inverse cosine of a number. Example: arccos(90)</value>
+  </data>
+  <data name="ArccotangentToolTip" xml:space="preserve">
+    <value>Inverse cotangent of a number. Example: arccot(90) or arcctg(90)</value>
+  </data>
+  <data name="ArcsecantToolTip" xml:space="preserve">
+    <value>Inverse secant of a number. Example: arcsec(90)</value>
+  </data>
+  <data name="ArcsineToolTip" xml:space="preserve">
+    <value>Inverse sine of a number. Example: arcsin(1)</value>
+  </data>
+  <data name="ArctangentToolTip" xml:space="preserve">
+    <value>Inverse tangent of a number. Example: arctan(90) or arctg(90)</value>
+  </data>
+  <data name="CosecantToolTip" xml:space="preserve">
+    <value>Cosecant of a number. Example: csc(90) or cosec(90)</value>
+  </data>
+  <data name="CosineToolTip" xml:space="preserve">
+    <value>Cosine of a number. Example: cos(90)</value>
+  </data>
+  <data name="CotangentToolTip" xml:space="preserve">
+    <value>Cotangent of a number. Example: cot(90) or ctg(90)</value>
+  </data>
+  <data name="SecantToolTip" xml:space="preserve">
+    <value>Secant of a number. Example: sec(90)</value>
+  </data>
+  <data name="SineToolTip" xml:space="preserve">
+    <value>Sine of a number. Example: sin(90)</value>
+  </data>
+  <data name="TangentToolTip" xml:space="preserve">
+    <value>Tangent of a number. Example: tan(90) or tg(90)</value>
+  </data>
 </root>

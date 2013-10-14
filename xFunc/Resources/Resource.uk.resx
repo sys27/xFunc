@@ -372,4 +372,40 @@
   <data name="VarScreenTitTitle" xml:space="preserve">
     <value>Змінні</value>
   </data>
+  <data name="ArccosecantToolTip" xml:space="preserve">
+    <value>Арккосеканс числа. Приклад: arccsc(90) or arccosec(90)</value>
+  </data>
+  <data name="ArccosineToolTip" xml:space="preserve">
+    <value>Арккосинус числа. Приклад: arccos(90)</value>
+  </data>
+  <data name="ArccotangentToolTip" xml:space="preserve">
+    <value>Арккотангенс числа. Приклад: arccot(90) or arcctg(90)</value>
+  </data>
+  <data name="ArcsecantToolTip" xml:space="preserve">
+    <value>Арксеканс числа. Приклад: arcsec(90)</value>
+  </data>
+  <data name="ArcsineToolTip" xml:space="preserve">
+    <value>Арксинус числа. Приклад: arcsin(1)</value>
+  </data>
+  <data name="ArctangentToolTip" xml:space="preserve">
+    <value>Арктангенс числа. Приклад: arctan(90) or arctg(90)</value>
+  </data>
+  <data name="CosecantToolTip" xml:space="preserve">
+    <value>Косеканс числа. Приклад: csc(90) or cosec(90)</value>
+  </data>
+  <data name="CosineToolTip" xml:space="preserve">
+    <value>Косинус числа. Приклад: cos(90)</value>
+  </data>
+  <data name="CotangentToolTip" xml:space="preserve">
+    <value>Котангенс числа. Приклад: cot(90) or ctg(90)</value>
+  </data>
+  <data name="SecantToolTip" xml:space="preserve">
+    <value>Секанс числа. Приклад: sec(90)</value>
+  </data>
+  <data name="SineToolTip" xml:space="preserve">
+    <value>Синус числа. Приклад: sin(90)</value>
+  </data>
+  <data name="TangentToolTip" xml:space="preserve">
+    <value>Тангенс числа. Приклад: tan(90) or tg(90)</value>
+  </data>
 </root>

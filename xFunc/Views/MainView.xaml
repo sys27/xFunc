@@ -291,41 +291,77 @@ limitations under the License. -->
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="sin" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sin}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SineToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="cos" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource cos}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CosineToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="tan" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource tan}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.TangentToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="cot" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource cot}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CotangentToolTip}" />
+                            </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="arcsin" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arcsin}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArcsineToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="arccos" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccos}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArccosineToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="arctan" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arctan}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArctangentToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="arccot" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArccotangentToolTip}" />
+                            </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="sec" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sec}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SecantToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="csc" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource csc}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CosecantToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="arcsec" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arcsec}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArcsecantToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="arccsc" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arccsc}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArccosecantToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                     </Grid>
                 </Expander>

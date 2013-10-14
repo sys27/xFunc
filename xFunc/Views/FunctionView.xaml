@@ -29,13 +29,7 @@ limitations under the License. -->
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="{x:Static res:Resource.FuncValueHeader}">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Value}" TextAlignment="Center" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
+                <GridViewColumn Header="{x:Static res:Resource.FuncValueHeader}" DisplayMemberBinding="{Binding Path=Value}" />
             </GridView>
         </ListView.View>
     </ListView>

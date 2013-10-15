@@ -619,11 +619,38 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logarithm to base 10 of &quot;x&quot;. Example: lg(3).
+        /// </summary>
+        public static string LgToolTip {
+            get {
+                return ResourceManager.GetString("LgToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Natural logarithm of &quot;x&quot;. Example: ln(10).
+        /// </summary>
+        public static string LnToolTip {
+            get {
+                return ResourceManager.GetString("LnToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logic Expressions.
         /// </summary>
         public static string LogicTab {
             get {
                 return ResourceManager.GetString("LogicTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logarigthm to base &quot;y&quot; of &quot;x&quot;. Example: log(2, 4).
+        /// </summary>
+        public static string LogToolTip {
+            get {
+                return ResourceManager.GetString("LogToolTip", resourceCulture);
             }
         }
         

@@ -34,8 +34,9 @@ namespace xFunc
             var lang = Settings.Default.Lang;
             if (lang != "Auto")
             {
-                this.Dispatcher.Thread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
-                this.Dispatcher.Thread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
+                var cultureInfo = CultureInfo.GetCultureInfo(lang);
+                this.Dispatcher.Thread.CurrentCulture = cultureInfo;
+                this.Dispatcher.Thread.CurrentUICulture = cultureInfo;
             }
 
             MainView mainView = new MainView();

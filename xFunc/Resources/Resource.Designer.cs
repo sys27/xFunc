@@ -88,6 +88,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Absolute value of &quot;x&quot;. Example: abs(-1).
+        /// </summary>
+        public static string AbsToolTip {
+            get {
+                return ResourceManager.GetString("AbsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Additional.
         /// </summary>
         public static string AdditionalLogicExpanderHeader {
@@ -637,6 +646,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to nth root of &quot;x&quot;. Example: root(27, 3).
+        /// </summary>
+        public static string NthRootToolTip {
+            get {
+                return ResourceManager.GetString("NthRootToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Numbers &amp; Arithmetic.
         /// </summary>
         public static string NumberAndArithmeticExpanderHeader {
@@ -678,6 +696,24 @@ namespace xFunc.Resources {
         public static string PasteScreenTipTitle {
             get {
                 return ResourceManager.GetString("PasteScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;x&quot; raised to the power of 2. Example: 7^2.
+        /// </summary>
+        public static string PowerOfTwoToolTip {
+            get {
+                return ResourceManager.GetString("PowerOfTwoToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;x&quot; raised to the power of &quot;y&quot;. Example: 7^4.
+        /// </summary>
+        public static string PowerOfYToolTip {
+            get {
+                return ResourceManager.GetString("PowerOfYToolTip", resourceCulture);
             }
         }
         
@@ -759,6 +795,15 @@ namespace xFunc.Resources {
         public static string SineToolTip {
             get {
                 return ResourceManager.GetString("SineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square root of &quot;x&quot;. Example: sqrt(9).
+        /// </summary>
+        public static string SquareRootToolTip {
+            get {
+                return ResourceManager.GetString("SquareRootToolTip", resourceCulture);
             }
         }
         

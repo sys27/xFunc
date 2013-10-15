@@ -250,15 +250,27 @@ limitations under the License. -->
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="^2" Click="InsertInv_Click">
                             <Rectangle Fill="{StaticResource sqr}" Width="20" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.PowerOfTwoToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="^" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource inv}" Width="20" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.PowerOfYToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="sqrt" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sqrt}" Width="22" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SquareRootToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="root" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource root}" Width="22" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.NthRootToolTip}" />
+                            </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="ln" Click="InsertFunc_Click">
@@ -272,6 +284,9 @@ limitations under the License. -->
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="abs" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                     </Grid>
                 </Expander>

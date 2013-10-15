@@ -408,4 +408,19 @@
   <data name="TangentToolTip" xml:space="preserve">
     <value>Tangent of a number. Example: tan(90) or tg(90)</value>
   </data>
+  <data name="AbsToolTip" xml:space="preserve">
+    <value>Absolute value of "x". Example: abs(-1)</value>
+  </data>
+  <data name="NthRootToolTip" xml:space="preserve">
+    <value>nth root of "x". Example: root(27, 3)</value>
+  </data>
+  <data name="PowerOfTwoToolTip" xml:space="preserve">
+    <value>"x" raised to the power of 2. Example: 7^2</value>
+  </data>
+  <data name="PowerOfYToolTip" xml:space="preserve">
+    <value>"x" raised to the power of "y". Example: 7^4</value>
+  </data>
+  <data name="SquareRootToolTip" xml:space="preserve">
+    <value>Square root of "x". Example: sqrt(9)</value>
+  </data>
 </root>

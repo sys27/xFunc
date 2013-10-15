@@ -275,12 +275,21 @@ limitations under the License. -->
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="ln" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource ln}" Width="26" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.LnToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="lg" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource lg}" Width="26" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.LgToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="log" Click="InsertDoubleArgFunc_Click">
                             <Rectangle Fill="{StaticResource log}" Width="36" Height="16" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.LogToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="abs" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />

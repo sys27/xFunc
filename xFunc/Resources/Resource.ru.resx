@@ -423,4 +423,13 @@
   <data name="SquareRootToolTip" xml:space="preserve">
     <value>Квадратный корень от "x". Пример: sqrt(9)</value>
   </data>
+  <data name="LgToolTip" xml:space="preserve">
+    <value>Логарифм по основанию 10 числа "x". Пример: lg(3)</value>
+  </data>
+  <data name="LnToolTip" xml:space="preserve">
+    <value>Натуральный логарифм числа "x". Пример: ln(10)</value>
+  </data>
+  <data name="LogToolTip" xml:space="preserve">
+    <value>Логарифм по основанию "y" чиста "x". Пример: log(2, 4)</value>
+  </data>
 </root>

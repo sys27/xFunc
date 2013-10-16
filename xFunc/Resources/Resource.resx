@@ -474,11 +474,32 @@
   <data name="DefToolTip" xml:space="preserve">
     <value>Assigns the value to specified variable or creates an user-function. Example: x := 1, f(x) := sin(x)</value>
   </data>
+  <data name="ExitMenu" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="ExitToolTip" xml:space="preserve">
+    <value>Closes the application.</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="NewMenu" xml:space="preserve">
+    <value>New</value>
+  </data>
   <data name="NotToolTip" xml:space="preserve">
     <value>Bitwise NOT operation. This operation rounds a rational number. Example: not(3)</value>
   </data>
+  <data name="OpenMenu" xml:space="preserve">
+    <value>Open</value>
+  </data>
   <data name="OrToolTip" xml:space="preserve">
     <value>Bitwise OR operation. This operation rounds a rational number. Example: x or y, x | y</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="SimplifyToolTip" xml:space="preserve">
     <value>Simplifies the specified expression. Example: simplify(arcsin(sin(x)))</value>

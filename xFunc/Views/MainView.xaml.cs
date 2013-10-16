@@ -63,6 +63,7 @@ namespace xFunc.Views
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
         public static RoutedCommand AboutCommand = new RoutedCommand();
+        public static RoutedCommand ExitCommand = new RoutedCommand();
 
         #endregion Commands
 
@@ -435,6 +436,11 @@ namespace xFunc.Views
         {
             AboutView aboutView = new AboutView { Owner = this };
             aboutView.ShowDialog();
+        }
+
+        private void ExitCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            Application.Current.Shutdown();
         }
 
         #endregion Commands

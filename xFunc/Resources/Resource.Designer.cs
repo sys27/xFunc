@@ -115,6 +115,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitwise AND operation. This operation rounds a rational number. Example: x and y, x &amp; y.
+        /// </summary>
+        public static string AndToolTip {
+            get {
+                return ResourceManager.GetString("AndToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Angles.
         /// </summary>
         public static string AnglesGroupHeader {
@@ -484,6 +493,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigns the value to specified variable or creates an user-function. Example: x := 1, f(x) := sin(x).
+        /// </summary>
+        public static string DefToolTip {
+            get {
+                return ResourceManager.GetString("DefToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dergee.
         /// </summary>
         public static string DegreeButtonHeader {
@@ -754,6 +772,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitwise NOT operation. This operation rounds a rational number. Example: not(3).
+        /// </summary>
+        public static string NotToolTip {
+            get {
+                return ResourceManager.GetString("NotToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to nth root of &quot;x&quot;. Example: root(27, 3).
         /// </summary>
         public static string NthRootToolTip {
@@ -768,6 +795,15 @@ namespace xFunc.Resources {
         public static string NumberAndArithmeticExpanderHeader {
             get {
                 return ResourceManager.GetString("NumberAndArithmeticExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitwise OR operation. This operation rounds a rational number. Example: x or y, x | y.
+        /// </summary>
+        public static string OrToolTip {
+            get {
+                return ResourceManager.GetString("OrToolTip", resourceCulture);
             }
         }
         
@@ -907,6 +943,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Simplifies the specified expression. Example: simplify(arcsin(sin(x))).
+        /// </summary>
+        public static string SimplifyToolTip {
+            get {
+                return ResourceManager.GetString("SimplifyToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sine of a number. Example: sin(90).
         /// </summary>
         public static string SineToolTip {
@@ -1015,6 +1060,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removes the specified variable or user-function. Example: undef(x).
+        /// </summary>
+        public static string UndefToolTip {
+            get {
+                return ResourceManager.GetString("UndefToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undo.
         /// </summary>
         public static string UndoButtonHeader {
@@ -1110,6 +1164,15 @@ namespace xFunc.Resources {
         public static string VersionTextBox {
             get {
                 return ResourceManager.GetString("VersionTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitwise XOR operation. This operation rounds a rational number. Example: x xor y.
+        /// </summary>
+        public static string XOrToolTip {
+            get {
+                return ResourceManager.GetString("XOrToolTip", resourceCulture);
             }
         }
     }

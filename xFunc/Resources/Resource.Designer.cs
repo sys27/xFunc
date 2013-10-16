@@ -169,6 +169,33 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inverse hyperbolic cosine of &quot;x&quot;. Example: arcosh(90) or arch(90).
+        /// </summary>
+        public static string ArcoshToolTip {
+            get {
+                return ResourceManager.GetString("ArcoshToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse hyperbolic cotangent of &quot;x&quot;. Example: arcoth(90) or arcth(90).
+        /// </summary>
+        public static string ArcothToolTip {
+            get {
+                return ResourceManager.GetString("ArcothToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse hyperbolic cosecant of &quot;x&quot;. Example: arcsch(90).
+        /// </summary>
+        public static string ArcschToolTip {
+            get {
+                return ResourceManager.GetString("ArcschToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inverse secant of a number. Example: arcsec(90).
         /// </summary>
         public static string ArcsecantToolTip {
@@ -192,6 +219,33 @@ namespace xFunc.Resources {
         public static string ArctangentToolTip {
             get {
                 return ResourceManager.GetString("ArctangentToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse hyperbolic secant of &quot;x&quot;. Example: arsech(90).
+        /// </summary>
+        public static string ArsechToolTip {
+            get {
+                return ResourceManager.GetString("ArsechToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse hyperbolic sine of &quot;x&quot;. Example: arsinh(90) or arsh(90).
+        /// </summary>
+        public static string ArsinhToolTip {
+            get {
+                return ResourceManager.GetString("ArsinhToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse hyperbolic tangent of &quot;x&quot;. Example: artanh(90) or arth(90).
+        /// </summary>
+        public static string ArtanhToolTip {
+            get {
+                return ResourceManager.GetString("ArtanhToolTip", resourceCulture);
             }
         }
         
@@ -358,6 +412,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic cosine of &quot;x&quot;. Example: cosh(90) or ch(90).
+        /// </summary>
+        public static string CoshToolTip {
+            get {
+                return ResourceManager.GetString("CoshToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cosine of a number. Example: cos(90).
         /// </summary>
         public static string CosineToolTip {
@@ -372,6 +435,24 @@ namespace xFunc.Resources {
         public static string CotangentToolTip {
             get {
                 return ResourceManager.GetString("CotangentToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic cotangent of &quot;x&quot;. Example: coth(90) or cth(90).
+        /// </summary>
+        public static string CothToolTip {
+            get {
+                return ResourceManager.GetString("CothToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic cosecant of &quot;x&quot;. Example: csch(90).
+        /// </summary>
+        public static string CschToolTip {
+            get {
+                return ResourceManager.GetString("CschToolTip", resourceCulture);
             }
         }
         
@@ -808,6 +889,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic secant of &quot;x&quot;. Example: sech(90).
+        /// </summary>
+        public static string SechToolTip {
+            get {
+                return ResourceManager.GetString("SechToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Grid.
         /// </summary>
         public static string ShowGridCheckBox {
@@ -822,6 +912,15 @@ namespace xFunc.Resources {
         public static string SineToolTip {
             get {
                 return ResourceManager.GetString("SineToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic sine of &quot;x&quot;. Example: sinh(90) or sh(90).
+        /// </summary>
+        public static string SinhToolTip {
+            get {
+                return ResourceManager.GetString("SinhToolTip", resourceCulture);
             }
         }
         
@@ -849,6 +948,15 @@ namespace xFunc.Resources {
         public static string TangentToolTip {
             get {
                 return ResourceManager.GetString("TangentToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hyperbolic tangent of &quot;x&quot;. Example: tanh(90) or th(90).
+        /// </summary>
+        public static string TanhToolTip {
+            get {
+                return ResourceManager.GetString("TanhToolTip", resourceCulture);
             }
         }
         

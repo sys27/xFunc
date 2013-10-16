@@ -373,13 +373,13 @@
     <value>Переменные</value>
   </data>
   <data name="ArccosecantToolTip" xml:space="preserve">
-    <value>Арккосеканс числа. Пример: arccsc(90) or arccosec(90)</value>
+    <value>Арккосеканс числа. Пример: arccsc(90) или arccosec(90)</value>
   </data>
   <data name="ArccosineToolTip" xml:space="preserve">
     <value>Арккосинус числа. Пример: arccos(90)</value>
   </data>
   <data name="ArccotangentToolTip" xml:space="preserve">
-    <value>Арккотангенс числа. Пример: arccot(90) or arcctg(90)</value>
+    <value>Арккотангенс числа. Пример: arccot(90) или arcctg(90)</value>
   </data>
   <data name="ArcsecantToolTip" xml:space="preserve">
     <value>Арксеканс числа. Пример: arcsec(90)</value>
@@ -388,16 +388,16 @@
     <value>Арксинус числа. Пример: arcsin(1)</value>
   </data>
   <data name="ArctangentToolTip" xml:space="preserve">
-    <value>Арктангенс числа. Пример: arctan(90) or arctg(90)</value>
+    <value>Арктангенс числа. Пример: arctan(90) или arctg(90)</value>
   </data>
   <data name="CosecantToolTip" xml:space="preserve">
-    <value>Косеканс числа. Пример: csc(90) or cosec(90)</value>
+    <value>Косеканс числа. Пример: csc(90) или cosec(90)</value>
   </data>
   <data name="CosineToolTip" xml:space="preserve">
     <value>Косинус числа. Пример: cos(90)</value>
   </data>
   <data name="CotangentToolTip" xml:space="preserve">
-    <value>Котангенс числа. Пример: cot(90) or ctg(90)</value>
+    <value>Котангенс числа. Пример: cot(90) или ctg(90)</value>
   </data>
   <data name="SecantToolTip" xml:space="preserve">
     <value>Секанс числа. Пример: sec(90)</value>
@@ -406,7 +406,7 @@
     <value>Синус числа. Пример: sin(90)</value>
   </data>
   <data name="TangentToolTip" xml:space="preserve">
-    <value>Тангенс числа. Пример: tan(90) or tg(90)</value>
+    <value>Тангенс числа. Пример: tan(90) или tg(90)</value>
   </data>
   <data name="AbsToolTip" xml:space="preserve">
     <value>Модуль "x". Пример: abs(-1)</value>
@@ -431,5 +431,41 @@
   </data>
   <data name="LogToolTip" xml:space="preserve">
     <value>Логарифм по основанию "y" чиста "x". Пример: log(2, 4)</value>
+  </data>
+  <data name="ArcoshToolTip" xml:space="preserve">
+    <value>Обратный гиперболический косинус числа "x". Пример: arcosh(90) или arch(90)</value>
+  </data>
+  <data name="ArcothToolTip" xml:space="preserve">
+    <value>Обратный гиперболический котангенс числа "x". Пример: arcoth(90) или arcth(90)</value>
+  </data>
+  <data name="ArcschToolTip" xml:space="preserve">
+    <value>Обратный гиперболический косеканс числа "x". Пример: arcsch(90)</value>
+  </data>
+  <data name="ArsechToolTip" xml:space="preserve">
+    <value>Обратный гиперболический секанс числа "x". Пример: arsech(90)</value>
+  </data>
+  <data name="ArsinhToolTip" xml:space="preserve">
+    <value>Обратный гиперболический синус числа "x". Пример: arsinh(90) или arsh(90)</value>
+  </data>
+  <data name="ArtanhToolTip" xml:space="preserve">
+    <value>Обратный гиперболический тангенс числа "x". Пример: artanh(90) или arth(90)</value>
+  </data>
+  <data name="CoshToolTip" xml:space="preserve">
+    <value>Гиперболический косинус числа "x". Пример: cosh(90) или ch(90)</value>
+  </data>
+  <data name="CothToolTip" xml:space="preserve">
+    <value>Гиперболический котангенс числа "x". Пример: coth(90) или cth(90)</value>
+  </data>
+  <data name="CschToolTip" xml:space="preserve">
+    <value>Гиперболический косеканс числа "x". Пример: csch(90)</value>
+  </data>
+  <data name="SechToolTip" xml:space="preserve">
+    <value>Гиперболический секанс числа "x". Пример: sech(90)</value>
+  </data>
+  <data name="SinhToolTip" xml:space="preserve">
+    <value>Гиперболический синус числа "x". Пример: sinh(90) или sh(90)</value>
+  </data>
+  <data name="TanhToolTip" xml:space="preserve">
+    <value>Гиперболический тангенс числа "x". Пример: tanh(90) или th(90)</value>
   </data>
 </root>

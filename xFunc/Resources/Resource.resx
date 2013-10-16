@@ -432,4 +432,40 @@
   <data name="LogToolTip" xml:space="preserve">
     <value>Logarigthm to base "y" of "x". Example: log(2, 4)</value>
   </data>
+  <data name="ArcoshToolTip" xml:space="preserve">
+    <value>Inverse hyperbolic cosine of "x". Example: arcosh(90) or arch(90)</value>
+  </data>
+  <data name="ArcothToolTip" xml:space="preserve">
+    <value>Inverse hyperbolic cotangent of "x". Example: arcoth(90) or arcth(90)</value>
+  </data>
+  <data name="ArcschToolTip" xml:space="preserve">
+    <value>Inverse hyperbolic cosecant of "x". Example: arcsch(90)</value>
+  </data>
+  <data name="ArsechToolTip" xml:space="preserve">
+    <value>Inverse hyperbolic secant of "x". Example: arsech(90)</value>
+  </data>
+  <data name="ArsinhToolTip" xml:space="preserve">
+    <value>Inverse hyperbolic sine of "x". Example: arsinh(90) or arsh(90)</value>
+  </data>
+  <data name="ArtanhToolTip" xml:space="preserve">
+    <value>Inverse hyperbolic tangent of "x". Example: artanh(90) or arth(90)</value>
+  </data>
+  <data name="CoshToolTip" xml:space="preserve">
+    <value>Hyperbolic cosine of "x". Example: cosh(90) or ch(90)</value>
+  </data>
+  <data name="CothToolTip" xml:space="preserve">
+    <value>Hyperbolic cotangent of "x". Example: coth(90) or cth(90)</value>
+  </data>
+  <data name="CschToolTip" xml:space="preserve">
+    <value>Hyperbolic cosecant of "x". Example: csch(90)</value>
+  </data>
+  <data name="SechToolTip" xml:space="preserve">
+    <value>Hyperbolic secant of "x". Example: sech(90)</value>
+  </data>
+  <data name="SinhToolTip" xml:space="preserve">
+    <value>Hyperbolic sine of "x". Example: sinh(90) or sh(90)</value>
+  </data>
+  <data name="TanhToolTip" xml:space="preserve">
+    <value>Hyperbolic tangent of "x". Example: tanh(90) or th(90)</value>
+  </data>
 </root>

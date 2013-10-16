@@ -474,11 +474,32 @@
   <data name="DefToolTip" xml:space="preserve">
     <value>Призначає значення змінній або функції користувача. Приклад: x := 1, f(x) := sin(x)</value>
   </data>
+  <data name="ExitMenu" xml:space="preserve">
+    <value>Вихід</value>
+  </data>
+  <data name="ExitToolTip" xml:space="preserve">
+    <value>Закрити додаток.</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="NewMenu" xml:space="preserve">
+    <value>Новий</value>
+  </data>
   <data name="NotToolTip" xml:space="preserve">
     <value>Побітова операція НЕ. Ця операція округлює раціональне число. Приклад: not(3)</value>
   </data>
+  <data name="OpenMenu" xml:space="preserve">
+    <value>Відкрити</value>
+  </data>
   <data name="OrToolTip" xml:space="preserve">
     <value>Побітова операція АБО. Ця операція округлює раціональне число. Приклад: x or y, x | y</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Налаштування</value>
   </data>
   <data name="SimplifyToolTip" xml:space="preserve">
     <value>Спрощує вираз. Приклад: simplify(arcsin(sin(x)))</value>

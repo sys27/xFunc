@@ -474,11 +474,32 @@
   <data name="DefToolTip" xml:space="preserve">
     <value>Назначает значение переменной или пользовательской функции. Пример: x := 1, f(x) := sin(x)</value>
   </data>
+  <data name="ExitMenu" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="ExitToolTip" xml:space="preserve">
+    <value>Закрыть приложение.</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="NewMenu" xml:space="preserve">
+    <value>Новый</value>
+  </data>
   <data name="NotToolTip" xml:space="preserve">
     <value>Побитовая операция НЕ. Эта операция округляет рациональное число. Пример: not(3)</value>
   </data>
+  <data name="OpenMenu" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
   <data name="OrToolTip" xml:space="preserve">
     <value>Побитовая операция ИЛИ. Эта операция округляет рациональное число. Пример: x or y, x | y</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Настройки</value>
   </data>
   <data name="SimplifyToolTip" xml:space="preserve">
     <value>Упрощает выражение. Пример: simplify(arcsin(sin(x)))</value>

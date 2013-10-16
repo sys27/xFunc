@@ -565,6 +565,24 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string ExitMenu {
+            get {
+                return ResourceManager.GetString("ExitMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closes the application..
+        /// </summary>
+        public static string ExitToolTip {
+            get {
+                return ResourceManager.GetString("ExitToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expression List.
         /// </summary>
         public static string ExpListGroupHeader {
@@ -588,6 +606,15 @@ namespace xFunc.Resources {
         public static string ExpressionTextBox {
             get {
                 return ResourceManager.GetString("ExpressionTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string FileMenu {
+            get {
+                return ResourceManager.GetString("FileMenu", resourceCulture);
             }
         }
         
@@ -763,6 +790,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string NewMenu {
+            get {
+                return ResourceManager.GetString("NewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation is not supported..
         /// </summary>
         public static string NotSupportedOperationError {
@@ -795,6 +831,15 @@ namespace xFunc.Resources {
         public static string NumberAndArithmeticExpanderHeader {
             get {
                 return ResourceManager.GetString("NumberAndArithmeticExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string OpenMenu {
+            get {
+                return ResourceManager.GetString("OpenMenu", resourceCulture);
             }
         }
         
@@ -916,6 +961,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveMenu {
+            get {
+                return ResourceManager.GetString("SaveMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secant of a number. Example: sec(90).
         /// </summary>
         public static string SecantToolTip {
@@ -930,6 +984,15 @@ namespace xFunc.Resources {
         public static string SechToolTip {
             get {
                 return ResourceManager.GetString("SechToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsMenu {
+            get {
+                return ResourceManager.GetString("SettingsMenu", resourceCulture);
             }
         }
         

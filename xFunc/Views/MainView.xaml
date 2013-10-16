@@ -405,41 +405,77 @@ limitations under the License. -->
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="sinh" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sinh}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SinhToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="cosh" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource cosh}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CoshToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="tanh" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource tanh}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.TanhToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="coth" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource coth}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CothToolTip}" />
+                            </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="arsinh" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arsinh}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArsinhToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="arcosh" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arcosh}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArcoshToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="artanh" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource artanh}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArtanhToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="arcoth" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arcoth}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArcothToolTip}" />
+                            </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="sech" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource sech}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SechToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="csch" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource csch}" Width="36" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CschToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="arsech" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arsech}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArsechToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="arcsch" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource arcsch}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ArcschToolTip}" />
+                            </Button.ToolTip>
                         </Button>
                     </Grid>
                 </Expander>

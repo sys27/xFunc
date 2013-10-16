@@ -468,4 +468,25 @@
   <data name="TanhToolTip" xml:space="preserve">
     <value>Гіперболічний тангенс числа "x". Приклад: tanh(90) або th(90)</value>
   </data>
+  <data name="AndToolTip" xml:space="preserve">
+    <value>Побітова операція І. Ця операція округлює раціональне число. Приклад: x and y, x &amp; y</value>
+  </data>
+  <data name="DefToolTip" xml:space="preserve">
+    <value>Призначає значення змінній або функції користувача. Приклад: x := 1, f(x) := sin(x)</value>
+  </data>
+  <data name="NotToolTip" xml:space="preserve">
+    <value>Побітова операція НЕ. Ця операція округлює раціональне число. Приклад: not(3)</value>
+  </data>
+  <data name="OrToolTip" xml:space="preserve">
+    <value>Побітова операція АБО. Ця операція округлює раціональне число. Приклад: x or y, x | y</value>
+  </data>
+  <data name="SimplifyToolTip" xml:space="preserve">
+    <value>Спрощує вираз. Приклад: simplify(arcsin(sin(x)))</value>
+  </data>
+  <data name="UndefToolTip" xml:space="preserve">
+    <value>Видаляє змінні або функції користувача. Приклад: undef(x)</value>
+  </data>
+  <data name="XOrToolTip" xml:space="preserve">
+    <value>Побітова операція Виключне АБО. Ця операція округлює раціональне число. Приклад: x xor y</value>
+  </data>
 </root>

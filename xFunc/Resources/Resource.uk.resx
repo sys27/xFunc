@@ -522,4 +522,52 @@
   <data name="SettingsViewTitle" xml:space="preserve">
     <value>Налаштування</value>
   </data>
+  <data name="SettingsAngle" xml:space="preserve">
+    <value>Одиниці виміру кута за замовчуванням:</value>
+  </data>
+  <data name="SettingsAutoLang" xml:space="preserve">
+    <value>Автоматично</value>
+  </data>
+  <data name="SettingsBin" xml:space="preserve">
+    <value>Двійкова</value>
+  </data>
+  <data name="SettingsCheckUpdates" xml:space="preserve">
+    <value>Перевіряти оновлення.</value>
+  </data>
+  <data name="SettingsDec" xml:space="preserve">
+    <value>Десяткова</value>
+  </data>
+  <data name="SettingsDegree" xml:space="preserve">
+    <value>Градуси</value>
+  </data>
+  <data name="SettingsGradian" xml:space="preserve">
+    <value>Гради</value>
+  </data>
+  <data name="SettingsHex" xml:space="preserve">
+    <value>Шістнадцяткова</value>
+  </data>
+  <data name="SettingsLanguageLabel" xml:space="preserve">
+    <value>Мова:</value>
+  </data>
+  <data name="SettingsMaxNumber" xml:space="preserve">
+    <value>Максимальна кількість виразів:</value>
+  </data>
+  <data name="SettingsNumber" xml:space="preserve">
+    <value>Система числення за замовчуванням:</value>
+  </data>
+  <data name="SettingsOct" xml:space="preserve">
+    <value>Вісімкова</value>
+  </data>
+  <data name="SettingsRadian" xml:space="preserve">
+    <value>Радіани</value>
+  </data>
+  <data name="SettingsRemember" xml:space="preserve">
+    <value>Запам'ятовувати систему числення і одиниці вимірювання кута</value>
+  </data>
+  <data name="SettingsRightToolBar" xml:space="preserve">
+    <value>Запам'ятовувати стан правої панелі інструментів.</value>
+  </data>
+  <data name="SettingsWindowPos" xml:space="preserve">
+    <value>Запам'ятовувати стан вікна і його позицію.</value>
+  </data>
 </root>

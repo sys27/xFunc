@@ -522,4 +522,52 @@
   <data name="SettingsViewTitle" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="SettingsAngle" xml:space="preserve">
+    <value>Единицы измерения угла по умолчанию:</value>
+  </data>
+  <data name="SettingsAutoLang" xml:space="preserve">
+    <value>Автоматически</value>
+  </data>
+  <data name="SettingsBin" xml:space="preserve">
+    <value>Двоичная</value>
+  </data>
+  <data name="SettingsCheckUpdates" xml:space="preserve">
+    <value>Проверять обновления.</value>
+  </data>
+  <data name="SettingsDec" xml:space="preserve">
+    <value>Десятичная</value>
+  </data>
+  <data name="SettingsDegree" xml:space="preserve">
+    <value>Градусы</value>
+  </data>
+  <data name="SettingsGradian" xml:space="preserve">
+    <value>Грады</value>
+  </data>
+  <data name="SettingsHex" xml:space="preserve">
+    <value>Шестнадцатеричная</value>
+  </data>
+  <data name="SettingsLanguageLabel" xml:space="preserve">
+    <value>Язык:</value>
+  </data>
+  <data name="SettingsMaxNumber" xml:space="preserve">
+    <value>Максимальное количество выражений:</value>
+  </data>
+  <data name="SettingsNumber" xml:space="preserve">
+    <value>Система счисления по умолчанию:</value>
+  </data>
+  <data name="SettingsOct" xml:space="preserve">
+    <value>Восьмеричная</value>
+  </data>
+  <data name="SettingsRadian" xml:space="preserve">
+    <value>Радианы</value>
+  </data>
+  <data name="SettingsRemember" xml:space="preserve">
+    <value>Запоминать систему счисления и единицы измерения угла</value>
+  </data>
+  <data name="SettingsRightToolBar" xml:space="preserve">
+    <value>Запоминать состояние правой панели инструментов.</value>
+  </data>
+  <data name="SettingsWindowPos" xml:space="preserve">
+    <value>Запоминать состояние окна и его позицию.</value>
+  </data>
 </root>

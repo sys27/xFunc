@@ -19,7 +19,7 @@ limitations under the License. -->
                      xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
                      xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                      xmlns:views="clr-namespace:xFunc.Views"
-                     Title="xFunc" Width="1024" Height="576" MinWidth="450"
+                     Title="xFunc" Width="1024" Height="576" MinWidth="480" MinHeight="270"
                      Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
                      Loaded="this_Loaded">
     <ribbon:RibbonWindow.CommandBindings>

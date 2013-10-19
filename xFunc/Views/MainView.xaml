@@ -39,6 +39,7 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
 
         <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
+        <CommandBinding Command="views:MainView.SettingsCommand" Executed="SettingsCommand_Execute" />
         <CommandBinding Command="views:MainView.ExitCommand" Executed="ExitCommand_Execute" />
     </ribbon:RibbonWindow.CommandBindings>
     <ribbon:RibbonWindow.InputBindings>
@@ -76,7 +77,11 @@ limitations under the License. -->
                         <ribbon:Button Header="{x:Static res:Resource.OpenMenu}" Icon="..\Images\open.png" />
                         <ribbon:Button Header="{x:Static res:Resource.SaveMenu}" Icon="..\Images\save.png" />
                         <ribbon:SeparatorTabItem />
-                        <ribbon:Button Header="{x:Static res:Resource.SettingsMenu}" Icon="..\Images\settings.png" />
+                        <ribbon:Button Header="{x:Static res:Resource.SettingsMenu}" Icon="..\Images\settings.png" Command="views:MainView.SettingsCommand">
+                            <ribbon:Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SettingsToolTip}" />
+                            </ribbon:Button.ToolTip>
+                        </ribbon:Button>
                         <ribbon:Button Header="{x:Static res:Resource.ExitMenu}" Icon="..\Images\exit.png" Command="views:MainView.ExitCommand">
                             <ribbon:Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ExitToolTip}" />

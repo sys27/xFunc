@@ -510,4 +510,16 @@
   <data name="XOrToolTip" xml:space="preserve">
     <value>Побітова операція Виключне АБО. Ця операція округлює раціональне число. Приклад: x xor y</value>
   </data>
+  <data name="SettingsCancel" xml:space="preserve">
+    <value>Скасувати</value>
+  </data>
+  <data name="SettingsSave" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="SettingsToolTip" xml:space="preserve">
+    <value>Відображає налаштування програми.</value>
+  </data>
+  <data name="SettingsViewTitle" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
 </root>

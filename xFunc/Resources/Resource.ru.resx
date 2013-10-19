@@ -510,4 +510,16 @@
   <data name="XOrToolTip" xml:space="preserve">
     <value>Побитовая операция Исключащее ИЛИ. Эта операция округляет рациональное число. Пример: x xor y</value>
   </data>
+  <data name="SettingsCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="SettingsSave" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SettingsToolTip" xml:space="preserve">
+    <value>Отображает настройки программы.</value>
+  </data>
+  <data name="SettingsViewTitle" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
 </root>

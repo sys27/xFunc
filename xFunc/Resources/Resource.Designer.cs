@@ -988,6 +988,33 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default _angle measurement:.
+        /// </summary>
+        public static string SettingsAngle {
+            get {
+                return ResourceManager.GetString("SettingsAngle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic.
+        /// </summary>
+        public static string SettingsAutoLang {
+            get {
+                return ResourceManager.GetString("SettingsAutoLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Binary.
+        /// </summary>
+        public static string SettingsBin {
+            get {
+                return ResourceManager.GetString("SettingsBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string SettingsCancel {
@@ -997,11 +1024,119 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check for updates..
+        /// </summary>
+        public static string SettingsCheckUpdates {
+            get {
+                return ResourceManager.GetString("SettingsCheckUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decimal.
+        /// </summary>
+        public static string SettingsDec {
+            get {
+                return ResourceManager.GetString("SettingsDec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Degree.
+        /// </summary>
+        public static string SettingsDegree {
+            get {
+                return ResourceManager.GetString("SettingsDegree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gradian.
+        /// </summary>
+        public static string SettingsGradian {
+            get {
+                return ResourceManager.GetString("SettingsGradian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hexadecimal.
+        /// </summary>
+        public static string SettingsHex {
+            get {
+                return ResourceManager.GetString("SettingsHex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Language:.
+        /// </summary>
+        public static string SettingsLanguageLabel {
+            get {
+                return ResourceManager.GetString("SettingsLanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of expressions:.
+        /// </summary>
+        public static string SettingsMaxNumber {
+            get {
+                return ResourceManager.GetString("SettingsMaxNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string SettingsMenu {
             get {
                 return ResourceManager.GetString("SettingsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default _number base:.
+        /// </summary>
+        public static string SettingsNumber {
+            get {
+                return ResourceManager.GetString("SettingsNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Octal.
+        /// </summary>
+        public static string SettingsOct {
+            get {
+                return ResourceManager.GetString("SettingsOct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radian.
+        /// </summary>
+        public static string SettingsRadian {
+            get {
+                return ResourceManager.GetString("SettingsRadian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Remember number base and angle measurement.
+        /// </summary>
+        public static string SettingsRemember {
+            get {
+                return ResourceManager.GetString("SettingsRemember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember right _tool bar state..
+        /// </summary>
+        public static string SettingsRightToolBar {
+            get {
+                return ResourceManager.GetString("SettingsRightToolBar", resourceCulture);
             }
         }
         
@@ -1029,6 +1164,15 @@ namespace xFunc.Resources {
         public static string SettingsViewTitle {
             get {
                 return ResourceManager.GetString("SettingsViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember window state and _position..
+        /// </summary>
+        public static string SettingsWindowPos {
+            get {
+                return ResourceManager.GetString("SettingsWindowPos", resourceCulture);
             }
         }
         

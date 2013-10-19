@@ -18,6 +18,8 @@ limitations under the License. -->
         xmlns:res="clr-namespace:xFunc.Resources"
         xmlns:conv="clr-namespace:xFunc.Converters"
         xmlns:views="clr-namespace:xFunc.Views"
+        xmlns:maths="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
+        xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
         Title="{x:Static res:Resource.SettingsViewTitle}" Width="540" Height="300"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
@@ -33,46 +35,44 @@ limitations under the License. -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Content="Language:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
-        <ComboBox Margin="0,12,10,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Right" Width="140">
-            <ComboBoxItem Content="Auto" />
-            <ComboBoxItem Content="En" />
-            <ComboBoxItem Content="Ru" />
-            <ComboBoxItem Content="Ua" />
+        <Label Content="{x:Static res:Resource.SettingsLanguageLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Target="{Binding ElementName=langComboBox}" />
+        <ComboBox x:Name="langComboBox" Margin="0,12,10,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Right" Width="140" SelectedValuePath="Tag">
+            <ComboBoxItem Content="{x:Static res:Resource.SettingsAutoLang}" Tag="Auto" />
+            <ComboBoxItem Content="English" Tag="En" />
+            <ComboBoxItem Content="Русский" Tag="Ru" />
+            <ComboBoxItem Content="Українська" Tag="Uk" />
         </ComboBox>
 
-        <CheckBox Content="Remember window state and position." HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox Content="Remember right tool bar state." HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="positionCheckBox" Content="{x:Static res:Resource.SettingsWindowPos}" Margin="10,41,10,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="toolBarCheckBox" Content="{x:Static res:Resource.SettingsRightToolBar}" Margin="10,61,10,0" VerticalAlignment="Top" IsChecked="True" />
 
         <GroupBox Margin="10,81.098,10,0" VerticalAlignment="Top" Height="89.843">
             <GroupBox.Header>
-                <CheckBox x:Name="numAndAngleCheckBox" Content="Remember number base and angle measurement" IsChecked="True" />
+                <CheckBox x:Name="numAndAngleCheckBox" Content="{x:Static res:Resource.SettingsRemember}" IsChecked="True" />
             </GroupBox.Header>
             <GroupBox.Content>
                 <Grid IsEnabled="{Binding Path=IsChecked, ElementName=numAndAngleCheckBox, Converter={StaticResource inverseBooleanConverter}}">
-                    <Label Content="Default angle measurement:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6.01,0,0" />
-                    <ComboBox HorizontalAlignment="Right" VerticalAlignment="Top" Width="140" SelectedIndex="0" Margin="0,8.01,0,0">
-                        <ComboBoxItem Content="From last run" />
-                        <ComboBoxItem Content="Deg" />
-                        <ComboBoxItem Content="Rad" />
-                        <ComboBoxItem Content="Grad" />
+                    <Label Content="{x:Static res:Resource.SettingsAngle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6.01,0,0" />
+                    <ComboBox x:Name="angleComboBox" HorizontalAlignment="Right" VerticalAlignment="Top" Width="140" SelectedIndex="0" Margin="0,8.01,0,0" SelectedValuePath="Tag">
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsDegree}" Tag="{x:Static exps:AngleMeasurement.Degree}" />
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsRadian}" Tag="{x:Static exps:AngleMeasurement.Radian}" />
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsGradian}" Tag="{x:Static exps:AngleMeasurement.Gradian}" />
                     </ComboBox>
-                    <Label Content="Default number base:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36.97,0,0" />
-                    <ComboBox HorizontalAlignment="Right" VerticalAlignment="Top" Width="140" SelectedIndex="0" Margin="0,38.97,0,0">
-                        <ComboBoxItem Content="From last run" />
-                        <ComboBoxItem Content="Bin" />
-                        <ComboBoxItem Content="Oct" />
-                        <ComboBoxItem Content="Dec" />
-                        <ComboBoxItem Content="Hex" />
+                    <Label Content="{x:Static res:Resource.SettingsNumber}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36.97,0,0" />
+                    <ComboBox x:Name="baseComboBox" HorizontalAlignment="Right" VerticalAlignment="Top" Width="140" SelectedIndex="2" Margin="0,38.97,0,0" SelectedValuePath="Tag">
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsBin}" Tag="{x:Static maths:NumeralSystem.Binary}" />
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsOct}" Tag="{x:Static maths:NumeralSystem.Octal}" />
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsDec}" Tag="{x:Static maths:NumeralSystem.Decimal}" />
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsHex}" Tag="{x:Static maths:NumeralSystem.Hexidecimal}" />
                     </ComboBox>
                 </Grid>
             </GroupBox.Content>
         </GroupBox>
 
-        <Label Content="Maximum number of expressions." HorizontalAlignment="Left" Margin="10,171.94,0,0" VerticalAlignment="Top" />
+        <Label Content="{x:Static res:Resource.SettingsMaxNumber}" HorizontalAlignment="Left" Margin="10,171.94,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="maxCountOfExpsTextBox" HorizontalAlignment="Right" Height="23" Margin="0,175.941,10,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" />
 
-        <CheckBox Content="Check for updates." HorizontalAlignment="Left" Margin="10,202.9,0,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="updatesCheckBox" Content="{x:Static res:Resource.SettingsCheckUpdates}" Margin="10,202.9,10,0" VerticalAlignment="Top" IsChecked="True" />
 
         <Grid Grid.Row="1" Background="#FFEFEFEF" Height="39">
             <Button Content="{x:Static res:Resource.SettingsSave}" HorizontalAlignment="Right" Margin="0,10,87,8" Width="75" Command="views:SettingsView.OKCommand" IsDefault="True" />

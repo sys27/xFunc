@@ -443,11 +443,12 @@ namespace xFunc.Views
         {
             var settingsView = new SettingsView()
             {
-                Owner = this
+                Owner = this,
+                ProgramLanguage = Settings.Default.Lang
             };
             if (settingsView.ShowDialog() == true)
             {
-                // todo: save
+                Settings.Default.Lang = settingsView.ProgramLanguage;
             }
         }
 

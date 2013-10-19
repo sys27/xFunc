@@ -24,6 +24,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using xFunc.Maths;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.Views
 {
@@ -48,6 +50,102 @@ namespace xFunc.Views
         {
             int max;
             args.CanExecute = int.TryParse(this.maxCountOfExpsTextBox.Text, out max);
+        }
+
+        public string ProgramLanguage
+        {
+            get
+            {
+                return (string)this.langComboBox.SelectedValue;
+            }
+            internal set
+            {
+                this.langComboBox.SelectedValue = value;
+            }
+        }
+
+        public bool RememberStateAndPosition
+        {
+            get
+            {
+                return this.positionCheckBox.IsChecked.Value;
+            }
+            internal set
+            {
+                this.positionCheckBox.IsChecked = value;
+            }
+        }
+
+        public bool RememberRightToolBar
+        {
+            get
+            {
+                return this.toolBarCheckBox.IsChecked.Value;
+            }
+            internal set
+            {
+                this.toolBarCheckBox.IsChecked = value;
+            }
+        }
+
+        public bool RememberNumberAndAngle
+        {
+            get
+            {
+                return this.numAndAngleCheckBox.IsChecked.Value;
+            }
+            internal set
+            {
+                this.numAndAngleCheckBox.IsChecked = value;
+            }
+        }
+
+        public AngleMeasurement Angle
+        {
+            get
+            {
+                return (AngleMeasurement)this.angleComboBox.SelectedValue;
+            }
+            internal set
+            {
+                this.angleComboBox.SelectedValue = value;
+            }
+        }
+
+        public NumeralSystem Base
+        {
+            get
+            {
+                return (NumeralSystem)this.baseComboBox.SelectedValue;
+            }
+            internal set
+            {
+                this.baseComboBox.SelectedValue = value;
+            }
+        }
+
+        public int MaxCountOfExps
+        {
+            get
+            {
+                return int.Parse(this.maxCountOfExpsTextBox.Text);
+            }
+            internal set
+            {
+                this.maxCountOfExpsTextBox.Text = value.ToString();
+            }
+        }
+
+        public bool CheckUpdates
+        {
+            get
+            {
+                return this.updatesCheckBox.IsChecked.Value;
+            }
+            internal set
+            {
+                this.updatesCheckBox.IsChecked = value;
+            }
         }
 
     }

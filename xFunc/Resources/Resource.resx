@@ -522,4 +522,52 @@
   <data name="SettingsViewTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SettingsAngle" xml:space="preserve">
+    <value>Default _angle measurement:</value>
+  </data>
+  <data name="SettingsAutoLang" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="SettingsBin" xml:space="preserve">
+    <value>Binary</value>
+  </data>
+  <data name="SettingsCheckUpdates" xml:space="preserve">
+    <value>Check for updates.</value>
+  </data>
+  <data name="SettingsDec" xml:space="preserve">
+    <value>Decimal</value>
+  </data>
+  <data name="SettingsDegree" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="SettingsGradian" xml:space="preserve">
+    <value>Gradian</value>
+  </data>
+  <data name="SettingsHex" xml:space="preserve">
+    <value>Hexadecimal</value>
+  </data>
+  <data name="SettingsLanguageLabel" xml:space="preserve">
+    <value>_Language:</value>
+  </data>
+  <data name="SettingsMaxNumber" xml:space="preserve">
+    <value>Maximum number of expressions:</value>
+  </data>
+  <data name="SettingsNumber" xml:space="preserve">
+    <value>Default _number base:</value>
+  </data>
+  <data name="SettingsOct" xml:space="preserve">
+    <value>Octal</value>
+  </data>
+  <data name="SettingsRadian" xml:space="preserve">
+    <value>Radian</value>
+  </data>
+  <data name="SettingsRemember" xml:space="preserve">
+    <value>_Remember number base and angle measurement</value>
+  </data>
+  <data name="SettingsRightToolBar" xml:space="preserve">
+    <value>Remember right _tool bar state.</value>
+  </data>
+  <data name="SettingsWindowPos" xml:space="preserve">
+    <value>Remember window state and _position.</value>
+  </data>
 </root>

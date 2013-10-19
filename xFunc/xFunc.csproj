@@ -78,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Presenters\GraphsPresenter.cs" />
     <Compile Include="Presenters\LogicPresenter.cs" />
     <Compile Include="Presenters\LogicWorkspace.cs" />

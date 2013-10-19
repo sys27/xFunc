@@ -445,7 +445,10 @@ namespace xFunc.Views
             {
                 Owner = this
             };
-            settingsView.ShowDialog();
+            if (settingsView.ShowDialog() == true)
+            {
+                // todo: save
+            }
         }
 
         private void ExitCommand_Execute(object o, ExecutedRoutedEventArgs args)

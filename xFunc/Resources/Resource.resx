@@ -510,4 +510,16 @@
   <data name="XOrToolTip" xml:space="preserve">
     <value>Bitwise XOR operation. This operation rounds a rational number. Example: x xor y</value>
   </data>
+  <data name="SettingsCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SettingsSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SettingsToolTip" xml:space="preserve">
+    <value>Shows settings of program.</value>
+  </data>
+  <data name="SettingsViewTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

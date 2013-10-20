@@ -1053,6 +1053,58 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void RootInRoot()
+        {
+            var tokens = lexer.Tokenize("root(1 + root(2, x), 2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Root, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new OperationToken(Operations.Addition),
+                new FunctionToken(Functions.Root, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void BracketsForAllParams()
+        {
+            var tokens = lexer.Tokenize("(3)cos((u))cos((v))");
+
+            var expected = new List<IToken>()
+            {
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket),
+                new FunctionToken(Functions.Cosine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("u"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket),
+                new FunctionToken(Functions.Cosine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("v"),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

@@ -26,6 +26,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Properties;
 
 namespace xFunc.Views
 {
@@ -34,10 +35,18 @@ namespace xFunc.Views
     {
 
         public static RoutedCommand OKCommand = new RoutedCommand();
+        public static RoutedCommand ResetCommand = new RoutedCommand();
 
         public SettingsView()
         {
             InitializeComponent();
+
+            Init();
+        }
+
+        private void Init()
+        {
+            ProgramLanguage = Settings.Default.Lang;
         }
 
         private void OKCommand_Execute(object o, ExecutedRoutedEventArgs args)
@@ -50,6 +59,13 @@ namespace xFunc.Views
         {
             int max;
             args.CanExecute = int.TryParse(this.maxCountOfExpsTextBox.Text, out max);
+        }
+
+        private void ResetCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            // todo: !!!
+            //Settings.Default.Reset();
+            Init();
         }
 
         public string ProgramLanguage

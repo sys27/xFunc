@@ -727,7 +727,7 @@ namespace xFunc.Maths
                         oneParam = false;
                     }
 
-                    i += _CountUserFuncParams(tokens, i) - 1;
+                    i = _CountUserFuncParams(tokens, i) + 1;
                 }
                 else
                 {
@@ -750,7 +750,7 @@ namespace xFunc.Maths
             for (int i = 0; i < tokens.Count; )
             {
                 if (tokens[i] is FunctionToken)
-                    i += _CountUserFuncParams(tokens, i);
+                    i = _CountUserFuncParams(tokens, i) + 1;
                 else
                     i++;
             }

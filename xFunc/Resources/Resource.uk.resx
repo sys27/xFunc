@@ -570,4 +570,7 @@
   <data name="SettingsWindowPos" xml:space="preserve">
     <value>Запам'ятовувати стан вікна і його позицію.</value>
   </data>
+  <data name="SettingsReset" xml:space="preserve">
+    <value>Скинути</value>
+  </data>
 </root>

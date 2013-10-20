@@ -570,4 +570,7 @@
   <data name="SettingsWindowPos" xml:space="preserve">
     <value>Remember window state and _position.</value>
   </data>
+  <data name="SettingsReset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>

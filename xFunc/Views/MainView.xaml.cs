@@ -188,10 +188,10 @@ namespace xFunc.Views
             Width = Settings.Default.WindowWidth;
             Height = Settings.Default.WindowHeight;
 
+            tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
+
             mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
             mathPresenter.Base = Settings.Default.NumberBase;
-
-            tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
 
             numberToolBar.IsExpanded = Settings.Default.NumbersExpanded;
             standartMathToolBar.IsExpanded = Settings.Default.StandartMathExpanded;
@@ -208,31 +208,66 @@ namespace xFunc.Views
 
         private void SaveSettings()
         {
-            if (WindowState != WindowState.Minimized)
-                Settings.Default.WindowState = WindowState;
+            if (Settings.Default.RememberSizeAndPosition)
+            {
+                if (WindowState != WindowState.Minimized)
+                    Settings.Default.WindowState = WindowState;
 
-            Settings.Default.WindowTop = Top;
-            Settings.Default.WindowLeft = Left;
+                Settings.Default.WindowTop = Top;
+                Settings.Default.WindowLeft = Left;
 
-            Settings.Default.WindowWidth = Width;
-            Settings.Default.WindowHeight = Height;
+                Settings.Default.WindowWidth = Width;
+                Settings.Default.WindowHeight = Height;
 
-            Settings.Default.AngleMeasurement = mathPresenter.AngleMeasurement;
-            Settings.Default.NumberBase = mathPresenter.Base;
+                Settings.Default.SelectedTabIndex = tabControl.SelectedIndex;
+            }
+            else
+            {
+                Settings.Default.WindowState = (WindowState)Enum.Parse(typeof(WindowState), Settings.Default.Properties["WindowState"].DefaultValue.ToString());
 
-            Settings.Default.SelectedTabIndex = tabControl.SelectedIndex;
+                Settings.Default.WindowTop = double.Parse(Settings.Default.Properties["WindowTop"].DefaultValue.ToString());
+                Settings.Default.WindowLeft = double.Parse(Settings.Default.Properties["WindowLeft"].DefaultValue.ToString());
 
-            Settings.Default.NumbersExpanded = numberToolBar.IsExpanded;
-            Settings.Default.StandartMathExpanded = standartMathToolBar.IsExpanded;
-            Settings.Default.TrigonometricExpanded = trigonometricToolBar.IsExpanded;
-            Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
-            Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
-            Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
-            Settings.Default.AdditionalMathExpanded = additionalMathToolBar.IsExpanded;
+                Settings.Default.WindowWidth = double.Parse(Settings.Default.Properties["WindowWidth"].DefaultValue.ToString());
+                Settings.Default.WindowHeight = double.Parse(Settings.Default.Properties["WindowHeight"].DefaultValue.ToString());
 
-            Settings.Default.StandartLogicExpanded = standartLogicToolBar.IsExpanded;
-            Settings.Default.ConstantsLogicExpanded = constantsLogicToolBar.IsExpanded;
-            Settings.Default.AdditionalLogicExpanded = additionalLogicToolBar.IsExpanded;
+                Settings.Default.SelectedTabIndex = int.Parse(Settings.Default.Properties["SelectedTabIndex"].DefaultValue.ToString());
+            }
+
+            if (Settings.Default.RememberBaseAndAngle)
+            {
+                Settings.Default.AngleMeasurement = mathPresenter.AngleMeasurement;
+                Settings.Default.NumberBase = mathPresenter.Base;
+            }
+
+            if (Settings.Default.RememberRightToolBar)
+            {
+                Settings.Default.NumbersExpanded = numberToolBar.IsExpanded;
+                Settings.Default.StandartMathExpanded = standartMathToolBar.IsExpanded;
+                Settings.Default.TrigonometricExpanded = trigonometricToolBar.IsExpanded;
+                Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
+                Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
+                Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
+                Settings.Default.AdditionalMathExpanded = additionalMathToolBar.IsExpanded;
+
+                Settings.Default.StandartLogicExpanded = standartLogicToolBar.IsExpanded;
+                Settings.Default.ConstantsLogicExpanded = constantsLogicToolBar.IsExpanded;
+                Settings.Default.AdditionalLogicExpanded = additionalLogicToolBar.IsExpanded;
+            }
+            else
+            {
+                Settings.Default.NumbersExpanded = bool.Parse(Settings.Default.Properties["NumbersExpanded"].DefaultValue.ToString());
+                Settings.Default.StandartMathExpanded = bool.Parse(Settings.Default.Properties["StandartMathExpanded"].DefaultValue.ToString());
+                Settings.Default.TrigonometricExpanded = bool.Parse(Settings.Default.Properties["TrigonometricExpanded"].DefaultValue.ToString());
+                Settings.Default.HyperbolicExpanded = bool.Parse(Settings.Default.Properties["HyperbolicExpanded"].DefaultValue.ToString());
+                Settings.Default.BitwiseExpanded = bool.Parse(Settings.Default.Properties["BitwiseExpanded"].DefaultValue.ToString());
+                Settings.Default.ConstantsMathExpanded = bool.Parse(Settings.Default.Properties["ConstantsMathExpanded"].DefaultValue.ToString());
+                Settings.Default.AdditionalMathExpanded = bool.Parse(Settings.Default.Properties["AdditionalMathExpanded"].DefaultValue.ToString());
+
+                Settings.Default.StandartLogicExpanded = bool.Parse(Settings.Default.Properties["StandartLogicExpanded"].DefaultValue.ToString());
+                Settings.Default.ConstantsLogicExpanded = bool.Parse(Settings.Default.Properties["ConstantsLogicExpanded"].DefaultValue.ToString());
+                Settings.Default.AdditionalLogicExpanded = bool.Parse(Settings.Default.Properties["AdditionalLogicExpanded"].DefaultValue.ToString());
+            }
 
             Settings.Default.Save();
         }
@@ -458,6 +493,8 @@ namespace xFunc.Views
                 }
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
                 Settings.Default.CheckUpdates = settingsView.CheckUpdates;
+
+                Settings.Default.Save();
             }
             else
             {

@@ -9,14 +9,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-<<<<<<< HEAD
-[assembly: AssemblyVersion("2.8.0")]
-[assembly: AssemblyFileVersion("2.8.0")]
-[assembly: AssemblyInformationalVersion("2.8.0")]
-[assembly: NeutralResourcesLanguageAttribute("en")]
-=======
 [assembly: AssemblyVersion("2.8.2")]
 [assembly: AssemblyFileVersion("2.8.2")]
 [assembly: AssemblyInformationalVersion("2.8.2")]
 [assembly: NeutralResourcesLanguageAttribute("en")]
->>>>>>> master

@@ -936,7 +936,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        public void ZeroTest()
+        public void ZeroSubTwoTest()
         {
             var tokens = lexer.Tokenize("0-2");
 
@@ -1054,7 +1054,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        public void RootInRoot()
+        public void RootInRootTest()
         {
             var tokens = lexer.Tokenize("root(1 + root(2, x), 2)");
 
@@ -1079,7 +1079,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        public void BracketsForAllParams()
+        public void BracketsForAllParamsTest()
         {
             var tokens = lexer.Tokenize("(3)cos((u))cos((v))");
 
@@ -1100,6 +1100,49 @@ namespace xFunc.Test
                 new VariableToken("v"),
                 new SymbolToken(Symbols.CloseBracket),
                 new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ZeroTest()
+        {
+            var tokens = lexer.Tokenize("0");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(0)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void HexErrorTest()
+        {
+            var tokens = lexer.Tokenize("0x");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(0),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("x")
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void BinErrorTest()
+        {
+            var tokens = lexer.Tokenize("0b");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(0),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("b")
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());

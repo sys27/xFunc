@@ -188,10 +188,10 @@ namespace xFunc.Maths
                     string strNumber;
                     double number;
 
-                    if (letter == '0' && i < function.Length)
+                    if (letter == '0' && i + 1 < function.Length)
                     {
                         var nextLetter = function[i + 1];
-                        if (nextLetter == 'x')
+                        if (nextLetter == 'x' && i + 2 < function.Length)
                         {
                             i += 2;
 
@@ -206,7 +206,7 @@ namespace xFunc.Maths
                             i += length;
                             continue;
                         }
-                        if (nextLetter == 'b')
+                        if (nextLetter == 'b' && i + 2 < function.Length)
                         {
                             i += 2;
 

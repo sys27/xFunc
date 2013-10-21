@@ -89,5 +89,14 @@
     <Setting Name="FuncWindowHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">280</Value>
     </Setting>
+    <Setting Name="RememberSizeAndPosition" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RememberRightToolBar" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RememberBaseAndAngle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -47,6 +47,16 @@ namespace xFunc.Views
         private void Init()
         {
             ProgramLanguage = Settings.Default.Lang;
+            RememberStateAndPosition = Settings.Default.RememberSizeAndPosition;
+            RememberRightToolBar = Settings.Default.RememberRightToolBar;
+            RememberNumberAndAngle = Settings.Default.RememberBaseAndAngle;
+            if (!RememberNumberAndAngle)
+            {
+                Angle = Settings.Default.AngleMeasurement;
+                Base = Settings.Default.NumberBase;
+            }
+            MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
+            CheckUpdates = Settings.Default.CheckUpdates;
         }
 
         private void OKCommand_Execute(object o, ExecutedRoutedEventArgs args)

@@ -73,9 +73,9 @@ namespace xFunc.Views
 
         private void ResetCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            // todo: !!!
-            //Settings.Default.Reset();
-            Init();
+            Settings.Default.Reset();
+            DialogResult = false;
+            Close();
         }
 
         public string ProgramLanguage

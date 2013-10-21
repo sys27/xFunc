@@ -448,6 +448,16 @@ namespace xFunc.Views
             if (settingsView.ShowDialog() == true)
             {
                 Settings.Default.Lang = settingsView.ProgramLanguage;
+                Settings.Default.RememberSizeAndPosition = settingsView.RememberStateAndPosition;
+                Settings.Default.RememberRightToolBar = settingsView.RememberRightToolBar;
+                Settings.Default.RememberBaseAndAngle = settingsView.RememberNumberAndAngle;
+                if (!settingsView.RememberNumberAndAngle)
+                {
+                    Settings.Default.AngleMeasurement = settingsView.Angle;
+                    Settings.Default.NumberBase = settingsView.Base;
+                }
+                Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
+                Settings.Default.CheckUpdates = settingsView.CheckUpdates;
             }
             else
             {

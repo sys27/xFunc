@@ -1069,11 +1069,20 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Language:.
+        ///   Looks up a localized string similar to _Language*:.
         /// </summary>
         public static string SettingsLanguageLabel {
             get {
                 return ResourceManager.GetString("SettingsLanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The language will be set after program restart..
+        /// </summary>
+        public static string SettingsLanguageToolTip {
+            get {
+                return ResourceManager.GetString("SettingsLanguageToolTip", resourceCulture);
             }
         }
         

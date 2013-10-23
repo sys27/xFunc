@@ -78,6 +78,7 @@ namespace xFunc.Views
             processor = new MathProcessor();
 
             mathPresenter = new MathPresenter(this.mathControl, processor);
+            mathPresenter.PropertyChanged += mathPresenter_PropertyChanged;
             this.mathControl.Presenter = mathPresenter;
             logicPresenter = new LogicPresenter(this.logicControl);
             this.logicControl.Presenter = logicPresenter;
@@ -90,33 +91,60 @@ namespace xFunc.Views
             LoadSettings();
 
             SetFocus();
+        }
 
-            switch (mathPresenter.AngleMeasurement)
+        private void mathPresenter_PropertyChanged(object o, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "AngleMeasurement")
             {
-                case AngleMeasurement.Degree:
-                    degreeButton.IsChecked = true;
-                    break;
-                case AngleMeasurement.Radian:
-                    radianButton.IsChecked = true;
-                    break;
-                case AngleMeasurement.Gradian:
-                    gradianButton.IsChecked = true;
-                    break;
+                switch (mathPresenter.AngleMeasurement)
+                {
+                    case AngleMeasurement.Degree:
+                        radianButton.IsChecked = false;
+                        gradianButton.IsChecked = false;
+                        degreeButton.IsChecked = true;
+                        break;
+                    case AngleMeasurement.Radian:
+                        degreeButton.IsChecked = false;
+                        gradianButton.IsChecked = false;
+                        radianButton.IsChecked = true;
+                        break;
+                    case AngleMeasurement.Gradian:
+                        degreeButton.IsChecked = false;
+                        radianButton.IsChecked = false;
+                        gradianButton.IsChecked = true;
+                        break;
+                }
             }
-            switch (mathPresenter.Base)
+            else if (args.PropertyName == "Base")
             {
-                case NumeralSystem.Binary:
-                    binButton.IsChecked = true;
-                    break;
-                case NumeralSystem.Octal:
-                    octButton.IsChecked = true;
-                    break;
-                case NumeralSystem.Decimal:
-                    decButton.IsChecked = true;
-                    break;
-                case NumeralSystem.Hexidecimal:
-                    hexButton.IsChecked = true;
-                    break;
+                switch (mathPresenter.Base)
+                {
+                    case NumeralSystem.Binary:
+                        octButton.IsChecked = false;
+                        decButton.IsChecked = false;
+                        hexButton.IsChecked = false;
+                        binButton.IsChecked = true;
+                        break;
+                    case NumeralSystem.Octal:
+                        binButton.IsChecked = false;
+                        decButton.IsChecked = false;
+                        hexButton.IsChecked = false;
+                        octButton.IsChecked = true;
+                        break;
+                    case NumeralSystem.Decimal:
+                        binButton.IsChecked = false;
+                        octButton.IsChecked = false;
+                        hexButton.IsChecked = false;
+                        decButton.IsChecked = true;
+                        break;
+                    case NumeralSystem.Hexidecimal:
+                        binButton.IsChecked = false;
+                        octButton.IsChecked = false;
+                        decButton.IsChecked = false;
+                        hexButton.IsChecked = true;
+                        break;
+                }
             }
         }
 
@@ -286,28 +314,19 @@ namespace xFunc.Views
 
         #region Commands
 
-        private void DergeeButton_Execute(object o, ExecutedRoutedEventArgs args)
+        private void DegreeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            radianButton.IsChecked = false;
-            gradianButton.IsChecked = false;
             mathPresenter.AngleMeasurement = AngleMeasurement.Degree;
-            degreeButton.IsChecked = true;
         }
 
         private void RadianButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            degreeButton.IsChecked = false;
-            gradianButton.IsChecked = false;
             mathPresenter.AngleMeasurement = AngleMeasurement.Radian;
-            radianButton.IsChecked = true;
         }
 
         private void GradianButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            degreeButton.IsChecked = false;
-            radianButton.IsChecked = false;
             mathPresenter.AngleMeasurement = AngleMeasurement.Gradian;
-            gradianButton.IsChecked = true;
         }
 
         private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
@@ -317,38 +336,22 @@ namespace xFunc.Views
 
         private void BinCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            octButton.IsChecked = false;
-            decButton.IsChecked = false;
-            hexButton.IsChecked = false;
             mathPresenter.Base = NumeralSystem.Binary;
-            binButton.IsChecked = true;
         }
 
         private void OctCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            binButton.IsChecked = false;
-            decButton.IsChecked = false;
-            hexButton.IsChecked = false;
             mathPresenter.Base = NumeralSystem.Octal;
-            octButton.IsChecked = true;
         }
 
         private void DecCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            binButton.IsChecked = false;
-            octButton.IsChecked = false;
-            hexButton.IsChecked = false;
             mathPresenter.Base = NumeralSystem.Decimal;
-            decButton.IsChecked = true;
         }
 
         private void HexCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            binButton.IsChecked = false;
-            octButton.IsChecked = false;
-            decButton.IsChecked = false;
             mathPresenter.Base = NumeralSystem.Hexidecimal;
-            hexButton.IsChecked = true;
         }
 
         private void BaseCommands_CanExecute(object o, CanExecuteRoutedEventArgs args)
@@ -370,10 +373,21 @@ namespace xFunc.Views
                 };
                 variableView.Closed += (lo, larg) =>
                 {
-                    Settings.Default.VarWindowTop = variableView.Top;
-                    Settings.Default.VarWindowLeft = variableView.Left;
-                    Settings.Default.VarWindowWidth = variableView.Width;
-                    Settings.Default.VarWindowHeight = variableView.Height;
+                    if (Settings.Default.RememberSizeAndPosition)
+                    {
+                        Settings.Default.VarWindowTop = variableView.Top;
+                        Settings.Default.VarWindowLeft = variableView.Left;
+                        Settings.Default.VarWindowWidth = variableView.Width;
+                        Settings.Default.VarWindowHeight = variableView.Height;
+                    }
+                    else
+                    {
+                        Settings.Default.VarWindowTop = double.Parse(Settings.Default.Properties["VarWindowTop"].DefaultValue.ToString());
+                        Settings.Default.VarWindowLeft = double.Parse(Settings.Default.Properties["VarWindowLeft"].DefaultValue.ToString());
+
+                        Settings.Default.VarWindowWidth = double.Parse(Settings.Default.Properties["VarWindowWidth"].DefaultValue.ToString());
+                        Settings.Default.VarWindowHeight = double.Parse(Settings.Default.Properties["VarWindowHeight"].DefaultValue.ToString());
+                    }
                     variableView = null;
                 };
             }
@@ -403,10 +417,21 @@ namespace xFunc.Views
                 };
                 functionView.Closed += (lo, larg) =>
                 {
-                    Settings.Default.FuncWindowTop = functionView.Top;
-                    Settings.Default.FuncWindowLeft = functionView.Left;
-                    Settings.Default.FuncWindowWidth = functionView.Width;
-                    Settings.Default.FuncWindowHeight = functionView.Height;
+                    if (Settings.Default.RememberSizeAndPosition)
+                    {
+                        Settings.Default.FuncWindowTop = functionView.Top;
+                        Settings.Default.FuncWindowLeft = functionView.Left;
+                        Settings.Default.FuncWindowWidth = functionView.Width;
+                        Settings.Default.FuncWindowHeight = functionView.Height;
+                    }
+                    else
+                    {
+                        Settings.Default.FuncWindowTop = double.Parse(Settings.Default.Properties["FuncWindowTop"].DefaultValue.ToString());
+                        Settings.Default.FuncWindowLeft = double.Parse(Settings.Default.Properties["FuncWindowLeft"].DefaultValue.ToString());
+
+                        Settings.Default.FuncWindowWidth = double.Parse(Settings.Default.Properties["FuncWindowWidth"].DefaultValue.ToString());
+                        Settings.Default.FuncWindowHeight = double.Parse(Settings.Default.Properties["FuncWindowHeight"].DefaultValue.ToString());
+                    }
                     functionView = null;
                 };
             }
@@ -490,6 +515,9 @@ namespace xFunc.Views
                 {
                     Settings.Default.AngleMeasurement = settingsView.Angle;
                     Settings.Default.NumberBase = settingsView.Base;
+
+                    mathPresenter.AngleMeasurement = settingsView.Angle;
+                    mathPresenter.Base = settingsView.Base;
                 }
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
                 Settings.Default.CheckUpdates = settingsView.CheckUpdates;

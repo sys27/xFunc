@@ -23,7 +23,7 @@ limitations under the License. -->
                      Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
                      Loaded="this_Loaded">
     <ribbon:RibbonWindow.CommandBindings>
-        <CommandBinding Command="views:MainView.DegreeCommand" Executed="DergeeButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.DegreeCommand" Executed="DegreeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
 

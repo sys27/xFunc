@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
@@ -24,7 +25,7 @@ using xFunc.Views;
 namespace xFunc.Presenters
 {
 
-    public class MathPresenter
+    public class MathPresenter : INotifyPropertyChanged
     {
 
         private IMathView view;
@@ -32,12 +33,20 @@ namespace xFunc.Presenters
         private MathProcessor processor;
         private MathWorkspace workspace;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public MathPresenter(IMathView view, MathProcessor processor)
         {
             this.view = view;
 
             this.processor = processor;
             workspace = new MathWorkspace(Settings.Default.MaxCountOfExpressions);
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
         private void UpdateList()
@@ -100,6 +109,7 @@ namespace xFunc.Presenters
             set
             {
                 processor.AngleMeasurement = value;
+                OnPropertyChanged("AngleMeasurement");
             }
         }
 
@@ -112,6 +122,7 @@ namespace xFunc.Presenters
             set
             {
                 processor.Base = value;
+                OnPropertyChanged("Base");
             }
         }
 

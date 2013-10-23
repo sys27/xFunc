@@ -547,7 +547,7 @@
     <value>Hexadecimal</value>
   </data>
   <data name="SettingsLanguageLabel" xml:space="preserve">
-    <value>_Language:</value>
+    <value>_Language*:</value>
   </data>
   <data name="SettingsMaxNumber" xml:space="preserve">
     <value>Maximum number of expressions:</value>
@@ -572,5 +572,8 @@
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="SettingsLanguageToolTip" xml:space="preserve">
+    <value>The language will be set after program restart.</value>
   </data>
 </root>

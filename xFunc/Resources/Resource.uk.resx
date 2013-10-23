@@ -547,7 +547,7 @@
     <value>Шістнадцяткова</value>
   </data>
   <data name="SettingsLanguageLabel" xml:space="preserve">
-    <value>Мова:</value>
+    <value>Мова*:</value>
   </data>
   <data name="SettingsMaxNumber" xml:space="preserve">
     <value>Максимальна кількість виразів:</value>
@@ -572,5 +572,8 @@
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Скинути</value>
+  </data>
+  <data name="SettingsLanguageToolTip" xml:space="preserve">
+    <value>Мова буде змінена після перезапуску програми.</value>
   </data>
 </root>

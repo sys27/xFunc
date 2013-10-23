@@ -36,7 +36,11 @@ limitations under the License. -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Content="{x:Static res:Resource.SettingsLanguageLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Target="{Binding ElementName=langComboBox}" />
+        <Label Content="{x:Static res:Resource.SettingsLanguageLabel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Target="{Binding ElementName=langComboBox}">
+            <Label.ToolTip>
+                <ToolTip Content="{x:Static res:Resource.SettingsLanguageToolTip}" />
+            </Label.ToolTip>
+        </Label>
         <ComboBox x:Name="langComboBox" Margin="0,12,10,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Right" Width="140" SelectedValuePath="Tag">
             <ComboBoxItem Content="{x:Static res:Resource.SettingsAutoLang}" Tag="Auto" />
             <ComboBoxItem Content="English" Tag="En" />

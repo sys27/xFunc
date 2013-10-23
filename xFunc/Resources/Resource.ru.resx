@@ -547,7 +547,7 @@
     <value>Шестнадцатеричная</value>
   </data>
   <data name="SettingsLanguageLabel" xml:space="preserve">
-    <value>Язык:</value>
+    <value>Язык*:</value>
   </data>
   <data name="SettingsMaxNumber" xml:space="preserve">
     <value>Максимальное количество выражений:</value>
@@ -572,5 +572,8 @@
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Сбросить настройки</value>
+  </data>
+  <data name="SettingsLanguageToolTip" xml:space="preserve">
+    <value>Язык будет изменен после перезапуска программы.</value>
   </data>
 </root>

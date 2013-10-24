@@ -7,6 +7,7 @@ namespace xFunc.Views
 
     internal static class WindowExtensions
     {
+
         private const int GWL_STYLE = -16;
         private const int WS_MAXIMIZEBOX = 0x10000;
         private const int WS_MINIMIZEBOX = 0x20000;

@@ -75,7 +75,7 @@ limitations under the License. -->
         </GroupBox>
 
         <Label Content="{x:Static res:Resource.SettingsMaxNumber}" HorizontalAlignment="Left" Margin="10,171.94,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="maxCountOfExpsTextBox" HorizontalAlignment="Right" Height="23" Margin="0,175.941,10,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" />
+        <TextBox x:Name="maxCountOfExpsTextBox" HorizontalAlignment="Right" Height="23" Margin="0,175.941,10,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" TextAlignment="Right" />
 
         <CheckBox x:Name="updatesCheckBox" Content="{x:Static res:Resource.SettingsCheckUpdates}" Margin="10,202.9,10,0" VerticalAlignment="Top" IsChecked="True" />
 

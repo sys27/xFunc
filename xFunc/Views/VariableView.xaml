@@ -35,14 +35,14 @@ limitations under the License. -->
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Height" To="39" Duration="0:0:0.15" />
+                        <DoubleAnimation Storyboard.TargetName="grid" Storyboard.TargetProperty="Height" To="39" Duration="0:0:0.15" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.15" />
+                        <DoubleAnimation Storyboard.TargetName="grid" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.15" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -72,21 +72,28 @@ limitations under the License. -->
                 </GridView>
             </ListView.View>
         </ListView>
-        <Border x:Name="border" Grid.Row="1" Height="0">
-            <Grid Background="#FFEFEFEF" Height="39">
-                <Grid.Resources>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Width" Value="16" />
-                        <Setter Property="Height" Value="16" />
-                        <Setter Property="HorizontalAlignment" Value="Left" />
-                    </Style>
-                </Grid.Resources>
+        <Grid x:Name="grid" Grid.Row="1" Background="#FFEFEFEF" Height="0">
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Width" Value="24" />
+                    <Setter Property="Height" Value="24" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </Grid.Resources>
 
-                <Button Margin="10,10,0,8" Command="views:VariableView.AddCommand" />
-                <Button Margin="34,10,0,8" Command="views:VariableView.EditCommand" />
-                <Button Margin="58,10,0,8" Command="views:VariableView.DeleteCommand" />
-                <Button Margin="82,10,0,8" Command="views:VariableView.RefreshCommand" />
-            </Grid>
-        </Border>
+            <Button Margin="10,0,0,0" Command="views:VariableView.AddCommand">
+                <Image Source="..\Images\Add.png" />
+            </Button>
+            <Button Margin="42,0,0,0" Command="views:VariableView.EditCommand">
+                <Image Source="..\Images\Edit.png" />
+            </Button>
+            <Button Margin="74,0,0,0" Command="views:VariableView.DeleteCommand">
+                <Image Source="..\Images\Remove.png" />
+            </Button>
+            <Button Margin="106,0,0,0" Command="views:VariableView.RefreshCommand">
+                <Image Source="..\Images\Refresh.png" />
+            </Button>
+        </Grid>
     </Grid>
 </Window>

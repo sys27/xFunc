@@ -47,7 +47,7 @@ limitations under the License. -->
                 </BeginStoryboard>
             </EventTrigger>
         </Grid.Triggers>
-
+        
         <ListView x:Name="varList" Grid.Row="0" ItemsSource="{Binding}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">

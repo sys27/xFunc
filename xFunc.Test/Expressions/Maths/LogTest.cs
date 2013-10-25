@@ -40,7 +40,7 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
 
             num.Value = 4;
-            Assert.AreEqual("log(x, 4)", exp.ToString());
+            Assert.AreEqual("log(4, x)", exp.ToString());
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
         }
 

@@ -34,14 +34,61 @@ namespace xFunc.Views
     public partial class FunctionView : Window
     {
 
+        private MathProcessor processor;
+
+        #region Commands
+
+        public static RoutedCommand AddCommand = new RoutedCommand();
+        public static RoutedCommand EditCommand = new RoutedCommand();
+        public static RoutedCommand DeleteCommand = new RoutedCommand();
+        public static RoutedCommand RefreshCommand = new RoutedCommand();
+
+        #endregion
+
         public FunctionView(MathProcessor processor)
         {
-            this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key.ToString(), f.Value.ToString()));
+            this.processor = processor;
+            RefreshList();
 
             this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();
 
             InitializeComponent();
         }
+
+        private void RefreshList()
+        {
+            this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key.ToString(), f.Value.ToString()));
+        }
+
+        #region Commands
+
+        private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+        }
+
+        private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+        }
+
+        private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            var selectedItem = funcList.SelectedItem as FunctionViewModel;
+            //processor.UserFunctions.Remove();
+
+            RefreshList();
+        }
+
+        private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            RefreshList();
+        }
+
+        private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = funcList.SelectedItem != null;
+        }
+
+        #endregion
 
     }
 

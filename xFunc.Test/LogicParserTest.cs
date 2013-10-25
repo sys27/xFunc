@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using xFunc.Maths;
 using xFunc.Logics;
 using xFunc.Logics.Expressions;
 
@@ -11,20 +10,6 @@ namespace xFunc.Test
     [TestClass]
     public class LogicParserTest
     {
-
-        private TestContext testContextInstance;
-
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
 
         private LogicParser logicParser;
 
@@ -38,12 +23,12 @@ namespace xFunc.Test
         public void GetLogicParametersTest()
         {
             string function = "a | b & c & (a | c)";
-            LogicParameterCollection expected = new LogicParameterCollection()
-                                                {
-                                                    "a",
-                                                    "b",
-                                                    "c"
-                                                };
+            var expected = new LogicParameterCollection()
+                            {
+                                "a",
+                                "b",
+                                "c"
+                            };
 
             LogicParameterCollection actual = logicParser.GetLogicParameters(function);
 

@@ -25,11 +25,6 @@ namespace xFunc.Presenters
         private ILogicExpression exp;
         private string answer;
 
-        public LogicWorkspaceItem()
-        {
-
-        }
-
         public LogicWorkspaceItem(string strExp, ILogicExpression exp)
             : this(strExp, exp, null)
         {

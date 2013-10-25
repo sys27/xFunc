@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using xFunc.Maths;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Tokens;
 
 namespace xFunc.Test

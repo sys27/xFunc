@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.ViewModels;
-using xFunc.Views;
 using xFunc.Logics;
 using xFunc.Logics.Expressions;
 
@@ -49,7 +48,7 @@ namespace xFunc.Presenters
                 parameters.Bits = i;
                 bool b = expression.Calculate(parameters);
 
-                TruthTableRowViewModel row = new TruthTableRowViewModel(parameters.Count, expressions.Count());
+                var row = new TruthTableRowViewModel(parameters.Count, expressions.Count());
 
                 row.Index = (int)Math.Pow(2, parameters.Count) - i;
                 for (int j = 0; j < parameters.Count; j++)
@@ -93,7 +92,7 @@ namespace xFunc.Presenters
             }
         }
 
-        public List<TruthTableRowViewModel> Table
+        public IEnumerable<TruthTableRowViewModel> Table
         {
             get
             {

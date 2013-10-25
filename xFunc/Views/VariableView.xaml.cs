@@ -25,6 +25,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.Maths;
+using xFunc.Maths.Expressions;
 using xFunc.ViewModels;
 
 namespace xFunc.Views
@@ -71,10 +72,17 @@ namespace xFunc.Views
 
         private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
-            var selectedItem = varList.SelectedItem as VariableViewModel;
-            processor.Parameters.Remove(selectedItem.Variable);
+            try
+            {
+                var selectedItem = varList.SelectedItem as VariableViewModel;
+                processor.Parameters.Remove(selectedItem.Variable);
 
-            RefreshList();
+                RefreshList();
+            }
+            catch (MathParameterIsReadOnlyException mpiroe)
+            {
+                // todo: !!!
+            }
         }
 
         private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)

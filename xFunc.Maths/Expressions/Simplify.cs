@@ -70,7 +70,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return string.Format("simplify({0})", expression.ToString());
+            return string.Format("simplify({0})", expression);
         }
 
         /// <summary>

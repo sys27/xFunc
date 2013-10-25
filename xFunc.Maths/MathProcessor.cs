@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Results;
@@ -70,7 +69,7 @@ namespace xFunc.Maths
         /// <returns>The result of solving.</returns>
         public IResult Solve(string function)
         {
-            var exp = this.Parse(function, true);
+            var exp = Parse(function, true);
 
             if (exp is Derivative)
             {

@@ -99,11 +99,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return collection.Where(p => p.Key == key).First().Value;
+                return collection.First(p => p.Key == key).Value;
             }
             set
             {
-                var param = collection.Where(p => p.Key == key).FirstOrDefault();
+                var param = collection.FirstOrDefault(p => p.Key == key);
                 if (param == null)
                     this.Add(key, value);
                 else if (!param.IsReadOnly)
@@ -180,7 +180,7 @@ namespace xFunc.Maths.Expressions
 #endif
                 throw new ArgumentNullException("key");
 
-            var el = collection.Where(p => p.Key == key).FirstOrDefault();
+            var el = collection.FirstOrDefault(p => p.Key == key);
             if (el == null)
                 return;
 
@@ -204,7 +204,7 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
         public bool ContainsKey(string key)
         {
-            return collection.Where(p => p.Key == key).Count() != 0;
+            return collection.Count(p => p.Key == key) != 0;
         }
 
     }

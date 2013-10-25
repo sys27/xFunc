@@ -559,10 +559,10 @@ namespace xFunc.Maths
         {
             var attrs = unary.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false);
             ReverseFunctionAttribute attr = null;
-            if (attrs != null && attrs.Length > 0)
+            if (attrs.Length > 0)
                 attr = (ReverseFunctionAttribute)attrs[0];
 
-            if (unary.Argument.GetType().Equals(attr.ReverseType))
+            if (attr != null && unary.Argument.GetType() == attr.ReverseType)
                 return ((UnaryMathExpression)unary.Argument).Argument;
 
             return unary;

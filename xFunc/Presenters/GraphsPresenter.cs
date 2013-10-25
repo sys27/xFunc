@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using xFunc.Maths;
-using xFunc.Maths.Expressions;
 using xFunc.Properties;
 using xFunc.Resources;
 using xFunc.ViewModels;

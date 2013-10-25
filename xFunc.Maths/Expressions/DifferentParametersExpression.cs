@@ -84,11 +84,11 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected string ToString(string function)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.Append(function).Append('(');
             foreach (var item in arguments)
-                sb.Append(item.ToString()).Append(", ");
+                sb.Append(item).Append(", ");
             sb.Remove(sb.Length - 2, 2).Append(')');
 
             return sb.ToString();

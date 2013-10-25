@@ -33,14 +33,61 @@ namespace xFunc.Views
     public partial class VariableView : Window
     {
 
+        private MathProcessor processor;
+
+        #region Commands
+
+        public static RoutedCommand AddCommand = new RoutedCommand();
+        public static RoutedCommand EditCommand = new RoutedCommand();
+        public static RoutedCommand DeleteCommand = new RoutedCommand();
+        public static RoutedCommand RefreshCommand = new RoutedCommand();
+
+        #endregion
+
         public VariableView(MathProcessor processor)
         {
-            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.IsReadOnly));
+            this.processor = processor;
+            RefreshList();
 
             this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();
 
             InitializeComponent();
         }
+
+        private void RefreshList()
+        {
+            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v));
+        }
+
+        #region Commands
+
+        private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+        }
+
+        private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+        }
+
+        private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            var selectedItem = varList.SelectedItem as VariableViewModel;
+            processor.Parameters.Remove(selectedItem.Variable);
+
+            RefreshList();
+        }
+
+        private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            RefreshList();
+        }
+
+        private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = varList.SelectedItem != null;
+        }
+
+        #endregion
 
     }
 

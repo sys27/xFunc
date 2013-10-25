@@ -15,10 +15,17 @@ limitations under the License. -->
 <Window x:Class="xFunc.Views.FunctionView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:viewModes="clr-namespace:xFunc.ViewModels"
+        xmlns:views="clr-namespace:xFunc.Views"
         xmlns:res="clr-namespace:xFunc.Resources"
         Title="{x:Static res:Resource.FunctionsTitle}" Width="220" Height="280"
         ShowInTaskbar="False">
+    <Window.CommandBindings>
+        <CommandBinding Command="views:FunctionView.AddCommand" Executed="AddCommand_Executed" />
+        <CommandBinding Command="views:FunctionView.EditCommand" Executed="EditCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
+        <CommandBinding Command="views:FunctionView.DeleteCommand" Executed="DeleteCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
+        <CommandBinding Command="views:FunctionView.RefreshCommand" Executed="RefreshCommand_Executed" />
+    </Window.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -41,7 +48,7 @@ limitations under the License. -->
             </EventTrigger>
         </Grid.Triggers>
         
-        <ListView ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+        <ListView x:Name="funcList" ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="{x:Static res:Resource.FuncNameHeader}">
@@ -57,7 +64,18 @@ limitations under the License. -->
         </ListView>
         <Border x:Name="border" Grid.Row="1" Height="0">
             <Grid Background="#FFEFEFEF" Height="39">
-                <Button Content="Update" HorizontalAlignment="Left" Margin="10,10,0,8" Padding="8,0,8,0" MinWidth="75" />
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="16" />
+                        <Setter Property="Height" Value="16" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                    </Style>
+                </Grid.Resources>
+
+                <Button Margin="10,10,0,8" Command="views:FunctionView.AddCommand" />
+                <Button Margin="34,10,0,8" Command="views:FunctionView.EditCommand" />
+                <Button Margin="58,10,0,8" Command="views:FunctionView.DeleteCommand" />
+                <Button Margin="82,10,0,8" Command="views:FunctionView.RefreshCommand" />
             </Grid>
         </Border>
     </Grid>

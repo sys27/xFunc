@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return ToString("log({1}, {0})");
+            return ToString("log({0}, {1})");
         }
 
         /// <summary>

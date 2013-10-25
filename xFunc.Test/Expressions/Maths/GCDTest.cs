@@ -20,7 +20,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalcucateTest2()
         {
-            var exp = new GCD(new[] { new Number(64), new Number(16), new Number(8) }, 3);
+            var exp = new GCD(new IMathExpression[] { new Number(64), new Number(16), new Number(8) }, 3);
 
             Assert.AreEqual(8, exp.Calculate());
         }

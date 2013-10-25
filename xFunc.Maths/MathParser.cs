@@ -18,9 +18,6 @@ using System.Collections.Generic;
 using System.Linq;
 #endif
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Bitwise;
-using xFunc.Maths.Expressions.Hyperbolic;
-using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 

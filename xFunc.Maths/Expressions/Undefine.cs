@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return string.Format("undef({0})", key.ToString());
+            return string.Format("undef({0})", key);
         }
 
         /// <summary>

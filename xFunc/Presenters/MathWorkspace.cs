@@ -15,10 +15,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using xFunc.Maths;
-using xFunc.Maths.Expressions;
-using xFunc.Resources;
 
 namespace xFunc.Presenters
 {

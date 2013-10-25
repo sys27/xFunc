@@ -44,9 +44,7 @@ namespace xFunc.Presenters
         {
             var vm = new List<MathWorkspaceItemViewModel>();
             for (int i = 0; i < workspace.Count; i++)
-            {
                 vm.Add(new MathWorkspaceItemViewModel(i + 1, workspace[i]));
-            }
 
             view.MathExpressions = vm;
         }

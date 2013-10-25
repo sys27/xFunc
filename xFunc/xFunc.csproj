@@ -310,6 +310,12 @@
     <Resource Include="Images\open.png" />
     <Resource Include="Images\save.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\Edit.png" />
+    <Resource Include="Images\Refresh.png" />
+    <Resource Include="Images\Remove.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

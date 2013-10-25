@@ -117,7 +117,8 @@ namespace xFunc.Maths.Expressions
         /// Adds the specified element to a set.
         /// </summary>
         /// <param name="param">The element.</param>
-        /// <returns><c>true</c> if the element is added to the object; <c>false</c> if the element is already present.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
+        /// <exception cref="MathParameterIsReadOnlyException">The variable is read only.</exception>
         public void Add(MathParameter param)
         {
             if (param == null)
@@ -132,7 +133,6 @@ namespace xFunc.Maths.Expressions
         /// Adds the specified element to a set.
         /// </summary>
         /// <param name="key">The name of variable.</param>
-        /// <returns><c>true</c> if the element is added to the object; <c>false</c> if the element is already present.</returns>
         public void Add(string key)
         {
             this.Add(new MathParameter(key, 0));
@@ -143,9 +143,6 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <param name="value">The value of variable.</param>
-        /// <returns>
-        ///   <c>true</c> if the element is added to the object; <c>false</c> if the element is already present.
-        /// </returns>
         public void Add(string key, double value)
         {
             this.Add(new MathParameter(key, value));
@@ -155,7 +152,8 @@ namespace xFunc.Maths.Expressions
         /// Removes the specified element from this object.
         /// </summary>
         /// <param name="param">The element.</param>
-        /// <returns><c>true</c> if the element is successfully found and removed; otherwise, <c>false</c>. This method returns false if item is not found in the object.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
+        /// <exception cref="MathParameterIsReadOnlyException">The variable is read only.</exception>
         public void Remove(MathParameter param)
         {
             if (param == null)
@@ -170,7 +168,8 @@ namespace xFunc.Maths.Expressions
         /// Removes the specified element from this object.
         /// </summary>
         /// <param name="key">The name of variable.</param>
-        /// <returns><c>true</c> if the element is successfully found and removed; otherwise, <c>false</c>. This method returns false if item is not found in the object.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
+        /// <exception cref="MathParameterIsReadOnlyException">The variable is read only.</exception>
         public void Remove(string key)
         {
 #if NET40_OR_GREATER || PORTABLE

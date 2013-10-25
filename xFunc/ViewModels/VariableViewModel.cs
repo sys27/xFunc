@@ -1,4 +1,5 @@
 ﻿using System;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.ViewModels
 {
@@ -6,22 +7,18 @@ namespace xFunc.ViewModels
     public class VariableViewModel
     {
 
-        private string variable;
-        private string value;
-        private bool isReadOnly;
+        private MathParameter parameter;
 
-        public VariableViewModel(string variable, string value, bool isReadOnly)
+        public VariableViewModel(MathParameter parameter)
         {
-            this.variable = variable;
-            this.value = value;
-            this.isReadOnly = isReadOnly;
+            this.parameter = parameter;
         }
 
         public string Variable
         {
             get
             {
-                return variable;
+                return parameter.Key;
             }
         }
 
@@ -29,7 +26,7 @@ namespace xFunc.ViewModels
         {
             get
             {
-                return value;
+                return parameter.Value.ToString();
             }
         }
 
@@ -37,7 +34,7 @@ namespace xFunc.ViewModels
         {
             get
             {
-                return isReadOnly;
+                return parameter.IsReadOnly;
             }
         }
 

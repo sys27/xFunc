@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Results;
 
 namespace xFunc.Presenters
@@ -25,11 +24,6 @@ namespace xFunc.Presenters
         private string strExp;
         private IResult result;
         private string answer;
-
-        public MathWorkspaceItem()
-        {
-
-        }
 
         public MathWorkspaceItem(string strExp, IResult result)
         {

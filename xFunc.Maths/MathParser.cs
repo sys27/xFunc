@@ -34,6 +34,7 @@ namespace xFunc.Maths
         private ISimplifier simplifier;
         private IExpressionFactory factory;
 
+        private bool saveLastExpression = true;
         private string lastFunc = string.Empty;
         private IMathExpression mathExpression;
 
@@ -108,7 +109,7 @@ namespace xFunc.Maths
 #endif
                 throw new ArgumentNullException("function");
 
-            if (function != lastFunc)
+            if (!saveLastExpression || function != lastFunc)
             {
                 IEnumerable<IToken> tokens = lexer.Tokenize(function);
                 IEnumerable<IToken> rpn = ConvertToReversePolishNotation(tokens);
@@ -201,8 +202,15 @@ namespace xFunc.Maths
                 if (stack.Count > 1)
                     throw new MathParserException(Resource.ErrorWhileParsingTree);
 
-                lastFunc = function;
-                mathExpression = stack.Pop();
+                if (saveLastExpression)
+                {
+                    lastFunc = function;
+                    mathExpression = stack.Pop();
+                }
+                else
+                {
+                    return stack.Pop();
+                }
             }
 
             return mathExpression;
@@ -325,6 +333,24 @@ namespace xFunc.Maths
             set
             {
                 simplifier = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether saving of last expression.
+        /// </summary>
+        /// <value>
+        ///   If <c>true</c> the parser saves last expression.
+        /// </value>
+        public bool SaveLastExpression
+        {
+            get
+            {
+                return saveLastExpression;
+            }
+            set
+            {
+                saveLastExpression = value;
             }
         }
 

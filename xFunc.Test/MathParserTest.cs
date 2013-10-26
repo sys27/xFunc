@@ -378,6 +378,16 @@ namespace xFunc.Test
             Assert.AreEqual("fact(4)", exp.ToString());
         }
 
+        [TestMethod]
+        public void SaveLastExpFalseTest()
+        {
+            var parser = new MathParser() { SaveLastExpression = false };
+            var e1 = parser.Parse("e");
+            var e2 = parser.Parse("e");
+
+            Assert.AreNotSame(e1, e2);
+        }
+
     }
 
 }

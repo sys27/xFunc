@@ -68,7 +68,7 @@ namespace xFunc.Views
         private void OKCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             int max;
-            args.CanExecute = int.TryParse(this.maxCountOfExpsTextBox.Text, out max);
+            args.CanExecute = int.TryParse(this.maxCountOfExpsTextBox.Text, out max) && max > 0;
         }
 
         private void ResetCommand_Execute(object o, ExecutedRoutedEventArgs args)

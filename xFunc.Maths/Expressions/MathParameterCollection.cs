@@ -30,8 +30,10 @@ namespace xFunc.Maths.Expressions
     {
 
 #if NET40_OR_GREATER || PORTABLE
+        private HashSet<MathParameter> consts;
         private HashSet<MathParameter> collection;
 #elif NET20_OR_GREATER
+        private List<MathParameter> consts;
         private List<MathParameter> collection;
 #endif
 
@@ -41,13 +43,14 @@ namespace xFunc.Maths.Expressions
         public MathParameterCollection()
         {
 #if NET40_OR_GREATER || PORTABLE
+            consts = new HashSet<MathParameter>();
             collection = new HashSet<MathParameter>();
 #elif NET20_OR_GREATER
+            consts = new List<MathParameter>();
             collection = new List<MathParameter>();
 #endif
 
-            collection.Add(new MathParameter("π", Math.PI, true));
-            collection.Add(new MathParameter("e", Math.E, true));
+            InitializeDefaults();
         }
 
         /// <summary>
@@ -57,10 +60,22 @@ namespace xFunc.Maths.Expressions
         public MathParameterCollection(IEnumerable<MathParameter> parameters)
         {
 #if NET40_OR_GREATER || PORTABLE
+            consts = new HashSet<MathParameter>();
             collection = new HashSet<MathParameter>(parameters);
 #elif NET20_OR_GREATER
+            consts = new List<MathParameter>();
             collection = new List<MathParameter>(parameters);
 #endif
+
+            InitializeDefaults();
+        }
+
+        private void InitializeDefaults()
+        {
+            consts.Add(MathParameter.CreateConstant("π", Math.PI));
+            consts.Add(MathParameter.CreateConstant("e", Math.E));
+            consts.Add(MathParameter.CreateConstant("g", 9.80665));
+            consts.Add(MathParameter.CreateConstant("c", 299792458));
         }
 
         /// <summary>
@@ -82,7 +97,11 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public IEnumerator<MathParameter> GetEnumerator()
         {
-            return collection.GetEnumerator();
+            foreach (var item in consts)
+                yield return item;
+
+            foreach (var item in collection)
+                yield return item;
         }
 
         /// <summary>
@@ -97,14 +116,19 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return collection.First(p => p.Key == key).Value;
+                var item = collection.FirstOrDefault(p => p.Key == key);
+
+                if (item != null)
+                    return item.Value;
+
+                return consts.First(p => p.Key == key).Value;
             }
             set
             {
                 var param = collection.FirstOrDefault(p => p.Key == key);
                 if (param == null)
                     this.Add(key, value);
-                else if (!param.IsReadOnly)
+                else if (param.Type == MathParameterType.Normal)
                     param.Value = value;
                 else
                     throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
@@ -120,8 +144,9 @@ namespace xFunc.Maths.Expressions
         {
             if (param == null)
                 throw new ArgumentNullException("param");
-            if (param.IsReadOnly)
-                throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
+            if (param.Type == MathParameterType.Constant)
+                // todo: ...
+                throw new Exception();
 
             collection.Add(param);
         }
@@ -158,8 +183,6 @@ namespace xFunc.Maths.Expressions
         {
             if (param == null)
                 throw new ArgumentNullException("param");
-            if (param.IsReadOnly)
-                throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
 
             collection.Remove(param);
         }
@@ -192,7 +215,17 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool Contains(MathParameter param)
         {
-            return collection.Contains(param);
+            return collection.Contains(param) || consts.Contains(param);
+        }
+
+        /// <summary>
+        /// Determines whether an onject contains the specified element.
+        /// </summary>
+        /// <param name="param">The element.</param>
+        /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
+        public bool ContainsInConstants(MathParameter param)
+        {
+            return consts.Contains(param);
         }
 
         /// <summary>
@@ -202,7 +235,45 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
         public bool ContainsKey(string key)
         {
-            return collection.Count(p => p.Key == key) != 0;
+            return collection.FirstOrDefault(p => p.Key == key) != null || consts.FirstOrDefault(p => p.Key == key) != null;
+        }
+
+        /// <summary>
+        /// Determines whether an onject contains the specified key.
+        /// </summary>
+        /// <param name="key">The name of variable.</param>
+        /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
+        public bool ContainsKeyInConstants(string key)
+        {
+            return consts.FirstOrDefault(p => p.Key == key) != null;
+        }
+
+        /// <summary>
+        /// Gets the constants.
+        /// </summary>
+        /// <value>
+        /// The constants.
+        /// </value>
+        public IEnumerable<MathParameter> Constants
+        {
+            get
+            {
+                return consts;
+            }
+        }
+
+        /// <summary>
+        /// Gets the collection of variables.
+        /// </summary>
+        /// <value>
+        /// The collection.
+        /// </value>
+        public IEnumerable<MathParameter> Collection
+        {
+            get
+            {
+                return collection;
+            }
         }
 
     }

@@ -21,7 +21,8 @@ namespace xFunc.Views
 
         public VariableView(MathProcessor processor)
         {
-            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.IsReadOnly));
+            // todo: ...
+            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.Type != Maths.Expressions.MathParameterType.Normal));
 
             this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();
 

@@ -48,6 +48,7 @@ limitations under the License. -->
         <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
 
         <KeyBinding Command="views:MainView.AboutCommand" Key="F1" />
+        <KeyBinding Command="views:MainView.SettingsCommand" Key="S" Modifiers="Alt" />
         <KeyBinding Command="views:MainView.ExitCommand" Key="F4" Modifiers="Alt" />
     </ribbon:RibbonWindow.InputBindings>
 
@@ -68,23 +69,27 @@ limitations under the License. -->
                 <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
             <ribbon:Ribbon.ToolBarItems>
-                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" ToolTip="{x:Static res:Resource.AboutButtonToolTip}" Size="Small" Icon="../Images/Help.png" Command="views:MainView.AboutCommand" />
+                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" Size="Small" Icon="../Images/Help.png" Command="views:MainView.AboutCommand">
+                    <ribbon:Button.ToolTip>
+                        <ribbon:ScreenTip Title="{x:Static res:Resource.AboutToolTipTitle}" Text="{x:Static res:Resource.AboutButtonToolTip}" />
+                    </ribbon:Button.ToolTip>
+                </ribbon:Button>
             </ribbon:Ribbon.ToolBarItems>
             <ribbon:Ribbon.Menu>
                 <ribbon:Backstage Header="{x:Static res:Resource.FileMenu}" Background="Black">
                     <ribbon:BackstageTabControl>
-                        <ribbon:Button Header="{x:Static res:Resource.NewMenu}" Icon="..\Images\new.png" />
+                        <!--<ribbon:Button Header="{x:Static res:Resource.NewMenu}" Icon="..\Images\new.png" />
                         <ribbon:Button Header="{x:Static res:Resource.OpenMenu}" Icon="..\Images\open.png" />
                         <ribbon:Button Header="{x:Static res:Resource.SaveMenu}" Icon="..\Images\save.png" />
-                        <ribbon:SeparatorTabItem />
+                        <ribbon:SeparatorTabItem />-->
                         <ribbon:Button Header="{x:Static res:Resource.SettingsMenu}" Icon="..\Images\settings.png" Command="views:MainView.SettingsCommand">
                             <ribbon:Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.SettingsToolTip}" />
+                                <ribbon:ScreenTip Title="{x:Static res:Resource.SettingsToolTipTitle}" Text="{x:Static res:Resource.SettingsToolTip}" />
                             </ribbon:Button.ToolTip>
                         </ribbon:Button>
                         <ribbon:Button Header="{x:Static res:Resource.ExitMenu}" Icon="..\Images\exit.png" Command="views:MainView.ExitCommand">
                             <ribbon:Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.ExitToolTip}" />
+                                <ribbon:ScreenTip Title="{x:Static res:Resource.ExitToolTipTitle}" Text="{x:Static res:Resource.ExitToolTip}" />
                             </ribbon:Button.ToolTip>
                         </ribbon:Button>
                     </ribbon:BackstageTabControl>

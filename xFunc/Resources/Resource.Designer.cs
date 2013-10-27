@@ -79,6 +79,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About (F1).
+        /// </summary>
+        public static string AboutToolTipTitle {
+            get {
+                return ResourceManager.GetString("AboutToolTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string AboutWindowTitle {
@@ -579,6 +588,15 @@ namespace xFunc.Resources {
         public static string ExitToolTip {
             get {
                 return ResourceManager.GetString("ExitToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit (Alt+F4).
+        /// </summary>
+        public static string ExitToolTipTitle {
+            get {
+                return ResourceManager.GetString("ExitToolTipTitle", resourceCulture);
             }
         }
         
@@ -1173,6 +1191,15 @@ namespace xFunc.Resources {
         public static string SettingsToolTip {
             get {
                 return ResourceManager.GetString("SettingsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings (Alt+S).
+        /// </summary>
+        public static string SettingsToolTipTitle {
+            get {
+                return ResourceManager.GetString("SettingsToolTipTitle", resourceCulture);
             }
         }
         

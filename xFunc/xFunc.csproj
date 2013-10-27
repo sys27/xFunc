@@ -79,6 +79,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\MathParameterTypeToStringConverter.cs" />
     <Compile Include="Presenters\GraphsPresenter.cs" />
     <Compile Include="Presenters\LogicPresenter.cs" />
     <Compile Include="Presenters\LogicWorkspace.cs" />

@@ -797,6 +797,32 @@ namespace xFunc.Resources {
                 return ResourceManager.GetString("LogToolTip", resourceCulture);
             }
         }
+        /// <summary>
+        ///   Looks up a localized string similar to Constants.
+        /// </summary>
+        public static string MathParameterType_Constant {
+            get {
+                return ResourceManager.GetString("MathParameterType_Constant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string MathParameterType_Normal {
+            get {
+                return ResourceManager.GetString("MathParameterType_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReadOnly.
+        /// </summary>
+        public static string MathParameterType_ReadOnly {
+            get {
+                return ResourceManager.GetString("MathParameterType_ReadOnly", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Math Expressions.

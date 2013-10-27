@@ -57,6 +57,7 @@
     <Compile Include="Expressions\LCM.cs" />
     <Compile Include="Expressions\MathParameter.cs" />
     <Compile Include="Expressions\MathParameterIsReadOnlyException.cs" />
+    <Compile Include="Expressions\MathParameterType.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="IDifferentiator.cs" />

@@ -576,4 +576,13 @@
   <data name="SettingsLanguageToolTip" xml:space="preserve">
     <value>Язык будет изменен после перезапуска программы.</value>
   </data>
+  <data name="AboutToolTipTitle" xml:space="preserve">
+    <value>О программе (F1)</value>
+  </data>
+  <data name="ExitToolTipTitle" xml:space="preserve">
+    <value>Выход (Alt+F4)</value>
+  </data>
+  <data name="SettingsToolTipTitle" xml:space="preserve">
+    <value>Настройки (Alt+S)</value>
+  </data>
 </root>

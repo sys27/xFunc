@@ -19,19 +19,19 @@ limitations under the License. -->
         xmlns:res="clr-namespace:xFunc.Resources"
         Title="{x:Static res:Resource.FunctionsTitle}" Width="220" Height="280"
         ShowInTaskbar="False">
-    <Window.CommandBindings>
+    <!--<Window.CommandBindings>
         <CommandBinding Command="views:FunctionView.AddCommand" Executed="AddCommand_Executed" />
         <CommandBinding Command="views:FunctionView.EditCommand" Executed="EditCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
         <CommandBinding Command="views:FunctionView.DeleteCommand" Executed="DeleteCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
         <CommandBinding Command="views:FunctionView.RefreshCommand" Executed="RefreshCommand_Executed" />
-    </Window.CommandBindings>
+    </Window.CommandBindings>-->
     
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.Triggers>
+        <!--<Grid.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
@@ -46,7 +46,7 @@ limitations under the License. -->
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-        </Grid.Triggers>
+        </Grid.Triggers>-->
         
         <ListView x:Name="funcList" ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
             <ListView.View>
@@ -62,7 +62,7 @@ limitations under the License. -->
                 </GridView>
             </ListView.View>
         </ListView>
-        <Grid x:Name="grid" Grid.Row="1" Background="#FFEFEFEF" Height="0">
+        <!--<Grid x:Name="grid" Grid.Row="1" Background="#FFEFEFEF" Height="0">
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Width" Value="24" />
@@ -84,6 +84,6 @@ limitations under the License. -->
             <Button Margin="106,0,0,0" Command="views:FunctionView.RefreshCommand">
                 <Image Source="..\Images\Refresh.png" />
             </Button>
-        </Grid>
+        </Grid>-->
     </Grid>
 </Window>

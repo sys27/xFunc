@@ -576,4 +576,13 @@
   <data name="SettingsLanguageToolTip" xml:space="preserve">
     <value>The language will be set after program restart.</value>
   </data>
+  <data name="AboutToolTipTitle" xml:space="preserve">
+    <value>About (F1)</value>
+  </data>
+  <data name="ExitToolTipTitle" xml:space="preserve">
+    <value>Exit (Alt+F4)</value>
+  </data>
+  <data name="SettingsToolTipTitle" xml:space="preserve">
+    <value>Settings (Alt+S)</value>
+  </data>
 </root>

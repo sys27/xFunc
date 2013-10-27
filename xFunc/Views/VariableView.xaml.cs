@@ -21,8 +21,9 @@ namespace xFunc.Views
 
         public VariableView(MathProcessor processor)
         {
-            // todo: ...
-            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v.Key, v.Value.ToString(), v.Type != Maths.Expressions.MathParameterType.Normal));
+            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v));
+            var view = (CollectionView)CollectionViewSource.GetDefaultView(this.DataContext);
+            view.GroupDescriptions.Add(new PropertyGroupDescription("Type"));
 
             this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();
 

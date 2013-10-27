@@ -372,4 +372,13 @@
   <data name="VarScreenTitTitle" xml:space="preserve">
     <value>Змінні</value>
   </data>
+  <data name="MathParameterType_Constant" xml:space="preserve">
+    <value>Константи</value>
+  </data>
+  <data name="MathParameterType_Normal" xml:space="preserve">
+    <value>Звичайні</value>
+  </data>
+  <data name="MathParameterType_ReadOnly" xml:space="preserve">
+    <value>Тільки для читання</value>
+  </data>
 </root>

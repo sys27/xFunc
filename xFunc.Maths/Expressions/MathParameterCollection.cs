@@ -145,8 +145,7 @@ namespace xFunc.Maths.Expressions
             if (param == null)
                 throw new ArgumentNullException("param");
             if (param.Type == MathParameterType.Constant)
-                // todo: ...
-                throw new Exception();
+                throw new ArgumentException(Resource.ConstError);
 
             collection.Add(param);
         }

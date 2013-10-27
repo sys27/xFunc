@@ -17,8 +17,13 @@ limitations under the License. -->
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:xFunc.Views"
         xmlns:res="clr-namespace:xFunc.Resources"
+        xmlns:conv="clr-namespace:xFunc.Converters"
+        xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
         Title="{x:Static res:Resource.VariablesTitle}" Width="220" Height="280"
         ShowInTaskbar="False">
+    <Window.Resources>
+        <conv:MathParameterTypeToStringConverter x:Key="typeToStr" />
+    </Window.Resources>
     <!--<Window.CommandBindings>
         <CommandBinding Command="views:VariableView.AddCommand" Executed="AddCommand_Executed" />
         <CommandBinding Command="views:VariableView.EditCommand" Executed="EditCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
@@ -49,16 +54,47 @@ limitations under the License. -->
         </Grid.Triggers>-->
         
         <ListView x:Name="varList" Grid.Row="0" ItemsSource="{Binding}">
+            <ListView.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.ContainerStyle>
+                    <Style TargetType="{x:Type GroupItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                    <Expander IsExpanded="True">
+                                        <Expander.Header>
+                                            <TextBlock Foreground="#FF27276C" FontWeight="Medium" Text="{Binding Path=Name, Converter={StaticResource typeToStr}}" />
+                                        </Expander.Header>
+                                        <Expander.Content>
+                                            <ItemsPresenter />
+                                        </Expander.Content>
+                                    </Expander>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </GroupStyle.ContainerStyle>
+            </GroupStyle>
+        </ListView.GroupStyle>
             <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=IsReadOnly}" Value="True">
-                            <Setter Property="Foreground" Value="Gray" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
+            <Style TargetType="{x:Type ListViewItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=Type}">
+                        <DataTrigger.Value>
+                            <exps:MathParameterType>Constant</exps:MathParameterType>
+                        </DataTrigger.Value>
+                        <Setter Property="Foreground" Value="Gray" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=Type}">
+                        <DataTrigger.Value>
+                            <exps:MathParameterType>ReadOnly</exps:MathParameterType>
+                        </DataTrigger.Value>
+                        <Setter Property="Foreground" Value="Gray" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="{x:Static res:Resource.VarNameHeader}">

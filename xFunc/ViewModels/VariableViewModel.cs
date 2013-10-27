@@ -22,19 +22,19 @@ namespace xFunc.ViewModels
             }
         }
 
-        public string Value
+        public double Value
         {
             get
             {
-                return parameter.Value.ToString();
+                return parameter.Value;
             }
         }
 
-        public bool IsReadOnly
+        public MathParameterType Type
         {
             get
             {
-                return parameter.IsReadOnly;
+                return parameter.Type;
             }
         }
 

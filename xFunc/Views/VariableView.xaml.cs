@@ -58,6 +58,8 @@ namespace xFunc.Views
         private void RefreshList()
         {
             this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v));
+            var view = (CollectionView)CollectionViewSource.GetDefaultView(this.DataContext);
+            view.GroupDescriptions.Add(new PropertyGroupDescription("Type"));
         }
 
         //#region Commands

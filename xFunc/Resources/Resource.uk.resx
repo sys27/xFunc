@@ -585,4 +585,13 @@
   <data name="SettingsToolTipTitle" xml:space="preserve">
     <value>Налаштування (Alt+S)</value>
   </data>
+  <data name="MathParameterType_Constant" xml:space="preserve">
+    <value>Константи</value>
+  </data>
+  <data name="MathParameterType_Normal" xml:space="preserve">
+    <value>Звичайні</value>
+  </data>
+  <data name="MathParameterType_ReadOnly" xml:space="preserve">
+    <value>Тільки для читання</value>
+  </data>
 </root>

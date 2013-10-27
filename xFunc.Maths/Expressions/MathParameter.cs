@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
 
         private string key;
         private double value;
-        private bool isReadOnly;
+        private MathParameterType type;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MathParameter"/> class.
@@ -34,19 +34,30 @@ namespace xFunc.Maths.Expressions
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         public MathParameter(string key, double value)
-            : this(key, value, false) { }
+            : this(key, value, MathParameterType.Normal) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameter"/> class.
+        /// Initializes a new instance of the <see cref="MathParameter" /> class.
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
-        /// <param name="isReadOnly">if set to <c>true</c> parameter is read-only.</param>
-        public MathParameter(string key, double value, bool isReadOnly)
+        /// <param name="type">The type of parameter.</param>
+        public MathParameter(string key, double value, MathParameterType type)
         {
             this.key = key;
             this.value = value;
-            this.isReadOnly = isReadOnly;
+            this.type = type;
+        }
+
+        /// <summary>
+        /// Creates a constant.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <returns>A constant.</returns>
+        public static MathParameter CreateConstant(string key, double value)
+        {
+            return new MathParameter(key, value, MathParameterType.Constant);
         }
 
         /// <summary>
@@ -95,7 +106,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}: {1} (Read-Only: {2})", key, value, isReadOnly);
+            return string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", key, value, type);
         }
 
         /// <summary>
@@ -131,16 +142,16 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets a value indicating whether this variable is read-only.
+        /// Gets the type of parameter.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this variable is read-only; otherwise, <c>false</c>.
+        /// The type of parameter.
         /// </value>
-        public bool IsReadOnly
+        public MathParameterType Type
         {
             get
             {
-                return isReadOnly;
+                return type;
             }
         }
 

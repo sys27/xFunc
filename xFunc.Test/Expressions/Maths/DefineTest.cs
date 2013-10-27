@@ -48,13 +48,14 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParameterIsReadOnlyException))]
         public void OverrideConstTest()
         {
             IMathExpression exp = new Define(new Variable("π"), new Number(1));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);
+
+            
         }
 
     }

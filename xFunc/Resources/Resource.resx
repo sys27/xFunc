@@ -585,4 +585,13 @@
   <data name="SettingsToolTipTitle" xml:space="preserve">
     <value>Settings (Alt+S)</value>
   </data>
+  <data name="MathParameterType_Constant" xml:space="preserve">
+    <value>Constants</value>
+  </data>
+  <data name="MathParameterType_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="MathParameterType_ReadOnly" xml:space="preserve">
+    <value>ReadOnly</value>
+  </data>
 </root>

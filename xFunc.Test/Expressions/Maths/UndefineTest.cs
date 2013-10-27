@@ -34,7 +34,6 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParameterIsReadOnlyException))]
         public void UndefConstTest()
         {
             var parameters = new MathParameterCollection();

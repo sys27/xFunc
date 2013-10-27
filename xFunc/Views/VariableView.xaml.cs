@@ -36,14 +36,14 @@ namespace xFunc.Views
 
         private MathProcessor processor;
 
-        #region Commands
+        //#region Commands
 
-        public static RoutedCommand AddCommand = new RoutedCommand();
-        public static RoutedCommand EditCommand = new RoutedCommand();
-        public static RoutedCommand DeleteCommand = new RoutedCommand();
-        public static RoutedCommand RefreshCommand = new RoutedCommand();
+        //public static RoutedCommand AddCommand = new RoutedCommand();
+        //public static RoutedCommand EditCommand = new RoutedCommand();
+        //public static RoutedCommand DeleteCommand = new RoutedCommand();
+        //public static RoutedCommand RefreshCommand = new RoutedCommand();
 
-        #endregion
+        //#endregion
 
         public VariableView(MathProcessor processor)
         {
@@ -60,42 +60,42 @@ namespace xFunc.Views
             this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v));
         }
 
-        #region Commands
+        //#region Commands
 
-        private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        {
-        }
+        //private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        //{
+        //}
 
-        private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        {
-        }
+        //private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        //{
+        //}
 
-        private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        {
-            try
-            {
-                var selectedItem = varList.SelectedItem as VariableViewModel;
-                processor.Parameters.Remove(selectedItem.Variable);
+        //private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        //{
+        //    try
+        //    {
+        //        var selectedItem = varList.SelectedItem as VariableViewModel;
+        //        processor.Parameters.Remove(selectedItem.Variable);
 
-                RefreshList();
-            }
-            catch (MathParameterIsReadOnlyException mpiroe)
-            {
-                // todo: !!!
-            }
-        }
+        //        RefreshList();
+        //    }
+        //    catch (MathParameterIsReadOnlyException mpiroe)
+        //    {
+        //        // todo: !!!
+        //    }
+        //}
 
-        private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        {
-            RefreshList();
-        }
+        //private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        //{
+        //    RefreshList();
+        //}
 
-        private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        {
-            args.CanExecute = varList.SelectedItem != null;
-        }
+        //private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        //{
+        //    args.CanExecute = varList.SelectedItem != null;
+        //}
 
-        #endregion
+        //#endregion
 
     }
 

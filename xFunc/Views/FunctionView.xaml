@@ -25,7 +25,7 @@ limitations under the License. -->
         <CommandBinding Command="views:FunctionView.DeleteCommand" Executed="DeleteCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
         <CommandBinding Command="views:FunctionView.RefreshCommand" Executed="RefreshCommand_Executed" />
     </Window.CommandBindings>-->
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -47,7 +47,7 @@ limitations under the License. -->
                 </BeginStoryboard>
             </EventTrigger>
         </Grid.Triggers>-->
-        
+
         <ListView x:Name="funcList" ItemsSource="{Binding}" ItemContainerStyle="{StaticResource listBoxItemStyle}">
             <ListView.View>
                 <GridView>

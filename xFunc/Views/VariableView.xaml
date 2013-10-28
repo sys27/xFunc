@@ -30,7 +30,7 @@ limitations under the License. -->
         <CommandBinding Command="views:VariableView.DeleteCommand" Executed="DeleteCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
         <CommandBinding Command="views:VariableView.RefreshCommand" Executed="RefreshCommand_Executed" />
     </Window.CommandBindings>-->
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -52,49 +52,49 @@ limitations under the License. -->
                 </BeginStoryboard>
             </EventTrigger>
         </Grid.Triggers>-->
-        
+
         <ListView x:Name="varList" Grid.Row="0" ItemsSource="{Binding}">
             <ListView.GroupStyle>
-            <GroupStyle>
-                <GroupStyle.ContainerStyle>
-                    <Style TargetType="{x:Type GroupItem}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type GroupItem}">
-                                    <Expander IsExpanded="True">
-                                        <Expander.Header>
-                                            <TextBlock Foreground="#FF27276C" FontWeight="Medium" Text="{Binding Path=Name, Converter={StaticResource typeToStr}}" />
-                                        </Expander.Header>
-                                        <Expander.Content>
-                                            <ItemsPresenter />
-                                        </Expander.Content>
-                                    </Expander>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </GroupStyle.ContainerStyle>
-            </GroupStyle>
-        </ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <TextBlock Foreground="#FF27276C" FontWeight="Medium" Text="{Binding Path=Name, Converter={StaticResource typeToStr}}" />
+                                            </Expander.Header>
+                                            <Expander.Content>
+                                                <ItemsPresenter />
+                                            </Expander.Content>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
             <ListView.ItemContainerStyle>
-            <Style TargetType="{x:Type ListViewItem}">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Path=Type}">
-                        <DataTrigger.Value>
-                            <exps:MathParameterType>Constant</exps:MathParameterType>
-                        </DataTrigger.Value>
-                        <Setter Property="Foreground" Value="Gray" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=Type}">
-                        <DataTrigger.Value>
-                            <exps:MathParameterType>ReadOnly</exps:MathParameterType>
-                        </DataTrigger.Value>
-                        <Setter Property="Foreground" Value="Gray" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Type}">
+                            <DataTrigger.Value>
+                                <exps:MathParameterType>Constant</exps:MathParameterType>
+                            </DataTrigger.Value>
+                            <Setter Property="Foreground" Value="Gray" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Type}">
+                            <DataTrigger.Value>
+                                <exps:MathParameterType>ReadOnly</exps:MathParameterType>
+                            </DataTrigger.Value>
+                            <Setter Property="Foreground" Value="Gray" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="{x:Static res:Resource.VarNameHeader}">

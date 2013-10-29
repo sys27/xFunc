@@ -594,4 +594,22 @@
   <data name="MathParameterType_ReadOnly" xml:space="preserve">
     <value>ReadOnly</value>
   </data>
+  <data name="AddVarCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AddVarName" xml:space="preserve">
+    <value>_Name:</value>
+  </data>
+  <data name="AddVarOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="AddVarReadOnly" xml:space="preserve">
+    <value>_Read-Only</value>
+  </data>
+  <data name="AddVarTitle" xml:space="preserve">
+    <value>Add a new variable</value>
+  </data>
+  <data name="AddVarValue" xml:space="preserve">
+    <value>_Value:</value>
+  </data>
 </root>

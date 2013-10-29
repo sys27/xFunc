@@ -594,4 +594,22 @@
   <data name="MathParameterType_ReadOnly" xml:space="preserve">
     <value>Только для чтения</value>
   </data>
+  <data name="AddVarCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="AddVarName" xml:space="preserve">
+    <value>_Имя:</value>
+  </data>
+  <data name="AddVarOK" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="AddVarReadOnly" xml:space="preserve">
+    <value>_Только для чтения</value>
+  </data>
+  <data name="AddVarTitle" xml:space="preserve">
+    <value>Добавить переменную</value>
+  </data>
+  <data name="AddVarValue" xml:space="preserve">
+    <value>_Значение:</value>
+  </data>
 </root>

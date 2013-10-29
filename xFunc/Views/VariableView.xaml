@@ -24,19 +24,19 @@ limitations under the License. -->
     <Window.Resources>
         <conv:MathParameterTypeToStringConverter x:Key="typeToStr" />
     </Window.Resources>
-    <!--<Window.CommandBindings>
+    <Window.CommandBindings>
         <CommandBinding Command="views:VariableView.AddCommand" Executed="AddCommand_Executed" />
-        <CommandBinding Command="views:VariableView.EditCommand" Executed="EditCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
-        <CommandBinding Command="views:VariableView.DeleteCommand" Executed="DeleteCommand_Executed" CanExecute="SelectedCommand_CanExecute" />
+        <CommandBinding Command="views:VariableView.EditCommand" Executed="EditCommand_Executed" CanExecute="EditCommand_CanExecute" />
+        <CommandBinding Command="views:VariableView.DeleteCommand" Executed="DeleteCommand_Executed" CanExecute="DeleteCommand_CanExecute" />
         <CommandBinding Command="views:VariableView.RefreshCommand" Executed="RefreshCommand_Executed" />
-    </Window.CommandBindings>-->
+    </Window.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <!--<Grid.Triggers>
+        <Grid.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
@@ -51,7 +51,7 @@ limitations under the License. -->
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-        </Grid.Triggers>-->
+        </Grid.Triggers>
 
         <ListView x:Name="varList" Grid.Row="0" ItemsSource="{Binding}">
             <ListView.GroupStyle>
@@ -108,7 +108,7 @@ limitations under the License. -->
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--<Grid x:Name="grid" Grid.Row="1" Background="#FFEFEFEF" Height="0">
+        <Grid x:Name="grid" Grid.Row="1" Background="#FFEFEFEF" Height="0">
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Width" Value="24" />
@@ -130,6 +130,6 @@ limitations under the License. -->
             <Button Margin="106,0,0,0" Command="views:VariableView.RefreshCommand">
                 <Image Source="..\Images\Refresh.png" />
             </Button>
-        </Grid>-->
+        </Grid>
     </Grid>
 </Window>

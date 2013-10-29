@@ -36,14 +36,14 @@ namespace xFunc.Views
 
         private MathProcessor processor;
 
-        //#region Commands
+        #region Commands
 
-        //public static RoutedCommand AddCommand = new RoutedCommand();
-        //public static RoutedCommand EditCommand = new RoutedCommand();
-        //public static RoutedCommand DeleteCommand = new RoutedCommand();
-        //public static RoutedCommand RefreshCommand = new RoutedCommand();
+        public static RoutedCommand AddCommand = new RoutedCommand();
+        public static RoutedCommand EditCommand = new RoutedCommand();
+        public static RoutedCommand DeleteCommand = new RoutedCommand();
+        public static RoutedCommand RefreshCommand = new RoutedCommand();
 
-        //#endregion
+        #endregion
 
         public VariableView(MathProcessor processor)
         {
@@ -62,42 +62,74 @@ namespace xFunc.Views
             view.GroupDescriptions.Add(new PropertyGroupDescription("Type"));
         }
 
-        //#region Commands
+        #region Commands
 
-        //private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //}
+        private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            AddVariableView view = new AddVariableView()
+            {
+                Owner = this
+            };
+            if (view.ShowDialog() == true)
+            {
+                processor.Parameters.Add(new MathParameter(view.VariableName, view.Value, view.IsReadOnly ? MathParameterType.ReadOnly : MathParameterType.Normal));
 
-        //private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //}
+                RefreshList();
+            }
+        }
 
-        //private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //    try
-        //    {
-        //        var selectedItem = varList.SelectedItem as VariableViewModel;
-        //        processor.Parameters.Remove(selectedItem.Variable);
+        private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            var item = varList.SelectedItem as VariableViewModel;
 
-        //        RefreshList();
-        //    }
-        //    catch (MathParameterIsReadOnlyException mpiroe)
-        //    {
-        //        // todo: !!!
-        //    }
-        //}
+            AddVariableView view = new AddVariableView(item)
+            {
+                Owner = this
+            };
+            if (view.ShowDialog() == true)
+            {
+                var variable = processor.Parameters.First(v => v.Key == view.VariableName);
+                variable.Value = view.Value;
+                variable.Type = view.IsReadOnly ? MathParameterType.ReadOnly : MathParameterType.Normal;
 
-        //private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //    RefreshList();
-        //}
+                RefreshList();
+            }
+        }
 
-        //private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        //{
-        //    args.CanExecute = varList.SelectedItem != null;
-        //}
+        private void EditCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            var item = varList.SelectedItem as VariableViewModel;
 
-        //#endregion
+            args.CanExecute = item != null && item.Type == MathParameterType.Normal;
+        }
+
+        private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            try
+            {
+                var selectedItem = varList.SelectedItem as VariableViewModel;
+                processor.Parameters.Remove(selectedItem.Variable);
+
+                RefreshList();
+            }
+            catch (MathParameterIsReadOnlyException)
+            {
+            }
+        }
+
+        private void DeleteCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            var item = varList.SelectedItem as VariableViewModel;
+
+            args.CanExecute = item != null && item.Type != MathParameterType.Constant;
+        }
+
+        private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            RefreshList();
+        }
+
+        #endregion
 
     }
 

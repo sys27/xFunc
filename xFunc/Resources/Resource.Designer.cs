@@ -124,6 +124,60 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string AddVarCancel {
+            get {
+                return ResourceManager.GetString("AddVarCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Name:.
+        /// </summary>
+        public static string AddVarName {
+            get {
+                return ResourceManager.GetString("AddVarName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string AddVarOK {
+            get {
+                return ResourceManager.GetString("AddVarOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Read-Only.
+        /// </summary>
+        public static string AddVarReadOnly {
+            get {
+                return ResourceManager.GetString("AddVarReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new variable.
+        /// </summary>
+        public static string AddVarTitle {
+            get {
+                return ResourceManager.GetString("AddVarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Value:.
+        /// </summary>
+        public static string AddVarValue {
+            get {
+                return ResourceManager.GetString("AddVarValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitwise AND operation. This operation rounds a rational number. Example: x and y, x &amp; y.
         /// </summary>
         public static string AndToolTip {
@@ -797,6 +851,7 @@ namespace xFunc.Resources {
                 return ResourceManager.GetString("LogToolTip", resourceCulture);
             }
         }
+        
         /// <summary>
         ///   Looks up a localized string similar to Constants.
         /// </summary>

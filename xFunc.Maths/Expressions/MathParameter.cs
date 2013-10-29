@@ -142,7 +142,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets the type of parameter.
+        /// Gets or sets the type of parameter.
         /// </summary>
         /// <value>
         /// The type of parameter.
@@ -152,6 +152,10 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return type;
+            }
+            set
+            {
+                type = value;
             }
         }
 

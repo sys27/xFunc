@@ -36,14 +36,14 @@ namespace xFunc.Views
 
         private MathProcessor processor;
 
-        //#region Commands
+        #region Commands
 
-        //public static RoutedCommand AddCommand = new RoutedCommand();
-        //public static RoutedCommand EditCommand = new RoutedCommand();
-        //public static RoutedCommand DeleteCommand = new RoutedCommand();
-        //public static RoutedCommand RefreshCommand = new RoutedCommand();
+        public static RoutedCommand AddCommand = new RoutedCommand();
+        public static RoutedCommand EditCommand = new RoutedCommand();
+        public static RoutedCommand DeleteCommand = new RoutedCommand();
+        public static RoutedCommand RefreshCommand = new RoutedCommand();
 
-        //#endregion
+        #endregion
 
         public FunctionView(MathProcessor processor)
         {
@@ -60,35 +60,42 @@ namespace xFunc.Views
             this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key.ToString(), f.Value.ToString()));
         }
 
-        //#region Commands
+        #region Commands
 
-        //private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //}
+        private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            AddFunctionView view = new AddFunctionView()
+            {
+                Owner = this
+            };
+            if (view.ShowDialog() == true)
+            {
+            }
+        }
 
-        //private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //}
+        private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+        }
 
-        //private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //    var selectedItem = funcList.SelectedItem as FunctionViewModel;
-        //    //processor.UserFunctions.Remove();
+        private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            var selectedItem = funcList.SelectedItem as FunctionViewModel;
+            //processor.UserFunctions.Remove();
 
-        //    RefreshList();
-        //}
+            RefreshList();
+        }
 
-        //private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
-        //{
-        //    RefreshList();
-        //}
+        private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            RefreshList();
+        }
 
-        //private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        //{
-        //    args.CanExecute = funcList.SelectedItem != null;
-        //}
+        private void SelectedCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = funcList.SelectedItem != null;
+        }
 
-        //#endregion
+        #endregion
 
     }
 

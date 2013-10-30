@@ -106,6 +106,51 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string AddFuncCancel {
+            get {
+                return ResourceManager.GetString("AddFuncCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Function:.
+        /// </summary>
+        public static string AddFuncFunc {
+            get {
+                return ResourceManager.GetString("AddFuncFunc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Name:.
+        /// </summary>
+        public static string AddFuncName {
+            get {
+                return ResourceManager.GetString("AddFuncName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string AddFuncOk {
+            get {
+                return ResourceManager.GetString("AddFuncOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new function.
+        /// </summary>
+        public static string AddFuncTitle {
+            get {
+                return ResourceManager.GetString("AddFuncTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Additional.
         /// </summary>
         public static string AdditionalLogicExpanderHeader {

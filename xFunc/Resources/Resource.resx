@@ -612,4 +612,19 @@
   <data name="AddVarValue" xml:space="preserve">
     <value>_Value:</value>
   </data>
+  <data name="AddFuncCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AddFuncFunc" xml:space="preserve">
+    <value>_Function:</value>
+  </data>
+  <data name="AddFuncName" xml:space="preserve">
+    <value>_Name:</value>
+  </data>
+  <data name="AddFuncOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="AddFuncTitle" xml:space="preserve">
+    <value>Add a new function</value>
+  </data>
 </root>

@@ -612,4 +612,19 @@
   <data name="AddVarValue" xml:space="preserve">
     <value>_Значение:</value>
   </data>
+  <data name="AddFuncCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="AddFuncFunc" xml:space="preserve">
+    <value>_Функция:</value>
+  </data>
+  <data name="AddFuncName" xml:space="preserve">
+    <value>_Имя:</value>
+  </data>
+  <data name="AddFuncOk" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="AddFuncTitle" xml:space="preserve">
+    <value>Добавить функцию</value>
+  </data>
 </root>

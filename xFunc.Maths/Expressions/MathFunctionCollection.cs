@@ -14,8 +14,12 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+#if NET35_OR_GREATER || PORTABLE
+using System.Linq;
+#endif
 #if !PORTABLE
 using System.Runtime.Serialization;
+using xFunc.Maths.Resources;
 #endif
 
 namespace xFunc.Maths.Expressions
@@ -43,6 +47,21 @@ namespace xFunc.Maths.Expressions
         /// <param name="context">The context.</param>
         protected MathFunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
+
+        /// <summary>
+        /// Gets an user function.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>An user function</returns>
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException">The exception that is thrown when the key specified for accessing an element in a collection does not match any key in the collection.</exception>
+        public UserFunction GetKeyByKey(UserFunction function)
+        {
+            var func = Keys.FirstOrDefault(uf => uf.Equals(function));
+            if (func == null)
+                throw new KeyNotFoundException(string.Format(Resource.FunctionNotFoundExceptionError, function));
+
+            return func;
+        }
 
     }
 

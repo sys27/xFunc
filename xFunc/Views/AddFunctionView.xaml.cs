@@ -24,6 +24,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using xFunc.ViewModels;
 
 namespace xFunc.Views
 {
@@ -40,6 +41,16 @@ namespace xFunc.Views
             this.nameBox.Focus();
         }
 
+        public AddFunctionView(FunctionViewModel function)
+        {
+            InitializeComponent();
+
+            this.nameBox.Text = function.Function.ToString();
+            this.nameBox.IsEnabled = false;
+            this.funcBox.Text = function.Value;
+            this.nameBox.Focus();
+        }
+
         private void OKCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
             this.DialogResult = true;
@@ -49,6 +60,22 @@ namespace xFunc.Views
         private void OKCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = !string.IsNullOrWhiteSpace(this.nameBox.Text) && !string.IsNullOrWhiteSpace(this.funcBox.Text);
+        }
+
+        public string FunctionName
+        {
+            get
+            {
+                return this.nameBox.Text;
+            }
+        }
+
+        public string Function
+        {
+            get
+            {
+                return this.funcBox.Text;
+            }
         }
 
     }

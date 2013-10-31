@@ -1,4 +1,5 @@
 ﻿using System;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.ViewModels
 {
@@ -6,16 +7,16 @@ namespace xFunc.ViewModels
     public class FunctionViewModel
     {
 
-        private string function;
-        private string value;
+        private UserFunction function;
+        private IMathExpression value;
 
-        public FunctionViewModel(string function, string value)
+        public FunctionViewModel(UserFunction function, IMathExpression value)
         {
             this.function = function;
             this.value = value;
         }
 
-        public string Function
+        public UserFunction Function
         {
             get
             {
@@ -27,7 +28,7 @@ namespace xFunc.ViewModels
         {
             get
             {
-                return value;
+                return value.ToString();
             }
         }
 

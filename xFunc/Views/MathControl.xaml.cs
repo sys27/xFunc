@@ -102,9 +102,9 @@ namespace xFunc.Views
             {
                 Status = oe.Message;
             }
-            catch (KeyNotFoundException)
+            catch (KeyNotFoundException knfe)
             {
-                Status = Resource.VariableNotFoundExceptionError;
+                Status = knfe.Message;
             }
             catch (IndexOutOfRangeException)
             {

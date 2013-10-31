@@ -26,6 +26,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.Maths;
+using xFunc.Maths.Expressions;
 using xFunc.ViewModels;
 
 namespace xFunc.Views
@@ -57,7 +58,7 @@ namespace xFunc.Views
 
         private void RefreshList()
         {
-            this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key.ToString(), f.Value.ToString()));
+            this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key, f.Value));
         }
 
         #region Commands
@@ -70,17 +71,82 @@ namespace xFunc.Views
             };
             if (view.ShowDialog() == true)
             {
+                try
+                {
+                    var userFunc = processor.Parse(view.FunctionName) as UserFunction;
+                    if (userFunc == null)
+                    {
+                        // todo: !!!
+                        MessageBox.Show(this, "", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                        return;
+                    }
+
+                    var func = processor.Parse(view.Function);
+
+                    processor.UserFunctions.Add(userFunc, func);
+
+                    RefreshList();
+                }
+                catch (MathLexerException)
+                {
+                }
+                catch (MathParserException)
+                {
+                }
+                catch (MathParameterIsReadOnlyException)
+                {
+                }
+                catch (ArgumentNullException)
+                {
+                }
+                catch (ArgumentException)
+                {
+                }
             }
         }
 
         private void EditCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
+            var selectedItem = funcList.SelectedItem as FunctionViewModel;
+
+            AddFunctionView view = new AddFunctionView(selectedItem)
+            {
+                Owner = this
+            };
+            if (view.ShowDialog() == true)
+            {
+                try
+                {
+                    var userFunc = (funcList.SelectedItem as FunctionViewModel).Function;
+                    var func = processor.Parse(view.Function);
+
+                    processor.UserFunctions[userFunc] = func;
+
+                    RefreshList();
+                }
+                catch (MathLexerException)
+                {
+                }
+                catch (MathParserException)
+                {
+                }
+                catch (MathParameterIsReadOnlyException)
+                {
+                }
+                catch (ArgumentNullException)
+                {
+                }
+                catch (ArgumentException)
+                {
+                }
+            }
         }
 
         private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
             var selectedItem = funcList.SelectedItem as FunctionViewModel;
-            //processor.UserFunctions.Remove();
+            processor.UserFunctions.Remove(selectedItem.Function);
 
             RefreshList();
         }

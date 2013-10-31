@@ -129,6 +129,9 @@
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>При построении дерева произошла ошибка.</value>
   </data>
+  <data name="FunctionNotFoundExceptionError" xml:space="preserve">
+    <value>Функция '{0}' не найдена.</value>
+  </data>
   <data name="InvalidExpression" xml:space="preserve">
     <value>Выражение имеет неверный формат.</value>
   </data>
@@ -167,5 +170,8 @@
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Неожидаемая ошибка.</value>
+  </data>
+  <data name="VariableNotFoundExceptionError" xml:space="preserve">
+    <value>Переменная '{0}' не найдена.</value>
   </data>
 </root>

@@ -97,6 +97,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; function not found..
+        /// </summary>
+        internal static string FunctionNotFoundExceptionError {
+            get {
+                return ResourceManager.GetString("FunctionNotFoundExceptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The expression is invalid..
         /// </summary>
         internal static string InvalidExpression {
@@ -210,6 +219,15 @@ namespace xFunc.Maths.Resources {
         internal static string UnexpectedError {
             get {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;{0}&apos; variable not found..
+        /// </summary>
+        internal static string VariableNotFoundExceptionError {
+            get {
+                return ResourceManager.GetString("VariableNotFoundExceptionError", resourceCulture);
             }
         }
     }

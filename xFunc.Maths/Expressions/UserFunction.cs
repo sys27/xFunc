@@ -17,6 +17,7 @@ using System;
 using System.Linq;
 #endif
 using System.Text;
+using System.Collections.Generic;
 
 namespace xFunc.Maths.Expressions
 {
@@ -146,7 +147,8 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
-            var func = parameters.Functions.Keys.First(uf => uf.Equals(this));
+            var func = parameters.Functions.GetKeyByKey(this);
+
             var newParameters = new MathParameterCollection(parameters.Parameters);
             for (int i = 0; i < arguments.Length; i++)
             {

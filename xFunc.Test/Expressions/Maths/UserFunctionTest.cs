@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths.Expressions;
+using System.Collections.Generic;
 
 namespace xFunc.Test.Expressions.Maths
 {
@@ -20,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(KeyNotFoundException))]
         public void CalculateTest2()
         {
             var functions = new MathFunctionCollection();

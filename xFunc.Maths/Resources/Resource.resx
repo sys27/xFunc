@@ -129,6 +129,9 @@
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>An error occurred while parsing the tree.</value>
   </data>
+  <data name="FunctionNotFoundExceptionError" xml:space="preserve">
+    <value>The '{0}' function not found.</value>
+  </data>
   <data name="InvalidExpression" xml:space="preserve">
     <value>The expression is invalid.</value>
   </data>
@@ -167,5 +170,8 @@
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Unexpected error.</value>
+  </data>
+  <data name="VariableNotFoundExceptionError" xml:space="preserve">
+    <value>The '{0}' variable not found.</value>
   </data>
 </root>

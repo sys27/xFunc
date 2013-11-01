@@ -27,6 +27,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Resources;
 using xFunc.ViewModels;
 
 namespace xFunc.Views
@@ -77,7 +78,7 @@ namespace xFunc.Views
                     if (userFunc == null)
                     {
                         // todo: !!!
-                        MessageBox.Show(this, "", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show(this, "", Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
 
                         return;
                     }
@@ -88,20 +89,25 @@ namespace xFunc.Views
 
                     RefreshList();
                 }
-                catch (MathLexerException)
+                catch (MathLexerException mle)
                 {
+                    MessageBox.Show(this, mle.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParserException)
+                catch (MathParserException mpe)
                 {
+                    MessageBox.Show(this, mpe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParameterIsReadOnlyException)
+                catch (MathParameterIsReadOnlyException mpiroe)
                 {
+                    MessageBox.Show(this, mpiroe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (ArgumentNullException)
+                catch (ArgumentNullException ane)
                 {
+                    MessageBox.Show(this, ane.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ae)
                 {
+                    MessageBox.Show(this, ae.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
@@ -125,20 +131,25 @@ namespace xFunc.Views
 
                     RefreshList();
                 }
-                catch (MathLexerException)
+                catch (MathLexerException mle)
                 {
+                    MessageBox.Show(this, mle.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParserException)
+                catch (MathParserException mpe)
                 {
+                    MessageBox.Show(this, mpe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParameterIsReadOnlyException)
+                catch (MathParameterIsReadOnlyException mpiroe)
                 {
+                    MessageBox.Show(this, mpiroe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (ArgumentNullException)
+                catch (ArgumentNullException ane)
                 {
+                    MessageBox.Show(this, ane.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ae)
                 {
+                    MessageBox.Show(this, ae.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

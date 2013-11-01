@@ -627,4 +627,7 @@
   <data name="AddFuncTitle" xml:space="preserve">
     <value>Додати функцію</value>
   </data>
+  <data name="ErrorHeader" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
 </root>

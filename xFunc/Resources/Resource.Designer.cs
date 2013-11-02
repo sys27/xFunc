@@ -115,6 +115,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The function name is incorrect..
+        /// </summary>
+        public static string AddFuncError {
+            get {
+                return ResourceManager.GetString("AddFuncError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Function:.
         /// </summary>
         public static string AddFuncFunc {

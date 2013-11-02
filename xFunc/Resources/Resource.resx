@@ -630,4 +630,7 @@
   <data name="ErrorHeader" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="AddFuncError" xml:space="preserve">
+    <value>The function name is incorrect.</value>
+  </data>
 </root>

@@ -126,7 +126,7 @@
     <Compile Include="MathParser.cs" />
     <Compile Include="MathProcessor.cs" />
     <Compile Include="MathSimplifier.cs" />
-    <Compile Include="NumberSystem.cs" />
+    <Compile Include="NumeralSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.uk.Designer.cs">
       <DependentUpon>Resource.uk.resx</DependentUpon>

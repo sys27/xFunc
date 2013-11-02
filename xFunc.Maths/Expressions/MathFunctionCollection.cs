@@ -19,8 +19,8 @@ using System.Linq;
 #endif
 #if !PORTABLE
 using System.Runtime.Serialization;
-using xFunc.Maths.Resources;
 #endif
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {

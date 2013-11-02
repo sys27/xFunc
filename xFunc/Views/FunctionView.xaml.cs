@@ -77,8 +77,7 @@ namespace xFunc.Views
                     var userFunc = processor.Parse(view.FunctionName) as UserFunction;
                     if (userFunc == null)
                     {
-                        // todo: !!!
-                        MessageBox.Show(this, "", Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show(this, Resource.AddFuncError, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
 
                         return;
                     }

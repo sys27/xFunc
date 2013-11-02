@@ -633,4 +633,13 @@
   <data name="AddFuncError" xml:space="preserve">
     <value>Ім'я функції є неправильним.</value>
   </data>
+  <data name="GCDToolTip" xml:space="preserve">
+    <value>Найбільший спільний дільник. Приклад: gcd(2, 4)</value>
+  </data>
+  <data name="LCMToolTip" xml:space="preserve">
+    <value>Найменше спільне кратне. Приклад: lcm(2, 4)</value>
+  </data>
+  <data name="FactToolTip" xml:space="preserve">
+    <value>Факторіал. Приклад: fact(4) or 4!</value>
+  </data>
 </root>

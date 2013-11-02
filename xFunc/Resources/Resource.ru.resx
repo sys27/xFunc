@@ -630,4 +630,7 @@
   <data name="ErrorHeader" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="AddFuncError" xml:space="preserve">
+    <value>Имя функции является неправильным.</value>
+  </data>
 </root>

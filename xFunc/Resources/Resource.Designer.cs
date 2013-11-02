@@ -745,6 +745,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Factorial. Example: fact(4) or 4!.
+        /// </summary>
+        public static string FactToolTip {
+            get {
+                return ResourceManager.GetString("FactToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string FileMenu {
@@ -804,6 +813,15 @@ namespace xFunc.Resources {
         public static string FuncValueHeader {
             get {
                 return ResourceManager.GetString("FuncValueHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greatest common divisor. Example: gcd(2, 4).
+        /// </summary>
+        public static string GCDToolTip {
+            get {
+                return ResourceManager.GetString("GCDToolTip", resourceCulture);
             }
         }
         
@@ -876,6 +894,15 @@ namespace xFunc.Resources {
         public static string IndexOutOfRangeExceptionError {
             get {
                 return ResourceManager.GetString("IndexOutOfRangeExceptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Least common multiple. Example: lcm(2, 4).
+        /// </summary>
+        public static string LCMToolTip {
+            get {
+                return ResourceManager.GetString("LCMToolTip", resourceCulture);
             }
         }
         

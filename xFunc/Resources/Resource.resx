@@ -633,4 +633,13 @@
   <data name="AddFuncError" xml:space="preserve">
     <value>The function name is incorrect.</value>
   </data>
+  <data name="GCDToolTip" xml:space="preserve">
+    <value>Greatest common divisor. Example: gcd(2, 4)</value>
+  </data>
+  <data name="LCMToolTip" xml:space="preserve">
+    <value>Least common multiple. Example: lcm(2, 4)</value>
+  </data>
+  <data name="FactToolTip" xml:space="preserve">
+    <value>Factorial. Example: fact(4) or 4!</value>
+  </data>
 </root>

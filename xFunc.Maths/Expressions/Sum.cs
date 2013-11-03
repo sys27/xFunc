@@ -255,6 +255,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the function that is executed on each iteration.
+        /// </summary>
+        /// <value>
+        /// The function that is executed on each iteration.
+        /// </value>
         public IMathExpression Body
         {
             get
@@ -263,6 +269,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets ghe initial value (including).
+        /// </summary>
+        /// <value>
+        /// The initial value (including).
+        /// </value>
         public IMathExpression From
         {
             get
@@ -274,6 +286,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the final value (including).
+        /// </summary>
+        /// <value>
+        /// The final value (including).
+        /// </value>
         public IMathExpression To
         {
             get
@@ -285,6 +303,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the increment.
+        /// </summary>
+        /// <value>
+        /// The increment.
+        /// </value>
         public IMathExpression Increment
         {
             get
@@ -296,6 +320,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the increment variable.
+        /// </summary>
+        /// <value>
+        /// The increment variable.
+        /// </value>
         public Variable Variable
         {
             get

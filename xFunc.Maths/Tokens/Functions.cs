@@ -166,6 +166,10 @@ namespace xFunc.Maths.Tokens
         /// Summation
         /// </summary>
         Sum,
+        /// <summary>
+        /// Product
+        /// </summary>
+        Product,
 
         /// <summary>
         /// deriv

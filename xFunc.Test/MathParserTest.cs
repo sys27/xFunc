@@ -388,6 +388,86 @@ namespace xFunc.Test
             Assert.AreNotSame(e1, e2);
         }
 
+        [TestMethod]
+        public void SumToTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("sum(i, 20)");
+            Assert.AreEqual("sum(i, 20)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void SumFromToTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("sum(i, 2, 20)");
+            Assert.AreEqual("sum(i, 2, 20)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void SumFromToIncTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 4),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("sum(i, 2, 20, 2)");
+            Assert.AreEqual("sum(i, 2, 20, 2)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void SumFromToIncVarTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 5),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("sum(k, 2, 20, 2, k)");
+            Assert.AreEqual("sum(k, 2, 20, 2, k)", exp.ToString());
+        }
+
     }
 
 }

@@ -60,6 +60,7 @@
     <Compile Include="Expressions\MathParameterType.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />
+    <Compile Include="Expressions\Sum.cs" />
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="IExpressionFactory.cs" />
     <Compile Include="ISimplifier.cs" />

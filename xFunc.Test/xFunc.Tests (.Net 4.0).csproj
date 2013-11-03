@@ -104,6 +104,7 @@
     <Compile Include="Expressions\Maths\FactTest.cs" />
     <Compile Include="Expressions\Maths\BinaryTest.cs" />
     <Compile Include="Expressions\Maths\UnaryTest.cs" />
+    <Compile Include="Expressions\Maths\SumTest.cs" />
     <Compile Include="Expressions\Maths\UserFunctionTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathLexerMock.cs" />

@@ -1148,6 +1148,90 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void SumToTest()
+        {
+            var tokens = lexer.Tokenize("sum(i, 20)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void SumFromToTest()
+        {
+            var tokens = lexer.Tokenize("sum(i, 2, 20)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void SumFromToIncTest()
+        {
+            var tokens = lexer.Tokenize("sum(i, 2, 20, 2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 4),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void SumFromToIncVarTest()
+        {
+            var tokens = lexer.Tokenize("sum(k, 2, 20, 2, k)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sum, 5),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

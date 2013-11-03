@@ -162,6 +162,10 @@ namespace xFunc.Maths.Tokens
         /// fact
         /// </summary>
         Factorial,
+        /// <summary>
+        /// Summation
+        /// </summary>
+        Sum,
 
         /// <summary>
         /// deriv

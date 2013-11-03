@@ -18,27 +18,27 @@ namespace xFunc.Maths.Expressions
 {
 
     /// <summary>
-    /// Represents the "sum" function.
+    /// Represents the "product" function.
     /// </summary>
-    public class Sum : DifferentParametersExpression
+    public class Product : DifferentParametersExpression
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
+        /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
-        internal Sum()
+        internal Product()
             : base(null, -1)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
+        /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="ArgumentException"></exception>
-        public Sum(IMathExpression[] args, int countOfParams)
+        public Product(IMathExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             if (args == null)
@@ -50,47 +50,47 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
+        /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         /// <param name="body">The function that is executed on each iteration.</param>
         /// <param name="to">The final value (including).</param>
-        public Sum(IMathExpression body, IMathExpression to)
+        public Product(IMathExpression body, IMathExpression to)
             : base(new[] { body, to }, 2)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
+        /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         /// <param name="body">The function that is executed on each iteration.</param>
         /// <param name="from">The initial value (including).</param>
         /// <param name="to">The final value (including).</param>
-        public Sum(IMathExpression body, IMathExpression from, IMathExpression to)
+        public Product(IMathExpression body, IMathExpression from, IMathExpression to)
             : base(new[] { body, from, to }, 3)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
+        /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         /// <param name="body">The function that is executed on each iteration.</param>
         /// <param name="from">The initial value (including).</param>
         /// <param name="to">The final value (including).</param>
         /// <param name="inc">The increment.</param>
-        public Sum(IMathExpression body, IMathExpression from, IMathExpression to, IMathExpression inc)
+        public Product(IMathExpression body, IMathExpression from, IMathExpression to, IMathExpression inc)
             : base(new[] { body, from, to, inc }, 4)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
+        /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         /// <param name="body">The function that is executed on each iteration.</param>
         /// <param name="from">The initial value (including).</param>
         /// <param name="to">The final value (including).</param>
         /// <param name="inc">The increment.</param>
         /// <param name="variable">The increment variable.</param>
-        public Sum(IMathExpression body, IMathExpression from, IMathExpression to, IMathExpression inc, Variable variable)
+        public Product(IMathExpression body, IMathExpression from, IMathExpression to, IMathExpression inc, Variable variable)
             : base(new[] { body, from, to, inc, variable }, 5)
         {
         }
@@ -103,7 +103,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(6089, 9949);
+            return base.GetHashCode(1607, 6917);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override string ToString()
         {
-            return base.ToString("sum");
+            return base.ToString("product");
         }
 
         private static string GetVarName(MathParameterCollection parameters)
@@ -149,11 +149,11 @@ namespace xFunc.Maths.Expressions
             localParams.Add(variable, from);
             var param = new ExpressionParameters(localParams);
 
-            double S = 0;
+            double S = 1;
             for (; from <= to; from += inc)
             {
                 localParams[variable] = from;
-                S += body.Calculate(param);
+                S *= body.Calculate(param);
             }
 
             return S;
@@ -179,11 +179,11 @@ namespace xFunc.Maths.Expressions
             localParams.Add(variable, from);
             var param = new ExpressionParameters(parameters.AngleMeasurement, localParams, parameters.Functions);
 
-            double S = 0;
+            double S = 1;
             for (; from <= to; from += inc)
             {
                 localParams[variable] = from;
-                S += body.Calculate(param);
+                S *= body.Calculate(param);
             }
 
             return S;
@@ -192,6 +192,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Always throws <see cref="NotSupportedException" />.
         /// </summary>
+        /// <param name="variable"></param>
         /// <returns>
         /// Throws an exception.
         /// </returns>
@@ -224,7 +225,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IMathExpression Clone()
         {
-            return new Sum(CloneArguments(), arguments.Length);
+            return new Product(CloneArguments(), countOfParams);
         }
 
         /// <summary>

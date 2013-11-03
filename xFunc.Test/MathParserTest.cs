@@ -468,6 +468,86 @@ namespace xFunc.Test
             Assert.AreEqual("sum(k, 2, 20, 2, k)", exp.ToString());
         }
 
+        [TestMethod]
+        public void ProductToTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("product(i, 20)");
+            Assert.AreEqual("product(i, 20)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void ProductFromToTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("product(i, 2, 20)");
+            Assert.AreEqual("product(i, 2, 20)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void ProductFromToIncTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 4),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("product(i, 2, 20, 2)");
+            Assert.AreEqual("product(i, 2, 20, 2)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void ProductFromToIncVarTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 5),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("product(k, 2, 20, 2, k)");
+            Assert.AreEqual("product(k, 2, 20, 2, k)", exp.ToString());
+        }
+
     }
 
 }

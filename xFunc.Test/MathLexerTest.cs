@@ -1232,6 +1232,90 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void ProductToTest()
+        {
+            var tokens = lexer.Tokenize("product(i, 20)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ProductFromToTest()
+        {
+            var tokens = lexer.Tokenize("product(i, 2, 20)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ProductFromToIncTest()
+        {
+            var tokens = lexer.Tokenize("product(i, 2, 20, 2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 4),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("i"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ProductFromToIncVarTest()
+        {
+            var tokens = lexer.Tokenize("product(k, 2, 20, 2, k)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Product, 5),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(20),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("k"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

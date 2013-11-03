@@ -158,6 +158,8 @@ namespace xFunc.Maths
                     return new LCM();
                 case Functions.Factorial:
                     return new Fact();
+                case Functions.Sum:
+                    return new Sum();
                 case Functions.Derivative:
                     return new Derivative();
                 case Functions.Simplify:

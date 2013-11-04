@@ -58,8 +58,10 @@
     <Compile Include="Expressions\MathParameter.cs" />
     <Compile Include="Expressions\MathParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\MathParameterType.cs" />
+    <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />
+    <Compile Include="Expressions\Sum.cs" />
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="EnumerableExtention.cs" />
     <Compile Include="ISimplifier.cs" />

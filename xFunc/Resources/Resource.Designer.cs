@@ -1096,6 +1096,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product. Example: product(body, from, to, increment, variable).
+        /// </summary>
+        public static string ProductToolTip {
+            get {
+                return ResourceManager.GetString("ProductToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Radian.
         /// </summary>
         public static string RadianButtonHeader {
@@ -1443,6 +1452,15 @@ namespace xFunc.Resources {
         public static string StandartExpanderHeader {
             get {
                 return ResourceManager.GetString("StandartExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summation. Example: sum(body, from, to, increment, variable).
+        /// </summary>
+        public static string SumToolTip {
+            get {
+                return ResourceManager.GetString("SumToolTip", resourceCulture);
             }
         }
         

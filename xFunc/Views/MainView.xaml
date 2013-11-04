@@ -69,7 +69,7 @@ limitations under the License. -->
                 <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
             <ribbon:Ribbon.ToolBarItems>
-                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" Size="Small" Icon="../Images/Help.png" Command="views:MainView.AboutCommand">
+                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" ribbon:RibbonAttachedProperties.RibbonSize="Small" Icon="../Images/Help.png" Command="views:MainView.AboutCommand">
                     <ribbon:Button.ToolTip>
                         <ribbon:ScreenTip Title="{x:Static res:Resource.AboutToolTipTitle}" Text="{x:Static res:Resource.AboutButtonToolTip}" />
                     </ribbon:Button.ToolTip>

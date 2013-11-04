@@ -642,4 +642,10 @@
   <data name="FactToolTip" xml:space="preserve">
     <value>Факториал. Пример: fact(4) or 4!</value>
   </data>
+  <data name="ProductToolTip" xml:space="preserve">
+    <value>Произведение. Пример: product(body, from, to, increment, variable)</value>
+  </data>
+  <data name="SumToolTip" xml:space="preserve">
+    <value>Сумма. Пример: sum(body, from, to, increment, variable)</value>
+  </data>
 </root>

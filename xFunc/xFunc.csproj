@@ -229,8 +229,12 @@
     <None Include="..\key.pfx">
       <Link>key.pfx</Link>
     </None>
+    <None Include="..\LICENSE">
+      <Link>LICENSE</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
-    <None Include="LICENSE">
+    <None Include="NOTICE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
@@ -285,16 +289,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NOTICE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LICENSE_Ms-PL.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Clear.png" />
     <Resource Include="Images\ClearLarge.png" />
   </ItemGroup>
@@ -330,6 +324,12 @@
     <Resource Include="Images\Edit.png" />
     <Resource Include="Images\Refresh.png" />
     <Resource Include="Images\Remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LICENSE_Ms-PL.txt">
+      <Link>LICENSE_Ms-PL.txt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

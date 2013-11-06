@@ -121,7 +121,7 @@ namespace xFunc.Maths.Expressions
                 if (item != null)
                     return item.Value;
 
-                var param = collection.FirstOrDefault(p => p.Key == key);
+                var param = consts.FirstOrDefault(p => p.Key == key);
                 if (param == null)
                     throw new KeyNotFoundException(string.Format(Resource.VariableNotFoundExceptionError, key));
 

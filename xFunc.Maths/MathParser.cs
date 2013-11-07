@@ -87,12 +87,8 @@ namespace xFunc.Maths
 
                 return paramExp.Arguments.Any(e => HasVar(e, arg));
             }
-            if (expression is Variable && expression.Equals(arg))
-            {
-                return true;
-            }
 
-            return false;
+            return expression is Variable && expression.Equals(arg);
         }
 
         /// <summary>

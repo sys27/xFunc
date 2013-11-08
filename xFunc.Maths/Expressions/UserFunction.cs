@@ -149,14 +149,15 @@ namespace xFunc.Maths.Expressions
 
             var func = parameters.Functions.GetKeyByKey(this);
 
-            var newParameters = new MathParameterCollection(parameters.Parameters);
+            var newParameters = new MathParameterCollection(parameters.Parameters.Collection);
             for (int i = 0; i < arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
                 newParameters[arg.Name] = this.arguments[i].Calculate(parameters);
             }
 
-            return parameters.Functions[this].Calculate(newParameters);
+            var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
+            return parameters.Functions[this].Calculate(expParam);
         }
 
         /// <summary>

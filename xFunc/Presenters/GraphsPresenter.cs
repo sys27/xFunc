@@ -44,8 +44,6 @@ namespace xFunc.Presenters
         public void Add(string strExp)
         {
             var exp = processor.Parse(strExp);
-            if (!MathParser.HasVar(exp, "x"))
-                throw new MathParserException(Resource.VariableNotFoundExceptionError);
 
             listOfGraphs.Add(new GraphItemViewModel(exp, true, null));
 

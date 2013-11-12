@@ -9,20 +9,6 @@ namespace xFunc.Test
     public class LogicParameterCollectionTest
     {
 
-        private TestContext testContextInstance;
-
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
         [TestMethod]
         public void AddTest()
         {

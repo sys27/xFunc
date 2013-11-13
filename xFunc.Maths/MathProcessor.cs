@@ -111,6 +111,17 @@ namespace xFunc.Maths
         }
 
         /// <summary>
+        /// Solves the specified function.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="function">The function.</param>
+        /// <returns>The result of solving.</returns>
+        public TResult Solve<TResult>(string function) where TResult : IResult
+        {
+            return (TResult)Solve(function);
+        }
+
+        /// <summary>
         /// Simplifies the <paramref name="expression"/>.
         /// </summary>
         /// <param name="expression">A expression to simplify.</param>

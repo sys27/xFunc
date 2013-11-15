@@ -165,11 +165,6 @@ namespace xFunc.Maths
 
                         var assign = expression as Define;
                         assign.Value = stack.Pop();
-
-                        var peek = stack.Peek();
-                        if (!(peek is Variable || peek is UserFunction))
-                            throw new MathParserException(Resource.InvalidExpression);
-
                         assign.Key = stack.Pop();
 
                         stack.Push(assign);
@@ -180,11 +175,6 @@ namespace xFunc.Maths
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
                         var undef = expression as Undefine;
-
-                        var peek = stack.Peek();
-                        if (!(peek is Variable || peek is UserFunction))
-                            throw new MathParserException(Resource.InvalidExpression);
-
                         undef.Key = stack.Pop();
 
                         stack.Push(undef);

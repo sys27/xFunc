@@ -237,9 +237,7 @@ namespace xFunc.Maths.Expressions
                     throw new ArgumentNullException("value");
 
                 if (!(value is Variable || value is UserFunction))
-                {
                     throw new NotSupportedException();
-                }
 
                 key = value;
             }

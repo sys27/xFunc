@@ -177,7 +177,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
+        [ExpectedException(typeof(NotSupportedException))]
         public void ParseAssignFirstParamIsNotVar()
         {
             lexer.Tokens = new List<IToken>()

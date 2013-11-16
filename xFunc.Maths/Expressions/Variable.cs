@@ -133,7 +133,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>
-        /// <param name="variable"></param>
+        /// <param name="variable">The variable of differentiation.</param>
         /// <returns>
         /// Returns a derivative of the expression of several variables.
         /// </returns>

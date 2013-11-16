@@ -80,9 +80,11 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>
-        /// <param name="variable"></param>
-        /// <returns>Returns a derivative of the expression of several variables.</returns>
-        /// <seealso cref="Variable"/>
+        /// <param name="variable">The variable of differentiation.</param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
         protected override IMathExpression _Differentiation(Variable variable)
         {
             var div = new Div(argument.Clone(), Clone());

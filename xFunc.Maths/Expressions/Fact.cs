@@ -84,12 +84,12 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Always throws <see cref="NotSupportedException" />.
         /// </summary>
-        /// <param name="variable"></param>
+        /// <param name="variable">The variable of differentiation.</param>
         /// <returns>
         /// Throws an exception.
         /// </returns>
         /// <seealso cref="Variable" />
-        /// <exception cref="NotSupportedException">Always.</exception>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         protected override IMathExpression _Differentiation(Variable variable)
         {
             throw new NotSupportedException();

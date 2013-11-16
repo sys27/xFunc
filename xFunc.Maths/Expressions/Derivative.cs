@@ -138,13 +138,13 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>
-        /// <param name="variable"></param>
+        /// <param name="variable">The variable of differentiation.</param>
         /// <returns>
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
         /// <remarks>
-        /// This method ignores the local <paramref name="variable"/>.
+        /// This method ignores the local <paramref name="variable" />.
         /// </remarks>
         public override IMathExpression Differentiate(Variable variable)
         {

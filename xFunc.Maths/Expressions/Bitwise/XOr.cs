@@ -105,11 +105,14 @@ namespace xFunc.Maths.Expressions.Bitwise
         }
 
         /// <summary>
-        /// This method always throws the <see cref="NotSupportedException"/> exception.
+        /// Always throws <see cref="NotSupportedException" />.
         /// </summary>
-        /// <param name="variable">This method always throws the <see cref="NotSupportedException"/> exception.</param>
-        /// <returns>This method always throws the <see cref="NotSupportedException"/> exception.</returns>
-        /// <exception cref="NotSupportedException">Always is thrown.</exception>
+        /// <param name="variable">The variable of differentiation.</param>
+        /// <returns>
+        /// Throws an exception.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public override IMathExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();

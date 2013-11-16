@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>
-        /// <param name="variable"></param>
+        /// <param name="variable">The variable of differentiation.</param>
         /// <returns>Returns a derivative of the expression of several variables.</returns>
         /// <seealso cref="Variable"/>
         IMathExpression Differentiate(Variable variable);
@@ -66,7 +66,6 @@ namespace xFunc.Maths.Expressions
         /// The minimum count of parameters.
         /// </value>
         int MinCountOfParams { get; }
-
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
         /// </summary>
@@ -74,7 +73,6 @@ namespace xFunc.Maths.Expressions
         /// The maximum count of parameters.
         /// </value>
         int MaxCountOfParams { get; }
-
         /// <summary>
         /// Gets the count of parameters.
         /// </summary>

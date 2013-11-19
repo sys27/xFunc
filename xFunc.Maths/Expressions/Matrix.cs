@@ -18,6 +18,9 @@ using System.Text;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents a matrix.
+    /// </summary>
     public class Matrix : DifferentParametersExpression
     {
 
@@ -29,6 +32,13 @@ namespace xFunc.Maths.Expressions
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Matrix"/> class.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
+        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
+        /// <exception cref="System.ArgumentException"></exception>
         public Matrix(IMathExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {

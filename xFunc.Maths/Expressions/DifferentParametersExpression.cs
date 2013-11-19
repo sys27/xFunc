@@ -53,7 +53,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="countOfParams">The count of parameters.</param>
         protected DifferentParametersExpression(IMathExpression[] arguments, int countOfParams)
         {
-            this.arguments = arguments;
+            this.Arguments = arguments;
             this.countOfParams = countOfParams;
         }
 
@@ -179,6 +179,14 @@ namespace xFunc.Maths.Expressions
             set
             {
                 arguments = value;
+                if (arguments != null)
+                {
+                    foreach (var item in arguments)
+                    {
+                        if (item != null)
+                            item.Parent = this;
+                    }
+                }
             }
         }
 

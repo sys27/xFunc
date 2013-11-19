@@ -93,10 +93,12 @@ namespace xFunc.Maths
                 {
                     tokens.Add(new SymbolToken(Symbols.OpenBracket));
                 }
-                else if (letter == '{' && tokens.Count > 0)
+                else if (letter == '{')
                 {
-                    var token = tokens[tokens.Count - 1] as FunctionToken;
-                    if (token != null && token.Function != Functions.Matrix)
+                    FunctionToken token = null;
+                    if (tokens.Count > 0)
+                        token = tokens[tokens.Count - 1] as FunctionToken;
+                    if (token == null || token.Function != Functions.Matrix)
                     {
                         tokens.Add(new FunctionToken(Functions.Matrix));
                     }

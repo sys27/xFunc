@@ -548,6 +548,52 @@ namespace xFunc.Test
             Assert.AreEqual("product(k, 2, 20, 2, k)", exp.ToString());
         }
 
+        [TestMethod]
+        public void MatrixTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("matrix{2, 3, 4}");
+            Assert.AreEqual("{2, 3, 4}", exp.ToString());
+        }
+
+        [TestMethod]
+        public void MatrixTwoDimTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("matrix{matrix{2, 3}, matrix{4, 7}}");
+            Assert.AreEqual("{{2, 3}, {4, 7}}", exp.ToString());
+        }
+
     }
 
 }

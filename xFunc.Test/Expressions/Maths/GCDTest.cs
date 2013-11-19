@@ -25,6 +25,17 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual(8, exp.Calculate());
         }
 
+        [TestMethod]
+        public void DifferentArgsParentTest()
+        {
+            var num1 = new Number(64);
+            var num2 = new Number(16);
+            var gcd = new GCD(new[] { num1, num2 }, 2);
+
+            Assert.AreEqual(gcd, num1.Parent);
+            Assert.AreEqual(gcd, num2.Parent);
+        }
+
     }
 
 }

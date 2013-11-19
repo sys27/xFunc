@@ -189,6 +189,10 @@ namespace xFunc.Maths.Tokens
         Undefine,
 
         /// <summary>
+        /// matrix
+        /// </summary>
+        Matrix,
+        /// <summary>
         /// The user function
         /// </summary>
         UserFunction

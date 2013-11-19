@@ -93,7 +93,17 @@ namespace xFunc.Maths
                 {
                     tokens.Add(new SymbolToken(Symbols.OpenBracket));
                 }
-                else if (letter == ')')
+                else if (letter == '{' && tokens.Count > 0)
+                {
+                    var token = tokens[tokens.Count - 1] as FunctionToken;
+                    if (token != null && token.Function != Functions.Matrix)
+                    {
+                        tokens.Add(new FunctionToken(Functions.Matrix));
+                    }
+
+                    tokens.Add(new SymbolToken(Symbols.OpenBracket));
+                }
+                else if (letter == ')' || letter == '}')
                 {
                     tokens.Add(new SymbolToken(Symbols.CloseBracket));
                 }
@@ -268,6 +278,13 @@ namespace xFunc.Maths
                     {
                         tokens.Add(new VariableToken("π"));
                         i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("matrix(") || sub.StartsWith("matrix{"))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Matrix));
+                        i += 6;
 
                         continue;
                     }

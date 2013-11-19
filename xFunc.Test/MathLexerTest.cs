@@ -1316,6 +1316,97 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void MatrixBraketTest()
+        {
+            var tokens = lexer.Tokenize("matrix(2, 3, 4)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void MatrixBracesTest()
+        {
+            var tokens = lexer.Tokenize("matrix{2, 3, 4}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void MatrixBracesWithExpTest()
+        {
+            var tokens = lexer.Tokenize("matrix{sin(4), 3^4}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Sine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new OperationToken(Operations.Exponentiation),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void MatrixTwoDimTest()
+        {
+            var tokens = lexer.Tokenize("matrix{matrix{2, 3}, matrix{4, 7}}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

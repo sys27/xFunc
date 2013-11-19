@@ -141,6 +141,28 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Gets or sets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        public override IMathExpression[] Arguments
+        {
+            get
+            {
+                return base.Arguments;
+            }
+            set
+            {
+                if (value.Length == 0)
+                    throw new ArgumentException();
+                // todo: matrix check ...
+
+                base.Arguments = value;
+            }
+        }
+
+        /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
         /// <value>

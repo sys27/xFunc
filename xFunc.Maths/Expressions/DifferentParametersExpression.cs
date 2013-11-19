@@ -170,7 +170,7 @@ namespace xFunc.Maths.Expressions
         /// Gets or sets the arguments.
         /// </summary>
         /// <value>The arguments.</value>
-        public IMathExpression[] Arguments
+        public virtual IMathExpression[] Arguments
         {
             get
             {

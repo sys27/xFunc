@@ -168,6 +168,8 @@ namespace xFunc.Maths
                     return new Simplify();
                 case Functions.Define:
                     return new Define();
+                case Functions.Matrix:
+                    return new Matrix();
                 case Functions.Undefine:
                     return new Undefine();
                 default:

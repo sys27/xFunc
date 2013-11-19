@@ -1357,9 +1357,29 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void MatrixBracesShortTest()
+        {
+            var tokens = lexer.Tokenize("{2, 3, 4}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(4),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
         public void MatrixBracesWithExpTest()
         {
-            var tokens = lexer.Tokenize("matrix{sin(4), 3^4}");
+            var tokens = lexer.Tokenize("{sin(4), 3^4}");
 
             var expected = new List<IToken>()
             {

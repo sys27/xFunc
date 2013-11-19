@@ -95,7 +95,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
         /// A result of the calculation.

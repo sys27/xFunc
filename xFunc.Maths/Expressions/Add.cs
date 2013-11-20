@@ -67,6 +67,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
+            // todo: without param
+
             return left.Calculate() + right.Calculate();
         }
 
@@ -80,6 +82,12 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
+            if (left is Matrix && right is Matrix)
+                Matrix.Add(left, right, parameters);
+            if (left is Matrix || right is Matrix)
+                // todo: exception
+                throw new Exception();
+
             return left.Calculate(parameters) + right.Calculate(parameters);
         }
 

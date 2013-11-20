@@ -48,6 +48,18 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentException();
         }
 
+        public IMathExpression this[int index]
+        {
+            get
+            {
+                return arguments[index];
+            }
+            set
+            {
+                arguments[index] = value;
+            }
+        }
+
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
@@ -75,6 +87,28 @@ namespace xFunc.Maths.Expressions
             sb.Remove(sb.Length - 2, 2).Append('}');
 
             return sb.ToString();
+        }
+
+        public Matrix Add(Matrix right, ExpressionParameters parameters)
+        {
+            return Add(this, right, parameters);
+        }
+
+        public static Matrix Add(IMathExpression left, IMathExpression right, ExpressionParameters parameters)
+        {
+            return Add((Matrix)left, (Matrix)right, parameters);
+        }
+
+        public static Matrix Add(Matrix left, Matrix right, ExpressionParameters parameters)
+        {
+            if (left == null)
+                throw new ArgumentNullException("left");
+            if (right == null)
+                throw new ArgumentNullException("right");
+
+            // todo: check size
+
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -154,7 +188,7 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value.Length == 0)
+                if (value != null && value.Length == 0)
                     throw new ArgumentException();
                 // todo: matrix check ...
 

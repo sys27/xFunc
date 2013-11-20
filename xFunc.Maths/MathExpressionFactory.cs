@@ -16,6 +16,7 @@ using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Bitwise;
 using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
@@ -168,6 +169,8 @@ namespace xFunc.Maths
                     return new Simplify();
                 case Functions.Define:
                     return new Define();
+                case Functions.Vector:
+                    return new Vector();
                 case Functions.Matrix:
                     return new Matrix();
                 case Functions.Undefine:

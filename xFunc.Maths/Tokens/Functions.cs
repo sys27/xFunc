@@ -189,6 +189,10 @@ namespace xFunc.Maths.Tokens
         Undefine,
 
         /// <summary>
+        /// vector
+        /// </summary>
+        Vector,
+        /// <summary>
         /// matrix
         /// </summary>
         Matrix,

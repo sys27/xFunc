@@ -82,12 +82,6 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
-            if (left is Matrix && right is Matrix)
-                Matrix.Add(left, right, parameters);
-            if (left is Matrix || right is Matrix)
-                // todo: exception
-                throw new Exception();
-
             return left.Calculate(parameters) + right.Calculate(parameters);
         }
 

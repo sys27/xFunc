@@ -13,41 +13,50 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Linq;
 using System.Text;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Matrices
 {
 
     /// <summary>
-    /// Represents a matrix.
+    /// Represents a vector.
     /// </summary>
-    public class Matrix : DifferentParametersExpression
+    public class Vector : DifferentParametersExpression
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Matrix"/> class.
+        /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
-        internal Matrix()
+        internal Vector()
             : base(null, -1)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Matrix"/> class.
+        /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
-        public Matrix(IMathExpression[] args, int countOfParams)
+        public Vector(IMathExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             if (args == null)
                 throw new ArgumentNullException("args");
-            if (args.Length < 2 && args.Length != countOfParams)
+            if (args.Length < 1 && args.Length != countOfParams)
                 throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="IMathExpression"/> at the specified index.
+        /// </summary>
+        /// <value>
+        /// The <see cref="IMathExpression"/>.
+        /// </value>
+        /// <param name="index">The index.</param>
+        /// <returns>The element of vector.</returns>
         public IMathExpression this[int index]
         {
             get
@@ -87,28 +96,6 @@ namespace xFunc.Maths.Expressions
             sb.Remove(sb.Length - 2, 2).Append('}');
 
             return sb.ToString();
-        }
-
-        public Matrix Add(Matrix right, ExpressionParameters parameters)
-        {
-            return Add(this, right, parameters);
-        }
-
-        public static Matrix Add(IMathExpression left, IMathExpression right, ExpressionParameters parameters)
-        {
-            return Add((Matrix)left, (Matrix)right, parameters);
-        }
-
-        public static Matrix Add(Matrix left, Matrix right, ExpressionParameters parameters)
-        {
-            if (left == null)
-                throw new ArgumentNullException("left");
-            if (right == null)
-                throw new ArgumentNullException("right");
-
-            // todo: check size
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -171,7 +158,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IMathExpression Clone()
         {
-            return new Matrix(CloneArguments(), countOfParams);
+            return new Vector(CloneArguments(), countOfParams);
         }
 
         /// <summary>
@@ -190,7 +177,6 @@ namespace xFunc.Maths.Expressions
             {
                 if (value != null && value.Length == 0)
                     throw new ArgumentException();
-                // todo: matrix check ...
 
                 base.Arguments = value;
             }

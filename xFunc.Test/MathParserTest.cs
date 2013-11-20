@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
 
@@ -549,11 +550,11 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        public void MatrixTest()
+        public void VectorTest()
         {
             lexer.Tokens = new List<IToken>()
             {
-                new FunctionToken(Functions.Matrix, 3),
+                new FunctionToken(Functions.Vector, 3),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -563,25 +564,25 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("matrix{2, 3, 4}");
+            var exp = parser.Parse("vector{2, 3, 4}");
             Assert.AreEqual("{2, 3, 4}", exp.ToString());
         }
 
         [TestMethod]
-        public void MatrixTwoDimTest()
+        public void VectorTwoDimTest()
         {
             lexer.Tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new FunctionToken(Functions.Matrix, 2),
+                new FunctionToken(Functions.Vector, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(3),
                 new SymbolToken(Symbols.CloseBracket),
                 new SymbolToken(Symbols.Comma),
-                new FunctionToken(Functions.Matrix, 2),
+                new FunctionToken(Functions.Vector, 2),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(4),
                 new SymbolToken(Symbols.Comma),
@@ -590,8 +591,25 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("matrix{matrix{2, 3}, matrix{4, 7}}");
+            var exp = parser.Parse("matrix{vector{2, 3}, vector{4, 7}}");
             Assert.AreEqual("{{2, 3}, {4, 7}}", exp.ToString());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MatrixIsInvalidException))]
+        public void MatrixAndNotVectorTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            parser.Parse("matrix{2, 3}");
         }
 
     }

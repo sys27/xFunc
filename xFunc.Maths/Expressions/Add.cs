@@ -67,8 +67,6 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            // todo: without param
-
             return left.Calculate() + right.Calculate();
         }
 

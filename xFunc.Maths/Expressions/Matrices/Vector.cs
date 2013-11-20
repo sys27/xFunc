@@ -98,6 +98,20 @@ namespace xFunc.Maths.Expressions.Matrices
             return sb.ToString();
         }
 
+        //public static Vector MulByNumber(IMathExpression vector, IMathExpression number, ExpressionParameters parameters)
+        //{
+        //    return MulByNumber((Vector)vector, number, parameters);
+        //}
+
+        //public static Vector MulByNumber(Vector vector, IMathExpression number, ExpressionParameters parameters)
+        //{
+        //    var args = new IMathExpression[vector.countOfParams];
+        //    for (int i = 0; i < vector.CountOfParams; i++)
+        //        args[i] = new Number(number.Calculate(parameters) * vector[i].Calculate(parameters));
+
+        //    return new Vector(args, args.Length);
+        //}
+
         /// <summary>
         /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>

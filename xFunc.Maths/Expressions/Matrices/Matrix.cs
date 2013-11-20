@@ -93,6 +93,8 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new MatrixIsInvalidException();
         }
 
+
+
         /// <summary>
         /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>

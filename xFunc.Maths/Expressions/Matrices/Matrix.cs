@@ -183,6 +183,20 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
+        /// Gets the size of vectors.
+        /// </summary>
+        /// <value>
+        /// The size of vectors.
+        /// </value>
+        public int SizeOfVectors
+        {
+            get
+            {
+                return arguments[0].CountOfParams;
+            }
+        }
+
+        /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
         /// <value>

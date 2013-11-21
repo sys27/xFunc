@@ -21,17 +21,17 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for expressions with different number of parameters.
     /// </summary>
-    public abstract class DifferentParametersExpression : IMathExpression
+    public abstract class DifferentParametersExpression : IExpression
     {
 
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IMathExpression parent;
+        protected IExpression parent;
         /// <summary>
         /// The arguments.
         /// </summary>
-        protected IMathExpression[] arguments;
+        protected IExpression[] arguments;
         /// <summary>
         /// The count of parameters.
         /// </summary>
@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
-        protected DifferentParametersExpression(IMathExpression[] arguments, int countOfParams)
+        protected DifferentParametersExpression(IExpression[] arguments, int countOfParams)
         {
             this.Arguments = arguments;
             this.countOfParams = countOfParams;
@@ -118,7 +118,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns a derivative of the expression.
         /// </returns>
-        public abstract IMathExpression Differentiate();
+        public abstract IExpression Differentiate();
 
         /// <summary>
         /// Calculates a derivative of the expression.
@@ -128,23 +128,23 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public abstract IMathExpression Differentiate(Variable variable);
+        public abstract IExpression Differentiate(Variable variable);
 
         /// <summary>
-        /// Clones this instance of the <see cref="IMathExpression" />.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="IMathExpression" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public abstract IMathExpression Clone();
+        public abstract IExpression Clone();
 
         /// <summary>
         /// Closes the arguments.
         /// </summary>
-        /// <returns>The new array of <see cref="IMathExpression"/>.</returns>
-        protected IMathExpression[] CloneArguments()
+        /// <returns>The new array of <see cref="IExpression"/>.</returns>
+        protected IExpression[] CloneArguments()
         {
-            var args = new IMathExpression[arguments.Length];
+            var args = new IExpression[arguments.Length];
             for (int i = 0; i < arguments.Length; i++)
                 args[i] = arguments[i].Clone();
 
@@ -154,7 +154,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IMathExpression Parent
+        public IExpression Parent
         {
             get
             {
@@ -170,7 +170,7 @@ namespace xFunc.Maths.Expressions
         /// Gets or sets the arguments.
         /// </summary>
         /// <value>The arguments.</value>
-        public virtual IMathExpression[] Arguments
+        public virtual IExpression[] Arguments
         {
             get
             {

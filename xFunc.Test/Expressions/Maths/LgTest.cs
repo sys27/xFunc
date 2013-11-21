@@ -12,7 +12,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Lg(new Number(2));
+            IExpression exp = new Lg(new Number(2));
 
             Assert.AreEqual(Math.Log10(2), exp.Calculate());
         }
@@ -20,8 +20,8 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Lg(new Mul(new Number(2), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Lg(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / ((2 * x) * ln(10))", deriv.ToString());
         }
@@ -34,8 +34,8 @@ namespace xFunc.Test.Expressions.Maths
             Variable x = new Variable("x");
             Mul mul = new Mul(num, x);
 
-            IMathExpression exp = new Lg(mul);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Lg(mul);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / ((2 * x) * ln(10))", deriv.ToString());
 
@@ -48,8 +48,8 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             // lg(2xy)
-            IMathExpression exp = new Lg(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Lg(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("((2 * 1) * y) / (((2 * x) * y) * ln(10))", deriv.ToString());
         }
 
@@ -57,8 +57,8 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             // lg(2xy)
-            IMathExpression exp = new Lg(new Variable("x"));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Lg(new Variable("x"));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

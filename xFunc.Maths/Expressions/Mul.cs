@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="firstOperand">The first (left) operand.</param>
         /// <param name="secondOperand">The second (right) operand.</param>
-        public Mul(IMathExpression firstOperand, IMathExpression secondOperand) : base(firstOperand, secondOperand) { }
+        public Mul(IExpression firstOperand, IExpression secondOperand) : base(firstOperand, secondOperand) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -91,7 +91,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             var first = MathParser.HasVar(left, variable);
             var second = MathParser.HasVar(right, variable);
@@ -119,8 +119,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Mul(left.Clone(), right.Clone());
         }

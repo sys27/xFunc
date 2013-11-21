@@ -12,7 +12,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Log(new Number(10), new Number(2));
+            IExpression exp = new Log(new Number(10), new Number(2));
 
             Assert.AreEqual(Math.Log(10, 2), exp.Calculate());
         }
@@ -20,8 +20,8 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Log(new Variable("x"), new Number(2));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Log(new Variable("x"), new Number(2));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
         }
@@ -33,8 +33,8 @@ namespace xFunc.Test.Expressions.Maths
             Number num = new Number(2);
             Variable x = new Variable("x");
 
-            IMathExpression exp = new Log(x, num);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Log(x, num);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
 
@@ -46,8 +46,8 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest3()
         {
-            IMathExpression exp = new Log(new Number(2), new Variable("x"));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Log(new Number(2), new Variable("x"));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(ln(2) * (1 / x)) / (ln(x) ^ 2)", deriv.ToString());
         }
@@ -55,16 +55,16 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Log(new Variable("x"), new Number(2));
-            IMathExpression deriv = exp.Differentiate(new Variable("x"));
+            IExpression exp = new Log(new Variable("x"), new Number(2));
+            IExpression deriv = exp.Differentiate(new Variable("x"));
             Assert.AreEqual("1 / (x * ln(2))", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Log(new Variable("x"), new Number(2));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Log(new Variable("x"), new Number(2));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

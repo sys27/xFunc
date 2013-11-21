@@ -12,7 +12,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Ln(new Number(2));
+            IExpression exp = new Ln(new Number(2));
 
             Assert.AreEqual(Math.Log(2), exp.Calculate());
         }
@@ -20,8 +20,8 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Ln(new Mul(new Number(2), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Ln(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * x)", deriv.ToString());
         }
@@ -34,8 +34,8 @@ namespace xFunc.Test.Expressions.Maths
             Variable x = new Variable("x");
             Mul mul = new Mul(num, x);
 
-            IMathExpression exp = new Ln(mul);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Ln(mul);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * x)", deriv.ToString());
 
@@ -48,8 +48,8 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             // ln(xy)
-            IMathExpression exp = new Ln(new Mul(new Variable("x"), new Variable("y")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Ln(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) / (x * y)", deriv.ToString());
         }
 
@@ -57,16 +57,16 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             // ln(xy)
-            IMathExpression exp = new Ln(new Mul(new Variable("x"), new Variable("y")));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Ln(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("(x * 1) / (x * y)", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Ln(new Variable("y"));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Ln(new Variable("y"));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("0", deriv.ToString());
         }
 

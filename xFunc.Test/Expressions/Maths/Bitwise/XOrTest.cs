@@ -13,7 +13,7 @@ namespace xFunc.Test.Expressions.Maths.Bitwise
         [TestMethod]
         public void CalculateTest1()
         {
-            IMathExpression exp = new XOr(new Number(1), new Number(2));
+            IExpression exp = new XOr(new Number(1), new Number(2));
 
             Assert.AreEqual(3, exp.Calculate());
         }
@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths.Bitwise
         [TestMethod]
         public void CalculateTest2()
         {
-            IMathExpression exp = new XOr(new Number(1), new Number(2.5));
+            IExpression exp = new XOr(new Number(1), new Number(2.5));
 
             Assert.AreEqual(2, exp.Calculate());
         }

@@ -13,7 +13,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Sub(new Number(1), new Number(2));
+            IExpression exp = new Sub(new Number(1), new Number(2));
 
             Assert.AreEqual(-1, exp.Calculate());
         }
@@ -22,8 +22,8 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest1()
         {
             // x - sin(x)
-            IMathExpression exp = new Sub(new Variable("x"), new Sin(new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sub(new Variable("x"), new Sin(new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 - (cos(x) * 1)", deriv.ToString());
         }
@@ -38,8 +38,8 @@ namespace xFunc.Test.Expressions.Maths
             Number num2 = new Number(3);
             Mul mul2 = new Mul(num2, x.Clone());
 
-            IMathExpression exp = new Sub(mul1, mul2);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sub(mul1, mul2);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) - (3 * 1)", deriv.ToString());
 
@@ -52,32 +52,32 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Sub(new Mul(new Variable("x"), new Variable("y")), new Variable("y"));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Sub(new Mul(new Variable("x"), new Variable("y")), new Variable("y"));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("(x * 1) - 1", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Sub(new Variable("x"), new Variable("y"));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sub(new Variable("x"), new Variable("y"));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("1", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Sub(new Variable("x"), new Variable("y"));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Sub(new Variable("x"), new Variable("y"));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("-1", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest4()
         {
-            IMathExpression exp = new Sub(new Variable("x"), new Number(1));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Sub(new Variable("x"), new Number(1));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

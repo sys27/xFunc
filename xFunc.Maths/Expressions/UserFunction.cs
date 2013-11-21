@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="function">The name of function.</param>
         /// <param name="args">Arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
-        public UserFunction(string function, IMathExpression[] args, int countOfParams)
+        public UserFunction(string function, IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             this.function = function;
@@ -166,7 +166,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns a derivative of the expression.
         /// </returns>
-        public override IMathExpression Differentiate()
+        public override IExpression Differentiate()
         {
             return Differentiate(new Variable("x"));
         }
@@ -179,7 +179,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotImplementedException();
         }
@@ -187,8 +187,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new UserFunction(function, arguments, countOfParams);
         }

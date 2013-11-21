@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
-        /// <seealso cref="IMathExpression"/>
+        /// <seealso cref="IExpression"/>
         internal Log() { }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arg">The left operand.</param>
         /// <param name="base">The right operand.</param>
-        /// <seealso cref="IMathExpression"/>
-        public Log(IMathExpression arg, IMathExpression @base) : base(@base, arg) { }
+        /// <seealso cref="IExpression"/>
+        public Log(IExpression arg, IExpression @base) : base(@base, arg) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(left, variable))
             {
@@ -112,8 +112,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="Log"/>.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Log(right.Clone(), left.Clone());
         }

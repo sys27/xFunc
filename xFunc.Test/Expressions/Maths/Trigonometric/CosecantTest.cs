@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Csc(new Number(1));
+            IExpression exp = new Csc(new Number(1));
 
             Assert.AreEqual(MathExtentions.Csc(Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Csc(new Number(1));
+            IExpression exp = new Csc(new Number(1));
 
             Assert.AreEqual(MathExtentions.Csc(1), exp.Calculate(AngleMeasurement.Radian));
         }
@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Csc(new Number(1));
+            IExpression exp = new Csc(new Number(1));
 
             Assert.AreEqual(MathExtentions.Csc(Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
@@ -38,8 +38,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest()
         {
-            IMathExpression exp = new Csc(new Mul(new Number(2), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Csc(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());
         }

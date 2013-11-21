@@ -32,8 +32,8 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// Initializes a new instance of the <see cref="Not"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        /// <seealso cref="IMathExpression"/>
-        public Not(IMathExpression firstMathExpression)
+        /// <seealso cref="IExpression"/>
+        public Not(IExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -92,8 +92,8 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Clones this instance of the <see cref="Not"/>.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Not(argument.Clone());
         }
@@ -107,7 +107,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             throw new NotSupportedException();
         }

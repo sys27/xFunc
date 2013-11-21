@@ -32,7 +32,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        protected TrigonometryMathExpression(IMathExpression firstMathExpression)
+        protected TrigonometryMathExpression(IExpression firstMathExpression)
             : base(firstMathExpression)
         {
         }

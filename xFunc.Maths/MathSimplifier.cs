@@ -34,15 +34,15 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">A expression to simplify.</param>
         /// <returns>A simplified expression.</returns>
-        public IMathExpression Simplify(IMathExpression expression)
+        public IExpression Simplify(IExpression expression)
         {
-            IMathExpression exp = _Simplify(expression);
+            IExpression exp = _Simplify(expression);
             exp.Parent = null;
 
             return exp;
         }
 
-        private IMathExpression _Simplify(IMathExpression expression)
+        private IExpression _Simplify(IExpression expression)
         {
             if (expression is Number)
                 return expression;
@@ -157,7 +157,7 @@ namespace xFunc.Maths
             return expression;
         }
 
-        private IMathExpression SimplifyAdd(Add add)
+        private IExpression SimplifyAdd(Add add)
         {
             // plus zero
             if (add.Left.Equals(zero))
@@ -170,7 +170,7 @@ namespace xFunc.Maths
 
             if (add.Left is UnaryMinus)
             {
-                IMathExpression temp = add.Left;
+                IExpression temp = add.Left;
                 add.Left = add.Right;
                 add.Right = temp;
             }
@@ -252,7 +252,7 @@ namespace xFunc.Maths
             return add;
         }
 
-        private IMathExpression SimplifySub(Sub sub)
+        private IExpression SimplifySub(Sub sub)
         {
             // sub zero
             if (sub.Left.Equals(zero))
@@ -363,7 +363,7 @@ namespace xFunc.Maths
             return sub;
         }
 
-        private IMathExpression SimplifyMul(Mul mul)
+        private IExpression SimplifyMul(Mul mul)
         {
             // mul by zero
             if (mul.Left.Equals(zero) || mul.Right.Equals(zero))
@@ -448,7 +448,7 @@ namespace xFunc.Maths
             return mul;
         }
 
-        private IMathExpression SimplifyDiv(Div div)
+        private IExpression SimplifyDiv(Div div)
         {
             // 0 / x
             if (div.Left.Equals(zero))
@@ -555,7 +555,7 @@ namespace xFunc.Maths
             return div;
         }
 
-        private IMathExpression SimplifyTrig(UnaryMathExpression unary)
+        private IExpression SimplifyTrig(UnaryMathExpression unary)
         {
             var attrs = unary.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false);
             ReverseFunctionAttribute attr = null;

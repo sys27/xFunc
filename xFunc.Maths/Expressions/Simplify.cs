@@ -20,10 +20,10 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Simplify operation.
     /// </summary>
-    public class Simplify  : IMathExpression
+    public class Simplify  : IExpression
     {
 
-        private IMathExpression expression;
+        private IExpression expression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Simplify"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Simplify(IMathExpression expression)
+        public Simplify(IExpression expression)
         {
             this.expression = expression;
         }
@@ -106,7 +106,7 @@ namespace xFunc.Maths.Expressions
         /// Throws an exception.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public IMathExpression Differentiate()
+        public IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public IMathExpression Differentiate(Variable variable)
+        public IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
@@ -128,8 +128,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public IExpression Clone()
         {
             return new Simplify(expression.Clone());
         }
@@ -137,7 +137,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// This property always returns <c>null</c>.
         /// </summary>
-        public IMathExpression Parent
+        public IExpression Parent
         {
             get
             {
@@ -154,7 +154,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression.
         /// </value>
-        public IMathExpression Expression
+        public IExpression Expression
         {
             get
             {

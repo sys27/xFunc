@@ -49,7 +49,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>Returns the derivative.</returns>
-        public IMathExpression Differentiate(IMathExpression expression)
+        public IExpression Differentiate(IExpression expression)
         {
             return Differentiate(expression, new Variable("x"));
         }
@@ -60,7 +60,7 @@ namespace xFunc.Maths
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         /// <returns>Returns the derivative.</returns>
-        public IMathExpression Differentiate(IMathExpression expression, Variable variable)
+        public IExpression Differentiate(IExpression expression, Variable variable)
         {
             if (expression == null)
                 throw new ArgumentNullException("expression");

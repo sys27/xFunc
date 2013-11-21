@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
-        public Derivative(IMathExpression[] args, int countOfParams)
+        public Derivative(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             if (args == null)
@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
-        public Derivative(IMathExpression expression, Variable variable)
+        public Derivative(IExpression expression, Variable variable)
             : base(new[] { expression, variable }, 2)
         {
         }
@@ -127,7 +127,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns a derivative of the expression.
         /// </returns>
-        public override IMathExpression Differentiate()
+        public override IExpression Differentiate()
         {
             if (countOfParams == 1)
                 return _Differentiate(new Variable("x"));
@@ -146,7 +146,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// This method ignores the local <paramref name="variable" />.
         /// </remarks>
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             if (countOfParams == 1)
                 return _Differentiate(new Variable("x"));
@@ -154,7 +154,7 @@ namespace xFunc.Maths.Expressions
             return _Differentiate(this.Variable);
         }
 
-        private IMathExpression _Differentiate(Variable variable)
+        private IExpression _Differentiate(Variable variable)
         {
             if (Expression is Derivative)
                 return Expression.Differentiate(variable).Differentiate(variable);
@@ -165,8 +165,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Derivative(CloneArguments(), countOfParams);
         }
@@ -177,7 +177,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression.
         /// </value>
-        public IMathExpression Expression
+        public IExpression Expression
         {
             get
             {

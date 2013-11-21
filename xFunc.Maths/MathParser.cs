@@ -36,7 +36,7 @@ namespace xFunc.Maths
 
         private bool saveLastExpression = true;
         private string lastFunc = string.Empty;
-        private IMathExpression mathExpression;
+        private IExpression mathExpression;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MathParser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IExpressionFactory"/>.
@@ -65,7 +65,7 @@ namespace xFunc.Maths
         /// <param name="expression">A expression that is checked.</param>
         /// <param name="arg">A variable that can be contained in the expression.</param>
         /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
-        public static bool HasVar(IMathExpression expression, Variable arg)
+        public static bool HasVar(IExpression expression, Variable arg)
         {
             if (expression is BinaryMathExpression)
             {
@@ -96,7 +96,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="function">The function.</param>
         /// <returns>The parsed expression.</returns>
-        public IMathExpression Parse(string function)
+        public IExpression Parse(string function)
         {
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
@@ -109,9 +109,9 @@ namespace xFunc.Maths
             {
                 IEnumerable<IToken> tokens = lexer.Tokenize(function);
                 IEnumerable<IToken> rpn = ConvertToReversePolishNotation(tokens);
-                IEnumerable<IMathExpression> expressions = ConvertTokensToExpressions(rpn);
+                IEnumerable<IExpression> expressions = ConvertTokensToExpressions(rpn);
 
-                var stack = new Stack<IMathExpression>();
+                var stack = new Stack<IExpression>();
                 foreach (var expression in expressions)
                 {
                     if (expression is Number || expression is Variable)
@@ -140,7 +140,7 @@ namespace xFunc.Maths
                     {
                         var func = expression as DifferentParametersExpression;
 
-                        IMathExpression[] arg = new IMathExpression[func.CountOfParams];
+                        IExpression[] arg = new IExpression[func.CountOfParams];
                         for (int i = func.CountOfParams - 1; i >= 0; i--)
                             arg[i] = stack.Pop();
 
@@ -202,9 +202,9 @@ namespace xFunc.Maths
             return mathExpression;
         }
 
-        private IEnumerable<IMathExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
+        private IEnumerable<IExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
         {
-            var preOutput = new List<IMathExpression>();
+            var preOutput = new List<IExpression>();
 
             foreach (var token in tokens)
             {

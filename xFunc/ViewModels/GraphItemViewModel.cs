@@ -26,10 +26,10 @@ namespace xFunc.ViewModels
     {
 
         private bool isChecked;
-        private IMathExpression exp;
+        private IExpression exp;
         private DrawingVisual visual;
 
-        public GraphItemViewModel(IMathExpression exp, bool isChecked, DrawingVisual visual)
+        public GraphItemViewModel(IExpression exp, bool isChecked, DrawingVisual visual)
         {
             this.exp = exp;
             this.isChecked = isChecked;
@@ -53,7 +53,7 @@ namespace xFunc.ViewModels
             }
         }
 
-        public IMathExpression Expression
+        public IExpression Expression
         {
             get
             {

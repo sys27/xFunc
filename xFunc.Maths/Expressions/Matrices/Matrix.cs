@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions.Matrices
             return sb.ToString();
         }
 
-        private void CheckMatrix(IMathExpression[] args)
+        private void CheckMatrix(IExpression[] args)
         {
             var size = args[0].CountOfParams;
 
@@ -128,7 +128,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Returns a derivative of the expression.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate()
+        public override IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
@@ -142,18 +142,18 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="IMathExpression" />.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="IMathExpression" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IMathExpression Clone()
+        public override IExpression Clone()
         {
             return new Matrix((Vector[])CloneArguments(), countOfParams);
         }
@@ -164,7 +164,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The arguments.
         /// </value>
-        public override IMathExpression[] Arguments
+        public override IExpression[] Arguments
         {
             get
             {

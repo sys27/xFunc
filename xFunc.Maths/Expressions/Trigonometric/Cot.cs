@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Cot"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        public Cot(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Cot(IExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -108,7 +108,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             var sine = new Sin(argument.Clone());
             var involution = new Pow(sine, new Number(2));
@@ -121,8 +121,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Cot(argument.Clone());
         }

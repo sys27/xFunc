@@ -12,7 +12,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Pow(new Number(2), new Number(10));
+            IExpression exp = new Pow(new Number(2), new Number(10));
 
             Assert.AreEqual(1024, exp.Calculate());
         }
@@ -20,8 +20,8 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Pow(new Variable("x"), new Number(3));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Pow(new Variable("x"), new Number(3));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 * (3 * (x ^ (3 - 1)))", deriv.ToString());
         }
@@ -30,8 +30,8 @@ namespace xFunc.Test.Expressions.Maths
         public void DerivativeTest2()
         {
             // 2 ^ (3x)
-            IMathExpression exp = new Pow(new Number(2), new Mul(new Number(3), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Pow(new Number(2), new Mul(new Number(3), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(ln(2) * (2 ^ (3 * x))) * (3 * 1)", deriv.ToString());
         }
@@ -43,8 +43,8 @@ namespace xFunc.Test.Expressions.Maths
             Variable x = new Variable("x");
             Number num1 = new Number(3);
 
-            IMathExpression exp = new Pow(x, num1);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Pow(x, num1);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 * (3 * (x ^ (3 - 1)))", deriv.ToString());
 
@@ -71,8 +71,8 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             // (yx) ^ 3
-            IMathExpression exp = new Pow(new Mul(new Variable("y"), new Variable("x")), new Number(3));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Pow(new Mul(new Variable("y"), new Variable("x")), new Number(3));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("(y * 1) * (3 * ((y * x) ^ (3 - 1)))", deriv.ToString());
         }
 
@@ -80,16 +80,16 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest2()
         {
             // (yx) ^ 3
-            IMathExpression exp = new Pow(new Mul(new Variable("y"), new Variable("x")), new Number(3));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Pow(new Mul(new Variable("y"), new Variable("x")), new Number(3));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("(1 * x) * (3 * ((y * x) ^ (3 - 1)))", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Pow(new Variable("x"), new Number(3));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Pow(new Variable("x"), new Number(3));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

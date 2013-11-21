@@ -8,9 +8,9 @@ namespace xFunc.ViewModels
     {
 
         private UserFunction function;
-        private IMathExpression value;
+        private IExpression value;
 
-        public FunctionViewModel(UserFunction function, IMathExpression value)
+        public FunctionViewModel(UserFunction function, IExpression value)
         {
             this.function = function;
             this.value = value;

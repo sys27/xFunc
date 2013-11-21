@@ -32,8 +32,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Sqrt"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of the function.</param>
-        /// <seealso cref="IMathExpression"/>
-        public Sqrt(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        /// <seealso cref="IExpression"/>
+        public Sqrt(IExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             var mul = new Mul(new Number(2), Clone());
             var div = new Div(argument.Clone().Differentiate(variable), mul);
@@ -98,8 +98,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="Sqrt"/> class.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Sqrt(argument.Clone());
         }

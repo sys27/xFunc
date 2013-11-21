@@ -19,7 +19,7 @@ namespace xFunc.Test
             simplifier = new MathSimplifier();
         }
 
-        private void SimpleTest(IMathExpression exp, IMathExpression expected)
+        private void SimpleTest(IExpression exp, IExpression expected)
         {
             var simple = simplifier.Simplify(exp);
 

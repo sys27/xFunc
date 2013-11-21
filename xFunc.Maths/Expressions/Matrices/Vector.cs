@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
-        public Vector(IMathExpression[] args, int countOfParams)
+        public Vector(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             if (args == null)
@@ -50,14 +50,14 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="IMathExpression"/> at the specified index.
+        /// Gets or sets the <see cref="IExpression"/> at the specified index.
         /// </summary>
         /// <value>
-        /// The <see cref="IMathExpression"/>.
+        /// The <see cref="IExpression"/>.
         /// </value>
         /// <param name="index">The index.</param>
         /// <returns>The element of vector.</returns>
-        public IMathExpression this[int index]
+        public IExpression this[int index]
         {
             get
             {
@@ -145,7 +145,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Returns a derivative of the expression.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate()
+        public override IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
@@ -159,18 +159,18 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="IMathExpression" />.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="IMathExpression" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IMathExpression Clone()
+        public override IExpression Clone()
         {
             return new Vector(CloneArguments(), countOfParams);
         }
@@ -181,7 +181,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The arguments.
         /// </value>
-        public override IMathExpression[] Arguments
+        public override IExpression[] Arguments
         {
             get
             {

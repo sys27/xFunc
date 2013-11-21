@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="firstMathExpression">The first operand.</param>
         /// <param name="secondMathExpression">The second operand.</param>
-        public Root(IMathExpression firstMathExpression, IMathExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
+        public Root(IExpression firstMathExpression, IExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             if (MathParser.HasVar(left, variable) || MathParser.HasVar(right, variable))
             {
@@ -110,8 +110,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Root(left.Clone(), right.Clone());
         }

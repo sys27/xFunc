@@ -20,21 +20,21 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for binary operations.
     /// </summary>
-    public abstract class BinaryMathExpression : IMathExpression
+    public abstract class BinaryMathExpression : IExpression
     {
 
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IMathExpression parent;
+        protected IExpression parent;
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        protected IMathExpression left;
+        protected IExpression left;
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        protected IMathExpression right;
+        protected IExpression right;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryMathExpression"/> class.
@@ -48,7 +48,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        protected BinaryMathExpression(IMathExpression left, IMathExpression right)
+        protected BinaryMathExpression(IExpression left, IExpression right)
         {
             Left = left;
             Right = right;
@@ -135,7 +135,7 @@ namespace xFunc.Maths.Expressions
         /// Creates the clone of this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="BinaryMathExpression"/> that is a clone of this instance.</returns>
-        public abstract IMathExpression Clone();
+        public abstract IExpression Clone();
 
         /// <summary>
         /// Calculates a derivative of the expression.
@@ -143,7 +143,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns a derivative of the expression.
         /// </returns>
-        public IMathExpression Differentiate()
+        public IExpression Differentiate()
         {
             return Differentiate(new Variable("x"));
         }
@@ -156,12 +156,12 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public abstract IMathExpression Differentiate(Variable variable);
+        public abstract IExpression Differentiate(Variable variable);
 
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        public IMathExpression Left
+        public IExpression Left
         {
             get
             {
@@ -181,7 +181,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        public IMathExpression Right
+        public IExpression Right
         {
             get
             {
@@ -201,7 +201,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IMathExpression Parent
+        public IExpression Parent
         {
             get
             {

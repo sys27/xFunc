@@ -30,7 +30,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="token">The token.</param>
         /// <returns>The expression.</returns>
-        IMathExpression Create(IToken token);
+        IExpression Create(IToken token);
 
     }
 

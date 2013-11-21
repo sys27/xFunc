@@ -12,7 +12,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest()
         {
-            IMathExpression exp = new Sqrt(new Number(4));
+            IExpression exp = new Sqrt(new Number(4));
 
             Assert.AreEqual(Math.Sqrt(4), exp.Calculate());
         }
@@ -20,8 +20,8 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Sqrt(new Mul(new Number(2), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sqrt(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * sqrt(2 * x))", deriv.ToString());
         }
@@ -33,8 +33,8 @@ namespace xFunc.Test.Expressions.Maths
             Variable x = new Variable("x");
             Mul mul = new Mul(num, x);
 
-            IMathExpression exp = new Sqrt(mul);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sqrt(mul);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (2 * sqrt(2 * x))", deriv.ToString());
 
@@ -47,16 +47,16 @@ namespace xFunc.Test.Expressions.Maths
         public void PartialDerivativeTest1()
         {
             // sqrt(2xy)
-            IMathExpression exp = new Sqrt(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sqrt(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("((2 * 1) * y) / (2 * sqrt((2 * x) * y))", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Sqrt(new Variable("y"));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Sqrt(new Variable("y"));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("0", deriv.ToString());
         }
 

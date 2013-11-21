@@ -13,7 +13,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Tan(new Number(1));
+            IExpression exp = new Tan(new Number(1));
 
             Assert.AreEqual(Math.Tan(1), exp.Calculate(AngleMeasurement.Radian));
         }
@@ -21,7 +21,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Tan(new Number(1));
+            IExpression exp = new Tan(new Number(1));
 
             Assert.AreEqual(Math.Tan(1 * Math.PI / 180), exp.Calculate(AngleMeasurement.Degree));
         }
@@ -29,7 +29,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Tan(new Number(1));
+            IExpression exp = new Tan(new Number(1));
 
             Assert.AreEqual(Math.Tan(1 * Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
@@ -37,8 +37,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Tan(new Variable("x"));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Tan(new Variable("x"));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("1 / (cos(x) ^ 2)", deriv.ToString());
         }
@@ -46,8 +46,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest2()
         {
-            IMathExpression exp = new Tan(new Mul(new Number(2), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Tan(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
         }
@@ -59,8 +59,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Variable x = new Variable("x");
             Mul mul = new Mul(num, x);
 
-            IMathExpression exp = new Tan(mul);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Tan(mul);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
 
@@ -72,24 +72,24 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void PartialDerivativeTest1()
         {
-            IMathExpression exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = exp.Differentiate();
             Assert.AreEqual("(1 * y) / (cos(x * y) ^ 2)", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest2()
         {
-            IMathExpression exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("(x * 1) / (cos(x * y) ^ 2)", deriv.ToString());
         }
 
         [TestMethod]
         public void PartialDerivativeTest3()
         {
-            IMathExpression exp = new Tan(new Variable("x"));
-            IMathExpression deriv = exp.Differentiate(new Variable("y"));
+            IExpression exp = new Tan(new Variable("x"));
+            IExpression deriv = exp.Differentiate(new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
         }
 

@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Defines methods to calculate and to differentiate mathematical expressions.
     /// </summary>
-    public interface IMathExpression
+    public interface IExpression
     {
 
         /// <summary>
@@ -39,25 +39,25 @@ namespace xFunc.Maths.Expressions
         /// Calculates a derivative of the expression.
         /// </summary>
         /// <returns>Returns a derivative of the expression.</returns>
-        IMathExpression Differentiate();
+        IExpression Differentiate();
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>
         /// <param name="variable">The variable of differentiation.</param>
         /// <returns>Returns a derivative of the expression of several variables.</returns>
         /// <seealso cref="Variable"/>
-        IMathExpression Differentiate(Variable variable);
+        IExpression Differentiate(Variable variable);
 
         /// <summary>
-        /// Clones this instance of the <see cref="IMathExpression"/>.
+        /// Clones this instance of the <see cref="IExpression"/>.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        IMathExpression Clone();
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        IExpression Clone();
 
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        IMathExpression Parent { get; set; }
+        IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.

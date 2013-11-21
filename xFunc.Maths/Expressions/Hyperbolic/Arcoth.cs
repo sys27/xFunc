@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// Initializes a new instance of the <see cref="Arcoth"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        public Arcoth(IMathExpression firstMathExpression)
+        public Arcoth(IExpression firstMathExpression)
             : base(firstMathExpression)
         {
 
@@ -86,8 +86,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Arcoth(argument.Clone());
         }
@@ -100,7 +100,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             var sqr = new Pow(argument.Clone(), new Number(2));
             var sub = new Sub(new Number(1), sqr);

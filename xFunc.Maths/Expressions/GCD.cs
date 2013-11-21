@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
-        public GCD(IMathExpression[] args, int countOfParams)
+        public GCD(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             if (args == null)
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="firstMathExpression">The first operand.</param>
         /// <param name="secondMathExpression">The second operand.</param>
-        public GCD(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
+        public GCD(IExpression firstMathExpression, IExpression secondMathExpression)
             : base(new[] { firstMathExpression, secondMathExpression }, 2)
         {
         }
@@ -112,7 +112,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance of the <see cref="GCD"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="GCD"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        public override IExpression Clone()
         {
             return new GCD(CloneArguments(), arguments.Length);
         }
@@ -124,7 +124,7 @@ namespace xFunc.Maths.Expressions
         /// Throws an exception.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate()
+        public override IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
@@ -138,7 +138,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }

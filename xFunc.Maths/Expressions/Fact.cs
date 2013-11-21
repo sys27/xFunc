@@ -18,7 +18,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Fact(IMathExpression argument)
+        public Fact(IExpression argument)
             : base(argument)
         {
 
@@ -74,9 +74,9 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="IMathExpression" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IMathExpression Clone()
+        public override IExpression Clone()
         {
             return new Fact(argument.Clone());
         }
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             throw new NotSupportedException();
         }

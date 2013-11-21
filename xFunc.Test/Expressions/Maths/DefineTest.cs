@@ -13,7 +13,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void SimpDefineTest()
         {
-            IMathExpression exp = new Define(new Variable("x"), new Number(1));
+            IExpression exp = new Define(new Variable("x"), new Number(1));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);
@@ -25,7 +25,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DefineWithFuncTest()
         {
-            IMathExpression exp = new Define(new Variable("x"), new Sin(new Number(1)));
+            IExpression exp = new Define(new Variable("x"), new Sin(new Number(1)));
             MathParameterCollection parameters = new MathParameterCollection();
             ExpressionParameters expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
 
@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void DefineExpTest()
         {
-            IMathExpression exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
+            IExpression exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);
@@ -50,7 +50,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void OverrideConstTest()
         {
-            IMathExpression exp = new Define(new Variable("π"), new Number(1));
+            IExpression exp = new Define(new Variable("π"), new Number(1));
             MathParameterCollection parameters = new MathParameterCollection();
 
             double answer = exp.Calculate(parameters);

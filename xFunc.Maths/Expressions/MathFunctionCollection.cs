@@ -31,7 +31,7 @@ namespace xFunc.Maths.Expressions
 #if !PORTABLE
     [Serializable]
 #endif
-    public class MathFunctionCollection : Dictionary<UserFunction, IMathExpression>
+    public class MathFunctionCollection : Dictionary<UserFunction, IExpression>
     {
 
         /// <summary>

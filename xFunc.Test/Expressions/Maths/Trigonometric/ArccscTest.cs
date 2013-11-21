@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateRadianTest()
         {
-            IMathExpression exp = new Arccsc(new Number(1));
+            IExpression exp = new Arccsc(new Number(1));
 
             Assert.AreEqual(MathExtentions.Acsc(1), exp.Calculate(AngleMeasurement.Radian));
         }
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateDegreeTest()
         {
-            IMathExpression exp = new Arccsc(new Number(1));
+            IExpression exp = new Arccsc(new Number(1));
 
             Assert.AreEqual(MathExtentions.Acsc(1) / Math.PI * 180, exp.Calculate(AngleMeasurement.Degree));
         }
@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void CalculateGradianTest()
         {
-            IMathExpression exp = new Arccsc(new Number(1));
+            IExpression exp = new Arccsc(new Number(1));
 
             Assert.AreEqual(MathExtentions.Acsc(1) / Math.PI * 200, exp.Calculate(AngleMeasurement.Gradian));
         }
@@ -38,8 +38,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         [TestMethod]
         public void DerivativeTest1()
         {
-            IMathExpression exp = new Arccsc(new Mul(new Number(2), new Variable("x")));
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Arccsc(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
         }
@@ -52,8 +52,8 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Variable x = new Variable("x");
             Mul mul = new Mul(num, x);
 
-            IMathExpression exp = new Arccsc(mul);
-            IMathExpression deriv = exp.Differentiate();
+            IExpression exp = new Arccsc(mul);
+            IExpression deriv = exp.Differentiate();
 
             Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
 

@@ -6,10 +6,10 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Undefice operation.
     /// </summary>
-    public class Undefine : IMathExpression
+    public class Undefine : IExpression
     {
 
-        private IMathExpression key;
+        private IExpression key;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
-        public Undefine(IMathExpression key)
+        public Undefine(IExpression key)
         {
             this.Key = key;
         }
@@ -113,7 +113,7 @@ namespace xFunc.Maths.Expressions
         /// Throws exception.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public IMathExpression Differentiate()
+        public IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
@@ -127,7 +127,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public IMathExpression Differentiate(Variable variable)
+        public IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
@@ -135,8 +135,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public IExpression Clone()
         {
             return new Undefine(key.Clone());
         }
@@ -144,7 +144,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IMathExpression Parent
+        public IExpression Parent
         {
             get
             {
@@ -202,7 +202,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <value>The key.</value>
         /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
-        public IMathExpression Key
+        public IExpression Key
         {
             get
             {

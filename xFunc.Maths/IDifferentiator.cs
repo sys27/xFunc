@@ -29,14 +29,14 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>Returns the derivative.</returns>
-        IMathExpression Differentiate(IMathExpression expression);
+        IExpression Differentiate(IExpression expression);
         /// <summary>
         /// Differentiates the specified expression.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         /// <returns>Returns the derivative.</returns>
-        IMathExpression Differentiate(IMathExpression expression, Variable variable);
+        IExpression Differentiate(IExpression expression, Variable variable);
 
     }
 

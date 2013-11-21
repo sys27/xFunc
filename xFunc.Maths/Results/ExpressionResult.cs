@@ -10,13 +10,13 @@ namespace xFunc.Maths.Results
     public class ExpressionResult : IResult
     {
 
-        private IMathExpression exp;
+        private IExpression exp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionResult"/> class.
         /// </summary>
         /// <param name="exp">The expression.</param>
-        public ExpressionResult(IMathExpression exp)
+        public ExpressionResult(IExpression exp)
         {
             this.exp = exp;
         }
@@ -38,7 +38,7 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        public IMathExpression Result
+        public IExpression Result
         {
             get
             {

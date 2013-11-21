@@ -32,8 +32,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Abs"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        /// <seealso cref="IMathExpression"/>
-        public Abs(IMathExpression expression) : base(expression) { }
+        /// <seealso cref="IExpression"/>
+        public Abs(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             var div = new Div(argument.Clone(), Clone());
             var mul = new Mul(argument.Clone().Differentiate(variable), div);
@@ -96,8 +96,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="xFunc.Maths.Expressions.Bitwise.And"/> class.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Abs(argument.Clone());
         }

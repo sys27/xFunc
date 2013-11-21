@@ -20,7 +20,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void CalculateTest2()
         {
-            var exp = new LCM(new IMathExpression[] { new Number(4), new Number(16), new Number(8) }, 3);
+            var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) }, 3);
 
             Assert.AreEqual(16, exp.Calculate());
         }

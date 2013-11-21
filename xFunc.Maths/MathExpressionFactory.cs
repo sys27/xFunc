@@ -38,7 +38,7 @@ namespace xFunc.Maths
         /// The expression.
         /// </returns>
         /// <exception cref="MathParserException">This factory don't support specified token.</exception>
-        public IMathExpression Create(IToken token)
+        public IExpression Create(IToken token)
         {
             if (token is OperationToken)
                 return CreateOperation(token as OperationToken);
@@ -54,7 +54,7 @@ namespace xFunc.Maths
             throw new MathParserException(Resource.ErrorWhileParsingTree);
         }
 
-        private IMathExpression CreateOperation(OperationToken token)
+        private IExpression CreateOperation(OperationToken token)
         {
             switch (token.Operation)
             {
@@ -87,7 +87,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IMathExpression CreateFunction(FunctionToken token)
+        private IExpression CreateFunction(FunctionToken token)
         {
             switch (token.Function)
             {
@@ -180,7 +180,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IMathExpression CreateUserFunction(UserFunctionToken token)
+        private IExpression CreateUserFunction(UserFunctionToken token)
         {
             return new UserFunction(token.FunctionName);
         }

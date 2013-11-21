@@ -33,8 +33,8 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// </summary>
         /// <param name="firstMathExpression">The left operand.</param>
         /// <param name="secondMathExpression">The right operand.</param>
-        /// <seealso cref="IMathExpression"/>
-        public XOr(IMathExpression firstMathExpression, IMathExpression secondMathExpression)
+        /// <seealso cref="IExpression"/>
+        public XOr(IExpression firstMathExpression, IExpression secondMathExpression)
             : base(firstMathExpression, secondMathExpression)
         {
 
@@ -98,8 +98,8 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <summary>
         /// Clones this instance of the <see cref="XOr"/>.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new XOr(left.Clone(), right.Clone());
         }
@@ -113,7 +113,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }

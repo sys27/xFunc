@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Csc"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        public Csc(IMathExpression firstMathExpression)
+        public Csc(IExpression firstMathExpression)
             : base(firstMathExpression)
         {
         }
@@ -109,7 +109,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             var unary = new UnaryMinus(argument.Clone().Differentiate(variable));
             var cot = new Cot(argument.Clone());
@@ -123,8 +123,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Csc(argument.Clone());
         }

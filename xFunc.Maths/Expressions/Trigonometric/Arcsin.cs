@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Arcsin"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        public Arcsin(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Arcsin(IExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -106,7 +106,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             var involution = new Pow(argument.Clone(), new Number(2));
             var sub = new Sub(new Number(1), involution);
@@ -119,8 +119,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>The new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Arcsin(argument.Clone());
         }

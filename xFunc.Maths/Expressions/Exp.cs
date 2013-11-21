@@ -32,7 +32,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Exp"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        public Exp(IMathExpression firstMathExpression) : base(firstMathExpression) { }
+        public Exp(IExpression firstMathExpression) : base(firstMathExpression) { }
 
         /// <summary>
         /// Converts this expression to the equivalent string.
@@ -86,7 +86,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        protected override IMathExpression _Differentiation(Variable variable)
+        protected override IExpression _Differentiation(Variable variable)
         {
             return new Mul(argument.Clone().Differentiate(variable), Clone());
         }
@@ -94,8 +94,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public override IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public override IExpression Clone()
         {
             return new Exp(argument.Clone());
         }

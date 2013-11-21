@@ -29,7 +29,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">A expression to simplify.</param>
         /// <returns>A simplified expression.</returns>
-        IMathExpression Simplify(IMathExpression expression);
+        IExpression Simplify(IExpression expression);
 
     }
 

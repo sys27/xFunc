@@ -20,10 +20,10 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Number operation.
     /// </summary>
-    public class Number : IMathExpression
+    public class Number : IExpression
     {
 
-        private IMathExpression parent;
+        private IExpression parent;
         private double number;
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns>Returns a derivative of the expression of several variables.</returns>
         /// <seealso cref="Variable"/>
-        public IMathExpression Differentiate()
+        public IExpression Differentiate()
         {
             return new Number(0);
         }
@@ -127,7 +127,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a derivative of the expression of several variables.
         /// </returns>
         /// <seealso cref="Variable" />
-        public IMathExpression Differentiate(Variable variable)
+        public IExpression Differentiate(Variable variable)
         {
             return new Number(0);
         }
@@ -135,8 +135,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Clones this instance of the <see cref="Number"/> class.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IMathExpression"/> that is a clone of this instance.</returns>
-        public IMathExpression Clone()
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public IExpression Clone()
         {
             return new Number(number);
         }
@@ -159,7 +159,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IMathExpression Parent
+        public IExpression Parent
         {
             get
             {

@@ -126,7 +126,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">A expression to simplify.</param>
         /// <returns>A simplified expression.</returns>
-        public IMathExpression Simplify(IMathExpression expression)
+        public IExpression Simplify(IExpression expression)
         {
             return simplifier.Simplify(expression);
         }
@@ -136,7 +136,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>Returns the derivative.</returns>
-        public IMathExpression Differentiate(IMathExpression expression)
+        public IExpression Differentiate(IExpression expression)
         {
             return differentiator.Differentiate(expression);
         }
@@ -147,7 +147,7 @@ namespace xFunc.Maths
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         /// <returns>Returns the derivative.</returns>
-        public IMathExpression Differentiate(IMathExpression expression, Variable variable)
+        public IExpression Differentiate(IExpression expression, Variable variable)
         {
             return differentiator.Differentiate(expression, variable);
         }
@@ -157,7 +157,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="function">The function.</param>
         /// <returns>The parsed expression.</returns>
-        public IMathExpression Parse(string function)
+        public IExpression Parse(string function)
         {
             return Parse(function, true);
         }
@@ -170,7 +170,7 @@ namespace xFunc.Maths
         /// <returns>The parsed expression.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         /// <exception cref="MathParserException">Error while parsing.</exception>
-        public IMathExpression Parse(string function, bool simplify)
+        public IExpression Parse(string function, bool simplify)
         {
             if (simplify)
                 return simplifier.Simplify(parser.Parse(function));

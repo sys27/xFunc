@@ -38,7 +38,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="ArgumentException"></exception>
-        public Product(IMathExpression[] args, int countOfParams)
+        public Product(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
             if (args == null)
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="body">The function that is executed on each iteration.</param>
         /// <param name="to">The final value (including).</param>
-        public Product(IMathExpression body, IMathExpression to)
+        public Product(IExpression body, IExpression to)
             : base(new[] { body, to }, 2)
         {
         }
@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="body">The function that is executed on each iteration.</param>
         /// <param name="from">The initial value (including).</param>
         /// <param name="to">The final value (including).</param>
-        public Product(IMathExpression body, IMathExpression from, IMathExpression to)
+        public Product(IExpression body, IExpression from, IExpression to)
             : base(new[] { body, from, to }, 3)
         {
         }
@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="from">The initial value (including).</param>
         /// <param name="to">The final value (including).</param>
         /// <param name="inc">The increment.</param>
-        public Product(IMathExpression body, IMathExpression from, IMathExpression to, IMathExpression inc)
+        public Product(IExpression body, IExpression from, IExpression to, IExpression inc)
             : base(new[] { body, from, to, inc }, 4)
         {
         }
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="to">The final value (including).</param>
         /// <param name="inc">The increment.</param>
         /// <param name="variable">The increment variable.</param>
-        public Product(IMathExpression body, IMathExpression from, IMathExpression to, IMathExpression inc, Variable variable)
+        public Product(IExpression body, IExpression from, IExpression to, IExpression inc, Variable variable)
             : base(new[] { body, from, to, inc, variable }, 5)
         {
         }
@@ -198,7 +198,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate()
+        public override IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
@@ -212,18 +212,18 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IMathExpression Differentiate(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="IMathExpression" />.
+        /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="IMathExpression" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IMathExpression Clone()
+        public override IExpression Clone()
         {
             return new Product(CloneArguments(), countOfParams);
         }
@@ -262,7 +262,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The function that is executed on each iteration.
         /// </value>
-        public IMathExpression Body
+        public IExpression Body
         {
             get
             {
@@ -276,7 +276,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The initial value (including).
         /// </value>
-        public IMathExpression From
+        public IExpression From
         {
             get
             {
@@ -293,7 +293,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The final value (including).
         /// </value>
-        public IMathExpression To
+        public IExpression To
         {
             get
             {
@@ -310,7 +310,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The increment.
         /// </value>
-        public IMathExpression Increment
+        public IExpression Increment
         {
             get
             {

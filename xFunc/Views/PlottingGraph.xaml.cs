@@ -304,39 +304,41 @@ namespace xFunc.Views
         private void DrawFunc(GraphItemViewModel graph)
         {
             var exp = graph.Expression;
-            PathGeometry geometry = new PathGeometry();
-            PathFigure figure = null;
+            StreamGeometry geometry = new StreamGeometry();
 
-            bool startFlag = true;
-            double y;
-            double tempY;
-            for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
+            using (var context = geometry.Open())
             {
-                parameters.Parameters["x"] = x;
-                y = exp.Calculate(parameters);
+                bool startFlag = true;
+                double y;
+                double tempY;
+                for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
+                {
+                    parameters.Parameters["x"] = x;
+                    y = exp.Calculate(parameters);
 
-                tempY = centerY - (y * cm);
-                if (double.IsNaN(y) || tempY < 0 || tempY > currentHeight)
-                {
-                    startFlag = true;
-                }
-                else
-                {
-                    if (startFlag)
+                    tempY = centerY - (y * cm);
+                    if (double.IsNaN(y) || tempY < 0 || tempY > currentHeight)
                     {
-                        figure = new PathFigure() { IsClosed = false, IsFilled = false };
-                        geometry.Figures.Add(figure);
-
-                        figure.StartPoint = new Point(centerX + (x * cm), tempY);
-                        startFlag = false;
+                        startFlag = true;
                     }
+                    else
+                    {
+                        if (startFlag)
+                        {
+                            context.BeginFigure(new Point(centerX + (x * cm), tempY), false, false);
+                            startFlag = false;
+                        }
 
-                    figure.Segments.Add(new LineSegment(new Point(centerX + (x * cm), tempY), true));
+                        context.LineTo(new Point(centerX + (x * cm), tempY), true, false);
+                    }
                 }
             }
 
+            geometry.Freeze();
+
             var funcVisual = new DrawingVisual();
             Pen pen = new Pen(Brushes.Red, 1);
+            pen.Freeze();
             using (DrawingContext context = funcVisual.RenderOpen())
             {
                 context.DrawGeometry(Brushes.Red, pen, geometry);

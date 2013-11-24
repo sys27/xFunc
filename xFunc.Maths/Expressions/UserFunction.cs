@@ -18,6 +18,7 @@ using System.Linq;
 #endif
 using System.Text;
 using System.Collections.Generic;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
 {

@@ -27,6 +27,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Presenters;
 using xFunc.Resources;
 using xFunc.ViewModels;

@@ -15,7 +15,7 @@
 using System;
 using System.Globalization;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Collections
 {
 
     /// <summary>

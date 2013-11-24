@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Test.Expressions.Maths
 {

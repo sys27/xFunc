@@ -22,7 +22,7 @@ using System.Runtime.Serialization;
 #endif
 using xFunc.Maths.Resources;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Collections
 {
 
     /// <summary>

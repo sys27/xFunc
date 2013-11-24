@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Test
 {

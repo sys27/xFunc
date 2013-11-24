@@ -16,6 +16,7 @@ using System;
 using System.Resources;
 using System.Windows.Data;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Resources;
 
 namespace xFunc.Converters

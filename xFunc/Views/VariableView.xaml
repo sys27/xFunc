@@ -18,7 +18,7 @@ limitations under the License. -->
         xmlns:views="clr-namespace:xFunc.Views"
         xmlns:res="clr-namespace:xFunc.Resources"
         xmlns:conv="clr-namespace:xFunc.Converters"
-        xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
+        xmlns:exps="clr-namespace:xFunc.Maths.Expressions.Collections;assembly=xFunc.Maths"
         Title="{x:Static res:Resource.VariablesTitle}" Width="220" Height="280"
         ShowInTaskbar="False">
     <Window.Resources>

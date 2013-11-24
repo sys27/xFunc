@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Resources;
 using xFunc.ViewModels;
 

@@ -17,7 +17,7 @@ using System;
 using System.Runtime.Serialization;
 #endif
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Collections
 {
 
     /// <summary>

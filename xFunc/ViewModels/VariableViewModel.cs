@@ -1,5 +1,6 @@
 ﻿using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.ViewModels
 {

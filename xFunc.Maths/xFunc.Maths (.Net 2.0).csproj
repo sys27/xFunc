@@ -55,9 +55,14 @@
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\Hyperbolic\HyperbolicMathExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />
-    <Compile Include="Expressions\MathParameter.cs" />
-    <Compile Include="Expressions\MathParameterIsReadOnlyException.cs" />
-    <Compile Include="Expressions\MathParameterType.cs" />
+    <Compile Include="Expressions\Collections\MathFunctionCollection.cs" />
+    <Compile Include="Expressions\Collections\MathParameter.cs" />
+    <Compile Include="Expressions\Collections\MathParameterCollection.cs" />
+    <Compile Include="Expressions\Collections\MathParameterIsReadOnlyException.cs" />
+    <Compile Include="Expressions\Collections\MathParameterType.cs" />
+    <Compile Include="Expressions\Matrices\Matrix.cs" />
+    <Compile Include="Expressions\Matrices\MatrixIsInvalidException.cs" />
+    <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />
@@ -75,7 +80,6 @@
     <Compile Include="Expressions\Bitwise\XOr.cs" />
     <Compile Include="Expressions\Bitwise\Or.cs" />
     <Compile Include="Expressions\Bitwise\Not.cs" />
-    <Compile Include="Expressions\MathFunctionCollection.cs" />
     <Compile Include="Expressions\Trigonometric\Arccos.cs" />
     <Compile Include="Expressions\Trigonometric\Arccot.cs" />
     <Compile Include="Expressions\Trigonometric\Arccsc.cs" />
@@ -83,7 +87,7 @@
     <Compile Include="Expressions\Trigonometric\Arcsin.cs" />
     <Compile Include="Expressions\Trigonometric\Arctan.cs" />
     <Compile Include="Expressions\Define.cs" />
-    <Compile Include="Expressions\BinaryMathExpression.cs" />
+    <Compile Include="Expressions\BinaryExpression.cs" />
     <Compile Include="Expressions\Hyperbolic\Arcsch.cs" />
     <Compile Include="Expressions\Hyperbolic\Arsech.cs" />
     <Compile Include="Expressions\Hyperbolic\Arcoth.cs" />
@@ -103,11 +107,10 @@
     <Compile Include="Expressions\Hyperbolic\Sech.cs" />
     <Compile Include="Expressions\Hyperbolic\Sinh.cs" />
     <Compile Include="Expressions\Hyperbolic\Tanh.cs" />
-    <Compile Include="Expressions\IMathExpression.cs" />
+    <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\Lg.cs" />
     <Compile Include="Expressions\Ln.cs" />
     <Compile Include="Expressions\Log.cs" />
-    <Compile Include="Expressions\MathParameterCollection.cs" />
     <Compile Include="Expressions\Mul.cs" />
     <Compile Include="Expressions\Number.cs" />
     <Compile Include="Expressions\Root.cs" />
@@ -117,7 +120,7 @@
     <Compile Include="Expressions\Sub.cs" />
     <Compile Include="Expressions\Trigonometric\Tan.cs" />
     <Compile Include="Expressions\Trigonometric\TrigonometryMathExpression.cs" />
-    <Compile Include="Expressions\UnaryMathExpression.cs" />
+    <Compile Include="Expressions\UnaryExpression.cs" />
     <Compile Include="Expressions\UnaryMinus.cs" />
     <Compile Include="Expressions\Undefine.cs" />
     <Compile Include="Expressions\UserFunction.cs" />

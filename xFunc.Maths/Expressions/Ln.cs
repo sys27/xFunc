@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Natural logarithm function.
     /// </summary>
-    public class Ln : UnaryMathExpression
+    public class Ln : UnaryExpression
     {
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A result of the calculation.</returns>
         public override double Calculate()
         {
-            return Math.Log(Argument.Calculate());
+            return Math.Log(argument.Calculate());
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
-            return Math.Log(Argument.Calculate(parameters));
+            return Math.Log(argument.Calculate(parameters));
         }
 
         /// <summary>

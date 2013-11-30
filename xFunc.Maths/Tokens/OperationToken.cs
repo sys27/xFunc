@@ -53,7 +53,7 @@ namespace xFunc.Maths.Tokens
             if (typeof(OperationToken) != obj.GetType())
                 return false;
 
-            var token = obj as OperationToken;
+            var token = (OperationToken)obj;
             
             return this.Operation == token.Operation;
         }

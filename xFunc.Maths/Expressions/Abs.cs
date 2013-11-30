@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Absolute operation.
     /// </summary>
-    public class Abs : UnaryMathExpression
+    public class Abs : UnaryExpression
     {
 
         /// <summary>

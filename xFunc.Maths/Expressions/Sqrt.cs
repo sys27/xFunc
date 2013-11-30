@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Square Root function.
     /// </summary>
-    public class Sqrt : UnaryMathExpression
+    public class Sqrt : UnaryExpression
     {
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override double Calculate()
         {
-            return Math.Sqrt(Argument.Calculate());
+            return Math.Sqrt(argument.Calculate());
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)
         {
-            return Math.Sqrt(Argument.Calculate(parameters));
+            return Math.Sqrt(argument.Calculate(parameters));
         }
 
         /// <summary>

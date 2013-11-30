@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Exponential function.
     /// </summary>
-    public class Exp : UnaryMathExpression
+    public class Exp : UnaryExpression
     {
 
         /// <summary>

@@ -30,10 +30,10 @@ namespace xFunc.Maths.Expressions.Collections
     {
 
 #if NET40_OR_GREATER || PORTABLE
-        private HashSet<MathParameter> consts;
+        private readonly HashSet<MathParameter> consts;
         private HashSet<MathParameter> collection;
 #elif NET20_OR_GREATER
-        private List<MathParameter> consts;
+        private readonly List<MathParameter> consts;
         private List<MathParameter> collection;
 #endif
 

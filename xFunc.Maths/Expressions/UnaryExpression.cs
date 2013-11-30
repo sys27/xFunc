@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The abstract base class that represents the unary operation.
     /// </summary>
-    public abstract class UnaryMathExpression : IExpression
+    public abstract class UnaryExpression : IExpression
     {
 
         /// <summary>
@@ -33,15 +33,15 @@ namespace xFunc.Maths.Expressions
         protected IExpression argument;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnaryMathExpression"/> class.
+        /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
         /// </summary>
-        protected UnaryMathExpression() { }
+        protected UnaryExpression() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnaryMathExpression"/> class.
+        /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        protected UnaryMathExpression(IExpression argument)
+        protected UnaryExpression(IExpression argument)
         {
             Argument = argument;
         }
@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = obj as UnaryMathExpression;
+            var exp = obj as UnaryExpression;
             if (exp == null)
                 return false;
 

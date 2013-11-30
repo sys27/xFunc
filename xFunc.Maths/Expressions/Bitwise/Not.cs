@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions.Bitwise
     /// <summary>
     /// Represents a bitwise NOT operation.
     /// </summary>
-    public class Not : UnaryMathExpression
+    public class Not : UnaryExpression
     {
 
         /// <summary>

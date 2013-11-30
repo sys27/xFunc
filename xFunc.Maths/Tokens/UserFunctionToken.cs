@@ -58,7 +58,7 @@ namespace xFunc.Maths.Tokens
             if (typeof(UserFunctionToken) != obj.GetType())
                 return false;
 
-            var token = obj as UserFunctionToken;
+            var token = (UserFunctionToken)obj;
 
             return this.functionName == token.functionName && this.countOfParams == token.countOfParams;
         }

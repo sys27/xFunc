@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the nth root operation.
     /// </summary>
-    public class Root : BinaryMathExpression
+    public class Root : BinaryExpression
     {
 
         /// <summary>

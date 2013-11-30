@@ -59,9 +59,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = obj as UnaryExpression;
-            if (exp == null)
-                return false;
+            var exp = (UnaryExpression)obj;
 
             return argument.Equals(exp.Argument);
         }

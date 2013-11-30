@@ -21,7 +21,7 @@ namespace xFunc.Maths
     internal static class EnumerableExtention
     {
 
-        public static T Aggregate<T>(this IEnumerable<T> value, Func<T, T, T> func)
+        public static TSource Aggregate<TSource>(this IEnumerable<TSource> value, Func<TSource, TSource, TSource> func)
         {
             if (value == null)
                 throw new ArgumentNullException("value");
@@ -33,11 +33,26 @@ namespace xFunc.Maths
                 if (!enumerator.MoveNext())
                     throw new InvalidOperationException("No elements in source list");
 
-                T folded = enumerator.Current;
+                TSource folded = enumerator.Current;
                 while (enumerator.MoveNext())
                     folded = func(folded, enumerator.Current);
                 return folded;
             }
+        }
+
+        public static TAccumulate Aggregate<TSource, TAccumulate>(this IEnumerable<TSource> value, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+            if (func == null)
+                throw new ArgumentNullException("func");
+
+            TAccumulate folded = seed;
+
+            foreach (var item in value)
+                folded = func(folded, item);
+
+            return folded;
         }
 
         public static bool Any<T>(this IEnumerable<T> value, Func<T, bool> predicate)

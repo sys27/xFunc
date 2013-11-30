@@ -13,6 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+#if NET35_OR_GREATER || PORTABLE
+using System.Linq;
+#endif
 using System.Text;
 
 namespace xFunc.Maths.Expressions
@@ -67,12 +70,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected int GetHashCode(int first, int second)
         {
-            int hash = first;
-
-            foreach (var item in arguments)
-                hash = hash * second + item.GetHashCode();
-
-            return hash;
+            return arguments.Aggregate(first, (current, item) => current * second + item.GetHashCode());
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for binary operations.
     /// </summary>
-    public abstract class BinaryMathExpression : IExpression
+    public abstract class BinaryExpression : IExpression
     {
 
         /// <summary>
@@ -37,18 +37,18 @@ namespace xFunc.Maths.Expressions
         protected IExpression right;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryMathExpression"/> class.
+        /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
-        protected BinaryMathExpression()
+        protected BinaryExpression()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryMathExpression"/> class.
+        /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        protected BinaryMathExpression(IExpression left, IExpression right)
+        protected BinaryExpression(IExpression left, IExpression right)
         {
             Left = left;
             Right = right;
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = obj as BinaryMathExpression;
+            var exp = obj as BinaryExpression;
             if (exp == null)
                 return false;
 
@@ -134,7 +134,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Creates the clone of this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="BinaryMathExpression"/> that is a clone of this instance.</returns>
+        /// <returns>Returns the new instance of <see cref="BinaryExpression"/> that is a clone of this instance.</returns>
         public abstract IExpression Clone();
 
         /// <summary>

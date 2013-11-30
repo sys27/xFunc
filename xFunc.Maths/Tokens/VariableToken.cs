@@ -50,7 +50,7 @@ namespace xFunc.Maths.Tokens
             if (typeof(VariableToken) != obj.GetType())
                 return false;
 
-            var token = obj as VariableToken;
+            var token = (VariableToken)obj;
 
             return variable == token.variable;
         }

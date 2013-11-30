@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// The base class for hyperbolic functions.
     /// </summary>
-    public abstract class HyperbolicMathExpression : UnaryMathExpression
+    public abstract class HyperbolicMathExpression : UnaryExpression
     {
         
         /// <summary>

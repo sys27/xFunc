@@ -53,7 +53,7 @@ namespace xFunc.Maths.Tokens
             if (typeof(SymbolToken) != obj.GetType())
                 return false;
 
-            var token = obj as SymbolToken;
+            var token = (SymbolToken)obj;
             
             return this.Symbol == token.Symbol;
         }

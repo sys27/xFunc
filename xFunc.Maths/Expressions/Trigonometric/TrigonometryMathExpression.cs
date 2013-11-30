@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
-    public abstract class TrigonometryMathExpression : UnaryMathExpression
+    public abstract class TrigonometryMathExpression : UnaryExpression
     {
 
         /// <summary>

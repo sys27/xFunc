@@ -67,17 +67,17 @@ namespace xFunc.Maths
         /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
         public static bool HasVar(IExpression expression, Variable arg)
         {
-            if (expression is BinaryMathExpression)
+            if (expression is BinaryExpression)
             {
-                var bin = expression as BinaryMathExpression;
+                var bin = expression as BinaryExpression;
                 if (HasVar(bin.Left, arg))
                     return true;
 
                 return HasVar(bin.Right, arg);
             }
-            if (expression is UnaryMathExpression)
+            if (expression is UnaryExpression)
             {
-                var un = expression as UnaryMathExpression;
+                var un = expression as UnaryExpression;
 
                 return HasVar(un.Argument, arg);
             }
@@ -118,20 +118,20 @@ namespace xFunc.Maths
                     {
                         stack.Push(expression);
                     }
-                    else if (expression is BinaryMathExpression)
+                    else if (expression is BinaryExpression)
                     {
                         if ((expression is Log || expression is Root) && stack.Count < 2)
                             throw new MathParserException(Resource.InvalidNumberOfVariables);
 
-                        var binExp = expression as BinaryMathExpression;
+                        var binExp = expression as BinaryExpression;
                         binExp.Right = stack.Pop();
                         binExp.Left = stack.Pop();
 
                         stack.Push(binExp);
                     }
-                    else if (expression is UnaryMathExpression)
+                    else if (expression is UnaryExpression)
                     {
-                        var unaryMathExp = expression as UnaryMathExpression;
+                        var unaryMathExp = expression as UnaryExpression;
                         unaryMathExp.Argument = stack.Pop();
 
                         stack.Push(unaryMathExp);

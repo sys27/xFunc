@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions.Collections
     public class MathParameter
     {
 
-        private string key;
+        private readonly string key;
         private double value;
         private MathParameterType type;
 

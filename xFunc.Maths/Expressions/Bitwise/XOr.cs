@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions.Bitwise
     /// <summary>
     /// Represents a bitwise XOR operation.
     /// </summary>
-    public class XOr : BinaryMathExpression
+    public class XOr : BinaryExpression
     {
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (parent is BinaryMathExpression)
+            if (parent is BinaryExpression)
             {
                 return ToString("({0} xor {1})");
             }

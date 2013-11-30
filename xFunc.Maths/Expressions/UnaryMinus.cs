@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the unary minus.
     /// </summary>
-    public class UnaryMinus : UnaryMathExpression
+    public class UnaryMinus : UnaryExpression
     {
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (argument is BinaryMathExpression)
+            if (argument is BinaryExpression)
                 return ToString("-({0})");
 
             return ToString("-{0}");

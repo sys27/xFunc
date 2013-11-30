@@ -26,8 +26,8 @@ namespace xFunc.Maths
     public class MathSimplifier : ISimplifier
     {
 
-        private Number zero = 0;
-        private Number one = 1;
+        private readonly Number zero = 0;
+        private readonly Number one = 1;
 
         /// <summary>
         /// Simplifies the <paramref name="expression"/>.
@@ -49,15 +49,15 @@ namespace xFunc.Maths
             if (expression is Variable)
                 return expression;
 
-            if (expression is BinaryMathExpression)
+            if (expression is BinaryExpression)
             {
-                var bin = expression as BinaryMathExpression;
+                var bin = expression as BinaryExpression;
                 bin.Left = _Simplify(bin.Left);
                 bin.Right = _Simplify(bin.Right);
             }
-            else if (expression is UnaryMathExpression)
+            else if (expression is UnaryExpression)
             {
-                var un = expression as UnaryMathExpression;
+                var un = expression as UnaryExpression;
                 un.Argument = _Simplify(un.Argument);
             }
             else if (expression is Simplify)
@@ -151,7 +151,7 @@ namespace xFunc.Maths
             }
             else if (expression is TrigonometryMathExpression || expression is HyperbolicMathExpression)
             {
-                return SimplifyTrig((UnaryMathExpression)expression);
+                return SimplifyTrig((UnaryExpression)expression);
             }
 
             return expression;
@@ -555,7 +555,7 @@ namespace xFunc.Maths
             return div;
         }
 
-        private IExpression SimplifyTrig(UnaryMathExpression unary)
+        private IExpression SimplifyTrig(UnaryExpression unary)
         {
             var attrs = unary.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false);
             ReverseFunctionAttribute attr = null;
@@ -563,7 +563,7 @@ namespace xFunc.Maths
                 attr = (ReverseFunctionAttribute)attrs[0];
 
             if (attr != null && unary.Argument.GetType() == attr.ReverseType)
-                return ((UnaryMathExpression)unary.Argument).Argument;
+                return ((UnaryExpression)unary.Argument).Argument;
 
             return unary;
         }

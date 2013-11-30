@@ -50,9 +50,9 @@ namespace xFunc.Maths.Tokens
             if (typeof(NumberToken) != obj.GetType())
                 return false;
 
-            var token = obj as NumberToken;
+            var token = (NumberToken)obj;
             
-            return this.Number == token.Number;
+            return this.number == token.number;
         }
 
         /// <summary>

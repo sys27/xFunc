@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents an Addition operation.
     /// </summary>
-    public class Add : BinaryMathExpression
+    public class Add : BinaryExpression
     {
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (parent is BinaryMathExpression)
+            if (parent is BinaryExpression)
             {
                 return ToString("({0} + {1})");
             }

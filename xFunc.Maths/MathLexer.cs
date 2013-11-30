@@ -724,7 +724,7 @@ namespace xFunc.Maths
 
         private int _CountUserFuncParams(List<IToken> tokens, int index)
         {
-            var func = tokens[index] as FunctionToken;
+            var func = (FunctionToken)tokens[index];
 
             int countOfParams = 0;
             int brackets = 1;

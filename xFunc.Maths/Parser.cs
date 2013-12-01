@@ -27,7 +27,7 @@ namespace xFunc.Maths
     /// <summary>
     /// The parser for mathematical expressions.
     /// </summary>
-    public class MathParser
+    public class Parser
     {
 
         private ILexer lexer;
@@ -39,20 +39,20 @@ namespace xFunc.Maths
         private IExpression mathExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IExpressionFactory"/>.
+        /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IExpressionFactory"/>.
         /// </summary>
-        public MathParser()
-            : this(new MathLexer(), new MathSimplifier(), new MathExpressionFactory())
+        public Parser()
+            : this(new Lexer(), new Simplifier(), new ExpressionFactory())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParser" /> class.
+        /// Initializes a new instance of the <see cref="Parser" /> class.
         /// </summary>
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="factory">The factory.</param>
-        public MathParser(ILexer lexer, ISimplifier simplifier, IExpressionFactory factory)
+        public Parser(ILexer lexer, ISimplifier simplifier, IExpressionFactory factory)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
@@ -121,7 +121,7 @@ namespace xFunc.Maths
                     else if (expression is BinaryExpression)
                     {
                         if ((expression is Log || expression is Root) && stack.Count < 2)
-                            throw new MathParserException(Resource.InvalidNumberOfVariables);
+                            throw new ParserException(Resource.InvalidNumberOfVariables);
 
                         var binExp = expression as BinaryExpression;
                         binExp.Right = stack.Pop();
@@ -145,7 +145,7 @@ namespace xFunc.Maths
                             arg[i] = stack.Pop();
 
                         if (func is Derivative && func.CountOfParams == 2 && !(arg[1] is Variable))
-                            throw new MathParserException(Resource.InvalidExpression);
+                            throw new ParserException(Resource.InvalidExpression);
 
                         func.Arguments = arg;
 
@@ -161,7 +161,7 @@ namespace xFunc.Maths
                     else if (expression is Define)
                     {
                         if (stack.Count < 2)
-                            throw new MathParserException(Resource.InvalidNumberOfVariables);
+                            throw new ParserException(Resource.InvalidNumberOfVariables);
 
                         var assign = expression as Define;
                         assign.Value = stack.Pop();
@@ -172,7 +172,7 @@ namespace xFunc.Maths
                     else if (expression is Undefine)
                     {
                         if (stack.Count < 1)
-                            throw new MathParserException(Resource.InvalidNumberOfVariables);
+                            throw new ParserException(Resource.InvalidNumberOfVariables);
 
                         var undef = expression as Undefine;
                         undef.Key = stack.Pop();
@@ -181,12 +181,12 @@ namespace xFunc.Maths
                     }
                     else
                     {
-                        throw new MathParserException(Resource.UnexpectedError);
+                        throw new ParserException(Resource.UnexpectedError);
                     }
                 }
 
                 if (stack.Count > 1)
-                    throw new MathParserException(Resource.ErrorWhileParsingTree);
+                    throw new ParserException(Resource.ErrorWhileParsingTree);
 
                 if (saveLastExpression)
                 {
@@ -215,9 +215,9 @@ namespace xFunc.Maths
                     var t = token as FunctionToken;
 
                     if (t.CountOfParams < exp.MinCountOfParams)
-                        throw new MathParserException(Resource.LessParams);
+                        throw new ParserException(Resource.LessParams);
                     if (exp.MaxCountOfParams != -1 && t.CountOfParams > exp.MaxCountOfParams)
-                        throw new MathParserException(Resource.MoreParams);
+                        throw new ParserException(Resource.MoreParams);
 
                     var diff = exp as DifferentParametersExpression;
                     if (diff != null)

@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// Represents the Arccosine function.
     /// </summary>
     [ReverseFunction(typeof(Cos))]
-    public class Arccos : TrigonometryMathExpression
+    public class Arccos : TrigonometricExpression
     {
 
         /// <summary>

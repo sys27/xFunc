@@ -94,8 +94,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
-            var first = MathParser.HasVar(left, variable);
-            var second = MathParser.HasVar(right, variable);
+            var first = Parser.HasVar(left, variable);
+            var second = Parser.HasVar(right, variable);
 
             if (first && second)
             {

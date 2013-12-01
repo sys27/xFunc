@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// Represents the Hyperbolic sine function.
     /// </summary>
     [ReverseFunction(typeof(Arsinh))]
-    public class Sinh : HyperbolicMathExpression
+    public class Sinh : HyperbolicExpression
     {
 
         /// <summary>

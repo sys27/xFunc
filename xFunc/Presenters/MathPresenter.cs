@@ -30,12 +30,12 @@ namespace xFunc.Presenters
 
         private IMathView view;
 
-        private MathProcessor processor;
+        private Processor processor;
         private MathWorkspace workspace;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public MathPresenter(IMathView view, MathProcessor processor)
+        public MathPresenter(IMathView view, Processor processor)
         {
             this.view = view;
 

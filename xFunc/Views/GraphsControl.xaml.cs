@@ -61,11 +61,11 @@ namespace xFunc.Views
                     presenter.Add(graphExpressionBox.Text);
                     Status = string.Empty;
                 }
-                catch (MathLexerException mle)
+                catch (LexerException mle)
                 {
                     Status = mle.Message;
                 }
-                catch (MathParserException mpe)
+                catch (ParserException mpe)
                 {
                     Status = mpe.Message;
                 }

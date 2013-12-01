@@ -82,13 +82,13 @@ limitations under the License. -->
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Path=Type}">
                             <DataTrigger.Value>
-                                <exps:MathParameterType>Constant</exps:MathParameterType>
+                                <exps:ParameterType>Constant</exps:ParameterType>
                             </DataTrigger.Value>
                             <Setter Property="Foreground" Value="Gray" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=Type}">
                             <DataTrigger.Value>
-                                <exps:MathParameterType>ReadOnly</exps:MathParameterType>
+                                <exps:ParameterType>ReadOnly</exps:ParameterType>
                             </DataTrigger.Value>
                             <Setter Property="Foreground" Value="Gray" />
                         </DataTrigger>

@@ -8,9 +8,9 @@ namespace xFunc.ViewModels
     public class VariableViewModel
     {
 
-        private MathParameter parameter;
+        private Parameter parameter;
 
-        public VariableViewModel(MathParameter parameter)
+        public VariableViewModel(Parameter parameter)
         {
             this.parameter = parameter;
         }
@@ -31,7 +31,7 @@ namespace xFunc.ViewModels
             }
         }
 
-        public MathParameterType Type
+        public ParameterType Type
         {
             get
             {

@@ -26,35 +26,35 @@ namespace xFunc.Maths.Expressions.Collections
 #if !PORTABLE
     [Serializable]
 #endif
-    public class MathParameterIsReadOnlyException : Exception
+    public class ParameterIsReadOnlyException : Exception
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameterIsReadOnlyException"/> class.
+        /// Initializes a new instance of the <see cref="ParameterIsReadOnlyException"/> class.
         /// </summary>
-        public MathParameterIsReadOnlyException()
+        public ParameterIsReadOnlyException()
             : this("You cannot change the read-only variable.") { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameterIsReadOnlyException" /> class.
+        /// Initializes a new instance of the <see cref="ParameterIsReadOnlyException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public MathParameterIsReadOnlyException(string message) : base(message) { }
+        public ParameterIsReadOnlyException(string message) : base(message) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameterIsReadOnlyException"/> class.
+        /// Initializes a new instance of the <see cref="ParameterIsReadOnlyException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public MathParameterIsReadOnlyException(string message, Exception inner) : base(message, inner) { }
+        public ParameterIsReadOnlyException(string message, Exception inner) : base(message, inner) { }
 
 #if !PORTABLE
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameterIsReadOnlyException"/> class.
+        /// Initializes a new instance of the <see cref="ParameterIsReadOnlyException"/> class.
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
-        protected MathParameterIsReadOnlyException(SerializationInfo info, StreamingContext context)
+        protected ParameterIsReadOnlyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 #endif
 

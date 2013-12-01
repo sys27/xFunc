@@ -71,15 +71,15 @@ namespace xFunc.Views
                     mathExpsListBox.ScrollIntoView(mathExpsListBox.Items[count - 1]);
                 Status = string.Empty;
             }
-            catch (MathLexerException mle)
+            catch (LexerException mle)
             {
                 Status = mle.Message;
             }
-            catch (MathParserException mpe)
+            catch (ParserException mpe)
             {
                 Status = mpe.Message;
             }
-            catch (MathParameterIsReadOnlyException mpiroe)
+            catch (ParameterIsReadOnlyException mpiroe)
             {
                 Status = mpiroe.Message;
             }

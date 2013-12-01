@@ -24,55 +24,55 @@ namespace xFunc.Maths
     /// <summary>
     /// The main point of this library. Bring together all features.
     /// </summary>
-    public class MathProcessor
+    public class Processor
     {
 
         private ILexer lexer;
         private ISimplifier simplifier;
         private IDifferentiator differentiator;
-        private MathParser parser;
+        private Parser parser;
 
         private ExpressionParameters parameters;
         private NumeralSystem numberSystem;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathProcessor"/> class.
+        /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
-        public MathProcessor()
+        public Processor()
         {
-            lexer = new MathLexer();
-            simplifier = new MathSimplifier();
-            differentiator = new MathDifferentiator(simplifier);
-            parser = new MathParser(lexer, simplifier, new MathExpressionFactory());
+            lexer = new Lexer();
+            simplifier = new Simplifier();
+            differentiator = new Differentiator(simplifier);
+            parser = new Parser(lexer, simplifier, new ExpressionFactory());
 
-            parameters = new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection());
+            parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathProcessor"/> class.
+        /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
-        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(lexer, simplifier, differentiator, new MathExpressionFactory(), new ExpressionParameters(AngleMeasurement.Degree, new MathParameterCollection(), new MathFunctionCollection()))
+        public Processor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
+            : this(lexer, simplifier, differentiator, new ExpressionFactory(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathProcessor" /> class.
+        /// Initializes a new instance of the <see cref="Processor" /> class.
         /// </summary>
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="factory">The expression factory.</param>
         /// <param name="parameters">The collection of parameters.</param>
-        public MathProcessor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, IExpressionFactory factory, ExpressionParameters parameters)
+        public Processor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, IExpressionFactory factory, ExpressionParameters parameters)
         {
             this.lexer = lexer;
             this.simplifier = simplifier;
             this.differentiator = differentiator;
-            this.parser = new MathParser(lexer, simplifier, factory);
+            this.parser = new Parser(lexer, simplifier, factory);
 
             this.parameters = parameters;
         }
@@ -184,7 +184,7 @@ namespace xFunc.Maths
         /// <param name="simplify">if set to <c>true</c>, simplifies the expression.</param>
         /// <returns>The parsed expression.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
-        /// <exception cref="MathParserException">Error while parsing.</exception>
+        /// <exception cref="ParserException">Error while parsing.</exception>
         public IExpression Parse(string function, bool simplify)
         {
             if (simplify)
@@ -233,7 +233,7 @@ namespace xFunc.Maths
         /// <value>
         /// The parameters.
         /// </value>
-        public MathParameterCollection Parameters
+        public ParameterCollection Parameters
         {
             get
             {
@@ -247,7 +247,7 @@ namespace xFunc.Maths
         /// <value>
         /// The functions.
         /// </value>
-        public MathFunctionCollection UserFunctions
+        public FunctionCollection UserFunctions
         {
             get
             {

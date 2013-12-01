@@ -13,7 +13,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void UndefVarTest()
         {
-            var parameters = new MathParameterCollection { { "a", 1 } };
+            var parameters = new ParameterCollection { { "a", 1 } };
 
             var undef = new Undefine(new Variable("a"));
             undef.Calculate(parameters);
@@ -26,7 +26,7 @@ namespace xFunc.Test.Expressions.Maths
             var key1 = new UserFunction("f", 0);
             var key2 = new UserFunction("f", 1);
 
-            var functions = new MathFunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
+            var functions = new FunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
 
             var undef = new Undefine(key1);
             undef.Calculate(functions);
@@ -37,7 +37,7 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void UndefConstTest()
         {
-            var parameters = new MathParameterCollection();
+            var parameters = new ParameterCollection();
 
             var undef = new Undefine(new Variable("π"));
             undef.Calculate(parameters);

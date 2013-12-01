@@ -14,27 +14,28 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions.Collections
+namespace xFunc.Maths.Expressions.Hyperbolic
 {
 
     /// <summary>
-    /// Contains types of parameter.
+    /// The base class for hyperbolic functions.
     /// </summary>
-    public enum MathParameterType
+    public abstract class HyperbolicExpression : UnaryExpression
     {
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HyperbolicExpression"/> class.
+        /// </summary>
+        protected HyperbolicExpression() { }
 
         /// <summary>
-        /// Normal.
+        /// Initializes a new instance of the <see cref="HyperbolicExpression"/> class.
         /// </summary>
-        Normal,
-        /// <summary>
-        /// Read only.
-        /// </summary>
-        ReadOnly,
-        /// <summary>
-        /// Constant.
-        /// </summary>
-        Constant
+        /// <param name="argument">The expression.</param>
+        protected HyperbolicExpression(IExpression argument)
+            : base(argument)
+        {
+        }
 
     }
 

@@ -23,7 +23,7 @@ namespace xFunc.Maths
     /// <summary>
     /// The default implementation of <see cref="ISimplifier"/>/
     /// </summary>
-    public class MathSimplifier : ISimplifier
+    public class Simplifier : ISimplifier
     {
 
         private readonly Number zero = 0;
@@ -149,7 +149,7 @@ namespace xFunc.Maths
                 if (lg.Argument.Equals(new Number(10)))
                     return one;
             }
-            else if (expression is TrigonometryMathExpression || expression is HyperbolicMathExpression)
+            else if (expression is TrigonometricExpression || expression is HyperbolicExpression)
             {
                 return SimplifyTrig((UnaryExpression)expression);
             }

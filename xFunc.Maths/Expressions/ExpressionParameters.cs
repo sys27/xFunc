@@ -25,15 +25,15 @@ namespace xFunc.Maths.Expressions
     {
 
         private AngleMeasurement angleMeasuremnt;
-        private MathParameterCollection parameters;
-        private MathFunctionCollection functions;
+        private ParameterCollection parameters;
+        private FunctionCollection functions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         public ExpressionParameters(AngleMeasurement angleMeasuremnt)
-            : this(angleMeasuremnt, new MathParameterCollection(), new MathFunctionCollection())
+            : this(angleMeasuremnt, new ParameterCollection(), new FunctionCollection())
         {
         }
 
@@ -41,8 +41,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
-        public ExpressionParameters(MathParameterCollection parameters)
-            : this(AngleMeasurement.Degree, parameters, new MathFunctionCollection())
+        public ExpressionParameters(ParameterCollection parameters)
+            : this(AngleMeasurement.Degree, parameters, new FunctionCollection())
         {
         }
 
@@ -50,8 +50,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
         /// <param name="functions">The collection of user functions.</param>
-        public ExpressionParameters(MathFunctionCollection functions)
-            : this(AngleMeasurement.Degree, new MathParameterCollection(), functions)
+        public ExpressionParameters(FunctionCollection functions)
+            : this(AngleMeasurement.Degree, new ParameterCollection(), functions)
         {
         }
 
@@ -60,8 +60,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         /// <param name="parameters">The collection of variables' values.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathParameterCollection parameters)
-            : this(angleMeasuremnt, parameters, new MathFunctionCollection())
+        public ExpressionParameters(AngleMeasurement angleMeasuremnt, ParameterCollection parameters)
+            : this(angleMeasuremnt, parameters, new FunctionCollection())
         {
         }
 
@@ -70,8 +70,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         /// <param name="functions">The collection of user functions.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathFunctionCollection functions)
-            : this(angleMeasuremnt, new MathParameterCollection(), functions)
+        public ExpressionParameters(AngleMeasurement angleMeasuremnt, FunctionCollection functions)
+            : this(angleMeasuremnt, new ParameterCollection(), functions)
         {
         }
 
@@ -80,7 +80,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
         /// <param name="functions">The collection of user functions.</param>
-        public ExpressionParameters(MathParameterCollection parameters, MathFunctionCollection functions)
+        public ExpressionParameters(ParameterCollection parameters, FunctionCollection functions)
             : this(AngleMeasurement.Degree, parameters, functions)
         {
         }
@@ -91,7 +91,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         /// <param name="parameters">The collection of variables' values.</param>
         /// <param name="functions">The collection of user functions.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasuremnt, MathParameterCollection parameters, MathFunctionCollection functions)
+        public ExpressionParameters(AngleMeasurement angleMeasuremnt, ParameterCollection parameters, FunctionCollection functions)
         {
             this.angleMeasuremnt = angleMeasuremnt;
             this.parameters = parameters;
@@ -109,21 +109,21 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="MathParameterCollection"/>.
+        /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="ParameterCollection"/>.
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(MathParameterCollection parameters)
+        public static implicit operator ExpressionParameters(ParameterCollection parameters)
         {
             return new ExpressionParameters(parameters);
         }
 
         /// <summary>
-        /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="MathFunctionCollection"/>.
+        /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="FunctionCollection"/>.
         /// </summary>
         /// <param name="functions">The collection of user functions.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(MathFunctionCollection functions)
+        public static implicit operator ExpressionParameters(FunctionCollection functions)
         {
             return new ExpressionParameters(functions);
         }
@@ -152,7 +152,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The collection of variables' values.
         /// </value>
-        public MathParameterCollection Parameters
+        public ParameterCollection Parameters
         {
             get
             {
@@ -166,7 +166,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The collection of user functions.
         /// </value>
-        public MathFunctionCollection Functions
+        public FunctionCollection Functions
         {
             get
             {

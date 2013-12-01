@@ -37,7 +37,7 @@ namespace xFunc.Views
     public partial class FunctionView : Window
     {
 
-        private MathProcessor processor;
+        private Processor processor;
 
         #region Commands
 
@@ -48,7 +48,7 @@ namespace xFunc.Views
 
         #endregion
 
-        public FunctionView(MathProcessor processor)
+        public FunctionView(Processor processor)
         {
             this.processor = processor;
             RefreshList();
@@ -89,15 +89,15 @@ namespace xFunc.Views
 
                     RefreshList();
                 }
-                catch (MathLexerException mle)
+                catch (LexerException mle)
                 {
                     MessageBox.Show(this, mle.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParserException mpe)
+                catch (ParserException mpe)
                 {
                     MessageBox.Show(this, mpe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParameterIsReadOnlyException mpiroe)
+                catch (ParameterIsReadOnlyException mpiroe)
                 {
                     MessageBox.Show(this, mpiroe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
@@ -131,15 +131,15 @@ namespace xFunc.Views
 
                     RefreshList();
                 }
-                catch (MathLexerException mle)
+                catch (LexerException mle)
                 {
                     MessageBox.Show(this, mle.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParserException mpe)
+                catch (ParserException mpe)
                 {
                     MessageBox.Show(this, mpe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (MathParameterIsReadOnlyException mpiroe)
+                catch (ParameterIsReadOnlyException mpiroe)
                 {
                     MessageBox.Show(this, mpiroe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }

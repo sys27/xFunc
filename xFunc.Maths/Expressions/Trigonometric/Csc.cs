@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// Represents the Cosecant function.
     /// </summary>
     [ReverseFunction(typeof(Arccsc))]
-    public class Csc : TrigonometryMathExpression
+    public class Csc : TrigonometricExpression
     {
 
         /// <summary>

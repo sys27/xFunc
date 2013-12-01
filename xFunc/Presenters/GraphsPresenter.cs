@@ -28,11 +28,11 @@ namespace xFunc.Presenters
 
         private IGraphsView view;
 
-        private MathProcessor processor;
+        private Processor processor;
         private int countOfGraphs;
         private List<GraphItemViewModel> listOfGraphs;
 
-        public GraphsPresenter(IGraphsView view, MathProcessor processor)
+        public GraphsPresenter(IGraphsView view, Processor processor)
         {
             this.view = view;
 

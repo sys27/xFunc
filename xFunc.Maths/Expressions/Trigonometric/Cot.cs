@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// Represents the Cotangent function.
     /// </summary>
     [ReverseFunction(typeof(Arccot))]
-    public class Cot : TrigonometryMathExpression
+    public class Cot : TrigonometricExpression
     {
 
         /// <summary>

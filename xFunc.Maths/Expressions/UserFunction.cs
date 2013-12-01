@@ -150,7 +150,7 @@ namespace xFunc.Maths.Expressions
 
             var func = parameters.Functions.GetKeyByKey(this);
 
-            var newParameters = new MathParameterCollection(parameters.Parameters.Collection);
+            var newParameters = new ParameterCollection(parameters.Parameters.Collection);
             for (int i = 0; i < arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;

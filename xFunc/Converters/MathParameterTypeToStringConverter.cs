@@ -22,7 +22,7 @@ using xFunc.Resources;
 namespace xFunc.Converters
 {
 
-    [ValueConversion(typeof(MathParameterType), typeof(string))]
+    [ValueConversion(typeof(ParameterType), typeof(string))]
     public class MathParameterTypeToStringConverter : IValueConverter
     {
 

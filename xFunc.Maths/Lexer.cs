@@ -27,7 +27,7 @@ namespace xFunc.Maths
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    public class MathLexer : ILexer
+    public class Lexer : ILexer
     {
 
 #if NET35_OR_GREATER || PORTABLE
@@ -37,9 +37,9 @@ namespace xFunc.Maths
 #endif
 
         /// <summary>
-        /// Initializes a new instance of <see cref="MathLexer"/>.
+        /// Initializes a new instance of <see cref="Lexer"/>.
         /// </summary>
-        public MathLexer()
+        public Lexer()
         {
 #if NET35_OR_GREATER || PORTABLE
             notVar = new HashSet<string> { "and", "or", "xor" };
@@ -71,7 +71,7 @@ namespace xFunc.Maths
         /// <returns>The sequence of tokens.</returns>
         /// <seealso cref="IToken"/>
         /// <exception cref="ArgumentNullException">Throws when the <paramref name="function"/> parameter is null or empty.</exception>
-        /// <exception cref="MathLexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
+        /// <exception cref="LexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
         public IEnumerable<IToken> Tokenize(string function)
         {
 #if NET40_OR_GREATER || PORTABLE
@@ -83,7 +83,7 @@ namespace xFunc.Maths
 
             function = function.ToLower().Replace(" ", "");
             if (!IsBalanced(function))
-                throw new MathLexerException(Resource.NotBalanced);
+                throw new LexerException(Resource.NotBalanced);
             var tokens = new List<IToken>();
 
             for (int i = 0; i < function.Length; )
@@ -713,7 +713,7 @@ namespace xFunc.Maths
                 }
                 else
                 {
-                    throw new MathLexerException(string.Format(Resource.NotSupportedSymbol, letter));
+                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
                 }
 
                 i++;

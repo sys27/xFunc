@@ -27,7 +27,7 @@ namespace xFunc.Maths
     /// <summary>
     /// Factory of mathematic expressions.
     /// </summary>
-    public class MathExpressionFactory : IExpressionFactory
+    public class ExpressionFactory : IExpressionFactory
     {
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace xFunc.Maths
         /// <returns>
         /// The expression.
         /// </returns>
-        /// <exception cref="MathParserException">This factory don't support specified token.</exception>
+        /// <exception cref="ParserException">This factory don't support specified token.</exception>
         public IExpression Create(IToken token)
         {
             if (token is OperationToken)
@@ -51,7 +51,7 @@ namespace xFunc.Maths
             if (token is FunctionToken)
                 return CreateFunction(token as FunctionToken);
 
-            throw new MathParserException(Resource.ErrorWhileParsingTree);
+            throw new ParserException(Resource.ErrorWhileParsingTree);
         }
 
         private IExpression CreateOperation(OperationToken token)
@@ -83,7 +83,7 @@ namespace xFunc.Maths
                 case Operations.XOr:
                     return new XOr();
                 default:
-                    throw new MathParserException(Resource.ErrorWhileParsingTree);
+                    throw new ParserException(Resource.ErrorWhileParsingTree);
             }
         }
 
@@ -176,7 +176,7 @@ namespace xFunc.Maths
                 case Functions.Undefine:
                     return new Undefine();
                 default:
-                    throw new MathParserException(Resource.ErrorWhileParsingTree);
+                    throw new ParserException(Resource.ErrorWhileParsingTree);
             }
         }
 

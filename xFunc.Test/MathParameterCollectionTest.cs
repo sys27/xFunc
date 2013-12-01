@@ -15,8 +15,8 @@ namespace xFunc.Test
         [TestMethod]
         public void GetItemFromCollectionTest()
         {
-            var parameters = new MathParameterCollection();
-            parameters.Add(new MathParameter("x", 2.3));
+            var parameters = new ParameterCollection();
+            parameters.Add(new Parameter("x", 2.3));
 
             Assert.AreEqual(2.3, parameters["x"]);
         }
@@ -24,7 +24,7 @@ namespace xFunc.Test
         [TestMethod]
         public void GetItemFromConstsTest()
         {
-            var parameters = new MathParameterCollection();
+            var parameters = new ParameterCollection();
 
             Assert.AreEqual(Math.PI, parameters["π"]);
         }
@@ -33,7 +33,7 @@ namespace xFunc.Test
         [ExpectedException(typeof(KeyNotFoundException))]
         public void GetItemKeyNotFoundTest()
         {
-            var parameters = new MathParameterCollection();
+            var parameters = new ParameterCollection();
 
             var actual = parameters["hello"];
         }
@@ -41,7 +41,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SetItemFromCollectionTest()
         {
-            var parameters = new MathParameterCollection();
+            var parameters = new ParameterCollection();
             parameters["x"] = 2.3;
 
             Assert.AreEqual(1, parameters.Collection.Count());
@@ -52,8 +52,8 @@ namespace xFunc.Test
         [TestMethod]
         public void SetExistItemFromCollectionTest()
         {
-            var parameters = new MathParameterCollection();
-            parameters.Add(new MathParameter("x", 2.3));
+            var parameters = new ParameterCollection();
+            parameters.Add(new Parameter("x", 2.3));
             parameters["x"] = 3.3;
 
             Assert.AreEqual(1, parameters.Collection.Count());
@@ -62,18 +62,18 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParameterIsReadOnlyException))]
+        [ExpectedException(typeof(ParameterIsReadOnlyException))]
         public void SetReadOnlyItemTest()
         {
-            var parameters = new MathParameterCollection();
-            parameters.Add(new MathParameter("hello", 2.5, MathParameterType.ReadOnly));
+            var parameters = new ParameterCollection();
+            parameters.Add(new Parameter("hello", 2.5, ParameterType.ReadOnly));
             parameters["hello"] = 5;
         }
 
         [TestMethod]
         public void OverrideConstsTest()
         {
-            var parameters = new MathParameterCollection();
+            var parameters = new ParameterCollection();
             parameters["π"] = 4;
 
             Assert.AreEqual(1, parameters.Collection.Count());

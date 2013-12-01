@@ -142,7 +142,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable" />
         public IExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(argument, variable))
+            if (Parser.HasVar(argument, variable))
             {
                 return _Differentiation(variable);
             }

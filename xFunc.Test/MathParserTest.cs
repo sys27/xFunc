@@ -14,22 +14,22 @@ namespace xFunc.Test
     public class MathParserTest
     {
 
-        private MathParser parser;
+        private Parser parser;
         private MathLexerMock lexer;
 
         [TestInitialize]
         public void TestInit()
         {
             lexer = new MathLexerMock();
-            var simplifier = new MathSimplifier();
-            parser = new MathParser(lexer, simplifier, new MathExpressionFactory());
+            var simplifier = new Simplifier();
+            parser = new Parser(lexer, simplifier, new ExpressionFactory());
         }
 
         [TestMethod]
         public void HasVarTest1()
         {
             IExpression exp = new Sin(new Mul(new Number(2), new Variable("x")));
-            bool expected = MathParser.HasVar(exp, new Variable("x"));
+            bool expected = Parser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, true);
         }
@@ -38,7 +38,7 @@ namespace xFunc.Test
         public void HasVarTest2()
         {
             IExpression exp = new Sin(new Mul(new Number(2), new Number(3)));
-            bool expected = MathParser.HasVar(exp, new Variable("x"));
+            bool expected = Parser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, false);
         }
@@ -68,7 +68,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
+        [ExpectedException(typeof(ParserException))]
         public void ParseLogWithOneParam()
         {
             lexer.Tokens = new List<IToken>()
@@ -100,7 +100,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
+        [ExpectedException(typeof(ParserException))]
         public void ParseRootWithOneParam()
         {
             lexer.Tokens = new List<IToken>()
@@ -134,7 +134,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
+        [ExpectedException(typeof(ParserException))]
         public void ParseDerivSecondParamIsNotVar()
         {
             lexer.Tokens = new List<IToken>()
@@ -165,7 +165,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
+        [ExpectedException(typeof(ParserException))]
         public void ParseAssignWithOneParam()
         {
             lexer.Tokens = new List<IToken>()
@@ -192,7 +192,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathParserException))]
+        [ExpectedException(typeof(ParserException))]
         public void ErrorWhileParsingTree()
         {
             lexer.Tokens = new List<IToken>()
@@ -382,7 +382,7 @@ namespace xFunc.Test
         [TestMethod]
         public void SaveLastExpFalseTest()
         {
-            var parser = new MathParser() { SaveLastExpression = false };
+            var parser = new Parser() { SaveLastExpression = false };
             var e1 = parser.Parse("e");
             var e2 = parser.Parse("e");
 

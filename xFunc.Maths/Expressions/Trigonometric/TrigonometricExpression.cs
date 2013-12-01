@@ -20,19 +20,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
-    public abstract class TrigonometryMathExpression : UnaryExpression
+    public abstract class TrigonometricExpression : UnaryExpression
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
+        /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
         /// </summary>
-        protected TrigonometryMathExpression() { }
+        protected TrigonometricExpression() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrigonometryMathExpression"/> class.
+        /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
-        protected TrigonometryMathExpression(IExpression firstMathExpression)
+        protected TrigonometricExpression(IExpression firstMathExpression)
             : base(firstMathExpression)
         {
         }

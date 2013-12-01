@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(left, variable) || MathParser.HasVar(right, variable))
+            if (Parser.HasVar(left, variable) || Parser.HasVar(right, variable))
             {
                 var div = new Div(new Number(1), right.Clone());
                 var inv = new Pow(left.Clone(), div);

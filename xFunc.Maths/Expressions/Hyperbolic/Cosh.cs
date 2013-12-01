@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// Represents the Hyperbolic cosine function.
     /// </summary>
     [ReverseFunction(typeof(Arcosh))]
-    public class Cosh : HyperbolicMathExpression
+    public class Cosh : HyperbolicExpression
     {
 
         /// <summary>

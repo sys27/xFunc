@@ -17,7 +17,7 @@ namespace xFunc.Test
         [TestInitialize]
         public void TestInit()
         {
-            lexer = new MathLexer();
+            lexer = new Lexer();
         }
 
         private void FuncTest(string func, Functions type)
@@ -42,7 +42,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathLexerException))]
+        [ExpectedException(typeof(LexerException))]
         public void NotSupportedSymbol()
         {
             var tokens = lexer.Tokenize("@");
@@ -876,21 +876,21 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathLexerException))]
+        [ExpectedException(typeof(LexerException))]
         public void NotBalancedOpen()
         {
             var tokens = lexer.Tokenize("sin(2(");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathLexerException))]
+        [ExpectedException(typeof(LexerException))]
         public void NotBalancedClose()
         {
             var tokens = lexer.Tokenize("sin)2)");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MathLexerException))]
+        [ExpectedException(typeof(LexerException))]
         public void NotBalancedFirstClose()
         {
             var tokens = lexer.Tokenize("sin)2(");

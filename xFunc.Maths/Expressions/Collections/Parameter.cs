@@ -19,30 +19,30 @@ namespace xFunc.Maths.Expressions.Collections
 {
 
     /// <summary>
-    /// Item of <see cref="MathParameterCollection"/>.
+    /// Item of <see cref="ParameterCollection"/>.
     /// </summary>
-    public class MathParameter
+    public class Parameter
     {
 
         private readonly string key;
         private double value;
-        private MathParameterType type;
+        private ParameterType type;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameter"/> class.
+        /// Initializes a new instance of the <see cref="Parameter"/> class.
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
-        public MathParameter(string key, double value)
-            : this(key, value, MathParameterType.Normal) { }
+        public Parameter(string key, double value)
+            : this(key, value, ParameterType.Normal) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameter" /> class.
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
-        public MathParameter(string key, double value, MathParameterType type)
+        public Parameter(string key, double value, ParameterType type)
         {
             this.key = key;
             this.value = value;
@@ -55,9 +55,9 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <returns>A constant.</returns>
-        public static MathParameter CreateConstant(string key, double value)
+        public static Parameter CreateConstant(string key, double value)
         {
-            return new MathParameter(key, value, MathParameterType.Constant);
+            return new Parameter(key, value, ParameterType.Constant);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (this == obj)
                 return true;
 
-            var param = obj as MathParameter;
+            var param = obj as Parameter;
             if (param == null)
                 return false;
 
@@ -147,7 +147,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The type of parameter.
         /// </value>
-        public MathParameterType Type
+        public ParameterType Type
         {
             get
             {

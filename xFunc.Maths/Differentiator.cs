@@ -21,25 +21,25 @@ namespace xFunc.Maths
     /// <summary>
     /// The differentiator of expressions.
     /// </summary>
-    public class MathDifferentiator : IDifferentiator
+    public class Differentiator : IDifferentiator
     {
 
         private ISimplifier simplifier;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathDifferentiator"/> class.
+        /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
-        public MathDifferentiator()
-            : this(new MathSimplifier())
+        public Differentiator()
+            : this(new Simplifier())
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathDifferentiator"/> class.
+        /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
         /// <param name="simplifier">The simplifier.</param>
-        public MathDifferentiator(ISimplifier simplifier)
+        public Differentiator(ISimplifier simplifier)
         {
             this.simplifier = simplifier;
         }

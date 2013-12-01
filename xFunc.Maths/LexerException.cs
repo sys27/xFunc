@@ -21,39 +21,39 @@ namespace xFunc.Maths
 {
 
     /// <summary>
-    /// The exception that is thrown in <see cref="MathParser"/>.
+    /// The exception that is thrown in <see cref="Lexer"/>.
     /// </summary>
 #if !PORTABLE
     [Serializable]
 #endif
-    public class MathParserException : Exception
+    public class LexerException : Exception
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParserException"/> class.
+        /// Initializes a new instance of the <see cref="LexerException"/> class.
         /// </summary>
-        public MathParserException() { }
+        public LexerException() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParserException"/> class with a specified error message.
+        /// Initializes a new instance of the <see cref="LexerException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">A <see cref="String"/> that describes the error.</param>
-        public MathParserException(string message) : base(message) { }
-
+        public LexerException(string message) : base(message) { }
+        
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParserException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// Initializes a new instance of the <see cref="LexerException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="message">A <see cref="String"/> that describes the error.</param>
         /// <param name="inner">The exception that is the cause of the current exception.</param>
-        public MathParserException(string message, Exception inner) : base(message, inner) { }
-
+        public LexerException(string message, Exception inner) : base(message, inner) { }
+        
 #if !PORTABLE
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParserException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="LexerException"/> class with serialized data.
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected MathParserException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected LexerException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
 
     }

@@ -92,7 +92,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
-            if (MathParser.HasVar(left, variable))
+            if (Parser.HasVar(left, variable))
             {
                 var sub = new Sub(right.Clone(), new Number(1));
                 var inv = new Pow(left.Clone(), sub);
@@ -101,7 +101,7 @@ namespace xFunc.Maths.Expressions
 
                 return mul2;
             }
-            if (MathParser.HasVar(right, variable))
+            if (Parser.HasVar(right, variable))
             {
                 var ln = new Ln(left.Clone());
                 var mul1 = new Mul(ln, Clone());

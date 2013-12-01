@@ -31,21 +31,21 @@ namespace xFunc.Maths.Expressions.Collections
 #if !PORTABLE
     [Serializable]
 #endif
-    public class MathFunctionCollection : Dictionary<UserFunction, IExpression>
+    public class FunctionCollection : Dictionary<UserFunction, IExpression>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathFunctionCollection"/> class.
+        /// Initializes a new instance of the <see cref="FunctionCollection"/> class.
         /// </summary>
-        public MathFunctionCollection() { }
+        public FunctionCollection() { }
 
 #if !PORTABLE
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathFunctionCollection"/> class.
+        /// Initializes a new instance of the <see cref="FunctionCollection"/> class.
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
-        protected MathFunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
 
         /// <summary>

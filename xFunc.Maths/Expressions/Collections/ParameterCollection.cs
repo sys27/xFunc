@@ -26,25 +26,25 @@ namespace xFunc.Maths.Expressions.Collections
     /// <summary>
     /// Strongly typed dictionaty that contains value of variables.
     /// </summary>
-    public class MathParameterCollection : IEnumerable<MathParameter>
+    public class ParameterCollection : IEnumerable<Parameter>
     {
 
 #if NET40_OR_GREATER || PORTABLE
-        private readonly HashSet<MathParameter> consts;
-        private HashSet<MathParameter> collection;
+        private readonly HashSet<Parameter> consts;
+        private HashSet<Parameter> collection;
 #elif NET20_OR_GREATER
         private readonly List<MathParameter> consts;
         private List<MathParameter> collection;
 #endif
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameterCollection"/> class.
+        /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
         /// </summary>
-        public MathParameterCollection()
+        public ParameterCollection()
         {
 #if NET40_OR_GREATER || PORTABLE
-            consts = new HashSet<MathParameter>();
-            collection = new HashSet<MathParameter>();
+            consts = new HashSet<Parameter>();
+            collection = new HashSet<Parameter>();
 #elif NET20_OR_GREATER
             consts = new List<MathParameter>();
             collection = new List<MathParameter>();
@@ -54,14 +54,14 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MathParameterCollection"/> class.
+        /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
         /// </summary>
         /// <param name="parameters">The parameters.</param>
-        public MathParameterCollection(IEnumerable<MathParameter> parameters)
+        public ParameterCollection(IEnumerable<Parameter> parameters)
         {
 #if NET40_OR_GREATER || PORTABLE
-            consts = new HashSet<MathParameter>();
-            collection = new HashSet<MathParameter>(parameters);
+            consts = new HashSet<Parameter>();
+            collection = new HashSet<Parameter>(parameters);
 #elif NET20_OR_GREATER
             consts = new List<MathParameter>();
             collection = new List<MathParameter>(parameters);
@@ -72,10 +72,10 @@ namespace xFunc.Maths.Expressions.Collections
 
         private void InitializeDefaults()
         {
-            consts.Add(MathParameter.CreateConstant("π", Math.PI));
-            consts.Add(MathParameter.CreateConstant("e", Math.E));
-            consts.Add(MathParameter.CreateConstant("g", 9.80665));
-            consts.Add(MathParameter.CreateConstant("c", 299792458));
+            consts.Add(Parameter.CreateConstant("π", Math.PI));
+            consts.Add(Parameter.CreateConstant("e", Math.E));
+            consts.Add(Parameter.CreateConstant("g", 9.80665));
+            consts.Add(Parameter.CreateConstant("c", 299792458));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator<MathParameter> GetEnumerator()
+        public IEnumerator<Parameter> GetEnumerator()
         {
             foreach (var item in consts)
                 yield return item;
@@ -132,10 +132,10 @@ namespace xFunc.Maths.Expressions.Collections
                 var param = collection.FirstOrDefault(p => p.Key == key);
                 if (param == null)
                     this.Add(key, value);
-                else if (param.Type == MathParameterType.Normal)
+                else if (param.Type == ParameterType.Normal)
                     param.Value = value;
                 else
-                    throw new MathParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
+                    throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
             }
         }
 
@@ -144,12 +144,12 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="param">The element.</param>
         /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
-        /// <exception cref="MathParameterIsReadOnlyException">The variable is read only.</exception>
-        public void Add(MathParameter param)
+        /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
+        public void Add(Parameter param)
         {
             if (param == null)
                 throw new ArgumentNullException("param");
-            if (param.Type == MathParameterType.Constant)
+            if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
 
             collection.Add(param);
@@ -161,7 +161,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of variable.</param>
         public void Add(string key)
         {
-            this.Add(new MathParameter(key, 0));
+            this.Add(new Parameter(key, 0));
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of variable.</param>
         public void Add(string key, double value)
         {
-            this.Add(new MathParameter(key, value));
+            this.Add(new Parameter(key, value));
         }
 
         /// <summary>
@@ -179,8 +179,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="param">The element.</param>
         /// <exception cref="ArgumentNullException"><paramref name="param"/> is null.</exception>
-        /// <exception cref="MathParameterIsReadOnlyException">The variable is read only.</exception>
-        public void Remove(MathParameter param)
+        /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
+        public void Remove(Parameter param)
         {
             if (param == null)
                 throw new ArgumentNullException("param");
@@ -193,7 +193,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
-        /// <exception cref="MathParameterIsReadOnlyException">The variable is read only.</exception>
+        /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
         public void Remove(string key)
         {
 #if NET40_OR_GREATER || PORTABLE
@@ -215,7 +215,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
-        public bool Contains(MathParameter param)
+        public bool Contains(Parameter param)
         {
             return collection.Contains(param) || consts.Contains(param);
         }
@@ -225,7 +225,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
-        public bool ContainsInConstants(MathParameter param)
+        public bool ContainsInConstants(Parameter param)
         {
             return consts.Contains(param);
         }
@@ -256,7 +256,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The constants.
         /// </value>
-        public IEnumerable<MathParameter> Constants
+        public IEnumerable<Parameter> Constants
         {
             get
             {
@@ -270,7 +270,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The collection.
         /// </value>
-        public IEnumerable<MathParameter> Collection
+        public IEnumerable<Parameter> Collection
         {
             get
             {

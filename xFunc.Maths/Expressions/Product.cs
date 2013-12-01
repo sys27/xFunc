@@ -118,7 +118,7 @@ namespace xFunc.Maths.Expressions
             return base.ToString("product");
         }
 
-        private static string GetVarName(MathParameterCollection parameters)
+        private static string GetVarName(ParameterCollection parameters)
         {
             string variable = "i";
             if (!parameters.ContainsKey(variable))
@@ -145,7 +145,7 @@ namespace xFunc.Maths.Expressions
             var to = To.Calculate();
             var inc = Increment != null ? Increment.Calculate() : 1;
 
-            var localParams = new MathParameterCollection();
+            var localParams = new ParameterCollection();
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
             localParams.Add(variable, from);
             var param = new ExpressionParameters(localParams);
@@ -175,7 +175,7 @@ namespace xFunc.Maths.Expressions
             var to = To.Calculate(parameters);
             var inc = Increment != null ? Increment.Calculate(parameters) : 1;
 
-            var localParams = new MathParameterCollection(parameters.Parameters.Collection);
+            var localParams = new ParameterCollection(parameters.Parameters.Collection);
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
             localParams.Add(variable, from);
             var param = new ExpressionParameters(parameters.AngleMeasurement, localParams, parameters.Functions);

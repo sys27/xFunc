@@ -42,7 +42,7 @@ namespace xFunc.Views
 
         public PlottingGraph()
         {
-            this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new MathParameterCollection() { { "x", 0 } });
+            this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new ParameterCollection() { { "x", 0 } });
 
             InitializeComponent();
 

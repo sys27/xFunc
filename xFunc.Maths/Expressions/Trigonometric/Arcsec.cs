@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// Represents the Arcsecant function.
     /// </summary>
     [ReverseFunction(typeof(Sec))]
-    public class Arcsec : TrigonometryMathExpression
+    public class Arcsec : TrigonometricExpression
     {
 
         /// <summary>

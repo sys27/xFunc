@@ -35,7 +35,7 @@ namespace xFunc.Views
     public partial class VariableView : Window
     {
 
-        private MathProcessor processor;
+        private Processor processor;
 
         #region Commands
 
@@ -46,7 +46,7 @@ namespace xFunc.Views
 
         #endregion
 
-        public VariableView(MathProcessor processor)
+        public VariableView(Processor processor)
         {
             this.processor = processor;
             RefreshList();
@@ -73,7 +73,7 @@ namespace xFunc.Views
             };
             if (view.ShowDialog() == true)
             {
-                processor.Parameters.Add(new MathParameter(view.VariableName, view.Value, view.IsReadOnly ? MathParameterType.ReadOnly : MathParameterType.Normal));
+                processor.Parameters.Add(new Parameter(view.VariableName, view.Value, view.IsReadOnly ? ParameterType.ReadOnly : ParameterType.Normal));
 
                 RefreshList();
             }
@@ -91,7 +91,7 @@ namespace xFunc.Views
             {
                 var variable = processor.Parameters.First(v => v.Key == view.VariableName);
                 variable.Value = view.Value;
-                variable.Type = view.IsReadOnly ? MathParameterType.ReadOnly : MathParameterType.Normal;
+                variable.Type = view.IsReadOnly ? ParameterType.ReadOnly : ParameterType.Normal;
 
                 RefreshList();
             }
@@ -101,7 +101,7 @@ namespace xFunc.Views
         {
             var item = varList.SelectedItem as VariableViewModel;
 
-            args.CanExecute = item != null && item.Type == MathParameterType.Normal;
+            args.CanExecute = item != null && item.Type == ParameterType.Normal;
         }
 
         private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
@@ -113,7 +113,7 @@ namespace xFunc.Views
 
                 RefreshList();
             }
-            catch (MathParameterIsReadOnlyException)
+            catch (ParameterIsReadOnlyException)
             {
             }
         }
@@ -122,7 +122,7 @@ namespace xFunc.Views
         {
             var item = varList.SelectedItem as VariableViewModel;
 
-            args.CanExecute = item != null && item.Type != MathParameterType.Constant;
+            args.CanExecute = item != null && item.Type != ParameterType.Constant;
         }
 
         private void RefreshCommand_Executed(object o, ExecutedRoutedEventArgs args)

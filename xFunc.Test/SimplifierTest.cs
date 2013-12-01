@@ -16,7 +16,7 @@ namespace xFunc.Test
 
         public SimplifierTest()
         {
-            simplifier = new MathSimplifier();
+            simplifier = new Simplifier();
         }
 
         private void SimpleTest(IExpression exp, IExpression expected)

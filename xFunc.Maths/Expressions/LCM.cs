@@ -81,19 +81,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        public override double Calculate()
-        {
-            var numbers = arguments.Select(item => item.Calculate()).ToArray();
-
-            return MathExtentions.LCM(numbers);
-        }
-
-        /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

@@ -129,18 +129,6 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override double Calculate()
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// Always throws an exception.
-        /// </summary>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override double Calculate(ExpressionParameters parameters)

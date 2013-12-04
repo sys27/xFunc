@@ -98,7 +98,10 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public abstract double Calculate();
+        public virtual double Calculate()
+        {
+            return Calculate(null);
+        }
 
         /// <summary>
         /// Calculates this mathemarical expression.

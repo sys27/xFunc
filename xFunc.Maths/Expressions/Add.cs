@@ -60,16 +60,7 @@ namespace xFunc.Maths.Expressions
 
             return ToString("{0} + {1}");
         }
-
-        /// <summary>
-        /// Calculates this expression. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate()
-        {
-            return left.Calculate() + right.Calculate();
-        }
-
+        
         /// <summary>
         /// Calculates this expression.
         /// </summary>

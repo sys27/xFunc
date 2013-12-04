@@ -54,18 +54,7 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("root({0}, {1})");
         }
-
-        /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        public override double Calculate()
-        {
-            return Calculate(null);
-        }
-
+        
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>

@@ -63,15 +63,6 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns a specified number raised to the specified power.
         /// </summary>
-        /// <returns>A specified number raised to the specified power.</returns>
-        public override double Calculate()
-        {
-            return Math.Pow(left.Calculate(), right.Calculate());
-        }
-
-        /// <summary>
-        /// Returns a specified number raised to the specified power.
-        /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A specified number raised to the specified power.

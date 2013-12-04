@@ -57,15 +57,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this Lg expression. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate()
-        {
-            return Math.Log10(argument.Calculate());
-        }
-
-        /// <summary>
         /// Calculates this Lg expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

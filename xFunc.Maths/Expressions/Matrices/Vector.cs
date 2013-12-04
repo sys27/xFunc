@@ -98,18 +98,6 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
-        /// </summary>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override double Calculate()
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

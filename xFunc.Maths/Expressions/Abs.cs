@@ -54,16 +54,7 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("abs({0})");
         }
-
-        /// <summary>
-        /// Calculates this Absolute expression. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate()
-        {
-            return Math.Abs(argument.Calculate());
-        }
-
+        
         /// <summary>
         /// Calculates this Absolute expression.
         /// </summary>

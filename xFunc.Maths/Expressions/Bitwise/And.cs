@@ -66,19 +66,6 @@ namespace xFunc.Maths.Expressions.Bitwise
         }
 
         /// <summary>
-        /// Calculates this bitwise AND expression. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <returns>A result of the calculation.</returns>
-        public override double Calculate()
-        {
-#if PORTABLE
-            return (int)Math.Round(left.Calculate()) & (int)Math.Round(right.Calculate());
-#else
-            return (int)Math.Round(left.Calculate(), MidpointRounding.AwayFromZero) & (int)Math.Round(right.Calculate(), MidpointRounding.AwayFromZero);
-#endif
-        }
-
-        /// <summary>
         /// Calculates this bitwise AND expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

@@ -54,18 +54,7 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("sqrt({0})");
         }
-
-        /// <summary>
-        /// Calculates this expression. Don't use this method if your expression has variables.
-        /// </summary>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        public override double Calculate()
-        {
-            return Math.Sqrt(argument.Calculate());
-        }
-
+        
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>

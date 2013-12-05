@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
             if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
                 return CalculateDergee(parameters);

@@ -88,9 +88,9 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            var numbers = arguments.Select(item => item.Calculate(parameters)).ToArray();
+            var numbers = arguments.Select(item => (double)item.Calculate(parameters)).ToArray();
 
             return MathExtentions.GCD(numbers);
         }

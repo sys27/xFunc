@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             var exp = new LCM(new Number(12), new Number(16));
 
-            Assert.AreEqual(48, exp.Calculate());
+            Assert.AreEqual(48.0, exp.Calculate());
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) }, 3);
 
-            Assert.AreEqual(16, exp.Calculate());
+            Assert.AreEqual(16.0, exp.Calculate());
         }
 
     }

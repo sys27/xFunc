@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IExpression exp = new Root(new Number(-8), new Number(3));
 
-            Assert.AreEqual(-2, exp.Calculate());
+            Assert.AreEqual(-2.0, exp.Calculate());
         }
 
         [TestMethod]

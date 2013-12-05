@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("root({0}, {1})");
         }
-        
+
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
@@ -63,10 +63,10 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            var first = left.Calculate(parameters);
-            var second = 1 / right.Calculate(parameters);
+            var first = (double)left.Calculate(parameters);
+            var second = 1 / (double)right.Calculate(parameters);
             if (first < 0 && second % 2 != 0)
             {
                 return -Math.Pow(-first, second);

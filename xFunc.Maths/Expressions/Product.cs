@@ -138,12 +138,12 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public override double Calculate()
+        public override object Calculate()
         {
             var body = Body;
-            var from = From != null ? From.Calculate() : 1;
-            var to = To.Calculate();
-            var inc = Increment != null ? Increment.Calculate() : 1;
+            var from = From != null ? (double)From.Calculate() : 1;
+            var to = (double)To.Calculate();
+            var inc = Increment != null ? (double)Increment.Calculate() : 1;
 
             var localParams = new ParameterCollection();
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
@@ -154,7 +154,7 @@ namespace xFunc.Maths.Expressions
             for (; from <= to; from += inc)
             {
                 localParams[variable] = from;
-                S *= body.Calculate(param);
+                S *= (double)body.Calculate(param);
             }
 
             return S;
@@ -168,12 +168,12 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
             var body = Body;
-            var from = From != null ? From.Calculate(parameters) : 1;
-            var to = To.Calculate(parameters);
-            var inc = Increment != null ? Increment.Calculate(parameters) : 1;
+            var from = From != null ? (double)From.Calculate(parameters) : 1;
+            var to = (double)To.Calculate(parameters);
+            var inc = Increment != null ? (double)Increment.Calculate(parameters) : 1;
 
             var localParams = new ParameterCollection(parameters.Parameters.Collection);
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
@@ -184,7 +184,7 @@ namespace xFunc.Maths.Expressions
             for (; from <= to; from += inc)
             {
                 localParams[variable] = from;
-                S *= body.Calculate(param);
+                S *= (double)body.Calculate(param);
             }
 
             return S;

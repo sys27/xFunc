@@ -67,9 +67,9 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            return left.Calculate(parameters) * right.Calculate(parameters);
+            return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
         }
 
         /// <summary>

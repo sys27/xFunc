@@ -93,7 +93,7 @@ namespace xFunc.Maths.Expressions
         /// The exception.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public double Calculate()
+        public object Calculate()
         {
             throw new NotSupportedException();
         }
@@ -107,7 +107,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> is null.</exception>
-        public double Calculate(ExpressionParameters parameters)
+        public object Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
@@ -116,7 +116,7 @@ namespace xFunc.Maths.Expressions
             {
                 var e = key as Variable;
 
-                parameters.Parameters[e.Name] = value.Calculate(parameters);
+                parameters.Parameters[e.Name] = (double)value.Calculate(parameters);
             }
             else if (key is UserFunction)
             {

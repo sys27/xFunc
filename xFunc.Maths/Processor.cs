@@ -120,7 +120,7 @@ namespace xFunc.Maths
             }
 
             if (numberSystem == NumeralSystem.Decimal)
-                return new NumberResult(exp.Calculate(parameters));
+                return new NumberResult((double)exp.Calculate(parameters));
 
             return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters), numberSystem));
         }

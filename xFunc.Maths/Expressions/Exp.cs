@@ -51,9 +51,9 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            return Math.Exp(argument.Calculate(parameters));
+            return Math.Exp((double)argument.Calculate(parameters));
         }
 
         /// <summary>

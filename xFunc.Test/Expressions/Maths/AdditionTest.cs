@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IExpression exp = new Add(new Number(1), new Number(2));
 
-            Assert.AreEqual(3, exp.Calculate());
+            Assert.AreEqual(3.0, exp.Calculate());
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IExpression exp = new Add(new Number(-3), new Number(2));
 
-            Assert.AreEqual(-1, exp.Calculate());
+            Assert.AreEqual(-1.0, exp.Calculate());
         }
 
         [TestMethod]

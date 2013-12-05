@@ -67,9 +67,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            return MathExtentions.Asinh(argument.Calculate(parameters));
+            return MathExtentions.Asinh((double)argument.Calculate(parameters));
         }
 
         /// <summary>

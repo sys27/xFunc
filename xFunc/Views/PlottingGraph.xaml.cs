@@ -304,7 +304,7 @@ namespace xFunc.Views
         private void DrawFunc(GraphItemViewModel graph)
         {
             var exp = graph.Expression;
-            StreamGeometry geometry = new StreamGeometry();
+            var geometry = new StreamGeometry();
 
             using (var context = geometry.Open())
             {
@@ -314,7 +314,7 @@ namespace xFunc.Views
                 for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
                 {
                     parameters.Parameters["x"] = x;
-                    y = exp.Calculate(parameters);
+                    y = (double)exp.Calculate(parameters);
 
                     tempY = centerY - (y * cm);
                     if (double.IsNaN(y) || tempY < 0 || tempY > currentHeight)

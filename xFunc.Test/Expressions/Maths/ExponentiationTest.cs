@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             IExpression exp = new Pow(new Number(2), new Number(10));
 
-            Assert.AreEqual(1024, exp.Calculate());
+            Assert.AreEqual(1024.0, exp.Calculate());
         }
 
         [TestMethod]

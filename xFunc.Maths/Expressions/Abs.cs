@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("abs({0})");
         }
-        
+
         /// <summary>
         /// Calculates this Absolute expression.
         /// </summary>
@@ -63,9 +63,9 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            return Math.Abs(argument.Calculate(parameters));
+            return Math.Abs((double)argument.Calculate(parameters));
         }
 
         /// <summary>

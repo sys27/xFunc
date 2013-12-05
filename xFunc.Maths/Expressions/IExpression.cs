@@ -27,14 +27,14 @@ namespace xFunc.Maths.Expressions
         /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>A result of the calculation.</returns>
-        double Calculate();
+        object Calculate();
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>A result of the calculation.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        double Calculate(ExpressionParameters parameters);
+        object Calculate(ExpressionParameters parameters);
         /// <summary>
         /// Calculates a derivative of the expression.
         /// </summary>

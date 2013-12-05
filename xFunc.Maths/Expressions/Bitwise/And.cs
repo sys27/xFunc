@@ -73,12 +73,12 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
-            return (int)Math.Round(left.Calculate(parameters)) & (int)Math.Round(right.Calculate(parameters));
+            return (int)Math.Round((double)left.Calculate(parameters)) & (int)Math.Round((double)right.Calculate(parameters));
 #else
-            return (int)Math.Round(left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round(right.Calculate(parameters), MidpointRounding.AwayFromZero);
+            return (int)Math.Round((double)left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round((double)right.Calculate(parameters), MidpointRounding.AwayFromZero);
 #endif
         }
 

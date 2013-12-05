@@ -93,7 +93,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a number. Don't use this method if your expression has variables.
         /// </summary>
         /// <returns>A result of the calculation.</returns>
-        public double Calculate()
+        public object Calculate()
         {
             return number;
         }
@@ -104,7 +104,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the calculation.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        public double Calculate(ExpressionParameters parameters)
+        public object Calculate(ExpressionParameters parameters)
         {
             return number;
         }

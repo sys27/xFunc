@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("sqrt({0})");
         }
-        
+
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
@@ -63,9 +63,9 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            return Math.Sqrt(argument.Calculate(parameters));
+            return Math.Sqrt((double)argument.Calculate(parameters));
         }
 
         /// <summary>

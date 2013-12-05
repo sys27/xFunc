@@ -14,7 +14,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             var fact = new Fact(new Number(4));
 
-            Assert.AreEqual(24, fact.Calculate());
+            Assert.AreEqual(24.0, fact.Calculate());
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             var fact = new Fact(new Number(0));
 
-            Assert.AreEqual(1, fact.Calculate());
+            Assert.AreEqual(1.0, fact.Calculate());
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths
         {
             var fact = new Fact(new Number(1));
 
-            Assert.AreEqual(1, fact.Calculate());
+            Assert.AreEqual(1.0, fact.Calculate());
         }
 
         [TestMethod]

@@ -98,7 +98,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public virtual double Calculate()
+        public virtual object Calculate()
         {
             return Calculate(null);
         }
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract double Calculate(ExpressionParameters parameters);
+        public abstract object Calculate(ExpressionParameters parameters);
 
         /// <summary>
         /// Calculates a derivative of the expression.

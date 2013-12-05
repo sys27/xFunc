@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions
 
             return ToString("{0} + {1}");
         }
-        
+
         /// <summary>
         /// Calculates this expression.
         /// </summary>
@@ -69,9 +69,9 @@ namespace xFunc.Maths.Expressions
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override double Calculate(ExpressionParameters parameters)
+        public override object Calculate(ExpressionParameters parameters)
         {
-            return left.Calculate(parameters) + right.Calculate(parameters);
+            return (double)left.Calculate(parameters) + (double)right.Calculate(parameters);
         }
 
         /// <summary>

@@ -69,6 +69,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override object Calculate(ExpressionParameters parameters)
         {
+            // todo: tests
             if (left is Vector && right is Vector)
             {
 
@@ -83,13 +84,9 @@ namespace xFunc.Maths.Expressions
 
             }
             if (left is Matrix)
-            {
-
-            }
+                return Matrix.Mul((Matrix)left, (Number)right, parameters);
             if (right is Matrix)
-            {
-
-            }
+                return Matrix.Mul((Matrix)right, (Number)left, parameters);
 
             return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
         }

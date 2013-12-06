@@ -119,10 +119,23 @@ namespace xFunc.Maths
                 return new StringResult(string.Format(Resource.UndefineFunction, undef.Key));
             }
 
-            if (numberSystem == NumeralSystem.Decimal)
-                return new NumberResult((double)exp.Calculate(parameters));
+            var result = exp.Calculate(parameters);
+            if (result is double)
+            {
+                if (numberSystem == NumeralSystem.Decimal)
+                    return new NumberResult((double)result);
 
-            return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters), numberSystem));
+                return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters), numberSystem));
+            }
+            else if (result is IExpression)
+            {
+                return new ExpressionResult((IExpression)result);
+            }
+            else
+            {
+                // todo: ...
+                throw new Exception();
+            }
         }
 
         /// <summary>

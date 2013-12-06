@@ -71,6 +71,58 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        public Matrix Mul(Number number)
+        {
+            return Mul(number, null);
+        }
+
+        public Matrix Mul(Number number, ExpressionParameters parameters)
+        {
+            var matrix = this.arguments
+                             .Select(v =>
+                             {
+                                 var vector = ((Vector)v).Arguments
+                                                         .Select(num => new Number((double)num.Calculate(parameters) * number))
+                                                         .ToArray();
+
+                                 return new Vector(vector, vector.Length);
+                             })
+                             .ToArray();
+
+            return new Matrix(matrix, matrix.Length);
+        }
+
+        public static Matrix Mul(Matrix vector, Number number)
+        {
+            return vector.Mul(number, null);
+        }
+
+        public static Matrix Mul(Matrix vector, Number number, ExpressionParameters parameters)
+        {
+            return vector.Mul(number, parameters);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            var matrix = (Matrix)obj;
+
+            return this.countOfParams == matrix.countOfParams && 
+                   this.arguments.SequenceEqual(matrix.arguments);
+        }
+
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>

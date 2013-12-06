@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Linq;
 using System.Text;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -66,6 +67,50 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 arguments[index] = value;
             }
+        }
+
+        public Vector Mul(Number number)
+        {
+            return Mul(number, null);
+        }
+
+        public Vector Mul(Number number, ExpressionParameters parameters)
+        {
+            var numbers = (from num in this.arguments
+                           select new Number((double)num.Calculate(parameters) * number)).ToArray();
+
+            return new Vector(numbers, numbers.Length);
+        }
+
+        public static Vector Mul(Vector vector, Number number)
+        {
+            return vector.Mul(number, null);
+        }
+
+        public static Vector Mul(Vector vector, Number number, ExpressionParameters parameters)
+        {
+            return vector.Mul(number, parameters);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            var vector = (Vector)obj;
+
+            return this.countOfParams == vector.countOfParams &&
+                   this.arguments.SequenceEqual(vector.arguments);
         }
 
         /// <summary>

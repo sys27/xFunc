@@ -13,10 +13,10 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void MulByNumberVectorTest()
         {
-            var vector = new Vector(new[] { new Number(2), new Number(3) }, 2);
+            var vector = new Vector(new[] { new Number(2), new Number(3) });
             var number = new Number(5);
 
-            var expected = new Vector(new[] { new Number(10), new Number(15) }, 2);
+            var expected = new Vector(new[] { new Number(10), new Number(15) });
             var result = vector.Mul(number);
 
             Assert.AreEqual(expected, result);
@@ -25,10 +25,10 @@ namespace xFunc.Test.Expressions.Maths
         [TestMethod]
         public void AddVectorsTest()
         {
-            var vector1 = new Vector(new[] { new Number(2), new Number(3) }, 2);
-            var vector2 = new Vector(new[] { new Number(7), new Number(1) }, 2);
+            var vector1 = new Vector(new[] { new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(7), new Number(1) });
 
-            var expected = new Vector(new[] { new Number(9), new Number(4) }, 2);
+            var expected = new Vector(new[] { new Number(9), new Number(4) });
             var result = vector1.Add(vector2);
 
             Assert.AreEqual(expected, result);
@@ -38,10 +38,10 @@ namespace xFunc.Test.Expressions.Maths
         [ExpectedException(typeof(VectorIsInvalidException))]
         public void AddVectorsDiffSizeTest()
         {
-            var vector1 = new Vector(new[] { new Number(2), new Number(3) }, 2);
-            var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) }, 3);
+            var vector1 = new Vector(new[] { new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) });
 
-            var expected = new Vector(new[] { new Number(9), new Number(4) }, 2);
+            var expected = new Vector(new[] { new Number(9), new Number(4) });
             var result = vector1.Add(vector2);
         }
 

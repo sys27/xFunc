@@ -157,6 +157,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var size = args[0].CountOfParams;
 
             if (args.Any(exp => !(exp is Vector) || exp.CountOfParams != size))
+                // todo: message
                 throw new MatrixIsInvalidException();
         }
 

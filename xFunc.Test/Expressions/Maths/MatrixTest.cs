@@ -54,7 +54,7 @@ namespace xFunc.Test.Expressions.Maths
 
         [TestMethod]
         [ExpectedException(typeof(MatrixIsInvalidException))]
-        public void AddMatricesDiffSizeTest()
+        public void AddMatricesDiffSizeTest1()
         {
             var matrix1 = new Matrix(new[] 
             { 
@@ -65,6 +65,25 @@ namespace xFunc.Test.Expressions.Maths
             { 
                 new Vector(new[] { new Number(9), new Number(2) }), 
                 new Vector(new[] { new Number(4), new Number(3), new Number(9) }) 
+            });
+
+            var result = matrix1.Add(matrix2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MatrixIsInvalidException))]
+        public void AddMatricesDiffSizeTest2()
+        {
+            var matrix1 = new Matrix(new[] 
+            { 
+                new Vector(new[] { new Number(6), new Number(3) }), 
+                new Vector(new[] { new Number(2), new Number(1) }) 
+            });
+            var matrix2 = new Matrix(new[] 
+            { 
+                new Vector(new[] { new Number(9), new Number(2) }), 
+                new Vector(new[] { new Number(4), new Number(3) }),
+                new Vector(new[] { new Number(1), new Number(7) })
             });
 
             var result = matrix1.Add(matrix2);
@@ -96,7 +115,7 @@ namespace xFunc.Test.Expressions.Maths
 
         [TestMethod]
         [ExpectedException(typeof(MatrixIsInvalidException))]
-        public void SubMatricesDiffSizeTest()
+        public void SubMatricesDiffSizeTest1()
         {
             var matrix1 = new Matrix(new[] 
             { 
@@ -107,6 +126,25 @@ namespace xFunc.Test.Expressions.Maths
             { 
                 new Vector(new[] { new Number(9), new Number(2) }), 
                 new Vector(new[] { new Number(4), new Number(3), new Number(9) }) 
+            });
+
+            var result = matrix1.Sub(matrix2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MatrixIsInvalidException))]
+        public void SubMatricesDiffSizeTest2()
+        {
+            var matrix1 = new Matrix(new[] 
+            { 
+                new Vector(new[] { new Number(6), new Number(3) }), 
+                new Vector(new[] { new Number(2), new Number(1) }) 
+            });
+            var matrix2 = new Matrix(new[] 
+            { 
+                new Vector(new[] { new Number(9), new Number(2) }), 
+                new Vector(new[] { new Number(4), new Number(3) }),
+                new Vector(new[] { new Number(6), new Number(1) })
             });
 
             var result = matrix1.Sub(matrix2);

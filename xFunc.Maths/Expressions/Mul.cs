@@ -70,23 +70,33 @@ namespace xFunc.Maths.Expressions
         public override object Calculate(ExpressionParameters parameters)
         {
             // todo: tests
-            if (left is Vector && right is Vector)
-            {
-
-            }
             if (left is Vector)
-                return Vector.Mul((Vector)left, (Number)right, parameters);
-            if (right is Vector)
-                return Vector.Mul((Vector)right, (Number)left, parameters);
+            {
+                if (right is Matrix)
+                {
 
+                }
+
+                return Vector.Mul((Vector)left, right, parameters);
+            }
+            if (right is Vector)
+            {
+                if (left is Matrix)
+                {
+
+                }
+
+                return Vector.Mul((Vector)right, left, parameters);
+            }
+            
             if (left is Matrix && right is Matrix)
             {
 
             }
             if (left is Matrix)
-                return Matrix.Mul((Matrix)left, (Number)right, parameters);
+                return Matrix.Mul((Matrix)left, right, parameters);
             if (right is Matrix)
-                return Matrix.Mul((Matrix)right, (Number)left, parameters);
+                return Matrix.Mul((Matrix)right, left, parameters);
 
             return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
         }

@@ -71,18 +71,18 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
-        public Matrix Mul(Number number)
+        public Matrix Mul(IExpression number)
         {
             return Mul(number, null);
         }
 
-        public Matrix Mul(Number number, ExpressionParameters parameters)
+        public Matrix Mul(IExpression number, ExpressionParameters parameters)
         {
             var matrix = this.arguments
                              .Select(v =>
                              {
                                  var vector = ((Vector)v).Arguments
-                                                         .Select(num => new Number((double)num.Calculate(parameters) * number))
+                                                         .Select(num => new Number((double)num.Calculate(parameters) * (double)number.Calculate(parameters)))
                                                          .ToArray();
 
                                  return new Vector(vector, vector.Length);
@@ -92,12 +92,12 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Matrix(matrix, matrix.Length);
         }
 
-        public static Matrix Mul(Matrix vector, Number number)
+        public static Matrix Mul(Matrix vector, IExpression number)
         {
             return vector.Mul(number, null);
         }
 
-        public static Matrix Mul(Matrix vector, Number number, ExpressionParameters parameters)
+        public static Matrix Mul(Matrix vector, IExpression number, ExpressionParameters parameters)
         {
             return vector.Mul(number, parameters);
         }

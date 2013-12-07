@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions.Matrices
                                                          .Select(num => new Number((double)num.Calculate(parameters) * (double)number.Calculate(parameters)))
                                                          .ToArray();
 
-                                 return new Vector(vector, vector.Length);
+                                 return new Vector(vector);
                              })
                              .ToArray();
 

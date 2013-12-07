@@ -22,6 +22,29 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void AddVectorsTest()
+        {
+            var vector1 = new Vector(new[] { new Number(2), new Number(3) }, 2);
+            var vector2 = new Vector(new[] { new Number(7), new Number(1) }, 2);
+
+            var expected = new Vector(new[] { new Number(9), new Number(4) }, 2);
+            var result = vector1.Add(vector2);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(VectorIsInvalidException))]
+        public void AddVectorsDiffSizeTest()
+        {
+            var vector1 = new Vector(new[] { new Number(2), new Number(3) }, 2);
+            var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) }, 3);
+
+            var expected = new Vector(new[] { new Number(9), new Number(4) }, 2);
+            var result = vector1.Add(vector2);
+        }
+
     }
 
 }

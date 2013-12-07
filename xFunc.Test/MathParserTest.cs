@@ -612,6 +612,35 @@ namespace xFunc.Test
             parser.Parse("matrix{2, 3}");
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(MatrixIsInvalidException))]
+        public void MatrixWithDiffVectorSizeTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Vector, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("matrix{vector{2, 3}, vector{4, 7, 2}}");
+        }
+
     }
 
 }

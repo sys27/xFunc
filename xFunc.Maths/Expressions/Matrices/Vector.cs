@@ -69,25 +69,54 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
-        public Vector Mul(Number number)
+        // todo: tests
+        public Vector Add(Vector vector)
+        {
+            return Add(vector, (ExpressionParameters)null);
+        }
+
+        public Vector Add(Vector vector, ExpressionParameters parameters)
+        {
+            if (this.countOfParams != vector.countOfParams)
+                // todo: exception
+                throw new Exception();
+
+            var exps = new IExpression[countOfParams];
+            for (int i = 0; i < countOfParams; i++)
+                exps[i] = new Number((double)this.arguments[i].Calculate(parameters) + (double)this.arguments[i].Calculate(parameters));
+
+            return new Vector(exps, exps.Length);
+        }
+
+        public static Vector Add(Vector left, Vector right)
+        {
+            return left.Add(right, (ExpressionParameters)null);
+        }
+
+        public static Vector Add(Vector left, Vector right, ExpressionParameters parameters)
+        {
+            return left.Add(right, parameters);
+        }
+
+        public Vector Mul(IExpression number)
         {
             return Mul(number, null);
         }
 
-        public Vector Mul(Number number, ExpressionParameters parameters)
+        public Vector Mul(IExpression number, ExpressionParameters parameters)
         {
             var numbers = (from num in this.arguments
-                           select new Number((double)num.Calculate(parameters) * number)).ToArray();
+                           select new Number((double)num.Calculate(parameters) * (double)number.Calculate(parameters))).ToArray();
 
             return new Vector(numbers, numbers.Length);
         }
 
-        public static Vector Mul(Vector vector, Number number)
+        public static Vector Mul(Vector vector, IExpression number)
         {
             return vector.Mul(number, null);
         }
 
-        public static Vector Mul(Vector vector, Number number, ExpressionParameters parameters)
+        public static Vector Mul(Vector vector, IExpression number, ExpressionParameters parameters)
         {
             return vector.Mul(number, parameters);
         }

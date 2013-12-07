@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
@@ -71,6 +72,14 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
+            // todo: tests
+            if (left is Vector && right is Vector)
+                return Vector.Add((Vector)left, (Vector)right, parameters);
+            if (left is Matrix && right is Matrix)
+            {
+
+            }
+
             return (double)left.Calculate(parameters) + (double)right.Calculate(parameters);
         }
 

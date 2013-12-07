@@ -40,12 +40,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
-        public Vector(IExpression[] args, int countOfParams)
-            : base(args, countOfParams)
+        public Vector(IExpression[] args)
+            : base(args, args.Length)
         {
             if (args == null)
                 throw new ArgumentNullException("args");
-            if (args.Length < 1 && args.Length != countOfParams)
+            if (args.Length < 1)
                 throw new ArgumentException();
         }
 
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions.Matrices
             for (int i = 0; i < countOfParams; i++)
                 exps[i] = new Number((double)this.arguments[i].Calculate(parameters) + (double)vector.arguments[i].Calculate(parameters));
 
-            return new Vector(exps, exps.Length);
+            return new Vector(exps);
         }
 
         public static Vector Add(Vector left, Vector right)
@@ -108,7 +108,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var numbers = (from num in this.arguments
                            select new Number((double)num.Calculate(parameters) * (double)number.Calculate(parameters))).ToArray();
 
-            return new Vector(numbers, numbers.Length);
+            return new Vector(numbers);
         }
 
         public static Vector Mul(Vector vector, IExpression number)
@@ -219,7 +219,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Vector(CloneArguments(), countOfParams);
+            return new Vector(CloneArguments());
         }
 
         /// <summary>

@@ -42,12 +42,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
-        public Matrix(Vector[] args, int countOfParams)
-            : base(args, countOfParams)
+        public Matrix(Vector[] args)
+            : base(args, args.Length)
         {
             if (args == null)
                 throw new ArgumentNullException("args");
-            if (args.Length < 1 && args.Length != countOfParams)
+            if (args.Length < 1)
                 throw new ArgumentException();
         }
 
@@ -71,6 +71,77 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        // todo: tests
+        public Matrix Add(Matrix matrix)
+        {
+            return Add(matrix, (ExpressionParameters)null);
+        }
+
+        public Matrix Add(Matrix matrix, ExpressionParameters parameters)
+        {
+            if (this.countOfParams != matrix.countOfParams || this.SizeOfVectors != matrix.SizeOfVectors)
+                // todo: message
+                throw new MatrixIsInvalidException();
+
+            var vectors = new Vector[countOfParams];
+            for (int i = 0; i < countOfParams; i++)
+            {
+                var exps = new IExpression[SizeOfVectors];
+
+                for (int j = 0; j < SizeOfVectors; j++)
+                    exps[j] = new Number((double)this[i][j].Calculate(parameters) + (double)matrix[i][j].Calculate(parameters));
+
+                vectors[i] = new Vector(exps);
+            }
+
+            return new Matrix(vectors);
+        }
+
+        public static Matrix Add(Matrix left, Matrix right)
+        {
+            return left.Add(right, (ExpressionParameters)null);
+        }
+
+        public static Matrix Add(Matrix left, Matrix right, ExpressionParameters parameters)
+        {
+            return left.Add(right, parameters);
+        }
+
+        public Matrix Sub(Matrix matrix)
+        {
+            return Sub(matrix, (ExpressionParameters)null);
+        }
+
+        public Matrix Sub(Matrix matrix, ExpressionParameters parameters)
+        {
+            if (this.countOfParams != matrix.countOfParams || this.SizeOfVectors != matrix.SizeOfVectors)
+                // todo: message
+                throw new MatrixIsInvalidException();
+
+            var vectors = new Vector[countOfParams];
+            for (int i = 0; i < countOfParams; i++)
+            {
+                var exps = new IExpression[SizeOfVectors];
+
+                for (int j = 0; j < SizeOfVectors; j++)
+                    exps[j] = new Number((double)this[i][j].Calculate(parameters) - (double)matrix[i][j].Calculate(parameters));
+
+                vectors[i] = new Vector(exps);
+            }
+
+            return new Matrix(vectors);
+        }
+
+        public static Matrix Sub(Matrix left, Matrix right)
+        {
+            return left.Sub(right, (ExpressionParameters)null);
+        }
+
+        public static Matrix Sub(Matrix left, Matrix right, ExpressionParameters parameters)
+        {
+            return left.Sub(right, parameters);
+        }
+
         public Matrix Mul(IExpression number)
         {
             return Mul(number, null);
@@ -89,7 +160,7 @@ namespace xFunc.Maths.Expressions.Matrices
                              })
                              .ToArray();
 
-            return new Matrix(matrix, matrix.Length);
+            return new Matrix(matrix);
         }
 
         public static Matrix Mul(Matrix vector, IExpression number)
@@ -119,7 +190,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var matrix = (Matrix)obj;
 
-            return this.countOfParams == matrix.countOfParams && 
+            return this.countOfParams == matrix.countOfParams &&
                    this.arguments.SequenceEqual(matrix.arguments);
         }
 
@@ -209,7 +280,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Matrix((Vector[])CloneArguments(), countOfParams);
+            return new Matrix((Vector[])CloneArguments());
         }
 
         /// <summary>

@@ -63,12 +63,14 @@
     <Compile Include="Expressions\Matrices\Matrix.cs" />
     <Compile Include="Expressions\Matrices\MatrixIsInvalidException.cs" />
     <Compile Include="Expressions\Matrices\Vector.cs" />
+    <Compile Include="Expressions\Matrices\VectorIsInvalidException.cs" />
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Sum.cs" />
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="IExpressionFactory.cs" />
+    <Compile Include="InvalidResultException.cs" />
     <Compile Include="ISimplifier.cs" />
     <Compile Include="Differentiator.cs" />
     <Compile Include="ExpressionFactory.cs" />

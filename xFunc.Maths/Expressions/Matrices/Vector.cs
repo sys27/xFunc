@@ -78,12 +78,12 @@ namespace xFunc.Maths.Expressions.Matrices
         public Vector Add(Vector vector, ExpressionParameters parameters)
         {
             if (this.countOfParams != vector.countOfParams)
-                // todo: exception
-                throw new Exception();
+                // todo: message
+                throw new VectorIsInvalidException();
 
             var exps = new IExpression[countOfParams];
             for (int i = 0; i < countOfParams; i++)
-                exps[i] = new Number((double)this.arguments[i].Calculate(parameters) + (double)this.arguments[i].Calculate(parameters));
+                exps[i] = new Number((double)this.arguments[i].Calculate(parameters) + (double)vector.arguments[i].Calculate(parameters));
 
             return new Vector(exps, exps.Length);
         }

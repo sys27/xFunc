@@ -71,7 +71,6 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
-        // todo: tests
         public Matrix Add(Matrix matrix)
         {
             return Add(matrix, (ExpressionParameters)null);

@@ -69,7 +69,6 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
-        // todo: tests
         public Vector Add(Vector vector)
         {
             return Add(vector, (ExpressionParameters)null);

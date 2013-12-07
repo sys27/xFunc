@@ -133,8 +133,8 @@ namespace xFunc.Maths
             }
             else
             {
-                // todo: ...
-                throw new Exception();
+                // todo: message
+                throw new InvalidResultException();
             }
         }
 

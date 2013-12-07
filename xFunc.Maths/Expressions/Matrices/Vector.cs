@@ -98,6 +98,34 @@ namespace xFunc.Maths.Expressions.Matrices
             return left.Add(right, parameters);
         }
 
+        public Vector Sub(Vector vector)
+        {
+            return Sub(vector, (ExpressionParameters)null);
+        }
+
+        public Vector Sub(Vector vector, ExpressionParameters parameters)
+        {
+            if (this.countOfParams != vector.countOfParams)
+                // todo: message
+                throw new VectorIsInvalidException();
+
+            var exps = new IExpression[countOfParams];
+            for (int i = 0; i < countOfParams; i++)
+                exps[i] = new Number((double)this.arguments[i].Calculate(parameters) - (double)vector.arguments[i].Calculate(parameters));
+
+            return new Vector(exps);
+        }
+
+        public static Vector Sub(Vector left, Vector right)
+        {
+            return left.Sub(right, (ExpressionParameters)null);
+        }
+
+        public static Vector Sub(Vector left, Vector right, ExpressionParameters parameters)
+        {
+            return left.Sub(right, parameters);
+        }
+
         public Vector Mul(IExpression number)
         {
             return Mul(number, null);

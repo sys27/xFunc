@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions
 
                 }
 
-                return Vector.Mul((Vector)left, right, parameters);
+                return MatrixExtentions.Mul((Vector)left, right, parameters);
             }
             if (right is Vector)
             {
@@ -86,7 +86,7 @@ namespace xFunc.Maths.Expressions
 
                 }
 
-                return Vector.Mul((Vector)right, left, parameters);
+                return MatrixExtentions.Mul((Vector)right, left, parameters);
             }
             
             if (left is Matrix && right is Matrix)
@@ -94,9 +94,9 @@ namespace xFunc.Maths.Expressions
 
             }
             if (left is Matrix)
-                return Matrix.Mul((Matrix)left, right, parameters);
+                return MatrixExtentions.Mul((Matrix)left, right, parameters);
             if (right is Matrix)
-                return Matrix.Mul((Matrix)right, left, parameters);
+                return MatrixExtentions.Mul((Matrix)right, left, parameters);
 
             return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
         }

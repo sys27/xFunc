@@ -72,9 +72,9 @@ namespace xFunc.Maths.Expressions
         public override object Calculate(ExpressionParameters parameters)
         {
             if (left is Vector && right is Vector)
-                return Vector.Sub((Vector)left, (Vector)right, parameters);
+                return MatrixExtentions.Sub((Vector)left, (Vector)right, parameters);
             if (left is Matrix && right is Matrix)
-                return Matrix.Sub((Matrix)left, (Matrix)right, parameters);
+                return MatrixExtentions.Sub((Matrix)left, (Matrix)right, parameters);
 
             return (double)left.Calculate(parameters) - (double)right.Calculate(parameters);
         }

@@ -32,9 +32,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Mul"/> class.
         /// </summary>
-        /// <param name="firstOperand">The first (left) operand.</param>
-        /// <param name="secondOperand">The second (right) operand.</param>
-        public Mul(IExpression firstOperand, IExpression secondOperand) : base(firstOperand, secondOperand) { }
+        /// <param name="left">The first (left) operand.</param>
+        /// <param name="right">The second (right) operand.</param>
+        public Mul(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

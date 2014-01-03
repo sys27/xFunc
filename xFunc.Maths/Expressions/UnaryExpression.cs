@@ -167,7 +167,7 @@ namespace xFunc.Maths.Expressions
         /// Gets or sets the expression.
         /// </summary>
         /// <value>The expression.</value>
-        public IExpression Argument
+        public virtual IExpression Argument
         {
             get
             {

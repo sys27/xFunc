@@ -32,9 +32,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Sub"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The minuend.</param>
-        /// <param name="secondMathExpression">The subtrahend.</param>
-        public Sub(IExpression firstMathExpression, IExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
+        /// <param name="left">The minuend.</param>
+        /// <param name="right">The subtrahend.</param>
+        public Sub(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -75,6 +75,8 @@ namespace xFunc.Maths.Expressions
                 return MatrixExtentions.Sub((Vector)left, (Vector)right, parameters);
             if (left is Matrix && right is Matrix)
                 return MatrixExtentions.Sub((Matrix)left, (Matrix)right, parameters);
+            if ((left is Vector && right is Matrix) || (right is Vector && left is Matrix))
+                throw new NotSupportedException();
 
             return (double)left.Calculate(parameters) - (double)right.Calculate(parameters);
         }

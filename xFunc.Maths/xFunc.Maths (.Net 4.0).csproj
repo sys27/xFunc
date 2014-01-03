@@ -63,6 +63,7 @@
     <Compile Include="Expressions\Matrices\Matrix.cs" />
     <Compile Include="Expressions\Matrices\MatrixExtentions.cs" />
     <Compile Include="Expressions\Matrices\MatrixIsInvalidException.cs" />
+    <Compile Include="Expressions\Matrices\Transpose.cs" />
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Matrices\VectorIsInvalidException.cs" />
     <Compile Include="Expressions\Product.cs" />

@@ -128,6 +128,26 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Matrix(matrix);
         }
 
+        public static Matrix Transpose(this Vector vector)
+        {
+            var vectors = new Vector[vector.CountOfParams];
+            for (int i = 0; i < vectors.Length; i++)
+                vectors[i] = new Vector(new[] { vector[i] });
+
+            return new Matrix(vectors);
+        }
+
+        public static IExpression Transpose(this Matrix matrix)
+        {
+            var result = new Matrix(matrix.SizeOfVectors, matrix.CountOfParams);
+
+            for (int i = 0; i < matrix.CountOfParams; i++)
+                for (int j = 0; j < matrix.SizeOfVectors; j++)
+                    result[j][i] = matrix[i][j];
+
+            return result;
+        }
+
     }
 
 }

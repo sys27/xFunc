@@ -1384,6 +1384,22 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void TransposeTest()
+        {
+            var tokens = lexer.Tokenize("transpose(2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Transpose, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

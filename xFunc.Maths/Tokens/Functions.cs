@@ -189,6 +189,10 @@ namespace xFunc.Maths.Tokens
         Undefine,
 
         /// <summary>
+        /// transpose
+        /// </summary>
+        Transpose,
+        /// <summary>
         /// vector
         /// </summary>
         Vector,

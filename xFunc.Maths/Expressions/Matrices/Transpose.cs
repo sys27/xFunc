@@ -16,7 +16,12 @@ namespace xFunc.Maths.Expressions.Matrices
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            throw new NotImplementedException();
+            if (argument is Vector)
+                return ((Vector)argument).Transpose();
+            if (argument is Matrix)
+                return ((Matrix)argument).Transpose();
+
+            throw new NotSupportedException();
         }
 
         public override IExpression Clone()
@@ -37,12 +42,15 @@ namespace xFunc.Maths.Expressions.Matrices
             }
             set
             {
-                if (!(argument is Vector || argument is Matrix))
-                    throw new NotSupportedException();
+                if (value != null)
+                {
+                    if (!(value is Vector || value is Matrix))
+                        throw new NotSupportedException();
+
+                    value.Parent = this;
+                }
 
                 argument = value;
-                if (argument != null)
-                    argument.Parent = this;
             }
         }
 

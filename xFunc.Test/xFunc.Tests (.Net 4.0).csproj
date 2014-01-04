@@ -106,8 +106,8 @@
     <Compile Include="Expressions\Maths\UnaryTest.cs" />
     <Compile Include="Expressions\Maths\SumTest.cs" />
     <Compile Include="Expressions\Maths\ProductTest.cs" />
-    <Compile Include="Expressions\Maths\MatrixTest.cs" />
-    <Compile Include="Expressions\Maths\VectorTest.cs" />
+    <Compile Include="Expressions\Maths\Matrices\MatrixTest.cs" />
+    <Compile Include="Expressions\Maths\Matrices\VectorTest.cs" />
     <Compile Include="Expressions\Maths\UserFunctionTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathLexerMock.cs" />

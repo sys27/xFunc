@@ -51,6 +51,16 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException();
         }
 
+        public Matrix(int matrixSize, int vectorSize)
+            : base(null, matrixSize)
+        {
+            var vectors = new Vector[matrixSize];
+            for (int i = 0; i < vectors.Length; i++)
+                vectors[i] = new Vector(vectorSize);
+
+            Arguments = vectors;
+        }
+
         /// <summary>
         /// Gets or sets the <see cref="Vector"/> at the specified index.
         /// </summary>

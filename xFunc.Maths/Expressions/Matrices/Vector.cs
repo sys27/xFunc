@@ -49,6 +49,12 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException();
         }
 
+        public Vector(int size)
+            : base(new IExpression[size], size)
+        {
+
+        }
+
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> at the specified index.
         /// </summary>

@@ -173,6 +173,8 @@ namespace xFunc.Maths
                     return new Vector();
                 case Functions.Matrix:
                     return new Matrix();
+                case Functions.Transpose:
+                    return new Transpose();
                 case Functions.Undefine:
                     return new Undefine();
                 default:

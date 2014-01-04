@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions;
 
-namespace xFunc.Test.Expressions.Maths
+namespace xFunc.Test.Expressions.Maths.Matrices
 {
 
     [TestClass]
@@ -64,6 +64,21 @@ namespace xFunc.Test.Expressions.Maths
             var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) });
 
             var result = vector1.Sub(vector2);
+        }
+
+        [TestMethod]
+        public void TransposeVectorTest()
+        {
+            var vector = new Vector(new[] { new Number(1), new Number(2) });
+
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1) }),
+                new Vector(new[] { new Number(2) })
+            });
+            var result = vector.Transpose();
+
+            Assert.AreEqual(expected, result);
         }
 
     }

@@ -170,6 +170,80 @@ namespace xFunc.Test.Expressions.Maths.Matrices
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void MulMatrices1()
+        {
+            var left = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-2), new Number(1) }),
+                new Vector(new[] { new Number(5), new Number(4) })
+            });
+            var right = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-7) }),
+                new Vector(new[] { new Number(11) })
+            });
+            var result = left.Mul(right);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MulMatrices2()
+        {
+            var left = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(5), new Number(8), new Number(-4) }),
+                new Vector(new[] { new Number(6), new Number(9), new Number(-5) }),
+                new Vector(new[] { new Number(4), new Number(7), new Number(-3) })
+            });
+            var right = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3), new Number(2), new Number(5) }),
+                new Vector(new[] { new Number(4), new Number(-1), new Number(3) }),
+                new Vector(new[] { new Number(9), new Number(6), new Number(5) })
+            });
+
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(11), new Number(-22), new Number(29) }),
+                new Vector(new[] { new Number(9), new Number(-27), new Number(32) }),
+                new Vector(new[] { new Number(13), new Number(-17), new Number(26) })
+            });
+            var result = left.Mul(right);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MulMatrices3()
+        {
+            var left = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-2), new Number(1) }),
+                new Vector(new[] { new Number(5), new Number(4) })
+            });
+            var right = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-7) }),
+                new Vector(new[] { new Number(11) })
+            });
+            var result = right.Mul(left);
+        }
+
     }
 
 }

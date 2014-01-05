@@ -128,6 +128,32 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Matrix(matrix);
         }
 
+        public static Matrix Mul(this Matrix left, Matrix right)
+        {
+            return left.Mul(right, null);
+        }
+
+        public static Matrix Mul(this Matrix left, Matrix right, ExpressionParameters parameters)
+        {
+            if (left.SizeOfVectors != right.CountOfParams)
+                // todo: message...
+                throw new ArgumentException();
+
+            var result = new Matrix(left.CountOfParams, right.SizeOfVectors);
+            for (int i = 0; i < right.SizeOfVectors; i++)
+            {
+                for (int j = 0; j < left.CountOfParams; j++)
+                {
+                    double el = 0;
+                    for (int k = 0; k < left.SizeOfVectors; k++)
+                        el += (double)left[j][k].Calculate(parameters) * (double)right[k][i].Calculate(parameters); 
+                    result[j][i] = new Number(el);
+                }
+            }
+
+            return result;
+        }
+
         public static Matrix Transpose(this Vector vector)
         {
             var vectors = new Vector[vector.CountOfParams];

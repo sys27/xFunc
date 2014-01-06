@@ -4,6 +4,9 @@ using System.Linq;
 namespace xFunc.Maths.Expressions.Matrices
 {
 
+    /// <summary>
+    /// Provides extention methods for matrices and vectors.
+    /// </summary>
     public static class MatrixExtentions
     {
 
@@ -178,6 +181,11 @@ namespace xFunc.Maths.Expressions.Matrices
             return left.Mul(matrix, parameters);
         }
 
+        /// <summary>
+        /// Transposes the specified vector.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <returns>The transposed matrix.</returns>
         public static Matrix Transpose(this Vector vector)
         {
             var vectors = new Vector[vector.CountOfParams];
@@ -187,6 +195,11 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Matrix(vectors);
         }
 
+        /// <summary>
+        /// Transposes the specified matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix.</param>
+        /// <returns>The transposed matrix.</returns>
         public static IExpression Transpose(this Matrix matrix)
         {
             var result = new Matrix(matrix.SizeOfVectors, matrix.CountOfParams);

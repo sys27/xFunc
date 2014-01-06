@@ -193,7 +193,6 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Always throws <see cref="NotSupportedException" />.
         /// </summary>
-        /// <param name="variable"></param>
         /// <returns>
         /// Throws an exception.
         /// </returns>

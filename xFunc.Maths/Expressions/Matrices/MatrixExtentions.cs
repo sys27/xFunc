@@ -211,6 +211,15 @@ namespace xFunc.Maths.Expressions.Matrices
             return result;
         }
 
+        public static double Determinant(this Matrix matrix)
+        {
+            if (matrix.CountOfParams != matrix.SizeOfVectors)
+                // todo: ...
+                throw new ArgumentException();
+
+            throw new NotImplementedException();
+        }
+
     }
 
 }

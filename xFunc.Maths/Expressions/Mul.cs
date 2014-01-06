@@ -70,6 +70,10 @@ namespace xFunc.Maths.Expressions
         public override object Calculate(ExpressionParameters parameters)
         {
             // todo: tests
+            if (left is Vector && right is Vector)
+                // todo: message...
+                throw new ArgumentException();
+
             if (left is Vector)
             {
                 if (right is Matrix)

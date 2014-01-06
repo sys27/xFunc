@@ -1400,6 +1400,55 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void MulMatrixTest()
+        {
+            var tokens = lexer.Tokenize("matrix{vector{3}, vector{-1}} * vector{-2, 1}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Vector, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Vector, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBracket),
+                new OperationToken(Operations.Multiplication),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void PlusVectorTest()
+        {
+            var tokens = lexer.Tokenize("vector{+3}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Vector, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

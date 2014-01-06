@@ -81,6 +81,22 @@ namespace xFunc.Test.Expressions.Maths.Matrices
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void VectorMulMatrixTest()
+        {
+            var vector = new Vector(new[] { new Number(-2), new Number(1) });
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            var expected = new Matrix(new[] { new Vector(new[] { new Number(-7) }) });
+            var result = vector.Mul(matrix);
+
+            Assert.AreEqual(expected, result);
+        }
+
     }
 
 }

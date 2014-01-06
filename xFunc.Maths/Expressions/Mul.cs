@@ -73,26 +73,20 @@ namespace xFunc.Maths.Expressions
             if (left is Vector)
             {
                 if (right is Matrix)
-                {
-
-                }
+                    return MatrixExtentions.Mul((Vector)left, (Matrix)right, parameters);
 
                 return MatrixExtentions.Mul((Vector)left, right, parameters);
             }
             if (right is Vector)
             {
                 if (left is Matrix)
-                {
-
-                }
+                    return MatrixExtentions.Mul((Matrix)left, (Vector)right, parameters);
 
                 return MatrixExtentions.Mul((Vector)right, left, parameters);
             }
-            
-            if (left is Matrix && right is Matrix)
-            {
 
-            }
+            if (left is Matrix && right is Matrix)
+                return MatrixExtentions.Mul((Matrix)left, (Matrix)right, parameters);
             if (left is Matrix)
                 return MatrixExtentions.Mul((Matrix)left, right, parameters);
             if (right is Matrix)

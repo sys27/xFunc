@@ -37,7 +37,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
         public Vector(IExpression[] args)
@@ -49,6 +48,10 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Vector"/> class.
+        /// </summary>
+        /// <param name="size">The size of vector.</param>
         public Vector(int size)
             : base(new IExpression[size], size)
         {

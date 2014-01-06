@@ -39,7 +39,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         /// <exception cref="System.ArgumentException"></exception>
         public Matrix(Vector[] args)
@@ -51,6 +50,11 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Matrix"/> class.
+        /// </summary>
+        /// <param name="matrixSize">The size of the matrix.</param>
+        /// <param name="vectorSize">The size of the vector.</param>
         public Matrix(int matrixSize, int vectorSize)
             : base(null, matrixSize)
         {

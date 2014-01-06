@@ -114,7 +114,7 @@ namespace xFunc.Maths
                     if (i - 1 >= 0)
                     {
                         char pre = function[i - 1];
-                        if (pre == '(')
+                        if (pre == '(' || pre == '{')
                         {
                             i++;
                             continue;
@@ -133,7 +133,7 @@ namespace xFunc.Maths
                     if (i - 1 >= 0)
                     {
                         char pre = function[i - 1];
-                        if (pre == '(')
+                        if (pre == '(' || pre == '{')
                         {
                             tokens.Add(new OperationToken(Operations.UnaryMinus));
 

@@ -60,6 +60,7 @@
     <Compile Include="Expressions\Collections\ParameterCollection.cs" />
     <Compile Include="Expressions\Collections\ParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\Collections\ParameterType.cs" />
+    <Compile Include="Expressions\Matrices\Determinant.cs" />
     <Compile Include="Expressions\Matrices\Matrix.cs" />
     <Compile Include="Expressions\Matrices\MatrixExtentions.cs" />
     <Compile Include="Expressions\Matrices\MatrixIsInvalidException.cs" />

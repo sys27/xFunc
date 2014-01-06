@@ -146,12 +146,36 @@ namespace xFunc.Maths.Expressions.Matrices
                 {
                     double el = 0;
                     for (int k = 0; k < left.SizeOfVectors; k++)
-                        el += (double)left[j][k].Calculate(parameters) * (double)right[k][i].Calculate(parameters); 
+                        el += (double)left[j][k].Calculate(parameters) * (double)right[k][i].Calculate(parameters);
                     result[j][i] = new Number(el);
                 }
             }
 
             return result;
+        }
+
+        public static Matrix Mul(this Vector left, Matrix right)
+        {
+            return left.Mul(right, null);
+        }
+
+        public static Matrix Mul(this Vector left, Matrix right, ExpressionParameters parameters)
+        {
+            var matrix = new Matrix(new[] { left });
+
+            return matrix.Mul(right, parameters);
+        }
+
+        public static Matrix Mul(this Matrix left, Vector right)
+        {
+            return left.Mul(right, null);
+        }
+
+        public static Matrix Mul(this Matrix left, Vector right, ExpressionParameters parameters)
+        {
+            var matrix = new Matrix(new[] { right });
+
+            return left.Mul(matrix, parameters);
         }
 
         public static Matrix Transpose(this Vector vector)

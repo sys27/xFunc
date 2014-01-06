@@ -244,6 +244,26 @@ namespace xFunc.Test.Expressions.Maths.Matrices
             var result = right.Mul(left);
         }
 
+        [TestMethod]
+        public void MatrixMulVectorTest()
+        {
+            var vector = new Vector(new[] { new Number(-2), new Number(1) });
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            var expected = new Matrix(new[] 
+            { 
+                new Vector(new[] { new Number(-6), new Number(3) }),
+                new Vector(new[] { new Number(2), new Number(-1) })
+            });
+            var result = matrix.Mul(vector);
+
+            Assert.AreEqual(expected, result);
+        }
+
     }
 
 }

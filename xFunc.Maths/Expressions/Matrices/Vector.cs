@@ -180,6 +180,16 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
+        /// Gets the calculated array.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>The calculated array.</returns>
+        public double[] ToCalculatedArray(ExpressionParameters parameters)
+        {
+            return arguments.Select(exp => (double)exp.Calculate(parameters)).ToArray();
+        }
+
+        /// <summary>
         /// Gets or sets the arguments.
         /// </summary>
         /// <value>

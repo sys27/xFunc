@@ -175,6 +175,8 @@ namespace xFunc.Maths
                     return new Matrix();
                 case Functions.Transpose:
                     return new Transpose();
+                case Functions.Determinant:
+                    return new Determinant();
                 case Functions.Undefine:
                     return new Undefine();
                 default:

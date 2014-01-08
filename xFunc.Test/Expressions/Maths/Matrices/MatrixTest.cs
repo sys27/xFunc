@@ -71,7 +71,7 @@ namespace xFunc.Test.Expressions.Maths.Matrices
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MatrixIsInvalidException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void AddMatricesDiffSizeTest2()
         {
             var matrix1 = new Matrix(new[] 
@@ -132,7 +132,7 @@ namespace xFunc.Test.Expressions.Maths.Matrices
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MatrixIsInvalidException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void SubMatricesDiffSizeTest2()
         {
             var matrix1 = new Matrix(new[] 

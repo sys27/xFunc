@@ -174,4 +174,7 @@
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>Змінна '{0}' не знайдена.</value>
   </data>
+  <data name="MatrixArgException" xml:space="preserve">
+    <value>Неправильні розміри матриць.</value>
+  </data>
 </root>

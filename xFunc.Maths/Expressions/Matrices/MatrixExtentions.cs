@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Linq;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -32,8 +33,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Vector Add(this Vector left, Vector right, ExpressionParameters parameters)
         {
             if (left.CountOfParams != right.CountOfParams)
-                // todo: message
-                throw new VectorIsInvalidException();
+                throw new ArgumentException(Resource.MatrixArgException);
 
             var exps = new IExpression[left.CountOfParams];
             for (int i = 0; i < left.CountOfParams; i++)
@@ -50,8 +50,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Vector Sub(this Vector left, Vector right, ExpressionParameters parameters)
         {
             if (left.CountOfParams != right.CountOfParams)
-                // todo: message
-                throw new VectorIsInvalidException();
+                throw new ArgumentException(Resource.MatrixArgException);
 
             var exps = new IExpression[left.CountOfParams];
             for (int i = 0; i < left.CountOfParams; i++)
@@ -82,8 +81,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Matrix Add(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
             if (left.CountOfParams != right.CountOfParams || left.SizeOfVectors != right.SizeOfVectors)
-                // todo: message
-                throw new MatrixIsInvalidException();
+                throw new ArgumentException(Resource.MatrixArgException);
 
             var vectors = new Vector[left.CountOfParams];
             for (int i = 0; i < left.CountOfParams; i++)
@@ -107,8 +105,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Matrix Sub(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
             if (left.CountOfParams != right.CountOfParams || left.SizeOfVectors != right.SizeOfVectors)
-                // todo: message
-                throw new MatrixIsInvalidException();
+                throw new ArgumentException(Resource.MatrixArgException);
 
             var vectors = new Vector[left.CountOfParams];
             for (int i = 0; i < left.CountOfParams; i++)
@@ -153,8 +150,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Matrix Mul(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
             if (left.SizeOfVectors != right.CountOfParams)
-                // todo: message...
-                throw new ArgumentException();
+                throw new ArgumentException(Resource.MatrixArgException);
 
             var result = new Matrix(left.CountOfParams, right.SizeOfVectors);
             for (int i = 0; i < right.SizeOfVectors; i++)
@@ -218,6 +214,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var result = new Matrix(matrix.SizeOfVectors, matrix.CountOfParams);
 
+            // todo: parallel?
             for (int i = 0; i < matrix.CountOfParams; i++)
                 for (int j = 0; j < matrix.SizeOfVectors; j++)
                     result[j][i] = matrix[i][j];
@@ -233,8 +230,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static double Determinant(this Matrix matrix, ExpressionParameters parameters)
         {
             if (matrix.CountOfParams != matrix.SizeOfVectors)
-                // todo: message...
-                throw new ArgumentException();
+                throw new ArgumentException(Resource.MatrixArgException);
 
             var array = matrix.ToCalculatedArray(parameters);
 

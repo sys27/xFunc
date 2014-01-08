@@ -174,4 +174,7 @@
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>The '{0}' variable not found.</value>
   </data>
+  <data name="MatrixArgException" xml:space="preserve">
+    <value>The size of matrices is invalid.</value>
+  </data>
 </root>

@@ -142,6 +142,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The size of matrices is invalid..
+        /// </summary>
+        internal static string MatrixArgException {
+            get {
+                return ResourceManager.GetString("MatrixArgException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of parameters is more than expected..
         /// </summary>
         internal static string MoreParams {

@@ -216,12 +216,7 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Matrix((Vector[])CloneArguments());
         }
 
-        /// <summary>
-        /// Gets the calculated array.
-        /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
-        /// <returns>The calculated array.</returns>
-        public double[][] ToCalculatedArray(ExpressionParameters parameters)
+        internal double[][] ToCalculatedArray(ExpressionParameters parameters)
         {
             return arguments.Select(vector => ((Vector)vector).ToCalculatedArray(parameters)).ToArray();
         }

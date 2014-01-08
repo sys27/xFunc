@@ -86,6 +86,27 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="IExpression"/> with the specified index.
+        /// </summary>
+        /// <value>
+        /// The <see cref="IExpression"/>.
+        /// </value>
+        /// <param name="row">The row.</param>
+        /// <param name="col">The column.</param>
+        /// <returns>The element of matrix.</returns>
+        public IExpression this[int row, int col]
+        {
+            get
+            {
+                return this[row][col];
+            }
+            set
+            {
+                this[row][col] = value;
+            }
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
@@ -193,6 +214,16 @@ namespace xFunc.Maths.Expressions.Matrices
         public override IExpression Clone()
         {
             return new Matrix((Vector[])CloneArguments());
+        }
+
+        /// <summary>
+        /// Gets the calculated array.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>The calculated array.</returns>
+        public double[][] ToCalculatedArray(ExpressionParameters parameters)
+        {
+            return arguments.Select(vector => ((Vector)vector).ToCalculatedArray(parameters)).ToArray();
         }
 
         /// <summary>

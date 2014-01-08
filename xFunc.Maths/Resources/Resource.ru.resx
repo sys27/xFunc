@@ -174,4 +174,7 @@
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>Переменная '{0}' не найдена.</value>
   </data>
+  <data name="MatrixArgException" xml:space="preserve">
+    <value>Неправильные размеры матриц.</value>
+  </data>
 </root>

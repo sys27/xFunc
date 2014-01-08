@@ -35,7 +35,7 @@ namespace xFunc.Test.Expressions.Maths.Matrices
         }
 
         [TestMethod]
-        [ExpectedException(typeof(VectorIsInvalidException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void AddVectorsDiffSizeTest()
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
@@ -57,7 +57,7 @@ namespace xFunc.Test.Expressions.Maths.Matrices
         }
 
         [TestMethod]
-        [ExpectedException(typeof(VectorIsInvalidException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void SubVectorsDiffSizeTest()
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });

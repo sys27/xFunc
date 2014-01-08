@@ -71,8 +71,7 @@ namespace xFunc.Maths.Expressions
         {
             // todo: tests
             if (left is Vector && right is Vector)
-                // todo: message...
-                throw new ArgumentException();
+                throw new NotSupportedException();
 
             if (left is Vector)
             {

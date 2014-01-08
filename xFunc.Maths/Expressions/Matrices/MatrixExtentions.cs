@@ -213,11 +213,53 @@ namespace xFunc.Maths.Expressions.Matrices
 
         public static double Determinant(this Matrix matrix)
         {
+            return Determinant(matrix, null);
+        }
+
+        public static double Determinant(this Matrix matrix, ExpressionParameters parameters)
+        {
             if (matrix.CountOfParams != matrix.SizeOfVectors)
                 // todo: ...
                 throw new ArgumentException();
 
-            throw new NotImplementedException();
+            var array = matrix.ToCalculatedArray(parameters);
+
+            return Determinant_(array, matrix.CountOfParams);
+        }
+
+        private static double Determinant_(double[][] matrix, int size)
+        {
+            if (size == 2)
+                return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+
+            double det = 0;
+            double[][] temp = new double[size - 1][];
+            for (int i = 0; i < temp.Length; i++)
+                temp[i] = new double[size - 1];
+
+            for (int k = 0; k < size; k++)
+            {
+                int n = 0;
+                for (int i = 0; i < size; i++)
+                {
+                    int m = 0;
+                    for (int j = 0; j < size; j++)
+                    {
+                        if (i != k && j != 0)
+                        {
+                            temp[n][m] = matrix[i][j];
+                            m++;
+                        }
+                    }
+
+                    if (i != k)
+                        n++;
+                }
+
+                det += matrix[k][0] * Math.Pow(-1, k + 2) * Determinant_(temp, size - 1);
+            }
+
+            return det;
         }
 
     }

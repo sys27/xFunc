@@ -193,6 +193,10 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Transpose,
         /// <summary>
+        /// determinant, det
+        /// </summary>
+        Determinant,
+        /// <summary>
         /// vector
         /// </summary>
         Vector,

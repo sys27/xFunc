@@ -704,6 +704,20 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("determinant("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Determinant));
+                        i += 11;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("det"))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Determinant));
+                        i += 3;
+
+                        continue;
+                    }
 
                     int j = i + 1;
                     for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;

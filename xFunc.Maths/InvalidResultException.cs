@@ -18,6 +18,9 @@ using System.Runtime.Serialization;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// Throws when a result is invalid.
+    /// </summary>
     [Serializable]
     public class InvalidResultException : Exception
     {

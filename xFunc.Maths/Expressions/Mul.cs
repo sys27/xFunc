@@ -69,7 +69,6 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override object Calculate(ExpressionParameters parameters)
         {
-            // todo: tests
             if (left is Vector && right is Vector)
                 throw new NotSupportedException();
 

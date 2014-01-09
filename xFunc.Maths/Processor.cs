@@ -131,11 +131,8 @@ namespace xFunc.Maths
             {
                 return new ExpressionResult((IExpression)result);
             }
-            else
-            {
-                // todo: message
-                throw new InvalidResultException();
-            }
+
+            throw new InvalidResultException();
         }
 
         /// <summary>

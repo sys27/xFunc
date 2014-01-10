@@ -95,14 +95,6 @@ namespace xFunc.Maths
                 }
                 else if (letter == '{')
                 {
-                    //FunctionToken token = null;
-                    //if (tokens.Count > 0)
-                    //    token = tokens[tokens.Count - 1] as FunctionToken;
-                    //if (token == null || token.Function != Functions.Matrix)
-                    //{
-                    //    tokens.Add(new FunctionToken(Functions.Matrix));
-                    //}
-
                     tokens.Add(new SymbolToken(Symbols.OpenBracket));
                 }
                 else if (letter == ')' || letter == '}')

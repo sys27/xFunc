@@ -209,6 +209,8 @@ namespace xFunc.Maths
             foreach (var token in tokens)
             {
                 var exp = factory.Create(token);
+                if (exp == null)
+                    throw new ParserException(Resource.ErrorWhileParsingTree);
 
                 if (token is FunctionToken)
                 {

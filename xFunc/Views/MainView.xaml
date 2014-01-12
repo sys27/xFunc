@@ -507,6 +507,38 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
+                <Expander x:Name="matrixToolBar">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="det" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="transpose" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="invert" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </Expander>
                 <Expander x:Name="bitwiseToolBar" Header="{x:Static res:Resource.BitwiseExpanderHeader}">
                     <Grid Margin="0,4,0,0">
                         <Grid.RowDefinitions>

@@ -225,7 +225,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        /// <exception cref="System.NotImplementedException"></exception>
         public override int MaxCountOfParams
         {
             get

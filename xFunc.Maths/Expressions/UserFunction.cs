@@ -170,7 +170,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>

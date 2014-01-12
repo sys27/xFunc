@@ -33,8 +33,8 @@ namespace xFunc.Maths.Expressions.Collections
         private readonly HashSet<Parameter> consts;
         private HashSet<Parameter> collection;
 #elif NET20_OR_GREATER
-        private readonly List<MathParameter> consts;
-        private List<MathParameter> collection;
+        private readonly List<Parameter> consts;
+        private List<Parameter> collection;
 #endif
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace xFunc.Maths.Expressions.Collections
             consts = new HashSet<Parameter>();
             collection = new HashSet<Parameter>();
 #elif NET20_OR_GREATER
-            consts = new List<MathParameter>();
-            collection = new List<MathParameter>();
+            consts = new List<Parameter>();
+            collection = new List<Parameter>();
 #endif
 
             InitializeDefaults();
@@ -63,8 +63,8 @@ namespace xFunc.Maths.Expressions.Collections
             consts = new HashSet<Parameter>();
             collection = new HashSet<Parameter>(parameters);
 #elif NET20_OR_GREATER
-            consts = new List<MathParameter>();
-            collection = new List<MathParameter>(parameters);
+            consts = new List<Parameter>();
+            collection = new List<Parameter>(parameters);
 #endif
 
             InitializeDefaults();

@@ -37,8 +37,7 @@ namespace xFunc.Maths
         /// <returns>
         /// The expression.
         /// </returns>
-        /// <exception cref="ParserException">This factory don't support specified token.</exception>
-        public IExpression Create(IToken token)
+        public virtual IExpression Create(IToken token)
         {
             if (token is OperationToken)
                 return CreateOperation(token as OperationToken);
@@ -51,10 +50,15 @@ namespace xFunc.Maths
             if (token is FunctionToken)
                 return CreateFunction(token as FunctionToken);
 
-            throw new ParserException(Resource.ErrorWhileParsingTree);
+            return null;
         }
 
-        private IExpression CreateOperation(OperationToken token)
+        /// <summary>
+        /// Creates an expression object from <see cref="OperationToken"/>.
+        /// </summary>
+        /// <param name="token">The operation token.</param>
+        /// <returns>An expression.</returns>
+        protected virtual IExpression CreateOperation(OperationToken token)
         {
             switch (token.Operation)
             {
@@ -83,11 +87,16 @@ namespace xFunc.Maths
                 case Operations.XOr:
                     return new XOr();
                 default:
-                    throw new ParserException(Resource.ErrorWhileParsingTree);
+                    return null;
             }
         }
 
-        private IExpression CreateFunction(FunctionToken token)
+        /// <summary>
+        /// Creates an expression object from <see cref="FunctionToken"/>.
+        /// </summary>
+        /// <param name="token">The function token.</param>
+        /// <returns>An expression.</returns>
+        protected virtual IExpression CreateFunction(FunctionToken token)
         {
             switch (token.Function)
             {
@@ -177,14 +186,21 @@ namespace xFunc.Maths
                     return new Transpose();
                 case Functions.Determinant:
                     return new Determinant();
+                case Functions.Invert:
+                    return new Invert();
                 case Functions.Undefine:
                     return new Undefine();
-                default:
-                    throw new ParserException(Resource.ErrorWhileParsingTree);
+                default: 
+                    return null;
             }
         }
 
-        private IExpression CreateUserFunction(UserFunctionToken token)
+        /// <summary>
+        /// Creates an expression object from <see cref="UserFunctionToken"/>.
+        /// </summary>
+        /// <param name="token">The user-function token.</param>
+        /// <returns>An expression.</returns>
+        protected virtual IExpression CreateUserFunction(UserFunctionToken token)
         {
             return new UserFunction(token.FunctionName);
         }

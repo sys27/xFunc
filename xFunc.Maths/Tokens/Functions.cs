@@ -197,6 +197,10 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Determinant,
         /// <summary>
+        /// invert
+        /// </summary>
+        Invert,
+        /// <summary>
         /// vector
         /// </summary>
         Vector,

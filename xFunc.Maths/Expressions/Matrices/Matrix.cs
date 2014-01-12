@@ -123,8 +123,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var matrix = (Matrix)obj;
 
-            return this.countOfParams == matrix.countOfParams &&
-                   this.arguments.SequenceEqual(matrix.arguments);
+            return this.countOfParams == matrix.countOfParams && this.arguments.SequenceEqual(matrix.arguments);
         }
 
         /// <summary>

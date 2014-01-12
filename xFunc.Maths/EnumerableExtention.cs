@@ -166,6 +166,29 @@ namespace xFunc.Maths
                 yield return func(item);
         }
 
+        public static bool SequenceEqual<TSource>(this IEnumerable<TSource> value, IEnumerable<TSource> obj)
+        {
+            if (value == null) 
+                throw new ArgumentNullException("value");
+            if (obj == null) 
+                throw new ArgumentNullException("obj");
+
+            using (IEnumerator<TSource> first = value.GetEnumerator(), second = obj.GetEnumerator())
+            {
+                do
+                {
+                    if (!first.MoveNext())
+                        return !second.MoveNext();
+
+                    if (!second.MoveNext())
+                        return false;
+                } 
+                while (first.Current.Equals(second.Current));
+            }
+
+            return false;
+        }
+
         public static IEnumerable<T> Where<T>(this IEnumerable<T> value, Func<T, bool> predicate)
         {
             if (value == null)

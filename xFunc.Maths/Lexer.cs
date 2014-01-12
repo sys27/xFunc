@@ -703,10 +703,17 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("det"))
+                    if (sub.StartsWith("det("))
                     {
                         tokens.Add(new FunctionToken(Functions.Determinant));
                         i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("invert("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Invert));
+                        i += 6;
 
                         continue;
                     }

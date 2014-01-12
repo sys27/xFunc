@@ -21,7 +21,9 @@ namespace xFunc.Maths
     /// <summary>
     /// Throws when a result is invalid.
     /// </summary>
+#if !PORTABLE
     [Serializable]
+#endif
     public class InvalidResultException : Exception
     {
 
@@ -43,6 +45,7 @@ namespace xFunc.Maths
         /// <param name="inner">The inner exception.</param>
         public InvalidResultException(string message, Exception inner) : base(message, inner) { }
 
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidResultException"/> class.
         /// </summary>
@@ -50,6 +53,7 @@ namespace xFunc.Maths
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected InvalidResultException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+#endif
 
     }
 

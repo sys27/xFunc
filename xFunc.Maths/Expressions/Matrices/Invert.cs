@@ -16,12 +16,16 @@ using System;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
-    
+
     public class Invert : UnaryExpression
     {
 
         internal Invert() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Invert"/> class.
+        /// </summary>
+        /// <param name="argument">A matrix.</param>
         public Invert(IExpression argument)
             : base(argument)
         {
@@ -33,16 +37,38 @@ namespace xFunc.Maths.Expressions.Matrices
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Clones this instance.
+        /// </summary>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
         public override IExpression Clone()
         {
             return new Invert(this.argument.Clone());
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable">The variable of differentiation.</param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <seealso cref="Variable" />
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         protected override IExpression _Differentiation(Variable variable)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Gets or sets the expression.
+        /// </summary>
+        /// <value>
+        /// The expression.
+        /// </value>
+        /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override IExpression Argument
         {
             get

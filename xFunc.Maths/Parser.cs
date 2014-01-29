@@ -238,20 +238,21 @@ namespace xFunc.Maths
             var stack = new Stack<IToken>();
 
             var openBracketToken = new SymbolToken(Symbols.OpenBracket);
+            var openBraceToken = new SymbolToken(Symbols.OpenBrace);
             foreach (var token in tokens)
             {
                 IToken stackToken;
                 if (token is SymbolToken)
                 {
                     var t = token as SymbolToken;
-                    if (t.Symbol == Symbols.OpenBracket)
+                    if (t.Symbol == Symbols.OpenBracket || t.Symbol == Symbols.OpenBrace)
                     {
                         stack.Push(token);
                     }
-                    else if (t.Symbol == Symbols.CloseBracket)
+                    else if (t.Symbol == Symbols.CloseBracket || t.Symbol == Symbols.CloseBrace)
                     {
                         stackToken = stack.Pop();
-                        while (!stackToken.Equals(openBracketToken))
+                        while (!stackToken.Equals(openBracketToken) && !stackToken.Equals(openBraceToken))
                         {
                             output.Add(stackToken);
                             stackToken = stack.Pop();
@@ -261,7 +262,7 @@ namespace xFunc.Maths
                     {
                         stackToken = stack.Pop();
 
-                        while (!stackToken.Equals(openBracketToken))
+                        while (!stackToken.Equals(openBracketToken) && !stackToken.Equals(openBraceToken))
                         {
                             output.Add(stackToken);
                             stackToken = stack.Pop();
@@ -278,7 +279,7 @@ namespace xFunc.Maths
                 {
                     while (stack.Count != 0 && (stackToken = stack.Peek()).Priority >= token.Priority)
                     {
-                        if (stackToken.Equals(openBracketToken))
+                        if (stackToken.Equals(openBracketToken) || stackToken.Equals(openBraceToken))
                             break;
                         output.Add(stack.Pop());
                     }

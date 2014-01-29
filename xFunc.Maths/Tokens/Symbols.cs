@@ -32,6 +32,14 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         CloseBracket,
         /// <summary>
+        /// {
+        /// </summary>
+        OpenBrace,
+        /// <summary>
+        /// }
+        /// </summary>
+        CloseBrace,
+        /// <summary>
         /// ,
         /// </summary>
         Comma,

@@ -1344,13 +1344,13 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Vector, 3),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(3),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(4),
-                new SymbolToken(Symbols.CloseBracket)
+                new SymbolToken(Symbols.CloseBrace)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -1364,21 +1364,21 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Matrix, 2),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new FunctionToken(Functions.Vector, 2),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBrace),
                 new SymbolToken(Symbols.Comma),
                 new FunctionToken(Functions.Vector, 2),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new NumberToken(4),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(7),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.CloseBracket)
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBrace)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -1408,26 +1408,26 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Matrix, 2),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new FunctionToken(Functions.Vector, 1),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBrace),
                 new SymbolToken(Symbols.Comma),
                 new FunctionToken(Functions.Vector, 1),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new OperationToken(Operations.UnaryMinus),
                 new NumberToken(1),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.CloseBracket),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBrace),
                 new OperationToken(Operations.Multiplication),
                 new FunctionToken(Functions.Vector, 2),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new OperationToken(Operations.UnaryMinus),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(1),
-                new SymbolToken(Symbols.CloseBracket)
+                new SymbolToken(Symbols.CloseBrace)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -1441,9 +1441,9 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Vector, 1),
-                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.OpenBrace),
                 new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
+                new SymbolToken(Symbols.CloseBrace)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());

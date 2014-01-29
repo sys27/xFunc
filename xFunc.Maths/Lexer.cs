@@ -51,17 +51,22 @@ namespace xFunc.Maths
         private bool IsBalanced(string str)
         {
             int brackets = 0;
+            int braces = 0;
 
             foreach (var item in str)
             {
                 if (item == '(') brackets++;
                 else if (item == ')') brackets--;
+                else if (item == '{') braces++;
+                else if (item == '}') braces--;
 
                 if (brackets < 0)
                     return false;
+                if (braces < 0)
+                    return false;
             }
 
-            return brackets == 0;
+            return brackets == 0 && braces == 0;
         }
 
         /// <summary>
@@ -95,11 +100,15 @@ namespace xFunc.Maths
                 }
                 else if (letter == '{')
                 {
-                    tokens.Add(new SymbolToken(Symbols.OpenBracket));
+                    tokens.Add(new SymbolToken(Symbols.OpenBrace));
                 }
-                else if (letter == ')' || letter == '}')
+                else if (letter == ')')
                 {
                     tokens.Add(new SymbolToken(Symbols.CloseBracket));
+                }
+                else if (letter == '}')
+                {
+                    tokens.Add(new SymbolToken(Symbols.CloseBrace));
                 }
                 else if (letter == '+')
                 {
@@ -739,10 +748,10 @@ namespace xFunc.Maths
                 i++;
             }
 
-            return CountUserFuncParams(tokens);
+            return CountParams(tokens);
         }
 
-        private int _CountUserFuncParams(List<IToken> tokens, int index)
+        private int _CountParams(List<IToken> tokens, int index)
         {
             var func = (FunctionToken)tokens[index];
 
@@ -756,13 +765,13 @@ namespace xFunc.Maths
                 if (token is SymbolToken)
                 {
                     var symbol = token as SymbolToken;
-                    if (symbol.Symbol == Symbols.CloseBracket)
+                    if (symbol.Symbol == Symbols.CloseBracket || symbol.Symbol == Symbols.CloseBrace)
                     {
                         brackets--;
                         if (brackets == 0)
                             break;
                     }
-                    else if (symbol.Symbol == Symbols.OpenBracket)
+                    else if (symbol.Symbol == Symbols.OpenBracket || symbol.Symbol == Symbols.OpenBrace)
                     {
                         brackets++;
 
@@ -787,7 +796,7 @@ namespace xFunc.Maths
                         oneParam = false;
                     }
 
-                    i = _CountUserFuncParams(tokens, i) + 1;
+                    i = _CountParams(tokens, i) + 1;
                 }
                 else
                 {
@@ -805,12 +814,12 @@ namespace xFunc.Maths
             return i;
         }
 
-        private IEnumerable<IToken> CountUserFuncParams(List<IToken> tokens)
+        private IEnumerable<IToken> CountParams(List<IToken> tokens)
         {
             for (int i = 0; i < tokens.Count; )
             {
                 if (tokens[i] is FunctionToken)
-                    i = _CountUserFuncParams(tokens, i) + 1;
+                    i = _CountParams(tokens, i) + 1;
                 else
                     i++;
             }

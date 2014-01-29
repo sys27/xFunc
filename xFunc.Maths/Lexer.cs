@@ -100,6 +100,17 @@ namespace xFunc.Maths
                 }
                 else if (letter == '{')
                 {
+                    var token = tokens.LastOrDefault() as FunctionToken;
+                    if (token != null)
+                    {
+                        if (token.Function != Functions.Matrix && token.Function != Functions.Vector)
+                            tokens.Add(new FunctionToken(Functions.Vector));
+                    }
+                    else
+                    {
+                        tokens.Add(new FunctionToken(Functions.Vector));
+                    }
+
                     tokens.Add(new SymbolToken(Symbols.OpenBrace));
                 }
                 else if (letter == ')')
@@ -284,14 +295,14 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("vector(") || sub.StartsWith("vector{"))
+                    if (sub.StartsWith("vector{"))
                     {
                         tokens.Add(new FunctionToken(Functions.Vector));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("matrix(") || sub.StartsWith("matrix{"))
+                    if (sub.StartsWith("matrix{"))
                     {
                         tokens.Add(new FunctionToken(Functions.Matrix));
                         i += 6;
@@ -757,6 +768,7 @@ namespace xFunc.Maths
 
             int countOfParams = 0;
             int brackets = 1;
+            bool hasBraces = false;
             bool oneParam = true;
             int i = index + 2;
             for (; i < tokens.Count; )
@@ -764,10 +776,15 @@ namespace xFunc.Maths
                 var token = tokens[i];
                 if (token is SymbolToken)
                 {
+                    // todo: !!!
                     var symbol = token as SymbolToken;
+                    if (symbol.Symbol == Symbols.OpenBrace)
+                        hasBraces = true;
+
                     if (symbol.Symbol == Symbols.CloseBracket || symbol.Symbol == Symbols.CloseBrace)
                     {
                         brackets--;
+
                         if (brackets == 0)
                             break;
                     }
@@ -796,6 +813,10 @@ namespace xFunc.Maths
                         oneParam = false;
                     }
 
+                    var f = (FunctionToken)token;
+                    if (f.Function == Functions.Matrix || f.Function == Functions.Vector)
+                        hasBraces = true;
+
                     i = _CountParams(tokens, i) + 1;
                 }
                 else
@@ -810,7 +831,11 @@ namespace xFunc.Maths
                 }
             }
 
-            func.CountOfParams = countOfParams;
+            if (func.Function == Functions.Vector && hasBraces)
+                tokens[index] = new FunctionToken(Functions.Matrix, countOfParams);
+            else
+                func.CountOfParams = countOfParams;
+
             return i;
         }
 

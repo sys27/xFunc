@@ -1317,26 +1317,6 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        public void VectorBraketTest()
-        {
-            var tokens = lexer.Tokenize("matrix(2, 3, 4)");
-
-            var expected = new List<IToken>()
-            {
-                new FunctionToken(Functions.Matrix, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(4),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            CollectionAssert.AreEqual(expected, tokens.ToList());
-        }
-
-        [TestMethod]
         public void VectorBracesTest()
         {
             var tokens = lexer.Tokenize("vector{2, 3, 4}");
@@ -1443,6 +1423,52 @@ namespace xFunc.Test
                 new FunctionToken(Functions.Vector, 1),
                 new SymbolToken(Symbols.OpenBrace),
                 new NumberToken(3),
+                new SymbolToken(Symbols.CloseBrace)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ShortVectorTest()
+        {
+            var tokens = lexer.Tokenize("{4, 7}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBrace)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ShortMatrixTest()
+        {
+            var tokens = lexer.Tokenize("{{2, 3}, {4, 7}}");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBrace),
                 new SymbolToken(Symbols.CloseBrace)
             };
 

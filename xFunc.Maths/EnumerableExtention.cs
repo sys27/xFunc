@@ -155,6 +155,28 @@ namespace xFunc.Maths
             return null;
         }
 
+        public static T LastOrDefault<T>(this IEnumerable<T> value) where T : class
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+
+            var list = value as IList<T>;
+            if (list != null)
+                return list.Count > 0 ? list[list.Count - 1] : null;
+
+            using (var e = value.GetEnumerator())
+            {
+                if (!e.MoveNext())
+                    return null;
+
+                var last = e.Current;
+                while (e.MoveNext())
+                    last = e.Current;
+
+                return last;
+            }
+        }
+
         public static IEnumerable<V> Select<T, V>(this IEnumerable<T> value, Func<T, V> func)
         {
             if (value == null)

@@ -183,7 +183,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
-            return arguments.Select(exp => (double)exp.Calculate(parameters)).ToArray();
+            return (from exp in arguments.AsParallel().AsOrdered()
+                    select (double)exp.Calculate(parameters)).ToArray();
         }
 
         /// <summary>

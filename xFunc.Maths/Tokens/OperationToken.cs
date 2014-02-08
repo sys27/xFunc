@@ -23,8 +23,8 @@ namespace xFunc.Maths.Tokens
     public class OperationToken : IToken
     {
 
-        private Operations operation;
-        private int priority;
+        private readonly Operations operation;
+        private readonly int priority;
 
         /// <summary>
         /// Initializes the <see cref="OperationToken"/> class.
@@ -33,8 +33,7 @@ namespace xFunc.Maths.Tokens
         public OperationToken(Operations operation)
         {
             this.operation = operation;
-
-            SetPriority();
+            this.priority = GetPriority();
         }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace xFunc.Maths.Tokens
                 return false;
 
             var token = (OperationToken)obj;
-            
+
             return this.Operation == token.Operation;
         }
 
@@ -78,46 +77,36 @@ namespace xFunc.Maths.Tokens
             return "Operation: " + operation;
         }
 
-        private void SetPriority()
+        private int GetPriority()
         {
             switch (operation)
             {
                 case Operations.Addition:
-                    priority = 10;
-                    break;
+                    return 10;
                 case Operations.Subtraction:
-                    priority = 10;
-                    break;
+                    return 10;
                 case Operations.Multiplication:
-                    priority = 11;
-                    break;
+                    return 11;
                 case Operations.Division:
-                    priority = 11;
-                    break;
+                    return 11;
                 case Operations.Exponentiation:
-                    priority = 12;
-                    break;
+                    return 12;
                 case Operations.UnaryMinus:
-                    priority = 14;
-                    break;
+                    return 14;
                 case Operations.Factorial:
-                    priority = 13;
-                    break;
+                    return 13;
                 case Operations.Assign:
-                    priority = 0;
-                    break;
+                    return 0;
                 case Operations.Not:
-                    priority = 15;
-                    break;
+                    return 15;
                 case Operations.And:
-                    priority = 15;
-                    break;
+                    return 15;
                 case Operations.Or:
-                    priority = 15;
-                    break;
+                    return 15;
                 case Operations.XOr:
-                    priority = 15;
-                    break;
+                    return 15;
+                default:
+                    return -1;
             }
         }
 

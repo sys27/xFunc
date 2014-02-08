@@ -23,8 +23,8 @@ namespace xFunc.Maths.Tokens
     public class SymbolToken : IToken
     {
 
-        private Symbols symbol;
-        private int priority;
+        private readonly Symbols symbol;
+        private readonly int priority;
 
         /// <summary>
         /// Initializes the <see cref="SymbolToken"/> class.
@@ -33,8 +33,7 @@ namespace xFunc.Maths.Tokens
         public SymbolToken(Symbols symbol)
         {
             this.symbol = symbol;
-
-            SetPriority();
+            this.priority = GetPriority();
         }
 
         /// <summary>
@@ -78,19 +77,18 @@ namespace xFunc.Maths.Tokens
             return "Symbol: " + symbol;
         }
 
-        private void SetPriority()
+        private int GetPriority()
         {
             switch (symbol)
             {
-                case Symbols.OpenBracket:
-                    priority = 1;
-                    break;
+                case Symbols.OpenBracket: 
+                    return 1;
                 case Symbols.CloseBracket:
-                    priority = 2;
-                    break;
+                    return 2;
                 case Symbols.Comma:
-                    priority = 3;
-                    break;
+                    return 3;
+                default:
+                    return -1;
             }
         }
 

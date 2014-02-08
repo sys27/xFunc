@@ -23,7 +23,7 @@ namespace xFunc.Maths.Tokens
     public class NumberToken : IToken
     {
 
-        private double number;
+        private readonly double number;
 
         /// <summary>
         /// Initializes the <see cref="NumberToken"/> class.

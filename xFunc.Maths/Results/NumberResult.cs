@@ -24,7 +24,7 @@ namespace xFunc.Maths.Results
     public class NumberResult : IResult
     {
 
-        private double number;
+        private readonly double number;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberResult"/> class.

@@ -23,7 +23,7 @@ namespace xFunc.Maths.Tokens
     public class UserFunctionToken : FunctionToken
     {
 
-        private string functionName;
+        private readonly string functionName;
 
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.

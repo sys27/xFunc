@@ -23,7 +23,7 @@ namespace xFunc.Maths.Tokens
     public class FunctionToken : IToken
     {
 
-        private Functions function;
+        private readonly Functions function;
         /// <summary>
         /// The count of parameters
         /// </summary>

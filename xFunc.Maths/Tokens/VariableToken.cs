@@ -23,7 +23,7 @@ namespace xFunc.Maths.Tokens
     public class VariableToken : IToken
     {
 
-        private string variable;
+        private readonly string variable;
 
         /// <summary>
         /// Initializes the <see cref="VariableToken"/> class.

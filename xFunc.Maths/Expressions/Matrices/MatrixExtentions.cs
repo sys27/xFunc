@@ -469,33 +469,11 @@ namespace xFunc.Maths.Expressions.Matrices
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
             double det = 0;
+            object detLock = new object();
             double[][] temp = new double[size - 1][];
             for (int i = 0; i < temp.Length; i++)
                 temp[i] = new double[size - 1];
 
-#if NET40_OR_GREATER
-            Parallel.For(0, size, k =>
-            {
-                int n = 0;
-                for (int i = 0; i < size; i++)
-                {
-                    int m = 0;
-                    for (int j = 0; j < size; j++)
-                    {
-                        if (i != k && j != 0)
-                        {
-                            temp[n][m] = matrix[i][j];
-                            m++;
-                        }
-                    }
-
-                    if (i != k)
-                        n++;
-                }
-
-                det += matrix[k][0] * Math.Pow(-1, k + 2) * Determinant_(temp, size - 1);
-            });
-#else
             for (int k = 0; k < size; k++)
             {
                 int n = 0;
@@ -517,7 +495,6 @@ namespace xFunc.Maths.Expressions.Matrices
 
                 det += matrix[k][0] * Math.Pow(-1, k + 2) * Determinant_(temp, size - 1);
             }
-#endif
 
             return det;
         }

@@ -24,7 +24,7 @@ namespace xFunc.Maths.Results
     public class ExpressionResult : IResult
     {
 
-        private IExpression exp;
+        private readonly IExpression exp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionResult"/> class.

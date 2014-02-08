@@ -23,7 +23,7 @@ namespace xFunc.Maths.Results
     public class StringResult : IResult
     {
 
-        private string str;
+        private readonly string str;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringResult"/> class.

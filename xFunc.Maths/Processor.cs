@@ -28,11 +28,11 @@ namespace xFunc.Maths
     {
 
         private ILexer lexer;
-        private ISimplifier simplifier;
-        private IDifferentiator differentiator;
-        private Parser parser;
+        private readonly ISimplifier simplifier;
+        private readonly IDifferentiator differentiator;
+        private readonly Parser parser;
 
-        private ExpressionParameters parameters;
+        private readonly ExpressionParameters parameters;
         private NumeralSystem numberSystem;
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace xFunc.Maths
             }
             if (exp is Define)
             {
-                Define assign = exp as Define;
+                var assign = exp as Define;
                 assign.Calculate(parameters);
 
                 if (assign.Key is Variable)
@@ -110,7 +110,7 @@ namespace xFunc.Maths
             }
             if (exp is Undefine)
             {
-                Undefine undef = exp as Undefine;
+                var undef = exp as Undefine;
                 undef.Calculate(parameters);
 
                 if (undef.Key is Variable)
@@ -127,7 +127,7 @@ namespace xFunc.Maths
 
                 return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters), numberSystem));
             }
-            else if (result is IExpression)
+            if (result is IExpression)
             {
                 return new ExpressionResult((IExpression)result);
             }

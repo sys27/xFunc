@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Inverse : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Inverse"/> class.
-        /// </summary>
         internal Inverse() { }
 
         /// <summary>

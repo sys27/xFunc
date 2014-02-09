@@ -198,7 +198,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The arguments.
         /// </value>
-        public override IExpression[] Arguments
+        public sealed override IExpression[] Arguments
         {
             get
             {

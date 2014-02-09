@@ -46,10 +46,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override object Calculate(ExpressionParameters parameters)
         {
-            if (argument is Vector)
-                return ((Vector)argument).Transpose();
-            if (argument is Matrix)
-                return ((Matrix)argument).Transpose();
+            var vector = argument as Vector;
+            if (vector != null)
+                return vector.Transpose();
+            var matrix = argument as Matrix;
+            if (matrix != null)
+                return matrix.Transpose();
 
             throw new NotSupportedException();
         }

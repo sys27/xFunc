@@ -186,6 +186,7 @@ namespace xFunc.Maths
         /// <returns>The greatest common divisor.</returns>
         public static double GCD(double a, double b)
         {
+            // todo: double!!!
             while (b != 0)
                 b = a % (a = b);
 

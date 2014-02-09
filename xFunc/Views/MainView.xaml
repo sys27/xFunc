@@ -531,7 +531,7 @@ limitations under the License. -->
                                 <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="0" Grid.Column="2" Tag="invert" Click="InsertFunc_Click">
+                        <Button Grid.Row="0" Grid.Column="2" Tag="inverse" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />

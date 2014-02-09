@@ -186,8 +186,8 @@ namespace xFunc.Maths
                     return new Transpose();
                 case Functions.Determinant:
                     return new Determinant();
-                case Functions.Invert:
-                    return new Invert();
+                case Functions.Inverse:
+                    return new Inverse();
                 case Functions.Undefine:
                     return new Undefine();
                 default: 

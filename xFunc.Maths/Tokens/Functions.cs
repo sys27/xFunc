@@ -197,9 +197,9 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Determinant,
         /// <summary>
-        /// invert
+        /// inverse
         /// </summary>
-        Invert,
+        Inverse,
         /// <summary>
         /// vector
         /// </summary>

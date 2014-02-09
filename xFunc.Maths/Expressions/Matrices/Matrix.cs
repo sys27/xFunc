@@ -225,6 +225,33 @@ namespace xFunc.Maths.Expressions.Matrices
 #endif
         }
 
+        public void SwapRows(int firstIndex, int secondIndex)
+        {
+            if (firstIndex < 0 || firstIndex >= countOfParams)
+                throw new ArgumentException();
+            if (secondIndex < 0 || secondIndex >= countOfParams)
+                throw new ArgumentException();
+
+            var temp = arguments[firstIndex];
+            arguments[firstIndex] = arguments[secondIndex];
+            arguments[secondIndex] = temp;
+        }
+
+        public void SwapColumns(int firstIndex, int secondIndex)
+        {
+            if (firstIndex < 0 || firstIndex >= countOfParams)
+                throw new ArgumentException();
+            if (secondIndex < 0 || secondIndex >= countOfParams)
+                throw new ArgumentException();
+
+            foreach (Vector item in arguments)
+            {
+                var temp = item[firstIndex];
+                item[firstIndex] = item[secondIndex];
+                item[secondIndex] = temp;
+            }
+        }
+
         /// <summary>
         /// Gets or sets the arguments.
         /// </summary>

@@ -225,6 +225,12 @@ namespace xFunc.Maths.Expressions.Matrices
 #endif
         }
 
+        /// <summary>
+        /// Swaps the rows of matrix.
+        /// </summary>
+        /// <param name="firstIndex">The index of first row.</param>
+        /// <param name="secondIndex">The index of second row.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
         public void SwapRows(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= countOfParams)
@@ -237,12 +243,18 @@ namespace xFunc.Maths.Expressions.Matrices
             arguments[secondIndex] = temp;
         }
 
+        /// <summary>
+        /// Swaps the columns of matrix.
+        /// </summary>
+        /// <param name="firstIndex">The index of first column.</param>
+        /// <param name="secondIndex">The index of second column.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
         public void SwapColumns(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= countOfParams)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException();
             if (secondIndex < 0 || secondIndex >= countOfParams)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException();
 
             foreach (Vector item in arguments)
             {
@@ -252,6 +264,11 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        /// <summary>
+        /// Creates an identity matrix.
+        /// </summary>
+        /// <param name="sizeOfMatrix">The size of matrix.</param>
+        /// <returns>An identity matrix.</returns>
         public static Matrix CreateIdentity(int sizeOfMatrix)
         {
             var matrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
@@ -335,6 +352,12 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether matrix is square.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if matrix is square; otherwise, <c>false</c>.
+        /// </value>
         public bool IsSquare
         {
             get

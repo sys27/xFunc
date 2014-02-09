@@ -17,9 +17,15 @@ using System;
 namespace xFunc.Maths.Expressions.Matrices
 {
 
+    /// <summary>
+    /// Represents the Inverse function.
+    /// </summary>
     public class Inverse : UnaryExpression
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Inverse"/> class.
+        /// </summary>
         internal Inverse() { }
 
         /// <summary>
@@ -32,6 +38,14 @@ namespace xFunc.Maths.Expressions.Matrices
 
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
             return MatrixExtentions.Inverse((Matrix)argument, parameters);

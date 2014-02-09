@@ -252,6 +252,21 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        public static Matrix CreateIdentity(int sizeOfMatrix)
+        {
+            var matrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
+
+            for (int i = 0; i < sizeOfMatrix; i++)
+            {
+                for (int j = 0; j < sizeOfMatrix; j++)
+                    matrix[i][j] = new Number(0);
+
+                matrix[i][i] = new Number(1);
+            }
+
+            return matrix;
+        }
+
         /// <summary>
         /// Gets or sets the arguments.
         /// </summary>

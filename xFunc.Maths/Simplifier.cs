@@ -77,14 +77,14 @@ namespace xFunc.Maths
 
             if (expression is UnaryMinus)
             {
-                UnaryMinus unMinus = expression as UnaryMinus;
+                var unMinus = expression as UnaryMinus;
                 // -(-x)
                 if (unMinus.Argument is UnaryMinus)
                     return (unMinus.Argument as UnaryMinus).Argument;
                 // -1
                 if (unMinus.Argument is Number)
                 {
-                    Number number = unMinus.Argument as Number;
+                    var number = unMinus.Argument as Number;
                     number.Value = -number.Value;
 
                     return number;
@@ -108,7 +108,7 @@ namespace xFunc.Maths
             }
             else if (expression is Pow)
             {
-                Pow inv = expression as Pow;
+                var inv = expression as Pow;
 
                 // x^0
                 if (inv.Right.Equals(zero))
@@ -119,7 +119,7 @@ namespace xFunc.Maths
             }
             else if (expression is Root)
             {
-                Root root = expression as Root;
+                var root = expression as Root;
 
                 // root(x, 1)
                 if (root.Right.Equals(one))
@@ -127,7 +127,7 @@ namespace xFunc.Maths
             }
             else if (expression is Log)
             {
-                Log log = expression as Log;
+                var log = expression as Log;
 
                 // log(4x, 4x)
                 if (log.Left.Equals(log.Right))
@@ -135,7 +135,7 @@ namespace xFunc.Maths
             }
             else if (expression is Ln)
             {
-                Ln ln = expression as Ln;
+                var ln = expression as Ln;
 
                 // ln(e)
                 if (ln.Argument.Equals(new Variable("e")))
@@ -143,7 +143,7 @@ namespace xFunc.Maths
             }
             else if (expression is Lg)
             {
-                Lg lg = expression as Lg;
+                var lg = expression as Lg;
 
                 // lg(10)
                 if (lg.Argument.Equals(new Number(10)))
@@ -176,8 +176,8 @@ namespace xFunc.Maths
             }
             if (add.Right is UnaryMinus)
             {
-                UnaryMinus unMinus = add.Right as UnaryMinus;
-                Sub sub = new Sub(add.Left, unMinus.Argument);
+                var unMinus = add.Right as UnaryMinus;
+                var sub = new Sub(add.Left, unMinus.Argument);
 
                 return sub;
             }
@@ -202,15 +202,15 @@ namespace xFunc.Maths
             {
                 if (bracketAdd.Left is Number)
                 {
-                    Number secondNumber = bracketAdd.Left as Number;
-                    Add result = new Add(bracketAdd.Right, new Number(firstNumber.Value + secondNumber.Value));
+                    var secondNumber = bracketAdd.Left as Number;
+                    var result = new Add(bracketAdd.Right, new Number(firstNumber.Value + secondNumber.Value));
 
                     return _Simplify(result);
                 }
                 if (bracketAdd.Right is Number)
                 {
-                    Number secondNumber = bracketAdd.Right as Number;
-                    Add result = new Add(bracketAdd.Left, new Number(firstNumber.Value + secondNumber.Value));
+                    var secondNumber = bracketAdd.Right as Number;
+                    var result = new Add(bracketAdd.Left, new Number(firstNumber.Value + secondNumber.Value));
 
                     return _Simplify(result);
                 }
@@ -235,15 +235,15 @@ namespace xFunc.Maths
             {
                 if (bracketSub.Left is Number)
                 {
-                    Number secondNumber = bracketSub.Left as Number;
-                    Sub result = new Sub(new Number(firstNumber.Value + secondNumber.Value), bracketSub.Right);
+                    var secondNumber = bracketSub.Left as Number;
+                    var result = new Sub(new Number(firstNumber.Value + secondNumber.Value), bracketSub.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketSub.Right is Number)
                 {
-                    Number secondNumber = bracketSub.Right as Number;
-                    Add result = new Add(new Number(firstNumber.Value - secondNumber.Value), bracketSub.Left);
+                    var secondNumber = bracketSub.Right as Number;
+                    var result = new Add(new Number(firstNumber.Value - secondNumber.Value), bracketSub.Left);
 
                     return _Simplify(result);
                 }
@@ -265,8 +265,8 @@ namespace xFunc.Maths
 
             if (sub.Right is UnaryMinus)
             {
-                UnaryMinus unMinus = sub.Right as UnaryMinus;
-                Add add = new Add(sub.Left, unMinus.Argument);
+                var unMinus = sub.Right as UnaryMinus;
+                var add = new Add(sub.Left, unMinus.Argument);
 
                 return add;
             }
@@ -275,20 +275,20 @@ namespace xFunc.Maths
             // (x + 2) - 2
             if (sub.Left is Add && sub.Right is Number)
             {
-                Add bracketAdd = sub.Left as Add;
-                Number firstNumber = sub.Right as Number;
+                var bracketAdd = sub.Left as Add;
+                var firstNumber = sub.Right as Number;
 
                 if (bracketAdd.Left is Number)
                 {
-                    Number secondNumber = bracketAdd.Left as Number;
-                    Add result = new Add(bracketAdd.Right, new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()));
+                    var secondNumber = bracketAdd.Left as Number;
+                    var result = new Add(bracketAdd.Right, new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()));
 
                     return _Simplify(result);
                 }
                 if (bracketAdd.Right is Number)
                 {
-                    Number secondNumber = bracketAdd.Right as Number;
-                    Add result = new Add(bracketAdd.Left, new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()));
+                    var secondNumber = bracketAdd.Right as Number;
+                    var result = new Add(bracketAdd.Left, new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()));
 
                     return _Simplify(result);
                 }
@@ -297,20 +297,20 @@ namespace xFunc.Maths
             // 2 - (x + 2)
             else if (sub.Right is Add && sub.Left is Number)
             {
-                Add bracketAdd = sub.Right as Add;
-                Number firstNumber = sub.Left as Number;
+                var bracketAdd = sub.Right as Add;
+                var firstNumber = sub.Left as Number;
 
                 if (bracketAdd.Left is Number)
                 {
-                    Number secondNumber = bracketAdd.Left as Number;
-                    Sub result = new Sub(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketAdd.Right);
+                    var secondNumber = bracketAdd.Left as Number;
+                    var result = new Sub(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketAdd.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketAdd.Right is Number)
                 {
-                    Number secondNumber = bracketAdd.Right as Number;
-                    Sub result = new Sub(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketAdd.Left);
+                    var secondNumber = bracketAdd.Right as Number;
+                    var result = new Sub(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketAdd.Left);
 
                     return _Simplify(result);
                 }
@@ -319,20 +319,20 @@ namespace xFunc.Maths
             // (x - 2) - 2
             else if (sub.Left is Sub && sub.Right is Number)
             {
-                Sub bracketSub = sub.Left as Sub;
-                Number firstNumber = sub.Right as Number;
+                var bracketSub = sub.Left as Sub;
+                var firstNumber = sub.Right as Number;
 
                 if (bracketSub.Left is Number)
                 {
-                    Number secondNumber = bracketSub.Left as Number;
-                    Sub result = new Sub(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketSub.Right);
+                    var secondNumber = bracketSub.Left as Number;
+                    var result = new Sub(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketSub.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketSub.Right is Number)
                 {
-                    Number secondNumber = bracketSub.Right as Number;
-                    Sub result = new Sub(bracketSub.Left, new Number((double)firstNumber.Calculate() + (double)secondNumber.Calculate()));
+                    var secondNumber = bracketSub.Right as Number;
+                    var result = new Sub(bracketSub.Left, new Number((double)firstNumber.Calculate() + (double)secondNumber.Calculate()));
 
                     return _Simplify(result);
                 }
@@ -341,20 +341,20 @@ namespace xFunc.Maths
             // 2 - (x - 2)
             else if (sub.Right is Sub && sub.Left is Number)
             {
-                Sub bracketSub = sub.Right as Sub;
-                Number firstNumber = sub.Left as Number;
+                var bracketSub = sub.Right as Sub;
+                var firstNumber = sub.Left as Number;
 
                 if (bracketSub.Left is Number)
                 {
-                    Number secondNumber = bracketSub.Left as Number;
-                    Add result = new Add(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketSub.Right);
+                    var secondNumber = bracketSub.Left as Number;
+                    var result = new Add(new Number((double)firstNumber.Calculate() - (double)secondNumber.Calculate()), bracketSub.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketSub.Right is Number)
                 {
-                    Number secondNumber = bracketSub.Right as Number;
-                    Sub result = new Sub(new Number((double)firstNumber.Calculate() + (double)secondNumber.Calculate()), bracketSub.Left);
+                    var secondNumber = bracketSub.Right as Number;
+                    var result = new Sub(new Number((double)firstNumber.Calculate() + (double)secondNumber.Calculate()), bracketSub.Left);
 
                     return _Simplify(result);
                 }
@@ -398,15 +398,15 @@ namespace xFunc.Maths
             {
                 if (bracketMul.Left is Number)
                 {
-                    Number secondNumber = bracketMul.Left as Number;
-                    Mul result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Right);
+                    var secondNumber = bracketMul.Left as Number;
+                    var result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketMul.Right is Number)
                 {
-                    Number secondNumber = bracketMul.Right as Number;
-                    Mul result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Left);
+                    var secondNumber = bracketMul.Right as Number;
+                    var result = new Mul(new Number(firstNumber.Value * secondNumber.Value), bracketMul.Left);
 
                     return _Simplify(result);
                 }
@@ -431,15 +431,15 @@ namespace xFunc.Maths
             {
                 if (bracketDiv.Left is Number)
                 {
-                    Number secondNumber = bracketDiv.Left as Number;
-                    Div result = new Div(new Number(firstNumber.Value * secondNumber.Value), bracketDiv.Right);
+                    var secondNumber = bracketDiv.Left as Number;
+                    var result = new Div(new Number(firstNumber.Value * secondNumber.Value), bracketDiv.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketDiv.Right is Number)
                 {
-                    Number secondNumber = bracketDiv.Right as Number;
-                    Mul result = new Mul(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.Left);
+                    var secondNumber = bracketDiv.Right as Number;
+                    var result = new Mul(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.Left);
 
                     return _Simplify(result);
                 }
@@ -467,20 +467,20 @@ namespace xFunc.Maths
             // (x * 2) / 2
             if (div.Left is Mul && div.Right is Number)
             {
-                Mul bracketMul = div.Left as Mul;
-                Number firstNumber = div.Right as Number;
+                var bracketMul = div.Left as Mul;
+                var firstNumber = div.Right as Number;
 
                 if (bracketMul.Left is Number)
                 {
-                    Number secondNumber = bracketMul.Left as Number;
-                    Div result = new Div(bracketMul.Right, new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()));
+                    var secondNumber = bracketMul.Left as Number;
+                    var result = new Div(bracketMul.Right, new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()));
 
                     return _Simplify(result);
                 }
                 if (bracketMul.Right is Number)
                 {
-                    Number secondNumber = bracketMul.Right as Number;
-                    Div result = new Div(bracketMul.Left, new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()));
+                    var secondNumber = bracketMul.Right as Number;
+                    var result = new Div(bracketMul.Left, new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()));
 
                     return _Simplify(result);
                 }
@@ -489,20 +489,20 @@ namespace xFunc.Maths
             // 2 / (x * 2)
             else if (div.Right is Mul && div.Left is Number)
             {
-                Mul bracketMul = div.Right as Mul;
-                Number firstNumber = div.Left as Number;
+                var bracketMul = div.Right as Mul;
+                var firstNumber = div.Left as Number;
 
                 if (bracketMul.Left is Number)
                 {
-                    Number secondNumber = bracketMul.Left as Number;
-                    Div result = new Div(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketMul.Right);
+                    var secondNumber = bracketMul.Left as Number;
+                    var result = new Div(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketMul.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketMul.Right is Number)
                 {
-                    Number secondNumber = bracketMul.Right as Number;
-                    Div result = new Div(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketMul.Left);
+                    var secondNumber = bracketMul.Right as Number;
+                    var result = new Div(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketMul.Left);
 
                     return _Simplify(result);
                 }
@@ -511,20 +511,20 @@ namespace xFunc.Maths
             // (x / 2) / 2
             else if (div.Left is Div && div.Right is Number)
             {
-                Div bracketDiv = div.Left as Div;
-                Number firstNumber = div.Right as Number;
+                var bracketDiv = div.Left as Div;
+                var firstNumber = div.Right as Number;
 
                 if (bracketDiv.Left is Number)
                 {
-                    Number secondNumber = bracketDiv.Left as Number;
-                    Div result = new Div(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketDiv.Right);
+                    var secondNumber = bracketDiv.Left as Number;
+                    var result = new Div(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketDiv.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketDiv.Right is Number)
                 {
-                    Number secondNumber = bracketDiv.Right as Number;
-                    Div result = new Div(bracketDiv.Left, new Number((double)firstNumber.Calculate() * (double)secondNumber.Calculate()));
+                    var secondNumber = bracketDiv.Right as Number;
+                    var result = new Div(bracketDiv.Left, new Number((double)firstNumber.Calculate() * (double)secondNumber.Calculate()));
 
                     return _Simplify(result);
                 }
@@ -533,20 +533,20 @@ namespace xFunc.Maths
             // 2 / (x / 2)
             else if (div.Right is Div && div.Left is Number)
             {
-                Div bracketDiv = div.Right as Div;
-                Number firstNumber = div.Left as Number;
+                var bracketDiv = div.Right as Div;
+                var firstNumber = div.Left as Number;
 
                 if (bracketDiv.Left is Number)
                 {
-                    Number secondNumber = bracketDiv.Left as Number;
-                    Mul result = new Mul(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketDiv.Right);
+                    var secondNumber = bracketDiv.Left as Number;
+                    var result = new Mul(new Number((double)firstNumber.Calculate() / (double)secondNumber.Calculate()), bracketDiv.Right);
 
                     return _Simplify(result);
                 }
                 if (bracketDiv.Right is Number)
                 {
-                    Number secondNumber = bracketDiv.Right as Number;
-                    Div result = new Div(new Number((double)firstNumber.Calculate() * (double)secondNumber.Calculate()), bracketDiv.Left);
+                    var secondNumber = bracketDiv.Right as Number;
+                    var result = new Div(new Number((double)firstNumber.Calculate() * (double)secondNumber.Calculate()), bracketDiv.Left);
 
                     return _Simplify(result);
                 }

@@ -18,7 +18,6 @@ using xFunc.Maths.Expressions.Bitwise;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
 namespace xFunc.Maths

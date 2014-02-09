@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
                 return false;
 
             //return number == num.Value;
-            // todo: epsilon!!!
+            // todo: double!!!
             return Math.Abs(number - num.Value) < 1E-14;
         }
 

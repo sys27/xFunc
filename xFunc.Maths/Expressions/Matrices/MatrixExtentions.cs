@@ -455,48 +455,180 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentException">The size of matrices is invalid.</exception>
         public static double Determinant(this Matrix matrix, ExpressionParameters parameters)
         {
-            if (matrix.CountOfParams != matrix.SizeOfVectors)
+            if (!matrix.IsSquare)
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var array = matrix.ToCalculatedArray(parameters);
 
-            return Determinant_(array, matrix.CountOfParams);
+            return Determinant_(array);
         }
 
-        private static double Determinant_(double[][] matrix, int size)
+        private static double Determinant_(double[][] matrix)
         {
-            if (size == 2)
+            if (matrix.Length == 1)
+                return matrix[0][0];
+            if (matrix.Length == 2)
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
-            double det = 0;
-            object detLock = new object();
-            double[][] temp = new double[size - 1][];
-            for (int i = 0; i < temp.Length; i++)
-                temp[i] = new double[size - 1];
+            int[] perm;
+            int toggle;
+            double[][] lum = LUPDecomposition_(matrix, out perm, out toggle);
 
-            for (int k = 0; k < size; k++)
+            // todo: ...
+            if (lum == null)
+                throw new MatrixIsInvalidException();
+
+            double result = toggle;
+            for (int i = 0; i < lum.Length; ++i)
+                result *= lum[i][i];
+
+            return result;
+        }
+
+        public static Matrix LUPDecomposition(this Matrix matrix, ExpressionParameters parameters, out int[] permutation, out int toggle)
+        {
+            if (!matrix.IsSquare)
+                throw new ArgumentException(Resource.MatrixArgException);
+
+            var result = LUPDecomposition_(matrix.ToCalculatedArray(parameters), out permutation, out toggle);
+            var m = new Matrix(result.Length, result.Length);
+            for (int i = 0; i < result.Length; i++)
+                for (int j = 0; j < result.Length; j++)
+                    m[i][j] = new Number(result[i][j]);
+
+            return m;
+        }
+
+        private static double[][] LUPDecomposition_(double[][] matrix, out int[] permutation, out int toggle)
+        {
+            int size = matrix.Length;
+
+            permutation = new int[size];
+            for (int i = 0; i < size; i++)
+                permutation[i] = i;
+
+            toggle = 1;
+
+            for (int j = 0; j < size - 1; ++j)
             {
-                int n = 0;
-                for (int i = 0; i < size; i++)
-                {
-                    int m = 0;
-                    for (int j = 0; j < size; j++)
-                    {
-                        if (i != k && j != 0)
-                        {
-                            temp[n][m] = matrix[i][j];
-                            m++;
-                        }
-                    }
+                double colMax = Math.Abs(matrix[j][j]);
+                int pRow = j;
 
-                    if (i != k)
-                        n++;
+                for (int i = j + 1; i < size; ++i)
+                {
+                    if (matrix[i][j] > colMax)
+                    {
+                        colMax = matrix[i][j];
+                        pRow = i;
+                    }
                 }
 
-                det += matrix[k][0] * Math.Pow(-1, k + 2) * Determinant_(temp, size - 1);
+                if (pRow != j)
+                {
+                    double[] rowPtr = matrix[pRow];
+                    matrix[pRow] = matrix[j];
+                    matrix[j] = rowPtr;
+                    int tmp = permutation[pRow];
+                    permutation[pRow] = permutation[j];
+                    permutation[j] = tmp;
+                    toggle = -toggle;
+                }
+
+                // todo: !!!
+                if (matrix[j][j] == 0)
+                    throw new MatrixIsInvalidException();
+
+                for (int i = j + 1; i < size; ++i)
+                {
+                    matrix[i][j] /= matrix[j][j];
+                    for (int k = j + 1; k < size; ++k)
+                        matrix[i][k] -= matrix[i][j] * matrix[j][k];
+                }
             }
 
-            return det;
+            return matrix;
+        }
+
+        private static double[] HelperSolve(double[][] lu, double[] b)
+        {
+            int n = lu.Length;
+            double[] x = new double[n];
+            b.CopyTo(x, 0);
+
+            for (int i = 1; i < n; ++i)
+            {
+                double sum = x[i];
+                for (int j = 0; j < i; ++j)
+                    sum -= lu[i][j] * x[j];
+                x[i] = sum;
+            }
+
+            x[n - 1] /= lu[n - 1][n - 1];
+
+            for (int i = n - 2; i >= 0; --i)
+            {
+                double sum = x[i];
+                for (int j = i + 1; j < n; ++j)
+                    sum -= lu[i][j] * x[j];
+                x[i] = sum / lu[i][i];
+            }
+
+            return x;
+        }
+
+        public static Matrix Inverse(this Matrix matrix, ExpressionParameters parameters)
+        {
+            if (!matrix.IsSquare)
+                throw new ArgumentException(Resource.MatrixArgException);
+
+            var size = matrix.CountOfParams;
+            var result = Inverse_(matrix.ToCalculatedArray(parameters));
+            var m = new Matrix(size, size);
+            for (int i = 0; i < size; i++)
+                for (int j = 0; j < size; j++)
+                    m[i][j] = new Number(result[i][j]);
+
+            return m;
+        }
+
+        private static double[][] Inverse_(double[][] matrix)
+        {
+            int n = matrix.Length;
+            double[][] result = new double[n][];
+
+            for (int i = 0; i < n; i++)
+            {
+                result[i] = new double[n];
+                for (int j = 0; j < n; j++)
+                {
+                    result[i][j] = matrix[i][j];
+                }
+            }
+
+            int[] perm;
+            int toggle;
+            double[][] lum = LUPDecomposition_(matrix, out perm, out toggle);
+
+            // todo: !!!
+            if (lum == null)
+                throw new MatrixIsInvalidException();
+
+            double[] b = new double[n];
+            for (int i = 0; i < n; ++i)
+            {
+                for (int j = 0; j < n; ++j)
+                {
+                    if (i == perm[j])
+                        b[j] = 1.0;
+                    else
+                        b[j] = 0.0;
+                }
+                double[] x = HelperSolve(lum, b);
+                for (int j = 0; j < n; ++j)
+                    result[j][i] = x[j];
+            }
+
+            return result;
         }
 
     }

@@ -335,6 +335,14 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        public bool IsSquare
+        {
+            get
+            {
+                return this.countOfParams == this.SizeOfVectors;
+            }
+        }
+
     }
 
 }

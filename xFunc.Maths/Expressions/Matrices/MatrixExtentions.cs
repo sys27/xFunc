@@ -472,14 +472,14 @@ namespace xFunc.Maths.Expressions.Matrices
 
             int[] permutation;
             int toggle;
-            double[][] lu = LUPDecomposition_(matrix, out permutation, out toggle);
+            var lu = LUPDecomposition_(matrix, out permutation, out toggle);
 
             // todo: ...
             if (lu == null)
                 throw new MatrixIsInvalidException();
 
             double result = toggle;
-            for (int i = 0; i < lu.Length; ++i)
+            for (var i = 0; i < lu.Length; i++)
                 result *= lu[i][i];
 
             return result;
@@ -512,17 +512,17 @@ namespace xFunc.Maths.Expressions.Matrices
             int size = matrix.Length;
 
             permutation = new int[size];
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
                 permutation[i] = i;
 
             toggle = 1;
 
-            for (int j = 0; j < size - 1; ++j)
+            for (var j = 0; j < size - 1; j++)
             {
                 double colMax = Math.Abs(matrix[j][j]);
                 int pRow = j;
 
-                for (int i = j + 1; i < size; ++i)
+                for (var i = j + 1; i < size; i++)
                 {
                     if (matrix[i][j] > colMax)
                     {
@@ -542,14 +542,14 @@ namespace xFunc.Maths.Expressions.Matrices
                     toggle = -toggle;
                 }
 
-                // todo: !!!
-                if (matrix[j][j] == 0)
+                // todo: double!!!
+                if (Math.Abs(matrix[j][j]) < 1E-14)
                     throw new MatrixIsInvalidException();
 
-                for (int i = j + 1; i < size; ++i)
+                for (var i = j + 1; i < size; i++)
                 {
                     matrix[i][j] /= matrix[j][j];
-                    for (int k = j + 1; k < size; ++k)
+                    for (var k = j + 1; k < size; k++)
                         matrix[i][k] -= matrix[i][j] * matrix[j][k];
                 }
             }
@@ -608,37 +608,35 @@ namespace xFunc.Maths.Expressions.Matrices
         private static double[][] Inverse_(double[][] matrix)
         {
             int n = matrix.Length;
-            double[][] result = new double[n][];
+            var result = new double[n][];
 
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 result[i] = new double[n];
-                for (int j = 0; j < n; j++)
-                {
+                for (var j = 0; j < n; j++)
                     result[i][j] = matrix[i][j];
-                }
             }
 
             int[] permutation;
             int toggle;
-            double[][] lu = LUPDecomposition_(matrix, out permutation, out toggle);
+            var lu = LUPDecomposition_(matrix, out permutation, out toggle);
 
             // todo: !!!
             if (lu == null)
                 throw new MatrixIsInvalidException();
 
-            double[] b = new double[n];
-            for (int i = 0; i < n; ++i)
+            var b = new double[n];
+            for (var i = 0; i < n; i++)
             {
-                for (int j = 0; j < n; ++j)
+                for (var j = 0; j < n; j++)
                 {
                     if (i == permutation[j])
                         b[j] = 1.0;
                     else
                         b[j] = 0.0;
                 }
-                double[] x = HelperSolve(lu, b);
-                for (int j = 0; j < n; ++j)
+                var x = HelperSolve(lu, b);
+                for (var j = 0; j < n; j++)
                     result[j][i] = x[j];
             }
 

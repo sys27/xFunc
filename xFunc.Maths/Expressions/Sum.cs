@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions
 
         private static string GetVarName(ParameterCollection parameters)
         {
-            string variable = "i";
+            const string variable = "i";
             if (!parameters.ContainsKey(variable))
                 return variable;
 

@@ -79,6 +79,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (param == null)
                 return false;
 
+            // todo: double!!!
             return key == param.key && value == param.value;
         }
 

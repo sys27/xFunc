@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.Matrices
             : base(null, matrixSize)
         {
             var vectors = new Vector[matrixSize];
-            for (int i = 0; i < vectors.Length; i++)
+            for (var i = 0; i < vectors.Length; i++)
                 vectors[i] = new Vector(vectorSize);
 
             Arguments = vectors;
@@ -290,7 +290,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The arguments.
         /// </value>
-        public override IExpression[] Arguments
+        public sealed override IExpression[] Arguments
         {
             get
             {

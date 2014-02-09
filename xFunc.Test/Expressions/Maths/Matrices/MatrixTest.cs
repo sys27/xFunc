@@ -279,6 +279,50 @@ namespace xFunc.Test.Expressions.Maths.Matrices
             Assert.AreEqual(204, det);
         }
 
+        [TestMethod]
+        public void SwapRowsTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
+                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
+            });
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-7), new Number(8), new Number(9) }),
+                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new[] { new Number(1), new Number(-2), new Number(3) })
+                
+            });
+
+            matrix.SwapRows(0, 2);
+
+            Assert.AreEqual(expected, matrix);
+        }
+
+        [TestMethod]
+        public void SwapColumnsTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
+                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
+            });
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3), new Number(-2), new Number(1) }),
+                new Vector(new[] { new Number(6), new Number(0), new Number(4) }),
+                new Vector(new[] { new Number(9), new Number(8), new Number(-7) })
+                
+            });
+
+            matrix.SwapColumns(0, 2);
+
+            Assert.AreEqual(expected, matrix);
+        }
+
     }
 
 }

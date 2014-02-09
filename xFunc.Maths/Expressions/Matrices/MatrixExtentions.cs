@@ -470,21 +470,29 @@ namespace xFunc.Maths.Expressions.Matrices
             if (matrix.Length == 2)
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
-            int[] perm;
+            int[] permutation;
             int toggle;
-            double[][] lum = LUPDecomposition_(matrix, out perm, out toggle);
+            double[][] lu = LUPDecomposition_(matrix, out permutation, out toggle);
 
             // todo: ...
-            if (lum == null)
+            if (lu == null)
                 throw new MatrixIsInvalidException();
 
             double result = toggle;
-            for (int i = 0; i < lum.Length; ++i)
-                result *= lum[i][i];
+            for (int i = 0; i < lu.Length; ++i)
+                result *= lu[i][i];
 
             return result;
         }
 
+        /// <summary>
+        /// Decomposes a matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="permutation">An array of permutations.</param>
+        /// <param name="toggle">Used for calculating a determinant.</param>
+        /// <returns>Combined Lower and Upper matrices.</returns>
         public static Matrix LUPDecomposition(this Matrix matrix, ExpressionParameters parameters, out int[] permutation, out int toggle)
         {
             if (!matrix.IsSquare)
@@ -576,6 +584,12 @@ namespace xFunc.Maths.Expressions.Matrices
             return x;
         }
 
+        /// <summary>
+        /// Inverts a matrix.
+        /// </summary>
+        /// <param name="matrix">The matrix.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>An inverse matrix.</returns>
         public static Matrix Inverse(this Matrix matrix, ExpressionParameters parameters)
         {
             if (!matrix.IsSquare)
@@ -605,12 +619,12 @@ namespace xFunc.Maths.Expressions.Matrices
                 }
             }
 
-            int[] perm;
+            int[] permutation;
             int toggle;
-            double[][] lum = LUPDecomposition_(matrix, out perm, out toggle);
+            double[][] lu = LUPDecomposition_(matrix, out permutation, out toggle);
 
             // todo: !!!
-            if (lum == null)
+            if (lu == null)
                 throw new MatrixIsInvalidException();
 
             double[] b = new double[n];
@@ -618,12 +632,12 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 for (int j = 0; j < n; ++j)
                 {
-                    if (i == perm[j])
+                    if (i == permutation[j])
                         b[j] = 1.0;
                     else
                         b[j] = 0.0;
                 }
-                double[] x = HelperSolve(lum, b);
+                double[] x = HelperSolve(lu, b);
                 for (int j = 0; j < n; ++j)
                     result[j][i] = x[j];
             }

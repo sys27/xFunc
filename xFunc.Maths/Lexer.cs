@@ -730,10 +730,10 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("invert("))
+                    if (sub.StartsWith("inverse("))
                     {
-                        tokens.Add(new FunctionToken(Functions.Invert));
-                        i += 6;
+                        tokens.Add(new FunctionToken(Functions.Inverse));
+                        i += 7;
 
                         continue;
                     }

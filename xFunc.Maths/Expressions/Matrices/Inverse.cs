@@ -17,16 +17,16 @@ using System;
 namespace xFunc.Maths.Expressions.Matrices
 {
 
-    public class Invert : UnaryExpression
+    public class Inverse : UnaryExpression
     {
 
-        internal Invert() { }
+        internal Inverse() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Invert"/> class.
+        /// Initializes a new instance of the <see cref="Inverse"/> class.
         /// </summary>
         /// <param name="argument">A matrix.</param>
-        public Invert(IExpression argument)
+        public Inverse(IExpression argument)
             : base(argument)
         {
 
@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            throw new NotImplementedException();
+            return MatrixExtentions.Inverse((Matrix)argument, parameters);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Invert(this.argument.Clone());
+            return new Inverse(this.argument.Clone());
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The expression.
         /// </value>
-        /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
+        /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/>.</exception>
         public override IExpression Argument
         {
             get
@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 if (value != null)
                 {
-                    if (!(value is Vector || value is Matrix))
+                    if (!(value is Matrix))
                         throw new NotSupportedException();
 
                     value.Parent = this;

@@ -79,8 +79,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (param == null)
                 return false;
 
-            // todo: double!!!
-            return key == param.key && value == param.value;
+            return key == param.key && (value.Equals(param.value) || Math.Abs(value - param.value) < 1E-14);
         }
 
         /// <summary>

@@ -186,8 +186,7 @@ namespace xFunc.Maths
         /// <returns>The greatest common divisor.</returns>
         public static double GCD(double a, double b)
         {
-            // todo: double!!!
-            while (b != 0)
+            while (!(b.Equals(0) || Math.Abs(b) < 1E-14))
                 b = a % (a = b);
 
             return a;

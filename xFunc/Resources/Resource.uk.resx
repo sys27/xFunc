@@ -648,4 +648,7 @@
   <data name="SumToolTip" xml:space="preserve">
     <value>Сума. Приклад: sum(body, from, to, increment, variable)</value>
   </data>
+  <data name="MatrixExpanderHeader" xml:space="preserve">
+    <value>Матриці</value>
+  </data>
 </root>

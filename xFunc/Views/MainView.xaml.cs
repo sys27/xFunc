@@ -225,6 +225,7 @@ namespace xFunc.Views
             standartMathToolBar.IsExpanded = Settings.Default.StandartMathExpanded;
             trigonometricToolBar.IsExpanded = Settings.Default.TrigonometricExpanded;
             hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
+            matrixToolBar.IsExpanded = Settings.Default.MatrixExpanded;
             bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
             constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
             additionalMathToolBar.IsExpanded = Settings.Default.AdditionalMathExpanded;
@@ -274,6 +275,7 @@ namespace xFunc.Views
                 Settings.Default.StandartMathExpanded = standartMathToolBar.IsExpanded;
                 Settings.Default.TrigonometricExpanded = trigonometricToolBar.IsExpanded;
                 Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
+                Settings.Default.MatrixExpanded = matrixToolBar.IsExpanded;
                 Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
                 Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
                 Settings.Default.AdditionalMathExpanded = additionalMathToolBar.IsExpanded;
@@ -645,6 +647,7 @@ namespace xFunc.Views
                 standartMathToolBar.Visibility = Visibility.Collapsed;
                 trigonometricToolBar.Visibility = Visibility.Collapsed;
                 hyperbolicToolBar.Visibility = Visibility.Collapsed;
+                matrixToolBar.Visibility = Visibility.Collapsed;
                 bitwiseToolBar.Visibility = Visibility.Collapsed;
                 constantsMathToolBar.Visibility = Visibility.Collapsed;
                 additionalMathToolBar.Visibility = Visibility.Collapsed;
@@ -655,6 +658,11 @@ namespace xFunc.Views
             }
             else
             {
+                if (tabControl.SelectedItem == mathTab)
+                    matrixToolBar.Visibility = Visibility.Visible;
+                else
+                    matrixToolBar.Visibility = Visibility.Collapsed;
+
                 numberToolBar.Visibility = Visibility.Visible;
                 standartMathToolBar.Visibility = Visibility.Visible;
                 trigonometricToolBar.Visibility = Visibility.Visible;

@@ -542,8 +542,8 @@ namespace xFunc.Maths.Expressions.Matrices
                     toggle = -toggle;
                 }
 
-                // todo: double!!!
-                if (Math.Abs(matrix[j][j]) < 1E-14)
+                // todo: ...
+                if (matrix[j][j].Equals(0) || Math.Abs(matrix[j][j]) < 1E-14)
                     throw new MatrixIsInvalidException();
 
                 for (var i = j + 1; i < size; i++)

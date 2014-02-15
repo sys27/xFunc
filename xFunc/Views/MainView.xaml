@@ -507,7 +507,7 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
-                <Expander x:Name="matrixToolBar">
+                <Expander x:Name="matrixToolBar" Header="{x:Static res:Resource.MatrixExpanderHeader}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />

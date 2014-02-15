@@ -776,7 +776,6 @@ namespace xFunc.Maths
                 var token = tokens[i];
                 if (token is SymbolToken)
                 {
-                    // todo: !!!
                     var symbol = token as SymbolToken;
                     if (symbol.Symbol == Symbols.OpenBrace)
                         hasBraces = true;

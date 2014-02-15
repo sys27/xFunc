@@ -648,4 +648,7 @@
   <data name="SumToolTip" xml:space="preserve">
     <value>Summation. Example: sum(body, from, to, increment, variable)</value>
   </data>
+  <data name="MatrixExpanderHeader" xml:space="preserve">
+    <value>Matrix</value>
+  </data>
 </root>

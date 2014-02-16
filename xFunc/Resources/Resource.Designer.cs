@@ -682,6 +682,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Determinant of a matrix. Example: det({{1, 3}, {9, 4}}).
+        /// </summary>
+        public static string DetToolTip {
+            get {
+                return ResourceManager.GetString("DetToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string ErrorHeader {
@@ -894,6 +903,15 @@ namespace xFunc.Resources {
         public static string IndexOutOfRangeExceptionError {
             get {
                 return ResourceManager.GetString("IndexOutOfRangeExceptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inverse a matrix. Example: inverse({{1, 3}, {9, 4}}).
+        /// </summary>
+        public static string InverseToolTip {
+            get {
+                return ResourceManager.GetString("InverseToolTip", resourceCulture);
             }
         }
         
@@ -1506,6 +1524,15 @@ namespace xFunc.Resources {
         public static string ToInputMenuItem {
             get {
                 return ResourceManager.GetString("ToInputMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transpose a matrix. Example: transpose({{1, 3}, {9, 4}}).
+        /// </summary>
+        public static string TransposeToolTip {
+            get {
+                return ResourceManager.GetString("TransposeToolTip", resourceCulture);
             }
         }
         

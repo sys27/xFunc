@@ -522,19 +522,19 @@ limitations under the License. -->
                         <Button Grid.Row="0" Grid.Column="0" Tag="det" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.DetToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="transpose" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.TransposeToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="inverse" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>

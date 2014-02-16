@@ -651,4 +651,13 @@
   <data name="MatrixExpanderHeader" xml:space="preserve">
     <value>Матрицы</value>
   </data>
+  <data name="DetToolTip" xml:space="preserve">
+    <value>Детерминант матрицы. Пример: det({{1, 3}, {9, 4}})</value>
+  </data>
+  <data name="TransposeToolTip" xml:space="preserve">
+    <value>Транспонировать матрицу. Пример: transpose({{1, 3}, {9, 4}})</value>
+  </data>
+  <data name="InverseToolTip" xml:space="preserve">
+    <value>Обратная матрица. Пример: inverse({{1, 3}, {9, 4}})</value>
+  </data>
 </root>

@@ -474,7 +474,6 @@ namespace xFunc.Maths.Expressions.Matrices
             int toggle;
             var lu = LUPDecomposition_(matrix, out permutation, out toggle);
 
-            // todo: ...
             if (lu == null)
                 throw new MatrixIsInvalidException();
 
@@ -542,7 +541,6 @@ namespace xFunc.Maths.Expressions.Matrices
                     toggle = -toggle;
                 }
 
-                // todo: ...
                 if (matrix[j][j].Equals(0) || Math.Abs(matrix[j][j]) < 1E-14)
                     throw new MatrixIsInvalidException();
 
@@ -621,7 +619,6 @@ namespace xFunc.Maths.Expressions.Matrices
             int toggle;
             var lu = LUPDecomposition_(matrix, out permutation, out toggle);
 
-            // todo: !!!
             if (lu == null)
                 throw new MatrixIsInvalidException();
 

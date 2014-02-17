@@ -979,4 +979,108 @@ limitations under the License. -->
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+
+    <DrawingBrush x:Key="det" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 386.397,149.75L 382.557,149.75L 382.557,145.46L 382.467,145.46C 380.687,148.64 377.942,150.23 374.232,150.23C 371.222,150.23 368.817,149.163 367.017,147.028C 365.217,144.893 364.317,141.988 364.317,138.313C 364.317,134.368 365.314,131.208 367.309,128.833C 369.304,126.458 371.962,125.27 375.282,125.27C 378.572,125.27 380.964,126.61 382.459,129.29L 382.557,129.29L 382.557,114.23L 386.397,114.23L 386.397,149.75 Z M 382.557,138.875L 382.557,135.41C 382.557,133.52 381.913,131.918 380.625,130.603C 379.338,129.288 377.707,128.63 375.732,128.63C 373.382,128.63 371.532,129.47 370.182,131.15C 368.832,132.83 368.157,135.153 368.157,138.118C 368.157,140.823 368.804,142.958 370.099,144.523C 371.394,146.088 373.132,146.87 375.312,146.87C 377.462,146.87 379.207,146.114 380.547,144.601C 381.887,143.089 382.557,141.18 382.557,138.875 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 413.277,138.71L 396.477,138.71C 396.542,141.315 397.264,143.326 398.644,144.744C 400.024,146.161 401.924,146.87 404.344,146.87C 407.064,146.87 409.562,146.07 411.837,144.47L 411.837,147.988C 409.737,149.483 406.957,150.23 403.497,150.23C 400.117,150.23 397.462,149.148 395.532,146.983C 393.602,144.818 392.637,141.77 392.637,137.84C 392.637,134.13 393.68,131.108 395.768,128.773C 397.855,126.438 400.449,125.27 403.549,125.27C 406.644,125.27 409.039,126.279 410.734,128.296C 412.429,130.314 413.277,133.118 413.277,136.708L 413.277,138.71 Z M 409.437,135.35C 409.422,133.23 408.889,131.58 407.839,130.4C 406.789,129.22 405.329,128.63 403.459,128.63C 401.654,128.63 400.122,129.25 398.862,130.49C 397.602,131.73 396.824,133.35 396.529,135.35L 409.437,135.35 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 430.557,149.428C 429.632,149.963 428.414,150.23 426.904,150.23C 422.619,150.23 420.477,147.9 420.477,143.24L 420.477,129.11L 416.157,129.11L 416.157,125.75L 420.477,125.75L 420.477,119.81L 424.317,118.55L 424.317,125.75L 430.557,125.75L 430.557,129.11L 424.317,129.11L 424.317,142.453C 424.317,144.043 424.599,145.176 425.164,145.854C 425.729,146.531 426.664,146.87 427.969,146.87C 428.969,146.87 429.832,146.55 430.557,145.91L 430.557,149.428 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 445.437,157.43L 442.077,157.43C 437.277,151.895 434.877,145.07 434.877,136.955C 434.877,128.81 437.277,121.875 442.077,116.15L 445.437,116.15C 440.637,122.09 438.237,129.01 438.237,136.91C 438.237,144.74 440.637,151.58 445.437,157.43 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 476.637,149.75L 472.227,149.75L 468.529,140.15L 454.317,140.15L 450.829,149.75L 446.397,149.75L 459.432,116.15L 463.557,116.15L 476.637,149.75 Z M 467.269,136.79L 461.982,122.698C 461.812,122.233 461.642,121.49 461.472,120.47L 461.374,120.47C 461.214,121.415 461.029,122.158 460.819,122.698L 455.569,136.79L 467.269,136.79 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 480.957,157.43L 477.597,157.43C 482.397,151.58 484.797,144.74 484.797,136.91C 484.797,129.01 482.397,122.09 477.597,116.15L 480.957,116.15C 485.757,121.875 488.157,128.81 488.157,136.955C 488.157,145.07 485.757,151.895 480.957,157.43 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="inverse" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 429.97,251.75L 425.56,251.75L 421.862,242.15L 407.65,242.15L 404.162,251.75L 399.73,251.75L 412.765,218.15L 416.89,218.15L 429.97,251.75 Z M 420.602,238.79L 415.315,224.698C 415.145,224.233 414.975,223.49 414.805,222.47L 414.707,222.47C 414.547,223.415 414.362,224.158 414.152,224.698L 408.902,238.79L 420.602,238.79 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 441.33,217.95L 432.69,217.95L 432.69,216.03L 441.33,216.03L 441.33,217.95 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 458.61,225.95L 445.81,225.95L 445.81,223.71L 450.93,223.71L 450.93,206.48L 445.685,208.03L 445.685,205.59L 453.49,203.23L 453.49,223.71L 458.61,223.71L 458.61,225.95 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="transpose" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Geometry="F1 M 0.250012,39.4058L 35.7231,39.4058L 35.7231,92.6266L 0.250012,92.6266L 0.250012,39.4058 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 0.25,57.2939L 35.8118,57.2939">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 17.9459,92.4935L 17.9459,39.4058">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 0.25,74.9011L 35.6787,74.9011">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 91.5038,0.250122L 91.5038,35.7233L 38.2831,35.7233L 38.2831,0.250122L 91.5038,0.250122 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 73.6157,0.25L 73.6157,35.8119">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 38.4162,17.9459L 91.5039,17.9459">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 56.0086,0.25L 56.0086,35.6788">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 18.7016,34.7354L 17.9204,36.3087L 17.9204,17.9204L 36.3075,17.9204L 34.7484,18.6958">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 17.1392,34.7354L 17.9204,36.3087L 17.9204,17.9204L 17.6941,17.9204">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 34.7354,17.1393L 36.3087,17.9204L 17.9204,17.9204L 17.9204,17.7149">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 55.1602,40.4325L 55.9414,38.8593L 55.9414,57.2476L 37.5543,57.2476L 39.1134,56.4722">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 56.7225,40.4325L 55.9414,38.8593L 55.9414,57.2475L 56.1677,57.2475">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M 39.1264,58.0287L 37.5531,57.2475L 55.9414,57.2475L 55.9414,57.453">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 </ResourceDictionary>

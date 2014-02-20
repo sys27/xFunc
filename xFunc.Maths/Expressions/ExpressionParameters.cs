@@ -31,6 +31,14 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
+        public ExpressionParameters()
+            : this(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
+        /// </summary>
         /// <param name="angleMeasuremnt">The angle measuremnt.</param>
         public ExpressionParameters(AngleMeasurement angleMeasuremnt)
             : this(angleMeasuremnt, new ParameterCollection(), new FunctionCollection())

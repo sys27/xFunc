@@ -38,6 +38,17 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public int GetHashCode()
+        {
+            return 5119 ^ func.GetHashCode();
+        }
+
+        /// <summary>
         /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>

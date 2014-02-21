@@ -38,14 +38,14 @@ namespace xFunc.Test.Expressions.Maths
         public void CalculateTest3()
         {
             var uf1 = new UserFunction("func", new[] { new Variable("x") }, 1);
-            var func = new DelegateExpression(p => p.Parameters["x"] + 1);
+            var func = new DelegateExpression(p => p.Parameters["x"] == 10 ? 0 : 1);
             var funcs = new FunctionCollection();
             funcs.Add(uf1, func);
 
-            var uf2 = new UserFunction("func", new[] { new Number(10) }, 1);
+            var uf2 = new UserFunction("func", new[] { new Number(12) }, 1);
             var result = uf2.Calculate(new ExpressionParameters(funcs));
 
-            Assert.AreEqual(11.0, result);
+            Assert.AreEqual(1, result);
         }
 
     }

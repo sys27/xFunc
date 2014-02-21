@@ -17,6 +17,9 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents a function in code.
+    /// </summary>
     public class DelegateExpression : IExpression
     {
 
@@ -38,12 +41,32 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            var exp = (DelegateExpression)obj;
+
+            return func.Equals(func);
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public int GetHashCode()
+        public override int GetHashCode()
         {
             return 5119 ^ func.GetHashCode();
         }
@@ -104,10 +127,10 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public IExpression Clone()
         {
-            // todo: ...
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>

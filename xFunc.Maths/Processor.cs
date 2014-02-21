@@ -33,7 +33,7 @@ namespace xFunc.Maths
         private readonly Parser parser;
 
         private readonly ExpressionParameters parameters;
-        private NumeralSystem numberSystem;
+        private NumeralSystem numeralSystem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
@@ -122,10 +122,10 @@ namespace xFunc.Maths
             var result = exp.Calculate(parameters);
             if (result is double)
             {
-                if (numberSystem == NumeralSystem.Decimal)
+                if (numeralSystem == NumeralSystem.Decimal)
                     return new NumberResult((double)result);
 
-                return new StringResult(MathExtentions.ToNewBase((int)exp.Calculate(parameters), numberSystem));
+                return new StringResult(MathExtentions.ToNewBase((int)(double)result, numeralSystem));
             }
             if (result is IExpression)
             {
@@ -229,11 +229,11 @@ namespace xFunc.Maths
         {
             get
             {
-                return numberSystem;
+                return numeralSystem;
             }
             set
             {
-                numberSystem = value;
+                numeralSystem = value;
             }
         }
 

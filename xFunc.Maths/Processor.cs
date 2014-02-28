@@ -127,6 +127,13 @@ namespace xFunc.Maths
 
                 return new StringResult(MathExtentions.ToNewBase((int)(double)result, numeralSystem));
             }
+            if (result is int)
+            {
+                if (numeralSystem == NumeralSystem.Decimal)
+                    return new NumberResult((int)result);
+
+                return new StringResult(MathExtentions.ToNewBase((int)result, numeralSystem));
+            }
             if (result is IExpression)
             {
                 return new ExpressionResult((IExpression)result);

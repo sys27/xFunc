@@ -69,30 +69,35 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override object Calculate(ExpressionParameters parameters)
         {
-            if (left is Vector && right is Vector)
-                throw new NotSupportedException();
-
-            if (left is Vector)
+            if (ResultIsMatrix)
             {
-                if (right is Matrix)
-                    return MatrixExtentions.Mul((Vector)left, (Matrix)right, parameters);
+                if (left is Vector && right is Vector)
+                    throw new NotSupportedException();
 
-                return MatrixExtentions.Mul((Vector)left, right, parameters);
-            }
-            if (right is Vector)
-            {
+                if (left is Vector)
+                {
+                    if (right is Matrix)
+                        return MatrixExtentions.Mul((Vector)left, (Matrix)right, parameters);
+
+                    return MatrixExtentions.Mul((Vector)left, right, parameters);
+                }
+                if (right is Vector)
+                {
+                    if (left is Matrix)
+                        return MatrixExtentions.Mul((Matrix)left, (Vector)right, parameters);
+
+                    return MatrixExtentions.Mul((Vector)right, left, parameters);
+                }
+
+                if (left is Matrix && right is Matrix)
+                    return MatrixExtentions.Mul((Matrix)left, (Matrix)right, parameters);
                 if (left is Matrix)
-                    return MatrixExtentions.Mul((Matrix)left, (Vector)right, parameters);
+                    return MatrixExtentions.Mul((Matrix)left, right, parameters);
+                if (right is Matrix)
+                    return MatrixExtentions.Mul((Matrix)right, left, parameters);
 
-                return MatrixExtentions.Mul((Vector)right, left, parameters);
+
             }
-
-            if (left is Matrix && right is Matrix)
-                return MatrixExtentions.Mul((Matrix)left, (Matrix)right, parameters);
-            if (left is Matrix)
-                return MatrixExtentions.Mul((Matrix)left, right, parameters);
-            if (right is Matrix)
-                return MatrixExtentions.Mul((Matrix)right, left, parameters);
 
             return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
         }
@@ -118,14 +123,11 @@ namespace xFunc.Maths.Expressions
 
                 return add;
             }
+
             if (first)
-            {
                 return new Mul(left.Clone().Differentiate(variable), right.Clone());
-            }
             if (second)
-            {
                 return new Mul(left.Clone(), right.Clone().Differentiate(variable));
-            }
 
             return new Number(0);
         }
@@ -137,6 +139,20 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Mul(left.Clone(), right.Clone());
+        }
+
+        // <summary>
+        /// Gets a value indicating whether result is a matrix.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// </value>
+        public override bool ResultIsMatrix
+        {
+            get
+            {
+                return left.ResultIsMatrix || right.ResultIsMatrix;
+            }
         }
 
     }

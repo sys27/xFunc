@@ -16,7 +16,7 @@ using System;
 
 namespace xFunc.Maths.Expressions
 {
-    
+
     /// <summary>
     /// Represents variables in expressions.
     /// </summary>
@@ -211,6 +211,20 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether result is a matrix.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// </value>
+        public bool ResultIsMatrix
+        {
+            get
+            {
+                return false;
             }
         }
 

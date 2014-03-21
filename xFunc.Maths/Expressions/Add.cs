@@ -72,12 +72,17 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            if (left is Vector && right is Vector)
-                return MatrixExtentions.Add((Vector)left, (Vector)right, parameters);
-            if (left is Matrix && right is Matrix)
-                return MatrixExtentions.Add((Matrix)left, (Matrix)right, parameters);
-            if ((left is Vector && right is Matrix) || (right is Vector && left is Matrix))
-                throw new NotSupportedException();
+            if (ResultIsMatrix)
+            {
+                if (left is Vector && right is Vector)
+                    return MatrixExtentions.Add((Vector)left, (Vector)right, parameters);
+                if (left is Matrix && right is Matrix)
+                    return MatrixExtentions.Add((Matrix)left, (Matrix)right, parameters);
+                if ((left is Vector && right is Matrix) || (right is Vector && left is Matrix))
+                    throw new NotSupportedException();
+
+
+            }
 
             return (double)left.Calculate(parameters) + (double)right.Calculate(parameters);
         }
@@ -96,17 +101,11 @@ namespace xFunc.Maths.Expressions
             var second = Parser.HasVar(right, variable);
 
             if (first && second)
-            {
                 return new Add(left.Clone().Differentiate(variable), right.Differentiate(variable).Clone());
-            }
             if (first)
-            {
                 return left.Clone().Differentiate(variable);
-            }
             if (second)
-            {
                 return right.Differentiate(variable).Clone();
-            }
 
             return new Number(0);
         }
@@ -118,6 +117,20 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Add(left.Clone(), right.Clone());
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether result is a matrix.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// </value>
+        public override bool ResultIsMatrix
+        {
+            get
+            {
+                return left.ResultIsMatrix && right.ResultIsMatrix;
+            }
         }
 
     }

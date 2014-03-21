@@ -225,6 +225,20 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether result is a matrix. Default implementation returns <c>false</c>. Override it if this expression returns a matrix.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool ResultIsMatrix
+        {
+            get
+            {
+                return false;
+            }
+        }
+
     }
 
 }

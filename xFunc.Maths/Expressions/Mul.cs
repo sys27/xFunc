@@ -74,29 +74,54 @@ namespace xFunc.Maths.Expressions
                 if (left is Vector && right is Vector)
                     throw new NotSupportedException();
 
-                if (left is Vector)
+                IExpression l = null;
+                if (left is Vector || left is Matrix)
                 {
-                    if (right is Matrix)
-                        return MatrixExtentions.Mul((Vector)left, (Matrix)right, parameters);
-
-                    return MatrixExtentions.Mul((Vector)left, right, parameters);
+                    l = left;
                 }
-                if (right is Vector)
+                else
                 {
-                    if (left is Matrix)
-                        return MatrixExtentions.Mul((Matrix)left, (Vector)right, parameters);
-
-                    return MatrixExtentions.Mul((Vector)right, left, parameters);
+                    var temp = left.Calculate(parameters);
+                    if (temp is IExpression)
+                        l = (IExpression)temp;
+                    else
+                        l = new Number((double)temp);
+                }
+                IExpression r = null;
+                if (right is Vector || right is Matrix)
+                {
+                    r = left;
+                }
+                else
+                {
+                    var temp = right.Calculate(parameters);
+                    if (temp is IExpression)
+                        r = (IExpression)temp;
+                    else
+                        r = new Number((double)temp);
                 }
 
-                if (left is Matrix && right is Matrix)
-                    return MatrixExtentions.Mul((Matrix)left, (Matrix)right, parameters);
-                if (left is Matrix)
-                    return MatrixExtentions.Mul((Matrix)left, right, parameters);
-                if (right is Matrix)
-                    return MatrixExtentions.Mul((Matrix)right, left, parameters);
+                if (l is Vector)
+                {
+                    if (r is Matrix)
+                        return MatrixExtentions.Mul((Vector)l, (Matrix)r, parameters);
 
+                    return MatrixExtentions.Mul((Vector)l, r, parameters);
+                }
+                if (r is Vector)
+                {
+                    if (l is Matrix)
+                        return MatrixExtentions.Mul((Matrix)l, (Vector)r, parameters);
 
+                    return MatrixExtentions.Mul((Vector)r, l, parameters);
+                }
+
+                if (l is Matrix && r is Matrix)
+                    return MatrixExtentions.Mul((Matrix)l, (Matrix)r, parameters);
+                if (l is Matrix)
+                    return MatrixExtentions.Mul((Matrix)l, r, parameters);
+                if (r is Matrix)
+                    return MatrixExtentions.Mul((Matrix)r, l, parameters);
             }
 
             return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
@@ -141,7 +166,7 @@ namespace xFunc.Maths.Expressions
             return new Mul(left.Clone(), right.Clone());
         }
 
-        // <summary>
+        /// <summary>
         /// Gets a value indicating whether result is a matrix.
         /// </summary>
         /// <value>

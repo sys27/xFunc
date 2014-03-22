@@ -79,6 +79,35 @@ namespace xFunc.Maths.Expressions
                     return MatrixExtentions.Sub((Matrix)left, (Matrix)right, parameters);
                 if ((left is Vector && right is Matrix) || (right is Vector && left is Matrix))
                     throw new NotSupportedException();
+
+                if (!(left is Vector || left is Matrix))
+                {
+                    var l = left.Calculate(parameters);
+
+                    if (l is Vector)
+                        return MatrixExtentions.Sub((Vector)l, (Vector)right, parameters);
+                    if (l is Matrix)
+                        return MatrixExtentions.Sub((Matrix)l, (Matrix)right, parameters);
+
+                    // todo: ...
+                    throw new Exception();
+                }
+
+                if (!(right is Vector || right is Matrix))
+                {
+                    var r = right.Calculate(parameters);
+
+                    if (r is Vector)
+                        return MatrixExtentions.Sub((Vector)left, (Vector)r, parameters);
+                    if (r is Matrix)
+                        return MatrixExtentions.Sub((Matrix)left, (Matrix)r, parameters);
+
+                    // todo: ...
+                    throw new Exception();
+                }
+
+                // todo: ...
+                throw new Exception();
             }
 
             return (double)left.Calculate(parameters) - (double)right.Calculate(parameters);
@@ -116,7 +145,7 @@ namespace xFunc.Maths.Expressions
             return new Sub(left.Clone(), right.Clone());
         }
 
-        // <summary>
+        /// <summary>
         /// Gets a value indicating whether result is a matrix.
         /// </summary>
         /// <value>

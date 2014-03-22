@@ -89,8 +89,7 @@ namespace xFunc.Maths.Expressions
                     if (l is Matrix)
                         return MatrixExtentions.Sub((Matrix)l, (Matrix)right, parameters);
 
-                    // todo: ...
-                    throw new Exception();
+                    throw new NotSupportedException();
                 }
 
                 if (!(right is Vector || right is Matrix))
@@ -102,12 +101,10 @@ namespace xFunc.Maths.Expressions
                     if (r is Matrix)
                         return MatrixExtentions.Sub((Matrix)left, (Matrix)r, parameters);
 
-                    // todo: ...
-                    throw new Exception();
+                    throw new NotSupportedException();
                 }
 
-                // todo: ...
-                throw new Exception();
+                throw new NotSupportedException();
             }
 
             return (double)left.Calculate(parameters) - (double)right.Calculate(parameters);

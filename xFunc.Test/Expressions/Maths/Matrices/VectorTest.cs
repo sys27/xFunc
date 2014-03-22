@@ -135,9 +135,38 @@ namespace xFunc.Test.Expressions.Maths.Matrices
             var vector2 = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
             var sub = new Sub(vector2, vector1);
             var mul = new Mul(sub, new Number(4));
-            
+
             var expected = new Vector(new[] { new Number(4), new Number(4), new Number(4) });
             var result = mul.Calculate();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MultiOpAddMul()
+        {
+            // ({2, 3, 4} + {1, 2, 3}) * 4
+            var vector1 = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+            var add = new Add(vector2, vector1);
+            var mul = new Mul(add, new Number(4));
+
+            var expected = new Vector(new[] { new Number(12), new Number(20), new Number(28) });
+            var result = mul.Calculate();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MultiOpMulMul()
+        {
+            // ({1, 2, 3} * 2) * 4
+            var vector = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var mul1 = new Mul(vector, new Number(2));
+            var mul2 = new Mul(mul1, new Number(4));
+
+            var expected = new Vector(new[] { new Number(8), new Number(16), new Number(24) });
+            var result = mul2.Calculate();
 
             Assert.AreEqual(expected, result);
         }

@@ -81,7 +81,34 @@ namespace xFunc.Maths.Expressions
                 if ((left is Vector && right is Matrix) || (right is Vector && left is Matrix))
                     throw new NotSupportedException();
 
+                if (!(left is Vector || left is Matrix))
+                {
+                    var l = left.Calculate(parameters);
 
+                    if (l is Vector)
+                        return MatrixExtentions.Add((Vector)l, (Vector)right, parameters);
+                    if (l is Matrix)
+                        return MatrixExtentions.Add((Matrix)l, (Matrix)right, parameters);
+
+                    // todo: ...
+                    throw new Exception();
+                }
+
+                if (!(right is Vector || right is Matrix))
+                {
+                    var r = right.Calculate(parameters);
+
+                    if (r is Vector)
+                        return MatrixExtentions.Add((Vector)left, (Vector)r, parameters);
+                    if (r is Matrix)
+                        return MatrixExtentions.Add((Matrix)left, (Matrix)r, parameters);
+
+                    // todo: ...
+                    throw new Exception();
+                }
+
+                // todo: ...
+                throw new Exception();
             }
 
             return (double)left.Calculate(parameters) + (double)right.Calculate(parameters);

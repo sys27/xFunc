@@ -97,6 +97,51 @@ namespace xFunc.Test.Expressions.Maths.Matrices
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void MultiOpMulAdd()
+        {
+            // ({1, 2, 3} * 4) + {2, 3, 4}
+            var vector1 = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+            var mul = new Mul(vector1, new Number(4));
+            var add = new Add(mul, vector2);
+
+            var expected = new Vector(new[] { new Number(6), new Number(11), new Number(16) });
+            var result = add.Calculate();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MultiOpMulSub()
+        {
+            // ({1, 2, 3} * 4) - {2, 3, 4}
+            var vector1 = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+            var mul = new Mul(vector1, new Number(4));
+            var sub = new Sub(mul, vector2);
+
+            var expected = new Vector(new[] { new Number(2), new Number(5), new Number(8) });
+            var result = sub.Calculate();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void MultiOpSubMul()
+        {
+            // ({2, 3, 4} - {1, 2, 3}) * 4
+            var vector1 = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+            var sub = new Sub(vector2, vector1);
+            var mul = new Mul(sub, new Number(4));
+            
+            var expected = new Vector(new[] { new Number(4), new Number(4), new Number(4) });
+            var result = mul.Calculate();
+
+            Assert.AreEqual(expected, result);
+        }
+
     }
 
 }

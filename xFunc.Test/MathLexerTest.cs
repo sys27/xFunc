@@ -206,6 +206,21 @@ namespace xFunc.Test
         [TestMethod]
         public void Not()
         {
+            var tokens = lexer.Tokenize("not(2)");
+
+            var expected = new List<IToken>()
+            {
+                new OperationToken(Operations.Not),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void NotAsOperator()
+        {
             var tokens = lexer.Tokenize("~2");
 
             var expected = new List<IToken>()
@@ -897,6 +912,20 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void NotBalancedBracesOpen()
+        {
+            var tokens = lexer.Tokenize("{2,1");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void NotBalancedBracesClose()
+        {
+            var tokens = lexer.Tokenize("}2,1");
+        }
+
+        [TestMethod]
         public void HexTest()
         {
             var tokens = lexer.Tokenize("0xFF00");
@@ -1048,6 +1077,20 @@ namespace xFunc.Test
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(4),
                 new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void FactorialOperatorTest()
+        {
+            var tokens = lexer.Tokenize("4!");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(4),
+                new OperationToken(Operations.Factorial)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -1470,6 +1513,89 @@ namespace xFunc.Test
                 new NumberToken(7),
                 new SymbolToken(Symbols.CloseBrace),
                 new SymbolToken(Symbols.CloseBrace)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void DeterminantTest()
+        {
+            var tokens = lexer.Tokenize("determinant({{2, 3}, {4, 7}})");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Determinant, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void DetTest()
+        {
+            var tokens = lexer.Tokenize("det({{2, 3}, {4, 7}})");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Determinant, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Matrix, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.Comma),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void InverseTest()
+        {
+            var tokens = lexer.Tokenize("inverse({4, 7})");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.Inverse, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new FunctionToken(Functions.Vector, 2),
+                new SymbolToken(Symbols.OpenBrace),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(7),
+                new SymbolToken(Symbols.CloseBrace),
+                new SymbolToken(Symbols.CloseBracket)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());

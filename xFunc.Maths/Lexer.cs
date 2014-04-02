@@ -100,16 +100,8 @@ namespace xFunc.Maths
                 }
                 else if (letter == '{')
                 {
-                    var token = tokens.LastOrDefault() as FunctionToken;
-                    if (token != null)
-                    {
-                        if (token.Function != Functions.Matrix && token.Function != Functions.Vector)
-                            tokens.Add(new FunctionToken(Functions.Vector));
-                    }
-                    else
-                    {
+                    if (!(tokens.LastOrDefault() is FunctionToken))
                         tokens.Add(new FunctionToken(Functions.Vector));
-                    }
 
                     tokens.Add(new SymbolToken(Symbols.OpenBrace));
                 }

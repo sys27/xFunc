@@ -28,7 +28,7 @@ namespace xFunc.Test
         [TestMethod]
         public void HasVarTest1()
         {
-            IExpression exp = new Sin(new Mul(new Number(2), new Variable("x")));
+            var exp = new Sin(new Mul(new Number(2), new Variable("x")));
             bool expected = Parser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, true);
@@ -37,8 +37,26 @@ namespace xFunc.Test
         [TestMethod]
         public void HasVarTest2()
         {
-            IExpression exp = new Sin(new Mul(new Number(2), new Number(3)));
+            var exp = new Sin(new Mul(new Number(2), new Number(3)));
             bool expected = Parser.HasVar(exp, new Variable("x"));
+
+            Assert.AreEqual(expected, false);
+        }
+
+        [TestMethod]
+        public void HasVarDiffTest1()
+        {
+            var exp = new GCD(new IExpression[] { new Variable("x"), new Number(2), new Number(4) }, 3);
+            var expected = Parser.HasVar(exp, new Variable("x"));
+
+            Assert.AreEqual(expected, true);
+        }
+
+        [TestMethod]
+        public void HasVarDiffTest2()
+        {
+            var exp = new GCD(new IExpression[] { new Variable("y"), new Number(2), new Number(4) }, 3);
+            var expected = Parser.HasVar(exp, new Variable("x"));
 
             Assert.AreEqual(expected, false);
         }
@@ -274,6 +292,20 @@ namespace xFunc.Test
 
             var exp = parser.Parse("undef(f(x))");
             Assert.AreEqual("undef(f(x))", exp.ToString());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void UndefWithoutParamsTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Undefine, 0),
+                new SymbolToken(Symbols.OpenBracket),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("undef()");
         }
 
         [TestMethod]
@@ -639,6 +671,23 @@ namespace xFunc.Test
             };
 
             var exp = parser.Parse("matrix{vector{2, 3}, vector{4, 7, 2}}");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void TooMuchParamsTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.Sine, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("sin(x, 3)");
         }
 
     }

@@ -173,6 +173,14 @@ namespace xFunc.Maths
                 }
                 else if (letter == '~')
                 {
+                    var lastToken = tokens.LastOrDefault();
+                    if (lastToken != null)
+                    {
+                        var symbol = lastToken as SymbolToken;
+                        if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken)
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+                    }
+
                     tokens.Add(new OperationToken(Operations.Not));
                 }
                 else if (letter == '&')
@@ -192,10 +200,20 @@ namespace xFunc.Maths
                 }
                 else if (letter == '!')
                 {
-                    tokens.Add(new OperationToken(Operations.Factorial));
-                    i++;
+                    var lastToken = tokens.LastOrDefault();
+                    if (lastToken != null)
+                    {
+                        var symbol = lastToken as SymbolToken;
+                        if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken)
+                        {
+                            tokens.Add(new OperationToken(Operations.Factorial));
+                            i++;
 
-                    continue;
+                            continue;
+                        }
+                    }
+
+                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
                 }
                 else if (char.IsDigit(letter))
                 {

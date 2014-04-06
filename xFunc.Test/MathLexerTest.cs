@@ -232,6 +232,13 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void NotAsOperatorFail()
+        {
+            var tokens = lexer.Tokenize("2~");
+        }
+
+        [TestMethod]
         public void And()
         {
             var tokens = lexer.Tokenize("2 & 2");
@@ -1094,6 +1101,13 @@ namespace xFunc.Test
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void FactorialOperatorFailTest()
+        {
+            lexer.Tokenize("!4");
         }
 
         [TestMethod]

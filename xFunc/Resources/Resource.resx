@@ -660,4 +660,7 @@
   <data name="InverseToolTip" xml:space="preserve">
     <value>Inverse a matrix. Example: inverse({{1, 3}, {9, 4}})</value>
   </data>
+  <data name="RoundToolTip" xml:space="preserve">
+    <value>The "round" function. Example: round(number, digits).</value>
+  </data>
 </root>

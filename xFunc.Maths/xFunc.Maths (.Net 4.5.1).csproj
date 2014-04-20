@@ -52,6 +52,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />
     <Compile Include="IExpressionFactory.cs" />

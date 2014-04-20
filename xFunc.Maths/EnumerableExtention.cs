@@ -15,9 +15,6 @@ namespace System.Runtime.CompilerServices
 namespace xFunc.Maths
 {
 
-    internal delegate V Func<in T, out V>(T arg);
-    internal delegate V Func<in T1, in T2, out V>(T1 arg1, T2 args2);
-
     internal static class EnumerableExtention
     {
 

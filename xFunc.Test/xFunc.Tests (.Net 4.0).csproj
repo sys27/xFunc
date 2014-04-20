@@ -109,6 +109,7 @@
     <Compile Include="Expressions\Maths\Matrices\MatrixTest.cs" />
     <Compile Include="Expressions\Maths\Matrices\VectorTest.cs" />
     <Compile Include="Expressions\Maths\DelegateExpressionTest.cs" />
+    <Compile Include="Expressions\Maths\RoundTest.cs" />
     <Compile Include="Expressions\Maths\UserFunctionTest.cs" />
     <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathLexerMock.cs" />

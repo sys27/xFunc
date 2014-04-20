@@ -280,10 +280,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (countOfParams >= 3)
-                    return arguments[1];
-
-                return null;
+                return countOfParams >= 3 ? arguments[1] : null;
             }
         }
 
@@ -297,10 +294,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (countOfParams == 2)
-                    return arguments[1];
-
-                return arguments[2];
+                return countOfParams == 2 ? arguments[1] : arguments[2];
             }
         }
 
@@ -314,10 +308,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (countOfParams >= 4)
-                    return arguments[3];
-
-                return null;
+                return countOfParams >= 4 ? arguments[3] : null;
             }
         }
 
@@ -331,10 +322,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (countOfParams == 5)
-                    return (Variable)arguments[4];
-
-                return null;
+                return countOfParams == 5 ? (Variable)arguments[4] : null;
             }
         }
 

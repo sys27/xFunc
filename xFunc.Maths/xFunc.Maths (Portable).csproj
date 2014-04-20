@@ -113,6 +113,7 @@
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
+    <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Lg.cs" />
     <Compile Include="Expressions\Ln.cs" />
     <Compile Include="Expressions\Log.cs" />

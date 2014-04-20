@@ -660,4 +660,7 @@
   <data name="InverseToolTip" xml:space="preserve">
     <value>Зворотній матриця. Приклад: inverse({{1, 3}, {9, 4}})</value>
   </data>
+  <data name="RoundToolTip" xml:space="preserve">
+    <value>Функція округлення. Приклад: round(number, digits).</value>
+  </data>
 </root>

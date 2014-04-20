@@ -72,6 +72,7 @@
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
+    <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Sum.cs" />
     <Compile Include="IDifferentiator.cs" />

@@ -664,6 +664,12 @@ limitations under the License. -->
                                 <ToolTip Content="{x:Static res:Resource.FactToolTip}" />
                             </Button.ToolTip>
                         </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Tag="round" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource round}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.RoundToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
                     </Grid>
                 </Expander>
                 <Expander x:Name="standartLogicToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" Visibility="Collapsed" IsExpanded="True">

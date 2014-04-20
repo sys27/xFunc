@@ -171,6 +171,8 @@ namespace xFunc.Maths
                     return new Sum();
                 case Functions.Product:
                     return new Product();
+                case Functions.Round:
+                    return new Round();
                 case Functions.Derivative:
                     return new Derivative();
                 case Functions.Simplify:

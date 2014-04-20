@@ -170,6 +170,10 @@ namespace xFunc.Maths.Tokens
         /// Product
         /// </summary>
         Product,
+        /// <summary>
+        /// round
+        /// </summary>
+        Round,
 
         /// <summary>
         /// deriv

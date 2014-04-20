@@ -719,6 +719,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("round("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Round));
+                        i += 5;
+
+                        continue;
+                    }
                     if (sub.StartsWith("transpose("))
                     {
                         tokens.Add(new FunctionToken(Functions.Transpose));

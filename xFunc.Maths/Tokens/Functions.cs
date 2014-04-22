@@ -174,6 +174,14 @@ namespace xFunc.Maths.Tokens
         /// round
         /// </summary>
         Round,
+        /// <summary>
+        /// floor
+        /// </summary>
+        Floor,
+        /// <summary>
+        /// ceil
+        /// </summary>
+        Ceil,
 
         /// <summary>
         /// deriv

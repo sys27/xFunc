@@ -726,6 +726,18 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("floor(")) {
+                        tokens.Add(new FunctionToken(Functions.Floor));
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("ceil(")) {
+                        tokens.Add(new FunctionToken(Functions.Ceil));
+                        i += 4;
+
+                        continue;
+                    }
                     if (sub.StartsWith("transpose("))
                     {
                         tokens.Add(new FunctionToken(Functions.Transpose));

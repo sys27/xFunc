@@ -93,12 +93,8 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 if (value != null)
                 {
-                    /*
                     if (!(value is Matrix))
                         throw new NotSupportedException();
-                     * */
-
-                    // Not compatible with own TextExpression
 
                     value.Parent = this;
                 }

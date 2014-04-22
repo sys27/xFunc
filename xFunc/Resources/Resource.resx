@@ -661,6 +661,12 @@
     <value>Inverse a matrix. Example: inverse({{1, 3}, {9, 4}})</value>
   </data>
   <data name="RoundToolTip" xml:space="preserve">
-    <value>The "round" function. Example: round(number, digits).</value>
+    <value>Rounds a value to the nearest integer or to the specified number of fractional digits. Example: round(number, digits).</value>
+  </data>
+  <data name="CeilToolTip" xml:space="preserve">
+    <value>Returns the smallest integer greater than or equal to the specified number. Example: ceil(5.5555).</value>
+  </data>
+  <data name="FloorToolTip" xml:space="preserve">
+    <value>Returns the largest integer less than or equal to the specified number. Example: floor(5.55555).</value>
   </data>
 </root>

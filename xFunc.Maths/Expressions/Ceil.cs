@@ -52,6 +52,10 @@ namespace xFunc.Maths.Expressions
             return base.ToString("ceil");
         }
 
+        protected override IExpression _Differentiation (Variable variable) {
+            throw new NotSupportedException();
+        }
+
         /// <summary>
         /// Calculates this mathemarical expression.
         /// </summary>
@@ -67,32 +71,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <returns>
-        /// Returns a derivative of the expression.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
-        public override IExpression Differentiate()
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
         /// <returns>
@@ -101,17 +79,6 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Ceil(argument.Clone());
-        }
-
-        /// <summary>
-        /// The expression that represents a double-precision floating-point number to be rounded up.
-        /// </summary>
-        public IExpression Argument
-        {
-            get
-            {
-                return argument;
-            }
         }
     }
 }

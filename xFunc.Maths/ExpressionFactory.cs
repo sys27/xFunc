@@ -173,6 +173,10 @@ namespace xFunc.Maths
                     return new Product();
                 case Functions.Round:
                     return new Round();
+                case Functions.Floor:
+                    return new Floor();
+                case Functions.Ceil:
+                    return new Ceil();
                 case Functions.Derivative:
                     return new Derivative();
                 case Functions.Simplify:

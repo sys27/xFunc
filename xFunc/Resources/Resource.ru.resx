@@ -663,4 +663,10 @@
   <data name="RoundToolTip" xml:space="preserve">
     <value>Функция округления. Пример: round(number, digits).</value>
   </data>
+  <data name="CeilToolTip" xml:space="preserve">
+    <value>Возвращает наименьшее целое число, которое больше или равно заданному числу. Пример: ceil(5.55555).</value>
+  </data>
+  <data name="FloorToolTip" xml:space="preserve">
+    <value>Возвращает наибольшее целое число, которое меньше или равно указанному числу. Пример: floor(5.55555).</value>
+  </data>
 </root>

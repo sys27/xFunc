@@ -430,6 +430,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returns the smallest integer greater than or equal to the specified number. Example: ceil(5.5555)..
+        /// </summary>
+        public static string CeilToolTip {
+            get {
+                return ResourceManager.GetString("CeilToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string ClearButtonHeader {
@@ -768,6 +777,15 @@ namespace xFunc.Resources {
         public static string FileMenu {
             get {
                 return ResourceManager.GetString("FileMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string FloorToolTip {
+            get {
+                return ResourceManager.GetString("FloorToolTip", resourceCulture);
             }
         }
         

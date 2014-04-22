@@ -726,12 +726,6 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("roundunary(")) {
-                        tokens.Add(new FunctionToken(Functions.RoundUnary));
-                        i += 10;
-
-                        continue;
-                    }
                     if (sub.StartsWith("floor(")) {
                         tokens.Add(new FunctionToken(Functions.Floor));
                         i += 5;

@@ -49,10 +49,12 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />
     <Compile Include="Expressions\Fact.cs" />
+    <Compile Include="Expressions\Floor.cs" />
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\Hyperbolic\HyperbolicExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />

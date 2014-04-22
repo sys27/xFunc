@@ -173,8 +173,6 @@ namespace xFunc.Maths
                     return new Product();
                 case Functions.Round:
                     return new Round();
-                case Functions.RoundUnary:
-                    return new RoundUnary();
                 case Functions.Floor:
                     return new Floor();
                 case Functions.Ceil:

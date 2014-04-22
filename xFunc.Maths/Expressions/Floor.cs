@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override string ToString()
         {
-            return base.ToString("floor");
+            return ToString("floor({0})");
         }
 
         protected override IExpression _Differentiation (Variable variable) {

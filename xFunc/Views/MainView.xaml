@@ -665,19 +665,19 @@ limitations under the License. -->
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="round" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource round}" Width="40" Height="20" />
+                            <Rectangle Fill="{StaticResource round}" Width="48" Height="28" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.RoundToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="ceil" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource round}" Width="40" Height="20" />
+                            <Rectangle Fill="{StaticResource ceil}" Width="40" Height="28" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CeilToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="floor" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource round}" Width="40" Height="20" />
+                            <Rectangle Fill="{StaticResource floor}" Width="42" Height="28" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.FloorToolTip}" />
                             </Button.ToolTip>

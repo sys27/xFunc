@@ -451,10 +451,10 @@ namespace xFunc.Maths
         private IExpression SimplifyDiv(Div div)
         {
             // 0 / x
-            if (div.Left.Equals(zero))
+            if (div.Left.Equals(zero) && !div.Right.Equals(zero))
                 return zero;
             // x / 0
-            if (div.Right.Equals(zero))
+            if (div.Right.Equals(zero) && !div.Left.Equals(zero))
                 throw new DivideByZeroException();
             // x / 1
             if (div.Right.Equals(one))

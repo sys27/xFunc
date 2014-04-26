@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Sech : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sech"/> class.
-        /// </summary>
         internal Sech() { }
 
         /// <summary>

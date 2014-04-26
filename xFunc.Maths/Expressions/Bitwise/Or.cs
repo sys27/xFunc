@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions.Bitwise
     public class Or : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Or"/> class.
-        /// </summary>
         internal Or() { }
 
         /// <summary>

@@ -25,9 +25,6 @@ namespace xFunc.Maths.Expressions
 
         private IExpression expression;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Simplify"/> class.
-        /// </summary>
         internal Simplify() { }
 
         /// <summary>

@@ -26,9 +26,6 @@ namespace xFunc.Maths.Expressions
         private IExpression key;
         private IExpression value;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="Define"/>.
-        /// </summary>
         internal Define() { }
 
         /// <summary>

@@ -23,10 +23,7 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Determinant : UnaryExpression
     {
 
-        internal Determinant()
-        {
-
-        }
+        internal Determinant() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Determinant"/> class.

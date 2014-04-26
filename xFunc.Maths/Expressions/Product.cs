@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions
     public class Product : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Product"/> class.
-        /// </summary>
         internal Product()
             : base(null, -1)
         {

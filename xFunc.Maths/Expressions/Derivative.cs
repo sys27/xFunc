@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions
     public class Derivative : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Derivative"/> class.
-        /// </summary>
         internal Derivative()
             : base(null, -1) { }
 

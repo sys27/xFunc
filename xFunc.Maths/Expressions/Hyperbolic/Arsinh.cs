@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Arsinh : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arsinh"/> class.
-        /// </summary>
         internal Arsinh() { }
 
         /// <summary>

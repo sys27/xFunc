@@ -17,16 +17,13 @@ using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
-    
+
     /// <summary>
     /// Represents the Subtraction operation.
     /// </summary>
     public class Sub : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sub"/> class.
-        /// </summary>
         internal Sub() { }
 
         /// <summary>
@@ -132,7 +129,7 @@ namespace xFunc.Maths.Expressions
 
             return new Number(0);
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="Sub"/> class.
         /// </summary>

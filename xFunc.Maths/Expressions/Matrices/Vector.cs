@@ -27,9 +27,6 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Vector : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Vector"/> class.
-        /// </summary>
         internal Vector()
             : base(null, -1)
         {

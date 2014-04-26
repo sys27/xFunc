@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Div : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Div"/> class.
-        /// </summary>
         internal Div() { }
 
         /// <summary>

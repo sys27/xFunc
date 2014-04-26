@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arctan : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arctan"/> class.
-        /// </summary>
         internal Arctan() { }
 
         /// <summary>

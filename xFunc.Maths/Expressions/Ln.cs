@@ -23,10 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Ln : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Ln"/> class.
-        /// </summary>
-        /// <seealso cref="IExpression"/>
         internal Ln() { }
 
         /// <summary>

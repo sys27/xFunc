@@ -16,16 +16,13 @@ using System;
 
 namespace xFunc.Maths.Expressions
 {
-    
+
     /// <summary>
     /// Represents the Square Root function.
     /// </summary>
     public class Sqrt : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sqrt"/> class.
-        /// </summary>
         internal Sqrt() { }
 
         /// <summary>

@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions
     public class Mul : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Mul"/> class.
-        /// </summary>
         internal Mul() { }
 
         /// <summary>

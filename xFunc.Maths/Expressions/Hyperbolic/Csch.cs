@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Csch : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Csch"/> class.
-        /// </summary>
         internal Csch() { }
 
         /// <summary>

@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions
     public class Sum : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sum"/> class.
-        /// </summary>
         internal Sum()
             : base(null, -1)
         {

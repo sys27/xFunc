@@ -27,9 +27,6 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Matrix : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Matrix"/> class.
-        /// </summary>
         internal Matrix()
             : base(null, -1)
         {

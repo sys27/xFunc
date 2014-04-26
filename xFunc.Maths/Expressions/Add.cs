@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions
     public class Add : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Add"/> class.
-        /// </summary>
         internal Add() { }
 
         /// <summary>

@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Tan : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Tan"/> class.
-        /// </summary>
         internal Tan() { }
 
         /// <summary>

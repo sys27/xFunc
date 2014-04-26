@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions.Bitwise
     public class XOr : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XOr"/> class.
-        /// </summary>
         internal XOr() { }
 
         /// <summary>

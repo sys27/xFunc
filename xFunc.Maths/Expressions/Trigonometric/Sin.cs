@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Sin : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sin"/> class.
-        /// </summary>
         internal Sin() { }
 
         /// <summary>
@@ -34,7 +31,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="firstMathExpression">The argument of function.</param>
         public Sin(IExpression firstMathExpression) : base(firstMathExpression) { }
-        
+
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>

@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arcsec : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsec"/> class.
-        /// </summary>
         internal Arcsec() { }
 
         /// <summary>

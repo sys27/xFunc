@@ -25,9 +25,6 @@ namespace xFunc.Maths.Expressions
 
         private IExpression key;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Undefine"/> class.
-        /// </summary>
         internal Undefine() { }
 
         /// <summary>

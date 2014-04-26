@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Fact : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Fact"/> class.
-        /// </summary>
         internal Fact() { }
 
         /// <summary>

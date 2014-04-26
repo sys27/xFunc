@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Sec : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sec"/> class.
-        /// </summary>
         internal Sec() { }
 
         /// <summary>

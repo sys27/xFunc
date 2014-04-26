@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Coth : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Coth"/> class.
-        /// </summary>
         internal Coth() { }
 
         /// <summary>

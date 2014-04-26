@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arccot : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arccot"/> class.
-        /// </summary>
         internal Arccot() { }
 
         /// <summary>

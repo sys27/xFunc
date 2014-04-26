@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arcsin : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsin"/> class.
-        /// </summary>
         internal Arcsin() { }
 
         /// <summary>

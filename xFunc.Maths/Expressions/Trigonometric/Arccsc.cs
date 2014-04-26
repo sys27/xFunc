@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arccsc : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arccsc"/> class.
-        /// </summary>
         internal Arccsc() { }
 
         /// <summary>

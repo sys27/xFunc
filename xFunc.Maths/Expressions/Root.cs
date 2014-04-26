@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Root : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Root"/> class.
-        /// </summary>
         internal Root() { }
 
         /// <summary>

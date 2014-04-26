@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions.Bitwise
     public class Not : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Not"/> class.
-        /// </summary>
         internal Not() { }
 
         /// <summary>

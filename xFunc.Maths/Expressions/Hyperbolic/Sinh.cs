@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Sinh : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Sinh"/> class.
-        /// </summary>
         internal Sinh() { }
 
         /// <summary>

@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Pow : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Pow"/> class.
-        /// </summary>
         internal Pow() { }
 
         /// <summary>

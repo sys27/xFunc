@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class UnaryMinus : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
-        /// </summary>
         internal UnaryMinus() { }
 
         /// <summary>

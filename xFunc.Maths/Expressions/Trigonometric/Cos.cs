@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Cos : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Cos"/> class.
-        /// </summary>
         internal Cos() { }
 
         /// <summary>

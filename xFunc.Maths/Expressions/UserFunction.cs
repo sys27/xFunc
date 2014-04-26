@@ -31,9 +31,6 @@ namespace xFunc.Maths.Expressions
 
         private string function;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserFunction"/> class.
-        /// </summary>
         internal UserFunction()
             : this(null, null, -1)
         {

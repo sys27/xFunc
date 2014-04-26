@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Artanh : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Artanh"/> class.
-        /// </summary>
         internal Artanh() { }
 
         /// <summary>

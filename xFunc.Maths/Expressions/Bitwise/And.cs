@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions.Bitwise
     public class And : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="And"/> class.
-        /// </summary>
         internal And() { }
 
         /// <summary>

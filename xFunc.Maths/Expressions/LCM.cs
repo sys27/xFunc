@@ -26,9 +26,6 @@ namespace xFunc.Maths.Expressions
     public class LCM : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LCM"/> class.
-        /// </summary>
         internal LCM()
             : base(null, -1)
         {

@@ -23,10 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Log : BinaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Log"/> class.
-        /// </summary>
-        /// <seealso cref="IExpression"/>
         internal Log() { }
 
         /// <summary>

@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Abs : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Abs"/> class.
-        /// </summary>
         internal Abs() { }
 
         /// <summary>

@@ -23,9 +23,6 @@ namespace xFunc.Maths.Expressions
     public class Exp : UnaryExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Exp"/> class.
-        /// </summary>
         internal Exp() { }
 
         /// <summary>

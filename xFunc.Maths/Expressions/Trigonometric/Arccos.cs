@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Arccos : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arccos"/> class.
-        /// </summary>
         internal Arccos() { }
 
         /// <summary>

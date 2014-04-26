@@ -26,9 +26,6 @@ namespace xFunc.Maths.Expressions
     public class GCD : DifferentParametersExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GCD"/> class.
-        /// </summary>
         internal GCD()
             : base(null, -1)
         {

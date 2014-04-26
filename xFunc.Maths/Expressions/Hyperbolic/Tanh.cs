@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Tanh : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Tanh"/> class.
-        /// </summary>
         internal Tanh() { }
 
         /// <summary>

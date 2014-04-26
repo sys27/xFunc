@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Cot : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Cot"/> class.
-        /// </summary>
         internal Cot() { }
 
         /// <summary>

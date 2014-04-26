@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     public class Arcoth : HyperbolicExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Arcoth"/> class.
-        /// </summary>
         internal Arcoth() { }
 
         /// <summary>

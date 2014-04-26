@@ -24,9 +24,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     public class Csc : TrigonometricExpression
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Csc"/> class.
-        /// </summary>
         internal Csc() { }
 
         /// <summary>

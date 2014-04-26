@@ -16,11 +16,7 @@ namespace xFunc.Maths.Expressions.Programming
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            // todo: refactor...
-            var leftValue = (double)left.Calculate(parameters) == 0 ? false : true;
-            var rightValue = (double)right.Calculate(parameters) == 0 ? false : true;
-
-            return leftValue == rightValue;
+            throw new NotImplementedException();
         }
 
         public override IExpression Clone()

@@ -19,7 +19,34 @@ using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    class NotEqual
+
+    public class NotEqual : BinaryExpression
     {
+
+        internal NotEqual() { }
+
+        public NotEqual(IExpression left, IExpression right)
+            : base(left, right) { }
+
+        public override object Calculate(ExpressionParameters parameters)
+        {
+            var leftValue = left.Calculate(parameters);
+            var rightValue = right.Calculate(parameters);
+
+            // todo: equals?
+            return leftValue != rightValue;
+        }
+
+        public override IExpression Clone()
+        {
+            return new Equal(left.Clone(), right.Clone());
+        }
+
+        public override IExpression Differentiate(Variable variable)
+        {
+            throw new NotSupportedException();
+        }
+
     }
+
 }

@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions.Programming
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            return left.Calculate(parameters).AsBool() && right.Calculate(parameters).AsBool();
+            return (left.Calculate(parameters).AsBool() && right.Calculate(parameters).AsBool()).AsNumber();
         }
 
         public override IExpression Clone()

@@ -22,6 +22,9 @@ namespace xFunc.Maths.Expressions.Programming
 
         internal For() : base(null, -1) { }
 
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter)
+            : base(new[] { body, init, cond, iter }, 4) { }
+
         public For(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams) { }
 
@@ -30,7 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
             for (Initialization.Calculate(parameters); Condition.Calculate(parameters).AsBool(); Iteration.Calculate(parameters))
                 Body.Calculate(parameters);
 
-            return null;
+            return double.NaN;
         }
 
         public override IExpression Differentiate()

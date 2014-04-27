@@ -31,8 +31,19 @@ namespace xFunc.Maths.Expressions.Programming
 
                 return num == False ? false : true;
             }
+            if (value is int)
+            {
+                var num = (int)value;
+
+                return num == False ? false : true;
+            }
 
             return false;
+        }
+
+        public static int AsNumber(this bool value)
+        {
+            return value ? 1 : 0;
         }
 
     }

@@ -31,7 +31,7 @@ namespace xFunc.Maths.Expressions.Programming
             var rightValue = right.Calculate(parameters);
 
             // todo: equals?
-            return leftValue == rightValue;
+            return (leftValue == rightValue).AsNumber();
         }
 
         public override IExpression Clone()

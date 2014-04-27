@@ -15,9 +15,9 @@ namespace xFunc.Test.Expressions.Maths.Programming
         public void CalculateGreaterTrueTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 463) };
-            var lessThen = new GreaterThen(new Variable("x"), new Number(10));
+            var greaterThen = new GreaterThen(new Variable("x"), new Number(10));
 
-            Assert.AreEqual(1, lessThen.Calculate(parameters));
+            Assert.AreEqual(1, greaterThen.Calculate(parameters));
         }
 
         [TestMethod]

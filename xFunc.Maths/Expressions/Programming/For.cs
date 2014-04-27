@@ -13,9 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
@@ -25,34 +22,78 @@ namespace xFunc.Maths.Expressions.Programming
 
         internal For() : base(null, -1) { }
 
+        public For(IExpression[] arguments, int countOfParams)
+            : base(arguments, countOfParams) { }
+
         public override object Calculate(ExpressionParameters parameters)
         {
-            throw new NotImplementedException();
+            for (Initialization.Calculate(parameters); Condition.Calculate(parameters).AsBool(); Iteration.Calculate(parameters))
+                Body.Calculate(parameters);
+
+            return null;
         }
 
         public override IExpression Differentiate()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public override IExpression Differentiate(Variable variable)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public override IExpression Clone()
         {
-            throw new NotImplementedException();
+            return new For(CloneArguments(), countOfParams);
         }
 
         public override int MinCountOfParams
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return 4;
+            }
         }
 
         public override int MaxCountOfParams
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return 4;
+            }
+        }
+
+        public IExpression Body
+        {
+            get
+            {
+                return arguments[0];
+            }
+        }
+
+        public IExpression Initialization
+        {
+            get
+            {
+                return arguments[1];
+            }
+        }
+
+        public IExpression Condition
+        {
+            get
+            {
+                return arguments[2];
+            }
+        }
+
+        public IExpression Iteration
+        {
+            get
+            {
+                return arguments[3];
+            }
         }
 
     }

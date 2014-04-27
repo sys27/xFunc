@@ -25,6 +25,11 @@ namespace xFunc.Maths.Expressions.Programming
         public While(IExpression body, IExpression condition)
             : base(body, condition) { }
 
+        public override string ToString()
+        {
+            return ToString("while({0}, {1})");
+        }
+
         public override object Calculate(ExpressionParameters parameters)
         {
             while (right.Calculate(parameters).AsBool())

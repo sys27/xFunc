@@ -97,13 +97,13 @@ namespace xFunc.Maths.Tokens
                     return 13;
                 case Operations.Assign:
                     return 0;
-                case Operations.Not:
+                case Operations.BitwiseNot:
                     return 15;
-                case Operations.And:
+                case Operations.BitwiseAnd:
                     return 15;
-                case Operations.Or:
+                case Operations.BitwiseOr:
                     return 15;
-                case Operations.XOr:
+                case Operations.BitwiseXOr:
                     return 15;
                 default:
                     return -1;

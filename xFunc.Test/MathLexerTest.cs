@@ -210,7 +210,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new OperationToken(Operations.Not),
+                new OperationToken(Operations.BitwiseNot),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(2),
                 new SymbolToken(Symbols.CloseBracket)
@@ -225,7 +225,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new OperationToken(Operations.Not),
+                new OperationToken(Operations.BitwiseNot),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -246,7 +246,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(2),
-                new OperationToken(Operations.And),
+                new OperationToken(Operations.BitwiseAnd),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -260,7 +260,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(2),
-                new OperationToken(Operations.Or),
+                new OperationToken(Operations.BitwiseOr),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -701,7 +701,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new OperationToken(Operations.Not),
+                new OperationToken(Operations.BitwiseNot),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -715,7 +715,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(1),
-                new OperationToken(Operations.And),
+                new OperationToken(Operations.BitwiseAnd),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -729,7 +729,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(1),
-                new OperationToken(Operations.Or),
+                new OperationToken(Operations.BitwiseOr),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -743,7 +743,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(1),
-                new OperationToken(Operations.XOr),
+                new OperationToken(Operations.BitwiseXOr),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -771,7 +771,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new VariableToken("x"),
-                new OperationToken(Operations.And),
+                new OperationToken(Operations.BitwiseAnd),
                 new VariableToken("x")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -799,7 +799,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new VariableToken("func"),
-                new OperationToken(Operations.And),
+                new OperationToken(Operations.BitwiseAnd),
                 new NumberToken(1)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());

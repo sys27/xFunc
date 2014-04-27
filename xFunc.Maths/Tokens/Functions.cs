@@ -184,6 +184,19 @@ namespace xFunc.Maths.Tokens
         Ceil,
 
         /// <summary>
+        /// if
+        /// </summary>
+        If,
+        /// <summary>
+        /// for
+        /// </summary>
+        For,
+        /// <summary>
+        /// while
+        /// </summary>
+        While,
+
+        /// <summary>
         /// deriv
         /// </summary>
         Derivative,

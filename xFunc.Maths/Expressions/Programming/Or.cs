@@ -19,7 +19,30 @@ using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    class Or
+
+    public class Or : BinaryExpression
     {
+
+        internal Or() { }
+
+        public Or(IExpression left, IExpression right)
+            : base(left, right) { }
+
+        public override object Calculate(ExpressionParameters parameters)
+        {
+            return left.Calculate(parameters).AsBool() || right.Calculate(parameters).AsBool();
+        }
+
+        public override IExpression Clone()
+        {
+            return new And(left.Clone(), right.Clone());
+        }
+
+        public override IExpression Differentiate(Variable variable)
+        {
+            throw new NotSupportedException();
+        }
+
     }
+
 }

@@ -19,7 +19,42 @@ using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    class For
+
+    public class For : DifferentParametersExpression
     {
+
+        internal For() : base(null, -1) { }
+
+        public override object Calculate(ExpressionParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IExpression Differentiate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IExpression Differentiate(Variable variable)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IExpression Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int MinCountOfParams
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override int MaxCountOfParams
+        {
+            get { throw new NotImplementedException(); }
+        }
+
     }
+
 }

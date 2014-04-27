@@ -72,6 +72,7 @@
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
+    <Compile Include="Expressions\Programming\Bool.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />
     <Compile Include="Expressions\Programming\For.cs" />
     <Compile Include="Expressions\Programming\GreaterOrEqual.cs" />

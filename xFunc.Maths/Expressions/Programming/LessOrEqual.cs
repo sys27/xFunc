@@ -19,7 +19,33 @@ using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    class LessOrEqual
+
+    public class LessOrEqual : BinaryExpression
     {
+
+        internal LessOrEqual() { }
+
+        public LessOrEqual(IExpression left, IExpression right)
+            : base(left, right) { }
+
+        public override object Calculate(ExpressionParameters parameters)
+        {
+            var leftValue = (double)left.Calculate(parameters);
+            var rightValue = (double)right.Calculate(parameters);
+
+            return leftValue <= rightValue;
+        }
+
+        public override IExpression Clone()
+        {
+            return new LessOrEqual(left.Clone(), right.Clone());
+        }
+
+        public override IExpression Differentiate(Variable variable)
+        {
+            throw new NotSupportedException();
+        }
+
     }
+
 }

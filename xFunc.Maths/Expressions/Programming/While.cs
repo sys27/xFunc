@@ -23,12 +23,12 @@ namespace xFunc.Maths.Expressions.Programming
         internal While() { }
 
         public While(IExpression body, IExpression condition)
-            : base(condition, body) { }
+            : base(body, condition) { }
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            while (left.Calculate(parameters).AsBool())
-                right.Calculate(parameters);
+            while (right.Calculate(parameters).AsBool())
+                left.Calculate(parameters);
 
             return double.NaN;
         }

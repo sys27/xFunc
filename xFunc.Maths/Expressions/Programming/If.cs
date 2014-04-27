@@ -22,6 +22,9 @@ namespace xFunc.Maths.Expressions.Programming
 
         internal If() : base(null, -1) { }
 
+        public If(IExpression condition, IExpression then)
+            : base(new[] { condition, then }, 2) { }
+
         public If(IExpression condition, IExpression then, IExpression @else)
             : base(new[] { condition, then, @else }, 3) { }
 

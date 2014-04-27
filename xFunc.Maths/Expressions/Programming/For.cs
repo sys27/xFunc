@@ -28,6 +28,11 @@ namespace xFunc.Maths.Expressions.Programming
         public For(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams) { }
 
+        public override string ToString()
+        {
+            return base.ToString("for");
+        }
+
         public override object Calculate(ExpressionParameters parameters)
         {
             for (Initialization.Calculate(parameters); Condition.Calculate(parameters).AsBool(); Iteration.Calculate(parameters))

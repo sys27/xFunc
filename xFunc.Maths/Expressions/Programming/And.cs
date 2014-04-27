@@ -25,6 +25,14 @@ namespace xFunc.Maths.Expressions.Programming
         public And(IExpression left, IExpression right)
             : base(left, right) { }
 
+        public override string ToString()
+        {
+            if(parent is BinaryExpression)
+                return ToString("({0} && {1})");
+
+            return ToString("{0} && {1}");
+        }
+
         public override object Calculate(ExpressionParameters parameters)
         {
             return (left.Calculate(parameters).AsBool() && right.Calculate(parameters).AsBool()).AsNumber();

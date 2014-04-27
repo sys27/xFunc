@@ -185,15 +185,38 @@ namespace xFunc.Maths
                 }
                 else if (letter == '&')
                 {
+                    if (i + 1 < function.Length && function[i + 1] == '&')
+                    {
+                        tokens.Add(new OperationToken(Operations.ConditionalAnd));
+                        i += 2;
+
+                        continue;
+                    }
+
                     tokens.Add(new OperationToken(Operations.BitwiseAnd));
                 }
                 else if (letter == '|')
                 {
+                    if (i + 1 < function.Length && function[i + 1] == '|')
+                    {
+                        tokens.Add(new OperationToken(Operations.ConditionalOr));
+                        i += 2;
+
+                        continue;
+                    }
+
                     tokens.Add(new OperationToken(Operations.BitwiseOr));
                 }
                 else if (letter == ':' && i + 1 < function.Length && function[i + 1] == '=')
                 {
                     tokens.Add(new OperationToken(Operations.Assign));
+                    i += 2;
+
+                    continue;
+                }
+                else if (letter == '=' && i + 1 < function.Length && function[i + 1] == '=')
+                {
+                    tokens.Add(new OperationToken(Operations.Equal));
                     i += 2;
 
                     continue;
@@ -213,7 +236,39 @@ namespace xFunc.Maths
                         }
                     }
 
+                    if (i + 1 < function.Length && function[i + 1] == '=')
+                    {
+                        tokens.Add(new OperationToken(Operations.NotEqual));
+                        i += 2;
+
+                        continue;
+                    }
+
                     throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+                }
+                else if (letter == '<')
+                {
+                    if (i + 1 < function.Length && function[i + 1] == '=')
+                    {
+                        tokens.Add(new OperationToken(Operations.LessOrEqual));
+                        i += 2;
+
+                        continue;
+                    }
+
+                    tokens.Add(new OperationToken(Operations.LessThen));
+                }
+                else if (letter == '>')
+                {
+                    if (i + 1 < function.Length && function[i + 1] == '=')
+                    {
+                        tokens.Add(new OperationToken(Operations.GreaterOrEqual));
+                        i += 2;
+
+                        continue;
+                    }
+
+                    tokens.Add(new OperationToken(Operations.GreaterThen));
                 }
                 else if (char.IsDigit(letter))
                 {
@@ -726,13 +781,15 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("floor(")) {
+                    if (sub.StartsWith("floor("))
+                    {
                         tokens.Add(new FunctionToken(Functions.Floor));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("ceil(")) {
+                    if (sub.StartsWith("ceil("))
+                    {
                         tokens.Add(new FunctionToken(Functions.Ceil));
                         i += 4;
 

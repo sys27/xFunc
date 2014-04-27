@@ -690,6 +690,212 @@ namespace xFunc.Test
             var exp = parser.Parse("sin(x, 3)");
         }
 
+        [TestMethod]
+        public void ForTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.For, 4),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(0),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.LessThen),
+                new NumberToken(10),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("for(2, x := 0, x < 10, x := x + 1)");
+
+            Assert.AreEqual("for(2, x := 0, x < 10, x := x + 1)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void WhileTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.While, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("while(2, x := x + 1)");
+
+            Assert.AreEqual("while(2, x := x + 1)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void IfTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.If, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new OperationToken(Operations.Equal),
+                new NumberToken(0),
+                new OperationToken(Operations.ConditionalAnd),
+                new VariableToken("y"),
+                new OperationToken(Operations.NotEqual),
+                new NumberToken(0),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(8),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("if(x == 0 && y != 0, 2, 8)");
+
+            Assert.AreEqual("if(x == 0 && y != 0, 2, 8)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void ConditionalAndTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Equal),
+                new NumberToken(0),
+                new OperationToken(Operations.ConditionalAnd),
+                new VariableToken("y"),
+                new OperationToken(Operations.NotEqual),
+                new NumberToken(0)
+            };
+
+            var exp = parser.Parse("x == 0 && y != 0");
+
+            Assert.AreEqual("x == 0 && y != 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void ConditionalOrTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Equal),
+                new NumberToken(0),
+                new OperationToken(Operations.ConditionalOr),
+                new VariableToken("y"),
+                new OperationToken(Operations.NotEqual),
+                new NumberToken(0)
+            };
+
+            var exp = parser.Parse("x == 0 || y != 0");
+
+            Assert.AreEqual("x == 0 || y != 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void EqualTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Equal),
+                new NumberToken(0),
+            };
+
+            var exp = parser.Parse("x == 0");
+
+            Assert.AreEqual("x == 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void NotEqualTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.NotEqual),
+                new NumberToken(0),
+            };
+
+            var exp = parser.Parse("x != 0");
+
+            Assert.AreEqual("x != 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void LessThenTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.LessThen),
+                new NumberToken(0),
+            };
+
+            var exp = parser.Parse("x < 0");
+
+            Assert.AreEqual("x < 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void LessOrEqualTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.LessOrEqual),
+                new NumberToken(0),
+            };
+
+            var exp = parser.Parse("x <= 0");
+
+            Assert.AreEqual("x <= 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void GreaterThenTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.GreaterThen),
+                new NumberToken(0),
+            };
+
+            var exp = parser.Parse("x > 0");
+
+            Assert.AreEqual("x > 0", exp.ToString());
+        }
+
+        [TestMethod]
+        public void GreaterOrEqualTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.GreaterOrEqual),
+                new NumberToken(0),
+            };
+
+            var exp = parser.Parse("x >= 0");
+
+            Assert.AreEqual("x >= 0", exp.ToString());
+        }
+
     }
 
 }

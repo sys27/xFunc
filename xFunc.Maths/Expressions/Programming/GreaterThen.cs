@@ -25,6 +25,14 @@ namespace xFunc.Maths.Expressions.Programming
         public GreaterThen(IExpression left, IExpression right)
             : base(left, right) { }
 
+        public override string ToString()
+        {
+            if(parent is BinaryExpression)
+                return ToString("({0} > {1})");
+
+            return ToString("{0} > {1}");
+        }
+
         public override object Calculate(ExpressionParameters parameters)
         {
             var leftValue = (double)left.Calculate(parameters);

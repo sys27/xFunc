@@ -39,9 +39,7 @@ namespace xFunc.Maths.Expressions
         public override string ToString()
         {
             if (parent is BinaryExpression)
-            {
                 return ToString("({0} / {1})");
-            }
 
             return ToString("{0} / {1}");
         }

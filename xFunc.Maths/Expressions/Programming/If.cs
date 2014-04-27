@@ -31,6 +31,11 @@ namespace xFunc.Maths.Expressions.Programming
         public If(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams) { }
 
+        public override string ToString()
+        {
+            return ToString("if");
+        }
+
         public override object Calculate(ExpressionParameters parameters)
         {
             if (Condition.Calculate(parameters).AsBool())

@@ -33,8 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            var cond = Condition.Calculate(parameters).AsBool();
-            if (cond)
+            if (Condition.Calculate(parameters).AsBool())
                 return Then.Calculate(parameters);
 
             var @else = Else;

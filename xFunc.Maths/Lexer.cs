@@ -181,15 +181,15 @@ namespace xFunc.Maths
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
                     }
 
-                    tokens.Add(new OperationToken(Operations.Not));
+                    tokens.Add(new OperationToken(Operations.BitwiseNot));
                 }
                 else if (letter == '&')
                 {
-                    tokens.Add(new OperationToken(Operations.And));
+                    tokens.Add(new OperationToken(Operations.BitwiseAnd));
                 }
                 else if (letter == '|')
                 {
-                    tokens.Add(new OperationToken(Operations.Or));
+                    tokens.Add(new OperationToken(Operations.BitwiseOr));
                 }
                 else if (letter == ':' && i + 1 < function.Length && function[i + 1] == '=')
                 {
@@ -658,28 +658,28 @@ namespace xFunc.Maths
 
                     if (sub.StartsWith("not("))
                     {
-                        tokens.Add(new OperationToken(Operations.Not));
+                        tokens.Add(new OperationToken(Operations.BitwiseNot));
                         i += 3;
 
                         continue;
                     }
                     if (sub.StartsWith("and"))
                     {
-                        tokens.Add(new OperationToken(Operations.And));
+                        tokens.Add(new OperationToken(Operations.BitwiseAnd));
                         i += 3;
 
                         continue;
                     }
                     if (sub.StartsWith("or"))
                     {
-                        tokens.Add(new OperationToken(Operations.Or));
+                        tokens.Add(new OperationToken(Operations.BitwiseOr));
                         i += 2;
 
                         continue;
                     }
                     if (sub.StartsWith("xor"))
                     {
-                        tokens.Add(new OperationToken(Operations.XOr));
+                        tokens.Add(new OperationToken(Operations.BitwiseXOr));
                         i += 3;
 
                         continue;

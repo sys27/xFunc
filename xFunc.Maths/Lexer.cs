@@ -823,6 +823,27 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("if("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.If));
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("for("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.For));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("while("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.While));
+                        i += 5;
+
+                        continue;
+                    }
 
                     int j = i + 1;
                     for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;

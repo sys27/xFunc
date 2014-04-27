@@ -13,29 +13,34 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    
-    public class While : UnaryExpression
+
+    public class While : BinaryExpression
     {
-        
+
+        internal While() { }
+
+        public While(IExpression left, IExpression right)
+            : base(left, right) { }
+
         public override object Calculate(ExpressionParameters parameters)
         {
-            throw new NotImplementedException();
+            while (left.Calculate(parameters).AsBool())
+                right.Calculate(parameters);
+
+            return null;
         }
 
         public override IExpression Clone()
         {
-            throw new NotImplementedException();
+            return new While(left.Clone(), right.Clone());
         }
 
-        protected override IExpression _Differentiation(Variable variable)
+        public override IExpression Differentiate(Variable variable)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
     }

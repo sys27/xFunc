@@ -77,13 +77,13 @@ namespace xFunc.Maths
                     return new Fact();
                 case Operations.Assign:
                     return new Define();
-                case Operations.Not:
+                case Operations.BitwiseNot:
                     return new Not();
-                case Operations.And:
+                case Operations.BitwiseAnd:
                     return new And();
-                case Operations.Or:
+                case Operations.BitwiseOr:
                     return new Or();
-                case Operations.XOr:
+                case Operations.BitwiseXOr:
                     return new XOr();
                 default:
                     return null;

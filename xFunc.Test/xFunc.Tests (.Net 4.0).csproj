@@ -69,6 +69,8 @@
     <Compile Include="Expressions\Maths\Programming\GreaterTest.cs" />
     <Compile Include="Expressions\Maths\Programming\LessOrEqualTest.cs" />
     <Compile Include="Expressions\Maths\Programming\GreaterOrEqualTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\AndTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\OrTest.cs" />
     <Compile Include="Expressions\Maths\Programming\WhileTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccosTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArcsinTest.cs" />

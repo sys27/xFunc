@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Programming;
 
 namespace xFunc.Test.Expressions.Maths.Programming
 {

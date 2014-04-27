@@ -30,7 +30,6 @@ namespace xFunc.Maths.Expressions.Programming
             var leftValue = (double)left.Calculate(parameters);
             var rightValue = (double)right.Calculate(parameters);
 
-            // todo: equals?
             return (leftValue != rightValue).AsNumber();
         }
 

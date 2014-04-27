@@ -17,6 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Bitwise;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
 
@@ -77,14 +78,30 @@ namespace xFunc.Maths
                     return new Fact();
                 case Operations.Assign:
                     return new Define();
+                case Operations.ConditionalAnd:
+                    return new xFunc.Maths.Expressions.Programming.And();
+                case Operations.ConditionalOr:
+                    return new xFunc.Maths.Expressions.Programming.Or();
+                case Operations.Equal:
+                    return new Equal();
+                case Operations.NotEqual:
+                    return new NotEqual();
+                case Operations.LessThen:
+                    return new LessThen();
+                case Operations.LessOrEqual:
+                    return new LessOrEqual();
+                case Operations.GreaterThen:
+                    return new GreaterThen();
+                case Operations.GreaterOrEqual:
+                    return new GreaterOrEqual();
                 case Operations.BitwiseNot:
-                    return new Not();
+                    return new xFunc.Maths.Expressions.Bitwise.Not();
                 case Operations.BitwiseAnd:
-                    return new And();
+                    return new xFunc.Maths.Expressions.Bitwise.And();
                 case Operations.BitwiseOr:
-                    return new Or();
+                    return new xFunc.Maths.Expressions.Bitwise.Or();
                 case Operations.BitwiseXOr:
-                    return new XOr();
+                    return new xFunc.Maths.Expressions.Bitwise.XOr();
                 default:
                     return null;
             }
@@ -193,6 +210,12 @@ namespace xFunc.Maths
                     return new Determinant();
                 case Functions.Inverse:
                     return new Inverse();
+                case Functions.If:
+                    return new If();
+                case Functions.For:
+                    return new For();
+                case Functions.While:
+                    return new While();
                 case Functions.Undefine:
                     return new Undefine();
                 default: 

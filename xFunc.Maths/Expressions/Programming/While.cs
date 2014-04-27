@@ -19,7 +19,25 @@ using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    class While
+    
+    public class While : UnaryExpression
     {
+        
+        public override object Calculate(ExpressionParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IExpression Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override IExpression _Differentiation(Variable variable)
+        {
+            throw new NotImplementedException();
+        }
+
     }
+
 }

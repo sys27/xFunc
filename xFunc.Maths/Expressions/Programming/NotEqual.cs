@@ -27,8 +27,8 @@ namespace xFunc.Maths.Expressions.Programming
 
         public override object Calculate(ExpressionParameters parameters)
         {
-            var leftValue = left.Calculate(parameters);
-            var rightValue = right.Calculate(parameters);
+            var leftValue = (double)left.Calculate(parameters);
+            var rightValue = (double)right.Calculate(parameters);
 
             // todo: equals?
             return (leftValue != rightValue).AsNumber();

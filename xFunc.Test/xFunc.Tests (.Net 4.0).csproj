@@ -64,6 +64,7 @@
     <Compile Include="Expressions\Maths\Bitwise\NotTest.cs" />
     <Compile Include="Expressions\Maths\Bitwise\AndTest.cs" />
     <Compile Include="Expressions\Maths\Programming\ForTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\IfTest.cs" />
     <Compile Include="Expressions\Maths\Programming\WhileTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccosTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArcsinTest.cs" />

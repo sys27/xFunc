@@ -1615,6 +1615,156 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void IfTest()
+        {
+            var tokens = lexer.Tokenize("if(z, x ^ 2)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.If, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("z"),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.Exponentiation),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ForTest()
+        {
+            var tokens = lexer.Tokenize("for(z := z + 1)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.For, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("z"),
+                new OperationToken(Operations.Assign),
+                new VariableToken("z"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void WhileTest()
+        {
+            var tokens = lexer.Tokenize("while(z := z + 1)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.While, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("z"),
+                new OperationToken(Operations.Assign),
+                new VariableToken("z"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ConditionalAndTest()
+        {
+            var tokens = lexer.Tokenize("x && y");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.ConditionalAnd),
+                new VariableToken("y")
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ConditionalOrTest()
+        {
+            var tokens = lexer.Tokenize("x || y");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.ConditionalOr),
+                new VariableToken("y")
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void LessThenTest()
+        {
+            var tokens = lexer.Tokenize("x < 10");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.LessThen),
+                new NumberToken(10)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void LessOrEqualTest()
+        {
+            var tokens = lexer.Tokenize("x <= 10");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.LessOrEqual),
+                new NumberToken(10)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void GreaterThenTest()
+        {
+            var tokens = lexer.Tokenize("x > 10");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.GreaterThen),
+                new NumberToken(10)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void GreaterOrEqualTest()
+        {
+            var tokens = lexer.Tokenize("x >= 10");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.GreaterOrEqual),
+                new NumberToken(10)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

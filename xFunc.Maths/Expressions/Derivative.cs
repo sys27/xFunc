@@ -189,15 +189,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return (Variable)arguments[1];
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException("value");
-
-                arguments[1] = value;
-                arguments[1].Parent = this;
+                return countOfParams == 2 ? (Variable)arguments[1] : null;
             }
         }
 

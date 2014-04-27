@@ -13,13 +13,28 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    class GreaterThen
+
+    public static class Bool
     {
+
+        public static int True = 1;
+        public static int False = 0;
+
+        public static bool AsBool(this object value)
+        {
+            if (value is double)
+            {
+                var num = (double)value;
+
+                return num == False ? false : true;
+            }
+
+            return false;
+        }
+
     }
+
 }

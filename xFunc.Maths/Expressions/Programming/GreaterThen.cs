@@ -30,7 +30,7 @@ namespace xFunc.Maths.Expressions.Programming
             var leftValue = (double)left.Calculate(parameters);
             var rightValue = (double)right.Calculate(parameters);
 
-            return leftValue > rightValue;
+            return (leftValue > rightValue).AsNumber();
         }
 
         public override IExpression Clone()

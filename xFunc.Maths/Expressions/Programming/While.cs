@@ -22,15 +22,15 @@ namespace xFunc.Maths.Expressions.Programming
 
         internal While() { }
 
-        public While(IExpression left, IExpression right)
-            : base(left, right) { }
+        public While(IExpression body, IExpression condition)
+            : base(condition, body) { }
 
         public override object Calculate(ExpressionParameters parameters)
         {
             while (left.Calculate(parameters).AsBool())
                 right.Calculate(parameters);
 
-            return null;
+            return double.NaN;
         }
 
         public override IExpression Clone()

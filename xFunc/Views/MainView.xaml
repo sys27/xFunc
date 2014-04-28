@@ -592,69 +592,69 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="==" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource equal}" Width="32" Height="22" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="!=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource notEqual}" Width="32" Height="19" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="&amp;&amp;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource condAnd}" Width="32" Height="22" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="||" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource condOr}" Width="32" Height="20" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="&lt;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource less}" Width="32" Height="14" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="1" Tag="&lt;=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                        <Button Grid.Row="1" Grid.Column="1" Tag="&gt;" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource greater}" Width="32" Height="14" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="2" Tag="&gt;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                        <Button Grid.Row="1" Grid.Column="2" Tag="&lt;=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource lessOrEqual}" Width="32" Height="20" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="&gt;=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource greaterOrEqual}" Width="32" Height="20" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="if" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource if}" Width="28" Height="16" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="for" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource for}" Width="28" Height="22" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="while" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <Rectangle Fill="{StaticResource while}" Width="44" Height="22" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>

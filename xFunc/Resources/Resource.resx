@@ -681,4 +681,28 @@
   <data name="IfToolTip" xml:space="preserve">
     <value>The If condition. Example: if(x &lt; 2, sin(x), cos(x)).</value>
   </data>
+  <data name="EqualToolTip" xml:space="preserve">
+    <value>The equality operator. Example: x == 10.</value>
+  </data>
+  <data name="NotEqualToolTip" xml:space="preserve">
+    <value>The inequality operator. Example: x != 10.</value>
+  </data>
+  <data name="LessThanToolTip" xml:space="preserve">
+    <value>The "less than" operator. Example: x &lt; 10.</value>
+  </data>
+  <data name="GreaterThanToolTip" xml:space="preserve">
+    <value>The "greater than" operator. Example: x &gt; 10.</value>
+  </data>
+  <data name="LessOrEqualToolTip" xml:space="preserve">
+    <value>The "less or equal than" operator. Example: x &lt;= 10.</value>
+  </data>
+  <data name="GreaterOrEqualToolTip" xml:space="preserve">
+    <value>The "greater or equal than" operator. Example: x &gt;= 10.</value>
+  </data>
+  <data name="ConditionalAndToolTip" xml:space="preserve">
+    <value>The conditional-AND operator. Example: x == 0 &amp;&amp; y != 0.</value>
+  </data>
+  <data name="ConditionalOrToolTip" xml:space="preserve">
+    <value>The conditional-OR operator. Example: x == 0 || y != 0.</value>
+  </data>
 </root>

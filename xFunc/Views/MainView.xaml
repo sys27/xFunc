@@ -594,50 +594,50 @@ limitations under the License. -->
                         <Button Grid.Row="0" Grid.Column="0" Tag="==" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource equal}" Width="32" Height="22" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.EqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="!=" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource notEqual}" Width="32" Height="19" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.NotEqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="&amp;&amp;" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource condAnd}" Width="32" Height="22" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.ConditionalAndToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="||" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource condOr}" Width="32" Height="20" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.ConditionalOrToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="&lt;" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource less}" Width="32" Height="14" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.LessThanToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="&gt;" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource greater}" Width="32" Height="14" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.GreaterThanToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="&lt;=" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource lessOrEqual}" Width="32" Height="20" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.LessOrEqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="&gt;=" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource greaterOrEqual}" Width="32" Height="20" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.GreaterOrEqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
 

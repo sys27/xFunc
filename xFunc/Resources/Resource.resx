@@ -669,4 +669,7 @@
   <data name="FloorToolTip" xml:space="preserve">
     <value>Returns the largest integer less than or equal to the specified number. Example: floor(5.55555).</value>
   </data>
+  <data name="ProgExpanderHeader" xml:space="preserve">
+    <value>Programming</value>
+  </data>
 </root>

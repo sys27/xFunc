@@ -781,7 +781,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Returns the largest integer less than or equal to the specified number. Example: floor(5.55555)..
         /// </summary>
         public static string FloorToolTip {
             get {
@@ -1150,6 +1150,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Programming.
+        /// </summary>
+        public static string ProgExpanderHeader {
+            get {
+                return ResourceManager.GetString("ProgExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Radian.
         /// </summary>
         public static string RadianButtonHeader {
@@ -1204,7 +1213,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;round&quot; function. Example: round(number, digits)..
+        ///   Looks up a localized string similar to Rounds a value to the nearest integer or to the specified number of fractional digits. Example: round(number, digits)..
         /// </summary>
         public static string RoundToolTip {
             get {

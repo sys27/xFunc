@@ -669,4 +669,7 @@
   <data name="FloorToolTip" xml:space="preserve">
     <value>Повертає найбільше ціле число, яке менше або дорівнює вказаному числу. Приклад: floor(5.55555).</value>
   </data>
+  <data name="ProgExpanderHeader" xml:space="preserve">
+    <value>Програмування</value>
+  </data>
 </root>

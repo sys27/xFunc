@@ -17,7 +17,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var parameters = new ExpressionParameters();
 
             var init = new Define(new Variable("i"), new Number(0));
-            var cond = new LessThen(new Variable("i"), new Number(10));
+            var cond = new LessThan(new Variable("i"), new Number(10));
             var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1))); 
 
             var @for = new For(new Variable("i"), init, cond, iter);

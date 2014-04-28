@@ -17,12 +17,12 @@ using System;
 namespace xFunc.Maths.Expressions.Programming
 {
 
-    public class GreaterThen : BinaryExpression
+    public class GreaterThan : BinaryExpression
     {
 
-        internal GreaterThen() { }
+        internal GreaterThan() { }
 
-        public GreaterThen(IExpression left, IExpression right)
+        public GreaterThan(IExpression left, IExpression right)
             : base(left, right) { }
 
         public override string ToString()
@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions.Programming
 
         public override IExpression Clone()
         {
-            return new GreaterThen(left.Clone(), right.Clone());
+            return new GreaterThan(left.Clone(), right.Clone());
         }
 
         public override IExpression Differentiate(Variable variable)

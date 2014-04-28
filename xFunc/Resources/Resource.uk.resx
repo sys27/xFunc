@@ -672,4 +672,13 @@
   <data name="ProgExpanderHeader" xml:space="preserve">
     <value>Програмування</value>
   </data>
+  <data name="WhileToolTip" xml:space="preserve">
+    <value>Цикл while. Приклад: while(x := x + 1, x &lt; 10).</value>
+  </data>
+  <data name="ForToolTip" xml:space="preserve">
+    <value>Цикл for. Приклад: for(z := z + 1, x := 0, x &lt; 10, x := x + 1).</value>
+  </data>
+  <data name="IfToolTip" xml:space="preserve">
+    <value>Умова if. Приклад: if(x &lt; 2, sin(x), cos(x)).</value>
+  </data>
 </root>

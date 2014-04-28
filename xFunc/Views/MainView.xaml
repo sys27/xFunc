@@ -644,19 +644,19 @@ limitations under the License. -->
                         <Button Grid.Row="2" Grid.Column="0" Tag="if" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource if}" Width="28" Height="16" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.IfToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="for" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource for}" Width="28" Height="22" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.ForToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="while" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource while}" Width="44" Height="22" />
                             <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
+                                <ToolTip Content="{x:Static res:Resource.WhileToolTip}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>

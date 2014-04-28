@@ -86,12 +86,12 @@ namespace xFunc.Maths
                     return new Equal();
                 case Operations.NotEqual:
                     return new NotEqual();
-                case Operations.LessThen:
-                    return new LessThen();
+                case Operations.LessThan:
+                    return new LessThan();
                 case Operations.LessOrEqual:
                     return new LessOrEqual();
-                case Operations.GreaterThen:
-                    return new GreaterThen();
+                case Operations.GreaterThan:
+                    return new GreaterThan();
                 case Operations.GreaterOrEqual:
                     return new GreaterOrEqual();
                 case Operations.BitwiseNot:

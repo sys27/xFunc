@@ -89,11 +89,11 @@ namespace xFunc.Maths.Tokens
                     return 9;
                 case Operations.NotEqual:
                     return 9;
-                case Operations.LessThen:
+                case Operations.LessThan:
                     return 9;
                 case Operations.LessOrEqual:
                     return 9;
-                case Operations.GreaterThen:
+                case Operations.GreaterThan:
                     return 9;
                 case Operations.GreaterOrEqual:
                     return 9;

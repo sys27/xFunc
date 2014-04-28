@@ -790,6 +790,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The For loop. Example: for(z := z + 1, x := 0, x &lt; 10, x := x + 1)..
+        /// </summary>
+        public static string ForToolTip {
+            get {
+                return ResourceManager.GetString("ForToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string FuncNameHeader {
@@ -912,6 +921,15 @@ namespace xFunc.Resources {
         public static string HyperbolicExpanderHeader {
             get {
                 return ResourceManager.GetString("HyperbolicExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The If condition. Example: if(x &lt; 2, sin(x), cos(x))..
+        /// </summary>
+        public static string IfToolTip {
+            get {
+                return ResourceManager.GetString("IfToolTip", resourceCulture);
             }
         }
         
@@ -1713,6 +1731,15 @@ namespace xFunc.Resources {
         public static string VersionTextBox {
             get {
                 return ResourceManager.GetString("VersionTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The While loop. Example: while(x := x + 1, x &lt; 10)..
+        /// </summary>
+        public static string WhileToolTip {
+            get {
+                return ResourceManager.GetString("WhileToolTip", resourceCulture);
             }
         }
         

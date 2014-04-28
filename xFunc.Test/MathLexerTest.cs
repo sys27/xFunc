@@ -1713,7 +1713,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new VariableToken("x"),
-                new OperationToken(Operations.LessThen),
+                new OperationToken(Operations.LessThan),
                 new NumberToken(10)
             };
 
@@ -1743,7 +1743,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new VariableToken("x"),
-                new OperationToken(Operations.GreaterThen),
+                new OperationToken(Operations.GreaterThan),
                 new NumberToken(10)
             };
 

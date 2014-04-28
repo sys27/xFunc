@@ -15,8 +15,8 @@ namespace xFunc.Test.Expressions.Maths.Programming
         public void CalculateOrTrueTest1()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new LessThen(new Variable("x"), new Number(10));
-            var greaterThen = new GreaterThen(new Variable("x"), new Number(-10));
+            var lessThen = new LessThan(new Variable("x"), new Number(10));
+            var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
             var or = new Or(lessThen, greaterThen);
 
             Assert.AreEqual(1, or.Calculate(parameters));
@@ -26,8 +26,8 @@ namespace xFunc.Test.Expressions.Maths.Programming
         public void CalculateOrTrueTest2()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new LessThen(new Variable("x"), new Number(-10));
-            var greaterThen = new GreaterThen(new Variable("x"), new Number(-10));
+            var lessThen = new LessThan(new Variable("x"), new Number(-10));
+            var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
             var or = new Or(lessThen, greaterThen);
 
             Assert.AreEqual(1, or.Calculate(parameters));

@@ -704,7 +704,7 @@ namespace xFunc.Test
                 new NumberToken(0),
                 new SymbolToken(Symbols.Comma),
                 new VariableToken("x"),
-                new OperationToken(Operations.LessThen),
+                new OperationToken(Operations.LessThan),
                 new NumberToken(10),
                 new SymbolToken(Symbols.Comma),
                 new VariableToken("x"),
@@ -842,7 +842,7 @@ namespace xFunc.Test
             lexer.Tokens = new List<IToken>()
             {
                 new VariableToken("x"),
-                new OperationToken(Operations.LessThen),
+                new OperationToken(Operations.LessThan),
                 new NumberToken(0),
             };
 
@@ -872,7 +872,7 @@ namespace xFunc.Test
             lexer.Tokens = new List<IToken>()
             {
                 new VariableToken("x"),
-                new OperationToken(Operations.GreaterThen),
+                new OperationToken(Operations.GreaterThan),
                 new NumberToken(0),
             };
 

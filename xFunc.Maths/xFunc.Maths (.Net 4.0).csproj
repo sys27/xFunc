@@ -76,10 +76,10 @@
     <Compile Include="Expressions\Programming\Equal.cs" />
     <Compile Include="Expressions\Programming\For.cs" />
     <Compile Include="Expressions\Programming\GreaterOrEqual.cs" />
-    <Compile Include="Expressions\Programming\GreaterThen.cs" />
+    <Compile Include="Expressions\Programming\GreaterThan.cs" />
     <Compile Include="Expressions\Programming\If.cs" />
     <Compile Include="Expressions\Programming\LessOrEqual.cs" />
-    <Compile Include="Expressions\Programming\LessThen.cs" />
+    <Compile Include="Expressions\Programming\LessThan.cs" />
     <Compile Include="Expressions\Programming\NotEqual.cs" />
     <Compile Include="Expressions\Programming\Or.cs" />
     <Compile Include="Expressions\Programming\While.cs" />

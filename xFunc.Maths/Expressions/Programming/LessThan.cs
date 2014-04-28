@@ -17,12 +17,12 @@ using System;
 namespace xFunc.Maths.Expressions.Programming
 {
     
-    public class LessThen : BinaryExpression
+    public class LessThan : BinaryExpression
     {
 
-        internal LessThen() { }
+        internal LessThan() { }
 
-        public LessThen(IExpression left, IExpression right)
+        public LessThan(IExpression left, IExpression right)
             : base(left, right) { }
 
         public override string ToString()
@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions.Programming
 
         public override IExpression Clone()
         {
-            return new LessThen(left.Clone(), right.Clone());
+            return new LessThan(left.Clone(), right.Clone());
         }
 
         public override IExpression Differentiate(Variable variable)

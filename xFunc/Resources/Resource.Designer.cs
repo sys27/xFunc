@@ -484,6 +484,26 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ConditionalAndToolTip {
+            get {
+                return ResourceManager.GetString("ConditionalAndToolTip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The conditional-OR operator. Example: x == 0 || y != 0..
+        /// </summary>
+        public static string ConditionalOrToolTip
+        {
+            get
+            {
+                return ResourceManager.GetString("ConditionalOrToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Constants.
         /// </summary>
         public static string ConstantsExpanderHeader {
@@ -700,6 +720,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string EqualToolTip {
+            get {
+                return ResourceManager.GetString("EqualToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string ErrorHeader {
@@ -898,6 +927,24 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string GreaterOrEqualToolTip {
+            get {
+                return ResourceManager.GetString("GreaterOrEqualToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string GreaterThanToolTip {
+            get {
+                return ResourceManager.GetString("GreaterThanToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home Page:.
         /// </summary>
         public static string HomePageTextBox {
@@ -957,6 +1004,24 @@ namespace xFunc.Resources {
         public static string LCMToolTip {
             get {
                 return ResourceManager.GetString("LCMToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string LessOrEqualToolTip {
+            get {
+                return ResourceManager.GetString("LessOrEqualToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string LessThanToolTip {
+            get {
+                return ResourceManager.GetString("LessThanToolTip", resourceCulture);
             }
         }
         
@@ -1047,6 +1112,15 @@ namespace xFunc.Resources {
         public static string NewMenu {
             get {
                 return ResourceManager.GetString("NewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string NotEqualToolTip {
+            get {
+                return ResourceManager.GetString("NotEqualToolTip", resourceCulture);
             }
         }
         

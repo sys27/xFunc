@@ -227,6 +227,7 @@ namespace xFunc.Views
             hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
             matrixToolBar.IsExpanded = Settings.Default.MatrixExpanded;
             bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
+            progToolBar.IsExpanded = Settings.Default.ProgExpanded;
             constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
             additionalMathToolBar.IsExpanded = Settings.Default.AdditionalMathExpanded;
 
@@ -277,6 +278,7 @@ namespace xFunc.Views
                 Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
                 Settings.Default.MatrixExpanded = matrixToolBar.IsExpanded;
                 Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
+                Settings.Default.ProgExpanded = progToolBar.IsExpanded;
                 Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
                 Settings.Default.AdditionalMathExpanded = additionalMathToolBar.IsExpanded;
 

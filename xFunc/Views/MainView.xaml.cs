@@ -649,6 +649,7 @@ namespace xFunc.Views
                 hyperbolicToolBar.Visibility = Visibility.Collapsed;
                 matrixToolBar.Visibility = Visibility.Collapsed;
                 bitwiseToolBar.Visibility = Visibility.Collapsed;
+                progToolBar.Visibility = Visibility.Collapsed;
                 constantsMathToolBar.Visibility = Visibility.Collapsed;
                 additionalMathToolBar.Visibility = Visibility.Collapsed;
 
@@ -668,6 +669,7 @@ namespace xFunc.Views
                 trigonometricToolBar.Visibility = Visibility.Visible;
                 hyperbolicToolBar.Visibility = Visibility.Visible;
                 bitwiseToolBar.Visibility = Visibility.Visible;
+                progToolBar.Visibility = Visibility.Visible;
                 constantsMathToolBar.Visibility = Visibility.Visible;
                 additionalMathToolBar.Visibility = Visibility.Visible;
 

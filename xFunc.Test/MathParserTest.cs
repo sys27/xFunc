@@ -765,7 +765,7 @@ namespace xFunc.Test
 
             var exp = parser.Parse("if(x == 0 && y != 0, 2, 8)");
 
-            Assert.AreEqual("if(x == 0 && y != 0, 2, 8)", exp.ToString());
+            Assert.AreEqual("if((x == 0) && (y != 0), 2, 8)", exp.ToString());
         }
 
         [TestMethod]
@@ -784,7 +784,7 @@ namespace xFunc.Test
 
             var exp = parser.Parse("x == 0 && y != 0");
 
-            Assert.AreEqual("x == 0 && y != 0", exp.ToString());
+            Assert.AreEqual("(x == 0) && (y != 0)", exp.ToString());
         }
 
         [TestMethod]
@@ -803,7 +803,7 @@ namespace xFunc.Test
 
             var exp = parser.Parse("x == 0 || y != 0");
 
-            Assert.AreEqual("x == 0 || y != 0", exp.ToString());
+            Assert.AreEqual("(x == 0) || (y != 0)", exp.ToString());
         }
 
         [TestMethod]

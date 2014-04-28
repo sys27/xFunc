@@ -8,14 +8,14 @@ namespace xFunc.Test.Expressions.Maths.Programming
 {
 
     [TestClass]
-    public class LessThenTest
+    public class LessThanTest
     {
 
         [TestMethod]
         public void CalculateLessTrueTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new LessThen(new Variable("x"), new Number(10));
+            var lessThen = new LessThan(new Variable("x"), new Number(10));
 
             Assert.AreEqual(1, lessThen.Calculate(parameters));
         }
@@ -24,7 +24,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
         public void CalculateLessFalseTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var lessThen = new LessThen(new Variable("x"), new Number(10));
+            var lessThen = new LessThan(new Variable("x"), new Number(10));
 
             Assert.AreEqual(0, lessThen.Calculate(parameters));
         }

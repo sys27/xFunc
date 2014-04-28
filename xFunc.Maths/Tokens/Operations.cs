@@ -71,7 +71,7 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// &lt;
         /// </summary>
-        LessThen,
+        LessThan,
         /// <summary>
         /// &lt;=
         /// </summary>
@@ -79,7 +79,7 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// &gt;
         /// </summary>
-        GreaterThen,
+        GreaterThan,
         /// <summary>
         /// &gt;=
         /// </summary>

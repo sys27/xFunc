@@ -672,4 +672,13 @@
   <data name="ProgExpanderHeader" xml:space="preserve">
     <value>Programming</value>
   </data>
+  <data name="WhileToolTip" xml:space="preserve">
+    <value>The While loop. Example: while(x := x + 1, x &lt; 10).</value>
+  </data>
+  <data name="ForToolTip" xml:space="preserve">
+    <value>The For loop. Example: for(z := z + 1, x := 0, x &lt; 10, x := x + 1).</value>
+  </data>
+  <data name="IfToolTip" xml:space="preserve">
+    <value>The If condition. Example: if(x &lt; 2, sin(x), cos(x)).</value>
+  </data>
 </root>

@@ -18,7 +18,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             parameters.Parameters.Add(new Parameter("x", 0));
 
             var body = new Define(new Variable("x"), new Add(new Variable("x"), new Number(2)));
-            var cond = new LessThen(new Variable("x"), new Number(10));
+            var cond = new LessThan(new Variable("x"), new Number(10));
 
             var @while = new While(body, cond);
             @while.Calculate(parameters);

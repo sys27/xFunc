@@ -65,7 +65,7 @@
     <Compile Include="Expressions\Maths\Bitwise\AndTest.cs" />
     <Compile Include="Expressions\Maths\Programming\ForTest.cs" />
     <Compile Include="Expressions\Maths\Programming\IfTest.cs" />
-    <Compile Include="Expressions\Maths\Programming\LessThenTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\LessThanTest.cs" />
     <Compile Include="Expressions\Maths\Programming\GreaterTest.cs" />
     <Compile Include="Expressions\Maths\Programming\LessOrEqualTest.cs" />
     <Compile Include="Expressions\Maths\Programming\GreaterOrEqualTest.cs" />

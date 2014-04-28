@@ -256,7 +256,7 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    tokens.Add(new OperationToken(Operations.LessThen));
+                    tokens.Add(new OperationToken(Operations.LessThan));
                 }
                 else if (letter == '>')
                 {
@@ -268,7 +268,7 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    tokens.Add(new OperationToken(Operations.GreaterThen));
+                    tokens.Add(new OperationToken(Operations.GreaterThan));
                 }
                 else if (char.IsDigit(letter))
                 {

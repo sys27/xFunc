@@ -896,6 +896,61 @@ namespace xFunc.Test
             Assert.AreEqual("x >= 0", exp.ToString());
         }
 
+        [TestMethod]
+        public void IncTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Increment)
+            };
+
+            var exp = parser.Parse("x++");
+
+            Assert.AreEqual("x++", exp.ToString());
+        }
+
+        [TestMethod]
+        public void IncForTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new FunctionToken(Functions.For, 4),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(0),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.LessThan),
+                new NumberToken(10),
+                new SymbolToken(Symbols.Comma),
+                new VariableToken("x"),
+                new OperationToken(Operations.Increment),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse("for(2, x := 0, x < 10, x++)");
+
+            Assert.AreEqual("for(2, x := 0, x < 10, x++)", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DecTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Decrement)
+            };
+
+            var exp = parser.Parse("x--");
+
+            Assert.AreEqual("x--", exp.ToString());
+        }
+
     }
 
 }

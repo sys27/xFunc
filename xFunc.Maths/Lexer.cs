@@ -124,7 +124,7 @@ namespace xFunc.Maths
                             continue;
                         }
 
-                        // IsNext(string)
+                        // todo: IsNext(string)
                         if (i + 1 < function.Length && function[i + 1] == '+')
                         {
                             var lastToken = tokens.LastOrDefault();

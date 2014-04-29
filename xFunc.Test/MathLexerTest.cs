@@ -1111,6 +1111,20 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void FactorialVarOperatorTest()
+        {
+            var tokens = lexer.Tokenize("x!");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Factorial)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(LexerException))]
         public void FactorialOperatorFailTest()
         {

@@ -125,7 +125,7 @@ namespace xFunc.Maths
                         }
 
                         // todo: IsNext(string)
-                        if (i + 1 < function.Length && function[i + 1] == '+')
+                        if (CheckNextSymbol(function, i, '+'))
                         {
                             var lastToken = tokens.LastOrDefault();
                             if (lastToken != null)
@@ -163,7 +163,7 @@ namespace xFunc.Maths
                             continue;
                         }
 
-                        if (i + 1 < function.Length && function[i + 1] == '-')
+                        if (CheckNextSymbol(function, i, '-'))
                         {
                             var lastToken = tokens.LastOrDefault();
                             if (lastToken != null)
@@ -220,7 +220,7 @@ namespace xFunc.Maths
                 }
                 else if (letter == '&')
                 {
-                    if (i + 1 < function.Length && function[i + 1] == '&')
+                    if (CheckNextSymbol(function, i, '&'))
                     {
                         tokens.Add(new OperationToken(Operations.ConditionalAnd));
                         i += 2;
@@ -232,7 +232,7 @@ namespace xFunc.Maths
                 }
                 else if (letter == '|')
                 {
-                    if (i + 1 < function.Length && function[i + 1] == '|')
+                    if (CheckNextSymbol(function, i, '|'))
                     {
                         tokens.Add(new OperationToken(Operations.ConditionalOr));
                         i += 2;
@@ -242,14 +242,14 @@ namespace xFunc.Maths
 
                     tokens.Add(new OperationToken(Operations.BitwiseOr));
                 }
-                else if (letter == ':' && i + 1 < function.Length && function[i + 1] == '=')
+                else if (letter == ':' && CheckNextSymbol(function, i, '='))
                 {
                     tokens.Add(new OperationToken(Operations.Assign));
                     i += 2;
 
                     continue;
                 }
-                else if (letter == '=' && i + 1 < function.Length && function[i + 1] == '=')
+                else if (letter == '=' && CheckNextSymbol(function, i, '='))
                 {
                     tokens.Add(new OperationToken(Operations.Equal));
                     i += 2;
@@ -271,7 +271,7 @@ namespace xFunc.Maths
                         }
                     }
 
-                    if (i + 1 < function.Length && function[i + 1] == '=')
+                    if (CheckNextSymbol(function, i, '='))
                     {
                         tokens.Add(new OperationToken(Operations.NotEqual));
                         i += 2;
@@ -283,7 +283,7 @@ namespace xFunc.Maths
                 }
                 else if (letter == '<')
                 {
-                    if (i + 1 < function.Length && function[i + 1] == '=')
+                    if (CheckNextSymbol(function, i, '='))
                     {
                         tokens.Add(new OperationToken(Operations.LessOrEqual));
                         i += 2;
@@ -295,7 +295,7 @@ namespace xFunc.Maths
                 }
                 else if (letter == '>')
                 {
-                    if (i + 1 < function.Length && function[i + 1] == '=')
+                    if (CheckNextSymbol(function, i, '='))
                     {
                         tokens.Add(new OperationToken(Operations.GreaterOrEqual));
                         i += 2;
@@ -991,6 +991,11 @@ namespace xFunc.Maths
             }
 
             return tokens;
+        }
+
+        private bool CheckNextSymbol(string str, int index, char symbol)
+        {
+            return index + 1 < str.Length && str[index + 1] == symbol;
         }
 
     }

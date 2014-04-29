@@ -145,6 +145,8 @@
     <Compile Include="Expressions\Programming\NotEqual.cs" />
     <Compile Include="Expressions\Programming\Or.cs" />
     <Compile Include="Expressions\Programming\While.cs" />
+    <Compile Include="Expressions\Programming\Inc.cs" />
+    <Compile Include="Expressions\Programming\Dec.cs" />
     <Compile Include="Expressions\Sum.cs" />
     <Compile Include="Expressions\Mul.cs" />
     <Compile Include="Expressions\Number.cs" />

@@ -85,6 +85,8 @@
     <Compile Include="Expressions\Programming\NotEqual.cs" />
     <Compile Include="Expressions\Programming\Or.cs" />
     <Compile Include="Expressions\Programming\While.cs" />
+    <Compile Include="Expressions\Programming\Inc.cs" />
+    <Compile Include="Expressions\Programming\Dec.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Simplify.cs" />

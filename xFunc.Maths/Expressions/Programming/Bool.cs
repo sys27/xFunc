@@ -17,12 +17,26 @@ using System;
 namespace xFunc.Maths.Expressions.Programming
 {
 
+    /// <summary>
+    /// A static class for bool extentions.
+    /// </summary>
     public static class Bool
     {
 
-        public static int True = 1;
-        public static int False = 0;
+        /// <summary>
+        /// The true constant.
+        /// </summary>
+        public const int True = 1;
+        /// <summary>
+        /// The false constant.
+        /// </summary>
+        public const int False = 0;
 
+        /// <summary>
+        /// Convert an object (a number) to bool.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>Returns a bool.</returns>
         public static bool AsBool(this object value)
         {
             if (value is double)
@@ -41,6 +55,11 @@ namespace xFunc.Maths.Expressions.Programming
             return false;
         }
 
+        /// <summary>
+        /// Convert a bool to number.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>Returns a number.</returns>
         public static int AsNumber(this bool value)
         {
             return value ? 1 : 0;

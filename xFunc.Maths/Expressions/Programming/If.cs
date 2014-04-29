@@ -17,25 +17,59 @@ using System;
 namespace xFunc.Maths.Expressions.Programming
 {
 
+    /// <summary>
+    /// Represents the "if-else" statement.
+    /// </summary>
     public class If : DifferentParametersExpression
     {
 
         internal If() : base(null, -1) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="If"/> class.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <param name="then">The "then" statement.</param>
         public If(IExpression condition, IExpression then)
             : base(new[] { condition, then }, 2) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="If"/> class.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <param name="then">The "then" statement.</param>
+        /// <param name="else">The "else" statement.</param>
         public If(IExpression condition, IExpression then, IExpression @else)
             : base(new[] { condition, then, @else }, 3) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="If"/> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
         public If(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams) { }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return ToString("if");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">If the "else" statement is null.</exception>
+        /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
             if (Condition.Calculate(parameters).AsBool())
@@ -43,27 +77,54 @@ namespace xFunc.Maths.Expressions.Programming
 
             var @else = Else;
             if (@else == null)
-                // todo: ???
-                throw new Exception();
+                throw new ArgumentNullException("else");
 
             return @else.Calculate(parameters);
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <returns>
+        /// Returns a derivative of the expression.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
         public override IExpression Differentiate()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable">The variable of differentiation.</param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Clones this instance of the <see cref="If" />.
+        /// </summary>
+        /// <returns>
+        /// Returns the new instance of <see cref="If" /> that is a clone of this instance.
+        /// </returns>
         public override IExpression Clone()
         {
             return new If(CloneArguments(), countOfParams);
         }
 
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
         public override int MinCountOfParams
         {
             get
@@ -72,6 +133,12 @@ namespace xFunc.Maths.Expressions.Programming
             }
         }
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
         public override int MaxCountOfParams
         {
             get
@@ -80,6 +147,12 @@ namespace xFunc.Maths.Expressions.Programming
             }
         }
 
+        /// <summary>
+        /// Gets the condition.
+        /// </summary>
+        /// <value>
+        /// The condition.
+        /// </value>
         public IExpression Condition
         {
             get
@@ -88,6 +161,12 @@ namespace xFunc.Maths.Expressions.Programming
             }
         }
 
+        /// <summary>
+        /// Gets the "then" statement.
+        /// </summary>
+        /// <value>
+        /// The then.
+        /// </value>
         public IExpression Then
         {
             get
@@ -96,6 +175,12 @@ namespace xFunc.Maths.Expressions.Programming
             }
         }
 
+        /// <summary>
+        /// Gets the "else" statement.
+        /// </summary>
+        /// <value>
+        /// The else.
+        /// </value>
         public IExpression Else
         {
             get

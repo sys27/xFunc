@@ -73,11 +73,13 @@
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
     <Compile Include="Expressions\Programming\Bool.cs" />
+    <Compile Include="Expressions\Programming\Dec.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />
     <Compile Include="Expressions\Programming\For.cs" />
     <Compile Include="Expressions\Programming\GreaterOrEqual.cs" />
     <Compile Include="Expressions\Programming\GreaterThan.cs" />
     <Compile Include="Expressions\Programming\If.cs" />
+    <Compile Include="Expressions\Programming\Inc.cs" />
     <Compile Include="Expressions\Programming\LessOrEqual.cs" />
     <Compile Include="Expressions\Programming\LessThan.cs" />
     <Compile Include="Expressions\Programming\NotEqual.cs" />

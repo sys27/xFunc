@@ -94,6 +94,10 @@ namespace xFunc.Maths
                     return new GreaterThan();
                 case Operations.GreaterOrEqual:
                     return new GreaterOrEqual();
+                case Operations.Increment:
+                    return new Inc();
+                case Operations.Decrement:
+                    return new Dec();
                 case Operations.BitwiseNot:
                     return new xFunc.Maths.Expressions.Bitwise.Not();
                 case Operations.BitwiseAnd:

@@ -1786,6 +1786,48 @@ namespace xFunc.Test
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 
+        [TestMethod]
+        public void IncTest()
+        {
+            var tokens = lexer.Tokenize("x++");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Increment)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void IncWithNumFail()
+        {
+            var tokens = lexer.Tokenize("2++");
+        }
+
+        [TestMethod]
+        public void DecTest()
+        {
+            var tokens = lexer.Tokenize("x--");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Decrement)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void DecWithNumFail()
+        {
+            var tokens = lexer.Tokenize("2--");
+        }
+
     }
 
 }

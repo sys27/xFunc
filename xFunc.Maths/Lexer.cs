@@ -115,6 +115,19 @@ namespace xFunc.Maths
                 }
                 else if (letter == '+')
                 {
+                    if (CheckNextSymbol(function, i, '+'))
+                    {
+                        var lastToken = tokens.LastOrDefault();
+                        if (lastToken == null || (lastToken as VariableToken) == null)
+                            // todo: ???
+                            throw new LexerException();
+
+                        tokens.Add(new OperationToken(Operations.Increment));
+                        i += 2;
+
+                        continue;
+                    }
+
                     if (i - 1 >= 0)
                     {
                         char pre = function[i - 1];
@@ -122,24 +135,6 @@ namespace xFunc.Maths
                         {
                             i++;
                             continue;
-                        }
-
-                        // todo: IsNext(string)
-                        if (CheckNextSymbol(function, i, '+'))
-                        {
-                            var lastToken = tokens.LastOrDefault();
-                            if (lastToken != null)
-                            {
-                                var variable = lastToken as VariableToken;
-                                if (variable == null)
-                                    // todo: ???
-                                    throw new LexerException();
-
-                                tokens.Add(new OperationToken(Operations.Increment));
-                                i += 2;
-
-                                continue;
-                            }
                         }
                     }
                     else
@@ -152,6 +147,19 @@ namespace xFunc.Maths
                 }
                 else if (letter == '-')
                 {
+                    if (CheckNextSymbol(function, i, '-'))
+                    {
+                        var lastToken = tokens.LastOrDefault();
+                        if (lastToken == null || (lastToken as VariableToken) == null)
+                            // todo: ???
+                            throw new LexerException();
+
+                        tokens.Add(new OperationToken(Operations.Decrement));
+                        i += 2;
+
+                        continue;
+                    }
+
                     if (i - 1 >= 0)
                     {
                         char pre = function[i - 1];
@@ -161,23 +169,6 @@ namespace xFunc.Maths
 
                             i++;
                             continue;
-                        }
-
-                        if (CheckNextSymbol(function, i, '-'))
-                        {
-                            var lastToken = tokens.LastOrDefault();
-                            if (lastToken != null)
-                            {
-                                var variable = lastToken as VariableToken;
-                                if (variable == null)
-                                    // todo: ???
-                                    throw new LexerException();
-
-                                tokens.Add(new OperationToken(Operations.Decrement));
-                                i += 2;
-
-                                continue;
-                            }
                         }
                     }
                     else

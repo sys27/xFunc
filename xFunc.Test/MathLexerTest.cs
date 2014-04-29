@@ -1802,6 +1802,13 @@ namespace xFunc.Test
 
         [TestMethod]
         [ExpectedException(typeof(LexerException))]
+        public void IncPrefixTest()
+        {
+            var tokens = lexer.Tokenize("++x");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LexerException))]
         public void IncWithNumFail()
         {
             var tokens = lexer.Tokenize("2++");
@@ -1819,6 +1826,13 @@ namespace xFunc.Test
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void DecPrefixTest()
+        {
+            var tokens = lexer.Tokenize("--x");
         }
 
         [TestMethod]

@@ -119,8 +119,7 @@ namespace xFunc.Maths
                     {
                         var lastToken = tokens.LastOrDefault();
                         if (lastToken == null || (lastToken as VariableToken) == null)
-                            // todo: ???
-                            throw new LexerException();
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.Increment));
                         i += 2;
@@ -151,8 +150,7 @@ namespace xFunc.Maths
                     {
                         var lastToken = tokens.LastOrDefault();
                         if (lastToken == null || (lastToken as VariableToken) == null)
-                            // todo: ???
-                            throw new LexerException();
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.Decrement));
                         i += 2;

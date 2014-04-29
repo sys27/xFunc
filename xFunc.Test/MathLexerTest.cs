@@ -239,6 +239,13 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(LexerException))]
+        public void NotWithVarAsOperatorFail()
+        {
+            var tokens = lexer.Tokenize("x~");
+        }
+
+        [TestMethod]
         public void And()
         {
             var tokens = lexer.Tokenize("2 & 2");

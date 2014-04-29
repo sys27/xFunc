@@ -227,7 +227,7 @@ namespace xFunc.Maths
                     if (lastToken != null)
                     {
                         var symbol = lastToken as SymbolToken;
-                        if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken)
+                        if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
                         {
                             tokens.Add(new OperationToken(Operations.Factorial));
                             i++;

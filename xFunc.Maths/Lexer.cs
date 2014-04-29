@@ -123,6 +123,24 @@ namespace xFunc.Maths
                             i++;
                             continue;
                         }
+
+                        // IsNext(string)
+                        if (i + 1 < function.Length && function[i + 1] == '+')
+                        {
+                            var lastToken = tokens.LastOrDefault();
+                            if (lastToken != null)
+                            {
+                                var variable = lastToken as VariableToken;
+                                if (variable == null)
+                                    // todo: ???
+                                    throw new LexerException();
+
+                                tokens.Add(new OperationToken(Operations.Increment));
+                                i += 2;
+
+                                continue;
+                            }
+                        }
                     }
                     else
                     {
@@ -143,6 +161,23 @@ namespace xFunc.Maths
 
                             i++;
                             continue;
+                        }
+
+                        if (i + 1 < function.Length && function[i + 1] == '-')
+                        {
+                            var lastToken = tokens.LastOrDefault();
+                            if (lastToken != null)
+                            {
+                                var variable = lastToken as VariableToken;
+                                if (variable == null)
+                                    // todo: ???
+                                    throw new LexerException();
+
+                                tokens.Add(new OperationToken(Operations.Decrement));
+                                i += 2;
+
+                                continue;
+                            }
                         }
                     }
                     else

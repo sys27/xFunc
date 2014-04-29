@@ -84,6 +84,14 @@ namespace xFunc.Maths.Tokens
         /// &gt;=
         /// </summary>
         GreaterOrEqual,
+        /// <summary>
+        /// The increment (++)
+        /// </summary>
+        Increment,
+        /// <summary>
+        /// The decrement (--)
+        /// </summary>
+        Decrement,
 
         /// <summary>
         /// :=

@@ -121,6 +121,10 @@ namespace xFunc.Maths.Tokens
                     return 15;
                 case Operations.BitwiseXOr:
                     return 15;
+                case Operations.Increment:
+                    return 16;
+                case Operations.Decrement:
+                    return 16;
                 default:
                     return -1;
             }

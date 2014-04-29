@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CalculateElseTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };

@@ -16,15 +16,29 @@ using System;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-    
+
+    /// <summary>
+    /// Represents the "less than" operator.
+    /// </summary>
     public class LessThan : BinaryExpression
     {
 
         internal LessThan() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LessThan"/> class.
+        /// </summary>
+        /// <param name="left">The left (first) operand.</param>
+        /// <param name="right">The right (second) operand.</param>
         public LessThan(IExpression left, IExpression right)
             : base(left, right) { }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             if (parent is BinaryExpression)
@@ -33,6 +47,14 @@ namespace xFunc.Maths.Expressions.Programming
             return ToString("{0} < {1}");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
             var leftValue = (double)left.Calculate(parameters);
@@ -41,11 +63,26 @@ namespace xFunc.Maths.Expressions.Programming
             return (leftValue < rightValue).AsNumber();
         }
 
+        /// <summary>
+        /// Creates the clone of this instance.
+        /// </summary>
+        /// <returns>
+        /// Returns the new instance of <see cref="LessThan" /> that is a clone of this instance.
+        /// </returns>
         public override IExpression Clone()
         {
             return new LessThan(left.Clone(), right.Clone());
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable">The variable of differentiation.</param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();

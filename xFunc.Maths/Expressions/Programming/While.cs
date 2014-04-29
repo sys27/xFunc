@@ -17,19 +17,41 @@ using System;
 namespace xFunc.Maths.Expressions.Programming
 {
 
+    /// <summary>
+    /// Represents the "while" loop.
+    /// </summary>
     public class While : BinaryExpression
     {
 
         internal While() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="While"/> class.
+        /// </summary>
+        /// <param name="body">The body of while loop.</param>
+        /// <param name="condition">The condition of loop.</param>
         public While(IExpression body, IExpression condition)
             : base(body, condition) { }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return ToString("while({0}, {1})");
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
             while (right.Calculate(parameters).AsBool())
@@ -38,11 +60,26 @@ namespace xFunc.Maths.Expressions.Programming
             return double.NaN;
         }
 
+        /// <summary>
+        /// Creates the clone of this instance.
+        /// </summary>
+        /// <returns>
+        /// Returns the new instance of <see cref="While" /> that is a clone of this instance.
+        /// </returns>
         public override IExpression Clone()
         {
             return new While(left.Clone(), right.Clone());
         }
 
+        /// <summary>
+        /// Calculates a derivative of the expression.
+        /// </summary>
+        /// <param name="variable">The variable of differentiation.</param>
+        /// <returns>
+        /// Returns a derivative of the expression of several variables.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <seealso cref="Variable" />
         public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();

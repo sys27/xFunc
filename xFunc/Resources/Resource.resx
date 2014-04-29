@@ -694,10 +694,10 @@
     <value>The "greater than" operator. Example: x &gt; 10.</value>
   </data>
   <data name="LessOrEqualToolTip" xml:space="preserve">
-    <value>The "less or equal than" operator. Example: x &lt;= 10.</value>
+    <value>The "less than or equal" operator. Example: x &lt;= 10.</value>
   </data>
   <data name="GreaterOrEqualToolTip" xml:space="preserve">
-    <value>The "greater or equal than" operator. Example: x &gt;= 10.</value>
+    <value>The "greater than or equal" operator. Example: x &gt;= 10.</value>
   </data>
   <data name="ConditionalAndToolTip" xml:space="preserve">
     <value>The conditional-AND operator. Example: x == 0 &amp;&amp; y != 0.</value>

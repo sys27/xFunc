@@ -92,6 +92,22 @@ namespace xFunc.Maths.Tokens
         /// The decrement (--)
         /// </summary>
         Decrement,
+        /// <summary>
+        /// +=
+        /// </summary>
+        AddAssign,
+        /// <summary>
+        /// -=
+        /// </summary>
+        SubAssign,
+        /// <summary>
+        /// *=
+        /// </summary>
+        MulAssign,
+        /// <summary>
+        /// /=
+        /// </summary>
+        DivAssign,
 
         /// <summary>
         /// :=

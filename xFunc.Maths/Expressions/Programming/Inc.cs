@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions.Programming
         public override object Calculate(ExpressionParameters parameters)
         {
             var var = (Variable)argument;
-            var newValue = (double)var.Calculate(parameters) + 1;
+            var newValue = parameters.Parameters[var.Name] + 1;
             parameters.Parameters[var.Name] = newValue;
 
             return newValue;
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// Gets or sets the expression.
         /// </summary>
         /// <value>The expression.</value>
-        public virtual IExpression Argument
+        public override IExpression Argument
         {
             get
             {
@@ -97,15 +97,11 @@ namespace xFunc.Maths.Expressions.Programming
             }
             set
             {
-                if (value != null)
-                {
-                    if (!(value is Variable))
-                        throw new NotSupportedException();
-
-                    value.Parent = this;
-                }
+                if (!(value is Variable))
+                    throw new NotSupportedException();
 
                 argument = value;
+                argument.Parent = this;
             }
         }
 

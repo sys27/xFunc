@@ -126,6 +126,17 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (CheckNextSymbol(function, i, '='))
+                    {
+                        var lastToken = tokens.LastOrDefault();
+                        if (lastToken == null || (lastToken as VariableToken) == null)
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+
+                        tokens.Add(new OperationToken(Operations.AddAssign));
+                        i += 2;
+
+                        continue;
+                    }
 
                     if (i - 1 >= 0)
                     {
@@ -157,6 +168,17 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (CheckNextSymbol(function, i, '='))
+                    {
+                        var lastToken = tokens.LastOrDefault();
+                        if (lastToken == null || (lastToken as VariableToken) == null)
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+
+                        tokens.Add(new OperationToken(Operations.SubAssign));
+                        i += 2;
+
+                        continue;
+                    }
 
                     if (i - 1 >= 0)
                     {
@@ -181,10 +203,34 @@ namespace xFunc.Maths
                 }
                 else if (letter == '*')
                 {
+                    if (CheckNextSymbol(function, i, '='))
+                    {
+                        var lastToken = tokens.LastOrDefault();
+                        if (lastToken == null || (lastToken as VariableToken) == null)
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+
+                        tokens.Add(new OperationToken(Operations.MulAssign));
+                        i += 2;
+
+                        continue;
+                    }
+
                     tokens.Add(new OperationToken(Operations.Multiplication));
                 }
                 else if (letter == '/')
                 {
+                    if (CheckNextSymbol(function, i, '='))
+                    {
+                        var lastToken = tokens.LastOrDefault();
+                        if (lastToken == null || (lastToken as VariableToken) == null)
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
+
+                        tokens.Add(new OperationToken(Operations.DivAssign));
+                        i += 2;
+
+                        continue;
+                    }
+
                     tokens.Add(new OperationToken(Operations.Division));
                 }
                 else if (letter == '^')

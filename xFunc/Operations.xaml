@@ -1251,4 +1251,44 @@ limitations under the License. -->
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+    <DrawingBrush x:Key="addAssign" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 23.48,12.96L 13.88,12.96L 13.88,22.56L 10.52,22.56L 10.52,12.96L 0.920006,12.96L 0.920006,9.60001L 10.52,9.60001L 10.52,7.62939e-006L 13.88,7.62939e-006L 13.88,9.60001L 23.48,9.60001L 23.48,12.96 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 55.64,7.68L 33.56,7.68L 33.56,4.31998L 55.64,4.31998L 55.64,7.68 Z M 55.64,17.76L 33.56,17.76L 33.56,14.4L 55.64,14.4L 55.64,17.76 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="subAssign" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 12.96,60.96L 0,60.96L 0,58.08L 12.96,58.08L 12.96,60.96 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 43.2,55.68L 21.12,55.68L 21.12,52.32L 43.2,52.32L 43.2,55.68 Z M 43.2,65.76L 21.12,65.76L 21.12,62.4L 43.2,62.4L 43.2,65.76 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="mulAssign" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 36.36,103.04L 29.8275,104.33L 34.44,109.933L 31.77,111.68L 27.9825,105.47L 24.15,111.68L 21.48,109.933L 26.0925,104.33L 19.56,103.04L 20.625,100.16L 26.8425,102.44L 26.28,95.36L 29.64,95.36L 29.0775,102.44L 35.355,100.16L 36.36,103.04 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 65.16,111.68L 43.08,111.68L 43.08,108.32L 65.16,108.32L 65.16,111.68 Z M 65.16,121.76L 43.08,121.76L 43.08,118.4L 65.16,118.4L 65.16,121.76 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="divAssign" Stretch="Uniform">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 32.84,137.36L 16.7375,176.72L 13.16,176.72L 29.21,137.36L 32.84,137.36 Z "/>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M 59.72,153.68L 37.64,153.68L 37.64,150.32L 59.72,150.32L 59.72,153.68 Z M 59.72,163.76L 37.64,163.76L 37.64,160.4L 59.72,160.4L 59.72,163.76 Z "/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 </ResourceDictionary>

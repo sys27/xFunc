@@ -96,15 +96,11 @@ namespace xFunc.Maths.Expressions.Matrices
             }
             set
             {
-                if (value != null)
-                {
-                    if (!(value is Vector || value is Matrix))
-                        throw new NotSupportedException();
-
-                    value.Parent = this;
-                }
+                if (!(value is Vector || value is Matrix))
+                    throw new NotSupportedException();
 
                 argument = value;
+                argument.Parent = this;
             }
         }
 

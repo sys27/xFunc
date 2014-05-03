@@ -1842,6 +1842,66 @@ namespace xFunc.Test
             var tokens = lexer.Tokenize("2--");
         }
 
+        [TestMethod]
+        public void AddAssign()
+        {
+            var tokens = lexer.Tokenize("x += 2");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.AddAssign),
+                new NumberToken(2)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void SubAssign()
+        {
+            var tokens = lexer.Tokenize("x -= 2");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.SubAssign),
+                new NumberToken(2)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void MulAssign()
+        {
+            var tokens = lexer.Tokenize("x *= 2");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.MulAssign),
+                new NumberToken(2)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void DivAssign()
+        {
+            var tokens = lexer.Tokenize("x /= 2");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.DivAssign),
+                new NumberToken(2)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
     }
 
 }

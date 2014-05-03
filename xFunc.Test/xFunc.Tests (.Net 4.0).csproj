@@ -73,6 +73,10 @@
     <Compile Include="Expressions\Maths\Programming\OrTest.cs" />
     <Compile Include="Expressions\Maths\Programming\IncTest.cs" />
     <Compile Include="Expressions\Maths\Programming\DecTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\AddAssignTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\SubAssignTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\MulAssignTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\DivAssignTest.cs" />
     <Compile Include="Expressions\Maths\Programming\WhileTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccosTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArcsinTest.cs" />

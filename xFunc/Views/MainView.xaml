@@ -583,6 +583,7 @@ limitations under the License. -->
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -641,19 +642,44 @@ limitations under the License. -->
                             </Button.ToolTip>
                         </Button>
 
-                        <Button Grid.Row="2" Grid.Column="0" Tag="if" Click="InsertFunc_Click">
+                        <Button Grid.Row="2" Grid.Column="0" Tag="+=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource addAssign}" Width="32" Height="14" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.AddAssignToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Tag="-=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource subAssign}" Width="32" Height="14" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.SubAssignToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="2" Tag="*=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource mulAssign}" Width="32" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.MulAssignToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="3" Tag="/=" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource divAssign}" Width="32" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.DivAssignToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="0" Tag="if" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource if}" Width="28" Height="16" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.IfToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="2" Grid.Column="1" Tag="for" Click="InsertFunc_Click">
+                        <Button Grid.Row="3" Grid.Column="1" Tag="for" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource for}" Width="28" Height="22" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ForToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="2" Grid.Column="2" Tag="while" Click="InsertFunc_Click">
+                        <Button Grid.Row="3" Grid.Column="2" Tag="while" Click="InsertFunc_Click">
                             <Rectangle Fill="{StaticResource while}" Width="44" Height="22" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.WhileToolTip}" />

@@ -951,6 +951,66 @@ namespace xFunc.Test
             Assert.AreEqual("x--", exp.ToString());
         }
 
+        [TestMethod]
+        public void AddAssing()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.AddAssign),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse("x += 2");
+
+            Assert.AreEqual("x += 2", exp.ToString());
+        }
+
+        [TestMethod]
+        public void MulAssing()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.MulAssign),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse("x *= 2");
+
+            Assert.AreEqual("x *= 2", exp.ToString());
+        }
+
+        [TestMethod]
+        public void SubAssing()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.SubAssign),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse("x -= 2");
+
+            Assert.AreEqual("x -= 2", exp.ToString());
+        }
+
+        [TestMethod]
+        public void DivAssing()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.DivAssign),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse("x /= 2");
+
+            Assert.AreEqual("x /= 2", exp.ToString());
+        }
+
     }
 
 }

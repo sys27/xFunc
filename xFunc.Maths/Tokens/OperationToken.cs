@@ -82,27 +82,19 @@ namespace xFunc.Maths.Tokens
             switch (operation)
             {
                 case Operations.ConditionalAnd:
-                    return 8;
                 case Operations.ConditionalOr:
                     return 8;
                 case Operations.Equal:
-                    return 9;
                 case Operations.NotEqual:
-                    return 9;
                 case Operations.LessThan:
-                    return 9;
                 case Operations.LessOrEqual:
-                    return 9;
                 case Operations.GreaterThan:
-                    return 9;
                 case Operations.GreaterOrEqual:
                     return 9;
                 case Operations.Addition:
-                    return 10;
                 case Operations.Subtraction:
                     return 10;
                 case Operations.Multiplication:
-                    return 11;
                 case Operations.Division:
                     return 11;
                 case Operations.Exponentiation:
@@ -114,17 +106,18 @@ namespace xFunc.Maths.Tokens
                 case Operations.Assign:
                     return 0;
                 case Operations.BitwiseNot:
-                    return 15;
                 case Operations.BitwiseAnd:
-                    return 15;
                 case Operations.BitwiseOr:
-                    return 15;
                 case Operations.BitwiseXOr:
                     return 15;
+                case Operations.AddAssign:
+                case Operations.SubAssign:
+                case Operations.MulAssign:
+                case Operations.DivAssign:
+                    return 16;
                 case Operations.Increment:
-                    return 16;
                 case Operations.Decrement:
-                    return 16;
+                    return 17;
                 default:
                     return -1;
             }

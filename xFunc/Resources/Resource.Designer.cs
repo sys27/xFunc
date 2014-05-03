@@ -106,6 +106,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &quot;+=&quot; operator. Example: x += 2..
+        /// </summary>
+        public static string AddAssignToolTip {
+            get {
+                return ResourceManager.GetString("AddAssignToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string AddFuncCancel {
@@ -484,21 +493,19 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The conditional-AND operator. Example: x == 0 &amp;&amp; y != 0..
         /// </summary>
         public static string ConditionalAndToolTip {
             get {
                 return ResourceManager.GetString("ConditionalAndToolTip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The conditional-OR operator. Example: x == 0 || y != 0..
         /// </summary>
-        public static string ConditionalOrToolTip
-        {
-            get
-            {
+        public static string ConditionalOrToolTip {
+            get {
                 return ResourceManager.GetString("ConditionalOrToolTip", resourceCulture);
             }
         }
@@ -720,7 +727,16 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &quot;/=&quot; operator. Example: x /= 2..
+        /// </summary>
+        public static string DivAssignToolTip {
+            get {
+                return ResourceManager.GetString("DivAssignToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The equality operator. Example: x == 10..
         /// </summary>
         public static string EqualToolTip {
             get {
@@ -927,7 +943,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &quot;greater than or equal&quot; operator. Example: x &gt;= 10..
         /// </summary>
         public static string GreaterOrEqualToolTip {
             get {
@@ -936,7 +952,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &quot;greater than&quot; operator. Example: x &gt; 10..
         /// </summary>
         public static string GreaterThanToolTip {
             get {
@@ -1008,7 +1024,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &quot;less than or equal&quot; operator. Example: x &lt;= 10..
         /// </summary>
         public static string LessOrEqualToolTip {
             get {
@@ -1017,7 +1033,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &quot;less than&quot; operator. Example: x &lt; 10..
         /// </summary>
         public static string LessThanToolTip {
             get {
@@ -1107,6 +1123,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &quot;*=&quot; operator. Example: x *= 2..
+        /// </summary>
+        public static string MulAssignToolTip {
+            get {
+                return ResourceManager.GetString("MulAssignToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string NewMenu {
@@ -1116,7 +1141,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The inequality operator. Example: x != 10..
         /// </summary>
         public static string NotEqualToolTip {
             get {
@@ -1607,6 +1632,15 @@ namespace xFunc.Resources {
         public static string StandartExpanderHeader {
             get {
                 return ResourceManager.GetString("StandartExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;-=&quot; operator. Example: x -= 2..
+        /// </summary>
+        public static string SubAssignToolTip {
+            get {
+                return ResourceManager.GetString("SubAssignToolTip", resourceCulture);
             }
         }
         

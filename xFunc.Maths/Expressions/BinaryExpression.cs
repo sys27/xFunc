@@ -162,7 +162,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        public IExpression Left
+        public virtual IExpression Left
         {
             get
             {
@@ -174,15 +174,14 @@ namespace xFunc.Maths.Expressions
                     throw new ArgumentNullException("value");
 
                 left = value;
-                if (left != null)
-                    left.Parent = this;
+                left.Parent = this;
             }
         }
 
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        public IExpression Right
+        public virtual IExpression Right
         {
             get
             {
@@ -194,8 +193,7 @@ namespace xFunc.Maths.Expressions
                     throw new ArgumentNullException("value");
 
                 right = value;
-                if (right != null)
-                    right.Parent = this;
+                right.Parent = this;
             }
         }
 

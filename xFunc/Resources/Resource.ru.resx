@@ -705,4 +705,16 @@
   <data name="ConditionalOrToolTip" xml:space="preserve">
     <value>Условный оператор ИЛИ. Пример: x == 0 || y != 0.</value>
   </data>
+  <data name="AddAssignToolTip" xml:space="preserve">
+    <value>Оператор "+=". Пример: x += 2.</value>
+  </data>
+  <data name="SubAssignToolTip" xml:space="preserve">
+    <value>Оператор "-=". Пример: x -= 2.</value>
+  </data>
+  <data name="MulAssignToolTip" xml:space="preserve">
+    <value>Оператор "*=". Пример: x *= 2.</value>
+  </data>
+  <data name="DivAssignToolTip" xml:space="preserve">
+    <value>Оператор "/=". Пример: x /= 2.</value>
+  </data>
 </root>

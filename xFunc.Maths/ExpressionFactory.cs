@@ -94,6 +94,14 @@ namespace xFunc.Maths
                     return new GreaterThan();
                 case Operations.GreaterOrEqual:
                     return new GreaterOrEqual();
+                case Operations.AddAssign:
+                    return new AddAssign();
+                case Operations.SubAssign:
+                    return new SubAssign();
+                case Operations.MulAssign:
+                    return new MulAssign();
+                case Operations.DivAssign:
+                    return new DivAssign();
                 case Operations.Increment:
                     return new Inc();
                 case Operations.Decrement:

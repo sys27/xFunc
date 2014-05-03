@@ -71,9 +71,11 @@
     <Compile Include="Expressions\Matrices\Transpose.cs" />
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Product.cs" />
+    <Compile Include="Expressions\Programming\AddAssign.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
     <Compile Include="Expressions\Programming\Bool.cs" />
     <Compile Include="Expressions\Programming\Dec.cs" />
+    <Compile Include="Expressions\Programming\DivAssign.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />
     <Compile Include="Expressions\Programming\For.cs" />
     <Compile Include="Expressions\Programming\GreaterOrEqual.cs" />
@@ -82,8 +84,10 @@
     <Compile Include="Expressions\Programming\Inc.cs" />
     <Compile Include="Expressions\Programming\LessOrEqual.cs" />
     <Compile Include="Expressions\Programming\LessThan.cs" />
+    <Compile Include="Expressions\Programming\MulAssign.cs" />
     <Compile Include="Expressions\Programming\NotEqual.cs" />
     <Compile Include="Expressions\Programming\Or.cs" />
+    <Compile Include="Expressions\Programming\SubAssign.cs" />
     <Compile Include="Expressions\Programming\While.cs" />
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Round.cs" />

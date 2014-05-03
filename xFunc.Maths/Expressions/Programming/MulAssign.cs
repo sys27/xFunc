@@ -14,29 +14,38 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions.Matrices
+namespace xFunc.Maths.Expressions.Programming
 {
 
     /// <summary>
-    /// Represents a determinant.
+    /// Represents the "*=" operation.
     /// </summary>
-    public class Determinant : UnaryExpression
+    public class MulAssign : BinaryExpression
     {
 
-        internal Determinant() { }
+        internal MulAssign() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Determinant"/> class.
+        /// Initializes a new instance of the <see cref="AddAssign"/> class.
         /// </summary>
-        /// <param name="argument">The argument of function.</param>
-        public Determinant(IExpression argument)
-            : base(argument)
-        {
+        /// <param name="variable">The variable.</param>
+        /// <param name="exp">The expression.</param>
+        public MulAssign(IExpression variable, IExpression exp)
+            : base(variable, exp) { }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return ToString("{0} *= {1}");
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Calculates this mathemarical expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -45,18 +54,22 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return ((Matrix)argument).Determinant(parameters);
+            var var = (Variable)left;
+            var newValue = parameters.Parameters[var.Name] * (double)right.Calculate(parameters);
+            parameters.Parameters[var.Name] = newValue;
+
+            return newValue;
         }
 
         /// <summary>
-        /// Clones this instance.
+        /// Creates the clone of this instance.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="MulAssign" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone()
         {
-            return new Determinant(argument.Clone());
+            return new MulAssign(left.Clone(), right.Clone());
         }
 
         /// <summary>
@@ -66,47 +79,29 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns a derivative of the expression of several variables.
         /// </returns>
-        /// <seealso cref="Variable" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        protected override IExpression _Differentiation(Variable variable)
+        /// <seealso cref="Variable" />
+        public override IExpression Differentiate(Variable variable)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Gets or sets the expression.
+        /// The left (first) operand.
         /// </summary>
-        /// <value>
-        /// The expression.
-        /// </value>
-        /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/>.</exception>
-        public override IExpression Argument
+        public override IExpression Left
         {
             get
             {
-                return argument;
+                return left;
             }
             set
             {
-                if (!(value is Matrix))
+                if (!(value is Variable))
                     throw new NotSupportedException();
 
-                argument = value;
-                argument.Parent = this;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether result is a matrix.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
-        /// </value>
-        public override bool ResultIsMatrix
-        {
-            get
-            {
-                return true;
+                left = value;
+                left.Parent = this;
             }
         }
 

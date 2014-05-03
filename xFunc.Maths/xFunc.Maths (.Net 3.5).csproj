@@ -74,6 +74,10 @@
     <Compile Include="Expressions\Matrices\Transpose.cs" />
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Product.cs" />
+    <Compile Include="Expressions\Programming\AddAssign.cs" />
+    <Compile Include="Expressions\Programming\SubAssign.cs" />
+    <Compile Include="Expressions\Programming\MulAssign.cs" />
+    <Compile Include="Expressions\Programming\DivAssign.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
     <Compile Include="Expressions\Programming\Bool.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />

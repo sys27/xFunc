@@ -34,7 +34,7 @@ using xFunc.ViewModels;
 namespace xFunc.Views
 {
 
-    public partial class MainView : Fluent.RibbonWindow
+    public partial class MainView : Fluent.MetroWindow
     {
 
         private Processor processor;

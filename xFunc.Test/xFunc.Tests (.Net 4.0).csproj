@@ -137,6 +137,7 @@
     <Compile Include="LogicLexerTest.cs" />
     <Compile Include="SimplifierTest.cs" />
     <Compile Include="MathParameterCollectionTest.cs" />
+    <Compile Include="DifferentiatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Logics\xFunc.Logics %28.Net 4.0%29.csproj">

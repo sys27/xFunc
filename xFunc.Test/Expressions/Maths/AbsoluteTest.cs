@@ -18,54 +18,6 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
-        public void DerivativeTest1()
-        {
-            IExpression exp = new Abs(new Variable("x")).Differentiate();
-
-            Assert.AreEqual("1 * (x / abs(x))", exp.ToString());
-        }
-
-        [TestMethod]
-        public void DerivativeTest2()
-        {
-            Number num = new Number(2);
-            Variable x = new Variable("x");
-            Mul mul = new Mul(num, x);
-
-            IExpression exp = new Abs(mul);
-            IExpression deriv = exp.Differentiate();
-
-            Assert.AreEqual("(2 * 1) * ((2 * x) / abs(2 * x))", deriv.ToString());
-
-            num.Value = 3;
-            Assert.AreEqual("abs(3 * x)", exp.ToString());
-            Assert.AreEqual("(2 * 1) * ((2 * x) / abs(2 * x))", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void PartialDerivativeTest1()
-        {
-            IExpression exp = new Abs(new Mul(new Variable("x"), new Variable("y")));
-            IExpression deriv = exp.Differentiate();
-            Assert.AreEqual("(1 * y) * ((x * y) / abs(x * y))", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void PartialDerivativeTest2()
-        {
-            IExpression exp = new Abs(new Mul(new Variable("x"), new Variable("y")));
-            IExpression deriv = exp.Differentiate(new Variable("y"));
-            Assert.AreEqual("(x * 1) * ((x * y) / abs(x * y))", deriv.ToString());
-        }
-
-        [TestMethod]
-        public void PartialDerivativeTest3()
-        {
-            IExpression deriv = new Abs(new Variable("x")).Differentiate(new Variable("y"));
-            Assert.AreEqual("0", deriv.ToString());
-        }
-
-        [TestMethod]
         public void EqualsTest1()
         {
             Variable x1 = "x";

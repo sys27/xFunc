@@ -7,7 +7,7 @@ namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class AdditionTest
+    public class AddTest
     {
 
         [TestMethod]

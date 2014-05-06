@@ -6,7 +6,7 @@ namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class AbsoluteTest
+    public class AbsTest
     {
 
         [TestMethod]

@@ -64,8 +64,83 @@ namespace xFunc.Maths
         {
             if (expression == null)
                 throw new ArgumentNullException("expression");
+            if (variable == null)
+                throw new ArgumentNullException("variable");
 
-            return simplifier.Simplify(expression.Differentiate(variable));
+            //return simplifier.Simplify(expression.Differentiate(variable));
+            throw new NotImplementedException();
+        }
+
+        private IExpression _Differentiate(IExpression expression, Variable variable)
+        {
+            if (expression is UnaryExpression)
+            {
+                var un = (UnaryExpression)expression;
+                if (!Parser.HasVar(un.Argument, variable))
+                    return new Number(0);
+            }
+
+            if (expression is Sqrt)
+                return Sqrt((Sqrt)expression, variable);
+            if (expression is Ln)
+                return Ln((Ln)expression, variable);
+            if (expression is Lg)
+                return Lg((Lg)expression, variable);
+            if (expression is Log)
+                return Log((Log)expression, variable);
+            if (expression is Exp)
+                return Exp((Exp)expression, variable);
+
+            throw new NotImplementedException();
+        }
+
+        protected virtual IExpression Ln(Ln expression, Variable variable)
+        {
+            return new Div(_Differentiate(expression.Argument.Clone(), variable), expression.Argument.Clone());
+        }
+
+        protected virtual IExpression Lg(Lg expression, Variable variable)
+        {
+            var ln = new Ln(new Number(10));
+            var mul1 = new Mul(expression.Argument.Clone(), ln);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul1);
+
+            return div;
+        }
+
+        protected virtual IExpression Log(Log expression, Variable variable)
+        {
+            if (Parser.HasVar(expression.Left, variable))
+            {
+                var ln1 = new Ln(expression.Right.Clone());
+                var ln2 = new Ln(expression.Left.Clone());
+                var div = new Div(ln1, ln2);
+
+                return _Differentiate(div, variable);
+            }
+            if (Parser.HasVar(expression.Right, variable))
+            {
+                var ln = new Ln(expression.Left.Clone());
+                var mul = new Mul(expression.Right.Clone(), ln);
+                var div = new Div(_Differentiate(expression.Right.Clone(), variable), mul);
+
+                return div;
+            }
+
+            return new Number(0);
+        }
+
+        protected virtual IExpression Sqrt(Sqrt expression, Variable variable)
+        {
+            var mul = new Mul(new Number(2), expression.Clone());
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul);
+
+            return div;
+        }
+
+        protected virtual IExpression Exp(Exp expression, Variable variable)
+        {
+            return new Mul(_Differentiate(expression.Argument.Clone(), variable), expression.Clone());
         }
 
         /// <summary>

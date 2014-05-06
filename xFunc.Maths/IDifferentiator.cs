@@ -37,6 +37,16 @@ namespace xFunc.Maths
         /// <param name="variable">The variable.</param>
         /// <returns>Returns the derivative.</returns>
         IExpression Differentiate(IExpression expression, Variable variable);
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>
+        /// Returns the derivative.
+        /// </returns>
+        IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters);
 
     }
 

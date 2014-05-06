@@ -4,6 +4,7 @@ using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Test
 {
@@ -28,6 +29,11 @@ namespace xFunc.Test
         private IExpression Differentiate(IExpression exp, Variable variable)
         {
             return differentiator.Differentiate(exp, variable);
+        }
+
+        private IExpression Differentiate(IExpression exp, Variable variable, ExpressionParameters parameters)
+        {
+            return differentiator.Differentiate(exp, variable, parameters);
         }
 
         #region Common
@@ -1398,6 +1404,18 @@ namespace xFunc.Test
         }
 
         #endregion Hyperbolic
+
+        [TestMethod]
+        public void UserFunctionDerivTest()
+        {
+            var parameters = new FunctionCollection();
+            var uf = new UserFunction("f", new[] { new Variable("x") }, 1);
+            parameters.Add(uf, new Sin(new Variable("x")));
+
+            var diff = Differentiate(uf, "x", parameters);
+
+            Assert.AreEqual("cos(x) * 1", diff.ToString());
+        }
 
     }
 

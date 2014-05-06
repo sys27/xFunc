@@ -48,6 +48,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\TemperatureTest.cs" />
     <Compile Include="Expressions\Logics\AndTest.cs" />
     <Compile Include="Expressions\Logics\EqualityTest.cs" />
     <Compile Include="Expressions\Logics\ImplicationTest.cs" />
@@ -142,11 +143,15 @@
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Logics\xFunc.Logics %28.Net 4.0%29.csproj">
       <Project>{dfc61417-f3cc-47d5-b2de-4029be939a4c}</Project>
-      <Name>xFunc.Logics</Name>
+      <Name>xFunc.Logics %28.Net 4.0%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths %28.Net 4.0%29.csproj">
       <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
-      <Name>xFunc.Maths</Name>
+      <Name>xFunc.Maths %28.Net 4.0%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters %28.Net 4.0%29.csproj">
+      <Project>{2ecaad28-e0ce-40be-8eb0-0d055c908133}</Project>
+      <Name>xFunc.UnitConverters %28.Net 4.0%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1414,7 +1414,7 @@ namespace xFunc.Test
 
             var diff = Differentiate(uf, "x", parameters);
 
-            Assert.AreEqual("cos(x) * 1", diff.ToString());
+            Assert.AreEqual("cos(x)", diff.ToString());
         }
 
     }

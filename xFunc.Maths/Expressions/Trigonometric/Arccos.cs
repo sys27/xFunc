@@ -94,26 +94,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             return Math.Acos(radian) / Math.PI * 200;
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            var involution = new Pow(argument.Clone(), new Number(2));
-            var sub = new Sub(new Number(1), involution);
-            var sqrt = new Sqrt(sub);
-            var division = new Div(argument.Clone().Differentiate(variable), sqrt);
-            var unMinus = new UnaryMinus(division);
-
-            return unMinus;
-        }
-
+        
         /// <summary>
         /// Clones this instance.
         /// </summary>

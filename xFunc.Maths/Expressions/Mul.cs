@@ -125,36 +125,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            var first = Parser.HasVar(left, variable);
-            var second = Parser.HasVar(right, variable);
-
-            if (first && second)
-            {
-                var mul1 = new Mul(left.Clone().Differentiate(variable), right.Clone());
-                var mul2 = new Mul(left.Clone(), right.Clone().Differentiate(variable));
-                var add = new Add(mul1, mul2);
-
-                return add;
-            }
-
-            if (first)
-                return new Mul(left.Clone().Differentiate(variable), right.Clone());
-            if (second)
-                return new Mul(left.Clone(), right.Clone().Differentiate(variable));
-
-            return new Number(0);
-        }
-
-        /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>

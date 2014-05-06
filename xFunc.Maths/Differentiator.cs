@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
 {
@@ -80,18 +81,97 @@ namespace xFunc.Maths
                     return new Number(0);
             }
 
-            if (expression is Sqrt)
-                return Sqrt((Sqrt)expression, variable);
+            if (expression is Abs)
+                return Abs((Abs)expression, variable);
+            if (expression is Add)
+                return Add((Add)expression, variable);
+            if (expression is Div)
+                return Div((Div)expression, variable);
+            if (expression is Exp)
+                return Exp((Exp)expression, variable);
             if (expression is Ln)
                 return Ln((Ln)expression, variable);
             if (expression is Lg)
                 return Lg((Lg)expression, variable);
             if (expression is Log)
                 return Log((Log)expression, variable);
-            if (expression is Exp)
-                return Exp((Exp)expression, variable);
+            if (expression is Mul)
+                return Mul((Mul)expression, variable);
+            if (expression is Pow)
+                return Pow((Pow)expression, variable);
+            if (expression is Root)
+                return Root((Root)expression, variable);
+            if (expression is Sqrt)
+                return Sqrt((Sqrt)expression, variable);
+            if (expression is Sub)
+                return Sub((Sub)expression, variable);
+            if (expression is UnaryMinus)
+                return UnaryMinus((UnaryMinus)expression, variable);
 
-            throw new NotImplementedException();
+            // todo: expression
+            throw new NotSupportedException();
+        }
+
+        #region Common
+
+        protected virtual IExpression Abs(Abs expression, Variable variable)
+        {
+            var div = new Div(expression.Argument.Clone(), expression.Clone());
+            var mul = new Mul(_Differentiate(expression.Argument.Clone(), variable), div);
+
+            return mul;
+        }
+
+        protected virtual IExpression Add(Add expression, Variable variable)
+        {
+            var first = Parser.HasVar(expression.Left, variable);
+            var second = Parser.HasVar(expression.Right, variable);
+
+            if (first && second)
+                return new Add(_Differentiate(expression.Left.Clone(), variable), _Differentiate(expression.Right.Clone(), variable));
+            if (first)
+                return _Differentiate(expression.Left.Clone(), variable);
+            if (second)
+                return _Differentiate(expression.Right.Clone(), variable);
+
+            return new Number(0);
+        }
+
+        protected virtual IExpression Div(Div expression, Variable variable)
+        {
+            var first = Parser.HasVar(expression.Left, variable);
+            var second = Parser.HasVar(expression.Right, variable);
+
+            if (first && second)
+            {
+                var mul1 = new Mul(_Differentiate(expression.Left.Clone(), variable), expression.Right.Clone());
+                var mul2 = new Mul(expression.Left.Clone(), _Differentiate(expression.Right.Clone(), variable));
+                var sub = new Sub(mul1, mul2);
+                var inv = new Pow(expression.Right.Clone(), new Number(2));
+                var division = new Div(sub, inv);
+
+                return division;
+            }
+            if (first)
+            {
+                return new Div(_Differentiate(expression.Left.Clone(), variable), expression.Right.Clone());
+            }
+            if (second)
+            {
+                var mul2 = new Mul(expression.Left.Clone(), _Differentiate(expression.Right.Clone(), variable));
+                var unMinus = new UnaryMinus(mul2);
+                var inv = new Pow(expression.Right.Clone(), new Number(2));
+                var division = new Div(unMinus, inv);
+
+                return division;
+            }
+
+            return new Number(0);
+        }
+
+        protected virtual IExpression Exp(Exp expression, Variable variable)
+        {
+            return new Mul(_Differentiate(expression.Argument.Clone(), variable), expression.Clone());
         }
 
         protected virtual IExpression Ln(Ln expression, Variable variable)
@@ -116,7 +196,7 @@ namespace xFunc.Maths
                 var ln2 = new Ln(expression.Left.Clone());
                 var div = new Div(ln1, ln2);
 
-                return _Differentiate(div, variable);
+                return Div(div, variable);
             }
             if (Parser.HasVar(expression.Right, variable))
             {
@@ -130,6 +210,64 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        protected virtual IExpression Mul(Mul expression, Variable variable)
+        {
+            var first = Parser.HasVar(expression.Left, variable);
+            var second = Parser.HasVar(expression.Right, variable);
+
+            if (first && second)
+            {
+                var mul1 = new Mul(_Differentiate(expression.Left.Clone(), variable), expression.Right.Clone());
+                var mul2 = new Mul(expression.Left.Clone(), _Differentiate(expression.Right.Clone(), variable));
+                var add = new Add(mul1, mul2);
+
+                return add;
+            }
+
+            if (first)
+                return new Mul(_Differentiate(expression.Left.Clone(), variable), expression.Right.Clone());
+            if (second)
+                return new Mul(expression.Left.Clone(), _Differentiate(expression.Right.Clone(), variable));
+
+            return new Number(0);
+        }
+
+        protected virtual IExpression Pow(Pow expression, Variable variable)
+        {
+            if (Parser.HasVar(expression.Left, variable))
+            {
+                var sub = new Sub(expression.Right.Clone(), new Number(1));
+                var inv = new Pow(expression.Left.Clone(), sub);
+                var mul1 = new Mul(expression.Right.Clone(), inv);
+                var mul2 = new Mul(_Differentiate(expression.Left.Clone(), variable), mul1);
+
+                return mul2;
+            }
+            if (Parser.HasVar(expression.Right, variable))
+            {
+                var ln = new Ln(expression.Left.Clone());
+                var mul1 = new Mul(ln, expression.Clone());
+                var mul2 = new Mul(mul1, _Differentiate(expression.Right.Clone(), variable));
+
+                return mul2;
+            }
+
+            return new Number(0);
+        }
+
+        protected virtual IExpression Root(Root expression, Variable variable)
+        {
+            if (Parser.HasVar(expression.Left, variable) || Parser.HasVar(expression.Right, variable))
+            {
+                var div = new Div(new Number(1), expression.Right.Clone());
+                var pow = new Pow(expression.Left.Clone(), div);
+
+                return Pow(pow, variable);
+            }
+
+            return new Number(0);
+        }
+
         protected virtual IExpression Sqrt(Sqrt expression, Variable variable)
         {
             var mul = new Mul(new Number(2), expression.Clone());
@@ -138,10 +276,101 @@ namespace xFunc.Maths
             return div;
         }
 
-        protected virtual IExpression Exp(Exp expression, Variable variable)
+        protected virtual IExpression Sub(Sub expression, Variable variable)
         {
-            return new Mul(_Differentiate(expression.Argument.Clone(), variable), expression.Clone());
+            var first = Parser.HasVar(expression.Left, variable);
+            var second = Parser.HasVar(expression.Right, variable);
+
+            if (first && second)
+                return new Sub(_Differentiate(expression.Left.Clone(), variable), _Differentiate(expression.Right.Clone(), variable));
+            if (first)
+                return _Differentiate(expression.Left.Clone(), variable);
+            if (second)
+                return new UnaryMinus(_Differentiate(expression.Right.Clone(), variable));
+
+            return new Number(0);
         }
+
+        protected virtual IExpression UnaryMinus(UnaryMinus expression, Variable variable)
+        {
+            return new UnaryMinus(_Differentiate(expression.Argument.Clone(), variable));
+        }
+
+        #endregion Common
+
+        #region Trigonometric
+
+        protected virtual IExpression Arccos(Arccos expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Arccot(Arccot expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Arccsc(Arccsc expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Arcsec(Arcsec expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Arcsin(Arcsin expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Arctan(Arctan expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Cos(Cos expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Cot(Cot expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Csc(Csc expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Sec(Sec expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Sin(Sin expression, Variable variable)
+        {
+
+        }
+
+        protected virtual IExpression Tan(Tan expression, Variable variable)
+        {
+            var cos = new Cos(expression.Argument.Clone());
+            var inv = new Pow(cos, new Number(2));
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), inv);
+
+            return div;
+        }
+
+        #endregion Trigonometric
+
+        #region Hyperbolic
+
+
+
+        #endregion Hyperbolic
 
         /// <summary>
         /// Gets or sets the simplifier.

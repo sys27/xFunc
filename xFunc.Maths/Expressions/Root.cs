@@ -73,27 +73,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            if (Parser.HasVar(left, variable) || Parser.HasVar(right, variable))
-            {
-                var div = new Div(new Number(1), right.Clone());
-                var inv = new Pow(left.Clone(), div);
-
-                return inv.Differentiate(variable);
-            }
-
-            return new Number(0);
-        }
-
-        /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>

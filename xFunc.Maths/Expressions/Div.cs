@@ -67,47 +67,7 @@ namespace xFunc.Maths.Expressions
         {
             return base.GetHashCode(6091, 3457);
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            var first = Parser.HasVar(left, variable);
-            var second = Parser.HasVar(right, variable);
-
-            if (first && second)
-            {
-                var mul1 = new Mul(left.Clone().Differentiate(variable), right.Clone());
-                var mul2 = new Mul(left.Clone(), right.Clone().Differentiate(variable));
-                var sub = new Sub(mul1, mul2);
-                var inv = new Pow(right.Clone(), new Number(2));
-                var division = new Div(sub, inv);
-
-                return division;
-            }
-            if (first)
-            {
-                return new Div(left.Clone().Differentiate(variable), right.Clone());
-            }
-            if (second)
-            {
-                var mul2 = new Mul(left.Clone(), right.Clone().Differentiate(variable));
-                var unMinus = new UnaryMinus(mul2);
-                var inv = new Pow(right.Clone(), new Number(2));
-                var division = new Div(unMinus, inv);
-
-                return division;
-            }
-
-            return new Number(0);
-        }
-
+        
         /// <summary>
         /// Clones this instance.
         /// </summary>

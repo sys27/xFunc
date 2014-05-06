@@ -18,15 +18,6 @@ namespace xFunc.Test.Expressions.Maths.Hyperbolic
             Assert.AreEqual(Math.Cosh(1), exp.Calculate());
         }
 
-        [TestMethod]
-        public void DerivativeTest()
-        {
-            IExpression exp = new Cosh(new Mul(new Number(2), new Variable("x")));
-            IExpression deriv = exp.Differentiate();
-
-            Assert.AreEqual("(2 * 1) * sinh(2 * x)", deriv.ToString());
-        }
-
     }
 
 }

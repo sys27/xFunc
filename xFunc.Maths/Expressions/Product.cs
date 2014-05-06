@@ -186,34 +186,7 @@ namespace xFunc.Maths.Expressions
 
             return S;
         }
-
-        /// <summary>
-        /// Always throws <see cref="NotSupportedException" />.
-        /// </summary>
-        /// <returns>
-        /// Throws an exception.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        /// <exception cref="NotSupportedException">Always.</exception>
-        public override IExpression Differentiate()
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// Always throws <see cref="NotSupportedException" />.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Throws an exception.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IExpression Differentiate(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
+        
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
@@ -426,7 +427,123 @@ namespace xFunc.Maths
 
         #region Hyperbolic
 
+        protected virtual IExpression Arcosh(Arccos expression, Variable variable)
+        {
+            var sqr = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(sqr, new Number(1));
+            var sqrt = new Sqrt(sub);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), sqrt);
 
+            return div;
+        }
+
+        protected virtual IExpression Arcoth(Arcoth expression, Variable variable)
+        {
+            var sqr = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), sqr);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), sub);
+
+            return div;
+        }
+
+        protected virtual IExpression Arcsch(Arcsch expression, Variable variable)
+        {
+            var inv = new Pow(expression.Argument.Clone(), new Number(2));
+            var add = new Add(new Number(1), inv);
+            var sqrt = new Sqrt(add);
+            var abs = new Abs(expression.Argument.Clone());
+            var mul = new Mul(abs, sqrt);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul);
+            var unMinus = new UnaryMinus(div);
+
+            return unMinus;
+        }
+
+        protected virtual IExpression Arsech(Arsech expression, Variable variable)
+        {
+            var inv = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), inv);
+            var sqrt = new Sqrt(sub);
+            var mul = new Mul(expression.Argument.Clone(), sqrt);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul);
+            var unMinus = new UnaryMinus(div);
+
+            return unMinus;
+        }
+
+        protected virtual IExpression Arsinh(Arsinh expression, Variable variable)
+        {
+            var sqr = new Pow(expression.Argument.Clone(), new Number(2));
+            var add = new Add(sqr, new Number(1));
+            var sqrt = new Sqrt(add);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), sqrt);
+
+            return div;
+        }
+
+        protected virtual IExpression Artanh(Artanh expression, Variable variable)
+        {
+            var sqr = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), sqr);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), sub);
+
+            return div;
+        }
+
+        protected virtual IExpression Cosh(Cosh expression, Variable variable)
+        {
+            var sinh = new Sinh(expression.Argument.Clone());
+            var mul = new Mul(_Differentiate(expression.Argument.Clone(), variable), sinh);
+
+            return mul;
+        }
+
+        protected virtual IExpression Coth(Coth expression, Variable variable)
+        {
+            var sinh = new Sinh(expression.Argument.Clone());
+            var inv = new Pow(sinh, new Number(2));
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), inv);
+            var unMinus = new UnaryMinus(div);
+
+            return unMinus;
+        }
+
+        protected virtual IExpression Csch(Csch expression, Variable variable)
+        {
+            var coth = new Coth(expression.Argument.Clone());
+            var mul1 = new Mul(coth, expression.Clone());
+            var mul2 = new Mul(_Differentiate(expression.Argument.Clone(), variable), mul1);
+            var unMinus = new UnaryMinus(mul2);
+
+            return unMinus;
+        }
+
+        protected virtual IExpression Sech(Sech expression, Variable variable)
+        {
+            var tanh = new Tanh(expression.Argument.Clone());
+            var mul1 = new Mul(tanh, expression.Clone());
+            var mul2 = new Mul(_Differentiate(expression.Argument.Clone(), variable), mul1);
+            var unMinus = new UnaryMinus(mul2);
+
+            return unMinus;
+        }
+
+        protected virtual IExpression Sinh(Sinh expression, Variable variable)
+        {
+            var cosh = new Cosh(expression.Argument.Clone());
+            var mul = new Mul(_Differentiate(expression.Argument.Clone(), variable), cosh);
+
+            return mul;
+        }
+
+        protected virtual IExpression Tanh(Tanh expression, Variable variable)
+        {
+            var cosh = new Cosh(expression.Argument.Clone());
+            var inv = new Pow(cosh, new Number(2));
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), inv);
+
+            return div;
+        }
 
         #endregion Hyperbolic
 

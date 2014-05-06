@@ -7,7 +7,7 @@ namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class DivisionTest
+    public class DivTest
     {
 
         [TestMethod]

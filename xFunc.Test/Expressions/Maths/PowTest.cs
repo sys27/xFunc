@@ -6,7 +6,7 @@ namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class ExponentiationTest
+    public class PowTest
     {
 
         [TestMethod]

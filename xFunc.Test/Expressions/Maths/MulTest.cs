@@ -6,7 +6,7 @@ namespace xFunc.Test.Expressions.Maths
 {
 
     [TestClass]
-    public class MultiplicationTest
+    public class MulTest
     {
 
         [TestMethod]

@@ -78,22 +78,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new Sinh(argument.Clone());
         }
 
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            var cosh = new Cosh(argument.Clone());
-            var mul = new Mul(argument.Clone().Differentiate(variable), cosh);
-
-            return mul;
-        }
-
     }
 
 }

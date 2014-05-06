@@ -145,31 +145,7 @@ namespace xFunc.Maths.Expressions
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
             return parameters.Functions[this].Calculate(expParam);
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <returns>
-        /// Returns a derivative of the expression.
-        /// </returns>
-        public override IExpression Differentiate()
-        {
-            return Differentiate(new Variable("x"));
-        }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
+        
         /// <summary>
         /// Clones this instance.
         /// </summary>

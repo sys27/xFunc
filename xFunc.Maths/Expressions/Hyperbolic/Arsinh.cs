@@ -77,25 +77,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             return new Arsinh(argument.Clone());
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            var sqr = new Pow(argument.Clone(), new Number(2));
-            var add = new Add(sqr, new Number(1));
-            var sqrt = new Sqrt(add);
-            var div = new Div(argument.Clone().Differentiate(variable), sqrt);
-
-            return div;
-        }
-
+        
     }
 
 }

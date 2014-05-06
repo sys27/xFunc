@@ -112,25 +112,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public abstract object Calculate(ExpressionParameters parameters);
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <returns>
-        /// Returns a derivative of the expression.
-        /// </returns>
-        public abstract IExpression Differentiate();
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public abstract IExpression Differentiate(Variable variable);
-
+        
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>

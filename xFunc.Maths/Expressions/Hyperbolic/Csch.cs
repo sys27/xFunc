@@ -77,26 +77,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             return new Csch(argument.Clone());
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            var coth = new Coth(argument.Clone());
-            var csch = Clone();
-            var mul1 = new Mul(coth, csch);
-            var mul2 = new Mul(argument.Clone().Differentiate(variable), mul1);
-            var unMinus = new UnaryMinus(mul2);
-
-            return unMinus;
-        }
-
+        
     }
 
 }

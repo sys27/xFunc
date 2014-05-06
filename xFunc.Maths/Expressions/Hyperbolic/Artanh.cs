@@ -78,23 +78,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             return new Artanh(argument.Clone());
         }
 
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            var sqr = new Pow(argument.Clone(), new Number(2));
-            var sub = new Sub(new Number(1), sqr);
-            var div = new Div(argument.Clone().Differentiate(variable), sub);
-
-            return div;
-        }
-
     }
 
 }

@@ -71,32 +71,6 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <returns>
-        /// Returns a derivative of the expression.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override IExpression Differentiate()
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
         /// Clones this instance of the <see cref="For" />.
         /// </summary>
         /// <returns>

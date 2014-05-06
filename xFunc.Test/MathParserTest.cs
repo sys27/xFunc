@@ -147,8 +147,7 @@ namespace xFunc.Test
             };
 
             var exp = parser.Parse("deriv(sin(x))");
-            var diff = exp.Differentiate();
-            Assert.AreEqual("cos(x) * 1", diff.ToString());
+            Assert.AreEqual("deriv(sin(x))", exp.ToString());
         }
 
         [TestMethod]

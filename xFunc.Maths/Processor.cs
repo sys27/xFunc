@@ -90,9 +90,9 @@ namespace xFunc.Maths
             {
                 var deriv = exp as Derivative;
                 if (deriv.CountOfParams == 1)
-                    return new ExpressionResult(Differentiate(deriv.Expression));
+                    return new ExpressionResult(Differentiate(deriv.Expression, new Variable("x"), parameters));
 
-                return new ExpressionResult(Differentiate(deriv.Expression, deriv.Variable));
+                return new ExpressionResult(Differentiate(deriv.Expression, deriv.Variable, parameters));
             }
             if (exp is Simplify)
             {
@@ -182,6 +182,20 @@ namespace xFunc.Maths
         public IExpression Differentiate(IExpression expression, Variable variable)
         {
             return differentiator.Differentiate(expression, variable);
+        }
+
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>
+        /// Returns the derivative.
+        /// </returns>
+        public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
+        {
+            return differentiator.Differentiate(expression, variable, parameters);
         }
 
         /// <summary>

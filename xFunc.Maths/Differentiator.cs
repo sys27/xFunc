@@ -65,15 +65,35 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression, Variable variable)
         {
+            return _Differentiate(expression, variable, null);
+        }
+
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>
+        /// Returns the derivative.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="expression"/> or <paramref name="variable"/> is null.</exception>
+        public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
+        {
             if (expression == null)
                 throw new ArgumentNullException("expression");
             if (variable == null)
                 throw new ArgumentNullException("variable");
 
-            return _Differentiate(expression, variable);
+            return simplifier.Simplify(_Differentiate(expression, variable, parameters));
         }
 
         private IExpression _Differentiate(IExpression expression, Variable variable)
+        {
+            return _Differentiate(expression, variable, null);
+        }
+
+        private IExpression _Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
         {
             if (expression is Number)
                 return Number((Number)expression, variable);
@@ -113,6 +133,8 @@ namespace xFunc.Maths
                 return Sub((Sub)expression, variable);
             if (expression is UnaryMinus)
                 return UnaryMinus((UnaryMinus)expression, variable);
+            if (expression is UserFunction)
+                return UserFunction((UserFunction)expression, variable, parameters);
 
             if (expression is Sin)
                 return Sin((Sin)expression, variable);
@@ -613,6 +635,13 @@ namespace xFunc.Maths
         }
 
         #endregion Hyperbolic
+
+        protected virtual IExpression UserFunction(UserFunction expression, Variable variable, ExpressionParameters parameters)
+        {
+            var func = parameters.Functions[expression];
+
+            return _Differentiate(func, variable, parameters);
+        }
 
         /// <summary>
         /// Gets or sets the simplifier.

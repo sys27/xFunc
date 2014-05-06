@@ -191,11 +191,23 @@ namespace xFunc.Maths
 
         #region Common
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Number(Number expression, Variable variable)
         {
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Variable(Variable expression, Variable variable)
         {
             if (expression.Equals(variable))
@@ -204,6 +216,12 @@ namespace xFunc.Maths
             return expression.Clone();
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Abs(Abs expression, Variable variable)
         {
             var div = new Div(expression.Argument.Clone(), expression.Clone());
@@ -212,6 +230,12 @@ namespace xFunc.Maths
             return mul;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Add(Add expression, Variable variable)
         {
             var first = Parser.HasVar(expression.Left, variable);
@@ -227,6 +251,12 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Div(Div expression, Variable variable)
         {
             var first = Parser.HasVar(expression.Left, variable);
@@ -259,16 +289,34 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Exp(Exp expression, Variable variable)
         {
             return new Mul(_Differentiate(expression.Argument.Clone(), variable), expression.Clone());
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Ln(Ln expression, Variable variable)
         {
             return new Div(_Differentiate(expression.Argument.Clone(), variable), expression.Argument.Clone());
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Lg(Lg expression, Variable variable)
         {
             var ln = new Ln(new Number(10));
@@ -278,6 +326,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Log(Log expression, Variable variable)
         {
             if (Parser.HasVar(expression.Left, variable))
@@ -300,6 +354,12 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Mul(Mul expression, Variable variable)
         {
             var first = Parser.HasVar(expression.Left, variable);
@@ -322,6 +382,12 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Pow(Pow expression, Variable variable)
         {
             if (Parser.HasVar(expression.Left, variable))
@@ -345,6 +411,12 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Root(Root expression, Variable variable)
         {
             if (Parser.HasVar(expression.Left, variable) || Parser.HasVar(expression.Right, variable))
@@ -358,6 +430,12 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sqrt(Sqrt expression, Variable variable)
         {
             var mul = new Mul(new Number(2), expression.Clone());
@@ -366,6 +444,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sub(Sub expression, Variable variable)
         {
             var first = Parser.HasVar(expression.Left, variable);
@@ -381,6 +465,12 @@ namespace xFunc.Maths
             return new Number(0);
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression UnaryMinus(UnaryMinus expression, Variable variable)
         {
             return new UnaryMinus(_Differentiate(expression.Argument.Clone(), variable));
@@ -390,6 +480,12 @@ namespace xFunc.Maths
 
         #region Trigonometric
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arccos(Arccos expression, Variable variable)
         {
             var pow = new Pow(expression.Argument.Clone(), new Number(2));
@@ -401,6 +497,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arccot(Arccot expression, Variable variable)
         {
             var involution = new Pow(expression.Argument.Clone(), new Number(2));
@@ -411,6 +513,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arccsc(Arccsc expression, Variable variable)
         {
             var abs = new Abs(expression.Argument.Clone());
@@ -424,6 +532,12 @@ namespace xFunc.Maths
             return unary;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arcsec(Arcsec expression, Variable variable)
         {
             var abs = new Abs(expression.Argument.Clone());
@@ -436,6 +550,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arcsin(Arcsin expression, Variable variable)
         {
             var involution = new Pow(expression.Argument.Clone(), new Number(2));
@@ -446,6 +566,12 @@ namespace xFunc.Maths
             return division;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arctan(Arctan expression, Variable variable)
         {
             var involution = new Pow(expression.Argument.Clone(), new Number(2));
@@ -455,6 +581,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Cos(Cos expression, Variable variable)
         {
             var sine = new Sin(expression.Argument.Clone());
@@ -464,6 +596,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Cot(Cot expression, Variable variable)
         {
             var sine = new Sin(expression.Argument.Clone());
@@ -474,6 +612,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Csc(Csc expression, Variable variable)
         {
             var unary = new UnaryMinus(_Differentiate(expression.Argument.Clone(), variable));
@@ -485,6 +629,12 @@ namespace xFunc.Maths
             return mul2;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sec(Sec expression, Variable variable)
         {
             var tan = new Tan(expression.Argument.Clone());
@@ -495,6 +645,12 @@ namespace xFunc.Maths
             return mul2;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sin(Sin expression, Variable variable)
         {
             var cos = new Cos(expression.Argument.Clone());
@@ -503,6 +659,12 @@ namespace xFunc.Maths
             return mul;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Tan(Tan expression, Variable variable)
         {
             var cos = new Cos(expression.Argument.Clone());
@@ -516,6 +678,12 @@ namespace xFunc.Maths
 
         #region Hyperbolic
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arcosh(Arcosh expression, Variable variable)
         {
             var sqr = new Pow(expression.Argument.Clone(), new Number(2));
@@ -526,6 +694,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arcoth(Arcoth expression, Variable variable)
         {
             var sqr = new Pow(expression.Argument.Clone(), new Number(2));
@@ -535,6 +709,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arcsch(Arcsch expression, Variable variable)
         {
             var inv = new Pow(expression.Argument.Clone(), new Number(2));
@@ -548,6 +728,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arsech(Arsech expression, Variable variable)
         {
             var inv = new Pow(expression.Argument.Clone(), new Number(2));
@@ -560,6 +746,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Arsinh(Arsinh expression, Variable variable)
         {
             var sqr = new Pow(expression.Argument.Clone(), new Number(2));
@@ -570,6 +762,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Artanh(Artanh expression, Variable variable)
         {
             var sqr = new Pow(expression.Argument.Clone(), new Number(2));
@@ -579,6 +777,12 @@ namespace xFunc.Maths
             return div;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Cosh(Cosh expression, Variable variable)
         {
             var sinh = new Sinh(expression.Argument.Clone());
@@ -587,6 +791,12 @@ namespace xFunc.Maths
             return mul;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Coth(Coth expression, Variable variable)
         {
             var sinh = new Sinh(expression.Argument.Clone());
@@ -597,6 +807,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Csch(Csch expression, Variable variable)
         {
             var coth = new Coth(expression.Argument.Clone());
@@ -607,6 +823,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sech(Sech expression, Variable variable)
         {
             var tanh = new Tanh(expression.Argument.Clone());
@@ -617,6 +839,12 @@ namespace xFunc.Maths
             return unMinus;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sinh(Sinh expression, Variable variable)
         {
             var cosh = new Cosh(expression.Argument.Clone());
@@ -625,6 +853,12 @@ namespace xFunc.Maths
             return mul;
         }
 
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Tanh(Tanh expression, Variable variable)
         {
             var cosh = new Cosh(expression.Argument.Clone());
@@ -636,6 +870,13 @@ namespace xFunc.Maths
 
         #endregion Hyperbolic
 
+        /// <summary>
+        /// Differentiates the user function.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>Returns the derivative.</returns>
         protected virtual IExpression UserFunction(UserFunction expression, Variable variable, ExpressionParameters parameters)
         {
             var func = parameters.Functions[expression];

@@ -69,38 +69,7 @@ namespace xFunc.Maths.Expressions
         {
             return Math.Pow((double)left.Calculate(parameters), (double)right.Calculate(parameters));
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            if (Parser.HasVar(left, variable))
-            {
-                var sub = new Sub(right.Clone(), new Number(1));
-                var inv = new Pow(left.Clone(), sub);
-                var mul1 = new Mul(right.Clone(), inv);
-                var mul2 = new Mul(left.Clone().Differentiate(variable), mul1);
-
-                return mul2;
-            }
-            if (Parser.HasVar(right, variable))
-            {
-                var ln = new Ln(left.Clone());
-                var mul1 = new Mul(ln, Clone());
-                var mul2 = new Mul(mul1, right.Clone().Differentiate(variable));
-
-                return mul2;
-            }
-            
-            return new Number(0);
-        }
-
+        
         /// <summary>
         /// Clones this instance of the <see cref="Pow"/> class.
         /// </summary>

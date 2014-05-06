@@ -302,57 +302,115 @@ namespace xFunc.Maths
 
         protected virtual IExpression Arccos(Arccos expression, Variable variable)
         {
+            var pow = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), pow);
+            var sqrt = new Sqrt(sub);
+            var division = new Div(_Differentiate(expression.Argument.Clone(), variable), sqrt);
+            var unMinus = new UnaryMinus(division);
 
+            return unMinus;
         }
 
         protected virtual IExpression Arccot(Arccot expression, Variable variable)
         {
+            var involution = new Pow(expression.Argument.Clone(), new Number(2));
+            var add = new Add(new Number(1), involution);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), add);
+            var unMinus = new UnaryMinus(div);
 
+            return unMinus;
         }
 
         protected virtual IExpression Arccsc(Arccsc expression, Variable variable)
         {
+            var abs = new Abs(expression.Argument.Clone());
+            var sqr = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(sqr, new Number(1));
+            var sqrt = new Sqrt(sub);
+            var mul = new Mul(abs, sqrt);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul);
+            var unary = new UnaryMinus(div);
 
+            return unary;
         }
 
         protected virtual IExpression Arcsec(Arcsec expression, Variable variable)
         {
+            var abs = new Abs(expression.Argument.Clone());
+            var sqr = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(sqr, new Number(1));
+            var sqrt = new Sqrt(sub);
+            var mul = new Mul(abs, sqrt);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul);
 
+            return div;
         }
 
         protected virtual IExpression Arcsin(Arcsin expression, Variable variable)
         {
+            var involution = new Pow(expression.Argument.Clone(), new Number(2));
+            var sub = new Sub(new Number(1), involution);
+            var sqrt = new Sqrt(sub);
+            var division = new Div(_Differentiate(expression.Argument.Clone(), variable), sqrt);
 
+            return division;
         }
 
         protected virtual IExpression Arctan(Arctan expression, Variable variable)
         {
+            var involution = new Pow(expression.Argument.Clone(), new Number(2));
+            var add = new Add(new Number(1), involution);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), add);
 
+            return div;
         }
 
         protected virtual IExpression Cos(Cos expression, Variable variable)
         {
+            var sine = new Sin(expression.Argument.Clone());
+            var multiplication = new Mul(sine, _Differentiate(expression.Argument.Clone(), variable));
+            var unMinus = new UnaryMinus(multiplication);
 
+            return unMinus;
         }
 
         protected virtual IExpression Cot(Cot expression, Variable variable)
         {
+            var sine = new Sin(expression.Argument.Clone());
+            var involution = new Pow(sine, new Number(2));
+            var division = new Div(_Differentiate(expression.Argument.Clone(), variable), involution);
+            var unMinus = new UnaryMinus(division);
 
+            return unMinus;
         }
 
         protected virtual IExpression Csc(Csc expression, Variable variable)
         {
+            var unary = new UnaryMinus(_Differentiate(expression.Argument.Clone(), variable));
+            var cot = new Cot(expression.Argument.Clone());
+            var csc = new Csc(expression.Argument.Clone());
+            var mul1 = new Mul(cot, csc);
+            var mul2 = new Mul(unary, mul1);
 
+            return mul2;
         }
 
         protected virtual IExpression Sec(Sec expression, Variable variable)
         {
+            var tan = new Tan(expression.Argument.Clone());
+            var sec = new Sec(expression.Argument.Clone());
+            var mul1 = new Mul(tan, sec);
+            var mul2 = new Mul(_Differentiate(expression.Argument.Clone(), variable), mul1);
 
+            return mul2;
         }
 
         protected virtual IExpression Sin(Sin expression, Variable variable)
         {
+            var cos = new Cos(expression.Argument.Clone());
+            var mul = new Mul(cos, _Differentiate(expression.Argument.Clone(), variable));
 
+            return mul;
         }
 
         protected virtual IExpression Tan(Tan expression, Variable variable)

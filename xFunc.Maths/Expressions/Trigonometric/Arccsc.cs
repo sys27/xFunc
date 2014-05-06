@@ -90,28 +90,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             return MathExtentions.Acsc((double)argument.Calculate(parameters)) / Math.PI * 200;
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            var abs = new Abs(argument.Clone());
-            var sqr = new Pow(argument.Clone(), new Number(2));
-            var sub = new Sub(sqr, new Number(1));
-            var sqrt = new Sqrt(sub);
-            var mul = new Mul(abs, sqrt);
-            var div = new Div(argument.Clone().Differentiate(variable), mul);
-            var unary = new UnaryMinus(div);
-
-            return unary;
-        }
-
+        
         /// <summary>
         /// Clones this instance.
         /// </summary>

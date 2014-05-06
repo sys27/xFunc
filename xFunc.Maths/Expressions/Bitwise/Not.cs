@@ -82,20 +82,6 @@ namespace xFunc.Maths.Expressions.Bitwise
             return new Not(argument.Clone());
         }
 
-        /// <summary>
-        /// Always throws <see cref="NotSupportedException" />.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Throws an exception.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        protected override IExpression _Differentiation(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
     }
 
 }

@@ -73,21 +73,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new Equal(left.Clone(), right.Clone());
         }
-
-        /// <summary>
-        /// Differentiates the specified variable.
-        /// </summary>
-        /// <param name="variable">The variable.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
+        
     }
 
 }

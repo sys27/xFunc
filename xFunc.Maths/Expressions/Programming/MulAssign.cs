@@ -71,21 +71,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new MulAssign(left.Clone(), right.Clone());
         }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
-        /// <seealso cref="Variable" />
-        public override IExpression Differentiate(Variable variable)
-        {
-            throw new NotSupportedException();
-        }
-
+        
         /// <summary>
         /// The left (first) operand.
         /// </summary>

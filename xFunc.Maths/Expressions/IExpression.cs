@@ -18,7 +18,7 @@ namespace xFunc.Maths.Expressions
 {
 
     /// <summary>
-    /// Defines methods to calculate and to differentiate mathematical expressions.
+    /// Defines methods to calculate mathematical expressions.
     /// </summary>
     public interface IExpression
     {

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Expressions.Hyperbolic;
 
 namespace xFunc.Test
 {
@@ -721,7 +722,113 @@ namespace xFunc.Test
 
         #region Hyperbolic
 
+        [TestMethod]
+        public void SinhDerivativeTest()
+        {
+            IExpression exp = new Sinh(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
 
+            Assert.AreEqual("(2 * 1) * cosh(2 * x)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CoshDerivativeTest()
+        {
+            IExpression exp = new Cosh(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) * sinh(2 * x)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanhDerivativeTest()
+        {
+            IExpression exp = new Tanh(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (cosh(2 * x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CothDerivativeTest()
+        {
+            IExpression exp = new Coth(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (sinh(2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SechDerivativeTest()
+        {
+            IExpression exp = new Sech(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) * (tanh(2 * x) * sech(2 * x)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CschDerivativeTest()
+        {
+            IExpression exp = new Csch(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) * (coth(2 * x) * csch(2 * x)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArsinehDerivativeTest()
+        {
+            IExpression exp = new Arsinh(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / sqrt(((2 * x) ^ 2) + 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcoshDerivativeTest()
+        {
+            IExpression exp = new Arcosh(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / sqrt(((2 * x) ^ 2) - 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArtanhDerivativeTest()
+        {
+            IExpression exp = new Artanh(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (1 - ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcothDerivativeTest()
+        {
+            IExpression exp = new Arcoth(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (1 - ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArsechDerivativeTest()
+        {
+            IExpression exp = new Arsech(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / ((2 * x) * sqrt(1 - ((2 * x) ^ 2))))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcschDerivativeTest()
+        {
+            IExpression exp = new Arcsch(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(1 + ((2 * x) ^ 2))))", deriv.ToString());
+        }
 
         #endregion Hyperbolic
 

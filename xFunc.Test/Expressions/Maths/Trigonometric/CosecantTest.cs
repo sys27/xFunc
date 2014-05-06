@@ -35,15 +35,6 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
             Assert.AreEqual(MathExtentions.Csc(Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
-        [TestMethod]
-        public void DerivativeTest()
-        {
-            IExpression exp = new Csc(new Mul(new Number(2), new Variable("x")));
-            IExpression deriv = exp.Differentiate();
-
-            Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());
-        }
-
     }
 
 }

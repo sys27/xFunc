@@ -716,7 +716,574 @@ namespace xFunc.Test
 
         #region Trigonometric
 
+        [TestMethod]
+        public void SinDerivativeTest1()
+        {
+            IExpression exp = new Sin(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
 
+            Assert.AreEqual("cos(x) * 1", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SinDerivativeTest2()
+        {
+            IExpression exp = new Sin(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("cos(2 * x) * (2 * 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SinDerivativeTest3()
+        {
+            // sin(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Sin(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("cos(2 * x) * (2 * 1)", deriv.ToString());
+
+            num.Value = 3;
+            Assert.AreEqual("sin(3 * x)", exp.ToString());
+            Assert.AreEqual("cos(2 * x) * (2 * 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SinPartialDerivativeTest1()
+        {
+            IExpression exp = new Sin(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("cos(x * y) * (1 * y)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SinPartialDerivativeTest2()
+        {
+            IExpression exp = new Sin(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("cos(x * y) * (x * 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SinPartialDerivativeTest3()
+        {
+            IExpression exp = new Sin(new Variable("y"));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CosDerivativeTest1()
+        {
+            IExpression exp = new Cos(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(sin(x) * 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CosDerivativeTest2()
+        {
+            IExpression exp = new Cos(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CosDerivativeTest3()
+        {
+            // cos(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Cos(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
+
+            num.Value = 7;
+            Assert.AreEqual("cos(7 * x)", exp.ToString());
+            Assert.AreEqual("-(sin(2 * x) * (2 * 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CosPartialDerivativeTest1()
+        {
+            IExpression exp = new Cos(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("-(sin(x * y) * (1 * y))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CosPartialDerivativeTest2()
+        {
+            IExpression exp = new Cos(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("-(sin(x * y) * (x * 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CosPartialDerivativeTest3()
+        {
+            IExpression exp = new Cos(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanDerivativeTest1()
+        {
+            IExpression exp = new Tan(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("1 / (cos(x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanDerivativeTest2()
+        {
+            IExpression exp = new Tan(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanDerivativeTest3()
+        {
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Tan(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
+
+            num.Value = 5;
+            Assert.AreEqual("tan(5 * x)", exp.ToString());
+            Assert.AreEqual("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanPartialDerivativeTest1()
+        {
+            IExpression exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("(1 * y) / (cos(x * y) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanPartialDerivativeTest2()
+        {
+            IExpression exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("(x * 1) / (cos(x * y) ^ 2)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TanPartialDerivativeTest3()
+        {
+            IExpression exp = new Tan(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CotDerivativeTest1()
+        {
+            IExpression exp = new Cot(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(1 / (sin(x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CotDerivativeTest2()
+        {
+            IExpression exp = new Cot(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (sin(2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CotDerivativeTest3()
+        {
+            // cot(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Cot(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (sin(2 * x) ^ 2))", deriv.ToString());
+
+            num.Value = 3;
+            Assert.AreEqual("cot(3 * x)", exp.ToString());
+            Assert.AreEqual("-((2 * 1) / (sin(2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CotPartialDerivativeTest1()
+        {
+            IExpression exp = new Cot(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("-((1 * y) / (sin(x * y) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CotPartialDerivativeTest2()
+        {
+            IExpression exp = new Cot(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("-((x * 1) / (sin(x * y) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CotPartialDerivativeTest3()
+        {
+            IExpression exp = new Cot(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SecDerivativeTest1()
+        {
+            IExpression exp = new Sec(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void SecDerivativeTest2()
+        {
+            // sec(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Sec(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
+
+            num.Value = 4;
+            Assert.AreEqual("sec(4 * x)", exp.ToString());
+            Assert.AreEqual("(2 * 1) * (tan(2 * x) * sec(2 * x))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void CscDerivativeTest()
+        {
+            IExpression exp = new Csc(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(2 * 1) * (cot(2 * x) * csc(2 * x))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsinDerivativeTest1()
+        {
+            IExpression exp = new Arcsin(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("1 / sqrt(1 - (x ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsinDerivativeTest2()
+        {
+            IExpression exp = new Arcsin(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / sqrt(1 - ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsinDerivativeTest3()
+        {
+            // arcsin(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Arcsin(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / sqrt(1 - ((2 * x) ^ 2))", deriv.ToString());
+
+            num.Value = 5;
+            Assert.AreEqual("arcsin(5 * x)", exp.ToString());
+            Assert.AreEqual("(2 * 1) / sqrt(1 - ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsinPartialDerivativeTest1()
+        {
+            IExpression exp = new Arcsin(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("(1 * y) / sqrt(1 - ((x * y) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsinPartialDerivativeTest2()
+        {
+            IExpression exp = new Arcsin(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("(x * 1) / sqrt(1 - ((x * y) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsinPartialDerivativeTest3()
+        {
+            IExpression exp = new Arcsin(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccosDerivativeTest1()
+        {
+            IExpression exp = new Arccos(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(1 / sqrt(1 - (x ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccosDerivativeTest2()
+        {
+            IExpression exp = new Arccos(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccosDerivativeTest3()
+        {
+            // arccos(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Arccos(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
+
+            num.Value = 6;
+            Assert.AreEqual("arccos(6 * x)", exp.ToString());
+            Assert.AreEqual("-((2 * 1) / sqrt(1 - ((2 * x) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccosPartialDerivativeTest1()
+        {
+            IExpression exp = new Arccos(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("-((1 * y) / sqrt(1 - ((x * y) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccosPartialDerivativeTest2()
+        {
+            IExpression exp = new Arccos(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("-((x * 1) / sqrt(1 - ((x * y) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccosPartialDerivativeTest3()
+        {
+            IExpression exp = new Arccos(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArctanDerivativeTest1()
+        {
+            IExpression exp = new Arctan(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("1 / (1 + (x ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArctanDerivativeTest2()
+        {
+            IExpression exp = new Arctan(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (1 + ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArctanDerivativeTest3()
+        {
+            // arctan(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Arctan(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (1 + ((2 * x) ^ 2))", deriv.ToString());
+
+            num.Value = 6;
+            Assert.AreEqual("arctan(6 * x)", exp.ToString());
+            Assert.AreEqual("(2 * 1) / (1 + ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArctanPartialDerivativeTest1()
+        {
+            IExpression exp = new Arctan(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("(1 * y) / (1 + ((x * y) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArctanPartialDerivativeTest2()
+        {
+            IExpression exp = new Arctan(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("(x * 1) / (1 + ((x * y) ^ 2))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArctanPartialDerivativeTest3()
+        {
+            IExpression exp = new Arctan(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccotDerivativeTest1()
+        {
+            IExpression exp = new Arccot(new Variable("x"));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(1 / (1 + (x ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccotDerivativeTest2()
+        {
+            IExpression exp = new Arccot(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (1 + ((2 * x) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccotDerivativeTest3()
+        {
+            // arccot(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Arccot(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (1 + ((2 * x) ^ 2)))", deriv.ToString());
+
+            num.Value = 4;
+            Assert.AreEqual("arccot(4 * x)", exp.ToString());
+            Assert.AreEqual("-((2 * 1) / (1 + ((2 * x) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccotPartialDerivativeTest1()
+        {
+            IExpression exp = new Arccot(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp);
+            Assert.AreEqual("-((1 * y) / (1 + ((x * y) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccotPartialDerivativeTest2()
+        {
+            IExpression exp = new Arccot(new Mul(new Variable("x"), new Variable("y")));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("-((x * 1) / (1 + ((x * y) ^ 2)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccotPartialDerivativeTest3()
+        {
+            IExpression exp = new Arccot(new Variable("x"));
+            IExpression deriv = Differentiate(exp, new Variable("y"));
+            Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsecDerivativeTest1()
+        {
+            IExpression exp = new Arcsec(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArcsecDerivativeTest2()
+        {
+            // arcsec(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Arcsec(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("(2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1))", deriv.ToString());
+
+            num.Value = 4;
+            Assert.AreEqual("arcsec(4 * x)", exp.ToString());
+            Assert.AreEqual("(2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccscDerivativeTest1()
+        {
+            IExpression exp = new Arccsc(new Mul(new Number(2), new Variable("x")));
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void ArccscDerivativeTest2()
+        {
+            // arccsc(2x)
+            Number num = new Number(2);
+            Variable x = new Variable("x");
+            Mul mul = new Mul(num, x);
+
+            IExpression exp = new Arccsc(mul);
+            IExpression deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
+
+            num.Value = 4;
+            Assert.AreEqual("arccsc(4 * x)", exp.ToString());
+            Assert.AreEqual("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
+        }
 
         #endregion Trigonometric
 

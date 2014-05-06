@@ -110,29 +110,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <returns>Returns a derivative of the expression of several variables.</returns>
-        /// <seealso cref="Variable"/>
-        public IExpression Differentiate()
-        {
-            return new Number(0);
-        }
-
-        /// <summary>
-        /// Calculates a derivative of the expression.
-        /// </summary>
-        /// <param name="variable">The variable of differentiation.</param>
-        /// <returns>
-        /// Returns a derivative of the expression of several variables.
-        /// </returns>
-        /// <seealso cref="Variable" />
-        public IExpression Differentiate(Variable variable)
-        {
-            return new Number(0);
-        }
-
-        /// <summary>
         /// Clones this instance of the <see cref="Number"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>

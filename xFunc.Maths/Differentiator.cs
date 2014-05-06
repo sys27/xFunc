@@ -69,12 +69,16 @@ namespace xFunc.Maths
             if (variable == null)
                 throw new ArgumentNullException("variable");
 
-            //return simplifier.Simplify(expression.Differentiate(variable));
-            throw new NotImplementedException();
+            return _Differentiate(expression, variable);
         }
 
         private IExpression _Differentiate(IExpression expression, Variable variable)
         {
+            if (expression is Number)
+                return Number((Number)expression, variable);
+            if (expression is Variable)
+                return Variable((Variable)expression, variable);
+
             if (expression is UnaryExpression)
             {
                 var un = (UnaryExpression)expression;
@@ -109,11 +113,74 @@ namespace xFunc.Maths
             if (expression is UnaryMinus)
                 return UnaryMinus((UnaryMinus)expression, variable);
 
+            if (expression is Sin)
+                return Sin((Sin)expression, variable);
+            if (expression is Cos)
+                return Cos((Cos)expression, variable);
+            if (expression is Tan)
+                return Tan((Tan)expression, variable);
+            if (expression is Cot)
+                return Cot((Cot)expression, variable);
+            if (expression is Sec)
+                return Sec((Sec)expression, variable);
+            if (expression is Csc)
+                return Csc((Csc)expression, variable);
+            if (expression is Arcsin)
+                return Arcsin((Arcsin)expression, variable);
+            if (expression is Arccos)
+                return Arccos((Arccos)expression, variable);
+            if (expression is Arctan)
+                return Arctan((Arctan)expression, variable);
+            if (expression is Arccot)
+                return Arccot((Arccot)expression, variable);
+            if (expression is Arcsec)
+                return Arcsec((Arcsec)expression, variable);
+            if (expression is Arccsc)
+                return Arccsc((Arccsc)expression, variable);
+
+            if (expression is Sinh)
+                return Sinh((Sinh)expression, variable);
+            if (expression is Cosh)
+                return Cosh((Cosh)expression, variable);
+            if (expression is Tanh)
+                return Tanh((Tanh)expression, variable);
+            if (expression is Coth)
+                return Coth((Coth)expression, variable);
+            if (expression is Sech)
+                return Sech((Sech)expression, variable);
+            if (expression is Csch)
+                return Csch((Csch)expression, variable);
+            if (expression is Arsinh)
+                return Arsinh((Arsinh)expression, variable);
+            if (expression is Arcosh)
+                return Arcosh((Arcosh)expression, variable);
+            if (expression is Artanh)
+                return Artanh((Artanh)expression, variable);
+            if (expression is Arcoth)
+                return Arcoth((Arcoth)expression, variable);
+            if (expression is Arsech)
+                return Arsech((Arsech)expression, variable);
+            if (expression is Arcsch)
+                return Arcsch((Arcsch)expression, variable);
+
             // todo: expression
             throw new NotSupportedException();
         }
 
         #region Common
+
+        protected virtual IExpression Number(Number expression, Variable variable)
+        {
+            return new Number(0);
+        }
+
+        protected virtual IExpression Variable(Variable expression, Variable variable)
+        {
+            if (expression.Equals(variable))
+                return new Number(1);
+
+            return expression.Clone();
+        }
 
         protected virtual IExpression Abs(Abs expression, Variable variable)
         {
@@ -427,7 +494,7 @@ namespace xFunc.Maths
 
         #region Hyperbolic
 
-        protected virtual IExpression Arcosh(Arccos expression, Variable variable)
+        protected virtual IExpression Arcosh(Arcosh expression, Variable variable)
         {
             var sqr = new Pow(expression.Argument.Clone(), new Number(2));
             var sub = new Sub(sqr, new Number(1));

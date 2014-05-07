@@ -16,15 +16,36 @@ using System;
 
 namespace xFunc.UnitConverters
 {
-    
+
+    /// <summary>
+    /// Represents the mass units.
+    /// </summary>
     public enum MassUnits
     {
 
+        /// <summary>
+        /// Milligrams (mg).
+        /// </summary>
         Milligrams,
+        /// <summary>
+        /// Grams (g).
+        /// </summary>
         Grams,
+        /// <summary>
+        /// Kilograms (kg).
+        /// </summary>
         Kilograms,
+        /// <summary>
+        /// Slugs.
+        /// </summary>
         Slugs,
+        /// <summary>
+        /// Pounds (lb).
+        /// </summary>
         Pounds,
+        /// <summary>
+        /// Tonne (t).
+        /// </summary>
         Tonne
 
     }

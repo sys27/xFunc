@@ -53,6 +53,7 @@
     <Compile Include="Converters\AreaTest.cs" />
     <Compile Include="Converters\LengthTest.cs" />
     <Compile Include="Converters\MassTest.cs" />
+    <Compile Include="Converters\PowerTest.cs" />
     <Compile Include="Converters\VolumeTest.cs" />
     <Compile Include="Expressions\Logics\AndTest.cs" />
     <Compile Include="Expressions\Logics\EqualityTest.cs" />

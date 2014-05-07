@@ -9,26 +9,26 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xFunc.UnitConverters</RootNamespace>
     <AssemblyName>xFunc.UnitConverters</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\net40\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NET40;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
+    <OutputPath>bin\Debug\net20\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NET20;NET20_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\net40\</OutputPath>
-    <DefineConstants>TRACE;NET40;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
+    <OutputPath>bin\Release\net20\</OutputPath>
+    <DefineConstants>TRACE;NET20;NET20_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\net40\xFunc.UnitConverters.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\net20\xFunc.UnitConverters.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -49,6 +49,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Func.cs" />
     <Compile Include="AreaConverter.cs" />
     <Compile Include="AreaUnits.cs" />
     <Compile Include="Converter.cs" />

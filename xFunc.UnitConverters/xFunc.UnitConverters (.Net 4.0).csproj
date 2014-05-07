@@ -52,6 +52,8 @@
     <Compile Include="TemperatureUnits.cs" />
     <Compile Include="TimeConverter.cs" />
     <Compile Include="TimeUnits.cs" />
+    <Compile Include="VolumeConverter.cs" />
+    <Compile Include="VolumeUnits.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

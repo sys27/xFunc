@@ -80,7 +80,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(15, AreaUnits.SquareMetres, AreaUnits.SquareInches);
 
-            Assert.AreEqual(23250.0465, value);
+            Assert.AreEqual(23250.0465, value, 0.00001);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(23250.0465, AreaUnits.SquareInches, AreaUnits.SquareMetres);
 
-            Assert.AreEqual(15, value);
+            Assert.AreEqual(15, value, 0.00001);
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(17.93985, AreaUnits.SquareYards, AreaUnits.SquareMetres);
 
-            Assert.AreEqual(15, value);
+            Assert.AreEqual(15, value, 0.00001);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(15000, AreaUnits.SquareMetres, AreaUnits.Acres);
 
-            Assert.AreEqual(3.706580715, value);
+            Assert.AreEqual(3.706580715, value, 0.00001);
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(3.706580715, AreaUnits.Acres, AreaUnits.SquareMetres);
 
-            Assert.AreEqual(15000, value);
+            Assert.AreEqual(15000, value, 0.00001);
         }
 
         [TestMethod]

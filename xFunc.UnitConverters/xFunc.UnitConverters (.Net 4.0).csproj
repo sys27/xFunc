@@ -49,6 +49,8 @@
     <Compile Include="LengthUnits.cs" />
     <Compile Include="MassConverter.cs" />
     <Compile Include="MassUnits.cs" />
+    <Compile Include="PowerConverter.cs" />
+    <Compile Include="PowerUnits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemperatureConverter.cs" />
     <Compile Include="TemperatureUnits.cs" />

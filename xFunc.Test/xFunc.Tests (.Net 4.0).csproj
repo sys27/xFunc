@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Converters\TemperatureTest.cs" />
     <Compile Include="Converters\TimeTest.cs" />
+    <Compile Include="Converters\AreaTest.cs" />
     <Compile Include="Expressions\Logics\AndTest.cs" />
     <Compile Include="Expressions\Logics\EqualityTest.cs" />
     <Compile Include="Expressions\Logics\ImplicationTest.cs" />

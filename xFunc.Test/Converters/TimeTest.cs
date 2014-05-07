@@ -96,7 +96,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(1412812.8, TimeUnits.Seconds, TimeUnits.Weeks);
 
-            Assert.AreEqual(2.336, value);
+            Assert.AreEqual(2.336, value, 0.00001);
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(2.336, TimeUnits.Weeks, TimeUnits.Seconds);
 
-            Assert.AreEqual(1412812.8, value);
+            Assert.AreEqual(1412812.8, value, 0.00001);
         }
         
     }

@@ -56,7 +56,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(513.27, TemperatureUnits.Rankine, TemperatureUnits.Celsius);
 
-            Assert.AreEqual(12.0, value);
+            Assert.AreEqual(12.0, value, 0.00001);
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(12, TemperatureUnits.Celsius, TemperatureUnits.Réaumur);
 
-            Assert.AreEqual(9.6, value);
+            Assert.AreEqual(9.6, value, 0.00001);
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace xFunc.Test.Converters
         {
             var value = conv.Convert(299, TemperatureUnits.Delisle, TemperatureUnits.Fahrenheit);
 
-            Assert.AreEqual(-146.8, value);
+            Assert.AreEqual(-146.8, value, 0.00001);
         }
 
     }

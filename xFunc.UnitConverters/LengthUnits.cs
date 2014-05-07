@@ -33,9 +33,9 @@ namespace xFunc.UnitConverters
         NauticalMiles,
         Fathoms,
         Chains,
-        Rod,
+        Rods,
         AstronomicalUnits,
-        LigthYears,
+        LightYears,
         Parsecs
 
     }

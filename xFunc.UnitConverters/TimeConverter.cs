@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the time converter.
+    /// </summary>
     public class TimeConverter : Converter<TimeUnits>
     {
 

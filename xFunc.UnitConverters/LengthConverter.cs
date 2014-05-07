@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the length converter.
+    /// </summary>
     public class LengthConverter : Converter<LengthUnits>
     {
 

@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the temperature converter.
+    /// </summary>
     public class TemperatureConverter : Converter<TemperatureUnits>
     {
 

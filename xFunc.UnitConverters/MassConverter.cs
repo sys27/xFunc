@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the mass converter.
+    /// </summary>
     public class MassConverter : Converter<MassUnits>
     {
 

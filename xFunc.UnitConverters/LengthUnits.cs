@@ -17,19 +17,10 @@ using System;
 namespace xFunc.UnitConverters
 {
     
-    public enum AreaUnits
+    public enum LengthUnits
     {
 
-        SquareMillimeters,
-        SquareCentimeters,
-        SquareMetres,
-        Hectares,
-        SquareKilometers,
-        SquareInches,
-        SquareFeet,
-        SquareYards,
-        Acres,
-        SquareMiles
+
 
     }
 

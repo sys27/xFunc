@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the volume converter.
+    /// </summary>
     public class VolumeConverter : Converter<VolumeUnits>
     {
 

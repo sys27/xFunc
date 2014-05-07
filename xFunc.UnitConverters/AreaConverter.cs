@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the area converter.
+    /// </summary>
     public class AreaConverter : Converter<AreaUnits>
     {
 

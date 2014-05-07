@@ -17,6 +17,9 @@ using System;
 namespace xFunc.UnitConverters
 {
 
+    /// <summary>
+    /// Represents the power converter.
+    /// </summary>
     public class PowerConverter : Converter<PowerUnits>
     {
 

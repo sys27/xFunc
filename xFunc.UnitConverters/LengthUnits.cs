@@ -20,7 +20,23 @@ namespace xFunc.UnitConverters
     public enum LengthUnits
     {
 
-
+        Nanometres,
+        Micrometers,
+        Millimeters,
+        Centimeters,
+        Metres,
+        Kilometers,
+        Inches,
+        Feet,
+        Yards,
+        Miles,
+        NauticalMiles,
+        Fathoms,
+        Chains,
+        Rod,
+        AstronomicalUnits,
+        LigthYears,
+        Parsecs
 
     }
 

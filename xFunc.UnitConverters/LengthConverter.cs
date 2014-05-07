@@ -16,13 +16,30 @@ using System;
 
 namespace xFunc.UnitConverters
 {
-    
+
     public class LengthConverter : Converter<LengthUnits>
     {
 
         static LengthConverter()
         {
+            BaseUnit = LengthUnits.Metres;
 
+            RegisterConversion(LengthUnits.Nanometres, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Micrometers, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Millimeters, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Centimeters, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Kilometers, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Inches, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Feet, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Yards, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Miles, t => 0, t => 0);
+            RegisterConversion(LengthUnits.NauticalMiles, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Fathoms, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Chains, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Rod, t => 0, t => 0);
+            RegisterConversion(LengthUnits.AstronomicalUnits, t => 0, t => 0);
+            RegisterConversion(LengthUnits.LigthYears, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Parsecs, t => 0, t => 0);
         }
 
     }

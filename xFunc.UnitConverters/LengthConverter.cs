@@ -24,22 +24,22 @@ namespace xFunc.UnitConverters
         {
             BaseUnit = LengthUnits.Metres;
 
-            RegisterConversion(LengthUnits.Nanometres, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Micrometers, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Millimeters, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Centimeters, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Kilometers, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Inches, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Feet, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Yards, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Miles, t => 0, t => 0);
-            RegisterConversion(LengthUnits.NauticalMiles, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Fathoms, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Chains, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Rod, t => 0, t => 0);
-            RegisterConversion(LengthUnits.AstronomicalUnits, t => 0, t => 0);
-            RegisterConversion(LengthUnits.LigthYears, t => 0, t => 0);
-            RegisterConversion(LengthUnits.Parsecs, t => 0, t => 0);
+            RegisterConversion(LengthUnits.Nanometres, l => l / 0.000000001, l => l * 0.000000001);
+            RegisterConversion(LengthUnits.Micrometers, l => l / 0.000001, l => l * 0.000001);
+            RegisterConversion(LengthUnits.Millimeters, l => l / 0.001, l => l * 0.001);
+            RegisterConversion(LengthUnits.Centimeters, l => l / 0.01, l => l * 0.01);
+            RegisterConversion(LengthUnits.Kilometers, l => l / 1000, l => l * 1000);
+            RegisterConversion(LengthUnits.Inches, l => l / 0.0254, l => l * 0.0254);
+            RegisterConversion(LengthUnits.Feet, l => l / 0.3048, l => l * 0.3048);
+            RegisterConversion(LengthUnits.Yards, l => l / 0.9144, l => l * 0.9144);
+            RegisterConversion(LengthUnits.Miles, l => l / 1609.344, l => l * 1609.344);
+            RegisterConversion(LengthUnits.NauticalMiles, l => l / 1852, l => l * 1852);
+            RegisterConversion(LengthUnits.Fathoms, l => l / 1.82880, l => l * 1.82880);
+            RegisterConversion(LengthUnits.Chains, l => l / 20.1168, l => l * 20.1168);
+            RegisterConversion(LengthUnits.Rods, l => l * 0.198838782, l => l / 0.198838782);
+            RegisterConversion(LengthUnits.AstronomicalUnits, l => l / 149597870700, l => l * 149597870700);
+            RegisterConversion(LengthUnits.LightYears, l => l / 9460528400000000, l => l * 9460528400000000);
+            RegisterConversion(LengthUnits.Parsecs, l => l / 30856775800000000, l => l * 30856775800000000);
         }
 
     }

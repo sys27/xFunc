@@ -9,26 +9,26 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xFunc.UnitConverters</RootNamespace>
     <AssemblyName>xFunc.UnitConverters</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\net40\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NET40;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
+    <OutputPath>bin\Debug\net35\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NET35;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\net40\</OutputPath>
-    <DefineConstants>TRACE;NET40;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
+    <OutputPath>bin\Release\net35\</OutputPath>
+    <DefineConstants>TRACE;NET35;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\net40\xFunc.UnitConverters.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\net35\xFunc.UnitConverters.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

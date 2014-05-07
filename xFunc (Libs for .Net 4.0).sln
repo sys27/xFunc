@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Maths", "xFunc.Maths\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Logics", "xFunc.Logics\xFunc.Logics (.Net 4.0).csproj", "{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.UnitConverters (.Net 4.0)", "xFunc.UnitConverters\xFunc.UnitConverters (.Net 4.0).csproj", "{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = xFunc.vsmdi

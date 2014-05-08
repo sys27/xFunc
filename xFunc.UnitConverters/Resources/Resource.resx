@@ -138,4 +138,34 @@
   <data name="VolumeConverterName" xml:space="preserve">
     <value>Volume</value>
   </data>
+  <data name="SquareMillimeters" xml:space="preserve">
+    <value>Square millimeters</value>
+  </data>
+  <data name="SquareCentimeters" xml:space="preserve">
+    <value>Square centimeters</value>
+  </data>
+  <data name="SquareMetres" xml:space="preserve">
+    <value>Square metres</value>
+  </data>
+  <data name="SquareKilometers" xml:space="preserve">
+    <value>Square kilometers</value>
+  </data>
+  <data name="Hectares" xml:space="preserve">
+    <value>Hectares</value>
+  </data>
+  <data name="SquareInches" xml:space="preserve">
+    <value>Square inches</value>
+  </data>
+  <data name="SquareFeet" xml:space="preserve">
+    <value>Square feet</value>
+  </data>
+  <data name="SquareYards" xml:space="preserve">
+    <value>Square yards</value>
+  </data>
+  <data name="Acres" xml:space="preserve">
+    <value>Acres</value>
+  </data>
+  <data name="SquareMiles" xml:space="preserve">
+    <value>Square miles</value>
+  </data>
 </root>

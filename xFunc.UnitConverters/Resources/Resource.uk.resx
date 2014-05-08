@@ -138,4 +138,7 @@
   <data name="VolumeConverterName" xml:space="preserve">
     <value>Об'єм</value>
   </data>
+  <data name="SquareMillimeters" xml:space="preserve">
+    <value>Квадратні міліметри</value>
+  </data>
 </root>

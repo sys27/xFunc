@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
@@ -23,6 +24,8 @@ namespace xFunc.UnitConverters
     /// </summary>
     public class AreaConverter : Converter<AreaUnits>
     {
+
+        private static Lazy<IDictionary<AreaUnits, string>> units;
 
         static AreaConverter()
         {
@@ -37,6 +40,20 @@ namespace xFunc.UnitConverters
             RegisterConversion(AreaUnits.SquareYards, t => t * 1.195990, t => t / 1.195990);
             RegisterConversion(AreaUnits.Acres, t => t * 0.000247105381, t => t / 0.000247105381);
             RegisterConversion(AreaUnits.SquareMiles, t => t * 2589988.110336, t => t / 2589988.110336);
+
+            units = new Lazy<IDictionary<AreaUnits, string>>(() => new Dictionary<AreaUnits, string>()
+            {
+                { AreaUnits.SquareMillimeters, Resource.SquareMillimeters },
+                { AreaUnits.SquareCentimeters, Resource.SquareCentimeters },
+                { AreaUnits.SquareMetres, Resource.SquareMetres },
+                { AreaUnits.SquareKilometers, Resource.SquareKilometers },
+                { AreaUnits.Hectares, Resource.Hectares },
+                { AreaUnits.SquareInches, Resource.SquareInches },
+                { AreaUnits.SquareFeet, Resource.SquareFeet },
+                { AreaUnits.SquareYards, Resource.SquareYards },
+                { AreaUnits.Acres, Resource.Acres },
+                { AreaUnits.SquareMiles, Resource.SquareMiles }
+            });
         }
 
         /// <summary>
@@ -50,6 +67,20 @@ namespace xFunc.UnitConverters
             get
             {
                 return Resource.AreaConverterName;
+            }
+        }
+
+        /// <summary>
+        /// Gets the units.
+        /// </summary>
+        /// <value>
+        /// The units.
+        /// </value>
+        public override IDictionary<AreaUnits, string> Units
+        {
+            get
+            {
+                return units.Value;
             }
         }
 

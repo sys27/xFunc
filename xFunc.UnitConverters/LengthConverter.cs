@@ -1,4 +1,4 @@
-﻿// Copyright 2014 Dmitry Kischenko
+﻿// Copyright 2012-2014 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
@@ -43,6 +44,20 @@ namespace xFunc.UnitConverters
             RegisterConversion(LengthUnits.AstronomicalUnits, l => l / 149597870700, l => l * 149597870700);
             RegisterConversion(LengthUnits.LightYears, l => l / 9460528400000000, l => l * 9460528400000000);
             RegisterConversion(LengthUnits.Parsecs, l => l / 30856775800000000, l => l * 30856775800000000);
+        }
+
+        /// <summary>
+        /// Gets the name of this converter.
+        /// </summary>
+        /// <value>
+        /// The name of this converter.
+        /// </value>
+        public override string Name
+        {
+            get
+            {
+                return Resource.LengthConverterName;
+            }
         }
 
     }

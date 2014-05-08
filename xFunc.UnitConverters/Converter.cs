@@ -1,4 +1,4 @@
-﻿// Copyright 2014 Dmitry Kischenko
+﻿// Copyright 2012-2014 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -68,6 +68,14 @@ namespace xFunc.UnitConverters
             convTo.Add(unit, conversionTo);
             convFrom.Add(unit, conversionFrom);
         }
+
+        /// <summary>
+        /// Gets the name of this converter.
+        /// </summary>
+        /// <value>
+        /// The name of this converter.
+        /// </value>
+        public abstract string Name { get; }
 
     }
 

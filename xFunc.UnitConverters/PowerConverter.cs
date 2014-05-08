@@ -1,4 +1,4 @@
-﻿// Copyright 2014 Dmitry Kischenko
+﻿// Copyright 2012-2014 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
@@ -29,6 +30,20 @@ namespace xFunc.UnitConverters
 
             RegisterConversion(PowerUnits.Kilowatts, p => p / 1000, p => p * 1000);
             RegisterConversion(PowerUnits.Horsepower, p => p / 745.69987158227022, p => p * 745.69987158227022);
+        }
+
+        /// <summary>
+        /// Gets the name of this converter.
+        /// </summary>
+        /// <value>
+        /// The name of this converter.
+        /// </value>
+        public override string Name
+        {
+            get
+            {
+                return Resource.PowerConverterName;
+            }
         }
 
     }

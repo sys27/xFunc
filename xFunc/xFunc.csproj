@@ -287,6 +287,10 @@
       <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
       <Name>xFunc.Maths %28.Net 4.0%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters %28.Net 4.0%29.csproj">
+      <Project>{2ecaad28-e0ce-40be-8eb0-0d055c908133}</Project>
+      <Name>xFunc.UnitConverters %28.Net 4.0%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Clear.png" />
@@ -330,6 +334,10 @@
       <Link>LICENSE_Ms-PL.txt</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Converter.png" />
+    <Resource Include="Images\ConverterLarge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

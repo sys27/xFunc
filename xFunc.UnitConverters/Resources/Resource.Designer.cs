@@ -61,11 +61,29 @@ namespace xFunc.UnitConverters.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acres.
+        /// </summary>
+        internal static string Acres {
+            get {
+                return ResourceManager.GetString("Acres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Area.
         /// </summary>
         internal static string AreaConverterName {
             get {
                 return ResourceManager.GetString("AreaConverterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hectares.
+        /// </summary>
+        internal static string Hectares {
+            get {
+                return ResourceManager.GetString("Hectares", resourceCulture);
             }
         }
         
@@ -93,6 +111,78 @@ namespace xFunc.UnitConverters.Resources {
         internal static string PowerConverterName {
             get {
                 return ResourceManager.GetString("PowerConverterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square centimeters.
+        /// </summary>
+        internal static string SquareCentimeters {
+            get {
+                return ResourceManager.GetString("SquareCentimeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square feet.
+        /// </summary>
+        internal static string SquareFeet {
+            get {
+                return ResourceManager.GetString("SquareFeet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square inches.
+        /// </summary>
+        internal static string SquareInches {
+            get {
+                return ResourceManager.GetString("SquareInches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square kilometers.
+        /// </summary>
+        internal static string SquareKilometers {
+            get {
+                return ResourceManager.GetString("SquareKilometers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square metres.
+        /// </summary>
+        internal static string SquareMetres {
+            get {
+                return ResourceManager.GetString("SquareMetres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square miles.
+        /// </summary>
+        internal static string SquareMiles {
+            get {
+                return ResourceManager.GetString("SquareMiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square millimeters.
+        /// </summary>
+        internal static string SquareMillimeters {
+            get {
+                return ResourceManager.GetString("SquareMillimeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Square yards.
+        /// </summary>
+        internal static string SquareYards {
+            get {
+                return ResourceManager.GetString("SquareYards", resourceCulture);
             }
         }
         

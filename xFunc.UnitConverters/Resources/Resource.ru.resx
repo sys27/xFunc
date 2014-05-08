@@ -138,4 +138,34 @@
   <data name="VolumeConverterName" xml:space="preserve">
     <value>Объем</value>
   </data>
+  <data name="SquareMillimeters" xml:space="preserve">
+    <value>Квадратные миллиметры</value>
+  </data>
+  <data name="SquareCentimeters" xml:space="preserve">
+    <value>Квадратные сантиметры</value>
+  </data>
+  <data name="SquareMetres" xml:space="preserve">
+    <value>Квадратные  метры</value>
+  </data>
+  <data name="SquareKilometers" xml:space="preserve">
+    <value>Квадратные километры</value>
+  </data>
+  <data name="Hectares" xml:space="preserve">
+    <value>Гектары</value>
+  </data>
+  <data name="SquareInches" xml:space="preserve">
+    <value>Квадратные дюймы</value>
+  </data>
+  <data name="SquareFeet" xml:space="preserve">
+    <value>Квадратные футы</value>
+  </data>
+  <data name="SquareYards" xml:space="preserve">
+    <value>Квадратные ярды</value>
+  </data>
+  <data name="Acres" xml:space="preserve">
+    <value>Акры</value>
+  </data>
+  <data name="SquareMiles" xml:space="preserve">
+    <value>Квадратные мили</value>
+  </data>
 </root>

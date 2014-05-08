@@ -25,6 +25,8 @@ namespace xFunc.UnitConverters
     public class TemperatureConverter : Converter<TemperatureUnits>
     {
 
+        private static Lazy<IDictionary<TemperatureUnits, string>> units;
+
         static TemperatureConverter()
         {
             BaseUnit = TemperatureUnits.Celsius;
@@ -35,6 +37,18 @@ namespace xFunc.UnitConverters
             RegisterConversion(TemperatureUnits.Newton, t => t * (0.33), t => t * (100.0 / 33));
             RegisterConversion(TemperatureUnits.Réaumur, t => t * (4.0 / 5), t => t * (5.0 / 4));
             RegisterConversion(TemperatureUnits.Rømer, t => t * (21.0 / 40) + 7.5, t => (t - 7.5) * (40.0 / 21));
+
+            units = new Lazy<IDictionary<TemperatureUnits, string>>(() => new Dictionary<TemperatureUnits, string>()
+            {
+                { TemperatureUnits.Celsius, Resource.Celsius },
+                { TemperatureUnits.Fahrenheit, Resource.Fahrenheit },
+                { TemperatureUnits.Kelvin, Resource.Kelvin },
+                { TemperatureUnits.Rankine, Resource.Rankine },
+                { TemperatureUnits.Delisle, Resource.Delisle },
+                { TemperatureUnits.Newton, Resource.Newton },
+                { TemperatureUnits.Réaumur, Resource.Réaumur },
+                { TemperatureUnits.Rømer, Resource.Rømer },
+            });
         }
 
         /// <summary>
@@ -59,7 +73,10 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<TemperatureUnits, string> Units
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return units.Value;
+            }
         }
 
     }

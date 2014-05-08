@@ -25,12 +25,21 @@ namespace xFunc.UnitConverters
     public class PowerConverter : Converter<PowerUnits>
     {
 
+        private static Lazy<IDictionary<PowerUnits, string>> units;
+
         static PowerConverter()
         {
             BaseUnit = PowerUnits.Watts;
 
             RegisterConversion(PowerUnits.Kilowatts, p => p / 1000, p => p * 1000);
             RegisterConversion(PowerUnits.Horsepower, p => p / 745.69987158227022, p => p * 745.69987158227022);
+
+            units = new Lazy<IDictionary<PowerUnits, string>>(() => new Dictionary<PowerUnits, string>()
+            {
+                { PowerUnits.Watts, Resource.Watts },
+                { PowerUnits.Kilowatts, Resource.Kilowatts },
+                { PowerUnits.Horsepower, Resource.Horsepower }
+            });
         }
 
         /// <summary>
@@ -55,7 +64,10 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<PowerUnits, string> Units
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return units.Value;
+            }
         }
 
     }

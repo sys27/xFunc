@@ -25,6 +25,8 @@ namespace xFunc.UnitConverters
     public class LengthConverter : Converter<LengthUnits>
     {
 
+        private static Lazy<IDictionary<LengthUnits, string>> units;
+
         static LengthConverter()
         {
             BaseUnit = LengthUnits.Metres;
@@ -45,6 +47,27 @@ namespace xFunc.UnitConverters
             RegisterConversion(LengthUnits.AstronomicalUnits, l => l / 149597870700, l => l * 149597870700);
             RegisterConversion(LengthUnits.LightYears, l => l / 9460528400000000, l => l * 9460528400000000);
             RegisterConversion(LengthUnits.Parsecs, l => l / 30856775800000000, l => l * 30856775800000000);
+
+            units = new Lazy<IDictionary<LengthUnits, string>>(() => new Dictionary<LengthUnits, string>()
+            {
+                { LengthUnits.Nanometres, Resource.Nanometres },
+                { LengthUnits.Micrometers, Resource.Micrometers },
+                { LengthUnits.Millimeters, Resource.Millimeters },
+                { LengthUnits.Centimeters, Resource.Centimeters },
+                { LengthUnits.Metres, Resource.Metres },
+                { LengthUnits.Kilometers, Resource.Kilometers },
+                { LengthUnits.Inches, Resource.Inches },
+                { LengthUnits.Feet, Resource.Feet },
+                { LengthUnits.Yards, Resource.Yards },
+                { LengthUnits.Miles, Resource.Miles },
+                { LengthUnits.NauticalMiles, Resource.NauticalMiles },
+                { LengthUnits.Fathoms, Resource.Fathoms },
+                { LengthUnits.Chains, Resource.Chains },
+                { LengthUnits.Rods, Resource.Rods },
+                { LengthUnits.AstronomicalUnits, Resource.AstronomicalUnits },
+                { LengthUnits.LightYears, Resource.LightYears },
+                { LengthUnits.Parsecs, Resource.Parsecs }
+            });
         }
 
         /// <summary>
@@ -69,7 +92,10 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<LengthUnits, string> Units
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return units.Value;
+            }
         }
 
     }

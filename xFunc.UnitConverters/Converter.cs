@@ -76,6 +76,13 @@ namespace xFunc.UnitConverters
         /// The name of this converter.
         /// </value>
         public abstract string Name { get; }
+        /// <summary>
+        /// Gets the units.
+        /// </summary>
+        /// <value>
+        /// The units.
+        /// </value>
+        public abstract IDictionary<TUnit, string> Units { get; }
 
     }
 

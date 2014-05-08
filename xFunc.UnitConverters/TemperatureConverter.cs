@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
@@ -48,6 +49,17 @@ namespace xFunc.UnitConverters
             {
                 return Resource.TemperatureConverterName;
             }
+        }
+
+        /// <summary>
+        /// Gets the units.
+        /// </summary>
+        /// <value>
+        /// The units.
+        /// </value>
+        public override IDictionary<TemperatureUnits, string> Units
+        {
+            get { throw new NotImplementedException(); }
         }
 
     }

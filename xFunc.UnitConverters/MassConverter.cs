@@ -1,4 +1,4 @@
-﻿// Copyright 2014 Dmitry Kischenko
+﻿// Copyright 2012-2014 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
@@ -32,6 +33,20 @@ namespace xFunc.UnitConverters
             RegisterConversion(MassUnits.Slugs, m => m / 14.593903, m => m * 14.593903);
             RegisterConversion(MassUnits.Pounds, m => m * 2.20462262184878, m => m / 2.20462262184878);
             RegisterConversion(MassUnits.Tonne, m => m / 1000, m => m * 1000);
+        }
+
+        /// <summary>
+        /// Gets the name of this converter.
+        /// </summary>
+        /// <value>
+        /// The name of this converter.
+        /// </value>
+        public override string Name
+        {
+            get
+            {
+                return Resource.MassConverterName;
+            }
         }
 
     }

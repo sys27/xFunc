@@ -1,4 +1,4 @@
-﻿// Copyright 2014 Dmitry Kischenko
+﻿// Copyright 2012-2014 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
@@ -33,6 +34,20 @@ namespace xFunc.UnitConverters
             RegisterConversion(TemperatureUnits.Newton, t => t * (0.33), t => t * (100.0 / 33));
             RegisterConversion(TemperatureUnits.Réaumur, t => t * (4.0 / 5), t => t * (5.0 / 4));
             RegisterConversion(TemperatureUnits.Rømer, t => t * (21.0 / 40) + 7.5, t => (t - 7.5) * (40.0 / 21));
+        }
+
+        /// <summary>
+        /// Gets the name of this converter.
+        /// </summary>
+        /// <value>
+        /// The name of this converter.
+        /// </value>
+        public override string Name
+        {
+            get
+            {
+                return Resource.TemperatureConverterName;
+            }
         }
 
     }

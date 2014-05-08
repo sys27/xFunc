@@ -62,6 +62,8 @@ namespace xFunc.Views
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
+        public static RoutedCommand ConverterCommand = new RoutedCommand();
+
         public static RoutedCommand AboutCommand = new RoutedCommand();
         public static RoutedCommand SettingsCommand = new RoutedCommand();
         public static RoutedCommand ExitCommand = new RoutedCommand();
@@ -495,6 +497,15 @@ namespace xFunc.Views
             args.CanExecute = tabControl.SelectedItem == mathTab ||
                               tabControl.SelectedItem == logicTab ||
                               tabControl.SelectedItem == graphsTab;
+        }
+
+        private void ConverterCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            var conv = new Converter()
+            {
+                Owner = this
+            };
+            conv.Show();
         }
 
         private void AboutCommand_Execute(object o, ExecutedRoutedEventArgs args)

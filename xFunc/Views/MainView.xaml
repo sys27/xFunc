@@ -40,6 +40,8 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
 
+        <CommandBinding Command="views:MainView.ConverterCommand" Executed="ConverterCommand_Execute" />
+
         <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
         <CommandBinding Command="views:MainView.SettingsCommand" Executed="SettingsCommand_Execute" />
         <CommandBinding Command="views:MainView.ExitCommand" Executed="ExitCommand_Execute" />
@@ -174,7 +176,7 @@ limitations under the License. -->
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ToolsGroupHeader}">
-                    <ribbon:Button Header="{x:Static res:Resource.ConverterButtonHeader}" Icon="..\Images\Converter.png" LargeIcon="..\Images\ConverterLarge.png">
+                    <ribbon:Button Header="{x:Static res:Resource.ConverterButtonHeader}" Icon="..\Images\Converter.png" LargeIcon="..\Images\ConverterLarge.png" Command="views:MainView.ConverterCommand">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.ConverterScreenTipTitle}" Text="{x:Static res:Resource.ConverterScreenTipText}" />
                         </ribbon:Button.ToolTip>

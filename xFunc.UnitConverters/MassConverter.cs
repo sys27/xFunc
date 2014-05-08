@@ -25,6 +25,8 @@ namespace xFunc.UnitConverters
     public class MassConverter : Converter<MassUnits>
     {
 
+        private static Lazy<IDictionary<MassUnits, string>> units;
+
         static MassConverter()
         {
             BaseUnit = MassUnits.Kilograms;
@@ -34,6 +36,16 @@ namespace xFunc.UnitConverters
             RegisterConversion(MassUnits.Slugs, m => m / 14.593903, m => m * 14.593903);
             RegisterConversion(MassUnits.Pounds, m => m * 2.20462262184878, m => m / 2.20462262184878);
             RegisterConversion(MassUnits.Tonne, m => m / 1000, m => m * 1000);
+
+            units = new Lazy<IDictionary<MassUnits, string>>(() => new Dictionary<MassUnits, string>()
+            {
+                { MassUnits.Milligrams, Resource.Milligrams },
+                { MassUnits.Grams, Resource.Grams },
+                { MassUnits.Kilograms, Resource.Kilograms },
+                { MassUnits.Slugs, Resource.Slugs },
+                { MassUnits.Pounds, Resource.Pounds },
+                { MassUnits.Tonne, Resource.Tonne }
+            });
         }
 
         /// <summary>
@@ -58,7 +70,10 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<MassUnits, string> Units
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return units.Value;
+            }
         }
 
     }

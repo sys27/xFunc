@@ -141,4 +141,7 @@
   <data name="SquareMillimeters" xml:space="preserve">
     <value>Квадратні міліметри</value>
   </data>
+  <data name="Slugs" xml:space="preserve">
+    <value>Slugs</value>
+  </data>
 </root>

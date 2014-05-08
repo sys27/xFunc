@@ -87,7 +87,9 @@ namespace xFunc.Views
         private void SetUnits()
         {
             fromComboBox.ItemsSource = Units;
+            fromComboBox.SelectedIndex = 0;
             toComboBox.ItemsSource = Units;
+            toComboBox.SelectedIndex = 0;
         }
 
         private void convertersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

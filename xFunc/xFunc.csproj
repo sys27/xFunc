@@ -124,6 +124,9 @@
     <Compile Include="Views\AddVariableView.xaml.cs">
       <DependentUpon>AddVariableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converter.xaml.cs">
+      <DependentUpon>Converter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DrawingCanvas.cs" />
     <Compile Include="Views\FunctionView.xaml.cs">
       <DependentUpon>FunctionView.xaml</DependentUpon>
@@ -182,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddVariableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Converter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

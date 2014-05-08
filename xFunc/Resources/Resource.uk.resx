@@ -717,4 +717,16 @@
   <data name="DivAssignToolTip" xml:space="preserve">
     <value>Оператор "/=". Приклад: x /= 2.</value>
   </data>
+  <data name="ToolsGroupHeader" xml:space="preserve">
+    <value>Інструменти</value>
+  </data>
+  <data name="ConverterButtonHeader" xml:space="preserve">
+    <value>Конвертер величин</value>
+  </data>
+  <data name="ConverterScreenTipTitle" xml:space="preserve">
+    <value>Конвертер величин</value>
+  </data>
+  <data name="ConverterScreenTipText" xml:space="preserve">
+    <value>Перетворює дані з однієї одиниці вимірювання в іншу.</value>
+  </data>
 </root>

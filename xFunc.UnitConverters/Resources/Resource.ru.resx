@@ -168,4 +168,82 @@
   <data name="SquareMiles" xml:space="preserve">
     <value>Квадратные мили</value>
   </data>
+  <data name="Nanometres" xml:space="preserve">
+    <value>Нанометры</value>
+  </data>
+  <data name="Micrometers" xml:space="preserve">
+    <value>Микрометры</value>
+  </data>
+  <data name="Millimeters" xml:space="preserve">
+    <value>Миллиметры</value>
+  </data>
+  <data name="Centimeters" xml:space="preserve">
+    <value>Сантиметры</value>
+  </data>
+  <data name="Metres" xml:space="preserve">
+    <value>Метры</value>
+  </data>
+  <data name="Kilometers" xml:space="preserve">
+    <value>Километры</value>
+  </data>
+  <data name="Inches" xml:space="preserve">
+    <value>Дюймы</value>
+  </data>
+  <data name="Feet" xml:space="preserve">
+    <value>Футы</value>
+  </data>
+  <data name="Yards" xml:space="preserve">
+    <value>Ярды</value>
+  </data>
+  <data name="Miles" xml:space="preserve">
+    <value>Мили</value>
+  </data>
+  <data name="NauticalMiles" xml:space="preserve">
+    <value>Морская миля</value>
+  </data>
+  <data name="Fathoms" xml:space="preserve">
+    <value>Морская сажень</value>
+  </data>
+  <data name="Chains" xml:space="preserve">
+    <value>Чейны</value>
+  </data>
+  <data name="Rods" xml:space="preserve">
+    <value>Роды</value>
+  </data>
+  <data name="AstronomicalUnits" xml:space="preserve">
+    <value>Астрономические единицы</value>
+  </data>
+  <data name="LightYears" xml:space="preserve">
+    <value>Световые годы</value>
+  </data>
+  <data name="Parsecs" xml:space="preserve">
+    <value>Парсеки</value>
+  </data>
+  <data name="Milligrams" xml:space="preserve">
+    <value>Миллиграммы</value>
+  </data>
+  <data name="Grams" xml:space="preserve">
+    <value>Граммы</value>
+  </data>
+  <data name="Kilograms" xml:space="preserve">
+    <value>Килограммы</value>
+  </data>
+  <data name="Tonne" xml:space="preserve">
+    <value>Тонны</value>
+  </data>
+  <data name="Slugs" xml:space="preserve">
+    <value>Slugs</value>
+  </data>
+  <data name="Pounds" xml:space="preserve">
+    <value>Фунты</value>
+  </data>
+  <data name="Watts" xml:space="preserve">
+    <value>Ватты</value>
+  </data>
+  <data name="Kilowatts" xml:space="preserve">
+    <value>Киловатты</value>
+  </data>
+  <data name="Horsepower" xml:space="preserve">
+    <value>Лошадиные силы</value>
+  </data>
 </root>

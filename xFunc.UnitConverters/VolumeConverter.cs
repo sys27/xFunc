@@ -25,6 +25,8 @@ namespace xFunc.UnitConverters
     public class VolumeConverter : Converter<VolumeUnits>
     {
 
+        private static Lazy<IDictionary<VolumeUnits, string>> units;
+
         static VolumeConverter()
         {
             BaseUnit = VolumeUnits.CubicMeters;
@@ -38,6 +40,20 @@ namespace xFunc.UnitConverters
             RegisterConversion(VolumeUnits.GallonsUK, v => v * 219.969248299088, v => v / 219.969248299088);
             RegisterConversion(VolumeUnits.CubicFeet, v => v * 35.3146667214886, v => v / 35.3146667214886);
             RegisterConversion(VolumeUnits.CubicYards, v => v * 1.30795061931439, v => v / 1.30795061931439);
+
+            units = new Lazy<IDictionary<VolumeUnits, string>>(() => new Dictionary<VolumeUnits, string>()
+            {
+                { VolumeUnits.CubicCentimeters, Resource.CubicCentimeters },
+                { VolumeUnits.CubicMeters, Resource.CubicMeters },
+                { VolumeUnits.Litres, Resource.Litres },
+                { VolumeUnits.CubicInches, Resource.CubicInches },
+                { VolumeUnits.PintsUS, Resource.PintsUS },
+                { VolumeUnits.PintsUK, Resource.PintsUK },
+                { VolumeUnits.GallonsUS, Resource.GallonsUS },
+                { VolumeUnits.GallonsUK, Resource.GallonsUK },
+                { VolumeUnits.CubicFeet, Resource.CubicFeet },
+                { VolumeUnits.CubicYards, Resource.CubicYards }
+            });
         }
 
         /// <summary>
@@ -62,7 +78,10 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<VolumeUnits, string> Units
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return units.Value;
+            }
         }
 
     }

@@ -520,6 +520,33 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unit Converter.
+        /// </summary>
+        public static string ConverterButtonHeader {
+            get {
+                return ResourceManager.GetString("ConverterButtonHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converts data from one unit to another..
+        /// </summary>
+        public static string ConverterScreenTipText {
+            get {
+                return ResourceManager.GetString("ConverterScreenTipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit Converter.
+        /// </summary>
+        public static string ConverterScreenTipTitle {
+            get {
+                return ResourceManager.GetString("ConverterScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy &quot;Answer&quot;.
         /// </summary>
         public static string CopyAnswerMenuItem {
@@ -1686,6 +1713,15 @@ namespace xFunc.Resources {
         public static string ToInputMenuItem {
             get {
                 return ResourceManager.GetString("ToInputMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string ToolsGroupHeader {
+            get {
+                return ResourceManager.GetString("ToolsGroupHeader", resourceCulture);
             }
         }
         

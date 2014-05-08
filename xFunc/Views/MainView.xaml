@@ -173,6 +173,13 @@ limitations under the License. -->
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
+                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ToolsGroupHeader}">
+                    <ribbon:Button Header="{x:Static res:Resource.ConverterButtonHeader}" Icon="..\Images\Converter.png" LargeIcon="..\Images\ConverterLarge.png">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.ConverterScreenTipTitle}" Text="{x:Static res:Resource.ConverterScreenTipText}" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                </ribbon:RibbonGroupBox>
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>
 

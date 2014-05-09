@@ -145,7 +145,7 @@
     <value>Квадратные сантиметры</value>
   </data>
   <data name="SquareMetres" xml:space="preserve">
-    <value>Квадратные  метры</value>
+    <value>Квадратные метры</value>
   </data>
   <data name="SquareKilometers" xml:space="preserve">
     <value>Квадратные километры</value>
@@ -316,7 +316,7 @@
     <value>Недели</value>
   </data>
   <data name="Years" xml:space="preserve">
-    <value>Года</value>
+    <value>Годы</value>
   </data>
   <data name="PintsUK" xml:space="preserve">
     <value>Пинта (UK)</value>

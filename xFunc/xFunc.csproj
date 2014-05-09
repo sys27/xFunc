@@ -99,6 +99,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Resource.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Resource.uk.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.uk.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\FunctionViewModel.cs" />
     <Compile Include="ViewModels\GraphItemViewModel.cs" />
     <Compile Include="ViewModels\LogicWorkspaceItemViewModel.cs" />

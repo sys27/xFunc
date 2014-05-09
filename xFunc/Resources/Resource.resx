@@ -729,4 +729,25 @@
   <data name="ConverterScreenTipText" xml:space="preserve">
     <value>Converts data from one unit to another.</value>
   </data>
+  <data name="ConverterTitle" xml:space="preserve">
+    <value>Unit Converter</value>
+  </data>
+  <data name="ConverterTypeText" xml:space="preserve">
+    <value>_Converter Type:</value>
+  </data>
+  <data name="FromText" xml:space="preserve">
+    <value>From:</value>
+  </data>
+  <data name="ToText" xml:space="preserve">
+    <value>To:</value>
+  </data>
+  <data name="UnitsText" xml:space="preserve">
+    <value>_Unit:</value>
+  </data>
+  <data name="ValueText" xml:space="preserve">
+    <value>_Value:</value>
+  </data>
+  <data name="ConverterCalculateText" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
 </root>

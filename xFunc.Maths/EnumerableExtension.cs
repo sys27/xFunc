@@ -15,7 +15,7 @@ namespace System.Runtime.CompilerServices
 namespace xFunc.Maths
 {
 
-    internal static class EnumerableExtention
+    internal static class EnumerableExtension
     {
 
         public static TSource Aggregate<TSource>(this IEnumerable<TSource> value, Func<TSource, TSource, TSource> func)

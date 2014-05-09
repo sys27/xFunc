@@ -17,7 +17,7 @@ limitations under the License. -->
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:res="clr-namespace:xFunc.Resources"
         xmlns:views="clr-namespace:xFunc.Views"
-        Title="Unit Converter" Width="460" Height="286"
+        Title="{x:Static res:Resource.ConverterTitle}" Width="460" Height="286"
         ShowInTaskbar="False" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
@@ -33,29 +33,29 @@ limitations under the License. -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Content="_Converter Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,10" Target="{Binding ElementName=convertersComboBox}" />
-        <ComboBox x:Name="convertersComboBox" VerticalAlignment="Top" Margin="108,12,10,0" DisplayMemberPath="Name" SelectedIndex="0" SelectionChanged="convertersComboBox_SelectionChanged" />
+        <Label Content="{x:Static res:Resource.ConverterTypeText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,10" Target="{Binding ElementName=convertersComboBox}" />
+        <ComboBox x:Name="convertersComboBox" VerticalAlignment="Top" Margin="116,12,10,0" DisplayMemberPath="Name" SelectedIndex="0" SelectionChanged="convertersComboBox_SelectionChanged" />
 
-        <GroupBox Grid.Row="1" Header="From:" Margin="10,0,10,4">
+        <GroupBox Grid.Row="1" Header="{x:Static res:Resource.FromText}" Margin="10,0,10,4">
             <Grid>
-                <Label Content="_Unit:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromComboBox}" />
-                <ComboBox x:Name="fromComboBox" Margin="57,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" />
-                <Label Content="_Value:" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromTextBox}" />
-                <TextBox x:Name="fromTextBox" Height="23" Margin="57,35,10,0" VerticalAlignment="Top" />
+                <Label Content="{x:Static res:Resource.UnitsText}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromComboBox}" />
+                <ComboBox x:Name="fromComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" />
+                <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromTextBox}" />
+                <TextBox x:Name="fromTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" />
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="2" Header="To:" Margin="10,0,10,4">
+        <GroupBox Grid.Row="2" Header="{x:Static res:Resource.ToText}" Margin="10,0,10,4">
             <Grid>
-                <Label Content="_Unit:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toComboBox}" />
-                <ComboBox x:Name="toComboBox" Margin="57,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" />
-                <Label Content="_Value:" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toTextBox}" />
-                <TextBox x:Name="toTextBox" Height="23" Margin="57,35,10,0" VerticalAlignment="Top" />
+                <Label Content="{x:Static res:Resource.UnitsText}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toComboBox}" />
+                <ComboBox x:Name="toComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" />
+                <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toTextBox}" />
+                <TextBox x:Name="toTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" />
             </Grid>
         </GroupBox>
 
         <Grid Grid.Row="3" Background="#FFEFEFEF" Height="39">
-            <Button Content="Calculate" HorizontalAlignment="Right" Margin="0,10,10,8" Padding="8,0,8,0" MinWidth="75" IsDefault="True" Command="views:Converter.CalculateCommand" />
+            <Button Content="{x:Static res:Resource.ConverterCalculateText}" HorizontalAlignment="Right" Margin="0,10,10,8" Padding="8,0,8,0" MinWidth="75" IsDefault="True" Command="views:Converter.CalculateCommand" />
         </Grid>
     </Grid>
 </Window>

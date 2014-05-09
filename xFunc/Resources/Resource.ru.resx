@@ -729,4 +729,25 @@
   <data name="ConverterScreenTipText" xml:space="preserve">
     <value>Преобразует данные из одной единицы измерения в другую.</value>
   </data>
+  <data name="ConverterTitle" xml:space="preserve">
+    <value>Конвертер величин</value>
+  </data>
+  <data name="ConverterTypeText" xml:space="preserve">
+    <value>_Тип конвертора:</value>
+  </data>
+  <data name="FromText" xml:space="preserve">
+    <value>Из:</value>
+  </data>
+  <data name="ToText" xml:space="preserve">
+    <value>В:</value>
+  </data>
+  <data name="UnitsText" xml:space="preserve">
+    <value>_Единицы:</value>
+  </data>
+  <data name="ValueText" xml:space="preserve">
+    <value>_Значение:</value>
+  </data>
+  <data name="ConverterCalculateText" xml:space="preserve">
+    <value>Рассчитать</value>
+  </data>
 </root>

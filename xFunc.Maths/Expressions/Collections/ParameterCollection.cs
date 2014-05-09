@@ -201,7 +201,7 @@ namespace xFunc.Maths.Expressions.Collections
 #if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(key))
 #elif NET20_OR_GREATER
-            if (StringExtention.IsNullOrWhiteSpace(key))
+            if (StringExtension.IsNullOrWhiteSpace(key))
 #endif
                 throw new ArgumentNullException("key");
 

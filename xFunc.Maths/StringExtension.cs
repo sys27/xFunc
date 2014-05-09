@@ -5,7 +5,7 @@ using System;
 namespace xFunc.Maths
 {
 
-    internal static class StringExtention
+    internal static class StringExtension
     {
 
         public static bool IsNullOrWhiteSpace(string value)

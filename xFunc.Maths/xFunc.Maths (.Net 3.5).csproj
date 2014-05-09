@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
+    <Compile Include="..\SharedCode\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Expressions\Ceil.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="Results\ExpressionResult.cs" />
     <Compile Include="Results\NumberResult.cs" />
     <Compile Include="Results\StringResult.cs" />
-    <Compile Include="StringExtention.cs" />
+    <Compile Include="StringExtension.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />

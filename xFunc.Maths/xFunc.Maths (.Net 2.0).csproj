@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
+    <Compile Include="..\SharedCode\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Func.cs" />
+    <Compile Include="..\SharedCode\Func.cs" />
     <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\Floor.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Sum.cs" />
     <Compile Include="IDifferentiator.cs" />
-    <Compile Include="EnumerableExtention.cs" />
+    <Compile Include="EnumerableExtension.cs" />
     <Compile Include="ISimplifier.cs" />
     <Compile Include="Differentiator.cs" />
     <Compile Include="LexerException.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="Results\ExpressionResult.cs" />
     <Compile Include="Results\NumberResult.cs" />
     <Compile Include="Results\StringResult.cs" />
-    <Compile Include="StringExtention.cs" />
+    <Compile Include="StringExtension.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />

@@ -144,4 +144,184 @@
   <data name="Slugs" xml:space="preserve">
     <value>Slugs</value>
   </data>
+  <data name="Years" xml:space="preserve">
+    <value>Роки</value>
+  </data>
+  <data name="AstronomicalUnits" xml:space="preserve">
+    <value>Астрономічні одиниці</value>
+  </data>
+  <data name="Centimeters" xml:space="preserve">
+    <value>Сантиметри</value>
+  </data>
+  <data name="CubicCentimeters" xml:space="preserve">
+    <value>Кубічні сантиметри</value>
+  </data>
+  <data name="CubicFeet" xml:space="preserve">
+    <value>Кубічні фути</value>
+  </data>
+  <data name="CubicInches" xml:space="preserve">
+    <value>Кубічні дюйми</value>
+  </data>
+  <data name="CubicMeters" xml:space="preserve">
+    <value>Кубічні метри</value>
+  </data>
+  <data name="CubicYards" xml:space="preserve">
+    <value>Кубічні ярди</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Дні</value>
+  </data>
+  <data name="Acres" xml:space="preserve">
+    <value>Акри</value>
+  </data>
+  <data name="Celsius" xml:space="preserve">
+    <value>Градуси Цельсія</value>
+  </data>
+  <data name="Chains" xml:space="preserve">
+    <value>Чейні</value>
+  </data>
+  <data name="Delisle" xml:space="preserve">
+    <value>Градуси Делиля</value>
+  </data>
+  <data name="Fahrenheit" xml:space="preserve">
+    <value>Градуси Фаренгейта</value>
+  </data>
+  <data name="Fathoms" xml:space="preserve">
+    <value>Морська сажень</value>
+  </data>
+  <data name="Feet" xml:space="preserve">
+    <value>Фути</value>
+  </data>
+  <data name="Grams" xml:space="preserve">
+    <value>Грами</value>
+  </data>
+  <data name="GallonsUK" xml:space="preserve">
+    <value>Галони (UK)</value>
+  </data>
+  <data name="GallonsUS" xml:space="preserve">
+    <value>Галони (UK)</value>
+  </data>
+  <data name="Hectares" xml:space="preserve">
+    <value>Гектари</value>
+  </data>
+  <data name="Horsepower" xml:space="preserve">
+    <value>Кінські сили</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Години</value>
+  </data>
+  <data name="Inches" xml:space="preserve">
+    <value>Дюйми</value>
+  </data>
+  <data name="Kelvin" xml:space="preserve">
+    <value>Кельвіни</value>
+  </data>
+  <data name="Kilograms" xml:space="preserve">
+    <value>Кілограми</value>
+  </data>
+  <data name="Kilometers" xml:space="preserve">
+    <value>Кілометри</value>
+  </data>
+  <data name="Kilowatts" xml:space="preserve">
+    <value>Кіловати</value>
+  </data>
+  <data name="LightYears" xml:space="preserve">
+    <value>Світлові роки</value>
+  </data>
+  <data name="Litres" xml:space="preserve">
+    <value>Літри</value>
+  </data>
+  <data name="Yards" xml:space="preserve">
+    <value>Ярди</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>Тижні</value>
+  </data>
+  <data name="Watts" xml:space="preserve">
+    <value>Вати</value>
+  </data>
+  <data name="Tonne" xml:space="preserve">
+    <value>Тонни</value>
+  </data>
+  <data name="SquareYards" xml:space="preserve">
+    <value>Квадратні ярди</value>
+  </data>
+  <data name="SquareMiles" xml:space="preserve">
+    <value>Квадратні милі</value>
+  </data>
+  <data name="SquareMetres" xml:space="preserve">
+    <value>Квадратні метри</value>
+  </data>
+  <data name="SquareKilometers" xml:space="preserve">
+    <value>Квадратні кілометри</value>
+  </data>
+  <data name="SquareInches" xml:space="preserve">
+    <value>Квадратні дюйми</value>
+  </data>
+  <data name="SquareFeet" xml:space="preserve">
+    <value>Квадратні фути</value>
+  </data>
+  <data name="SquareCentimeters" xml:space="preserve">
+    <value>Квадратні сантиметри</value>
+  </data>
+  <data name="Metres" xml:space="preserve">
+    <value>Метри</value>
+  </data>
+  <data name="Micrometers" xml:space="preserve">
+    <value>Мікрометри</value>
+  </data>
+  <data name="Miles" xml:space="preserve">
+    <value>Милі</value>
+  </data>
+  <data name="Microseconds" xml:space="preserve">
+    <value>Мікросекунди</value>
+  </data>
+  <data name="Milligrams" xml:space="preserve">
+    <value>Міліграми</value>
+  </data>
+  <data name="Millimeters" xml:space="preserve">
+    <value>Міліметри</value>
+  </data>
+  <data name="Milliseconds" xml:space="preserve">
+    <value>Мілісекунди</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Хвилини</value>
+  </data>
+  <data name="Nanometres" xml:space="preserve">
+    <value>Нанометра</value>
+  </data>
+  <data name="NauticalMiles" xml:space="preserve">
+    <value>Морська миля</value>
+  </data>
+  <data name="Newton" xml:space="preserve">
+    <value>Градуси Ньютона</value>
+  </data>
+  <data name="Parsecs" xml:space="preserve">
+    <value>Парсеки</value>
+  </data>
+  <data name="PintsUK" xml:space="preserve">
+    <value>Пінта (UK)</value>
+  </data>
+  <data name="PintsUS" xml:space="preserve">
+    <value>Пінта (UK)</value>
+  </data>
+  <data name="Pounds" xml:space="preserve">
+    <value>Фунти</value>
+  </data>
+  <data name="Rankine" xml:space="preserve">
+    <value>Градуси Ранкина</value>
+  </data>
+  <data name="Réaumur" xml:space="preserve">
+    <value>Градуси Реомюра</value>
+  </data>
+  <data name="Rods" xml:space="preserve">
+    <value>Роди</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Секунди</value>
+  </data>
+  <data name="Rømer" xml:space="preserve">
+    <value>Градуси Ремера</value>
+  </data>
 </root>

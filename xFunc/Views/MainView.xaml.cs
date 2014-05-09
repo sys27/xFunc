@@ -72,6 +72,7 @@ namespace xFunc.Views
 
         private VariableView variableView;
         private FunctionView functionView;
+        private Converter converterView;
 
         public MainView()
         {
@@ -501,11 +502,22 @@ namespace xFunc.Views
 
         private void ConverterCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            var conv = new Converter()
+            if (converterView == null)
             {
-                Owner = this
-            };
-            conv.Show();
+                converterView = new Converter()
+                {
+                    Owner = this
+                };
+                converterView.Closed += (obj, args1) =>
+                {
+                    converterView = null;
+                };
+            }
+
+            if (converterView.Visibility == Visibility.Visible)
+                converterView.Activate();
+            else
+                converterView.Visibility = Visibility.Visible;
         }
 
         private void AboutCommand_Execute(object o, ExecutedRoutedEventArgs args)

@@ -6,7 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{716F4D54-B652-4140-9275-5CEA8054C7B2}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
-		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+		SharadCode\SharedAssemblyInfo.cs = SharadCode\SharedAssemblyInfo.cs
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 		xFunc.vsmdi = xFunc.vsmdi
 	EndProjectSection

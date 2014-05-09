@@ -529,6 +529,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calculate.
+        /// </summary>
+        public static string ConverterCalculateText {
+            get {
+                return ResourceManager.GetString("ConverterCalculateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Converts data from one unit to another..
         /// </summary>
         public static string ConverterScreenTipText {
@@ -543,6 +552,24 @@ namespace xFunc.Resources {
         public static string ConverterScreenTipTitle {
             get {
                 return ResourceManager.GetString("ConverterScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit Converter.
+        /// </summary>
+        public static string ConverterTitle {
+            get {
+                return ResourceManager.GetString("ConverterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Converter Type:.
+        /// </summary>
+        public static string ConverterTypeText {
+            get {
+                return ResourceManager.GetString("ConverterTypeText", resourceCulture);
             }
         }
         
@@ -867,6 +894,15 @@ namespace xFunc.Resources {
         public static string ForToolTip {
             get {
                 return ResourceManager.GetString("ForToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From:.
+        /// </summary>
+        public static string FromText {
+            get {
+                return ResourceManager.GetString("FromText", resourceCulture);
             }
         }
         
@@ -1726,6 +1762,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To:.
+        /// </summary>
+        public static string ToText {
+            get {
+                return ResourceManager.GetString("ToText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transpose a matrix. Example: transpose({{1, 3}, {9, 4}}).
         /// </summary>
         public static string TransposeToolTip {
@@ -1803,6 +1848,24 @@ namespace xFunc.Resources {
         public static string UndoScreenTipTitle {
             get {
                 return ResourceManager.GetString("UndoScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Unit:.
+        /// </summary>
+        public static string UnitsText {
+            get {
+                return ResourceManager.GetString("UnitsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Value:.
+        /// </summary>
+        public static string ValueText {
+            get {
+                return ResourceManager.GetString("ValueText", resourceCulture);
             }
         }
         

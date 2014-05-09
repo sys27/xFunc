@@ -246,4 +246,82 @@
   <data name="Horsepower" xml:space="preserve">
     <value>Лошадиные силы</value>
   </data>
+  <data name="CubicCentimeters" xml:space="preserve">
+    <value>Кубические сантиметры</value>
+  </data>
+  <data name="CubicFeet" xml:space="preserve">
+    <value>Кубические футы</value>
+  </data>
+  <data name="CubicInches" xml:space="preserve">
+    <value>Кубические дюймы</value>
+  </data>
+  <data name="CubicMeters" xml:space="preserve">
+    <value>Кубические метры</value>
+  </data>
+  <data name="CubicYards" xml:space="preserve">
+    <value>Кубические ярды</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Дни</value>
+  </data>
+  <data name="Delisle" xml:space="preserve">
+    <value>Градусы Делиля</value>
+  </data>
+  <data name="Fahrenheit" xml:space="preserve">
+    <value>Градусы Фаренгейта</value>
+  </data>
+  <data name="GallonsUK" xml:space="preserve">
+    <value>Галлоны (UK)</value>
+  </data>
+  <data name="GallonsUS" xml:space="preserve">
+    <value>Галлоны (US)</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Часы</value>
+  </data>
+  <data name="Celsius" xml:space="preserve">
+    <value>Градусы Цельсия</value>
+  </data>
+  <data name="Kelvin" xml:space="preserve">
+    <value>Кельвины</value>
+  </data>
+  <data name="Litres" xml:space="preserve">
+    <value>Литры</value>
+  </data>
+  <data name="Microseconds" xml:space="preserve">
+    <value>Микросекунды</value>
+  </data>
+  <data name="Milliseconds" xml:space="preserve">
+    <value>Миллисекунды</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Минуты</value>
+  </data>
+  <data name="Newton" xml:space="preserve">
+    <value>Градусы Ньютона</value>
+  </data>
+  <data name="Rankine" xml:space="preserve">
+    <value>Градусы Ранкина</value>
+  </data>
+  <data name="Réaumur" xml:space="preserve">
+    <value>Градусы Реомюра</value>
+  </data>
+  <data name="Rømer" xml:space="preserve">
+    <value>Градусы Рёмера</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Секунды</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>Недели</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>Года</value>
+  </data>
+  <data name="PintsUK" xml:space="preserve">
+    <value>Пинта (UK)</value>
+  </data>
+  <data name="PintsUS" xml:space="preserve">
+    <value>Пинта (US)</value>
+  </data>
 </root>

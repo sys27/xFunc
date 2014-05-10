@@ -56,6 +56,7 @@ namespace xFunc.Views
                 Base = Settings.Default.NumberBase;
             }
             MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
+            SaveUserFunctions = Settings.Default.SaveUserFunction;
             CheckUpdates = Settings.Default.CheckUpdates;
         }
 
@@ -159,6 +160,18 @@ namespace xFunc.Views
             internal set
             {
                 this.maxCountOfExpsTextBox.Text = value.ToString();
+            }
+        }
+
+        public bool SaveUserFunctions
+        {
+            get
+            {
+                return this.saveUserFuncCheckBox.IsChecked.Value;
+            }
+            internal set
+            {
+                this.saveUserFuncCheckBox.IsChecked = value;
             }
         }
 

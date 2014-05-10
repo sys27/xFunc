@@ -201,6 +201,10 @@ namespace xFunc.Views
 
         private void LoadSettings()
         {
+            if (Settings.Default.UserFunctions != null)
+                foreach (var func in Settings.Default.UserFunctions)
+                    processor.Solve(func);
+
             if (Settings.Default.WindowState != WindowState.Minimized)
             {
                 WindowState = Settings.Default.WindowState;
@@ -241,6 +245,11 @@ namespace xFunc.Views
 
         private void SaveSettings()
         {
+            if (processor.UserFunctions.Count > 0)
+                Settings.Default.UserFunctions = new System.Collections.Specialized.StringCollection();
+            foreach (var item in processor.UserFunctions)
+                Settings.Default.UserFunctions.Add(string.Format("{0}:={1}", item.Key, item.Value));
+
             if (Settings.Default.RememberSizeAndPosition)
             {
                 if (WindowState != WindowState.Minimized)

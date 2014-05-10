@@ -430,5 +430,16 @@ namespace xFunc.Properties {
                 this["ProgExpanded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection UserFunctions {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["UserFunctions"]));
+            }
+            set {
+                this["UserFunctions"] = value;
+            }
+        }
     }
 }

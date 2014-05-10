@@ -201,7 +201,7 @@ namespace xFunc.Views
 
         private void LoadSettings()
         {
-            if (Settings.Default.UserFunctions != null)
+            if (Settings.Default.SaveUserFunction && Settings.Default.UserFunctions != null)
                 foreach (var func in Settings.Default.UserFunctions)
                     processor.Solve(func);
 
@@ -245,10 +245,13 @@ namespace xFunc.Views
 
         private void SaveSettings()
         {
-            if (processor.UserFunctions.Count > 0)
-                Settings.Default.UserFunctions = new System.Collections.Specialized.StringCollection();
-            foreach (var item in processor.UserFunctions)
-                Settings.Default.UserFunctions.Add(string.Format("{0}:={1}", item.Key, item.Value));
+            if (Settings.Default.SaveUserFunction)
+            {
+                if (processor.UserFunctions.Count > 0)
+                    Settings.Default.UserFunctions = new System.Collections.Specialized.StringCollection();
+                foreach (var item in processor.UserFunctions)
+                    Settings.Default.UserFunctions.Add(string.Format("{0}:={1}", item.Key, item.Value));
+            }
 
             if (Settings.Default.RememberSizeAndPosition)
             {
@@ -515,10 +518,23 @@ namespace xFunc.Views
             {
                 converterView = new Converter()
                 {
-                    Owner = this
+                    Owner = this,
+                    Top = Settings.Default.ConverterTop == -1 ? this.Top + 100 : Settings.Default.ConverterTop,
+                    Left = Settings.Default.ConverterLeft == -1 ? this.Left + 300 : Settings.Default.ConverterLeft
                 };
                 converterView.Closed += (obj, args1) =>
                 {
+                    if (Settings.Default.RememberSizeAndPosition)
+                    {
+                        Settings.Default.ConverterTop = converterView.Top;
+                        Settings.Default.ConverterLeft = converterView.Left;
+                    }
+                    else
+                    {
+                        Settings.Default.ConverterTop = double.Parse(Settings.Default.Properties["ConverterTop"].DefaultValue.ToString());
+                        Settings.Default.ConverterLeft = double.Parse(Settings.Default.Properties["ConverterLeft"].DefaultValue.ToString());
+                    }
+
                     converterView = null;
                 };
             }
@@ -556,6 +572,7 @@ namespace xFunc.Views
                     mathPresenter.Base = settingsView.Base;
                 }
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
+                Settings.Default.SaveUserFunction = settingsView.SaveUserFunctions;
                 Settings.Default.CheckUpdates = settingsView.CheckUpdates;
 
                 Settings.Default.Save();

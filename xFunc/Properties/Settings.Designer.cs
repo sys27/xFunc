@@ -441,5 +441,41 @@ namespace xFunc.Properties {
                 this["UserFunctions"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveUserFunction {
+            get {
+                return ((bool)(this["SaveUserFunction"]));
+            }
+            set {
+                this["SaveUserFunction"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double ConverterLeft {
+            get {
+                return ((double)(this["ConverterLeft"]));
+            }
+            set {
+                this["ConverterLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double ConverterTop {
+            get {
+                return ((double)(this["ConverterTop"]));
+            }
+            set {
+                this["ConverterTop"] = value;
+            }
+        }
     }
 }

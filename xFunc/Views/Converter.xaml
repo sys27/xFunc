@@ -19,7 +19,6 @@ limitations under the License. -->
         xmlns:views="clr-namespace:xFunc.Views"
         Title="{x:Static res:Resource.ConverterTitle}" Width="460" Height="286"
         ShowInTaskbar="False" ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.CommandBindings>
         <CommandBinding Command="views:Converter.CalculateCommand" Executed="CalculateCommand_Execute" CanExecute="CalculateCommand_CanExecute" />

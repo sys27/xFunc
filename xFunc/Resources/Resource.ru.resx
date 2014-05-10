@@ -750,4 +750,7 @@
   <data name="ConverterCalculateText" xml:space="preserve">
     <value>Рассчитать</value>
   </data>
+  <data name="SettingsSaveUF" xml:space="preserve">
+    <value>Сохранять пользовательские функции.</value>
+  </data>
 </root>

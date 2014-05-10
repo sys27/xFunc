@@ -1609,6 +1609,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save user functions..
+        /// </summary>
+        public static string SettingsSaveUF {
+            get {
+                return ResourceManager.GetString("SettingsSaveUF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shows settings of program..
         /// </summary>
         public static string SettingsToolTip {

@@ -12,20 +12,25 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Xml.Linq;
 using xFunc.Logics;
 using xFunc.Logics.Expressions;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Presenters;
 using xFunc.Properties;
 using xFunc.Resources;
@@ -44,6 +49,7 @@ namespace xFunc.Views
         private GraphsPresenter graphsPresenter;
         private TruthTablePresenter truthTablePresenter;
         private Updater updater;
+        private string fileName;
 
         #region Commands
 
@@ -324,6 +330,49 @@ namespace xFunc.Views
             Settings.Default.Save();
         }
 
+        private void Serialize(string path)
+        {
+            var exps = new XElement("expressions", mathPresenter.Workspace.Select(exp => new XElement("expression", exp.StringExpression)));
+            var vars = new XElement("variables",
+                from @var in processor.Parameters
+                where @var.Type != ParameterType.Constant
+                select new XElement("add",
+                        new XAttribute("key", @var.Key),
+                        new XAttribute("value", @var.Value.ToString(CultureInfo.InvariantCulture))));
+            var funcs = new XElement("functions",
+                from func in processor.UserFunctions
+                select new XElement("add",
+                        new XAttribute("key", func.Key.ToString()),
+                        new XAttribute("value", func.Value.ToString())));
+
+            var root = new XElement("xfunc",
+                                    exps.IsEmpty ? null : exps,
+                                    vars.IsEmpty ? null : vars,
+                                    funcs.IsEmpty ? null : funcs);
+            var doc = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), root);
+
+            doc.Save(path);
+        }
+
+        private void Deserialize(string path)
+        {
+            var doc = XDocument.Load(path);
+            var vars = doc.Root.Element("variables");
+            if (vars != null)
+                foreach (var item in vars.Elements("add"))
+                    processor.Parameters.Add(item.Attribute("key").Value, double.Parse(item.Attribute("value").Value));
+
+            var funcs = doc.Root.Element("functions");
+            if (funcs != null)
+                foreach (var item in funcs.Elements("add"))
+                    processor.Solve(string.Format("{0}:={1}", item.Attribute("key").Value, item.Attribute("value").Value));
+
+            var exps = doc.Root.Element("expressions");
+            if (exps != null)
+                foreach (var item in exps.Elements("expression").Select(exp => exp.Value))
+                    mathPresenter.Add(item);
+        }
+
         private void SetFocus()
         {
             if (tabControl.SelectedItem == mathTab)
@@ -340,24 +389,53 @@ namespace xFunc.Views
 
         private void NewCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-
+            mathPresenter.Clear();
+            processor.Parameters.Clear();
+            fileName = null;
         }
 
         private void OpenCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            var ofd = new OpenFileDialog()
+            {
+                FileName = "xFunc Document",
+                DefaultExt = ".xml",
+                Filter = "xFunc File (*.xml)|*.xml|All Files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
 
+            if (ofd.ShowDialog() == true)
+            {
+                Deserialize(ofd.FileName);
+                fileName = ofd.FileName;
+            }
         }
 
         private void SaveCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-
+            if (string.IsNullOrWhiteSpace(fileName))
+                SaveAsCommand_Execute(o, args);
+            else
+                Serialize(fileName);
         }
 
         private void SaveAsCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
+            var sfd = new SaveFileDialog()
+            {
+                FileName = "xFunc Document",
+                DefaultExt = ".xml",
+                Filter = "xFunc File (*.xml)|*.xml|All Files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
 
+            if (sfd.ShowDialog() == true)
+            {
+                Serialize(sfd.FileName);
+                fileName = sfd.FileName;
+            }
         }
-        
+
         private void DegreeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             mathPresenter.AngleMeasurement = AngleMeasurement.Degree;

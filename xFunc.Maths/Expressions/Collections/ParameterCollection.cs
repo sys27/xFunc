@@ -213,6 +213,14 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
+        /// Clears this collection.
+        /// </summary>
+        public void Clear()
+        {
+            collection.Clear();
+        }
+
+        /// <summary>
         /// Determines whether an onject contains the specified element.
         /// </summary>
         /// <param name="param">The element.</param>

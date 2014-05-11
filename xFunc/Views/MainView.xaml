@@ -52,9 +52,18 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.ExitCommand" Executed="ExitCommand_Execute" />
     </ribbon:MetroWindow.CommandBindings>
     <ribbon:MetroWindow.InputBindings>
+        <KeyBinding Command="views:MainView.NewCommand" Key="N" Modifiers="Control" />
+        <KeyBinding Command="views:MainView.OpenCommand" Key="O" Modifiers="Control" />
+        <KeyBinding Command="views:MainView.SaveCommand" Key="S" Modifiers="Control" />
+        <KeyBinding Command="views:MainView.SaveAsCommand" Key="S" Modifiers="Control+Shift" />
+        
         <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
+
+        <KeyBinding Command="views:MainView.VariablesCommand" Key="V" Modifiers="Control+Alt" />
+        <KeyBinding Command="views:MainView.FunctionsCommand" Key="F" Modifiers="Control+Alt" />
+        <KeyBinding Command="views:MainView.ConverterCommand" Key="C" Modifiers="Control+Alt" />
 
         <KeyBinding Command="views:MainView.AboutCommand" Key="F1" />
         <KeyBinding Command="views:MainView.SettingsCommand" Key="S" Modifiers="Alt" />

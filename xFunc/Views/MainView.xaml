@@ -82,16 +82,16 @@ limitations under the License. -->
             <ribbon:Ribbon.Menu>
                 <ribbon:Backstage Header="{x:Static res:Resource.FileMenu}">
                     <ribbon:BackstageTabControl>
-                        <!--<ribbon:Button Header="{x:Static res:Resource.NewMenu}" Icon="..\Images\new.png" />
-                        <ribbon:Button Header="{x:Static res:Resource.OpenMenu}" Icon="..\Images\open.png" />
-                        <ribbon:Button Header="{x:Static res:Resource.SaveMenu}" Icon="..\Images\save.png" />
-                        <ribbon:SeparatorTabItem />-->
-                        <ribbon:Button Header="{x:Static res:Resource.SettingsMenu}" Icon="..\Images\settings.png" Command="views:MainView.SettingsCommand">
+                        <ribbon:Button Header="{x:Static res:Resource.NewMenu}" />
+                        <ribbon:Button Header="{x:Static res:Resource.OpenMenu}" />
+                        <ribbon:Button Header="{x:Static res:Resource.SaveMenu}" />
+                        <ribbon:SeparatorTabItem />
+                        <ribbon:Button Header="{x:Static res:Resource.SettingsMenu}" Command="views:MainView.SettingsCommand">
                             <ribbon:Button.ToolTip>
                                 <ribbon:ScreenTip Title="{x:Static res:Resource.SettingsToolTipTitle}" Text="{x:Static res:Resource.SettingsToolTip}" />
                             </ribbon:Button.ToolTip>
                         </ribbon:Button>
-                        <ribbon:Button Header="{x:Static res:Resource.ExitMenu}" Icon="..\Images\exit.png" Command="views:MainView.ExitCommand">
+                        <ribbon:Button Header="{x:Static res:Resource.ExitMenu}" Command="views:MainView.ExitCommand">
                             <ribbon:Button.ToolTip>
                                 <ribbon:ScreenTip Title="{x:Static res:Resource.ExitToolTipTitle}" Text="{x:Static res:Resource.ExitToolTip}" />
                             </ribbon:Button.ToolTip>

@@ -20,7 +20,7 @@ limitations under the License. -->
         xmlns:views="clr-namespace:xFunc.Views"
         xmlns:maths="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
         xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
-        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="332.707"
+        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="316"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
         <conv:InverseBooleanConverter x:Key="inverseBooleanConverter" />

@@ -324,15 +324,6 @@
     <Resource Include="Images\FunctionLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\exit.png" />
-    <Resource Include="Images\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\new.png" />
-    <Resource Include="Images\open.png" />
-    <Resource Include="Images\save.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\Edit.png" />
     <Resource Include="Images\Refresh.png" />

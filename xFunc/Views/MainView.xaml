@@ -25,6 +25,11 @@ limitations under the License. -->
                     Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
                     Loaded="this_Loaded">
     <ribbon:MetroWindow.CommandBindings>
+        <CommandBinding Command="views:MainView.NewCommand" Executed="NewCommand_Execute" />
+        <CommandBinding Command="views:MainView.OpenCommand" Executed="OpenCommand_Execute" />
+        <CommandBinding Command="views:MainView.SaveCommand" Executed="SaveCommand_Execute" />
+        <CommandBinding Command="views:MainView.SaveAsCommand" Executed="SaveAsCommand_Execute" />
+        
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DegreeButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
@@ -82,15 +87,17 @@ limitations under the License. -->
             <ribbon:Ribbon.Menu>
                 <ribbon:Backstage Header="{x:Static res:Resource.FileMenu}">
                     <ribbon:BackstageTabControl>
-                        <ribbon:Button Header="{x:Static res:Resource.NewMenu}" />
-                        <ribbon:Button Header="{x:Static res:Resource.OpenMenu}" />
-                        <ribbon:Button Header="{x:Static res:Resource.SaveMenu}" />
+                        <ribbon:Button Header="{x:Static res:Resource.NewMenu}" Command="views:MainView.NewCommand" />
+                        <ribbon:Button Header="{x:Static res:Resource.OpenMenu}" Command="views:MainView.OpenCommand" />
+                        <ribbon:Button Header="{x:Static res:Resource.SaveMenu}" Command="views:MainView.SaveCommand" />
+                        <ribbon:Button Header="{x:Static res:Resource.SaveAsMenu}" Command="views:MainView.SaveAsCommand" />
                         <ribbon:SeparatorTabItem />
                         <ribbon:Button Header="{x:Static res:Resource.SettingsMenu}" Command="views:MainView.SettingsCommand">
                             <ribbon:Button.ToolTip>
                                 <ribbon:ScreenTip Title="{x:Static res:Resource.SettingsToolTipTitle}" Text="{x:Static res:Resource.SettingsToolTip}" />
                             </ribbon:Button.ToolTip>
                         </ribbon:Button>
+                        <ribbon:SeparatorTabItem />
                         <ribbon:Button Header="{x:Static res:Resource.ExitMenu}" Command="views:MainView.ExitCommand">
                             <ribbon:Button.ToolTip>
                                 <ribbon:ScreenTip Title="{x:Static res:Resource.ExitToolTipTitle}" Text="{x:Static res:Resource.ExitToolTip}" />

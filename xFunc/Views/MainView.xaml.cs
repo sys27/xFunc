@@ -47,6 +47,11 @@ namespace xFunc.Views
 
         #region Commands
 
+        public static RoutedCommand NewCommand = new RoutedCommand();
+        public static RoutedCommand OpenCommand = new RoutedCommand();
+        public static RoutedCommand SaveCommand = new RoutedCommand();
+        public static RoutedCommand SaveAsCommand = new RoutedCommand();
+
         public static RoutedCommand DegreeCommand = new RoutedCommand();
         public static RoutedCommand RadianCommand = new RoutedCommand();
         public static RoutedCommand GradianCommand = new RoutedCommand();
@@ -333,6 +338,26 @@ namespace xFunc.Views
 
         #region Commands
 
+        private void NewCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+
+        }
+
+        private void OpenCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+
+        }
+
+        private void SaveCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+
+        }
+
+        private void SaveAsCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+
+        }
+        
         private void DegreeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             mathPresenter.AngleMeasurement = AngleMeasurement.Degree;

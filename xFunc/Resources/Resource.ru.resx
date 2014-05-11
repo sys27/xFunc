@@ -753,4 +753,7 @@
   <data name="SettingsSaveUF" xml:space="preserve">
     <value>Сохранять пользовательские функции.</value>
   </data>
+  <data name="SaveAsMenu" xml:space="preserve">
+    <value>Сохранить как</value>
+  </data>
 </root>

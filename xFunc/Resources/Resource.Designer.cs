@@ -1402,6 +1402,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save As.
+        /// </summary>
+        public static string SaveAsMenu {
+            get {
+                return ResourceManager.GetString("SaveAsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveMenu {

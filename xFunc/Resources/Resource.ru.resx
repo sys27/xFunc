@@ -364,13 +364,13 @@
     <value>Отображает окно со всеме введенными функциями.</value>
   </data>
   <data name="FuncScreenTitTitle" xml:space="preserve">
-    <value>Функции</value>
+    <value>Функции (Ctrl+Alt+F)</value>
   </data>
   <data name="VarScreenTitText" xml:space="preserve">
     <value>Отображает окно со всеме введенными переменными.</value>
   </data>
   <data name="VarScreenTitTitle" xml:space="preserve">
-    <value>Переменные</value>
+    <value>Переменные (Ctrl+Alt+V)</value>
   </data>
   <data name="ArccosecantToolTip" xml:space="preserve">
     <value>Арккосеканс числа. Пример: arccsc(90) или arccosec(90)</value>
@@ -724,7 +724,7 @@
     <value>Конвертер величин</value>
   </data>
   <data name="ConverterScreenTipTitle" xml:space="preserve">
-    <value>Конвертер величин</value>
+    <value>Конвертер величин (Ctrl+Alt+C)</value>
   </data>
   <data name="ConverterScreenTipText" xml:space="preserve">
     <value>Преобразует данные из одной единицы измерения в другую.</value>

@@ -547,7 +547,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unit Converter.
+        ///   Looks up a localized string similar to Unit Converter (Ctrl+Alt+C).
         /// </summary>
         public static string ConverterScreenTipTitle {
             get {
@@ -925,7 +925,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Functions.
+        ///   Looks up a localized string similar to Functions (Ctrl+Alt+F).
         /// </summary>
         public static string FuncScreenTitTitle {
             get {
@@ -1933,7 +1933,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Variables.
+        ///   Looks up a localized string similar to Variables (Ctrl+Alt+V).
         /// </summary>
         public static string VarScreenTitTitle {
             get {

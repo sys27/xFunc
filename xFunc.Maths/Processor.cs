@@ -46,6 +46,7 @@ namespace xFunc.Maths
             parser = new Parser(lexer, simplifier, new ExpressionFactory());
 
             parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
+            numeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>
@@ -75,6 +76,7 @@ namespace xFunc.Maths
             this.parser = new Parser(lexer, simplifier, factory);
 
             this.parameters = parameters;
+            this.numeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>

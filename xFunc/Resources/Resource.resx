@@ -364,13 +364,13 @@
     <value>Shows the window with all entered functions.</value>
   </data>
   <data name="FuncScreenTitTitle" xml:space="preserve">
-    <value>Functions</value>
+    <value>Functions (Ctrl+Alt+F)</value>
   </data>
   <data name="VarScreenTitText" xml:space="preserve">
     <value>Shows the window with all entered variables.</value>
   </data>
   <data name="VarScreenTitTitle" xml:space="preserve">
-    <value>Variables</value>
+    <value>Variables (Ctrl+Alt+V)</value>
   </data>
   <data name="ArccosecantToolTip" xml:space="preserve">
     <value>Inverse cosecant of a number. Example: arccsc(90) or arccosec(90)</value>
@@ -724,7 +724,7 @@
     <value>Unit Converter</value>
   </data>
   <data name="ConverterScreenTipTitle" xml:space="preserve">
-    <value>Unit Converter</value>
+    <value>Unit Converter (Ctrl+Alt+C)</value>
   </data>
   <data name="ConverterScreenTipText" xml:space="preserve">
     <value>Converts data from one unit to another.</value>

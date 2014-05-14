@@ -364,13 +364,13 @@
     <value>Відображає вікно з усіма введеними функціями.</value>
   </data>
   <data name="FuncScreenTitTitle" xml:space="preserve">
-    <value>Функції</value>
+    <value>Функції (Ctrl+Alt+F)</value>
   </data>
   <data name="VarScreenTitText" xml:space="preserve">
     <value>Відображає вікно з усіма введеними змінними.</value>
   </data>
   <data name="VarScreenTitTitle" xml:space="preserve">
-    <value>Змінні</value>
+    <value>Змінні (Ctrl+Alt+V)</value>
   </data>
   <data name="ArccosecantToolTip" xml:space="preserve">
     <value>Арккосеканс числа. Приклад: arccsc(90) або arccosec(90)</value>
@@ -724,7 +724,7 @@
     <value>Конвертер величин</value>
   </data>
   <data name="ConverterScreenTipTitle" xml:space="preserve">
-    <value>Конвертер величин</value>
+    <value>Конвертер величин (Ctrl+Alt+C)</value>
   </data>
   <data name="ConverterScreenTipText" xml:space="preserve">
     <value>Перетворює дані з однієї одиниці вимірювання в іншу.</value>

@@ -33,13 +33,13 @@ namespace xFunc.Views
     public partial class Converter : Window
     {
 
-        private object[] converters;
+        private IConverter[] converters;
 
         public static RoutedCommand CalculateCommand = new RoutedCommand();
 
         public Converter()
         {
-            converters = new object[]
+            converters = new IConverter[]
             {
                 new AreaConverter(),
                 new xFunc.UnitConverters.LengthConverter(),
@@ -56,11 +56,39 @@ namespace xFunc.Views
             SetUnits();
         }
 
+        private void ConvertFromTo()
+        {
+            if (convertersComboBox.SelectedItem == null || fromComboBox.SelectedItem == null || toComboBox.SelectedItem == null)
+                return;
+
+            var conv = (IConverter)convertersComboBox.SelectedItem;
+            var from = (KeyValuePair<object, string>)fromComboBox.SelectedItem;
+            var to = (KeyValuePair<object, string>)toComboBox.SelectedItem;
+            double value;
+
+            if (double.TryParse(fromTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+                toTextBox.Text = conv.Convert(value, from.Key, to.Key).ToString(CultureInfo.InvariantCulture);
+        }
+
+        private void ConvertToFrom()
+        {
+            if (convertersComboBox.SelectedItem == null || fromComboBox.SelectedItem == null || toComboBox.SelectedItem == null)
+                return;
+
+            var conv = (IConverter)convertersComboBox.SelectedItem;
+            var from = (KeyValuePair<object, string>)fromComboBox.SelectedItem;
+            var to = (KeyValuePair<object, string>)toComboBox.SelectedItem;
+            double value;
+
+            if (double.TryParse(toTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+                fromTextBox.Text = conv.Convert(value, to.Key, from.Key).ToString(CultureInfo.InvariantCulture);
+        }
+
         private void CalculateCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            dynamic conv = convertersComboBox.SelectedItem;
-            dynamic from = fromComboBox.SelectedItem;
-            dynamic to = toComboBox.SelectedItem;
+            var conv = (IConverter)convertersComboBox.SelectedItem;
+            var from = (KeyValuePair<object, string>)fromComboBox.SelectedItem;
+            var to = (KeyValuePair<object, string>)toComboBox.SelectedItem;
             double value;
 
             if (double.TryParse(fromTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
@@ -97,7 +125,29 @@ namespace xFunc.Views
             SetUnits();
         }
 
-        public object[] Converters
+        private void fromTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (fromTextBox.IsFocused)
+                ConvertFromTo();
+        }
+
+        private void toTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (toTextBox.IsFocused)
+                ConvertToFrom();
+        }
+
+        private void fromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ConvertFromTo();
+        }
+
+        private void toComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ConvertToFrom();
+        }
+
+        public IConverter[] Converters
         {
             get
             {
@@ -109,7 +159,7 @@ namespace xFunc.Views
         {
             get
             {
-                dynamic conv = convertersComboBox.SelectedItem;
+                var conv = (IConverter)convertersComboBox.SelectedItem;
 
                 return conv.Units;
             }

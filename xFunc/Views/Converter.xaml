@@ -38,18 +38,18 @@ limitations under the License. -->
         <GroupBox Grid.Row="1" Header="{x:Static res:Resource.FromText}" Margin="10,0,10,4">
             <Grid>
                 <Label Content="{x:Static res:Resource.UnitsText}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromComboBox}" />
-                <ComboBox x:Name="fromComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" />
+                <ComboBox x:Name="fromComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" SelectionChanged="fromComboBox_SelectionChanged" />
                 <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromTextBox}" />
-                <TextBox x:Name="fromTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" />
+                <TextBox x:Name="fromTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" TextChanged="fromTextBox_TextChanged" />
             </Grid>
         </GroupBox>
 
         <GroupBox Grid.Row="2" Header="{x:Static res:Resource.ToText}" Margin="10,0,10,4">
             <Grid>
                 <Label Content="{x:Static res:Resource.UnitsText}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toComboBox}" />
-                <ComboBox x:Name="toComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" />
+                <ComboBox x:Name="toComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" SelectionChanged="toComboBox_SelectionChanged" />
                 <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toTextBox}" />
-                <TextBox x:Name="toTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" />
+                <TextBox x:Name="toTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" TextChanged="toTextBox_TextChanged" />
             </Grid>
         </GroupBox>
 

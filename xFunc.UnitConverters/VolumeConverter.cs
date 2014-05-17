@@ -25,7 +25,7 @@ namespace xFunc.UnitConverters
     public class VolumeConverter : Converter<VolumeUnits>
     {
 
-        private static Lazy<IDictionary<object, string>> units;
+        private static readonly Lazy<IDictionary<object, string>> units;
 
         static VolumeConverter()
         {
@@ -41,7 +41,7 @@ namespace xFunc.UnitConverters
             RegisterConversion(VolumeUnits.CubicFeet, v => v * 35.3146667214886, v => v / 35.3146667214886);
             RegisterConversion(VolumeUnits.CubicYards, v => v * 1.30795061931439, v => v / 1.30795061931439);
 
-            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>()
+            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>
             {
                 { VolumeUnits.CubicCentimeters, Resource.CubicCentimeters },
                 { VolumeUnits.CubicMeters, Resource.CubicMeters },

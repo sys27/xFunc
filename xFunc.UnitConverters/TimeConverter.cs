@@ -25,7 +25,7 @@ namespace xFunc.UnitConverters
     public class TimeConverter : Converter<TimeUnits>
     {
 
-        private static Lazy<IDictionary<object, string>> units;
+        private static readonly Lazy<IDictionary<object, string>> units;
 
         static TimeConverter()
         {
@@ -39,7 +39,7 @@ namespace xFunc.UnitConverters
             RegisterConversion(TimeUnits.Weeks, t => t / 604800, t => t * 604800);
             RegisterConversion(TimeUnits.Years, t => t / 31536000, t => t * 31536000);
 
-            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>()
+            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>
             {
                 { TimeUnits.Microseconds, Resource.Microseconds },
                 { TimeUnits.Milliseconds, Resource.Milliseconds },

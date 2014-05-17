@@ -14,7 +14,6 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Bitwise;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
@@ -79,9 +78,9 @@ namespace xFunc.Maths
                 case Operations.Assign:
                     return new Define();
                 case Operations.ConditionalAnd:
-                    return new xFunc.Maths.Expressions.Programming.And();
+                    return new And();
                 case Operations.ConditionalOr:
-                    return new xFunc.Maths.Expressions.Programming.Or();
+                    return new Or();
                 case Operations.Equal:
                     return new Equal();
                 case Operations.NotEqual:
@@ -107,13 +106,13 @@ namespace xFunc.Maths
                 case Operations.Decrement:
                     return new Dec();
                 case Operations.BitwiseNot:
-                    return new xFunc.Maths.Expressions.Bitwise.Not();
+                    return new Expressions.Bitwise.Not();
                 case Operations.BitwiseAnd:
-                    return new xFunc.Maths.Expressions.Bitwise.And();
+                    return new Expressions.Bitwise.And();
                 case Operations.BitwiseOr:
-                    return new xFunc.Maths.Expressions.Bitwise.Or();
+                    return new Expressions.Bitwise.Or();
                 case Operations.BitwiseXOr:
-                    return new xFunc.Maths.Expressions.Bitwise.XOr();
+                    return new Expressions.Bitwise.XOr();
                 default:
                     return null;
             }

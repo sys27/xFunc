@@ -32,11 +32,11 @@ namespace xFunc.UnitConverters
         /// <summary>
         /// Dictionary of functions to convert from the base unit type into a specific type.
         /// </summary>
-        protected static Dictionary<TUnit, Func<double, double>> convTo = new Dictionary<TUnit, Func<double, double>>();
+        protected static readonly Dictionary<TUnit, Func<double, double>> convTo = new Dictionary<TUnit, Func<double, double>>();
         /// <summary>
         /// Dictionary of functions to convert from the specified type into the base unit type.
         /// </summary>
-        protected static Dictionary<TUnit, Func<double, double>> convFrom = new Dictionary<TUnit, Func<double, double>>();
+        protected static readonly Dictionary<TUnit, Func<double, double>> convFrom = new Dictionary<TUnit, Func<double, double>>();
 
         double IConverter.Convert(double value, object from, object to)
         {

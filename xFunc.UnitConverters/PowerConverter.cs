@@ -25,7 +25,7 @@ namespace xFunc.UnitConverters
     public class PowerConverter : Converter<PowerUnits>
     {
 
-        private static Lazy<IDictionary<object, string>> units;
+        private static readonly Lazy<IDictionary<object, string>> units;
 
         static PowerConverter()
         {
@@ -34,7 +34,7 @@ namespace xFunc.UnitConverters
             RegisterConversion(PowerUnits.Kilowatts, p => p / 1000, p => p * 1000);
             RegisterConversion(PowerUnits.Horsepower, p => p / 745.69987158227022, p => p * 745.69987158227022);
 
-            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>()
+            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>
             {
                 { PowerUnits.Watts, Resource.Watts },
                 { PowerUnits.Kilowatts, Resource.Kilowatts },

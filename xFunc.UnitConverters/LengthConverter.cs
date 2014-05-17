@@ -25,7 +25,7 @@ namespace xFunc.UnitConverters
     public class LengthConverter : Converter<LengthUnits>
     {
 
-        private static Lazy<IDictionary<object, string>> units;
+        private static readonly Lazy<IDictionary<object, string>> units;
 
         static LengthConverter()
         {
@@ -48,7 +48,7 @@ namespace xFunc.UnitConverters
             RegisterConversion(LengthUnits.LightYears, l => l / 9460528400000000, l => l * 9460528400000000);
             RegisterConversion(LengthUnits.Parsecs, l => l / 30856775800000000, l => l * 30856775800000000);
 
-            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>()
+            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>
             {
                 { LengthUnits.Nanometres, Resource.Nanometres },
                 { LengthUnits.Micrometers, Resource.Micrometers },

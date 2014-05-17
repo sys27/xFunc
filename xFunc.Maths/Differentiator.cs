@@ -16,7 +16,6 @@ using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths
 {

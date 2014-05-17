@@ -139,12 +139,12 @@ namespace xFunc.Views
 
         private void fromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ConvertFromTo();
+            ConvertToFrom();
         }
 
         private void toComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ConvertToFrom();
+            ConvertFromTo(); 
         }
 
         public IConverter[] Converters

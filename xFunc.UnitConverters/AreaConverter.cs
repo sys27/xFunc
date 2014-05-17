@@ -25,7 +25,7 @@ namespace xFunc.UnitConverters
     public class AreaConverter : Converter<AreaUnits>
     {
 
-        private static Lazy<IDictionary<object, string>> units;
+        private static readonly Lazy<IDictionary<object, string>> units;
 
         static AreaConverter()
         {
@@ -41,7 +41,7 @@ namespace xFunc.UnitConverters
             RegisterConversion(AreaUnits.Acres, t => t * 0.000247105381, t => t / 0.000247105381);
             RegisterConversion(AreaUnits.SquareMiles, t => t * 2589988.110336, t => t / 2589988.110336);
 
-            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>()
+            units = new Lazy<IDictionary<object, string>>(() => new Dictionary<object, string>
             {
                 { AreaUnits.SquareMillimeters, Resource.SquareMillimeters },
                 { AreaUnits.SquareCentimeters, Resource.SquareCentimeters },

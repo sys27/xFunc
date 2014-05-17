@@ -43,13 +43,13 @@ namespace xFunc.Maths.Expressions.Programming
             {
                 var num = (double)value;
 
-                return num == False ? false : true;
+                return num != False;
             }
             if (value is int)
             {
                 var num = (int)value;
 
-                return num == False ? false : true;
+                return num != False;
             }
 
             return false;

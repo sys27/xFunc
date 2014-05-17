@@ -14,20 +14,15 @@
 // limitations under the License.
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
-using xFunc.Logics;
-using xFunc.Logics.Expressions;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
@@ -349,7 +344,7 @@ namespace xFunc.Views
                                     exps.IsEmpty ? null : exps,
                                     vars.IsEmpty ? null : vars,
                                     funcs.IsEmpty ? null : funcs);
-            var doc = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), root);
+            var doc = new XDocument(new XDeclaration("1.0", "UTF-8", null), root);
 
             doc.Save(path);
         }

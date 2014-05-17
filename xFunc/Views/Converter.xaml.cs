@@ -15,16 +15,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using xFunc.UnitConverters;
 
 namespace xFunc.Views
@@ -33,7 +26,7 @@ namespace xFunc.Views
     public partial class Converter : Window
     {
 
-        private IConverter[] converters;
+        private readonly IConverter[] converters;
 
         public static RoutedCommand CalculateCommand = new RoutedCommand();
 
@@ -42,7 +35,7 @@ namespace xFunc.Views
             converters = new IConverter[]
             {
                 new AreaConverter(),
-                new xFunc.UnitConverters.LengthConverter(),
+                new UnitConverters.LengthConverter(),
                 new MassConverter(),
                 new PowerConverter(),
                 new TemperatureConverter(),

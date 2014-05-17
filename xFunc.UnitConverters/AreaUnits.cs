@@ -36,13 +36,13 @@ namespace xFunc.UnitConverters
         /// </summary>
         SquareMetres,
         /// <summary>
-        /// Hectares (ha).
-        /// </summary>
-        Hectares,
-        /// <summary>
         /// Square kilometers (km²).
         /// </summary>
         SquareKilometers,
+        /// <summary>
+        /// Hectares (ha).
+        /// </summary>
+        Hectares,
         /// <summary>
         /// Square inches (in²).
         /// </summary>

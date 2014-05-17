@@ -47,6 +47,7 @@
     <Compile Include="AreaConverter.cs" />
     <Compile Include="AreaUnits.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="IConverter.cs" />
     <Compile Include="LengthConverter.cs" />
     <Compile Include="LengthUnits.cs" />
     <Compile Include="MassConverter.cs" />

@@ -22,7 +22,7 @@ namespace xFunc.UnitConverters
     /// The base class for converters.
     /// </summary>
     /// <typeparam name="TUnit">The type that represents units (eg. enum).</typeparam>
-    public abstract class Converter<TUnit>
+    public abstract class Converter<TUnit> : IConverter
     {
 
         /// <summary>
@@ -37,6 +37,11 @@ namespace xFunc.UnitConverters
         /// Dictionary of functions to convert from the specified type into the base unit type.
         /// </summary>
         protected static Dictionary<TUnit, Func<double, double>> convFrom = new Dictionary<TUnit, Func<double, double>>();
+
+        double IConverter.Convert(double value, object from, object to)
+        {
+            return Convert(value, (TUnit)from, (TUnit)to);
+        }
 
         /// <summary>
         /// Converts a value from one unit type to another.
@@ -76,14 +81,14 @@ namespace xFunc.UnitConverters
         /// The name of this converter.
         /// </value>
         public abstract string Name { get; }
+
         /// <summary>
         /// Gets the units.
         /// </summary>
         /// <value>
         /// The units.
         /// </value>
-        public abstract IDictionary<TUnit, string> Units { get; }
-
+        public abstract IDictionary<object, string> Units { get; }
     }
 
 }

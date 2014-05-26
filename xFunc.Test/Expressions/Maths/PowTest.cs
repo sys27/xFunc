@@ -17,6 +17,14 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual(1024.0, exp.Calculate());
         }
 
+        [TestMethod]
+        public void NegativeCalculateTest()
+        {
+            IExpression exp = new Pow(new Number(-8), new Number(1 / 3.0));
+
+            Assert.AreEqual(-2.0, exp.Calculate());
+        }
+
     }
 
 }

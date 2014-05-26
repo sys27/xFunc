@@ -64,12 +64,8 @@ namespace xFunc.Maths.Expressions
         {
             var first = (double)left.Calculate(parameters);
             var second = 1 / (double)right.Calculate(parameters);
-            if (first < 0 && second % 2 != 0)
-            {
-                return -Math.Pow(-first, second);
-            }
 
-            return Math.Pow(first, second);
+            return MathExtentions.Pow(first, second);
         }
 
         /// <summary>

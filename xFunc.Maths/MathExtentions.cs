@@ -28,6 +28,22 @@ namespace xFunc.Maths
     {
 
         /// <summary>
+        /// Returns a specified number raised to the specified power.
+        /// </summary>
+        /// <param name="number">A double-precision floating-point number to be raised to a power.</param>
+        /// <param name="power">A double-precision floating-point number that specifies a power.</param>
+        /// <returns>The <paramref name="number"/> raised to the <paramref name="power"/>.</returns>
+        public static double Pow(double number, double power)
+        {
+            if (number < 0 && power % 2 != 0)
+            {
+                return -Math.Pow(-number, power);
+            }
+
+            return Math.Pow(number, power);
+        }
+
+        /// <summary>
         /// Returns the cotangent of the specified angle.
         /// </summary>
         /// <param name="d">An angle, measured in radians.</param>

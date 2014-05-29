@@ -45,7 +45,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return MatrixExtentions.Inverse((Matrix)argument, parameters);
+            return MatrixExtentions.Inverse((Matrix)argument.Calculate(parameters), parameters);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Matrices
             }
             set
             {
-                if (!(value is Matrix))
+                if (!value.ResultIsMatrix)
                     throw new NotSupportedException();
 
                 argument = value;

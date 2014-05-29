@@ -171,7 +171,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public override object Calculate(ExpressionParameters parameters)
         {
-            throw new NotSupportedException();
+            return this;
         }
 
         /// <summary>

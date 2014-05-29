@@ -45,7 +45,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return ((Matrix)argument).Determinant(parameters);
+            return ((Matrix)argument.Calculate(parameters)).Determinant(parameters);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Matrices
             }
             set
             {
-                if (!(value is Matrix))
+                if (!value.ResultIsMatrix)
                     throw new NotSupportedException();
 
                 argument = value;

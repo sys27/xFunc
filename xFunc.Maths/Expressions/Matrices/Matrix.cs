@@ -156,8 +156,17 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var size = args[0].CountOfParams;
 
-            if (args.Any(exp => !(exp is Vector) || exp.CountOfParams != size))
+            if (args.Any(exp => !exp.ResultIsMatrix || exp.CountOfParams != size))
                 throw new MatrixIsInvalidException();
+        }
+
+        private Vector[] CalculateMatrix(ExpressionParameters parameters)
+        {
+            Vector[] args = new Vector[this.countOfParams];
+            for (int i = 0; i < this.CountOfParams; i++)
+                if (!(arguments[i] is Vector) && arguments[i].ResultIsMatrix)
+                    args[i] = (Vector)arguments[i].Calculate(parameters);
+            return args;
         }
 
         /// <summary>
@@ -171,7 +180,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public override object Calculate(ExpressionParameters parameters)
         {
-            return this;
+            return new Matrix(CalculateMatrix(parameters));
         }
 
         /// <summary>

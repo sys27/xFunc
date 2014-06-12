@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("xFunc.UnitConverters")]
@@ -13,3 +13,5 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: Guid("0c0a7e2e-fae0-4340-a298-0b31bfb5e82d")]
 #endif
+
+[assembly: CLSCompliant(true)]

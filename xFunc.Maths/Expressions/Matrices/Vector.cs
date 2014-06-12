@@ -158,7 +158,7 @@ namespace xFunc.Maths.Expressions.Matrices
             return (from exp in m_arguments.AsParallel().AsOrdered()
                     select (double)exp.Calculate(parameters)).ToArray();
 #else
-            return (from exp in arguments
+            return (from exp in m_arguments
                     select (double)exp.Calculate(parameters)).ToArray();
 #endif
         }

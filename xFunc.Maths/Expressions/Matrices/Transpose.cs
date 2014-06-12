@@ -46,10 +46,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override object Calculate(ExpressionParameters parameters)
         {
-            var vector = argument.Calculate(parameters) as Vector;
+            var vector = m_argument.Calculate(parameters) as Vector;
             if (vector != null)
                 return vector.Transpose();
-            var matrix = argument.Calculate(parameters) as Matrix;
+            var matrix = m_argument.Calculate(parameters) as Matrix;
             if (matrix != null)
                 return matrix.Transpose();
 
@@ -64,7 +64,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Transpose(this.argument.Clone());
+            return new Transpose(this.m_argument.Clone());
         }
 
         /// <summary>
@@ -78,15 +78,15 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return argument;
+                return m_argument;
             }
             set
             {
                 if (!value.ResultIsMatrix)
                     throw new NotSupportedException();
 
-                argument = value;
-                argument.Parent = this;
+                m_argument = value;
+                m_argument.Parent = this;
             }
         }
 

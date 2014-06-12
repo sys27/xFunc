@@ -30,15 +30,15 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IExpression parent;
+        protected IExpression m_parent;
         /// <summary>
         /// The arguments.
         /// </summary>
-        protected IExpression[] arguments;
+        protected IExpression[] m_arguments;
         /// <summary>
         /// The count of parameters.
         /// </summary>
-        protected int countOfParams;
+        protected int m_countOfParams;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression"/> class.
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
         protected DifferentParametersExpression(IExpression[] arguments, int countOfParams)
         {
             this.Arguments = arguments;
-            this.countOfParams = countOfParams;
+            this.m_countOfParams = countOfParams;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected int GetHashCode(int first, int second)
         {
-            return arguments.Aggregate(first, (current, item) => current * second + item.GetHashCode());
+            return m_arguments.Aggregate(first, (current, item) => current * second + item.GetHashCode());
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions
             var sb = new StringBuilder();
 
             sb.Append(function).Append('(');
-            foreach (var item in arguments)
+            foreach (var item in m_arguments)
                 sb.Append(item).Append(", ");
             sb.Remove(sb.Length - 2, 2).Append(')');
 
@@ -127,9 +127,9 @@ namespace xFunc.Maths.Expressions
         /// <returns>The new array of <see cref="IExpression"/>.</returns>
         protected IExpression[] CloneArguments()
         {
-            var args = new IExpression[arguments.Length];
-            for (int i = 0; i < arguments.Length; i++)
-                args[i] = arguments[i].Clone();
+            var args = new IExpression[m_arguments.Length];
+            for (int i = 0; i < m_arguments.Length; i++)
+                args[i] = m_arguments[i].Clone();
 
             return args;
         }
@@ -141,11 +141,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parent;
+                return m_parent;
             }
             set
             {
-                parent = value;
+                m_parent = value;
             }
         }
 
@@ -157,14 +157,14 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return arguments;
+                return m_arguments;
             }
             set
             {
-                arguments = value;
-                if (arguments != null)
+                m_arguments = value;
+                if (m_arguments != null)
                 {
-                    foreach (var item in arguments)
+                    foreach (var item in m_arguments)
                     {
                         if (item != null)
                             item.Parent = this;
@@ -199,11 +199,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return countOfParams;
+                return m_countOfParams;
             }
             set
             {
-                countOfParams = value;
+                m_countOfParams = value;
             }
         }
 

@@ -27,7 +27,7 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// The count of parameters
         /// </summary>
-        protected int countOfParams;
+        protected int m_countOfParams;
 
         /// <summary>
         /// Initializes the <see cref="FunctionToken" /> class.
@@ -46,7 +46,7 @@ namespace xFunc.Maths.Tokens
         public FunctionToken(Functions function, int countOfParams)
         {
             this.function = function;
-            this.countOfParams = countOfParams;
+            this.m_countOfParams = countOfParams;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Tokens
 
             var token = (FunctionToken)obj;
 
-            return this.function == token.function && this.countOfParams == token.countOfParams;
+            return this.function == token.function && this.m_countOfParams == token.m_countOfParams;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace xFunc.Maths.Tokens
             int hash = 6949;
 
             hash = hash * 5437 + function.GetHashCode();
-            hash = hash * 5437 + countOfParams.GetHashCode();
+            hash = hash * 5437 + m_countOfParams.GetHashCode();
 
             return hash;
         }
@@ -92,7 +92,7 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return string.Format("Function: {0} ({1})", function, countOfParams);
+            return string.Format("Function: {0} ({1})", function, m_countOfParams);
         }
 
         /// <summary>
@@ -127,11 +127,11 @@ namespace xFunc.Maths.Tokens
         {
             get
             {
-                return countOfParams;
+                return m_countOfParams;
             }
             internal set
             {
-                countOfParams = value;
+                m_countOfParams = value;
             }
         }
 

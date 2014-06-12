@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return MathExtentions.Fact(Math.Round((double)argument.Calculate(parameters)));
+            return MathExtentions.Fact(Math.Round((double)m_argument.Calculate(parameters)));
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Fact(argument.Clone());
+            return new Fact(m_argument.Clone());
         }
 
     }

@@ -200,7 +200,7 @@ namespace xFunc.Maths.Expressions.Matrices
             return (from vector in m_arguments.AsParallel().AsOrdered()
                     select ((Vector)vector).ToCalculatedArray(parameters)).ToArray();
 #else
-            return (from vector in arguments
+            return (from vector in m_arguments
                     select ((Vector)vector).ToCalculatedArray(parameters)).ToArray();
 #endif
         }

@@ -62,8 +62,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            var first = (double)left.Calculate(parameters);
-            var second = 1 / (double)right.Calculate(parameters);
+            var first = (double)m_left.Calculate(parameters);
+            var second = 1 / (double)m_right.Calculate(parameters);
 
             return MathExtentions.Pow(first, second);
         }
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Root(left.Clone(), right.Clone());
+            return new Root(m_left.Clone(), m_right.Clone());
         }
 
     }

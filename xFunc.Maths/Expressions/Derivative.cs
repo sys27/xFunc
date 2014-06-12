@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions
                 return false;
 
             return Expression.Equals(exp.Expression) &&
-                   (countOfParams == 2 && Variable.Equals(exp.Variable));
+                   (m_countOfParams == 2 && Variable.Equals(exp.Variable));
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (countOfParams == 1)
+            if (m_countOfParams == 1)
                 return string.Format("deriv({0})", Expression);
 
             return string.Format("deriv({0}, {1})", Expression, Variable);
@@ -113,7 +113,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Derivative(CloneArguments(), countOfParams);
+            return new Derivative(CloneArguments(), m_countOfParams);
         }
 
         /// <summary>
@@ -126,15 +126,15 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return arguments[0];
+                return m_arguments[0];
             }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                arguments[0] = value;
-                arguments[0].Parent = this;
+                m_arguments[0] = value;
+                m_arguments[0].Parent = this;
             }
         }
 
@@ -148,7 +148,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return countOfParams == 2 ? (Variable)arguments[1] : null;
+                return m_countOfParams == 2 ? (Variable)m_arguments[1] : null;
             }
         }
 

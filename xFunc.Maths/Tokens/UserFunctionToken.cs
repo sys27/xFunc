@@ -60,7 +60,7 @@ namespace xFunc.Maths.Tokens
 
             var token = (UserFunctionToken)obj;
 
-            return this.functionName == token.functionName && this.countOfParams == token.countOfParams;
+            return this.functionName == token.functionName && this.m_countOfParams == token.m_countOfParams;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Tokens
             int hash = 4909;
 
             hash = hash * 1877 + functionName.GetHashCode();
-            hash = hash * 1877 + countOfParams.GetHashCode();
+            hash = hash * 1877 + m_countOfParams.GetHashCode();
 
             return hash;
         }

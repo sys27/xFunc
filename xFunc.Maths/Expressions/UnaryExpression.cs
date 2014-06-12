@@ -26,11 +26,11 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IExpression parent;
+        protected IExpression m_parent;
         /// <summary>
         /// The (first) operand.
         /// </summary>
-        protected IExpression argument;
+        protected IExpression m_argument;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
 
             var exp = (UnaryExpression)obj;
 
-            return argument.Equals(exp.Argument);
+            return m_argument.Equals(exp.Argument);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected int GetHashCode(int first)
         {
-            return first ^ argument.GetHashCode();
+            return first ^ m_argument.GetHashCode();
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A <see cref="String" /> that represents this instance.</returns>
         protected string ToString(string format)
         {
-            return string.Format(format, argument);
+            return string.Format(format, m_argument);
         }
 
         /// <summary>
@@ -132,13 +132,13 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return argument;
+                return m_argument;
             }
             set
             {
-                argument = value;
-                if (argument != null)
-                    argument.Parent = this;
+                m_argument = value;
+                if (m_argument != null)
+                    m_argument.Parent = this;
             }
         }
 
@@ -149,11 +149,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parent;
+                return m_parent;
             }
             set
             {
-                parent = value;
+                m_parent = value;
             }
         }
 

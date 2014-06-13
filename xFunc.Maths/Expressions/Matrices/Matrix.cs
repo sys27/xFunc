@@ -163,9 +163,13 @@ namespace xFunc.Maths.Expressions.Matrices
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
         {
             Vector[] args = new Vector[this.m_countOfParams];
+
             for (int i = 0; i < this.CountOfParams; i++)
                 if (!(m_arguments[i] is Vector) && m_arguments[i].ResultIsMatrix)
                     args[i] = (Vector)m_arguments[i].Calculate(parameters);
+                else
+                    args[i] = (Vector)m_arguments[i];
+
             return args;
         }
 

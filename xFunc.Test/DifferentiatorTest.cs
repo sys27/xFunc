@@ -18,7 +18,10 @@ namespace xFunc.Test
         [TestInitializeAttribute]
         public void TestInit()
         {
-            differentiator = new Differentiator();
+            differentiator = new Differentiator()
+            {
+                Simplify = false
+            };
         }
 
         private IExpression Differentiate(IExpression exp)
@@ -1414,7 +1417,7 @@ namespace xFunc.Test
 
             var diff = Differentiate(uf, "x", parameters);
 
-            Assert.AreEqual("cos(x)", diff.ToString());
+            Assert.AreEqual("cos(x) * 1", diff.ToString());
         }
 
     }

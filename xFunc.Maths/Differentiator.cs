@@ -27,6 +27,7 @@ namespace xFunc.Maths
     {
 
         private ISimplifier simplifier;
+        private bool simplify = true;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
@@ -53,7 +54,10 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression)
         {
-            return Differentiate(expression, new Variable("x"));
+            if (simplify)
+                return simplifier.Simplify(_Differentiate(expression, new Variable("x"), null));
+
+            return _Differentiate(expression, new Variable("x"), null);
         }
 
         /// <summary>
@@ -64,6 +68,9 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression, Variable variable)
         {
+            if (simplify)
+                return simplifier.Simplify(_Differentiate(expression, variable, null));
+
             return _Differentiate(expression, variable, null);
         }
 
@@ -84,7 +91,10 @@ namespace xFunc.Maths
             if (variable == null)
                 throw new ArgumentNullException("variable");
 
-            return simplifier.Simplify(_Differentiate(expression, variable, parameters));
+            if (simplify)
+                return simplifier.Simplify(_Differentiate(expression, variable, parameters));
+
+            return _Differentiate(expression, variable, parameters);
         }
 
         private IExpression _Differentiate(IExpression expression, Variable variable)
@@ -896,6 +906,24 @@ namespace xFunc.Maths
             set
             {
                 simplifier = value;
+            }
+        }
+
+        /// <summary>
+        /// Enable/disable simplification.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if simplify; otherwise, <c>false</c>.
+        /// </value>
+        public bool Simplify
+        {
+            get
+            {
+                return simplify;
+            }
+            set
+            {
+                simplify = value;
             }
         }
 

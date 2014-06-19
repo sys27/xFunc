@@ -333,7 +333,8 @@ namespace xFunc.Views
                 where @var.Type != ParameterType.Constant
                 select new XElement("add",
                         new XAttribute("key", @var.Key),
-                        new XAttribute("value", @var.Value.ToString(CultureInfo.InvariantCulture))));
+                        new XAttribute("value", @var.Value.ToString(CultureInfo.InvariantCulture)),
+                        new XAttribute("readonly", @var.Type == ParameterType.ReadOnly ? true : false)));
             var funcs = new XElement("functions",
                 from func in processor.UserFunctions
                 select new XElement("add",
@@ -355,7 +356,7 @@ namespace xFunc.Views
             var vars = doc.Root.Element("variables");
             if (vars != null)
                 foreach (var item in vars.Elements("add"))
-                    processor.Parameters.Add(item.Attribute("key").Value, double.Parse(item.Attribute("value").Value));
+                    processor.Parameters.Add(new Parameter(item.Attribute("key").Value, double.Parse(item.Attribute("value").Value), bool.Parse(item.Attribute("readonly").Value) ? ParameterType.ReadOnly : ParameterType.Normal));
 
             var funcs = doc.Root.Element("functions");
             if (funcs != null)

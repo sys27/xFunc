@@ -387,6 +387,7 @@ namespace xFunc.Views
         {
             mathPresenter.Clear();
             processor.Parameters.Clear();
+            processor.UserFunctions.Clear();
             fileName = null;
         }
 

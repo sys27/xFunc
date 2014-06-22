@@ -121,7 +121,7 @@
     <value>Функции '{0}' присвоено выражение '{1}'.</value>
   </data>
   <data name="AssignVariable" xml:space="preserve">
-    <value>Переменной '{0}' присвоено '{1}' значение.</value>
+    <value>Переменной '{0}' присвоено значение '{1}'.</value>
   </data>
   <data name="ConstError" xml:space="preserve">
     <value>Вы не можете добавлять константы.</value>

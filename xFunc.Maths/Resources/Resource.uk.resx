@@ -121,7 +121,7 @@
     <value>Функції '{0}' присвоєно вираз "{1} '.</value>
   </data>
   <data name="AssignVariable" xml:space="preserve">
-    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
+    <value>Змінній '{0}' присвоєно значення '{1}'.</value>
   </data>
   <data name="ConstError" xml:space="preserve">
     <value>Ви не можете додавати константи.</value>

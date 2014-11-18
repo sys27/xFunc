@@ -78,7 +78,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new For(CloneArguments(), m_countOfParams);
+            return new For(CloneArguments(), countOfParams);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return m_arguments[0];
+                return arguments[0];
             }
         }
 
@@ -133,7 +133,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return m_arguments[1];
+                return arguments[1];
             }
         }
 
@@ -147,7 +147,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return m_arguments[2];
+                return arguments[2];
             }
         }
 
@@ -161,7 +161,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return m_arguments[3];
+                return arguments[3];
             }
         }
 

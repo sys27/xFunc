@@ -69,11 +69,11 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return m_arguments[index];
+                return arguments[index];
             }
             set
             {
-                m_arguments[index] = value;
+                arguments[index] = value;
             }
         }
 
@@ -94,8 +94,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var vector = (Vector)obj;
 
-            return this.m_countOfParams == vector.m_countOfParams &&
-                   this.m_arguments.SequenceEqual(vector.m_arguments);
+            return this.countOfParams == vector.countOfParams &&
+                   this.arguments.SequenceEqual(vector.arguments);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var sb = new StringBuilder();
 
             sb.Append('{');
-            foreach (var item in m_arguments)
+            foreach (var item in arguments)
                 sb.Append(item).Append(", ");
             sb.Remove(sb.Length - 2, 2).Append('}');
 
@@ -129,13 +129,13 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private IExpression[] CalculateVector(ExpressionParameters parameters)
         {
-            IExpression[] args = new IExpression[this.m_countOfParams];
+            IExpression[] args = new IExpression[this.countOfParams];
 
-            for (int i = 0; i < this.m_countOfParams; i++)
+            for (int i = 0; i < this.countOfParams; i++)
             {
-                if (!(m_arguments[i] is Number))
+                if (!(arguments[i] is Number))
                 {
-                    var result = m_arguments[i].Calculate(parameters);
+                    var result = arguments[i].Calculate(parameters);
                     if (result is double)
                         args[i] = new Number((double)result);
                     else
@@ -143,7 +143,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 }
                 else
                 {
-                    args[i] = m_arguments[i];
+                    args[i] = arguments[i];
                 }
             }
 
@@ -178,10 +178,10 @@ namespace xFunc.Maths.Expressions.Matrices
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
 #if NET40_OR_GREATER
-            return (from exp in m_arguments.AsParallel().AsOrdered()
+            return (from exp in arguments.AsParallel().AsOrdered()
                     select (double)exp.Calculate(parameters)).ToArray();
 #else
-            return (from exp in m_arguments
+            return (from exp in arguments
                     select (double)exp.Calculate(parameters)).ToArray();
 #endif
         }

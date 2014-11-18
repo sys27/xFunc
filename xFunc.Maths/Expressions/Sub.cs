@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (m_parent is BinaryExpression)
+            if (parent is BinaryExpression)
             {
                 return ToString("({0} - {1})");
             }
@@ -70,33 +70,33 @@ namespace xFunc.Maths.Expressions
         {
             if (ResultIsMatrix)
             {
-                if (m_left is Vector && m_right is Vector)
-                    return MatrixExtentions.Sub((Vector)m_left, (Vector)m_right, parameters);
-                if (m_left is Matrix && m_right is Matrix)
-                    return MatrixExtentions.Sub((Matrix)m_left, (Matrix)m_right, parameters);
-                if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
+                if (left is Vector && right is Vector)
+                    return MatrixExtentions.Sub((Vector)left, (Vector)right, parameters);
+                if (left is Matrix && right is Matrix)
+                    return MatrixExtentions.Sub((Matrix)left, (Matrix)right, parameters);
+                if ((left is Vector && right is Matrix) || (right is Vector && left is Matrix))
                     throw new NotSupportedException();
 
-                if (!(m_left is Vector || m_left is Matrix))
+                if (!(left is Vector || left is Matrix))
                 {
-                    var l = m_left.Calculate(parameters);
+                    var l = left.Calculate(parameters);
 
                     if (l is Vector)
-                        return MatrixExtentions.Sub((Vector)l, (Vector)m_right, parameters);
+                        return MatrixExtentions.Sub((Vector)l, (Vector)right, parameters);
                     if (l is Matrix)
-                        return MatrixExtentions.Sub((Matrix)l, (Matrix)m_right, parameters);
+                        return MatrixExtentions.Sub((Matrix)l, (Matrix)right, parameters);
 
                     throw new NotSupportedException();
                 }
 
-                if (!(m_right is Vector || m_right is Matrix))
+                if (!(right is Vector || right is Matrix))
                 {
-                    var r = m_right.Calculate(parameters);
+                    var r = right.Calculate(parameters);
 
                     if (r is Vector)
-                        return MatrixExtentions.Sub((Vector)m_left, (Vector)r, parameters);
+                        return MatrixExtentions.Sub((Vector)left, (Vector)r, parameters);
                     if (r is Matrix)
-                        return MatrixExtentions.Sub((Matrix)m_left, (Matrix)r, parameters);
+                        return MatrixExtentions.Sub((Matrix)left, (Matrix)r, parameters);
 
                     throw new NotSupportedException();
                 }
@@ -104,7 +104,7 @@ namespace xFunc.Maths.Expressions
                 throw new NotSupportedException();
             }
 
-            return (double)m_left.Calculate(parameters) - (double)m_right.Calculate(parameters);
+            return (double)left.Calculate(parameters) - (double)right.Calculate(parameters);
         }
         
         /// <summary>
@@ -113,7 +113,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Sub(m_left.Clone(), m_right.Clone());
+            return new Sub(left.Clone(), right.Clone());
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_left.ResultIsMatrix && m_right.ResultIsMatrix;
+                return left.ResultIsMatrix && right.ResultIsMatrix;
             }
         }
 

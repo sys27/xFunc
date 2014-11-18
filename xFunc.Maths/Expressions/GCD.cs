@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            var numbers = m_arguments.Select(item => (double)item.Calculate(parameters)).ToArray();
+            var numbers = arguments.Select(item => (double)item.Calculate(parameters)).ToArray();
 
             return MathExtentions.GCD(numbers);
         }
@@ -98,7 +98,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="GCD"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new GCD(CloneArguments(), m_arguments.Length);
+            return new GCD(CloneArguments(), arguments.Length);
         }
         
         /// <summary>

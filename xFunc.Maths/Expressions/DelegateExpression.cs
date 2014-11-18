@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IExpression m_parent;
+        protected IExpression parent;
         private Func<ExpressionParameters, object> func;
 
         internal DelegateExpression() { }
@@ -114,11 +114,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_parent;
+                return parent;
             }
             set
             {
-                m_parent = value;
+                parent = value;
             }
         }
 

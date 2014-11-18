@@ -66,7 +66,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return Math.Tanh((double)m_argument.Calculate(parameters));
+            return Math.Tanh((double)argument.Calculate(parameters));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Tanh(m_argument.Clone());
+            return new Tanh(argument.Clone());
         }
         
     }

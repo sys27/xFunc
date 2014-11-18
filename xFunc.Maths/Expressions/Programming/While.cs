@@ -54,8 +54,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            while (m_right.Calculate(parameters).AsBool())
-                m_left.Calculate(parameters);
+            while (right.Calculate(parameters).AsBool())
+                left.Calculate(parameters);
 
             return double.NaN;
         }
@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new While(m_left.Clone(), m_right.Clone());
+            return new While(left.Clone(), right.Clone());
         }
         
     }

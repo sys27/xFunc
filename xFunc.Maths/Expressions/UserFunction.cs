@@ -62,8 +62,8 @@ namespace xFunc.Maths.Expressions
             : base(args, countOfParams)
         {
             this.function = function;
-            this.m_arguments = args;
-            this.m_countOfParams = countOfParams;
+            this.arguments = args;
+            this.countOfParams = countOfParams;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             var exp = obj as UserFunction;
-            if (exp != null && this.function == exp.function && this.m_countOfParams == exp.m_countOfParams)
+            if (exp != null && this.function == exp.function && this.countOfParams == exp.countOfParams)
                 return true;
 
             return false;
@@ -91,7 +91,7 @@ namespace xFunc.Maths.Expressions
             int hash = 1721;
 
             hash = (hash * 5701) + function.GetHashCode();
-            hash = (hash * 5701) + m_countOfParams.GetHashCode();
+            hash = (hash * 5701) + countOfParams.GetHashCode();
 
             return hash;
         }
@@ -105,14 +105,14 @@ namespace xFunc.Maths.Expressions
             var builder = new StringBuilder();
             builder.Append(function);
             builder.Append('(');
-            if (m_arguments != null)
+            if (arguments != null)
             {
-                foreach (var arg in m_arguments)
+                foreach (var arg in arguments)
                 {
                     builder.Append(arg);
                     builder.Append(',');
                 }
-                if (m_arguments.Length > 0)
+                if (arguments.Length > 0)
                     builder.Remove(builder.Length - 1, 1);
             }
             builder.Append(')');
@@ -136,10 +136,10 @@ namespace xFunc.Maths.Expressions
             var func = parameters.Functions.GetKeyByKey(this);
 
             var newParameters = new ParameterCollection(parameters.Parameters.Collection);
-            for (int i = 0; i < m_arguments.Length; i++)
+            for (int i = 0; i < arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Name] = (double)this.m_arguments[i].Calculate(parameters);
+                newParameters[arg.Name] = (double)this.arguments[i].Calculate(parameters);
             }
 
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
@@ -152,7 +152,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new UserFunction(function, m_arguments, m_countOfParams);
+            return new UserFunction(function, arguments, countOfParams);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_countOfParams;
+                return countOfParams;
             }
         }
 
@@ -191,7 +191,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_countOfParams;
+                return countOfParams;
             }
         }
 

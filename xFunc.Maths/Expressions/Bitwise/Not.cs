@@ -67,9 +67,9 @@ namespace xFunc.Maths.Expressions.Bitwise
         public override object Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
-            return ~(int)Math.Round((double)m_argument.Calculate(parameters));
+            return ~(int)Math.Round((double)argument.Calculate(parameters));
 #else
-            return ~(int)Math.Round((double)m_argument.Calculate(parameters), MidpointRounding.AwayFromZero);
+            return ~(int)Math.Round((double)argument.Calculate(parameters), MidpointRounding.AwayFromZero);
 #endif
         }
 
@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Not(m_argument.Clone());
+            return new Not(argument.Clone());
         }
 
     }

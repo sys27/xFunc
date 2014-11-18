@@ -24,6 +24,14 @@ namespace xFunc.Test.Expressions.Maths
 
             Assert.AreEqual(-2.0, exp.Calculate());
         }
+
+        [TestMethod]
+        public void NegativeNumberCalculateTest()
+        {
+            var exp = new Root(new Number(-25), new Number(2));
+
+            Assert.AreEqual(double.NaN, exp.Calculate());
+        }
                 
     }
 

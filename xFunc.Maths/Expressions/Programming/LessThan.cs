@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override string ToString()
         {
-            if (m_parent is BinaryExpression)
+            if (parent is BinaryExpression)
                 return ToString("({0} < {1})");
 
             return ToString("{0} < {1}");
@@ -57,8 +57,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            var leftValue = (double)m_left.Calculate(parameters);
-            var rightValue = (double)m_right.Calculate(parameters);
+            var leftValue = (double)left.Calculate(parameters);
+            var rightValue = (double)right.Calculate(parameters);
 
             return (leftValue < rightValue).AsNumber();
         }
@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new LessThan(m_left.Clone(), m_right.Clone());
+            return new LessThan(left.Clone(), right.Clone());
         }
 
     }

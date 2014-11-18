@@ -17,6 +17,14 @@ namespace xFunc.Test.Expressions.Maths
             Assert.AreEqual(Math.Sqrt(4), exp.Calculate());
         }
 
+        [TestMethod]
+        public void NegativeNumberCalculateTest()
+        {
+            var exp = new Sqrt(new Number(-25));
+
+            Assert.AreEqual(double.NaN, exp.Calculate());
+        }
+
     }
 
 }

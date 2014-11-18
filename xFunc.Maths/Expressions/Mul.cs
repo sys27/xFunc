@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (m_parent is BinaryExpression)
+            if (parent is BinaryExpression)
             {
                 return ToString("({0} * {1})");
             }
@@ -68,30 +68,30 @@ namespace xFunc.Maths.Expressions
         {
             if (ResultIsMatrix)
             {
-                if (m_left is Vector && m_right is Vector)
+                if (left is Vector && right is Vector)
                     throw new NotSupportedException();
 
                 IExpression l = null;
-                if (m_left is Vector || m_left is Matrix)
+                if (left is Vector || left is Matrix)
                 {
-                    l = m_left;
+                    l = left;
                 }
                 else
                 {
-                    var temp = m_left.Calculate(parameters);
+                    var temp = left.Calculate(parameters);
                     if (temp is IExpression)
                         l = (IExpression)temp;
                     else
                         l = new Number((double)temp);
                 }
                 IExpression r = null;
-                if (m_right is Vector || m_right is Matrix)
+                if (right is Vector || right is Matrix)
                 {
-                    r = m_right;
+                    r = right;
                 }
                 else
                 {
-                    var temp = m_right.Calculate(parameters);
+                    var temp = right.Calculate(parameters);
                     if (temp is IExpression)
                         r = (IExpression)temp;
                     else
@@ -121,7 +121,7 @@ namespace xFunc.Maths.Expressions
                     return MatrixExtentions.Mul((Matrix)r, l, parameters);
             }
 
-            return (double)m_left.Calculate(parameters) * (double)m_right.Calculate(parameters);
+            return (double)left.Calculate(parameters) * (double)right.Calculate(parameters);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Mul(m_left.Clone(), m_right.Clone());
+            return new Mul(left.Clone(), right.Clone());
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_left.ResultIsMatrix || m_right.ResultIsMatrix;
+                return left.ResultIsMatrix || right.ResultIsMatrix;
             }
         }
 

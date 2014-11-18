@@ -35,10 +35,8 @@ namespace xFunc.Maths
         /// <returns>The <paramref name="number"/> raised to the <paramref name="power"/>.</returns>
         public static double Pow(double number, double power)
         {
-            if (number < 0 && power % 2 != 0)
-            {
+            if (number < 0 && (BitConverter.DoubleToInt64Bits(power) & 1) == 1)
                 return -Math.Pow(-number, power);
-            }
 
             return Math.Pow(number, power);
         }

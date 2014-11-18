@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (m_parent is BinaryExpression)
+            if (parent is BinaryExpression)
             {
                 return ToString("({0} and {1})");
             }
@@ -73,9 +73,9 @@ namespace xFunc.Maths.Expressions.Bitwise
         public override object Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
-            return (int)Math.Round((double)m_left.Calculate(parameters)) & (int)Math.Round((double)m_right.Calculate(parameters));
+            return (int)Math.Round((double)left.Calculate(parameters)) & (int)Math.Round((double)right.Calculate(parameters));
 #else
-            return (int)Math.Round((double)m_left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round((double)m_right.Calculate(parameters), MidpointRounding.AwayFromZero);
+            return (int)Math.Round((double)left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round((double)right.Calculate(parameters), MidpointRounding.AwayFromZero);
 #endif
         }
 
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new And(m_left.Clone(), m_right.Clone());
+            return new And(left.Clone(), right.Clone());
         }
 
     }

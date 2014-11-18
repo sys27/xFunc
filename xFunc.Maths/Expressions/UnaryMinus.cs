@@ -48,7 +48,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (m_argument is BinaryExpression)
+            if (argument is BinaryExpression)
                 return ToString("-({0})");
 
             return ToString("-{0}");
@@ -64,7 +64,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return -(double)m_argument.Calculate(parameters);
+            return -(double)argument.Calculate(parameters);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new UnaryMinus(m_argument.Clone());
+            return new UnaryMinus(argument.Clone());
         }
         
     }

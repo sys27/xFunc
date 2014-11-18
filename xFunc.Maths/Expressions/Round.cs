@@ -107,7 +107,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Round(CloneArguments(), m_countOfParams);
+            return new Round(CloneArguments(), countOfParams);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_arguments[0];
+                return arguments[0];
             }
         }
 
@@ -162,7 +162,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_countOfParams == 2 ? m_arguments[1] : null;
+                return countOfParams == 2 ? arguments[1] : null;
             }
         }
 

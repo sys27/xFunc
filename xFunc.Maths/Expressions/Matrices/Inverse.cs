@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return MatrixExtentions.Inverse((Matrix)m_argument.Calculate(parameters), parameters);
+            return MatrixExtentions.Inverse((Matrix)argument.Calculate(parameters), parameters);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Inverse(this.m_argument.Clone());
+            return new Inverse(this.argument.Clone());
         }
         
         /// <summary>
@@ -92,15 +92,15 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return m_argument;
+                return argument;
             }
             set
             {
                 if (!value.ResultIsMatrix)
                     throw new NotSupportedException();
 
-                m_argument = value;
-                m_argument.Parent = this;
+                argument = value;
+                argument.Parent = this;
             }
         }
 

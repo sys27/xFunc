@@ -23,7 +23,7 @@ namespace xFunc.Presenters
     {
 
         private const string CheckUri = "http://xfunc.codeplex.com/releases/";
-        private const int CurrentRelease = 123657;
+        private const int CurrentRelease = 139727;
         private string updateUri;
         private bool hasUpdates;
 

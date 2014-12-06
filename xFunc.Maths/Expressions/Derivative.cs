@@ -28,10 +28,11 @@ namespace xFunc.Maths.Expressions
             : base(null, -1) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Derivative"/> class.
+        /// Initializes a new instance of the <see cref="Derivative" /> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
+        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         public Derivative(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
@@ -48,10 +49,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
-        public Derivative(IExpression expression, Variable variable)
-            : base(new[] { expression, variable }, 2)
-        {
-        }
+        public Derivative(IExpression expression, Variable variable) : base(new[] { expression, variable }, 2) { }
 
         /// <summary>
         /// Determines whether the specified <see cref="Object" /> is equal to this instance.

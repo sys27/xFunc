@@ -50,6 +50,9 @@ namespace xFunc.Maths.Expressions
         {
             if (argument is BinaryExpression)
                 return ToString("-({0})");
+            var sub = parent as Sub;
+            if (sub != null && sub.Right == this)
+                return ToString("(-{0})");
 
             return ToString("-{0}");
         }
@@ -75,7 +78,7 @@ namespace xFunc.Maths.Expressions
         {
             return new UnaryMinus(argument.Clone());
         }
-        
+
     }
 
 }

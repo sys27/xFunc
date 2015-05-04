@@ -86,6 +86,13 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
+            if (number < 0)
+            {
+                var sub = parent as Sub;
+                if (sub != null && sub.Right == this)
+                    return string.Format("({0})", number.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            }
+
             return number.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 

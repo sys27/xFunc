@@ -145,6 +145,36 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void UnaryMinusInDivision()
+        {
+            var tokens = lexer.Tokenize("1 / -2");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.Division),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void UnaryMinusInAssign()
+        {
+            var tokens = lexer.Tokenize("x := -2");
+
+            var expected = new List<IToken>()
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2)
+            };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
         public void Mul()
         {
             var tokens = lexer.Tokenize("2 * 2");

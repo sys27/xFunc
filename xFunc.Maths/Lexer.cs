@@ -32,8 +32,10 @@ namespace xFunc.Maths
 
 #if NET35_OR_GREATER || PORTABLE
         private readonly HashSet<string> notVar;
+        private readonly HashSet<char> unaryMinusOp;
 #elif NET20_OR_GREATER
         private readonly List<string> notVar;
+        private readonly List<char> unaryMinusOp;
 #endif
 
         /// <summary>
@@ -43,8 +45,10 @@ namespace xFunc.Maths
         {
 #if NET35_OR_GREATER || PORTABLE
             notVar = new HashSet<string> { "and", "or", "xor" };
+            unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=' };
 #elif NET20_OR_GREATER
             notVar = new List<string> { "and", "or", "xor" };
+            unaryMinusOp = new List<char> { '(', '{', '*', '/', '^', '=' };
 #endif
         }
 
@@ -118,7 +122,7 @@ namespace xFunc.Maths
                     if (CheckNextSymbol(function, i, '+'))
                     {
                         var lastToken = tokens.LastOrDefault();
-                        if (lastToken == null || (lastToken as VariableToken) == null)
+                        if (!(lastToken is VariableToken))
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.Increment));
@@ -129,7 +133,7 @@ namespace xFunc.Maths
                     if (CheckNextSymbol(function, i, '='))
                     {
                         var lastToken = tokens.LastOrDefault();
-                        if (lastToken == null || (lastToken as VariableToken) == null)
+                        if (!(lastToken is VariableToken))
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.AddAssign));
@@ -160,7 +164,7 @@ namespace xFunc.Maths
                     if (CheckNextSymbol(function, i, '-'))
                     {
                         var lastToken = tokens.LastOrDefault();
-                        if (lastToken == null || (lastToken as VariableToken) == null)
+                        if (!(lastToken is VariableToken))
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.Decrement));
@@ -171,7 +175,7 @@ namespace xFunc.Maths
                     if (CheckNextSymbol(function, i, '='))
                     {
                         var lastToken = tokens.LastOrDefault();
-                        if (lastToken == null || (lastToken as VariableToken) == null)
+                        if (!(lastToken is VariableToken))
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.SubAssign));
@@ -183,7 +187,7 @@ namespace xFunc.Maths
                     if (i - 1 >= 0)
                     {
                         char pre = function[i - 1];
-                        if (pre == '(' || pre == '{')
+                        if (unaryMinusOp.Contains(pre))
                         {
                             tokens.Add(new OperationToken(Operations.UnaryMinus));
 
@@ -206,7 +210,7 @@ namespace xFunc.Maths
                     if (CheckNextSymbol(function, i, '='))
                     {
                         var lastToken = tokens.LastOrDefault();
-                        if (lastToken == null || (lastToken as VariableToken) == null)
+                        if (!(lastToken is VariableToken))
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.MulAssign));
@@ -222,7 +226,7 @@ namespace xFunc.Maths
                     if (CheckNextSymbol(function, i, '='))
                     {
                         var lastToken = tokens.LastOrDefault();
-                        if (lastToken == null || (lastToken as VariableToken) == null)
+                        if (!(lastToken is VariableToken))
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
 
                         tokens.Add(new OperationToken(Operations.DivAssign));

@@ -66,7 +66,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="xFunc.Maths.Expressions.Bitwise.And"/> class.
+        /// Clones this instance of the <see cref="xFunc.Maths.Expressions.Abs"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()

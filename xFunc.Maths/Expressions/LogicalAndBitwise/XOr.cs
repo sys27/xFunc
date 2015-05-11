@@ -14,24 +14,25 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions.Bitwise
+namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
 
     /// <summary>
-    /// Represents a bitwise NOT operation.
+    /// Represents a bitwise XOR operation.
     /// </summary>
-    public class Not : UnaryExpression
+    public class XOr : BinaryExpression
     {
 
-        internal Not() { }
+        internal XOr() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Not"/> class.
+        /// Initializes a new instance of the <see cref="XOr"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="firstMathExpression">The left operand.</param>
+        /// <param name="secondMathExpression">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public Not(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        public XOr(IExpression firstMathExpression, IExpression secondMathExpression)
+            : base(firstMathExpression, secondMathExpression)
         {
 
         }
@@ -44,7 +45,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(3023);
+            return base.GetHashCode(3371, 2833);
         }
 
         /// <summary>
@@ -53,11 +54,16 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return ToString("not({0})");
+            if (parent is BinaryExpression)
+            {
+                return ToString("({0} xor {1})");
+            }
+
+            return ToString("{0} xor {1}");
         }
 
         /// <summary>
-        /// Calculates this bitwise NOT expression.
+        /// Calculates this bitwise XOR expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -67,21 +73,21 @@ namespace xFunc.Maths.Expressions.Bitwise
         public override object Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
-            return ~(int)Math.Round((double)argument.Calculate(parameters));
+            return (int)Math.Round((double)left.Calculate(parameters)) ^ (int)Math.Round((double)right.Calculate(parameters));
 #else
-            return ~(int)Math.Round((double)argument.Calculate(parameters), MidpointRounding.AwayFromZero);
+            return (int)Math.Round((double)left.Calculate(parameters), MidpointRounding.AwayFromZero) ^ (int)Math.Round((double)right.Calculate(parameters), MidpointRounding.AwayFromZero);
 #endif
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="Not"/>.
+        /// Clones this instance of the <see cref="XOr"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Not(argument.Clone());
+            return new XOr(left.Clone(), right.Clone());
         }
-
+        
     }
 
 }

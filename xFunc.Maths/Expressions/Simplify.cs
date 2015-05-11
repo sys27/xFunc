@@ -174,7 +174,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int CountOfParams
+        public int CountOfParameters
         {
             get
             {

@@ -38,7 +38,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (parent is BinaryExpression)
+            if (m_parent is BinaryExpression)
                 return ToString("({0} / {1})");
 
             return ToString("{0} / {1}");
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return (double)left.Calculate(parameters) / (double)right.Calculate(parameters);
+            return (double)m_left.Calculate(parameters) / (double)m_right.Calculate(parameters);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Div(left.Clone(), right.Clone());
+            return new Div(m_left.Clone(), m_right.Clone());
         }
 
     }

@@ -131,7 +131,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return arguments[0];
+                return m_arguments[0];
             }
         }
 
@@ -145,7 +145,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return arguments[1];
+                return m_arguments[1];
             }
         }
 
@@ -159,7 +159,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return countOfParams == 3 ? arguments[2] : null;
+                return countOfParams == 3 ? m_arguments[2] : null;
             }
         }
 

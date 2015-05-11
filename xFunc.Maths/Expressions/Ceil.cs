@@ -64,7 +64,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return Math.Ceiling((double)argument.Calculate(parameters));
+            return Math.Ceiling((double)m_argument.Calculate(parameters));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Ceil(argument.Clone());
+            return new Ceil(m_argument.Clone());
         }
 
     }

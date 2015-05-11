@@ -51,12 +51,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentException">The size of matrices is invalid.</exception>
         public static Vector Add(this Vector left, Vector right, ExpressionParameters parameters)
         {
-            if (left.CountOfParams != right.CountOfParams)
+            if (left.CountOfParameters != right.CountOfParameters)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var exps = new IExpression[left.CountOfParams];
+            var exps = new IExpression[left.CountOfParameters];
 #if NET40_OR_GREATER
-            Parallel.For(0, left.CountOfParams,
+            Parallel.For(0, left.CountOfParameters,
                 i => exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) + (double)right.Arguments[i].Calculate(parameters))
             );
 #else
@@ -88,12 +88,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentException">The size of matrices is invalid.</exception>
         public static Vector Sub(this Vector left, Vector right, ExpressionParameters parameters)
         {
-            if (left.CountOfParams != right.CountOfParams)
+            if (left.CountOfParameters != right.CountOfParameters)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var exps = new IExpression[left.CountOfParams];
+            var exps = new IExpression[left.CountOfParameters];
 #if NET40_OR_GREATER
-            Parallel.For(0, left.CountOfParams,
+            Parallel.For(0, left.CountOfParameters,
                 i => exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) - (double)right.Arguments[i].Calculate(parameters))
             );
 #else
@@ -159,12 +159,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Add(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
-            if (left.CountOfParams != right.CountOfParams || left.SizeOfVectors != right.SizeOfVectors)
+            if (left.CountOfParameters != right.CountOfParameters || left.SizeOfVectors != right.SizeOfVectors)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var vectors = new Vector[left.CountOfParams];
+            var vectors = new Vector[left.CountOfParameters];
 #if NET40_OR_GREATER
-            Parallel.For(0, left.CountOfParams, i =>
+            Parallel.For(0, left.CountOfParameters, i =>
             {
                 var exps = new IExpression[left.SizeOfVectors];
 
@@ -209,12 +209,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Sub(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
-            if (left.CountOfParams != right.CountOfParams || left.SizeOfVectors != right.SizeOfVectors)
+            if (left.CountOfParameters != right.CountOfParameters || left.SizeOfVectors != right.SizeOfVectors)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var vectors = new Vector[left.CountOfParams];
+            var vectors = new Vector[left.CountOfParameters];
 #if NET40_OR_GREATER
-            Parallel.For(0, left.CountOfParams, i =>
+            Parallel.For(0, left.CountOfParameters, i =>
             {
                 var exps = new IExpression[left.SizeOfVectors];
 
@@ -303,14 +303,14 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Mul(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
-            if (left.SizeOfVectors != right.CountOfParams)
+            if (left.SizeOfVectors != right.CountOfParameters)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var result = new Matrix(left.CountOfParams, right.SizeOfVectors);
+            var result = new Matrix(left.CountOfParameters, right.SizeOfVectors);
 #if NET40_OR_GREATER
             Parallel.For(0, right.SizeOfVectors, i =>
             {
-                for (int j = 0; j < left.CountOfParams; j++)
+                for (int j = 0; j < left.CountOfParameters; j++)
                 {
                     double el = 0;
                     for (int k = 0; k < left.SizeOfVectors; k++)
@@ -401,7 +401,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The transposed matrix.</returns>
         public static Matrix Transpose(this Vector vector)
         {
-            var vectors = new Vector[vector.CountOfParams];
+            var vectors = new Vector[vector.CountOfParameters];
 #if NET40_OR_GREATER
             Parallel.For(0, vectors.Length, i => vectors[i] = new Vector(new[] { vector[i] }));
 #else
@@ -419,10 +419,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The transposed matrix.</returns>
         public static IExpression Transpose(this Matrix matrix)
         {
-            var result = new Matrix(matrix.SizeOfVectors, matrix.CountOfParams);
+            var result = new Matrix(matrix.SizeOfVectors, matrix.CountOfParameters);
 
 #if NET40_OR_GREATER
-            Parallel.For(0, matrix.CountOfParams, i =>
+            Parallel.For(0, matrix.CountOfParameters, i =>
             {
                 for (int j = 0; j < matrix.SizeOfVectors; j++)
                     result[j][i] = matrix[i][j];
@@ -593,7 +593,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (!matrix.IsSquare)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var size = matrix.CountOfParams;
+            var size = matrix.CountOfParameters;
             var result = Inverse_(matrix.ToCalculatedArray(parameters));
             var m = new Matrix(size, size);
             for (int i = 0; i < size; i++)

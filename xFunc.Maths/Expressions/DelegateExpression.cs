@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IExpression parent;
+        protected IExpression m_parent;
         private Func<ExpressionParameters, object> func;
 
         internal DelegateExpression() { }
@@ -114,11 +114,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parent;
+                return m_parent;
             }
             set
             {
-                parent = value;
+                m_parent = value;
             }
         }
 
@@ -156,7 +156,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int CountOfParams
+        public int CountOfParameters
         {
             get
             {

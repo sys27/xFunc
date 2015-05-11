@@ -14,24 +14,24 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions.Bitwise
+namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
 
     /// <summary>
-    /// Represents a bitwise AND operation.
+    /// Represents a bitwise OR operation.
     /// </summary>
-    public class And : BinaryExpression
+    public class Or : BinaryExpression
     {
 
-        internal And() { }
+        internal Or() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="And"/> class.
+        /// Initializes a new instance of the <see cref="Or"/> class.
         /// </summary>
         /// <param name="firstMathExpression">The left operand.</param>
         /// <param name="secondMathExpression">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public And(IExpression firstMathExpression, IExpression secondMathExpression)
+        public Or(IExpression firstMathExpression, IExpression secondMathExpression)
             : base(firstMathExpression, secondMathExpression)
         {
 
@@ -45,7 +45,7 @@ namespace xFunc.Maths.Expressions.Bitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(4691, 9043);
+            return base.GetHashCode(7727, 5657);
         }
 
         /// <summary>
@@ -56,14 +56,14 @@ namespace xFunc.Maths.Expressions.Bitwise
         {
             if (parent is BinaryExpression)
             {
-                return ToString("({0} and {1})");
+                return ToString("({0} or {1})");
             }
 
-            return ToString("{0} and {1}");
+            return ToString("{0} or {1}");
         }
 
         /// <summary>
-        /// Calculates this bitwise AND expression.
+        /// Calculates this bitwise OR expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -73,19 +73,19 @@ namespace xFunc.Maths.Expressions.Bitwise
         public override object Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
-            return (int)Math.Round((double)left.Calculate(parameters)) & (int)Math.Round((double)right.Calculate(parameters));
+            return (int)Math.Round((double)left.Calculate(parameters)) | (int)Math.Round((double)right.Calculate(parameters));
 #else
-            return (int)Math.Round((double)left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round((double)right.Calculate(parameters), MidpointRounding.AwayFromZero);
+            return (int)Math.Round((double)left.Calculate(parameters), MidpointRounding.AwayFromZero) | (int)Math.Round((double)right.Calculate(parameters), MidpointRounding.AwayFromZero);
 #endif
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="And"/>.
+        /// Clones this instance of the <see cref="Or"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new And(left.Clone(), right.Clone());
+            return new Or(left.Clone(), right.Clone());
         }
 
     }

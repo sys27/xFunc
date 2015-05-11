@@ -119,7 +119,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return arguments[0];
+                return m_arguments[0];
             }
         }
 
@@ -133,7 +133,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return arguments[1];
+                return m_arguments[1];
             }
         }
 
@@ -147,7 +147,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return arguments[2];
+                return m_arguments[2];
             }
         }
 
@@ -161,7 +161,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return arguments[3];
+                return m_arguments[3];
             }
         }
 

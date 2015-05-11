@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            var numbers = arguments.Select(item => (double)item.Calculate(parameters)).ToArray();
+            var numbers = m_arguments.Select(item => (double)item.Calculate(parameters)).ToArray();
 
             return MathExtentions.LCM(numbers);
         }
@@ -98,7 +98,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="LCM"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new LCM(CloneArguments(), arguments.Length);
+            return new LCM(CloneArguments(), m_arguments.Length);
         }
         
         /// <summary>

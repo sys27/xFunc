@@ -69,11 +69,11 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return arguments[index];
+                return m_arguments[index];
             }
             set
             {
-                arguments[index] = value;
+                m_arguments[index] = value;
             }
         }
 
@@ -95,7 +95,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var vector = (Vector)obj;
 
             return this.countOfParams == vector.countOfParams &&
-                   this.arguments.SequenceEqual(vector.arguments);
+                   this.m_arguments.SequenceEqual(vector.m_arguments);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var sb = new StringBuilder();
 
             sb.Append('{');
-            foreach (var item in arguments)
+            foreach (var item in m_arguments)
                 sb.Append(item).Append(", ");
             sb.Remove(sb.Length - 2, 2).Append('}');
 
@@ -133,9 +133,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (int i = 0; i < this.countOfParams; i++)
             {
-                if (!(arguments[i] is Number))
+                if (!(m_arguments[i] is Number))
                 {
-                    var result = arguments[i].Calculate(parameters);
+                    var result = m_arguments[i].Calculate(parameters);
                     if (result is double)
                         args[i] = new Number((double)result);
                     else
@@ -143,7 +143,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 }
                 else
                 {
-                    args[i] = arguments[i];
+                    args[i] = m_arguments[i];
                 }
             }
 
@@ -178,7 +178,7 @@ namespace xFunc.Maths.Expressions.Matrices
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
 #if NET40_OR_GREATER
-            return (from exp in arguments.AsParallel().AsOrdered()
+            return (from exp in m_arguments.AsParallel().AsOrdered()
                     select (double)exp.Calculate(parameters)).ToArray();
 #else
             return (from exp in arguments

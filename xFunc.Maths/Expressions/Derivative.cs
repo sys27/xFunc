@@ -124,15 +124,15 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return arguments[0];
+                return m_arguments[0];
             }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                arguments[0] = value;
-                arguments[0].Parent = this;
+                m_arguments[0] = value;
+                m_arguments[0].Parent = this;
             }
         }
 
@@ -146,7 +146,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return countOfParams == 2 ? (Variable)arguments[1] : null;
+                return countOfParams == 2 ? (Variable)m_arguments[1] : null;
             }
         }
 

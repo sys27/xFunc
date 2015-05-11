@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Bitwise;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Test.Expressions.Maths.Bitwise
 {

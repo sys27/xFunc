@@ -106,13 +106,13 @@ namespace xFunc.Maths
                 case Operations.Decrement:
                     return new Dec();
                 case Operations.BitwiseNot:
-                    return new Expressions.Bitwise.Not();
+                    return new Expressions.LogicalAndBitwise.Not();
                 case Operations.BitwiseAnd:
-                    return new Expressions.Bitwise.And();
+                    return new Expressions.LogicalAndBitwise.And();
                 case Operations.BitwiseOr:
-                    return new Expressions.Bitwise.Or();
+                    return new Expressions.LogicalAndBitwise.Or();
                 case Operations.BitwiseXOr:
-                    return new Expressions.Bitwise.XOr();
+                    return new Expressions.LogicalAndBitwise.XOr();
                 default:
                     return null;
             }

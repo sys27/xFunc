@@ -26,15 +26,15 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The parent expression of this expression.
         /// </summary>
-        protected IExpression parent;
+        protected IExpression m_parent;
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        protected IExpression left;
+        protected IExpression m_left;
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        protected IExpression right;
+        protected IExpression m_right;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions
 
             var exp = (BinaryExpression)obj;
 
-            return left.Equals(exp.Left) && right.Equals(exp.Right);
+            return m_left.Equals(exp.Left) && m_right.Equals(exp.Right);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace xFunc.Maths.Expressions
         {
             int hash = first;
 
-            hash = hash * second + left.GetHashCode();
+            hash = hash * second + m_left.GetHashCode();
             hash = hash * second + second.GetHashCode();
 
             return hash;
@@ -108,7 +108,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A string that represents the current object.</returns>
         protected string ToString(string format)
         {
-            return string.Format(format, left, right);
+            return string.Format(format, m_left, m_right);
         }
 
         /// <summary>
@@ -145,15 +145,15 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return left;
+                return m_left;
             }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                left = value;
-                left.Parent = this;
+                m_left = value;
+                m_left.Parent = this;
             }
         }
 
@@ -164,15 +164,15 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return right;
+                return m_right;
             }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                right = value;
-                right.Parent = this;
+                m_right = value;
+                m_right.Parent = this;
             }
         }
 
@@ -183,11 +183,11 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return parent;
+                return m_parent;
             }
             set
             {
-                parent = value;
+                m_parent = value;
             }
         }
 
@@ -225,7 +225,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int CountOfParams
+        public int CountOfParameters
         {
             get
             {

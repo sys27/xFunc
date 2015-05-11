@@ -74,11 +74,11 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return (Vector)arguments[index];
+                return (Vector)m_arguments[index];
             }
             set
             {
-                arguments[index] = value;
+                m_arguments[index] = value;
             }
         }
 
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var matrix = (Matrix)obj;
 
-            return this.countOfParams == matrix.countOfParams && this.arguments.SequenceEqual(matrix.arguments);
+            return this.countOfParams == matrix.countOfParams && this.m_arguments.SequenceEqual(matrix.m_arguments);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var sb = new StringBuilder();
 
             sb.Append('{');
-            foreach (var item in arguments)
+            foreach (var item in m_arguments)
                 sb.Append(item).Append(", ");
             sb.Remove(sb.Length - 2, 2).Append('}');
 
@@ -154,9 +154,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private void CheckMatrix(IExpression[] args)
         {
-            var size = args[0].CountOfParams;
+            var size = args[0].CountOfParameters;
 
-            if (args.Any(exp => !exp.ResultIsMatrix || exp.CountOfParams != size))
+            if (args.Any(exp => !exp.ResultIsMatrix || exp.CountOfParameters != size))
                 throw new MatrixIsInvalidException();
         }
 
@@ -164,11 +164,11 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             Vector[] args = new Vector[this.countOfParams];
 
-            for (int i = 0; i < this.CountOfParams; i++)
-                if (!(arguments[i] is Vector) && arguments[i].ResultIsMatrix)
-                    args[i] = (Vector)arguments[i].Calculate(parameters);
+            for (int i = 0; i < this.CountOfParameters; i++)
+                if (!(m_arguments[i] is Vector) && m_arguments[i].ResultIsMatrix)
+                    args[i] = (Vector)m_arguments[i].Calculate(parameters);
                 else
-                    args[i] = (Vector)arguments[i];
+                    args[i] = (Vector)m_arguments[i];
 
             return args;
         }
@@ -201,7 +201,7 @@ namespace xFunc.Maths.Expressions.Matrices
         internal double[][] ToCalculatedArray(ExpressionParameters parameters)
         {
 #if NET40_OR_GREATER
-            return (from vector in arguments.AsParallel().AsOrdered()
+            return (from vector in m_arguments.AsParallel().AsOrdered()
                     select ((Vector)vector).ToCalculatedArray(parameters)).ToArray();
 #else
             return (from vector in arguments
@@ -222,9 +222,9 @@ namespace xFunc.Maths.Expressions.Matrices
             if (secondIndex < 0 || secondIndex >= countOfParams)
                 throw new ArgumentException();
 
-            var temp = arguments[firstIndex];
-            arguments[firstIndex] = arguments[secondIndex];
-            arguments[secondIndex] = temp;
+            var temp = m_arguments[firstIndex];
+            m_arguments[firstIndex] = m_arguments[secondIndex];
+            m_arguments[secondIndex] = temp;
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (secondIndex < 0 || secondIndex >= countOfParams)
                 throw new ArgumentOutOfRangeException();
 
-            foreach (Vector item in arguments)
+            foreach (Vector item in m_arguments)
             {
                 var temp = item[firstIndex];
                 item[firstIndex] = item[secondIndex];
@@ -304,7 +304,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return arguments[0].CountOfParams;
+                return m_arguments[0].CountOfParameters;
             }
         }
 

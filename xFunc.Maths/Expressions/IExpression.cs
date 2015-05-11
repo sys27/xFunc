@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        int CountOfParams { get; }
+        int CountOfParameters { get; }
         /// <summary>
         /// Gets a value indicating whether result is a matrix.
         /// </summary>

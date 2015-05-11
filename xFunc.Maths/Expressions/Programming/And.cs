@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override string ToString()
         {
-            if(parent is BinaryExpression)
+            if(m_parent is BinaryExpression)
                 return ToString("({0} && {1})");
 
             return ToString("{0} && {1}");
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return (left.Calculate(parameters).AsBool() && right.Calculate(parameters).AsBool()).AsNumber();
+            return (m_left.Calculate(parameters).AsBool() && m_right.Calculate(parameters).AsBool()).AsNumber();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new And(left.Clone(), right.Clone());
+            return new And(m_left.Clone(), m_right.Clone());
         }
         
     }

@@ -140,11 +140,11 @@ namespace xFunc.Maths
                     {
                         var func = expression as DifferentParametersExpression;
 
-                        IExpression[] arg = new IExpression[func.CountOfParams];
-                        for (int i = func.CountOfParams - 1; i >= 0; i--)
+                        IExpression[] arg = new IExpression[func.CountOfParameters];
+                        for (int i = func.CountOfParameters - 1; i >= 0; i--)
                             arg[i] = stack.Pop();
 
-                        if (func is Derivative && func.CountOfParams == 2 && !(arg[1] is Variable))
+                        if (func is Derivative && func.CountOfParameters == 2 && !(arg[1] is Variable))
                             throw new ParserException(Resource.InvalidExpression);
 
                         func.Arguments = arg;
@@ -223,7 +223,7 @@ namespace xFunc.Maths
 
                     var diff = exp as DifferentParametersExpression;
                     if (diff != null)
-                        diff.CountOfParams = t.CountOfParams;
+                        diff.CountOfParameters = t.CountOfParams;
                 }
 
                 preOutput.Add(exp);

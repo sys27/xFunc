@@ -91,7 +91,7 @@ namespace xFunc.Maths
             if (exp is Derivative)
             {
                 var deriv = exp as Derivative;
-                if (deriv.CountOfParams == 1)
+                if (deriv.CountOfParameters == 1)
                     return new ExpressionResult(Differentiate(deriv.Expression, new Variable("x"), parameters));
 
                 return new ExpressionResult(Differentiate(deriv.Expression, deriv.Variable, parameters));

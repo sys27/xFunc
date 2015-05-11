@@ -148,7 +148,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return arguments[0];
+                return m_arguments[0];
             }
         }
 
@@ -162,7 +162,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return countOfParams == 2 ? arguments[1] : null;
+                return countOfParams == 2 ? m_arguments[1] : null;
             }
         }
 

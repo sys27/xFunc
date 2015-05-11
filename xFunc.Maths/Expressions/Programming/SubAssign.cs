@@ -54,8 +54,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            var var = (Variable)left;
-            var newValue = parameters.Parameters[var.Name] - (double)right.Calculate(parameters);
+            var var = (Variable)m_left;
+            var newValue = parameters.Parameters[var.Name] - (double)m_right.Calculate(parameters);
             parameters.Parameters[var.Name] = newValue;
 
             return newValue;
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new SubAssign(left.Clone(), right.Clone());
+            return new SubAssign(m_left.Clone(), m_right.Clone());
         }
 
         /// <summary>
@@ -79,15 +79,15 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return left;
+                return m_left;
             }
             set
             {
                 if (!(value is Variable))
                     throw new NotSupportedException();
 
-                left = value;
-                left.Parent = this;
+                m_left = value;
+                m_left.Parent = this;
             }
         }
 

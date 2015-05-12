@@ -192,7 +192,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Expression;
+                return ExpressionResultType.None;
             }
         }
 

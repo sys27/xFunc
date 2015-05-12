@@ -156,7 +156,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var size = args[0].ParametersCount;
 
-            if (args.Any(exp => !exp.ResultIsMatrix || exp.ParametersCount != size))
+            if (args.Any(exp => exp.ResultType != ExpressionResultType.Matrix || exp.ParametersCount != size))
                 throw new MatrixIsInvalidException();
         }
 
@@ -165,7 +165,7 @@ namespace xFunc.Maths.Expressions.Matrices
             Vector[] args = new Vector[this.countOfParams];
 
             for (int i = 0; i < this.ParametersCount; i++)
-                if (!(m_arguments[i] is Vector) && m_arguments[i].ResultIsMatrix)
+                if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ExpressionResultType.Matrix)
                     args[i] = (Vector)m_arguments[i].Calculate(parameters);
                 else
                     args[i] = (Vector)m_arguments[i];
@@ -351,16 +351,16 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Gets a value indicating whether result is a matrix.
+        /// Gets the type of the result.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// The type of the result.
         /// </value>
-        public override bool ResultIsMatrix
+        public override ExpressionResultType ResultType
         {
             get
             {
-                return true;
+                return ExpressionResultType.Matrix;
             }
         }
 

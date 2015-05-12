@@ -68,13 +68,14 @@ namespace xFunc.Maths.Expressions
         /// The count of parameters.
         /// </value>
         int ParametersCount { get; }
+        
         /// <summary>
-        /// Gets a value indicating whether result is a matrix.
+        /// Gets the type of the result.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// The type of the result.
         /// </value>
-        bool ResultIsMatrix { get; }
+        ExpressionResultType ResultType { get; }
 
     }
 

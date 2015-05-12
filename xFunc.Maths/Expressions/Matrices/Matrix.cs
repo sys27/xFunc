@@ -154,9 +154,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private void CheckMatrix(IExpression[] args)
         {
-            var size = args[0].CountOfParameters;
+            var size = args[0].ParametersCount;
 
-            if (args.Any(exp => !exp.ResultIsMatrix || exp.CountOfParameters != size))
+            if (args.Any(exp => !exp.ResultIsMatrix || exp.ParametersCount != size))
                 throw new MatrixIsInvalidException();
         }
 
@@ -164,7 +164,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             Vector[] args = new Vector[this.countOfParams];
 
-            for (int i = 0; i < this.CountOfParameters; i++)
+            for (int i = 0; i < this.ParametersCount; i++)
                 if (!(m_arguments[i] is Vector) && m_arguments[i].ResultIsMatrix)
                     args[i] = (Vector)m_arguments[i].Calculate(parameters);
                 else
@@ -304,7 +304,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return m_arguments[0].CountOfParameters;
+                return m_arguments[0].ParametersCount;
             }
         }
 
@@ -314,7 +314,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinCountOfParams
+        public override int MinParameters
         {
             get
             {
@@ -328,7 +328,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxCountOfParams
+        public override int MaxParameters
         {
             get
             {

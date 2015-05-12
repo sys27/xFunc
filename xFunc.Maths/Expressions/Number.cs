@@ -161,7 +161,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinCountOfParams
+        public int MinParameters
         {
             get
             {
@@ -175,7 +175,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxCountOfParams
+        public int MaxParameters
         {
             get
             {
@@ -189,7 +189,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int CountOfParameters
+        public int ParametersCount
         {
             get
             {

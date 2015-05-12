@@ -53,21 +53,21 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        int MinCountOfParams { get; }
+        int MinParameters { get; }
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        int MaxCountOfParams { get; }
+        int MaxParameters { get; }
         /// <summary>
         /// Gets the count of parameters.
         /// </summary>
         /// <value>
         /// The count of parameters.
         /// </value>
-        int CountOfParameters { get; }
+        int ParametersCount { get; }
         /// <summary>
         /// Gets a value indicating whether result is a matrix.
         /// </summary>

@@ -17,15 +17,36 @@ using System;
 namespace xFunc.Maths.Expressions
 {
 
+    /// <summary>
+    /// Represents results of expressions.
+    /// </summary>
     [Flags]
     public enum ExpressionResultType
     {
 
+        /// <summary>
+        /// An expression doesn't return anything.
+        /// </summary>
         None = 0x0,
+        /// <summary>
+        /// An expression returns a number.
+        /// </summary>
         Number = 0x1,
+        /// <summary>
+        /// An expression returns a boolean (true or false).
+        /// </summary>
         Boolean = 0x2,
+        /// <summary>
+        /// An expression returns a matrix or a vector.
+        /// </summary>
         Matrix = 0x4,
+        /// <summary>
+        /// An expression returns an expression.
+        /// </summary>
         Expression = 0x8,
+        /// <summary>
+        /// Combines other parameters.
+        /// </summary>
         All = Number | Boolean | Matrix | Expression
 
     }

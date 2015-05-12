@@ -236,16 +236,16 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Gets a value indicating whether result is a matrix.
+        /// Gets the type of the result.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// The type of the result.
         /// </value>
-        public override bool ResultIsMatrix
+        public override ExpressionResultType ResultType
         {
             get
             {
-                return true;
+                return ExpressionResultType.Matrix;
             }
         }
 

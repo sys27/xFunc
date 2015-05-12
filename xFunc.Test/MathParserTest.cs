@@ -726,19 +726,21 @@ namespace xFunc.Test
             {
                 new FunctionToken(Functions.While, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
                 new VariableToken("x"),
                 new OperationToken(Operations.Assign),
                 new VariableToken("x"),
                 new OperationToken(Operations.Addition),
                 new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(1),
+                new OperationToken(Operations.Equal),
+                new NumberToken(1),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("while(2, x := x + 1)");
+            var exp = parser.Parse("while(x := x + 1, (1 == 1))");
 
-            Assert.AreEqual("while(2, x := x + 1)", exp.ToString());
+            Assert.AreEqual("while(x := x + 1, (1 == 1))", exp.ToString());
         }
 
         [TestMethod]

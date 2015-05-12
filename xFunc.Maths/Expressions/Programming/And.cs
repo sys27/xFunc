@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override string ToString()
         {
-            if(m_parent is BinaryExpression)
+            if (m_parent is BinaryExpression)
                 return ToString("({0} && {1})");
 
             return ToString("{0} && {1}");
@@ -70,7 +70,49 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new And(m_left.Clone(), m_right.Clone());
         }
-        
+
+        /// <summary>
+        /// Gets the type of the left parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the left parameter.
+        /// </value>
+        public override ExpressionResultType LeftType
+        {
+            get
+            {
+                return ExpressionResultType.Boolean;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public override ExpressionResultType RightType
+        {
+            get
+            {
+                return ExpressionResultType.Boolean;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                return ExpressionResultType.Boolean;
+            }
+        }
+
     }
 
 }

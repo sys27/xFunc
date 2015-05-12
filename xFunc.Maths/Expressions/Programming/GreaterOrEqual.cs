@@ -74,6 +74,20 @@ namespace xFunc.Maths.Expressions.Programming
             return new GreaterOrEqual(m_left.Clone(), m_right.Clone());
         }
 
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                return ExpressionResultType.Boolean;
+            }
+        }
+
     }
 
 }

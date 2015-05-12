@@ -82,6 +82,34 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             return new Not(m_argument.Clone());
         }
 
+        /// <summary>
+        /// Gets the type of the argument.
+        /// </summary>
+        /// <value>
+        /// The type of the argument.
+        /// </value>
+        public override ExpressionResultType ArgumentType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                return m_argument.ResultType;
+            }
+        }
+
     }
 
 }

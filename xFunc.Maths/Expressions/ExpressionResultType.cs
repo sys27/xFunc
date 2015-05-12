@@ -29,25 +29,29 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         None = 0x0,
         /// <summary>
+        /// An expression returns undefined result.
+        /// </summary>
+        Undefined = 0x1,
+        /// <summary>
         /// An expression returns a number.
         /// </summary>
-        Number = 0x1,
+        Number = 0x2,
         /// <summary>
         /// An expression returns a boolean (true or false).
         /// </summary>
-        Boolean = 0x2,
+        Boolean = 0x4,
         /// <summary>
         /// An expression returns a matrix or a vector.
         /// </summary>
-        Matrix = 0x4,
+        Matrix = 0x8,
         /// <summary>
         /// An expression returns an expression.
         /// </summary>
-        Expression = 0x8,
+        Expression = 0x10,
         /// <summary>
         /// Combines other parameters.
         /// </summary>
-        All = Number | Boolean | Matrix | Expression
+        All = Undefined | Number | Boolean | Matrix | Expression
 
     }
 

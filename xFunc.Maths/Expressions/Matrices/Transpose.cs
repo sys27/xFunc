@@ -90,25 +90,16 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Gets or sets the expression.
+        /// Gets the type of the argument.
         /// </summary>
         /// <value>
-        /// The expression.
+        /// The type of the argument.
         /// </value>
-        /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
-        public override IExpression Argument
+        public override ExpressionResultType ArgumentType
         {
             get
             {
-                return m_argument;
-            }
-            set
-            {
-                if (value.ResultType != ExpressionResultType.Matrix)
-                    throw new NotSupportedException();
-
-                m_argument = value;
-                m_argument.Parent = this;
+                return ExpressionResultType.Matrix;
             }
         }
 

@@ -106,12 +106,12 @@ namespace xFunc.Maths.Expressions
                 throw new NotSupportedException();
             }
 
-            if(ResultType == ExpressionResultType.Number)
+            if (ResultType == ExpressionResultType.Number)
                 return (double)m_left.Calculate(parameters) + (double)m_right.Calculate(parameters);
 
             throw new NotSupportedException();
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="Add"/>.
         /// </summary>
@@ -119,6 +119,50 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Add(m_left.Clone(), m_right.Clone());
+        }
+
+        /// <summary>
+        /// Gets the type of the left parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the left parameter.
+        /// </value>
+        public override ExpressionResultType LeftType
+        {
+            get
+            {
+                if (m_right != null)
+                {
+                    if (m_right.ResultType.HasFlag(ExpressionResultType.Number))
+                        return ExpressionResultType.Number;
+
+                    return ExpressionResultType.Matrix;
+                }
+
+                return ExpressionResultType.Number | ExpressionResultType.Matrix;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public override ExpressionResultType RightType
+        {
+            get
+            {
+                if (m_left != null)
+                {
+                    if (m_left.ResultType.HasFlag(ExpressionResultType.Number))
+                        return ExpressionResultType.Number;
+
+                    return ExpressionResultType.Matrix;
+                }
+
+                return ExpressionResultType.Number | ExpressionResultType.Matrix;
+            }
         }
 
         /// <summary>
@@ -131,9 +175,9 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (m_left.ResultType == ExpressionResultType.Number && m_right.ResultType == ExpressionResultType.Number)
+                if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
-                if (m_left.ResultType == ExpressionResultType.Matrix && m_right.ResultType == ExpressionResultType.Matrix)
+                if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix) && m_right.ResultType.HasFlag(ExpressionResultType.Matrix))
                     return ExpressionResultType.Matrix;
 
                 return ExpressionResultType.None;

@@ -161,6 +161,8 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                // todo: check!!!
+
                 m_arguments = value;
                 if (m_arguments != null)
                 {

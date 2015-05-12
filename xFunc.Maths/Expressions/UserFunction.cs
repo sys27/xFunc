@@ -195,6 +195,20 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                return ExpressionResultType.All;
+            }
+        }
+
     }
 
 }

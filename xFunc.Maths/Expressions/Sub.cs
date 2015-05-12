@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            if (ResultIsMatrix)
+            if (ResultType == ExpressionResultType.Matrix)
             {
                 if (m_left is Vector && m_right is Vector)
                     return MatrixExtentions.Sub((Vector)m_left, (Vector)m_right, parameters);
@@ -77,6 +77,7 @@ namespace xFunc.Maths.Expressions
                 if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
                     throw new NotSupportedException();
 
+                // todo: refactor remove not sup, if-else-if
                 if (!(m_left is Vector || m_left is Matrix))
                 {
                     var l = m_left.Calculate(parameters);
@@ -104,9 +105,12 @@ namespace xFunc.Maths.Expressions
                 throw new NotSupportedException();
             }
 
-            return (double)m_left.Calculate(parameters) - (double)m_right.Calculate(parameters);
+            if (ResultType == ExpressionResultType.Number)
+                return (double)m_left.Calculate(parameters) - (double)m_right.Calculate(parameters);
+
+            throw new NotSupportedException();
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="Sub"/> class.
         /// </summary>
@@ -117,16 +121,21 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets a value indicating whether result is a matrix.
+        /// Gets the type of the result.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if result is a matrix; otherwise, <c>false</c>.
+        /// The type of the result.
         /// </value>
-        public override bool ResultIsMatrix
+        public override ExpressionResultType ResultType
         {
             get
             {
-                return m_left.ResultIsMatrix && m_right.ResultIsMatrix;
+                if (m_left.ResultType == ExpressionResultType.Number && m_right.ResultType == ExpressionResultType.Number)
+                    return ExpressionResultType.Number;
+                if (m_left.ResultType == ExpressionResultType.Matrix && m_right.ResultType == ExpressionResultType.Matrix)
+                    return ExpressionResultType.Matrix;
+
+                return ExpressionResultType.None;
             }
         }
 

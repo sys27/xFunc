@@ -123,7 +123,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public abstract IExpression Clone();
-        
+
         /// <summary>
         /// Gets or sets the expression.
         /// </summary>
@@ -136,9 +136,28 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if ((ArgumentType & value.ResultType) == ExpressionResultType.None)
+                    // todo: message
+                    throw new ParameterTypeMismatchException();
+
                 m_argument = value;
-                if (m_argument != null)
-                    m_argument.Parent = this;
+                m_argument.Parent = this;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the argument.
+        /// </summary>
+        /// <value>
+        /// The type of the argument.
+        /// </value>
+        public virtual ExpressionResultType ArgumentType
+        {
+            get
+            {
+                return ExpressionResultType.Number;
             }
         }
 

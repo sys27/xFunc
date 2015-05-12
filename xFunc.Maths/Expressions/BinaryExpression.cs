@@ -137,7 +137,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns>Returns the new instance of <see cref="BinaryExpression"/> that is a clone of this instance.</returns>
         public abstract IExpression Clone();
-                
+
         /// <summary>
         /// The left (first) operand.
         /// </summary>
@@ -151,9 +151,26 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
+                if ((LeftType & value.ResultType) == ExpressionResultType.None)
+                    // todo: message
+                    throw new ParameterTypeMismatchException();
 
                 m_left = value;
                 m_left.Parent = this;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the left parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the left parameter.
+        /// </value>
+        public virtual ExpressionResultType LeftType
+        {
+            get
+            {
+                return ExpressionResultType.Number;
             }
         }
 
@@ -170,9 +187,26 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
+                if ((RightType & value.ResultType) == ExpressionResultType.None)
+                    // todo: message
+                    throw new ParameterTypeMismatchException();
 
                 m_right = value;
                 m_right.Parent = this;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public virtual ExpressionResultType RightType
+        {
+            get
+            {
+                return ExpressionResultType.Number;
             }
         }
 

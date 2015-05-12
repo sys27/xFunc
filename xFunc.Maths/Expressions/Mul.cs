@@ -176,14 +176,8 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix) && m_right.ResultType.HasFlag(ExpressionResultType.Matrix))
-                    return ExpressionResultType.Matrix;
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Matrix))
-                    return ExpressionResultType.Matrix;
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
-                    return ExpressionResultType.Matrix;
 
-                return ExpressionResultType.Undefined;
+                return ExpressionResultType.Matrix;
             }
         }
 

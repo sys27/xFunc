@@ -77,7 +77,6 @@ namespace xFunc.Maths.Expressions
                 if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
                     throw new NotSupportedException();
 
-                // todo: refactor remove not sup, if-else-if
                 if (!(m_left is Vector || m_left is Matrix))
                 {
                     var l = m_left.Calculate(parameters);
@@ -86,11 +85,8 @@ namespace xFunc.Maths.Expressions
                         return MatrixExtentions.Sub((Vector)l, (Vector)m_right, parameters);
                     if (l is Matrix)
                         return MatrixExtentions.Sub((Matrix)l, (Matrix)m_right, parameters);
-
-                    throw new NotSupportedException();
                 }
-
-                if (!(m_right is Vector || m_right is Matrix))
+                else if (!(m_right is Vector || m_right is Matrix))
                 {
                     var r = m_right.Calculate(parameters);
 
@@ -98,8 +94,6 @@ namespace xFunc.Maths.Expressions
                         return MatrixExtentions.Sub((Vector)m_left, (Vector)r, parameters);
                     if (r is Matrix)
                         return MatrixExtentions.Sub((Matrix)m_left, (Matrix)r, parameters);
-
-                    throw new NotSupportedException();
                 }
 
                 throw new NotSupportedException();
@@ -176,10 +170,8 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix) && m_right.ResultType.HasFlag(ExpressionResultType.Matrix))
-                    return ExpressionResultType.Matrix;
 
-                return ExpressionResultType.Undefined;
+                return ExpressionResultType.Matrix;
             }
         }
 

@@ -183,7 +183,7 @@ namespace xFunc.Maths.Expressions
                 if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
                     return ExpressionResultType.Matrix;
 
-                return ExpressionResultType.None;
+                return ExpressionResultType.Undefined;
             }
         }
 

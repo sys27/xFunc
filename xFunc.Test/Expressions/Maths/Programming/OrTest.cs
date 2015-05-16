@@ -19,7 +19,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
             var or = new Or(lessThen, greaterThen);
 
-            Assert.AreEqual(1, or.Calculate(parameters));
+            Assert.AreEqual(true, or.Calculate(parameters));
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
             var or = new Or(lessThen, greaterThen);
 
-            Assert.AreEqual(1, or.Calculate(parameters));
+            Assert.AreEqual(true, or.Calculate(parameters));
         }
 
     }

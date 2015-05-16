@@ -72,7 +72,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            if (Condition.Calculate(parameters).AsBool())
+            if ((bool)Condition.Calculate(parameters))
                 return Then.Calculate(parameters);
 
             var @else = Else;

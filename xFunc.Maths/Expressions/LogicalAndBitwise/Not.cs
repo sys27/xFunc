@@ -67,9 +67,15 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override object Calculate(ExpressionParameters parameters)
         {
 #if PORTABLE
-            return ~(int)Math.Round((double)argument.Calculate(parameters));
+            if (ResultType == ExpressionResultType.Number)
+                return ~(int)Math.Round((double)argument.Calculate(parameters));
+            else
+                return !(bool)m_argument.Calculate(parameters);
 #else
-            return ~(int)Math.Round((double)m_argument.Calculate(parameters), MidpointRounding.AwayFromZero);
+            if (ResultType == ExpressionResultType.Number)
+                return ~(int)Math.Round((double)m_argument.Calculate(parameters), MidpointRounding.AwayFromZero);
+            else
+                return !(bool)m_argument.Calculate(parameters);
 #endif
         }
 

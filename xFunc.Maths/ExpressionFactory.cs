@@ -15,6 +15,7 @@
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -42,6 +43,8 @@ namespace xFunc.Maths
                 return CreateOperation(token as OperationToken);
             if (token is NumberToken)
                 return new Number((token as NumberToken).Number);
+            if(token is BooleanToken)
+                return new Bool((token as BooleanToken).Value);
             if (token is VariableToken)
                 return new Variable((token as VariableToken).Variable);
             if (token is UserFunctionToken)
@@ -78,9 +81,9 @@ namespace xFunc.Maths
                 case Operations.Assign:
                     return new Define();
                 case Operations.ConditionalAnd:
-                    return new And();
+                    return new Expressions.Programming.And();
                 case Operations.ConditionalOr:
-                    return new Or();
+                    return new Expressions.Programming.Or();
                 case Operations.Equal:
                     return new Equal();
                 case Operations.NotEqual:
@@ -105,13 +108,13 @@ namespace xFunc.Maths
                     return new Inc();
                 case Operations.Decrement:
                     return new Dec();
-                case Operations.BitwiseNot:
+                case Operations.Not:
                     return new Expressions.LogicalAndBitwise.Not();
-                case Operations.BitwiseAnd:
+                case Operations.And:
                     return new Expressions.LogicalAndBitwise.And();
-                case Operations.BitwiseOr:
+                case Operations.Or:
                     return new Expressions.LogicalAndBitwise.Or();
-                case Operations.BitwiseXOr:
+                case Operations.XOr:
                     return new Expressions.LogicalAndBitwise.XOr();
                 default:
                     return null;

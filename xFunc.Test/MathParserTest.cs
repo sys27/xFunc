@@ -1012,6 +1012,21 @@ namespace xFunc.Test
             Assert.AreEqual("x /= 2", exp.ToString());
         }
 
+        [TestMethod]
+        public void BoolConstTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.And),
+                new BooleanToken(false)
+            };
+
+            var exp = parser.Parse("true & false");
+
+            Assert.AreEqual("True and False", exp.ToString());
+        }
+
     }
 
 }

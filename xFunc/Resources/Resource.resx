@@ -274,7 +274,7 @@
     <value>Version:</value>
   </data>
   <data name="BitwiseExpanderHeader" xml:space="preserve">
-    <value>Bitwise</value>
+    <value>Bitwise &amp; Logical</value>
   </data>
   <data name="ClearButtonHeader" xml:space="preserve">
     <value>Clear</value>

@@ -274,7 +274,7 @@
     <value>Версия:</value>
   </data>
   <data name="BitwiseExpanderHeader" xml:space="preserve">
-    <value>Битовые</value>
+    <value>Битовые и логические</value>
   </data>
   <data name="ClearButtonHeader" xml:space="preserve">
     <value>Очистить</value>

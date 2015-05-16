@@ -105,10 +105,10 @@ namespace xFunc.Maths.Tokens
                     return 14;
                 case Operations.Assign:
                     return 0;
-                case Operations.BitwiseNot:
-                case Operations.BitwiseAnd:
-                case Operations.BitwiseOr:
-                case Operations.BitwiseXOr:
+                case Operations.Not:
+                case Operations.And:
+                case Operations.Or:
+                case Operations.XOr:
                     return 15;
                 case Operations.AddAssign:
                 case Operations.SubAssign:

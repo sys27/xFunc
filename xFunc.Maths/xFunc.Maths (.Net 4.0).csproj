@@ -64,6 +64,7 @@
     <Compile Include="Expressions\Collections\ParameterCollection.cs" />
     <Compile Include="Expressions\Collections\ParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\Collections\ParameterType.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
     <Compile Include="Expressions\Matrices\Determinant.cs" />
     <Compile Include="Expressions\Matrices\Inverse.cs" />
     <Compile Include="Expressions\Matrices\Matrix.cs" />
@@ -75,7 +76,7 @@
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\Programming\AddAssign.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
-    <Compile Include="Expressions\Programming\Bool.cs" />
+    <Compile Include="Expressions\BoolExtentions.cs" />
     <Compile Include="Expressions\Programming\Dec.cs" />
     <Compile Include="Expressions\Programming\DivAssign.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Results\ExpressionResult.cs" />
     <Compile Include="Results\NumberResult.cs" />
     <Compile Include="Results\StringResult.cs" />
+    <Compile Include="Tokens\BooleanToken.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />

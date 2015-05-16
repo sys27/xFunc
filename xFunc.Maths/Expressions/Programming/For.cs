@@ -64,7 +64,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            for (Initialization.Calculate(parameters); Condition.Calculate(parameters).AsBool(); Iteration.Calculate(parameters))
+            for (Initialization.Calculate(parameters); (bool)Condition.Calculate(parameters); Iteration.Calculate(parameters))
                 Body.Calculate(parameters);
 
             return double.NaN;

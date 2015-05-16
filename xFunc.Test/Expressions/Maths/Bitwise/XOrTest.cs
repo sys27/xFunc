@@ -26,6 +26,22 @@ namespace xFunc.Test.Expressions.Maths.Bitwise
             Assert.AreEqual(2, exp.Calculate());
         }
 
+        [TestMethod]
+        public void CalculateTest3()
+        {
+            var exp = new XOr(new Bool(true), new Bool(true));
+
+            Assert.AreEqual(false, exp.Calculate());
+        }
+
+        [TestMethod]
+        public void CalculateTest4()
+        {
+            var exp = new XOr(new Bool(false), new Bool(true));
+
+            Assert.AreEqual(true, exp.Calculate());
+        }
+
     }
 
 }

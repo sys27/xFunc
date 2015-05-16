@@ -255,7 +255,7 @@ namespace xFunc.Maths
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
                     }
 
-                    tokens.Add(new OperationToken(Operations.BitwiseNot));
+                    tokens.Add(new OperationToken(Operations.Not));
                 }
                 else if (letter == '&')
                 {
@@ -267,7 +267,7 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    tokens.Add(new OperationToken(Operations.BitwiseAnd));
+                    tokens.Add(new OperationToken(Operations.And));
                 }
                 else if (letter == '|')
                 {
@@ -279,7 +279,7 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    tokens.Add(new OperationToken(Operations.BitwiseOr));
+                    tokens.Add(new OperationToken(Operations.Or));
                 }
                 else if (letter == ':' && CheckNextSymbol(function, i, '='))
                 {
@@ -431,6 +431,20 @@ namespace xFunc.Maths
                     {
                         tokens.Add(new VariableToken("π"));
                         i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("true"))
+                    {
+                        tokens.Add(new BooleanToken(true));
+                        i += 4;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("false"))
+                    {
+                        tokens.Add(new BooleanToken(false));
+                        i += 5;
 
                         continue;
                     }
@@ -787,28 +801,28 @@ namespace xFunc.Maths
 
                     if (sub.StartsWith("not("))
                     {
-                        tokens.Add(new OperationToken(Operations.BitwiseNot));
+                        tokens.Add(new OperationToken(Operations.Not));
                         i += 3;
 
                         continue;
                     }
                     if (sub.StartsWith("and"))
                     {
-                        tokens.Add(new OperationToken(Operations.BitwiseAnd));
+                        tokens.Add(new OperationToken(Operations.And));
                         i += 3;
 
                         continue;
                     }
                     if (sub.StartsWith("or"))
                     {
-                        tokens.Add(new OperationToken(Operations.BitwiseOr));
+                        tokens.Add(new OperationToken(Operations.Or));
                         i += 2;
 
                         continue;
                     }
                     if (sub.StartsWith("xor"))
                     {
-                        tokens.Add(new OperationToken(Operations.BitwiseXOr));
+                        tokens.Add(new OperationToken(Operations.XOr));
                         i += 3;
 
                         continue;

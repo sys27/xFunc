@@ -14,13 +14,13 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Expressions.Programming
+namespace xFunc.Maths.Expressions
 {
 
     /// <summary>
     /// A static class for bool extentions.
     /// </summary>
-    public static class Bool
+    public static class BoolExtentions
     {
 
         /// <summary>
@@ -39,18 +39,14 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>Returns a bool.</returns>
         public static bool AsBool(this object value)
         {
+            if (value is bool)
+                return (bool)value;
+
             if (value is double)
-            {
-                var num = (double)value;
+                return (double)value != False;
 
-                return num != False;
-            }
             if (value is int)
-            {
-                var num = (int)value;
-
-                return num != False;
-            }
+                return (int)value != False;
 
             return false;
         }

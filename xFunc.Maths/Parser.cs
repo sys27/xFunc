@@ -20,6 +20,7 @@ using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Maths
 {
@@ -114,7 +115,7 @@ namespace xFunc.Maths
                 var stack = new Stack<IExpression>();
                 foreach (var expression in expressions)
                 {
-                    if (expression is Number || expression is Variable)
+                    if (expression is Number || expression is Bool || expression is Variable)
                     {
                         stack.Push(expression);
                     }

@@ -117,19 +117,19 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// ~, not
         /// </summary>
-        BitwiseNot,
+        Not,
         /// <summary>
         /// &amp;, and
         /// </summary>
-        BitwiseAnd,
+        And,
         /// <summary>
         /// |, or
         /// </summary>
-        BitwiseOr,
+        Or,
         /// <summary>
         /// xor
         /// </summary>
-        BitwiseXOr
+        XOr
 
     }
 

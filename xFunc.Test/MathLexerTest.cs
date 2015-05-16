@@ -240,7 +240,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new OperationToken(Operations.BitwiseNot),
+                new OperationToken(Operations.Not),
                 new SymbolToken(Symbols.OpenBracket),
                 new NumberToken(2),
                 new SymbolToken(Symbols.CloseBracket)
@@ -255,7 +255,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new OperationToken(Operations.BitwiseNot),
+                new OperationToken(Operations.Not),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -283,7 +283,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(2),
-                new OperationToken(Operations.BitwiseAnd),
+                new OperationToken(Operations.And),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -297,7 +297,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(2),
-                new OperationToken(Operations.BitwiseOr),
+                new OperationToken(Operations.Or),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -738,7 +738,7 @@ namespace xFunc.Test
 
             var expected = new List<IToken>()
             {
-                new OperationToken(Operations.BitwiseNot),
+                new OperationToken(Operations.Not),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -752,7 +752,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(1),
-                new OperationToken(Operations.BitwiseAnd),
+                new OperationToken(Operations.And),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -766,7 +766,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(1),
-                new OperationToken(Operations.BitwiseOr),
+                new OperationToken(Operations.Or),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -780,7 +780,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new NumberToken(1),
-                new OperationToken(Operations.BitwiseXOr),
+                new OperationToken(Operations.XOr),
                 new NumberToken(2)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -808,7 +808,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new VariableToken("x"),
-                new OperationToken(Operations.BitwiseAnd),
+                new OperationToken(Operations.And),
                 new VariableToken("x")
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -836,7 +836,7 @@ namespace xFunc.Test
             var expected = new List<IToken>()
             {
                 new VariableToken("func"),
-                new OperationToken(Operations.BitwiseAnd),
+                new OperationToken(Operations.And),
                 new NumberToken(1)
             };
             CollectionAssert.AreEqual(expected, tokens.ToList());
@@ -1927,6 +1927,21 @@ namespace xFunc.Test
                 new VariableToken("x"),
                 new OperationToken(Operations.DivAssign),
                 new NumberToken(2)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void BoolConstLongTest()
+        {
+            var tokens = lexer.Tokenize("true & false");
+
+            var expected = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.And),
+                new BooleanToken(false)
             };
 
             CollectionAssert.AreEqual(expected, tokens.ToList());

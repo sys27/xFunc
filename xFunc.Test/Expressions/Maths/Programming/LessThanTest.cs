@@ -17,7 +17,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(new Variable("x"), new Number(10));
 
-            Assert.AreEqual(1, lessThen.Calculate(parameters));
+            Assert.AreEqual(true, lessThen.Calculate(parameters));
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var lessThen = new LessThan(new Variable("x"), new Number(10));
 
-            Assert.AreEqual(0, lessThen.Calculate(parameters));
+            Assert.AreEqual(false, lessThen.Calculate(parameters));
         }
 
     }

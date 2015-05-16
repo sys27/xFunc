@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions.Programming
             var leftValue = (double)m_left.Calculate(parameters);
             var rightValue = (double)m_right.Calculate(parameters);
 
-            return (leftValue >= rightValue).AsNumber();
+            return leftValue >= rightValue;
         }
 
         /// <summary>

@@ -136,6 +136,10 @@ namespace xFunc.Maths
 
                 return new StringResult(MathExtentions.ToNewBase((int)result, numeralSystem));
             }
+            if (result is bool)
+            {
+                return new BooleanResult((bool)result);
+            }
             if (result is IExpression)
             {
                 return new ExpressionResult((IExpression)result);

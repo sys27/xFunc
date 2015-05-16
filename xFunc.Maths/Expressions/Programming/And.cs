@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return (m_left.Calculate(parameters).AsBool() && m_right.Calculate(parameters).AsBool()).AsNumber();
+            return (bool)m_left.Calculate(parameters) && (bool)m_right.Calculate(parameters);
         }
 
         /// <summary>

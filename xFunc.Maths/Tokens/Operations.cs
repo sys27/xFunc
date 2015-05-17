@@ -129,7 +129,23 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// xor
         /// </summary>
-        XOr
+        XOr,
+        /// <summary>
+        /// =>, ->, impl
+        /// </summary>
+        Implication,
+        /// <summary>
+        /// &lt;=>, &lt;->, eq
+        /// </summary>
+        Equality,
+        /// <summary>
+        /// nor
+        /// </summary>
+        NOr,
+        /// <summary>
+        /// nand
+        /// </summary>
+        NAnd
 
     }
 

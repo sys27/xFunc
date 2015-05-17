@@ -183,6 +183,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (CheckNextSymbol(function, i, '>'))
+                    {
+                        tokens.Add(new OperationToken(Operations.Implication));
+                        i += 2;
+
+                        continue;
+                    }
 
                     if (i - 1 >= 0)
                     {
@@ -288,12 +295,22 @@ namespace xFunc.Maths
 
                     continue;
                 }
-                else if (letter == '=' && CheckNextSymbol(function, i, '='))
+                else if (letter == '=')
                 {
-                    tokens.Add(new OperationToken(Operations.Equal));
-                    i += 2;
+                    if (CheckNextSymbol(function, i, '='))
+                    {
+                        tokens.Add(new OperationToken(Operations.Equal));
+                        i += 2;
 
-                    continue;
+                        continue;
+                    }
+                    if (CheckNextSymbol(function, i, '>'))
+                    {
+                        tokens.Add(new OperationToken(Operations.Implication));
+                        i += 2;
+
+                        continue;
+                    }
                 }
                 else if (letter == '!')
                 {
@@ -324,8 +341,23 @@ namespace xFunc.Maths
                 {
                     if (CheckNextSymbol(function, i, '='))
                     {
+                        if (CheckNextSymbol(function, i + 1, '>'))
+                        {
+                            tokens.Add(new OperationToken(Operations.Equality));
+                            i += 3;
+
+                            continue;
+                        }
+
                         tokens.Add(new OperationToken(Operations.LessOrEqual));
                         i += 2;
+
+                        continue;
+                    }
+                    if (CheckNextSymbol(function, i, '-') && CheckNextSymbol(function, i + 1, '>'))
+                    {
+                        tokens.Add(new OperationToken(Operations.Equality));
+                        i += 3;
 
                         continue;
                     }
@@ -824,6 +856,34 @@ namespace xFunc.Maths
                     {
                         tokens.Add(new OperationToken(Operations.XOr));
                         i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("impl"))
+                    {
+                        tokens.Add(new OperationToken(Operations.Implication));
+                        i += 4;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("eq"))
+                    {
+                        tokens.Add(new OperationToken(Operations.Equality));
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("nor"))
+                    {
+                        tokens.Add(new OperationToken(Operations.NOr));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("nand"))
+                    {
+                        tokens.Add(new OperationToken(Operations.NAnd));
+                        i += 4;
 
                         continue;
                     }

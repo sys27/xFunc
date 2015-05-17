@@ -18,7 +18,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
 
     /// <summary>
-    /// Represents a bitwise OR operation.
+    /// Represents a OR operation.
     /// </summary>
     public class Or : BinaryExpression
     {
@@ -28,14 +28,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="Or"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The left operand.</param>
-        /// <param name="secondMathExpression">The right operand.</param>
-        /// <seealso cref="IExpression"/>
-        public Or(IExpression firstMathExpression, IExpression secondMathExpression)
-            : base(firstMathExpression, secondMathExpression)
-        {
-
-        }
+        /// <param name="left">The left (first) operand.</param>
+        /// <param name="right">The right (second) operand.</param>
+        public Or(IExpression left, IExpression right)
+            : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -63,7 +59,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Calculates this bitwise OR expression.
+        /// Calculates this OR expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>

@@ -241,7 +241,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bitwise AND operation. This operation rounds a rational number. Example: x and y, x &amp; y.
+        ///   Looks up a localized string similar to Bitwise AND operation. Example: x and y, x &amp; y.
         /// </summary>
         public static string AndToolTip {
             get {
@@ -790,6 +790,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logical Equality. Example: true == false..
+        /// </summary>
+        public static string EqualityToolTip {
+            get {
+                return ResourceManager.GetString("EqualityToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The equality operator. Example: x == 10..
         /// </summary>
         public static string EqualToolTip {
@@ -1060,6 +1069,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logical Implication. Example: true =&gt; false..
+        /// </summary>
+        public static string ImplicationToolTip {
+            get {
+                return ResourceManager.GetString("ImplicationToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Perhaps, variables have entered incorrectly..
         /// </summary>
         public static string IndexOutOfRangeExceptionError {
@@ -1195,11 +1213,29 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logical NAnd..
+        /// </summary>
+        public static string NAndToolTip {
+            get {
+                return ResourceManager.GetString("NAndToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string NewMenu {
             get {
                 return ResourceManager.GetString("NewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logical NOr..
+        /// </summary>
+        public static string NOrToolTip {
+            get {
+                return ResourceManager.GetString("NOrToolTip", resourceCulture);
             }
         }
         
@@ -1222,7 +1258,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bitwise NOT operation. This operation rounds a rational number. Example: not(3).
+        ///   Looks up a localized string similar to Bitwise NOT operation. Example: not(3).
         /// </summary>
         public static string NotToolTip {
             get {
@@ -1258,7 +1294,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bitwise OR operation. This operation rounds a rational number. Example: x or y, x | y.
+        ///   Looks up a localized string similar to Bitwise OR operation. Example: x or y, x | y.
         /// </summary>
         public static string OrToolTip {
             get {
@@ -1969,7 +2005,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bitwise XOR operation. This operation rounds a rational number. Example: x xor y.
+        ///   Looks up a localized string similar to Bitwise XOR operation. Example: x xor y.
         /// </summary>
         public static string XOrToolTip {
             get {

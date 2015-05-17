@@ -170,7 +170,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.uk.resx</DependentUpon>
     </Compile>
-    <Compile Include="Results\BooleanResult.cs" />
     <Compile Include="Simplifier.cs" />
     <Compile Include="NumeralSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +182,7 @@
     <Compile Include="Results\ExpressionResult.cs" />
     <Compile Include="Results\NumberResult.cs" />
     <Compile Include="Results\StringResult.cs" />
+    <Compile Include="Results\BooleanResult.cs" />
     <Compile Include="Tokens\BooleanToken.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />

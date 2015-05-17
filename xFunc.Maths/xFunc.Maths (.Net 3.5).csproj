@@ -54,6 +54,8 @@
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />
+    <Compile Include="Expressions\ExpressionResultType.cs" />
+    <Compile Include="Expressions\ParameterTypeMismatchException.cs" />
     <Compile Include="IExpressionFactory.cs" />
     <Compile Include="InvalidResultException.cs" />
     <Compile Include="ExpressionFactory.cs" />
@@ -79,7 +81,6 @@
     <Compile Include="Expressions\Programming\MulAssign.cs" />
     <Compile Include="Expressions\Programming\DivAssign.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
-    <Compile Include="Expressions\Programming\Bool.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />
     <Compile Include="Expressions\Programming\For.cs" />
     <Compile Include="Expressions\Programming\GreaterOrEqual.cs" />
@@ -104,10 +105,11 @@
     <Compile Include="Expressions\Abs.cs" />
     <Compile Include="Expressions\Add.cs" />
     <Compile Include="Expressions\AngleMeasurement.cs" />
-    <Compile Include="Expressions\Bitwise\And.cs" />
-    <Compile Include="Expressions\Bitwise\XOr.cs" />
-    <Compile Include="Expressions\Bitwise\Or.cs" />
-    <Compile Include="Expressions\Bitwise\Not.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\And.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\XOr.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Or.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Not.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
     <Compile Include="Expressions\Trigonometric\Arccos.cs" />
     <Compile Include="Expressions\Trigonometric\Arccot.cs" />
     <Compile Include="Expressions\Trigonometric\Arccsc.cs" />
@@ -181,6 +183,8 @@
     <Compile Include="Results\NumberResult.cs" />
     <Compile Include="Results\StringResult.cs" />
     <Compile Include="StringExtension.cs" />
+    <Compile Include="Results\BooleanResult.cs" />
+    <Compile Include="Tokens\BooleanToken.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />

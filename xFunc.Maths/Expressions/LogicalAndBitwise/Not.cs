@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
 #if PORTABLE
             if (ResultType == ExpressionResultType.Number)
-                return ~(int)Math.Round((double)argument.Calculate(parameters));
+                return ~(int)Math.Round((double)m_argument.Calculate(parameters));
             else
                 return !(bool)m_argument.Calculate(parameters);
 #else

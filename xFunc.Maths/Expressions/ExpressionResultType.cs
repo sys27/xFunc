@@ -55,4 +55,16 @@ namespace xFunc.Maths.Expressions
 
     }
 
+#if !NET40_OR_GREATER
+    public static class ExpressionResultTypeExtention
+    {
+
+        public static bool HasFlag(this ExpressionResultType type, ExpressionResultType flag)
+        {
+            return (type & flag) == flag;
+        }
+
+    }
+#endif
+
 }

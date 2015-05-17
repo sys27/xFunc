@@ -117,41 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Acres" xml:space="preserve">
+    <value>Акри</value>
+  </data>
   <data name="AreaConverterName" xml:space="preserve">
     <value>Площа</value>
-  </data>
-  <data name="LengthConverterName" xml:space="preserve">
-    <value>Довжина</value>
-  </data>
-  <data name="MassConverterName" xml:space="preserve">
-    <value>Маса</value>
-  </data>
-  <data name="PowerConverterName" xml:space="preserve">
-    <value>Потужність</value>
-  </data>
-  <data name="TemperatureConverterName" xml:space="preserve">
-    <value>Температура</value>
-  </data>
-  <data name="TimeConverterName" xml:space="preserve">
-    <value>Час</value>
-  </data>
-  <data name="VolumeConverterName" xml:space="preserve">
-    <value>Об'єм</value>
-  </data>
-  <data name="SquareMillimeters" xml:space="preserve">
-    <value>Квадратні міліметри</value>
-  </data>
-  <data name="Slugs" xml:space="preserve">
-    <value>Slugs</value>
-  </data>
-  <data name="Years" xml:space="preserve">
-    <value>Роки</value>
   </data>
   <data name="AstronomicalUnits" xml:space="preserve">
     <value>Астрономічні одиниці</value>
   </data>
+  <data name="Celsius" xml:space="preserve">
+    <value>Градуси Цельсія</value>
+  </data>
   <data name="Centimeters" xml:space="preserve">
     <value>Сантиметри</value>
+  </data>
+  <data name="Chains" xml:space="preserve">
+    <value>Чейні</value>
   </data>
   <data name="CubicCentimeters" xml:space="preserve">
     <value>Кубічні сантиметри</value>
@@ -171,15 +153,6 @@
   <data name="Days" xml:space="preserve">
     <value>Дні</value>
   </data>
-  <data name="Acres" xml:space="preserve">
-    <value>Акри</value>
-  </data>
-  <data name="Celsius" xml:space="preserve">
-    <value>Градуси Цельсія</value>
-  </data>
-  <data name="Chains" xml:space="preserve">
-    <value>Чейні</value>
-  </data>
   <data name="Delisle" xml:space="preserve">
     <value>Градуси Делиля</value>
   </data>
@@ -192,14 +165,14 @@
   <data name="Feet" xml:space="preserve">
     <value>Фути</value>
   </data>
-  <data name="Grams" xml:space="preserve">
-    <value>Грами</value>
-  </data>
   <data name="GallonsUK" xml:space="preserve">
     <value>Галони (UK)</value>
   </data>
   <data name="GallonsUS" xml:space="preserve">
     <value>Галони (UK)</value>
+  </data>
+  <data name="Grams" xml:space="preserve">
+    <value>Грами</value>
   </data>
   <data name="Hectares" xml:space="preserve">
     <value>Гектари</value>
@@ -225,44 +198,17 @@
   <data name="Kilowatts" xml:space="preserve">
     <value>Кіловати</value>
   </data>
+  <data name="LengthConverterName" xml:space="preserve">
+    <value>Довжина</value>
+  </data>
   <data name="LightYears" xml:space="preserve">
     <value>Світлові роки</value>
   </data>
   <data name="Litres" xml:space="preserve">
     <value>Літри</value>
   </data>
-  <data name="Yards" xml:space="preserve">
-    <value>Ярди</value>
-  </data>
-  <data name="Weeks" xml:space="preserve">
-    <value>Тижні</value>
-  </data>
-  <data name="Watts" xml:space="preserve">
-    <value>Вати</value>
-  </data>
-  <data name="Tonne" xml:space="preserve">
-    <value>Тонни</value>
-  </data>
-  <data name="SquareYards" xml:space="preserve">
-    <value>Квадратні ярди</value>
-  </data>
-  <data name="SquareMiles" xml:space="preserve">
-    <value>Квадратні милі</value>
-  </data>
-  <data name="SquareMetres" xml:space="preserve">
-    <value>Квадратні метри</value>
-  </data>
-  <data name="SquareKilometers" xml:space="preserve">
-    <value>Квадратні кілометри</value>
-  </data>
-  <data name="SquareInches" xml:space="preserve">
-    <value>Квадратні дюйми</value>
-  </data>
-  <data name="SquareFeet" xml:space="preserve">
-    <value>Квадратні фути</value>
-  </data>
-  <data name="SquareCentimeters" xml:space="preserve">
-    <value>Квадратні сантиметри</value>
+  <data name="MassConverterName" xml:space="preserve">
+    <value>Маса</value>
   </data>
   <data name="Metres" xml:space="preserve">
     <value>Метри</value>
@@ -270,11 +216,11 @@
   <data name="Micrometers" xml:space="preserve">
     <value>Мікрометри</value>
   </data>
-  <data name="Miles" xml:space="preserve">
-    <value>Милі</value>
-  </data>
   <data name="Microseconds" xml:space="preserve">
     <value>Мікросекунди</value>
+  </data>
+  <data name="Miles" xml:space="preserve">
+    <value>Милі</value>
   </data>
   <data name="Milligrams" xml:space="preserve">
     <value>Міліграми</value>
@@ -309,6 +255,9 @@
   <data name="Pounds" xml:space="preserve">
     <value>Фунти</value>
   </data>
+  <data name="PowerConverterName" xml:space="preserve">
+    <value>Потужність</value>
+  </data>
   <data name="Rankine" xml:space="preserve">
     <value>Градуси Ранкина</value>
   </data>
@@ -318,10 +267,61 @@
   <data name="Rods" xml:space="preserve">
     <value>Роди</value>
   </data>
+  <data name="Rømer" xml:space="preserve">
+    <value>Градуси Ремера</value>
+  </data>
   <data name="Seconds" xml:space="preserve">
     <value>Секунди</value>
   </data>
-  <data name="Rømer" xml:space="preserve">
-    <value>Градуси Ремера</value>
+  <data name="Slugs" xml:space="preserve">
+    <value>Slugs</value>
+  </data>
+  <data name="SquareCentimeters" xml:space="preserve">
+    <value>Квадратні сантиметри</value>
+  </data>
+  <data name="SquareFeet" xml:space="preserve">
+    <value>Квадратні фути</value>
+  </data>
+  <data name="SquareInches" xml:space="preserve">
+    <value>Квадратні дюйми</value>
+  </data>
+  <data name="SquareKilometers" xml:space="preserve">
+    <value>Квадратні кілометри</value>
+  </data>
+  <data name="SquareMetres" xml:space="preserve">
+    <value>Квадратні метри</value>
+  </data>
+  <data name="SquareMiles" xml:space="preserve">
+    <value>Квадратні милі</value>
+  </data>
+  <data name="SquareMillimeters" xml:space="preserve">
+    <value>Квадратні міліметри</value>
+  </data>
+  <data name="SquareYards" xml:space="preserve">
+    <value>Квадратні ярди</value>
+  </data>
+  <data name="TemperatureConverterName" xml:space="preserve">
+    <value>Температура</value>
+  </data>
+  <data name="TimeConverterName" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="Tonne" xml:space="preserve">
+    <value>Тонни</value>
+  </data>
+  <data name="VolumeConverterName" xml:space="preserve">
+    <value>Об'єм</value>
+  </data>
+  <data name="Watts" xml:space="preserve">
+    <value>Вати</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>Тижні</value>
+  </data>
+  <data name="Yards" xml:space="preserve">
+    <value>Ярди</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>Роки</value>
   </data>
 </root>

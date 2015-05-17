@@ -144,6 +144,9 @@
   <data name="LessParams" xml:space="preserve">
     <value>Количество параметров меньше, чем ожидается.</value>
   </data>
+  <data name="MatrixArgException" xml:space="preserve">
+    <value>Неправильные размеры матриц.</value>
+  </data>
   <data name="MoreParams" xml:space="preserve">
     <value>Количество параметров больше, чем ожидается.</value>
   </data>
@@ -174,7 +177,7 @@
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>Переменная '{0}' не найдена.</value>
   </data>
-  <data name="MatrixArgException" xml:space="preserve">
-    <value>Неправильные размеры матриц.</value>
+  <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Несоответствующий тип параметра. (Ожидается: {0}; Фактически: {1})</value>
   </data>
 </root>

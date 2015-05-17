@@ -178,7 +178,7 @@
     <value>_Значение:</value>
   </data>
   <data name="AndToolTip" xml:space="preserve">
-    <value>Побитовая операция И. Эта операция округляет рациональное число. Пример: x and y, x &amp; y</value>
+    <value>Побитовая операция И. Пример: x and y, x &amp; y</value>
   </data>
   <data name="AnglesGroupHeader" xml:space="preserve">
     <value>Меры измерения углов</value>
@@ -505,7 +505,7 @@
     <value>Указанная операция не поддерживается.</value>
   </data>
   <data name="NotToolTip" xml:space="preserve">
-    <value>Побитовая операция НЕ. Эта операция округляет рациональное число. Пример: not(3)</value>
+    <value>Побитовая операция НЕ. Пример: not(3)</value>
   </data>
   <data name="NthRootToolTip" xml:space="preserve">
     <value>Корень n-ой степени от "x". Пример: root(27, 3)</value>
@@ -517,7 +517,7 @@
     <value>Открыть</value>
   </data>
   <data name="OrToolTip" xml:space="preserve">
-    <value>Побитовая операция ИЛИ. Эта операция округляет рациональное число. Пример: x or y, x | y</value>
+    <value>Побитовая операция ИЛИ. Пример: x or y, x | y</value>
   </data>
   <data name="ParamGroupHeader" xml:space="preserve">
     <value>Параметры выражения</value>
@@ -754,6 +754,18 @@
     <value>Цикл while. Пример: while(x := x + 1, x &lt; 10).</value>
   </data>
   <data name="XOrToolTip" xml:space="preserve">
-    <value>Побитовая операция Исключащее ИЛИ. Эта операция округляет рациональное число. Пример: x xor y</value>
+    <value>Побитовая операция Исключащее ИЛИ. Пример: x xor y</value>
+  </data>
+  <data name="EqualityToolTip" xml:space="preserve">
+    <value>Эквиваленция. Пример: true &lt;=&gt; false.</value>
+  </data>
+  <data name="ImplicationToolTip" xml:space="preserve">
+    <value>Импликация. Пример: true =&gt; false.</value>
+  </data>
+  <data name="NAndToolTip" xml:space="preserve">
+    <value>Штрих Шеффера. Пример: true nand false.</value>
+  </data>
+  <data name="NOrToolTip" xml:space="preserve">
+    <value>Стрелка Пирса. Пример: true nor false.</value>
   </data>
 </root>

@@ -570,6 +570,7 @@ limitations under the License. -->
                     <Grid Margin="0,4,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -600,6 +601,31 @@ limitations under the License. -->
                             <Rectangle Fill="{StaticResource bit_xor}" Width="28" Height="20" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.XOrToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Grid.Row="1" Grid.Column="0" Tag="=>" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource impl}" Width="26" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ImplicationToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1" Tag="&lt;=>" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource eq}" Width="30" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.EqualityToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2" Tag="nor" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource nor}" Width="20" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.NOrToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3" Tag="nand" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource nand}" Width="28" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.NAndToolTip}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>

@@ -284,7 +284,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

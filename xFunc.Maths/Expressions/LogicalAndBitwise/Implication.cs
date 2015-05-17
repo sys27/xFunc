@@ -18,23 +18,20 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
 
     /// <summary>
-    /// Represents a AND operation.
+    /// Represents a Implication operation.
     /// </summary>
-    public class And : BinaryExpression
+    public class Implication : BinaryExpression
     {
 
-        internal And() { }
+        internal Implication() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="And"/> class.
+        /// Initializes a new instance of the <see cref="Implication"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public And(IExpression left, IExpression right)
-            : base(left, right)
-        {
-
-        }
+        public Implication(IExpression left, IExpression right)
+            : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -44,7 +41,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(4691, 9043);
+            return base.GetHashCode(57601, 26669);
         }
 
         /// <summary>
@@ -55,14 +52,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             if (m_parent is BinaryExpression)
             {
-                return ToString("({0} and {1})");
+                return ToString("({0} => {1})");
             }
 
-            return ToString("{0} and {1}");
+            return ToString("{0} => {1}");
         }
 
         /// <summary>
-        /// Calculates this AND expression.
+        /// Calculates this Implication expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -71,26 +68,16 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-#if PORTABLE
-            if (ResultType == ExpressionResultType.Number)
-                return (int)Math.Round((double)m_left.Calculate(parameters)) & (int)Math.Round((double)m_right.Calculate(parameters));
-            else
-                return (bool)m_left.Calculate(parameters) & (bool)m_right.Calculate(parameters);
-#else
-            if (ResultType == ExpressionResultType.Number)
-                return (int)Math.Round((double)m_left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round((double)m_right.Calculate(parameters), MidpointRounding.AwayFromZero);
-            else
-                return (bool)m_left.Calculate(parameters) & (bool)m_right.Calculate(parameters);
-#endif
+            return !(bool)m_left.Calculate(parameters) | (bool)m_right.Calculate(parameters);
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="And"/>.
+        /// Clones this instance of the <see cref="Implication"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new And(m_left.Clone(), m_right.Clone());
+            return new Implication(m_left.Clone(), m_right.Clone());
         }
 
         /// <summary>
@@ -103,7 +90,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+                return ExpressionResultType.Boolean;
             }
         }
 
@@ -117,7 +104,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+                return ExpressionResultType.Boolean;
             }
         }
 
@@ -131,9 +118,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
-                    return ExpressionResultType.Number;
-
                 return ExpressionResultType.Boolean;
             }
         }

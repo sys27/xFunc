@@ -110,6 +110,10 @@
     <Compile Include="Expressions\LogicalAndBitwise\Or.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Not.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Equality.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Implication.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\NAnd.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\NOr.cs" />
     <Compile Include="Expressions\Trigonometric\Arccos.cs" />
     <Compile Include="Expressions\Trigonometric\Arccot.cs" />
     <Compile Include="Expressions\Trigonometric\Arccsc.cs" />

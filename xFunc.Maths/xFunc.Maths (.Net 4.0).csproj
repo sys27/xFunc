@@ -65,6 +65,10 @@
     <Compile Include="Expressions\Collections\ParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\Collections\ParameterType.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Equality.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Implication.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\NAnd.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\NOr.cs" />
     <Compile Include="Expressions\Matrices\Determinant.cs" />
     <Compile Include="Expressions\Matrices\Inverse.cs" />
     <Compile Include="Expressions\Matrices\Matrix.cs" />

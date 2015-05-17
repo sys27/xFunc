@@ -116,6 +116,14 @@ namespace xFunc.Maths
                     return new Expressions.LogicalAndBitwise.Or();
                 case Operations.XOr:
                     return new Expressions.LogicalAndBitwise.XOr();
+                case Operations.Implication:
+                    return new Implication();
+                case Operations.Equality:
+                    return new Equality();
+                case Operations.NOr:
+                    return new NOr();
+                case Operations.NAnd:
+                    return new NAnd();
                 default:
                     return null;
             }

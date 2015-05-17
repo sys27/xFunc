@@ -83,6 +83,10 @@ namespace xFunc.Views
             {
                 Status = mpiroe.Message;
             }
+            catch (ParameterTypeMismatchException ptme)
+            {
+                Status = ptme.Message;
+            }
             catch (DivideByZeroException dbze)
             {
                 Status = dbze.Message;

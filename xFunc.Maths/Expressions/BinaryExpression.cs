@@ -152,8 +152,7 @@ namespace xFunc.Maths.Expressions
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if ((LeftType & value.ResultType) == ExpressionResultType.None)
-                    // todo: message
-                    throw new ParameterTypeMismatchException();
+                    throw new ParameterTypeMismatchException(LeftType, value.ResultType);
 
                 m_left = value;
                 m_left.Parent = this;
@@ -188,8 +187,7 @@ namespace xFunc.Maths.Expressions
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if ((RightType & value.ResultType) == ExpressionResultType.None)
-                    // todo: message
-                    throw new ParameterTypeMismatchException();
+                    throw new ParameterTypeMismatchException(RightType, value.ResultType);
 
                 m_right = value;
                 m_right.Parent = this;

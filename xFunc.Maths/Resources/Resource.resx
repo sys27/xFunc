@@ -144,6 +144,9 @@
   <data name="LessParams" xml:space="preserve">
     <value>The number of parameters is less than expected.</value>
   </data>
+  <data name="MatrixArgException" xml:space="preserve">
+    <value>The size of matrices is invalid.</value>
+  </data>
   <data name="MoreParams" xml:space="preserve">
     <value>The number of parameters is more than expected.</value>
   </data>
@@ -174,7 +177,7 @@
   <data name="VariableNotFoundExceptionError" xml:space="preserve">
     <value>The '{0}' variable not found.</value>
   </data>
-  <data name="MatrixArgException" xml:space="preserve">
-    <value>The size of matrices is invalid.</value>
+  <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Parameter type mismatch. (Expected: {0}; Actual: {1})</value>
   </data>
 </root>

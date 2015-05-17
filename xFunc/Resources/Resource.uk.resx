@@ -123,476 +123,41 @@
   <data name="AboutButtonToolTip" xml:space="preserve">
     <value>Відкрити вікно "Про програму"</value>
   </data>
+  <data name="AboutToolTipTitle" xml:space="preserve">
+    <value>Про програму (F1)</value>
+  </data>
   <data name="AboutWindowTitle" xml:space="preserve">
     <value>Про програму</value>
-  </data>
-  <data name="AdditionalMathExpanderHeader" xml:space="preserve">
-    <value>Додаткові</value>
-  </data>
-  <data name="AnglesGroupHeader" xml:space="preserve">
-    <value>Одиниці виміру кутів</value>
-  </data>
-  <data name="AnswerTextBox" xml:space="preserve">
-    <value>Рішення:</value>
-  </data>
-  <data name="Author" xml:space="preserve">
-    <value>Дмитро Кіщенко</value>
-  </data>
-  <data name="AuthorTextBox" xml:space="preserve">
-    <value>Розробник:</value>
-  </data>
-  <data name="ClipboardGroupHeader" xml:space="preserve">
-    <value>Буфер обміну</value>
-  </data>
-  <data name="cm" xml:space="preserve">
-    <value>см</value>
-  </data>
-  <data name="ConstantsExpanderHeader" xml:space="preserve">
-    <value>Констати</value>
-  </data>
-  <data name="CopyButtonHeader" xml:space="preserve">
-    <value>Копіювати</value>
-  </data>
-  <data name="CopyScreenTipText" xml:space="preserve">
-    <value>Скопіювати виділений текст</value>
-  </data>
-  <data name="CopyScreenTipTitle" xml:space="preserve">
-    <value>Копіювати (Ctrl+C)</value>
-  </data>
-  <data name="CutButtonHeader" xml:space="preserve">
-    <value>Вирізати</value>
-  </data>
-  <data name="CutScreenTipText" xml:space="preserve">
-    <value>Вирізати виділений текст</value>
-  </data>
-  <data name="CutScreenTipTitle" xml:space="preserve">
-    <value>Вирізати (Ctrl+X)</value>
-  </data>
-  <data name="DegreeButtonHeader" xml:space="preserve">
-    <value>Градуси</value>
-  </data>
-  <data name="DegreeScreenTipText" xml:space="preserve">
-    <value>Використовувати градуси як одиниці виміру кутів</value>
-  </data>
-  <data name="DegreeScreenTipTitle" xml:space="preserve">
-    <value>Градуси (Ctrl+Alt+D)</value>
-  </data>
-  <data name="ExpressionsTextBox" xml:space="preserve">
-    <value>Графіки:</value>
-  </data>
-  <data name="ExpressionTextBox" xml:space="preserve">
-    <value>Вираз:</value>
-  </data>
-  <data name="GradianButtonHeader" xml:space="preserve">
-    <value>Гради</value>
-  </data>
-  <data name="GradianScreenTipText" xml:space="preserve">
-    <value>Використовувати гради як одиниці виміру кутів</value>
-  </data>
-  <data name="GradianScreenTipTitle" xml:space="preserve">
-    <value>Гради (Ctrl+Alt+G)</value>
-  </data>
-  <data name="GraphsTab" xml:space="preserve">
-    <value>Графіки</value>
-  </data>
-  <data name="HomePageTextBox" xml:space="preserve">
-    <value>Сайт:</value>
-  </data>
-  <data name="HomeRibbonTabHeader" xml:space="preserve">
-    <value>Головна</value>
-  </data>
-  <data name="HyperbolicExpanderHeader" xml:space="preserve">
-    <value>Гіперболічні</value>
-  </data>
-  <data name="IndexOutOfRangeExceptionError" xml:space="preserve">
-    <value>Можливо, змінні були введені неправильно.</value>
-  </data>
-  <data name="LogicTab" xml:space="preserve">
-    <value>Логічні</value>
-  </data>
-  <data name="MathTab" xml:space="preserve">
-    <value>Математичні</value>
-  </data>
-  <data name="NotSupportedOperationError" xml:space="preserve">
-    <value>Вказана операція не підтримується.</value>
-  </data>
-  <data name="NumberAndArithmeticExpanderHeader" xml:space="preserve">
-    <value>Числа та арифметичні</value>
-  </data>
-  <data name="PasteButtonHeader" xml:space="preserve">
-    <value>Вставити</value>
-  </data>
-  <data name="PasteScreenTipText" xml:space="preserve">
-    <value>Вставити текст з буфера обміну</value>
-  </data>
-  <data name="PasteScreenTipTitle" xml:space="preserve">
-    <value>Вставити (Ctrl+V)</value>
-  </data>
-  <data name="RadianButtonHeader" xml:space="preserve">
-    <value>Радіани</value>
-  </data>
-  <data name="RadianScreenTipText" xml:space="preserve">
-    <value>Використовувати радіани як одиниці виміру кутів</value>
-  </data>
-  <data name="RadianScreenTipTitle" xml:space="preserve">
-    <value>Радіани (Ctrl+Alt+R)</value>
-  </data>
-  <data name="RedoButtonHeader" xml:space="preserve">
-    <value>Повтор</value>
-  </data>
-  <data name="RedoScreenTipText" xml:space="preserve">
-    <value>Повторити останню дію</value>
-  </data>
-  <data name="RedoScreenTipTitle" xml:space="preserve">
-    <value>Повтор (Ctrl+Y)</value>
-  </data>
-  <data name="ShowGridCheckBox" xml:space="preserve">
-    <value>Показати сітку</value>
-  </data>
-  <data name="StandartExpanderHeader" xml:space="preserve">
-    <value>Стандартні</value>
-  </data>
-  <data name="TrigonometricExpanderHeader" xml:space="preserve">
-    <value>Тригонометричні</value>
-  </data>
-  <data name="TruthTableTab" xml:space="preserve">
-    <value>Таблиця істинності</value>
-  </data>
-  <data name="UndoButtonHeader" xml:space="preserve">
-    <value>Відміна</value>
-  </data>
-  <data name="UndoScreenTipText" xml:space="preserve">
-    <value>Відмінити останню дію</value>
-  </data>
-  <data name="UndoScreenTipTitle" xml:space="preserve">
-    <value>Відміна (Ctrl+Z)</value>
-  </data>
-  <data name="VariableNotFoundExceptionError" xml:space="preserve">
-    <value>Змінна не знайдена.</value>
-  </data>
-  <data name="VersionTextBox" xml:space="preserve">
-    <value>Версія:</value>
-  </data>
-  <data name="BitwiseExpanderHeader" xml:space="preserve">
-    <value>Бітові та логічні</value>
-  </data>
-  <data name="ClearButtonHeader" xml:space="preserve">
-    <value>Очистити</value>
-  </data>
-  <data name="ClearScreenTipText" xml:space="preserve">
-    <value>Видалити всі вирази зі списку.</value>
-  </data>
-  <data name="ClearScreenTipTitle" xml:space="preserve">
-    <value>Очистити</value>
-  </data>
-  <data name="DeleteExpButtonHeader" xml:space="preserve">
-    <value>Видалити</value>
-  </data>
-  <data name="DeleteExpScreenTipText" xml:space="preserve">
-    <value>Видалити виділений вираз</value>
-  </data>
-  <data name="DeleteExpScreenTipTitle" xml:space="preserve">
-    <value>Видалити</value>
-  </data>
-  <data name="ExpListGroupHeader" xml:space="preserve">
-    <value>Список виразів</value>
-  </data>
-  <data name="CopyAnswerMenuItem" xml:space="preserve">
-    <value>Копіювати "Відповідь"</value>
-  </data>
-  <data name="CopyExpressionMenuItem" xml:space="preserve">
-    <value>Копіювати "Вираз"</value>
-  </data>
-  <data name="DeleteMenuItem" xml:space="preserve">
-    <value>Видалити</value>
-  </data>
-  <data name="ToClipboardMenuItem" xml:space="preserve">
-    <value>До буфера обміну</value>
-  </data>
-  <data name="ToInputMenuItem" xml:space="preserve">
-    <value>У поле для введеня</value>
-  </data>
-  <data name="AdditionalLogicExpanderHeader" xml:space="preserve">
-    <value>Додаткові</value>
-  </data>
-  <data name="AssignFunction" xml:space="preserve">
-    <value>Функції '{0}' присвоєно вираз "{1} '.</value>
-  </data>
-  <data name="AssignVariable" xml:space="preserve">
-    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
-  </data>
-  <data name="UndefineFunction" xml:space="preserve">
-    <value>Функція '{0}' видалена.</value>
-  </data>
-  <data name="UndefineVariable" xml:space="preserve">
-    <value>Змінна '{0}' видалена.</value>
-  </data>
-  <data name="AvailableUpdate" xml:space="preserve">
-    <value>Доступно оновлення.</value>
-  </data>
-  <data name="VariablesTitle" xml:space="preserve">
-    <value>Змінні</value>
-  </data>
-  <data name="AnswerBaseGroupHeader" xml:space="preserve">
-    <value>Система числення</value>
-  </data>
-  <data name="FunctionButtonHeader" xml:space="preserve">
-    <value>Функції</value>
-  </data>
-  <data name="ParamGroupHeader" xml:space="preserve">
-    <value>Параметри виразу.</value>
-  </data>
-  <data name="VariablesButtonHeader" xml:space="preserve">
-    <value>Змінні</value>
-  </data>
-  <data name="FunctionsTitle" xml:space="preserve">
-    <value>Функції</value>
-  </data>
-  <data name="FuncNameHeader" xml:space="preserve">
-    <value>Ім'я</value>
-  </data>
-  <data name="FuncValueHeader" xml:space="preserve">
-    <value>Значення</value>
-  </data>
-  <data name="VarNameHeader" xml:space="preserve">
-    <value>Ім'я</value>
-  </data>
-  <data name="VarValueHeader" xml:space="preserve">
-    <value>Значення</value>
-  </data>
-  <data name="FuncScreenTitText" xml:space="preserve">
-    <value>Відображає вікно з усіма введеними функціями.</value>
-  </data>
-  <data name="FuncScreenTitTitle" xml:space="preserve">
-    <value>Функції (Ctrl+Alt+F)</value>
-  </data>
-  <data name="VarScreenTitText" xml:space="preserve">
-    <value>Відображає вікно з усіма введеними змінними.</value>
-  </data>
-  <data name="VarScreenTitTitle" xml:space="preserve">
-    <value>Змінні (Ctrl+Alt+V)</value>
-  </data>
-  <data name="ArccosecantToolTip" xml:space="preserve">
-    <value>Арккосеканс числа. Приклад: arccsc(90) або arccosec(90)</value>
-  </data>
-  <data name="ArccosineToolTip" xml:space="preserve">
-    <value>Арккосинус числа. Приклад: arccos(90)</value>
-  </data>
-  <data name="ArccotangentToolTip" xml:space="preserve">
-    <value>Арккотангенс числа. Приклад: arccot(90) або arcctg(90)</value>
-  </data>
-  <data name="ArcsecantToolTip" xml:space="preserve">
-    <value>Арксеканс числа. Приклад: arcsec(90)</value>
-  </data>
-  <data name="ArcsineToolTip" xml:space="preserve">
-    <value>Арксинус числа. Приклад: arcsin(1)</value>
-  </data>
-  <data name="ArctangentToolTip" xml:space="preserve">
-    <value>Арктангенс числа. Приклад: arctan(90) або arctg(90)</value>
-  </data>
-  <data name="CosecantToolTip" xml:space="preserve">
-    <value>Косеканс числа. Приклад: csc(90) або cosec(90)</value>
-  </data>
-  <data name="CosineToolTip" xml:space="preserve">
-    <value>Косинус числа. Приклад: cos(90)</value>
-  </data>
-  <data name="CotangentToolTip" xml:space="preserve">
-    <value>Котангенс числа. Приклад: cot(90) або ctg(90)</value>
-  </data>
-  <data name="SecantToolTip" xml:space="preserve">
-    <value>Секанс числа. Приклад: sec(90)</value>
-  </data>
-  <data name="SineToolTip" xml:space="preserve">
-    <value>Синус числа. Приклад: sin(90)</value>
-  </data>
-  <data name="TangentToolTip" xml:space="preserve">
-    <value>Тангенс числа. Приклад: tan(90) або tg(90)</value>
   </data>
   <data name="AbsToolTip" xml:space="preserve">
     <value>Модуль "x". Приклад: abs(-1)</value>
   </data>
-  <data name="NthRootToolTip" xml:space="preserve">
-    <value>Корінь n-ого ступеня від "x". Приклад: root(27, 3)</value>
+  <data name="AddAssignToolTip" xml:space="preserve">
+    <value>Оператор "+=". Приклад: x += 2.</value>
   </data>
-  <data name="PowerOfTwoToolTip" xml:space="preserve">
-    <value>"x" в ступені 2. Приклад: 7^2</value>
+  <data name="AddFuncCancel" xml:space="preserve">
+    <value>Відміна</value>
   </data>
-  <data name="PowerOfYToolTip" xml:space="preserve">
-    <value>"x" в ступені "y". Приклад: 7^4</value>
+  <data name="AddFuncError" xml:space="preserve">
+    <value>Ім'я функції є неправильним.</value>
   </data>
-  <data name="SquareRootToolTip" xml:space="preserve">
-    <value>Квадратний корінь від "x". Приклад: sqrt(9)</value>
+  <data name="AddFuncFunc" xml:space="preserve">
+    <value>_Функція:</value>
   </data>
-  <data name="LgToolTip" xml:space="preserve">
-    <value>Логарифм за основою 10 числа "x". Приклад: lg(3)</value>
+  <data name="AddFuncName" xml:space="preserve">
+    <value>_Им'я:</value>
   </data>
-  <data name="LnToolTip" xml:space="preserve">
-    <value>Натуральный логарифм числа "x". Приклад: ln(10)</value>
+  <data name="AddFuncOk" xml:space="preserve">
+    <value>ОК</value>
   </data>
-  <data name="LogToolTip" xml:space="preserve">
-    <value>Логарифм за основою "y" чиста "x". Приклад: log(2, 4)</value>
+  <data name="AddFuncTitle" xml:space="preserve">
+    <value>Додати функцію</value>
   </data>
-  <data name="ArcoshToolTip" xml:space="preserve">
-    <value>Зворотний гіперболічний косинус числа "x". Приклад: arcosh(90) або arch(90)</value>
+  <data name="AdditionalLogicExpanderHeader" xml:space="preserve">
+    <value>Додаткові</value>
   </data>
-  <data name="ArcothToolTip" xml:space="preserve">
-    <value>Зворотний гіперболічний котангенс числа "x". Приклад: arcoth(90) або arcth(90)</value>
-  </data>
-  <data name="ArcschToolTip" xml:space="preserve">
-    <value>Зворотний гіперболічний косеканс числа "x". Приклад: arcsch(90)</value>
-  </data>
-  <data name="ArsechToolTip" xml:space="preserve">
-    <value>Зворотний гіперболічний секанс числа "x". Приклад: arsech(90)</value>
-  </data>
-  <data name="ArsinhToolTip" xml:space="preserve">
-    <value>Зворотний гіперболічний синус числа "x". Приклад: arsinh(90) або arsh(90)</value>
-  </data>
-  <data name="ArtanhToolTip" xml:space="preserve">
-    <value>Зворотний гіперболічний тангенс числа "x". Приклад: artanh(90) або arth(90)</value>
-  </data>
-  <data name="CoshToolTip" xml:space="preserve">
-    <value>Гіперболічний косинус числа "x". Приклад: cosh(90) або ch(90)</value>
-  </data>
-  <data name="CothToolTip" xml:space="preserve">
-    <value>Гіперболічний котангенс числа "x". Приклад: coth(90) або cth(90)</value>
-  </data>
-  <data name="CschToolTip" xml:space="preserve">
-    <value>Гіперболічний косеканс числа "x". Приклад: csch(90)</value>
-  </data>
-  <data name="SechToolTip" xml:space="preserve">
-    <value>Гіперболічний секанс числа "x". Приклад: sech(90)</value>
-  </data>
-  <data name="SinhToolTip" xml:space="preserve">
-    <value>Гіперболічний синус числа "x". Приклад: sinh(90) або sh(90)</value>
-  </data>
-  <data name="TanhToolTip" xml:space="preserve">
-    <value>Гіперболічний тангенс числа "x". Приклад: tanh(90) або th(90)</value>
-  </data>
-  <data name="AndToolTip" xml:space="preserve">
-    <value>Побітова операція І. Ця операція округлює раціональне число. Приклад: x and y, x &amp; y</value>
-  </data>
-  <data name="DefToolTip" xml:space="preserve">
-    <value>Призначає значення змінній або функції користувача. Приклад: x := 1, f(x) := sin(x)</value>
-  </data>
-  <data name="ExitMenu" xml:space="preserve">
-    <value>Вихід</value>
-  </data>
-  <data name="ExitToolTip" xml:space="preserve">
-    <value>Закрити додаток.</value>
-  </data>
-  <data name="FileMenu" xml:space="preserve">
-    <value>Файл</value>
-  </data>
-  <data name="NewMenu" xml:space="preserve">
-    <value>Новий</value>
-  </data>
-  <data name="NotToolTip" xml:space="preserve">
-    <value>Побітова операція НЕ. Ця операція округлює раціональне число. Приклад: not(3)</value>
-  </data>
-  <data name="OpenMenu" xml:space="preserve">
-    <value>Відкрити</value>
-  </data>
-  <data name="OrToolTip" xml:space="preserve">
-    <value>Побітова операція АБО. Ця операція округлює раціональне число. Приклад: x or y, x | y</value>
-  </data>
-  <data name="SaveMenu" xml:space="preserve">
-    <value>Зберегти</value>
-  </data>
-  <data name="SettingsMenu" xml:space="preserve">
-    <value>Налаштування</value>
-  </data>
-  <data name="SimplifyToolTip" xml:space="preserve">
-    <value>Спрощує вираз. Приклад: simplify(arcsin(sin(x)))</value>
-  </data>
-  <data name="UndefToolTip" xml:space="preserve">
-    <value>Видаляє змінні або функції користувача. Приклад: undef(x)</value>
-  </data>
-  <data name="XOrToolTip" xml:space="preserve">
-    <value>Побітова операція Виключне АБО. Ця операція округлює раціональне число. Приклад: x xor y</value>
-  </data>
-  <data name="SettingsCancel" xml:space="preserve">
-    <value>Скасувати</value>
-  </data>
-  <data name="SettingsSave" xml:space="preserve">
-    <value>Зберегти</value>
-  </data>
-  <data name="SettingsToolTip" xml:space="preserve">
-    <value>Відображає налаштування програми.</value>
-  </data>
-  <data name="SettingsViewTitle" xml:space="preserve">
-    <value>Налаштування</value>
-  </data>
-  <data name="SettingsAngle" xml:space="preserve">
-    <value>Одиниці виміру кута за замовчуванням:</value>
-  </data>
-  <data name="SettingsAutoLang" xml:space="preserve">
-    <value>Автоматично</value>
-  </data>
-  <data name="SettingsBin" xml:space="preserve">
-    <value>Двійкова</value>
-  </data>
-  <data name="SettingsCheckUpdates" xml:space="preserve">
-    <value>Перевіряти оновлення.</value>
-  </data>
-  <data name="SettingsDec" xml:space="preserve">
-    <value>Десяткова</value>
-  </data>
-  <data name="SettingsDegree" xml:space="preserve">
-    <value>Градуси</value>
-  </data>
-  <data name="SettingsGradian" xml:space="preserve">
-    <value>Гради</value>
-  </data>
-  <data name="SettingsHex" xml:space="preserve">
-    <value>Шістнадцяткова</value>
-  </data>
-  <data name="SettingsLanguageLabel" xml:space="preserve">
-    <value>Мова*:</value>
-  </data>
-  <data name="SettingsMaxNumber" xml:space="preserve">
-    <value>Максимальна кількість виразів:</value>
-  </data>
-  <data name="SettingsNumber" xml:space="preserve">
-    <value>Система числення за замовчуванням:</value>
-  </data>
-  <data name="SettingsOct" xml:space="preserve">
-    <value>Вісімкова</value>
-  </data>
-  <data name="SettingsRadian" xml:space="preserve">
-    <value>Радіани</value>
-  </data>
-  <data name="SettingsRemember" xml:space="preserve">
-    <value>Запам'ятовувати систему числення і одиниці вимірювання кута</value>
-  </data>
-  <data name="SettingsRightToolBar" xml:space="preserve">
-    <value>Запам'ятовувати стан правої панелі інструментів.</value>
-  </data>
-  <data name="SettingsWindowPos" xml:space="preserve">
-    <value>Запам'ятовувати стан вікна і його позицію.</value>
-  </data>
-  <data name="SettingsReset" xml:space="preserve">
-    <value>Скинути</value>
-  </data>
-  <data name="SettingsLanguageToolTip" xml:space="preserve">
-    <value>Мова буде змінена після перезапуску програми.</value>
-  </data>
-  <data name="AboutToolTipTitle" xml:space="preserve">
-    <value>Про програму (F1)</value>
-  </data>
-  <data name="ExitToolTipTitle" xml:space="preserve">
-    <value>Вихід (Alt+F4)</value>
-  </data>
-  <data name="SettingsToolTipTitle" xml:space="preserve">
-    <value>Налаштування (Alt+S)</value>
-  </data>
-  <data name="MathParameterType_Constant" xml:space="preserve">
-    <value>Константи</value>
-  </data>
-  <data name="MathParameterType_Normal" xml:space="preserve">
-    <value>Звичайні</value>
-  </data>
-  <data name="MathParameterType_ReadOnly" xml:space="preserve">
-    <value>Тільки для читання</value>
+  <data name="AdditionalMathExpanderHeader" xml:space="preserve">
+    <value>Додаткові</value>
   </data>
   <data name="AddVarCancel" xml:space="preserve">
     <value>Відміна</value>
@@ -612,92 +177,89 @@
   <data name="AddVarValue" xml:space="preserve">
     <value>_Значення:</value>
   </data>
-  <data name="AddFuncCancel" xml:space="preserve">
-    <value>Відміна</value>
+  <data name="AndToolTip" xml:space="preserve">
+    <value>Побітова операція І. Ця операція округлює раціональне число. Приклад: x and y, x &amp; y</value>
   </data>
-  <data name="AddFuncFunc" xml:space="preserve">
-    <value>_Функція:</value>
+  <data name="AnglesGroupHeader" xml:space="preserve">
+    <value>Одиниці виміру кутів</value>
   </data>
-  <data name="AddFuncName" xml:space="preserve">
-    <value>_Им'я:</value>
+  <data name="AnswerBaseGroupHeader" xml:space="preserve">
+    <value>Система числення</value>
   </data>
-  <data name="AddFuncOk" xml:space="preserve">
-    <value>ОК</value>
+  <data name="AnswerTextBox" xml:space="preserve">
+    <value>Рішення:</value>
   </data>
-  <data name="AddFuncTitle" xml:space="preserve">
-    <value>Додати функцію</value>
+  <data name="ArccosecantToolTip" xml:space="preserve">
+    <value>Арккосеканс числа. Приклад: arccsc(90) або arccosec(90)</value>
   </data>
-  <data name="ErrorHeader" xml:space="preserve">
-    <value>Помилка</value>
+  <data name="ArccosineToolTip" xml:space="preserve">
+    <value>Арккосинус числа. Приклад: arccos(90)</value>
   </data>
-  <data name="AddFuncError" xml:space="preserve">
-    <value>Ім'я функції є неправильним.</value>
+  <data name="ArccotangentToolTip" xml:space="preserve">
+    <value>Арккотангенс числа. Приклад: arccot(90) або arcctg(90)</value>
   </data>
-  <data name="GCDToolTip" xml:space="preserve">
-    <value>Найбільший спільний дільник. Приклад: gcd(2, 4)</value>
+  <data name="ArcoshToolTip" xml:space="preserve">
+    <value>Зворотний гіперболічний косинус числа "x". Приклад: arcosh(90) або arch(90)</value>
   </data>
-  <data name="LCMToolTip" xml:space="preserve">
-    <value>Найменше спільне кратне. Приклад: lcm(2, 4)</value>
+  <data name="ArcothToolTip" xml:space="preserve">
+    <value>Зворотний гіперболічний котангенс числа "x". Приклад: arcoth(90) або arcth(90)</value>
   </data>
-  <data name="FactToolTip" xml:space="preserve">
-    <value>Факторіал. Приклад: fact(4) or 4!</value>
+  <data name="ArcschToolTip" xml:space="preserve">
+    <value>Зворотний гіперболічний косеканс числа "x". Приклад: arcsch(90)</value>
   </data>
-  <data name="ProductToolTip" xml:space="preserve">
-    <value>Добуток. Приклад: product(body, from, to, increment, variable)</value>
+  <data name="ArcsecantToolTip" xml:space="preserve">
+    <value>Арксеканс числа. Приклад: arcsec(90)</value>
   </data>
-  <data name="SumToolTip" xml:space="preserve">
-    <value>Сума. Приклад: sum(body, from, to, increment, variable)</value>
+  <data name="ArcsineToolTip" xml:space="preserve">
+    <value>Арксинус числа. Приклад: arcsin(1)</value>
   </data>
-  <data name="MatrixExpanderHeader" xml:space="preserve">
-    <value>Матриці</value>
+  <data name="ArctangentToolTip" xml:space="preserve">
+    <value>Арктангенс числа. Приклад: arctan(90) або arctg(90)</value>
   </data>
-  <data name="DetToolTip" xml:space="preserve">
-    <value>Детермінант матриці. Приклад: det({{1, 3}, {9, 4}})</value>
+  <data name="ArsechToolTip" xml:space="preserve">
+    <value>Зворотний гіперболічний секанс числа "x". Приклад: arsech(90)</value>
   </data>
-  <data name="TransposeToolTip" xml:space="preserve">
-    <value>Транспонувати матрицю. Приклад: transpose({{1, 3}, {9, 4}})</value>
+  <data name="ArsinhToolTip" xml:space="preserve">
+    <value>Зворотний гіперболічний синус числа "x". Приклад: arsinh(90) або arsh(90)</value>
   </data>
-  <data name="InverseToolTip" xml:space="preserve">
-    <value>Зворотній матриця. Приклад: inverse({{1, 3}, {9, 4}})</value>
+  <data name="ArtanhToolTip" xml:space="preserve">
+    <value>Зворотний гіперболічний тангенс числа "x". Приклад: artanh(90) або arth(90)</value>
   </data>
-  <data name="RoundToolTip" xml:space="preserve">
-    <value>Функція округлення. Приклад: round(number, digits).</value>
+  <data name="AssignFunction" xml:space="preserve">
+    <value>Функції '{0}' присвоєно вираз "{1} '.</value>
+  </data>
+  <data name="AssignVariable" xml:space="preserve">
+    <value>Змінній '{0}' присвоєно '{1}' значення.</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Дмитро Кіщенко</value>
+  </data>
+  <data name="AuthorTextBox" xml:space="preserve">
+    <value>Розробник:</value>
+  </data>
+  <data name="AvailableUpdate" xml:space="preserve">
+    <value>Доступно оновлення.</value>
+  </data>
+  <data name="BitwiseExpanderHeader" xml:space="preserve">
+    <value>Бітові та логічні</value>
   </data>
   <data name="CeilToolTip" xml:space="preserve">
     <value>Повертає найменше ціле число, яке більше або дорівнює заданому числу. Приклад: ceil(5.55555).</value>
   </data>
-  <data name="FloorToolTip" xml:space="preserve">
-    <value>Повертає найбільше ціле число, яке менше або дорівнює вказаному числу. Приклад: floor(5.55555).</value>
+  <data name="ClearButtonHeader" xml:space="preserve">
+    <value>Очистити</value>
   </data>
-  <data name="ProgExpanderHeader" xml:space="preserve">
-    <value>Програмування</value>
+  <data name="ClearScreenTipText" xml:space="preserve">
+    <value>Видалити всі вирази зі списку.</value>
   </data>
-  <data name="WhileToolTip" xml:space="preserve">
-    <value>Цикл while. Приклад: while(x := x + 1, x &lt; 10).</value>
+  <data name="ClearScreenTipTitle" xml:space="preserve">
+    <value>Очистити</value>
   </data>
-  <data name="ForToolTip" xml:space="preserve">
-    <value>Цикл for. Приклад: for(z := z + 1, x := 0, x &lt; 10, x := x + 1).</value>
+  <data name="ClipboardGroupHeader" xml:space="preserve">
+    <value>Буфер обміну</value>
   </data>
-  <data name="IfToolTip" xml:space="preserve">
-    <value>Умова if. Приклад: if(x &lt; 2, sin(x), cos(x)).</value>
-  </data>
-  <data name="EqualToolTip" xml:space="preserve">
-    <value>Оператор рівності. Приклад: x == 10.</value>
-  </data>
-  <data name="NotEqualToolTip" xml:space="preserve">
-    <value>Оператор нерівності. Приклад: x != 10.</value>
-  </data>
-  <data name="LessThanToolTip" xml:space="preserve">
-    <value>Оператор порівняння "менше". Приклад: x &lt;10.</value>
-  </data>
-  <data name="GreaterThanToolTip" xml:space="preserve">
-    <value>Оператор порівняння "більше". Приклад: x&gt; 10.</value>
-  </data>
-  <data name="LessOrEqualToolTip" xml:space="preserve">
-    <value>Оператор порівняння "менше або дорівнює". Приклад: x &lt;= 10.</value>
-  </data>
-  <data name="GreaterOrEqualToolTip" xml:space="preserve">
-    <value>Оператор порівняння "більше або дорівнює". Приклад: x&gt; = 10.</value>
+  <data name="cm" xml:space="preserve">
+    <value>см</value>
   </data>
   <data name="ConditionalAndToolTip" xml:space="preserve">
     <value>Умовний оператор І. Приклад: x == 0 &amp;&amp; y != 0.</value>
@@ -705,29 +267,20 @@
   <data name="ConditionalOrToolTip" xml:space="preserve">
     <value>Умовний оператор АБО. Приклад: x == 0 || y != 0.</value>
   </data>
-  <data name="AddAssignToolTip" xml:space="preserve">
-    <value>Оператор "+=". Приклад: x += 2.</value>
-  </data>
-  <data name="SubAssignToolTip" xml:space="preserve">
-    <value>Оператор "-=". Приклад: x -= 2.</value>
-  </data>
-  <data name="MulAssignToolTip" xml:space="preserve">
-    <value>Оператор "*=". Приклад: x *= 2.</value>
-  </data>
-  <data name="DivAssignToolTip" xml:space="preserve">
-    <value>Оператор "/=". Приклад: x /= 2.</value>
-  </data>
-  <data name="ToolsGroupHeader" xml:space="preserve">
-    <value>Інструменти</value>
+  <data name="ConstantsExpanderHeader" xml:space="preserve">
+    <value>Констати</value>
   </data>
   <data name="ConverterButtonHeader" xml:space="preserve">
     <value>Конвертер величин</value>
   </data>
-  <data name="ConverterScreenTipTitle" xml:space="preserve">
-    <value>Конвертер величин (Ctrl+Alt+C)</value>
+  <data name="ConverterCalculateText" xml:space="preserve">
+    <value>Розрахувати</value>
   </data>
   <data name="ConverterScreenTipText" xml:space="preserve">
     <value>Перетворює дані з однієї одиниці вимірювання в іншу.</value>
+  </data>
+  <data name="ConverterScreenTipTitle" xml:space="preserve">
+    <value>Конвертер величин (Ctrl+Alt+C)</value>
   </data>
   <data name="ConverterTitle" xml:space="preserve">
     <value>Конвертер величин</value>
@@ -735,25 +288,472 @@
   <data name="ConverterTypeText" xml:space="preserve">
     <value>_Тип конвертора:</value>
   </data>
-  <data name="ValueText" xml:space="preserve">
-    <value>_Значення:</value>
+  <data name="CopyAnswerMenuItem" xml:space="preserve">
+    <value>Копіювати "Відповідь"</value>
   </data>
-  <data name="UnitsText" xml:space="preserve">
-    <value>_Одиниці:</value>
+  <data name="CopyButtonHeader" xml:space="preserve">
+    <value>Копіювати</value>
+  </data>
+  <data name="CopyExpressionMenuItem" xml:space="preserve">
+    <value>Копіювати "Вираз"</value>
+  </data>
+  <data name="CopyScreenTipText" xml:space="preserve">
+    <value>Скопіювати виділений текст</value>
+  </data>
+  <data name="CopyScreenTipTitle" xml:space="preserve">
+    <value>Копіювати (Ctrl+C)</value>
+  </data>
+  <data name="CosecantToolTip" xml:space="preserve">
+    <value>Косеканс числа. Приклад: csc(90) або cosec(90)</value>
+  </data>
+  <data name="CoshToolTip" xml:space="preserve">
+    <value>Гіперболічний косинус числа "x". Приклад: cosh(90) або ch(90)</value>
+  </data>
+  <data name="CosineToolTip" xml:space="preserve">
+    <value>Косинус числа. Приклад: cos(90)</value>
+  </data>
+  <data name="CotangentToolTip" xml:space="preserve">
+    <value>Котангенс числа. Приклад: cot(90) або ctg(90)</value>
+  </data>
+  <data name="CothToolTip" xml:space="preserve">
+    <value>Гіперболічний котангенс числа "x". Приклад: coth(90) або cth(90)</value>
+  </data>
+  <data name="CschToolTip" xml:space="preserve">
+    <value>Гіперболічний косеканс числа "x". Приклад: csch(90)</value>
+  </data>
+  <data name="CutButtonHeader" xml:space="preserve">
+    <value>Вирізати</value>
+  </data>
+  <data name="CutScreenTipText" xml:space="preserve">
+    <value>Вирізати виділений текст</value>
+  </data>
+  <data name="CutScreenTipTitle" xml:space="preserve">
+    <value>Вирізати (Ctrl+X)</value>
+  </data>
+  <data name="DefToolTip" xml:space="preserve">
+    <value>Призначає значення змінній або функції користувача. Приклад: x := 1, f(x) := sin(x)</value>
+  </data>
+  <data name="DegreeButtonHeader" xml:space="preserve">
+    <value>Градуси</value>
+  </data>
+  <data name="DegreeScreenTipText" xml:space="preserve">
+    <value>Використовувати градуси як одиниці виміру кутів</value>
+  </data>
+  <data name="DegreeScreenTipTitle" xml:space="preserve">
+    <value>Градуси (Ctrl+Alt+D)</value>
+  </data>
+  <data name="DeleteExpButtonHeader" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="DeleteExpScreenTipText" xml:space="preserve">
+    <value>Видалити виділений вираз</value>
+  </data>
+  <data name="DeleteExpScreenTipTitle" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="DeleteMenuItem" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="DetToolTip" xml:space="preserve">
+    <value>Детермінант матриці. Приклад: det({{1, 3}, {9, 4}})</value>
+  </data>
+  <data name="DivAssignToolTip" xml:space="preserve">
+    <value>Оператор "/=". Приклад: x /= 2.</value>
+  </data>
+  <data name="EqualToolTip" xml:space="preserve">
+    <value>Оператор рівності. Приклад: x == 10.</value>
+  </data>
+  <data name="ErrorHeader" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
+  <data name="ExitMenu" xml:space="preserve">
+    <value>Вихід</value>
+  </data>
+  <data name="ExitToolTip" xml:space="preserve">
+    <value>Закрити додаток.</value>
+  </data>
+  <data name="ExitToolTipTitle" xml:space="preserve">
+    <value>Вихід (Alt+F4)</value>
+  </data>
+  <data name="ExpListGroupHeader" xml:space="preserve">
+    <value>Список виразів</value>
+  </data>
+  <data name="ExpressionsTextBox" xml:space="preserve">
+    <value>Графіки:</value>
+  </data>
+  <data name="ExpressionTextBox" xml:space="preserve">
+    <value>Вираз:</value>
+  </data>
+  <data name="FactToolTip" xml:space="preserve">
+    <value>Факторіал. Приклад: fact(4) or 4!</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="FloorToolTip" xml:space="preserve">
+    <value>Повертає найбільше ціле число, яке менше або дорівнює вказаному числу. Приклад: floor(5.55555).</value>
+  </data>
+  <data name="ForToolTip" xml:space="preserve">
+    <value>Цикл for. Приклад: for(z := z + 1, x := 0, x &lt; 10, x := x + 1).</value>
   </data>
   <data name="FromText" xml:space="preserve">
     <value>З:</value>
   </data>
-  <data name="ToText" xml:space="preserve">
-    <value>В:</value>
+  <data name="FuncNameHeader" xml:space="preserve">
+    <value>Ім'я</value>
   </data>
-  <data name="ConverterCalculateText" xml:space="preserve">
-    <value>Розрахувати</value>
+  <data name="FuncScreenTitText" xml:space="preserve">
+    <value>Відображає вікно з усіма введеними функціями.</value>
+  </data>
+  <data name="FuncScreenTitTitle" xml:space="preserve">
+    <value>Функції (Ctrl+Alt+F)</value>
+  </data>
+  <data name="FunctionButtonHeader" xml:space="preserve">
+    <value>Функції</value>
+  </data>
+  <data name="FunctionsTitle" xml:space="preserve">
+    <value>Функції</value>
+  </data>
+  <data name="FuncValueHeader" xml:space="preserve">
+    <value>Значення</value>
+  </data>
+  <data name="GCDToolTip" xml:space="preserve">
+    <value>Найбільший спільний дільник. Приклад: gcd(2, 4)</value>
+  </data>
+  <data name="GradianButtonHeader" xml:space="preserve">
+    <value>Гради</value>
+  </data>
+  <data name="GradianScreenTipText" xml:space="preserve">
+    <value>Використовувати гради як одиниці виміру кутів</value>
+  </data>
+  <data name="GradianScreenTipTitle" xml:space="preserve">
+    <value>Гради (Ctrl+Alt+G)</value>
+  </data>
+  <data name="GraphsTab" xml:space="preserve">
+    <value>Графіки</value>
+  </data>
+  <data name="GreaterOrEqualToolTip" xml:space="preserve">
+    <value>Оператор порівняння "більше або дорівнює". Приклад: x&gt; = 10.</value>
+  </data>
+  <data name="GreaterThanToolTip" xml:space="preserve">
+    <value>Оператор порівняння "більше". Приклад: x&gt; 10.</value>
+  </data>
+  <data name="HomePageTextBox" xml:space="preserve">
+    <value>Сайт:</value>
+  </data>
+  <data name="HomeRibbonTabHeader" xml:space="preserve">
+    <value>Головна</value>
+  </data>
+  <data name="HyperbolicExpanderHeader" xml:space="preserve">
+    <value>Гіперболічні</value>
+  </data>
+  <data name="IfToolTip" xml:space="preserve">
+    <value>Умова if. Приклад: if(x &lt; 2, sin(x), cos(x)).</value>
+  </data>
+  <data name="IndexOutOfRangeExceptionError" xml:space="preserve">
+    <value>Можливо, змінні були введені неправильно.</value>
+  </data>
+  <data name="InverseToolTip" xml:space="preserve">
+    <value>Зворотній матриця. Приклад: inverse({{1, 3}, {9, 4}})</value>
+  </data>
+  <data name="LCMToolTip" xml:space="preserve">
+    <value>Найменше спільне кратне. Приклад: lcm(2, 4)</value>
+  </data>
+  <data name="LessOrEqualToolTip" xml:space="preserve">
+    <value>Оператор порівняння "менше або дорівнює". Приклад: x &lt;= 10.</value>
+  </data>
+  <data name="LessThanToolTip" xml:space="preserve">
+    <value>Оператор порівняння "менше". Приклад: x &lt;10.</value>
+  </data>
+  <data name="LgToolTip" xml:space="preserve">
+    <value>Логарифм за основою 10 числа "x". Приклад: lg(3)</value>
+  </data>
+  <data name="LnToolTip" xml:space="preserve">
+    <value>Натуральный логарифм числа "x". Приклад: ln(10)</value>
+  </data>
+  <data name="LogicTab" xml:space="preserve">
+    <value>Логічні</value>
+  </data>
+  <data name="LogToolTip" xml:space="preserve">
+    <value>Логарифм за основою "y" чиста "x". Приклад: log(2, 4)</value>
+  </data>
+  <data name="MathParameterType_Constant" xml:space="preserve">
+    <value>Константи</value>
+  </data>
+  <data name="MathParameterType_Normal" xml:space="preserve">
+    <value>Звичайні</value>
+  </data>
+  <data name="MathParameterType_ReadOnly" xml:space="preserve">
+    <value>Тільки для читання</value>
+  </data>
+  <data name="MathTab" xml:space="preserve">
+    <value>Математичні</value>
+  </data>
+  <data name="MatrixExpanderHeader" xml:space="preserve">
+    <value>Матриці</value>
+  </data>
+  <data name="MulAssignToolTip" xml:space="preserve">
+    <value>Оператор "*=". Приклад: x *= 2.</value>
+  </data>
+  <data name="NewMenu" xml:space="preserve">
+    <value>Новий</value>
+  </data>
+  <data name="NotEqualToolTip" xml:space="preserve">
+    <value>Оператор нерівності. Приклад: x != 10.</value>
+  </data>
+  <data name="NotSupportedOperationError" xml:space="preserve">
+    <value>Вказана операція не підтримується.</value>
+  </data>
+  <data name="NotToolTip" xml:space="preserve">
+    <value>Побітова операція НЕ. Ця операція округлює раціональне число. Приклад: not(3)</value>
+  </data>
+  <data name="NthRootToolTip" xml:space="preserve">
+    <value>Корінь n-ого ступеня від "x". Приклад: root(27, 3)</value>
+  </data>
+  <data name="NumberAndArithmeticExpanderHeader" xml:space="preserve">
+    <value>Числа та арифметичні</value>
+  </data>
+  <data name="OpenMenu" xml:space="preserve">
+    <value>Відкрити</value>
+  </data>
+  <data name="OrToolTip" xml:space="preserve">
+    <value>Побітова операція АБО. Ця операція округлює раціональне число. Приклад: x or y, x | y</value>
+  </data>
+  <data name="ParamGroupHeader" xml:space="preserve">
+    <value>Параметри виразу.</value>
+  </data>
+  <data name="PasteButtonHeader" xml:space="preserve">
+    <value>Вставити</value>
+  </data>
+  <data name="PasteScreenTipText" xml:space="preserve">
+    <value>Вставити текст з буфера обміну</value>
+  </data>
+  <data name="PasteScreenTipTitle" xml:space="preserve">
+    <value>Вставити (Ctrl+V)</value>
+  </data>
+  <data name="PowerOfTwoToolTip" xml:space="preserve">
+    <value>"x" в ступені 2. Приклад: 7^2</value>
+  </data>
+  <data name="PowerOfYToolTip" xml:space="preserve">
+    <value>"x" в ступені "y". Приклад: 7^4</value>
+  </data>
+  <data name="ProductToolTip" xml:space="preserve">
+    <value>Добуток. Приклад: product(body, from, to, increment, variable)</value>
+  </data>
+  <data name="ProgExpanderHeader" xml:space="preserve">
+    <value>Програмування</value>
+  </data>
+  <data name="RadianButtonHeader" xml:space="preserve">
+    <value>Радіани</value>
+  </data>
+  <data name="RadianScreenTipText" xml:space="preserve">
+    <value>Використовувати радіани як одиниці виміру кутів</value>
+  </data>
+  <data name="RadianScreenTipTitle" xml:space="preserve">
+    <value>Радіани (Ctrl+Alt+R)</value>
+  </data>
+  <data name="RedoButtonHeader" xml:space="preserve">
+    <value>Повтор</value>
+  </data>
+  <data name="RedoScreenTipText" xml:space="preserve">
+    <value>Повторити останню дію</value>
+  </data>
+  <data name="RedoScreenTipTitle" xml:space="preserve">
+    <value>Повтор (Ctrl+Y)</value>
+  </data>
+  <data name="RoundToolTip" xml:space="preserve">
+    <value>Функція округлення. Приклад: round(number, digits).</value>
+  </data>
+  <data name="SaveAsMenu" xml:space="preserve">
+    <value>Зберегти як</value>
+  </data>
+  <data name="SaveMenu" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="SecantToolTip" xml:space="preserve">
+    <value>Секанс числа. Приклад: sec(90)</value>
+  </data>
+  <data name="SechToolTip" xml:space="preserve">
+    <value>Гіперболічний секанс числа "x". Приклад: sech(90)</value>
+  </data>
+  <data name="SettingsAngle" xml:space="preserve">
+    <value>Одиниці виміру кута за замовчуванням:</value>
+  </data>
+  <data name="SettingsAutoLang" xml:space="preserve">
+    <value>Автоматично</value>
+  </data>
+  <data name="SettingsBin" xml:space="preserve">
+    <value>Двійкова</value>
+  </data>
+  <data name="SettingsCancel" xml:space="preserve">
+    <value>Скасувати</value>
+  </data>
+  <data name="SettingsCheckUpdates" xml:space="preserve">
+    <value>Перевіряти оновлення.</value>
+  </data>
+  <data name="SettingsDec" xml:space="preserve">
+    <value>Десяткова</value>
+  </data>
+  <data name="SettingsDegree" xml:space="preserve">
+    <value>Градуси</value>
+  </data>
+  <data name="SettingsGradian" xml:space="preserve">
+    <value>Гради</value>
+  </data>
+  <data name="SettingsHex" xml:space="preserve">
+    <value>Шістнадцяткова</value>
+  </data>
+  <data name="SettingsLanguageLabel" xml:space="preserve">
+    <value>Мова*:</value>
+  </data>
+  <data name="SettingsLanguageToolTip" xml:space="preserve">
+    <value>Мова буде змінена після перезапуску програми.</value>
+  </data>
+  <data name="SettingsMaxNumber" xml:space="preserve">
+    <value>Максимальна кількість виразів:</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="SettingsNumber" xml:space="preserve">
+    <value>Система числення за замовчуванням:</value>
+  </data>
+  <data name="SettingsOct" xml:space="preserve">
+    <value>Вісімкова</value>
+  </data>
+  <data name="SettingsRadian" xml:space="preserve">
+    <value>Радіани</value>
+  </data>
+  <data name="SettingsRemember" xml:space="preserve">
+    <value>Запам'ятовувати систему числення і одиниці вимірювання кута</value>
+  </data>
+  <data name="SettingsReset" xml:space="preserve">
+    <value>Скинути</value>
+  </data>
+  <data name="SettingsRightToolBar" xml:space="preserve">
+    <value>Запам'ятовувати стан правої панелі інструментів.</value>
+  </data>
+  <data name="SettingsSave" xml:space="preserve">
+    <value>Зберегти</value>
   </data>
   <data name="SettingsSaveUF" xml:space="preserve">
     <value>Зберігати функції користувача.</value>
   </data>
-  <data name="SaveAsMenu" xml:space="preserve">
-    <value>Зберегти як</value>
+  <data name="SettingsToolTip" xml:space="preserve">
+    <value>Відображає налаштування програми.</value>
+  </data>
+  <data name="SettingsToolTipTitle" xml:space="preserve">
+    <value>Налаштування (Alt+S)</value>
+  </data>
+  <data name="SettingsViewTitle" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="SettingsWindowPos" xml:space="preserve">
+    <value>Запам'ятовувати стан вікна і його позицію.</value>
+  </data>
+  <data name="ShowGridCheckBox" xml:space="preserve">
+    <value>Показати сітку</value>
+  </data>
+  <data name="SimplifyToolTip" xml:space="preserve">
+    <value>Спрощує вираз. Приклад: simplify(arcsin(sin(x)))</value>
+  </data>
+  <data name="SineToolTip" xml:space="preserve">
+    <value>Синус числа. Приклад: sin(90)</value>
+  </data>
+  <data name="SinhToolTip" xml:space="preserve">
+    <value>Гіперболічний синус числа "x". Приклад: sinh(90) або sh(90)</value>
+  </data>
+  <data name="SquareRootToolTip" xml:space="preserve">
+    <value>Квадратний корінь від "x". Приклад: sqrt(9)</value>
+  </data>
+  <data name="StandartExpanderHeader" xml:space="preserve">
+    <value>Стандартні</value>
+  </data>
+  <data name="SubAssignToolTip" xml:space="preserve">
+    <value>Оператор "-=". Приклад: x -= 2.</value>
+  </data>
+  <data name="SumToolTip" xml:space="preserve">
+    <value>Сума. Приклад: sum(body, from, to, increment, variable)</value>
+  </data>
+  <data name="TangentToolTip" xml:space="preserve">
+    <value>Тангенс числа. Приклад: tan(90) або tg(90)</value>
+  </data>
+  <data name="TanhToolTip" xml:space="preserve">
+    <value>Гіперболічний тангенс числа "x". Приклад: tanh(90) або th(90)</value>
+  </data>
+  <data name="ToClipboardMenuItem" xml:space="preserve">
+    <value>До буфера обміну</value>
+  </data>
+  <data name="ToInputMenuItem" xml:space="preserve">
+    <value>У поле для введеня</value>
+  </data>
+  <data name="ToolsGroupHeader" xml:space="preserve">
+    <value>Інструменти</value>
+  </data>
+  <data name="ToText" xml:space="preserve">
+    <value>В:</value>
+  </data>
+  <data name="TransposeToolTip" xml:space="preserve">
+    <value>Транспонувати матрицю. Приклад: transpose({{1, 3}, {9, 4}})</value>
+  </data>
+  <data name="TrigonometricExpanderHeader" xml:space="preserve">
+    <value>Тригонометричні</value>
+  </data>
+  <data name="TruthTableTab" xml:space="preserve">
+    <value>Таблиця істинності</value>
+  </data>
+  <data name="UndefineFunction" xml:space="preserve">
+    <value>Функція '{0}' видалена.</value>
+  </data>
+  <data name="UndefineVariable" xml:space="preserve">
+    <value>Змінна '{0}' видалена.</value>
+  </data>
+  <data name="UndefToolTip" xml:space="preserve">
+    <value>Видаляє змінні або функції користувача. Приклад: undef(x)</value>
+  </data>
+  <data name="UndoButtonHeader" xml:space="preserve">
+    <value>Відміна</value>
+  </data>
+  <data name="UndoScreenTipText" xml:space="preserve">
+    <value>Відмінити останню дію</value>
+  </data>
+  <data name="UndoScreenTipTitle" xml:space="preserve">
+    <value>Відміна (Ctrl+Z)</value>
+  </data>
+  <data name="UnitsText" xml:space="preserve">
+    <value>_Одиниці:</value>
+  </data>
+  <data name="ValueText" xml:space="preserve">
+    <value>_Значення:</value>
+  </data>
+  <data name="VariableNotFoundExceptionError" xml:space="preserve">
+    <value>Змінна не знайдена.</value>
+  </data>
+  <data name="VariablesButtonHeader" xml:space="preserve">
+    <value>Змінні</value>
+  </data>
+  <data name="VariablesTitle" xml:space="preserve">
+    <value>Змінні</value>
+  </data>
+  <data name="VarNameHeader" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="VarScreenTitText" xml:space="preserve">
+    <value>Відображає вікно з усіма введеними змінними.</value>
+  </data>
+  <data name="VarScreenTitTitle" xml:space="preserve">
+    <value>Змінні (Ctrl+Alt+V)</value>
+  </data>
+  <data name="VarValueHeader" xml:space="preserve">
+    <value>Значення</value>
+  </data>
+  <data name="VersionTextBox" xml:space="preserve">
+    <value>Версія:</value>
+  </data>
+  <data name="WhileToolTip" xml:space="preserve">
+    <value>Цикл while. Приклад: while(x := x + 1, x &lt; 10).</value>
+  </data>
+  <data name="XOrToolTip" xml:space="preserve">
+    <value>Побітова операція Виключне АБО. Ця операція округлює раціональне число. Приклад: x xor y</value>
   </data>
 </root>

@@ -109,6 +109,10 @@ namespace xFunc.Maths.Tokens
                 case Operations.And:
                 case Operations.Or:
                 case Operations.XOr:
+                case Operations.Implication:
+                case Operations.Equality:
+                case Operations.NOr:
+                case Operations.NAnd:
                     return 15;
                 case Operations.AddAssign:
                 case Operations.SubAssign:

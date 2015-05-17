@@ -60,6 +60,10 @@
     <Compile Include="Expressions\Logics\XOrTest.cs" />
     <Compile Include="Expressions\Maths\AbsTest.cs" />
     <Compile Include="Expressions\Maths\AddTest.cs" />
+    <Compile Include="Expressions\Maths\Bitwise\EqualityTest.cs" />
+    <Compile Include="Expressions\Maths\Bitwise\NAndTest.cs" />
+    <Compile Include="Expressions\Maths\Bitwise\NOrTest.cs" />
+    <Compile Include="Expressions\Maths\Bitwise\ImplicationTest.cs" />
     <Compile Include="Expressions\Maths\Bitwise\XOrTest.cs" />
     <Compile Include="Expressions\Maths\Bitwise\OrTest.cs" />
     <Compile Include="Expressions\Maths\Bitwise\NotTest.cs" />

@@ -304,6 +304,66 @@ namespace xFunc.Test
         }
 
         [TestMethod]
+        public void ImplicationSymbolTest1()
+        {
+            var tokens = lexer.Tokenize("true -> false");
+
+            var expected = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Implication),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ImplicationSymbolTest2()
+        {
+            var tokens = lexer.Tokenize("true => false");
+
+            var expected = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Implication),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void EqualitySymbolTest1()
+        {
+            var tokens = lexer.Tokenize("true <-> false");
+
+            var expected = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Equality),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void EqualitySymbolTest2()
+        {
+            var tokens = lexer.Tokenize("true <=> false");
+
+            var expected = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Equality),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
         public void Assign()
         {
             var tokens = lexer.Tokenize("x := 2");
@@ -783,6 +843,66 @@ namespace xFunc.Test
                 new OperationToken(Operations.XOr),
                 new NumberToken(2)
             };
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void ImplicationAsWordTest()
+        {
+            var tokens = lexer.Tokenize("true impl false");
+
+            var expected = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Implication),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void EqualityAsWordTest()
+        {
+            var tokens = lexer.Tokenize("true eq false");
+
+            var expected = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Equality),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void NOrAsWordTest()
+        {
+            var tokens = lexer.Tokenize("true nor false");
+
+            var expected = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.NOr),
+                new BooleanToken(false)
+            };
+
+            CollectionAssert.AreEqual(expected, tokens.ToList());
+        }
+
+        [TestMethod]
+        public void NAndAsWordTest()
+        {
+            var tokens = lexer.Tokenize("true nand false");
+
+            var expected = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.NAnd),
+                new BooleanToken(false)
+            };
+
             CollectionAssert.AreEqual(expected, tokens.ToList());
         }
 

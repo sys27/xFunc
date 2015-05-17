@@ -117,134 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AreaConverterName" xml:space="preserve">
-    <value>Площадь</value>
-  </data>
-  <data name="LengthConverterName" xml:space="preserve">
-    <value>Длина</value>
-  </data>
-  <data name="MassConverterName" xml:space="preserve">
-    <value>Масса</value>
-  </data>
-  <data name="PowerConverterName" xml:space="preserve">
-    <value>Мощность</value>
-  </data>
-  <data name="TemperatureConverterName" xml:space="preserve">
-    <value>Температура</value>
-  </data>
-  <data name="TimeConverterName" xml:space="preserve">
-    <value>Время</value>
-  </data>
-  <data name="VolumeConverterName" xml:space="preserve">
-    <value>Объем</value>
-  </data>
-  <data name="SquareMillimeters" xml:space="preserve">
-    <value>Квадратные миллиметры</value>
-  </data>
-  <data name="SquareCentimeters" xml:space="preserve">
-    <value>Квадратные сантиметры</value>
-  </data>
-  <data name="SquareMetres" xml:space="preserve">
-    <value>Квадратные метры</value>
-  </data>
-  <data name="SquareKilometers" xml:space="preserve">
-    <value>Квадратные километры</value>
-  </data>
-  <data name="Hectares" xml:space="preserve">
-    <value>Гектары</value>
-  </data>
-  <data name="SquareInches" xml:space="preserve">
-    <value>Квадратные дюймы</value>
-  </data>
-  <data name="SquareFeet" xml:space="preserve">
-    <value>Квадратные футы</value>
-  </data>
-  <data name="SquareYards" xml:space="preserve">
-    <value>Квадратные ярды</value>
-  </data>
   <data name="Acres" xml:space="preserve">
     <value>Акры</value>
   </data>
-  <data name="SquareMiles" xml:space="preserve">
-    <value>Квадратные мили</value>
-  </data>
-  <data name="Nanometres" xml:space="preserve">
-    <value>Нанометры</value>
-  </data>
-  <data name="Micrometers" xml:space="preserve">
-    <value>Микрометры</value>
-  </data>
-  <data name="Millimeters" xml:space="preserve">
-    <value>Миллиметры</value>
-  </data>
-  <data name="Centimeters" xml:space="preserve">
-    <value>Сантиметры</value>
-  </data>
-  <data name="Metres" xml:space="preserve">
-    <value>Метры</value>
-  </data>
-  <data name="Kilometers" xml:space="preserve">
-    <value>Километры</value>
-  </data>
-  <data name="Inches" xml:space="preserve">
-    <value>Дюймы</value>
-  </data>
-  <data name="Feet" xml:space="preserve">
-    <value>Футы</value>
-  </data>
-  <data name="Yards" xml:space="preserve">
-    <value>Ярды</value>
-  </data>
-  <data name="Miles" xml:space="preserve">
-    <value>Мили</value>
-  </data>
-  <data name="NauticalMiles" xml:space="preserve">
-    <value>Морская миля</value>
-  </data>
-  <data name="Fathoms" xml:space="preserve">
-    <value>Морская сажень</value>
-  </data>
-  <data name="Chains" xml:space="preserve">
-    <value>Чейны</value>
-  </data>
-  <data name="Rods" xml:space="preserve">
-    <value>Роды</value>
+  <data name="AreaConverterName" xml:space="preserve">
+    <value>Площадь</value>
   </data>
   <data name="AstronomicalUnits" xml:space="preserve">
     <value>Астрономические единицы</value>
   </data>
-  <data name="LightYears" xml:space="preserve">
-    <value>Световые годы</value>
+  <data name="Celsius" xml:space="preserve">
+    <value>Градусы Цельсия</value>
   </data>
-  <data name="Parsecs" xml:space="preserve">
-    <value>Парсеки</value>
+  <data name="Centimeters" xml:space="preserve">
+    <value>Сантиметры</value>
   </data>
-  <data name="Milligrams" xml:space="preserve">
-    <value>Миллиграммы</value>
-  </data>
-  <data name="Grams" xml:space="preserve">
-    <value>Граммы</value>
-  </data>
-  <data name="Kilograms" xml:space="preserve">
-    <value>Килограммы</value>
-  </data>
-  <data name="Tonne" xml:space="preserve">
-    <value>Тонны</value>
-  </data>
-  <data name="Slugs" xml:space="preserve">
-    <value>Slugs</value>
-  </data>
-  <data name="Pounds" xml:space="preserve">
-    <value>Фунты</value>
-  </data>
-  <data name="Watts" xml:space="preserve">
-    <value>Ватты</value>
-  </data>
-  <data name="Kilowatts" xml:space="preserve">
-    <value>Киловатты</value>
-  </data>
-  <data name="Horsepower" xml:space="preserve">
-    <value>Лошадиные силы</value>
+  <data name="Chains" xml:space="preserve">
+    <value>Чейны</value>
   </data>
   <data name="CubicCentimeters" xml:space="preserve">
     <value>Кубические сантиметры</value>
@@ -270,26 +159,74 @@
   <data name="Fahrenheit" xml:space="preserve">
     <value>Градусы Фаренгейта</value>
   </data>
+  <data name="Fathoms" xml:space="preserve">
+    <value>Морская сажень</value>
+  </data>
+  <data name="Feet" xml:space="preserve">
+    <value>Футы</value>
+  </data>
   <data name="GallonsUK" xml:space="preserve">
     <value>Галлоны (UK)</value>
   </data>
   <data name="GallonsUS" xml:space="preserve">
     <value>Галлоны (US)</value>
   </data>
+  <data name="Grams" xml:space="preserve">
+    <value>Граммы</value>
+  </data>
+  <data name="Hectares" xml:space="preserve">
+    <value>Гектары</value>
+  </data>
+  <data name="Horsepower" xml:space="preserve">
+    <value>Лошадиные силы</value>
+  </data>
   <data name="Hours" xml:space="preserve">
     <value>Часы</value>
   </data>
-  <data name="Celsius" xml:space="preserve">
-    <value>Градусы Цельсия</value>
+  <data name="Inches" xml:space="preserve">
+    <value>Дюймы</value>
   </data>
   <data name="Kelvin" xml:space="preserve">
     <value>Кельвины</value>
   </data>
+  <data name="Kilograms" xml:space="preserve">
+    <value>Килограммы</value>
+  </data>
+  <data name="Kilometers" xml:space="preserve">
+    <value>Километры</value>
+  </data>
+  <data name="Kilowatts" xml:space="preserve">
+    <value>Киловатты</value>
+  </data>
+  <data name="LengthConverterName" xml:space="preserve">
+    <value>Длина</value>
+  </data>
+  <data name="LightYears" xml:space="preserve">
+    <value>Световые годы</value>
+  </data>
   <data name="Litres" xml:space="preserve">
     <value>Литры</value>
   </data>
+  <data name="MassConverterName" xml:space="preserve">
+    <value>Масса</value>
+  </data>
+  <data name="Metres" xml:space="preserve">
+    <value>Метры</value>
+  </data>
+  <data name="Micrometers" xml:space="preserve">
+    <value>Микрометры</value>
+  </data>
   <data name="Microseconds" xml:space="preserve">
     <value>Микросекунды</value>
+  </data>
+  <data name="Miles" xml:space="preserve">
+    <value>Мили</value>
+  </data>
+  <data name="Milligrams" xml:space="preserve">
+    <value>Миллиграммы</value>
+  </data>
+  <data name="Millimeters" xml:space="preserve">
+    <value>Миллиметры</value>
   </data>
   <data name="Milliseconds" xml:space="preserve">
     <value>Миллисекунды</value>
@@ -297,8 +234,29 @@
   <data name="Minutes" xml:space="preserve">
     <value>Минуты</value>
   </data>
+  <data name="Nanometres" xml:space="preserve">
+    <value>Нанометры</value>
+  </data>
+  <data name="NauticalMiles" xml:space="preserve">
+    <value>Морская миля</value>
+  </data>
   <data name="Newton" xml:space="preserve">
     <value>Градусы Ньютона</value>
+  </data>
+  <data name="Parsecs" xml:space="preserve">
+    <value>Парсеки</value>
+  </data>
+  <data name="PintsUK" xml:space="preserve">
+    <value>Пинта (UK)</value>
+  </data>
+  <data name="PintsUS" xml:space="preserve">
+    <value>Пинта (US)</value>
+  </data>
+  <data name="Pounds" xml:space="preserve">
+    <value>Фунты</value>
+  </data>
+  <data name="PowerConverterName" xml:space="preserve">
+    <value>Мощность</value>
   </data>
   <data name="Rankine" xml:space="preserve">
     <value>Градусы Ранкина</value>
@@ -306,22 +264,64 @@
   <data name="Réaumur" xml:space="preserve">
     <value>Градусы Реомюра</value>
   </data>
+  <data name="Rods" xml:space="preserve">
+    <value>Роды</value>
+  </data>
   <data name="Rømer" xml:space="preserve">
     <value>Градусы Рёмера</value>
   </data>
   <data name="Seconds" xml:space="preserve">
     <value>Секунды</value>
   </data>
+  <data name="Slugs" xml:space="preserve">
+    <value>Slugs</value>
+  </data>
+  <data name="SquareCentimeters" xml:space="preserve">
+    <value>Квадратные сантиметры</value>
+  </data>
+  <data name="SquareFeet" xml:space="preserve">
+    <value>Квадратные футы</value>
+  </data>
+  <data name="SquareInches" xml:space="preserve">
+    <value>Квадратные дюймы</value>
+  </data>
+  <data name="SquareKilometers" xml:space="preserve">
+    <value>Квадратные километры</value>
+  </data>
+  <data name="SquareMetres" xml:space="preserve">
+    <value>Квадратные метры</value>
+  </data>
+  <data name="SquareMiles" xml:space="preserve">
+    <value>Квадратные мили</value>
+  </data>
+  <data name="SquareMillimeters" xml:space="preserve">
+    <value>Квадратные миллиметры</value>
+  </data>
+  <data name="SquareYards" xml:space="preserve">
+    <value>Квадратные ярды</value>
+  </data>
+  <data name="TemperatureConverterName" xml:space="preserve">
+    <value>Температура</value>
+  </data>
+  <data name="TimeConverterName" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="Tonne" xml:space="preserve">
+    <value>Тонны</value>
+  </data>
+  <data name="VolumeConverterName" xml:space="preserve">
+    <value>Объем</value>
+  </data>
+  <data name="Watts" xml:space="preserve">
+    <value>Ватты</value>
+  </data>
   <data name="Weeks" xml:space="preserve">
     <value>Недели</value>
   </data>
+  <data name="Yards" xml:space="preserve">
+    <value>Ярды</value>
+  </data>
   <data name="Years" xml:space="preserve">
     <value>Годы</value>
-  </data>
-  <data name="PintsUK" xml:space="preserve">
-    <value>Пинта (UK)</value>
-  </data>
-  <data name="PintsUS" xml:space="preserve">
-    <value>Пинта (US)</value>
   </data>
 </root>

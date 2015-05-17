@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 i => exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) + (double)right.Arguments[i].Calculate(parameters))
             );
 #else
-            for (int i = 0; i < left.CountOfParams; i++)
+            for (int i = 0; i < left.ParametersCount; i++)
                 exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) + (double)right.Arguments[i].Calculate(parameters));
 #endif
 
@@ -97,7 +97,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 i => exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) - (double)right.Arguments[i].Calculate(parameters))
             );
 #else
-            for (int i = 0; i < left.CountOfParams; i++)
+            for (int i = 0; i < left.ParametersCount; i++)
                 exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) - (double)right.Arguments[i].Calculate(parameters));
 #endif
 
@@ -174,7 +174,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 vectors[i] = new Vector(exps);
             });
 #else
-            for (int i = 0; i < left.CountOfParams; i++)
+            for (int i = 0; i < left.ParametersCount; i++)
             {
                 var exps = new IExpression[left.SizeOfVectors];
 
@@ -224,7 +224,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 vectors[i] = new Vector(exps);
             });
 #else
-            for (int i = 0; i < left.CountOfParams; i++)
+            for (int i = 0; i < left.ParametersCount; i++)
             {
                 var exps = new IExpression[left.SizeOfVectors];
 
@@ -321,7 +321,7 @@ namespace xFunc.Maths.Expressions.Matrices
 #else
             for (int i = 0; i < right.SizeOfVectors; i++)
             {
-                for (int j = 0; j < left.CountOfParams; j++)
+                for (int j = 0; j < left.ParametersCount; j++)
                 {
                     double el = 0;
                     for (int k = 0; k < left.SizeOfVectors; k++)
@@ -428,7 +428,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     result[j][i] = matrix[i][j];
             });
 #else
-            for (int i = 0; i < matrix.CountOfParams; i++)
+            for (int i = 0; i < matrix.ParametersCount; i++)
                 for (int j = 0; j < matrix.SizeOfVectors; j++)
                     result[j][i] = matrix[i][j];
 #endif

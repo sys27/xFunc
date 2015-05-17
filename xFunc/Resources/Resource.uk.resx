@@ -178,7 +178,7 @@
     <value>_Значення:</value>
   </data>
   <data name="AndToolTip" xml:space="preserve">
-    <value>Побітова операція І. Ця операція округлює раціональне число. Приклад: x and y, x &amp; y</value>
+    <value>Побітова операція І. Приклад: x and y, x &amp; y</value>
   </data>
   <data name="AnglesGroupHeader" xml:space="preserve">
     <value>Одиниці виміру кутів</value>
@@ -505,7 +505,7 @@
     <value>Вказана операція не підтримується.</value>
   </data>
   <data name="NotToolTip" xml:space="preserve">
-    <value>Побітова операція НЕ. Ця операція округлює раціональне число. Приклад: not(3)</value>
+    <value>Побітова операція НЕ. Приклад: not(3)</value>
   </data>
   <data name="NthRootToolTip" xml:space="preserve">
     <value>Корінь n-ого ступеня від "x". Приклад: root(27, 3)</value>
@@ -517,7 +517,7 @@
     <value>Відкрити</value>
   </data>
   <data name="OrToolTip" xml:space="preserve">
-    <value>Побітова операція АБО. Ця операція округлює раціональне число. Приклад: x or y, x | y</value>
+    <value>Побітова операція АБО. Приклад: x or y, x | y</value>
   </data>
   <data name="ParamGroupHeader" xml:space="preserve">
     <value>Параметри виразу.</value>
@@ -754,6 +754,18 @@
     <value>Цикл while. Приклад: while(x := x + 1, x &lt; 10).</value>
   </data>
   <data name="XOrToolTip" xml:space="preserve">
-    <value>Побітова операція Виключне АБО. Ця операція округлює раціональне число. Приклад: x xor y</value>
+    <value>Побітова операція Виключне АБО. Приклад: x xor y</value>
+  </data>
+  <data name="ImplicationToolTip" xml:space="preserve">
+    <value>Імплікація. Приклад: true =&gt; false.</value>
+  </data>
+  <data name="EqualityToolTip" xml:space="preserve">
+    <value>Еквіваленція. Приклад: true &lt;=&gt; false.</value>
+  </data>
+  <data name="NAndToolTip" xml:space="preserve">
+    <value>Штрих Шефера. Приклад: true nand false.</value>
+  </data>
+  <data name="NOrToolTip" xml:space="preserve">
+    <value>Стрілка Пірса. Приклад: true nor false.</value>
   </data>
 </root>

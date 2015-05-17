@@ -178,7 +178,7 @@
     <value>_Value:</value>
   </data>
   <data name="AndToolTip" xml:space="preserve">
-    <value>Bitwise AND operation. This operation rounds a rational number. Example: x and y, x &amp; y</value>
+    <value>Bitwise AND operation. Example: x and y, x &amp; y</value>
   </data>
   <data name="AnglesGroupHeader" xml:space="preserve">
     <value>Angles</value>
@@ -505,7 +505,7 @@
     <value>This operation is not supported.</value>
   </data>
   <data name="NotToolTip" xml:space="preserve">
-    <value>Bitwise NOT operation. This operation rounds a rational number. Example: not(3)</value>
+    <value>Bitwise NOT operation. Example: not(3)</value>
   </data>
   <data name="NthRootToolTip" xml:space="preserve">
     <value>nth root of "x". Example: root(27, 3)</value>
@@ -517,7 +517,7 @@
     <value>Open</value>
   </data>
   <data name="OrToolTip" xml:space="preserve">
-    <value>Bitwise OR operation. This operation rounds a rational number. Example: x or y, x | y</value>
+    <value>Bitwise OR operation. Example: x or y, x | y</value>
   </data>
   <data name="ParamGroupHeader" xml:space="preserve">
     <value>Expression Parameters</value>
@@ -754,6 +754,18 @@
     <value>The While loop. Example: while(x := x + 1, x &lt; 10).</value>
   </data>
   <data name="XOrToolTip" xml:space="preserve">
-    <value>Bitwise XOR operation. This operation rounds a rational number. Example: x xor y</value>
+    <value>Bitwise XOR operation. Example: x xor y</value>
+  </data>
+  <data name="ImplicationToolTip" xml:space="preserve">
+    <value>Logical Implication. Example: true =&gt; false.</value>
+  </data>
+  <data name="EqualityToolTip" xml:space="preserve">
+    <value>Logical Equality. Example: true &lt;=&gt; false.</value>
+  </data>
+  <data name="NOrToolTip" xml:space="preserve">
+    <value>Logical NOr. Example: true nor false.</value>
+  </data>
+  <data name="NAndToolTip" xml:space="preserve">
+    <value>Logical NAnd. Example: true nand false.</value>
   </data>
 </root>

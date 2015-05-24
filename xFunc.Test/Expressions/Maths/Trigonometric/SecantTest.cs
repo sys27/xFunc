@@ -24,7 +24,7 @@ namespace xFunc.Test.Expressions.Maths.Trigonometric
         {
             IExpression exp = new Sec(new Number(1));
 
-            Assert.AreEqual(MathExtentions.Sec(1), exp.Calculate(AngleMeasurement.Radian));
+            Assert.AreEqual(MathExtentions.Sec(1), (double)exp.Calculate(AngleMeasurement.Radian), 0.0000000001);
         }
 
         [TestMethod]

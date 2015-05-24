@@ -54,10 +54,7 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression)
         {
-            if (simplify)
-                return simplifier.Simplify(_Differentiate(expression, new Variable("x"), null));
-
-            return _Differentiate(expression, new Variable("x"), null);
+            return Differentiate(expression, new Variable("x"), null);
         }
 
         /// <summary>
@@ -68,10 +65,7 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression, Variable variable)
         {
-            if (simplify)
-                return simplifier.Simplify(_Differentiate(expression, variable, null));
-
-            return _Differentiate(expression, variable, null);
+            return Differentiate(expression, variable, null);
         }
 
         /// <summary>
@@ -91,6 +85,9 @@ namespace xFunc.Maths
             if (variable == null)
                 throw new ArgumentNullException("variable");
 
+            if (!Parser.HasVar(expression, variable))
+                return new Number(0);
+
             if (simplify)
                 return simplifier.Simplify(_Differentiate(expression, variable, parameters));
 
@@ -108,13 +105,6 @@ namespace xFunc.Maths
                 return Number((Number)expression, variable);
             if (expression is Variable)
                 return Variable((Variable)expression, variable);
-
-            if (expression is UnaryExpression)
-            {
-                var un = (UnaryExpression)expression;
-                if (!Parser.HasVar(un.Argument, variable))
-                    return new Number(0);
-            }
 
             if (expression is Abs)
                 return Abs((Abs)expression, variable);
@@ -351,16 +341,13 @@ namespace xFunc.Maths
 
                 return Div(div, variable);
             }
-            if (Parser.HasVar(expression.Right, variable))
-            {
-                var ln = new Ln(expression.Left.Clone());
-                var mul = new Mul(expression.Right.Clone(), ln);
-                var div = new Div(_Differentiate(expression.Right.Clone(), variable), mul);
 
-                return div;
-            }
+            // if (Parser.HasVar(expression.Right, variable))
+            var ln = new Ln(expression.Left.Clone());
+            var mul = new Mul(expression.Right.Clone(), ln);
+            var div2 = new Div(_Differentiate(expression.Right.Clone(), variable), mul);
 
-            return new Number(0);
+            return div2;
         }
 
         /// <summary>
@@ -408,16 +395,13 @@ namespace xFunc.Maths
 
                 return mul2;
             }
-            if (Parser.HasVar(expression.Right, variable))
-            {
-                var ln = new Ln(expression.Left.Clone());
-                var mul1 = new Mul(ln, expression.Clone());
-                var mul2 = new Mul(mul1, _Differentiate(expression.Right.Clone(), variable));
 
-                return mul2;
-            }
+            // if (Parser.HasVar(expression.Right, variable))
+            var ln = new Ln(expression.Left.Clone());
+            var mul3 = new Mul(ln, expression.Clone());
+            var mul4 = new Mul(mul3, _Differentiate(expression.Right.Clone(), variable));
 
-            return new Number(0);
+            return mul4;
         }
 
         /// <summary>
@@ -428,15 +412,10 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Root(Root expression, Variable variable)
         {
-            if (Parser.HasVar(expression.Left, variable) || Parser.HasVar(expression.Right, variable))
-            {
-                var div = new Div(new Number(1), expression.Right.Clone());
-                var pow = new Pow(expression.Left.Clone(), div);
+            var div = new Div(new Number(1), expression.Right.Clone());
+            var pow = new Pow(expression.Left.Clone(), div);
 
-                return Pow(pow, variable);
-            }
-
-            return new Number(0);
+            return Pow(pow, variable);
         }
 
         /// <summary>

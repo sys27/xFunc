@@ -39,7 +39,33 @@ namespace xFunc.Test
             return differentiator.Differentiate(exp, variable, parameters);
         }
 
+        #region Args
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ExpIsNullTest()
+        {
+            Differentiate(null, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void VariableIsNullTest()
+        {
+            Differentiate(new Number(10), null, null);
+        }
+
+        #endregion
+
         #region Common
+
+        [TestMethod]
+        public void NumberTest()
+        {
+            var exp = Differentiate(new Number(10));
+
+            Assert.AreEqual("0", exp.ToString());
+        }
 
         [TestMethod]
         public void AbsDerivativeTest1()
@@ -719,6 +745,24 @@ namespace xFunc.Test
             IExpression exp = new Sub(new Variable("x"), new Number(1));
             IExpression deriv = Differentiate(exp, new Variable("y"));
             Assert.AreEqual("0", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void UnaryMinusTest()
+        {
+            var exp = new UnaryMinus(new Sin(new Variable("x")));
+            var deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(cos(x) * 1)", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void DiffVarTest()
+        {
+            var exp = new Mul(new Variable("x"), new Variable("y"));
+            var deriv = Differentiate(exp);
+
+            Assert.AreEqual("1 * y", deriv.ToString());
         }
 
         #endregion Common
@@ -1418,6 +1462,16 @@ namespace xFunc.Test
             var diff = Differentiate(uf, "x", parameters);
 
             Assert.AreEqual("cos(x) * 1", diff.ToString());
+        }
+
+        [TestMethod]
+        public void WithSimplifyTest()
+        {
+            differentiator.Simplify = true;
+            var exp = new UnaryMinus(new Sin(new Variable("x")));
+            var deriv = Differentiate(exp);
+
+            Assert.AreEqual("-cos(x)", deriv.ToString());
         }
 
     }

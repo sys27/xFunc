@@ -472,7 +472,7 @@
     <value>Логарифм за основою "y" чиста "x". Приклад: log(2, 4)</value>
   </data>
   <data name="MathTab" xml:space="preserve">
-    <value>Математичні</value>
+    <value>Вирази</value>
   </data>
   <data name="MatrixExpanderHeader" xml:space="preserve">
     <value>Матриці</value>

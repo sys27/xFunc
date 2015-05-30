@@ -145,9 +145,6 @@ namespace xFunc.Maths
                         for (int i = func.ParametersCount - 1; i >= 0; i--)
                             arg[i] = stack.Pop();
 
-                        if (func is Derivative && func.ParametersCount == 2 && !(arg[1] is Variable))
-                            throw new ParserException(Resource.InvalidExpression);
-
                         func.Arguments = arg;
 
                         stack.Push(func);

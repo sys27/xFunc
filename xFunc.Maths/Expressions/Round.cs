@@ -98,7 +98,7 @@ namespace xFunc.Maths.Expressions
             return Math.Round(arg, digits, MidpointRounding.AwayFromZero);
 #endif
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
@@ -163,6 +163,27 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return countOfParams == 2 ? m_arguments[1] : null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
+        public override ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                if (countOfParams == 2)
+                    return new[]
+                    {
+                        ExpressionResultType.Number,
+                        ExpressionResultType.Number
+                    };
+
+                return new[] { ExpressionResultType.Number };
             }
         }
 

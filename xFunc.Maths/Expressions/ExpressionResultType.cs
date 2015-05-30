@@ -45,13 +45,9 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         Matrix = 0x8,
         /// <summary>
-        /// An expression returns an expression.
-        /// </summary>
-        Expression = 0x10,
-        /// <summary>
         /// Combines other parameters.
         /// </summary>
-        All = Undefined | Number | Boolean | Matrix | Expression
+        All = Undefined | Number | Boolean | Matrix
 
     }
 

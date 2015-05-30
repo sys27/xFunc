@@ -163,6 +163,50 @@ namespace xFunc.Maths.Expressions.Programming
             }
         }
 
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                var @else = Else;
+                if (@else != null)
+                    return Then.ResultType | @else.ResultType;
+
+                return Then.ResultType;
+            }
+        }
+
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
+        public override ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                if (countOfParams == 3)
+                    return new ExpressionResultType[]
+                    {
+                        ExpressionResultType.Boolean, // Condition
+                        ExpressionResultType.All,     // Then
+                        ExpressionResultType.All      // Else
+                    };
+
+                return new ExpressionResultType[]
+                {
+                    ExpressionResultType.Boolean, // Condition
+                    ExpressionResultType.All      // Then
+                };
+            }
+        }
+
     }
 
 }

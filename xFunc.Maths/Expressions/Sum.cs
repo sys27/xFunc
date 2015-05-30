@@ -186,7 +186,7 @@ namespace xFunc.Maths.Expressions
 
             return S;
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
@@ -293,6 +293,45 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return countOfParams == 5 ? (Variable)m_arguments[4] : null;
+            }
+        }
+
+        public override ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                if (countOfParams == 5)
+                    return new[]
+                    {
+                        ExpressionResultType.All,    // Body
+                        ExpressionResultType.Number, // From
+                        ExpressionResultType.Number, // To
+                        ExpressionResultType.All,    // Increment
+                        ExpressionResultType.All     // Variable
+                    };
+                if (countOfParams == 4)
+                    return new[]
+                    {
+                        ExpressionResultType.All,    // Body
+                        ExpressionResultType.Number, // From
+                        ExpressionResultType.Number, // To
+                        ExpressionResultType.All,    // Increment
+                    };
+                if (countOfParams == 3)
+                    return new[]
+                    {
+                        ExpressionResultType.All,    // Body
+                        ExpressionResultType.Number, // From
+                        ExpressionResultType.Number, // To
+                    };
+                if (countOfParams == 2)
+                    return new[]
+                    {
+                        ExpressionResultType.All,    // Body
+                        ExpressionResultType.Number, // To
+                    };
+
+                return new[] { ExpressionResultType.All };
             }
         }
 

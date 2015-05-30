@@ -205,9 +205,6 @@ limitations under the License. -->
             <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
                 <views:MathControl x:Name="mathControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
-            <TabItem x:Name="logicTab" Header="{x:Static res:Resource.LogicTab}">
-                <views:LogicControl x:Name="logicControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
-            </TabItem>
             <TabItem x:Name="graphsTab" Header="{x:Static res:Resource.GraphsTab}">
                 <views:GraphsControl x:Name="graphsControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>
@@ -758,6 +755,12 @@ limitations under the License. -->
                         <Button Grid.Row="0" Grid.Column="1" Tag="e" Click="InsertChar_Click">
                             <Rectangle Fill="{StaticResource exp}" Width="18" Height="12" />
                         </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="true" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource true}" Width="26" Height="16" />
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="false" Click="InsertChar_Click">
+                            <Rectangle Fill="{StaticResource false}" Width="26" Height="16" />
+                        </Button>
                     </Grid>
                 </Expander>
                 <Expander x:Name="additionalMathToolBar" Header="{x:Static res:Resource.AdditionalMathExpanderHeader}">
@@ -844,87 +847,6 @@ limitations under the License. -->
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.FloorToolTip}" />
                             </Button.ToolTip>
-                        </Button>
-                    </Grid>
-                </Expander>
-                <Expander x:Name="standartLogicToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" Visibility="Collapsed" IsExpanded="True">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Row="0" Grid.Column="0" Tag="!" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource not}" Width="20" Height="16" />
-                        </Button>
-                        <Button Grid.Row="0" Grid.Column="1" Tag="and" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource and}" Width="20" Height="12" />
-                        </Button>
-                        <Button Grid.Row="0" Grid.Column="2" Tag="or" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource or}" Width="20" Height="12" />
-                        </Button>
-                        <Button Grid.Row="0" Grid.Column="3" Tag="->" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource impl}" Width="20" Height="16" />
-                        </Button>
-
-                        <Button Grid.Row="1" Grid.Column="0" Tag="&lt;=&gt;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource eq}" Width="20" Height="16" />
-                        </Button>
-                        <Button Grid.Row="1" Grid.Column="1" Tag="nand" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource nand}" Width="20" Height="16" />
-                        </Button>
-                        <Button Grid.Row="1" Grid.Column="2" Tag="nor" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource nor}" Width="20" Height="16" />
-                        </Button>
-                        <Button Grid.Row="1" Grid.Column="3" Tag="^" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource xor}" Width="20" Height="16" />
-                        </Button>
-                    </Grid>
-                </Expander>
-                <Expander x:Name="constantsLogicToolBar" Header="{x:Static res:Resource.ConstantsExpanderHeader}" Visibility="Collapsed" IsExpanded="True">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Row="0" Grid.Column="0" Tag="true" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource true}" Width="26" Height="16" />
-                        </Button>
-                        <Button Grid.Row="0" Grid.Column="1" Tag="false" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource false}" Width="26" Height="16" />
-                        </Button>
-                    </Grid>
-                </Expander>
-                <Expander x:Name="additionalLogicToolBar" Header="{x:Static res:Resource.AdditionalLogicExpanderHeader}" Visibility="Collapsed">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Row="0" Grid.Column="0" Tag=":=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource assign}" Width="12" Height="20" />
-                        </Button>
-                        <Button Grid.Row="0" Grid.Column="1" Tag="undef" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource undef}" Width="46" Height="20" />
                         </Button>
                     </Grid>
                 </Expander>

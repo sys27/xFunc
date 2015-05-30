@@ -40,7 +40,6 @@ namespace xFunc.Views
         private Processor processor;
 
         private MathPresenter mathPresenter;
-        private LogicPresenter logicPresenter;
         private GraphsPresenter graphsPresenter;
         private TruthTablePresenter truthTablePresenter;
         private Updater updater;
@@ -89,8 +88,6 @@ namespace xFunc.Views
             mathPresenter = new MathPresenter(this.mathControl, processor);
             mathPresenter.PropertyChanged += mathPresenter_PropertyChanged;
             this.mathControl.Presenter = mathPresenter;
-            logicPresenter = new LogicPresenter(this.logicControl);
-            this.logicControl.Presenter = logicPresenter;
             graphsPresenter = new GraphsPresenter(this.graphsControl, processor);
             this.graphsControl.Presenter = graphsPresenter;
             truthTablePresenter = new TruthTablePresenter();
@@ -243,10 +240,6 @@ namespace xFunc.Views
             progToolBar.IsExpanded = Settings.Default.ProgExpanded;
             constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
             additionalMathToolBar.IsExpanded = Settings.Default.AdditionalMathExpanded;
-
-            standartLogicToolBar.IsExpanded = Settings.Default.StandartLogicExpanded;
-            constantsLogicToolBar.IsExpanded = Settings.Default.ConstantsLogicExpanded;
-            additionalLogicToolBar.IsExpanded = Settings.Default.AdditionalLogicExpanded;
         }
 
         private void SaveSettings()
@@ -302,10 +295,6 @@ namespace xFunc.Views
                 Settings.Default.ProgExpanded = progToolBar.IsExpanded;
                 Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
                 Settings.Default.AdditionalMathExpanded = additionalMathToolBar.IsExpanded;
-
-                Settings.Default.StandartLogicExpanded = standartLogicToolBar.IsExpanded;
-                Settings.Default.ConstantsLogicExpanded = constantsLogicToolBar.IsExpanded;
-                Settings.Default.AdditionalLogicExpanded = additionalLogicToolBar.IsExpanded;
             }
             else
             {
@@ -316,10 +305,6 @@ namespace xFunc.Views
                 Settings.Default.BitwiseExpanded = bool.Parse(Settings.Default.Properties["BitwiseExpanded"].DefaultValue.ToString());
                 Settings.Default.ConstantsMathExpanded = bool.Parse(Settings.Default.Properties["ConstantsMathExpanded"].DefaultValue.ToString());
                 Settings.Default.AdditionalMathExpanded = bool.Parse(Settings.Default.Properties["AdditionalMathExpanded"].DefaultValue.ToString());
-
-                Settings.Default.StandartLogicExpanded = bool.Parse(Settings.Default.Properties["StandartLogicExpanded"].DefaultValue.ToString());
-                Settings.Default.ConstantsLogicExpanded = bool.Parse(Settings.Default.Properties["ConstantsLogicExpanded"].DefaultValue.ToString());
-                Settings.Default.AdditionalLogicExpanded = bool.Parse(Settings.Default.Properties["AdditionalLogicExpanded"].DefaultValue.ToString());
             }
 
             Settings.Default.Save();
@@ -373,8 +358,6 @@ namespace xFunc.Views
         {
             if (tabControl.SelectedItem == mathTab)
                 this.mathControl.mathExpressionBox.Focus();
-            if (tabControl.SelectedItem == logicTab)
-                this.logicControl.logicExpressionBox.Focus();
             if (tabControl.SelectedItem == graphsTab)
                 this.graphsControl.graphExpressionBox.Focus();
             if (tabControl.SelectedItem == truthTableTab)
@@ -574,12 +557,6 @@ namespace xFunc.Views
 
                 mathPresenter.Remove(item);
             }
-            else if (tabControl.SelectedItem == logicTab)
-            {
-                var item = (LogicWorkspaceItemViewModel)this.logicControl.logicExpsListBox.SelectedItem;
-
-                logicPresenter.Remove(item);
-            }
             else if (tabControl.SelectedItem == graphsTab)
             {
                 var item = (GraphItemViewModel)this.graphsControl.graphsList.SelectedItem;
@@ -591,7 +568,6 @@ namespace xFunc.Views
         private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = (tabControl.SelectedItem == mathTab && this.mathControl.mathExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == logicTab && this.logicControl.logicExpsListBox.SelectedItem != null) ||
                               (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
         }
 
@@ -599,8 +575,6 @@ namespace xFunc.Views
         {
             if (tabControl.SelectedItem == mathTab)
                 mathPresenter.Clear();
-            else if (tabControl.SelectedItem == logicTab)
-                logicPresenter.Clear();
             else if (tabControl.SelectedItem == graphsTab)
                 graphsPresenter.Clear();
         }
@@ -608,7 +582,6 @@ namespace xFunc.Views
         private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab ||
-                              tabControl.SelectedItem == logicTab ||
                               tabControl.SelectedItem == graphsTab;
         }
 
@@ -694,8 +667,6 @@ namespace xFunc.Views
         {
             if (tabControl.SelectedItem == mathTab)
                 return this.mathControl.mathExpressionBox;
-            if (tabControl.SelectedItem == logicTab)
-                return this.logicControl.logicExpressionBox;
             if (tabControl.SelectedItem == graphsTab)
                 return this.graphsControl.graphExpressionBox;
             if (tabControl.SelectedItem == truthTableTab)
@@ -792,7 +763,7 @@ namespace xFunc.Views
 
         private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
-            if (tabControl.SelectedItem == logicTab || tabControl.SelectedItem == truthTableTab)
+            if (tabControl.SelectedItem == truthTableTab)
             {
                 numberToolBar.Visibility = Visibility.Collapsed;
                 standartMathToolBar.Visibility = Visibility.Collapsed;
@@ -803,10 +774,6 @@ namespace xFunc.Views
                 progToolBar.Visibility = Visibility.Collapsed;
                 constantsMathToolBar.Visibility = Visibility.Collapsed;
                 additionalMathToolBar.Visibility = Visibility.Collapsed;
-
-                standartLogicToolBar.Visibility = Visibility.Visible;
-                constantsLogicToolBar.Visibility = Visibility.Visible;
-                additionalLogicToolBar.Visibility = Visibility.Visible;
             }
             else
             {
@@ -823,10 +790,6 @@ namespace xFunc.Views
                 progToolBar.Visibility = Visibility.Visible;
                 constantsMathToolBar.Visibility = Visibility.Visible;
                 additionalMathToolBar.Visibility = Visibility.Visible;
-
-                standartLogicToolBar.Visibility = Visibility.Collapsed;
-                constantsLogicToolBar.Visibility = Visibility.Collapsed;
-                additionalLogicToolBar.Visibility = Visibility.Collapsed;
             }
         }
 

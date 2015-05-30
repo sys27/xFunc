@@ -23,9 +23,6 @@
     <Setting Name="StandartMathExpanded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="StandartLogicExpanded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="TrigonometricExpanded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -41,9 +38,6 @@
     <Setting Name="AdditionalMathExpanded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConstantsLogicExpanded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="SelectedTabIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
@@ -55,9 +49,6 @@
     </Setting>
     <Setting Name="Lang" Type="System.String" Scope="User">
       <Value Profile="(Default)">Auto</Value>
-    </Setting>
-    <Setting Name="AdditionalLogicExpanded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="NumberBase" Type="xFunc.Maths.NumeralSystem" Scope="User">
       <Value Profile="(Default)">Decimal</Value>

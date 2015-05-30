@@ -472,7 +472,7 @@
     <value>Logarigthm to base "y" of "x". Example: log(2, 4)</value>
   </data>
   <data name="MathTab" xml:space="preserve">
-    <value>Math Expressions</value>
+    <value>Expressions</value>
   </data>
   <data name="MatrixExpanderHeader" xml:space="preserve">
     <value>Matrix</value>

@@ -17,6 +17,7 @@ using System;
 using System.Linq;
 #endif
 using System.Text;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -56,8 +57,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="countOfParams">The count of parameters.</param>
         protected DifferentParametersExpression(IExpression[] arguments, int countOfParams)
         {
-            this.Arguments = arguments;
             this.countOfParams = countOfParams;
+            this.Arguments = arguments;
         }
 
         /// <summary>
@@ -112,7 +113,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public abstract object Calculate(ExpressionParameters parameters);
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>
@@ -161,17 +162,44 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                // todo: check!!!
-
                 m_arguments = value;
                 if (m_arguments != null)
                 {
-                    foreach (var item in m_arguments)
+                    var types = ArgumentsTypes;
+                    if (m_arguments.Length != types.Length)
+                        throw new ArgumentException(Resource.InvalidExpression);
+
+                    for (int i = 0; i < m_arguments.Length; i++)
                     {
+                        var item = m_arguments[i];
+
                         if (item != null)
+                        {
+                            if ((types[i] & item.ResultType) == ExpressionResultType.None)
+                                throw new ParameterTypeMismatchException(types[i], item.ResultType);
+
                             item.Parent = this;
+                        }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
+        public virtual ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                var results = new ExpressionResultType[m_arguments == null ? 0 : m_arguments.Length];
+                for (int i = 0; i < results.Length; i++)
+                    results[i] = ExpressionResultType.All;
+
+                return results;
             }
         }
 

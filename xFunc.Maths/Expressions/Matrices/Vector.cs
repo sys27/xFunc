@@ -249,6 +249,24 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
+        public override ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                var results = new ExpressionResultType[m_arguments == null ? 0 : m_arguments.Length];
+                for (int i = 0; i < results.Length; i++)
+                    results[i] = ExpressionResultType.Number;
+
+                return results;
+            }
+        }
+
     }
 
 }

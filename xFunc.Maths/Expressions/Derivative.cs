@@ -151,6 +151,27 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Gets or sets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        public override IExpression[] Arguments
+        {
+            get
+            {
+                return base.Arguments;
+            }
+            set
+            {
+                if (value != null && value.Length == 2 && !(value[1] is ValueType))
+                    throw new ArgumentException(Resource.InvalidExpression);
+
+                base.Arguments = value;
+            }
+        }
+
+        /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
         /// <value>

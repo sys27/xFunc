@@ -151,7 +151,7 @@ namespace xFunc.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParserException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void ParseDerivSecondParamIsNotVar()
         {
             lexer.Tokens = new List<IToken>()

@@ -179,6 +179,26 @@ namespace xFunc.Maths.Expressions.Programming
             }
         }
 
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
+        public override ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                return new ExpressionResultType[] 
+                { 
+                    ExpressionResultType.All,     // Body
+                    ExpressionResultType.All,     // Initialization
+                    ExpressionResultType.Boolean, // Condition
+                    ExpressionResultType.All      // Iteration
+                };
+            }
+        }
+
     }
 
 }

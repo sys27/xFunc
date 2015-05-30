@@ -153,9 +153,6 @@
   <data name="AddFuncTitle" xml:space="preserve">
     <value>Додати функцію</value>
   </data>
-  <data name="AdditionalLogicExpanderHeader" xml:space="preserve">
-    <value>Додаткові</value>
-  </data>
   <data name="AdditionalMathExpanderHeader" xml:space="preserve">
     <value>Додаткові</value>
   </data>
@@ -471,20 +468,8 @@
   <data name="LnToolTip" xml:space="preserve">
     <value>Натуральный логарифм числа "x". Приклад: ln(10)</value>
   </data>
-  <data name="LogicTab" xml:space="preserve">
-    <value>Логічні</value>
-  </data>
   <data name="LogToolTip" xml:space="preserve">
     <value>Логарифм за основою "y" чиста "x". Приклад: log(2, 4)</value>
-  </data>
-  <data name="MathParameterType_Constant" xml:space="preserve">
-    <value>Константи</value>
-  </data>
-  <data name="MathParameterType_Normal" xml:space="preserve">
-    <value>Звичайні</value>
-  </data>
-  <data name="MathParameterType_ReadOnly" xml:space="preserve">
-    <value>Тільки для читання</value>
   </data>
   <data name="MathTab" xml:space="preserve">
     <value>Математичні</value>

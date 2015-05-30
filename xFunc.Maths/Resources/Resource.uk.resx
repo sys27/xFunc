@@ -135,9 +135,6 @@
   <data name="InvalidExpression" xml:space="preserve">
     <value>Вираз має невірний формат.</value>
   </data>
-  <data name="InvalidInFirst" xml:space="preserve">
-    <value>Жоден елемент не задовольняє умові предиката або початкова послідовність порожня.</value>
-  </data>
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>Функція має невірну кількість змінних.</value>
   </data>

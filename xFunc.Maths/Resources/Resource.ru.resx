@@ -135,9 +135,6 @@
   <data name="InvalidExpression" xml:space="preserve">
     <value>Выражение имеет неверный формат.</value>
   </data>
-  <data name="InvalidInFirst" xml:space="preserve">
-    <value>Ни один элемент не удовлетворяет условию предиката или исходная последовательность пуста.</value>
-  </data>
   <data name="InvalidNumberOfVariables" xml:space="preserve">
     <value>Функция имеет неверное количество переменных.</value>
   </data>

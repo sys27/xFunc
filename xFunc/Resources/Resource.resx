@@ -153,9 +153,6 @@
   <data name="AddFuncTitle" xml:space="preserve">
     <value>Add a new function</value>
   </data>
-  <data name="AdditionalLogicExpanderHeader" xml:space="preserve">
-    <value>Additional</value>
-  </data>
   <data name="AdditionalMathExpanderHeader" xml:space="preserve">
     <value>Additional</value>
   </data>
@@ -471,20 +468,8 @@
   <data name="LnToolTip" xml:space="preserve">
     <value>Natural logarithm of "x". Example: ln(10)</value>
   </data>
-  <data name="LogicTab" xml:space="preserve">
-    <value>Logic Expressions</value>
-  </data>
   <data name="LogToolTip" xml:space="preserve">
     <value>Logarigthm to base "y" of "x". Example: log(2, 4)</value>
-  </data>
-  <data name="MathParameterType_Constant" xml:space="preserve">
-    <value>Constants</value>
-  </data>
-  <data name="MathParameterType_Normal" xml:space="preserve">
-    <value>Normal</value>
-  </data>
-  <data name="MathParameterType_ReadOnly" xml:space="preserve">
-    <value>ReadOnly</value>
   </data>
   <data name="MathTab" xml:space="preserve">
     <value>Math Expressions</value>

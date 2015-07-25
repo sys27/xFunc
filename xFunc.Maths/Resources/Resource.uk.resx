@@ -177,4 +177,10 @@
   <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Невідповідний тип параметра. (Очікується: {0}; Фактично: {1})</value>
   </data>
+  <data name="InvalidInFirst" xml:space="preserve">
+    <value>Жоден елемент не задовольняє умові предиката або початкова послідовність порожня.</value>
+  </data>
+  <data name="NoElementInSource" xml:space="preserve">
+    <value>Немає елементів у вихідному списку.</value>
+  </data>
 </root>

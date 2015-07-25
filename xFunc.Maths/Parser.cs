@@ -68,26 +68,17 @@ namespace xFunc.Maths
         /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
         public static bool HasVar(IExpression expression, Variable arg)
         {
-            if (expression is BinaryExpression)
-            {
-                var bin = expression as BinaryExpression;
-                if (HasVar(bin.Left, arg))
-                    return true;
+            var bin = expression as BinaryExpression;
+            if (bin != null)
+                return HasVar(bin.Left, arg) || HasVar(bin.Right, arg);
 
-                return HasVar(bin.Right, arg);
-            }
-            if (expression is UnaryExpression)
-            {
-                var un = expression as UnaryExpression;
-
+            var un = expression as UnaryExpression;
+            if (un != null)
                 return HasVar(un.Argument, arg);
-            }
-            if (expression is DifferentParametersExpression)
-            {
-                var paramExp = expression as DifferentParametersExpression;
 
+            var paramExp = expression as DifferentParametersExpression;
+            if (paramExp != null)
                 return paramExp.Arguments.Any(e => HasVar(e, arg));
-            }
 
             return expression is Variable && expression.Equals(arg);
         }
@@ -104,13 +95,13 @@ namespace xFunc.Maths
 #elif NET20_OR_GREATER
             if (StringExtension.IsNullOrWhiteSpace(function))
 #endif
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException(nameof(function));
 
             if (!saveLastExpression || function != lastFunc)
             {
-                IEnumerable<IToken> tokens = lexer.Tokenize(function);
-                IEnumerable<IToken> rpn = ConvertToReversePolishNotation(tokens);
-                IEnumerable<IExpression> expressions = ConvertTokensToExpressions(rpn);
+                var tokens = lexer.Tokenize(function);
+                var rpn = ConvertToReversePolishNotation(tokens);
+                var expressions = ConvertTokensToExpressions(rpn);
 
                 var stack = new Stack<IExpression>();
                 foreach (var expression in expressions)
@@ -141,7 +132,7 @@ namespace xFunc.Maths
                     {
                         var func = expression as DifferentParametersExpression;
 
-                        IExpression[] arg = new IExpression[func.ParametersCount];
+                        var arg = new IExpression[func.ParametersCount];
                         for (int i = func.ParametersCount - 1; i >= 0; i--)
                             arg[i] = stack.Pop();
 
@@ -243,30 +234,32 @@ namespace xFunc.Maths
                 if (token is SymbolToken)
                 {
                     var t = token as SymbolToken;
-                    if (t.Symbol == Symbols.OpenBracket || t.Symbol == Symbols.OpenBrace)
+                    switch (t.Symbol)
                     {
-                        stack.Push(token);
-                    }
-                    else if (t.Symbol == Symbols.CloseBracket || t.Symbol == Symbols.CloseBrace)
-                    {
-                        stackToken = stack.Pop();
-                        while (!stackToken.Equals(openBracketToken) && !stackToken.Equals(openBraceToken))
-                        {
-                            output.Add(stackToken);
+                        case Symbols.OpenBracket:
+                        case Symbols.OpenBrace:
+                            stack.Push(token);
+                            break;
+                        case Symbols.CloseBracket:
+                        case Symbols.CloseBrace:
                             stackToken = stack.Pop();
-                        }
-                    }
-                    else if (t.Symbol == Symbols.Comma)
-                    {
-                        stackToken = stack.Pop();
-
-                        while (!stackToken.Equals(openBracketToken) && !stackToken.Equals(openBraceToken))
-                        {
-                            output.Add(stackToken);
+                            while (!stackToken.Equals(openBracketToken) && !stackToken.Equals(openBraceToken))
+                            {
+                                output.Add(stackToken);
+                                stackToken = stack.Pop();
+                            }
+                            break;
+                        case Symbols.Comma:
                             stackToken = stack.Pop();
-                        }
 
-                        stack.Push(stackToken);
+                            while (!stackToken.Equals(openBracketToken) && !stackToken.Equals(openBraceToken))
+                            {
+                                output.Add(stackToken);
+                                stackToken = stack.Pop();
+                            }
+
+                            stack.Push(stackToken);
+                            break;
                     }
                 }
                 else if (token is NumberToken || token is VariableToken)
@@ -285,10 +278,9 @@ namespace xFunc.Maths
                     stack.Push(token);
                 }
             }
+
             if (stack.Count != 0)
-            {
                 output.AddRange(stack);
-            }
 
             return output;
         }
@@ -320,6 +312,24 @@ namespace xFunc.Maths
             set
             {
                 simplifier = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the expression factory.
+        /// </summary>
+        /// <value>
+        /// The expression factory.
+        /// </value>
+        public IExpressionFactory ExpressionFactory
+        {
+            get
+            {
+                return factory;
+            }
+            set
+            {
+                factory = value;
             }
         }
 

@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions.Matrices
             : base(args, args.Length)
         {
             if (args == null)
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             if (args.Length < 1)
                 throw new ArgumentException();
         }
@@ -162,7 +162,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
         {
-            Vector[] args = new Vector[this.countOfParams];
+            var args = new Vector[this.countOfParams];
 
             for (int i = 0; i < this.ParametersCount; i++)
                 if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ExpressionResultType.Matrix)
@@ -374,7 +374,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                var results = new ExpressionResultType[m_arguments == null ? 0 : m_arguments.Length];
+                var results = new ExpressionResultType[m_arguments?.Length ?? 0];
                 for (int i = 0; i < results.Length; i++)
                     results[i] = ExpressionResultType.Matrix;
 

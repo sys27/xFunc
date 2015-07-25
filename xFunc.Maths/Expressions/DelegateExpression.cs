@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
 
             var exp = (DelegateExpression)obj;
 
-            return func.Equals(func);
+            return func.Equals(exp.func);
         }
 
         /// <summary>

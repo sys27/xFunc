@@ -37,7 +37,7 @@ namespace xFunc.Maths.Expressions
             : base(args, countOfParams)
         {
             if (args == null)
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             if (args.Length != countOfParams)
                 throw new ArgumentException();
             if (countOfParams == 2 && !(args[1] is Variable))
@@ -87,9 +87,9 @@ namespace xFunc.Maths.Expressions
         public override string ToString()
         {
             if (countOfParams == 1)
-                return string.Format("deriv({0})", Expression);
+                return $"deriv({Expression})";
 
-            return string.Format("deriv({0}, {1})", Expression, Variable);
+            return $"deriv({Expression}, {Variable})";
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 m_arguments[0] = value;
                 m_arguments[0].Parent = this;
@@ -164,7 +164,7 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value != null && value.Length == 2 && !(value[1] is ValueType))
+                if (value != null && value.Length == 2 && !(value[1] is Variable))
                     throw new ArgumentException(Resource.InvalidExpression);
 
                 base.Arguments = value;

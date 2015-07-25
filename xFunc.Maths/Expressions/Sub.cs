@@ -70,31 +70,30 @@ namespace xFunc.Maths.Expressions
         {
             if (ResultType == ExpressionResultType.Matrix)
             {
-                if (m_left is Vector && m_right is Vector)
-                    return MatrixExtentions.Sub((Vector)m_left, (Vector)m_right, parameters);
-                if (m_left is Matrix && m_right is Matrix)
-                    return MatrixExtentions.Sub((Matrix)m_left, (Matrix)m_right, parameters);
-                if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
-                    throw new NotSupportedException();
-
-                if (!(m_left is Vector || m_left is Matrix))
+                if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix))
                 {
                     var l = m_left.Calculate(parameters);
 
-                    if (l is Vector)
-                        return MatrixExtentions.Sub((Vector)l, (Vector)m_right, parameters);
-                    if (l is Matrix)
-                        return MatrixExtentions.Sub((Matrix)l, (Matrix)m_right, parameters);
+                    var left = l as Vector;
+                    if (left != null)
+                        return left.Sub((Vector)m_right, parameters);
+
+                    return ((Matrix)l).Sub((Matrix)m_right, parameters);
                 }
-                else if (!(m_right is Vector || m_right is Matrix))
+
+                if (m_right.ResultType.HasFlag(ExpressionResultType.Matrix))
                 {
                     var r = m_right.Calculate(parameters);
 
-                    if (r is Vector)
-                        return MatrixExtentions.Sub((Vector)m_left, (Vector)r, parameters);
-                    if (r is Matrix)
-                        return MatrixExtentions.Sub((Matrix)m_left, (Matrix)r, parameters);
+                    var right = r as Vector;
+                    if (right != null)
+                        return ((Vector)m_left).Sub(right, parameters);
+
+                    return ((Matrix)m_left).Sub((Matrix)r, parameters);
                 }
+
+                if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
+                    throw new NotSupportedException();
 
                 throw new NotSupportedException();
             }

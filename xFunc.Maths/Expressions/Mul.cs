@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions
                 if (m_left is Vector && m_right is Vector)
                     throw new NotSupportedException();
 
-                IExpression l = null;
+                IExpression l;
                 if (m_left is Vector || m_left is Matrix)
                 {
                     l = m_left;
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions
                     else
                         l = new Number((double)temp);
                 }
-                IExpression r = null;
+                IExpression r;
                 if (m_right is Vector || m_right is Matrix)
                 {
                     r = m_right;
@@ -101,24 +101,24 @@ namespace xFunc.Maths.Expressions
                 if (l is Vector)
                 {
                     if (r is Matrix)
-                        return MatrixExtentions.Mul((Vector)l, (Matrix)r, parameters);
+                        return ((Vector)l).Mul((Matrix)r, parameters);
 
-                    return MatrixExtentions.Mul((Vector)l, r, parameters);
+                    return ((Vector)l).Mul(r, parameters);
                 }
                 if (r is Vector)
                 {
                     if (l is Matrix)
-                        return MatrixExtentions.Mul((Matrix)l, (Vector)r, parameters);
+                        return ((Matrix)l).Mul((Vector)r, parameters);
 
-                    return MatrixExtentions.Mul((Vector)r, l, parameters);
+                    return ((Vector)r).Mul(l, parameters);
                 }
 
                 if (l is Matrix && r is Matrix)
-                    return MatrixExtentions.Mul((Matrix)l, (Matrix)r, parameters);
+                    return ((Matrix)l).Mul((Matrix)r, parameters);
                 if (l is Matrix)
-                    return MatrixExtentions.Mul((Matrix)l, r, parameters);
+                    return ((Matrix)l).Mul(r, parameters);
                 if (r is Matrix)
-                    return MatrixExtentions.Mul((Matrix)r, l, parameters);
+                    return ((Matrix)r).Mul(l, parameters);
             }
 
             if (ResultType == ExpressionResultType.Number)

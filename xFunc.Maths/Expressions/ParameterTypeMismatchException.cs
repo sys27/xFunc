@@ -28,8 +28,8 @@ namespace xFunc.Maths.Expressions
     public class ParameterTypeMismatchException : Exception
     {
 
-        private ExpressionResultType expected;
-        private ExpressionResultType actual;
+        private readonly ExpressionResultType expected;
+        private readonly ExpressionResultType actual;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterTypeMismatchException"/> class.

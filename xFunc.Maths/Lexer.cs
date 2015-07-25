@@ -88,7 +88,7 @@ namespace xFunc.Maths
 #elif NET20_OR_GREATER
             if (StringExtension.IsNullOrWhiteSpace(function))
 #endif
-                throw new ArgumentNullException("function", Resource.NotSpecifiedFunction);
+                throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");
             if (!IsBalanced(function))

@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions.Programming
 
             var @else = Else;
             if (@else == null)
-                throw new ArgumentNullException("else");
+                throw new ArgumentNullException(nameof(@else));
 
             return @else.Calculate(parameters);
         }

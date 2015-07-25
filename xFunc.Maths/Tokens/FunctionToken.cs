@@ -92,7 +92,7 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return string.Format("Function: {0} ({1})", function, m_countOfParams);
+            return $"Function: {function} ({m_countOfParams})";
         }
 
         /// <summary>

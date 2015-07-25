@@ -80,7 +80,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return string.Format("{0} := {1}", key, value);
+            return $"{key} := {value}";
         }
 
         /// <summary>
@@ -107,19 +107,18 @@ namespace xFunc.Maths.Expressions
         public object Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)
-                throw new ArgumentNullException("parameters");
+                throw new ArgumentNullException(nameof(parameters));
 
-            if (key is Variable)
+            var variable = key as Variable;
+            if (variable != null)
             {
-                var e = key as Variable;
-
-                parameters.Parameters[e.Name] = (double)value.Calculate(parameters);
+                parameters.Parameters[variable.Name] = (double)value.Calculate(parameters);
             }
-            else if (key is UserFunction)
+            else
             {
-                var e = key as UserFunction;
-
-                parameters.Functions[e] = value;
+                var function = key as UserFunction;
+                if (function != null)
+                    parameters.Functions[function] = value;
             }
 
             return double.NaN;
@@ -204,7 +203,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 if (!(value is Variable || value is UserFunction))
                     throw new NotSupportedException();
@@ -226,7 +225,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 this.value = value;
             }

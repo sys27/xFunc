@@ -137,7 +137,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 if ((ArgumentType & value.ResultType) == ExpressionResultType.None)
                     throw new ParameterTypeMismatchException(ArgumentType, value.ResultType);
 

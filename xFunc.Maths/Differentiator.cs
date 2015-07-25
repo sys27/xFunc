@@ -81,9 +81,9 @@ namespace xFunc.Maths
         public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
         {
             if (expression == null)
-                throw new ArgumentNullException("expression");
+                throw new ArgumentNullException(nameof(expression));
             if (variable == null)
-                throw new ArgumentNullException("variable");
+                throw new ArgumentNullException(nameof(variable));
 
             if (!Parser.HasVar(expression, variable))
                 return new Number(0);
@@ -101,89 +101,129 @@ namespace xFunc.Maths
 
         private IExpression _Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
         {
-            if (expression is Number)
-                return Number((Number)expression, variable);
-            if (expression is Variable)
-                return Variable((Variable)expression, variable);
+            var number = expression as Number;
+            if (number != null)
+                return Number(number, variable);
+            var @var = expression as Variable;
+            if (@var != null)
+                return Variable(@var, variable);
 
-            if (expression is Abs)
-                return Abs((Abs)expression, variable);
-            if (expression is Add)
-                return Add((Add)expression, variable);
-            if (expression is Div)
-                return Div((Div)expression, variable);
-            if (expression is Exp)
-                return Exp((Exp)expression, variable);
-            if (expression is Ln)
-                return Ln((Ln)expression, variable);
-            if (expression is Lg)
-                return Lg((Lg)expression, variable);
-            if (expression is Log)
-                return Log((Log)expression, variable);
-            if (expression is Mul)
-                return Mul((Mul)expression, variable);
-            if (expression is Pow)
-                return Pow((Pow)expression, variable);
-            if (expression is Root)
-                return Root((Root)expression, variable);
-            if (expression is Sqrt)
-                return Sqrt((Sqrt)expression, variable);
-            if (expression is Sub)
-                return Sub((Sub)expression, variable);
-            if (expression is UnaryMinus)
-                return UnaryMinus((UnaryMinus)expression, variable);
-            if (expression is UserFunction)
-                return UserFunction((UserFunction)expression, variable, parameters);
+            var abs = expression as Abs;
+            if (abs != null)
+                return Abs(abs, variable);
+            var add = expression as Add;
+            if (add != null)
+                return Add(add, variable);
+            var div = expression as Div;
+            if (div != null)
+                return Div(div, variable);
+            var exp = expression as Exp;
+            if (exp != null)
+                return Exp(exp, variable);
+            var ln = expression as Ln;
+            if (ln != null)
+                return Ln(ln, variable);
+            var lg = expression as Lg;
+            if (lg != null)
+                return Lg(lg, variable);
+            var log = expression as Log;
+            if (log != null)
+                return Log(log, variable);
+            var mul = expression as Mul;
+            if (mul != null)
+                return Mul(mul, variable);
+            var pow = expression as Pow;
+            if (pow != null)
+                return Pow(pow, variable);
+            var root = expression as Root;
+            if (root != null)
+                return Root(root, variable);
+            var sqrt = expression as Sqrt;
+            if (sqrt != null)
+                return Sqrt(sqrt, variable);
+            var sub = expression as Sub;
+            if (sub != null)
+                return Sub(sub, variable);
+            var minus = expression as UnaryMinus;
+            if (minus != null)
+                return UnaryMinus(minus, variable);
+            var function = expression as UserFunction;
+            if (function != null)
+                return UserFunction(function, variable, parameters);
 
-            if (expression is Sin)
-                return Sin((Sin)expression, variable);
-            if (expression is Cos)
-                return Cos((Cos)expression, variable);
-            if (expression is Tan)
-                return Tan((Tan)expression, variable);
-            if (expression is Cot)
-                return Cot((Cot)expression, variable);
-            if (expression is Sec)
-                return Sec((Sec)expression, variable);
-            if (expression is Csc)
-                return Csc((Csc)expression, variable);
-            if (expression is Arcsin)
-                return Arcsin((Arcsin)expression, variable);
-            if (expression is Arccos)
-                return Arccos((Arccos)expression, variable);
-            if (expression is Arctan)
-                return Arctan((Arctan)expression, variable);
-            if (expression is Arccot)
-                return Arccot((Arccot)expression, variable);
-            if (expression is Arcsec)
-                return Arcsec((Arcsec)expression, variable);
-            if (expression is Arccsc)
-                return Arccsc((Arccsc)expression, variable);
+            var sin = expression as Sin;
+            if (sin != null)
+                return Sin(sin, variable);
+            var cos = expression as Cos;
+            if (cos != null)
+                return Cos(cos, variable);
+            var tan = expression as Tan;
+            if (tan != null)
+                return Tan(tan, variable);
+            var cot = expression as Cot;
+            if (cot != null)
+                return Cot(cot, variable);
+            var sec = expression as Sec;
+            if (sec != null)
+                return Sec(sec, variable);
+            var csc = expression as Csc;
+            if (csc != null)
+                return Csc(csc, variable);
+            var arcsin = expression as Arcsin;
+            if (arcsin != null)
+                return Arcsin(arcsin, variable);
+            var arccos = expression as Arccos;
+            if (arccos != null)
+                return Arccos(arccos, variable);
+            var arctan = expression as Arctan;
+            if (arctan != null)
+                return Arctan(arctan, variable);
+            var arccot = expression as Arccot;
+            if (arccot != null)
+                return Arccot(arccot, variable);
+            var arcsec = expression as Arcsec;
+            if (arcsec != null)
+                return Arcsec(arcsec, variable);
+            var arccsc = expression as Arccsc;
+            if (arccsc != null)
+                return Arccsc(arccsc, variable);
 
-            if (expression is Sinh)
-                return Sinh((Sinh)expression, variable);
-            if (expression is Cosh)
-                return Cosh((Cosh)expression, variable);
-            if (expression is Tanh)
-                return Tanh((Tanh)expression, variable);
-            if (expression is Coth)
-                return Coth((Coth)expression, variable);
-            if (expression is Sech)
-                return Sech((Sech)expression, variable);
-            if (expression is Csch)
-                return Csch((Csch)expression, variable);
-            if (expression is Arsinh)
-                return Arsinh((Arsinh)expression, variable);
-            if (expression is Arcosh)
-                return Arcosh((Arcosh)expression, variable);
-            if (expression is Artanh)
-                return Artanh((Artanh)expression, variable);
-            if (expression is Arcoth)
-                return Arcoth((Arcoth)expression, variable);
-            if (expression is Arsech)
-                return Arsech((Arsech)expression, variable);
-            if (expression is Arcsch)
-                return Arcsch((Arcsch)expression, variable);
+            var sinh = expression as Sinh;
+            if (sinh != null)
+                return Sinh(sinh, variable);
+            var cosh = expression as Cosh;
+            if (cosh != null)
+                return Cosh(cosh, variable);
+            var tanh = expression as Tanh;
+            if (tanh != null)
+                return Tanh(tanh, variable);
+            var coth = expression as Coth;
+            if (coth != null)
+                return Coth(coth, variable);
+            var sech = expression as Sech;
+            if (sech != null)
+                return Sech(sech, variable);
+            var csch = expression as Csch;
+            if (csch != null)
+                return Csch(csch, variable);
+            var arsinh = expression as Arsinh;
+            if (arsinh != null)
+                return Arsinh(arsinh, variable);
+            var arcosh = expression as Arcosh;
+            if (arcosh != null)
+                return Arcosh(arcosh, variable);
+            var artanh = expression as Artanh;
+            if (artanh != null)
+                return Artanh(artanh, variable);
+            var arcoth = expression as Arcoth;
+            if (arcoth != null)
+                return Arcoth(arcoth, variable);
+            var arsech = expression as Arsech;
+            if (arsech != null)
+                return Arsech(arsech, variable);
+            var arcsch = expression as Arcsch;
+            if (arcsch != null)
+                return Arcsch(arcsch, variable);
 
             throw new NotSupportedException();
         }

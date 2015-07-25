@@ -39,18 +39,24 @@ namespace xFunc.Maths
         /// </returns>
         public virtual IExpression Create(IToken token)
         {
-            if (token is OperationToken)
-                return CreateOperation(token as OperationToken);
-            if (token is NumberToken)
-                return new Number((token as NumberToken).Number);
-            if(token is BooleanToken)
-                return new Bool((token as BooleanToken).Value);
-            if (token is VariableToken)
-                return new Variable((token as VariableToken).Variable);
-            if (token is UserFunctionToken)
-                return CreateUserFunction(token as UserFunctionToken);
-            if (token is FunctionToken)
-                return CreateFunction(token as FunctionToken);
+            var operation = token as OperationToken;
+            if (operation != null)
+                return CreateOperation(operation);
+            var numberToken = token as NumberToken;
+            if (numberToken != null)
+                return new Number(numberToken.Number);
+            var booleanToken = token as BooleanToken;
+            if (booleanToken != null)
+                return new Bool(booleanToken.Value);
+            var variableToken = token as VariableToken;
+            if (variableToken != null)
+                return new Variable(variableToken.Variable);
+            var functionToken = token as UserFunctionToken;
+            if (functionToken != null)
+                return CreateUserFunction(functionToken);
+            var func = token as FunctionToken;
+            if (func != null)
+                return CreateFunction(func);
 
             return null;
         }
@@ -109,13 +115,13 @@ namespace xFunc.Maths
                 case Operations.Decrement:
                     return new Dec();
                 case Operations.Not:
-                    return new Expressions.LogicalAndBitwise.Not();
+                    return new Not();
                 case Operations.And:
                     return new Expressions.LogicalAndBitwise.And();
                 case Operations.Or:
                     return new Expressions.LogicalAndBitwise.Or();
                 case Operations.XOr:
-                    return new Expressions.LogicalAndBitwise.XOr();
+                    return new XOr();
                 case Operations.Implication:
                     return new Implication();
                 case Operations.Equality:
@@ -240,7 +246,7 @@ namespace xFunc.Maths
                     return new While();
                 case Functions.Undefine:
                     return new Undefine();
-                default: 
+                default:
                     return null;
             }
         }

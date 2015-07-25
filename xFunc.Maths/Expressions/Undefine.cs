@@ -72,7 +72,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return string.Format("undef({0})", key);
+            return $"undef({key})";
         }
 
         /// <summary>
@@ -99,19 +99,18 @@ namespace xFunc.Maths.Expressions
         public object Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)
-                throw new ArgumentNullException("parameters");
+                throw new ArgumentNullException(nameof(parameters));
 
-            if (key is Variable)
+            var variable = key as Variable;
+            if (variable != null)
             {
-                var e = key as Variable;
-
-                parameters.Parameters.Remove(e.Name);
+                parameters.Parameters.Remove(variable.Name);
             }
-            else if (key is UserFunction)
+            else
             {
-                var e = key as UserFunction;
-
-                parameters.Functions.Remove(e);
+                var function = key as UserFunction;
+                if (function != null)
+                    parameters.Functions.Remove(function);
             }
 
             return double.NaN;
@@ -196,7 +195,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 if (!(value is Variable || value is UserFunction))
                     throw new NotSupportedException();

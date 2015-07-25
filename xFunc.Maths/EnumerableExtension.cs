@@ -28,7 +28,7 @@ namespace xFunc.Maths
             using (var enumerator = value.GetEnumerator())
             {
                 if (!enumerator.MoveNext())
-                    throw new InvalidOperationException("No elements in source list");
+                    throw new InvalidOperationException(Resource.NoElementInSource);
 
                 TSource folded = enumerator.Current;
                 while (enumerator.MoveNext())

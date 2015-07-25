@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            return MatrixExtentions.Inverse((Matrix)m_argument.Calculate(parameters), parameters);
+            return ((Matrix)m_argument.Calculate(parameters)).Inverse(parameters);
         }
 
         /// <summary>

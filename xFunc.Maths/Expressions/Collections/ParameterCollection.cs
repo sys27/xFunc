@@ -150,7 +150,7 @@ namespace xFunc.Maths.Expressions.Collections
         public void Add(Parameter param)
         {
             if (param == null)
-                throw new ArgumentNullException("param");
+                throw new ArgumentNullException(nameof(param));
             if (param.Type == ParameterType.Constant)
                 throw new ArgumentException(Resource.ConstError);
 
@@ -185,7 +185,7 @@ namespace xFunc.Maths.Expressions.Collections
         public void Remove(Parameter param)
         {
             if (param == null)
-                throw new ArgumentNullException("param");
+                throw new ArgumentNullException(nameof(param));
 
             collection.Remove(param);
         }
@@ -203,7 +203,7 @@ namespace xFunc.Maths.Expressions.Collections
 #elif NET20_OR_GREATER
             if (StringExtension.IsNullOrWhiteSpace(key))
 #endif
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
 
             var el = collection.FirstOrDefault(p => p.Key == key);
             if (el == null)

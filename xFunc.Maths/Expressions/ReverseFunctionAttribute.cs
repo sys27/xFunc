@@ -17,11 +17,11 @@ using System;
 namespace xFunc.Maths.Expressions
 {
     
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     internal sealed class ReverseFunctionAttribute : Attribute
     {
 
-        private Type reverseType;
+        private readonly Type reverseType;
 
         public ReverseFunctionAttribute(Type reverseType)
         {

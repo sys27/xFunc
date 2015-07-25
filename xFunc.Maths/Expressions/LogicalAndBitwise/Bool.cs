@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     {
 
         private IExpression parent;
-        private bool value;
+        private readonly bool value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Bool"/> class.
@@ -93,10 +93,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override bool Equals(object obj)
         {
             var boolean = obj as Bool;
-            if (boolean == null)
-                return false;
 
-            return this.value == boolean.value;
+            return value == boolean?.value;
         }
 
         /// <summary>
@@ -129,7 +127,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public IExpression Clone()
         {
-            return new Bool(this.value);
+            return new Bool(value);
         }
 
         /// <summary>

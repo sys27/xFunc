@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions
             : base(args, countOfParams)
         {
             if (args == null)
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             if (args.Length < 2 && args.Length != countOfParams)
                 throw new ArgumentException();
             if (countOfParams == 5 && !(args[4] is Variable))
@@ -138,9 +138,9 @@ namespace xFunc.Maths.Expressions
         public override object Calculate()
         {
             var body = Body;
-            var from = From != null ? (double)From.Calculate() : 1;
+            var from = (double)(From?.Calculate() ?? 1.0);
             var to = (double)To.Calculate();
-            var inc = Increment != null ? (double)Increment.Calculate() : 1;
+            var inc = (double)(Increment?.Calculate() ?? 1.0);
 
             var localParams = new ParameterCollection();
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
@@ -168,9 +168,9 @@ namespace xFunc.Maths.Expressions
         public override object Calculate(ExpressionParameters parameters)
         {
             var body = Body;
-            var from = From != null ? (double)From.Calculate(parameters) : 1;
+            var from = (double)(From?.Calculate(parameters) ?? 1.0);
             var to = (double)To.Calculate(parameters);
-            var inc = Increment != null ? (double)Increment.Calculate(parameters) : 1;
+            var inc = (double)(Increment?.Calculate(parameters) ?? 1.0);
 
             var localParams = new ParameterCollection(parameters.Parameters.Collection);
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
@@ -186,7 +186,7 @@ namespace xFunc.Maths.Expressions
 
             return S;
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>

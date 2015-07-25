@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     {
 
         private IExpression parent;
-        private string name;
+        private readonly string name;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Variable"/> class.
@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that contains the converted value.</returns>
         public static implicit operator string(Variable variable)
         {
-            return variable == null ? null : variable.Name;
+            return variable?.Name;
         }
 
         /// <summary>
@@ -63,10 +63,8 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             var @var = obj as Variable;
-            if (@var != null && @var.Name == name)
-                return true;
 
-            return false;
+            return @var != null && @var.Name == name;
         }
 
         /// <summary>
@@ -105,7 +103,7 @@ namespace xFunc.Maths.Expressions
         public object Calculate(ExpressionParameters parameters)
         {
             if (parameters == null)
-                throw new ArgumentNullException("parameters");
+                throw new ArgumentNullException(nameof(parameters));
 
             return parameters.Parameters[name];
         }

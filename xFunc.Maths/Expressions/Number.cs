@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
         public static implicit operator double(Number number)
         {
-            return number == null ? double.NaN : number.Value;
+            return number?.Value ?? double.NaN;
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions
             {
                 var sub = parent as Sub;
                 if (sub != null && sub.Right == this)
-                    return string.Format("({0})", number.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    return $"({number.ToString(System.Globalization.CultureInfo.InvariantCulture)})";
             }
 
             return number.ToString(System.Globalization.CultureInfo.InvariantCulture);

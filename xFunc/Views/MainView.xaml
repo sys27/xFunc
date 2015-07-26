@@ -12,19 +12,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. 
 See the License for the specific language governing permissions and 
 limitations under the License. -->
-<ribbon:MetroWindow x:Class="xFunc.Views.MainView"
+<ribbon:RibbonWindow x:Class="xFunc.Views.MainView"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:res="clr-namespace:xFunc.Resources"
                     xmlns:ribbon="clr-namespace:Fluent;assembly=Fluent"
                     xmlns:viewModels="clr-namespace:xFunc.ViewModels"
                     xmlns:views="clr-namespace:xFunc.Views"
-                    Style="{StaticResource MetroWindowStyle}"
                     Foreground="White"
                     Title="xFunc" Width="1024" Height="576" MinWidth="480" MinHeight="270"
                     Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
                     Loaded="this_Loaded">
-    <ribbon:MetroWindow.CommandBindings>
+    <ribbon:RibbonWindow.CommandBindings>
         <CommandBinding Command="views:MainView.NewCommand" Executed="NewCommand_Execute" />
         <CommandBinding Command="views:MainView.OpenCommand" Executed="OpenCommand_Execute" />
         <CommandBinding Command="views:MainView.SaveCommand" Executed="SaveCommand_Execute" />
@@ -50,13 +49,13 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
         <CommandBinding Command="views:MainView.SettingsCommand" Executed="SettingsCommand_Execute" />
         <CommandBinding Command="views:MainView.ExitCommand" Executed="ExitCommand_Execute" />
-    </ribbon:MetroWindow.CommandBindings>
-    <ribbon:MetroWindow.InputBindings>
+    </ribbon:RibbonWindow.CommandBindings>
+    <ribbon:RibbonWindow.InputBindings>
         <KeyBinding Command="views:MainView.NewCommand" Key="N" Modifiers="Control" />
         <KeyBinding Command="views:MainView.OpenCommand" Key="O" Modifiers="Control" />
         <KeyBinding Command="views:MainView.SaveCommand" Key="S" Modifiers="Control" />
         <KeyBinding Command="views:MainView.SaveAsCommand" Key="S" Modifiers="Control+Shift" />
-        
+
         <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
@@ -68,7 +67,7 @@ limitations under the License. -->
         <KeyBinding Command="views:MainView.AboutCommand" Key="F1" />
         <KeyBinding Command="views:MainView.SettingsCommand" Key="S" Modifiers="Alt" />
         <KeyBinding Command="views:MainView.ExitCommand" Key="F4" Modifiers="Alt" />
-    </ribbon:MetroWindow.InputBindings>
+    </ribbon:RibbonWindow.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -87,7 +86,7 @@ limitations under the License. -->
                 <ribbon:QuickAccessMenuItem Target="{Binding ElementName=redoButton}" IsChecked="True" />
             </ribbon:Ribbon.QuickAccessItems>
             <ribbon:Ribbon.ToolBarItems>
-                <ribbon:Button Header="{x:Static res:Resource.AboutButtonHeader}" ribbon:RibbonAttachedProperties.RibbonSize="Small" Icon="../Images/Help.png" Command="views:MainView.AboutCommand">
+                <ribbon:Button Size="Small" Header="{x:Static res:Resource.AboutButtonHeader}" Icon="../Images/Help.png" Command="views:MainView.AboutCommand">
                     <ribbon:Button.ToolTip>
                         <ribbon:ScreenTip Title="{x:Static res:Resource.AboutToolTipTitle}" Text="{x:Static res:Resource.AboutButtonToolTip}" />
                     </ribbon:Button.ToolTip>
@@ -869,4 +868,4 @@ limitations under the License. -->
             </ribbon:StatusBarItem>
         </ribbon:StatusBar>
     </Grid>
-</ribbon:MetroWindow>
+</ribbon:RibbonWindow>

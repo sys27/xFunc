@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions
             int hash = first;
 
             hash = hash * second + m_left.GetHashCode();
-            hash = hash * second + second.GetHashCode();
+            hash = hash * second + m_right.GetHashCode();
 
             return hash;
         }

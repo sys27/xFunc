@@ -1,7 +1,7 @@
 xFunc
 =====
 
-xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. This program consists of libraries and an execution file. The libraries include the code that converts strings to expressions.
+xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. This program consists of libraries and an execution file. The libraries include the code that converts strings to expressions (parser, lexer and etc.).
 
 ## Features:
 
@@ -23,6 +23,4 @@ xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICE
 ## More:
 
 * [CodePlex](http://xfunc.codeplex.com/)
-* [SourceForge.net](https://sourceforge.net/projects/xfunc/)
 * [NuGet](https://nuget.org/packages?q=xFunc)
-* [e-x-it.blogspot.com (rus)](http://e-x-it.blogspot.com/2012/02/c.html)

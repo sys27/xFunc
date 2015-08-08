@@ -56,6 +56,10 @@ namespace xFunc.Views
         public static RoutedCommand RadianCommand = new RoutedCommand();
         public static RoutedCommand GradianCommand = new RoutedCommand();
 
+        public static RoutedCommand AutoFormatCommand = new RoutedCommand();
+        public static RoutedCommand NormatFormatCommand = new RoutedCommand();
+        public static RoutedCommand ExponentialFormatCommand = new RoutedCommand();
+
         public static RoutedCommand BinCommand = new RoutedCommand();
         public static RoutedCommand OctCommand = new RoutedCommand();
         public static RoutedCommand DecCommand = new RoutedCommand();

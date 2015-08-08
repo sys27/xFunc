@@ -753,4 +753,16 @@
   <data name="NAndToolTip" xml:space="preserve">
     <value>Logical NAnd. Example: true nand false.</value>
   </data>
+  <data name="OutputFormatGroupHeader" xml:space="preserve">
+    <value>Output Format</value>
+  </data>
+  <data name="AutoFormatButtonHeader" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="NormalFormatButtonHeader" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="ExponentialFormatButtonHeader" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
 </root>

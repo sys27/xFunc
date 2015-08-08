@@ -753,4 +753,16 @@
   <data name="NOrToolTip" xml:space="preserve">
     <value>Стрелка Пирса. Пример: true nor false.</value>
   </data>
+  <data name="OutputFormatGroupHeader" xml:space="preserve">
+    <value>Формат вывода чисел</value>
+  </data>
+  <data name="AutoFormatButtonHeader" xml:space="preserve">
+    <value>Авто</value>
+  </data>
+  <data name="NormalFormatButtonHeader" xml:space="preserve">
+    <value>Обычный</value>
+  </data>
+  <data name="ExponentialFormatButtonHeader" xml:space="preserve">
+    <value>Экспоненциальный</value>
+  </data>
 </root>

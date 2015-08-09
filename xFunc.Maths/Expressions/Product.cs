@@ -296,6 +296,12 @@ namespace xFunc.Maths.Expressions
             }
         }
 
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
         public override ExpressionResultType[] ArgumentsTypes
         {
             get

@@ -13,19 +13,11 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using xFunc.Maths;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.ViewModels;
 
@@ -67,7 +59,7 @@ namespace xFunc.Views
 
         private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
-            AddVariableView view = new AddVariableView()
+            var view = new AddVariableView()
             {
                 Owner = this
             };
@@ -83,7 +75,7 @@ namespace xFunc.Views
         {
             var item = varList.SelectedItem as VariableViewModel;
 
-            AddVariableView view = new AddVariableView(item)
+            var view = new AddVariableView(item)
             {
                 Owner = this
             };

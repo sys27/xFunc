@@ -242,7 +242,7 @@ namespace xFunc.Views
         private void DrawOXOY()
         {
             var oxoyVisual = new DrawingVisual();
-            Pen pen = new Pen(Brushes.Black, 1);
+            var pen = new Pen(Brushes.Black, 1);
             using (DrawingContext context = oxoyVisual.RenderOpen())
             {
                 var boolX = centerX >= 0 && centerX <= currentWidth;
@@ -337,7 +337,7 @@ namespace xFunc.Views
             geometry.Freeze();
 
             var funcVisual = new DrawingVisual();
-            Pen pen = new Pen(Brushes.Red, 1);
+            var pen = new Pen(Brushes.Red, 1);
             pen.Freeze();
             using (DrawingContext context = funcVisual.RenderOpen())
             {

@@ -61,7 +61,7 @@ namespace xFunc.Presenters
         public void Add(string strExp)
         {
             if (string.IsNullOrWhiteSpace(strExp))
-                throw new ArgumentNullException("strExp");
+                throw new ArgumentNullException(nameof(strExp));
 
             string[] exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -83,7 +83,7 @@ namespace xFunc.Presenters
         public void Remove(MathWorkspaceItemViewModel item)
         {
             if (item == null)
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
 
             workspace.Remove(item.Item);
 
@@ -107,7 +107,7 @@ namespace xFunc.Presenters
             set
             {
                 processor.AngleMeasurement = value;
-                OnPropertyChanged("AngleMeasurement");
+                OnPropertyChanged(nameof(AngleMeasurement));
             }
         }
 
@@ -120,7 +120,7 @@ namespace xFunc.Presenters
             set
             {
                 processor.Base = value;
-                OnPropertyChanged("Base");
+                OnPropertyChanged(nameof(Base));
             }
         }
 

@@ -253,7 +253,7 @@ namespace xFunc.Views
                 if (processor.UserFunctions.Count > 0)
                     Settings.Default.UserFunctions = new System.Collections.Specialized.StringCollection();
                 foreach (var item in processor.UserFunctions)
-                    Settings.Default.UserFunctions.Add(string.Format("{0}:={1}", item.Key, item.Value));
+                    Settings.Default.UserFunctions.Add($"{item.Key}:={item.Value}");
             }
 
             if (Settings.Default.RememberSizeAndPosition)

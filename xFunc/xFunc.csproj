@@ -90,6 +90,7 @@
     <Compile Include="Presenters\MathPresenter.cs" />
     <Compile Include="Presenters\MathWorkspace.cs" />
     <Compile Include="Presenters\MathWorkspaceItem.cs" />
+    <Compile Include="Presenters\OutputFormats.cs" />
     <Compile Include="Presenters\TruthTablePresenter.cs" />
     <Compile Include="Presenters\Updater.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

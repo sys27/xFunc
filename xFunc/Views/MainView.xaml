@@ -28,10 +28,14 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.OpenCommand" Executed="OpenCommand_Execute" />
         <CommandBinding Command="views:MainView.SaveCommand" Executed="SaveCommand_Execute" />
         <CommandBinding Command="views:MainView.SaveAsCommand" Executed="SaveAsCommand_Execute" />
+
+        <CommandBinding Command="views:MainView.AutoFormatCommand" Executed="AutoButton_Execute" CanExecute="FormatButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.NormalFormatCommand" Executed="NormalButton_Execute" CanExecute="FormatButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.ExponentialFormatCommand" Executed="ExponentialButton_Execute" CanExecute="FormatButtons_CanExecute" />
         
-        <CommandBinding Command="views:MainView.DegreeCommand" Executed="DegreeButton_Execute" CanExecute="AndleButtons_CanExecute" />
-        <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AndleButtons_CanExecute" />
-        <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AndleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.DegreeCommand" Executed="DegreeButton_Execute" CanExecute="AngleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AngleButtons_CanExecute" />
+        <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AngleButtons_CanExecute" />
 
         <CommandBinding Command="views:MainView.BinCommand" Executed="BinCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.OctCommand" Executed="OctCommand_Execute" CanExecute="BaseCommands_CanExecute" />
@@ -162,7 +166,7 @@ limitations under the License. -->
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.OutputFormatGroupHeader}">
                     <ribbon:ToggleButton x:Name="autoButton" Header="{x:Static res:Resource.AutoFormatButtonHeader}" Command="views:MainView.AutoFormatCommand" />
-                    <ribbon:ToggleButton x:Name="normalButton" Header="{x:Static res:Resource.NormalFormatButtonHeader}" Command="views:MainView.NormatFormatCommand" />
+                    <ribbon:ToggleButton x:Name="normalButton" Header="{x:Static res:Resource.NormalFormatButtonHeader}" Command="views:MainView.NormalFormatCommand" />
                     <ribbon:ToggleButton x:Name="exponentialButton" Header="{x:Static res:Resource.ExponentialFormatButtonHeader}" Command="views:MainView.ExponentialFormatCommand" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.AnswerBaseGroupHeader}">

@@ -15,9 +15,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Results;
 using xFunc.Properties;
 using xFunc.ViewModels;
 using xFunc.Views;
@@ -32,6 +34,8 @@ namespace xFunc.Presenters
 
         private Processor processor;
         private MathWorkspace workspace;
+
+        private OutputFormats outputFormat;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -63,12 +67,28 @@ namespace xFunc.Presenters
             if (string.IsNullOrWhiteSpace(strExp))
                 throw new ArgumentNullException(nameof(strExp));
 
-            string[] exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            var exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            
+            foreach (var s in exps)
+            {
+                var result = processor.Solve(s);
+                var num = result as NumberResult;
+                if (num != null)
+                {
+                    if (outputFormat == OutputFormats.Normal)
+                    {
+                        workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("F", CultureInfo.InvariantCulture)));
+                        continue;
+                    }
+                    else if (outputFormat == OutputFormats.Exponential)
+                    {
+                        workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("E", CultureInfo.InvariantCulture)));
+                        continue;
+                    }
+                }
 
-            var results = from s in exps
-                          let result = processor.Solve(s)
-                          select new MathWorkspaceItem(s, result);
-            workspace.AddRange(results);
+                workspace.Add(new MathWorkspaceItem(s, result, result.ToString()));
+            }
 
             UpdateList();
         }
@@ -121,6 +141,19 @@ namespace xFunc.Presenters
             {
                 processor.Base = value;
                 OnPropertyChanged(nameof(Base));
+            }
+        }
+
+        public OutputFormats OutputFormat
+        {
+            get
+            {
+                return outputFormat;
+            }
+            set
+            {
+                outputFormat = value;
+                OnPropertyChanged(nameof(OutputFormat));
             }
         }
 

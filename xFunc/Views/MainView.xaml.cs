@@ -57,7 +57,7 @@ namespace xFunc.Views
         public static RoutedCommand GradianCommand = new RoutedCommand();
 
         public static RoutedCommand AutoFormatCommand = new RoutedCommand();
-        public static RoutedCommand NormatFormatCommand = new RoutedCommand();
+        public static RoutedCommand NormalFormatCommand = new RoutedCommand();
         public static RoutedCommand ExponentialFormatCommand = new RoutedCommand();
 
         public static RoutedCommand BinCommand = new RoutedCommand();
@@ -105,7 +105,7 @@ namespace xFunc.Views
 
         private void mathPresenter_PropertyChanged(object o, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName == "AngleMeasurement")
+            if (args.PropertyName == nameof(mathPresenter.AngleMeasurement))
             {
                 switch (mathPresenter.AngleMeasurement)
                 {
@@ -126,7 +126,7 @@ namespace xFunc.Views
                         break;
                 }
             }
-            else if (args.PropertyName == "Base")
+            else if (args.PropertyName == nameof(mathPresenter.Base))
             {
                 switch (mathPresenter.Base)
                 {
@@ -153,6 +153,27 @@ namespace xFunc.Views
                         octButton.IsChecked = false;
                         decButton.IsChecked = false;
                         hexButton.IsChecked = true;
+                        break;
+                }
+            }
+            else if (args.PropertyName == nameof(mathPresenter.OutputFormat))
+            {
+                switch (mathPresenter.OutputFormat)
+                {
+                    case OutputFormats.Auto:
+                        autoButton.IsChecked = true;
+                        normalButton.IsChecked = false;
+                        exponentialButton.IsChecked = false;
+                        break;
+                    case OutputFormats.Normal:
+                        autoButton.IsChecked = false;
+                        normalButton.IsChecked = true;
+                        exponentialButton.IsChecked = false;
+                        break;
+                    case OutputFormats.Exponential:
+                        autoButton.IsChecked = false;
+                        normalButton.IsChecked = false;
+                        exponentialButton.IsChecked = true;
                         break;
                 }
             }
@@ -234,6 +255,7 @@ namespace xFunc.Views
 
             mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
             mathPresenter.Base = Settings.Default.NumberBase;
+            mathPresenter.OutputFormat = Settings.Default.OutputFormat;
 
             numberToolBar.IsExpanded = Settings.Default.NumbersExpanded;
             standartMathToolBar.IsExpanded = Settings.Default.StandartMathExpanded;
@@ -286,6 +308,7 @@ namespace xFunc.Views
             {
                 Settings.Default.AngleMeasurement = mathPresenter.AngleMeasurement;
                 Settings.Default.NumberBase = mathPresenter.Base;
+                Settings.Default.OutputFormat = mathPresenter.OutputFormat;
             }
 
             if (Settings.Default.RememberRightToolBar)
@@ -420,6 +443,26 @@ namespace xFunc.Views
             }
         }
 
+        private void AutoButton_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            mathPresenter.OutputFormat = OutputFormats.Auto;
+        }
+
+        private void NormalButton_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            mathPresenter.OutputFormat = OutputFormats.Normal;
+        }
+
+        private void ExponentialButton_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            mathPresenter.OutputFormat = OutputFormats.Exponential;
+        }
+
+        private void FormatButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = tabControl.SelectedItem == mathTab;
+        }
+
         private void DegreeButton_Execute(object o, ExecutedRoutedEventArgs args)
         {
             mathPresenter.AngleMeasurement = AngleMeasurement.Degree;
@@ -435,7 +478,7 @@ namespace xFunc.Views
             mathPresenter.AngleMeasurement = AngleMeasurement.Gradian;
         }
 
-        private void AndleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        private void AngleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
         }

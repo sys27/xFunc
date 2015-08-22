@@ -107,5 +107,8 @@
     <Setting Name="ConverterTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
+    <Setting Name="OutputFormat" Type="xFunc.Presenters.OutputFormats" Scope="User">
+      <Value Profile="(Default)">Auto</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

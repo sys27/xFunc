@@ -25,11 +25,11 @@ namespace xFunc.Presenters
         private IResult result;
         private string answer;
 
-        public MathWorkspaceItem(string strExp, IResult result)
+        public MathWorkspaceItem(string strExp, IResult result, string answer)
         {
             this.strExp = strExp;
             this.result = result;
-            this.answer = result.ToString();
+            this.answer = answer;
         }
 
         public string StringExpression

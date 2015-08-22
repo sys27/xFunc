@@ -15,16 +15,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using xFunc.Logics;
 using xFunc.Logics.Expressions;
 using xFunc.Presenters;
@@ -36,7 +30,7 @@ namespace xFunc.Views
     public partial class TruthTableControl : UserControl
     {
 
-        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(string), typeof(TruthTableControl));
+        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register(nameof(Status), typeof(string), typeof(TruthTableControl));
 
         private TruthTablePresenter presenter;
 

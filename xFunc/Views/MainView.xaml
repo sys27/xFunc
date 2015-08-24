@@ -165,9 +165,9 @@ limitations under the License. -->
                     </ribbon:ToggleButton>
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.OutputFormatGroupHeader}">
-                    <ribbon:ToggleButton x:Name="autoButton" Header="{x:Static res:Resource.AutoFormatButtonHeader}" Command="views:MainView.AutoFormatCommand" />
-                    <ribbon:ToggleButton x:Name="normalButton" Header="{x:Static res:Resource.NormalFormatButtonHeader}" Command="views:MainView.NormalFormatCommand" />
-                    <ribbon:ToggleButton x:Name="exponentialButton" Header="{x:Static res:Resource.ExponentialFormatButtonHeader}" Command="views:MainView.ExponentialFormatCommand" />
+                    <ribbon:ToggleButton x:Name="autoButton" Header="{x:Static res:Resource.AutoFormatButtonHeader}" LargeIcon="../Images/Auto.png"  Command="views:MainView.AutoFormatCommand" />
+                    <ribbon:ToggleButton x:Name="normalButton" Header="{x:Static res:Resource.NormalFormatButtonHeader}" LargeIcon="../Images/Normal.png"  Command="views:MainView.NormalFormatCommand" />
+                    <ribbon:ToggleButton x:Name="exponentialButton" Header="{x:Static res:Resource.ExponentialFormatButtonHeader}" LargeIcon="../Images/Exponential.png"  Command="views:MainView.ExponentialFormatCommand" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.AnswerBaseGroupHeader}">
                     <ribbon:ToggleButton x:Name="binButton" Header="Bin" LargeIcon="../Images/Bin.png" Command="views:MainView.BinCommand" />

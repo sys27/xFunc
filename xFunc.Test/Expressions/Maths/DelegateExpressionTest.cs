@@ -17,7 +17,7 @@ namespace xFunc.Test.Expressions.Maths
             {
                 new Parameter("x", 10)
             };
-            var func = new DelegateExpression(p => p.Parameters["x"] + 1);
+            var func = new DelegateExpression(p => (double)p.Parameters["x"] + 1);
 
             var result = func.Calculate(parameters);
 
@@ -38,7 +38,7 @@ namespace xFunc.Test.Expressions.Maths
         public void CalculateTest3()
         {
             var uf1 = new UserFunction("func", new[] { new Variable("x") }, 1);
-            var func = new DelegateExpression(p => p.Parameters["x"] == 10 ? 0 : 1);
+            var func = new DelegateExpression(p => (double)p.Parameters["x"] == 10 ? 0 : 1);
             var funcs = new FunctionCollection();
             funcs.Add(uf1, func);
 

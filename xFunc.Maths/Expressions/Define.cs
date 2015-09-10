@@ -112,7 +112,7 @@ namespace xFunc.Maths.Expressions
             var variable = key as Variable;
             if (variable != null)
             {
-                parameters.Parameters[variable.Name] = (double)value.Calculate(parameters);
+                parameters.Parameters[variable.Name] = value.Calculate(parameters);
             }
             else
             {

@@ -36,7 +36,7 @@ namespace xFunc.ViewModels
             }
         }
 
-        public double Value
+        public object Value
         {
             get
             {

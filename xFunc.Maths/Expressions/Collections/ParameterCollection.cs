@@ -114,7 +114,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </value>
         /// <param name="key">The name of variable.</param>
         /// <returns>The value of variable.</returns>
-        public double this[string key]
+        public object this[string key]
         {
             get
             {
@@ -124,10 +124,10 @@ namespace xFunc.Maths.Expressions.Collections
                     return item.Value;
 
                 var param = consts.FirstOrDefault(p => p.Key == key);
-                if (param == null)
-                    throw new KeyNotFoundException(string.Format(Resource.VariableNotFoundExceptionError, key));
+                if (param != null)
+                    return param.Value;
 
-                return param.Value;
+                throw new KeyNotFoundException(string.Format(Resource.VariableNotFoundExceptionError, key));
             }
             set
             {
@@ -171,7 +171,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <param name="value">The value of variable.</param>
-        public void Add(string key, double value)
+        public void Add(string key, object value)
         {
             this.Add(new Parameter(key, value));
         }

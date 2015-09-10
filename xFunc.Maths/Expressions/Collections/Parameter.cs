@@ -25,7 +25,7 @@ namespace xFunc.Maths.Expressions.Collections
     {
 
         private readonly string key;
-        private double value;
+        private object value;
         private ParameterType type;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
-        public Parameter(string key, double value)
+        public Parameter(string key, object value)
             : this(key, value, ParameterType.Normal) { }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
-        public Parameter(string key, double value, ParameterType type)
+        public Parameter(string key, object value, ParameterType type)
         {
             this.key = key;
             this.value = value;
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         /// <returns>A constant.</returns>
-        public static Parameter CreateConstant(string key, double value)
+        public static Parameter CreateConstant(string key, object value)
         {
             return new Parameter(key, value, ParameterType.Constant);
         }
@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (param == null)
                 return false;
 
-            return key == param.key && (value.Equals(param.value) || Math.Abs(value - param.value) < 1E-14);
+            return key == param.key && value.Equals(param.value);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The value of parameter.
         /// </value>
-        public double Value
+        public object Value
         {
             get
             {

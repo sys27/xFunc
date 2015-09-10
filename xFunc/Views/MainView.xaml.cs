@@ -345,7 +345,7 @@ namespace xFunc.Views
                 where @var.Type != ParameterType.Constant
                 select new XElement("add",
                         new XAttribute("key", @var.Key),
-                        new XAttribute("value", @var.Value.ToString(CultureInfo.InvariantCulture)),
+                        new XAttribute("value", Convert.ToString(@var.Value, CultureInfo.InvariantCulture)),
                         new XAttribute("readonly", @var.Type == ParameterType.ReadOnly ? true : false)));
             var funcs = new XElement("functions",
                 from func in processor.UserFunctions

@@ -39,7 +39,7 @@ namespace xFunc.Views
 
             nameBox.Text = variable.Variable;
             nameBox.IsEnabled = false;
-            valueBox.Text = variable.Value.ToString(CultureInfo.InvariantCulture);
+            valueBox.Text = Convert.ToString(variable.Value, CultureInfo.InvariantCulture);
 
             nameBox.Focus();
         }

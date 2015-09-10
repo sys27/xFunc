@@ -54,7 +54,11 @@ namespace xFunc.Maths.Expressions.Programming
         public override object Calculate(ExpressionParameters parameters)
         {
             var var = (Variable)m_argument;
-            var newValue = parameters.Parameters[var.Name] - 1;
+            if (parameters.Parameters[var.Name] is bool)
+                // todo: !!!
+                throw new Exception();
+
+            var newValue = Convert.ToDouble(parameters.Parameters[var.Name]) - 1;
             parameters.Parameters[var.Name] = newValue;
 
             return newValue;

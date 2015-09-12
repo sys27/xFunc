@@ -19,7 +19,7 @@ namespace xFunc.Test.Expressions.Maths
 
             var answer = exp.Calculate(parameters);
 
-            Assert.AreEqual(1, parameters["x"]);
+            Assert.AreEqual(1.0, parameters["x"]);
             Assert.AreEqual(double.NaN, answer);
         }
 
@@ -44,7 +44,7 @@ namespace xFunc.Test.Expressions.Maths
 
             var answer = exp.Calculate(parameters);
 
-            Assert.AreEqual(36, parameters["x"]);
+            Assert.AreEqual(36.0, parameters["x"]);
             Assert.AreEqual(double.NaN, answer);
         }
 
@@ -56,7 +56,7 @@ namespace xFunc.Test.Expressions.Maths
 
             var answer = exp.Calculate(parameters);
 
-            Assert.AreEqual(1, parameters["π"]);
+            Assert.AreEqual(1.0, parameters["π"]);
         }
 
     }

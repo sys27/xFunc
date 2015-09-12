@@ -18,8 +18,8 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var inc = new Inc(new Variable("x"));
             var result = (double)inc.Calculate(parameters);
 
-            Assert.AreEqual(11, result);
-            Assert.AreEqual(11, parameters["x"]);
+            Assert.AreEqual(11.0, result);
+            Assert.AreEqual(11.0, parameters["x"]);
         }
 
     }

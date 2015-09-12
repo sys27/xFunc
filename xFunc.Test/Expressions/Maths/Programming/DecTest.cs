@@ -18,8 +18,8 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var dec = new Dec(new Variable("x"));
             var result = (double)dec.Calculate(parameters);
 
-            Assert.AreEqual(9, result);
-            Assert.AreEqual(9, parameters["x"]);
+            Assert.AreEqual(9.0, result);
+            Assert.AreEqual(9.0, parameters["x"]);
         }
 
     }

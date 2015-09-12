@@ -23,7 +23,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var @while = new While(body, cond);
             @while.Calculate(parameters);
 
-            Assert.AreEqual(10, parameters.Parameters["x"]);
+            Assert.AreEqual(10.0, parameters.Parameters["x"]);
         }
 
     }

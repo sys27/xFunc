@@ -34,7 +34,34 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of parameter.</param>
         /// <param name="value">The value of parameter.</param>
         public Parameter(string key, object value)
-            : this(key, value, ParameterType.Normal) { }
+            : this(key, value, ParameterType.Normal)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, int value, ParameterType type)
+            : this(key, (object)value, type)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter" /> class.
+        /// </summary>
+        /// <param name="key">The name of parameter.</param>
+        /// <param name="value">The value of parameter.</param>
+        /// <param name="type">The type of parameter.</param>
+        public Parameter(string key, double value, ParameterType type)
+            : this(key, (object)value, type)
+        {
+
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parameter" /> class.
@@ -45,7 +72,7 @@ namespace xFunc.Maths.Expressions.Collections
         public Parameter(string key, object value, ParameterType type)
         {
             this.key = key;
-            this.value = value;
+            this.Value = value;
             this.type = type;
         }
 
@@ -79,6 +106,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (param == null)
                 return false;
 
+            // todo: check!!!
             return key == param.key && value.Equals(param.value);
         }
 
@@ -137,7 +165,7 @@ namespace xFunc.Maths.Expressions.Collections
             }
             set
             {
-                this.value = value;
+                this.value = !(value is bool) ? Convert.ToDouble(value) : value;
             }
         }
 

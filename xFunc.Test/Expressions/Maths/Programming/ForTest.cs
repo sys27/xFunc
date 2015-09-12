@@ -23,7 +23,7 @@ namespace xFunc.Test.Expressions.Maths.Programming
             var @for = new For(new Variable("i"), init, cond, iter);
             @for.Calculate(parameters);
 
-            Assert.AreEqual(10, parameters.Parameters["i"]);
+            Assert.AreEqual(10.0, parameters.Parameters["i"]);
         }
 
     }

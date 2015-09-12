@@ -78,7 +78,7 @@ namespace xFunc.Test
 
             Assert.AreEqual(1, parameters.Collection.Count());
             Assert.IsTrue(parameters.ContainsKey("π"));
-            Assert.AreEqual(4, parameters["π"]);
+            Assert.AreEqual(4.0, parameters["π"]);
         }
 
     }

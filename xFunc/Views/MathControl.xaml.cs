@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,6 +41,9 @@ namespace xFunc.Views
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
 
         private MathPresenter presenter;
+
+        private int index;
+        private Key prevKey;
 
         public MathControl()
         {
@@ -124,6 +128,33 @@ namespace xFunc.Views
             if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(mathExpressionBox.Text))
             {
                 MathExpEnter();
+            }
+            else if (args.Key == Key.Up && presenter.Workspace.Count > 0)
+            {
+                if (prevKey != Key.None && prevKey != args.Key)
+                    index++;
+
+                var newIndex = presenter.Workspace.Count - 1 - index;
+                if (newIndex >= 0 && newIndex < presenter.Workspace.Count)
+                {
+                    this.mathExpressionBox.Text = presenter.Workspace[newIndex].StringExpression;
+
+                    if (index < presenter.Workspace.Count - 1)
+                        index++;
+                }
+
+                prevKey = args.Key;
+            }
+            else if (args.Key == Key.Down && presenter.Workspace.Count > 0)
+            {
+                if (index > 0 || (prevKey != Key.None && prevKey != args.Key))
+                    index--;
+
+                var newIndex = presenter.Workspace.Count - 1 - index;
+                if (newIndex >= 0 && newIndex < presenter.Workspace.Count)
+                    this.mathExpressionBox.Text = presenter.Workspace[newIndex].StringExpression;
+
+                prevKey = args.Key;
             }
         }
 

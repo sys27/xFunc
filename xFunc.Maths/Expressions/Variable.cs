@@ -195,7 +195,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Number;
+                return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
 

@@ -76,8 +76,6 @@ namespace xFunc.Maths.Expressions.Collections
             consts.Add(Parameter.CreateConstant("e", Math.E));
             consts.Add(Parameter.CreateConstant("g", 9.80665));
             consts.Add(Parameter.CreateConstant("c", 299792458));
-            consts.Add(Parameter.CreateConstant("true", 1));
-            consts.Add(Parameter.CreateConstant("false", 0));
         }
 
         /// <summary>

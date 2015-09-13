@@ -27,8 +27,8 @@ limitations under the License. -->
             <Run x:Name="versionNumber" />
         </TextBlock>
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,79,0,0">
-            <Run Text="{x:Static res:Resource.AuthorTextBox}" />
-            <Run Text="{x:Static res:Resource.Author}" />
+            <Run Text="{x:Static res:Resource.AuthorTextBox}" />            
+            <Hyperlink NavigateUri="mailto:sys2712@gmail.com" Click="MailtoHyperlink_Click"><Run Text="{x:Static res:Resource.Author}" /></Hyperlink>
         </TextBlock>
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,100,0,0">
             <Run Text="{x:Static res:Resource.HomePageTextBox}" />

@@ -57,8 +57,7 @@ namespace xFunc.Maths.Expressions.Programming
             var var = (Variable)m_left;
             var parameter = parameters.Parameters[var.Name];
             if (parameter is bool)
-                // todo: !!!
-                throw new Exception();
+                throw new NotSupportedException();
 
             var newValue = Convert.ToDouble(parameter) + (double)m_right.Calculate(parameters);
             parameters.Parameters[var.Name] = newValue;

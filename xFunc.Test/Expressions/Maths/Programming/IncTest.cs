@@ -22,6 +22,15 @@ namespace xFunc.Test.Expressions.Maths.Programming
             Assert.AreEqual(11.0, parameters["x"]);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void IncBoolTest()
+        {
+            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var inc = new Inc(new Variable("x"));
+            inc.Calculate(parameters);
+        }
+
     }
 
 }

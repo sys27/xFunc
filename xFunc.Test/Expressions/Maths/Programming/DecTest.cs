@@ -22,6 +22,15 @@ namespace xFunc.Test.Expressions.Maths.Programming
             Assert.AreEqual(9.0, parameters["x"]);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void DecBoolTest()
+        {
+            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var dec = new Inc(new Variable("x"));
+            dec.Calculate(parameters);
+        }
+
     }
 
 }

@@ -88,6 +88,10 @@ namespace xFunc.Maths
             if (!Parser.HasVar(expression, variable))
                 return new Number(0);
 
+            var deriv = expression as Derivative;
+            if (deriv != null)
+                expression = deriv.Expression;
+
             if (simplify)
                 return simplifier.Simplify(_Differentiate(expression, variable, parameters));
 
@@ -107,6 +111,9 @@ namespace xFunc.Maths
             var @var = expression as Variable;
             if (@var != null)
                 return Variable(@var, variable);
+            var deriv = expression as Derivative;
+            if (deriv != null)
+                expression = _Differentiate(deriv.Expression, deriv.Variable, parameters);
 
             var abs = expression as Abs;
             if (abs != null)

@@ -1474,6 +1474,24 @@ namespace xFunc.Test
             Assert.AreEqual("-cos(x)", deriv.ToString());
         }
 
+        [TestMethod]
+        public void DoubleDiffTest()
+        {
+            var exp = new Derivative(new Derivative(new Sin(new Variable("x")), new Variable("x")), new Variable("x"));
+            var deriv = Differentiate(exp);
+
+            Assert.AreEqual("-(sin(x) * 1) * 1", deriv.ToString());
+        }
+
+        [TestMethod]
+        public void TripleDiffTest()
+        {
+            var exp = new Derivative(new Derivative(new Derivative(new Sin(new Variable("x")), new Variable("x")), new Variable("x")), new Variable("x"));
+            var deriv = Differentiate(exp);
+
+            Assert.AreEqual("-((cos(x) * 1) * 1) * 1", deriv.ToString());
+        }
+
     }
 
 }

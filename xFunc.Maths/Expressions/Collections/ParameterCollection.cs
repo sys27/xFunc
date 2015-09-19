@@ -41,6 +41,16 @@ namespace xFunc.Maths.Expressions.Collections
         /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
         /// </summary>
         public ParameterCollection()
+            : this(true)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
+        /// </summary>
+        /// <param name="initConsts">if set to <c>true</c> initialize constants.</param>
+        public ParameterCollection(bool initConsts)
         {
 #if NET40_OR_GREATER || PORTABLE
             consts = new HashSet<Parameter>();
@@ -50,7 +60,8 @@ namespace xFunc.Maths.Expressions.Collections
             collection = new List<Parameter>();
 #endif
 
-            InitializeDefaults();
+            if (initConsts)
+                InitializeDefaults();
         }
 
         /// <summary>
@@ -58,6 +69,17 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="parameters">The parameters.</param>
         public ParameterCollection(IEnumerable<Parameter> parameters)
+            : this(parameters, true)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="initConsts">if set to <c>true</c> initialize constants.</param>
+        public ParameterCollection(IEnumerable<Parameter> parameters, bool initConsts)
         {
 #if NET40_OR_GREATER || PORTABLE
             consts = new HashSet<Parameter>();
@@ -67,7 +89,8 @@ namespace xFunc.Maths.Expressions.Collections
             collection = new List<Parameter>(parameters);
 #endif
 
-            InitializeDefaults();
+            if (initConsts)
+                InitializeDefaults();
         }
 
         private void InitializeDefaults()
@@ -108,7 +131,39 @@ namespace xFunc.Maths.Expressions.Collections
         /// Gets or sets the value of variable.
         /// </summary>
         /// <value>
-        /// The <see cref="Double"/>.
+        /// The value of parameter.
+        /// </value>
+        /// <param name="index">The index of variable.</param>
+        /// <returns>The value of variable.</returns>
+        public object this[int index]
+        {
+            get
+            {
+                if (collection.Count + consts.Count - 1 < index)
+                    throw new IndexOutOfRangeException();
+
+                if (collection.Count > index)
+                    return collection.ElementAt(index);
+
+                return consts.ElementAt(index - collection.Count);
+            }
+            set
+            {
+                if (collection.Count + consts.Count - 1 < index)
+                    throw new IndexOutOfRangeException();
+
+                if (collection.Count <= index)
+                    throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, collection.ElementAt(index).Key));
+
+                collection.ElementAt(index).Value = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the value of variable.
+        /// </summary>
+        /// <value>
+        /// The value of parameter.
         /// </value>
         /// <param name="key">The name of variable.</param>
         /// <returns>The value of variable.</returns>

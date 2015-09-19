@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// <summary>
     /// Item of <see cref="ParameterCollection"/>.
     /// </summary>
-    public class Parameter
+    public class Parameter : IComparable<Parameter>
     {
 
         private readonly string key;
@@ -135,6 +135,16 @@ namespace xFunc.Maths.Expressions.Collections
         public override string ToString()
         {
             return string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", key, value, type);
+        }
+
+        /// <summary>
+        /// Compares the current object with another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.Zero This object is equal to other. Greater than zero This object is greater than other.</returns>
+        public int CompareTo(Parameter other)
+        {
+            return key.CompareTo(other.key);
         }
 
         /// <summary>

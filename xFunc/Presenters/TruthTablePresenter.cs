@@ -15,9 +15,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using xFunc.Maths;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.ViewModels;
-using xFunc.Logics;
-using xFunc.Logics.Expressions;
 
 namespace xFunc.Presenters
 {
@@ -25,41 +26,48 @@ namespace xFunc.Presenters
     public class TruthTablePresenter
     {
 
-        private LogicParser parser;
-        private ILogicExpression expression;
-        private IEnumerable<ILogicExpression> expressions;
-        private LogicParameterCollection parameters;
+        private Parser parser;
+        private IExpression expression;
+        private IEnumerable<IExpression> expressions;
+        private ParameterCollection parameters;
         private List<TruthTableRowViewModel> table;
 
         public TruthTablePresenter()
         {
-            parser = new LogicParser();
+            parser = new Parser();
+        }
+
+        private void SetBits(int bits, int parametersCount)
+        {
+            for (int i = 0; i < parametersCount; i++)
+                parameters[i] = ((bits >> i) & 1) == 1 ? true : false;
         }
 
         public void Generate(string strExp)
         {
             expression = parser.Parse(strExp);
-            expressions = parser.ConvertLogicExpressionToCollection(expression);
-            parameters = parser.GetLogicParameters(strExp);
+            if (!expression.ResultType.HasFlag(ExpressionResultType.Boolean))
+                throw new InvalidOperationException();
+
+            expressions = parser.ConvertExpressionToCollection(expression);
+            parameters = parser.GetParameters(strExp);
             table = new List<TruthTableRowViewModel>();
 
-            for (int i = (int)Math.Pow(2, parameters.Count) - 1; i >= 0; i--)
+            var parametersCount = parameters.Count();
+            for (int i = (int)Math.Pow(2, parametersCount) - 1; i >= 0; i--)
             {
-                parameters.Bits = i;
-                bool b = expression.Calculate(parameters);
+                SetBits(i, parametersCount);
 
-                var row = new TruthTableRowViewModel(parameters.Count, expressions.Count());
+                var b = (bool)expression.Calculate(parameters);
 
-                row.Index = (int)Math.Pow(2, parameters.Count) - i;
-                for (int j = 0; j < parameters.Count; j++)
-                {
-                    row.VarsValues[j] = parameters[parameters[j]];
-                }
+                var row = new TruthTableRowViewModel(parametersCount, expressions.Count());
+
+                row.Index = (int)Math.Pow(2, parametersCount) - i;
+                for (int j = 0; j < parametersCount; j++)
+                    row.VarsValues[j] = (bool)parameters[parameters.ElementAt(j).Key];
 
                 for (int j = 0; j < expressions.Count() - 1; j++)
-                {
-                    row.Values[j] = expressions.ElementAt(j).Calculate(parameters);
-                }
+                    row.Values[j] = (bool)expressions.ElementAt(j).Calculate(parameters);
 
                 if (expressions.Count() != 0)
                     row.Result = b;
@@ -68,7 +76,7 @@ namespace xFunc.Presenters
             }
         }
 
-        public ILogicExpression Expression
+        public IExpression Expression
         {
             get
             {
@@ -76,7 +84,7 @@ namespace xFunc.Presenters
             }
         }
 
-        public IEnumerable<ILogicExpression> Expressions
+        public IEnumerable<IExpression> Expressions
         {
             get
             {
@@ -84,7 +92,7 @@ namespace xFunc.Presenters
             }
         }
 
-        public LogicParameterCollection Parameters
+        public ParameterCollection Parameters
         {
             get
             {

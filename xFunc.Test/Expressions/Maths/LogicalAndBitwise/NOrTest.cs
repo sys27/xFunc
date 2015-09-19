@@ -1,47 +1,48 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using xFunc.Logics;
-using xFunc.Logics.Expressions;
+using xFunc.Maths;
+using xFunc.Maths.Expressions.Collections;
 
-namespace xFunc.Test.Expressions.Logics
+namespace xFunc.Test.Expressions.alAndBitwise
 {
 
     [TestClass]
-    public class AndTest
+    public class NOrTest
     {
 
-        private LogicParser parser;
+        private Parser parser;
 
         [TestInitialize]
         public void TestInit()
         {
-            parser = new LogicParser();
+            parser = new Parser();
         }
 
         [TestMethod]
         public void CalculateTest()
         {
-            ILogicExpression exp = parser.Parse("a & b");
-            LogicParameterCollection parameters = new LogicParameterCollection();
+            var exp = parser.Parse("a nor b");
+            var parameters = new ParameterCollection();
             parameters.Add("a");
             parameters.Add("b");
 
             parameters["a"] = true;
             parameters["b"] = true;
-            Assert.IsTrue(exp.Calculate(parameters));
+            Assert.IsFalse((bool)exp.Calculate(parameters));
 
             parameters["a"] = true;
             parameters["b"] = false;
-            Assert.IsFalse(exp.Calculate(parameters));
+            Assert.IsFalse((bool)exp.Calculate(parameters));
 
             parameters["a"] = false;
             parameters["b"] = true;
-            Assert.IsFalse(exp.Calculate(parameters));
+            Assert.IsFalse((bool)exp.Calculate(parameters));
 
             parameters["a"] = false;
             parameters["b"] = false;
-            Assert.IsFalse(exp.Calculate(parameters));
+            Assert.IsTrue((bool)exp.Calculate(parameters));
         }
 
     }
+
 }

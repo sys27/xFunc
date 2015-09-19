@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Maths (.Net 4.5.1)", "xFunc.Maths\xFunc.Maths (.Net 4.5.1).csproj", "{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Logics (.Net 4.5.1)", "xFunc.Logics\xFunc.Logics (.Net 4.5.1).csproj", "{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.UnitConverters (.Net 4.5.1)", "xFunc.UnitConverters\xFunc.UnitConverters (.Net 4.5.1).csproj", "{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}"
 EndProject
 Global
@@ -30,10 +28,6 @@ Global
 		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFC61417-F3CC-47D5-B2DE-4029BE939A4C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Release|Any CPU.ActiveCfg = Release|Any CPU

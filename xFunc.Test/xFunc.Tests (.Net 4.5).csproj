@@ -52,15 +52,14 @@
     <Compile Include="Converters\MassTest.cs" />
     <Compile Include="Converters\PowerTest.cs" />
     <Compile Include="Converters\VolumeTest.cs" />
-    <Compile Include="Expressions\Logics\AndTest.cs" />
-    <Compile Include="Expressions\Logics\EqualityTest.cs" />
-    <Compile Include="Expressions\Logics\ImplicationTest.cs" />
-    <Compile Include="Expressions\Logics\NAndTest.cs" />
-    <Compile Include="Expressions\Logics\NOrTest.cs" />
-    <Compile Include="Expressions\Logics\NotTest.cs" />
-    <Compile Include="Expressions\Logics\OrTest.cs" />
-    <Compile Include="Expressions\Logics\UndefineTest.cs" />
-    <Compile Include="Expressions\Logics\XOrTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\AndTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\EqualityTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\ImplicationTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\NAndTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\NOrTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\NotTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\OrTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\XOrTest.cs" />
     <Compile Include="Expressions\Maths\AbsTest.cs" />
     <Compile Include="Expressions\Maths\AddTest.cs" />
     <Compile Include="Expressions\Maths\Bitwise\EqualityTest.cs" />
@@ -136,21 +135,15 @@
     <Compile Include="Expressions\Maths\FloorTest.cs" />
     <Compile Include="Expressions\Maths\CeilTest.cs" />
     <Compile Include="Expressions\Maths\UserFunctionTest.cs" />
-    <Compile Include="LogicParameterCollectionTest.cs" />
     <Compile Include="MathLexerMock.cs" />
     <Compile Include="MathParserTest.cs" />
-    <Compile Include="LogicParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MathLexerTest.cs" />
-    <Compile Include="LogicLexerTest.cs" />
     <Compile Include="SimplifierTest.cs" />
     <Compile Include="MathParameterCollectionTest.cs" />
+    <Compile Include="DifferentiatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xFunc.Logics\xFunc.Logics %28.Net 4.5%29.csproj">
-      <Project>{dfc61417-f3cc-47d5-b2de-4029be939a4c}</Project>
-      <Name>xFunc.Logics %28.Net 4.5%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths %28.Net 4.5%29.csproj">
       <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
       <Name>xFunc.Maths %28.Net 4.5%29</Name>

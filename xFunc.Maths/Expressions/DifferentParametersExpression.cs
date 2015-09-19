@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
-#endif
 using System.Text;
 using xFunc.Maths.Resources;
 

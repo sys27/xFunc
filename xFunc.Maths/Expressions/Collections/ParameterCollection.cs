@@ -15,9 +15,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
-#endif
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
@@ -28,14 +26,9 @@ namespace xFunc.Maths.Expressions.Collections
     /// </summary>
     public class ParameterCollection : IEnumerable<Parameter>
     {
-
-#if NET40_OR_GREATER || PORTABLE
+        
         private readonly HashSet<Parameter> consts;
         private HashSet<Parameter> collection;
-#elif NET20_OR_GREATER
-        private readonly List<Parameter> consts;
-        private List<Parameter> collection;
-#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
@@ -52,13 +45,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="initConsts">if set to <c>true</c> initialize constants.</param>
         public ParameterCollection(bool initConsts)
         {
-#if NET40_OR_GREATER || PORTABLE
             consts = new HashSet<Parameter>();
             collection = new HashSet<Parameter>();
-#elif NET20_OR_GREATER
-            consts = new List<Parameter>();
-            collection = new List<Parameter>();
-#endif
 
             if (initConsts)
                 InitializeDefaults();
@@ -81,13 +69,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="initConsts">if set to <c>true</c> initialize constants.</param>
         public ParameterCollection(IEnumerable<Parameter> parameters, bool initConsts)
         {
-#if NET40_OR_GREATER || PORTABLE
             consts = new HashSet<Parameter>();
             collection = new HashSet<Parameter>(parameters);
-#elif NET20_OR_GREATER
-            consts = new List<Parameter>();
-            collection = new List<Parameter>(parameters);
-#endif
 
             if (initConsts)
                 InitializeDefaults();
@@ -251,11 +234,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <exception cref="ParameterIsReadOnlyException">The variable is read only.</exception>
         public void Remove(string key)
         {
-#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(key))
-#elif NET20_OR_GREATER
-            if (StringExtension.IsNullOrWhiteSpace(key))
-#endif
                 throw new ArgumentNullException(nameof(key));
 
             var el = collection.FirstOrDefault(p => p.Key == key);

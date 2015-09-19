@@ -14,9 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
-#endif
 #if !PORTABLE
 using System.Runtime.Serialization;
 #endif

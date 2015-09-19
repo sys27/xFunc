@@ -21,6 +21,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths
 {
@@ -81,6 +82,64 @@ namespace xFunc.Maths
                 return paramExp.Arguments.Any(e => HasVar(e, arg));
 
             return expression is Variable && expression.Equals(arg);
+        }
+
+        /// <summary>
+        /// Gets parameters of expression.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns>A collection of parameters.</returns>
+        public ParameterCollection GetParameters(string function)
+        {
+            var tokens = lexer.Tokenize(function);
+            var c = new SortedSet<Parameter>();
+
+            foreach (var token in tokens)
+            {
+                var @var = token as VariableToken;
+                if (@var != null)
+                    c.Add(new Parameter(@var.Variable, false));
+            }
+
+            return new ParameterCollection(c, false);
+        }
+
+        /// <summary>
+        /// Converts the logic expression to collection.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <returns>The collection of expression parts.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="expression"/> variable is null.</exception>
+        public IEnumerable<IExpression> ConvertExpressionToCollection(IExpression expression)
+        {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+
+            var collection = new List<IExpression>();
+            ConvertToColletion(expression, collection);
+
+            return collection;
+        }
+
+        private void ConvertToColletion(IExpression expression, List<IExpression> collection)
+        {
+            if (expression is UnaryExpression)
+            {
+                var un = expression as UnaryExpression;
+                ConvertToColletion(un.Argument, collection);
+            }
+            else if (expression is BinaryExpression)
+            {
+                var bin = expression as BinaryExpression;
+                ConvertToColletion(bin.Left, collection);
+                ConvertToColletion(bin.Right, collection);
+            }
+            else if (expression is Variable)
+            {
+                return;
+            }
+
+            collection.Add(expression);
         }
 
         /// <summary>

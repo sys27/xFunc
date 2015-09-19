@@ -143,9 +143,9 @@ namespace xFunc.Maths.Expressions.Collections
                     throw new IndexOutOfRangeException();
 
                 if (collection.Count > index)
-                    return collection.ElementAt(index);
+                    return collection.ElementAt(index).Value;
 
-                return consts.ElementAt(index - collection.Count);
+                return consts.ElementAt(index - collection.Count).Value;
             }
             set
             {

@@ -19,8 +19,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using xFunc.Logics;
-using xFunc.Logics.Expressions;
+using xFunc.Maths;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.Presenters;
 using xFunc.Resources;
 
@@ -46,7 +47,7 @@ namespace xFunc.Views
             InitializeComponent();
         }
 
-        private void GenerateTruthTable(IEnumerable<ILogicExpression> exps, LogicParameterCollection parameters)
+        private void GenerateTruthTable(IEnumerable<IExpression> exps, ParameterCollection parameters)
         {
             truthTableGridView.Columns.Clear();
 
@@ -55,11 +56,11 @@ namespace xFunc.Views
                 Header = "#",
                 DisplayMemberBinding = new Binding("Index")
             });
-            for (int i = 0; i < parameters.Count; i++)
+            for (int i = 0; i < parameters.Collection.Count(); i++)
             {
                 truthTableGridView.Columns.Add(new GridViewColumn
                 {
-                    Header = parameters[i],
+                    Header = parameters.ElementAt(i).Key,
                     DisplayMemberBinding = new Binding(string.Format("VarsValues[{0}]", i))
                 });
             }
@@ -91,13 +92,13 @@ namespace xFunc.Views
 
                     Status = string.Empty;
                 }
-                catch (LogicLexerException lle)
+                catch (LexerException le)
                 {
-                    Status = lle.Message;
+                    Status = le.Message;
                 }
-                catch (LogicParserException lpe)
+                catch (ParserException pe)
                 {
-                    Status = lpe.Message;
+                    Status = pe.Message;
                 }
                 catch (DivideByZeroException dbze)
                 {

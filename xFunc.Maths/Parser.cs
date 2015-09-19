@@ -14,9 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
-#endif
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
@@ -92,7 +90,11 @@ namespace xFunc.Maths
         public ParameterCollection GetParameters(string function)
         {
             var tokens = lexer.Tokenize(function);
+#if PORTABLE
+            var c = new List<Parameter>();
+#else
             var c = new SortedSet<Parameter>();
+#endif
 
             foreach (var token in tokens)
             {
@@ -100,6 +102,9 @@ namespace xFunc.Maths
                 if (@var != null)
                     c.Add(new Parameter(@var.Variable, false));
             }
+#if PORTABLE
+            c.Sort();
+#endif
 
             return new ParameterCollection(c, false);
         }
@@ -149,11 +154,7 @@ namespace xFunc.Maths
         /// <returns>The parsed expression.</returns>
         public IExpression Parse(string function)
         {
-#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
-#elif NET20_OR_GREATER
-            if (StringExtension.IsNullOrWhiteSpace(function))
-#endif
                 throw new ArgumentNullException(nameof(function));
 
             if (!saveLastExpression || function != lastFunc)

@@ -15,9 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-#if NET35_OR_GREATER || PORTABLE
 using System.Linq;
-#endif
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
@@ -30,26 +28,16 @@ namespace xFunc.Maths
     public class Lexer : ILexer
     {
 
-#if NET35_OR_GREATER || PORTABLE
         private readonly HashSet<string> notVar;
         private readonly HashSet<char> unaryMinusOp;
-#elif NET20_OR_GREATER
-        private readonly List<string> notVar;
-        private readonly List<char> unaryMinusOp;
-#endif
 
         /// <summary>
         /// Initializes a new instance of <see cref="Lexer"/>.
         /// </summary>
         public Lexer()
         {
-#if NET35_OR_GREATER || PORTABLE
             notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor" };
             unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=' };
-#elif NET20_OR_GREATER
-            notVar = new List<string> { "nand", "nor", "and", "or", "xor" };
-            unaryMinusOp = new List<char> { '(', '{', '*', '/', '^', '=' };
-#endif
         }
 
         private bool IsBalanced(string str)
@@ -83,11 +71,7 @@ namespace xFunc.Maths
         /// <exception cref="LexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
         public IEnumerable<IToken> Tokenize(string function)
         {
-#if NET40_OR_GREATER || PORTABLE
             if (string.IsNullOrWhiteSpace(function))
-#elif NET20_OR_GREATER
-            if (StringExtension.IsNullOrWhiteSpace(function))
-#endif
                 throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
 
             function = function.ToLower().Replace(" ", "");

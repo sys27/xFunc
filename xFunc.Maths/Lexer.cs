@@ -44,10 +44,10 @@ namespace xFunc.Maths
         public Lexer()
         {
 #if NET35_OR_GREATER || PORTABLE
-            notVar = new HashSet<string> { "and", "or", "xor" };
+            notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor" };
             unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=' };
 #elif NET20_OR_GREATER
-            notVar = new List<string> { "and", "or", "xor" };
+            notVar = new List<string> { "nand", "nor", "and", "or", "xor" };
             unaryMinusOp = new List<char> { '(', '{', '*', '/', '^', '=' };
 #endif
         }

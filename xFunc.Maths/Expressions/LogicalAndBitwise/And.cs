@@ -54,9 +54,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override string ToString()
         {
             if (m_parent is BinaryExpression)
-            {
                 return ToString("({0} and {1})");
-            }
 
             return ToString("{0} and {1}");
         }

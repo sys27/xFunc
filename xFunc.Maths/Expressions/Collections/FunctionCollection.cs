@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 #if !PORTABLE
 using System.Runtime.Serialization;
@@ -29,8 +30,13 @@ namespace xFunc.Maths.Expressions.Collections
 #if !PORTABLE
     [Serializable]
 #endif
-    public class FunctionCollection : Dictionary<UserFunction, IExpression>
+    public class FunctionCollection : Dictionary<UserFunction, IExpression>, INotifyCollectionChanged
     {
+
+        /// <summary>
+        /// Occurs when the collection changes.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionCollection"/> class.
@@ -45,6 +51,36 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="context">The context.</param>
         protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
+
+        public new IExpression this[UserFunction key]
+        {
+            get
+            {
+                return base[key];
+            }set
+            {
+                base[key] = value;
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+        }
+
+        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, args);
+        }
+
+        public new void Add(UserFunction key, IExpression value)
+        {
+            base.Add(key, value);
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, key));
+        }
+
+        public new void Remove(UserFunction key)
+        {
+            if (base.Remove(key))
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key));
+        }
 
         /// <summary>
         /// Gets an user function.

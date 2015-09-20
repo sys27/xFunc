@@ -138,6 +138,7 @@ namespace xFunc.Views
                 if (newIndex >= 0 && newIndex < presenter.Workspace.Count)
                 {
                     this.mathExpressionBox.Text = presenter.Workspace[newIndex].StringExpression;
+                    this.mathExpressionBox.SelectionStart = this.mathExpressionBox.Text.Length;
 
                     if (index < presenter.Workspace.Count - 1)
                         index++;
@@ -152,7 +153,10 @@ namespace xFunc.Views
 
                 var newIndex = presenter.Workspace.Count - 1 - index;
                 if (newIndex >= 0 && newIndex < presenter.Workspace.Count)
+                {
                     this.mathExpressionBox.Text = presenter.Workspace[newIndex].StringExpression;
+                    this.mathExpressionBox.SelectionStart = this.mathExpressionBox.Text.Length;
+                }
 
                 prevKey = args.Key;
             }

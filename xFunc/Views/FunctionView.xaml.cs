@@ -42,6 +42,8 @@ namespace xFunc.Views
         public FunctionView(Processor processor)
         {
             this.processor = processor;
+            this.processor.UserFunctions.CollectionChanged += (o, args) => RefreshList();
+
             RefreshList();
 
             this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();

@@ -124,7 +124,7 @@
     <value>The value '{1}' was assigned to the variable '{0}'.</value>
   </data>
   <data name="ConstError" xml:space="preserve">
-    <value>You can't add constants.</value>
+    <value>You can't change constants.</value>
   </data>
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>An error occurred while parsing the tree.</value>

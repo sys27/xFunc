@@ -35,6 +35,7 @@ namespace xFunc.Test.Expressions.Maths
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void UndefConstTest()
         {
             var parameters = new ParameterCollection();

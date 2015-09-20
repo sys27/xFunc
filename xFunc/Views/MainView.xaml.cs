@@ -808,38 +808,6 @@ namespace xFunc.Views
                 this.mathControl.MathExpEnter();
         }
 
-        private void tabControl_SelectionChanged(object o, SelectionChangedEventArgs args)
-        {
-            if (tabControl.SelectedItem == truthTableTab)
-            {
-                numberToolBar.Visibility = Visibility.Collapsed;
-                standartMathToolBar.Visibility = Visibility.Collapsed;
-                trigonometricToolBar.Visibility = Visibility.Collapsed;
-                hyperbolicToolBar.Visibility = Visibility.Collapsed;
-                matrixToolBar.Visibility = Visibility.Collapsed;
-                bitwiseToolBar.Visibility = Visibility.Collapsed;
-                progToolBar.Visibility = Visibility.Collapsed;
-                constantsMathToolBar.Visibility = Visibility.Collapsed;
-                additionalMathToolBar.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                if (tabControl.SelectedItem == mathTab)
-                    matrixToolBar.Visibility = Visibility.Visible;
-                else
-                    matrixToolBar.Visibility = Visibility.Collapsed;
-
-                numberToolBar.Visibility = Visibility.Visible;
-                standartMathToolBar.Visibility = Visibility.Visible;
-                trigonometricToolBar.Visibility = Visibility.Visible;
-                hyperbolicToolBar.Visibility = Visibility.Visible;
-                bitwiseToolBar.Visibility = Visibility.Visible;
-                progToolBar.Visibility = Visibility.Visible;
-                constantsMathToolBar.Visibility = Visibility.Visible;
-                additionalMathToolBar.Visibility = Visibility.Visible;
-            }
-        }
-
     }
 
 }

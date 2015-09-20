@@ -209,7 +209,7 @@ limitations under the License. -->
             </ribbon:RibbonTabItem>
         </ribbon:Ribbon>
 
-        <TabControl x:Name="tabControl" Grid.Row="1" SelectionChanged="tabControl_SelectionChanged">
+        <TabControl x:Name="tabControl" Grid.Row="1">
             <TabItem x:Name="mathTab" Header="{x:Static res:Resource.MathTab}">
                 <views:MathControl x:Name="mathControl" Status="{Binding Path=Text, ElementName=statusBox, Mode=OneWayToSource}" />
             </TabItem>

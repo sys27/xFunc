@@ -41,6 +41,8 @@ namespace xFunc.Views
         public VariableView(Processor processor)
         {
             this.processor = processor;
+            this.processor.Parameters.CollectionChanged += (o, args) => RefreshList();
+
             RefreshList();
 
             this.SourceInitialized += (o, args) => this.HideMinimizeAndMaximizeButtons();

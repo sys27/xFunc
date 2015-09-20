@@ -1,7 +1,25 @@
 xFunc
 =====
 
-xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. This program consists of libraries and an execution file. The libraries include the code that converts strings to expressions (parser, lexer and etc.).
+xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. The libraries include the code that converts strings to expressions (parser, lexer and etc.).
+
+xFunc is a small-sized and portable application that you can use to create complex mathematical expressions which will be automatically computed. It can be used by teachers and students alike.
+
+Since installation is not a prerequisite, you can drop the program files somewhere on the hard drive and just click the executable to run.
+
+It is also possible to save xFunc to a USB flash disk or similar storage unit, in order to run it on any machine with minimum effort and without prior installers.
+
+An important aspect to take into account is that the Windows registry does not get updated with new entries, and files are not left behind on the hard disk after removing the utility.
+
+The interface is based on a user-friendly window with a clean aspect, where you can use standard, trigonometric, hyperbolic, bitwise, constants, numbers and arithmetic, along with additional tools to write expressions. Furthermore, you can create logic expressions, graphs and truth tables.
+
+Expressions and answers can be copied to the Clipboard or input. It is possible to undo and redo your actions, select the answer base (e.g. binary, decimal, hexadecimal), add variables and functions, as well as clear the expression list.
+
+As far as settings are concerned, you can ask the tool to remember the last window state and position, right toolbar state, number base and angle measurement, as well as specify the maximum number of expressions.
+
+xFunc uses a pretty low amount of CPU and RAM, so it does not put a strain on computer performance or disrupt normal user activity. We have not come across any issues throughout our evaluation, since the tool did not hang, crash or pop up error dialogs.
+
+All in all, xFunc comes packed with resourceful options dedicated to computing mathematical expressions, and it should please everyone.
 
 ## Features:
 
@@ -10,7 +28,7 @@ xFunc is a simple and easy to use application that allows you to build mathemati
 * Derivative and simplifying expressions;
 * Plotting graphs;
 * Truth tables;
-* Supported Framework: .Net 2.0/3.0/3.5/4.0/4.5/4.5.1 and Portable (.Net 4.0 or higher, Silverlight 4 or higher and Windows Store App)
+* Supported Framework: 4.0 (or higher) and Portable (.Net 4.0 or higher, Silverlight 4 or higher and Windows Store App)
 
 ## Bug Tracker
 

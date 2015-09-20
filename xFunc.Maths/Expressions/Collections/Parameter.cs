@@ -105,8 +105,7 @@ namespace xFunc.Maths.Expressions.Collections
             var param = obj as Parameter;
             if (param == null)
                 return false;
-
-            // todo: check!!!
+            
             return key == param.key && value.Equals(param.value);
         }
 

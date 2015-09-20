@@ -15,6 +15,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using xFunc.Maths.Resources;
 
@@ -24,11 +25,16 @@ namespace xFunc.Maths.Expressions.Collections
     /// <summary>
     /// Strongly typed dictionaty that contains value of variables.
     /// </summary>
-    public class ParameterCollection : IEnumerable<Parameter>
+    public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChanged
     {
-        
+
         private readonly HashSet<Parameter> consts;
         private HashSet<Parameter> collection;
+
+        /// <summary>
+        /// Occurs when the collection changes.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
@@ -74,6 +80,16 @@ namespace xFunc.Maths.Expressions.Collections
 
             if (initConsts)
                 InitializeDefaults();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:CollectionChanged" /> event.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
+        {
+            if (CollectionChanged != null)
+                CollectionChanged(this, args);
         }
 
         private void InitializeDefaults()
@@ -138,7 +154,9 @@ namespace xFunc.Maths.Expressions.Collections
                 if (collection.Count <= index)
                     throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, collection.ElementAt(index).Key));
 
-                collection.ElementAt(index).Value = value;
+                var element = collection.ElementAt(index);
+                element.Value = value;
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
@@ -169,11 +187,18 @@ namespace xFunc.Maths.Expressions.Collections
             {
                 var param = collection.FirstOrDefault(p => p.Key == key);
                 if (param == null)
+                {
                     this.Add(key, value);
+                }
                 else if (param.Type == ParameterType.Normal)
+                {
                     param.Value = value;
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                }
                 else
+                {
                     throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
+                }
             }
         }
 
@@ -191,6 +216,7 @@ namespace xFunc.Maths.Expressions.Collections
                 throw new ArgumentException(Resource.ConstError);
 
             collection.Add(param);
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, param));
         }
 
         /// <summary>
@@ -224,6 +250,7 @@ namespace xFunc.Maths.Expressions.Collections
                 throw new ArgumentNullException(nameof(param));
 
             collection.Remove(param);
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
         }
 
         /// <summary>
@@ -250,6 +277,7 @@ namespace xFunc.Maths.Expressions.Collections
         public void Clear()
         {
             collection.Clear();
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         /// <summary>

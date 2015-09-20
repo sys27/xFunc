@@ -120,7 +120,6 @@ namespace xFunc.Maths.Expressions.Collections
             int hash = 163;
 
             hash = hash * 41 + key.GetHashCode();
-            hash = hash * 41 + value.GetHashCode();
 
             return hash;
         }

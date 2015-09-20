@@ -172,16 +172,7 @@ namespace xFunc.Maths.Expressions.Collections
         {
             get
             {
-                var item = collection.FirstOrDefault(p => p.Key == key);
-
-                if (item != null)
-                    return item.Value;
-
-                var param = consts.FirstOrDefault(p => p.Key == key);
-                if (param != null)
-                    return param.Value;
-
-                throw new KeyNotFoundException(string.Format(Resource.VariableNotFoundExceptionError, key));
+                return GetParameterByKey(key).Value;
             }
             set
             {
@@ -200,6 +191,20 @@ namespace xFunc.Maths.Expressions.Collections
                     throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
                 }
             }
+        }
+
+        private Parameter GetParameterByKey(string key)
+        {
+            var item = collection.FirstOrDefault(p => p.Key == key);
+
+            if (item != null)
+                return item;
+
+            var param = consts.FirstOrDefault(p => p.Key == key);
+            if (param != null)
+                return param;
+
+            throw new KeyNotFoundException(string.Format(Resource.VariableNotFoundExceptionError, key));
         }
 
         /// <summary>
@@ -248,6 +253,8 @@ namespace xFunc.Maths.Expressions.Collections
         {
             if (param == null)
                 throw new ArgumentNullException(nameof(param));
+            if (param.Type == ParameterType.Constant)
+                throw new ArgumentException(Resource.ConstError);
 
             collection.Remove(param);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
@@ -264,11 +271,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
 
-            var el = collection.FirstOrDefault(p => p.Key == key);
-            if (el == null)
-                return;
-
-            Remove(el);
+            Remove(GetParameterByKey(key));
         }
 
         /// <summary>

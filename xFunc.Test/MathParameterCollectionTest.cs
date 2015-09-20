@@ -81,6 +81,17 @@ namespace xFunc.Test
             Assert.AreEqual(4.0, parameters["π"]);
         }
 
+        [TestMethod]
+        public void OverrideRemoveTest()
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add(new Parameter("a", 1));
+            parameters["a"] = 2;
+            parameters.Remove("a");
+
+            Assert.AreEqual(0, parameters.Collection.Count());
+        }
+
     }
 
 }

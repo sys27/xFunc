@@ -124,7 +124,7 @@
     <value>Переменной '{0}' присвоено значение '{1}'.</value>
   </data>
   <data name="ConstError" xml:space="preserve">
-    <value>Вы не можете добавлять константы.</value>
+    <value>Вы не можете изменять константы.</value>
   </data>
   <data name="ErrorWhileParsingTree" xml:space="preserve">
     <value>При построении дерева произошла ошибка.</value>

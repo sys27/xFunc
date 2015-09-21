@@ -18,7 +18,7 @@ if errorlevel 0 echo %t% completed!
 echo Remove temp files.
 rmdir "xFunc/obj" /s /q
 rmdir "xFunc.Maths/obj" /s /q
-rmdir "xFunc.Test/obj" /s /q
+rmdir "xFunc.Tests/obj" /s /q
 rmdir "xFunc.UnitConverters/obj" /s /q
 
 pause

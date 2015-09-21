@@ -52,6 +52,14 @@ namespace xFunc.Maths.Expressions.Collections
         protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
 
+        /// <summary>
+        /// Gets or sets the <see cref="IExpression"/> with the specified key.
+        /// </summary>
+        /// <value>
+        /// The <see cref="IExpression"/>.
+        /// </value>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         public new IExpression this[UserFunction key]
         {
             get
@@ -64,18 +72,31 @@ namespace xFunc.Maths.Expressions.Collections
             }
         }
 
+        /// <summary>
+        /// Raises the <see cref="E:CollectionChanged" /> event.
+        /// </summary>
+        /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
             if (CollectionChanged != null)
                 CollectionChanged(this, args);
         }
 
+        /// <summary>
+        /// Adds new function.
+        /// </summary>
+        /// <param name="key">The signature of function.</param>
+        /// <param name="value">The function.</param>
         public new void Add(UserFunction key, IExpression value)
         {
             base.Add(key, value);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, key));
         }
 
+        /// <summary>
+        /// Removes the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
         public new void Remove(UserFunction key)
         {
             if (base.Remove(key))

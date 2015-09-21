@@ -85,7 +85,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Raises the <see cref="E:CollectionChanged" /> event.
         /// </summary>
-        /// <param name="action">The action.</param>
+        /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
             if (CollectionChanged != null)

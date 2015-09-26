@@ -47,7 +47,7 @@ namespace xFunc.Presenters
         {
             expression = parser.Parse(strExp);
             if (!expression.ResultType.HasFlag(ExpressionResultType.Boolean))
-                throw new InvalidOperationException();
+                throw new NotSupportedException();
 
             expressions = parser.ConvertExpressionToCollection(expression);
             parameters = parser.GetParameters(strExp);

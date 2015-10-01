@@ -765,4 +765,7 @@
   <data name="ExponentialFormatButtonHeader" xml:space="preserve">
     <value>Експонентний</value>
   </data>
+  <data name="DocumentationTextBox" xml:space="preserve">
+    <value>Документація:</value>
+  </data>
 </root>

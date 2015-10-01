@@ -790,6 +790,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Documentation:.
+        /// </summary>
+        public static string DocumentationTextBox {
+            get {
+                return ResourceManager.GetString("DocumentationTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logical Equality. Example: true &lt;=&gt; false..
         /// </summary>
         public static string EqualityToolTip {

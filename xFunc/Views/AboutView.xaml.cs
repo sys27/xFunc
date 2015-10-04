@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace xFunc.Views
 {
@@ -45,6 +46,10 @@ namespace xFunc.Views
             LaunchEmailClient("mailto:sys2712@gmail.com");
         }
 
+        private void DocsHyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+        }
     }
 
 }

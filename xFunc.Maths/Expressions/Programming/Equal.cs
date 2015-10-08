@@ -31,7 +31,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         public Equal(IExpression left, IExpression right)
-            : base(left, right) { }
+            : base(left, right)
+        { }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -57,10 +58,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
-            var leftValue = (double)m_left.Calculate(parameters);
-            var rightValue = (double)m_right.Calculate(parameters);
+            var leftValueObject = m_left.Calculate(parameters);
+            var rightValueObject = m_right.Calculate(parameters);
 
-            return leftValue == rightValue;
+            if (leftValueObject is double && rightValueObject is double)
+                return (double)leftValueObject == (double)rightValueObject;
+
+            if (leftValueObject is bool && rightValueObject is bool)
+                return (bool)leftValueObject == (bool)rightValueObject;
+
+            throw new NotSupportedException();
         }
 
         /// <summary>
@@ -72,6 +79,34 @@ namespace xFunc.Maths.Expressions.Programming
         public override IExpression Clone()
         {
             return new Equal(m_left.Clone(), m_right.Clone());
+        }
+
+        /// <summary>
+        /// Gets the type of the left parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the left parameter.
+        /// </value>
+        public override ExpressionResultType LeftType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public override ExpressionResultType RightType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+            }
         }
 
         /// <summary>

@@ -119,6 +119,8 @@
     <Compile Include="Expressions\Maths\Programming\AndTest.cs" />
     <Compile Include="Expressions\Maths\Programming\DecTest.cs" />
     <Compile Include="Expressions\Maths\Programming\DivAssignTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\EqualTest.cs" />
+    <Compile Include="Expressions\Maths\Programming\NotEqualTest.cs" />
     <Compile Include="Expressions\Maths\Programming\ForTest.cs" />
     <Compile Include="Expressions\Maths\Programming\GreaterOrEqualTest.cs" />
     <Compile Include="Expressions\Maths\Programming\GreaterTest.cs" />

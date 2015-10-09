@@ -21,7 +21,7 @@ namespace xFunc.Maths
 {
 
     /// <summary>
-    /// The default implementation of <see cref="ISimplifier"/>/
+    /// The default implementation of <see cref="ISimplifier"/>
     /// </summary>
     public class Simplifier : ISimplifier
     {

@@ -300,6 +300,7 @@ limitations under the License. -->
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -355,6 +356,31 @@ limitations under the License. -->
                             <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="0" Tag="fact" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource fact}" Width="40" Height="20" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.FactToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Tag="round" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource round}" Width="48" Height="28" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.RoundToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="2" Tag="ceil" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource ceil}" Width="40" Height="28" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.CeilToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="3" Tag="floor" Click="InsertFunc_Click">
+                            <Rectangle Fill="{StaticResource floor}" Width="42" Height="28" />
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.FloorToolTip}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>
@@ -776,7 +802,6 @@ limitations under the License. -->
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
-                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -829,31 +854,6 @@ limitations under the License. -->
                             <Rectangle Fill="{StaticResource product}" Width="40" Height="20" />
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ProductToolTip}" />
-                            </Button.ToolTip>
-                        </Button>
-
-                        <Button Grid.Row="2" Grid.Column="0" Tag="fact" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource fact}" Width="40" Height="20" />
-                            <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.FactToolTip}" />
-                            </Button.ToolTip>
-                        </Button>
-                        <Button Grid.Row="2" Grid.Column="1" Tag="round" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource round}" Width="48" Height="28" />
-                            <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.RoundToolTip}" />
-                            </Button.ToolTip>
-                        </Button>
-                        <Button Grid.Row="2" Grid.Column="2" Tag="ceil" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource ceil}" Width="40" Height="28" />
-                            <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.CeilToolTip}" />
-                            </Button.ToolTip>
-                        </Button>
-                        <Button Grid.Row="2" Grid.Column="3" Tag="floor" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource floor}" Width="42" Height="28" />
-                            <Button.ToolTip>
-                                <ToolTip Content="{x:Static res:Resource.FloorToolTip}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>

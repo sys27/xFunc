@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\MathParameterTypeToStringConverter.cs" />
+    <Compile Include="MiniDump.cs" />
     <Compile Include="Presenters\GraphsPresenter.cs" />
     <Compile Include="Presenters\MathPresenter.cs" />
     <Compile Include="Presenters\MathWorkspace.cs" />

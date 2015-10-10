@@ -13,12 +13,8 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
-using xFunc.Presenters;
 using xFunc.Properties;
 using xFunc.Views;
 
@@ -27,6 +23,11 @@ namespace xFunc
 
     public partial class App : Application
     {
+
+        public App()
+        {
+            AppDomain.CurrentDomain.UnhandledException += (obj, args) => MiniDump.CreateMiniDump();
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -39,7 +40,6 @@ namespace xFunc
             }
 
             MainView mainView = new MainView();
-
             mainView.Show();
         }
 

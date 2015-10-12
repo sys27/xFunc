@@ -51,16 +51,23 @@ namespace xFunc.Maths.Expressions
 
     }
 
-#if !NET40_OR_GREATER
-    public static class ExpressionResultTypeExtention
+    /// <summary>
+    /// Extension for the <see cref="ExpressionResultType"/> enumeration.
+    /// </summary>
+    public static class ExpressionResultTypeExtension
     {
 
-        public static bool HasFlag(this ExpressionResultType type, ExpressionResultType flag)
+        /// <summary>
+        /// Determines whether one or more bit fields are set in the current instance (faster than default implementation).
+        /// </summary>
+        /// <param name="type">An enumeration.</param>
+        /// <param name="flag">An enumeration value.</param>
+        /// <returns><c>true</c> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <c>false</c>.</returns>
+        public static bool HasFlagNI(this ExpressionResultType type, ExpressionResultType flag)
         {
             return (type & flag) == flag;
         }
 
     }
-#endif
 
 }

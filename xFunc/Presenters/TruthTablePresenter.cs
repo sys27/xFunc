@@ -46,7 +46,7 @@ namespace xFunc.Presenters
         public void Generate(string strExp)
         {
             expression = parser.Parse(strExp);
-            if (!expression.ResultType.HasFlag(ExpressionResultType.Boolean))
+            if (!expression.ResultType.HasFlagNI(ExpressionResultType.Boolean))
                 throw new NotSupportedException();
 
             expressions = parser.ConvertExpressionToCollection(expression);

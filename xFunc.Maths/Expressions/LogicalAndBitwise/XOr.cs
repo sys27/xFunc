@@ -130,10 +130,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Number | ExpressionResultType.Boolean) && m_right.ResultType.HasFlag(ExpressionResultType.Number | ExpressionResultType.Boolean))
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number | ExpressionResultType.Boolean) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number | ExpressionResultType.Boolean))
                     return ExpressionResultType.Number | ExpressionResultType.Boolean;
 
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
 
                 return ExpressionResultType.Boolean;

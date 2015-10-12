@@ -174,7 +174,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
 
                 return ExpressionResultType.Matrix;

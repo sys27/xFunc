@@ -70,7 +70,7 @@ namespace xFunc.Maths.Expressions
         {
             if (ResultType == ExpressionResultType.Matrix)
             {
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Matrix))
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Matrix))
                 {
                     var l = m_left.Calculate(parameters);
 
@@ -81,7 +81,7 @@ namespace xFunc.Maths.Expressions
                     return ((Matrix)l).Sub((Matrix)m_right, parameters);
                 }
 
-                if (m_right.ResultType.HasFlag(ExpressionResultType.Matrix))
+                if (m_right.ResultType.HasFlagNI(ExpressionResultType.Matrix))
                 {
                     var r = m_right.Calculate(parameters);
 
@@ -125,7 +125,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_right != null)
                 {
-                    if (m_right.ResultType.HasFlag(ExpressionResultType.Number))
+                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                         return ExpressionResultType.Number;
 
                     return ExpressionResultType.Matrix;
@@ -147,7 +147,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left != null)
                 {
-                    if (m_left.ResultType.HasFlag(ExpressionResultType.Number))
+                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
                         return ExpressionResultType.Number;
 
                     return ExpressionResultType.Matrix;
@@ -167,7 +167,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (m_left.ResultType.HasFlag(ExpressionResultType.Number) && m_right.ResultType.HasFlag(ExpressionResultType.Number))
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
 
                 return ExpressionResultType.Matrix;

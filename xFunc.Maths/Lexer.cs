@@ -298,6 +298,14 @@ namespace xFunc.Maths
                 }
                 else if (letter == '!')
                 {
+                    if (CheckNextSymbol(function, i, '='))
+                    {
+                        tokens.Add(new OperationToken(Operations.NotEqual));
+                        i += 2;
+
+                        continue;
+                    }
+
                     var lastToken = tokens.LastOrDefault();
                     if (lastToken != null)
                     {
@@ -311,13 +319,6 @@ namespace xFunc.Maths
                         }
                     }
 
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.NotEqual));
-                        i += 2;
-
-                        continue;
-                    }
 
                     throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
                 }

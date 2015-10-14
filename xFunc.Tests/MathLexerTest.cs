@@ -2060,6 +2060,36 @@ namespace xFunc.Test
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void EqualTest()
+        {
+            var tokens = lexer.Tokenize("1 == 1");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.Equal),
+                new NumberToken(1)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void NotEqualTest()
+        {
+            var tokens = lexer.Tokenize("1 != 1");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.NotEqual),
+                new NumberToken(1)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

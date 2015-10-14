@@ -23,7 +23,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
 using Xunit;
 
-namespace xFunc.Test
+namespace xFunc.Tests
 {
 
     public class MathParserTest

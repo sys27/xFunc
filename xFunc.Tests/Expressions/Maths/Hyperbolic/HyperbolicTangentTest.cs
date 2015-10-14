@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths.Hyperbolic
+namespace xFunc.Tests.Expressions.Maths.Hyperbolic
 {
     
     public class HyperbolicTangentTest

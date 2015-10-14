@@ -214,7 +214,7 @@ namespace xFunc.Maths
         public static double GCD(params double[] numbers)
         {
             if (numbers == null)
-                throw new ArgumentNullException("numbers");
+                throw new ArgumentNullException(nameof(numbers));
             if (numbers.Length < 2)
                 throw new ArgumentException();
 
@@ -244,7 +244,7 @@ namespace xFunc.Maths
         public static double LCM(params double[] numbers)
         {
             if (numbers == null)
-                throw new ArgumentNullException("numbers");
+                throw new ArgumentNullException(nameof(numbers));
             if (numbers.Length < 2)
                 throw new ArgumentException();
 

@@ -36,7 +36,7 @@ namespace xFunc.Maths
         /// <returns>A simplified expression.</returns>
         public IExpression Simplify(IExpression expression)
         {
-            IExpression exp = _Simplify(expression);
+            var exp = _Simplify(expression);
             exp.Parent = null;
 
             return exp;

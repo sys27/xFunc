@@ -27,7 +27,7 @@ namespace xFunc.Maths
     public class Processor
     {
 
-        private ILexer lexer;
+        private readonly ILexer lexer;
         private readonly ISimplifier simplifier;
         private readonly IDifferentiator differentiator;
         private readonly Parser parser;

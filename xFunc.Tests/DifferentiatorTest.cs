@@ -20,7 +20,7 @@ using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
-namespace xFunc.Test
+namespace xFunc.Tests
 {
 
     public class DifferentiatorTest

@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths.Programming
+namespace xFunc.Tests.Expressions.Maths.Programming
 {
     
     public class ForTest

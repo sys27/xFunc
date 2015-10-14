@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths.Bitwise
+namespace xFunc.Tests.Expressions.Maths.Bitwise
 {
     
     public class NotTest

@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths
+namespace xFunc.Tests.Expressions.Maths
 {
     
     public class AddTest

@@ -18,7 +18,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths
+namespace xFunc.Tests.Expressions.Maths
 {
     
     public class DefineTest

@@ -16,6 +16,8 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
@@ -1026,6 +1028,52 @@ namespace xFunc.Test
             var exp = parser.Parse("true & false");
 
             Assert.Equal("True and False", exp.ToString());
+        }
+
+        [Fact]
+        public void GetLogicParametersTest()
+        {
+            string function = "a | b & c & (a | c)";
+            lexer.Tokens = new List<IToken>
+            {
+                new VariableToken("a"),
+                new OperationToken(Operations.Or),
+                new VariableToken("b"),
+                new OperationToken(Operations.And),
+                new VariableToken("c"),
+                new OperationToken(Operations.And),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("a"),
+                new OperationToken(Operations.Or),
+                new VariableToken("c"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var expected = new ParameterCollection(false)
+            {
+                new Parameter("a", false),
+                new Parameter("b", false),
+                new Parameter("c", false)
+            };
+
+            var actual = parser.GetParameters(function);
+
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ConvertLogicExpressionToColletionTest()
+        {
+            var exp = new Implication(new Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
+            var actual = new List<IExpression>(parser.ConvertExpressionToCollection(exp));
+
+            Assert.Equal(3, actual.Count);
+        }
+
+        [Fact]
+        public void ConvertLogicExpressionToColletionNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => parser.ConvertExpressionToCollection(null));
         }
 
     }

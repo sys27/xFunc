@@ -734,6 +734,24 @@ namespace xFunc.Test
         }
 
         [Fact]
+        public void Round()
+        {
+            FuncTest("round", Functions.Round);
+        }
+
+        [Fact]
+        public void Ceil()
+        {
+            FuncTest("ceil", Functions.Ceil);
+        }
+
+        [Fact]
+        public void Floor()
+        {
+            FuncTest("floor", Functions.Floor);
+        }
+
+        [Fact]
         public void Root()
         {
             var tokens = lexer.Tokenize("root(27, 3)");

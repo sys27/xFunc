@@ -189,7 +189,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return new ExpressionResultType[] 
+                return new[] 
                 { 
                     ExpressionResultType.All,     // Body
                     ExpressionResultType.All,     // Initialization

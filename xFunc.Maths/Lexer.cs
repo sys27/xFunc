@@ -79,7 +79,7 @@ namespace xFunc.Maths
                 throw new LexerException(Resource.NotBalanced);
             var tokens = new List<IToken>();
 
-            for (int i = 0; i < function.Length; )
+            for (int i = 0; i < function.Length;)
             {
                 char letter = function[i];
                 if (letter == '(')
@@ -318,7 +318,6 @@ namespace xFunc.Maths
                             continue;
                         }
                     }
-
 
                     throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter));
                 }
@@ -979,7 +978,7 @@ namespace xFunc.Maths
                     }
 
                     int j = i + 1;
-                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) ;
+                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) { }
 
                     var str = function.Substring(i, j - i);
                     i = j;
@@ -1011,7 +1010,7 @@ namespace xFunc.Maths
             bool hasBraces = false;
             bool oneParam = true;
             int i = index + 2;
-            for (; i < tokens.Count; )
+            for (; i < tokens.Count;)
             {
                 var token = tokens[i];
                 if (token is SymbolToken)
@@ -1080,7 +1079,7 @@ namespace xFunc.Maths
 
         private IEnumerable<IToken> CountParams(List<IToken> tokens)
         {
-            for (int i = 0; i < tokens.Count; )
+            for (int i = 0; i < tokens.Count;)
             {
                 if (tokens[i] is FunctionToken)
                     i = _CountParams(tokens, i) + 1;

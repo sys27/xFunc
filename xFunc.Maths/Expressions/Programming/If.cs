@@ -31,7 +31,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         public If(IExpression condition, IExpression then)
-            : base(new[] { condition, then }, 2) { }
+            : base(new[] { condition, then }, 2)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -40,7 +41,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
         public If(IExpression condition, IExpression then, IExpression @else)
-            : base(new[] { condition, then, @else }, 3) { }
+            : base(new[] { condition, then, @else }, 3)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -48,7 +50,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         public If(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams) { }
+            : base(arguments, countOfParams)
+        { }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -192,14 +195,14 @@ namespace xFunc.Maths.Expressions.Programming
             get
             {
                 if (countOfParams == 3)
-                    return new ExpressionResultType[]
+                    return new[]
                     {
                         ExpressionResultType.Boolean, // Condition
                         ExpressionResultType.All,     // Then
                         ExpressionResultType.All      // Else
                     };
 
-                return new ExpressionResultType[]
+                return new[]
                 {
                     ExpressionResultType.Boolean, // Condition
                     ExpressionResultType.All      // Then

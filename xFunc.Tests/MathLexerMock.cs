@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Tokens;
 
-namespace xFunc.Test
+namespace xFunc.Tests
 {
 
     public class MathLexerMock : ILexer

@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths.Matrices
+namespace xFunc.Tests.Expressions.Maths.Matrices
 {
 
     public class VectorTest

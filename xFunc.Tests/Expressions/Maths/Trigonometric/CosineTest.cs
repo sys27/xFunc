@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
-namespace xFunc.Test.Expressions.Maths.Trigonometric
+namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
     
     public class CosineTest

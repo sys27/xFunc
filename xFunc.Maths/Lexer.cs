@@ -40,7 +40,7 @@ namespace xFunc.Maths
             unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=' };
         }
 
-        private bool IsBalanced(string str)
+        private static bool IsBalanced(string str)
         {
             int brackets = 0;
             int braces = 0;
@@ -52,9 +52,7 @@ namespace xFunc.Maths
                 else if (item == '{') braces++;
                 else if (item == '}') braces--;
 
-                if (brackets < 0)
-                    return false;
-                if (braces < 0)
+                if (brackets < 0 || braces < 0)
                     return false;
             }
 

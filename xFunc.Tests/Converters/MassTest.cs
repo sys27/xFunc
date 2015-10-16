@@ -16,7 +16,7 @@ using System;
 using xFunc.UnitConverters;
 using Xunit;
 
-namespace xFunc.Test.Converters
+namespace xFunc.Tests.Converters
 {
     
     public class MassTest

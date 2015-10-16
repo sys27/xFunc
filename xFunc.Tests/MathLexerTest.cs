@@ -19,7 +19,7 @@ using xFunc.Maths;
 using xFunc.Maths.Tokens;
 using Xunit;
 
-namespace xFunc.Test
+namespace xFunc.Tests
 {
 
     public class MathLexerTest
@@ -2019,6 +2019,12 @@ namespace xFunc.Test
         }
 
         [Fact]
+        public void AddAssignNotVarFail()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) += 2"));
+        }
+
+        [Fact]
         public void SubAssign()
         {
             var tokens = lexer.Tokenize("x -= 2");
@@ -2031,6 +2037,12 @@ namespace xFunc.Test
             };
 
             Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void SubAssignNotVarFail()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) -= 2"));
         }
 
         [Fact]
@@ -2049,6 +2061,12 @@ namespace xFunc.Test
         }
 
         [Fact]
+        public void MulAssignNotVarFail()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) *= 2"));
+        }
+
+        [Fact]
         public void DivAssign()
         {
             var tokens = lexer.Tokenize("x /= 2");
@@ -2061,6 +2079,12 @@ namespace xFunc.Test
             };
 
             Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void DivAssignNotVarFail()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) /= 2"));
         }
 
         [Fact]

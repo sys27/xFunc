@@ -172,9 +172,6 @@ namespace xFunc.Maths
                     }
                     else if (expression is BinaryExpression)
                     {
-                        if ((expression is Log || expression is Root) && stack.Count < 2)
-                            throw new ParserException(Resource.InvalidNumberOfVariables);
-
                         var binExp = expression as BinaryExpression;
                         binExp.Right = stack.Pop();
                         binExp.Left = stack.Pop();
@@ -220,9 +217,6 @@ namespace xFunc.Maths
                     }
                     else if (expression is Undefine)
                     {
-                        if (stack.Count < 1)
-                            throw new ParserException(Resource.InvalidNumberOfVariables);
-
                         var undef = expression as Undefine;
                         undef.Key = stack.Pop();
 

@@ -21,7 +21,9 @@ limitations under the License. -->
         ShowInTaskbar="False" ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.CommandBindings>
-        <CommandBinding Command="views:Converter.CalculateCommand" Executed="CalculateCommand_Execute" CanExecute="CalculateCommand_CanExecute" />
+        <CommandBinding Command="views:Converter.CalculateCommand" Executed="CalculateCommand_Executed" CanExecute="CalculateCommand_CanExecute" />
+        <CommandBinding Command="views:Converter.CopyFromCommand" Executed="CopyFromCommand_Executed" CanExecute="CopyFromCommand_CanExecute" />
+        <CommandBinding Command="views:Converter.CopyToCommand" Executed="CopyToCommand_Executed" CanExecute="CopyToCommand_CanExecute" />
     </Window.CommandBindings>
     
     <Grid>
@@ -40,7 +42,8 @@ limitations under the License. -->
                 <Label Content="{x:Static res:Resource.UnitsText}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromComboBox}" />
                 <ComboBox x:Name="fromComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" SelectionChanged="fromToComboBox_SelectionChanged" />
                 <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromTextBox}" />
-                <TextBox x:Name="fromTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" TextChanged="fromTextBox_TextChanged" />
+                <TextBox x:Name="fromTextBox" Height="23" Margin="74,35,38,0" VerticalAlignment="Top" TextChanged="fromTextBox_TextChanged" />
+                <Button Height="23" Width="23" Margin="389,35,10,0" VerticalAlignment="Top" Command="views:Converter.CopyFromCommand" />
             </Grid>
         </GroupBox>
 
@@ -49,7 +52,8 @@ limitations under the License. -->
                 <Label Content="{x:Static res:Resource.UnitsText}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toComboBox}" />
                 <ComboBox x:Name="toComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" SelectionChanged="fromToComboBox_SelectionChanged" />
                 <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toTextBox}" />
-                <TextBox x:Name="toTextBox" Height="23" Margin="74,35,10,0" VerticalAlignment="Top" TextChanged="toTextBox_TextChanged" />
+                <TextBox x:Name="toTextBox" Height="23" Margin="74,35,38,0" VerticalAlignment="Top" TextChanged="toTextBox_TextChanged" />
+                <Button Height="23" Width="23" Margin="389,35,10,0" VerticalAlignment="Top" Command="views:Converter.CopyToCommand" />
             </Grid>
         </GroupBox>
 

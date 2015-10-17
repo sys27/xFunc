@@ -368,12 +368,12 @@ namespace xFunc.Maths
                     if (letter == '0' && i + 1 < function.Length)
                     {
                         var nextLetter = function[i + 1];
-                        if (nextLetter == 'x' && i + 2 < function.Length)
+                        if (nextLetter == 'x' && i + 2 < function.Length) // hex
                         {
                             i += 2;
 
                             length = 1;
-                            for (j = i + 1; j < function.Length && (char.IsDigit(function[j]) || (function[j] >= 97 && function[j] <= 102)); j++)
+                            for (j = i + 1; j < function.Length && (char.IsDigit(function[j]) || (function[j] >= 97 && function[j] <= 102)); j++) // from 'a' to 'f'
                                 length++;
 
                             strNumber = function.Substring(i, length);
@@ -383,7 +383,7 @@ namespace xFunc.Maths
                             i += length;
                             continue;
                         }
-                        if (nextLetter == 'b' && i + 2 < function.Length)
+                        if (nextLetter == 'b' && i + 2 < function.Length) // bin
                         {
                             i += 2;
 
@@ -398,7 +398,7 @@ namespace xFunc.Maths
                             i += length;
                             continue;
                         }
-                        if (char.IsDigit(nextLetter))
+                        if (char.IsDigit(nextLetter)) // oct
                         {
                             length = 1;
                             for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
@@ -413,6 +413,8 @@ namespace xFunc.Maths
                         }
                     }
 
+                    // normal number (dec)
+
                     length = 1;
                     for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
                         length++;
@@ -424,6 +426,16 @@ namespace xFunc.Maths
                             length++;
                     }
 
+                    if (CheckNextSymbol(function, i + length - 1, 'e')) // exp notation
+                    {
+                        length++;
+                        if (CheckNextSymbol(function, i + length - 1, '-'))
+                            length++;
+
+                        for (j = i + length; j < function.Length && char.IsDigit(function[j]); j++)
+                            length++;
+                    }
+
                     strNumber = function.Substring(i, length);
                     number = double.Parse(strNumber, CultureInfo.InvariantCulture);
                     tokens.Add(new NumberToken(number));
@@ -432,9 +444,7 @@ namespace xFunc.Maths
 
                     var f = function.Substring(i);
                     if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(f.StartsWith))
-                    {
                         tokens.Add(new OperationToken(Operations.Multiplication));
-                    }
 
                     continue;
                 }

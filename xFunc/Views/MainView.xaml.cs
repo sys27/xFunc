@@ -636,7 +636,7 @@ namespace xFunc.Views
         {
             if (converterView == null)
             {
-                converterView = new Converter()
+                converterView = new Converter(this.mathControl)
                 {
                     Owner = this,
                     Top = Settings.Default.ConverterTop == -1 ? this.Top + 100 : Settings.Default.ConverterTop,

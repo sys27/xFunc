@@ -73,6 +73,41 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void ExpNumber1()
+        {
+            var tokens = lexer.Tokenize("1.2345E-10");
+            var expected = new List<IToken>
+            {
+                new NumberToken(0.00000000012345)
+            };
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ExpNumber2()
+        {
+            var tokens = lexer.Tokenize("1.2345E10");
+            var expected = new List<IToken>
+            {
+                new NumberToken(12345000000)
+            };
+            Assert.Equal(expected, tokens.ToList());
+        }
+        
+        [Fact]
+        public void ExpNumber3()
+        {
+            var tokens = lexer.Tokenize("1.2e2 + 2.1e-3");
+            var expected = new List<IToken>
+            {
+                new NumberToken(120),
+                new OperationToken(Operations.Addition),
+                new NumberToken(0.0021)
+            };
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void Add()
         {
             var tokens = lexer.Tokenize("2 + 2");

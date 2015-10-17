@@ -28,9 +28,13 @@ namespace xFunc.Views
 
         private readonly IConverter[] converters;
 
-        public static RoutedCommand CalculateCommand = new RoutedCommand();
+        private MathControl mathControl;
 
-        public Converter()
+        public static RoutedCommand CalculateCommand = new RoutedCommand();
+        public static RoutedCommand CopyFromCommand = new RoutedCommand();
+        public static RoutedCommand CopyToCommand = new RoutedCommand();
+
+        public Converter(MathControl mathControl)
         {
             converters = new IConverter[]
             {
@@ -42,6 +46,7 @@ namespace xFunc.Views
                 new TimeConverter(),
                 new VolumeConverter()
             };
+            this.mathControl = mathControl;
 
             InitializeComponent();
 
@@ -77,7 +82,7 @@ namespace xFunc.Views
                 fromTextBox.Text = conv.Convert(value, to.Key, from.Key).ToString(CultureInfo.InvariantCulture);
         }
 
-        private void CalculateCommand_Execute(object o, ExecutedRoutedEventArgs args)
+        private void CalculateCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
             var conv = (IConverter)convertersComboBox.SelectedItem;
             var from = (KeyValuePair<object, string>)fromComboBox.SelectedItem;
@@ -103,6 +108,26 @@ namespace xFunc.Views
             double d;
             args.CanExecute = (!string.IsNullOrWhiteSpace(fromTextBox.Text) || !string.IsNullOrWhiteSpace(toTextBox.Text))
                            && (double.TryParse(fromTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out d) || double.TryParse(toTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out d));
+        }
+
+        private void CopyFromCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            mathControl.mathExpressionBox.Text += this.fromTextBox.Text;
+        }
+
+        private void CopyFromCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = !string.IsNullOrWhiteSpace(this.fromTextBox.Text);
+        }
+
+        private void CopyToCommand_Executed(object o, ExecutedRoutedEventArgs args)
+        {
+            mathControl.mathExpressionBox.Text += this.toTextBox.Text;
+        }
+
+        private void CopyToCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = !string.IsNullOrWhiteSpace(this.toTextBox.Text);
         }
 
         private void SetUnits()

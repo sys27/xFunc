@@ -263,6 +263,9 @@ namespace xFunc.Maths
             if (sub.Left is Number && sub.Right is Number)
                 return new Number((double)sub.Calculate());
 
+            if (sub.Left is Variable && sub.Right is Variable)
+                return zero;
+
             if (sub.Right is UnaryMinus)
             {
                 var unMinus = sub.Right as UnaryMinus;
@@ -462,6 +465,9 @@ namespace xFunc.Maths
 
             if (div.Left is Number && div.Right is Number)
                 return new Number((double)div.Calculate());
+
+            if (div.Left is Variable && div.Right is Variable)
+                return one;
 
             // (2 * x) / 2
             // (x * 2) / 2

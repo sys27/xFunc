@@ -300,6 +300,27 @@ namespace xFunc.Tests
             SimpleTest(sub, expected);
         }
 
+        [Fact]
+        public void SubSameVars1()
+        {
+            // x - x
+            var sub = new Sub(new Variable("x"), new Variable("x"));
+            var expected = new Number(0);
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars2()
+        {
+            // (x - x) - x
+            var x = new Variable("x");
+            var sub = new Sub(new Sub(x, x), x);
+            var expected = new UnaryMinus(x);
+
+            SimpleTest(sub, expected);
+        }
+
         #endregion
 
         #region Mul
@@ -540,6 +561,16 @@ namespace xFunc.Tests
             // 2 / (x / 2)
             var div = new Div(new Number(2), new Div(new Variable("x"), new Number(2)));
             var expected = new Div(new Number(4), new Variable("x"));
+
+            SimpleTest(div, expected);
+        }
+
+        [Fact]
+        public void DivSameVars()
+        {
+            var x = new Variable("x");
+            var div = new Div(x, x);
+            var expected = new Number(1);
 
             SimpleTest(div, expected);
         }

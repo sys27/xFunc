@@ -27,7 +27,7 @@ namespace xFunc.Maths.Expressions
         /// The parent expression of this expression.
         /// </summary>
         protected IExpression m_parent;
-        private Func<ExpressionParameters, double> func;
+        private Func<ExpressionParameters, object> func;
 
         internal DelegateExpression() { }
 
@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="DelegateExpression"/> class.
         /// </summary>
         /// <param name="func">The delegate of function.</param>
-        public DelegateExpression(Func<ExpressionParameters, double> func)
+        public DelegateExpression(Func<ExpressionParameters, object> func)
         {
             this.func = func;
         }

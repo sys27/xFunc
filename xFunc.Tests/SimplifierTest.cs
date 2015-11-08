@@ -184,6 +184,39 @@ namespace xFunc.Tests
             SimpleTest(add, expected);
         }
 
+        [Fact]
+        public void AddSaveVars1()
+        {
+            // x + x
+            var var = new Variable("x");
+            var exp = new Add(var, var);
+            var expected = new Mul(new Number(2), var);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars2()
+        {
+            // 2x + x
+            var var = new Variable("x");
+            var exp = new Add(new Mul(new Number(2), var), var);
+            var expected = new Mul(new Number(3), var);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars3()
+        {
+            // 2x + x
+            var var = new Variable("x");
+            var exp = new Add(var, new Mul(new Number(2), var));
+            var expected = new Mul(new Number(3), var);
+
+            SimpleTest(exp, expected);
+        }
+
         #endregion
 
         #region Sub

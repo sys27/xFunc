@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Maths
             var uf2 = new UserFunction("func", new[] { new Number(12) }, 1);
             var result = uf2.Calculate(new ExpressionParameters(funcs));
 
-            Assert.Equal(1.0, result);
+            Assert.Equal(1, result);
         }
 
     }

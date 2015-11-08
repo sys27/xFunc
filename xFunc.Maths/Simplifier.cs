@@ -168,6 +168,11 @@ namespace xFunc.Maths
             if (add.Left is Number && add.Right is Number)
                 return new Number((double)add.Calculate());
 
+            var leftVar = add.Left as Variable;
+            var rightVar = add.Right as Variable;
+            if (leftVar != null && rightVar != null && leftVar.Name == rightVar.Name)
+                return new Mul(new Number(2), leftVar);
+
             if (add.Left is UnaryMinus)
             {
                 IExpression temp = add.Left;

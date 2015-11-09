@@ -209,10 +209,21 @@ namespace xFunc.Tests
         [Fact]
         public void AddSaveVars3()
         {
-            // 2x + x
+            // x + 2x
             var var = new Variable("x");
             var exp = new Add(var, new Mul(new Number(2), var));
             var expected = new Mul(new Number(3), var);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars4()
+        {
+            // 2x + 3x
+            var var = new Variable("x");
+            var exp = new Add(new Mul(new Number(2), var), new Mul(new Number(3), var));
+            var expected = new Mul(new Number(5), var);
 
             SimpleTest(exp, expected);
         }
@@ -354,6 +365,17 @@ namespace xFunc.Tests
             SimpleTest(sub, expected);
         }
 
+        [Fact]
+        public void SubSameVars3()
+        {
+            // 2x - x
+            var x = new Variable("x");
+            var sub = new Sub(new Mul(new Number(2), x), x);
+            var expected = x;
+
+            SimpleTest(sub, expected);
+        }
+
         #endregion
 
         #region Mul
@@ -466,6 +488,16 @@ namespace xFunc.Tests
             // (x / 2) * 2
             var mul = new Mul(new Div(new Variable("x"), new Number(2)), new Number(2));
             var expected = new Variable("x");
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar()
+        {
+            var var = new Variable("x");
+            var mul = new Mul(var, var);
+            var expected = new Pow(var, new Number(2));
 
             SimpleTest(mul, expected);
         }

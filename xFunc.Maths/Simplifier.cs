@@ -168,6 +168,7 @@ namespace xFunc.Maths
             if (add.Left is Number && add.Right is Number)
                 return new Number((double)add.Calculate());
 
+            // x + x
             var leftVar = add.Left as Variable;
             var rightVar = add.Right as Variable;
             if (leftVar != null && rightVar != null && leftVar.Name == rightVar.Name)
@@ -175,7 +176,7 @@ namespace xFunc.Maths
 
             if (add.Left is UnaryMinus)
             {
-                IExpression temp = add.Left;
+                var temp = add.Left;
                 add.Left = add.Right;
                 add.Right = temp;
             }
@@ -246,6 +247,40 @@ namespace xFunc.Maths
                 if (secondNumber != null)
                     return _Simplify(new Add(new Number(firstNumber.Value - secondNumber.Value), bracketSub.Left));
             }
+
+            // x + 2x
+            // 2x + 3x
+            Number leftMultiplier = null;
+            Number rightMultiplier = null;
+            Variable varMultiplier = null;
+            if (add.Left is Variable && add.Right is Mul)
+            {
+                leftMultiplier = 1;
+                varMultiplier = (Variable)add.Left;
+
+                var rightMul = (Mul)add.Right;
+                if (rightMul.Left is Number && rightMul.Right.Equals(add.Left))
+                    rightMultiplier = (Number)rightMul.Left;
+                else if (rightMul.Right is Number && rightMul.Left.Equals(add.Left))
+                    rightMultiplier = (Number)rightMul.Right;
+            }
+            else if (add.Right is Variable && add.Left is Mul)
+            {
+                rightMultiplier = 1;
+                varMultiplier = (Variable)add.Right;
+
+                var leftMul = (Mul)add.Left;
+                if (leftMul.Left is Number && leftMul.Right.Equals(add.Right))
+                    leftMultiplier = (Number)leftMul.Left;
+                else if (leftMul.Right is Number && leftMul.Left.Equals(add.Right))
+                    leftMultiplier = (Number)leftMul.Right;
+            }
+            else if (add.Left is Mul && add.Right is Mul)
+            {
+                // todo: !!!
+            }
+            if (leftMultiplier != null && rightMultiplier != null)
+                return new Mul(new Number(leftMultiplier.Value + rightMultiplier.Value), varMultiplier);
 
             return add;
         }

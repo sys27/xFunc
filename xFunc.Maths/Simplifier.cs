@@ -394,6 +394,9 @@ namespace xFunc.Maths
             if (mul.Left is Number && mul.Right is Number)
                 return new Number((double)mul.Calculate());
 
+            if (mul.Left is Variable && mul.Right is Variable)
+                return new Pow(mul.Left, new Number(2));
+
             // 2 * (2 * x)
             // 2 * (x * 2)
             // (2 * x) * 2

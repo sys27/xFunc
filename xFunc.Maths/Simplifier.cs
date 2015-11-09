@@ -192,14 +192,9 @@ namespace xFunc.Maths
             // 2 + (x + 2)
             // (2 + x) + 2
             // (x + 2) + 2
-            Add bracketAdd = null;
-            Number firstNumber = null;
-            if (add.Left is Add && add.Right is Number)
-            {
-                bracketAdd = add.Left as Add;
-                firstNumber = add.Right as Number;
-            }
-            else if (add.Right is Add && add.Left is Number)
+            var bracketAdd = add.Left as Add;
+            var firstNumber = add.Right as Number;
+            if (bracketAdd == null)
             {
                 bracketAdd = add.Right as Add;
                 firstNumber = add.Left as Number;
@@ -226,13 +221,9 @@ namespace xFunc.Maths
             // 2 + (x - 2)
             // (2 - x) + 2
             // (x - 2) + 2
-            Sub bracketSub = null;
-            if (add.Left is Sub && add.Right is Number)
-            {
-                bracketSub = add.Left as Sub;
-                firstNumber = add.Right as Number;
-            }
-            else if (add.Right is Sub && add.Left is Number)
+            var bracketSub = add.Left as Sub;
+            firstNumber = add.Right as Number;
+            if (bracketSub == null)
             {
                 bracketSub = add.Right as Sub;
                 firstNumber = add.Left as Number;
@@ -390,14 +381,9 @@ namespace xFunc.Maths
             // 2 * (x * 2)
             // (2 * x) * 2
             // (x * 2) * 2
-            Mul bracketMul = null;
-            Number firstNumber = null;
-            if (mul.Left is Mul && mul.Right is Number)
-            {
-                bracketMul = mul.Left as Mul;
-                firstNumber = mul.Right as Number;
-            }
-            else if (mul.Right is Mul && mul.Left is Number)
+            var bracketMul = mul.Left as Mul;
+            var firstNumber = mul.Right as Number;
+            if (bracketMul == null)
             {
                 bracketMul = mul.Right as Mul;
                 firstNumber = mul.Left as Number;
@@ -417,13 +403,9 @@ namespace xFunc.Maths
             // 2 * (x / 2)
             // (2 / x) * 2
             // (x / 2) * 2
-            Div bracketDiv = null;
-            if (mul.Left is Div && mul.Right is Number)
-            {
-                bracketDiv = mul.Left as Div;
-                firstNumber = mul.Right as Number;
-            }
-            else if (mul.Right is Div && mul.Left is Number)
+            var bracketDiv = mul.Left as Div;
+            firstNumber = mul.Right as Number;
+            if (bracketDiv == null)
             {
                 bracketDiv = mul.Right as Div;
                 firstNumber = mul.Left as Number;

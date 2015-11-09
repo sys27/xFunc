@@ -493,11 +493,31 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void MulSameVar()
+        public void MulSameVar1()
         {
             var var = new Variable("x");
             var mul = new Mul(var, var);
             var expected = new Pow(var, new Number(2));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar2()
+        {
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(new Number(2), var), var);
+            var expected = new Mul(new Number(2), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar3()
+        {
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(new Number(2), var), new Mul(new Number(3), var));
+            var expected = new Mul(new Number(6), new Pow(var, new Number(2)));
 
             SimpleTest(mul, expected);
         }

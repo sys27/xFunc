@@ -228,6 +228,28 @@ namespace xFunc.Tests
             SimpleTest(exp, expected);
         }
 
+        [Fact]
+        public void AddSaveVars5()
+        {
+            // -x + x
+            var var = new Variable("x");
+            var exp = new Add(new UnaryMinus(var), var);
+            var expected = new Number(0);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars6()
+        {
+            // -x + 2x
+            var var = new Variable("x");
+            var exp = new Add(new UnaryMinus(var), new Mul(new Number(2), var));
+            var expected = var;
+
+            SimpleTest(exp, expected);
+        }
+
         #endregion
 
         #region Sub
@@ -372,6 +394,17 @@ namespace xFunc.Tests
             var x = new Variable("x");
             var sub = new Sub(new Mul(new Number(2), x), x);
             var expected = x;
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars4()
+        {
+            // x - 2x
+            var x = new Variable("x");
+            var sub = new Sub(x, new Mul(new Number(2), x));
+            var expected = new UnaryMinus(x);
 
             SimpleTest(sub, expected);
         }

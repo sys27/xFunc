@@ -250,7 +250,7 @@
     <value>Delete all expressions.</value>
   </data>
   <data name="ClearScreenTipTitle" xml:space="preserve">
-    <value>Clear</value>
+    <value>Clear (Shift+Del)</value>
   </data>
   <data name="ClipboardGroupHeader" xml:space="preserve">
     <value>Clipboard</value>
@@ -346,7 +346,7 @@
     <value>Delete the selected expression</value>
   </data>
   <data name="DeleteExpScreenTipTitle" xml:space="preserve">
-    <value>Delete</value>
+    <value>Delete (Del)</value>
   </data>
   <data name="DeleteMenuItem" xml:space="preserve">
     <value>Delete</value>

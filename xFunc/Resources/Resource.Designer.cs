@@ -1303,15 +1303,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expression Parameters.
-        /// </summary>
-        public static string ParamGroupHeader {
-            get {
-                return ResourceManager.GetString("ParamGroupHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Paste.
         /// </summary>
         public static string PasteButtonHeader {

@@ -250,7 +250,7 @@
     <value>Видалити всі вирази зі списку.</value>
   </data>
   <data name="ClearScreenTipTitle" xml:space="preserve">
-    <value>Очистити</value>
+    <value>Очистити (Shift+Del)</value>
   </data>
   <data name="ClipboardGroupHeader" xml:space="preserve">
     <value>Буфер обміну</value>
@@ -346,7 +346,7 @@
     <value>Видалити виділений вираз</value>
   </data>
   <data name="DeleteExpScreenTipTitle" xml:space="preserve">
-    <value>Видалити</value>
+    <value>Видалити (Del)</value>
   </data>
   <data name="DeleteMenuItem" xml:space="preserve">
     <value>Видалити</value>

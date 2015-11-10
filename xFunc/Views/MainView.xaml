@@ -63,6 +63,9 @@ limitations under the License. -->
         <KeyBinding Command="views:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
 
+        <KeyBinding Command="views:MainView.DeleteExpCommand" Key="Delete" />
+        <KeyBinding Command="views:MainView.ClearCommand" Key="Delete" Modifiers="Shift" />
+
         <KeyBinding Command="views:MainView.VariablesCommand" Key="V" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.FunctionsCommand" Key="F" Modifiers="Control+Alt" />
         <KeyBinding Command="views:MainView.ConverterCommand" Key="C" Modifiers="Control+Alt" />

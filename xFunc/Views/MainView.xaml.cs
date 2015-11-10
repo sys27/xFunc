@@ -65,12 +65,11 @@ namespace xFunc.Views
         public static RoutedCommand DecCommand = new RoutedCommand();
         public static RoutedCommand HexCommand = new RoutedCommand();
 
-        public static RoutedCommand VariablesCommand = new RoutedCommand();
-        public static RoutedCommand FunctionsCommand = new RoutedCommand();
-
         public static RoutedCommand DeleteExpCommand = new RoutedCommand();
         public static RoutedCommand ClearCommand = new RoutedCommand();
 
+        public static RoutedCommand VariablesCommand = new RoutedCommand();
+        public static RoutedCommand FunctionsCommand = new RoutedCommand();
         public static RoutedCommand ConverterCommand = new RoutedCommand();
 
         public static RoutedCommand AboutCommand = new RoutedCommand();
@@ -508,6 +507,42 @@ namespace xFunc.Views
             args.CanExecute = tabControl.SelectedItem == mathTab;
         }
 
+        private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            if (tabControl.SelectedItem == mathTab)
+            {
+                var item = (MathWorkspaceItemViewModel)this.mathControl.mathExpsListBox.SelectedItem;
+
+                mathPresenter.Remove(item);
+            }
+            else if (tabControl.SelectedItem == graphsTab)
+            {
+                var item = (GraphItemViewModel)this.graphsControl.graphsList.SelectedItem;
+
+                graphsPresenter.Remove(item);
+            }
+        }
+
+        private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = (tabControl.SelectedItem == mathTab && this.mathControl.mathExpsListBox.SelectedItem != null) ||
+                              (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
+        }
+
+        private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
+        {
+            if (tabControl.SelectedItem == mathTab)
+                mathPresenter.Clear();
+            else if (tabControl.SelectedItem == graphsTab)
+                graphsPresenter.Clear();
+        }
+
+        private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = tabControl.SelectedItem == mathTab ||
+                              tabControl.SelectedItem == graphsTab;
+        }
+
         private void VariablesCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
             if (variableView == null)
@@ -594,42 +629,6 @@ namespace xFunc.Views
         private void FunctionsCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
-        }
-
-        private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            if (tabControl.SelectedItem == mathTab)
-            {
-                var item = (MathWorkspaceItemViewModel)this.mathControl.mathExpsListBox.SelectedItem;
-
-                mathPresenter.Remove(item);
-            }
-            else if (tabControl.SelectedItem == graphsTab)
-            {
-                var item = (GraphItemViewModel)this.graphsControl.graphsList.SelectedItem;
-
-                graphsPresenter.Remove(item);
-            }
-        }
-
-        private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        {
-            args.CanExecute = (tabControl.SelectedItem == mathTab && this.mathControl.mathExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
-        }
-
-        private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            if (tabControl.SelectedItem == mathTab)
-                mathPresenter.Clear();
-            else if (tabControl.SelectedItem == graphsTab)
-                graphsPresenter.Clear();
-        }
-
-        private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
-        {
-            args.CanExecute = tabControl.SelectedItem == mathTab ||
-                              tabControl.SelectedItem == graphsTab;
         }
 
         private void ConverterCommand_Execute(object o, ExecutedRoutedEventArgs args)

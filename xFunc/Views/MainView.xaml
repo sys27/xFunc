@@ -32,7 +32,7 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.AutoFormatCommand" Executed="AutoButton_Execute" CanExecute="FormatButtons_CanExecute" />
         <CommandBinding Command="views:MainView.NormalFormatCommand" Executed="NormalButton_Execute" CanExecute="FormatButtons_CanExecute" />
         <CommandBinding Command="views:MainView.ExponentialFormatCommand" Executed="ExponentialButton_Execute" CanExecute="FormatButtons_CanExecute" />
-        
+
         <CommandBinding Command="views:MainView.DegreeCommand" Executed="DegreeButton_Execute" CanExecute="AngleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AngleButtons_CanExecute" />
         <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AngleButtons_CanExecute" />
@@ -42,12 +42,11 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.DecCommand" Executed="DecCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.HexCommand" Executed="HexCommand_Execute" CanExecute="BaseCommands_CanExecute" />
 
-        <CommandBinding Command="views:MainView.VariablesCommand" Executed="VariablesCommand_Execute" CanExecute="VariablesCommand_CanExecute" />
-        <CommandBinding Command="views:MainView.FunctionsCommand" Executed="FunctionsCommand_Execute" CanExecute="FunctionsCommand_CanExecute" />
-
         <CommandBinding Command="views:MainView.DeleteExpCommand" Executed="DeleteExp_Execute" CanExecute="DeleteExp_CanExecute" />
         <CommandBinding Command="views:MainView.ClearCommand" Executed="Clear_Execute" CanExecute="Clear_CanExecute" />
 
+        <CommandBinding Command="views:MainView.VariablesCommand" Executed="VariablesCommand_Execute" CanExecute="VariablesCommand_CanExecute" />
+        <CommandBinding Command="views:MainView.FunctionsCommand" Executed="FunctionsCommand_Execute" CanExecute="FunctionsCommand_CanExecute" />
         <CommandBinding Command="views:MainView.ConverterCommand" Executed="ConverterCommand_Execute" />
 
         <CommandBinding Command="views:MainView.AboutCommand" Executed="AboutCommand_Execute" />
@@ -118,7 +117,7 @@ limitations under the License. -->
                     </ribbon:BackstageTabControl>
                 </ribbon:Backstage>
             </ribbon:Ribbon.Menu>
-            <ribbon:RibbonTabItem Header="{x:Static res:Resource.HomeRibbonTabHeader}" IsSelected="True">
+            <ribbon:RibbonTabItem Header="{x:Static res:Resource.HomeRibbonTabHeader}" ReduceOrder="AnglesGroupBox,AnglesGroupBox,AnglesGroupBox,OutputFormatGroupBox,OutputFormatGroupBox,OutputFormatGroupBox,AnswerBaseGroupBox,AnswerBaseGroupBox,AnswerBaseGroupBox,ToolsGroupBox,ToolsGroupBox,ToolsGroupBox" IsSelected="True">
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ClipboardGroupHeader}">
                     <ribbon:Button x:Name="undoButton" Header="{x:Static res:Resource.UndoButtonHeader}" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo">
                         <ribbon:Button.ToolTip>
@@ -147,45 +146,33 @@ limitations under the License. -->
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.AnglesGroupHeader}">
-                    <ribbon:ToggleButton x:Name="degreeButton" Header="{x:Static res:Resource.DegreeButtonHeader}" LargeIcon="../Images/DegreeLarge.png" Command="views:MainView.DegreeCommand">
+                <ribbon:RibbonGroupBox x:Name="AnglesGroupBox"  Header="{x:Static res:Resource.AnglesGroupHeader}">
+                    <ribbon:ToggleButton x:Name="degreeButton" Header="{x:Static res:Resource.DegreeButtonHeader}" LargeIcon="../Images/DegreeLarge.png" SizeDefinition="Large" Command="views:MainView.DegreeCommand">
                         <ribbon:ToggleButton.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.DegreeScreenTipTitle}" Text="{x:Static res:Resource.DegreeScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="radianButton" Header="{x:Static res:Resource.RadianButtonHeader}" LargeIcon="../Images/RadianLarge.png" Command="views:MainView.RadianCommand">
+                    <ribbon:ToggleButton x:Name="radianButton" Header="{x:Static res:Resource.RadianButtonHeader}" LargeIcon="../Images/RadianLarge.png" SizeDefinition="Large" Command="views:MainView.RadianCommand">
                         <ribbon:ToggleButton.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.RadianScreenTipTitle}" Text="{x:Static res:Resource.RadianScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="gradianButton" Header="{x:Static res:Resource.GradianButtonHeader}" LargeIcon="../Images/GradianLarge.png" Command="views:MainView.GradianCommand">
+                    <ribbon:ToggleButton x:Name="gradianButton" Header="{x:Static res:Resource.GradianButtonHeader}" LargeIcon="../Images/GradianLarge.png" SizeDefinition="Large" Command="views:MainView.GradianCommand">
                         <ribbon:ToggleButton.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.GradianScreenTipTitle}" Text="{x:Static res:Resource.GradianScreenTipText}" />
                         </ribbon:ToggleButton.ToolTip>
                     </ribbon:ToggleButton>
                 </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.OutputFormatGroupHeader}">
-                    <ribbon:ToggleButton x:Name="autoButton" Header="{x:Static res:Resource.AutoFormatButtonHeader}" LargeIcon="../Images/Auto.png"  Command="views:MainView.AutoFormatCommand" />
-                    <ribbon:ToggleButton x:Name="normalButton" Header="{x:Static res:Resource.NormalFormatButtonHeader}" LargeIcon="../Images/Normal.png"  Command="views:MainView.NormalFormatCommand" />
-                    <ribbon:ToggleButton x:Name="exponentialButton" Header="{x:Static res:Resource.ExponentialFormatButtonHeader}" LargeIcon="../Images/Exponential.png"  Command="views:MainView.ExponentialFormatCommand" />
+                <ribbon:RibbonGroupBox x:Name="OutputFormatGroupBox"  Header="{x:Static res:Resource.OutputFormatGroupHeader}">
+                    <ribbon:ToggleButton x:Name="autoButton" Header="{x:Static res:Resource.AutoFormatButtonHeader}" LargeIcon="../Images/Auto.png" SizeDefinition="Large" Command="views:MainView.AutoFormatCommand" />
+                    <ribbon:ToggleButton x:Name="normalButton" Header="{x:Static res:Resource.NormalFormatButtonHeader}" LargeIcon="../Images/Normal.png" SizeDefinition="Large" Command="views:MainView.NormalFormatCommand" />
+                    <ribbon:ToggleButton x:Name="exponentialButton" Header="{x:Static res:Resource.ExponentialFormatButtonHeader}" LargeIcon="../Images/Exponential.png" SizeDefinition="Large" Command="views:MainView.ExponentialFormatCommand" />
                 </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.AnswerBaseGroupHeader}">
-                    <ribbon:ToggleButton x:Name="binButton" Header="Bin" LargeIcon="../Images/Bin.png" Command="views:MainView.BinCommand" />
-                    <ribbon:ToggleButton x:Name="octButton" Header="Oct" LargeIcon="../Images/Oct.png" Command="views:MainView.OctCommand" />
-                    <ribbon:ToggleButton x:Name="decButton" Header="Dec" LargeIcon="../Images/Dec.png" Command="views:MainView.DecCommand" />
-                    <ribbon:ToggleButton x:Name="hexButton" Header="Hex" LargeIcon="../Images/Hex.png" Command="views:MainView.HexCommand" />
-                </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ParamGroupHeader}">
-                    <ribbon:Button Header="{x:Static res:Resource.VariablesButtonHeader}" Icon="..\Images\Variable.png" LargeIcon="..\Images\VariableLarge.png" Command="views:MainView.VariablesCommand">
-                        <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="{x:Static res:Resource.VarScreenTitTitle}" Text="{x:Static res:Resource.VarScreenTitText}" />
-                        </ribbon:Button.ToolTip>
-                    </ribbon:Button>
-                    <ribbon:Button Header="{x:Static res:Resource.FunctionButtonHeader}" Icon="..\Images\Function.png" LargeIcon="..\Images\FunctionLarge.png" Command="views:MainView.FunctionsCommand">
-                        <ribbon:Button.ToolTip>
-                            <ribbon:ScreenTip Title="{x:Static res:Resource.FuncScreenTitTitle}" Text="{x:Static res:Resource.FuncScreenTitText}" />
-                        </ribbon:Button.ToolTip>
-                    </ribbon:Button>
+                <ribbon:RibbonGroupBox x:Name="AnswerBaseGroupBox" Header="{x:Static res:Resource.AnswerBaseGroupHeader}">
+                    <ribbon:ToggleButton x:Name="binButton" Header="Bin" LargeIcon="../Images/Bin.png" SizeDefinition="Large" Command="views:MainView.BinCommand" />
+                    <ribbon:ToggleButton x:Name="octButton" Header="Oct" LargeIcon="../Images/Oct.png" SizeDefinition="Large" Command="views:MainView.OctCommand" />
+                    <ribbon:ToggleButton x:Name="decButton" Header="Dec" LargeIcon="../Images/Dec.png" SizeDefinition="Large" Command="views:MainView.DecCommand" />
+                    <ribbon:ToggleButton x:Name="hexButton" Header="Hex" LargeIcon="../Images/Hex.png" SizeDefinition="Large" Command="views:MainView.HexCommand" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ExpListGroupHeader}">
                     <ribbon:Button Header="{x:Static res:Resource.DeleteExpButtonHeader}" Icon="../Images/Delete.png" LargeIcon="../Images/DeleteLarge.png" Command="views:MainView.DeleteExpCommand">
@@ -199,8 +186,18 @@ limitations under the License. -->
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ToolsGroupHeader}">
-                    <ribbon:Button Header="{x:Static res:Resource.ConverterButtonHeader}" Icon="..\Images\Converter.png" LargeIcon="..\Images\ConverterLarge.png" Command="views:MainView.ConverterCommand">
+                <ribbon:RibbonGroupBox x:Name="ToolsGroupBox"  Header="{x:Static res:Resource.ToolsGroupHeader}">
+                    <ribbon:Button Header="{x:Static res:Resource.VariablesButtonHeader}" Icon="..\Images\Variable.png" LargeIcon="..\Images\VariableLarge.png" SizeDefinition="Large" Command="views:MainView.VariablesCommand">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.VarScreenTitTitle}" Text="{x:Static res:Resource.VarScreenTitText}" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button Header="{x:Static res:Resource.FunctionButtonHeader}" Icon="..\Images\Function.png" LargeIcon="..\Images\FunctionLarge.png" SizeDefinition="Large" Command="views:MainView.FunctionsCommand">
+                        <ribbon:Button.ToolTip>
+                            <ribbon:ScreenTip Title="{x:Static res:Resource.FuncScreenTitTitle}" Text="{x:Static res:Resource.FuncScreenTitText}" />
+                        </ribbon:Button.ToolTip>
+                    </ribbon:Button>
+                    <ribbon:Button Header="{x:Static res:Resource.ConverterButtonHeader}" Icon="..\Images\Converter.png" LargeIcon="..\Images\ConverterLarge.png" SizeDefinition="Large" Command="views:MainView.ConverterCommand">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.ConverterScreenTipTitle}" Text="{x:Static res:Resource.ConverterScreenTipText}" />
                         </ribbon:Button.ToolTip>

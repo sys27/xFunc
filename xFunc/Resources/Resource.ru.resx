@@ -504,9 +504,6 @@
   <data name="OrToolTip" xml:space="preserve">
     <value>Побитовая операция ИЛИ. Пример: x or y, x | y</value>
   </data>
-  <data name="ParamGroupHeader" xml:space="preserve">
-    <value>Параметры выражения</value>
-  </data>
   <data name="PasteButtonHeader" xml:space="preserve">
     <value>Вставить</value>
   </data>

@@ -504,9 +504,6 @@
   <data name="OrToolTip" xml:space="preserve">
     <value>Побітова операція АБО. Приклад: x or y, x | y</value>
   </data>
-  <data name="ParamGroupHeader" xml:space="preserve">
-    <value>Параметри виразу.</value>
-  </data>
   <data name="PasteButtonHeader" xml:space="preserve">
     <value>Вставити</value>
   </data>

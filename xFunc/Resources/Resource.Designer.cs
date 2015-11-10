@@ -466,7 +466,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear.
+        ///   Looks up a localized string similar to Clear (Shift+Del).
         /// </summary>
         public static string ClearScreenTipTitle {
             get {
@@ -754,7 +754,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to Delete (Del).
         /// </summary>
         public static string DeleteExpScreenTipTitle {
             get {

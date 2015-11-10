@@ -282,13 +282,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths %28.Net 4.0%29.csproj">
+    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj">
       <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
-      <Name>xFunc.Maths %28.Net 4.0%29</Name>
+      <Name>xFunc.Maths</Name>
     </ProjectReference>
-    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters %28.Net 4.0%29.csproj">
+    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj">
       <Project>{2ecaad28-e0ce-40be-8eb0-0d055c908133}</Project>
-      <Name>xFunc.UnitConverters %28.Net 4.0%29</Name>
+      <Name>xFunc.UnitConverters</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

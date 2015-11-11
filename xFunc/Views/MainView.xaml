@@ -189,7 +189,7 @@ limitations under the License. -->
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                 </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox x:Name="ToolsGroupBox"  Header="{x:Static res:Resource.ToolsGroupHeader}">
+                <ribbon:RibbonGroupBox x:Name="ToolsGroupBox"  Header="{x:Static res:Resource.ToolsGroupHeader}" Icon="..\Images\Tools.png">
                     <ribbon:Button Header="{x:Static res:Resource.VariablesButtonHeader}" Icon="..\Images\Variable.png" LargeIcon="..\Images\VariableLarge.png" SizeDefinition="Large" Command="views:MainView.VariablesCommand">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.VarScreenTitTitle}" Text="{x:Static res:Resource.VarScreenTitText}" />

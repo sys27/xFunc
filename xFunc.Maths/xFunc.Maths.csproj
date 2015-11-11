@@ -49,6 +49,7 @@
     <Compile Include="..\SharedCode\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Builder.cs" />
     <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />

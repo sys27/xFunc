@@ -43,7 +43,9 @@ limitations under the License. -->
                 <ComboBox x:Name="fromComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" SelectionChanged="fromToComboBox_SelectionChanged" />
                 <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=fromTextBox}" />
                 <TextBox x:Name="fromTextBox" Height="23" Margin="74,35,38,0" VerticalAlignment="Top" TextChanged="fromTextBox_TextChanged" />
-                <Button Height="23" Width="23" Margin="389,35,10,0" VerticalAlignment="Top" Command="views:Converter.CopyFromCommand" />
+                <Button Height="23" Width="23" Margin="389,35,10,0" VerticalAlignment="Top" Command="views:Converter.CopyFromCommand">
+                    <Image Source="..\Images\Copy_16.png" Width="16" Height="16" />
+                </Button>
             </Grid>
         </GroupBox>
 
@@ -53,7 +55,9 @@ limitations under the License. -->
                 <ComboBox x:Name="toComboBox" Margin="74,2,10,0" VerticalAlignment="Top" DisplayMemberPath="Value" SelectedIndex="0" SelectionChanged="fromToComboBox_SelectionChanged" />
                 <Label Content="{x:Static res:Resource.ValueText}" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Target="{Binding ElementName=toTextBox}" />
                 <TextBox x:Name="toTextBox" Height="23" Margin="74,35,38,0" VerticalAlignment="Top" TextChanged="toTextBox_TextChanged" />
-                <Button Height="23" Width="23" Margin="389,35,10,0" VerticalAlignment="Top" Command="views:Converter.CopyToCommand" />
+                <Button Height="23" Width="23" Margin="389,35,10,0" VerticalAlignment="Top" Command="views:Converter.CopyToCommand">
+                    <Image Source="..\Images\Copy_16.png" Width="16" Height="16" />
+                </Button>
             </Grid>
         </GroupBox>
 

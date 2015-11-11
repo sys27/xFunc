@@ -334,6 +334,9 @@
     <Resource Include="Images\Exponential.png" />
     <Resource Include="Images\Normal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Copy_16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

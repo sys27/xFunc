@@ -220,7 +220,7 @@ namespace xFunc.Maths
 
         #region Trigonometric
 
-        public Builder Sin(IExpression expression)
+        public Builder Sin()
         {
             CheckCurrentExpression();
 
@@ -229,17 +229,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Sin(double number)
-        {
-            return Sin((IExpression)new Number(number));
-        }
-
-        public Builder Sin(string variable)
-        {
-            return Sin((IExpression)new Variable(variable));
-        }
-
-        public Builder Cos(IExpression expression)
+        public Builder Cos()
         {
             CheckCurrentExpression();
 
@@ -248,17 +238,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Cos(double number)
-        {
-            return Cos((IExpression)new Number(number));
-        }
-
-        public Builder Cos(string variable)
-        {
-            return Cos((IExpression)new Variable(variable));
-        }
-
-        public Builder Tan(IExpression expression)
+        public Builder Tan()
         {
             CheckCurrentExpression();
 
@@ -267,17 +247,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Tan(double number)
-        {
-            return Tan((IExpression)new Number(number));
-        }
-
-        public Builder Tan(string variable)
-        {
-            return Tan((IExpression)new Variable(variable));
-        }
-
-        public Builder Cot(IExpression expression)
+        public Builder Cot()
         {
             CheckCurrentExpression();
 
@@ -286,17 +256,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Cot(double number)
-        {
-            return Cot((IExpression)new Number(number));
-        }
-
-        public Builder Cot(string variable)
-        {
-            return Cot((IExpression)new Variable(variable));
-        }
-
-        public Builder Sec(IExpression expression)
+        public Builder Sec()
         {
             CheckCurrentExpression();
 
@@ -305,17 +265,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Sec(double number)
-        {
-            return Sec((IExpression)new Number(number));
-        }
-
-        public Builder Sec(string variable)
-        {
-            return Sec((IExpression)new Variable(variable));
-        }
-
-        public Builder Csc(IExpression expression)
+        public Builder Csc()
         {
             CheckCurrentExpression();
 
@@ -324,21 +274,11 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Csc(double number)
-        {
-            return Csc((IExpression)new Number(number));
-        }
-
-        public Builder Csc(string variable)
-        {
-            return Csc((IExpression)new Variable(variable));
-        }
-
         #endregion Trigonometric
 
         #region Hyperbolic
 
-        public Builder Arcsin(IExpression expression)
+        public Builder Arcsin()
         {
             CheckCurrentExpression();
 
@@ -347,17 +287,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Arcsin(double number)
-        {
-            return Arcsin((IExpression)new Number(number));
-        }
-
-        public Builder Arcsin(string variable)
-        {
-            return Arcsin((IExpression)new Variable(variable));
-        }
-
-        public Builder Arccos(IExpression expression)
+        public Builder Arccos()
         {
             CheckCurrentExpression();
 
@@ -365,18 +295,8 @@ namespace xFunc.Maths
 
             return this;
         }
-
-        public Builder Arccos(double number)
-        {
-            return Arccos((IExpression)new Number(number));
-        }
-
-        public Builder Arccos(string variable)
-        {
-            return Arccos((IExpression)new Variable(variable));
-        }
-
-        public Builder Arctan(IExpression expression)
+        
+        public Builder Arctan()
         {
             CheckCurrentExpression();
 
@@ -385,17 +305,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Arctan(double number)
-        {
-            return Arctan((IExpression)new Number(number));
-        }
-
-        public Builder Arctan(string variable)
-        {
-            return Arctan((IExpression)new Variable(variable));
-        }
-
-        public Builder Arccot(IExpression expression)
+        public Builder Arccot()
         {
             CheckCurrentExpression();
 
@@ -404,17 +314,7 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Arccot(double number)
-        {
-            return Arccot((IExpression)new Number(number));
-        }
-
-        public Builder Arccot(string variable)
-        {
-            return Arccot((IExpression)new Variable(variable));
-        }
-
-        public Builder Arcsec(IExpression expression)
+        public Builder Arcsec()
         {
             CheckCurrentExpression();
 
@@ -423,33 +323,13 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Arcsec(double number)
-        {
-            return Arcsec((IExpression)new Number(number));
-        }
-
-        public Builder Arcsec(string variable)
-        {
-            return Arcsec((IExpression)new Variable(variable));
-        }
-
-        public Builder Arccsc(IExpression expression)
+        public Builder Arccsc()
         {
             CheckCurrentExpression();
 
             current = new Arccsc(current);
 
             return this;
-        }
-
-        public Builder Arccsc(double number)
-        {
-            return Arccsc((IExpression)new Number(number));
-        }
-
-        public Builder Arccsc(string variable)
-        {
-            return Csc((IExpression)new Variable(variable));
         }
 
         #endregion Hyperbolic

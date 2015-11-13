@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
 {
@@ -23,18 +24,81 @@ namespace xFunc.Maths
 
         private IExpression current;
 
-        public Builder(IExpression initial)
+        public Builder()
         {
-            this.current = initial;
+
         }
 
-        public Builder Create(IExpression initial)
+        public Builder(IExpression initial)
+        {
+            Init(initial);
+        }
+
+        public Builder(double number)
+        {
+            Init(number);
+        }
+
+        public Builder(string variable)
+        {
+            Init(variable);
+        }
+
+        public override string ToString()
+        {
+            return current.ToString();
+        }
+
+        public static Builder Create(IExpression initial)
         {
             return new Builder(initial);
         }
 
+        public static Builder Create(double number)
+        {
+            return new Builder(number);
+        }
+
+        public static Builder Create(string variable)
+        {
+            return new Builder(variable);
+        }
+
+        public void Init(IExpression initial)
+        {
+            this.current = initial;
+        }
+
+        public void Init(double number)
+        {
+            Init((IExpression)new Number(number));
+        }
+
+        public void Init(string variable)
+        {
+            Init((IExpression)new Variable(variable));
+        }
+
+        private void CheckCurrentExpression()
+        {
+            // todo: ???
+            if (current == null)
+                throw new ArgumentNullException(nameof(current));
+        }
+
+        public Builder Expression(Func<IExpression, IExpression> customExpression)
+        {
+            CheckCurrentExpression();
+
+            current = customExpression(current);
+
+            return this;
+        }
+
         public Builder Add(IExpression summand)
         {
+            CheckCurrentExpression();
+
             current = new Add(current, summand);
 
             return this;
@@ -52,6 +116,8 @@ namespace xFunc.Maths
 
         public Builder Sub(IExpression subtrahend)
         {
+            CheckCurrentExpression();
+
             current = new Sub(current, subtrahend);
 
             return this;
@@ -69,6 +135,8 @@ namespace xFunc.Maths
 
         public Builder Mul(IExpression factor)
         {
+            CheckCurrentExpression();
+
             current = new Mul(current, factor);
 
             return this;
@@ -86,6 +154,8 @@ namespace xFunc.Maths
 
         public Builder Div(IExpression denominator)
         {
+            CheckCurrentExpression();
+
             current = new Div(current, denominator);
 
             return this;
@@ -103,6 +173,8 @@ namespace xFunc.Maths
 
         public Builder Pow(IExpression exponent)
         {
+            CheckCurrentExpression();
+
             current = new Pow(current, exponent);
 
             return this;
@@ -120,6 +192,8 @@ namespace xFunc.Maths
 
         public Builder Sqrt()
         {
+            CheckCurrentExpression();
+
             current = new Sqrt(current);
 
             return this;
@@ -127,6 +201,8 @@ namespace xFunc.Maths
 
         public Builder Root(IExpression degree)
         {
+            CheckCurrentExpression();
+
             current = new Root(current, degree);
 
             return this;
@@ -142,12 +218,241 @@ namespace xFunc.Maths
             return Root((IExpression)new Variable(degree));
         }
 
-        public Builder Expression(Func<IExpression, IExpression> customExpression)
+        #region Trigonometric
+
+        public Builder Sin(IExpression expression)
         {
-            current = customExpression(current);
+            CheckCurrentExpression();
+
+            current = new Sin(current);
 
             return this;
         }
+
+        public Builder Sin(double number)
+        {
+            return Sin((IExpression)new Number(number));
+        }
+
+        public Builder Sin(string variable)
+        {
+            return Sin((IExpression)new Variable(variable));
+        }
+
+        public Builder Cos(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Cos(current);
+
+            return this;
+        }
+
+        public Builder Cos(double number)
+        {
+            return Cos((IExpression)new Number(number));
+        }
+
+        public Builder Cos(string variable)
+        {
+            return Cos((IExpression)new Variable(variable));
+        }
+
+        public Builder Tan(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Tan(current);
+
+            return this;
+        }
+
+        public Builder Tan(double number)
+        {
+            return Tan((IExpression)new Number(number));
+        }
+
+        public Builder Tan(string variable)
+        {
+            return Tan((IExpression)new Variable(variable));
+        }
+
+        public Builder Cot(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Cot(current);
+
+            return this;
+        }
+
+        public Builder Cot(double number)
+        {
+            return Cot((IExpression)new Number(number));
+        }
+
+        public Builder Cot(string variable)
+        {
+            return Cot((IExpression)new Variable(variable));
+        }
+
+        public Builder Sec(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Sec(current);
+
+            return this;
+        }
+
+        public Builder Sec(double number)
+        {
+            return Sec((IExpression)new Number(number));
+        }
+
+        public Builder Sec(string variable)
+        {
+            return Sec((IExpression)new Variable(variable));
+        }
+
+        public Builder Csc(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Csc(current);
+
+            return this;
+        }
+
+        public Builder Csc(double number)
+        {
+            return Csc((IExpression)new Number(number));
+        }
+
+        public Builder Csc(string variable)
+        {
+            return Csc((IExpression)new Variable(variable));
+        }
+
+        #endregion Trigonometric
+
+        #region Hyperbolic
+
+        public Builder Arcsin(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Arcsin(current);
+
+            return this;
+        }
+
+        public Builder Arcsin(double number)
+        {
+            return Arcsin((IExpression)new Number(number));
+        }
+
+        public Builder Arcsin(string variable)
+        {
+            return Arcsin((IExpression)new Variable(variable));
+        }
+
+        public Builder Arccos(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Arccos(current);
+
+            return this;
+        }
+
+        public Builder Arccos(double number)
+        {
+            return Arccos((IExpression)new Number(number));
+        }
+
+        public Builder Arccos(string variable)
+        {
+            return Arccos((IExpression)new Variable(variable));
+        }
+
+        public Builder Arctan(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Arctan(current);
+
+            return this;
+        }
+
+        public Builder Arctan(double number)
+        {
+            return Arctan((IExpression)new Number(number));
+        }
+
+        public Builder Arctan(string variable)
+        {
+            return Arctan((IExpression)new Variable(variable));
+        }
+
+        public Builder Arccot(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Arccot(current);
+
+            return this;
+        }
+
+        public Builder Arccot(double number)
+        {
+            return Arccot((IExpression)new Number(number));
+        }
+
+        public Builder Arccot(string variable)
+        {
+            return Arccot((IExpression)new Variable(variable));
+        }
+
+        public Builder Arcsec(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Arcsec(current);
+
+            return this;
+        }
+
+        public Builder Arcsec(double number)
+        {
+            return Arcsec((IExpression)new Number(number));
+        }
+
+        public Builder Arcsec(string variable)
+        {
+            return Arcsec((IExpression)new Variable(variable));
+        }
+
+        public Builder Arccsc(IExpression expression)
+        {
+            CheckCurrentExpression();
+
+            current = new Arccsc(current);
+
+            return this;
+        }
+
+        public Builder Arccsc(double number)
+        {
+            return Arccsc((IExpression)new Number(number));
+        }
+
+        public Builder Arccsc(string variable)
+        {
+            return Csc((IExpression)new Variable(variable));
+        }
+
+        #endregion Hyperbolic
 
         #region IExpression
 

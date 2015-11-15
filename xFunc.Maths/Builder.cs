@@ -550,21 +550,45 @@ namespace xFunc.Maths
 
         #region IExpression
 
+        /// <summary>
+        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
         public object Calculate()
         {
             return current.Calculate();
         }
 
+        /// <summary>
+        /// Calculates this mathemarical expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
         public object Calculate(ExpressionParameters parameters)
         {
             return current.Calculate(parameters);
         }
 
+        /// <summary>
+        /// Clones this instance of the <see cref="IExpression" />.
+        /// </summary>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
         public IExpression Clone()
         {
             return current.Clone();
         }
 
+        /// <summary>
+        /// Get or Set the parent expression.
+        /// </summary>
+        /// <exception cref="System.NotImplementedException">Always.</exception>
         public IExpression Parent
         {
             get
@@ -577,6 +601,12 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
         public int MinParameters
         {
             get
@@ -585,6 +615,12 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
         public int MaxParameters
         {
             get
@@ -593,6 +629,12 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
         public int ParametersCount
         {
             get
@@ -601,6 +643,12 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
         public ExpressionResultType ResultType
         {
             get

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
@@ -218,6 +219,52 @@ namespace xFunc.Maths
             return Root((IExpression)new Variable(degree));
         }
 
+        public Builder Abs()
+        {
+            CheckCurrentExpression();
+
+            current = new Abs(current);
+
+            return this;
+        }
+
+        public Builder Log(IExpression @base)
+        {
+            CheckCurrentExpression();
+
+            current = new Log(current, @base);
+
+            return this;
+        }
+
+        public Builder Log(double number)
+        {
+            return Log((IExpression)new Number(number));
+        }
+
+        public Builder Log(string variable)
+        {
+            return Log((IExpression)new Variable(variable));
+        }
+
+        public Builder Ln()
+        {
+            CheckCurrentExpression();
+
+            current = new Ln(current);
+
+            return this;
+        }
+
+        public Builder Lg()
+        {
+            CheckCurrentExpression();
+
+            current = new Lg(current);
+
+            return this;
+        }
+
         #region Trigonometric
 
         public Builder Sin()
@@ -274,10 +321,6 @@ namespace xFunc.Maths
             return this;
         }
 
-        #endregion Trigonometric
-
-        #region Hyperbolic
-
         public Builder Arcsin()
         {
             CheckCurrentExpression();
@@ -295,7 +338,7 @@ namespace xFunc.Maths
 
             return this;
         }
-        
+
         public Builder Arctan()
         {
             CheckCurrentExpression();
@@ -328,6 +371,118 @@ namespace xFunc.Maths
             CheckCurrentExpression();
 
             current = new Arccsc(current);
+
+            return this;
+        }
+
+        #endregion Trigonometric
+
+        #region Hyperbolic
+
+        public Builder Sinh()
+        {
+            CheckCurrentExpression();
+
+            current = new Sinh(current);
+
+            return this;
+        }
+
+        public Builder Cosh()
+        {
+            CheckCurrentExpression();
+
+            current = new Cosh(current);
+
+            return this;
+        }
+
+        public Builder Tanh()
+        {
+            CheckCurrentExpression();
+
+            current = new Tanh(current);
+
+            return this;
+        }
+
+        public Builder Coth()
+        {
+            CheckCurrentExpression();
+
+            current = new Coth(current);
+
+            return this;
+        }
+
+        public Builder Sech()
+        {
+            CheckCurrentExpression();
+
+            current = new Sech(current);
+
+            return this;
+        }
+
+        public Builder Csch()
+        {
+            CheckCurrentExpression();
+
+            current = new Csch(current);
+
+            return this;
+        }
+
+        public Builder Arsinh()
+        {
+            CheckCurrentExpression();
+
+            current = new Arsinh(current);
+
+            return this;
+        }
+
+        public Builder Arcosh()
+        {
+            CheckCurrentExpression();
+
+            current = new Arcosh(current);
+
+            return this;
+        }
+
+        public Builder Artanh()
+        {
+            CheckCurrentExpression();
+
+            current = new Artanh(current);
+
+            return this;
+        }
+
+        public Builder Arcoth()
+        {
+            CheckCurrentExpression();
+
+            current = new Arcoth(current);
+
+            return this;
+        }
+
+        public Builder Arsech()
+        {
+            CheckCurrentExpression();
+
+            current = new Arsech(current);
+
+            return this;
+        }
+
+        public Builder Arcsch()
+        {
+            CheckCurrentExpression();
+
+            current = new Arcsch(current);
 
             return this;
         }

@@ -20,61 +20,112 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The expression builder.
+    /// </summary>
     public class Builder : IExpression
     {
 
         private IExpression current;
 
+        /// <summary>
+        /// Initializes a new empty instance of the <see cref="Builder"/> class.
+        /// </summary>
         public Builder()
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Builder"/> class.
+        /// </summary>
+        /// <param name="initial">The initial value of builder.</param>
         public Builder(IExpression initial)
         {
             Init(initial);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Builder"/> class.
+        /// </summary>
+        /// <param name="number">The initial value of builder.</param>
         public Builder(double number)
         {
             Init(number);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Builder"/> class.
+        /// </summary>
+        /// <param name="variable">The initial value of builder.</param>
         public Builder(string variable)
         {
             Init(variable);
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return current.ToString();
         }
 
+        /// <summary>
+        /// Creates the builder.
+        /// </summary>
+        /// <param name="initial">The initial value of builder.</param>
+        /// <returns>The new instance of builder.</returns>
         public static Builder Create(IExpression initial)
         {
             return new Builder(initial);
         }
 
+        /// <summary>
+        /// Creates the builder.
+        /// </summary>
+        /// <param name="number">The initial value of builder.</param>
+        /// <returns>The new instance of builder.</returns>
         public static Builder Create(double number)
         {
             return new Builder(number);
         }
 
+        /// <summary>
+        /// Creates the builder.
+        /// </summary>
+        /// <param name="variable">The initial value of builder.</param>
+        /// <returns>The new instance of builder.</returns>
         public static Builder Create(string variable)
         {
             return new Builder(variable);
         }
 
+        /// <summary>
+        /// Initializes the builder.
+        /// </summary>
+        /// <param name="initial">The initial value of builder.</param>
         public void Init(IExpression initial)
         {
             this.current = initial;
         }
 
+        /// <summary>
+        /// Initializes the builder.
+        /// </summary>
+        /// <param name="number">The initial value of builder.</param>
         public void Init(double number)
         {
             Init((IExpression)new Number(number));
         }
 
+        /// <summary>
+        /// Initializes the builder.
+        /// </summary>
+        /// <param name="variable">The initial value of builder.</param>
         public void Init(string variable)
         {
             Init((IExpression)new Variable(variable));
@@ -82,11 +133,15 @@ namespace xFunc.Maths
 
         private void CheckCurrentExpression()
         {
-            // todo: ???
             if (current == null)
                 throw new ArgumentNullException(nameof(current));
         }
 
+        /// <summary>
+        /// Inserts a custom expression to builder.
+        /// </summary>
+        /// <param name="customExpression">The custom expression.</param>
+        /// <returns>The current instance of builder.</returns>
         public Builder Expression(Func<IExpression, IExpression> customExpression)
         {
             CheckCurrentExpression();
@@ -95,6 +150,8 @@ namespace xFunc.Maths
 
             return this;
         }
+
+        #region Standart
 
         public Builder Add(IExpression summand)
         {
@@ -264,6 +321,8 @@ namespace xFunc.Maths
 
             return this;
         }
+
+        #endregion Standart
 
         #region Trigonometric
 

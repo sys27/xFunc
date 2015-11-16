@@ -183,4 +183,7 @@
   <data name="NoElementInSource" xml:space="preserve">
     <value>Немає елементів у вихідному списку.</value>
   </data>
+  <data name="FormatException" xml:space="preserve">
+    <value>Рядок '{0}' має неправильний формат.</value>
+  </data>
 </root>

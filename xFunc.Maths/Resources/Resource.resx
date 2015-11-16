@@ -183,4 +183,7 @@
   <data name="NoElementInSource" xml:space="preserve">
     <value>No elements in source list.</value>
   </data>
+  <data name="FormatException" xml:space="preserve">
+    <value>The string '{0}' has an invalid format.</value>
+  </data>
 </root>

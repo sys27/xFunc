@@ -426,7 +426,7 @@ namespace xFunc.Maths
                             length++;
 
                         if (temp == length)
-                            throw new LexerException();
+                            throw new LexerException(string.Format(Resource.FormatException, function.Substring(i, length)));
                     }
 
                     if (CheckNextSymbol(function, i + length - 1, 'e')) // exp notation

@@ -421,9 +421,12 @@ namespace xFunc.Maths
 
                     if (j < function.Length && function[j] == '.')
                     {
-                        length++;
+                        var temp = ++length;
                         for (j += 1; j < function.Length && char.IsDigit(function[j]); j++)
                             length++;
+
+                        if (temp == length)
+                            throw new LexerException();
                     }
 
                     if (CheckNextSymbol(function, i + length - 1, 'e')) // exp notation

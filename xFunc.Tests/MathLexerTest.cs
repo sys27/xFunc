@@ -2167,6 +2167,12 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void NumberFormatTest()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("0."));
+        }
+
     }
 
 }

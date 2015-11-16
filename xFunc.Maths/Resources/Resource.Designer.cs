@@ -97,6 +97,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The string &apos;{0}&apos; has an invalid format..
+        /// </summary>
+        internal static string FormatException {
+            get {
+                return ResourceManager.GetString("FormatException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; function not found..
         /// </summary>
         internal static string FunctionNotFoundExceptionError {

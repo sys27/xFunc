@@ -183,4 +183,7 @@
   <data name="NoElementInSource" xml:space="preserve">
     <value>Нет элементов в исходном списке.</value>
   </data>
+  <data name="FormatException" xml:space="preserve">
+    <value>Строка '{0}' имеет неправильный формат.</value>
+  </data>
 </root>

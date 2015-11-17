@@ -84,6 +84,8 @@ namespace xFunc.Views
                 }
                 catch (KeyNotFoundException)
                 {
+                    presenter.Remove(presenter.CountOfGraphs - 1);
+
                     Status = Resource.VariableNotFoundExceptionError;
                 }
                 catch (IndexOutOfRangeException)
@@ -96,6 +98,8 @@ namespace xFunc.Views
                 }
                 catch (NotSupportedException)
                 {
+                    presenter.Remove(presenter.CountOfGraphs - 1);
+
                     Status = Resource.NotSupportedOperationError;
                 }
 

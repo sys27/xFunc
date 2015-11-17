@@ -59,11 +59,26 @@ namespace xFunc.Presenters
             view.Graphs = listOfGraphs.AsReadOnly();
         }
 
+        public void Remove(int index)
+        {
+            listOfGraphs.RemoveAt(index);
+
+            view.Graphs = listOfGraphs.AsReadOnly();
+        }
+
         public void Clear()
         {
             listOfGraphs.Clear();
 
             view.Graphs = listOfGraphs.AsReadOnly();
+        }
+
+        public int CountOfGraphs
+        {
+            get
+            {
+                return listOfGraphs.Count;
+            }
         }
 
     }

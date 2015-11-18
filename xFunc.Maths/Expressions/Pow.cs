@@ -28,9 +28,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Pow"/> class.
         /// </summary>
-        /// <param name="firstOperand">The base.</param>
-        /// <param name="secondOperand">The exponent.</param>
-        public Pow(IExpression firstOperand, IExpression secondOperand) : base(firstOperand, secondOperand) { }
+        /// <param name="base">The base.</param>
+        /// <param name="exponent">The exponent.</param>
+        public Pow(IExpression @base, IExpression exponent) : base(@base, exponent) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

@@ -28,9 +28,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Div"/> class.
         /// </summary>
-        /// <param name="firstOperand">The first (left) operand.</param>
-        /// <param name="secondOperand">The second (right) operand.</param>
-        public Div(IExpression firstOperand, IExpression secondOperand) : base(firstOperand, secondOperand) { }
+        /// <param name="left">The first (left) operand.</param>
+        /// <param name="right">The second (right) operand.</param>
+        public Div(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Converts this expression to the equivalent string.

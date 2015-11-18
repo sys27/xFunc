@@ -28,8 +28,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The expression.</param>
-        public UnaryMinus(IExpression firstMathExpression) : base(firstMathExpression) { }
+        /// <param name="expression">The expression.</param>
+        public UnaryMinus(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

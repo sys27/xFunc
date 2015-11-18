@@ -28,9 +28,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Root"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The first operand.</param>
-        /// <param name="secondMathExpression">The second operand.</param>
-        public Root(IExpression firstMathExpression, IExpression secondMathExpression) : base(firstMathExpression, secondMathExpression) { }
+        /// <param name="radicand">The radicand.</param>
+        /// <param name="degree">The degree.</param>
+        public Root(IExpression radicand, IExpression degree) : base(radicand, degree) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

@@ -28,8 +28,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Exp"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Exp(IExpression firstMathExpression) : base(firstMathExpression) { }
+        /// <param name="expression">The argument of function.</param>
+        public Exp(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Converts this expression to the equivalent string.

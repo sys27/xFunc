@@ -28,10 +28,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="Not"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Not(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        public Not(IExpression expression)
+            : base(expression)
         {
 
         }

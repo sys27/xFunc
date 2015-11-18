@@ -28,9 +28,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Ln"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
+        /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Ln(IExpression firstMathExpression) : base(firstMathExpression) { }
+        public Ln(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

@@ -28,11 +28,11 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <summary>
         /// Initializes a new instance of the <see cref="XOr"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The left operand.</param>
-        /// <param name="secondMathExpression">The right operand.</param>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public XOr(IExpression firstMathExpression, IExpression secondMathExpression)
-            : base(firstMathExpression, secondMathExpression)
+        public XOr(IExpression left, IExpression right)
+            : base(left, right)
         {
 
         }

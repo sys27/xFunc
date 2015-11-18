@@ -29,9 +29,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Arsinh"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Arsinh(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Arsinh(IExpression expression)
+            : base(expression)
         {
 
         }

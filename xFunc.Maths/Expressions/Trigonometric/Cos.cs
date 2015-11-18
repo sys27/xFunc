@@ -29,8 +29,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Cos"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Cos(IExpression firstMathExpression) : base(firstMathExpression) { }
+        /// <param name="expression">The argument of function.</param>
+        public Cos(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

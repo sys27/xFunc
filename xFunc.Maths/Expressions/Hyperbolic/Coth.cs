@@ -29,9 +29,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Coth"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Coth(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Coth(IExpression expression)
+            : base(expression)
         {
 
         }

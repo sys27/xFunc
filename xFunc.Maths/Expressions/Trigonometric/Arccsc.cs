@@ -29,8 +29,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Arccsc"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Arccsc(IExpression firstMathExpression) : base(firstMathExpression) { }
+        /// <param name="expression">The argument of function.</param>
+        public Arccsc(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

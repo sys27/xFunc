@@ -29,9 +29,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Csc"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Csc(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Csc(IExpression expression)
+            : base(expression)
         {
         }
 

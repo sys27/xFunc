@@ -29,9 +29,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Sec"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Sec(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Sec(IExpression expression)
+            : base(expression)
         {
         }
 

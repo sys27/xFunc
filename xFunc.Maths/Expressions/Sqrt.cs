@@ -28,9 +28,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Sqrt"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of the function.</param>
+        /// <param name="expression">The argument of the function.</param>
         /// <seealso cref="IExpression"/>
-        public Sqrt(IExpression firstMathExpression) : base(firstMathExpression) { }
+        public Sqrt(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

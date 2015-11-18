@@ -29,8 +29,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="Tan"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Tan(IExpression firstMathExpression) : base(firstMathExpression) { }
+        /// <param name="expression">The argument of function.</param>
+        public Tan(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

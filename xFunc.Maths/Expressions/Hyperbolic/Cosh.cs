@@ -29,9 +29,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Cosh"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Cosh(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Cosh(IExpression expression)
+            : base(expression)
         {
 
         }

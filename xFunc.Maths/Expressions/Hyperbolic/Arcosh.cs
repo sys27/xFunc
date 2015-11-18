@@ -29,9 +29,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcosh"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The argument of function.</param>
-        public Arcosh(IExpression firstMathExpression)
-            : base(firstMathExpression)
+        /// <param name="expression">The argument of function.</param>
+        public Arcosh(IExpression expression)
+            : base(expression)
         {
 
         }

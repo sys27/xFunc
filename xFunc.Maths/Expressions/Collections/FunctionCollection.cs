@@ -65,7 +65,8 @@ namespace xFunc.Maths.Expressions.Collections
             get
             {
                 return base[key];
-            }set
+            }
+            set
             {
                 base[key] = value;
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
@@ -78,8 +79,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
-            if (CollectionChanged != null)
-                CollectionChanged(this, args);
+            CollectionChanged?.Invoke(this, args);
         }
 
         /// <summary>

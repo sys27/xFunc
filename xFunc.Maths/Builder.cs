@@ -227,6 +227,12 @@ namespace xFunc.Maths
             return Sub((IExpression)new Variable(subtrahend));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Mul"/> operation. The current state is used as factor.
+        /// </summary>
+        /// <param name="factor">The factor (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Mul(IExpression factor)
         {
             CheckCurrentExpression();
@@ -236,16 +242,34 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Mul"/> operation. The current state is used as factor.
+        /// </summary>
+        /// <param name="factor">The factor (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Mul(double factor)
         {
             return Mul((IExpression)new Number(factor));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Mul"/> operation. The current state is used as factor.
+        /// </summary>
+        /// <param name="factor">The factor (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Mul(string factor)
         {
             return Mul((IExpression)new Variable(factor));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Div"/> operation. The current state is used as numerator.
+        /// </summary>
+        /// <param name="denominator">The denominator (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Div(IExpression denominator)
         {
             CheckCurrentExpression();
@@ -255,16 +279,34 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Div"/> operation. The current state is used as numerator.
+        /// </summary>
+        /// <param name="denominator">The denominator (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Div(double denominator)
         {
             return Div((IExpression)new Number(denominator));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Div"/> operation. The current state is used as numerator.
+        /// </summary>
+        /// <param name="denominator">The denominator (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Div(string denominator)
         {
             return Div((IExpression)new Variable(denominator));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Pow"/> operation. The current state is used as base of power.
+        /// </summary>
+        /// <param name="exponent">The exponent (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Pow(IExpression exponent)
         {
             CheckCurrentExpression();
@@ -274,16 +316,33 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Pow"/> operation. The current state is used as base of power.
+        /// </summary>
+        /// <param name="exponent">The exponent (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Pow(double exponent)
         {
             return Pow((IExpression)new Number(exponent));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Pow"/> operation. The current state is used as base of power.
+        /// </summary>
+        /// <param name="exponent">The exponent (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Pow(string exponent)
         {
             return Pow((IExpression)new Variable(exponent));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Sqrt"/> function. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sqrt()
         {
             CheckCurrentExpression();
@@ -293,6 +352,12 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Root"/> operation. The current state is used as radicand.
+        /// </summary>
+        /// <param name="degree">The degree (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Root(IExpression degree)
         {
             CheckCurrentExpression();
@@ -302,16 +367,33 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Root"/> operation. The current state is used as radicand.
+        /// </summary>
+        /// <param name="degree">The degree (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Root(double degree)
         {
             return Root((IExpression)new Number(degree));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Root"/> operation. The current state is used as radicand.
+        /// </summary>
+        /// <param name="degree">The degree (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Root(string degree)
         {
             return Root((IExpression)new Variable(degree));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Abs"/> function. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Abs()
         {
             CheckCurrentExpression();
@@ -321,6 +403,12 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Log"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <param name="base">The base (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Log(IExpression @base)
         {
             CheckCurrentExpression();
@@ -330,16 +418,33 @@ namespace xFunc.Maths
             return this;
         }
 
-        public Builder Log(double number)
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Log"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <param name="base">The base (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        public Builder Log(double @base)
         {
-            return Log((IExpression)new Number(number));
+            return Log((IExpression)new Number(@base));
         }
 
-        public Builder Log(string variable)
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Log"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <param name="base">The base (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        public Builder Log(string @base)
         {
-            return Log((IExpression)new Variable(variable));
+            return Log((IExpression)new Variable(@base));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Ln"/> function. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Ln()
         {
             CheckCurrentExpression();
@@ -349,6 +454,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Lg"/> function. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Lg()
         {
             CheckCurrentExpression();

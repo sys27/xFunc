@@ -153,6 +153,12 @@ namespace xFunc.Maths
 
         #region Standart
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Add"/> operation. The current state is used as summand.
+        /// </summary>
+        /// <param name="summand">The summand (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Add(IExpression summand)
         {
             CheckCurrentExpression();
@@ -162,16 +168,34 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Add"/> operation. The current state is used as summand.
+        /// </summary>
+        /// <param name="summand">The summand (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Add(double summand)
         {
             return Add((IExpression)new Number(summand));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Add"/> operation. The current state is used as summand.
+        /// </summary>
+        /// <param name="summand">The summand (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Add(string summand)
         {
             return Add((IExpression)new Variable(summand));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Sub"/> operation. The current state is used as minuend.
+        /// </summary>
+        /// <param name="subtrahend">The subtrahend (expression).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sub(IExpression subtrahend)
         {
             CheckCurrentExpression();
@@ -181,11 +205,23 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Sub"/> operation. The current state is used as minuend.
+        /// </summary>
+        /// <param name="subtrahend">The subtrahend (number).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sub(double subtrahend)
         {
             return Sub((IExpression)new Number(subtrahend));
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Sub"/> operation. The current state is used as minuend.
+        /// </summary>
+        /// <param name="subtrahend">The subtrahend (variable).</param>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sub(string subtrahend)
         {
             return Sub((IExpression)new Variable(subtrahend));

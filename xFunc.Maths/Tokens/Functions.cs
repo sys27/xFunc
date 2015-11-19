@@ -92,6 +92,10 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Lg,
         /// <summary>
+        /// Lb
+        /// </summary>
+        Lb,
+        /// <summary>
         /// Log
         /// </summary>
         Log,

@@ -178,6 +178,8 @@ namespace xFunc.Maths
                     return new Ln();
                 case Functions.Lg:
                     return new Lg();
+                case Functions.Lb:
+                    return new Lb();
                 case Functions.Log:
                     return new Log();
                 case Functions.Sineh:

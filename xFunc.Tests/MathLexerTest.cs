@@ -816,6 +816,18 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void Lb()
+        {
+            FuncTest("lb", Functions.Lb);
+        }
+
+        [Fact]
+        public void Log2()
+        {
+            FuncTest("log2", Functions.Lb);
+        }
+
+        [Fact]
         public void Log()
         {
             var tokens = lexer.Tokenize("log(2, 2)");

@@ -790,6 +790,20 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("lb("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Lb));
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("log2("))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Lb));
+                        i += 4;
+
+                        continue;
+                    }
                     if (sub.StartsWith("log("))
                     {
                         tokens.Add(new FunctionToken(Functions.Log));

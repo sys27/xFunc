@@ -468,6 +468,20 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Lb"/> function. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        public Builder Lb()
+        {
+            CheckCurrentExpression();
+
+            current = new Lb(current);
+
+            return this;
+        }
+
         #endregion Standart
 
         #region Trigonometric

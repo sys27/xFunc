@@ -100,6 +100,7 @@
     <Compile Include="Expressions\Maths\Hyperbolic\HyperbolicTangentTest.cs" />
     <Compile Include="Expressions\Maths\LCMTest.cs" />
     <Compile Include="Expressions\Maths\LgTest.cs" />
+    <Compile Include="Expressions\Maths\LbTest.cs" />
     <Compile Include="Expressions\Maths\LnTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\AndTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\EqualityTest.cs" />

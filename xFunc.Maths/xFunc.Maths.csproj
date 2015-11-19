@@ -65,6 +65,7 @@
     <Compile Include="Expressions\Collections\ParameterCollection.cs" />
     <Compile Include="Expressions\Collections\ParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\Collections\ParameterType.cs" />
+    <Compile Include="Expressions\Lb.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Equality.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Implication.cs" />

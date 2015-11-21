@@ -13,46 +13,29 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
-using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
     
     public class ImplicationTest
     {
 
-        private Parser parser;
-        
-        public ImplicationTest()
+        [Fact]
+        public void CalculateTest1()
         {
-            parser = new Parser();
+            var impl = new Implication(new Bool(true), new Bool(false));
+
+            Assert.Equal(false, impl.Calculate());
         }
 
         [Fact]
-        public void CalculateTest()
+        public void CalculateTest2()
         {
-            var exp = parser.Parse("a -> b");
-            var parameters = new ParameterCollection();
-            parameters.Add("a");
-            parameters.Add("b");
+            var impl = new Implication(new Bool(true), new Bool(true));
 
-            parameters["a"] = true;
-            parameters["b"] = true;
-            Assert.True((bool)exp.Calculate(parameters));
-
-            parameters["a"] = true;
-            parameters["b"] = false;
-            Assert.False((bool)exp.Calculate(parameters));
-
-            parameters["a"] = false;
-            parameters["b"] = true;
-            Assert.True((bool)exp.Calculate(parameters));
-
-            parameters["a"] = false;
-            parameters["b"] = false;
-            Assert.True((bool)exp.Calculate(parameters));
+            Assert.Equal(true, impl.Calculate());
         }
 
     }

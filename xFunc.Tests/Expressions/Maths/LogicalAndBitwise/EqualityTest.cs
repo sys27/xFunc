@@ -13,46 +13,30 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
-using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
     
     public class EqualityTest
     {
 
-        private Parser parser;
-        
-        public EqualityTest()
+        [Fact]
+        public void CalculateTest1()
         {
-            parser = new Parser();
+            var eq = new Equality(new Bool(true), new Bool(true));
+
+            Assert.Equal(true, eq.Calculate());
         }
 
         [Fact]
-        public void CalculateTest()
+        public void CalculateTest2()
         {
-            var exp = parser.Parse("a <=> b");
-            var parameters = new ParameterCollection();
-            parameters.Add("a");
-            parameters.Add("b");
+            var eq = new Equality(new Bool(true), new Bool(false));
 
-            parameters["a"] = true;
-            parameters["b"] = true;
-            Assert.True((bool)exp.Calculate(parameters));
-
-            parameters["a"] = true;
-            parameters["b"] = false;
-            Assert.False((bool)exp.Calculate(parameters));
-
-            parameters["a"] = false;
-            parameters["b"] = true;
-            Assert.False((bool)exp.Calculate(parameters));
-
-            parameters["a"] = false;
-            parameters["b"] = false;
-            Assert.True((bool)exp.Calculate(parameters));
+            Assert.Equal(false, eq.Calculate());
         }
 
     }

@@ -13,46 +13,30 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
-using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
     
     public class NAndTest
     {
 
-        private Parser parser;
-        
-        public NAndTest()
+        [Fact]
+        public void CalculateTest1()
         {
-            parser = new Parser();
+            var nand = new NAnd(new Bool(true), new Bool(true));
+
+            Assert.Equal(false, nand.Calculate());
         }
 
         [Fact]
-        public void CalculateTest()
+        public void CalculateTest2()
         {
-            var exp = parser.Parse("a nand b");
-            var parameters = new ParameterCollection();
-            parameters.Add("a");
-            parameters.Add("b");
+            var nand = new NAnd(new Bool(false), new Bool(true));
 
-            parameters["a"] = true;
-            parameters["b"] = true;
-            Assert.False((bool)exp.Calculate(parameters));
-
-            parameters["a"] = true;
-            parameters["b"] = false;
-            Assert.True((bool)exp.Calculate(parameters));
-
-            parameters["a"] = false;
-            parameters["b"] = true;
-            Assert.True((bool)exp.Calculate(parameters));
-
-            parameters["a"] = false;
-            parameters["b"] = false;
-            Assert.True((bool)exp.Calculate(parameters));
+            Assert.Equal(true, nand.Calculate());
         }
 
     }

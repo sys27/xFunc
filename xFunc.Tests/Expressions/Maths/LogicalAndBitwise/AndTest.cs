@@ -13,47 +13,48 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
-using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
     
     public class AndTest
     {
-
-        private Parser parser;
         
-        public AndTest()
+        [Fact]
+        public void CalculateTest1()
         {
-            parser = new Parser();
+            var exp = new And(new Number(1), new Number(3));
+
+            Assert.Equal(1.0, exp.Calculate());
         }
 
         [Fact]
-        public void CalculateTest()
+        public void CalculateTest2()
         {
-            var exp = parser.Parse("a & b");
-            var parameters = new ParameterCollection();
-            parameters.Add("a");
-            parameters.Add("b");
+            var exp = new And(new Number(1.5), new Number(2.5));
 
-            parameters["a"] = true;
-            parameters["b"] = true;
-            Assert.True((bool)exp.Calculate(parameters));
+            Assert.Equal(2.0, exp.Calculate());
+        }
 
-            parameters["a"] = true;
-            parameters["b"] = false;
-            Assert.False((bool)exp.Calculate(parameters));
+        [Fact]
+        public void CalculateTest3()
+        {
+            var exp = new And(new Bool(true), new Bool(false));
 
-            parameters["a"] = false;
-            parameters["b"] = true;
-            Assert.False((bool)exp.Calculate(parameters));
+            Assert.Equal(false, exp.Calculate());
+        }
 
-            parameters["a"] = false;
-            parameters["b"] = false;
-            Assert.False((bool)exp.Calculate(parameters));
+        [Fact]
+        public void CalculateTest4()
+        {
+            var exp = new And(new Bool(true), new Bool(true));
+
+            Assert.Equal(true, exp.Calculate());
         }
 
     }
+
 }

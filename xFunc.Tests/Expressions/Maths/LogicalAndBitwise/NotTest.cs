@@ -13,35 +13,38 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
-using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
     
     public class NotTest
     {
-
-        private Parser parser;
         
-        public NotTest()
+        [Fact]
+        public void CalculateTest1()
         {
-            parser = new Parser();
+            var exp = new Not(new Number(2));
+
+            Assert.Equal(-3.0, exp.Calculate());
         }
 
         [Fact]
-        public void CalculateTest()
+        public void CalculateTest2()
         {
-            var exp = parser.Parse("~a");
-            var parameters = new ParameterCollection();
-            parameters.Add("a");
+            var exp = new Not(new Number(2.5));
 
-            parameters["a"] = true;
-            Assert.False((bool)exp.Calculate(parameters));
+            Assert.Equal(-4.0, exp.Calculate());
+        }
 
-            parameters["a"] = false;
-            Assert.True((bool)exp.Calculate(parameters));
+        [Fact]
+        public void CalculateTest3()
+        {
+            var exp = new Not(new Bool(true));
+
+            Assert.Equal(false, exp.Calculate());
         }
 
     }

@@ -13,46 +13,46 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
-using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
     
     public class XOrTest
     {
 
-        private Parser parser;
-        
-        public XOrTest()
+        [Fact]
+        public void CalculateTest1()
         {
-            parser = new Parser();
+            IExpression exp = new XOr(new Number(1), new Number(2));
+
+            Assert.Equal(3.0, exp.Calculate());
         }
 
         [Fact]
-        public void CalculateTest()
+        public void CalculateTest2()
         {
-            var exp = parser.Parse("a xor b");
-            var parameters = new ParameterCollection();
-            parameters.Add("a");
-            parameters.Add("b");
+            IExpression exp = new XOr(new Number(1), new Number(2.5));
 
-            parameters["a"] = true;
-            parameters["b"] = true;
-            Assert.False((bool)exp.Calculate(parameters));
+            Assert.Equal(2.0, exp.Calculate());
+        }
 
-            parameters["a"] = true;
-            parameters["b"] = false;
-            Assert.True((bool)exp.Calculate(parameters));
+        [Fact]
+        public void CalculateTest3()
+        {
+            var exp = new XOr(new Bool(true), new Bool(true));
 
-            parameters["a"] = false;
-            parameters["b"] = true;
-            Assert.True((bool)exp.Calculate(parameters));
+            Assert.Equal(false, exp.Calculate());
+        }
 
-            parameters["a"] = false;
-            parameters["b"] = false;
-            Assert.False((bool)exp.Calculate(parameters));
+        [Fact]
+        public void CalculateTest4()
+        {
+            var exp = new XOr(new Bool(false), new Bool(true));
+
+            Assert.Equal(true, exp.Calculate());
         }
 
     }

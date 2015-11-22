@@ -693,6 +693,7 @@ namespace xFunc.Views
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
                 Settings.Default.SaveUserFunction = settingsView.SaveUserFunctions;
                 Settings.Default.CheckUpdates = settingsView.CheckUpdates;
+                Settings.Default.SaveDump = settingsView.SaveDump;
 
                 Settings.Default.Save();
             }

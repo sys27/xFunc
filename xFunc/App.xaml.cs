@@ -26,7 +26,11 @@ namespace xFunc
 
         public App()
         {
-            AppDomain.CurrentDomain.UnhandledException += (obj, args) => MiniDump.CreateMiniDump();
+            AppDomain.CurrentDomain.UnhandledException += (obj, args) =>
+            {
+                if (Settings.Default.SaveDump)
+                    MiniDump.CreateMiniDump();
+            };
         }
 
         protected override void OnStartup(StartupEventArgs e)

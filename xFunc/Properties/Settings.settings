@@ -110,5 +110,8 @@
     <Setting Name="OutputFormat" Type="xFunc.Presenters.OutputFormats" Scope="User">
       <Value Profile="(Default)">Auto</Value>
     </Setting>
+    <Setting Name="SaveDump" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

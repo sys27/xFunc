@@ -765,4 +765,7 @@
   <data name="DocumentationTextBox" xml:space="preserve">
     <value>Документация:</value>
   </data>
+  <data name="SettingsSaveDump" xml:space="preserve">
+    <value>Сохранить дамп-файл после ошибки в программе.</value>
+  </data>
 </root>

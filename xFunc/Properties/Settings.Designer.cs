@@ -453,5 +453,17 @@ namespace xFunc.Properties {
                 this["OutputFormat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveDump {
+            get {
+                return ((bool)(this["SaveDump"]));
+            }
+            set {
+                this["SaveDump"] = value;
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ limitations under the License. -->
         xmlns:views="clr-namespace:xFunc.Views"
         xmlns:maths="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
         xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
-        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="316"
+        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="336"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
         <conv:InverseBooleanConverter x:Key="inverseBooleanConverter" />
@@ -79,6 +79,7 @@ limitations under the License. -->
 
         <CheckBox x:Name="saveUserFuncCheckBox" Content="{x:Static res:Resource.SettingsSaveUF}" Margin="10,202.9,10,0" VerticalAlignment="Top" IsChecked="True" />
         <CheckBox x:Name="updatesCheckBox" Content="{x:Static res:Resource.SettingsCheckUpdates}" Margin="10,223,10,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,243,10,0" VerticalAlignment="Top" IsChecked="False" />
 
         <Grid Grid.Row="1" Background="#FFEFEFEF" Height="39">
             <Button Content="{x:Static res:Resource.SettingsReset}" HorizontalAlignment="Left" Margin="10,10,0,8" Padding="8,0,8,0" MinWidth="75" Command="views:SettingsView.ResetCommand" />

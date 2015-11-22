@@ -49,6 +49,7 @@ namespace xFunc.Views
             MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
             SaveUserFunctions = Settings.Default.SaveUserFunction;
             CheckUpdates = Settings.Default.CheckUpdates;
+            SaveDump = Settings.Default.SaveDump;
         }
 
         private void OKCommand_Execute(object o, ExecutedRoutedEventArgs args)
@@ -175,6 +176,18 @@ namespace xFunc.Views
             internal set
             {
                 this.updatesCheckBox.IsChecked = value;
+            }
+        }
+
+        public bool SaveDump
+        {
+            get
+            {
+                return this.saveDumpCheckBox.IsChecked.Value;
+            }
+            internal set
+            {
+                this.saveDumpCheckBox.IsChecked = value;
             }
         }
 

@@ -1645,6 +1645,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save the dump file after crash..
+        /// </summary>
+        public static string SettingsSaveDump {
+            get {
+                return ResourceManager.GetString("SettingsSaveDump", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save user functions..
         /// </summary>
         public static string SettingsSaveUF {

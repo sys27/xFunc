@@ -486,6 +486,11 @@ namespace xFunc.Maths
 
         #region Trigonometric
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Sin"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sin()
         {
             CheckCurrentExpression();
@@ -495,6 +500,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Cos"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Cos()
         {
             CheckCurrentExpression();
@@ -504,6 +514,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Tan"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Tan()
         {
             CheckCurrentExpression();
@@ -513,6 +528,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Cot"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Cot()
         {
             CheckCurrentExpression();
@@ -522,6 +542,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Sec"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sec()
         {
             CheckCurrentExpression();
@@ -531,6 +556,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Csc"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Csc()
         {
             CheckCurrentExpression();
@@ -540,6 +570,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arcsin"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arcsin()
         {
             CheckCurrentExpression();
@@ -549,6 +584,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arccos"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arccos()
         {
             CheckCurrentExpression();
@@ -558,6 +598,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arctan"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arctan()
         {
             CheckCurrentExpression();
@@ -567,6 +612,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arccot"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arccot()
         {
             CheckCurrentExpression();
@@ -576,6 +626,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arcsec"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arcsec()
         {
             CheckCurrentExpression();
@@ -585,6 +640,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arccsc"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arccsc()
         {
             CheckCurrentExpression();
@@ -598,6 +658,11 @@ namespace xFunc.Maths
 
         #region Hyperbolic
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Sinh"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sinh()
         {
             CheckCurrentExpression();
@@ -607,6 +672,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Cosh"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Cosh()
         {
             CheckCurrentExpression();
@@ -616,6 +686,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Tanh"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Tanh()
         {
             CheckCurrentExpression();
@@ -625,6 +700,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Coth"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Coth()
         {
             CheckCurrentExpression();
@@ -634,6 +714,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Sech"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sech()
         {
             CheckCurrentExpression();
@@ -643,6 +728,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Csch"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Csch()
         {
             CheckCurrentExpression();
@@ -652,6 +742,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arsinh"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arsinh()
         {
             CheckCurrentExpression();
@@ -661,6 +756,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcosh"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arcosh()
         {
             CheckCurrentExpression();
@@ -670,6 +770,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Artanh"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Artanh()
         {
             CheckCurrentExpression();
@@ -679,6 +784,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcoth"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arcoth()
         {
             CheckCurrentExpression();
@@ -688,6 +798,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arsech"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arsech()
         {
             CheckCurrentExpression();
@@ -697,6 +812,11 @@ namespace xFunc.Maths
             return this;
         }
 
+        /// <summary>
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcsch"/> operation. The current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Arcsch()
         {
             CheckCurrentExpression();

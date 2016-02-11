@@ -94,6 +94,10 @@ namespace xFunc.Views
                 {
                     MessageBox.Show(this, mpiroe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+                catch (ParameterTypeMismatchException ptme)
+                {
+                    MessageBox.Show(this, ptme.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 catch (ArgumentNullException ane)
                 {
                     MessageBox.Show(this, ane.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -135,6 +139,10 @@ namespace xFunc.Views
                 catch (ParameterIsReadOnlyException mpiroe)
                 {
                     MessageBox.Show(this, mpiroe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                catch (ParameterTypeMismatchException ptme)
+                {
+                    MessageBox.Show(this, ptme.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 catch (ArgumentNullException ane)
                 {

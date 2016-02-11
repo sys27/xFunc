@@ -175,7 +175,7 @@
     <value>Змінна '{0}' не знайдена.</value>
   </data>
   <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
-    <value>Невідповідний тип параметра. (Очікується: {0}; Фактично: {1})</value>
+    <value>Невідповідний тип параметра (Очікується: {0}; Фактично: {1}).</value>
   </data>
   <data name="InvalidInFirst" xml:space="preserve">
     <value>Жоден елемент не задовольняє умові предиката або початкова послідовність порожня.</value>

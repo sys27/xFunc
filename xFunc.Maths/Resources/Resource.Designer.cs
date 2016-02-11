@@ -214,7 +214,7 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter type mismatch. (Expected: {0}; Actual: {1}).
+        ///   Looks up a localized string similar to Parameter type mismatch (Expected: {0}; Actual: {1})..
         /// </summary>
         internal static string ParameterTypeMismatchExceptionError {
             get {

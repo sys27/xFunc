@@ -31,7 +31,6 @@ namespace xFunc.Maths
     {
 
         private ILexer lexer;
-        private ISimplifier simplifier;
         private IExpressionFactory factory;
 
         private bool saveLastExpression = true;
@@ -42,7 +41,7 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="ILexer"/>, <see cref="ISimplifier"/> and <see cref="IExpressionFactory"/>.
         /// </summary>
         public Parser()
-            : this(new Lexer(), new Simplifier(), new ExpressionFactory())
+            : this(new Lexer(), new ExpressionFactory())
         {
         }
 
@@ -52,99 +51,10 @@ namespace xFunc.Maths
         /// <param name="lexer">The lexer.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="factory">The factory.</param>
-        public Parser(ILexer lexer, ISimplifier simplifier, IExpressionFactory factory)
+        public Parser(ILexer lexer, IExpressionFactory factory)
         {
             this.lexer = lexer;
-            this.simplifier = simplifier;
             this.factory = factory;
-        }
-
-        /// <summary>
-        /// Checks the <paramref name="expression"/> parameter has <paramref name="arg"/>.
-        /// </summary>
-        /// <param name="expression">A expression that is checked.</param>
-        /// <param name="arg">A variable that can be contained in the expression.</param>
-        /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
-        public static bool HasVar(IExpression expression, Variable arg)
-        {
-            var bin = expression as BinaryExpression;
-            if (bin != null)
-                return HasVar(bin.Left, arg) || HasVar(bin.Right, arg);
-
-            var un = expression as UnaryExpression;
-            if (un != null)
-                return HasVar(un.Argument, arg);
-
-            var paramExp = expression as DifferentParametersExpression;
-            if (paramExp != null)
-                return paramExp.Arguments.Any(e => HasVar(e, arg));
-
-            return expression is Variable && expression.Equals(arg);
-        }
-
-        /// <summary>
-        /// Gets parameters of expression.
-        /// </summary>
-        /// <param name="function">The function.</param>
-        /// <returns>A collection of parameters.</returns>
-        public ParameterCollection GetParameters(string function)
-        {
-            var tokens = lexer.Tokenize(function);
-#if PORTABLE
-            var c = new List<Parameter>();
-#else
-            var c = new SortedSet<Parameter>();
-#endif
-
-            foreach (var token in tokens)
-            {
-                var @var = token as VariableToken;
-                if (@var != null)
-                    c.Add(new Parameter(@var.Variable, false));
-            }
-#if PORTABLE
-            c.Sort();
-#endif
-
-            return new ParameterCollection(c, false);
-        }
-
-        /// <summary>
-        /// Converts the logic expression to collection.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <returns>The collection of expression parts.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="expression"/> variable is null.</exception>
-        public IEnumerable<IExpression> ConvertExpressionToCollection(IExpression expression)
-        {
-            if (expression == null)
-                throw new ArgumentNullException(nameof(expression));
-
-            var collection = new List<IExpression>();
-            ConvertToColletion(expression, collection);
-
-            return collection;
-        }
-
-        private void ConvertToColletion(IExpression expression, List<IExpression> collection)
-        {
-            if (expression is UnaryExpression)
-            {
-                var un = expression as UnaryExpression;
-                ConvertToColletion(un.Argument, collection);
-            }
-            else if (expression is BinaryExpression)
-            {
-                var bin = expression as BinaryExpression;
-                ConvertToColletion(bin.Left, collection);
-                ConvertToColletion(bin.Right, collection);
-            }
-            else if (expression is Variable)
-            {
-                return;
-            }
-
-            collection.Add(expression);
         }
 
         /// <summary>
@@ -351,21 +261,6 @@ namespace xFunc.Maths
             set
             {
                 lexer = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or Sets a implementation of <see cref="ISimplifier"/>.
-        /// </summary>
-        public ISimplifier Simplifier
-        {
-            get
-            {
-                return simplifier;
-            }
-            set
-            {
-                simplifier = value;
             }
         }
 

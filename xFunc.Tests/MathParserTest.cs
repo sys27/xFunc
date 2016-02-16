@@ -36,14 +36,14 @@ namespace xFunc.Tests
         {
             lexer = new MathLexerMock();
             var simplifier = new Simplifier();
-            parser = new Parser(lexer, simplifier, new ExpressionFactory());
+            parser = new Parser(lexer, new ExpressionFactory());
         }
 
         [Fact]
         public void HasVarTest1()
         {
             var exp = new Sin(new Mul(new Number(2), new Variable("x")));
-            bool expected = Parser.HasVar(exp, new Variable("x"));
+            bool expected = Helpers.HasVar(exp, new Variable("x"));
 
             Assert.Equal(expected, true);
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests
         public void HasVarTest2()
         {
             var exp = new Sin(new Mul(new Number(2), new Number(3)));
-            bool expected = Parser.HasVar(exp, new Variable("x"));
+            bool expected = Helpers.HasVar(exp, new Variable("x"));
 
             Assert.Equal(expected, false);
         }
@@ -61,7 +61,7 @@ namespace xFunc.Tests
         public void HasVarDiffTest1()
         {
             var exp = new GCD(new IExpression[] { new Variable("x"), new Number(2), new Number(4) }, 3);
-            var expected = Parser.HasVar(exp, new Variable("x"));
+            var expected = Helpers.HasVar(exp, new Variable("x"));
 
             Assert.Equal(expected, true);
         }
@@ -70,7 +70,7 @@ namespace xFunc.Tests
         public void HasVarDiffTest2()
         {
             var exp = new GCD(new IExpression[] { new Variable("y"), new Number(2), new Number(4) }, 3);
-            var expected = Parser.HasVar(exp, new Variable("x"));
+            var expected = Helpers.HasVar(exp, new Variable("x"));
 
             Assert.Equal(expected, false);
         }
@@ -1033,8 +1033,8 @@ namespace xFunc.Tests
         [Fact]
         public void GetLogicParametersTest()
         {
-            string function = "a | b & c & (a | c)";
-            lexer.Tokens = new List<IToken>
+            //string function = "a | b & c & (a | c)";
+            var tokens=  new List<IToken>
             {
                 new VariableToken("a"),
                 new OperationToken(Operations.Or),
@@ -1048,6 +1048,7 @@ namespace xFunc.Tests
                 new VariableToken("c"),
                 new SymbolToken(Symbols.CloseBracket)
             };
+            lexer.Tokens = tokens;
             var expected = new ParameterCollection(false)
             {
                 new Parameter("a", false),
@@ -1055,7 +1056,7 @@ namespace xFunc.Tests
                 new Parameter("c", false)
             };
 
-            var actual = parser.GetParameters(function);
+            var actual = Helpers.GetParameters(tokens);
 
 
             Assert.Equal(expected, actual);
@@ -1065,7 +1066,7 @@ namespace xFunc.Tests
         public void ConvertLogicExpressionToColletionTest()
         {
             var exp = new Implication(new Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
-            var actual = new List<IExpression>(parser.ConvertExpressionToCollection(exp));
+            var actual = new List<IExpression>(Helpers.ConvertExpressionToCollection(exp));
 
             Assert.Equal(3, actual.Count);
         }
@@ -1073,7 +1074,7 @@ namespace xFunc.Tests
         [Fact]
         public void ConvertLogicExpressionToColletionNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => parser.ConvertExpressionToCollection(null));
+            Assert.Throws<ArgumentNullException>(() => Helpers.ConvertExpressionToCollection(null));
         }
 
     }

@@ -43,7 +43,7 @@ namespace xFunc.Maths
             lexer = new Lexer();
             simplifier = new Simplifier();
             differentiator = new Differentiator(simplifier);
-            parser = new Parser(lexer, simplifier, new ExpressionFactory());
+            parser = new Parser(lexer, new ExpressionFactory());
 
             parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
             numeralSystem = NumeralSystem.Decimal;
@@ -73,7 +73,7 @@ namespace xFunc.Maths
             this.lexer = lexer;
             this.simplifier = simplifier;
             this.differentiator = differentiator;
-            this.parser = new Parser(lexer, simplifier, factory);
+            this.parser = new Parser(lexer, factory);
 
             this.parameters = parameters;
             this.numeralSystem = NumeralSystem.Decimal;

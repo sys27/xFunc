@@ -49,8 +49,8 @@ namespace xFunc.Presenters
             if (!expression.ResultType.HasFlagNI(ExpressionResultType.Boolean))
                 throw new NotSupportedException();
 
-            expressions = parser.ConvertExpressionToCollection(expression);
-            parameters = parser.GetParameters(strExp);
+            expressions = Helpers.ConvertExpressionToCollection(expression);
+            parameters = Helpers.GetParameters(parser.Lexer.Tokenize(strExp));
             table = new List<TruthTableRowViewModel>();
 
             var parametersCount = parameters.Count();

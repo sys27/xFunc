@@ -85,7 +85,7 @@ namespace xFunc.Maths
             if (variable == null)
                 throw new ArgumentNullException(nameof(variable));
 
-            if (!Parser.HasVar(expression, variable))
+            if (!Helpers.HasVar(expression, variable))
                 return new Number(0);
 
             var deriv = expression as Derivative;
@@ -284,8 +284,8 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Add(Add expression, Variable variable)
         {
-            var first = Parser.HasVar(expression.Left, variable);
-            var second = Parser.HasVar(expression.Right, variable);
+            var first = Helpers.HasVar(expression.Left, variable);
+            var second = Helpers.HasVar(expression.Right, variable);
 
             if (first && second)
                 return new Add(_Differentiate(expression.Left.Clone(), variable), _Differentiate(expression.Right.Clone(), variable));
@@ -305,8 +305,8 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Div(Div expression, Variable variable)
         {
-            var first = Parser.HasVar(expression.Left, variable);
-            var second = Parser.HasVar(expression.Right, variable);
+            var first = Helpers.HasVar(expression.Left, variable);
+            var second = Helpers.HasVar(expression.Right, variable);
 
             if (first && second)
             {
@@ -380,7 +380,7 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Log(Log expression, Variable variable)
         {
-            if (Parser.HasVar(expression.Left, variable))
+            if (Helpers.HasVar(expression.Left, variable))
             {
                 var ln1 = new Ln(expression.Right.Clone());
                 var ln2 = new Ln(expression.Left.Clone());
@@ -389,7 +389,7 @@ namespace xFunc.Maths
                 return Div(div, variable);
             }
 
-            // if (Parser.HasVar(expression.Right, variable))
+            // if (Helpers.HasVar(expression.Right, variable))
             var ln = new Ln(expression.Left.Clone());
             var mul = new Mul(expression.Right.Clone(), ln);
             var div2 = new Div(_Differentiate(expression.Right.Clone(), variable), mul);
@@ -405,8 +405,8 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Mul(Mul expression, Variable variable)
         {
-            var first = Parser.HasVar(expression.Left, variable);
-            var second = Parser.HasVar(expression.Right, variable);
+            var first = Helpers.HasVar(expression.Left, variable);
+            var second = Helpers.HasVar(expression.Right, variable);
 
             if (first && second)
             {
@@ -433,7 +433,7 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Pow(Pow expression, Variable variable)
         {
-            if (Parser.HasVar(expression.Left, variable))
+            if (Helpers.HasVar(expression.Left, variable))
             {
                 var sub = new Sub(expression.Right.Clone(), new Number(1));
                 var inv = new Pow(expression.Left.Clone(), sub);
@@ -443,7 +443,7 @@ namespace xFunc.Maths
                 return mul2;
             }
 
-            // if (Parser.HasVar(expression.Right, variable))
+            // if (Helpers.HasVar(expression.Right, variable))
             var ln = new Ln(expression.Left.Clone());
             var mul3 = new Mul(ln, expression.Clone());
             var mul4 = new Mul(mul3, _Differentiate(expression.Right.Clone(), variable));
@@ -487,8 +487,8 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         protected virtual IExpression Sub(Sub expression, Variable variable)
         {
-            var first = Parser.HasVar(expression.Left, variable);
-            var second = Parser.HasVar(expression.Right, variable);
+            var first = Helpers.HasVar(expression.Left, variable);
+            var second = Helpers.HasVar(expression.Right, variable);
 
             if (first && second)
                 return new Sub(_Differentiate(expression.Left.Clone(), variable), _Differentiate(expression.Right.Clone(), variable));

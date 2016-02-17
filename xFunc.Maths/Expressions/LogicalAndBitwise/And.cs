@@ -69,16 +69,19 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Calculate(ExpressionParameters parameters)
         {
+            var left = m_left.Calculate(parameters);
+            var right = m_right.Calculate(parameters);
+
 #if PORTABLE
-            if (ResultType.HasFlagNI(ExpressionResultType.Number))
-                return (double)((int)Math.Round((double)m_left.Calculate(parameters)) & (int)Math.Round((double)m_right.Calculate(parameters)));
+            if (left is bool && right is bool)
+                return (bool)left & (bool)right;
             else
-                return (bool)m_left.Calculate(parameters) & (bool)m_right.Calculate(parameters);
+                return (double)((int)Math.Round((double)left) & (int)Math.Round((double)right));
 #else
-            if (ResultType.HasFlagNI(ExpressionResultType.Number))
-                return (double)((int)Math.Round((double)m_left.Calculate(parameters), MidpointRounding.AwayFromZero) & (int)Math.Round((double)m_right.Calculate(parameters), MidpointRounding.AwayFromZero));
+            if (left is bool && right is bool)
+                return (bool)left & (bool)right;
             else
-                return (bool)m_left.Calculate(parameters) & (bool)m_right.Calculate(parameters);
+                return (double)((int)Math.Round((double)left, MidpointRounding.AwayFromZero) & (int)Math.Round((double)right, MidpointRounding.AwayFromZero));
 #endif
         }
 

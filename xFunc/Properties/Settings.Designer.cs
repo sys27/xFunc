@@ -465,5 +465,17 @@ namespace xFunc.Properties {
                 this["SaveDump"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF0000")]
+        public global::System.Windows.Media.Color DefaultChartColor {
+            get {
+                return ((global::System.Windows.Media.Color)(this["DefaultChartColor"]));
+            }
+            set {
+                this["DefaultChartColor"] = value;
+            }
+        }
     }
 }

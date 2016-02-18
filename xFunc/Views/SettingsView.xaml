@@ -18,9 +18,10 @@ limitations under the License. -->
         xmlns:res="clr-namespace:xFunc.Resources"
         xmlns:conv="clr-namespace:xFunc.Converters"
         xmlns:views="clr-namespace:xFunc.Views"
+        xmlns:fluent="urn:fluent-ribbon"
         xmlns:maths="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
         xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
-        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="336"
+        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="358"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
         <conv:InverseBooleanConverter x:Key="inverseBooleanConverter" />
@@ -29,7 +30,7 @@ limitations under the License. -->
         <CommandBinding Command="views:SettingsView.OKCommand" Executed="OKCommand_Execute" CanExecute="OKCommand_CanExecute" />
         <CommandBinding Command="views:SettingsView.ResetCommand" Executed="ResetCommand_Execute" />
     </Window.CommandBindings>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -77,9 +78,22 @@ limitations under the License. -->
         <Label Content="{x:Static res:Resource.SettingsMaxNumber}" HorizontalAlignment="Left" Margin="10,171.94,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="maxCountOfExpsTextBox" HorizontalAlignment="Right" Height="23" Margin="0,175.941,10,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" TextAlignment="Right" />
 
-        <CheckBox x:Name="saveUserFuncCheckBox" Content="{x:Static res:Resource.SettingsSaveUF}" Margin="10,202.9,10,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="updatesCheckBox" Content="{x:Static res:Resource.SettingsCheckUpdates}" Margin="10,223,10,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,243,10,0" VerticalAlignment="Top" IsChecked="False" />
+        <Label Content="{x:Static res:Resource.SettingsDefaultChartColor}" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="chartColorTextBox" HorizontalAlignment="Right" Height="23" Margin="0,204,47,0" TextWrapping="Wrap" Text="#FFFF0000" VerticalAlignment="Top" Width="103" VerticalContentAlignment="Center" TextAlignment="Right" />
+        <fluent:DropDownButton HorizontalAlignment="Right" VerticalAlignment="Top" SizeDefinition="Small" Margin="0,204,10,0" >
+            <fluent:DropDownButton.Icon>
+                <Rectangle VerticalAlignment="Bottom" Height="16" Width="16" HorizontalAlignment="Center">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding Path=Text, ElementName=chartColorTextBox, Mode=TwoWay}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </fluent:DropDownButton.Icon>
+            <fluent:ColorGallery x:Name="chartColorGallery" IsAutomaticColorButtonVisible="False" IsNoColorButtonVisible="False" SelectedColor="{Binding Path=Text, ElementName=chartColorTextBox, Mode=TwoWay}" />
+        </fluent:DropDownButton>
+
+        <CheckBox x:Name="saveUserFuncCheckBox" Content="{x:Static res:Resource.SettingsSaveUF}" Margin="10,228,10,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="updatesCheckBox" Content="{x:Static res:Resource.SettingsCheckUpdates}" Margin="10,248,10,0" VerticalAlignment="Top" IsChecked="True" />
+        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,268,10,0" VerticalAlignment="Top" IsChecked="False" />
 
         <Grid Grid.Row="1" Background="#FFEFEFEF" Height="39">
             <Button Content="{x:Static res:Resource.SettingsReset}" HorizontalAlignment="Left" Margin="10,10,0,8" Padding="8,0,8,0" MinWidth="75" Command="views:SettingsView.ResetCommand" />

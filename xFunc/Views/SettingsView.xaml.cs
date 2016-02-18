@@ -15,6 +15,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Properties;
@@ -47,6 +48,7 @@ namespace xFunc.Views
                 Base = Settings.Default.NumberBase;
             }
             MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
+            ChartColor = Settings.Default.DefaultChartColor;
             SaveUserFunctions = Settings.Default.SaveUserFunction;
             CheckUpdates = Settings.Default.CheckUpdates;
             SaveDump = Settings.Default.SaveDump;
@@ -152,6 +154,18 @@ namespace xFunc.Views
             internal set
             {
                 this.maxCountOfExpsTextBox.Text = value.ToString();
+            }
+        }
+
+        public Color ChartColor
+        {
+            get
+            {
+                return this.chartColorGallery.SelectedColor.Value;
+            }
+            internal set
+            {
+                this.chartColorGallery.SelectedColor = value;
             }
         }
 

@@ -691,6 +691,7 @@ namespace xFunc.Views
                     mathPresenter.Base = settingsView.Base;
                 }
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
+                Settings.Default.DefaultChartColor = settingsView.ChartColor;
                 Settings.Default.SaveUserFunction = settingsView.SaveUserFunctions;
                 Settings.Default.CheckUpdates = settingsView.CheckUpdates;
                 Settings.Default.SaveDump = settingsView.SaveDump;

@@ -768,4 +768,7 @@
   <data name="SettingsSaveDump" xml:space="preserve">
     <value>Зберегти дамп-файл після помилки в програмі.</value>
   </data>
+  <data name="SettingsDefaultChartColor" xml:space="preserve">
+    <value>Колір графіка за замовчуванням:</value>
+  </data>
 </root>

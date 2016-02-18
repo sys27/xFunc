@@ -1024,7 +1024,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Graphs.
+        ///   Looks up a localized string similar to Charts.
         /// </summary>
         public static string GraphsTab {
             get {

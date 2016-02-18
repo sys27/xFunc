@@ -44,7 +44,7 @@ namespace xFunc.Presenters
         {
             var exp = processor.Parse(strExp);
 
-            listOfGraphs.Add(new GraphItemViewModel(exp, true, null));
+            listOfGraphs.Add(new GraphItemViewModel(exp, true, null, Settings.Default.DefaultChartColor));
 
             while (listOfGraphs.Count > countOfGraphs)
                 listOfGraphs.RemoveAt(0);

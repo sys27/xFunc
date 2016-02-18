@@ -337,12 +337,11 @@ namespace xFunc.Views
             geometry.Freeze();
 
             var funcVisual = new DrawingVisual();
-            var pen = new Pen(Brushes.Red, 1);
+            var brush = new SolidColorBrush(graph.ChartColor);
+            var pen = new Pen(brush, 1);
             pen.Freeze();
             using (DrawingContext context = funcVisual.RenderOpen())
-            {
-                context.DrawGeometry(Brushes.Red, pen, geometry);
-            }
+                context.DrawGeometry(brush, pen, geometry);
             graph.Visual = funcVisual;
             canvas.AddVisual(funcVisual);
         }

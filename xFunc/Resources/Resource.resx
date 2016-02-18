@@ -427,7 +427,7 @@
     <value>Gradian (Ctrl+Alt+G)</value>
   </data>
   <data name="GraphsTab" xml:space="preserve">
-    <value>Graphs</value>
+    <value>Charts</value>
   </data>
   <data name="GreaterOrEqualToolTip" xml:space="preserve">
     <value>The "greater than or equal" operator. Example: x &gt;= 10.</value>

@@ -1519,6 +1519,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default chart color:.
+        /// </summary>
+        public static string SettingsDefaultChartColor {
+            get {
+                return ResourceManager.GetString("SettingsDefaultChartColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Degree.
         /// </summary>
         public static string SettingsDegree {

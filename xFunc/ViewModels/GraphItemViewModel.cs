@@ -19,18 +19,20 @@ using xFunc.Maths.Expressions;
 namespace xFunc.ViewModels
 {
 
-    public class GraphItemViewModel
+    public class GraphItemViewModel : BaseViewModel
     {
 
         private bool isChecked;
         private IExpression exp;
         private DrawingVisual visual;
+        private Color color;
 
-        public GraphItemViewModel(IExpression exp, bool isChecked, DrawingVisual visual)
+        public GraphItemViewModel(IExpression exp, bool isChecked, DrawingVisual visual, Color color)
         {
             this.exp = exp;
             this.isChecked = isChecked;
             this.visual = visual;
+            this.color = color;
         }
 
         public override string ToString()
@@ -47,6 +49,7 @@ namespace xFunc.ViewModels
             set
             {
                 isChecked = value;
+                OnPropertyChanged("IsChecked");
             }
         }
 
@@ -67,6 +70,20 @@ namespace xFunc.ViewModels
             set
             {
                 visual = value;
+                OnPropertyChanged(nameof(Visual));
+            }
+        }
+
+        public Color ChartColor
+        {
+            get
+            {
+                return color;
+            }
+            set
+            {
+                color = value;
+                OnPropertyChanged(nameof(ChartColor));
             }
         }
 

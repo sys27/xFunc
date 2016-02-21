@@ -22,14 +22,17 @@ using xFunc.Maths.Tokens;
 namespace xFunc.Maths
 {
 
+    /// <summary>
+    /// The helper class with additional methods.
+    /// </summary>
     public static class Helpers
     {
 
         /// <summary>
-        /// Checks the <paramref name="expression"/> parameter has <paramref name="arg"/>.
+        /// Checks that <paramref name="expression"/> has  the <paramref name="arg"/> variable.
         /// </summary>
-        /// <param name="expression">A expression that is checked.</param>
-        /// <param name="arg">A variable that can be contained in the expression.</param>
+        /// <param name="expression">The expression that is checked.</param>
+        /// <param name="arg">The variable that can be contained in the expression.</param>
         /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
         public static bool HasVar(IExpression expression, Variable arg)
         {

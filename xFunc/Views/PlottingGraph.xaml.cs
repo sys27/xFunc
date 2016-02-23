@@ -38,7 +38,7 @@ namespace xFunc.Views
         private double centerX;
         private double centerY;
         private Point startPoint;
-        private double cm = = 37.795276;
+        private double cm = 37.795276;
 
         public PlottingGraph()
         {

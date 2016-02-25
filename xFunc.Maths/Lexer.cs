@@ -32,7 +32,7 @@ namespace xFunc.Maths
         private readonly HashSet<char> unaryMinusOp;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Lexer"/>.
+        /// Initializes a new instance of the <see cref="Lexer"/> class.
         /// </summary>
         public Lexer()
         {

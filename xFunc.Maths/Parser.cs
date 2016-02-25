@@ -248,7 +248,7 @@ namespace xFunc.Maths
         }
 
         /// <summary>
-        /// Gets or Sets a implementation of <see cref="ILexer"/>.
+        /// Gets or sets a implementation of <see cref="ILexer"/>.
         /// </summary>
         public ILexer Lexer
         {

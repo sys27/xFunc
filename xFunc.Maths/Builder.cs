@@ -29,7 +29,7 @@ namespace xFunc.Maths
         private IExpression current;
 
         /// <summary>
-        /// Initializes a new empty instance of the <see cref="Builder"/> class.
+        /// Initializes a new instance of the <see cref="Builder"/> class.
         /// </summary>
         public Builder()
         {

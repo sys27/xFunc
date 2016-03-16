@@ -105,6 +105,7 @@
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="IExpressionFactory.cs" />
     <Compile Include="InvalidResultException.cs" />
+    <Compile Include="IParser.cs" />
     <Compile Include="ISimplifier.cs" />
     <Compile Include="Differentiator.cs" />
     <Compile Include="ExpressionFactory.cs" />

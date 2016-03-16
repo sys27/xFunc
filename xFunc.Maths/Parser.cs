@@ -25,7 +25,7 @@ namespace xFunc.Maths
     /// <summary>
     /// The parser for mathematical expressions.
     /// </summary>
-    public class Parser
+    public class Parser : IParser
     {
 
         private ILexer lexer;

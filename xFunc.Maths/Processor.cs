@@ -27,10 +27,9 @@ namespace xFunc.Maths
     public class Processor
     {
 
-        private readonly ILexer lexer;
-        private readonly ISimplifier simplifier;
-        private readonly IDifferentiator differentiator;
-        private readonly Parser parser;
+        private ISimplifier simplifier;
+        private IDifferentiator differentiator;
+        private IParser parser;
 
         private readonly ExpressionParameters parameters;
         private NumeralSystem numeralSystem;
@@ -39,41 +38,33 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
         public Processor()
+            : this(new Parser(new Lexer(), new ExpressionFactory()), new Simplifier(), new Differentiator(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
-            lexer = new Lexer();
-            simplifier = new Simplifier();
-            differentiator = new Differentiator(simplifier);
-            parser = new Parser(lexer, new ExpressionFactory());
-
-            parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
-            numeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
-        /// <param name="lexer">The lexer.</param>
+        /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
-        public Processor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(lexer, simplifier, differentiator, new ExpressionFactory(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
+        public Processor(IParser parser, ISimplifier simplifier, IDifferentiator differentiator)
+            : this(parser, simplifier, differentiator, new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor" /> class.
         /// </summary>
-        /// <param name="lexer">The lexer.</param>
+        /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
-        /// <param name="factory">The expression factory.</param>
         /// <param name="parameters">The collection of parameters.</param>
-        public Processor(ILexer lexer, ISimplifier simplifier, IDifferentiator differentiator, IExpressionFactory factory, ExpressionParameters parameters)
+        public Processor(IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
         {
-            this.lexer = lexer;
             this.simplifier = simplifier;
             this.differentiator = differentiator;
-            this.parser = new Parser(lexer, factory);
+            this.parser = parser;
 
             this.parameters = parameters;
             this.numeralSystem = NumeralSystem.Decimal;
@@ -228,6 +219,60 @@ namespace xFunc.Maths
                 return simplifier.Simplify(parser.Parse(function));
 
             return parser.Parse(function);
+        }
+        
+        /// <summary>
+        /// Gets or sets the parser.
+        /// </summary>
+        /// <value>
+        /// The parser.
+        /// </value>
+        public IParser Parser
+        {
+            get
+            {
+                return parser;
+            }
+            set
+            {
+                parser = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the simplifier.
+        /// </summary>
+        /// <value>
+        /// The simplifier.
+        /// </value>
+        public ISimplifier Simplifier
+        {
+            get
+            {
+                return simplifier;
+            }
+            set
+            {
+                simplifier = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the differentiator.
+        /// </summary>
+        /// <value>
+        /// The differentiator.
+        /// </value>
+        public IDifferentiator Differentiator
+        {
+            get
+            {
+                return differentiator;
+            }
+            set
+            {
+                differentiator = value;
+            }
         }
 
         /// <summary>

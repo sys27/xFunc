@@ -13,24 +13,23 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths
 {
 
     /// <summary>
-    /// The interface for lexer.
+    /// The interface for parser.
     /// </summary>
-    public interface ILexer
+    public interface IParser
     {
 
         /// <summary>
-        /// Converts the string into a sequence of tokens.
+        /// Parses the specified function.
         /// </summary>
-        /// <param name="function">The string that contains the functions and operators.</param>
-        /// <returns>The sequence of tokens.</returns>
-        IEnumerable<IToken> Tokenize(string function);
+        /// <param name="function">The function.</param>
+        /// <returns>The parsed expression.</returns>
+        IExpression Parse(string function);
 
     }
 

@@ -122,28 +122,28 @@ limitations under the License. -->
             </ribbon:Ribbon.Menu>
             <ribbon:RibbonTabItem Header="{x:Static res:Resource.HomeRibbonTabHeader}" ReduceOrder="AnglesGroupBox,AnglesGroupBox,AnglesGroupBox,OutputFormatGroupBox,OutputFormatGroupBox,OutputFormatGroupBox,AnswerBaseGroupBox,AnswerBaseGroupBox,AnswerBaseGroupBox,ToolsGroupBox,ToolsGroupBox,ToolsGroupBox" IsSelected="True">
                 <ribbon:RibbonGroupBox Header="{x:Static res:Resource.ClipboardGroupHeader}">
-                    <ribbon:Button x:Name="undoButton" Header="{x:Static res:Resource.UndoButtonHeader}" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo">
+                    <ribbon:Button x:Name="undoButton" Header="{x:Static res:Resource.UndoButtonHeader}" Icon="../Images/Undo.png" LargeIcon="../Images/UndoLarge.png" Command="ApplicationCommands.Undo" FocusManager.IsFocusScope="True">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.UndoScreenTipTitle}" Text="{x:Static res:Resource.UndoScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                    <ribbon:Button x:Name="redoButton" Header="{x:Static res:Resource.RedoButtonHeader}" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" Command="ApplicationCommands.Redo">
+                    <ribbon:Button x:Name="redoButton" Header="{x:Static res:Resource.RedoButtonHeader}" Icon="../Images/Redo.png" LargeIcon="../Images/RedoLarge.png" Command="ApplicationCommands.Redo" FocusManager.IsFocusScope="True">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.RedoScreenTipTitle}" Text="{x:Static res:Resource.RedoScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
                     <Separator />
-                    <ribbon:Button Header="{x:Static res:Resource.CutButtonHeader}" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" Command="ApplicationCommands.Cut">
+                    <ribbon:Button Header="{x:Static res:Resource.CutButtonHeader}" Icon="../Images/Cut.png" LargeIcon="../Images/CutLarge.png" Command="ApplicationCommands.Cut" FocusManager.IsFocusScope="True">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.CutScreenTipTitle}" Text="{x:Static res:Resource.CutScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                    <ribbon:Button Header="{x:Static res:Resource.CopyButtonHeader}" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" Command="ApplicationCommands.Copy">
+                    <ribbon:Button Header="{x:Static res:Resource.CopyButtonHeader}" Icon="../Images/Copy.png" LargeIcon="../Images/CopyLarge.png" Command="ApplicationCommands.Copy" FocusManager.IsFocusScope="True">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.CopyScreenTipTitle}" Text="{x:Static res:Resource.CopyScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                    <ribbon:Button Header="{x:Static res:Resource.PasteButtonHeader}" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste">
+                    <ribbon:Button Header="{x:Static res:Resource.PasteButtonHeader}" Icon="../Images/Paste.png" LargeIcon="../Images/PasteLarge.png" Command="ApplicationCommands.Paste" FocusManager.IsFocusScope="True">
                         <ribbon:Button.ToolTip>
                             <ribbon:ScreenTip Title="{x:Static res:Resource.PasteScreenTipTitle}" Text="{x:Static res:Resource.PasteScreenTipText}" />
                         </ribbon:Button.ToolTip>

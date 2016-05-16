@@ -47,7 +47,6 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="Parser" /> class.
         /// </summary>
         /// <param name="lexer">The lexer.</param>
-        /// <param name="simplifier">The simplifier.</param>
         /// <param name="factory">The factory.</param>
         public Parser(ILexer lexer, IExpressionFactory factory)
         {

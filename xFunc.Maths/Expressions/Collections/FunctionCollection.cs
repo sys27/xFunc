@@ -90,7 +90,11 @@ namespace xFunc.Maths.Expressions.Collections
         public new void Add(UserFunction key, IExpression value)
         {
             base.Add(key, value);
+#if PORTABLE
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key, Count - 1));
+#else
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, key));
+#endif
         }
 
         /// <summary>
@@ -100,7 +104,11 @@ namespace xFunc.Maths.Expressions.Collections
         public new void Remove(UserFunction key)
         {
             if (base.Remove(key))
+#if PORTABLE
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key, Count));
+#else
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key));
+#endif
         }
 
         /// <summary>

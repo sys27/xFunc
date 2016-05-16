@@ -11,7 +11,7 @@
     <RootNamespace>xFunc.Maths</RootNamespace>
     <AssemblyName>xFunc.Maths</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <FileUpgradeFlags>
@@ -94,6 +94,7 @@
     <Compile Include="Expressions\AngleMeasurement.cs" />
     <Compile Include="Expressions\Define.cs" />
     <Compile Include="Expressions\BinaryExpression.cs" />
+    <Compile Include="Expressions\Lb.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\And.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Not.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\Or.cs" />
@@ -183,8 +184,10 @@
     <Compile Include="Expressions\Undefine.cs" />
     <Compile Include="Expressions\UserFunction.cs" />
     <Compile Include="Expressions\Variable.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="ILexer.cs" />
+    <Compile Include="IParser.cs" />
     <Compile Include="ISimplifier.cs" />
     <Compile Include="Differentiator.cs" />
     <Compile Include="MathExtentions.cs" />

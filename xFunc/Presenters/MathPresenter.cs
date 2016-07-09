@@ -67,8 +67,9 @@ namespace xFunc.Presenters
             if (string.IsNullOrWhiteSpace(strExp))
                 throw new ArgumentNullException(nameof(strExp));
 
-            var exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            
+            var exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                             .Select(str => str.Trim());
+
             foreach (var s in exps)
             {
                 var result = processor.Solve(s);

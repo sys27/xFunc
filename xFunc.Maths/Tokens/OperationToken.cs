@@ -113,7 +113,7 @@ namespace xFunc.Maths.Tokens
                 case Operations.Equality:
                 case Operations.NOr:
                 case Operations.NAnd:
-                    return 15;
+                    return 7;
                 case Operations.AddAssign:
                 case Operations.SubAssign:
                 case Operations.MulAssign:

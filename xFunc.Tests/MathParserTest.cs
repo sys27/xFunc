@@ -1031,10 +1031,29 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void LogicAddPriorityTest()
+        {
+            lexer.Tokens = new List<IToken>()
+            {
+                new NumberToken(3),
+                new OperationToken(Operations.GreaterThan),
+                new NumberToken(4),
+                new OperationToken(Operations.And),
+                new NumberToken(1),
+                new OperationToken(Operations.LessThan),
+                new NumberToken(3),
+            };
+
+            var exp = parser.Parse("3 > 4 and 1 < 3");
+
+            Assert.Equal("(3 > 4) and (1 < 3)", exp.ToString());
+        }        
+
+        [Fact]
         public void GetLogicParametersTest()
         {
             //string function = "a | b & c & (a | c)";
-            var tokens=  new List<IToken>
+            var tokens = new List<IToken>
             {
                 new VariableToken("a"),
                 new OperationToken(Operations.Or),

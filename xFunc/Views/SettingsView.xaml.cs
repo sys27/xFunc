@@ -50,7 +50,6 @@ namespace xFunc.Views
             MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
             ChartColor = Settings.Default.DefaultChartColor;
             SaveUserFunctions = Settings.Default.SaveUserFunction;
-            CheckUpdates = Settings.Default.CheckUpdates;
             SaveDump = Settings.Default.SaveDump;
         }
 
@@ -178,18 +177,6 @@ namespace xFunc.Views
             internal set
             {
                 this.saveUserFuncCheckBox.IsChecked = value;
-            }
-        }
-
-        public bool CheckUpdates
-        {
-            get
-            {
-                return this.updatesCheckBox.IsChecked.Value;
-            }
-            internal set
-            {
-                this.updatesCheckBox.IsChecked = value;
             }
         }
 

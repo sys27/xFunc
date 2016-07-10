@@ -21,7 +21,7 @@ limitations under the License. -->
         xmlns:fluent="urn:fluent-ribbon"
         xmlns:maths="clr-namespace:xFunc.Maths;assembly=xFunc.Maths"
         xmlns:exps="clr-namespace:xFunc.Maths.Expressions;assembly=xFunc.Maths"
-        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="358"
+        Title="{x:Static res:Resource.SettingsViewTitle}" Width="520" Height="340"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
         <conv:InverseBooleanConverter x:Key="inverseBooleanConverter" />
@@ -92,8 +92,7 @@ limitations under the License. -->
         </fluent:DropDownButton>
 
         <CheckBox x:Name="saveUserFuncCheckBox" Content="{x:Static res:Resource.SettingsSaveUF}" Margin="10,228,10,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="updatesCheckBox" Content="{x:Static res:Resource.SettingsCheckUpdates}" Margin="10,248,10,0" VerticalAlignment="Top" IsChecked="True" />
-        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,268,10,0" VerticalAlignment="Top" IsChecked="False" />
+        <CheckBox x:Name="saveDumpCheckBox" Content="{x:Static res:Resource.SettingsSaveDump}" Margin="10,248,10,0" VerticalAlignment="Top" IsChecked="False" />
 
         <Grid Grid.Row="1" Background="#FFEFEFEF" Height="39">
             <Button Content="{x:Static res:Resource.SettingsReset}" HorizontalAlignment="Left" Margin="10,10,0,8" Padding="8,0,8,0" MinWidth="75" Command="views:SettingsView.ResetCommand" />

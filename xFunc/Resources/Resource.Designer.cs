@@ -421,15 +421,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An update is available..
-        /// </summary>
-        public static string AvailableUpdate {
-            get {
-                return ResourceManager.GetString("AvailableUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Bitwise &amp; Logical.
         /// </summary>
         public static string BitwiseExpanderHeader {
@@ -1497,15 +1488,6 @@ namespace xFunc.Resources {
         public static string SettingsCancel {
             get {
                 return ResourceManager.GetString("SettingsCancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check for updates..
-        /// </summary>
-        public static string SettingsCheckUpdates {
-            get {
-                return ResourceManager.GetString("SettingsCheckUpdates", resourceCulture);
             }
         }
         

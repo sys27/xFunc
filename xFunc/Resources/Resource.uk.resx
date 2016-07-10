@@ -234,9 +234,6 @@
   <data name="AuthorTextBox" xml:space="preserve">
     <value>Розробник:</value>
   </data>
-  <data name="AvailableUpdate" xml:space="preserve">
-    <value>Доступно оновлення.</value>
-  </data>
   <data name="BitwiseExpanderHeader" xml:space="preserve">
     <value>Бітові та логічні</value>
   </data>
@@ -569,9 +566,6 @@
   </data>
   <data name="SettingsCancel" xml:space="preserve">
     <value>Скасувати</value>
-  </data>
-  <data name="SettingsCheckUpdates" xml:space="preserve">
-    <value>Перевіряти оновлення.</value>
   </data>
   <data name="SettingsDec" xml:space="preserve">
     <value>Десяткова</value>

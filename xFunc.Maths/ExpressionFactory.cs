@@ -209,31 +209,31 @@ namespace xFunc.Maths
                 case Functions.Exp:
                     return new Exp();
                 case Functions.GCD:
-                    return new GCD();
+                    return new GCD() { ParametersCount = token.CountOfParams };
                 case Functions.LCM:
-                    return new LCM();
+                    return new LCM() { ParametersCount = token.CountOfParams };
                 case Functions.Factorial:
                     return new Fact();
                 case Functions.Sum:
-                    return new Sum();
+                    return new Sum() { ParametersCount = token.CountOfParams };
                 case Functions.Product:
-                    return new Product();
+                    return new Product() { ParametersCount = token.CountOfParams };
                 case Functions.Round:
-                    return new Round();
+                    return new Round() { ParametersCount = token.CountOfParams };
                 case Functions.Floor:
                     return new Floor();
                 case Functions.Ceil:
                     return new Ceil();
                 case Functions.Derivative:
-                    return new Derivative();
+                    return new Derivative() { ParametersCount = token.CountOfParams };
                 case Functions.Simplify:
                     return new Simplify();
                 case Functions.Define:
                     return new Define();
                 case Functions.Vector:
-                    return new Vector();
+                    return new Vector() { ParametersCount = token.CountOfParams };
                 case Functions.Matrix:
-                    return new Matrix();
+                    return new Matrix() { ParametersCount = token.CountOfParams };
                 case Functions.Transpose:
                     return new Transpose();
                 case Functions.Determinant:
@@ -241,9 +241,9 @@ namespace xFunc.Maths
                 case Functions.Inverse:
                     return new Inverse();
                 case Functions.If:
-                    return new If();
+                    return new If() { ParametersCount = token.CountOfParams };
                 case Functions.For:
-                    return new For();
+                    return new For() { ParametersCount = token.CountOfParams };
                 case Functions.While:
                     return new While();
                 case Functions.Undefine:
@@ -260,7 +260,7 @@ namespace xFunc.Maths
         /// <returns>An expression.</returns>
         protected virtual IExpression CreateUserFunction(UserFunctionToken token)
         {
-            return new UserFunction(token.FunctionName);
+            return new UserFunction(token.FunctionName, token.CountOfParams);
         }
 
     }

@@ -170,10 +170,6 @@ namespace xFunc.Maths
                         throw new ParserException(Resource.LessParams);
                     if (exp.MaxParameters != -1 && t.CountOfParams > exp.MaxParameters)
                         throw new ParserException(Resource.MoreParams);
-
-                    var diff = exp as DifferentParametersExpression;
-                    if (diff != null)
-                        diff.ParametersCount = t.CountOfParams;
                 }
 
                 preOutput.Add(exp);

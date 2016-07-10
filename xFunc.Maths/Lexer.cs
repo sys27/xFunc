@@ -78,7 +78,7 @@ namespace xFunc.Maths
                                .Replace(" ", "")
                                .Replace("\t", "")
                                .Replace("\n", "")
-                               .Replace("\r", "");            
+                               .Replace("\r", "");
 
             var tokens = new List<IToken>();
 
@@ -451,7 +451,7 @@ namespace xFunc.Maths
                     i += length;
 
                     var f = function.Substring(i);
-                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(f.StartsWith))
+                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => f.StartsWith(s, StringComparison.Ordinal)))
                         tokens.Add(new OperationToken(Operations.Multiplication));
 
                     continue;
@@ -459,385 +459,385 @@ namespace xFunc.Maths
                 else if (char.IsLetter(letter))
                 {
                     var sub = function.Substring(i);
-                    if (sub.StartsWith("pi"))
+                    if (sub.StartsWith("pi", StringComparison.Ordinal))
                     {
                         tokens.Add(new VariableToken("π"));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("true"))
+                    if (sub.StartsWith("true", StringComparison.Ordinal))
                     {
                         tokens.Add(new BooleanToken(true));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("false"))
+                    if (sub.StartsWith("false", StringComparison.Ordinal))
                     {
                         tokens.Add(new BooleanToken(false));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("vector{"))
+                    if (sub.StartsWith("vector{", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Vector));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("matrix{"))
+                    if (sub.StartsWith("matrix{", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Matrix));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("exp("))
+                    if (sub.StartsWith("exp(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Exp));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("abs("))
+                    if (sub.StartsWith("abs(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Absolute));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("sh("))
+                    if (sub.StartsWith("sh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Sineh));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("sinh("))
+                    if (sub.StartsWith("sinh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Sineh));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("ch("))
+                    if (sub.StartsWith("ch(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosineh));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("cosh("))
+                    if (sub.StartsWith("cosh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosineh));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("th("))
+                    if (sub.StartsWith("th(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangenth));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("tanh("))
+                    if (sub.StartsWith("tanh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangenth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("cth("))
+                    if (sub.StartsWith("cth(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangenth));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("coth("))
+                    if (sub.StartsWith("coth(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangenth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("sech("))
+                    if (sub.StartsWith("sech(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Secanth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("csch("))
+                    if (sub.StartsWith("csch(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosecanth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("arsh("))
+                    if (sub.StartsWith("arsh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsineh));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("arsinh("))
+                    if (sub.StartsWith("arsinh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsineh));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arch("))
+                    if (sub.StartsWith("arch(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcosineh));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcosh("))
+                    if (sub.StartsWith("arcosh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcosineh));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arth("))
+                    if (sub.StartsWith("arth(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Artangenth));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("artanh("))
+                    if (sub.StartsWith("artanh(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Artangenth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcth("))
+                    if (sub.StartsWith("arcth(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcotangenth));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcoth("))
+                    if (sub.StartsWith("arcoth(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcotangenth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arsch("))
+                    if (sub.StartsWith("arsch(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsecanth));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("arsech("))
+                    if (sub.StartsWith("arsech(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arsecanth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcsch("))
+                    if (sub.StartsWith("arcsch(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcosecanth));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("sin("))
+                    if (sub.StartsWith("sin(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Sine));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("cosec("))
+                    if (sub.StartsWith("cosec(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosecant));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("csc("))
+                    if (sub.StartsWith("csc(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosecant));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("cos("))
+                    if (sub.StartsWith("cos(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cosine));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("tg("))
+                    if (sub.StartsWith("tg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangent));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("tan("))
+                    if (sub.StartsWith("tan(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Tangent));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("cot(") || sub.StartsWith("ctg("))
+                    if (sub.StartsWith("cot(") || sub.StartsWith("ctg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangent));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("sec("))
+                    if (sub.StartsWith("sec(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Secant));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcsin("))
+                    if (sub.StartsWith("arcsin(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcsine));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccosec("))
+                    if (sub.StartsWith("arccosec(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccosecant));
                         i += 8;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccsc("))
+                    if (sub.StartsWith("arccsc(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccosecant));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccos("))
+                    if (sub.StartsWith("arccos(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccosine));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arctg("))
+                    if (sub.StartsWith("arctg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arctangent));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("arctan("))
+                    if (sub.StartsWith("arctan(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arctangent));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arccot(") || sub.StartsWith("arcctg("))
+                    if (sub.StartsWith("arccot(") || sub.StartsWith("arcctg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccotangent));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("arcsec("))
+                    if (sub.StartsWith("arcsec(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arcsecant));
                         i += 6;
 
                         continue;
                     }
-                    if (sub.StartsWith("sqrt("))
+                    if (sub.StartsWith("sqrt(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Sqrt));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("root("))
+                    if (sub.StartsWith("root(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Root));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("lg("))
+                    if (sub.StartsWith("lg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Lg));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("ln("))
+                    if (sub.StartsWith("ln(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Ln));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("lb("))
+                    if (sub.StartsWith("lb(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Lb));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("log2("))
+                    if (sub.StartsWith("log2(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Lb));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("log("))
+                    if (sub.StartsWith("log(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Log));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("deriv("))
+                    if (sub.StartsWith("deriv(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Derivative));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("simplify("))
+                    if (sub.StartsWith("simplify(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Simplify));
                         i += 8;
 
                         continue;
                     }
-                    if (sub.StartsWith("def("))
+                    if (sub.StartsWith("def(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Define));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("undef("))
+                    if (sub.StartsWith("undef(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Undefine));
                         i += 5;
@@ -845,161 +845,161 @@ namespace xFunc.Maths
                         continue;
                     }
 
-                    if (sub.StartsWith("not("))
+                    if (sub.StartsWith("not(", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.Not));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("and"))
+                    if (sub.StartsWith("and", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.And));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("or"))
+                    if (sub.StartsWith("or", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.Or));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("xor"))
+                    if (sub.StartsWith("xor", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.XOr));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("impl"))
+                    if (sub.StartsWith("impl", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.Implication));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("eq"))
+                    if (sub.StartsWith("eq", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.Equality));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("nor"))
+                    if (sub.StartsWith("nor", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.NOr));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("nand"))
+                    if (sub.StartsWith("nand", StringComparison.Ordinal))
                     {
                         tokens.Add(new OperationToken(Operations.NAnd));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("gcd(") || sub.StartsWith("gcf(") || sub.StartsWith("hcf("))
+                    if (sub.StartsWith("gcd(") || sub.StartsWith("gcf(") || sub.StartsWith("hcf(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.GCD));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("lcm(") || sub.StartsWith("scm("))
+                    if (sub.StartsWith("lcm(") || sub.StartsWith("scm(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.LCM));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("fact("))
+                    if (sub.StartsWith("fact(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Factorial));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("sum("))
+                    if (sub.StartsWith("sum(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Sum));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("product("))
+                    if (sub.StartsWith("product(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Product));
                         i += 7;
 
                         continue;
                     }
-                    if (sub.StartsWith("round("))
+                    if (sub.StartsWith("round(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Round));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("floor("))
+                    if (sub.StartsWith("floor(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Floor));
                         i += 5;
 
                         continue;
                     }
-                    if (sub.StartsWith("ceil("))
+                    if (sub.StartsWith("ceil(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Ceil));
                         i += 4;
 
                         continue;
                     }
-                    if (sub.StartsWith("transpose("))
+                    if (sub.StartsWith("transpose(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Transpose));
                         i += 9;
 
                         continue;
                     }
-                    if (sub.StartsWith("determinant("))
+                    if (sub.StartsWith("determinant(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Determinant));
                         i += 11;
 
                         continue;
                     }
-                    if (sub.StartsWith("det("))
+                    if (sub.StartsWith("det(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Determinant));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("inverse("))
+                    if (sub.StartsWith("inverse(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Inverse));
                         i += 7;
 
                         continue;
                     }
-                    if (sub.StartsWith("if("))
+                    if (sub.StartsWith("if(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.If));
                         i += 2;
 
                         continue;
                     }
-                    if (sub.StartsWith("for("))
+                    if (sub.StartsWith("for(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.For));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("while("))
+                    if (sub.StartsWith("while(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.While));
                         i += 5;
@@ -1008,7 +1008,7 @@ namespace xFunc.Maths
                     }
 
                     int j = i + 1;
-                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s)); j++) { }
+                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s, StringComparison.Ordinal)); j++) { }
 
                     var str = function.Substring(i, j - i);
                     i = j;

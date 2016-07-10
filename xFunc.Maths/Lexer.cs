@@ -71,10 +71,15 @@ namespace xFunc.Maths
         {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
-
-            function = function.ToLower().Replace(" ", "");
             if (!IsBalanced(function))
                 throw new LexerException(Resource.NotBalanced);
+
+            function = function.ToLower()
+                               .Replace(" ", "")
+                               .Replace("\t", "")
+                               .Replace("\n", "")
+                               .Replace("\r", "");            
+
             var tokens = new List<IToken>();
 
             for (int i = 0; i < function.Length;)

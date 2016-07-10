@@ -53,9 +53,6 @@
     <Setting Name="NumberBase" Type="xFunc.Maths.NumeralSystem" Scope="User">
       <Value Profile="(Default)">Decimal</Value>
     </Setting>
-    <Setting Name="CheckUpdates" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="VarWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>

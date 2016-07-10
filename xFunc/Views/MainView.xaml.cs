@@ -42,7 +42,6 @@ namespace xFunc.Views
         private MathPresenter mathPresenter;
         private GraphsPresenter graphsPresenter;
         private TruthTablePresenter truthTablePresenter;
-        private Updater updater;
         private string fileName;
 
         #region Commands
@@ -95,7 +94,6 @@ namespace xFunc.Views
             this.graphsControl.Presenter = graphsPresenter;
             truthTablePresenter = new TruthTablePresenter();
             this.truthTableControl.Presenter = truthTablePresenter;
-            updater = new Updater();
 
             LoadSettings();
 
@@ -176,47 +174,6 @@ namespace xFunc.Views
                         break;
                 }
             }
-        }
-
-        private void this_Loaded(object o, RoutedEventArgs args)
-        {
-            if (Settings.Default.CheckUpdates)
-            {
-                var updaterTask = Task.Factory.StartNew(() => updater.CheckUpdates());
-                updaterTask.ContinueWith(t =>
-                {
-                    if (t.Result)
-                    {
-                        this.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            this.updateText.Text = Resource.AvailableUpdate;
-                            this.statusUpdate.Visibility = Visibility.Visible;
-                        }));
-                    }
-                });
-            }
-        }
-
-        private void UpdateText_MouseUp(object o, MouseButtonEventArgs args)
-        {
-            if (updater.HasUpdates)
-            {
-                Process.Start(updater.UpdateUrl);
-            }
-        }
-
-        private void hideNotification_Click(object o, RoutedEventArgs args)
-        {
-            this.updateText.Text = string.Empty;
-            this.statusUpdate.Visibility = Visibility.Collapsed;
-        }
-
-        private void dontCheckUpdates_Click(object o, RoutedEventArgs args)
-        {
-            hideNotification_Click(o, args);
-
-            Settings.Default.CheckUpdates = false;
-            Settings.Default.Save();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -693,7 +650,6 @@ namespace xFunc.Views
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;
                 Settings.Default.DefaultChartColor = settingsView.ChartColor;
                 Settings.Default.SaveUserFunction = settingsView.SaveUserFunctions;
-                Settings.Default.CheckUpdates = settingsView.CheckUpdates;
                 Settings.Default.SaveDump = settingsView.SaveDump;
 
                 Settings.Default.Save();

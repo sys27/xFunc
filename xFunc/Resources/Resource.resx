@@ -234,9 +234,6 @@
   <data name="AuthorTextBox" xml:space="preserve">
     <value>Author:</value>
   </data>
-  <data name="AvailableUpdate" xml:space="preserve">
-    <value>An update is available.</value>
-  </data>
   <data name="BitwiseExpanderHeader" xml:space="preserve">
     <value>Bitwise &amp; Logical</value>
   </data>
@@ -569,9 +566,6 @@
   </data>
   <data name="SettingsCancel" xml:space="preserve">
     <value>Cancel</value>
-  </data>
-  <data name="SettingsCheckUpdates" xml:space="preserve">
-    <value>Check for updates.</value>
   </data>
   <data name="SettingsDec" xml:space="preserve">
     <value>Decimal</value>

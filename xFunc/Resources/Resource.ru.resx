@@ -234,9 +234,6 @@
   <data name="AuthorTextBox" xml:space="preserve">
     <value>Разработчик:</value>
   </data>
-  <data name="AvailableUpdate" xml:space="preserve">
-    <value>Доступно обновление.</value>
-  </data>
   <data name="BitwiseExpanderHeader" xml:space="preserve">
     <value>Битовые и логические</value>
   </data>
@@ -569,9 +566,6 @@
   </data>
   <data name="SettingsCancel" xml:space="preserve">
     <value>Отмена</value>
-  </data>
-  <data name="SettingsCheckUpdates" xml:space="preserve">
-    <value>Проверять обновления.</value>
   </data>
   <data name="SettingsDec" xml:space="preserve">
     <value>Десятичная</value>

@@ -124,15 +124,6 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No item satisfied the predicate or the source collection was empty..
-        /// </summary>
-        internal static string InvalidInFirst {
-            get {
-                return ResourceManager.GetString("InvalidInFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The function has an invalid number of variables..
         /// </summary>
         internal static string InvalidNumberOfVariables {
@@ -169,15 +160,6 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No elements in source list..
-        /// </summary>
-        internal static string NoElementInSource {
-            get {
-                return ResourceManager.GetString("NoElementInSource", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Brackets are not balanced..
         /// </summary>
         internal static string NotBalanced {
@@ -201,15 +183,6 @@ namespace xFunc.Maths.Resources {
         internal static string NotSupportedSymbol {
             get {
                 return ResourceManager.GetString("NotSupportedSymbol", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type of token is not supported..
-        /// </summary>
-        internal static string NotSupportedToken {
-            get {
-                return ResourceManager.GetString("NotSupportedToken", resourceCulture);
             }
         }
         

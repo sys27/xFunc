@@ -21,8 +21,7 @@ limitations under the License. -->
                     xmlns:views="clr-namespace:xFunc.Views"
                     Foreground="White"
                     Title="xFunc" Width="1024" Height="576" MinWidth="480" MinHeight="270"
-                    Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display"
-                    Loaded="this_Loaded">
+                    Icon="../Images/xFunc.ico" TextOptions.TextFormattingMode="Display">
     <ribbon:RibbonWindow.CommandBindings>
         <CommandBinding Command="views:MainView.NewCommand" Executed="NewCommand_Execute" />
         <CommandBinding Command="views:MainView.OpenCommand" Executed="OpenCommand_Execute" />
@@ -862,18 +861,8 @@ limitations under the License. -->
         </ScrollViewer>
 
         <ribbon:StatusBar Grid.Row="3" Grid.ColumnSpan="2">
-            <StatusBar.Resources>
-                <ContextMenu x:Key="updateContextMenu">
-                    <MenuItem Header="Hide this notification." Click="hideNotification_Click" />
-                    <MenuItem Header="Don't check for updates." Click="dontCheckUpdates_Click" />
-                </ContextMenu>
-            </StatusBar.Resources>
             <ribbon:StatusBarItem HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock x:Name="statusBox" />
-            </ribbon:StatusBarItem>
-            <Separator />
-            <ribbon:StatusBarItem x:Name="statusUpdate" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand" Visibility="Collapsed" ContextMenuService.ContextMenu="{StaticResource updateContextMenu}" MouseLeftButtonUp="UpdateText_MouseUp">
-                <TextBlock x:Name="updateText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </ribbon:StatusBarItem>
         </ribbon:StatusBar>
     </Grid>

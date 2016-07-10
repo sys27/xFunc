@@ -156,9 +156,6 @@
   <data name="NotSupportedSymbol" xml:space="preserve">
     <value>The symbol '{0}' is not supported.</value>
   </data>
-  <data name="NotSupportedToken" xml:space="preserve">
-    <value>The type of token is not supported.</value>
-  </data>
   <data name="ReadOnlyError" xml:space="preserve">
     <value>You cannot change value of "{0}".</value>
   </data>
@@ -176,12 +173,6 @@
   </data>
   <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Parameter type mismatch (Expected: {0}; Actual: {1}).</value>
-  </data>
-  <data name="InvalidInFirst" xml:space="preserve">
-    <value>No item satisfied the predicate or the source collection was empty.</value>
-  </data>
-  <data name="NoElementInSource" xml:space="preserve">
-    <value>No elements in source list.</value>
   </data>
   <data name="FormatException" xml:space="preserve">
     <value>The string '{0}' has an invalid format.</value>

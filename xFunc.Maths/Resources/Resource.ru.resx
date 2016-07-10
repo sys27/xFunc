@@ -156,9 +156,6 @@
   <data name="NotSupportedSymbol" xml:space="preserve">
     <value>Символ '{0}' не поддерживается программой.</value>
   </data>
-  <data name="NotSupportedToken" xml:space="preserve">
-    <value>Тип токена не подходит.</value>
-  </data>
   <data name="ReadOnlyError" xml:space="preserve">
     <value>Вы не можете изменить значение "{0}".</value>
   </data>
@@ -176,12 +173,6 @@
   </data>
   <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Несоответствующий тип параметра (Ожидается: {0}; Фактически: {1}).</value>
-  </data>
-  <data name="InvalidInFirst" xml:space="preserve">
-    <value>Ни один элемент не удовлетворяет условию предиката или исходная последовательность пуста.</value>
-  </data>
-  <data name="NoElementInSource" xml:space="preserve">
-    <value>Нет элементов в исходном списке.</value>
   </data>
   <data name="FormatException" xml:space="preserve">
     <value>Строка '{0}' имеет неправильный формат.</value>

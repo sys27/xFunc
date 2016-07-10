@@ -2185,6 +2185,51 @@ namespace xFunc.Tests
             Assert.Throws<LexerException>(() => lexer.Tokenize("0."));
         }
 
+        [Fact]
+        public void TabTest()
+        {
+            var tokens = lexer.Tokenize("\t2 + 2");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void NewlineTest()
+        {
+            var tokens = lexer.Tokenize("\n2 + 2");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void CRTest()
+        {
+            var tokens = lexer.Tokenize("\r2 + 2");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

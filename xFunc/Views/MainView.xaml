@@ -264,7 +264,7 @@ limitations under the License. -->
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonStyle}" />
                 </StackPanel.Resources>
                 <Expander x:Name="numberToolBar" Header="{x:Static res:Resource.NumberAndArithmeticExpanderHeader}" IsExpanded="True">
-                    <Grid>
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -279,60 +279,60 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="7" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource seven}" Width="14" Height="12" />
+                            <TextBlock>7</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="8" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource eight}" Width="14" Height="12" />
+                            <TextBlock>8</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="9" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource nine}" Width="14" Height="12" />
+                            <TextBlock>9</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="/" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource div}" Width="14" Height="14" />
+                            <TextBlock>÷</TextBlock>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="4" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource four}" Width="14" Height="12" />
+                            <TextBlock>4</TextBlock>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="5" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource five}" Width="14" Height="12" />
+                            <TextBlock>5</TextBlock>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="6" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource six}" Width="14" Height="12" />
+                            <TextBlock>6</TextBlock>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="*" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource mul}" Width="14" Height="12" />
+                            <TextBlock>×</TextBlock>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="1" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource one}" Width="14" Height="12" />
+                            <TextBlock>1</TextBlock>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="2" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource two}" Width="14" Height="12" />
+                            <TextBlock>2</TextBlock>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="3" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource three}" Width="14" Height="12" />
+                            <TextBlock>3</TextBlock>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="-" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource minus}" Width="12" Height="4" />
+                            <TextBlock>&#x2212;</TextBlock>
                         </Button>
 
                         <Button Grid.Row="3" Grid.Column="0" Tag="0" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource zero}" Width="14" Height="12" />
+                            <TextBlock>0</TextBlock>
                         </Button>
                         <Button Grid.Row="3" Grid.Column="1" Tag="." Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource point}" Width="3" Height="3" />
+                            <TextBlock>•</TextBlock>
                         </Button>
                         <Button Grid.Row="3" Grid.Column="2" Click="EnterButton_Click">
-                            <Rectangle Fill="{StaticResource enter}" Width="14" Height="12" />
+                            <TextBlock>=</TextBlock>
                         </Button>
                         <Button Grid.Row="3" Grid.Column="3" Tag="+" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource plus}" Width="14" Height="12" />
+                            <TextBlock>+</TextBlock>
                         </Button>
                     </Grid>
                 </Expander>
                 <Expander x:Name="standartMathToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" IsExpanded="True">
-                    <Grid>
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -346,13 +346,13 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="^2" Click="InsertInv_Click">
-                            <Rectangle Fill="{StaticResource sqr}" Width="20" Height="16" />
+                            <TextBlock>x<Run BaselineAlignment="Top" FontSize="12">2</Run></TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.PowerOfTwoToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="^" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource inv}" Width="20" Height="16" />
+                            <TextBlock>x<Run BaselineAlignment="Top" FontSize="12">y</Run></TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.PowerOfYToolTip}" />
                             </Button.ToolTip>
@@ -371,50 +371,51 @@ limitations under the License. -->
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="ln" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource ln}" Width="26" Height="16" />
+                            <TextBlock>ln(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.LnToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="lg" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource lg}" Width="26" Height="16" />
+                            <TextBlock>lg(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.LgToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="log" Click="InsertDoubleArgFunc_Click">
-                            <Rectangle Fill="{StaticResource log}" Width="36" Height="16" />
+                            <!-- TODO: Fix -->
+                            <TextBlock>log<Run BaselineAlignment="Subscript" FontSize="12">y</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.LogToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="abs" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource abs}" Width="22" Height="15" />
+                            <TextBlock>|x|</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.AbsToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="fact" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource fact}" Width="40" Height="20" />
+                            <TextBlock>x!</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.FactToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="round" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource round}" Width="48" Height="28" />
+                            <TextBlock>round(x, y)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.RoundToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="ceil" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource ceil}" Width="40" Height="28" />
+                            <TextBlock>ceil(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CeilToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="floor" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource floor}" Width="42" Height="28" />
+                            <TextBlock>floor(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.FloorToolTip}" />
                             </Button.ToolTip>
@@ -422,7 +423,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="trigonometricToolBar" Header="{x:Static res:Resource.TrigonometricExpanderHeader}">
-                    <Grid Margin="0,4,0,0">
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -436,75 +437,75 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="sin" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource sin}" Width="36" Height="20" />
+                            <TextBlock>sin(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SineToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="cos" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource cos}" Width="36" Height="20" />
+                            <TextBlock>cos(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CosineToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="tan" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource tan}" Width="36" Height="20" />
+                            <TextBlock>tan(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.TangentToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="cot" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource cot}" Width="36" Height="20" />
+                            <TextBlock>cot(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CotangentToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="arcsin" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arcsin}" Width="40" Height="20" />
+                            <TextBlock>sin<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArcsineToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="arccos" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arccos}" Width="40" Height="20" />
+                            <TextBlock>cos<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArccosineToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="arctan" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arctan}" Width="40" Height="20" />
+                            <TextBlock>tan<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArctangentToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="arccot" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arccot}" Width="40" Height="20" />
+                            <TextBlock>cot<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArccotangentToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="sec" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource sec}" Width="36" Height="20" />
+                            <TextBlock>sec(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SecantToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="csc" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource csc}" Width="36" Height="20" />
+                            <TextBlock>csc(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CosecantToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="arcsec" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arcsec}" Width="40" Height="20" />
+                            <TextBlock>sec<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArcsecantToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="arccsc" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arccsc}" Width="40" Height="20" />
+                            <TextBlock>csc<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArccosecantToolTip}" />
                             </Button.ToolTip>
@@ -512,7 +513,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="hyperbolicToolBar" Header="{x:Static res:Resource.HyperbolicExpanderHeader}">
-                    <Grid Margin="0,4,0,0">
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -526,75 +527,75 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="sinh" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource sinh}" Width="36" Height="20" />
+                            <TextBlock>sinh(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SinhToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="cosh" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource cosh}" Width="36" Height="20" />
+                            <TextBlock>cosh(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CoshToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="tanh" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource tanh}" Width="36" Height="20" />
+                            <TextBlock>tanh(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.TanhToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="coth" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource coth}" Width="36" Height="20" />
+                            <TextBlock>coth(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CothToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="arsinh" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arsinh}" Width="40" Height="20" />
+                            <TextBlock>sinh<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArsinhToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="arcosh" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arcosh}" Width="40" Height="20" />
+                            <TextBlock>cosh<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArcoshToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="artanh" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource artanh}" Width="40" Height="20" />
+                            <TextBlock>tanh<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArtanhToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="arcoth" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arcoth}" Width="40" Height="20" />
+                            <TextBlock>coth<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArcothToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="sech" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource sech}" Width="36" Height="20" />
+                            <TextBlock>sech(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SechToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="csch" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource csch}" Width="36" Height="20" />
+                            <TextBlock>csch(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.CschToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="arsech" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arsech}" Width="40" Height="20" />
+                            <TextBlock>sech<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArsechToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="arcsch" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource arcsch}" Width="40" Height="20" />
+                            <TextBlock>csch<Run BaselineAlignment="Top" FontSize="12">-1</Run>(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ArcschToolTip}" />
                             </Button.ToolTip>
@@ -602,7 +603,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="matrixToolBar" Header="{x:Static res:Resource.MatrixExpanderHeader}">
-                    <Grid>
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                         </Grid.RowDefinitions>
@@ -614,7 +615,7 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="det" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource det}" Width="44" Height="24" />
+                            <TextBlock>det(A)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.DetToolTip}" />
                             </Button.ToolTip>
@@ -626,7 +627,7 @@ limitations under the License. -->
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="inverse" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource inverse}" Width="28" Height="22" />
+                            <TextBlock>A<Run BaselineAlignment="Top" FontSize="12">-1</Run></TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.InverseToolTip}" />
                             </Button.ToolTip>
@@ -634,7 +635,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="bitwiseToolBar" Header="{x:Static res:Resource.BitwiseExpanderHeader}">
-                    <Grid Margin="0,4,0,0">
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -647,50 +648,50 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="~" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource bit_not}" Width="26" Height="20" />
+                            <TextBlock>not</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.NotToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="&amp;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource bit_and}" Width="30" Height="20" />
+                            <TextBlock>and</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.AndToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="|" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource bit_or}" Width="20" Height="20" />
+                            <TextBlock>or</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.OrToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="xor" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource bit_xor}" Width="28" Height="20" />
+                            <TextBlock>xor</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.XOrToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="=>" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource impl}" Width="26" Height="20" />
+                            <TextBlock>→</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ImplicationToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="&lt;=>" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource eq}" Width="30" Height="20" />
+                            <TextBlock>↔</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.EqualityToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="nor" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource nor}" Width="20" Height="20" />
+                            <TextBlock>↓</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.NOrToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="nand" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource nand}" Width="28" Height="20" />
+                            <TextBlock>|</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.NAndToolTip}" />
                             </Button.ToolTip>
@@ -698,7 +699,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="progToolBar" Header="{x:Static res:Resource.ProgExpanderHeader}">
-                    <Grid>
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -713,94 +714,94 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="==" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource equal}" Width="32" Height="22" />
+                            <TextBlock>==</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.EqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="!=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource notEqual}" Width="32" Height="19" />
+                            <TextBlock>!=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.NotEqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="&amp;&amp;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource condAnd}" Width="32" Height="22" />
+                            <TextBlock>&amp;&amp;</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ConditionalAndToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="||" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource condOr}" Width="32" Height="20" />
+                            <TextBlock>||</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ConditionalOrToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="&lt;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource less}" Width="32" Height="14" />
+                            <TextBlock>&lt;</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.LessThanToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="&gt;" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource greater}" Width="32" Height="14" />
+                            <TextBlock>&gt;</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.GreaterThanToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="&lt;=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource lessOrEqual}" Width="32" Height="20" />
+                            <TextBlock>&lt;=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.LessOrEqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="&gt;=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource greaterOrEqual}" Width="32" Height="20" />
+                            <TextBlock>&gt;=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.GreaterOrEqualToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="2" Grid.Column="0" Tag="+=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource addAssign}" Width="32" Height="14" />
+                            <TextBlock>+=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.AddAssignToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="-=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource subAssign}" Width="32" Height="14" />
+                            <TextBlock>-=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SubAssignToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="2" Tag="*=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource mulAssign}" Width="32" Height="20" />
+                            <TextBlock>*=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.MulAssignToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="3" Tag="/=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource divAssign}" Width="32" Height="20" />
+                            <TextBlock>/=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.DivAssignToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="3" Grid.Column="0" Tag="if" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource if}" Width="28" Height="16" />
+                            <TextBlock>if()</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.IfToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="3" Grid.Column="1" Tag="for" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource for}" Width="28" Height="22" />
+                            <TextBlock>for()</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ForToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="3" Grid.Column="2" Tag="while" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource while}" Width="44" Height="22" />
+                            <TextBlock>while()</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.WhileToolTip}" />
                             </Button.ToolTip>
@@ -808,7 +809,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="constantsMathToolBar" Header="{x:Static res:Resource.ConstantsExpanderHeader}">
-                    <Grid>
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                         </Grid.RowDefinitions>
@@ -820,21 +821,21 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag="π" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource pi}" Width="18" Height="12" />
+                            <TextBlock>π</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="e" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource exp}" Width="18" Height="12" />
+                            <TextBlock>e</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="true" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource true}" Width="26" Height="16" />
+                            <TextBlock>True</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="false" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource false}" Width="26" Height="16" />
+                            <TextBlock>False</TextBlock>
                         </Button>
                     </Grid>
                 </Expander>
                 <Expander x:Name="additionalMathToolBar" Header="{x:Static res:Resource.AdditionalMathExpanderHeader}">
-                    <Grid>
+                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -847,35 +848,35 @@ limitations under the License. -->
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Row="0" Grid.Column="0" Tag=":=" Click="InsertChar_Click">
-                            <Rectangle Fill="{StaticResource assign}" Width="12" Height="20" />
+                            <TextBlock>:=</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.DefToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" Tag="undef" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource undef}" Width="46" Height="20" />
+                            <TextBlock>undef(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.UndefToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="deriv" Click="InsertDoubleArgFunc_Click">
-                            <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
+                            <TextBlock>deriv(x)</TextBlock>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="simplify" Click="InsertFunc_Click">
-                            <Rectangle Fill="{StaticResource simplify}" Width="48" Height="20" />
+                            <TextBlock>simplify(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SimplifyToolTip}" />
                             </Button.ToolTip>
                         </Button>
 
                         <Button Grid.Row="1" Grid.Column="0" Tag="gcd" Click="InsertDoubleArgFunc_Click">
-                            <Rectangle Fill="{StaticResource gcd}" Width="46" Height="20" />
+                            <TextBlock>gcd(a, b)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.GCDToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" Tag="lcm" Click="InsertDoubleArgFunc_Click">
-                            <Rectangle Fill="{StaticResource lcm}" Width="46" Height="20" />
+                            <TextBlock>lcm(a, b)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.LCMToolTip}" />
                             </Button.ToolTip>

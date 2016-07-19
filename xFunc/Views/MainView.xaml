@@ -264,7 +264,7 @@ limitations under the License. -->
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonStyle}" />
                 </StackPanel.Resources>
                 <Expander x:Name="numberToolBar" Header="{x:Static res:Resource.NumberAndArithmeticExpanderHeader}" IsExpanded="True">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -332,7 +332,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="standartMathToolBar" Header="{x:Static res:Resource.StandartExpanderHeader}" IsExpanded="True">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -403,7 +403,7 @@ limitations under the License. -->
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="2" Grid.Column="1" Tag="round" Click="InsertFunc_Click">
-                            <TextBlock>round(x, y)</TextBlock>
+                            <TextBlock>round(x)</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.RoundToolTip}" />
                             </Button.ToolTip>
@@ -423,7 +423,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="trigonometricToolBar" Header="{x:Static res:Resource.TrigonometricExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -513,7 +513,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="hyperbolicToolBar" Header="{x:Static res:Resource.HyperbolicExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -603,7 +603,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="matrixToolBar" Header="{x:Static res:Resource.MatrixExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                         </Grid.RowDefinitions>
@@ -635,7 +635,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="bitwiseToolBar" Header="{x:Static res:Resource.BitwiseExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -699,7 +699,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="progToolBar" Header="{x:Static res:Resource.ProgExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -809,7 +809,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="constantsMathToolBar" Header="{x:Static res:Resource.ConstantsExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                         </Grid.RowDefinitions>
@@ -835,7 +835,7 @@ limitations under the License. -->
                     </Grid>
                 </Expander>
                 <Expander x:Name="additionalMathToolBar" Header="{x:Static res:Resource.AdditionalMathExpanderHeader}">
-                    <Grid Margin="0,4,0,0" TextBlock.FontSize="18">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -860,7 +860,7 @@ limitations under the License. -->
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="2" Tag="deriv" Click="InsertDoubleArgFunc_Click">
-                            <TextBlock>deriv(x)</TextBlock>
+                            <Rectangle Fill="{StaticResource deriv}" Width="20" Height="20" />
                         </Button>
                         <Button Grid.Row="0" Grid.Column="3" Tag="simplify" Click="InsertFunc_Click">
                             <TextBlock>simplify(x)</TextBlock>
@@ -882,13 +882,13 @@ limitations under the License. -->
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="2" Tag="sum" Click="InsertDoubleArgFunc_Click">
-                            <Rectangle Fill="{StaticResource sum}" Width="40" Height="20" />
+                            <TextBlock>∑</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.SumToolTip}" />
                             </Button.ToolTip>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="3" Tag="product" Click="InsertDoubleArgFunc_Click">
-                            <Rectangle Fill="{StaticResource product}" Width="40" Height="20" />
+                            <TextBlock>∏</TextBlock>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.ProductToolTip}" />
                             </Button.ToolTip>

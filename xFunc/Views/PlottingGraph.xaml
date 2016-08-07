@@ -12,15 +12,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. 
 See the License for the specific language governing permissions and 
 limitations under the License. -->
-<UserControl x:Class="xFunc.Views.PlottingGraph" 
+<UserControl x:Class="xFunc.Views.PlottingGraph"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:res="clr-namespace:xFunc.Resources"
              xmlns:views="clr-namespace:xFunc.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600"
              SizeChanged="this_SizeChanged"
@@ -34,11 +32,7 @@ limitations under the License. -->
             <RowDefinition x:Name="secondRow" Height="39" />
         </Grid.RowDefinitions>
 
-        <views:DrawingCanvas x:Name="canvas" Grid.Row="0" Background="#FFEFEFEF" SnapsToDevicePixels="True">
-            <i:Interaction.Behaviors>
-                <ei:TranslateZoomRotateBehavior />
-            </i:Interaction.Behaviors>
-        </views:DrawingCanvas>
+        <views:DrawingCanvas x:Name="canvas" Grid.Row="0" Background="#FFEFEFEF" SnapsToDevicePixels="True"  />
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0">
             <Grid Background="White">
                 <Grid.ColumnDefinitions>

@@ -1869,6 +1869,27 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void IfElseNegativeTest()
+        {
+            var tokens = lexer.Tokenize("if(True, 1, -1)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.If, 3),
+                new SymbolToken(Symbols.OpenBracket),
+                new BooleanToken(true),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void ForTest()
         {
             var tokens = lexer.Tokenize("for(z := z + 1)");

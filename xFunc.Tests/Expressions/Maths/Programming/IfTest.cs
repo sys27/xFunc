@@ -40,6 +40,21 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         }
 
         [Fact]
+        public void CalculateIfElseNegativeNumberTest()
+        {
+            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+
+            var cond = new Equal(new Variable("x"), new Number(0));
+            var @if = new If(cond, new Number(1), new UnaryMinus(new Number(1)));
+
+            Assert.Equal(1.0, @if.Calculate(parameters));
+
+            parameters["x"] = 10;
+
+            Assert.Equal(-1.0, @if.Calculate(parameters));
+        }
+
+        [Fact]
         public void CalculateIfTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };

@@ -37,7 +37,7 @@ namespace xFunc.Maths
         public Lexer()
         {
             notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor" };
-            unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=' };
+            unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=', ',' };
         }
 
         private static bool IsBalanced(string str)

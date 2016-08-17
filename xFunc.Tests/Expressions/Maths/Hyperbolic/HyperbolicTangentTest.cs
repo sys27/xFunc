@@ -30,7 +30,16 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
 
             Assert.Equal(Math.Tanh(1), exp.Calculate());
         }
-        
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Tanh(new Number(1));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

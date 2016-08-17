@@ -30,7 +30,16 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
             var exp = new Arsinh(new Number(1));
 
             Assert.Equal(MathExtentions.Asinh(1), exp.Calculate());
-        }        
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Arsinh(new Number(1));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
 
     }
 

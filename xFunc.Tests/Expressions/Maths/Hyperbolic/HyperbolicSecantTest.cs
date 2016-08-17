@@ -32,6 +32,15 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
             Assert.Equal(MathExtentions.Sech(1), exp.Calculate());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Sech(new Number(1));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

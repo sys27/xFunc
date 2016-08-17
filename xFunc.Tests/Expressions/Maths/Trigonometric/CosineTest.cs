@@ -47,6 +47,15 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
             Assert.Equal(Math.Cos(1 * Math.PI / 200), exp.Calculate(AngleMeasurement.Gradian));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Cos(new Number(1));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

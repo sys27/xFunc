@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class DelegateExpressionTest
     {
 
@@ -59,6 +59,21 @@ namespace xFunc.Tests.Expressions.Maths
             var result = uf2.Calculate(new ExpressionParameters(funcs));
 
             Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void CalculateTest4()
+        {
+            var func = new DelegateExpression(p => 1.0);
+            var result = func.Calculate();
+
+            Assert.Equal(1.0, result);
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new DelegateExpression(x => null).Clone());
         }
 
     }

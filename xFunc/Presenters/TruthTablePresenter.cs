@@ -26,6 +26,7 @@ namespace xFunc.Presenters
     public class TruthTablePresenter
     {
 
+        private Lexer lexer;
         private Parser parser;
         private IExpression expression;
         private IEnumerable<IExpression> expressions;
@@ -45,12 +46,16 @@ namespace xFunc.Presenters
 
         public void Generate(string strExp)
         {
-            expression = parser.Parse(strExp);
+            lexer = new Lexer();
+
+            var tokens = lexer.Tokenize(strExp);
+
+            expression = parser.Parse(tokens);
             if (!expression.ResultType.HasFlagNI(ExpressionResultType.Boolean))
                 throw new NotSupportedException();
 
             expressions = Helpers.ConvertExpressionToCollection(expression);
-            parameters = Helpers.GetParameters(parser.Lexer.Tokenize(strExp));
+            parameters = Helpers.GetParameters(tokens);
             table = new List<TruthTableRowViewModel>();
 
             var parametersCount = parameters.Count();

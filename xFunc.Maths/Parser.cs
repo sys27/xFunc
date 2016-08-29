@@ -51,7 +51,7 @@ namespace xFunc.Maths
         /// <summary>
         /// Parses the specified function.
         /// </summary>
-        /// <param name="function">The function.</param>
+        /// <param name="tokens">The list of tokens.</param>
         /// <returns>The parsed expression.</returns>
         public IExpression Parse(IEnumerable<IToken> tokens)
         {

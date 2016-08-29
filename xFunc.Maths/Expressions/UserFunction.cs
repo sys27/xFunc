@@ -98,22 +98,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            var builder = new StringBuilder();
-            builder.Append(function);
-            builder.Append('(');
-            if (m_arguments != null)
-            {
-                foreach (var arg in m_arguments)
-                {
-                    builder.Append(arg);
-                    builder.Append(',');
-                }
-                if (m_arguments.Length > 0)
-                    builder.Remove(builder.Length - 1, 1);
-            }
-            builder.Append(')');
-
-            return builder.ToString();
+            return base.ToString(function);
         }
 
         /// <summary>

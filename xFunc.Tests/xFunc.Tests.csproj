@@ -145,7 +145,6 @@
     <Compile Include="Expressions\Maths\UnaryTest.cs" />
     <Compile Include="Expressions\Maths\UndefineTest.cs" />
     <Compile Include="Expressions\Maths\UserFunctionTest.cs" />
-    <Compile Include="MathLexerMock.cs" />
     <Compile Include="MathLexerTest.cs" />
     <Compile Include="MathParameterCollectionTest.cs" />
     <Compile Include="MathParserTest.cs" />

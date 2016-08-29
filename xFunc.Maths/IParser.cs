@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Tokens;
 
 namespace xFunc.Maths
 {
@@ -27,9 +29,9 @@ namespace xFunc.Maths
         /// <summary>
         /// Parses the specified function.
         /// </summary>
-        /// <param name="function">The function.</param>
+        /// <param name="tokens">The list of tokens.</param>
         /// <returns>The parsed expression.</returns>
-        IExpression Parse(string function);
+        IExpression Parse(IEnumerable<IToken> tokens);
 
     }
 

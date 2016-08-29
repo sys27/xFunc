@@ -30,13 +30,10 @@ namespace xFunc.Tests
     {
 
         private Parser parser;
-        private MathLexerMock lexer;
 
         public MathParserTest()
         {
-            lexer = new MathLexerMock();
-            var simplifier = new Simplifier();
-            parser = new Parser(lexer, new ExpressionFactory());
+            parser = new Parser(new ExpressionFactory());
         }
 
         [Fact]
@@ -76,15 +73,21 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ParseNullStr()
+        public void ParseNull()
         {
             Assert.Throws<ArgumentNullException>(() => parser.Parse(null));
         }
 
         [Fact]
+        public void ParseEmptyTokens()
+        {
+            Assert.Throws<ArgumentException>(() => parser.Parse(new List<IToken>()));
+        }
+
+        [Fact]
         public void ParseLog()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Log, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -94,14 +97,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("log(9, 3)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("log(9, 3)", exp.ToString());
         }
 
         [Fact]
         public void ParseLogWithOneParam()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Log, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -109,13 +112,13 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<ParserException>(() => parser.Parse("log(9)"));
+            Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ParseRoot()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Root, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -125,14 +128,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("root(x, 3)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("root(x, 3)", exp.ToString());
         }
 
         [Fact]
         public void ParseRootWithOneParam()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Root, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -140,13 +143,13 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<ParserException>(() => parser.Parse("root(x)"));
+            Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ParseDerivWithOneParam()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Derivative, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -157,14 +160,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("deriv(sin(x))");
+            var exp = parser.Parse(tokens);
             Assert.Equal("deriv(sin(x))", exp.ToString());
         }
 
         [Fact]
         public void ParseDerivSecondParamIsNotVar()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Derivative, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -174,52 +177,52 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<ArgumentException>(() => parser.Parse("deriv(x, 3)"));
+            Assert.Throws<ArgumentException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ParseAssign()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Assign),
                 new NumberToken(3)
             };
 
-            var exp = parser.Parse("x := 3");
+            var exp = parser.Parse(tokens);
             Assert.Equal("x := 3", exp.ToString());
         }
 
         [Fact]
         public void ParseAssignWithOneParam()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Assign)
             };
 
-            Assert.Throws<ParserException>(() => parser.Parse("x := "));
+            Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ParseAssignFirstParamIsNotVar()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new NumberToken(5),
                 new OperationToken(Operations.Assign),
                 new NumberToken(3)
             };
 
-            Assert.Throws<NotSupportedException>(() => parser.Parse("5 := 3"));
+            Assert.Throws<NotSupportedException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ErrorWhileParsingTree()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Sine, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -228,27 +231,27 @@ namespace xFunc.Tests
                 new NumberToken(2)
             };
 
-            Assert.Throws<ParserException>(() => parser.Parse("sin(x) 2"));
+            Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void StringVarParserTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("aaa"),
                 new OperationToken(Operations.Assign),
                 new NumberToken(1)
             };
 
-            var exp = parser.Parse("aaa := 1");
+            var exp = parser.Parse(tokens);
             Assert.Equal("aaa := 1", exp.ToString());
         }
 
         [Fact]
         public void AssignUserFuncTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new UserFunctionToken("func", 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -261,14 +264,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("func(x) := sin(x)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("func(x) := sin(x)", exp.ToString());
         }
 
         [Fact]
         public void UserFunc()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new NumberToken(1),
                 new OperationToken(Operations.Addition),
@@ -278,14 +281,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("1 + func(x)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("1 + func(x)", exp.ToString());
         }
 
         [Fact]
         public void UndefParseTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Undefine, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -296,27 +299,27 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("undef(f(x))");
+            var exp = parser.Parse(tokens);
             Assert.Equal("undef(f(x))", exp.ToString());
         }
 
         [Fact]
         public void UndefWithoutParamsTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Undefine, 0),
                 new SymbolToken(Symbols.OpenBracket),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<ParserException>(() => parser.Parse("undef()"));
+            Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ParserTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Cosine, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -329,14 +332,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("cos(x) + sin(x)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("cos(x) + sin(x)", exp.ToString());
         }
 
         [Fact]
         public void GCDTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.GCD, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -346,14 +349,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("gcd(12, 16)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("gcd(12, 16)", exp.ToString());
         }
 
         [Fact]
         public void GCDOfThreeTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.GCD, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -365,14 +368,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("gcd(12, 16, 8)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("gcd(12, 16, 8)", exp.ToString());
         }
 
         [Fact]
         public void LCMTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.LCM, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -382,14 +385,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("lcm(12, 16)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("lcm(12, 16)", exp.ToString());
         }
 
         [Fact]
         public void SimplifyTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Simplify, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -397,14 +400,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("simplify(x)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("simplify(x)", exp.ToString());
         }
 
         [Fact]
         public void FactorialTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Factorial, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -412,24 +415,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("fact(4)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("fact(4)", exp.ToString());
-        }
-
-        [Fact]
-        public void SaveLastExpFalseTest()
-        {
-            var parser = new Parser() { SaveLastExpression = false };
-            var e1 = parser.Parse("e");
-            var e2 = parser.Parse("e");
-
-            Assert.NotSame(e1, e2);
-        }
+        }        
 
         [Fact]
         public void SumToTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -439,14 +432,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("sum(i, 20)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("sum(i, 20)", exp.ToString());
         }
 
         [Fact]
         public void SumFromToTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -458,14 +451,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("sum(i, 2, 20)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("sum(i, 2, 20)", exp.ToString());
         }
 
         [Fact]
         public void SumFromToIncTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -479,14 +472,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("sum(i, 2, 20, 2)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("sum(i, 2, 20, 2)", exp.ToString());
         }
 
         [Fact]
         public void SumFromToIncVarTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 5),
                 new SymbolToken(Symbols.OpenBracket),
@@ -502,14 +495,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("sum(k, 2, 20, 2, k)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("sum(k, 2, 20, 2, k)", exp.ToString());
         }
 
         [Fact]
         public void ProductToTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -519,14 +512,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("product(i, 20)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("product(i, 20)", exp.ToString());
         }
 
         [Fact]
         public void ProductFromToTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -538,14 +531,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("product(i, 2, 20)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("product(i, 2, 20)", exp.ToString());
         }
 
         [Fact]
         public void ProductFromToIncTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -559,14 +552,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("product(i, 2, 20, 2)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("product(i, 2, 20, 2)", exp.ToString());
         }
 
         [Fact]
         public void ProductFromToIncVarTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 5),
                 new SymbolToken(Symbols.OpenBracket),
@@ -582,14 +575,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("product(k, 2, 20, 2, k)");
+            var exp = parser.Parse(tokens);
             Assert.Equal("product(k, 2, 20, 2, k)", exp.ToString());
         }
 
         [Fact]
         public void VectorTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Vector, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -601,14 +594,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("vector{2, 3, 4}");
+            var exp = parser.Parse(tokens);
             Assert.Equal("{2, 3, 4}", exp.ToString());
         }
 
         [Fact]
         public void VectorTwoDimTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -628,14 +621,14 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("matrix{vector{2, 3}, vector{4, 7}}");
+            var exp = parser.Parse(tokens);
             Assert.Equal("{{2, 3}, {4, 7}}", exp.ToString());
         }
 
         [Fact]
         public void MatrixAndNotVectorTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -645,13 +638,13 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<MatrixIsInvalidException>(() => parser.Parse("matrix{2, 3}"));
+            Assert.Throws<MatrixIsInvalidException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void MatrixWithDiffVectorSizeTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -673,13 +666,13 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<MatrixIsInvalidException>(() => parser.Parse("matrix{vector{2, 3}, vector{4, 7, 2}}"));
+            Assert.Throws<MatrixIsInvalidException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void TooMuchParamsTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.Sine, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -689,13 +682,13 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<ParserException>(() => parser.Parse("sin(x, 3)"));
+            Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
 
         [Fact]
         public void ForTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.For, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -717,7 +710,7 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("for(2, x := 0, x < 10, x := x + 1)");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("for(2, x := 0, x < 10, x := x + 1)", exp.ToString());
         }
@@ -725,7 +718,7 @@ namespace xFunc.Tests
         [Fact]
         public void WhileTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.While, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -741,7 +734,7 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("while(x := x + 1, (1 == 1))");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("while(x := x + 1, (1 == 1))", exp.ToString());
         }
@@ -749,7 +742,7 @@ namespace xFunc.Tests
         [Fact]
         public void IfTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.If, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -767,7 +760,7 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("if(x == 0 && y != 0, 2, 8)");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("if((x == 0) && (y != 0), 2, 8)", exp.ToString());
         }
@@ -775,7 +768,7 @@ namespace xFunc.Tests
         [Fact]
         public void ConditionalAndTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Equal),
@@ -786,7 +779,7 @@ namespace xFunc.Tests
                 new NumberToken(0)
             };
 
-            var exp = parser.Parse("x == 0 && y != 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("(x == 0) && (y != 0)", exp.ToString());
         }
@@ -794,7 +787,7 @@ namespace xFunc.Tests
         [Fact]
         public void ConditionalOrTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Equal),
@@ -805,7 +798,7 @@ namespace xFunc.Tests
                 new NumberToken(0)
             };
 
-            var exp = parser.Parse("x == 0 || y != 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("(x == 0) || (y != 0)", exp.ToString());
         }
@@ -813,14 +806,14 @@ namespace xFunc.Tests
         [Fact]
         public void EqualTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Equal),
                 new NumberToken(0),
             };
 
-            var exp = parser.Parse("x == 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x == 0", exp.ToString());
         }
@@ -828,14 +821,14 @@ namespace xFunc.Tests
         [Fact]
         public void NotEqualTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.NotEqual),
                 new NumberToken(0),
             };
 
-            var exp = parser.Parse("x != 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x != 0", exp.ToString());
         }
@@ -843,14 +836,14 @@ namespace xFunc.Tests
         [Fact]
         public void LessThenTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.LessThan),
                 new NumberToken(0),
             };
 
-            var exp = parser.Parse("x < 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x < 0", exp.ToString());
         }
@@ -858,14 +851,14 @@ namespace xFunc.Tests
         [Fact]
         public void LessOrEqualTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.LessOrEqual),
                 new NumberToken(0),
             };
 
-            var exp = parser.Parse("x <= 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x <= 0", exp.ToString());
         }
@@ -873,14 +866,14 @@ namespace xFunc.Tests
         [Fact]
         public void GreaterThenTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.GreaterThan),
                 new NumberToken(0),
             };
 
-            var exp = parser.Parse("x > 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x > 0", exp.ToString());
         }
@@ -888,14 +881,14 @@ namespace xFunc.Tests
         [Fact]
         public void GreaterOrEqualTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.GreaterOrEqual),
                 new NumberToken(0),
             };
 
-            var exp = parser.Parse("x >= 0");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x >= 0", exp.ToString());
         }
@@ -903,13 +896,13 @@ namespace xFunc.Tests
         [Fact]
         public void IncTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Increment)
             };
 
-            var exp = parser.Parse("x++");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x++", exp.ToString());
         }
@@ -917,7 +910,7 @@ namespace xFunc.Tests
         [Fact]
         public void IncForTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new FunctionToken(Functions.For, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -936,7 +929,7 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            var exp = parser.Parse("for(2, x := 0, x < 10, x++)");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("for(2, x := 0, x < 10, x++)", exp.ToString());
         }
@@ -944,13 +937,13 @@ namespace xFunc.Tests
         [Fact]
         public void DecTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Decrement)
             };
 
-            var exp = parser.Parse("x--");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x--", exp.ToString());
         }
@@ -958,14 +951,14 @@ namespace xFunc.Tests
         [Fact]
         public void AddAssing()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.AddAssign),
                 new NumberToken(2)
             };
 
-            var exp = parser.Parse("x += 2");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x += 2", exp.ToString());
         }
@@ -973,14 +966,14 @@ namespace xFunc.Tests
         [Fact]
         public void MulAssing()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.MulAssign),
                 new NumberToken(2)
             };
 
-            var exp = parser.Parse("x *= 2");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x *= 2", exp.ToString());
         }
@@ -988,14 +981,14 @@ namespace xFunc.Tests
         [Fact]
         public void SubAssing()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.SubAssign),
                 new NumberToken(2)
             };
 
-            var exp = parser.Parse("x -= 2");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x -= 2", exp.ToString());
         }
@@ -1003,14 +996,14 @@ namespace xFunc.Tests
         [Fact]
         public void DivAssing()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.DivAssign),
                 new NumberToken(2)
             };
 
-            var exp = parser.Parse("x /= 2");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("x /= 2", exp.ToString());
         }
@@ -1018,14 +1011,14 @@ namespace xFunc.Tests
         [Fact]
         public void BoolConstTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new BooleanToken(true),
                 new OperationToken(Operations.And),
                 new BooleanToken(false)
             };
 
-            var exp = parser.Parse("true & false");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("True and False", exp.ToString());
         }
@@ -1033,7 +1026,7 @@ namespace xFunc.Tests
         [Fact]
         public void LogicAddPriorityTest()
         {
-            lexer.Tokens = new List<IToken>()
+            var tokens = new List<IToken>()
             {
                 new NumberToken(3),
                 new OperationToken(Operations.GreaterThan),
@@ -1044,7 +1037,7 @@ namespace xFunc.Tests
                 new NumberToken(3),
             };
 
-            var exp = parser.Parse("3 > 4 and 1 < 3");
+            var exp = parser.Parse(tokens);
 
             Assert.Equal("(3 > 4) and (1 < 3)", exp.ToString());
         }        
@@ -1067,7 +1060,6 @@ namespace xFunc.Tests
                 new VariableToken("c"),
                 new SymbolToken(Symbols.CloseBracket)
             };
-            lexer.Tokens = tokens;
             var expected = new ParameterCollection(false)
             {
                 new Parameter("a", false),
@@ -1076,8 +1068,7 @@ namespace xFunc.Tests
             };
 
             var actual = Helpers.GetParameters(tokens);
-
-
+            
             Assert.Equal(expected, actual);
         }
 

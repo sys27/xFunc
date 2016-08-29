@@ -27,6 +27,7 @@ namespace xFunc.Maths
     public class Processor
     {
 
+        private ILexer lexer;
         private ISimplifier simplifier;
         private IDifferentiator differentiator;
         private IParser parser;
@@ -38,30 +39,33 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
         public Processor()
-            : this(new Parser(new Lexer(), new ExpressionFactory()), new Simplifier(), new Differentiator(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
+            : this(new Lexer(), new Parser(new ExpressionFactory()), new Simplifier(), new Differentiator(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
+        /// <param name="lexer">The lexer.</param>
         /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
-        public Processor(IParser parser, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(parser, simplifier, differentiator, new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
+        public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator)
+            : this(lexer, parser, simplifier, differentiator, new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor" /> class.
         /// </summary>
+        /// <param name="lexer">The lexer.</param>
         /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="parameters">The collection of parameters.</param>
-        public Processor(IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
+        public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
         {
+            this.lexer = lexer;
             this.simplifier = simplifier;
             this.differentiator = differentiator;
             this.parser = parser;
@@ -216,11 +220,26 @@ namespace xFunc.Maths
         public IExpression Parse(string function, bool simplify)
         {
             if (simplify)
-                return simplifier.Simplify(parser.Parse(function));
+                return simplifier.Simplify(parser.Parse(lexer.Tokenize(function)));
 
-            return parser.Parse(function);
+            return parser.Parse(lexer.Tokenize(function));
         }
         
+        /// <summary>
+        /// Gets or sets a implementation of <see cref="ILexer"/>.
+        /// </summary>
+        public ILexer Lexer
+        {
+            get
+            {
+                return lexer;
+            }
+            set
+            {
+                lexer = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets the parser.
         /// </summary>

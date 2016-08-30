@@ -235,7 +235,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void StringVarParserTest()
+        public void DefineParserTest()
         {
             var tokens = new List<IToken>()
             {
@@ -286,6 +286,23 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void DefineParseFailTest()
+        {
+            var tokens = new List<IToken>()
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new OperationToken(Operations.Assign),
+                new NumberToken(1),
+                new SymbolToken(Symbols.CloseBracket)
+            };            
+
+            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
         public void UndefParseTest()
         {
             var tokens = new List<IToken>()
@@ -314,6 +331,22 @@ namespace xFunc.Tests
             };
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
+        public void UndefineParseFailTest()
+        {
+            var tokens = new List<IToken>()
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new FunctionToken(Functions.Undefine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
         }
 
         [Fact]
@@ -417,7 +450,7 @@ namespace xFunc.Tests
 
             var exp = parser.Parse(tokens);
             Assert.Equal("fact(4)", exp.ToString());
-        }        
+        }
 
         [Fact]
         public void SumToTest()
@@ -1040,7 +1073,7 @@ namespace xFunc.Tests
             var exp = parser.Parse(tokens);
 
             Assert.Equal("(3 > 4) and (1 < 3)", exp.ToString());
-        }        
+        }
 
         [Fact]
         public void GetLogicParametersTest()
@@ -1068,7 +1101,7 @@ namespace xFunc.Tests
             };
 
             var actual = Helpers.GetParameters(tokens);
-            
+
             Assert.Equal(expected, actual);
         }
 

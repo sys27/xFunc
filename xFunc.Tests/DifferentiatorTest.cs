@@ -533,6 +533,14 @@ namespace xFunc.Tests
             Assert.Equal("0", deriv.ToString());
         }
 
+        public void MulNegativeRightParamTest1()
+        {
+            // sin(cos(x))
+            var exp = new Sin(new Cos(new Variable("x")));
+            var deriv = Differentiate(exp);
+            Assert.Equal("-(sin(x) * cos(cos(x)))", deriv.ToString());
+        }
+
         [Fact]
         public void PowDerivativeTest1()
         {

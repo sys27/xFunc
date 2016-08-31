@@ -555,6 +555,17 @@ namespace xFunc.Tests
             SimpleTest(mul, expected);
         }
 
+        [Fact]
+        public void MulNegativeRightParamTest1()
+        {
+            // sin(cos(x))
+            var x = new Variable("x");
+            var mul = new Mul(new Cos(new Cos(x)), new UnaryMinus(new Sin(x)));
+            var expected = new UnaryMinus(new Mul(new Sin(x), new Cos(new Cos(x))));
+
+            SimpleTest(mul, expected);
+        }
+
         #endregion
 
         #region Div

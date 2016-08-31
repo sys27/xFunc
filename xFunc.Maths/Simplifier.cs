@@ -290,7 +290,7 @@ namespace xFunc.Maths
             if (leftMultiplier != null && rightMultiplier != null)
             {
                 var multiplier = leftMultiplier.Value + rightMultiplier.Value;
-                
+
                 if (multiplier == 1)
                     return varMultiplier;
                 else if (multiplier == -1)
@@ -560,7 +560,7 @@ namespace xFunc.Maths
             if (leftMultiplier != null && rightMultiplier != null)
             {
                 var multiplier = leftMultiplier.Value * rightMultiplier.Value;
-                
+
                 if (multiplier == 1)
                     return new Pow(varMultiplier, new Number(2));
                 else if (multiplier == -1)
@@ -568,6 +568,10 @@ namespace xFunc.Maths
                 else
                     return new Mul(new Number(multiplier), new Pow(varMultiplier, new Number(2)));
             }
+
+            var rightNegative = mul.Right as UnaryMinus;
+            if (rightNegative != null)
+                return new UnaryMinus(new Mul(rightNegative.Argument, mul.Left));
 
             return mul;
         }

@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions.Programming
                 throw new NotSupportedException();
 
             var newValue = Convert.ToDouble(parameter) * (double)m_right.Calculate(parameters);
-            parameters.Parameters[var.Name] = newValue;
+            parameters.Variables[var.Name] = newValue;
 
             return newValue;
         }

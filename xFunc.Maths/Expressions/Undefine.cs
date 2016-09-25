@@ -104,7 +104,7 @@ namespace xFunc.Maths.Expressions
             var variable = key as Variable;
             if (variable != null)
             {
-                parameters.Parameters.Remove(variable.Name);
+                parameters.Variables.Remove(variable.Name);
             }
             else
             {

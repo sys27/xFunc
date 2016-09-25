@@ -115,7 +115,7 @@ namespace xFunc.Maths.Expressions
 
             var func = parameters.Functions.GetKeyByKey(this);
 
-            var newParameters = new ParameterCollection(parameters.Parameters.Collection);
+            var newParameters = new ParameterCollection(parameters.Variables.Collection);
             for (int i = 0; i < m_arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;

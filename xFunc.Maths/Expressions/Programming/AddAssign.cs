@@ -55,12 +55,12 @@ namespace xFunc.Maths.Expressions.Programming
         public override object Calculate(ExpressionParameters parameters)
         {
             var var = (Variable)m_left;
-            var parameter = parameters.Parameters[var.Name];
+            var parameter = parameters.Variables[var.Name];
             if (parameter is bool)
                 throw new NotSupportedException();
 
             var newValue = Convert.ToDouble(parameter) + (double)m_right.Calculate(parameters);
-            parameters.Parameters[var.Name] = newValue;
+            parameters.Variables[var.Name] = newValue;
 
             return newValue;
         }

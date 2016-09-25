@@ -313,7 +313,7 @@ namespace xFunc.Views
                 double tempY;
                 for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
                 {
-                    parameters.Parameters["x"] = x;
+                    parameters.Variables["x"] = x;
                     y = (double)exp.Calculate(parameters);
 
                     tempY = centerY - (y * cm);

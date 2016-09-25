@@ -172,7 +172,7 @@ namespace xFunc.Maths.Expressions
             var to = (double)To.Calculate(parameters);
             var inc = (double)(Increment?.Calculate(parameters) ?? 1.0);
 
-            var localParams = new ParameterCollection(parameters.Parameters.Collection);
+            var localParams = new ParameterCollection(parameters.Variables.Collection);
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
             localParams.Add(variable, from);
             var param = new ExpressionParameters(parameters.AngleMeasurement, localParams, parameters.Functions);

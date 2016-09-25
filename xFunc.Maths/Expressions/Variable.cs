@@ -105,7 +105,7 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            return parameters.Parameters[name];
+            return parameters.Variables[name];
         }
 
         /// <summary>

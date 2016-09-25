@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var @for = new For(new Variable("i"), init, cond, iter);
             @for.Calculate(parameters);
 
-            Assert.Equal(10.0, parameters.Parameters["i"]);
+            Assert.Equal(10.0, parameters.Variables["i"]);
         }
 
     }

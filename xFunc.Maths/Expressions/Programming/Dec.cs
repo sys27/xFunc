@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.Programming
                 throw new NotSupportedException();
 
             var newValue = Convert.ToDouble(parameter) - 1;
-            parameters.Parameters[var.Name] = newValue;
+            parameters.Variables[var.Name] = newValue;
 
             return newValue;
         }

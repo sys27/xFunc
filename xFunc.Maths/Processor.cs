@@ -338,7 +338,7 @@ namespace xFunc.Maths
         {
             get
             {
-                return parameters.Parameters;
+                return parameters.Variables;
             }
         }
 

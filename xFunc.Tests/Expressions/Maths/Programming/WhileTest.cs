@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         public void CalculateWhileTest()
         {
             var parameters = new ExpressionParameters();
-            parameters.Parameters.Add(new Parameter("x", 0));
+            parameters.Variables.Add(new Parameter("x", 0));
 
             var body = new Define(new Variable("x"), new Add(new Variable("x"), new Number(2)));
             var cond = new LessThan(new Variable("x"), new Number(10));
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var @while = new While(body, cond);
             @while.Calculate(parameters);
 
-            Assert.Equal(10.0, parameters.Parameters["x"]);
+            Assert.Equal(10.0, parameters.Variables["x"]);
         }
 
     }

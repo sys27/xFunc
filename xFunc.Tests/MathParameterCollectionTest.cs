@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
@@ -28,8 +27,10 @@ namespace xFunc.Tests
         [Fact]
         public void GetItemFromCollectionTest()
         {
-            var parameters = new ParameterCollection();
-            parameters.Add(new Parameter("x", 2.3));
+            var parameters = new ParameterCollection
+            {
+                new Parameter("x", 2.3)
+            };
 
             Assert.Equal(2.3, parameters["x"]);
         }
@@ -64,8 +65,10 @@ namespace xFunc.Tests
         [Fact]
         public void SetExistItemFromCollectionTest()
         {
-            var parameters = new ParameterCollection();
-            parameters.Add(new Parameter("x", 2.3));
+            var parameters = new ParameterCollection
+            {
+                new Parameter("x", 2.3)
+            };
             parameters["x"] = 3.3;
 
             Assert.Equal(1, parameters.Collection.Count());
@@ -76,8 +79,10 @@ namespace xFunc.Tests
         [Fact]
         public void SetReadOnlyItemTest()
         {
-            var parameters = new ParameterCollection();
-            parameters.Add(new Parameter("hello", 2.5, ParameterType.ReadOnly));
+            var parameters = new ParameterCollection
+            {
+                new Parameter("hello", 2.5, ParameterType.ReadOnly)
+            };
 
             Assert.Throws<ParameterIsReadOnlyException>(() => parameters["hello"] = 5);
         }
@@ -85,8 +90,10 @@ namespace xFunc.Tests
         [Fact]
         public void OverrideConstsTest()
         {
-            var parameters = new ParameterCollection();
-            parameters["π"] = 4;
+            var parameters = new ParameterCollection
+            {
+                ["π"] = 4
+            };
 
             Assert.Equal(1, parameters.Collection.Count());
             Assert.True(parameters.ContainsKey("π"));
@@ -96,8 +103,10 @@ namespace xFunc.Tests
         [Fact]
         public void OverrideRemoveTest()
         {
-            var parameters = new ParameterCollection();
-            parameters.Add(new Parameter("a", 1));
+            var parameters = new ParameterCollection
+            {
+                new Parameter("a", 1)
+            };
             parameters["a"] = 2;
             parameters.Remove("a");
 

@@ -293,10 +293,10 @@ namespace xFunc.Maths
 
                 if (multiplier == 1)
                     return varMultiplier;
-                else if (multiplier == -1)
+                if (multiplier == -1)
                     return new UnaryMinus(varMultiplier);
-                else
-                    return new Mul(new Number(multiplier), varMultiplier);
+
+                return new Mul(new Number(multiplier), varMultiplier);
             }
 
             return add;
@@ -438,10 +438,10 @@ namespace xFunc.Maths
 
                 if (multiplier == -1)
                     return new UnaryMinus(varMultiplier);
-                else if (multiplier == 1)
+                if (multiplier == 1)
                     return varMultiplier;
-                else
-                    return new Mul(new Number(multiplier), varMultiplier);
+
+                return new Mul(new Number(multiplier), varMultiplier);
             }
 
             return sub;
@@ -563,10 +563,10 @@ namespace xFunc.Maths
 
                 if (multiplier == 1)
                     return new Pow(varMultiplier, new Number(2));
-                else if (multiplier == -1)
+                if (multiplier == -1)
                     return new UnaryMinus(new Pow(varMultiplier, new Number(2)));
-                else
-                    return new Mul(new Number(multiplier), new Pow(varMultiplier, new Number(2)));
+
+                return new Mul(new Number(multiplier), new Pow(varMultiplier, new Number(2)));
             }
 
             var rightNegative = mul.Right as UnaryMinus;

@@ -1466,7 +1466,7 @@ namespace xFunc.Tests
         public void UserFunctionDerivTest()
         {
             var parameters = new FunctionCollection();
-            var uf = new UserFunction("f", new[] { new Variable("x") }, 1);
+            var uf = new UserFunction("f", new IExpression[] { new Variable("x") }, 1);
             parameters.Add(uf, new Sin(new Variable("x")));
 
             var diff = Differentiate(uf, "x", parameters);

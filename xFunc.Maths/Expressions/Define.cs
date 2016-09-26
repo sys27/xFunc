@@ -90,13 +90,13 @@ namespace xFunc.Maths.Expressions
         /// The exception.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public object Calculate()
+        public object Execute()
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -104,7 +104,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> is null.</exception>
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -112,7 +112,7 @@ namespace xFunc.Maths.Expressions
             var variable = key as Variable;
             if (variable != null)
             {
-                parameters.Variables[variable.Name] = value.Calculate(parameters);
+                parameters.Variables[variable.Name] = value.Execute(parameters);
             }
             else
             {

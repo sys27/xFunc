@@ -57,12 +57,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             if (ResultType == ExpressionResultType.Matrix)
             {
@@ -76,7 +76,7 @@ namespace xFunc.Maths.Expressions
                 }
                 else
                 {
-                    var temp = m_left.Calculate(parameters);
+                    var temp = m_left.Execute(parameters);
                     if (temp is IExpression)
                         l = (IExpression)temp;
                     else
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions
                 }
                 else
                 {
-                    var temp = m_right.Calculate(parameters);
+                    var temp = m_right.Execute(parameters);
                     if (temp is IExpression)
                         r = (IExpression)temp;
                     else
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions
             }
 
             if (ResultType == ExpressionResultType.Number)
-                return (double)m_left.Calculate(parameters) * (double)m_right.Calculate(parameters);
+                return (double)m_left.Execute(parameters) * (double)m_right.Execute(parameters);
 
             throw new NotSupportedException();
         }

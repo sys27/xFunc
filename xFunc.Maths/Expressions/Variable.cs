@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Calculate()
+        public object Execute()
         {
             throw new NotSupportedException();
         }
@@ -100,7 +100,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">Collection of variables.</param>
         /// <returns>A value of this variable.</returns>
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));

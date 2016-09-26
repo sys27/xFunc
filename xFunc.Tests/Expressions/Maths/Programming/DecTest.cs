@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var dec = new Dec(new Variable("x"));
-            var result = (double)dec.Calculate(parameters);
+            var result = (double)dec.Execute(parameters);
 
             Assert.Equal(9.0, result);
             Assert.Equal(9.0, parameters["x"]);
@@ -41,7 +41,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var parameters = new ParameterCollection() { new Parameter("x", true) };
             var dec = new Inc(new Variable("x"));
 
-            Assert.Throws<NotSupportedException>(() => dec.Calculate(parameters));
+            Assert.Throws<NotSupportedException>(() => dec.Execute(parameters));
         }
 
     }

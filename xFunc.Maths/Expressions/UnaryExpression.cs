@@ -98,25 +98,25 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
+        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public virtual object Calculate()
+        public virtual object Execute()
         {
-            return Calculate(null);
+            return Execute(null);
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Calculate(ExpressionParameters parameters);
+        public abstract object Execute(ExpressionParameters parameters);
 
         /// <summary>
         /// Clones this instance.
@@ -219,6 +219,7 @@ namespace xFunc.Maths.Expressions
 
         /// <summary>
         /// Gets the type of the result.
+        /// Default: Number.
         /// </summary>
         /// <value>
         /// The type of the result.

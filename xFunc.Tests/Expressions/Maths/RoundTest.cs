@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void CalculateRoundWithoutDigits()
         {
             var round = new Round(new Number(5.555555));
-            var result = round.Calculate();
+            var result = round.Execute();
             var expected = 6.0;
 
             Assert.Equal(expected, result);
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void CalculateRoundWithDigits()
         {
             var round = new Round(new Number(5.555555), new Number(2));
-            var result = round.Calculate();
+            var result = round.Execute();
             var expected = 5.56;
 
             Assert.Equal(expected, result);

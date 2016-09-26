@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var mul = new MulAssign(new Variable("x"), new Number(2));
-            var result = mul.Calculate(parameters);
+            var result = mul.Execute(parameters);
             var expected = 20.0;
 
             Assert.Equal(expected, result);
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var parameters = new ParameterCollection() { new Parameter("x", true) };
             var add = new MulAssign(new Variable("x"), new Number(2));
 
-            Assert.Throws<NotSupportedException>(() => add.Calculate(parameters));
+            Assert.Throws<NotSupportedException>(() => add.Execute(parameters));
         }
 
         [Fact]

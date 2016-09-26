@@ -45,21 +45,21 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             var var = (Variable)m_left;
             var parameter = parameters.Variables[var.Name];
             if (parameter is bool)
                 throw new NotSupportedException();
 
-            var newValue = Convert.ToDouble(parameter) + (double)m_right.Calculate(parameters);
+            var newValue = Convert.ToDouble(parameter) + (double)m_right.Execute(parameters);
             parameters.Variables[var.Name] = newValue;
 
             return newValue;

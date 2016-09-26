@@ -57,16 +57,16 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Calculates this NOR expression.
+        /// Executes this NOR expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            return !((bool)m_left.Calculate(parameters) | (bool)m_right.Calculate(parameters));
+            return !((bool)m_left.Execute(parameters) | (bool)m_right.Execute(parameters));
         }
 
         /// <summary>

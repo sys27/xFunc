@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var cond = new LessThan(new Variable("x"), new Number(10));
 
             var @while = new While(body, cond);
-            @while.Calculate(parameters);
+            @while.Execute(parameters);
 
             Assert.Equal(10.0, parameters.Variables["x"]);
         }

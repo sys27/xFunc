@@ -53,18 +53,18 @@ namespace xFunc.Maths.Expressions
         {
             return ToString("ceil({0})");
         }
-        
+
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            return Math.Ceiling((double)m_argument.Calculate(parameters));
+            return Math.Ceiling((double)m_argument.Execute(parameters));
         }
 
         /// <summary>

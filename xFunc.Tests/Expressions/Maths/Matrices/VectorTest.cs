@@ -118,7 +118,7 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             var add = new Add(mul, vector2);
 
             var expected = new Vector(new[] { new Number(6), new Number(11), new Number(16) });
-            var result = add.Calculate();
+            var result = add.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             var sub = new Sub(mul, vector2);
 
             var expected = new Vector(new[] { new Number(2), new Number(5), new Number(8) });
-            var result = sub.Calculate();
+            var result = sub.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -148,7 +148,7 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             var mul = new Mul(sub, new Number(4));
 
             var expected = new Vector(new[] { new Number(4), new Number(4), new Number(4) });
-            var result = mul.Calculate();
+            var result = mul.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -163,7 +163,7 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             var mul = new Mul(add, new Number(4));
 
             var expected = new Vector(new[] { new Number(12), new Number(20), new Number(28) });
-            var result = mul.Calculate();
+            var result = mul.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -177,7 +177,7 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             var mul2 = new Mul(mul1, new Number(4));
 
             var expected = new Vector(new[] { new Number(8), new Number(16), new Number(24) });
-            var result = mul2.Calculate();
+            var result = mul2.Execute();
 
             Assert.Equal(expected, result);
         }

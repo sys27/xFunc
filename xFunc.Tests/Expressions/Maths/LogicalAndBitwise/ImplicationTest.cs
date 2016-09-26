@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var impl = new Implication(new Bool(true), new Bool(false));
 
-            Assert.Equal(false, impl.Calculate());
+            Assert.Equal(false, impl.Execute());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var impl = new Implication(new Bool(true), new Bool(true));
 
-            Assert.Equal(true, impl.Calculate());
+            Assert.Equal(true, impl.Execute());
         }
 
     }

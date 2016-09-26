@@ -101,14 +101,13 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Always throws an exception.
+        /// Executes the user function.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -119,11 +118,11 @@ namespace xFunc.Maths.Expressions
             for (int i = 0; i < m_arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Name] = (double)this.m_arguments[i].Calculate(parameters);
+                newParameters[arg.Name] = (double)this.m_arguments[i].Execute(parameters);
             }
 
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
-            return parameters.Functions[this].Calculate(expParam);
+            return parameters.Functions[this].Execute(expParam);
         }
         
         /// <summary>

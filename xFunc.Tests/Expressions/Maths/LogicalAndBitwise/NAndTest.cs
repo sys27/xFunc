@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var nand = new NAnd(new Bool(true), new Bool(true));
 
-            Assert.Equal(false, nand.Calculate());
+            Assert.Equal(false, nand.Execute());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var nand = new NAnd(new Bool(false), new Bool(true));
 
-            Assert.Equal(true, nand.Calculate());
+            Assert.Equal(true, nand.Execute());
         }
 
     }

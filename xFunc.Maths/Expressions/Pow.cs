@@ -65,9 +65,9 @@ namespace xFunc.Maths.Expressions
         /// A specified number raised to the specified power.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            return MathExtentions.Pow((double)m_left.Calculate(parameters), (double)m_right.Calculate(parameters));
+            return MathExtentions.Pow((double)m_left.Execute(parameters), (double)m_right.Execute(parameters));
         }
         
         /// <summary>

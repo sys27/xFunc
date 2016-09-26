@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -66,12 +66,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            var vector = m_argument.Calculate(parameters) as Vector;
+            var vector = m_argument.Execute(parameters) as Vector;
             if (vector != null)
                 return vector.Transpose();
-            var matrix = m_argument.Calculate(parameters) as Matrix;
+            var matrix = m_argument.Execute(parameters) as Matrix;
             if (matrix != null)
                 return matrix.Transpose();
 

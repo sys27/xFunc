@@ -133,7 +133,7 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 if (!(m_arguments[i] is Number))
                 {
-                    var result = m_arguments[i].Calculate(parameters);
+                    var result = m_arguments[i].Execute(parameters);
                     if (result is double)
                         args[i] = new Number((double)result);
                     else
@@ -149,7 +149,7 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -157,7 +157,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             return new Vector(CalculateVector(parameters));
         }
@@ -177,7 +177,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
 #if NET40_OR_GREATER
             return (from exp in m_arguments.AsParallel().AsOrdered()
-                    select (double)exp.Calculate(parameters)).ToArray();
+                    select (double)exp.Execute(parameters)).ToArray();
 #else
             return (from exp in m_arguments
                     select (double)exp.Calculate(parameters)).ToArray();

@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Sqrt(new Number(4));
 
-            Assert.Equal(Math.Sqrt(4), exp.Calculate());
+            Assert.Equal(Math.Sqrt(4), exp.Execute());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var exp = new Sqrt(new Number(-25));
 
-            Assert.Equal(double.NaN, exp.Calculate());
+            Assert.Equal(double.NaN, exp.Execute());
         }
 
     }

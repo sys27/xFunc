@@ -98,7 +98,7 @@ namespace xFunc.Maths
             if (exp is Define)
             {
                 var assign = exp as Define;
-                assign.Calculate(parameters);
+                assign.Execute(parameters);
 
                 if (assign.Key is Variable)
                     return new StringResult(string.Format(Resource.AssignVariable, assign.Key, assign.Value));
@@ -108,7 +108,7 @@ namespace xFunc.Maths
             if (exp is Undefine)
             {
                 var undef = exp as Undefine;
-                undef.Calculate(parameters);
+                undef.Execute(parameters);
 
                 if (undef.Key is Variable)
                     return new StringResult(string.Format(Resource.UndefineVariable, undef.Key));
@@ -116,7 +116,7 @@ namespace xFunc.Maths
                 return new StringResult(string.Format(Resource.UndefineFunction, undef.Key));
             }
 
-            var result = exp.Calculate(parameters);
+            var result = exp.Execute(parameters);
             if (result is double)
             {
                 if (numeralSystem == NumeralSystem.Decimal)

@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions
         /// The exception.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Calculate()
+        public object Execute()
         {
             throw new NotSupportedException();
         }
@@ -91,7 +91,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
             throw new NotSupportedException();
         }

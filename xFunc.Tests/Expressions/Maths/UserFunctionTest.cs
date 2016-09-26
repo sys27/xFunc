@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions.Maths
             functions.Add(new UserFunction("f", new IExpression[] { new Variable("x") }, 1), new Ln(new Variable("x")));
 
             var func = new UserFunction("f", new IExpression[] { new Number(1) }, 1);
-            Assert.Equal(Math.Log(1), func.Calculate(functions));
+            Assert.Equal(Math.Log(1), func.Execute(functions));
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace xFunc.Tests.Expressions.Maths
 
             var func = new UserFunction("f", new IExpression[] { new Number(1) }, 1);
 
-            Assert.Throws<KeyNotFoundException>(() => func.Calculate(functions));
+            Assert.Throws<KeyNotFoundException>(() => func.Execute(functions));
         }
 
     }

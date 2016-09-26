@@ -831,27 +831,27 @@ namespace xFunc.Maths
         #region IExpression
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
+        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public object Calculate()
+        public object Execute()
         {
-            return current.Calculate();
+            return current.Execute();
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
-            return current.Calculate(parameters);
+            return current.Execute(parameters);
         }
 
         /// <summary>

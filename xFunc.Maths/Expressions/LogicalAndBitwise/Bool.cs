@@ -36,25 +36,25 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Executes this expression.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public object Calculate()
+        public object Execute()
         {
             return value;
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
             return value;
         }

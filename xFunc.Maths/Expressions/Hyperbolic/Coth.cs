@@ -57,16 +57,16 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            return MathExtentions.Coth((double)m_argument.Calculate(parameters));
+            return MathExtentions.Coth((double)m_argument.Execute(parameters));
         }
 
         /// <summary>

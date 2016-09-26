@@ -59,20 +59,20 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             if (ResultType == ExpressionResultType.Matrix)
             {
                 if (m_left.ResultType.HasFlagNI(ExpressionResultType.Matrix))
                 {
-                    var l = m_left.Calculate(parameters);
+                    var l = m_left.Execute(parameters);
 
                     var left = l as Vector;
                     if (left != null)
@@ -83,7 +83,7 @@ namespace xFunc.Maths.Expressions
 
                 if (m_right.ResultType.HasFlagNI(ExpressionResultType.Matrix))
                 {
-                    var r = m_right.Calculate(parameters);
+                    var r = m_right.Execute(parameters);
 
                     var right = r as Vector;
                     if (right != null)
@@ -99,7 +99,7 @@ namespace xFunc.Maths.Expressions
             }
 
             if (ResultType == ExpressionResultType.Number)
-                return (double)m_left.Calculate(parameters) - (double)m_right.Calculate(parameters);
+                return (double)m_left.Execute(parameters) - (double)m_right.Execute(parameters);
 
             throw new NotSupportedException();
         }

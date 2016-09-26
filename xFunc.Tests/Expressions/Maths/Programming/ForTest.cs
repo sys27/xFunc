@@ -33,7 +33,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1))); 
 
             var @for = new For(new Variable("i"), init, cond, iter);
-            @for.Calculate(parameters);
+            @for.Execute(parameters);
 
             Assert.Equal(10.0, parameters.Variables["i"]);
         }

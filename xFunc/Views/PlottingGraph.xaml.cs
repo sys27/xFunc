@@ -314,7 +314,7 @@ namespace xFunc.Views
                 for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
                 {
                     parameters.Variables["x"] = x;
-                    y = (double)exp.Calculate(parameters);
+                    y = (double)exp.Execute(parameters);
 
                     tempY = centerY - (y * cm);
                     if (double.IsNaN(y) || tempY < 0 || tempY > currentHeight)

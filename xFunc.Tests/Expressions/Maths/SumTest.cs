@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Variable("i"), new Number(20));
 
-            Assert.Equal(210.0, sum.Calculate());
+            Assert.Equal(210.0, sum.Execute());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Variable("i"), new Number(4), new Number(20));
 
-            Assert.Equal(204.0, sum.Calculate());
+            Assert.Equal(204.0, sum.Execute());
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Variable("i"), new Number(4), new Number(20), new Number(2));
 
-            Assert.Equal(108.0, sum.Calculate());
+            Assert.Equal(108.0, sum.Execute());
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Variable("k"), new Number(4), new Number(20), new Number(2), new Variable("k"));
 
-            Assert.Equal(108.0, sum.Calculate());
+            Assert.Equal(108.0, sum.Execute());
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Pow(new Variable("a"), new Variable("i")), new Number(4));
 
-            Assert.Equal(30.0, sum.Calculate(new ParameterCollection() { new Parameter("a", 2) }));
+            Assert.Equal(30.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Pow(new Variable("a"), new Variable("i")), new Number(2), new Number(5));
 
-            Assert.Equal(60.0, sum.Calculate(new ParameterCollection() { new Parameter("a", 2) }));
+            Assert.Equal(60.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Pow(new Variable("a"), new Variable("i")), new Number(4), new Number(8), new Number(2));
 
-            Assert.Equal(336.0, sum.Calculate(new ParameterCollection() { new Parameter("a", 2) }));
+            Assert.Equal(336.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var sum = new Sum(new Pow(new Variable("a"), new Variable("k")), new Number(4), new Number(8), new Number(2), new Variable("k"));
 
-            Assert.Equal(336.0, sum.Calculate(new ParameterCollection() { new Parameter("a", 2) }));
+            Assert.Equal(336.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }
 
     }

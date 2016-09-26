@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Add(new Number(1), new Number(2));
 
-            Assert.Equal(3.0, exp.Calculate());
+            Assert.Equal(3.0, exp.Execute());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Add(new Number(-3), new Number(2));
 
-            Assert.Equal(-1.0, exp.Calculate());
+            Assert.Equal(-1.0, exp.Execute());
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Maths
             var add = new Add(vector1, vector2);
 
             var expected = new Vector(new[] { new Number(9), new Number(4) });
-            var result = add.Calculate();
+            var result = add.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -72,7 +72,7 @@ namespace xFunc.Tests.Expressions.Maths
                 new Vector(new[] { new Number(15), new Number(5) }), 
                 new Vector(new[] { new Number(6), new Number(4) }) 
             });
-            var result = add.Calculate();
+            var result = add.Execute();
 
             Assert.Equal(expected, result);
         }

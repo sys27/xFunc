@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Root(new Number(8), new Number(3));
 
-            Assert.Equal(Math.Pow(8, 1.0 / 3.0), exp.Calculate());
+            Assert.Equal(Math.Pow(8, 1.0 / 3.0), exp.Execute());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Root(new Number(-8), new Number(3));
 
-            Assert.Equal(-2.0, exp.Calculate());
+            Assert.Equal(-2.0, exp.Execute());
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var exp = new Root(new Number(-25), new Number(2));
 
-            Assert.Equal(double.NaN, exp.Calculate());
+            Assert.Equal(double.NaN, exp.Execute());
         }
                 
     }

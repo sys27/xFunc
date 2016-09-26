@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Exp(new Number(2));
 
-            Assert.Equal(Math.Exp(2), exp.Calculate());
+            Assert.Equal(Math.Exp(2), exp.Execute());
         }
         
     }

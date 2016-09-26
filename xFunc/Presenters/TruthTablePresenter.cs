@@ -63,7 +63,7 @@ namespace xFunc.Presenters
             {
                 SetBits(i, parametersCount);
 
-                var b = (bool)expression.Calculate(parameters);
+                var b = (bool)expression.Execute(parameters);
 
                 var row = new TruthTableRowViewModel(parametersCount, expressions.Count());
 
@@ -72,7 +72,7 @@ namespace xFunc.Presenters
                     row.VarsValues[j] = (bool)parameters[parameters.ElementAt(j).Key];
 
                 for (int j = 0; j < expressions.Count() - 1; j++)
-                    row.Values[j] = (bool)expressions.ElementAt(j).Calculate(parameters);
+                    row.Values[j] = (bool)expressions.ElementAt(j).Execute(parameters);
 
                 if (expressions.Count() != 0)
                     row.Result = b;

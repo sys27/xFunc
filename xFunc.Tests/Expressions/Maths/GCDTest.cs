@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var exp = new GCD(new Number(12), new Number(16));
 
-            Assert.Equal(4.0, exp.Calculate());
+            Assert.Equal(4.0, exp.Execute());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var exp = new GCD(new IExpression[] { new Number(64), new Number(16), new Number(8) }, 3);
 
-            Assert.Equal(8.0, exp.Calculate());
+            Assert.Equal(8.0, exp.Execute());
         }
 
         [Fact]

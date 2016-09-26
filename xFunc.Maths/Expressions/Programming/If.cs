@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -73,16 +73,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         /// <exception cref="System.ArgumentNullException">If the "else" statement is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            if ((bool)Condition.Calculate(parameters))
-                return Then.Calculate(parameters);
+            if ((bool)Condition.Execute(parameters))
+                return Then.Execute(parameters);
 
             var @else = Else;
             if (@else == null)
                 throw new ArgumentNullException(nameof(@else));
 
-            return @else.Calculate(parameters);
+            return @else.Execute(parameters);
         }
 
         /// <summary>

@@ -32,11 +32,11 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var cond = new Equal(new Variable("x"), new Number(10));
             var @if = new If(cond, new Number(20), new Number(0));
 
-            Assert.Equal(20.0, @if.Calculate(parameters));
+            Assert.Equal(20.0, @if.Execute(parameters));
 
             parameters["x"] = 0;
 
-            Assert.Equal(0.0, @if.Calculate(parameters));
+            Assert.Equal(0.0, @if.Execute(parameters));
         }
 
         [Fact]
@@ -47,11 +47,11 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var cond = new Equal(new Variable("x"), new Number(0));
             var @if = new If(cond, new Number(1), new UnaryMinus(new Number(1)));
 
-            Assert.Equal(1.0, @if.Calculate(parameters));
+            Assert.Equal(1.0, @if.Execute(parameters));
 
             parameters["x"] = 10;
 
-            Assert.Equal(-1.0, @if.Calculate(parameters));
+            Assert.Equal(-1.0, @if.Execute(parameters));
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var cond = new Equal(new Variable("x"), new Number(10));
             var @if = new If(cond, new Number(20));
 
-            Assert.Equal(20.0, @if.Calculate(parameters));
+            Assert.Equal(20.0, @if.Execute(parameters));
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var cond = new Equal(new Variable("x"), new Number(10));
             var @if = new If(cond, new Number(20));
 
-            Assert.Throws<ArgumentNullException>(() => @if.Calculate(parameters));
+            Assert.Throws<ArgumentNullException>(() => @if.Execute(parameters));
         }
 
     }

@@ -164,7 +164,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (int i = 0; i < this.ParametersCount; i++)
                 if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ExpressionResultType.Matrix)
-                    args[i] = (Vector)m_arguments[i].Calculate(parameters);
+                    args[i] = (Vector)m_arguments[i].Execute(parameters);
                 else
                     args[i] = (Vector)m_arguments[i];
 
@@ -172,7 +172,7 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -180,7 +180,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="System.NotSupportedException">Always.</exception>
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             return new Matrix(CalculateMatrix(parameters));
         }

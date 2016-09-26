@@ -80,17 +80,17 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            var arg = (double)Argument.Calculate(parameters);
-            var digits = Digits != null ? (int)(double)Digits.Calculate(parameters) : 0;
+            var arg = (double)Argument.Execute(parameters);
+            var digits = Digits != null ? (int)(double)Digits.Execute(parameters) : 0;
 
 #if PORTABLE
             return Math.Round(arg, digits);

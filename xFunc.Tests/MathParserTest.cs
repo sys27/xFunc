@@ -87,7 +87,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseLog()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Log, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -104,7 +104,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseLogWithOneParam()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Log, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -118,7 +118,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseRoot()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Root, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -135,7 +135,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseRootWithOneParam()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Root, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -149,7 +149,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseDerivWithOneParam()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Derivative, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -167,7 +167,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseDerivSecondParamIsNotVar()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Derivative, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -183,7 +183,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseAssign()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Assign),
@@ -197,7 +197,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseAssignWithOneParam()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Assign)
@@ -209,7 +209,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParseAssignFirstParamIsNotVar()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new NumberToken(5),
                 new OperationToken(Operations.Assign),
@@ -222,7 +222,7 @@ namespace xFunc.Tests
         [Fact]
         public void ErrorWhileParsingTree()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Sine, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -237,7 +237,7 @@ namespace xFunc.Tests
         [Fact]
         public void DefineParserTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("aaa"),
                 new OperationToken(Operations.Assign),
@@ -251,7 +251,7 @@ namespace xFunc.Tests
         [Fact]
         public void AssignUserFuncTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new UserFunctionToken("func", 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -271,7 +271,7 @@ namespace xFunc.Tests
         [Fact]
         public void UserFunc()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new NumberToken(1),
                 new OperationToken(Operations.Addition),
@@ -288,7 +288,7 @@ namespace xFunc.Tests
         [Fact]
         public void DefineParseFailTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new NumberToken(2),
                 new OperationToken(Operations.Multiplication),
@@ -305,7 +305,7 @@ namespace xFunc.Tests
         [Fact]
         public void UndefParseTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Undefine, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -323,7 +323,7 @@ namespace xFunc.Tests
         [Fact]
         public void UndefWithoutParamsTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Undefine, 0),
                 new SymbolToken(Symbols.OpenBracket),
@@ -336,7 +336,7 @@ namespace xFunc.Tests
         [Fact]
         public void UndefineParseFailTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new NumberToken(2),
                 new OperationToken(Operations.Multiplication),
@@ -352,7 +352,7 @@ namespace xFunc.Tests
         [Fact]
         public void ParserTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Cosine, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -372,7 +372,7 @@ namespace xFunc.Tests
         [Fact]
         public void GCDTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.GCD, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -389,7 +389,7 @@ namespace xFunc.Tests
         [Fact]
         public void GCDOfThreeTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.GCD, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -408,7 +408,7 @@ namespace xFunc.Tests
         [Fact]
         public void LCMTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.LCM, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -425,7 +425,7 @@ namespace xFunc.Tests
         [Fact]
         public void SimplifyTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Simplify, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -440,7 +440,7 @@ namespace xFunc.Tests
         [Fact]
         public void FactorialTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Factorial, 1),
                 new SymbolToken(Symbols.OpenBracket),
@@ -455,7 +455,7 @@ namespace xFunc.Tests
         [Fact]
         public void SumToTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Sum, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -472,7 +472,7 @@ namespace xFunc.Tests
         [Fact]
         public void SumFromToTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Sum, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -491,7 +491,7 @@ namespace xFunc.Tests
         [Fact]
         public void SumFromToIncTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Sum, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -512,7 +512,7 @@ namespace xFunc.Tests
         [Fact]
         public void SumFromToIncVarTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Sum, 5),
                 new SymbolToken(Symbols.OpenBracket),
@@ -535,7 +535,7 @@ namespace xFunc.Tests
         [Fact]
         public void ProductToTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Product, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -552,7 +552,7 @@ namespace xFunc.Tests
         [Fact]
         public void ProductFromToTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Product, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -571,7 +571,7 @@ namespace xFunc.Tests
         [Fact]
         public void ProductFromToIncTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Product, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -592,7 +592,7 @@ namespace xFunc.Tests
         [Fact]
         public void ProductFromToIncVarTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Product, 5),
                 new SymbolToken(Symbols.OpenBracket),
@@ -615,7 +615,7 @@ namespace xFunc.Tests
         [Fact]
         public void VectorTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Vector, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -634,7 +634,7 @@ namespace xFunc.Tests
         [Fact]
         public void VectorTwoDimTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -661,7 +661,7 @@ namespace xFunc.Tests
         [Fact]
         public void MatrixAndNotVectorTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -677,7 +677,7 @@ namespace xFunc.Tests
         [Fact]
         public void MatrixWithDiffVectorSizeTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Matrix, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -705,7 +705,7 @@ namespace xFunc.Tests
         [Fact]
         public void TooMuchParamsTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.Sine, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -721,7 +721,7 @@ namespace xFunc.Tests
         [Fact]
         public void ForTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.For, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -751,7 +751,7 @@ namespace xFunc.Tests
         [Fact]
         public void WhileTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.While, 2),
                 new SymbolToken(Symbols.OpenBracket),
@@ -775,7 +775,7 @@ namespace xFunc.Tests
         [Fact]
         public void IfTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.If, 3),
                 new SymbolToken(Symbols.OpenBracket),
@@ -801,7 +801,7 @@ namespace xFunc.Tests
         [Fact]
         public void ConditionalAndTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Equal),
@@ -820,7 +820,7 @@ namespace xFunc.Tests
         [Fact]
         public void ConditionalOrTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Equal),
@@ -839,7 +839,7 @@ namespace xFunc.Tests
         [Fact]
         public void EqualTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Equal),
@@ -854,7 +854,7 @@ namespace xFunc.Tests
         [Fact]
         public void NotEqualTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.NotEqual),
@@ -869,7 +869,7 @@ namespace xFunc.Tests
         [Fact]
         public void LessThenTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.LessThan),
@@ -884,7 +884,7 @@ namespace xFunc.Tests
         [Fact]
         public void LessOrEqualTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.LessOrEqual),
@@ -899,7 +899,7 @@ namespace xFunc.Tests
         [Fact]
         public void GreaterThenTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.GreaterThan),
@@ -914,7 +914,7 @@ namespace xFunc.Tests
         [Fact]
         public void GreaterOrEqualTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.GreaterOrEqual),
@@ -929,7 +929,7 @@ namespace xFunc.Tests
         [Fact]
         public void IncTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Increment)
@@ -943,7 +943,7 @@ namespace xFunc.Tests
         [Fact]
         public void IncForTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new FunctionToken(Functions.For, 4),
                 new SymbolToken(Symbols.OpenBracket),
@@ -970,7 +970,7 @@ namespace xFunc.Tests
         [Fact]
         public void DecTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Decrement)
@@ -984,7 +984,7 @@ namespace xFunc.Tests
         [Fact]
         public void AddAssing()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.AddAssign),
@@ -999,7 +999,7 @@ namespace xFunc.Tests
         [Fact]
         public void MulAssing()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.MulAssign),
@@ -1014,7 +1014,7 @@ namespace xFunc.Tests
         [Fact]
         public void SubAssing()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.SubAssign),
@@ -1029,7 +1029,7 @@ namespace xFunc.Tests
         [Fact]
         public void DivAssing()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.DivAssign),
@@ -1044,7 +1044,7 @@ namespace xFunc.Tests
         [Fact]
         public void BoolConstTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new BooleanToken(true),
                 new OperationToken(Operations.And),
@@ -1059,7 +1059,7 @@ namespace xFunc.Tests
         [Fact]
         public void LogicAddPriorityTest()
         {
-            var tokens = new List<IToken>()
+            var tokens = new List<IToken>
             {
                 new NumberToken(3),
                 new OperationToken(Operations.GreaterThan),

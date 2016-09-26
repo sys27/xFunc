@@ -25,7 +25,7 @@ namespace xFunc.Tests
     public class SimplifierTest
     {
 
-        ISimplifier simplifier;
+        private ISimplifier simplifier;
 
         public SimplifierTest()
         {

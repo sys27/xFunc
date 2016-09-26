@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var exp = new Tanh(new Number(1));
 
-            Assert.Equal(Math.Tanh(1), exp.Calculate());
+            Assert.Equal(Math.Tanh(1), exp.Execute());
         }
 
         [Fact]

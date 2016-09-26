@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void CeilCalculate()
         {
             var ceil = new Ceil(new Number(5.55555555));
-            var result = ceil.Calculate();
+            var result = ceil.Execute();
             var expected = 6.0;
 
             Assert.Equal(expected, result);

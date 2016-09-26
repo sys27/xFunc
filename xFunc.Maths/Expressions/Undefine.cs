@@ -76,19 +76,19 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// Executes this expression. Don't use this method if your expression has variables or functions.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Calculate()
+        public object Execute()
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));

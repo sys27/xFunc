@@ -66,14 +66,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected abstract double CalculateGradian(ExpressionParameters parameters);
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
                 return CalculateDergee(parameters);

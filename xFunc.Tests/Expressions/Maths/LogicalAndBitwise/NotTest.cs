@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var exp = new Not(new Number(2));
 
-            Assert.Equal(-3.0, exp.Calculate());
+            Assert.Equal(-3.0, exp.Execute());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var exp = new Not(new Number(2.5));
 
-            Assert.Equal(-4.0, exp.Calculate());
+            Assert.Equal(-4.0, exp.Execute());
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         {
             var exp = new Not(new Bool(true));
 
-            Assert.Equal(false, exp.Calculate());
+            Assert.Equal(false, exp.Execute());
         }
 
     }

@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Maths
             IExpression exp = new Define(new Variable("x"), new Number(1));
             ParameterCollection parameters = new ParameterCollection();
 
-            var answer = exp.Calculate(parameters);
+            var answer = exp.Execute(parameters);
 
             Assert.Equal(1.0, parameters["x"]);
             Assert.Equal(double.NaN, answer);
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths
             ParameterCollection parameters = new ParameterCollection();
             ExpressionParameters expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
 
-            var answer = exp.Calculate(expParams);
+            var answer = exp.Execute(expParams);
 
             Assert.Equal(Math.Sin(1), parameters["x"]);
             Assert.Equal(double.NaN, answer);
@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressions.Maths
             IExpression exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
             ParameterCollection parameters = new ParameterCollection();
 
-            var answer = exp.Calculate(parameters);
+            var answer = exp.Execute(parameters);
 
             Assert.Equal(36.0, parameters["x"]);
             Assert.Equal(double.NaN, answer);
@@ -67,7 +67,7 @@ namespace xFunc.Tests.Expressions.Maths
             IExpression exp = new Define(new Variable("π"), new Number(1));
             ParameterCollection parameters = new ParameterCollection();
 
-            var answer = exp.Calculate(parameters);
+            var answer = exp.Execute(parameters);
 
             Assert.Equal(1.0, parameters["π"]);
         }

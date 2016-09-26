@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var exp = new Artanh(new Number(1));
 
-            Assert.Equal(MathExtentions.Atanh(1), exp.Calculate());
+            Assert.Equal(MathExtentions.Atanh(1), exp.Execute());
         }
 
         [Fact]

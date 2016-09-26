@@ -58,16 +58,16 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            return ((Matrix)m_argument.Calculate(parameters)).Inverse(parameters);
+            return ((Matrix)m_argument.Execute(parameters)).Inverse(parameters);
         }
 
         /// <summary>

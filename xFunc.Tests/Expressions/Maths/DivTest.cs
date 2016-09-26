@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             IExpression exp = new Div(new Number(1), new Number(2));
 
-            Assert.Equal(1.0 / 2.0, exp.Calculate());
+            Assert.Equal(1.0 / 2.0, exp.Execute());
         }
 
     }

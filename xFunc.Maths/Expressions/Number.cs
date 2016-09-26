@@ -100,7 +100,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a number. Don't use this method if your expression has variables.
         /// </summary>
         /// <returns>A result of the calculation.</returns>
-        public object Calculate()
+        public object Execute()
         {
             return number;
         }
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the calculation.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        public object Calculate(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters parameters)
         {
             return number;
         }

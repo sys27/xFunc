@@ -57,16 +57,16 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Calculates this bitwise NOT expression.
+        /// Executes this bitwise NOT expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            var arg = m_argument.Calculate(parameters);
+            var arg = m_argument.Execute(parameters);
 
 #if PORTABLE            
             if (arg is bool)

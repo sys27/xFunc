@@ -18,23 +18,23 @@ namespace xFunc.Maths.Expressions
 {
 
     /// <summary>
-    /// Defines methods to calculate mathematical expressions.
+    /// Defines methods to work with expressions.
     /// </summary>
     public interface IExpression
     {
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or user-functions.
+        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>A result of the calculation.</returns>
-        object Calculate();
+        object Execute();
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>A result of the calculation.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        object Calculate(ExpressionParameters parameters);
+        object Execute(ExpressionParameters parameters);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression"/>.

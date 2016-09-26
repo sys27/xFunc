@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var exps = new IExpression[left.ParametersCount];
 #if NET40_OR_GREATER
             Parallel.For(0, left.ParametersCount,
-                i => exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) + (double)right.Arguments[i].Calculate(parameters))
+                i => exps[i] = new Number((double)left.Arguments[i].Execute(parameters) + (double)right.Arguments[i].Execute(parameters))
             );
 #else
             for (int i = 0; i < left.ParametersCount; i++)
@@ -92,7 +92,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var exps = new IExpression[left.ParametersCount];
 #if NET40_OR_GREATER
             Parallel.For(0, left.ParametersCount,
-                i => exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) - (double)right.Arguments[i].Calculate(parameters))
+                i => exps[i] = new Number((double)left.Arguments[i].Execute(parameters) - (double)right.Arguments[i].Execute(parameters))
             );
 #else
             for (int i = 0; i < left.ParametersCount; i++)
@@ -122,10 +122,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The product of matrices.</returns>
         public static Vector Mul(this Vector vector, IExpression number, ExpressionParameters parameters)
         {
-            var n = (double)number.Calculate(parameters);
+            var n = (double)number.Execute(parameters);
 #if NET40_OR_GREATER
             var numbers = (from num in vector.Arguments.AsParallel().AsOrdered()
-                           select new Number((double)num.Calculate(parameters) * n))
+                           select new Number((double)num.Execute(parameters) * n))
                           .ToArray();
 #else
             var numbers = (from num in vector.Arguments
@@ -167,7 +167,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 var exps = new IExpression[left.SizeOfVectors];
 
                 for (int j = 0; j < left.SizeOfVectors; j++)
-                    exps[j] = new Number((double)left[i][j].Calculate(parameters) + (double)right[i][j].Calculate(parameters));
+                    exps[j] = new Number((double)left[i][j].Execute(parameters) + (double)right[i][j].Execute(parameters));
 
                 vectors[i] = new Vector(exps);
             });
@@ -217,7 +217,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 var exps = new IExpression[left.SizeOfVectors];
 
                 for (int j = 0; j < left.SizeOfVectors; j++)
-                    exps[j] = new Number((double)left[i][j].Calculate(parameters) - (double)right[i][j].Calculate(parameters));
+                    exps[j] = new Number((double)left[i][j].Execute(parameters) - (double)right[i][j].Execute(parameters));
 
                 vectors[i] = new Vector(exps);
             });
@@ -256,12 +256,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The product of matrix and number.</returns>
         public static Matrix Mul(this Matrix matrix, IExpression number, ExpressionParameters parameters)
         {
-            var n = (double)number.Calculate(parameters);
+            var n = (double)number.Execute(parameters);
 #if NET40_OR_GREATER
             var result = from v in matrix.Arguments.AsParallel().AsOrdered()
                          select new Vector(
                              (from num in ((Vector)v).Arguments
-                              select new Number((double)num.Calculate(parameters) * n))
+                              select new Number((double)num.Execute(parameters) * n))
                              .ToArray()
                          );
 #else
@@ -312,7 +312,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 {
                     double el = 0;
                     for (int k = 0; k < left.SizeOfVectors; k++)
-                        el += (double)left[j][k].Calculate(parameters) * (double)right[k][i].Calculate(parameters);
+                        el += (double)left[j][k].Execute(parameters) * (double)right[k][i].Execute(parameters);
                     result[j][i] = new Number(el);
                 }
             });

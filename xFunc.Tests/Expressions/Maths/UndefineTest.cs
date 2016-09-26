@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions.Maths
             var parameters = new ParameterCollection { { "a", 1 } };
 
             var undef = new Undefine(new Variable("a"));
-            undef.Calculate(parameters);
+            undef.Execute(parameters);
             Assert.False(parameters.ContainsKey("a"));
         }
 
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths
             var functions = new FunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
 
             var undef = new Undefine(key1);
-            undef.Calculate(functions);
+            undef.Execute(functions);
             Assert.False(functions.ContainsKey(key1));
             Assert.True(functions.ContainsKey(key2));
         }
@@ -54,7 +54,7 @@ namespace xFunc.Tests.Expressions.Maths
 
             var undef = new Undefine(new Variable("π"));
 
-            Assert.Throws<ArgumentException>(() => undef.Calculate(parameters));
+            Assert.Throws<ArgumentException>(() => undef.Execute(parameters));
         }
 
     }

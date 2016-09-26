@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected override double CalculateDergee(ExpressionParameters parameters)
         {
-            var radian = (double)m_argument.Calculate(parameters) * Math.PI / 180;
+            var radian = (double)m_argument.Execute(parameters) * Math.PI / 180;
 
             return Math.Tan(radian);
         }
@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected override double CalculateRadian(ExpressionParameters parameters)
         {
-            return Math.Tan((double)m_argument.Calculate(parameters));
+            return Math.Tan((double)m_argument.Execute(parameters));
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected override double CalculateGradian(ExpressionParameters parameters)
         {
-            var radian = (double)m_argument.Calculate(parameters) * Math.PI / 200;
+            var radian = (double)m_argument.Execute(parameters) * Math.PI / 200;
 
             return Math.Tan(radian);
         }

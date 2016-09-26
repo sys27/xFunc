@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Maths
             };
             var func = new DelegateExpression(p => (double)p.Variables["x"] + 1);
 
-            var result = func.Calculate(parameters);
+            var result = func.Execute(parameters);
 
             Assert.Equal(11.0, result);
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var func = new DelegateExpression(p => 10.0);
 
-            var result = func.Calculate(null);
+            var result = func.Execute(null);
 
             Assert.Equal(10.0, result);
         }
@@ -56,7 +56,7 @@ namespace xFunc.Tests.Expressions.Maths
             funcs.Add(uf1, func);
 
             var uf2 = new UserFunction("func", new[] { new Number(12) }, 1);
-            var result = uf2.Calculate(new ExpressionParameters(funcs));
+            var result = uf2.Execute(new ExpressionParameters(funcs));
 
             Assert.Equal(1, result);
         }
@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void CalculateTest4()
         {
             var func = new DelegateExpression(p => 1.0);
-            var result = func.Calculate();
+            var result = func.Execute();
 
             Assert.Equal(1.0, result);
         }

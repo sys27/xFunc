@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var exp = new Cosh(new Number(1));
 
-            Assert.Equal(Math.Cosh(1), exp.Calculate());
+            Assert.Equal(Math.Cosh(1), exp.Execute());
         }
 
         [Fact]

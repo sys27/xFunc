@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
             var and = new And(lessThen, greaterThen);
 
-            Assert.Equal(true, and.Calculate(parameters));
+            Assert.Equal(true, and.Execute(parameters));
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var greaterThen = new GreaterThan(new Variable("x"), new Number(10));
             var and = new And(lessThen, greaterThen);
 
-            Assert.Equal(false, and.Calculate(parameters));
+            Assert.Equal(false, and.Execute(parameters));
         }
 
     }

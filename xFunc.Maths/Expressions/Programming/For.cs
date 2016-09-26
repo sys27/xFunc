@@ -55,17 +55,17 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
-            for (Initialization.Calculate(parameters); (bool)Condition.Calculate(parameters); Iteration.Calculate(parameters))
-                Body.Calculate(parameters);
+            for (Initialization.Execute(parameters); (bool)Condition.Execute(parameters); Iteration.Execute(parameters))
+                Body.Execute(parameters);
 
             return double.NaN;
         }

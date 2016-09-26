@@ -130,17 +130,17 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression. Don't use this method if your expression has variables or functions.
+        /// Executes this expression. Don't use this method if your expression has variables or functions.
         /// </summary>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        public override object Calculate()
+        public override object Execute()
         {
             var body = Body;
-            var from = (double)(From?.Calculate() ?? 1.0);
-            var to = (double)To.Calculate();
-            var inc = (double)(Increment?.Calculate() ?? 1.0);
+            var from = (double)(From?.Execute() ?? 1.0);
+            var to = (double)To.Execute();
+            var inc = (double)(Increment?.Execute() ?? 1.0);
 
             var localParams = new ParameterCollection();
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
@@ -151,26 +151,26 @@ namespace xFunc.Maths.Expressions
             for (; from <= to; from += inc)
             {
                 localParams[variable] = from;
-                S += (double)body.Calculate(param);
+                S += (double)body.Execute(param);
             }
 
             return S;
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Calculate(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             var body = Body;
-            var from = (double)(From?.Calculate(parameters) ?? 1.0);
-            var to = (double)To.Calculate(parameters);
-            var inc = (double)(Increment?.Calculate(parameters) ?? 1.0);
+            var from = (double)(From?.Execute(parameters) ?? 1.0);
+            var to = (double)To.Execute(parameters);
+            var inc = (double)(Increment?.Execute(parameters) ?? 1.0);
 
             var localParams = new ParameterCollection(parameters.Variables.Collection);
             var variable = Variable != null ? Variable.Name : GetVarName(localParams);
@@ -181,7 +181,7 @@ namespace xFunc.Maths.Expressions
             for (; from <= to; from += inc)
             {
                 localParams[variable] = from;
-                S += (double)body.Calculate(param);
+                S += (double)body.Execute(param);
             }
 
             return S;

@@ -57,10 +57,12 @@ namespace xFunc.Maths
         {
             if (tokens == null)
                 throw new ArgumentNullException(nameof(tokens));
-            if (!tokens.Any())
+
+            var tokenList = tokens.ToList();
+            if (!tokenList.Any())
                 throw new ArgumentException(nameof(tokens));
 
-            var rpn = ConvertToReversePolishNotation(tokens);
+            var rpn = ConvertToReversePolishNotation(tokenList);
             var expressions = ConvertTokensToExpressions(rpn);
 
             var stack = new Stack<IExpression>();
@@ -90,7 +92,7 @@ namespace xFunc.Maths
                     var func = expression as DifferentParametersExpression;
 
                     var arg = new IExpression[func.ParametersCount];
-                    for (int i = func.ParametersCount - 1; i >= 0; i--)
+                    for (var i = func.ParametersCount - 1; i >= 0; i--)
                         arg[i] = stack.Pop();
 
                     func.Arguments = arg;

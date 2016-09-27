@@ -14,7 +14,6 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -176,22 +175,22 @@ namespace xFunc.Views
 
         private void CopyExpToClip_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString());
+            Clipboard.SetText(((MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem).StringExpression);
         }
 
         private void CopyAnswerToClip_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            Clipboard.SetText((mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString());
+            Clipboard.SetText(((MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem).Answer);
         }
 
         private void CopyExpToInput_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).StringExpression.ToString();
+            mathExpressionBox.Text = ((MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem).StringExpression;
         }
 
         private void CopyAnswerToInput_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            mathExpressionBox.Text = (mathExpsListBox.SelectedItem as MathWorkspaceItemViewModel).Answer.ToString();
+            mathExpressionBox.Text = ((MathWorkspaceItemViewModel)mathExpsListBox.SelectedItem).Answer;
         }
 
         private void DeleteExp_Execute(object o, ExecutedRoutedEventArgs args)

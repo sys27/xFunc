@@ -60,7 +60,7 @@ namespace xFunc.Views
 
         private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
-            AddFunctionView view = new AddFunctionView()
+            var view = new AddFunctionView
             {
                 Owner = this
             };
@@ -113,7 +113,7 @@ namespace xFunc.Views
         {
             var selectedItem = funcList.SelectedItem as FunctionViewModel;
 
-            AddFunctionView view = new AddFunctionView(selectedItem)
+            var view = new AddFunctionView(selectedItem)
             {
                 Owner = this
             };
@@ -121,7 +121,7 @@ namespace xFunc.Views
             {
                 try
                 {
-                    var userFunc = (funcList.SelectedItem as FunctionViewModel).Function;
+                    var userFunc = ((FunctionViewModel)funcList.SelectedItem).Function;
                     var func = processor.Parse(view.Function);
 
                     processor.Parameters.Functions[userFunc] = func;

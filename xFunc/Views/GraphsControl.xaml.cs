@@ -109,10 +109,7 @@ namespace xFunc.Views
 
         private void graphsList_SelectionChanged(object o, SelectionChangedEventArgs args)
         {
-            if (graphsList.SelectedIndex >= 0)
-                plot.Expression = graphsList.Items.Cast<GraphItemViewModel>();
-            else
-                plot.Expression = null;
+            plot.Expression = graphsList.SelectedIndex >= 0 ? graphsList.Items.Cast<GraphItemViewModel>() : null;
         }
 
         private void graphItem_Toggle(object o, RoutedEventArgs args)

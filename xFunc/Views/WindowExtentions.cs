@@ -27,14 +27,14 @@ namespace xFunc.Views
         private const int WS_MINIMIZEBOX = 0x20000;
 
         [DllImport("user32.dll")]
-        extern private static int GetWindowLong(IntPtr hwnd, int index);
+        private static extern int GetWindowLong(IntPtr hwnd, int index);
 
         [DllImport("user32.dll")]
-        extern private static int SetWindowLong(IntPtr hwnd, int index, int value);
+        private static extern int SetWindowLong(IntPtr hwnd, int index, int value);
 
         internal static void HideMinimizeAndMaximizeButtons(this Window window)
         {
-            IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(window).Handle;
+            var hwnd = new System.Windows.Interop.WindowInteropHelper(window).Handle;
             var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
 
             SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));

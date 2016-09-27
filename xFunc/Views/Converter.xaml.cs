@@ -91,13 +91,13 @@ namespace xFunc.Views
 
             if (double.TryParse(fromTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
             {
-                double result = conv.Convert(value, from.Key, to.Key);
+                var result = conv.Convert(value, from.Key, to.Key);
 
                 toTextBox.Text = result.ToString(CultureInfo.InvariantCulture);
             }
             else if (double.TryParse(toTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
             {
-                double result = conv.Convert(value, to.Key, from.Key);
+                var result = conv.Convert(value, to.Key, from.Key);
 
                 fromTextBox.Text = result.ToString(CultureInfo.InvariantCulture);
             }

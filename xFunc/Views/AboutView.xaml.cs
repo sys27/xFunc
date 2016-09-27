@@ -34,9 +34,9 @@ namespace xFunc.Views
         }
 
         [DllImport("shell32.dll")]
-        public static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, int nShowCmd);
+        private static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, int nShowCmd);
 
-        public static void LaunchEmailClient(string mailURL)
+        private static void LaunchEmailClient(string mailURL)
         {
             ShellExecute(IntPtr.Zero, "open", mailURL, "", "", 4);
         }

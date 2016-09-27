@@ -61,7 +61,7 @@ namespace xFunc.Views
 
         private void AddCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
-            var view = new AddVariableView()
+            var view = new AddVariableView
             {
                 Owner = this
             };

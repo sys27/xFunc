@@ -42,7 +42,7 @@ namespace xFunc.Views
 
         public PlottingGraph()
         {
-            this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new ParameterCollection() { { "x", 0 } });
+            this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new ParameterCollection { { "x", 0 } });
 
             InitializeComponent();
 
@@ -66,8 +66,8 @@ namespace xFunc.Views
 
         private void DrawCurrentCoords()
         {
-            double x = Mouse.GetPosition(this).X;
-            double y = Mouse.GetPosition(this).Y;
+            var x = Mouse.GetPosition(this).X;
+            var y = Mouse.GetPosition(this).Y;
             point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
         }
 
@@ -97,8 +97,8 @@ namespace xFunc.Views
 
                 if (args.LeftButton == MouseButtonState.Pressed)
                 {
-                    double chX = startPoint.X - args.GetPosition(null).X;
-                    double chY = startPoint.Y - args.GetPosition(null).Y;
+                    var chX = startPoint.X - args.GetPosition(null).X;
+                    var chY = startPoint.Y - args.GetPosition(null).Y;
 
                     centerX -= chX;
                     centerY -= chY;
@@ -175,8 +175,8 @@ namespace xFunc.Views
             if (renderGrid.IsChecked == true)
             {
                 var gridVisual = new DrawingVisual();
-                Pen pen = new Pen(Brushes.Blue, 0.5);
-                using (DrawingContext context = gridVisual.RenderOpen())
+                var pen = new Pen(Brushes.Blue, 0.5);
+                using (var context = gridVisual.RenderOpen())
                 {
                     if (centerX < 0)
                     {

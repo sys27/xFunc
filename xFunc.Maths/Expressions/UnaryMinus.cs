@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions
             if (m_argument is BinaryExpression)
                 return ToString("-({0})");
             var sub = m_parent as Sub;
-            if (sub != null && sub.Right == this)
+            if (sub != null && ReferenceEquals(sub.Right, this))
                 return ToString("(-{0})");
 
             return ToString("-{0}");

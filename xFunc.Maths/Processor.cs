@@ -224,7 +224,7 @@ namespace xFunc.Maths
 
             return parser.Parse(lexer.Tokenize(function));
         }
-        
+
         /// <summary>
         /// Gets or sets a implementation of <see cref="ILexer"/>.
         /// </summary>
@@ -295,18 +295,16 @@ namespace xFunc.Maths
         }
 
         /// <summary>
-        /// Gets or sets a measurement of angles.
+        /// Gets expression parameters object.
         /// </summary>
-        /// <seealso cref="AngleMeasurement"/>
-        public AngleMeasurement AngleMeasurement
+        /// <value>
+        /// The expression parameters object.
+        /// </value>
+        public ExpressionParameters Parameters
         {
             get
             {
-                return parameters.AngleMeasurement;
-            }
-            set
-            {
-                parameters.AngleMeasurement = value;
+                return parameters;
             }
         }
 
@@ -325,34 +323,6 @@ namespace xFunc.Maths
             set
             {
                 numeralSystem = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the parameters.
-        /// </summary>
-        /// <value>
-        /// The parameters.
-        /// </value>
-        public ParameterCollection Parameters
-        {
-            get
-            {
-                return parameters.Variables;
-            }
-        }
-
-        /// <summary>
-        /// Gets the functions.
-        /// </summary>
-        /// <value>
-        /// The functions.
-        /// </value>
-        public FunctionCollection UserFunctions
-        {
-            get
-            {
-                return parameters.Functions;
             }
         }
 

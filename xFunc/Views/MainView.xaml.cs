@@ -228,9 +228,9 @@ namespace xFunc.Views
         {
             if (Settings.Default.SaveUserFunction)
             {
-                if (processor.UserFunctions.Count > 0)
+                if (processor.Parameters.Functions.Count > 0)
                     Settings.Default.UserFunctions = new System.Collections.Specialized.StringCollection();
-                foreach (var item in processor.UserFunctions)
+                foreach (var item in processor.Parameters.Functions)
                     Settings.Default.UserFunctions.Add($"{item.Key}:={item.Value}");
             }
 
@@ -297,14 +297,14 @@ namespace xFunc.Views
         {
             var exps = new XElement("expressions", mathPresenter.Workspace.Select(exp => new XElement("expression", exp.StringExpression)));
             var vars = new XElement("variables",
-                from @var in processor.Parameters
+                from @var in processor.Parameters.Variables
                 where @var.Type != ParameterType.Constant
                 select new XElement("add",
                         new XAttribute("key", @var.Key),
                         new XAttribute("value", Convert.ToString(@var.Value, CultureInfo.InvariantCulture)),
                         new XAttribute("readonly", @var.Type == ParameterType.ReadOnly ? true : false)));
             var funcs = new XElement("functions",
-                from func in processor.UserFunctions
+                from func in processor.Parameters.Functions
                 select new XElement("add",
                         new XAttribute("key", func.Key.ToString()),
                         new XAttribute("value", func.Value.ToString())));
@@ -324,7 +324,7 @@ namespace xFunc.Views
             var vars = doc.Root.Element("variables");
             if (vars != null)
                 foreach (var item in vars.Elements("add"))
-                    processor.Parameters.Add(new Parameter(item.Attribute("key").Value, double.Parse(item.Attribute("value").Value), bool.Parse(item.Attribute("readonly").Value) ? ParameterType.ReadOnly : ParameterType.Normal));
+                    processor.Parameters.Variables.Add(new Parameter(item.Attribute("key").Value, double.Parse(item.Attribute("value").Value), bool.Parse(item.Attribute("readonly").Value) ? ParameterType.ReadOnly : ParameterType.Normal));
 
             var funcs = doc.Root.Element("functions");
             if (funcs != null)
@@ -352,8 +352,8 @@ namespace xFunc.Views
         private void NewCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
             mathPresenter.Clear();
-            processor.Parameters.Clear();
-            processor.UserFunctions.Clear();
+            processor.Parameters.Variables.Clear();
+            processor.Parameters.Functions.Clear();
             fileName = null;
         }
 

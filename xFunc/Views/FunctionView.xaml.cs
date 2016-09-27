@@ -42,7 +42,7 @@ namespace xFunc.Views
         public FunctionView(Processor processor)
         {
             this.processor = processor;
-            this.processor.UserFunctions.CollectionChanged += (o, args) => RefreshList();
+            this.processor.Parameters.Functions.CollectionChanged += (o, args) => RefreshList();
 
             RefreshList();
 
@@ -53,7 +53,7 @@ namespace xFunc.Views
 
         private void RefreshList()
         {
-            this.DataContext = processor.UserFunctions.Select(f => new FunctionViewModel(f.Key, f.Value));
+            this.DataContext = processor.Parameters.Functions.Select(f => new FunctionViewModel(f.Key, f.Value));
         }
 
         #region Commands
@@ -78,7 +78,7 @@ namespace xFunc.Views
 
                     var func = processor.Parse(view.Function);
 
-                    processor.UserFunctions.Add(userFunc, func);
+                    processor.Parameters.Functions.Add(userFunc, func);
 
                     RefreshList();
                 }
@@ -124,7 +124,7 @@ namespace xFunc.Views
                     var userFunc = (funcList.SelectedItem as FunctionViewModel).Function;
                     var func = processor.Parse(view.Function);
 
-                    processor.UserFunctions[userFunc] = func;
+                    processor.Parameters.Functions[userFunc] = func;
 
                     RefreshList();
                 }
@@ -158,7 +158,7 @@ namespace xFunc.Views
         private void DeleteCommand_Executed(object o, ExecutedRoutedEventArgs args)
         {
             var selectedItem = funcList.SelectedItem as FunctionViewModel;
-            processor.UserFunctions.Remove(selectedItem.Function);
+            processor.Parameters.Functions.Remove(selectedItem.Function);
 
             RefreshList();
         }

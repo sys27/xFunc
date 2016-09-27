@@ -15,10 +15,8 @@
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -28,7 +26,6 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Presenters;
 using xFunc.Properties;
-using xFunc.Resources;
 using xFunc.ViewModels;
 
 namespace xFunc.Views
@@ -302,7 +299,7 @@ namespace xFunc.Views
                 select new XElement("add",
                         new XAttribute("key", @var.Key),
                         new XAttribute("value", Convert.ToString(@var.Value, CultureInfo.InvariantCulture)),
-                        new XAttribute("readonly", @var.Type == ParameterType.ReadOnly ? true : false)));
+                        new XAttribute("readonly", @var.Type == ParameterType.ReadOnly)));
             var funcs = new XElement("functions",
                 from func in processor.Parameters.Functions
                 select new XElement("add",
@@ -329,7 +326,7 @@ namespace xFunc.Views
             var funcs = doc.Root.Element("functions");
             if (funcs != null)
                 foreach (var item in funcs.Elements("add"))
-                    processor.Solve(string.Format("{0}:={1}", item.Attribute("key").Value, item.Attribute("value").Value));
+                    processor.Solve($"{item.Attribute("key").Value}:={item.Attribute("value").Value}");
 
             var exps = doc.Root.Element("expressions");
             if (exps != null)
@@ -623,13 +620,13 @@ namespace xFunc.Views
 
         private void AboutCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            AboutView aboutView = new AboutView { Owner = this };
+            var aboutView = new AboutView { Owner = this };
             aboutView.ShowDialog();
         }
 
         private void SettingsCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            var settingsView = new SettingsView()
+            var settingsView = new SettingsView
             {
                 Owner = this
             };
@@ -682,7 +679,7 @@ namespace xFunc.Views
         private void InsertChar_Click(object o, RoutedEventArgs args)
         {
             var tag = ((Button)o).Tag.ToString();
-            TextBox tb = GetSelectedTextBox();
+            var tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
             tb.Text = tb.Text.Insert(prevSelectionStart, tag);
@@ -692,8 +689,8 @@ namespace xFunc.Views
 
         private void InsertFunc_Click(object o, RoutedEventArgs args)
         {
-            string func = ((Button)o).Tag.ToString();
-            TextBox tb = GetSelectedTextBox();
+            var func = ((Button)o).Tag.ToString();
+            var tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
 
@@ -715,8 +712,8 @@ namespace xFunc.Views
 
         private void InsertInv_Click(object o, RoutedEventArgs args)
         {
-            string func = ((Button)o).Tag.ToString();
-            TextBox tb = GetSelectedTextBox();
+            var func = ((Button)o).Tag.ToString();
+            var tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
 
@@ -738,8 +735,8 @@ namespace xFunc.Views
 
         private void InsertDoubleArgFunc_Click(object o, RoutedEventArgs args)
         {
-            string func = ((Button)o).Tag.ToString();
-            TextBox tb = GetSelectedTextBox();
+            var func = ((Button)o).Tag.ToString();
+            var tb = GetSelectedTextBox();
 
             var prevSelectionStart = tb.SelectionStart;
 

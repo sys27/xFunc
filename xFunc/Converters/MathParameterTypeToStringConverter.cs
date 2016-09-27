@@ -15,7 +15,6 @@
 using System;
 using System.Resources;
 using System.Windows.Data;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Resources;
 
@@ -30,7 +29,7 @@ namespace xFunc.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return rm.GetString("MathParameterType_" + value.ToString());
+            return rm.GetString("MathParameterType_" + value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

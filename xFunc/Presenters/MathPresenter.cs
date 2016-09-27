@@ -49,15 +49,12 @@ namespace xFunc.Presenters
 
         protected void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private void UpdateList()
         {
-            var vm = new List<MathWorkspaceItemViewModel>();
-            for (int i = 0; i < workspace.Count; i++)
-                vm.Add(new MathWorkspaceItemViewModel(i + 1, workspace[i]));
+            var vm = workspace.Select((t, i) => new MathWorkspaceItemViewModel(i + 1, t));
 
             view.MathExpressions = vm;
         }
@@ -81,7 +78,7 @@ namespace xFunc.Presenters
                         workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("F", CultureInfo.InvariantCulture)));
                         continue;
                     }
-                    else if (outputFormat == OutputFormats.Exponential)
+                    if (outputFormat == OutputFormats.Exponential)
                     {
                         workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("E", CultureInfo.InvariantCulture)));
                         continue;

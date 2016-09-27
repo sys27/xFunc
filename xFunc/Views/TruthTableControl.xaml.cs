@@ -61,7 +61,7 @@ namespace xFunc.Views
                 truthTableGridView.Columns.Add(new GridViewColumn
                 {
                     Header = parameters.ElementAt(i).Key,
-                    DisplayMemberBinding = new Binding(string.Format("VarsValues[{0}]", i))
+                    DisplayMemberBinding = new Binding($"VarsValues[{i}]")
                 });
             }
             for (int i = 0; i < exps.Count() - 1; i++)
@@ -69,7 +69,7 @@ namespace xFunc.Views
                 truthTableGridView.Columns.Add(new GridViewColumn
                 {
                     Header = exps.ElementAt(i),
-                    DisplayMemberBinding = new Binding(string.Format("Values[{0}]", i))
+                    DisplayMemberBinding = new Binding($"Values[{i}]")
                 });
             }
             if (exps.Count() != 0)

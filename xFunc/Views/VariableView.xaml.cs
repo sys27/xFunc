@@ -41,7 +41,7 @@ namespace xFunc.Views
         public VariableView(Processor processor)
         {
             this.processor = processor;
-            this.processor.Parameters.CollectionChanged += (o, args) => RefreshList();
+            this.processor.Parameters.Variables.CollectionChanged += (o, args) => RefreshList();
 
             RefreshList();
 
@@ -52,7 +52,7 @@ namespace xFunc.Views
 
         private void RefreshList()
         {
-            this.DataContext = processor.Parameters.Select(v => new VariableViewModel(v));
+            this.DataContext = processor.Parameters.Variables.Select(v => new VariableViewModel(v));
             var view = (CollectionView)CollectionViewSource.GetDefaultView(this.DataContext);
             view.GroupDescriptions.Add(new PropertyGroupDescription("Type"));
         }
@@ -67,7 +67,7 @@ namespace xFunc.Views
             };
             if (view.ShowDialog() == true)
             {
-                processor.Parameters.Add(new Parameter(view.VariableName, view.Value, view.IsReadOnly ? ParameterType.ReadOnly : ParameterType.Normal));
+                processor.Parameters.Variables.Add(new Parameter(view.VariableName, view.Value, view.IsReadOnly ? ParameterType.ReadOnly : ParameterType.Normal));
 
                 RefreshList();
             }
@@ -83,7 +83,7 @@ namespace xFunc.Views
             };
             if (view.ShowDialog() == true)
             {
-                var variable = processor.Parameters.First(v => v.Key == view.VariableName);
+                var variable = processor.Parameters.Variables.First(v => v.Key == view.VariableName);
                 variable.Value = view.Value;
                 variable.Type = view.IsReadOnly ? ParameterType.ReadOnly : ParameterType.Normal;
 
@@ -103,7 +103,7 @@ namespace xFunc.Views
             try
             {
                 var selectedItem = varList.SelectedItem as VariableViewModel;
-                processor.Parameters.Remove(selectedItem.Variable);
+                processor.Parameters.Variables.Remove(selectedItem.Variable);
 
                 RefreshList();
             }

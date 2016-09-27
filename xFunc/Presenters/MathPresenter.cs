@@ -123,11 +123,11 @@ namespace xFunc.Presenters
         {
             get
             {
-                return processor.AngleMeasurement;
+                return processor.Parameters.AngleMeasurement;
             }
             set
             {
-                processor.AngleMeasurement = value;
+                processor.Parameters.AngleMeasurement = value;
                 OnPropertyChanged(nameof(AngleMeasurement));
             }
         }

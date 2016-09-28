@@ -14,9 +14,7 @@
 // limitations under the License.
 using System;
 using System.Linq;
-#if NET40_OR_GREATER
 using System.Threading.Tasks;
-#endif
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -53,14 +51,9 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var exps = new IExpression[left.ParametersCount];
-#if NET40_OR_GREATER
             Parallel.For(0, left.ParametersCount,
                 i => exps[i] = new Number((double)left.Arguments[i].Execute(parameters) + (double)right.Arguments[i].Execute(parameters))
             );
-#else
-            for (int i = 0; i < left.ParametersCount; i++)
-                exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) + (double)right.Arguments[i].Calculate(parameters));
-#endif
 
             return new Vector(exps);
         }
@@ -90,14 +83,9 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var exps = new IExpression[left.ParametersCount];
-#if NET40_OR_GREATER
             Parallel.For(0, left.ParametersCount,
                 i => exps[i] = new Number((double)left.Arguments[i].Execute(parameters) - (double)right.Arguments[i].Execute(parameters))
             );
-#else
-            for (int i = 0; i < left.ParametersCount; i++)
-                exps[i] = new Number((double)left.Arguments[i].Calculate(parameters) - (double)right.Arguments[i].Calculate(parameters));
-#endif
 
             return new Vector(exps);
         }
@@ -123,15 +111,9 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Vector Mul(this Vector vector, IExpression number, ExpressionParameters parameters)
         {
             var n = (double)number.Execute(parameters);
-#if NET40_OR_GREATER
             var numbers = (from num in vector.Arguments.AsParallel().AsOrdered()
                            select new Number((double)num.Execute(parameters) * n))
                           .ToArray();
-#else
-            var numbers = (from num in vector.Arguments
-                           select new Number((double)num.Calculate(parameters) * n))
-                          .ToArray();
-#endif
 
             return new Vector(numbers);
         }
@@ -161,7 +143,6 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var vectors = new Vector[left.ParametersCount];
-#if NET40_OR_GREATER
             Parallel.For(0, left.ParametersCount, i =>
             {
                 var exps = new IExpression[left.SizeOfVectors];
@@ -171,17 +152,6 @@ namespace xFunc.Maths.Expressions.Matrices
 
                 vectors[i] = new Vector(exps);
             });
-#else
-            for (int i = 0; i < left.ParametersCount; i++)
-            {
-                var exps = new IExpression[left.SizeOfVectors];
-
-                for (int j = 0; j < left.SizeOfVectors; j++)
-                    exps[j] = new Number((double)left[i][j].Calculate(parameters) + (double)right[i][j].Calculate(parameters));
-
-                vectors[i] = new Vector(exps);
-            }
-#endif
 
             return new Matrix(vectors);
         }
@@ -211,7 +181,6 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var vectors = new Vector[left.ParametersCount];
-#if NET40_OR_GREATER
             Parallel.For(0, left.ParametersCount, i =>
             {
                 var exps = new IExpression[left.SizeOfVectors];
@@ -221,17 +190,6 @@ namespace xFunc.Maths.Expressions.Matrices
 
                 vectors[i] = new Vector(exps);
             });
-#else
-            for (int i = 0; i < left.ParametersCount; i++)
-            {
-                var exps = new IExpression[left.SizeOfVectors];
-
-                for (int j = 0; j < left.SizeOfVectors; j++)
-                    exps[j] = new Number((double)left[i][j].Calculate(parameters) - (double)right[i][j].Calculate(parameters));
-
-                vectors[i] = new Vector(exps);
-            }
-#endif
 
             return new Matrix(vectors);
         }
@@ -257,21 +215,12 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Matrix Mul(this Matrix matrix, IExpression number, ExpressionParameters parameters)
         {
             var n = (double)number.Execute(parameters);
-#if NET40_OR_GREATER
             var result = from v in matrix.Arguments.AsParallel().AsOrdered()
                          select new Vector(
                              (from num in ((Vector)v).Arguments
                               select new Number((double)num.Execute(parameters) * n))
                              .ToArray()
                          );
-#else
-            var result = from v in matrix.Arguments
-                         select new Vector(
-                             (from num in ((Vector)v).Arguments
-                              select new Number((double)num.Calculate(parameters) * n))
-                             .ToArray()
-                         );
-#endif
 
             return new Matrix(result.ToArray());
         }
@@ -305,7 +254,6 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var result = new Matrix(left.ParametersCount, right.SizeOfVectors);
-#if NET40_OR_GREATER
             Parallel.For(0, right.SizeOfVectors, i =>
             {
                 for (int j = 0; j < left.ParametersCount; j++)
@@ -316,18 +264,6 @@ namespace xFunc.Maths.Expressions.Matrices
                     result[j][i] = new Number(el);
                 }
             });
-#else
-            for (int i = 0; i < right.SizeOfVectors; i++)
-            {
-                for (int j = 0; j < left.ParametersCount; j++)
-                {
-                    double el = 0;
-                    for (int k = 0; k < left.SizeOfVectors; k++)
-                        el += (double)left[j][k].Calculate(parameters) * (double)right[k][i].Calculate(parameters);
-                    result[j][i] = new Number(el);
-                }
-            }
-#endif
 
             return result;
         }
@@ -400,12 +336,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public static Matrix Transpose(this Vector vector)
         {
             var vectors = new Vector[vector.ParametersCount];
-#if NET40_OR_GREATER
             Parallel.For(0, vectors.Length, i => vectors[i] = new Vector(new[] { vector[i] }));
-#else
-            for (int i = 0; i < vectors.Length; i++)
-                vectors[i] = new Vector(new[] { vector[i] });
-#endif
 
             return new Matrix(vectors);
         }
@@ -418,18 +349,12 @@ namespace xFunc.Maths.Expressions.Matrices
         public static IExpression Transpose(this Matrix matrix)
         {
             var result = new Matrix(matrix.SizeOfVectors, matrix.ParametersCount);
-
-#if NET40_OR_GREATER
+            
             Parallel.For(0, matrix.ParametersCount, i =>
             {
                 for (int j = 0; j < matrix.SizeOfVectors; j++)
                     result[j][i] = matrix[i][j];
             });
-#else
-            for (int i = 0; i < matrix.ParametersCount; i++)
-                for (int j = 0; j < matrix.SizeOfVectors; j++)
-                    result[j][i] = matrix[i][j];
-#endif
 
             return result;
         }

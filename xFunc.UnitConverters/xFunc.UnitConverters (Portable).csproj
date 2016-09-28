@@ -53,12 +53,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\portable\xFunc.UnitConverters.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\key.pfx</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
@@ -90,9 +84,6 @@
     <Compile Include="VolumeUnits.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\key.pfx">
-      <Link>key.pfx</Link>
-    </None>
     <None Include="..\LICENSE">
       <Link>LICENSE</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

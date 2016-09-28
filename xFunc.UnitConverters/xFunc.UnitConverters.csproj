@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\net40\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NET40;NET40_OR_GREATER;NET35_OR_GREATER;NET30_OR_GREATER;NET20_OR_GREATER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>

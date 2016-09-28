@@ -175,13 +175,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
-#if NET40_OR_GREATER
             return (from exp in m_arguments.AsParallel().AsOrdered()
                     select (double)exp.Execute(parameters)).ToArray();
-#else
-            return (from exp in m_arguments
-                    select (double)exp.Calculate(parameters)).ToArray();
-#endif
         }
 
         /// <summary>

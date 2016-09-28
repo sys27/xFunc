@@ -1,8 +1,0 @@
-language: csharp
-solution: xFunc (Libs for .Net 4.0).sln
-install:
-  - nuget restore "xFunc (Libs for .Net 4.0).sln"
-  - nuget install xunit.runner.console -OutputDirectory testrunner
-script:
-  - xbuild /p:Configuration=Release "xFunc (Libs for .Net 4.0).sln"
-  - mono ./testrunner/xunit.runner.console.*/tools/xunit.console.exe ./xFunc.Tests/bin/Release/xFunc.Tests.dll

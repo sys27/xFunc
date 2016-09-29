@@ -27,8 +27,8 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void SimpDefineTest()
         {
-            IExpression exp = new Define(new Variable("x"), new Number(1));
-            ParameterCollection parameters = new ParameterCollection();
+            var exp = new Define(new Variable("x"), new Number(1));
+            var parameters = new ParameterCollection();
 
             var answer = exp.Execute(parameters);
 
@@ -39,9 +39,9 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void DefineWithFuncTest()
         {
-            IExpression exp = new Define(new Variable("x"), new Sin(new Number(1)));
-            ParameterCollection parameters = new ParameterCollection();
-            ExpressionParameters expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
+            var exp = new Define(new Variable("x"), new Sin(new Number(1)));
+            var parameters = new ParameterCollection();
+            var expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
 
             var answer = exp.Execute(expParams);
 
@@ -52,8 +52,8 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void DefineExpTest()
         {
-            IExpression exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
-            ParameterCollection parameters = new ParameterCollection();
+            var exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
+            var parameters = new ParameterCollection();
 
             var answer = exp.Execute(parameters);
 
@@ -64,10 +64,10 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void OverrideConstTest()
         {
-            IExpression exp = new Define(new Variable("π"), new Number(1));
-            ParameterCollection parameters = new ParameterCollection();
+            var exp = new Define(new Variable("π"), new Number(1));
+            var parameters = new ParameterCollection();
 
-            var answer = exp.Execute(parameters);
+            exp.Execute(parameters);
 
             Assert.Equal(1.0, parameters["π"]);
         }

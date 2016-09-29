@@ -236,12 +236,6 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
                 new Vector(new[] { new Number(-1) })
             });
 
-            var expected = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(-7) }),
-                new Vector(new[] { new Number(11) })
-            });
-
             Assert.Throws<ArgumentException>(() => right.Mul(left));
         }
 

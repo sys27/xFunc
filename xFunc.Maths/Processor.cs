@@ -39,8 +39,14 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
         public Processor()
-            : this(new Lexer(), new Parser(new ExpressionFactory()), new Simplifier(), new Differentiator(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
+            lexer = new Lexer();
+            simplifier = new Simplifier();
+            differentiator = new Differentiator(simplifier);
+            parser = new Parser(new ExpressionFactory(new DefaultDependencyResolver(new object[] { simplifier, differentiator })));
+
+            parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
+            numeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>

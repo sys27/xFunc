@@ -44,6 +44,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Builder.cs" />
+    <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Sum.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="IDependencyResolver.cs" />
     <Compile Include="IDifferentiator.cs" />
     <Compile Include="IExpressionFactory.cs" />
     <Compile Include="InvalidResultException.cs" />

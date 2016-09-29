@@ -14,24 +14,33 @@
 // limitations under the License.
 using SimpleInjector;
 using System;
-using System.Collections.Generic;
 
 namespace xFunc.Maths
 {
 
     /// <summary>
-    /// The default implementation of methods to resolve object for post parse process.
+    /// The default implementation of methods to resolve object for post-parse process.
     /// </summary>
     public class DefaultDependencyResolver : IDependencyResolver
     {
 
         private Container container;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultDependencyResolver"/> class.
+        /// </summary>
         public DefaultDependencyResolver()
         {
             container = new Container();
+            container.RegisterSingleton<ISimplifier, Simplifier>();
+            container.RegisterSingleton<IDifferentiator>(() => new Differentiator(container.GetInstance<ISimplifier>()));
+            container.Verify();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultDependencyResolver"/> class.
+        /// </summary>
+        /// <param name="objects">The array of object to register in DI-container (as singletons).</param>
         public DefaultDependencyResolver(object[] objects)
         {
             container = new Container();
@@ -39,14 +48,30 @@ namespace xFunc.Maths
             if (objects != null)
                 foreach (var obj in objects)
                     container.RegisterSingleton(obj.GetType(), obj);
+
+            container.Verify();
         }
 
+        /// <summary>
+        /// Resolves the specified type.
+        /// </summary>
+        /// <param name="type">The type for resolving.</param>
+        /// <returns>
+        /// The object of specified type.
+        /// </returns>
         public object Resolve(Type type)
         {
             return container.GetInstance(type);
         }
 
-        public T Resolve<T>() where T: class
+        /// <summary>
+        /// Resolves this instance.
+        /// </summary>
+        /// <typeparam name="T">The type for resolving.</typeparam>
+        /// <returns>
+        /// The object of specified type.
+        /// </returns>
+        public T Resolve<T>() where T : class
         {
             return container.GetInstance<T>();
         }

@@ -23,7 +23,17 @@ namespace xFunc.Maths
     public interface IDependencyResolver
     {
 
+        /// <summary>
+        /// Resolves the specified type.
+        /// </summary>
+        /// <param name="type">The type for resolving.</param>
+        /// <returns>The object of specified type.</returns>
         object Resolve(Type type);
+        /// <summary>
+        /// Resolves this instance.
+        /// </summary>
+        /// <typeparam name="T">The type for resolving.</typeparam>
+        /// <returns>The object of specified type.</returns>
         T Resolve<T>() where T : class;
 
     }

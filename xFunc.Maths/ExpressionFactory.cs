@@ -30,6 +30,18 @@ namespace xFunc.Maths
     public class ExpressionFactory : IExpressionFactory
     {
 
+        private IDependencyResolver resolver;
+
+        public ExpressionFactory()
+            : this(new DefaultDependencyResolver())
+        {
+        }
+
+        public ExpressionFactory(IDependencyResolver resolver)
+        {
+            this.resolver = resolver;
+        }
+
         /// <summary>
         /// Creates a expression from specified token.
         /// </summary>

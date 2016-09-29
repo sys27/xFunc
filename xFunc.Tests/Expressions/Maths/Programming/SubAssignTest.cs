@@ -51,7 +51,6 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         {
             Assert.Throws<ParameterTypeMismatchException>(() =>
             {
-                var parameters = new ParameterCollection() { new Parameter("x", 2) };
                 var add = new SubAssign(new Variable("x"), new Bool(true));
             });
         }

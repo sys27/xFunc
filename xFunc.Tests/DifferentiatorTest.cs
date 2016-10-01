@@ -78,7 +78,7 @@ namespace xFunc.Tests
 
             Assert.Equal("0", exp.ToString());
         }
-
+        
         [Fact]
         public void AbsDerivativeTest1()
         {
@@ -1511,6 +1511,12 @@ namespace xFunc.Tests
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(cos(x) * 1 * 1) * 1", deriv.ToString());
+        }
+
+        [Fact]
+        public void NotSupportedTest()
+        {
+            Assert.Throws<NotSupportedException>(() => Differentiate(new Fact(new Variable("x"))));
         }
 
     }

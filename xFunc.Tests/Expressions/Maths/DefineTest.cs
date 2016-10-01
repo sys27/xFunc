@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class DefineTest
     {
 
@@ -28,11 +28,11 @@ namespace xFunc.Tests.Expressions.Maths
         public void SimpDefineTest()
         {
             var exp = new Define(new Variable("x"), new Number(1));
-            var parameters = new ParameterCollection();
+            var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
 
-            Assert.Equal(1.0, parameters["x"]);
+            Assert.Equal(1.0, parameters.Variables["x"]);
             Assert.Equal(double.NaN, answer);
         }
 
@@ -53,11 +53,11 @@ namespace xFunc.Tests.Expressions.Maths
         public void DefineExpTest()
         {
             var exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
-            var parameters = new ParameterCollection();
+            var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
 
-            Assert.Equal(36.0, parameters["x"]);
+            Assert.Equal(36.0, parameters.Variables["x"]);
             Assert.Equal(double.NaN, answer);
         }
 
@@ -65,11 +65,30 @@ namespace xFunc.Tests.Expressions.Maths
         public void OverrideConstTest()
         {
             var exp = new Define(new Variable("π"), new Number(1));
-            var parameters = new ParameterCollection();
+            var parameters = new ExpressionParameters();
 
             exp.Execute(parameters);
 
-            Assert.Equal(1.0, parameters["π"]);
+            Assert.Equal(1.0, parameters.Variables["π"]);
+        }
+
+        [Fact]
+        public void DefineFuncTest()
+        {
+            var uf = new UserFunction("s", 1);
+            var func = new Sin(new Variable("x"));
+            var exp = new Define(uf, func);
+            var parameters = new ExpressionParameters();
+
+            exp.Execute(parameters);
+            
+            Assert.Equal(func, parameters.Functions[uf]);
+        }
+
+        [Fact]
+        public void ParamsNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Define(new Variable("π"), new Number(1)).Execute(null));
         }
 
     }

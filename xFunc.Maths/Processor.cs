@@ -43,7 +43,10 @@ namespace xFunc.Maths
             lexer = new Lexer();
             simplifier = new Simplifier();
             differentiator = new Differentiator(simplifier);
-            parser = new Parser(new ExpressionFactory(new DefaultDependencyResolver(new object[] { simplifier, differentiator })));
+            parser = new Parser(new ExpressionFactory(
+                                    new DefaultDependencyResolver(new Type[] { typeof(ISimplifier), typeof(IDifferentiator) },
+                                                                  new object[] { simplifier, differentiator })
+                                ));
 
             parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
             numeralSystem = NumeralSystem.Decimal;

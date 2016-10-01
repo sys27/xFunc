@@ -20,10 +20,12 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Simplify operation.
     /// </summary>
-    public class Simplify  : IExpression
+    public class Simplify : IExpression
     {
 
         private IExpression expression;
+
+        private ISimplifier simplifier;
 
         internal Simplify() { }
 
@@ -79,7 +81,7 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException">Always.</exception>
         public object Execute()
         {
-            throw new NotSupportedException();
+            return Execute(null);
         }
 
         /// <summary>
@@ -93,9 +95,9 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException">Always.</exception>
         public object Execute(ExpressionParameters parameters)
         {
-            throw new NotSupportedException();
+            return simplifier.Simplify(this);
         }
-        
+
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -192,7 +194,25 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Undefined;
+                return ExpressionResultType.Expression;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the simplifier.
+        /// </summary>
+        /// <value>
+        /// The simplifier.
+        /// </value>
+        public ISimplifier Simplifier
+        {
+            get
+            {
+                return simplifier;
+            }
+            set
+            {
+                simplifier = value;
             }
         }
 

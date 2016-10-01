@@ -62,7 +62,9 @@ namespace xFunc.Tests
         [Fact]
         public void VariableIsNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => Differentiate(new Number(10), null, null));
+            var exp = Differentiate(new Number(10), null, null);
+
+            Assert.Equal("0", exp.ToString());
         }
 
         #endregion

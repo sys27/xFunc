@@ -12,8 +12,9 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using SimpleInjector;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace xFunc.Maths
 {
@@ -24,56 +25,65 @@ namespace xFunc.Maths
     public class DefaultDependencyResolver : IDependencyResolver
     {
 
-        private Container container;
+        private Dictionary<Type, object> container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultDependencyResolver"/> class.
         /// </summary>
         public DefaultDependencyResolver()
         {
-            container = new Container();
-            container.RegisterSingleton<ISimplifier, Simplifier>();
-            container.RegisterSingleton<IDifferentiator>(() => new Differentiator(container.GetInstance<ISimplifier>()));
-            container.Verify();
+            container = new Dictionary<Type, object>();
+            container.Add(typeof(ISimplifier), new Simplifier());
+            container.Add(typeof(IDifferentiator), new Differentiator());
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultDependencyResolver"/> class.
         /// </summary>
         /// <param name="objects">The array of object to register in DI-container (as singletons).</param>
-        public DefaultDependencyResolver(object[] objects)
+        public DefaultDependencyResolver(Type[] types, object[] objects)
         {
-            container = new Container();
+            if (types == null)
+                throw new ArgumentNullException(nameof(types));
+            if (objects == null)
+                throw new ArgumentNullException(nameof(objects));
+            if (types.Length != objects.Length)
+                throw new ArgumentException();
+
+            container = new Dictionary<Type, object>();
 
             if (objects != null)
-                foreach (var obj in objects)
-                    container.RegisterSingleton(obj.GetType(), obj);
-
-            container.Verify();
+                for (int i = 0; i < objects.Length; i++)
+                    container.Add(types[i], objects[i]);
         }
 
         /// <summary>
-        /// Resolves the specified type.
+        /// Resolves the specified object.
         /// </summary>
-        /// <param name="type">The type for resolving.</param>
-        /// <returns>
-        /// The object of specified type.
-        /// </returns>
-        public object Resolve(Type type)
+        /// <param name="obj">The object.</param>
+        public void Resolve(object obj)
         {
-            return container.GetInstance(type);
+            var type = obj.GetType();
+            foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (prop.CanWrite && container.ContainsKey(prop.PropertyType))
+                    prop.SetValue(obj, container[prop.PropertyType], null);
+            }
         }
 
         /// <summary>
-        /// Resolves this instance.
+        /// Resolves the specified object.
         /// </summary>
-        /// <typeparam name="T">The type for resolving.</typeparam>
+        /// <typeparam name="T">The type of specified object.</typeparam>
+        /// <param name="obj">The object.</param>
         /// <returns>
-        /// The object of specified type.
+        /// The object with injected properties.
         /// </returns>
-        public T Resolve<T>() where T : class
+        public T Resolve<T>(T obj)
         {
-            return container.GetInstance<T>();
+            Resolve(obj);
+
+            return obj;
         }
 
     }

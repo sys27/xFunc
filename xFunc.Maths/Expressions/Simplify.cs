@@ -20,10 +20,8 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Simplify operation.
     /// </summary>
-    public class Simplify : IExpression
+    public class Simplify : UnaryExpression
     {
-
-        private IExpression expression;
 
         private ISimplifier simplifier;
 
@@ -34,22 +32,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         public Simplify(IExpression expression)
+            : base(expression)
         {
-            this.expression = expression;
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            var simp = obj as Simplify;
-            if (simp != null && expression.Equals(simp.expression))
-                return true;
-
-            return false;
         }
 
         /// <summary>
@@ -60,7 +44,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return expression.GetHashCode() ^ 457;
+            return GetHashCode(457);
         }
 
         /// <summary>
@@ -69,19 +53,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A <see cref="String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"simplify({expression})";
-        }
-
-        /// <summary>
-        /// Throws <see cref="NotSupportedException"/>.
-        /// </summary>
-        /// <returns>
-        /// The exception.
-        /// </returns>
-        /// <exception cref="NotSupportedException">Always.</exception>
-        public object Execute()
-        {
-            return Execute(null);
+            return ToString("simplify({0})");
         }
 
         /// <summary>
@@ -93,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters parameters)
         {
             return simplifier.Simplify(this);
         }
@@ -102,95 +74,32 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
+        public override IExpression Clone()
         {
-            return new Simplify(expression.Clone());
+            return new Simplify(m_argument.Clone());
         }
 
         /// <summary>
-        /// This property always returns <c>null</c>.
-        /// </summary>
-        public IExpression Parent
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the expression.
+        /// Gets the type of the argument.
         /// </summary>
         /// <value>
-        /// The expression.
+        /// The type of the argument.
         /// </value>
-        public IExpression Expression
+        public override ExpressionResultType ArgumentType
         {
             get
             {
-                return expression;
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                expression = value;
+                return ExpressionResultType.All;
             }
         }
-
-        /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public int MinParameters
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public int MaxParameters
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
+        
         /// <summary>
         /// Gets the type of the result.
         /// </summary>
         /// <value>
         /// The type of the result.
         /// </value>
-        public ExpressionResultType ResultType
+        public override ExpressionResultType ResultType
         {
             get
             {

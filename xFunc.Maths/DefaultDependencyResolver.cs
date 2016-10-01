@@ -65,10 +65,8 @@ namespace xFunc.Maths
         {
             var type = obj.GetType();
             foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
                 if (prop.CanWrite && container.ContainsKey(prop.PropertyType))
                     prop.SetValue(obj, container[prop.PropertyType], null);
-            }
         }
 
         /// <summary>

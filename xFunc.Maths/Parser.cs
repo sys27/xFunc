@@ -99,13 +99,6 @@ namespace xFunc.Maths
 
                     stack.Push(func);
                 }
-                else if (expression is Simplify)
-                {
-                    var simp = expression as Simplify;
-                    simp.Expression = stack.Pop();
-
-                    stack.Push(simp);
-                }
                 else if (expression is Define)
                 {
                     if (stack.Count < 2)

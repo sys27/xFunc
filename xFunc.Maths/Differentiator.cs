@@ -82,8 +82,9 @@ namespace xFunc.Maths
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
+
             if (variable == null)
-                throw new ArgumentNullException(nameof(variable));
+                variable = new Variable("x");
 
             if (!Helpers.HasVar(expression, variable))
                 return new Number(0);
@@ -114,6 +115,9 @@ namespace xFunc.Maths
             var deriv = expression as Derivative;
             if (deriv != null)
                 expression = _Differentiate(deriv.Expression, deriv.Variable, parameters);
+            var simp = expression as Simplify;
+            if (simp != null)
+                expression = simp.Expression;
 
             var abs = expression as Abs;
             if (abs != null)

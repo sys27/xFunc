@@ -33,7 +33,7 @@ namespace xFunc.Tests
 
         public MathParserTest()
         {
-            parser = new Parser(new ExpressionFactory());
+            parser = new Parser();
         }
 
         [Fact]
@@ -1119,7 +1119,7 @@ namespace xFunc.Tests
         {
             Assert.Throws<ArgumentNullException>(() => Helpers.ConvertExpressionToCollection(null));
         }
-
+        
     }
 
 }

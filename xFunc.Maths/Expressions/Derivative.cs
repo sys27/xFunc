@@ -24,6 +24,8 @@ namespace xFunc.Maths.Expressions
     public class Derivative : DifferentParametersExpression
     {
 
+        private IDifferentiator differentiator;
+
         internal Derivative()
             : base(null, -1) { }
 
@@ -102,7 +104,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            throw new NotSupportedException();
+            return differentiator.Differentiate(this, Variable);
         }
 
         /// <summary>
@@ -170,7 +172,7 @@ namespace xFunc.Maths.Expressions
                 base.Arguments = value;
             }
         }
-
+        
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
@@ -209,7 +211,25 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Undefined;
+                return ExpressionResultType.Expression;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the differentiator.
+        /// </summary>
+        /// <value>
+        /// The differentiator.
+        /// </value>
+        public IDifferentiator Differentiator
+        {
+            get
+            {
+                return differentiator;
+            }
+            set
+            {
+                differentiator = value;
             }
         }
 

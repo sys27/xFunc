@@ -1487,6 +1487,15 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void DerivSimplify()
+        {
+            var exp = new Simplify(new Sin(new Variable("x")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("cos(x) * 1", deriv.ToString());
+        }
+
+        [Fact]
         public void DoubleDiffTest()
         {
             var exp = new Derivative(new Derivative(new Sin(new Variable("x")), new Variable("x")), new Variable("x"));

@@ -760,6 +760,15 @@ namespace xFunc.Tests
             SimpleTest(log, expected);
         }
 
+        [Fact]
+        public void Simplify()
+        {
+            var simp = new Simplify(new Pow(new Variable("x"), new Number(0)));
+            var expected = new Number(1);
+
+            SimpleTest(simp, expected);
+        }
+
         #region Trigonometric
 
         [Fact]

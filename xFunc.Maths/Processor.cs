@@ -92,18 +92,6 @@ namespace xFunc.Maths
         {
             var exp = Parse(function, true);
 
-            if (exp is Derivative)
-            {
-                var deriv = exp as Derivative;
-                if (deriv.ParametersCount == 1)
-                    return new ExpressionResult(Differentiate(deriv, new Variable("x"), parameters));
-
-                return new ExpressionResult(Differentiate(deriv, deriv.Variable, parameters));
-            }
-            if (exp is Simplify)
-            {
-                return new ExpressionResult((exp as Simplify).Expression);
-            }
             if (exp is Define)
             {
                 var assign = exp as Define;

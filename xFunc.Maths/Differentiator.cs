@@ -117,7 +117,7 @@ namespace xFunc.Maths
                 expression = _Differentiate(deriv.Expression, deriv.Variable, parameters);
             var simp = expression as Simplify;
             if (simp != null)
-                expression = simp.Expression;
+                expression = simp.Argument;
 
             var abs = expression as Abs;
             if (abs != null)

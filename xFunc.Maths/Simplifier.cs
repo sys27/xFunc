@@ -49,6 +49,11 @@ namespace xFunc.Maths
             if (expression is Variable)
                 return expression;
 
+            if (expression is Simplify)
+            {
+                return _Simplify(((Simplify)expression).Argument);
+            }
+
             if (expression is BinaryExpression)
             {
                 var bin = expression as BinaryExpression;
@@ -59,13 +64,6 @@ namespace xFunc.Maths
             {
                 var un = expression as UnaryExpression;
                 un.Argument = _Simplify(un.Argument);
-            }
-            else if (expression is Simplify)
-            {
-                var simp = expression as Simplify;
-                simp.Expression = _Simplify(simp.Expression);
-
-                return simp;
             }
             else if (expression is Derivative)
             {

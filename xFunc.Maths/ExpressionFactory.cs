@@ -51,26 +51,25 @@ namespace xFunc.Maths
         /// </returns>
         public virtual IExpression Create(IToken token)
         {
-            var operation = token as OperationToken;
-            if (operation != null)
-                return CreateOperation(operation);
-            var numberToken = token as NumberToken;
-            if (numberToken != null)
-                return new Number(numberToken.Number);
-            var booleanToken = token as BooleanToken;
-            if (booleanToken != null)
-                return new Bool(booleanToken.Value);
-            var variableToken = token as VariableToken;
-            if (variableToken != null)
-                return new Variable(variableToken.Variable);
-            var functionToken = token as UserFunctionToken;
-            if (functionToken != null)
-                return CreateUserFunction(functionToken);
-            var func = token as FunctionToken;
-            if (func != null)
-                return CreateFunction(func);
+            IExpression result = null;
+            
+            if (token is OperationToken)
+                result = CreateOperation((OperationToken)token);
+            else if (token is NumberToken)
+                result = new Number(((NumberToken)token).Number);
+            else if (token is BooleanToken)
+                result = new Bool(((BooleanToken)token).Value);
+            else if (token is VariableToken)
+                result = new Variable(((VariableToken)token).Variable);
+            else if (token is UserFunctionToken)
+                result = CreateUserFunction((UserFunctionToken)token);
+            else if (token is FunctionToken)
+                result = CreateFunction((FunctionToken)token);
 
-            return null;
+            if (resolver != null && result != null)
+                resolver.Resolve((object)result);
+
+            return result;
         }
 
         /// <summary>

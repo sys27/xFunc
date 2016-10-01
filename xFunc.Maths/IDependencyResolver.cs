@@ -18,23 +18,23 @@ namespace xFunc.Maths
 {
     
     /// <summary>
-    /// Defines methods to resolve object for post parse process.
+    /// Defines methods to resolve object (supports only property resolution on existing objects) for post parse process.
     /// </summary>
     public interface IDependencyResolver
     {
 
         /// <summary>
-        /// Resolves the specified type.
+        /// Resolves the specified object.
         /// </summary>
-        /// <param name="type">The type for resolving.</param>
-        /// <returns>The object of specified type.</returns>
-        object Resolve(Type type);
+        /// <param name="obj">The object.</param>
+        void Resolve(object obj);
         /// <summary>
-        /// Resolves this instance.
+        /// Resolves the specified object.
         /// </summary>
-        /// <typeparam name="T">The type for resolving.</typeparam>
-        /// <returns>The object of specified type.</returns>
-        T Resolve<T>() where T : class;
+        /// <typeparam name="T">The type of specified object.</typeparam>
+        /// <param name="obj">The object.</param>
+        /// <returns>The object with injected properties.</returns>
+        T Resolve<T>(T obj);
 
     }
 

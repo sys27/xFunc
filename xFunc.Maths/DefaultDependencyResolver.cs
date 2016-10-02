@@ -38,9 +38,14 @@ namespace xFunc.Maths
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultDependencyResolver"/> class.
+        /// Initializes a new instance of the <see cref="DefaultDependencyResolver" /> class.
         /// </summary>
-        /// <param name="objects">The array of object to register in DI-container (as singletons).</param>
+        /// <param name="types">The array of types to register in DI-container.</param>
+        /// <param name="objects">The array of objects to register in DI-container (as singletons).</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// <paramref name="types"/> or <paramref name="objects"/> is null.
+        /// </exception>
+        /// <exception cref="System.ArgumentException">The length of <paramref name="types"/> is not equal to length of <paramref name="objects"/></exception>
         public DefaultDependencyResolver(Type[] types, object[] objects)
         {
             if (types == null)
@@ -52,9 +57,8 @@ namespace xFunc.Maths
 
             container = new Dictionary<Type, object>();
 
-            if (objects != null)
-                for (int i = 0; i < objects.Length; i++)
-                    container.Add(types[i], objects[i]);
+            for (int i = 0; i < objects.Length; i++)
+                container.Add(types[i], objects[i]);
         }
 
         /// <summary>
@@ -79,7 +83,7 @@ namespace xFunc.Maths
         /// </returns>
         public T Resolve<T>(T obj)
         {
-            Resolve(obj);
+            Resolve((object)obj);
 
             return obj;
         }

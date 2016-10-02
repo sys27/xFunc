@@ -71,6 +71,7 @@
     <Compile Include="Expressions\Maths\AbsTest.cs" />
     <Compile Include="Expressions\Maths\AddTest.cs" />
     <Compile Include="Expressions\Maths\BinaryTest.cs" />
+    <Compile Include="Expressions\Maths\DelTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\AndTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\EqualityTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\ImplicationTest.cs" />

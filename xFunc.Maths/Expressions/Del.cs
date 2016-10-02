@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="differentiator"/> is null.</exception>
+        /// <exception cref="System.ArgumentNullException">The differentiator is null.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {

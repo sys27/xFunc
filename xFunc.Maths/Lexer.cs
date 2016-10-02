@@ -1022,7 +1022,7 @@ namespace xFunc.Maths
                     }
 
                     int j = i + 1;
-                    for (; j < function.Length && char.IsLetter(function[j]) && !notVar.Any(s => function.Substring(j).StartsWith(s, StringComparison.Ordinal)); j++) { }
+                    for (; j < function.Length && (char.IsLetter(function[j]) || char.IsDigit(function[j])) && !notVar.Any(s => function.Substring(j).StartsWith(s, StringComparison.Ordinal)); j++) { }
 
                     var str = function.Substring(i, j - i);
                     i = j;

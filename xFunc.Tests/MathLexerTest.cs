@@ -503,6 +503,45 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void VarWithNumber1()
+        {
+            var tokens = lexer.Tokenize("x1");
+
+            var expected = new List<IToken>
+            {
+                new VariableToken("x1")
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void VarWithNumber2()
+        {
+            var tokens = lexer.Tokenize("xdsa13213");
+
+            var expected = new List<IToken>
+            {
+                new VariableToken("xdsa13213")
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void VarWithNumber3()
+        {
+            var tokens = lexer.Tokenize("x1b2v3");
+
+            var expected = new List<IToken>
+            {
+                new VariableToken("x1b2v3")
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void Pi()
         {
             var tokens = lexer.Tokenize("3pi");

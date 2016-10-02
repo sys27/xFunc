@@ -246,6 +246,8 @@ namespace xFunc.Maths
                     return new Derivative() { ParametersCount = token.CountOfParams };
                 case Functions.Simplify:
                     return new Simplify();
+                case Functions.Del:
+                    return new Del();
                 case Functions.Define:
                     return new Define();
                 case Functions.Vector:

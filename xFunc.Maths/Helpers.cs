@@ -115,6 +115,48 @@ namespace xFunc.Maths
             collection.Add(expression);
         }
 
+        /// <summary>
+        /// Gets all variables.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <returns>The list of variables.</returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="expression"/> is null.</exception>
+        public static IEnumerable<Variable> GetAllVariables(IExpression expression)
+        {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+
+            var collection = new HashSet<Variable>();
+            GetAllVariables(expression, collection);
+
+            return collection;
+        }
+
+        private static void GetAllVariables(IExpression expression, HashSet<Variable> collection)
+        {
+            if (expression is UnaryExpression)
+            {
+                var un = (UnaryExpression)expression;
+                GetAllVariables(un.Argument, collection);
+            }
+            else if (expression is BinaryExpression)
+            {
+                var bin = (BinaryExpression)expression;
+                GetAllVariables(bin.Left, collection);
+                GetAllVariables(bin.Right, collection);
+            }
+            else if (expression is DifferentParametersExpression)
+            {
+                var diff = (DifferentParametersExpression)expression;
+                foreach (var exp in diff.Arguments)
+                    GetAllVariables(exp, collection);
+            }
+            else if (expression is Variable)
+            {
+                collection.Add((Variable)expression);
+            }
+        }
+
     }
 
 }

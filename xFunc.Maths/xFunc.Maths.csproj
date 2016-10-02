@@ -73,6 +73,7 @@
     <Compile Include="Expressions\Matrices\MatrixIsInvalidException.cs" />
     <Compile Include="Expressions\Matrices\Transpose.cs" />
     <Compile Include="Expressions\Matrices\Vector.cs" />
+    <Compile Include="Expressions\Del.cs" />
     <Compile Include="Expressions\ParameterTypeMismatchException.cs" />
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\Programming\AddAssign.cs" />

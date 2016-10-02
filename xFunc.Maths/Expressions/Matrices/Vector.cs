@@ -175,8 +175,13 @@ namespace xFunc.Maths.Expressions.Matrices
 
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
+#if !PORTABLE
             return (from exp in m_arguments.AsParallel().AsOrdered()
                     select (double)exp.Execute(parameters)).ToArray();
+#else
+            return (from exp in m_arguments
+                    select (double)exp.Execute(parameters)).ToArray();
+#endif
         }
 
         /// <summary>

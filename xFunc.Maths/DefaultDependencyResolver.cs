@@ -55,7 +55,7 @@ namespace xFunc.Maths
             if (types.Length != objects.Length)
                 throw new ArgumentException();
 
-            container = new Dictionary<Type, object>();
+            container = new Dictionary<Type, object>(types.Length);
 
             for (int i = 0; i < objects.Length; i++)
                 container.Add(types[i], objects[i]);
@@ -68,6 +68,7 @@ namespace xFunc.Maths
         public void Resolve(object obj)
         {
             var type = obj.GetType();
+
             foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
                 if (prop.CanWrite && container.ContainsKey(prop.PropertyType))
                     prop.SetValue(obj, container[prop.PropertyType], null);

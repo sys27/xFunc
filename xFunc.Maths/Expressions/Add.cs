@@ -71,32 +71,17 @@ namespace xFunc.Maths.Expressions
         {
             if (ResultType == ExpressionResultType.Matrix)
             {
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Matrix))
-                {
-                    var l = m_left.Execute(parameters);
-
-                    var left = l as Vector;
-                    if (left != null)
-                        return left.Add((Vector)m_right, parameters);
-
-                    return ((Matrix)l).Add((Matrix)m_right, parameters);
-                }
-
-                if (m_right.ResultType.HasFlagNI(ExpressionResultType.Matrix))
-                {
-                    var r = m_right.Execute(parameters);
-
-                    var right = r as Vector;
-                    if (right != null)
-                        return ((Vector)m_left).Add(right, parameters);
-
-                    return ((Matrix)m_left).Add((Matrix)r, parameters);
-                }
-
                 if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
                     throw new NotSupportedException();
 
-                throw new NotSupportedException();
+                var l = m_left.Execute(parameters);
+                var r = m_right.Execute(parameters);
+
+                var left = l as Vector;
+                if (left != null)
+                    return left.Add((Vector)r, parameters);
+
+                return ((Matrix)l).Add((Matrix)r, parameters);
             }
 
             return (double)m_left.Execute(parameters) + (double)m_right.Execute(parameters);

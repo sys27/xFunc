@@ -70,38 +70,20 @@ namespace xFunc.Maths.Expressions
         {
             if (ResultType == ExpressionResultType.Matrix)
             {
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Matrix))
-                {
-                    var l = m_left.Execute(parameters);
-
-                    var left = l as Vector;
-                    if (left != null)
-                        return left.Sub((Vector)m_right, parameters);
-
-                    return ((Matrix)l).Sub((Matrix)m_right, parameters);
-                }
-
-                if (m_right.ResultType.HasFlagNI(ExpressionResultType.Matrix))
-                {
-                    var r = m_right.Execute(parameters);
-
-                    var right = r as Vector;
-                    if (right != null)
-                        return ((Vector)m_left).Sub(right, parameters);
-
-                    return ((Matrix)m_left).Sub((Matrix)r, parameters);
-                }
-
                 if ((m_left is Vector && m_right is Matrix) || (m_right is Vector && m_left is Matrix))
                     throw new NotSupportedException();
 
-                throw new NotSupportedException();
+                var l = m_left.Execute(parameters);
+                var r = m_right.Execute(parameters);
+
+                var left = l as Vector;
+                if (left != null)
+                    return left.Sub((Vector)r, parameters);
+
+                return ((Matrix)l).Sub((Matrix)r, parameters);
             }
 
-            if (ResultType == ExpressionResultType.Number)
-                return (double)m_left.Execute(parameters) - (double)m_right.Execute(parameters);
-
-            throw new NotSupportedException();
+            return (double)m_left.Execute(parameters) - (double)m_right.Execute(parameters);
         }
 
         /// <summary>

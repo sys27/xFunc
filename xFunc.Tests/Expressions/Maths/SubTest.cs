@@ -68,7 +68,23 @@ namespace xFunc.Tests.Expressions.Maths
 
             Assert.Equal(expected, result);
         }
-        
+
+        [Fact]
+        public void Sub4MatricesTest()
+        {
+            var vector1 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector2 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector3 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector4 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var sub1 = new Sub(vector1, vector2);
+            var sub2 = new Sub(vector3, vector4);
+            var sub3 = new Sub(sub1, sub2);
+
+            var expected = new Vector(new IExpression[] { new Number(0), new Number(0) });
+
+            Assert.Equal(expected, sub3.Execute());
+        }
+
     }
 
 }

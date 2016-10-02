@@ -131,6 +131,9 @@ namespace xFunc.Maths
             var exp = expression as Exp;
             if (exp != null)
                 return Exp(exp, variable);
+            var lb = expression as Lb;
+            if (lb != null)
+                return Lb(lb, variable);
             var ln = expression as Ln;
             if (ln != null)
                 return Ln(ln, variable);
@@ -348,6 +351,21 @@ namespace xFunc.Maths
         protected virtual IExpression Exp(Exp expression, Variable variable)
         {
             return new Mul(_Differentiate(expression.Argument.Clone(), variable), expression.Clone());
+        }
+
+        /// <summary>
+        /// Differentiates the specified expression.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <returns>Returns the derivative.</returns>
+        protected virtual IExpression Lb(Lb expression, Variable variable)
+        {
+            var ln = new Ln(new Number(2));
+            var mul = new Mul(expression.Argument.Clone(), ln);
+            var div = new Div(_Differentiate(expression.Argument.Clone(), variable), mul);
+
+            return div;
         }
 
         /// <summary>

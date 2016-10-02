@@ -67,6 +67,9 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException">Always.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
+            if (simplifier == null)
+                throw new ArgumentNullException(nameof(simplifier));
+
             return simplifier.Simplify(this);
         }
 

@@ -104,6 +104,9 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
+            if (differentiator == null)
+                throw new ArgumentNullException(nameof(differentiator));
+
             return differentiator.Differentiate(this, Variable);
         }
 

@@ -423,6 +423,51 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void LbDerivativeTest1()
+        {
+            var exp = new Lb(new Mul(new Number(2), new Variable("x")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("(2 * 1) / (2 * x * ln(2))", deriv.ToString());
+        }
+
+        [Fact]
+        public void LbDerivativeTest2()
+        {
+            // lb(2x)
+            var num = new Number(2);
+            var x = new Variable("x");
+            var mul = new Mul(num, x);
+
+            var exp = new Lb(mul);
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("(2 * 1) / (2 * x * ln(2))", deriv.ToString());
+
+            num.Value = 3;
+            Assert.Equal("lb(3 * x)", exp.ToString());
+            Assert.Equal("(2 * 1) / (2 * x * ln(2))", deriv.ToString());
+        }
+
+        [Fact]
+        public void LbPartialDerivativeTest1()
+        {
+            // lb(2xy)
+            var exp = new Lb(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
+            var deriv = Differentiate(exp);
+            Assert.Equal("(2 * 1 * y) / (2 * x * y * ln(2))", deriv.ToString());
+        }
+
+        [Fact]
+        public void LbPartialDerivativeTest2()
+        {
+            // lb(2xy)
+            var exp = new Lb(new Variable("x"));
+            var deriv = Differentiate(exp, new Variable("y"));
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void LogDerivativeTest1()
         {
             var exp = new Log(new Variable("x"), new Number(2));

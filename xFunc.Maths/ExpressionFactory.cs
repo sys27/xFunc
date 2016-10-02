@@ -32,11 +32,18 @@ namespace xFunc.Maths
 
         private IDependencyResolver resolver;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionFactory"/> class.
+        /// </summary>
         public ExpressionFactory()
             : this(new DefaultDependencyResolver())
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionFactory"/> class.
+        /// </summary>
+        /// <param name="resolver">The dependency resolver.</param>
         public ExpressionFactory(IDependencyResolver resolver)
         {
             this.resolver = resolver;

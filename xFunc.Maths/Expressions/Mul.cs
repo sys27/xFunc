@@ -119,10 +119,7 @@ namespace xFunc.Maths.Expressions
                     return ((Matrix)r).Mul(l, parameters);
             }
 
-            if (ResultType == ExpressionResultType.Number)
-                return (double)m_left.Execute(parameters) * (double)m_right.Execute(parameters);
-
-            throw new NotSupportedException();
+            return (double)m_left.Execute(parameters) * (double)m_right.Execute(parameters);
         }
 
         /// <summary>

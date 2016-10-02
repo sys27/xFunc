@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class AddTest
     {
 
@@ -55,26 +55,42 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void AddTwoMatricesTest()
         {
-            var matrix1 = new Matrix(new[] 
-            { 
-                new Vector(new[] { new Number(6), new Number(3) }), 
-                new Vector(new[] { new Number(2), new Number(1) }) 
+            var matrix1 = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(6), new Number(3) }),
+                new Vector(new[] { new Number(2), new Number(1) })
             });
-            var matrix2 = new Matrix(new[] 
-            { 
-                new Vector(new[] { new Number(9), new Number(2) }), 
-                new Vector(new[] { new Number(4), new Number(3) }) 
+            var matrix2 = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(9), new Number(2) }),
+                new Vector(new[] { new Number(4), new Number(3) })
             });
             var add = new Add(matrix1, matrix2);
 
-            var expected = new Matrix(new[] 
-            { 
-                new Vector(new[] { new Number(15), new Number(5) }), 
-                new Vector(new[] { new Number(6), new Number(4) }) 
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(15), new Number(5) }),
+                new Vector(new[] { new Number(6), new Number(4) })
             });
             var result = add.Execute();
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Add4MatricesTest()
+        {
+            var vector1 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector2 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector3 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector4 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var add1 = new Add(vector1, vector2);
+            var add2 = new Add(vector3, vector4);
+            var add3 = new Add(add1, add2);
+
+            var expected = new Vector(new IExpression[] { new Number(4), new Number(8) });
+
+            Assert.Equal(expected, add3.Execute());
         }
 
     }

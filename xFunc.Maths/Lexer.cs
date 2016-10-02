@@ -830,6 +830,20 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("del(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Del));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("nabla(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Del));
+                        i += 5;
+
+                        continue;
+                    }
                     if (sub.StartsWith("def(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Define));

@@ -201,6 +201,10 @@ namespace xFunc.Maths.Tokens
         While,
 
         /// <summary>
+        /// The "Del" operator.
+        /// </summary>
+        Del,
+        /// <summary>
         /// deriv
         /// </summary>
         Derivative,

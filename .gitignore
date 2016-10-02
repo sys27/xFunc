@@ -5,6 +5,9 @@
 TestResults
 packages
 
+coverage
+coverage.xml
+
 *.com
 *.dll
 *.exe

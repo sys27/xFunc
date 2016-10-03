@@ -51,7 +51,12 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="countOfParams">The count of parameters.</param>
         public If(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams)
-        { }
+        {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+            if (arguments.Length != countOfParams)
+                throw new ArgumentException();
+        }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.

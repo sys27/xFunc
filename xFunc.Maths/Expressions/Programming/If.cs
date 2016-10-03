@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">If the "else" statement is null.</exception>
         /// <seealso cref="ExpressionParameters" />

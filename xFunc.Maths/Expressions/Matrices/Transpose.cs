@@ -28,7 +28,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <summary>
         /// Initializes a new instance of the <see cref="Transpose"/> class.
         /// </summary>
-        /// <param name="argument">Matrix or vector.</param>
+        /// <param name="argument">The expression, which returns matrix of vector.</param>
         public Transpose(IExpression argument)
             : base(argument)
         {
@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>

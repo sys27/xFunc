@@ -36,10 +36,12 @@ namespace xFunc.Maths.Expressions.Programming
             : base(new[] { body, init, cond, iter }, 4) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="For"/> class.
+        /// Initializes a new instance of the <see cref="For" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
+        /// <exception cref="System.ArgumentNullException"><paramref name="arguments"/> is null.</exception>
+        /// <exception cref="System.ArgumentException">The length of <paramref name="arguments"/> is not equal to <paramref name="countOfParams"/>.</exception>
         public For(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams)
         {
@@ -65,7 +67,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)

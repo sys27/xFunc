@@ -57,14 +57,14 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Throws <see cref="NotSupportedException" />.
+        /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// The exception.
+        /// A result of the execution.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException">Simplifier is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="NotSupportedException">Always.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
             if (simplifier == null)

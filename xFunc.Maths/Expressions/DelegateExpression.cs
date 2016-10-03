@@ -55,9 +55,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = (DelegateExpression)obj;
-
-            return func.Equals(exp.func);
+            return func.Equals(((DelegateExpression)obj).func);
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace xFunc.Maths.Expressions
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         public object Execute()
         {
@@ -87,14 +85,14 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters parameters)
         {
             return func(parameters);
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
         /// </summary>

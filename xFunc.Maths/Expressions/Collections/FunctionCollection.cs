@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// The <see cref="IExpression"/>.
         /// </value>
         /// <param name="key">The key.</param>
-        /// <returns></returns>
+        /// <returns>The saved user function.</returns>
         public new IExpression this[UserFunction key]
         {
             get

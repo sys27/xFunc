@@ -41,7 +41,13 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         public For(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams) { }
+            : base(arguments, countOfParams)
+        {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+            if (arguments.Length != countOfParams)
+                throw new ArgumentException();
+        }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -189,8 +195,8 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                return new[] 
-                { 
+                return new[]
+                {
                     ExpressionResultType.All,     // Body
                     ExpressionResultType.All,     // Initialization
                     ExpressionResultType.Boolean, // Condition

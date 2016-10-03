@@ -44,6 +44,9 @@ xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICE
 
 [@RonnyCSHARP](https://github.com/ronnycsharp)
 
+[Fluent.Ribbon](https://github.com/fluentribbon/Fluent.Ribbon)
+[AppVeyor](appveyor.com) for allowing free build CI services for Open Source projects.
+
 ## More:
 
 * [CodePlex](http://xfunc.codeplex.com/)

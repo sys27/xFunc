@@ -29,7 +29,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected HyperbolicExpression() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HyperbolicExpression"/> class.
+        /// Initializes a new instance of the <see cref="HyperbolicExpression" /> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
         protected HyperbolicExpression(IExpression argument)

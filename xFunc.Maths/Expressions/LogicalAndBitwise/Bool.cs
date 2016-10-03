@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// Executes this expression.
         /// </summary>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         public object Execute()
         {
@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters parameters)

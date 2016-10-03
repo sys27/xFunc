@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             var num = obj as Number;
@@ -99,7 +99,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns a number. Don't use this method if your expression has variables.
         /// </summary>
-        /// <returns>A result of the calculation.</returns>
+        /// <returns>A result of the execution.</returns>
         public object Execute()
         {
             return number;
@@ -109,7 +109,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a number.
         /// </summary>
         /// <param name="parameters">A collection of variables.</param>
-        /// <returns>A result of the calculation.</returns>
+        /// <returns>A result of the execution.</returns>
         /// <seealso cref="ExpressionParameters"/>
         public object Execute(ExpressionParameters parameters)
         {

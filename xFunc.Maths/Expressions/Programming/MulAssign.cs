@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions.Programming
         internal MulAssign() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddAssign"/> class.
+        /// Initializes a new instance of the <see cref="MulAssign"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)

@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
         internal Ceil() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ceil"/> class.
+        /// Initializes a new instance of the <see cref="Ceil" /> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded up.</param>
         public Ceil(IExpression argument)
@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)

@@ -41,8 +41,6 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
-            if (args.Length < 1)
-                throw new ArgumentException();
         }
 
         /// <summary>

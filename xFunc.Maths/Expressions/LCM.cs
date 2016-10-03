@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
-            if (args.Length < 2 && args.Length != countOfParams)
+            if (args.Length != countOfParams)
                 throw new ArgumentException();
         }
 

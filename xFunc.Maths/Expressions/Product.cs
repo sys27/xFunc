@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        /// <exception cref="ArgumentException">The length of <paramref name="arguments"/> is not equal to <paramref name="countOfParams"/> or last parameter is not variable.</exception>
+        /// <exception cref="ArgumentException">The length of <paramref name="args"/> is not equal to <paramref name="countOfParams"/> or last parameter is not variable.</exception>
         public Product(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {

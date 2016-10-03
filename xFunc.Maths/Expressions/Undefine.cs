@@ -79,7 +79,7 @@ namespace xFunc.Maths.Expressions
         /// Executes this expression. Don't use this method if your expression has variables or functions.
         /// </summary>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
         public object Execute()
@@ -92,7 +92,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>

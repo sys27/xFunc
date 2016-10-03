@@ -59,9 +59,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = (UnaryExpression)obj;
-
-            return m_argument.Equals(exp.Argument);
+            return m_argument.Equals(((UnaryExpression)obj).Argument);
         }
 
         /// <summary>
@@ -101,7 +99,7 @@ namespace xFunc.Maths.Expressions
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         public virtual object Execute()
         {
@@ -113,7 +111,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public abstract object Execute(ExpressionParameters parameters);

@@ -103,9 +103,11 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Executes the user function.
         /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="parameters"/> is null.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {

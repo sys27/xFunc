@@ -52,9 +52,7 @@ namespace xFunc.Maths.Expressions
         public override string ToString()
         {
             if (m_parent is BinaryExpression)
-            {
                 return ToString("({0} + {1})");
-            }
 
             return ToString("{0} + {1}");
         }
@@ -64,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)

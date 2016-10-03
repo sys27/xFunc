@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentException">The length of <paramref name="arguments"/> is not equal to <paramref name="countOfParams"/> or last parameter is not variable.</exception>
         public Sum(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
@@ -133,7 +133,7 @@ namespace xFunc.Maths.Expressions
         /// Executes this expression. Don't use this method if your expression has variables or functions.
         /// </summary>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         public override object Execute()
         {
@@ -162,7 +162,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)

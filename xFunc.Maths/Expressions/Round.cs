@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException">args</exception>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="System.ArgumentException">The length of <paramref name="arguments"/> is not equal to <paramref name="countOfParams"/>.</exception>
         public Round(IExpression[] args, int countOfParams)
             : base(args, countOfParams)
         {
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// A result of the calculation.
+        /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)

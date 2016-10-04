@@ -51,9 +51,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         [Fact]
         public void NumberAndBoolEqualTest()
         {
-            var equal = new NotEqual(new Number(10), new Bool(false));
-
-            Assert.Throws<NotSupportedException>(()=> (bool)equal.Execute());
+            Assert.Throws<ParameterTypeMismatchException>(() => new NotEqual(new Number(10), new Bool(false)));
         }
 
         [Fact]

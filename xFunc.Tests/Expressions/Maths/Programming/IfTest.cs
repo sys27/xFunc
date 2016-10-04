@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var cond = new Equal(new Variable("x"), new Number(10));
             var @if = new If(cond, new Number(20));
 
-            Assert.Throws<ArgumentNullException>(() => @if.Execute(parameters));
+            Assert.Equal(0.0, @if.Execute(parameters));
         }
 
     }

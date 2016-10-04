@@ -76,7 +76,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException">If the "else" statement is null.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
@@ -84,10 +83,8 @@ namespace xFunc.Maths.Expressions.Programming
                 return Then.Execute(parameters);
 
             var @else = Else;
-            if (@else == null)
-                throw new ArgumentNullException(nameof(@else));
 
-            return @else.Execute(parameters);
+            return @else != null ? @else.Execute(parameters) : 0.0;
         }
 
         /// <summary>

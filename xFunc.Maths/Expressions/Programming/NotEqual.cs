@@ -91,6 +91,14 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
+                if (m_right != null)
+                {
+                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
+                        return ExpressionResultType.Number;
+
+                    return ExpressionResultType.Boolean;
+                }
+
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
@@ -105,6 +113,14 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
+                if (m_left != null)
+                {
+                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
+                        return ExpressionResultType.Number;
+
+                    return ExpressionResultType.Boolean;
+                }
+
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }

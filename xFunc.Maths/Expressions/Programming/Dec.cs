@@ -90,8 +90,7 @@ namespace xFunc.Maths.Expressions.Programming
                 if (!(value is Variable))
                     throw new NotSupportedException();
 
-                m_argument = value;
-                m_argument.Parent = this;
+                base.Argument = value;
             }
         }
 

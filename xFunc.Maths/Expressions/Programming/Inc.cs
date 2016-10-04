@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new Inc(m_argument.Clone());
         }
-        
+
         /// <summary>
         /// Gets or sets the expression.
         /// </summary>
@@ -90,8 +90,7 @@ namespace xFunc.Maths.Expressions.Programming
                 if (!(value is Variable))
                     throw new NotSupportedException();
 
-                m_argument = value;
-                m_argument.Parent = this;
+                base.Argument = value;
             }
         }
 

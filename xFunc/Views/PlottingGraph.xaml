@@ -27,7 +27,7 @@ limitations under the License. -->
             <RowDefinition x:Name="secondRow" Height="39" />
         </Grid.RowDefinitions>
 
-        <views:DrawingCanvas x:Name="canvas" Grid.Row="0" Background="#FFEFEFEF" SnapsToDevicePixels="True"  />
+        <views:DrawingCanvas x:Name="canvas" Grid.Row="0" Background="#FFEFEFEF" SnapsToDevicePixels="True" IsManipulationEnabled="True" ManipulationStarting="canvas_ManipulationStarting" ManipulationDelta="canvas_ManipulationDelta" />
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0">
             <Grid Background="White">
                 <Grid.ColumnDefinitions>

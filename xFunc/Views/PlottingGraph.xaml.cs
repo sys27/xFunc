@@ -155,6 +155,40 @@ namespace xFunc.Views
             ReRender();
         }
 
+        private void canvas_ManipulationStarting(object sender, ManipulationStartingEventArgs e)
+        {
+            e.ManipulationContainer = this;
+            e.Mode = ManipulationModes.Scale | ManipulationModes.Translate;
+
+            e.Handled = true;
+        }
+
+        private void canvas_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        {
+            var deltaScale = e.DeltaManipulation.Scale;
+            if (deltaScale.X < 1 && deltaScale.Y < 1)
+            {
+                if (slider.Value != slider.Maximum)
+                    slider.Value += slider.Value > 1 ? 0.1 : 0.02;
+            }
+            else if (deltaScale.X > 1 && deltaScale.Y > 1)
+            {
+                if (slider.Value != slider.Minimum)
+                    slider.Value -= slider.Value > 1 ? 0.1 : 0.02;
+            }
+
+            var deltaTranslation = e.DeltaManipulation.Translation;
+            if (deltaTranslation.X != 0 && deltaTranslation.Y != 0)
+            {
+                centerX += deltaTranslation.X;
+                centerY += deltaTranslation.Y;
+
+                ReRender();
+            }
+
+            e.Handled = true;
+        }
+
         public void ReRender()
         {
             canvas.ClearVisuals();

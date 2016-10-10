@@ -1,4 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7mp?svg=true)](https://ci.appveyor.com/project/sys27/xfunc)
+[![NuGet](https://img.shields.io/nuget/v/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths/)
 
 xFunc
 =====

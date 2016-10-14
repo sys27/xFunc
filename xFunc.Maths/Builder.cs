@@ -873,11 +873,10 @@ namespace xFunc.Maths
         {
             get
             {
-                throw new NotImplementedException();
+                return null;
             }
             set
             {
-                throw new NotImplementedException();
             }
         }
 
@@ -938,6 +937,20 @@ namespace xFunc.Maths
         }
 
         #endregion
+
+        /// <summary>
+        /// Gets the current expression.
+        /// </summary>
+        /// <value>
+        /// The current expression.
+        /// </value>
+        public IExpression Current
+        {
+            get
+            {
+                return current;
+            }
+        }
 
     }
 

@@ -105,7 +105,10 @@
     <Compile Include="Expressions\Maths\LbTest.cs" />
     <Compile Include="Expressions\Maths\LnTest.cs" />
     <Compile Include="Expressions\Maths\LogTest.cs" />
+    <Compile Include="Expressions\Maths\Matrices\DeterminantTest.cs" />
+    <Compile Include="Expressions\Maths\Matrices\InverseTest.cs" />
     <Compile Include="Expressions\Maths\Matrices\MatrixTest.cs" />
+    <Compile Include="Expressions\Maths\Matrices\TransposeTest.cs" />
     <Compile Include="Expressions\Maths\Matrices\VectorTest.cs" />
     <Compile Include="Expressions\Maths\MulTest.cs" />
     <Compile Include="Expressions\Maths\PowTest.cs" />

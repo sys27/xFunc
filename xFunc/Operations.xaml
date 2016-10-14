@@ -60,7 +60,7 @@ limitations under the License. -->
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
-    
+
     <DrawingBrush x:Key="transpose" Stretch="Uniform">
         <DrawingBrush.Drawing>
             <DrawingGroup>
@@ -133,25 +133,6 @@ limitations under the License. -->
                     <GeometryDrawing Geometry="F1 M 39.1264,58.0287L 37.5531,57.2475L 55.9414,57.2475L 55.9414,57.453">
                         <GeometryDrawing.Pen>
                             <Pen Thickness="0.5" LineJoin="Round" Brush="#FF000000"/>
-                        </GeometryDrawing.Pen>
-                    </GeometryDrawing>
-                </DrawingGroup.Children>
-            </DrawingGroup>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
-
-    <DrawingBrush x:Key="remove" Stretch="Uniform">
-        <DrawingBrush.Drawing>
-            <DrawingGroup>
-                <DrawingGroup.Children>
-                    <GeometryDrawing Geometry="F1 M 4.99999,5L 105,105">
-                        <GeometryDrawing.Pen>
-                            <Pen Thickness="10" LineJoin="Round" Brush="#FF000000"/>
-                        </GeometryDrawing.Pen>
-                    </GeometryDrawing>
-                    <GeometryDrawing Geometry="F1 M 5.00005,105L 105,5.00006">
-                        <GeometryDrawing.Pen>
-                            <Pen Thickness="10" LineJoin="Round" Brush="#FF000000"/>
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup.Children>

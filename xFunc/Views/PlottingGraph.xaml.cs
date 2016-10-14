@@ -45,15 +45,6 @@ namespace xFunc.Views
             this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new ParameterCollection { { "x", 0 } });
 
             InitializeComponent();
-
-            this.SizeChanged += this_SizeChanged;
-            this.MouseLeftButtonDown += this_MouseLeftButtonDown;
-            this.MouseDoubleClick += this_MouseDoubleClick;
-            this.MouseMove += this_MouseMove;
-            this.MouseWheel += this_MouseWheel;
-            slider.ValueChanged += slider_ValueChanged;
-            renderGrid.Checked += (o, args) => { ReRender(); };
-            renderGrid.Unchecked += (o, args) => { ReRender(); };
         }
 
         private void InitCoords()
@@ -155,6 +146,11 @@ namespace xFunc.Views
             ReRender();
         }
 
+        private void renderGrid_StateChanged(object sender, RoutedEventArgs e)
+        {
+            ReRender();
+        }
+
         private void canvas_ManipulationStarting(object sender, ManipulationStartingEventArgs e)
         {
             e.ManipulationContainer = this;
@@ -191,6 +187,9 @@ namespace xFunc.Views
 
         public void ReRender()
         {
+            if (!this.IsInitialized)
+                return;
+
             canvas.ClearVisuals();
             DrawGrid();
             DrawOXOY();

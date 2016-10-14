@@ -43,6 +43,8 @@
   <ItemGroup>
     <Reference Include="ControlzEx, Version=2.1.2.3, Culture=neutral, PublicKeyToken=f08b075e934b7045, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.2.1.2.3\lib\net40\ControlzEx.dll</HintPath>
+    <Reference Include="ControlzEx, Version=2.1.1.3, Culture=neutral, PublicKeyToken=f08b075e934b7045, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.2.1.1.3\lib\net40\ControlzEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fluent, Version=4.0.3.394, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
@@ -52,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.2.1.2.3\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\ControlzEx.2.1.1.3\lib\net40\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -240,11 +243,8 @@
     <Resource Include="Images\CopyLarge.png" />
     <Resource Include="Images\Cut.png" />
     <Resource Include="Images\CutLarge.png" />
-    <Resource Include="Images\DegreeLarge.png" />
-    <Resource Include="Images\GradianLarge.png" />
     <Resource Include="Images\Paste.png" />
     <Resource Include="Images\PasteLarge.png" />
-    <Resource Include="Images\RadianLarge.png" />
     <Resource Include="Images\Redo.png" />
     <Resource Include="Images\RedoLarge.png" />
     <Resource Include="Images\Undo.png" />
@@ -290,12 +290,6 @@
     <Resource Include="Images\DeleteLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Bin.png" />
-    <Resource Include="Images\Dec.png" />
-    <Resource Include="Images\Hex.png" />
-    <Resource Include="Images\Oct.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Variable.png" />
     <Resource Include="Images\VariableLarge.png" />
   </ItemGroup>
@@ -318,11 +312,6 @@
   <ItemGroup>
     <Resource Include="Images\Converter.png" />
     <Resource Include="Images\ConverterLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Auto.png" />
-    <Resource Include="Images\Exponential.png" />
-    <Resource Include="Images\Normal.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Copy_16.png" />

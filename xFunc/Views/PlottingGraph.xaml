@@ -20,7 +20,12 @@ limitations under the License. -->
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600">
+             d:DesignHeight="600" d:DesignWidth="600"
+             SizeChanged="this_SizeChanged"
+             MouseLeftButtonDown="this_MouseLeftButtonDown"
+             MouseDoubleClick="this_MouseDoubleClick"
+             MouseMove="this_MouseMove"
+             MouseWheel="this_MouseWheel">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -37,8 +42,8 @@ limitations under the License. -->
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="point" Grid.Column="0" Margin="8,8,0,8" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" />
-                <CheckBox x:Name="renderGrid" Grid.Column="1" Margin="8,8,0,8" IsChecked="True" Content="{x:Static res:Resource.ShowGridCheckBox}" VerticalAlignment="Center" />
-                <Slider x:Name="slider" Grid.Column="2" Minimum="0.1" Maximum="5" Value="1" SmallChange="0.1" LargeChange="1.0"  Margin="8,6,8,8" HorizontalAlignment="Stretch" AutoToolTipPrecision="2" AutoToolTipPlacement="BottomRight" TickPlacement="TopLeft" Ticks="0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5" />
+                <CheckBox x:Name="renderGrid" Grid.Column="1" Margin="8,8,0,8" IsChecked="True" Content="{x:Static res:Resource.ShowGridCheckBox}" VerticalAlignment="Center" Checked="renderGrid_StateChanged" Unchecked="renderGrid_StateChanged" />
+                <Slider x:Name="slider" Grid.Column="2" Minimum="0.1" Maximum="5" Value="1" SmallChange="0.1" LargeChange="1.0"  Margin="8,6,8,8" HorizontalAlignment="Stretch" AutoToolTipPrecision="2" AutoToolTipPlacement="BottomRight" TickPlacement="TopLeft" Ticks="0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5" ValueChanged="slider_ValueChanged" />
             </Grid>
         </Border>
     </Grid>

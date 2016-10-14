@@ -32,7 +32,7 @@
     <DocumentationFile>bin\Release\net40\xFunc.Maths.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\key.pfx</AssemblyOriginatorKeyFile>

@@ -56,7 +56,9 @@ limitations under the License. -->
                                         <fluent:ColorGallery IsAutomaticColorButtonVisible="False" IsNoColorButtonVisible="False" SelectedColor="{Binding Path=ChartColor, Mode=TwoWay}" />
                                     </fluent:DropDownButton>
                                     <Button Grid.Column="3" Width="16" Height="16" Style="{StaticResource buttonStyle}" BorderThickness="0" Tag="{Binding}" Click="removeGraph_Click">
-                                        <Rectangle Fill="{StaticResource remove}" Width="10" Height="10" />
+                                        <Viewbox>
+                                            <TextBlock>✕</TextBlock>
+                                        </Viewbox>
                                     </Button>
                                 </Grid>
                             </DataTemplate>

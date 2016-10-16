@@ -147,14 +147,6 @@ namespace xFunc.Maths.Expressions.Matrices
             return sb.ToString();
         }
 
-        private void CheckMatrix(IExpression[] args)
-        {
-            var size = args[0].ParametersCount;
-
-            if (args.Any(exp => exp.ResultType != ExpressionResultType.Matrix || exp.ParametersCount != size))
-                throw new MatrixIsInvalidException();
-        }
-
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
         {
             var args = new Vector[this.countOfParams];
@@ -266,26 +258,42 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <summary>
         /// Gets or sets the arguments.
         /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        public sealed override IExpression[] Arguments
+        /// <value>The arguments.</value>
+        public override IExpression[] Arguments
         {
             get
             {
-                return base.Arguments;
+                return m_arguments;
             }
             set
             {
-                if (value != null)
-                {
-                    if (value.Length == 0)
-                        throw new ArgumentException();
-
-                    CheckMatrix(value);
-                }
-
                 base.Arguments = value;
+
+                if (value != null && value.Length > 0)
+                {
+                    var size = value[0].ParametersCount;
+
+                    if (value.Any(exp => exp.ParametersCount != size))
+                        throw new MatrixIsInvalidException();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the arguments types.
+        /// </summary>
+        /// <value>
+        /// The arguments types.
+        /// </value>
+        public override ExpressionResultType[] ArgumentsTypes
+        {
+            get
+            {
+                var results = new ExpressionResultType[m_arguments?.Length ?? MinParameters];
+                for (int i = 0; i < results.Length; i++)
+                    results[i] = ExpressionResultType.Vector;
+
+                return results;
             }
         }
 
@@ -356,24 +364,6 @@ namespace xFunc.Maths.Expressions.Matrices
             get
             {
                 return ExpressionResultType.Matrix;
-            }
-        }
-
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
-        {
-            get
-            {
-                var results = new ExpressionResultType[m_arguments?.Length ?? 0];
-                for (int i = 0; i < results.Length; i++)
-                    results[i] = ExpressionResultType.Matrix;
-
-                return results;
             }
         }
 

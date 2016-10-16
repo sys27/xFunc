@@ -67,59 +67,35 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (ResultType == ExpressionResultType.Matrix)
+            if (ResultType.HasFlagNI(ExpressionResultType.Matrix) || ResultType.HasFlagNI(ExpressionResultType.Vector))
             {
-                if (m_left is Vector && m_right is Vector)
-                    throw new NotSupportedException();
+                var temp = m_left.Execute(parameters);
+                var leftResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
 
-                IExpression l;
-                if (m_left is Vector || m_left is Matrix)
+                temp = m_right.Execute(parameters);
+                var rightResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
+
+                if (leftResult is Vector)
                 {
-                    l = m_left;
+                    if (rightResult is Matrix)
+                        return ((Vector)leftResult).Mul((Matrix)rightResult, parameters);
+
+                    return ((Vector)leftResult).Mul(rightResult, parameters);
                 }
-                else
+                if (rightResult is Vector)
                 {
-                    var temp = m_left.Execute(parameters);
-                    if (temp is IExpression)
-                        l = (IExpression)temp;
-                    else
-                        l = new Number((double)temp);
-                }
-                IExpression r;
-                if (m_right is Vector || m_right is Matrix)
-                {
-                    r = m_right;
-                }
-                else
-                {
-                    var temp = m_right.Execute(parameters);
-                    if (temp is IExpression)
-                        r = (IExpression)temp;
-                    else
-                        r = new Number((double)temp);
+                    if (leftResult is Matrix)
+                        return ((Matrix)leftResult).Mul((Vector)rightResult, parameters);
+
+                    return ((Vector)rightResult).Mul(leftResult, parameters);
                 }
 
-                if (l is Vector)
-                {
-                    if (r is Matrix)
-                        return ((Vector)l).Mul((Matrix)r, parameters);
-
-                    return ((Vector)l).Mul(r, parameters);
-                }
-                if (r is Vector)
-                {
-                    if (l is Matrix)
-                        return ((Matrix)l).Mul((Vector)r, parameters);
-
-                    return ((Vector)r).Mul(l, parameters);
-                }
-
-                if (l is Matrix && r is Matrix)
-                    return ((Matrix)l).Mul((Matrix)r, parameters);
-                if (l is Matrix)
-                    return ((Matrix)l).Mul(r, parameters);
-                if (r is Matrix)
-                    return ((Matrix)r).Mul(l, parameters);
+                if (leftResult is Matrix && rightResult is Matrix)
+                    return ((Matrix)leftResult).Mul((Matrix)rightResult, parameters);
+                if (leftResult is Matrix)
+                    return ((Matrix)leftResult).Mul(rightResult, parameters);
+                if (rightResult is Matrix)
+                    return ((Matrix)rightResult).Mul(leftResult, parameters);
             }
 
             return (double)m_left.Execute(parameters) * (double)m_right.Execute(parameters);
@@ -144,7 +120,10 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Number | ExpressionResultType.Matrix;
+                if (m_right != null && m_right.ResultType == ExpressionResultType.Vector)
+                    return ExpressionResultType.Number | ExpressionResultType.Matrix;
+
+                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 
@@ -158,7 +137,10 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Number | ExpressionResultType.Matrix;
+                if (m_left != null && m_left.ResultType == ExpressionResultType.Vector)
+                    return ExpressionResultType.Number | ExpressionResultType.Matrix;
+
+                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 
@@ -172,10 +154,10 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
+                if (m_left.ResultType == ExpressionResultType.Number && m_right.ResultType == ExpressionResultType.Number)
                     return ExpressionResultType.Number;
 
-                return ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 

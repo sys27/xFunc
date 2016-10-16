@@ -193,7 +193,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                var results = new ExpressionResultType[m_arguments?.Length ?? 0];
+                var results = new ExpressionResultType[m_arguments?.Length ?? MinParameters];
                 for (int i = 0; i < results.Length; i++)
                     results[i] = ExpressionResultType.All;
 

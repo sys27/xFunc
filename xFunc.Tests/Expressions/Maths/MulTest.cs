@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
@@ -25,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void CalculateTest()
         {
-            IExpression exp = new Mul(new Number(2), new Number(2));
+            var exp = new Mul(new Number(2), new Number(2));
 
             Assert.Equal(4.0, exp.Execute());
         }

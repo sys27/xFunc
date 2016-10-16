@@ -240,7 +240,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return ExpressionResultType.Matrix;
+                return ExpressionResultType.Vector;
             }
         }
 

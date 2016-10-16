@@ -68,12 +68,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
-            var vector = m_argument.Execute(parameters) as Vector;
-            if (vector != null)
-                return vector.Transpose();
-            var matrix = m_argument.Execute(parameters) as Matrix;
-            if (matrix != null)
-                return matrix.Transpose();
+            var result = m_argument.Execute(parameters);
+
+            if (m_argument.ResultType == ExpressionResultType.Matrix)
+                return ((Matrix)result).Transpose();
+            if (m_argument.ResultType == ExpressionResultType.Vector)
+                return ((Vector)result).Transpose();
 
             throw new NotSupportedException();
         }
@@ -99,7 +99,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                return ExpressionResultType.Matrix;
+                return ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 

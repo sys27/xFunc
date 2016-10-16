@@ -1,4 +1,5 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7mp?svg=true)](https://ci.appveyor.com/project/sys27/xfunc)
+Master: [![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7mp?svg=true)](https://ci.appveyor.com/project/sys27/xfunc)  
+Dev: [![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7mp/branch/master?svg=true)](https://ci.appveyor.com/project/sys27/xfunc/branch/master)  
 [![Coverage Status](https://coveralls.io/repos/github/sys27/xFunc/badge.svg?branch=dev)](https://coveralls.io/github/sys27/xFunc?branch=dev)
 [![NuGet](https://img.shields.io/nuget/v/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths/)
 

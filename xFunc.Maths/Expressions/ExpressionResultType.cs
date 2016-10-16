@@ -41,17 +41,21 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         Boolean = 0x4,
         /// <summary>
-        /// The expression returns a matrix or a vector.
+        /// The expression returns a vector.
         /// </summary>
-        Matrix = 0x8,
+        Vector = 0x8,
+        /// <summary>
+        /// The expression returns a matrix.
+        /// </summary>
+        Matrix = 0x10,
         /// <summary>
         /// The expression returns other expression.
         /// </summary>
-        Expression = 0x10,
+        Expression = 0x20,
         /// <summary>
         /// Combines other parameters.
         /// </summary>
-        All = Undefined | Number | Boolean | Matrix | Expression
+        All = Undefined | Number | Boolean | Vector | Matrix | Expression
 
     }
 

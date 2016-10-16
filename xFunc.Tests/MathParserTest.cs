@@ -671,7 +671,7 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
-            Assert.Throws<MatrixIsInvalidException>(() => parser.Parse(tokens));
+            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
         }
 
         [Fact]

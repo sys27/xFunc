@@ -37,25 +37,29 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         Number = 0x2,
         /// <summary>
+        /// The expression returns a complex number.
+        /// </summary>
+        ComplexNumber = 0x4,
+        /// <summary>
         /// The expression returns a boolean (true or false).
         /// </summary>
-        Boolean = 0x4,
+        Boolean = 0x8,
         /// <summary>
         /// The expression returns a vector.
         /// </summary>
-        Vector = 0x8,
+        Vector = 0x10,
         /// <summary>
         /// The expression returns a matrix.
         /// </summary>
-        Matrix = 0x10,
+        Matrix = 0x20,
         /// <summary>
         /// The expression returns other expression.
         /// </summary>
-        Expression = 0x20,
+        Expression = 0x40,
         /// <summary>
         /// Combines other parameters.
         /// </summary>
-        All = Undefined | Number | Boolean | Vector | Matrix | Expression
+        All = Undefined | Number | ComplexNumber | Boolean | Vector | Matrix | Expression
 
     }
 

@@ -74,7 +74,7 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return "Symbol: " + symbol;
+            return $"Symbol: {symbol}";
         }
 
         private int GetPriority()

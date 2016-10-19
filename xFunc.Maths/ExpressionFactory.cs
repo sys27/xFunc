@@ -59,13 +59,15 @@ namespace xFunc.Maths
         public virtual IExpression Create(IToken token)
         {
             IExpression result = null;
-            
+
             if (token is OperationToken)
                 result = CreateOperation((OperationToken)token);
             else if (token is NumberToken)
                 result = new Number(((NumberToken)token).Number);
             else if (token is BooleanToken)
                 result = new Bool(((BooleanToken)token).Value);
+            else if (token is ComplexNumberToken)
+                result = new ComplexNumber(((ComplexNumberToken)token).Number);
             else if (token is VariableToken)
                 result = new Variable(((VariableToken)token).Variable);
             else if (token is UserFunctionToken)

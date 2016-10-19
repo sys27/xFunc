@@ -24,17 +24,17 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
-            IExpression exp = new Add(new Number(1), new Number(2));
+            var exp = new Add(new Number(1), new Number(2));
 
             Assert.Equal(3.0, exp.Execute());
         }
 
         [Fact]
-        public void ExecuteTest1()
+        public void ExecuteTest2()
         {
-            IExpression exp = new Add(new Number(-3), new Number(2));
+            var exp = new Add(new Number(-3), new Number(2));
 
             Assert.Equal(-1.0, exp.Execute());
         }
@@ -91,6 +91,96 @@ namespace xFunc.Tests.Expressions.Maths
             var expected = new Vector(new IExpression[] { new Number(4), new Number(8) });
 
             Assert.Equal(expected, add3.Execute());
+        }
+
+        [Fact]
+        public void ResultTypeTwoNumberTest()
+        {
+            var add = new Add(new Number(1), new Number(2));
+
+            Assert.Equal(ExpressionResultType.Number, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number, add.RightType);
+            Assert.Equal(ExpressionResultType.Number, add.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberVarTest()
+        {
+            var add = new Add(new Number(1), new Variable("x"));
+
+            Assert.Equal(ExpressionResultType.Number, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number, add.RightType);
+            Assert.Equal(ExpressionResultType.Number, add.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeComplicatedTest()
+        {
+            var add = new Add(new Mul(new Number(1), new Number(2)), new Variable("x"));
+
+            Assert.Equal(ExpressionResultType.Number, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number, add.RightType);
+            Assert.Equal(ExpressionResultType.Number, add.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeTwoVectorTest()
+        {
+            var add = new Add(new Vector(new[] { new Number(1) }),
+                              new Vector(new[] { new Number(2) }));
+
+            Assert.Equal(ExpressionResultType.Vector, add.LeftType);
+            Assert.Equal(ExpressionResultType.Vector, add.RightType);
+            Assert.Equal(ExpressionResultType.Vector, add.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeTwoMatrixTest()
+        {
+            var add = new Add(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
+                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            Assert.Equal(ExpressionResultType.Matrix, add.LeftType);
+            Assert.Equal(ExpressionResultType.Matrix, add.RightType);
+            Assert.Equal(ExpressionResultType.Matrix, add.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberVectorTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Number(1), new Vector(new[] { new Number(1) })));
+        }
+
+        [Fact]
+        public void ResultTypeVectorNumberTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Vector(new[] { new Number(1) }), new Number(1)));
+        }
+
+        [Fact]
+        public void ResultTypeNumberMatrixTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) })));
+        }
+
+        [Fact]
+        public void ResultTypeMatrixNumberTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1)));
+        }
+
+        [Fact]
+        public void ResultTypeVectorMatrixTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Vector(new[] { new Number(1) }),
+                                                                        new Matrix(new[] { new Vector(new[] { new Number(2) }) })));
+        }
+
+        [Fact]
+        public void ResultTypeMatrixVectorTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }),
+                                                                        new Vector(new[] { new Number(1) })));
         }
 
     }

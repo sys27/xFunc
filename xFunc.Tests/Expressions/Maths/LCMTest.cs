@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             var exp = new LCM(new Number(12), new Number(16));
 
@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) }, 3);
 

@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             IExpression exp = new XOr(new Number(1), new Number(2));
 
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             IExpression exp = new XOr(new Number(1), new Number(2.5));
 
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         }
 
         [Fact]
-        public void CalculateTest3()
+        public void ExecuteTest3()
         {
             var exp = new XOr(new Bool(true), new Bool(true));
 
@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         }
 
         [Fact]
-        public void CalculateTest4()
+        public void ExecuteTest4()
         {
             var exp = new XOr(new Bool(false), new Bool(true));
 

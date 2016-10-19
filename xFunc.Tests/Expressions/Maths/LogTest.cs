@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             IExpression exp = new Log(new Number(10), new Number(2));
 

@@ -85,6 +85,96 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(expected, sub3.Execute());
         }
 
+        [Fact]
+        public void ResultTypeTwoNumberTest()
+        {
+            var sub = new Sub(new Number(1), new Number(2));
+
+            Assert.Equal(ExpressionResultType.Number, sub.LeftType);
+            Assert.Equal(ExpressionResultType.Number, sub.RightType);
+            Assert.Equal(ExpressionResultType.Number, sub.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberVarTest()
+        {
+            var sub = new Sub(new Number(1), new Variable("x"));
+
+            Assert.Equal(ExpressionResultType.Number, sub.LeftType);
+            Assert.Equal(ExpressionResultType.Number, sub.RightType);
+            Assert.Equal(ExpressionResultType.Number, sub.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeComplicatedTest()
+        {
+            var sub = new Sub(new Mul(new Number(1), new Number(2)), new Variable("x"));
+
+            Assert.Equal(ExpressionResultType.Number, sub.LeftType);
+            Assert.Equal(ExpressionResultType.Number, sub.RightType);
+            Assert.Equal(ExpressionResultType.Number, sub.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeTwoVectorTest()
+        {
+            var sub = new Sub(new Vector(new[] { new Number(1) }),
+                              new Vector(new[] { new Number(2) }));
+
+            Assert.Equal(ExpressionResultType.Vector, sub.LeftType);
+            Assert.Equal(ExpressionResultType.Vector, sub.RightType);
+            Assert.Equal(ExpressionResultType.Vector, sub.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeTwoMatrixTest()
+        {
+            var sub = new Sub(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
+                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            Assert.Equal(ExpressionResultType.Matrix, sub.LeftType);
+            Assert.Equal(ExpressionResultType.Matrix, sub.RightType);
+            Assert.Equal(ExpressionResultType.Matrix, sub.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberVectorTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Sub(new Number(1), new Vector(new[] { new Number(1) })));
+        }
+
+        [Fact]
+        public void ResultTypeVectorNumberTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Sub(new Vector(new[] { new Number(1) }), new Number(1)));
+        }
+
+        [Fact]
+        public void ResultTypeNumberMatrixTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Sub(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) })));
+        }
+
+        [Fact]
+        public void ResultTypeMatrixNumberTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Sub(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1)));
+        }
+
+        [Fact]
+        public void ResultTypeVectorMatrixTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Sub(new Vector(new[] { new Number(1) }),
+                                                                        new Matrix(new[] { new Vector(new[] { new Number(2) }) })));
+        }
+
+        [Fact]
+        public void ResultTypeMatrixVectorTest()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Sub(new Matrix(new[] { new Vector(new[] { new Number(2) }) }),
+                                                                        new Vector(new[] { new Number(1) })));
+        }
+
     }
 
 }

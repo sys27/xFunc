@@ -24,6 +24,11 @@ namespace xFunc.Maths.Expressions
         private IExpression parent;
         private Complex complex;
 
+        public ComplexNumber(double real, double imaginary)
+            : this(new Complex(real, imaginary))
+        {
+        }
+
         public ComplexNumber(Complex complex)
         {
             this.complex = complex;

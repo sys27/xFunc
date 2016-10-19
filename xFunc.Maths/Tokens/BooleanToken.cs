@@ -76,7 +76,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override string ToString()
         {
-            return "Boolean: " + value.ToString();
+            return $"Boolean: {value}";
         }
 
         /// <summary>

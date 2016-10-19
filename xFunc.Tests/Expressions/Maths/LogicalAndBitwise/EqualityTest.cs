@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             var eq = new Equality(new Bool(true), new Bool(true));
 
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             var eq = new Equality(new Bool(true), new Bool(false));
 

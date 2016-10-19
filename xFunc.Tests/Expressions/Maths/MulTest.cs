@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             var exp = new Mul(new Number(2), new Number(2));
 

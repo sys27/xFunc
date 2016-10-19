@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             IExpression exp = new Add(new Number(1), new Number(2));
 
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             IExpression exp = new Add(new Number(-3), new Number(2));
 

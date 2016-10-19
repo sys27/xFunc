@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             IExpression exp = new Pow(new Number(2), new Number(10));
 
@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void NegativeCalculateTest()
+        public void NegativeExecuteTest()
         {
             IExpression exp = new Pow(new Number(-8), new Number(1 / 3.0));
 
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void NegativeNumberCalculateTest()
+        public void NegativeNumberExecuteTest()
         {
             var exp = new Pow(new Number(-25), new Number(1 / 2.0));
 

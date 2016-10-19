@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             var sum = new Product(new Variable("i"), new Number(8));
 
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             var sum = new Product(new Variable("i"), new Number(4), new Number(8));
 
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest3()
+        public void ExecuteTest3()
         {
             var sum = new Product(new Variable("i"), new Number(4), new Number(8), new Number(2));
 
@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest4()
+        public void ExecuteTest4()
         {
             var sum = new Product(new Variable("k"), new Number(4), new Number(8), new Number(2), new Variable("k"));
 
@@ -56,7 +56,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest5()
+        public void ExecuteTest5()
         {
             var sum = new Product(new Pow(new Variable("a"), new Variable("i")), new Number(4));
 
@@ -64,7 +64,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest6()
+        public void ExecuteTest6()
         {
             var sum = new Product(new Pow(new Variable("a"), new Variable("i")), new Number(2), new Number(5));
 
@@ -72,7 +72,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest7()
+        public void ExecuteTest7()
         {
             var sum = new Product(new Pow(new Variable("a"), new Variable("i")), new Number(4), new Number(8), new Number(2));
 
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest8()
+        public void ExecuteTest8()
         {
             var sum = new Product(new Pow(new Variable("a"), new Variable("k")), new Number(4), new Number(8), new Number(2), new Variable("k"));
 

@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x")), new Pow(new Variable("y"), new Number(2))), new Pow(new Variable("z"), new Number(3))));
             exp.Differentiator = new Differentiator(new Simplifier());
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
             exp.Differentiator = new Differentiator(new Simplifier());

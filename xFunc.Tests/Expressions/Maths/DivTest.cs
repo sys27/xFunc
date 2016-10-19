@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             IExpression exp = new Div(new Number(1), new Number(2));
 

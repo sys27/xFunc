@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             var exp = new Arcosh(new Number(1));
 

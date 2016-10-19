@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             var fact = new Fact(new Number(4));
 
@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             var fact = new Fact(new Number(0));
 
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest3()
+        public void ExecuteTest3()
         {
             var fact = new Fact(new Number(1));
 
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void CalculateTest4()
+        public void ExecuteTest4()
         {
             var fact = new Fact(new Number(-1));
 

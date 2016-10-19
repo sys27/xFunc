@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
     {
 
         [Fact]
-        public void CalculateTest1()
+        public void ExecuteTest1()
         {
             var impl = new Implication(new Bool(true), new Bool(false));
 
@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         }
 
         [Fact]
-        public void CalculateTest2()
+        public void ExecuteTest2()
         {
             var impl = new Implication(new Bool(true), new Bool(true));
 

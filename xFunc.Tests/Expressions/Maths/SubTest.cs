@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             IExpression exp = new Sub(new Number(1), new Number(2));
 

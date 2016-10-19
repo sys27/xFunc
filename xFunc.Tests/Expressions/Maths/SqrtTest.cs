@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void CalculateTest()
+        public void ExecuteTest()
         {
             IExpression exp = new Sqrt(new Number(4));
 
@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void NegativeNumberCalculateTest()
+        public void NegativeNumberExecuteTest()
         {
             var exp = new Sqrt(new Number(-25));
 

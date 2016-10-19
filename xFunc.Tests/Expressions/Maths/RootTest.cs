@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void NegativeNumberCalculateTest()
+        public void NegativeNumberExecuteTest()
         {
             var exp = new Root(new Number(-25), new Number(2));
 

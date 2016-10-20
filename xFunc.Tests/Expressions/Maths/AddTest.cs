@@ -98,8 +98,8 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var add = new Add(new Number(1), new Number(2));
 
-            Assert.Equal(ExpressionResultType.Number, add.LeftType);
-            Assert.Equal(ExpressionResultType.Number, add.RightType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.RightType);
             Assert.Equal(ExpressionResultType.Number, add.ResultType);
         }
 
@@ -108,8 +108,8 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var add = new Add(new Number(1), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, add.LeftType);
-            Assert.Equal(ExpressionResultType.Number, add.RightType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.RightType);
             Assert.Equal(ExpressionResultType.Number, add.ResultType);
         }
 
@@ -118,8 +118,8 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var add = new Add(new Mul(new Number(1), new Number(2)), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, add.LeftType);
-            Assert.Equal(ExpressionResultType.Number, add.RightType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.RightType);
             Assert.Equal(ExpressionResultType.Number, add.ResultType);
         }
 
@@ -181,6 +181,26 @@ namespace xFunc.Tests.Expressions.Maths
         {
             Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }),
                                                                         new Vector(new[] { new Number(1) })));
+        }
+
+        [Fact]
+        public void ResultTypeNumberComplexNumberTest()
+        {
+            var add = new Add(new Number(1), new ComplexNumber(2, 1));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.RightType);
+            Assert.Equal(ExpressionResultType.ComplexNumber, add.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeComplexNumberNumberTest()
+        {
+            var add = new Add(new ComplexNumber(1, 3), new Number(2));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, add.RightType);
+            Assert.Equal(ExpressionResultType.ComplexNumber, add.ResultType);
         }
 
     }

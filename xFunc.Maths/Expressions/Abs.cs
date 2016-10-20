@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions
 {
@@ -62,7 +63,12 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return Math.Abs((double)m_argument.Execute(parameters));
+            var result = m_argument.Execute(parameters);
+
+            if (result is Complex)
+                return Complex.Abs((Complex)result);
+
+            return Math.Abs((double)result);
         }
 
         /// <summary>
@@ -72,6 +78,20 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Abs(m_argument.Clone());
+        }
+
+        /// <summary>
+        /// Gets the type of the argument.
+        /// </summary>
+        /// <value>
+        /// The type of the argument.
+        /// </value>
+        public override ExpressionResultType ArgumentType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
         }
 
     }

@@ -13,23 +13,33 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class ExpTest
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
-            IExpression exp = new Exp(new Number(2));
+            var exp = new Exp(new Number(2));
 
             Assert.Equal(Math.Exp(2), exp.Execute());
         }
-        
+
+        [Fact]
+        public void ExecuteTest2()
+        {
+            var expected = new Complex(4, 2);
+            var exp = new Exp(new ComplexNumber(expected));
+
+            Assert.Equal(Complex.Exp(expected), exp.Execute());
+        }
+
     }
 
 }

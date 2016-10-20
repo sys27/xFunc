@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
@@ -67,38 +68,49 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (ResultType.HasFlagNI(ExpressionResultType.Matrix) || ResultType.HasFlagNI(ExpressionResultType.Vector))
+            if (ResultType == ExpressionResultType.Matrix || ResultType == ExpressionResultType.Vector)
             {
                 var temp = m_left.Execute(parameters);
-                var leftResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
+                var leftExpResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
 
                 temp = m_right.Execute(parameters);
-                var rightResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
+                var rightExpResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
 
-                if (leftResult is Vector)
+                if (leftExpResult is Vector)
                 {
-                    if (rightResult is Matrix)
-                        return ((Vector)leftResult).Mul((Matrix)rightResult, parameters);
+                    if (rightExpResult is Matrix)
+                        return ((Vector)leftExpResult).Mul((Matrix)rightExpResult, parameters);
 
-                    return ((Vector)leftResult).Mul(rightResult, parameters);
+                    return ((Vector)leftExpResult).Mul(rightExpResult, parameters);
                 }
-                if (rightResult is Vector)
+                if (rightExpResult is Vector)
                 {
-                    if (leftResult is Matrix)
-                        return ((Matrix)leftResult).Mul((Vector)rightResult, parameters);
+                    if (leftExpResult is Matrix)
+                        return ((Matrix)leftExpResult).Mul((Vector)rightExpResult, parameters);
 
-                    return ((Vector)rightResult).Mul(leftResult, parameters);
+                    return ((Vector)rightExpResult).Mul(leftExpResult, parameters);
                 }
 
-                if (leftResult is Matrix && rightResult is Matrix)
-                    return ((Matrix)leftResult).Mul((Matrix)rightResult, parameters);
-                if (leftResult is Matrix)
-                    return ((Matrix)leftResult).Mul(rightResult, parameters);
-                if (rightResult is Matrix)
-                    return ((Matrix)rightResult).Mul(leftResult, parameters);
+                if (leftExpResult is Matrix && rightExpResult is Matrix)
+                    return ((Matrix)leftExpResult).Mul((Matrix)rightExpResult, parameters);
+                if (leftExpResult is Matrix)
+                    return ((Matrix)leftExpResult).Mul(rightExpResult, parameters);
+                if (rightExpResult is Matrix)
+                    return ((Matrix)rightExpResult).Mul(leftExpResult, parameters);
             }
 
-            return (double)m_left.Execute(parameters) * (double)m_right.Execute(parameters);
+            var leftResult = m_left.Execute(parameters);
+            var rightResult = m_right.Execute(parameters);
+
+            if (ResultType == ExpressionResultType.ComplexNumber)
+            {
+                var leftComplex = leftResult is Complex ? (Complex)leftResult : (double)leftResult;
+                var rightComplex = rightResult is Complex ? (Complex)rightResult : (double)rightResult;
+
+                return Complex.Multiply(leftComplex, rightComplex);
+            }
+
+            return (double)leftResult * (double)rightResult;
         }
 
         /// <summary>
@@ -123,7 +135,7 @@ namespace xFunc.Maths.Expressions
                 if (m_right != null && m_right.ResultType == ExpressionResultType.Vector)
                     return ExpressionResultType.Number | ExpressionResultType.Matrix;
 
-                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 
@@ -140,7 +152,7 @@ namespace xFunc.Maths.Expressions
                 if (m_left != null && m_left.ResultType == ExpressionResultType.Vector)
                     return ExpressionResultType.Number | ExpressionResultType.Matrix;
 
-                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 
@@ -154,6 +166,9 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) || m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
                 if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
 
@@ -164,7 +179,7 @@ namespace xFunc.Maths.Expressions
                 if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
                     return ExpressionResultType.Matrix;
 
-                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 

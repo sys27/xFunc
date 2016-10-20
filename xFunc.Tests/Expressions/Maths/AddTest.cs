@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
@@ -37,6 +38,33 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Add(new Number(-3), new Number(2));
 
             Assert.Equal(-1.0, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest3()
+        {
+            var exp = new Add(new ComplexNumber(7, 3), new ComplexNumber(2, 4));
+            var expected = new Complex(9, 7);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest4()
+        {
+            var exp = new Add(new Number(7), new ComplexNumber(2, 4));
+            var expected = new Complex(9, 4);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest5()
+        {
+            var exp = new Add(new ComplexNumber(7, 3), new Number(2));
+            var expected = new Complex(9, 3);
+
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

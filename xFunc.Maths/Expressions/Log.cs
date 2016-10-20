@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions
 {
@@ -63,7 +64,13 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return Math.Log((double)m_right.Execute(parameters), (double)m_left.Execute(parameters));
+            var leftResult = (double)m_left.Execute(parameters);
+            var rightResult = m_right.Execute(parameters);
+
+            if (ResultType == ExpressionResultType.ComplexNumber)
+                return Complex.Log(rightResult is Complex ? (Complex)rightResult : (double)rightResult, leftResult);
+
+            return Math.Log((double)rightResult, leftResult);
         }
 
         /// <summary>
@@ -73,6 +80,37 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Log(m_right.Clone(), m_left.Clone());
+        }
+        
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public override ExpressionResultType RightType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                if (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number;
+            }
         }
 
     }

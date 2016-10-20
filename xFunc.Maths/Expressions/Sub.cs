@@ -101,8 +101,8 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_right != null)
                 {
-                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
-                        return ExpressionResultType.Number;
+                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) || m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
+                        return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
                     if (m_right.ResultType == ExpressionResultType.Matrix)
                         return ExpressionResultType.Matrix;
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions
                         return ExpressionResultType.Vector;
                 }
 
-                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 
@@ -127,8 +127,8 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left != null)
                 {
-                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
-                        return ExpressionResultType.Number;
+                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) || m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
+                        return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
                     if (m_left.ResultType == ExpressionResultType.Matrix)
                         return ExpressionResultType.Matrix;
@@ -137,7 +137,7 @@ namespace xFunc.Maths.Expressions
                         return ExpressionResultType.Vector;
                 }
 
-                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 
@@ -151,6 +151,9 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
+                if (m_left.ResultType == ExpressionResultType.ComplexNumber || m_right.ResultType == ExpressionResultType.ComplexNumber)
+                    return ExpressionResultType.ComplexNumber;
+
                 if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
                     return ExpressionResultType.Number;
 
@@ -160,7 +163,7 @@ namespace xFunc.Maths.Expressions
                 if (m_left.ResultType == ExpressionResultType.Vector || m_right.ResultType == ExpressionResultType.Vector)
                     return ExpressionResultType.Vector;
 
-                return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
         }
 

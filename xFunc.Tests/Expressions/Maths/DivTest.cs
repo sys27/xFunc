@@ -58,6 +58,46 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(expected, exp.Execute());
         }
 
+        [Fact]
+        public void ResultTypeNumberNumberTest()
+        {
+            var exp = new Div(new Number(1), new Number(2));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.RightType);
+            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeComplexNumberComplexNumberTest()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.RightType);
+            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberComplexNumberTest()
+        {
+            var exp = new Div(new Number(3), new ComplexNumber(2, 4));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.RightType);
+            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeComplexNumberNumberTest()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new Number(2));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.LeftType);
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.RightType);
+            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+        }
+
     }
 
 }

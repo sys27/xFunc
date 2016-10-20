@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
@@ -70,6 +71,14 @@ namespace xFunc.Maths.Expressions
         {
             var leftResult = m_left.Execute(parameters);
             var rightResult = m_right.Execute(parameters);
+
+            if (ResultType == ExpressionResultType.ComplexNumber)
+            {
+                var leftComplex = leftResult is Complex ? (Complex)leftResult : (double)leftResult;
+                var rightComplex = rightResult is Complex ? (Complex)rightResult : (double)rightResult;
+
+                return Complex.Subtract(leftComplex, rightComplex);
+            }
 
             if (ResultType == ExpressionResultType.Matrix)
                 return ((Matrix)leftResult).Sub((Matrix)rightResult, parameters);

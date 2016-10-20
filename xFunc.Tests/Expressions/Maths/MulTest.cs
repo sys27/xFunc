@@ -35,9 +35,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeTwoNumberTest()
         {
             var mul = new Mul(new Number(1), new Number(2));
-
-            Assert.Equal(ExpressionResultType.Number, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Number, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Number, mul.ResultType);
         }
 
@@ -45,9 +43,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeNumberVarTest()
         {
             var mul = new Mul(new Number(1), new Variable("x"));
-
-            Assert.Equal(ExpressionResultType.Number, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Number, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Number, mul.ResultType);
         }
 
@@ -55,9 +51,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeComplicatedTest()
         {
             var mul = new Mul(new Add(new Number(1), new Number(2)), new Variable("x"));
-
-            Assert.Equal(ExpressionResultType.Number, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Number, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Number, mul.ResultType);
         }
 
@@ -73,9 +67,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
                               new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Assert.Equal(ExpressionResultType.Matrix, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Matrix, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
         }
 
@@ -83,9 +75,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeNumberVectorTest()
         {
             var mul = new Mul(new Number(1), new Vector(new[] { new Number(1) }));
-
-            Assert.Equal(ExpressionResultType.Number, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Vector, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Vector, mul.ResultType);
         }
 
@@ -93,9 +83,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeVectorNumberTest()
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }), new Number(1));
-
-            Assert.Equal(ExpressionResultType.Vector, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Number, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Vector, mul.ResultType);
         }
 
@@ -103,9 +91,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeNumberMatrixTest()
         {
             var mul = new Mul(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Assert.Equal(ExpressionResultType.Number, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Matrix, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
         }
 
@@ -113,9 +99,7 @@ namespace xFunc.Tests.Expressions.Maths
         public void ResultTypeMatrixNumberTest()
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
-
-            Assert.Equal(ExpressionResultType.Matrix, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Number, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
         }
 
@@ -124,9 +108,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }),
                               new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Assert.Equal(ExpressionResultType.Vector, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Matrix, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
         }
 
@@ -135,9 +117,7 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(2) }) }),
                               new Vector(new[] { new Number(1) }));
-
-            Assert.Equal(ExpressionResultType.Matrix, mul.LeftType);
-            Assert.Equal(ExpressionResultType.Vector, mul.RightType);
+            
             Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
         }
 

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions
 {
@@ -54,7 +55,18 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return (double)m_left.Execute(parameters) / (double)m_right.Execute(parameters);
+            var leftResult = m_left.Execute(parameters);
+            var rightResult = m_right.Execute(parameters);
+
+            if (ResultType == ExpressionResultType.ComplexNumber)
+            {
+                var leftComplex = leftResult is Complex ? (Complex)leftResult : (double)leftResult;
+                var rightComplex = rightResult is Complex ? (Complex)rightResult : (double)rightResult;
+
+                return Complex.Divide(leftComplex, rightComplex);
+            }
+
+            return (double)leftResult / (double)rightResult;
         }
 
         /// <summary>
@@ -67,7 +79,7 @@ namespace xFunc.Maths.Expressions
         {
             return base.GetHashCode(6091, 3457);
         }
-        
+
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -75,6 +87,54 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Div(m_left.Clone(), m_right.Clone());
+        }
+
+        /// <summary>
+        /// Gets the type of the left parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the left parameter.
+        /// </value>
+        public override ExpressionResultType LeftType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public override ExpressionResultType RightType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                if (m_left.ResultType == ExpressionResultType.ComplexNumber || m_right.ResultType == ExpressionResultType.ComplexNumber)
+                    return ExpressionResultType.ComplexNumber;
+
+                if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
+                    return ExpressionResultType.Number;
+
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
         }
 
     }

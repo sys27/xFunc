@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using Xunit;
 
@@ -23,11 +24,20 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
-            IExpression exp = new Lg(new Number(2));
+            var exp = new Lg(new Number(2));
 
             Assert.Equal(Math.Log10(2), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest2()
+        {
+            var complex = new Complex(2, 3);
+            var exp = new Lg(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Log10(complex), exp.Execute());
         }
 
     }

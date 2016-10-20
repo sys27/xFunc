@@ -129,11 +129,8 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left.ResultType == ExpressionResultType.ComplexNumber || m_right.ResultType == ExpressionResultType.ComplexNumber)
                     return ExpressionResultType.ComplexNumber;
-
-                if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
-                    return ExpressionResultType.Number;
-
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+                
+                return ExpressionResultType.Number;
             }
         }
 

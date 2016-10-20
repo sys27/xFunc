@@ -149,6 +149,7 @@
     <Compile Include="Expressions\Maths\Trigonometric\SecantTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\SineTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\TangentTest.cs" />
+    <Compile Include="Expressions\Maths\UnaryMinusTest.cs" />
     <Compile Include="Expressions\Maths\UnaryTest.cs" />
     <Compile Include="Expressions\Maths\UndefineTest.cs" />
     <Compile Include="Expressions\Maths\UserFunctionTest.cs" />

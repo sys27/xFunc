@@ -13,22 +13,50 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class SubTest
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
             IExpression exp = new Sub(new Number(1), new Number(2));
 
             Assert.Equal(-1.0, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest2()
+        {
+            var exp = new Sub(new ComplexNumber(7, 3), new ComplexNumber(2, 4));
+            var expected = new Complex(5, -1);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest3()
+        {
+            var exp = new Sub(new Number(7), new ComplexNumber(2, 4));
+            var expected = new Complex(5, -4);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest4()
+        {
+            var exp = new Sub(new ComplexNumber(7, 3), new Number(2));
+            var expected = new Complex(5, 3);
+
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
@@ -47,22 +75,22 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void SubTwoMatricesTest()
         {
-            var matrix1 = new Matrix(new[] 
-            { 
-                new Vector(new[] { new Number(6), new Number(3) }), 
-                new Vector(new[] { new Number(2), new Number(1) }) 
+            var matrix1 = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(6), new Number(3) }),
+                new Vector(new[] { new Number(2), new Number(1) })
             });
-            var matrix2 = new Matrix(new[] 
-            { 
-                new Vector(new[] { new Number(9), new Number(2) }), 
-                new Vector(new[] { new Number(4), new Number(3) }) 
+            var matrix2 = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(9), new Number(2) }),
+                new Vector(new[] { new Number(4), new Number(3) })
             });
             var sub = new Sub(matrix1, matrix2);
 
-            var expected = new Matrix(new[] 
-            { 
-                new Vector(new[] { new Number(-3), new Number(1) }), 
-                new Vector(new[] { new Number(-2), new Number(-2) }) 
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-3), new Number(1) }),
+                new Vector(new[] { new Number(-2), new Number(-2) })
             });
             var result = sub.Execute();
 

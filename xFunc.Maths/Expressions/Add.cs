@@ -100,7 +100,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_right != null)
                 {
-                    if (m_right.ResultType == ExpressionResultType.Number)
+                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                         return ExpressionResultType.Number;
 
                     if (m_right.ResultType == ExpressionResultType.Matrix)
@@ -126,7 +126,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left != null)
                 {
-                    if (m_left.ResultType == ExpressionResultType.Number)
+                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
                         return ExpressionResultType.Number;
 
                     if (m_left.ResultType == ExpressionResultType.Matrix)

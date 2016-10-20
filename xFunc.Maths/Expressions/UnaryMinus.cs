@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions
 {
@@ -67,7 +68,12 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return -(double)m_argument.Execute(parameters);
+            var result = m_argument.Execute(parameters);
+
+            if (ResultType == ExpressionResultType.ComplexNumber)
+                return Complex.Negate(result is Complex ? (Complex)result : (double)result);
+
+            return -(double)result;
         }
 
         /// <summary>
@@ -77,6 +83,37 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new UnaryMinus(m_argument.Clone());
+        }
+
+        /// <summary>
+        /// Gets the type of the argument.
+        /// </summary>
+        /// <value>
+        /// The type of the argument.
+        /// </value>
+        public override ExpressionResultType ArgumentType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                if (m_argument.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number;
+            }
         }
 
     }

@@ -13,21 +13,49 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class DivTest
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
-            IExpression exp = new Div(new Number(1), new Number(2));
+            var exp = new Div(new Number(1), new Number(2));
 
             Assert.Equal(1.0 / 2.0, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest2()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
+            var expected = new Complex(0.7, -0.4);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest3()
+        {
+            var exp = new Div(new Number(3), new ComplexNumber(2, 4));
+            var expected = new Complex(0.3, -0.6);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest4()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new Number(2));
+            var expected = new Complex(1.5, 1);
+
+            Assert.Equal(expected, exp.Execute());
         }
 
     }

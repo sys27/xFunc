@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class PowTest
     {
 
@@ -84,6 +84,12 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Pow(new ComplexNumber(complex), new Number(10));
 
             Assert.Equal(Complex.Pow(complex, 10), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest6()
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => new Pow(new Number(10), new ComplexNumber(new Complex(3, 2))));
         }
 
     }

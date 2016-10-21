@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions
 {
@@ -67,9 +68,15 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return MathExtentions.Pow((double)m_left.Execute(parameters), (double)m_right.Execute(parameters));
+            var leftResult = m_left.Execute(parameters);
+            var rightResult = m_right.Execute(parameters);
+
+            if (ResultType == ExpressionResultType.ComplexNumber)
+                return Complex.Pow((Complex)leftResult, rightResult is Complex ? (Complex)rightResult : (double)rightResult);
+
+            return MathExtentions.Pow((double)leftResult, (double)rightResult);
         }
-        
+
         /// <summary>
         /// Clones this instance of the <see cref="Pow"/> class.
         /// </summary>
@@ -77,6 +84,57 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Pow(m_left.Clone(), m_right.Clone());
+        }
+
+        /// <summary>
+        /// Gets the type of the left parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the left parameter.
+        /// </value>
+        public override ExpressionResultType LeftType
+        {
+            get
+            {
+                if (m_right != null && m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the right parameter.
+        /// </summary>
+        /// <value>
+        /// The type of the right parameter.
+        /// </value>
+        public override ExpressionResultType RightType
+        {
+            get
+            {
+                if (m_left != null && m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number;
+            }
         }
 
     }

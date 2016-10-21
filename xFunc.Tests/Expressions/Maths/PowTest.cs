@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
@@ -23,27 +25,65 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
-            IExpression exp = new Pow(new Number(2), new Number(10));
+            var exp = new Pow(new Number(2), new Number(10));
 
             Assert.Equal(1024.0, exp.Execute());
         }
 
         [Fact]
-        public void NegativeExecuteTest()
+        public void NegativeExecuteTest1()
         {
-            IExpression exp = new Pow(new Number(-8), new Number(1 / 3.0));
+            var exp = new Pow(new Number(-8), new Number(1 / 3.0));
 
             Assert.Equal(-2.0, exp.Execute());
         }
 
         [Fact]
-        public void NegativeNumberExecuteTest()
+        public void NegativeNumberExecuteTest1()
         {
             var exp = new Pow(new Number(-25), new Number(1 / 2.0));
 
             Assert.Equal(double.NaN, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest2()
+        {
+            var complex1 = new Complex(3, 2);
+            var complex2 = new Complex(4, 5);
+            var exp = new Pow(new ComplexNumber(complex1), new ComplexNumber(complex2));
+
+            Assert.Equal(Complex.Pow(complex1, complex2), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest3()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Pow(new ComplexNumber(complex), new Number(10));
+
+            Assert.Equal(Complex.Pow(complex, 10), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest4()
+        {
+            var complex1 = new Complex(-3, 2);
+            var complex2 = new Complex(-4, 5);
+            var exp = new Pow(new ComplexNumber(complex1), new ComplexNumber(complex2));
+
+            Assert.Equal(Complex.Pow(complex1, complex2), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest5()
+        {
+            var complex = new Complex(-3, 2);
+            var exp = new Pow(new ComplexNumber(complex), new Number(10));
+
+            Assert.Equal(Complex.Pow(complex, 10), exp.Execute());
         }
 
     }

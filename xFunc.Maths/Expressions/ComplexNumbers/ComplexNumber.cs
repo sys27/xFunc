@@ -15,7 +15,7 @@
 using System;
 using System.Numerics;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.ComplexNumbers
 {
 
     public class ComplexNumber : IExpression

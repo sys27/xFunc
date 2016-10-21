@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
@@ -23,19 +25,37 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteTest1()
         {
-            IExpression exp = new Sqrt(new Number(4));
+            var exp = new Sqrt(new Number(4));
 
             Assert.Equal(Math.Sqrt(4), exp.Execute());
         }
 
         [Fact]
-        public void NegativeNumberExecuteTest()
+        public void NegativeNumberExecuteTest1()
         {
             var exp = new Sqrt(new Number(-25));
 
             Assert.Equal(double.NaN, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest2()
+        {
+            var complex = new Complex(5, 3);
+            var exp = new Sqrt(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Sqrt(complex), exp.Execute());
+        }
+
+        [Fact]
+        public void NegativeNumberExecuteTest2()
+        {
+            var complex = new Complex(-25, 13);
+            var exp = new Sqrt(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Sqrt(complex), exp.Execute());
         }
 
     }

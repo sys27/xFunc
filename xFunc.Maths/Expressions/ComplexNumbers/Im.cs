@@ -18,26 +18,54 @@ using System.Numerics;
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
 
+    /// <summary>
+    /// Represent the function which returns the imaginary part of complex number.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public class Im : UnaryExpression
     {
 
         internal Im() { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Im"/> class.
+        /// </summary>
+        /// <param name="argument">The expression.</param>
         public Im(IExpression argument)
             : base(argument)
         {
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return base.GetHashCode(11699);
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return base.ToString("im({0})");
         }
 
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
             return ((Complex)m_argument.Execute(parameters)).Imaginary;

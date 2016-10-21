@@ -53,6 +53,7 @@
     <Compile Include="Expressions\ComplexNumbers\Magnitude.cs" />
     <Compile Include="Expressions\ComplexNumbers\Phase.cs" />
     <Compile Include="Expressions\ComplexNumbers\Re.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Reciprocal.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />

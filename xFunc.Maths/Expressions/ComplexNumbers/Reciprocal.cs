@@ -19,19 +19,19 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
 {
 
     /// <summary>
-    /// Returns the Magnitude function.
+    /// Respresents the Reciprocal function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
-    public class Magnitude : UnaryExpression
+    public class Reciprocal : UnaryExpression
     {
 
-        internal Magnitude() { }
+        internal Reciprocal() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Magnitude"/> class.
+        /// Initializes a new instance of the <see cref="Reciprocal"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Magnitude(IExpression argument)
+        public Reciprocal(IExpression argument)
             : base(argument)
         {
         }
@@ -44,7 +44,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(13331);
+            return base.GetHashCode(2179);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override string ToString()
         {
-            return base.ToString("magnitude({0})");
+            return base.ToString("reciprocal({0})");
         }
 
         /// <summary>
@@ -68,23 +68,25 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return ((Complex)m_argument.Execute(parameters)).Magnitude;
+            return Complex.Reciprocal((Complex)m_argument.Execute(parameters));
         }
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
-        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
         public override IExpression Clone()
         {
-            return new Magnitude(m_argument.Clone());
+            return new Reciprocal(m_argument.Clone());
         }
 
         /// <summary>
-        /// Gets the count of parameters.
+        /// Gets the type of the argument.
         /// </summary>
         /// <value>
-        /// The count of parameters.
+        /// The type of the argument.
         /// </value>
         public override ExpressionResultType ArgumentType
         {
@@ -104,7 +106,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         {
             get
             {
-                return ExpressionResultType.Number;
+                return ExpressionResultType.ComplexNumber;
             }
         }
 

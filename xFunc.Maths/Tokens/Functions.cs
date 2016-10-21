@@ -241,6 +241,16 @@ namespace xFunc.Maths.Tokens
         /// matrix
         /// </summary>
         Matrix,
+
+        /// <summary>
+        /// re (returns real part of complex number)
+        /// </summary>
+        Re,
+        /// <summary>
+        /// im (returns imaginary part of complex number)
+        /// </summary>
+        Im,
+
         /// <summary>
         /// The user function
         /// </summary>

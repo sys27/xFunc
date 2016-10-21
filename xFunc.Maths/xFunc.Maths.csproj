@@ -47,7 +47,11 @@
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="Expressions\Ceil.cs" />
-    <Compile Include="Expressions\ComplexNumber.cs" />
+    <Compile Include="Expressions\ComplexNumbers\ComplexNumber.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Im.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Magnitude.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Phase.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Re.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />

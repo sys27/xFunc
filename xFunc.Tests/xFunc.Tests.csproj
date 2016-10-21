@@ -72,8 +72,11 @@
     <Compile Include="Expressions\Maths\AbsTest.cs" />
     <Compile Include="Expressions\Maths\AddTest.cs" />
     <Compile Include="Expressions\Maths\BinaryTest.cs" />
-    <Compile Include="Expressions\Maths\ComplexNumberTest.cs" />
+    <Compile Include="Expressions\Maths\ComplexNumbers\ComplexNumberTest.cs" />
+    <Compile Include="Expressions\Maths\ComplexNumbers\MagnitudeTest.cs" />
+    <Compile Include="Expressions\Maths\ComplexNumbers\PhaseTest.cs" />
     <Compile Include="Expressions\Maths\DelTest.cs" />
+    <Compile Include="Expressions\Maths\ComplexNumbers\ImTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\AndTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\EqualityTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\ImplicationTest.cs" />
@@ -132,6 +135,7 @@
     <Compile Include="Expressions\Maths\Programming\OrTest.cs" />
     <Compile Include="Expressions\Maths\Programming\SubAssignTest.cs" />
     <Compile Include="Expressions\Maths\Programming\WhileTest.cs" />
+    <Compile Include="Expressions\Maths\ComplexNumbers\ReTest.cs" />
     <Compile Include="Expressions\Maths\RootTest.cs" />
     <Compile Include="Expressions\Maths\RoundTest.cs" />
     <Compile Include="Expressions\Maths\SqrtTest.cs" />

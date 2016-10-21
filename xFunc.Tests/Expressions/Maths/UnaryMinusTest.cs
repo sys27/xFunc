@@ -15,6 +15,7 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths

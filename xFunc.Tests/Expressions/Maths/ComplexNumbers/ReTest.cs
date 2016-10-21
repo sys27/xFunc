@@ -18,27 +18,25 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Maths
+namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
 {
-    
-    public class LnTest
-    {
 
+    public class ReTest
+    {
+        
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Ln(new Number(2));
+            var complex = new Complex(3.1, 2.5);
+            var exp = new Re(new ComplexNumber(complex));
 
-            Assert.Equal(Math.Log(2), exp.Execute());
+            Assert.Equal(complex.Real, exp.Execute());
         }
 
         [Fact]
-        public void ExecuteTest2()
+        public void ReNumberTest()
         {
-            var complex = new Complex(2, 3);
-            var exp = new Ln(new ComplexNumber(complex));
-
-            Assert.Equal(Complex.Log(complex), exp.Execute());
+            Assert.Throws<ParameterTypeMismatchException>(() => new Re(new Number(2)));
         }
 
     }

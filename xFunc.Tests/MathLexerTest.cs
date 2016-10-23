@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using xFunc.Maths;
 using xFunc.Maths.Tokens;
 using Xunit;
@@ -93,7 +94,7 @@ namespace xFunc.Tests
             };
             Assert.Equal(expected, tokens.ToList());
         }
-        
+
         [Fact]
         public void ExpNumber3()
         {
@@ -2285,6 +2286,84 @@ namespace xFunc.Tests
                 new NumberToken(2),
                 new OperationToken(Operations.Addition),
                 new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexNumberTest()
+        {
+            var tokens = lexer.Tokenize("3 + 2i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, 2))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexNumberNegativeTest()
+        {
+            var tokens = lexer.Tokenize("3 - 2i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, -2))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexNumberNegativeAllPartsTest()
+        {
+            var tokens = lexer.Tokenize("-3 - 2i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(-3, -2))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexOnlyRePartTest()
+        {
+            var tokens = lexer.Tokenize("3 + 0i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, 0))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexOnlyImPartTest()
+        {
+            var tokens = lexer.Tokenize("2i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(0, 2))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexOnlyImPartNegativeTest()
+        {
+            var tokens = lexer.Tokenize("-2i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(0, -2))
             };
 
             Assert.Equal(expected, tokens.ToList());

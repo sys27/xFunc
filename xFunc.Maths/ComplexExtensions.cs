@@ -22,105 +22,146 @@ namespace xFunc.Maths
     /// Trigonometric functions for Complex numbers.
     /// </summary>
     public static class ComplexExtensions
-    {        
+    {
 
         /// <summary>
         /// Returns the cotangent of the specified complex number.
         /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - cotangent of z.</returns>
-        public static Complex Cot(Complex z)
+        /// <param name="number">Complex number.</param>
+        /// <returns>Cotangent of complex number.</returns>
+        public static Complex Cot(Complex number)
         {
-            return Complex.Cos(z) / Complex.Sin(z);
-        }
-
-        /// <summary>
-        /// Returns the cosecant of the specified complex number.
-        /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - cosecant of z.</returns>
-        public static Complex Csc(Complex z)
-        {
-            return Complex.One / Complex.Sin(z);
+            return Complex.Cos(number) / Complex.Sin(number);
         }
 
         /// <summary>
         /// Returns the secant of the specified complex number.
         /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - secant of z.</returns>
-        public static Complex Sec(Complex z)
+        /// <param name="number">Complex number.</param>
+        /// <returns>Secant of complex number.</returns>
+        public static Complex Sec(Complex number)
         {
-            return Complex.One / Complex.Cos(z);
+            return Complex.One / Complex.Cos(number);
         }
 
         /// <summary>
-        /// Returns the hyperbolic secant of the specified complex number.
+        /// Returns the cosecant of the specified complex number.
         /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - hyperbolic secant of z.</returns>
-        public static Complex Sech(Complex z)
+        /// <param name="number">Complex number.</param>
+        /// <returns>Cosecant of complex number.</returns>
+        public static Complex Csc(Complex number)
         {
-            return Complex.One / Complex.Cosh(z);
-        }
-
-        /// <summary>
-        /// Returns the arcosecant of the specified complex number.
-        /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - arcosecant of z</returns>
-        public static Complex Acsc(Complex z)
-        {
-            var res = new Complex(0.0, -1.0) * (Complex.Log(Complex.ImaginaryOne + Complex.Sqrt(Complex.Pow(z, 2))) / z);
-
-            var re = res.Real;
-            var im = res.Imaginary;
-
-            // rounding check
-            if ((re - Math.Floor(re)) > 0.9999001)
-                res = new Complex(Math.Round(re), im);
-
-            return res;
+            return Complex.One / Complex.Sin(number);
         }
 
         /// <summary>
         /// Returns the arccotangent of the specified complex number.
         /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - arccotangent of z.</returns>
-        public static Complex Acot(Complex z)
+        /// <param name="number">Complex number.</param>
+        /// <returns>Arccotangent of complex number.</returns>
+        public static Complex Acot(Complex number)
         {
-            var res = new Complex(0.0, -5.0) * (Complex.Log((z * Complex.ImaginaryOne) / (z * Complex.ImaginaryOne)));
-
-            var re = res.Real;
-            var im = res.Imaginary;
-
-            // rounding check
-            if ((re - Math.Floor(re)) > 0.9999001)
-                res = new Complex(Math.Round(re), im);
-
-            return res;
+            return new Complex(0.0, 0.5) * (Complex.Log(1 - Complex.ImaginaryOne / number) - Complex.Log(1 + Complex.ImaginaryOne / number));
         }
 
         /// <summary>
-        /// Returns the hyperbolic arccosine of the specified complex number.
+        /// Returns the arcosecant of the specified complex number.
         /// </summary>
-        /// <param name="z">Complex number.</param>
-        /// <returns>Complex number - hyperbolic arccosine of z.</returns>
-        public static Complex Acosh(Complex z)
+        /// <param name="number">Complex number.</param>
+        /// <returns>Arcosecant of complex number.</returns>
+        public static Complex Asec(Complex number)
         {
-            var res = Complex.Log(z + Complex.Sqrt(Complex.Pow(z, 2) - Complex.One));
+            return -Complex.ImaginaryOne * Complex.Log(Complex.Sqrt(1 / Complex.Pow(number, 2) - 1) + Complex.ImaginaryOne / number);
+        }
 
-            var re = res.Real;
+        /// <summary>
+        /// Returns the arcosecant of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Arcosecant of complex number.</returns>
+        public static Complex Acsc(Complex number)
+        {
+            return -Complex.ImaginaryOne * Complex.Log(Complex.Sqrt(1 - 1 / Complex.Pow(number, 2)) + Complex.ImaginaryOne / number);
+        }
 
-            // strip the sign for the rounding test
-            if (re < 0.0)
-                re *= -1.0;
-            // rounding check
-            if ((re - Math.Floor(re)) > 0.9999001)
-                res = new Complex(Math.Round(res.Real), res.Imaginary);
+        /// <summary>
+        /// Returns the hyperbolic cotangent of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic cotangent of complex number.</returns>
+        public static Complex Coth(Complex number)
+        {
+            return 1 / Complex.Tanh(number);
+        }
 
-            return res;
+        /// <summary>
+        /// Returns the hyperbolic secant of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic secant of complex number.</returns>
+        public static Complex Sech(Complex number)
+        {
+            return Complex.One / Complex.Cosh(number);
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic cosecant of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic cosecant of complex number.</returns>
+        public static Complex Csch(Complex number)
+        {
+            return Complex.One / Complex.Sinh(number);
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic arcosine of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic arcosine of complex number.</returns>
+        public static Complex Acosh(Complex number)
+        {
+            return Complex.Log(number + Complex.Sqrt(number + Complex.One) * Complex.Sqrt(number - Complex.One));
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic artangent of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic arctangent of complex number.</returns>
+        public static Complex Atanh(Complex number)
+        {
+            return 0.5 * Complex.Log((1 + number) / (1 - number));
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic arcotangent of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic arcoctangent of complex number.</returns>
+        public static Complex Acoth(Complex number)
+        {
+            return 0.5 * Complex.Log((number + 1) / (number - 1));
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic arsecant of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic arsecant of complex number.</returns>
+        public static Complex Asech(Complex number)
+        {
+            return Complex.Log(1 / number + Complex.Sqrt(1 / number + 1) * Complex.Sqrt(1 / number - 1));
+        }
+
+        /// <summary>
+        /// Returns the hyperbolic arcosecant of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic arcosecant of complex number.</returns>
+        public static Complex Acsch(Complex number)
+        {
+            return Complex.Log(1 / number + Complex.Sqrt(1 / Complex.Pow(number, 2) + 1));
         }
 
     }

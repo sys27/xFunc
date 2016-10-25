@@ -14,9 +14,11 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -297,7 +299,7 @@ namespace xFunc.Tests
                 new OperationToken(Operations.Assign),
                 new NumberToken(1),
                 new SymbolToken(Symbols.CloseBracket)
-            };            
+            };
 
             Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
         }
@@ -1119,7 +1121,115 @@ namespace xFunc.Tests
         {
             Assert.Throws<ArgumentNullException>(() => Helpers.ConvertExpressionToCollection(null));
         }
-        
+
+        [Fact]
+        public void ComplexNumberTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, 2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(new Complex(3, 2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexNumberNegativeTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, -2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(new Complex(3, -2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexNumberNegativeAllPartsTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(-3, -2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(new Complex(-3, -2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexOnlyRePartTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, 0))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(new Complex(3, 0));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexOnlyImPartTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(0, 2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(new Complex(0, 2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexOnlyImPartNegativeTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(0, -2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(new Complex(0, -2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexWithVarTest1()
+        {
+            var tokens = new List<IToken>
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Subtraction),
+                new ComplexNumberToken(new Complex(0, 2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Sub(new Variable("x"), new ComplexNumber(new Complex(0, 2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexWithVarTest2()
+        {
+            var tokens = new List<IToken>
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new ComplexNumberToken(new Complex(3, -2))
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Add(new Variable("x"), new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

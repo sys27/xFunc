@@ -2369,6 +2369,36 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void ComplexWithVarTest1()
+        {
+            var tokens = lexer.Tokenize("x - 2i");
+
+            var expected = new List<IToken>
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Subtraction),
+                new ComplexNumberToken(new Complex(0, 2))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexWithVarTest2()
+        {
+            var tokens = lexer.Tokenize("x + 3 - 2i");
+
+            var expected = new List<IToken>
+            {
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new ComplexNumberToken(new Complex(3, -2))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

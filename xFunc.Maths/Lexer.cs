@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
@@ -446,7 +447,58 @@ namespace xFunc.Maths
 
                     strNumber = function.Substring(i, length);
                     number = double.Parse(strNumber, CultureInfo.InvariantCulture);
-                    tokens.Add(new NumberToken(number));
+
+                    if (CheckNextSymbol(function, i + length - 1, 'i'))
+                    {
+                        length++;
+
+                        var realPart = 0.0;
+                        var imaginaryPart = number;
+
+                        if (tokens.Count >= 1)
+                        {
+                            var lastOperationToken = tokens[tokens.Count - 1] as OperationToken;
+                            if (lastOperationToken != null && tokens.Count >= 2 &&
+                                (lastOperationToken.Operation == Operations.Addition ||
+                                 lastOperationToken.Operation == Operations.Subtraction))
+                            {
+                                var lastNumberToken = tokens[tokens.Count - 2] as NumberToken;
+                                if (lastNumberToken != null)
+                                {
+                                    realPart = lastNumberToken.Number;
+
+                                    if (lastOperationToken.Operation == Operations.Subtraction)
+                                        imaginaryPart = -imaginaryPart;
+
+                                    if (tokens.Count >= 3)
+                                    {
+                                        var lastUnaryToken = tokens[tokens.Count - 3] as OperationToken;
+                                        if (lastUnaryToken != null && lastUnaryToken.Operation == Operations.UnaryMinus)
+                                        {
+                                            realPart = -realPart;
+
+                                            tokens.Remove(lastUnaryToken);
+                                        }
+                                    }
+
+                                    tokens.Remove(lastNumberToken);
+                                    tokens.Remove(lastOperationToken);
+                                }
+                            }
+                            else if (lastOperationToken.Operation == Operations.UnaryMinus)
+                            {
+                                imaginaryPart = -imaginaryPart;
+
+                                tokens.Remove(lastOperationToken);
+                            }
+                        }
+
+                        tokens.Add(new ComplexNumberToken(new Complex(realPart, imaginaryPart)));
+                    }
+                    else
+                    {
+                        tokens.Add(new NumberToken(number));
+                    }
 
                     i += length;
 

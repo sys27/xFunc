@@ -20,6 +20,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// The base class for hyperbolic functions.
     /// </summary>
+    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public abstract class HyperbolicExpression : UnaryExpression
     {
         
@@ -35,6 +36,37 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected HyperbolicExpression(IExpression argument)
             : base(argument)
         {
+        }
+
+        /// <summary>
+        /// Gets the type of the argument.
+        /// </summary>
+        /// <value>
+        /// The type of the argument.
+        /// </value>
+        public override ExpressionResultType ArgumentType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                if (m_argument.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number;
+            }
         }
 
     }

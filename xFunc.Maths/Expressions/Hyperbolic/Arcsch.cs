@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
@@ -66,7 +67,11 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return MathExtentions.Acsch((double)m_argument.Execute(parameters));
+            var result = m_argument.Execute(parameters);
+            if (ResultType == ExpressionResultType.ComplexNumber)
+                return ComplexExtensions.Acsch((Complex)result);
+
+            return MathExtensions.Acsch((double)result);
         }
 
         /// <summary>

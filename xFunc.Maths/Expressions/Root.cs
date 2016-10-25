@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions
             var first = (double)m_left.Execute(parameters);
             var second = 1 / (double)m_right.Execute(parameters);
 
-            return MathExtentions.Pow(first, second);
+            return MathExtensions.Pow(first, second);
         }
 
         /// <summary>

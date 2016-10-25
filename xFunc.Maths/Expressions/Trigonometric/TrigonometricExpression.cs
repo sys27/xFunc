@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -20,6 +21,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
+    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public abstract class TrigonometricExpression : UnaryExpression
     {
 
@@ -38,7 +40,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using degree).
+        /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -47,7 +49,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected abstract double CalculateDergee(ExpressionParameters parameters);
         /// <summary>
-        /// Calculates this mathemarical expression (using radian).
+        /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -56,7 +58,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected abstract double CalculateRadian(ExpressionParameters parameters);
         /// <summary>
-        /// Calculates this mathemarical expression (using gradian).
+        /// Calculates this mathematical expression (using gradian).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -64,6 +66,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         protected abstract double CalculateGradian(ExpressionParameters parameters);
+        /// <summary>
+        /// Calculates the this mathematical expression (complex number).
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        protected abstract Complex CalculateComplex(ExpressionParameters parameters);
 
         /// <summary>
         /// Executes this expression.
@@ -75,6 +85,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
+            if (ResultType == ExpressionResultType.ComplexNumber)
+                return CalculateComplex(parameters);
             if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
                 return CalculateDergee(parameters);
             if (parameters.AngleMeasurement == AngleMeasurement.Radian)
@@ -83,6 +95,37 @@ namespace xFunc.Maths.Expressions.Trigonometric
                 return CalculateGradian(parameters);
 
             return double.NaN;
+        }
+
+        /// <summary>
+        /// Gets the type of the argument.
+        /// </summary>
+        /// <value>
+        /// The type of the argument.
+        /// </value>
+        public override ExpressionResultType ArgumentType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the result.
+        /// </summary>
+        /// <value>
+        /// The type of the result.
+        /// </value>
+        public override ExpressionResultType ResultType
+        {
+            get
+            {
+                if (m_argument.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                    return ExpressionResultType.ComplexNumber;
+
+                return ExpressionResultType.Number;
+            }
         }
 
     }

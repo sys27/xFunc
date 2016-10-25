@@ -22,7 +22,7 @@ namespace xFunc.Maths
     /// <summary>
     /// Provides static methods for additional functions.
     /// </summary>
-    public static class MathExtentions
+    public static class MathExtensions
     {
 
         /// <summary>

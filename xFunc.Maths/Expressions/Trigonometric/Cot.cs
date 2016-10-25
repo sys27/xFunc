@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -53,7 +54,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using degree).
+        /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -64,11 +65,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             var radian = (double)m_argument.Execute(parameters) * Math.PI / 180;
 
-            return MathExtentions.Cot(radian);
+            return MathExtensions.Cot(radian);
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using radian).
+        /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -79,11 +80,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             var x = (double)m_argument.Execute(parameters);
 
-            return MathExtentions.Cot(x);
+            return MathExtensions.Cot(x);
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using gradian).
+        /// Calculates this mathematical expression (using gradian).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -94,7 +95,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             var radian = (double)m_argument.Execute(parameters) * Math.PI / 200;
 
-            return MathExtentions.Cot(radian);
+            return MathExtensions.Cot(radian);
+        }
+
+        /// <summary>
+        /// Calculates the this mathematical expression (complex number).
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        protected override Complex CalculateComplex(ExpressionParameters parameters)
+        {
+            return ComplexExtensions.Cot((Complex)m_argument.Execute(parameters));
         }
 
         /// <summary>

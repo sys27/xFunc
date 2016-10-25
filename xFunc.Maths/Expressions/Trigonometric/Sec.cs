@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -56,7 +57,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using degree).
+        /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -71,7 +72,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using radian).
+        /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -84,7 +85,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathemarical expression (using gradian).
+        /// Calculates this mathematical expression (using gradian).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
@@ -97,7 +98,19 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             return 1 / Math.Cos(radian);
         }
-        
+
+        /// <summary>
+        /// Calculates the this mathematical expression (complex number).
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        protected override Complex CalculateComplex(ExpressionParameters parameters)
+        {
+            return ComplexExtensions.Sec((Complex)m_argument.Execute(parameters));
+        }
+
         /// <summary>
         /// Clones this instance.
         /// </summary>

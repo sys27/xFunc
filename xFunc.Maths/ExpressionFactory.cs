@@ -271,6 +271,18 @@ namespace xFunc.Maths
                     return new While();
                 case Functions.Undefine:
                     return new Undefine();
+                case Functions.Im:
+                    return new Im();
+                case Functions.Re:
+                    return new Re();
+                case Functions.Phase:
+                    return new Phase();
+                case Functions.Magnitude:
+                    return new Magnitude();
+                case Functions.Conjugate:
+                    return new Conjugate();
+                case Functions.Reciprocal:
+                    return new Reciprocal();
                 default:
                     return null;
             }

@@ -1072,6 +1072,62 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("im(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Im));
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("imaginary(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Im));
+                        i += 9;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("re(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Re));
+                        i += 2;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("real(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Re));
+                        i += 4;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("phase(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Phase));
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("magnitude(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Magnitude));
+                        i += 9;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("conjugate(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Conjugate));
+                        i += 9;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("reciprocal(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Reciprocal));
+                        i += 10;
+
+                        continue;
+                    }
 
                     int j = i + 1;
                     for (; j < function.Length && (char.IsLetter(function[j]) || char.IsDigit(function[j])) && !notVar.Any(s => function.Substring(j).StartsWith(s, StringComparison.Ordinal)); j++) { }

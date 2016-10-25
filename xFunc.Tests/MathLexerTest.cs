@@ -2399,6 +2399,134 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void ImTest()
+        {
+            var tokens = lexer.Tokenize("im(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Im, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ImaginaryTest()
+        {
+            var tokens = lexer.Tokenize("imaginary(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Im, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ReTest()
+        {
+            var tokens = lexer.Tokenize("re(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Re, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void RealTest()
+        {
+            var tokens = lexer.Tokenize("real(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Re, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void PhaseTest()
+        {
+            var tokens = lexer.Tokenize("phase(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Phase, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void MagnitudeTest()
+        {
+            var tokens = lexer.Tokenize("magnitude(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Magnitude, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ConjugateTest()
+        {
+            var tokens = lexer.Tokenize("conjugate(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Conjugate, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ReciprocalTest()
+        {
+            var tokens = lexer.Tokenize("reciprocal(3 - 2i)");
+
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Reciprocal, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

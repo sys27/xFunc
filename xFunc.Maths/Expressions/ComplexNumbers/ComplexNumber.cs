@@ -18,6 +18,10 @@ using System.Numerics;
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
 
+    /// <summary>
+    /// Represent complex number expression.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Expressions.IExpression" />
     public class ComplexNumber : IExpression
     {
 

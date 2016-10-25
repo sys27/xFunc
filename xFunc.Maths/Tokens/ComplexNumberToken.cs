@@ -18,16 +18,31 @@ using System.Numerics;
 namespace xFunc.Maths.Tokens
 {
 
+    /// <summary>
+    /// Represent complex number token.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokens.IToken" />
     public class ComplexNumberToken : IToken
     {
 
         private readonly Complex complex;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComplexNumberToken"/> class.
+        /// </summary>
+        /// <param name="complex">The complex number.</param>
         public ComplexNumberToken(Complex complex)
         {
             this.complex = complex;
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             var num = obj as ComplexNumberToken;
@@ -37,16 +52,31 @@ namespace xFunc.Maths.Tokens
             return complex.Equals(num.complex);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return complex.GetHashCode();
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return $"Complex Number: {complex}";
         }
 
+        /// <summary>
+        /// Gets a priority of current token.
+        /// </summary>
         public int Priority
         {
             get
@@ -55,6 +85,12 @@ namespace xFunc.Maths.Tokens
             }
         }
 
+        /// <summary>
+        /// Gets the complex number.
+        /// </summary>
+        /// <value>
+        /// The complex number.
+        /// </value>
         public Complex Number
         {
             get

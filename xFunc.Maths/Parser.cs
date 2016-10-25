@@ -19,6 +19,7 @@ using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using System.Linq;
+using xFunc.Maths.Expressions.ComplexNumbers;
 
 namespace xFunc.Maths
 {
@@ -68,7 +69,7 @@ namespace xFunc.Maths
             var stack = new Stack<IExpression>();
             foreach (var expression in expressions)
             {
-                if (expression is Number || expression is Bool || expression is Variable)
+                if (expression is Number || expression is ComplexNumber || expression is Bool || expression is Variable)
                 {
                     stack.Push(expression);
                 }

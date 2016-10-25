@@ -183,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.uk.resx</DependentUpon>
     </Compile>
+    <Compile Include="Results\ComplexNumberResult.cs" />
     <Compile Include="Simplifier.cs" />
     <Compile Include="NumeralSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

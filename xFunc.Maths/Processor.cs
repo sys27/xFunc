@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Resources;
@@ -120,6 +121,10 @@ namespace xFunc.Maths
                     return new NumberResult((double)result);
 
                 return new StringResult(MathExtentions.ToNewBase((int)(double)result, numeralSystem));
+            }
+            if (result is Complex)
+            {
+                return new ComplexNumberResult((Complex)result);
             }
             if (result is int)
             {

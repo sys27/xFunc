@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return MathExtentions.Fact(Math.Round((double)m_argument.Execute(parameters)));
+            return MathExtensions.Fact(Math.Round((double)m_argument.Execute(parameters)));
         }
 
         /// <summary>

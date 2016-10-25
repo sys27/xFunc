@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         {
             var numbers = m_arguments.Select(item => (double)item.Execute(parameters)).ToArray();
 
-            return MathExtentions.LCM(numbers);
+            return MathExtensions.LCM(numbers);
         }
 
         /// <summary>

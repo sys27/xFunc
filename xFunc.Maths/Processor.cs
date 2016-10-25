@@ -120,7 +120,7 @@ namespace xFunc.Maths
                 if (numeralSystem == NumeralSystem.Decimal)
                     return new NumberResult((double)result);
 
-                return new StringResult(MathExtentions.ToNewBase((int)(double)result, numeralSystem));
+                return new StringResult(MathExtensions.ToNewBase((int)(double)result, numeralSystem));
             }
             if (result is Complex)
             {
@@ -131,7 +131,7 @@ namespace xFunc.Maths
                 if (numeralSystem == NumeralSystem.Decimal)
                     return new NumberResult((int)result);
 
-                return new StringResult(MathExtentions.ToNewBase((int)result, numeralSystem));
+                return new StringResult(MathExtensions.ToNewBase((int)result, numeralSystem));
             }
             if (result is bool)
             {

@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         {
             var numbers = m_arguments.Select(item => (double)item.Execute(parameters)).ToArray();
 
-            return MathExtentions.GCD(numbers);
+            return MathExtensions.GCD(numbers);
         }
 
         /// <summary>

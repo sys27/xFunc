@@ -105,6 +105,7 @@
     <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Sum.cs" />
+    <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="IDependencyResolver.cs" />
     <Compile Include="IDifferentiator.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="Expressions\UserFunction.cs" />
     <Compile Include="Expressions\Variable.cs" />
     <Compile Include="ILexer.cs" />
-    <Compile Include="MathExtentions.cs" />
+    <Compile Include="MathExtensions.cs" />
     <Compile Include="Lexer.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Processor.cs" />

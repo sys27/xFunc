@@ -1230,6 +1230,102 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void ImTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Im, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Im(new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ReTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Re, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Re(new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void PhaseTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Phase, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Phase(new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void MagnitudeTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Magnitude, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Magnitude(new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ConjugateTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Conjugate, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Conjugate(new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ReciprocalTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Reciprocal, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new ComplexNumberToken(new Complex(3, -2)),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Reciprocal(new ComplexNumber(new Complex(3, -2)));
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

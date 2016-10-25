@@ -250,6 +250,22 @@ namespace xFunc.Maths.Tokens
         /// im (returns imaginary part of complex number)
         /// </summary>
         Im,
+        /// <summary>
+        /// phase
+        /// </summary>
+        Phase,
+        /// <summary>
+        /// magnitude
+        /// </summary>
+        Magnitude,
+        /// <summary>
+        /// conjugate
+        /// </summary>
+        Conjugate,
+        /// <summary>
+        /// reciprocal
+        /// </summary>
+        Reciprocal,
 
         /// <summary>
         /// The user function

@@ -71,7 +71,7 @@ namespace xFunc.Maths
         /// <returns>Arcosecant of complex number.</returns>
         public static Complex Asec(Complex number)
         {
-            return -Complex.ImaginaryOne * Complex.Log(Complex.Sqrt(1 / Complex.Pow(number, 2) - 1) + Complex.ImaginaryOne / number);
+            return Complex.ImaginaryOne * Complex.Log(Complex.Sqrt(1 / Complex.Pow(number, 2) - 1) + 1 / number);
         }
 
         /// <summary>

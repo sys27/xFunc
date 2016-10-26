@@ -13,13 +13,15 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class ArccosTest
     {
 
@@ -45,6 +47,16 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
             var exp = new Arccos(new Number(1));
 
             Assert.Equal(Math.Acos(1) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
+        }
+
+        [Fact]
+        public void CalculateComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Arccos(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Acos(complex), exp.Execute());
+            Assert.Equal(new Complex(0.60613782238729386, -1.9686379257930964), exp.Execute());
         }
 
         [Fact]

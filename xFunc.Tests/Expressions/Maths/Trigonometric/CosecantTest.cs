@@ -13,8 +13,10 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -46,6 +48,16 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
             var exp = new Csc(new Number(1));
 
             Assert.Equal(MathExtensions.Csc(Math.PI / 200), exp.Execute(AngleMeasurement.Gradian));
+        }
+
+        [Fact]
+        public void CalculateComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Csc(new ComplexNumber(complex));
+
+            Assert.Equal(ComplexExtensions.Csc(complex), exp.Execute());
+            Assert.Equal(new Complex(0.040300578856891527, 0.27254866146294021), exp.Execute());
         }
 
         [Fact]

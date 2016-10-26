@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest1()
         {
-            IExpression exp = new Sub(new Number(1), new Number(2));
+            var exp = new Sub(new Number(1), new Number(2));
 
             Assert.Equal(-1.0, exp.Execute());
         }

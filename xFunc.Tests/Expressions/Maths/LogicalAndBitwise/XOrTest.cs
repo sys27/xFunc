@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         [Fact]
         public void ExecuteTest1()
         {
-            IExpression exp = new XOr(new Number(1), new Number(2));
+            var exp = new XOr(new Number(1), new Number(2));
 
             Assert.Equal(3.0, exp.Execute());
         }
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         [Fact]
         public void ExecuteTest2()
         {
-            IExpression exp = new XOr(new Number(1), new Number(2.5));
+            var exp = new XOr(new Number(1), new Number(2.5));
 
             Assert.Equal(2.0, exp.Execute());
         }

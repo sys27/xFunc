@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         [Fact]
         public void CalculateRadianTest()
         {
-            IExpression exp = new Arctan(new Number(1));
+            var exp = new Arctan(new Number(1));
 
             Assert.Equal(Math.Atan(1), exp.Execute(AngleMeasurement.Radian));
         }
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         [Fact]
         public void CalculateDegreeTest()
         {
-            IExpression exp = new Arctan(new Number(1));
+            var exp = new Arctan(new Number(1));
 
             Assert.Equal(Math.Atan(1) / Math.PI * 180, exp.Execute(AngleMeasurement.Degree));
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         [Fact]
         public void CalculateGradianTest()
         {
-            IExpression exp = new Arctan(new Number(1));
+            var exp = new Arctan(new Number(1));
 
             Assert.Equal(Math.Atan(1) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
         }

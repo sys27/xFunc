@@ -17,6 +17,8 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
+using xFunc.Maths.Expressions.ComplexNumbers;
+using System.Numerics;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
@@ -46,6 +48,16 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
             var exp = new Arccot(new Number(1));
 
             Assert.Equal(MathExtensions.Acot(1) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
+        }
+
+        [Fact]
+        public void CalculateComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Arccot(new ComplexNumber(complex));
+
+            Assert.Equal(ComplexExtensions.Acot(complex), exp.Execute());
+            Assert.Equal(new Complex(0.23182380450040308, -0.14694666622552988), exp.Execute());
         }
 
         [Fact]

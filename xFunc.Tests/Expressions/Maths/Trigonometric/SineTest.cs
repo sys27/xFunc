@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -45,6 +47,16 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
             var exp = new Sin(new Number(1));
 
             Assert.Equal(Math.Sin(1 * Math.PI / 200), exp.Execute(AngleMeasurement.Gradian));
+        }
+
+        [Fact]
+        public void CalculateComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Sin(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Sin(complex), exp.Execute());
+            Assert.Equal(new Complex(0.53092108624851986, -3.59056458998578), exp.Execute());
         }
 
         [Fact]

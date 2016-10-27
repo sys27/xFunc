@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateComplexNumberTest()
+        public void ExecuteComplexNumberTest()
         {
             var complex = new Complex(3, 2);
             var exp = new Arctan(new ComplexNumber(complex));

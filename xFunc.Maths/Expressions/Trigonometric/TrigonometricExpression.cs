@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double CalculateDergee(ExpressionParameters parameters);
+        protected abstract double ExecuteDergee(ExpressionParameters parameters);
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double CalculateRadian(ExpressionParameters parameters);
+        protected abstract double ExecuteRadian(ExpressionParameters parameters);
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
         /// </summary>
@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double CalculateGradian(ExpressionParameters parameters);
+        protected abstract double ExecuteGradian(ExpressionParameters parameters);
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
         /// </summary>
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected abstract Complex CalculateComplex(ExpressionParameters parameters);
+        protected abstract Complex ExecuteComplex(ExpressionParameters parameters);
 
         /// <summary>
         /// Executes this expression.
@@ -86,13 +86,13 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public override object Execute(ExpressionParameters parameters)
         {
             if (ResultType == ExpressionResultType.ComplexNumber)
-                return CalculateComplex(parameters);
+                return ExecuteComplex(parameters);
             if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
-                return CalculateDergee(parameters);
+                return ExecuteDergee(parameters);
             if (parameters.AngleMeasurement == AngleMeasurement.Radian)
-                return CalculateRadian(parameters);
+                return ExecuteRadian(parameters);
             if (parameters.AngleMeasurement == AngleMeasurement.Gradian)
-                return CalculateGradian(parameters);
+                return ExecuteGradian(parameters);
 
             return double.NaN;
         }

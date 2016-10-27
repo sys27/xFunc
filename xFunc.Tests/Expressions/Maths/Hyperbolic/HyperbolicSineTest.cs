@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
 
@@ -29,6 +31,16 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
             var exp = new Sinh(new Number(1));
 
             Assert.Equal(Math.Sinh(1), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Sinh(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Sinh(complex), exp.Execute());
+            Assert.Equal(new Complex(-4.16890695996656435075, 9.154499146911429573), exp.Execute());
         }
 
         [Fact]

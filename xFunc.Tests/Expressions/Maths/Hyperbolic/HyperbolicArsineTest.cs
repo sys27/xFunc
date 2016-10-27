@@ -13,8 +13,10 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
 
@@ -30,6 +32,16 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
             var exp = new Arsinh(new Number(1));
 
             Assert.Equal(MathExtensions.Asinh(1), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Arsinh(new ComplexNumber(complex));
+
+            Assert.Equal(ComplexExtensions.Asinh(complex), exp.Execute());
+            Assert.Equal(new Complex(1.983387029916535432347076, 0.5706527843210994007), exp.Execute());
         }
 
         [Fact]

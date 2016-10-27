@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
     {
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Tan(new Number(1));
 
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Tan(new Number(1));
 
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Tan(new Number(1));
 
@@ -54,9 +54,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Tan(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
             Assert.Equal(Complex.Tan(complex), exp.Execute());
-            Assert.Equal(new Complex(-0.0098843750383224935, 0.96538587902213313), exp.Execute());
+            Assert.Equal(-0.0098843750383224935, result.Real, 15);
+            Assert.Equal(0.96538587902213313, result.Imaginary, 15);
         }
 
         [Fact]

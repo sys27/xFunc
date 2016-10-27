@@ -55,9 +55,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arcsec(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
             Assert.Equal(ComplexExtensions.Asec(complex), exp.Execute());
-            Assert.Equal(new Complex(1.3408334244176887, 0.15735549884498545), exp.Execute());
+            Assert.Equal(1.3408334244176887, result.Real, 15);
+            Assert.Equal(0.15735549884498545, result.Imaginary, 15);
         }
 
         [Fact]

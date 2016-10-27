@@ -22,12 +22,12 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class CotangentTest
     {
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Cot(new Number(1));
 
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Cot(new Number(1));
 
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Cot(new Number(1));
 
@@ -55,9 +55,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Cot(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Cot(complex), exp.Execute());
-            Assert.Equal(new Complex(-0.010604783470337083, -1.0357466377649953), exp.Execute());
+            Assert.Equal(ComplexExtensions.Cot(complex), result);
+            Assert.Equal(-0.010604783470337083, result.Real, 15);
+            Assert.Equal(-1.0357466377649953, result.Imaginary, 15);
         }
 
         [Fact]

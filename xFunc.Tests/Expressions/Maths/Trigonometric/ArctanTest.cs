@@ -21,12 +21,12 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class ArctanTest
     {
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Arctan(new Number(1));
 
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Arctan(new Number(1));
 
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Arctan(new Number(1));
 
@@ -54,9 +54,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arctan(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Atan(complex), exp.Execute());
-            Assert.Equal(new Complex(1.3389725222944935, 0.14694666622552977), exp.Execute());
+            Assert.Equal(Complex.Atan(complex), result);
+            Assert.Equal(1.3389725222944935, result.Real, 15);
+            Assert.Equal(0.14694666622552977, result.Imaginary, 15);
         }
 
         [Fact]

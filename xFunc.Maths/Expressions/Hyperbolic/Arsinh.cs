@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             var result = m_argument.Execute(parameters);
             if (ResultType == ExpressionResultType.ComplexNumber)
-                return Complex.Tanh((Complex)result);
+                return ComplexExtensions.Asinh((Complex)result);
 
             return MathExtensions.Asinh((double)result);
         }

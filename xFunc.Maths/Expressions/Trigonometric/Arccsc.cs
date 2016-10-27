@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double CalculateDergee(ExpressionParameters parameters)
+        protected override double ExecuteDergee(ExpressionParameters parameters)
         {
             return MathExtensions.Acsc((double)m_argument.Execute(parameters)) / Math.PI * 180;
         }
@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double CalculateRadian(ExpressionParameters parameters)
+        protected override double ExecuteRadian(ExpressionParameters parameters)
         {
             return MathExtensions.Acsc((double)m_argument.Execute(parameters));
         }
@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double CalculateGradian(ExpressionParameters parameters)
+        protected override double ExecuteGradian(ExpressionParameters parameters)
         {
             return MathExtensions.Acsc((double)m_argument.Execute(parameters)) / Math.PI * 200;
         }
@@ -99,7 +99,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex CalculateComplex(ExpressionParameters parameters)
+        protected override Complex ExecuteComplex(ExpressionParameters parameters)
         {
             return ComplexExtensions.Acsc((Complex)m_argument.Execute(parameters));
         }

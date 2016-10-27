@@ -115,6 +115,16 @@ namespace xFunc.Maths
         }
 
         /// <summary>
+        /// Returns the hyperbolic arsine of the specified complex number.
+        /// </summary>
+        /// <param name="number">Complex number.</param>
+        /// <returns>Hyperbolic arsine of complex number.</returns>
+        public static Complex Asinh(Complex number)
+        {
+            return Complex.Log(number + Complex.Sqrt(Complex.Pow(number, 2) + 1));
+        }
+
+        /// <summary>
         /// Returns the hyperbolic arcosine of the specified complex number.
         /// </summary>
         /// <param name="number">Complex number.</param>
@@ -142,6 +152,7 @@ namespace xFunc.Maths
         public static Complex Acoth(Complex number)
         {
             return 0.5 * Complex.Log((number + 1) / (number - 1));
+            //return 0.5 * Complex.Log(1 + 1 / number) - 0.5 * Complex.Log(1 - 1 / number);
         }
 
         /// <summary>

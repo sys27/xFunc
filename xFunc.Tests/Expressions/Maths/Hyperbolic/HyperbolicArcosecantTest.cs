@@ -22,7 +22,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Hyperbolic
 {
-    
+
     public class HyperbolicArcosecantTest
     {
 
@@ -39,9 +39,11 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Arcsch(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Acsch(complex), exp.Execute());
-            Assert.Equal(new Complex(0.23133469857397318, -0.15038560432786197), exp.Execute());
+            Assert.Equal(ComplexExtensions.Acsch(complex), result);
+            Assert.Equal(0.23133469857397318, result.Real, 15);
+            Assert.Equal(-0.15038560432786197, result.Imaginary, 15);
         }
 
         [Fact]

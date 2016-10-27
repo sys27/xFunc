@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Hyperbolic
 {
-    
+
     public class HyperbolicCosineTest
     {
 
@@ -38,9 +38,11 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Cosh(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Cosh(complex), exp.Execute());
-            Assert.Equal(new Complex(-4.189625690968807230132555, 9.10922789375533659797919), exp.Execute());
+            Assert.Equal(Complex.Cosh(complex), result);
+            Assert.Equal(-4.189625690968807230132555, result.Real, 15);
+            Assert.Equal(9.10922789375533659797919, result.Imaginary, 15);
         }
 
         [Fact]

@@ -21,12 +21,12 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class SineTest
     {
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Sin(new Number(1));
 
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Sin(new Number(1));
 
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Sin(new Number(1));
 
@@ -54,9 +54,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Sin(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Sin(complex), exp.Execute());
-            Assert.Equal(new Complex(0.53092108624851986, -3.59056458998578), exp.Execute());
+            Assert.Equal(Complex.Sin(complex), result);
+            Assert.Equal(0.53092108624851986, result.Real, 15);
+            Assert.Equal(-3.59056458998578, result.Imaginary, 15);
         }
 
         [Fact]

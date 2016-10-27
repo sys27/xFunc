@@ -21,10 +21,10 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Hyperbolic
 {
-    
+
     public class HyperbolicSineTest
     {
-        
+
         [Fact]
         public void ExecuteTest()
         {
@@ -38,9 +38,11 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Sinh(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Sinh(complex), exp.Execute());
-            Assert.Equal(new Complex(-4.16890695996656435075, 9.154499146911429573), exp.Execute());
+            Assert.Equal(Complex.Sinh(complex), result);
+            Assert.Equal(-4.16890695996656435075, result.Real, 15);
+            Assert.Equal(9.154499146911429573, result.Imaginary, 15);
         }
 
         [Fact]

@@ -22,7 +22,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class ArcsinTest
     {
 
@@ -55,9 +55,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arcsin(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Asin(complex), exp.Execute());
-            Assert.Equal(new Complex(0.96465850440760248, 1.9686379257930975), exp.Execute());
+            Assert.Equal(Complex.Asin(complex), result);
+            Assert.Equal(0.96465850440760248, result.Real, 15);
+            Assert.Equal(1.9686379257930975, result.Imaginary, 15);
         }
 
         [Fact]

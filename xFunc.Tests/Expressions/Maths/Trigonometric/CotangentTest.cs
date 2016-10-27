@@ -58,8 +58,8 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
             var result = (Complex)exp.Execute();
 
             Assert.Equal(ComplexExtensions.Cot(complex), result);
-            Assert.Equal(-0.010604783470337083, result.Real, 15);
-            Assert.Equal(-1.0357466377649953, result.Imaginary, 15);
+            Assert.Equal(-0.010604783470337083, result.Real, 14);
+            Assert.Equal(-1.0357466377649953, result.Imaginary, 14);
         }
 
         [Fact]

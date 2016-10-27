@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double CalculateDergee(ExpressionParameters parameters)
+        protected override double ExecuteDergee(ExpressionParameters parameters)
         {
             var radian = (double)m_argument.Execute(parameters) * Math.PI / 180;
 
@@ -76,7 +76,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double CalculateRadian(ExpressionParameters parameters)
+        protected override double ExecuteRadian(ExpressionParameters parameters)
         {
             return Math.Tan((double)m_argument.Execute(parameters));
         }
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double CalculateGradian(ExpressionParameters parameters)
+        protected override double ExecuteGradian(ExpressionParameters parameters)
         {
             var radian = (double)m_argument.Execute(parameters) * Math.PI / 200;
 
@@ -103,7 +103,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex CalculateComplex(ExpressionParameters parameters)
+        protected override Complex ExecuteComplex(ExpressionParameters parameters)
         {
             return Complex.Tan((Complex)m_argument.Execute(parameters));
         }

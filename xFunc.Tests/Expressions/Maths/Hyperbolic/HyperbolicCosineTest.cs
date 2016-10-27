@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
 
@@ -29,6 +31,16 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
             var exp = new Cosh(new Number(1));
 
             Assert.Equal(Math.Cosh(1), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteComplexNumberTest()
+        {
+            var complex = new Complex(3, 2);
+            var exp = new Cosh(new ComplexNumber(complex));
+
+            Assert.Equal(Complex.Cosh(complex), exp.Execute());
+            Assert.Equal(new Complex(-4.189625690968807230132555, 9.10922789375533659797919), exp.Execute());
         }
 
         [Fact]

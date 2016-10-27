@@ -22,12 +22,12 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class SecantTest
     {
-        
+
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Sec(new Number(1));
 
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Sec(new Number(1));
 
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Sec(new Number(1));
 
@@ -55,9 +55,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Sec(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Sec(complex), exp.Execute());
-            Assert.Equal(new Complex(-0.26351297515838928, 0.036211636558768523), exp.Execute());
+            Assert.Equal(ComplexExtensions.Sec(complex), result);
+            Assert.Equal(-0.26351297515838928, result.Real, 15);
+            Assert.Equal(0.036211636558768523, result.Imaginary, 15);
         }
 
         [Fact]

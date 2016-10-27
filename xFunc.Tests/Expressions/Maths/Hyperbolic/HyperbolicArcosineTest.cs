@@ -39,9 +39,11 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Arcosh(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Acosh(complex), exp.Execute());
-            Assert.Equal(new Complex(1.9686379257930964, 0.606137822387294), exp.Execute());
+            Assert.Equal(ComplexExtensions.Acosh(complex), result);
+            Assert.Equal(1.9686379257930964, result.Real, 15);
+            Assert.Equal(0.606137822387294, result.Imaginary, 15);
         }
 
         [Fact]

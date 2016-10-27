@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
     {
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Arccos(new Number(1));
 
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Arccos(new Number(1));
 
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Arccos(new Number(1));
 
@@ -54,9 +54,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arccos(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Acos(complex), exp.Execute());
-            Assert.Equal(new Complex(0.60613782238729386, -1.9686379257930964), exp.Execute());
+            Assert.Equal(Complex.Acos(complex), result);
+            Assert.Equal(0.60613782238729386, result.Real, 15);
+            Assert.Equal(-1.9686379257930964, result.Imaginary, 15);
         }
 
         [Fact]

@@ -22,12 +22,12 @@ using System.Numerics;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class ArccotTest
     {
 
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Arccot(new Number(1));
 
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Arccot(new Number(1));
 
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Arccot(new Number(1));
 
@@ -55,9 +55,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arccot(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Acot(complex), exp.Execute());
-            Assert.Equal(new Complex(0.23182380450040308, -0.14694666622552988), exp.Execute());
+            Assert.Equal(ComplexExtensions.Acot(complex), result);
+            Assert.Equal(0.23182380450040308, result.Real, 15);
+            Assert.Equal(-0.14694666622552988, result.Imaginary, 15);
         }
 
         [Fact]

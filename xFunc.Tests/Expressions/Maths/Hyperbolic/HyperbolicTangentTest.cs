@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Hyperbolic
 {
-    
+
     public class HyperbolicTangentTest
     {
 
@@ -38,9 +38,11 @@ namespace xFunc.Tests.Expressions.Maths.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Tanh(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Tanh(complex), exp.Execute());
-            Assert.Equal(new Complex(1.0032386273536098, -0.0037640256415041864), exp.Execute());
+            Assert.Equal(Complex.Tanh(complex), result);
+            Assert.Equal(1.0032386273536098, result.Real, 15);
+            Assert.Equal(-0.0037640256415041864, result.Imaginary, 15);
         }
 
         [Fact]

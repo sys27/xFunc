@@ -22,12 +22,12 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Trigonometric
 {
-    
+
     public class ArccscTest
     {
-        
+
         [Fact]
-        public void CalculateRadianTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Arccsc(new Number(1));
 
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateDegreeTest()
+        public void ExecuteDegreeTest()
         {
             var exp = new Arccsc(new Number(1));
 
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         }
 
         [Fact]
-        public void CalculateGradianTest()
+        public void ExecuteGradianTest()
         {
             var exp = new Arccsc(new Number(1));
 
@@ -55,9 +55,11 @@ namespace xFunc.Tests.Expressions.Maths.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arccsc(new ComplexNumber(complex));
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Acsc(complex), exp.Execute());
-            Assert.Equal(new Complex(0.22996290237720782, -0.15735549884498545), exp.Execute());
+            Assert.Equal(ComplexExtensions.Acsc(complex), result);
+            Assert.Equal(0.22996290237720782, result.Real, 15);
+            Assert.Equal(-0.15735549884498545, result.Imaginary, 15);
         }
 
         [Fact]

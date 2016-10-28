@@ -121,10 +121,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             get
             {
-                if (m_argument.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                    return ExpressionResultType.ComplexNumber;
-
-                return ExpressionResultType.Number;
+                return m_argument.ResultType;
             }
         }
 

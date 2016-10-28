@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public abstract class HyperbolicExpression : UnaryExpression
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HyperbolicExpression"/> class.
         /// </summary>
@@ -62,10 +62,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             get
             {
-                if (m_argument.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                    return ExpressionResultType.ComplexNumber;
-
-                return ExpressionResultType.Number;
+                return m_argument.ResultType;
             }
         }
 

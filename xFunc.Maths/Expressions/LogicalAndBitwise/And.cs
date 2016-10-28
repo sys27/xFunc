@@ -104,6 +104,15 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
+                if (m_right != null)
+                {
+                    if (m_right.ResultType == ExpressionResultType.Number)
+                        return ExpressionResultType.Number;
+
+                    if (m_right.ResultType == ExpressionResultType.Boolean)
+                        return ExpressionResultType.Boolean;
+                }
+
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
@@ -118,6 +127,15 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
+                if (m_left != null)
+                {
+                    if (m_left.ResultType == ExpressionResultType.Number)
+                        return ExpressionResultType.Number;
+
+                    if (m_left.ResultType == ExpressionResultType.Boolean)
+                        return ExpressionResultType.Boolean;
+                }
+
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
@@ -132,13 +150,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number | ExpressionResultType.Boolean) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number | ExpressionResultType.Boolean))
-                    return ExpressionResultType.Number | ExpressionResultType.Boolean;
-
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
+                if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
                     return ExpressionResultType.Number;
 
-                return ExpressionResultType.Boolean;
+                if (m_left.ResultType == ExpressionResultType.Boolean || m_right.ResultType == ExpressionResultType.Boolean)
+                    return ExpressionResultType.Boolean;
+
+                return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
 

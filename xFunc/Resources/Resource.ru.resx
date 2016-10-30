@@ -765,4 +765,22 @@
   <data name="SettingsDefaultChartColor" xml:space="preserve">
     <value>Цвет графика по умолчанию:</value>
   </data>
+  <data name="ComplexNumberExpanderHeader" xml:space="preserve">
+    <value>Комплексные числа</value>
+  </data>
+  <data name="ConjugateToolTip" xml:space="preserve">
+    <value>Функция Conjugate. Пример: conjugate(3+2i).</value>
+  </data>
+  <data name="ImToolTip" xml:space="preserve">
+    <value>Возвращает мнимую часть комплексного числа. Пример: im(3+2i).</value>
+  </data>
+  <data name="PhaseToolTip" xml:space="preserve">
+    <value>Функция Phase. Пример: phase(3+2i).</value>
+  </data>
+  <data name="ReciprocalToolTip" xml:space="preserve">
+    <value>Функция Reciprocal. Пример: reciprocal(3+2i).</value>
+  </data>
+  <data name="ReToolTip" xml:space="preserve">
+    <value>Возвращает вещественную часть комплексного числа. Пример: re(3+2i).</value>
+  </data>
 </root>

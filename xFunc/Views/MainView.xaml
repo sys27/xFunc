@@ -757,6 +757,62 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
+                <Expander x:Name="complexNumberToolBar" Header="{x:Static res:Resource.ComplexNumberExpanderHeader}">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="re" Click="InsertFunc_Click">
+                            <Viewbox>
+                                <TextBlock>Re(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ReToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="im" Click="InsertFunc_Click">
+                            <Viewbox>
+                                <TextBlock>Im(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ImToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="phase" Click="InsertFunc_Click">
+                            <Viewbox>
+                                <TextBlock>Phase(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.PhaseToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="3" Tag="conjugate" Click="InsertFunc_Click">
+                            <Viewbox>
+                                <TextBlock>Conjugate(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ConjugateToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        
+                        <Button Grid.Row="1" Grid.Column="0" Tag="reciprocal" Click="InsertFunc_Click">
+                            <Viewbox>
+                                <TextBlock>Reciprocal(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ReciprocalToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </Expander>
                 <Expander x:Name="bitwiseToolBar" Header="{x:Static res:Resource.BitwiseExpanderHeader}">
                     <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>

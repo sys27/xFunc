@@ -484,6 +484,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex numbers.
+        /// </summary>
+        public static string ComplexNumberExpanderHeader {
+            get {
+                return ResourceManager.GetString("ComplexNumberExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The conditional-AND operator. Example: x == 0 &amp;&amp; y != 0..
         /// </summary>
         public static string ConditionalAndToolTip {
@@ -498,6 +507,15 @@ namespace xFunc.Resources {
         public static string ConditionalOrToolTip {
             get {
                 return ResourceManager.GetString("ConditionalOrToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Conjugate function. Example: conjugate(3+2i)..
+        /// </summary>
+        public static string ConjugateToolTip {
+            get {
+                return ResourceManager.GetString("ConjugateToolTip", resourceCulture);
             }
         }
         
@@ -1087,6 +1105,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returns imaginary part of complex number. Example: im(3+2i)..
+        /// </summary>
+        public static string ImToolTip {
+            get {
+                return ResourceManager.GetString("ImToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Perhaps, variables have entered incorrectly..
         /// </summary>
         public static string IndexOutOfRangeExceptionError {
@@ -1321,6 +1348,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Phase function. Example: phase(3+2i)..
+        /// </summary>
+        public static string PhaseToolTip {
+            get {
+                return ResourceManager.GetString("PhaseToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;x&quot; raised to the power of 2. Example: 7^2.
         /// </summary>
         public static string PowerOfTwoToolTip {
@@ -1384,6 +1420,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Reciprocal function. Example: reciprocal(3+2i)..
+        /// </summary>
+        public static string ReciprocalToolTip {
+            get {
+                return ResourceManager.GetString("ReciprocalToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Redo.
         /// </summary>
         public static string RedoButtonHeader {
@@ -1407,6 +1452,15 @@ namespace xFunc.Resources {
         public static string RedoScreenTipTitle {
             get {
                 return ResourceManager.GetString("RedoScreenTipTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returns real part of complex number. Example: re(3+2i)..
+        /// </summary>
+        public static string ReToolTip {
+            get {
+                return ResourceManager.GetString("ReToolTip", resourceCulture);
             }
         }
         

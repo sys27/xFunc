@@ -465,5 +465,17 @@ namespace xFunc.Properties {
                 this["DefaultChartColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ComplexNumberExpanded {
+            get {
+                return ((bool)(this["ComplexNumberExpanded"]));
+            }
+            set {
+                this["ComplexNumberExpanded"] = value;
+            }
+        }
     }
 }

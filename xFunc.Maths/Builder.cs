@@ -108,27 +108,32 @@ namespace xFunc.Maths
         /// Initializes the builder.
         /// </summary>
         /// <param name="initial">The initial value of builder.</param>
-        public void Init(IExpression initial)
+        /// <returns>The builder.</returns>
+        public Builder Init(IExpression initial)
         {
             this.current = initial;
+
+            return this;
         }
 
         /// <summary>
         /// Initializes the builder.
         /// </summary>
         /// <param name="number">The initial value of builder.</param>
-        public void Init(double number)
+        /// <returns>The builder.</returns>
+        public Builder Init(double number)
         {
-            Init((IExpression)new Number(number));
+            return Init((IExpression)new Number(number));
         }
 
         /// <summary>
         /// Initializes the builder.
         /// </summary>
         /// <param name="variable">The initial value of builder.</param>
-        public void Init(string variable)
+        /// <returns>The builder.</returns>
+        public Builder Init(string variable)
         {
-            Init((IExpression)new Variable(variable));
+            return Init((IExpression)new Variable(variable));
         }
 
         private void CheckCurrentExpression()

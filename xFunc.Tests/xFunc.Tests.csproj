@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuilderTest.cs" />
     <Compile Include="Converters\AreaTest.cs" />
     <Compile Include="Converters\LengthTest.cs" />
     <Compile Include="Converters\MassTest.cs" />

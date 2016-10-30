@@ -54,81 +54,39 @@
     <DocumentationFile>bin\Release\portable\xFunc.Maths.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <EmbeddedResource Include="Resources\Resource.uk.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.uk.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.ru.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\SharedCode\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="Expressions\Ceil.cs" />
-    <Compile Include="Expressions\Floor.cs" />
+    <Compile Include="Expressions\ComplexNumbers\ComplexNumber.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Conjugate.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Im.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Magnitude.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Phase.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Re.cs" />
+    <Compile Include="Expressions\ComplexNumbers\Reciprocal.cs" />
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />
     <Compile Include="Expressions\ExpressionResultType.cs" />
-    <Compile Include="Expressions\ParameterTypeMismatchException.cs" />
-    <Compile Include="IExpressionFactory.cs" />
-    <Compile Include="InvalidResultException.cs" />
-    <Compile Include="ExpressionFactory.cs" />
     <Compile Include="Expressions\Fact.cs" />
-    <Compile Include="Expressions\Abs.cs" />
-    <Compile Include="Expressions\Add.cs" />
-    <Compile Include="Expressions\AngleMeasurement.cs" />
-    <Compile Include="Expressions\Define.cs" />
-    <Compile Include="Expressions\BinaryExpression.cs" />
-    <Compile Include="Expressions\Lb.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\And.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\Not.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\Or.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\XOr.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\Equality.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\Implication.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\NAnd.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\NOr.cs" />
-    <Compile Include="Expressions\Derivative.cs" />
-    <Compile Include="Expressions\Div.cs" />
-    <Compile Include="Expressions\Exp.cs" />
+    <Compile Include="Expressions\Floor.cs" />
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\Hyperbolic\HyperbolicExpression.cs" />
-    <Compile Include="Expressions\Hyperbolic\Arcosh.cs" />
-    <Compile Include="Expressions\Hyperbolic\Arcoth.cs" />
-    <Compile Include="Expressions\Hyperbolic\Arcsch.cs" />
-    <Compile Include="Expressions\Hyperbolic\Arsech.cs" />
-    <Compile Include="Expressions\Hyperbolic\Arsinh.cs" />
-    <Compile Include="Expressions\Hyperbolic\Artanh.cs" />
-    <Compile Include="Expressions\Hyperbolic\Cosh.cs" />
-    <Compile Include="Expressions\Hyperbolic\Coth.cs" />
-    <Compile Include="Expressions\Hyperbolic\Csch.cs" />
-    <Compile Include="Expressions\Hyperbolic\Sech.cs" />
-    <Compile Include="Expressions\Hyperbolic\Sinh.cs" />
-    <Compile Include="Expressions\Hyperbolic\Tanh.cs" />
-    <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\LCM.cs" />
-    <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
-    <Compile Include="Expressions\Round.cs" />
-    <Compile Include="Expressions\Lg.cs" />
-    <Compile Include="Expressions\Ln.cs" />
-    <Compile Include="Expressions\Log.cs" />
     <Compile Include="Expressions\Collections\FunctionCollection.cs" />
     <Compile Include="Expressions\Collections\Parameter.cs" />
     <Compile Include="Expressions\Collections\ParameterCollection.cs" />
     <Compile Include="Expressions\Collections\ParameterIsReadOnlyException.cs" />
     <Compile Include="Expressions\Collections\ParameterType.cs" />
+    <Compile Include="Expressions\Lb.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Bool.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Equality.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Implication.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\NAnd.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\NOr.cs" />
     <Compile Include="Expressions\Matrices\Determinant.cs" />
     <Compile Include="Expressions\Matrices\Inverse.cs" />
     <Compile Include="Expressions\Matrices\Matrix.cs" />
@@ -137,43 +95,86 @@
     <Compile Include="Expressions\Matrices\Transpose.cs" />
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Del.cs" />
+    <Compile Include="Expressions\ParameterTypeMismatchException.cs" />
     <Compile Include="Expressions\Product.cs" />
     <Compile Include="Expressions\Programming\AddAssign.cs" />
-    <Compile Include="Expressions\Programming\SubAssign.cs" />
-    <Compile Include="Expressions\Programming\MulAssign.cs" />
-    <Compile Include="Expressions\Programming\DivAssign.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
+    <Compile Include="Expressions\Programming\Dec.cs" />
+    <Compile Include="Expressions\Programming\DivAssign.cs" />
     <Compile Include="Expressions\Programming\Equal.cs" />
     <Compile Include="Expressions\Programming\For.cs" />
     <Compile Include="Expressions\Programming\GreaterOrEqual.cs" />
     <Compile Include="Expressions\Programming\GreaterThan.cs" />
     <Compile Include="Expressions\Programming\If.cs" />
+    <Compile Include="Expressions\Programming\Inc.cs" />
     <Compile Include="Expressions\Programming\LessOrEqual.cs" />
     <Compile Include="Expressions\Programming\LessThan.cs" />
+    <Compile Include="Expressions\Programming\MulAssign.cs" />
     <Compile Include="Expressions\Programming\NotEqual.cs" />
     <Compile Include="Expressions\Programming\Or.cs" />
+    <Compile Include="Expressions\Programming\SubAssign.cs" />
     <Compile Include="Expressions\Programming\While.cs" />
-    <Compile Include="Expressions\Programming\Inc.cs" />
-    <Compile Include="Expressions\Programming\Dec.cs" />
-    <Compile Include="Expressions\Sum.cs" />
-    <Compile Include="Expressions\Mul.cs" />
-    <Compile Include="Expressions\Number.cs" />
-    <Compile Include="Expressions\Pow.cs" />
-    <Compile Include="Expressions\Root.cs" />
-    <Compile Include="Expressions\Sqrt.cs" />
-    <Compile Include="Expressions\Sub.cs" />
+    <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
+    <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Simplify.cs" />
+    <Compile Include="Expressions\Sum.cs" />
+    <Compile Include="ComplexExtensions.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="IDependencyResolver.cs" />
+    <Compile Include="IDifferentiator.cs" />
+    <Compile Include="IExpressionFactory.cs" />
+    <Compile Include="InvalidResultException.cs" />
+    <Compile Include="IParser.cs" />
+    <Compile Include="ISimplifier.cs" />
+    <Compile Include="Differentiator.cs" />
+    <Compile Include="ExpressionFactory.cs" />
+    <Compile Include="LexerException.cs" />
+    <Compile Include="ParserException.cs" />
+    <Compile Include="Expressions\Abs.cs" />
+    <Compile Include="Expressions\Add.cs" />
+    <Compile Include="Expressions\AngleMeasurement.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\And.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\XOr.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Or.cs" />
+    <Compile Include="Expressions\LogicalAndBitwise\Not.cs" />
     <Compile Include="Expressions\Trigonometric\Arccos.cs" />
     <Compile Include="Expressions\Trigonometric\Arccot.cs" />
     <Compile Include="Expressions\Trigonometric\Arccsc.cs" />
     <Compile Include="Expressions\Trigonometric\Arcsec.cs" />
     <Compile Include="Expressions\Trigonometric\Arcsin.cs" />
     <Compile Include="Expressions\Trigonometric\Arctan.cs" />
+    <Compile Include="Expressions\Define.cs" />
+    <Compile Include="Expressions\BinaryExpression.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arcsch.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arsech.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arcoth.cs" />
+    <Compile Include="Expressions\Hyperbolic\Artanh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arcosh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Arsinh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Csch.cs" />
+    <Compile Include="Expressions\Trigonometric\Csc.cs" />
     <Compile Include="Expressions\Trigonometric\Cos.cs" />
     <Compile Include="Expressions\Trigonometric\Cot.cs" />
-    <Compile Include="Expressions\Trigonometric\Csc.cs" />
+    <Compile Include="Expressions\Derivative.cs" />
+    <Compile Include="Expressions\Div.cs" />
+    <Compile Include="Expressions\Exp.cs" />
+    <Compile Include="Expressions\Pow.cs" />
+    <Compile Include="Expressions\Hyperbolic\Cosh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Coth.cs" />
+    <Compile Include="Expressions\Hyperbolic\Sech.cs" />
+    <Compile Include="Expressions\Hyperbolic\Sinh.cs" />
+    <Compile Include="Expressions\Hyperbolic\Tanh.cs" />
+    <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Expressions\Lg.cs" />
+    <Compile Include="Expressions\Ln.cs" />
+    <Compile Include="Expressions\Log.cs" />
+    <Compile Include="Expressions\Mul.cs" />
+    <Compile Include="Expressions\Number.cs" />
+    <Compile Include="Expressions\Root.cs" />
     <Compile Include="Expressions\Trigonometric\Sec.cs" />
     <Compile Include="Expressions\Trigonometric\Sin.cs" />
+    <Compile Include="Expressions\Sqrt.cs" />
+    <Compile Include="Expressions\Sub.cs" />
     <Compile Include="Expressions\Trigonometric\Tan.cs" />
     <Compile Include="Expressions\Trigonometric\TrigonometricExpression.cs" />
     <Compile Include="Expressions\UnaryExpression.cs" />
@@ -181,18 +182,10 @@
     <Compile Include="Expressions\Undefine.cs" />
     <Compile Include="Expressions\UserFunction.cs" />
     <Compile Include="Expressions\Variable.cs" />
-    <Compile Include="Helpers.cs" />
-    <Compile Include="IDependencyResolver.cs" />
-    <Compile Include="IDifferentiator.cs" />
     <Compile Include="ILexer.cs" />
-    <Compile Include="IParser.cs" />
-    <Compile Include="ISimplifier.cs" />
-    <Compile Include="Differentiator.cs" />
-    <Compile Include="MathExtentions.cs" />
+    <Compile Include="MathExtensions.cs" />
     <Compile Include="Lexer.cs" />
-    <Compile Include="LexerException.cs" />
     <Compile Include="Parser.cs" />
-    <Compile Include="ParserException.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Resources\Resource.ru.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -204,6 +197,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.uk.resx</DependentUpon>
     </Compile>
+    <Compile Include="Results\ComplexNumberResult.cs" />
     <Compile Include="Simplifier.cs" />
     <Compile Include="NumeralSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -218,6 +212,7 @@
     <Compile Include="Results\StringResult.cs" />
     <Compile Include="Results\BooleanResult.cs" />
     <Compile Include="Tokens\BooleanToken.cs" />
+    <Compile Include="Tokens\ComplexNumberToken.cs" />
     <Compile Include="Tokens\Functions.cs" />
     <Compile Include="Tokens\FunctionToken.cs" />
     <Compile Include="Tokens\IToken.cs" />
@@ -228,6 +223,20 @@
     <Compile Include="Tokens\SymbolToken.cs" />
     <Compile Include="Tokens\UserFunctionToken.cs" />
     <Compile Include="Tokens\VariableToken.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.uk.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.uk.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE">

@@ -1277,23 +1277,7 @@ namespace xFunc.Tests
 
             Assert.Equal(expected, exp);
         }
-
-        [Fact]
-        public void MagnitudeTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Magnitude, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-            var exp = parser.Parse(tokens);
-            var expected = new Magnitude(new ComplexNumber(new Complex(3, -2)));
-
-            Assert.Equal(expected, exp);
-        }
-
+        
         [Fact]
         public void ConjugateTest()
         {

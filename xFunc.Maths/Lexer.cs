@@ -1107,13 +1107,6 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("magnitude(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Magnitude));
-                        i += 9;
-
-                        continue;
-                    }
                     if (sub.StartsWith("conjugate(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Conjugate));

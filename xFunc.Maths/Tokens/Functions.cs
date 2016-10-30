@@ -255,10 +255,6 @@ namespace xFunc.Maths.Tokens
         /// </summary>
         Phase,
         /// <summary>
-        /// magnitude
-        /// </summary>
-        Magnitude,
-        /// <summary>
         /// conjugate
         /// </summary>
         Conjugate,

@@ -70,7 +70,6 @@
     <Compile Include="Expressions\Maths\ComplexNumbers\ComplexNumberTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ReciprocalTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ConjugateTest.cs" />
-    <Compile Include="Expressions\Maths\ComplexNumbers\MagnitudeTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\PhaseTest.cs" />
     <Compile Include="Expressions\Maths\DelTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ImTest.cs" />

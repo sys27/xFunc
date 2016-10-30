@@ -17,6 +17,7 @@ using xFunc.Maths.Expressions;
 using System.Collections.Generic;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
+using xFunc.Maths.Expressions.Programming;
 
 namespace xFunc.Tests.Expressions.Maths
 {
@@ -42,6 +43,21 @@ namespace xFunc.Tests.Expressions.Maths
             var func = new UserFunction("f", new IExpression[] { new Number(1) }, 1);
 
             Assert.Throws<KeyNotFoundException>(() => func.Execute(functions));
+        }
+
+        [Fact]
+        public void ExecuteRecursiveTest()
+        {
+            var expParams = new ExpressionParameters();
+
+            var exp = new If(new Equal(new Variable("x"), new Number(0)),
+                             new Number(1),
+                             new Mul(new Variable("x"), new UserFunction("f", new[] { new Sub(new Variable("x"), new Number(1)) }, 1)));
+            expParams.Functions.Add(new UserFunction("f", new[] { new Variable("x") }, 1), exp);
+
+            var func = new UserFunction("f", new[] { new Number(4) }, 1);
+
+            Assert.Equal(24.0, func.Execute(expParams));
         }
 
     }

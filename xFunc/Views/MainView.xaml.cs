@@ -215,6 +215,7 @@ namespace xFunc.Views
             trigonometricToolBar.IsExpanded = Settings.Default.TrigonometricExpanded;
             hyperbolicToolBar.IsExpanded = Settings.Default.HyperbolicExpanded;
             matrixToolBar.IsExpanded = Settings.Default.MatrixExpanded;
+            complexNumberToolBar.IsExpanded = Settings.Default.ComplexNumberExpanded;
             bitwiseToolBar.IsExpanded = Settings.Default.BitwiseExpanded;
             progToolBar.IsExpanded = Settings.Default.ProgExpanded;
             constantsMathToolBar.IsExpanded = Settings.Default.ConstantsMathExpanded;
@@ -271,6 +272,7 @@ namespace xFunc.Views
                 Settings.Default.TrigonometricExpanded = trigonometricToolBar.IsExpanded;
                 Settings.Default.HyperbolicExpanded = hyperbolicToolBar.IsExpanded;
                 Settings.Default.MatrixExpanded = matrixToolBar.IsExpanded;
+                Settings.Default.ComplexNumberExpanded = complexNumberToolBar.IsExpanded;
                 Settings.Default.BitwiseExpanded = bitwiseToolBar.IsExpanded;
                 Settings.Default.ProgExpanded = progToolBar.IsExpanded;
                 Settings.Default.ConstantsMathExpanded = constantsMathToolBar.IsExpanded;
@@ -282,7 +284,10 @@ namespace xFunc.Views
                 Settings.Default.StandartMathExpanded = bool.Parse(Settings.Default.Properties["StandartMathExpanded"].DefaultValue.ToString());
                 Settings.Default.TrigonometricExpanded = bool.Parse(Settings.Default.Properties["TrigonometricExpanded"].DefaultValue.ToString());
                 Settings.Default.HyperbolicExpanded = bool.Parse(Settings.Default.Properties["HyperbolicExpanded"].DefaultValue.ToString());
+                Settings.Default.MatrixExpanded = bool.Parse(Settings.Default.Properties["MatrixExpanded"].DefaultValue.ToString());
+                Settings.Default.ComplexNumberExpanded = bool.Parse(Settings.Default.Properties["ComplexNumberExpanded"].DefaultValue.ToString());
                 Settings.Default.BitwiseExpanded = bool.Parse(Settings.Default.Properties["BitwiseExpanded"].DefaultValue.ToString());
+                Settings.Default.ProgExpanded = bool.Parse(Settings.Default.Properties["ProgExpanded"].DefaultValue.ToString());
                 Settings.Default.ConstantsMathExpanded = bool.Parse(Settings.Default.Properties["ConstantsMathExpanded"].DefaultValue.ToString());
                 Settings.Default.AdditionalMathExpanded = bool.Parse(Settings.Default.Properties["AdditionalMathExpanded"].DefaultValue.ToString());
             }

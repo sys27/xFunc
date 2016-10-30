@@ -113,5 +113,8 @@
     <Setting Name="DefaultChartColor" Type="System.Windows.Media.Color" Scope="User">
       <Value Profile="(Default)">#FFFF0000</Value>
     </Setting>
+    <Setting Name="ComplexNumberExpanded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

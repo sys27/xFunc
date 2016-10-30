@@ -765,4 +765,22 @@
   <data name="SettingsDefaultChartColor" xml:space="preserve">
     <value>Колір графіка за замовчуванням:</value>
   </data>
+  <data name="ComplexNumberExpanderHeader" xml:space="preserve">
+    <value>Комплексні числа</value>
+  </data>
+  <data name="ConjugateToolTip" xml:space="preserve">
+    <value>Функція Conjugate. Приклад: conjugate(3+2i).</value>
+  </data>
+  <data name="ImToolTip" xml:space="preserve">
+    <value>Повертає уявну частину комплексного числа. Приклад: im(3+2i).</value>
+  </data>
+  <data name="PhaseToolTip" xml:space="preserve">
+    <value>Функція Phase. Приклад: phase(3+2i).</value>
+  </data>
+  <data name="ReciprocalToolTip" xml:space="preserve">
+    <value>Функція Reciprocal. Приклад: reciprocal(3+2i).</value>
+  </data>
+  <data name="ReToolTip" xml:space="preserve">
+    <value>Повертає дійсну частину комплексного числа. Приклад: re(3+2i).</value>
+  </data>
 </root>

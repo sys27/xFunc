@@ -765,4 +765,22 @@
   <data name="SettingsDefaultChartColor" xml:space="preserve">
     <value>Default chart color:</value>
   </data>
+  <data name="ComplexNumberExpanderHeader" xml:space="preserve">
+    <value>Complex numbers</value>
+  </data>
+  <data name="ConjugateToolTip" xml:space="preserve">
+    <value>The Conjugate function. Example: conjugate(3+2i).</value>
+  </data>
+  <data name="ImToolTip" xml:space="preserve">
+    <value>Returns imaginary part of complex number. Example: im(3+2i).</value>
+  </data>
+  <data name="PhaseToolTip" xml:space="preserve">
+    <value>The Phase function. Example: phase(3+2i).</value>
+  </data>
+  <data name="ReciprocalToolTip" xml:space="preserve">
+    <value>The Reciprocal function. Example: reciprocal(3+2i).</value>
+  </data>
+  <data name="ReToolTip" xml:space="preserve">
+    <value>Returns real part of complex number. Example: re(3+2i).</value>
+  </data>
 </root>

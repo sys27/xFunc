@@ -224,6 +224,38 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(ExpressionResultType.ComplexNumber, sub.ResultType);
         }
 
+        [Fact]
+        public void ResultTypeNumberAllTest()
+        {
+            var exp = new Sub(new Number(1), new UserFunction("f", 1));
+
+            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeComplexNumberAllTest()
+        {
+            var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", 1));
+
+            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeVectorAllTest()
+        {
+            var exp = new Sub(new Vector(1), new UserFunction("f", 1));
+
+            Assert.Equal(ExpressionResultType.Vector, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeMatrixAllTest()
+        {
+            var exp = new Sub(new Matrix(1, 1), new UserFunction("f", 1));
+
+            Assert.Equal(ExpressionResultType.Matrix, exp.ResultType);
+        }
+
     }
 
 }

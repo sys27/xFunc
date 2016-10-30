@@ -166,14 +166,14 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) || m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                if (m_left.ResultType == ExpressionResultType.ComplexNumber || m_right.ResultType == ExpressionResultType.ComplexNumber)
                     return ExpressionResultType.ComplexNumber;
 
                 if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
 
-                if ((m_left.ResultType == ExpressionResultType.Number && m_right.ResultType == ExpressionResultType.Vector) ||
-                    (m_right.ResultType == ExpressionResultType.Number && m_left.ResultType == ExpressionResultType.Vector))
+                if ((m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType == ExpressionResultType.Vector) ||
+                    (m_right.ResultType.HasFlagNI(ExpressionResultType.Number) && m_left.ResultType == ExpressionResultType.Vector))
                     return ExpressionResultType.Vector;
 
                 if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)

@@ -2400,6 +2400,19 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void ComplexFromPolarTest()
+        {
+            var tokens = lexer.Tokenize("10+45°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(10, 45))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void ImTest()
         {
             var tokens = lexer.Tokenize("im(3 - 2i)");

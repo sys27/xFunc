@@ -44,7 +44,7 @@ namespace xFunc.Maths.Results
         /// </returns>
         public override string ToString()
         {
-            return complex.ToString(CultureInfo.InvariantCulture);
+            return $"{complex.Real}{complex.Imaginary.ToString("+#;-#;0")}i";
         }
 
         /// <summary>

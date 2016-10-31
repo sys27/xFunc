@@ -215,7 +215,10 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        /// <value>The value.</value>
+        /// <value>
+        /// The value.
+        /// </value>
+        /// <exception cref="System.ArgumentNullException"><paramref name="value"/> is null.</exception>
         public IExpression Value
         {
             get
@@ -226,8 +229,24 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
+                if ((ValueType & value.ResultType) == ExpressionResultType.None)
+                    throw new ParameterTypeMismatchException(ValueType, value.ResultType);
 
                 this.value = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type of the value.
+        /// </summary>
+        /// <value>
+        /// The type of the value.
+        /// </value>
+        public ExpressionResultType ValueType
+        {
+            get
+            {
+                return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
 

@@ -69,6 +69,54 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
             Assert.False(exp1.Equals(exp2));
         }
 
+        [Fact]
+        public void PositiveNegativeToStringTest()
+        {
+            var complex = new ComplexNumber(3, -2);
+
+            Assert.Equal("3-2i", complex.ToString());
+        }
+
+        [Fact]
+        public void NegativePositiveToStringTest()
+        {
+            var complex = new ComplexNumber(-3, 2);
+
+            Assert.Equal("-3+2i", complex.ToString());
+        }
+
+        [Fact]
+        public void TwoPositiveToStringTest()
+        {
+            var complex = new ComplexNumber(3, 2);
+
+            Assert.Equal("3+2i", complex.ToString());
+        }
+
+        [Fact]
+        public void TwoNegativeToStringTest()
+        {
+            var complex = new ComplexNumber(-3, -2);
+
+            Assert.Equal("-3-2i", complex.ToString());
+        }
+
+        [Fact]
+        public void BinaryToStringTest()
+        {
+            var exp = new Add(new ComplexNumber(3, 2), new ComplexNumber(3, 2));
+
+            Assert.Equal("3+2i + 3+2i", exp.ToString());
+        }
+
+        [Fact]
+        public void AbsToStringTest()
+        {
+            var exp = new Abs(new ComplexNumber(3, 2));
+
+            Assert.Equal("abs(3+2i)", exp.ToString());
+        }
+
     }
 
 }

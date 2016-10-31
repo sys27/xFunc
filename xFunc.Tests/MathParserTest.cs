@@ -251,6 +251,19 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void DefineComplexParserTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new VariableToken("aaa"),
+                new OperationToken(Operations.Assign),
+                new ComplexNumberToken(new Complex(3, 2))
+            };
+
+            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
         public void AssignUserFuncTest()
         {
             var tokens = new List<IToken>
@@ -1277,7 +1290,7 @@ namespace xFunc.Tests
 
             Assert.Equal(expected, exp);
         }
-        
+
         [Fact]
         public void ConjugateTest()
         {

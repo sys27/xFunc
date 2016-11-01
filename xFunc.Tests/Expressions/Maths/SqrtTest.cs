@@ -37,11 +37,19 @@ namespace xFunc.Tests.Expressions.Maths
         {
             var exp = new Sqrt(new Number(-25));
 
-            Assert.Equal(double.NaN, exp.Execute());
+            Assert.Equal(new Complex(0, 5), exp.Execute());
         }
 
         [Fact]
-        public void ExecuteTest2()
+        public void NegativeNumberExecuteTest2()
+        {
+            var exp = new Sqrt(new Number(-1));
+
+            Assert.Equal(new Complex(0, 1), exp.Execute());
+        }
+
+        [Fact]
+        public void ComplexExecuteTest()
         {
             var complex = new Complex(5, 3);
             var exp = new Sqrt(new ComplexNumber(complex));
@@ -50,7 +58,7 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void NegativeNumberExecuteTest2()
+        public void NegativeComplexNumberExecuteTest()
         {
             var complex = new Complex(-25, 13);
             var exp = new Sqrt(new ComplexNumber(complex));

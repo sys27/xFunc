@@ -71,7 +71,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override string ToString()
         {
-            return $"Complex Number: {complex}";
+            return $"Complex Number: {complex.Real}{complex.Imaginary.ToString("+#;-#;+0")}i";
         }
 
         /// <summary>

@@ -102,6 +102,22 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
         }
 
         [Fact]
+        public void OnlyRealPartToStringTest()
+        {
+            var complex = new ComplexNumber(-3, 0);
+
+            Assert.Equal("-3+0i", complex.ToString());
+        }
+
+        [Fact]
+        public void OnlyImaginaryPartToStringTest()
+        {
+            var complex = new ComplexNumber(0, -2);
+
+            Assert.Equal("0-2i", complex.ToString());
+        }
+
+        [Fact]
         public void BinaryToStringTest()
         {
             var exp = new Add(new ComplexNumber(3, 2), new ComplexNumber(3, 2));

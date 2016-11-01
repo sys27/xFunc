@@ -65,10 +65,14 @@ namespace xFunc.Maths.Expressions
         {
             var result = m_argument.Execute(parameters);
 
-            if (ResultType == ExpressionResultType.ComplexNumber)
+            if (result is Complex)
                 return Complex.Sqrt((Complex)result);
 
-            return Math.Sqrt((double)result);
+            var doubleResult = (double)result;
+            if (doubleResult < 0)
+                return new Complex(0, Complex.Sqrt(doubleResult).Imaginary);
+
+            return Math.Sqrt(doubleResult);
         }
 
         /// <summary>
@@ -104,10 +108,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (m_argument.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                    return ExpressionResultType.ComplexNumber;
-
-                return ExpressionResultType.Number;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
             }
         }
 

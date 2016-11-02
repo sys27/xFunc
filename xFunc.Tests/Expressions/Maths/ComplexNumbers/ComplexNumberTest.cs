@@ -106,7 +106,7 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
         {
             var complex = new ComplexNumber(-3, 0);
 
-            Assert.Equal("-3+0i", complex.ToString());
+            Assert.Equal("-3", complex.ToString());
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
         {
             var complex = new ComplexNumber(0, -2);
 
-            Assert.Equal("0-2i", complex.ToString());
+            Assert.Equal("-2i", complex.ToString());
         }
 
         [Fact]

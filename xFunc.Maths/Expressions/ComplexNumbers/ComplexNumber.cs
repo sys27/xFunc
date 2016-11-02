@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Globalization;
 using System.Numerics;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
@@ -106,7 +107,20 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override string ToString()
         {
-            return $"{complex.Real}{complex.Imaginary.ToString("+#;-#;+0")}i";
+            if (complex.Real == 0)
+            {
+                if (complex.Imaginary == 1)
+                    return "i";
+                if (complex.Imaginary == -1)
+                    return "-i";
+
+                return $"{complex.Imaginary.ToString("#;-#;0", CultureInfo.InvariantCulture)}i";
+            }
+
+            if (complex.Imaginary == 0)
+                return complex.Real.ToString(CultureInfo.InvariantCulture);
+
+            return $"{complex.Real}{complex.Imaginary.ToString("+#;-#;+0", CultureInfo.InvariantCulture)}i";
         }
 
         /// <summary>

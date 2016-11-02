@@ -44,7 +44,20 @@ namespace xFunc.Maths.Results
         /// </returns>
         public override string ToString()
         {
-            return $"{complex.Real}{complex.Imaginary.ToString("+#;-#;+0")}i";
+            if (complex.Real == 0)
+            {
+                if (complex.Imaginary == 1)
+                    return "i";
+                if (complex.Imaginary == -1)
+                    return "-i";
+
+                return $"{complex.Imaginary.ToString("#;-#;0", CultureInfo.InvariantCulture)}i";
+            }
+
+            if (complex.Imaginary == 0)
+                return complex.Real.ToString(CultureInfo.InvariantCulture);
+
+            return $"{complex.Real}{complex.Imaginary.ToString("+#;-#;+0", CultureInfo.InvariantCulture)}i";
         }
 
         /// <summary>

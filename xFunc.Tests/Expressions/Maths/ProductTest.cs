@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest1()
         {
-            var sum = new Product(new Variable("i"), new Number(8));
+            var sum = new Product(new Variable("iter"), new Number(8));
 
             Assert.Equal(40320.0, sum.Execute());
         }
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest2()
         {
-            var sum = new Product(new Variable("i"), new Number(4), new Number(8));
+            var sum = new Product(new Variable("iter"), new Number(4), new Number(8));
 
             Assert.Equal(6720.0, sum.Execute());
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest3()
         {
-            var sum = new Product(new Variable("i"), new Number(4), new Number(8), new Number(2));
+            var sum = new Product(new Variable("iter"), new Number(4), new Number(8), new Number(2));
 
             Assert.Equal(192.0, sum.Execute());
         }
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest5()
         {
-            var sum = new Product(new Pow(new Variable("a"), new Variable("i")), new Number(4));
+            var sum = new Product(new Pow(new Variable("a"), new Variable("iter")), new Number(4));
 
             Assert.Equal(1024.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }
@@ -66,7 +66,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest6()
         {
-            var sum = new Product(new Pow(new Variable("a"), new Variable("i")), new Number(2), new Number(5));
+            var sum = new Product(new Pow(new Variable("a"), new Variable("iter")), new Number(2), new Number(5));
 
             Assert.Equal(16384.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }
@@ -74,7 +74,7 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void ExecuteTest7()
         {
-            var sum = new Product(new Pow(new Variable("a"), new Variable("i")), new Number(4), new Number(8), new Number(2));
+            var sum = new Product(new Pow(new Variable("a"), new Variable("iter")), new Number(4), new Number(8), new Number(2));
 
             Assert.Equal(262144.0, sum.Execute(new ParameterCollection() { new Parameter("a", 2) }));
         }

@@ -117,7 +117,7 @@ namespace xFunc.Maths.Expressions
 
         private static string GetVarName(ParameterCollection parameters)
         {
-            const string variable = "i";
+            const string variable = "iter";
             if (!parameters.ContainsKey(variable))
                 return variable;
 

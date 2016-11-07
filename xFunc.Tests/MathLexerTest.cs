@@ -2550,6 +2550,51 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void ComplexPowNumberTest()
+        {
+            var tokens = lexer.Tokenize("3 - 2i ^ 2");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, -2)),
+                new OperationToken(Operations.Exponentiation),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexIPowNumberTest()
+        {
+            var tokens = lexer.Tokenize("i ^ 2");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(0, 1)),
+                new OperationToken(Operations.Exponentiation),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPowComplexTest()
+        {
+            var tokens = lexer.Tokenize("3 - 2i ^ 2 + 3i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(3, -2)),
+                new OperationToken(Operations.Exponentiation),
+                new ComplexNumberToken(new Complex(2, 3))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

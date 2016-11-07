@@ -1481,13 +1481,13 @@ namespace xFunc.Tests
         [Fact]
         public void SumToTest()
         {
-            var tokens = lexer.Tokenize("sum(i, 20)");
+            var tokens = lexer.Tokenize("sum(x, 20)");
 
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(20),
                 new SymbolToken(Symbols.CloseBracket)
@@ -1499,13 +1499,13 @@ namespace xFunc.Tests
         [Fact]
         public void SumFromToTest()
         {
-            var tokens = lexer.Tokenize("sum(i, 2, 20)");
+            var tokens = lexer.Tokenize("sum(x, 2, 20)");
 
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 3),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -1519,13 +1519,13 @@ namespace xFunc.Tests
         [Fact]
         public void SumFromToIncTest()
         {
-            var tokens = lexer.Tokenize("sum(i, 2, 20, 2)");
+            var tokens = lexer.Tokenize("sum(x, 2, 20, 2)");
 
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Sum, 4),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -1565,13 +1565,13 @@ namespace xFunc.Tests
         [Fact]
         public void ProductToTest()
         {
-            var tokens = lexer.Tokenize("product(i, 20)");
+            var tokens = lexer.Tokenize("product(x, 20)");
 
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(20),
                 new SymbolToken(Symbols.CloseBracket)
@@ -1583,13 +1583,13 @@ namespace xFunc.Tests
         [Fact]
         public void ProductFromToTest()
         {
-            var tokens = lexer.Tokenize("product(i, 2, 20)");
+            var tokens = lexer.Tokenize("product(x, 2, 20)");
 
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 3),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -1603,13 +1603,13 @@ namespace xFunc.Tests
         [Fact]
         public void ProductFromToIncTest()
         {
-            var tokens = lexer.Tokenize("product(i, 2, 20, 2)");
+            var tokens = lexer.Tokenize("product(x, 2, 20, 2)");
 
             var expected = new List<IToken>()
             {
                 new FunctionToken(Functions.Product, 4),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(2),
                 new SymbolToken(Symbols.Comma),
@@ -2370,6 +2370,32 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void ComplexOnlyITest()
+        {
+            var tokens = lexer.Tokenize("i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(0, 1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexEmptyImPartTest()
+        {
+            var tokens = lexer.Tokenize("2 + i");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(new Complex(2, 1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void ComplexWithVarTest1()
         {
             var tokens = lexer.Tokenize("x - 2i");
@@ -2491,7 +2517,7 @@ namespace xFunc.Tests
 
             Assert.Equal(expected, tokens.ToList());
         }
-        
+
         [Fact]
         public void ConjugateTest()
         {

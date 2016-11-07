@@ -117,11 +117,11 @@ namespace xFunc.Maths.Expressions
 
         private static string GetVarName(ParameterCollection parameters)
         {
-            const string variable = "i";
+            const string variable = "iter";
             if (!parameters.ContainsKey(variable))
                 return variable;
 
-            for (int i = 1; ; i++)
+            for (int i = 2; ; i++)
             {
                 var localVar = variable + i;
                 if (!parameters.ContainsKey(localVar))

@@ -60,6 +60,15 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
+        public void ExecuteTest6()
+        {
+            var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
+            var expected = new Complex(0, 2);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
         public void ResultTypeNumberNumberTest()
         {
             var exp = new Div(new Number(1), new Number(2));
@@ -96,6 +105,14 @@ namespace xFunc.Tests.Expressions.Maths
 
             Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.LeftType);
             Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, exp.RightType);
+            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberComplexTest()
+        {
+            var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
+
             Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
         }
 

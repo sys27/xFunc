@@ -84,9 +84,13 @@ namespace xFunc.Maths.Expressions
             var sb = new StringBuilder();
 
             sb.Append(function).Append('(');
-            foreach (var item in m_arguments)
-                sb.Append(item).Append(", ");
-            sb.Remove(sb.Length - 2, 2).Append(')');
+            if (m_arguments != null)
+            {
+                foreach (var item in m_arguments)
+                    sb.Append(item).Append(", ");
+                sb.Remove(sb.Length - 2, 2);
+            }
+            sb.Append(')');
 
             return sb.ToString();
         }

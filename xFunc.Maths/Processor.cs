@@ -92,28 +92,6 @@ namespace xFunc.Maths
         public IResult Solve(string function)
         {
             var exp = Parse(function, true);
-
-            if (exp is Define)
-            {
-                var assign = exp as Define;
-                assign.Execute(parameters);
-
-                if (assign.Key is Variable)
-                    return new StringResult(string.Format(Resource.AssignVariable, assign.Key, assign.Value));
-
-                return new StringResult(string.Format(Resource.AssignFunction, assign.Key, assign.Value));
-            }
-            if (exp is Undefine)
-            {
-                var undef = exp as Undefine;
-                undef.Execute(parameters);
-
-                if (undef.Key is Variable)
-                    return new StringResult(string.Format(Resource.UndefineVariable, undef.Key));
-
-                return new StringResult(string.Format(Resource.UndefineFunction, undef.Key));
-            }
-
             var result = exp.Execute(parameters);
             if (result is double)
             {
@@ -136,6 +114,10 @@ namespace xFunc.Maths
             if (result is bool)
             {
                 return new BooleanResult((bool)result);
+            }
+            if (result is string)
+            {
+                return new StringResult((string)result);
             }
             if (result is IExpression)
             {

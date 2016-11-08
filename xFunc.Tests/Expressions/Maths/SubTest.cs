@@ -61,6 +61,15 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
+        public void ExecuteTest6()
+        {
+            var exp = new Sub(new Number(2), new Sqrt(new Number(-9)));
+            var expected = new Complex(2, -3);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
         public void SubTwoVectorsTest()
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
@@ -254,6 +263,14 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Sub(new Matrix(1, 1), new UserFunction("f", 1));
 
             Assert.Equal(ExpressionResultType.Matrix, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeNumberComplexTest()
+        {
+            var exp = new Sub(new Number(2), new Sqrt(new Number(-9)));
+
+            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
         }
 
     }

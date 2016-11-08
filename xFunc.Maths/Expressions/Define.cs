@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Resources;
+using xFunc.Maths.Results;
 
 namespace xFunc.Maths.Expressions
 {
@@ -113,15 +115,15 @@ namespace xFunc.Maths.Expressions
             if (variable != null)
             {
                 parameters.Variables[variable.Name] = value.Execute(parameters);
-            }
-            else
-            {
-                var function = key as UserFunction;
-                if (function != null)
-                    parameters.Functions[function] = value;
+
+                return string.Format(Resource.AssignVariable, key, value);
             }
 
-            return double.NaN;
+            var function = key as UserFunction;
+            if (function != null)
+                parameters.Functions[function] = value;
+
+            return string.Format(Resource.AssignFunction, key, value);
         }
 
         /// <summary>

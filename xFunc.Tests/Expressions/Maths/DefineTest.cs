@@ -33,7 +33,7 @@ namespace xFunc.Tests.Expressions.Maths
             var answer = exp.Execute(parameters);
 
             Assert.Equal(1.0, parameters.Variables["x"]);
-            Assert.Equal(double.NaN, answer);
+            Assert.Equal("The value '1' was assigned to the variable 'x'.", answer);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Maths
             var answer = exp.Execute(expParams);
 
             Assert.Equal(Math.Sin(1), parameters["x"]);
-            Assert.Equal(double.NaN, answer);
+            Assert.Equal("The value 'sin(1)' was assigned to the variable 'x'.", answer);
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Maths
             var answer = exp.Execute(parameters);
 
             Assert.Equal(36.0, parameters.Variables["x"]);
-            Assert.Equal(double.NaN, answer);
+            Assert.Equal("The value '4 * (8 + 1)' was assigned to the variable 'x'.", answer);
         }
 
         [Fact]
@@ -75,14 +75,29 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void DefineFuncTest()
         {
+            var uf = new UserFunction("s", new IExpression[0], 0);
+            var func = new Sin(new Number(1));
+            var exp = new Define(uf, func);
+            var parameters = new ExpressionParameters();
+
+            var result = exp.Execute(parameters);
+
+            Assert.Equal(func, parameters.Functions[uf]);
+            Assert.Equal("The expression 'sin(1)' was assigned to the function 's()'.", result);
+        }
+
+        [Fact]
+        public void DefineFuncWithParamsTest()
+        {
             var uf = new UserFunction("s", 1);
             var func = new Sin(new Variable("x"));
             var exp = new Define(uf, func);
             var parameters = new ExpressionParameters();
 
-            exp.Execute(parameters);
-            
+            var result = exp.Execute(parameters);
+
             Assert.Equal(func, parameters.Functions[uf]);
+            Assert.Equal("The expression 'sin(x)' was assigned to the function 's(x1)'.", result);
         }
 
         [Fact]

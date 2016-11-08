@@ -128,7 +128,7 @@ namespace xFunc.Maths.Expressions
             get
             {
                 if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
-                         (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
+                    (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
                     return ExpressionResultType.ComplexNumber;
 
                 return ExpressionResultType.Number;

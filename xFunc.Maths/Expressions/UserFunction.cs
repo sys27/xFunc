@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Text;
 using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
@@ -97,7 +98,24 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            return base.ToString(function);
+            var sb = new StringBuilder();
+
+            sb.Append(function).Append('(');
+            if (m_arguments != null && m_arguments.Length > 0)
+            {
+                foreach (var item in m_arguments)
+                    sb.Append(item).Append(", ");
+                sb.Remove(sb.Length - 2, 2);
+            }
+            else if (countOfParams > 0)
+            {
+                for (int i = 1; i <= countOfParams; i++)
+                    sb.AppendFormat("x{0}, ", i);
+                sb.Remove(sb.Length - 2, 2);
+            }
+            sb.Append(')');
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -126,7 +144,7 @@ namespace xFunc.Maths.Expressions
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
             return parameters.Functions[this].Execute(expParam);
         }
-        
+
         /// <summary>
         /// Clones this instance.
         /// </summary>

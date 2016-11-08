@@ -36,15 +36,33 @@ namespace xFunc.Tests.Expressions.Maths
         [Fact]
         public void UndefFuncTest()
         {
-            var key1 = new UserFunction("f", 0);
+            var key1 = new UserFunction("f", new IExpression[0], 0);
             var key2 = new UserFunction("f", 1);
 
             var functions = new FunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
 
             var undef = new Undefine(key1);
-            undef.Execute(functions);
+            var result = undef.Execute(functions);
+
             Assert.False(functions.ContainsKey(key1));
             Assert.True(functions.ContainsKey(key2));
+            Assert.Equal("The 'f()' function is removed.", result);
+        }
+
+        [Fact]
+        public void UndefFuncWithParamsTest()
+        {
+            var key1 = new UserFunction("f", new IExpression[0], 0);
+            var key2 = new UserFunction("f", 1);
+
+            var functions = new FunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
+
+            var undef = new Undefine(key2);
+            var result = undef.Execute(functions);
+
+            Assert.True(functions.ContainsKey(key1));
+            Assert.False(functions.ContainsKey(key2));
+            Assert.Equal("The 'f(x1)' function is removed.", result);
         }
 
         [Fact]

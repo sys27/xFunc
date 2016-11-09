@@ -2595,6 +2595,36 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void ModuloTest()
+        {
+            var tokens = lexer.Tokenize("7 % 2");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(7),
+                new OperationToken(Operations.Modulo),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ModuloAsFuncTest()
+        {
+            var tokens = lexer.Tokenize("7 mod 2");
+
+            var expected = new List<IToken>
+            {
+                new NumberToken(7),
+                new OperationToken(Operations.Modulo),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

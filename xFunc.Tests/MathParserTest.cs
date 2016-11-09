@@ -1323,6 +1323,53 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void ModuloTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(7),
+                new OperationToken(Operations.Modulo),
+                new NumberToken(2)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Mod(new Number(7), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ModuloAsFuncTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(7),
+                new OperationToken(Operations.Modulo),
+                new NumberToken(2)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Mod(new Number(7), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ModuloAddTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new NumberToken(7),
+                new OperationToken(Operations.Modulo),
+                new NumberToken(2)
+            };
+            var exp = parser.Parse(tokens);
+            var expected = new Add(new Number(2), new Mod(new Number(7), new Number(2)));
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

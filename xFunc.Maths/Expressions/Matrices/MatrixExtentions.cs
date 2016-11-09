@@ -29,6 +29,17 @@ namespace xFunc.Maths.Expressions.Matrices
     {
 
         /// <summary>
+        /// Calculates the absolute value (norm) of vector.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>Return the absolute value of vector.</returns>
+        public static double Abs(this Vector vector, ExpressionParameters parameters)
+        {
+            return Math.Sqrt(vector.Arguments.Sum(arg => Math.Pow((double)arg.Execute(parameters), 2)));
+        }
+
+        /// <summary>
         /// Adds the <paramref name="right"/> vector to the <paramref name="left"/> vector.
         /// </summary>
         /// <param name="left">The left vector.</param>

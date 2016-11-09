@@ -783,4 +783,7 @@
   <data name="ReToolTip" xml:space="preserve">
     <value>Returns real part of complex number. Example: re(3+2i).</value>
   </data>
+  <data name="ModuleToolTip" xml:space="preserve">
+    <value>The modulo operator. Example: 7 % 2, 7 mod 2.</value>
+  </data>
 </root>

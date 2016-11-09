@@ -37,7 +37,7 @@ namespace xFunc.Maths
         /// </summary>
         public Lexer()
         {
-            notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor" };
+            notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor", "mod" };
             unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=', ',' };
         }
 
@@ -364,6 +364,10 @@ namespace xFunc.Maths
 
                     tokens.Add(new OperationToken(Operations.GreaterThan));
                 }
+                else if (letter == '%')
+                {
+                    tokens.Add(new OperationToken(Operations.Modulo));
+                }
                 else if (char.IsDigit(letter))
                 {
                     int length;
@@ -505,6 +509,13 @@ namespace xFunc.Maths
                     if (sub.StartsWith("abs(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Absolute));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("mod", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new OperationToken(Operations.Modulo));
                         i += 3;
 
                         continue;

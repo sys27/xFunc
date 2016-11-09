@@ -96,6 +96,7 @@ namespace xFunc.Maths.Tokens
                     return 10;
                 case Operations.Multiplication:
                 case Operations.Division:
+                case Operations.Modulo:
                     return 11;
                 case Operations.Exponentiation:
                     return 12;

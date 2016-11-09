@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
@@ -38,6 +39,14 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Abs(new ComplexNumber(4, 2));
 
             Assert.Equal(Complex.Abs(new Complex(4, 2)), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTest3()
+        {
+            var exp = new Abs(new Vector(new IExpression[] { new Number(5), new Number(4), new Number(6), new Number(7) }));
+
+            Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
         }
 
         [Fact]

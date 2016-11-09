@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Numerics;
+using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
@@ -68,6 +69,9 @@ namespace xFunc.Maths.Expressions
             if (result is Complex)
                 return Complex.Abs((Complex)result);
 
+            if (result is Vector)
+                return ((Vector)result).Abs(parameters);
+
             return Math.Abs((double)result);
         }
 
@@ -90,7 +94,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector;
             }
         }
 

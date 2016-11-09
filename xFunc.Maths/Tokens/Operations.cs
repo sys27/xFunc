@@ -51,6 +51,10 @@ namespace xFunc.Maths.Tokens
         /// !
         /// </summary>
         Factorial,
+        /// <summary>
+        /// %, mod
+        /// </summary>
+        Modulo,
 
         /// <summary>
         /// &amp;&amp;

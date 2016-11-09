@@ -105,6 +105,8 @@ namespace xFunc.Maths
                     return new UnaryMinus();
                 case Operations.Factorial:
                     return new Fact();
+                case Operations.Modulo:
+                    return new Mod();
                 case Operations.Assign:
                     return new Define();
                 case Operations.ConditionalAnd:

@@ -389,6 +389,7 @@ limitations under the License. -->
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -489,6 +490,15 @@ limitations under the License. -->
                             </Viewbox>
                             <Button.ToolTip>
                                 <ToolTip Content="{x:Static res:Resource.FloorToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Grid.Row="3" Grid.Column="0" Tag="%" Click="InsertChar_Click">
+                            <Viewbox>
+                                <TextBlock>%</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.ModuleToolTip}" />
                             </Button.ToolTip>
                         </Button>
                     </Grid>

@@ -1204,6 +1204,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The modulo operator. Example: 7 % 2, 7 mod 2..
+        /// </summary>
+        public static string ModuleToolTip {
+            get {
+                return ResourceManager.GetString("ModuleToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &quot;*=&quot; operator. Example: x *= 2..
         /// </summary>
         public static string MulAssignToolTip {

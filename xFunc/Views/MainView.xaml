@@ -767,6 +767,44 @@ limitations under the License. -->
                         </Button>
                     </Grid>
                 </Expander>
+                <Expander x:Name="statisticalToolBar" Header="{x:Static res:Resource.StatisticalExpanderHeader}">
+                    <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Tag="min" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>min(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.MinToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="1" Tag="max" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>max(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.MaxToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Tag="avg" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>avg(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.AvgToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </Expander>
                 <Expander x:Name="complexNumberToolBar" Header="{x:Static res:Resource.ComplexNumberExpanderHeader}">
                     <Grid Margin="0,4,0,2" TextBlock.FontSize="18">
                         <Grid.RowDefinitions>

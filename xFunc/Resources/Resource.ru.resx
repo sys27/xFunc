@@ -786,4 +786,16 @@
   <data name="ModuleToolTip" xml:space="preserve">
     <value>Остаток от деления. Пример: 7 % 2, 7 mod 2.</value>
   </data>
+  <data name="AvgToolTip" xml:space="preserve">
+    <value>Среднее арифметическое. Пример: avg(1, 2, 3).</value>
+  </data>
+  <data name="MaxToolTip" xml:space="preserve">
+    <value>Максимум. Пример: max(1, 2, 3).</value>
+  </data>
+  <data name="MinToolTip" xml:space="preserve">
+    <value>Минимум. Пример: min(1, 2, 3).</value>
+  </data>
+  <data name="StatisticalExpanderHeader" xml:space="preserve">
+    <value>Статистические</value>
+  </data>
 </root>

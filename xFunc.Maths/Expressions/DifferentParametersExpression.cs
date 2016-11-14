@@ -60,6 +60,44 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            var diff = (DifferentParametersExpression)obj;
+
+            if (this.m_arguments == null && diff.m_arguments == null)
+                return true;
+
+            if (this.m_arguments == null || diff.m_arguments == null ||
+                this.m_arguments.Length != diff.m_arguments.Length)
+                return false;
+
+            return this.m_arguments.SequenceEqual(diff.m_arguments);
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return GetHashCode(7951, 8807);
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <param name="first">The first.</param>

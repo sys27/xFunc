@@ -73,27 +73,6 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-                return true;
-
-            if (obj == null || this.GetType() != obj.GetType())
-                return false;
-
-            var vector = (Vector)obj;
-
-            return this.countOfParams == vector.countOfParams &&
-                   this.m_arguments.SequenceEqual(vector.m_arguments);
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

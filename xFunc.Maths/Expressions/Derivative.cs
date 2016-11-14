@@ -54,24 +54,6 @@ namespace xFunc.Maths.Expressions
         public Derivative(IExpression expression, Variable variable) : base(new[] { expression, variable }, 2) { }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-                return true;
-
-            var exp = obj as Derivative;
-            if (exp == null)
-                return false;
-
-            return Expression.Equals(exp.Expression) &&
-                   (countOfParams == 2 && Variable.Equals(exp.Variable));
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

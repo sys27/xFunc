@@ -166,133 +166,141 @@ namespace xFunc.Maths
         /// <returns>An expression.</returns>
         protected virtual IExpression CreateFunction(FunctionToken token)
         {
+            IExpression exp;
+
             switch (token.Function)
             {
                 case Functions.Absolute:
-                    return new Abs();
+                    exp = new Abs(); break;
                 case Functions.Sine:
-                    return new Sin();
+                    exp = new Sin(); break;
                 case Functions.Cosine:
-                    return new Cos();
+                    exp = new Cos(); break;
                 case Functions.Tangent:
-                    return new Tan();
+                    exp = new Tan(); break;
                 case Functions.Cotangent:
-                    return new Cot();
+                    exp = new Cot(); break;
                 case Functions.Secant:
-                    return new Sec();
+                    exp = new Sec(); break;
                 case Functions.Cosecant:
-                    return new Csc();
+                    exp = new Csc(); break;
                 case Functions.Arcsine:
-                    return new Arcsin();
+                    exp = new Arcsin(); break;
                 case Functions.Arccosine:
-                    return new Arccos();
+                    exp = new Arccos(); break;
                 case Functions.Arctangent:
-                    return new Arctan();
+                    exp = new Arctan(); break;
                 case Functions.Arccotangent:
-                    return new Arccot();
+                    exp = new Arccot(); break;
                 case Functions.Arcsecant:
-                    return new Arcsec();
+                    exp = new Arcsec(); break;
                 case Functions.Arccosecant:
-                    return new Arccsc();
+                    exp = new Arccsc(); break;
                 case Functions.Sqrt:
-                    return new Sqrt();
+                    exp = new Sqrt(); break;
                 case Functions.Root:
-                    return new Root();
+                    exp = new Root(); break;
                 case Functions.Ln:
-                    return new Ln();
+                    exp = new Ln(); break;
                 case Functions.Lg:
-                    return new Lg();
+                    exp = new Lg(); break;
                 case Functions.Lb:
-                    return new Lb();
+                    exp = new Lb(); break;
                 case Functions.Log:
-                    return new Log();
+                    exp = new Log(); break;
                 case Functions.Sineh:
-                    return new Sinh();
+                    exp = new Sinh(); break;
                 case Functions.Cosineh:
-                    return new Cosh();
+                    exp = new Cosh(); break;
                 case Functions.Tangenth:
-                    return new Tanh();
+                    exp = new Tanh(); break;
                 case Functions.Cotangenth:
-                    return new Coth();
+                    exp = new Coth(); break;
                 case Functions.Secanth:
-                    return new Sech();
+                    exp = new Sech(); break;
                 case Functions.Cosecanth:
-                    return new Csch();
+                    exp = new Csch(); break;
                 case Functions.Arsineh:
-                    return new Arsinh();
+                    exp = new Arsinh(); break;
                 case Functions.Arcosineh:
-                    return new Arcosh();
+                    exp = new Arcosh(); break;
                 case Functions.Artangenth:
-                    return new Artanh();
+                    exp = new Artanh(); break;
                 case Functions.Arcotangenth:
-                    return new Arcoth();
+                    exp = new Arcoth(); break;
                 case Functions.Arsecanth:
-                    return new Arsech();
+                    exp = new Arsech(); break;
                 case Functions.Arcosecanth:
-                    return new Arcsch();
+                    exp = new Arcsch(); break;
                 case Functions.Exp:
-                    return new Exp();
+                    exp = new Exp(); break;
                 case Functions.GCD:
-                    return new GCD() { ParametersCount = token.CountOfParams };
+                    exp = new GCD(); break;
                 case Functions.LCM:
-                    return new LCM() { ParametersCount = token.CountOfParams };
+                    exp = new LCM(); break;
                 case Functions.Factorial:
-                    return new Fact();
+                    exp = new Fact(); break;
                 case Functions.Sum:
-                    return new Sum() { ParametersCount = token.CountOfParams };
+                    exp = new Sum(); break;
                 case Functions.Product:
-                    return new Product() { ParametersCount = token.CountOfParams };
+                    exp = new Product(); break;
                 case Functions.Round:
-                    return new Round() { ParametersCount = token.CountOfParams };
+                    exp = new Round(); break;
                 case Functions.Floor:
-                    return new Floor();
+                    exp = new Floor(); break;
                 case Functions.Ceil:
-                    return new Ceil();
+                    exp = new Ceil(); break;
                 case Functions.Derivative:
-                    return new Derivative() { ParametersCount = token.CountOfParams };
+                    exp = new Derivative(); break;
                 case Functions.Simplify:
-                    return new Simplify();
+                    exp = new Simplify(); break;
                 case Functions.Del:
-                    return new Del();
+                    exp = new Del(); break;
                 case Functions.Define:
-                    return new Define();
+                    exp = new Define(); break;
                 case Functions.Vector:
-                    return new Vector() { ParametersCount = token.CountOfParams };
+                    exp = new Vector(); break;
                 case Functions.Matrix:
-                    return new Matrix() { ParametersCount = token.CountOfParams };
+                    exp = new Matrix(); break;
                 case Functions.Transpose:
-                    return new Transpose();
+                    exp = new Transpose(); break;
                 case Functions.Determinant:
-                    return new Determinant();
+                    exp = new Determinant(); break;
                 case Functions.Inverse:
-                    return new Inverse();
+                    exp = new Inverse(); break;
                 case Functions.If:
-                    return new If() { ParametersCount = token.CountOfParams };
+                    exp = new If(); break;
                 case Functions.For:
-                    return new For() { ParametersCount = token.CountOfParams };
+                    exp = new For(); break;
                 case Functions.While:
-                    return new While();
+                    exp = new While(); break;
                 case Functions.Undefine:
-                    return new Undefine();
+                    exp = new Undefine(); break;
                 case Functions.Im:
-                    return new Im();
+                    exp = new Im(); break;
                 case Functions.Re:
-                    return new Re();
+                    exp = new Re(); break;
                 case Functions.Phase:
-                    return new Phase();
+                    exp = new Phase(); break;
                 case Functions.Conjugate:
-                    return new Conjugate();
+                    exp = new Conjugate(); break;
                 case Functions.Reciprocal:
-                    return new Reciprocal();
+                    exp = new Reciprocal(); break;
                 case Functions.Min:
-                    return new Min() { ParametersCount = token.CountOfParams };
+                    exp = new Min(); break;
                 case Functions.Max:
-                    return new Max() { ParametersCount = token.CountOfParams };
+                    exp = new Max(); break;
                 case Functions.Avg:
-                    return new Avg() { ParametersCount = token.CountOfParams };
+                    exp = new Avg(); break;
                 default:
-                    return null;
+                    exp = null; break;
             }
+
+            var diff = exp as DifferentParametersExpression;
+            if (diff != null)
+                diff.ParametersCount = token.CountOfParams;
+
+            return exp;
         }
 
         /// <summary>

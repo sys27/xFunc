@@ -1081,6 +1081,27 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("min(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Min));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("max(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Max));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("avg(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Avg));
+                        i += 3;
+
+                        continue;
+                    }
 
                     var isIComplex = letter == 'i';
                     var isDegreeComplex = letter == '°';

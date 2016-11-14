@@ -136,6 +136,9 @@
     <Compile Include="Expressions\Maths\RootTest.cs" />
     <Compile Include="Expressions\Maths\RoundTest.cs" />
     <Compile Include="Expressions\Maths\SqrtTest.cs" />
+    <Compile Include="Expressions\Maths\Statistical\AvgTest.cs" />
+    <Compile Include="Expressions\Maths\Statistical\MaxTest.cs" />
+    <Compile Include="Expressions\Maths\Statistical\MinTest.cs" />
     <Compile Include="Expressions\Maths\SubTest.cs" />
     <Compile Include="Expressions\Maths\SumTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccosTest.cs" />

@@ -21,6 +21,7 @@ using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
 using Xunit;
@@ -1366,6 +1367,63 @@ namespace xFunc.Tests
             };
             var exp = parser.Parse(tokens);
             var expected = new Add(new Number(2), new Mod(new Number(7), new Number(2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void MinTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Min, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Min(new[] { new Number(1), new Number(2) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void MaxTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Max, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Max(new[] { new Number(1), new Number(2) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void AvgTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Avg, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Avg(new[] { new Number(1), new Number(2) }, 2);
 
             Assert.Equal(expected, exp);
         }

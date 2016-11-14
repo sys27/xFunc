@@ -266,7 +266,20 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// The user function
         /// </summary>
-        UserFunction
+        UserFunction,
+
+        /// <summary>
+        /// The Min function
+        /// </summary>
+        Min,
+        /// <summary>
+        /// The Max function
+        /// </summary>
+        Max,
+        /// <summary>
+        /// The Avg function
+        /// </summary>
+        Avg
 
     }
 

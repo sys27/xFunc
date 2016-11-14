@@ -2625,6 +2625,57 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void MinTest()
+        {
+            var tokens = lexer.Tokenize("min(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Min, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void MaxTest()
+        {
+            var tokens = lexer.Tokenize("max(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Max, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void AvgTest()
+        {
+            var tokens = lexer.Tokenize("avg(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Avg, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

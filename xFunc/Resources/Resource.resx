@@ -517,7 +517,7 @@
     <value>"x" raised to the power of "y". Example: 7^4</value>
   </data>
   <data name="ProductToolTip" xml:space="preserve">
-    <value>Product. Example: product(body, from, to, increment, variable)</value>
+    <value>Product. Example: product(x, y, z).</value>
   </data>
   <data name="ProgExpanderHeader" xml:space="preserve">
     <value>Programming</value>
@@ -649,7 +649,7 @@
     <value>The "-=" operator. Example: x -= 2.</value>
   </data>
   <data name="SumToolTip" xml:space="preserve">
-    <value>Summation. Example: sum(body, from, to, increment, variable)</value>
+    <value>Summation. Example: sum(x, y, z).</value>
   </data>
   <data name="TangentToolTip" xml:space="preserve">
     <value>Tangent of a number. Example: tan(90) or tg(90)</value>

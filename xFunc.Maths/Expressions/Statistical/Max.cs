@@ -27,19 +27,35 @@ namespace xFunc.Maths.Expressions.Statistical
     {
 
         internal Max() : base(null, -1) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Max"/> class.
-        /// </summary>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public Max(int countOfParams) : base(countOfParams) { }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Max"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         public Max(IExpression[] arguments, int countOfParams) : base(arguments, countOfParams) { }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(8431, 12107);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return base.ToString("max");
+        }
 
         /// <summary>
         /// Executes this expression.

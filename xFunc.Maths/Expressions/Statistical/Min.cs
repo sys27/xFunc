@@ -31,15 +31,31 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <summary>
         /// Initializes a new instance of the <see cref="Min"/> class.
         /// </summary>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public Min(int countOfParams) : base(countOfParams) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Min"/> class.
-        /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         public Min(IExpression[] arguments, int countOfParams) : base(arguments, countOfParams) { }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(6217, 1301);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return base.ToString("min");
+        }
 
         /// <summary>
         /// Executes this expression.

@@ -79,7 +79,7 @@
     <Compile Include="Expressions\Del.cs" />
     <Compile Include="Expressions\Mod.cs" />
     <Compile Include="Expressions\ParameterTypeMismatchException.cs" />
-    <Compile Include="Expressions\Product.cs" />
+    <Compile Include="Expressions\Statistical\Product.cs" />
     <Compile Include="Expressions\Programming\AddAssign.cs" />
     <Compile Include="Expressions\Programming\And.cs" />
     <Compile Include="Expressions\Programming\Dec.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="Expressions\Statistical\Avg.cs" />
     <Compile Include="Expressions\Statistical\Max.cs" />
     <Compile Include="Expressions\Statistical\Min.cs" />
-    <Compile Include="Expressions\Sum.cs" />
+    <Compile Include="Expressions\Statistical\Sum.cs" />
     <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="IDependencyResolver.cs" />

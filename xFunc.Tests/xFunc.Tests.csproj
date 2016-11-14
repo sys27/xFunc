@@ -114,7 +114,7 @@
     <Compile Include="Expressions\Maths\ModTest.cs" />
     <Compile Include="Expressions\Maths\MulTest.cs" />
     <Compile Include="Expressions\Maths\PowTest.cs" />
-    <Compile Include="Expressions\Maths\ProductTest.cs" />
+    <Compile Include="Expressions\Maths\Statistical\ProductTest.cs" />
     <Compile Include="Expressions\Maths\Programming\AddAssignTest.cs" />
     <Compile Include="Expressions\Maths\Programming\AndTest.cs" />
     <Compile Include="Expressions\Maths\Programming\DecTest.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="Expressions\Maths\Statistical\MaxTest.cs" />
     <Compile Include="Expressions\Maths\Statistical\MinTest.cs" />
     <Compile Include="Expressions\Maths\SubTest.cs" />
-    <Compile Include="Expressions\Maths\SumTest.cs" />
+    <Compile Include="Expressions\Maths\Statistical\SumTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccosTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccotTest.cs" />
     <Compile Include="Expressions\Maths\Trigonometric\ArccscTest.cs" />

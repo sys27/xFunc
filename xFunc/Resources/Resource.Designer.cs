@@ -1411,7 +1411,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Product. Example: product(body, from, to, increment, variable).
+        ///   Looks up a localized string similar to Product. Example: product(x, y, z)..
         /// </summary>
         public static string ProductToolTip {
             get {
@@ -1852,7 +1852,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Summation. Example: sum(body, from, to, increment, variable).
+        ///   Looks up a localized string similar to Summation. Example: sum(x, y, z)..
         /// </summary>
         public static string SumToolTip {
             get {

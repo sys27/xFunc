@@ -517,7 +517,7 @@
     <value>"x" в ступені "y". Приклад: 7^4</value>
   </data>
   <data name="ProductToolTip" xml:space="preserve">
-    <value>Добуток. Приклад: product(body, from, to, increment, variable)</value>
+    <value>Добуток. Приклад: product(x, y, z).</value>
   </data>
   <data name="ProgExpanderHeader" xml:space="preserve">
     <value>Програмування</value>
@@ -649,7 +649,7 @@
     <value>Оператор "-=". Приклад: x -= 2.</value>
   </data>
   <data name="SumToolTip" xml:space="preserve">
-    <value>Сума. Приклад: sum(body, from, to, increment, variable)</value>
+    <value>Сума. Приклад: sum(x, y, z).</value>
   </data>
   <data name="TangentToolTip" xml:space="preserve">
     <value>Тангенс числа. Приклад: tan(90) або tg(90)</value>

@@ -33,7 +33,14 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
-        public Avg(IExpression[] arguments, int countOfParams) : base(arguments, countOfParams) { }
+        public Avg(IExpression[] arguments, int countOfParams)
+            : base(arguments, countOfParams)
+        {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+            if (arguments.Length != countOfParams)
+                throw new ArgumentException();
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.

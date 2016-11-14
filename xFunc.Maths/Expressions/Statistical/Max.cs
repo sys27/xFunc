@@ -27,13 +27,20 @@ namespace xFunc.Maths.Expressions.Statistical
     {
 
         internal Max() : base(null, -1) { }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Max"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
-        public Max(IExpression[] arguments, int countOfParams) : base(arguments, countOfParams) { }
+        public Max(IExpression[] arguments, int countOfParams)
+            : base(arguments, countOfParams)
+        {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+            if (arguments.Length != countOfParams)
+                throw new ArgumentException();
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.

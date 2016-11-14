@@ -19,6 +19,7 @@ using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
 
@@ -283,6 +284,12 @@ namespace xFunc.Maths
                     return new Conjugate();
                 case Functions.Reciprocal:
                     return new Reciprocal();
+                case Functions.Min:
+                    return new Min() { ParametersCount = token.CountOfParams };
+                case Functions.Max:
+                    return new Max() { ParametersCount = token.CountOfParams };
+                case Functions.Avg:
+                    return new Avg() { ParametersCount = token.CountOfParams };
                 default:
                     return null;
             }

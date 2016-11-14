@@ -100,6 +100,9 @@
     <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Simplify.cs" />
+    <Compile Include="Expressions\Statistical\Avg.cs" />
+    <Compile Include="Expressions\Statistical\Max.cs" />
+    <Compile Include="Expressions\Statistical\Min.cs" />
     <Compile Include="Expressions\Sum.cs" />
     <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Helpers.cs" />

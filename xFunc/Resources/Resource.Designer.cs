@@ -421,6 +421,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Avg function. Example: avg(1, 2, 3)..
+        /// </summary>
+        public static string AvgToolTip {
+            get {
+                return ResourceManager.GetString("AvgToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitwise &amp; Logical.
         /// </summary>
         public static string BitwiseExpanderHeader {
@@ -1204,6 +1213,24 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Max function. Example: max(1, 2, 3)..
+        /// </summary>
+        public static string MaxToolTip {
+            get {
+                return ResourceManager.GetString("MaxToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Min function. Example: min(1, 2, 3)..
+        /// </summary>
+        public static string MinToolTip {
+            get {
+                return ResourceManager.GetString("MinToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The modulo operator. Example: 7 % 2, 7 mod 2..
         /// </summary>
         public static string ModuleToolTip {
@@ -1803,6 +1830,15 @@ namespace xFunc.Resources {
         public static string StandartExpanderHeader {
             get {
                 return ResourceManager.GetString("StandartExpanderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistical.
+        /// </summary>
+        public static string StatisticalExpanderHeader {
+            get {
+                return ResourceManager.GetString("StatisticalExpanderHeader", resourceCulture);
             }
         }
         

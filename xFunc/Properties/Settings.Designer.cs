@@ -477,5 +477,17 @@ namespace xFunc.Properties {
                 this["ComplexNumberExpanded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StatisticalExpanded {
+            get {
+                return ((bool)(this["StatisticalExpanded"]));
+            }
+            set {
+                this["StatisticalExpanded"] = value;
+            }
+        }
     }
 }

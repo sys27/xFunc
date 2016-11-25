@@ -1102,10 +1102,14 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (letter == 'i')
+                    {
+                        tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));
+                        i++;
 
-                    var isIComplex = letter == 'i';
-                    var isDegreeComplex = letter == '°';
-                    if (isIComplex || isDegreeComplex)
+                        continue;
+                    }
+                    if (letter == '°')
                     {
                         var realPart = 0.0;
                         var imaginaryPart = 1.0;
@@ -1161,10 +1165,7 @@ namespace xFunc.Maths
                             }
                         }
 
-                        if (isDegreeComplex)
-                            tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(realPart, imaginaryPart)));
-                        else
-                            tokens.Add(new ComplexNumberToken(new Complex(realPart, imaginaryPart)));
+                        tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(realPart, imaginaryPart)));
 
                         i++;
                         continue;

@@ -2298,7 +2298,11 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(3, 2))
+                new NumberToken(3),
+                new OperationToken(Operations.Addition),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2311,7 +2315,11 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(3, -2))
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2324,7 +2332,12 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(-3, -2))
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2337,7 +2350,11 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(3, 0))
+                new NumberToken(3),
+                new OperationToken(Operations.Addition),
+                new NumberToken(0),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2350,7 +2367,9 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(0, 2))
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2363,7 +2382,10 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(0, -2))
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2376,7 +2398,7 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(0, 1))
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2389,7 +2411,9 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(2, 1))
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2404,7 +2428,9 @@ namespace xFunc.Tests
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Subtraction),
-                new ComplexNumberToken(new Complex(0, 2))
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2419,7 +2445,11 @@ namespace xFunc.Tests
             {
                 new VariableToken("x"),
                 new OperationToken(Operations.Addition),
-                new ComplexNumberToken(new Complex(3, -2))
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2447,7 +2477,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Im, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2463,7 +2497,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Im, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2479,7 +2517,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Re, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2495,7 +2537,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Re, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2511,7 +2557,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Phase, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2527,7 +2577,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Conjugate, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2543,7 +2597,11 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Reciprocal, 1),
                 new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
@@ -2557,7 +2615,11 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new OperationToken(Operations.Exponentiation),
                 new NumberToken(2)
             };
@@ -2587,9 +2649,17 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(new Complex(3, -2)),
+                new NumberToken(3),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
                 new OperationToken(Operations.Exponentiation),
-                new ComplexNumberToken(new Complex(2, 3))
+                new NumberToken(2),
+                new OperationToken(Operations.Addition),
+                new NumberToken(3),
+                new OperationToken(Operations.Multiplication),
+                new ComplexNumberToken(Complex.ImaginaryOne),
             };
 
             Assert.Equal(expected, tokens.ToList());

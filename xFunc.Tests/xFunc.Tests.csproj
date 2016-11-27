@@ -161,6 +161,11 @@
     <Compile Include="MathParameterCollectionTest.cs" />
     <Compile Include="MathParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\BooleanResultTest.cs" />
+    <Compile Include="Results\ComplexNumberResultTest.cs" />
+    <Compile Include="Results\NumberResultTest.cs" />
+    <Compile Include="Results\ExpressionResultTest.cs" />
+    <Compile Include="Results\StringResultTest.cs" />
     <Compile Include="SimplifierTest.cs" />
     <Compile Include="Tokens\BooleanTokenTest.cs" />
     <Compile Include="Tokens\UserFunctionTokenTest.cs" />

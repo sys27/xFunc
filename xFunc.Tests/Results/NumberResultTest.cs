@@ -13,39 +13,37 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Numerics;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Results;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
+namespace xFunc.Tests.Results
 {
 
-    public class ImTest
+    public class NumberResultTest
     {
 
         [Fact]
-        public void ExecuteTest1()
+        public void ResultTest()
         {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Im(new ComplexNumber(complex));
+            var result = new NumberResult(10.2);
 
-            Assert.Equal(complex.Imaginary, exp.Execute());
+            Assert.Equal(10.2, result.Result);
         }
 
         [Fact]
-        public void ImNumberTest()
+        public void IResultTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Im(new Number(2)));
+            var result = new NumberResult(10.2) as IResult;
+
+            Assert.Equal(10.2, result.Result);
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Im(new ComplexNumber(complex));
+            var result = new NumberResult(10.2);
 
-            Assert.Equal("im(3.1+2.5i)", exp.ToString());
+            Assert.Equal("10.2", result.ToString());
         }
 
     }

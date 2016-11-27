@@ -2746,6 +2746,56 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void DelTest()
+        {
+            var tokens = lexer.Tokenize("del(2x + 3y + 4z)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Del, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(3),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("y"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(4),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("z"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void NablaTest()
+        {
+            var tokens = lexer.Tokenize("nabla(2x + 3y + 4z)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Del, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(3),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("y"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(4),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("z"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

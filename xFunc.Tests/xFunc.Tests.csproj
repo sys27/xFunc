@@ -162,6 +162,14 @@
     <Compile Include="MathParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimplifierTest.cs" />
+    <Compile Include="Tokens\BooleanTokenTest.cs" />
+    <Compile Include="Tokens\UserFunctionTokenTest.cs" />
+    <Compile Include="Tokens\FunctionTokenTest.cs" />
+    <Compile Include="Tokens\ComplexNumberTokenTest.cs" />
+    <Compile Include="Tokens\OperationTokenTest.cs" />
+    <Compile Include="Tokens\NumberTokenTest.cs" />
+    <Compile Include="Tokens\VariableTokenTest.cs" />
+    <Compile Include="Tokens\SymbolTokenTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Globalization;
 
 namespace xFunc.Maths.Tokens
 {
@@ -72,7 +73,7 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Number: {number}";
+            return $"Number: {number.ToString(CultureInfo.InvariantCulture)}";
         }
 
         /// <summary>

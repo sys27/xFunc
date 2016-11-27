@@ -2659,10 +2659,107 @@ namespace xFunc.Tests
                 new OperationToken(Operations.Addition),
                 new NumberToken(3),
                 new OperationToken(Operations.Multiplication),
-                new ComplexNumberToken(Complex.ImaginaryOne),
+                new ComplexNumberToken(Complex.ImaginaryOne)
             };
 
             Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarPosPosTest()
+        {
+            var tokens = lexer.Tokenize("2.3 + 7.1°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, 7.1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarPosNegTest()
+        {
+            var tokens = lexer.Tokenize("2.3 - 7.1°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, -7.1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarNegNegTest()
+        {
+            var tokens = lexer.Tokenize("-2.3 - 7.1°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(-2.3, -7.1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarPhaseTest()
+        {
+            var tokens = lexer.Tokenize("7.1°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(0, 7.1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarNegPhaseTest()
+        {
+            var tokens = lexer.Tokenize("-7.1°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(0, -7.1))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarMagnitudeTest()
+        {
+            var tokens = lexer.Tokenize("2.3 + 0°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, 0))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarNegMagnitudeTest()
+        {
+            var tokens = lexer.Tokenize("-2.3 + 0°");
+
+            var expected = new List<IToken>
+            {
+                new ComplexNumberToken(Complex.FromPolarCoordinates(-2.3, 0))
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarInvalidTest()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("x°"));
         }
 
         [Fact]

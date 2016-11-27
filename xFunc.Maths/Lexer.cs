@@ -1111,61 +1111,54 @@ namespace xFunc.Maths
                     }
                     if (letter == '°')
                     {
-                        var realPart = 0.0;
-                        var imaginaryPart = 1.0;
+                        var magnitude = 0.0;
+                        var phase = 1.0;
+                        
+                        var phaseToken = tokens.LastOrDefault() as NumberToken;
+                        if (phaseToken == null)
+                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
 
-                        var mulToken = tokens.LastOrDefault() as OperationToken;
-                        if (mulToken != null && mulToken.Operation == Operations.Multiplication)
-                            tokens.Remove(mulToken);
-
-                        // imaginary part
-                        var imaginaryToken = tokens.LastOrDefault() as NumberToken;
-                        if (imaginaryToken != null)
-                        {
-                            imaginaryPart = imaginaryToken.Number;
-
-                            tokens.Remove(imaginaryToken);
-                        }
+                        phase = phaseToken.Number;
+                        tokens.Remove(phaseToken);
 
                         // binary +, - or unary -
                         var operationToken = tokens.LastOrDefault() as OperationToken;
                         if (operationToken != null)
                         {
-                            if (tokens.Count >= 2 &&
-                                (operationToken.Operation == Operations.Addition || operationToken.Operation == Operations.Subtraction))
+                            if (tokens.Count >= 2 && (operationToken.Operation == Operations.Addition || operationToken.Operation == Operations.Subtraction))
                             {
-                                var realToken = tokens[tokens.Count - 2] as NumberToken;
-                                if (realToken != null)
+                                var magnitudeToken = tokens[tokens.Count - 2] as NumberToken;
+                                if (magnitudeToken != null)
                                 {
-                                    realPart = realToken.Number;
+                                    magnitude = magnitudeToken.Number;
 
                                     if (operationToken.Operation == Operations.Subtraction)
-                                        imaginaryPart = -imaginaryPart;
+                                        phase = -phase;
 
                                     if (tokens.Count >= 3)
                                     {
                                         var unaryRealToken = tokens[tokens.Count - 3] as OperationToken;
                                         if (unaryRealToken != null && unaryRealToken.Operation == Operations.UnaryMinus)
                                         {
-                                            realPart = -realPart;
+                                            magnitude = -magnitude;
 
                                             tokens.Remove(unaryRealToken);
                                         }
                                     }
 
                                     tokens.Remove(operationToken);
-                                    tokens.Remove(realToken);
+                                    tokens.Remove(magnitudeToken);
                                 }
                             }
                             else if (operationToken.Operation == Operations.UnaryMinus)
                             {
-                                imaginaryPart = -imaginaryPart;
+                                phase = -phase;
 
                                 tokens.Remove(operationToken);
                             }
                         }
 
-                        tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(realPart, imaginaryPart)));
+                        tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
 
                         i++;
                         continue;

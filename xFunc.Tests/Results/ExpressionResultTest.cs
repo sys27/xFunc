@@ -13,39 +13,42 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Numerics;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Results;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
+namespace xFunc.Tests.Results
 {
 
-    public class ImTest
+    public class ExpressionResultTest
     {
 
         [Fact]
-        public void ExecuteTest1()
+        public void ResultTest()
         {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Im(new ComplexNumber(complex));
+            var exp = new Sin(new Variable("x"));
+            var result = new ExpressionResult(exp);
 
-            Assert.Equal(complex.Imaginary, exp.Execute());
+            Assert.Equal(exp, result.Result);
         }
 
         [Fact]
-        public void ImNumberTest()
+        public void IResultTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Im(new Number(2)));
+            var exp = new Sin(new Variable("x"));
+            var result = new ExpressionResult(exp) as IResult;
+
+            Assert.Equal(exp, result.Result);
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Im(new ComplexNumber(complex));
+            var exp = new Sin(new Variable("x"));
+            var result = new ExpressionResult(exp);
 
-            Assert.Equal("im(3.1+2.5i)", exp.ToString());
+            Assert.Equal("sin(x)", result.ToString());
         }
 
     }

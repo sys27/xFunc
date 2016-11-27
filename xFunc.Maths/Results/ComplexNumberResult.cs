@@ -51,13 +51,16 @@ namespace xFunc.Maths.Results
                 if (complex.Imaginary == -1)
                     return "-i";
 
-                return $"{complex.Imaginary.ToString("#;-#;0", CultureInfo.InvariantCulture)}i";
+                return $"{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
             }
 
             if (complex.Imaginary == 0)
-                return complex.Real.ToString(CultureInfo.InvariantCulture);
+                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
 
-            return $"{complex.Real}{complex.Imaginary.ToString("+#;-#;+0", CultureInfo.InvariantCulture)}i";
+            if (complex.Imaginary > 0)
+                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+
+            return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
         }
 
         /// <summary>

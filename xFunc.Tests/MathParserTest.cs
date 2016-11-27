@@ -1428,6 +1428,33 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void DelTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Del, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("x"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(3),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("y"),
+                new OperationToken(Operations.Addition),
+                new NumberToken(4),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("z"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x")), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

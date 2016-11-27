@@ -220,11 +220,8 @@ namespace xFunc.Maths.Expressions.Collections
                 throw new ArgumentException(Resource.ConstError);
 
             collection.Add(param);
-#if PORTABLE
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, param, collection.Count - 1));
-#else
+
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, param));
-#endif
         }
 
         /// <summary>
@@ -260,11 +257,8 @@ namespace xFunc.Maths.Expressions.Collections
                 throw new ArgumentException(Resource.ConstError);
 
             collection.Remove(param);
-#if PORTABLE
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param, collection.Count));
-#else
+
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, param));
-#endif
         }
 
         /// <summary>

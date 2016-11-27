@@ -16,9 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-#if !PORTABLE
 using System.Runtime.Serialization;
-#endif
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
@@ -27,9 +25,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// <summary>
     /// Strongly typed dictionaty that contains user-defined functions.
     /// </summary>
-#if !PORTABLE
     [Serializable]
-#endif
     public class FunctionCollection : Dictionary<UserFunction, IExpression>, INotifyCollectionChanged
     {
 
@@ -43,14 +39,12 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         public FunctionCollection() { }
 
-#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionCollection"/> class.
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
         protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
-#endif
 
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> with the specified key.
@@ -90,11 +84,8 @@ namespace xFunc.Maths.Expressions.Collections
         public new void Add(UserFunction key, IExpression value)
         {
             base.Add(key, value);
-#if PORTABLE
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key, Count - 1));
-#else
+
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, key));
-#endif
         }
 
         /// <summary>
@@ -104,11 +95,7 @@ namespace xFunc.Maths.Expressions.Collections
         public new void Remove(UserFunction key)
         {
             if (base.Remove(key))
-#if PORTABLE
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key, Count));
-#else
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key));
-#endif
         }
 
         /// <summary>

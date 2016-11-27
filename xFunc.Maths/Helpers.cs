@@ -58,11 +58,7 @@ namespace xFunc.Maths
         /// <returns>A collection of parameters.</returns>
         public static ParameterCollection GetParameters(IEnumerable<IToken> tokens)
         {
-#if PORTABLE
-            var c = new List<Parameter>();
-#else
             var c = new SortedSet<Parameter>();
-#endif
 
             foreach (var token in tokens)
             {
@@ -70,9 +66,6 @@ namespace xFunc.Maths
                 if (@var != null)
                     c.Add(new Parameter(@var.Variable, false));
             }
-#if PORTABLE
-            c.Sort();
-#endif
 
             return new ParameterCollection(c, false);
         }

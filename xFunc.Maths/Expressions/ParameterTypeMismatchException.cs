@@ -22,9 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents an exception when the type of the actual argument does not match the expected parameter type.
     /// </summary>
-#if !PORTABLE
     [Serializable]
-#endif
     public class ParameterTypeMismatchException : Exception
     {
 
@@ -60,8 +58,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
         public ParameterTypeMismatchException(string message, Exception inner) : base(message, inner) { }
-
-#if !PORTABLE
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterTypeMismatchException"/> class.
         /// </summary>
@@ -69,7 +66,6 @@ namespace xFunc.Maths.Expressions
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected ParameterTypeMismatchException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
-#endif
 
         /// <summary>
         /// Gets the expected parameter type.

@@ -68,17 +68,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             var arg = m_argument.Execute(parameters);
 
-#if PORTABLE            
-            if (arg is bool)
-                return !(bool)arg;
-            else
-                return (double)(~(int)Math.Round((double)arg));
-#else
             if (arg is bool)
                 return !(bool)arg;
             else
                 return (double)(~(int)Math.Round((double)arg, MidpointRounding.AwayFromZero));
-#endif
         }
 
         /// <summary>

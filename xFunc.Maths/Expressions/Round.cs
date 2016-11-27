@@ -31,7 +31,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         public Round(IExpression argument) :
-            this(new[] { argument }, 1) { }
+            this(new[] { argument }, 1)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
@@ -39,7 +40,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
         public Round(IExpression argument, IExpression digits) :
-            this(new[] { argument, digits }, 2) { }
+            this(new[] { argument, digits }, 2)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
@@ -92,11 +94,7 @@ namespace xFunc.Maths.Expressions
             var arg = (double)Argument.Execute(parameters);
             var digits = Digits != null ? (int)(double)Digits.Execute(parameters) : 0;
 
-#if PORTABLE
-            return Math.Round(arg, digits);
-#else
             return Math.Round(arg, digits, MidpointRounding.AwayFromZero);
-#endif
         }
 
         /// <summary>

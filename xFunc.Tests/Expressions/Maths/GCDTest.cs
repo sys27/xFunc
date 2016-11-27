@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class GCDTest
     {
 
@@ -47,6 +47,19 @@ namespace xFunc.Tests.Expressions.Maths
 
             Assert.Equal(gcd, num1.Parent);
             Assert.Equal(gcd, num2.Parent);
+        }
+
+        [Fact]
+        public void NullArgTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new GCD(null, 0));
+        }
+
+
+        [Fact]
+        public void ArgCountTest()
+        {
+            Assert.Throws<ArgumentException>(() => new GCD(new IExpression[] { new Number(1) }, 0));
         }
 
     }

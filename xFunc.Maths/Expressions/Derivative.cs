@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions
             if (differentiator == null)
                 throw new ArgumentNullException(nameof(differentiator));
 
-            return differentiator.Differentiate(this, Variable);
+            return differentiator.Differentiate(this, Variable, parameters);
         }
 
         /// <summary>

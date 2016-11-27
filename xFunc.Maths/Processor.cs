@@ -104,13 +104,6 @@ namespace xFunc.Maths
             {
                 return new ComplexNumberResult((Complex)result);
             }
-            if (result is int)
-            {
-                if (numeralSystem == NumeralSystem.Decimal)
-                    return new NumberResult((int)result);
-
-                return new StringResult(MathExtensions.ToNewBase((int)result, numeralSystem));
-            }
             if (result is bool)
             {
                 return new BooleanResult((bool)result);

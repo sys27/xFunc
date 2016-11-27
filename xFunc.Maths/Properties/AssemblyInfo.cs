@@ -9,9 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-#if !PORTABLE
 [assembly: ComVisible(false)]
 [assembly: Guid("cab94f81-2f6d-40bd-8a94-272845642538")]
-#endif
 
 [assembly: CLSCompliant(true)]

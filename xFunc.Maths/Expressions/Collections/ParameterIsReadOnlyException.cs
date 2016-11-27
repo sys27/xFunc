@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-#if !PORTABLE
 using System.Runtime.Serialization;
-#endif
 
 namespace xFunc.Maths.Expressions.Collections
 {
@@ -23,9 +21,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// <summary>
     /// Trying to change a read-only variable.
     /// </summary>
-#if !PORTABLE
     [Serializable]
-#endif
     public class ParameterIsReadOnlyException : Exception
     {
 
@@ -48,7 +44,6 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="inner">The inner.</param>
         public ParameterIsReadOnlyException(string message, Exception inner) : base(message, inner) { }
 
-#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterIsReadOnlyException"/> class.
         /// </summary>
@@ -56,7 +51,6 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected ParameterIsReadOnlyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
-#endif
 
     }
 

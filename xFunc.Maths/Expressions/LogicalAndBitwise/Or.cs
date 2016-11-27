@@ -70,17 +70,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             var left = m_left.Execute(parameters);
             var right = m_right.Execute(parameters);
 
-#if PORTABLE
-            if (left is bool && right is bool)
-                return (bool)left | (bool)right;
-            else
-                return (double)((int)Math.Round((double)left) | (int)Math.Round((double)right));
-#else
             if (left is bool && right is bool)
                 return (bool)left | (bool)right;
             else
                 return (double)((int)Math.Round((double)left, MidpointRounding.AwayFromZero) | (int)Math.Round((double)right, MidpointRounding.AwayFromZero));
-#endif
         }
 
         /// <summary>

@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-#if !PORTABLE
 using System.Runtime.Serialization;
-#endif
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -23,9 +21,7 @@ namespace xFunc.Maths.Expressions.Matrices
     /// <summary>
     /// Thrown in matrix building.
     /// </summary>
-#if !PORTABLE
     [Serializable]
-#endif
     public class MatrixIsInvalidException : Exception
     {
 
@@ -46,8 +42,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="message">A <see cref="String"/> that describes the error.</param>
         /// <param name="inner">The exception that is the cause of the current exception.</param>
         public MatrixIsInvalidException(string message, Exception inner) : base(message, inner) { }
-
-#if !PORTABLE
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
         /// </summary>
@@ -55,7 +50,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="context">The contextual information about the source or destination.</param>
         protected MatrixIsInvalidException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
-#endif
 
     }
 

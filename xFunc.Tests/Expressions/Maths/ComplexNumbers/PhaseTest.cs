@@ -39,6 +39,15 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
             Assert.Throws<ParameterTypeMismatchException>(() => new Phase(new Number(2)));
         }
 
+        [Fact]
+        public void ToStringTest()
+        {
+            var complex = new Complex(3.1, 2.5);
+            var exp = new Phase(new ComplexNumber(complex));
+
+            Assert.Equal("phase(3.1+2.5i)", exp.ToString());
+        }
+
     }
 
 }

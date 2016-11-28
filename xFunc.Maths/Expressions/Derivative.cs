@@ -47,11 +47,25 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Derivative"/> class.
+        /// Initializes a new instance of the <see cref="Derivative" /> class.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        public Derivative(IExpression expression) : base(new[] { expression }, 1) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Derivative" /> class.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         public Derivative(IExpression expression, Variable variable) : base(new[] { expression, variable }, 2) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Derivative" /> class.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="variable">The variable.</param>
+        /// <param name="point">The point of derivation.</param>
+        public Derivative(IExpression expression, Variable variable, Number point) : base(new[] { expression, variable, point }, 3) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -70,10 +84,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (countOfParams == 1)
-                return $"deriv({Expression})";
-
-            return $"deriv({Expression}, {Variable})";
+            return base.ToString("deriv");
         }
 
         /// <summary>
@@ -89,7 +100,21 @@ namespace xFunc.Maths.Expressions
             if (differentiator == null)
                 throw new ArgumentNullException(nameof(differentiator));
 
-            return differentiator.Differentiate(this, Variable, parameters);
+            var variable = this.Variable;
+            var diff = differentiator.Differentiate(this, Variable, parameters);
+
+            var point = this.DerivativePoint;
+            if (variable != null && point != null)
+            {
+                if (parameters == null)
+                    parameters = new ExpressionParameters();
+
+                parameters.Variables[variable.Name] = point.Value;
+
+                return diff.Execute(parameters);
+            }
+
+            return diff;
         }
 
         /// <summary>
@@ -133,7 +158,21 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return countOfParams == 2 ? (Variable)m_arguments[1] : null;
+                return countOfParams >= 2 ? (Variable)m_arguments[1] : null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the derivative point.
+        /// </summary>
+        /// <value>
+        /// The derivative point.
+        /// </value>
+        public Number DerivativePoint
+        {
+            get
+            {
+                return countOfParams >= 3 ? (Number)m_arguments[2] : null;
             }
         }
 
@@ -151,13 +190,15 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value != null && value.Length == 2 && !(value[1] is Variable))
+                if (value != null &&
+                    ((value.Length >= 2 && !(value[1] is Variable)) ||
+                     (value.Length >= 3 && !(value[2] is Number))))
                     throw new ArgumentException(Resource.InvalidExpression);
 
                 base.Arguments = value;
             }
         }
-        
+
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>
@@ -182,7 +223,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return 2;
+                return 3;
             }
         }
 
@@ -196,6 +237,9 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
+                if (countOfParams == 3)
+                    return ExpressionResultType.Number;
+
                 return ExpressionResultType.Expression;
             }
         }

@@ -709,7 +709,7 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("cot(") || sub.StartsWith("ctg(", StringComparison.Ordinal))
+                    if (sub.StartsWith("cot(", StringComparison.Ordinal) || sub.StartsWith("ctg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Cotangent));
                         i += 3;
@@ -765,7 +765,8 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("arccot(") || sub.StartsWith("arcctg(", StringComparison.Ordinal))
+                    if (sub.StartsWith("arccot(", StringComparison.Ordinal) || 
+                        sub.StartsWith("arcctg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccotangent));
                         i += 6;
@@ -927,14 +928,17 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("gcd(") || sub.StartsWith("gcf(") || sub.StartsWith("hcf(", StringComparison.Ordinal))
+                    if (sub.StartsWith("gcd(", StringComparison.Ordinal) || 
+                        sub.StartsWith("gcf(", StringComparison.Ordinal) || 
+                        sub.StartsWith("hcf(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.GCD));
                         i += 3;
 
                         continue;
                     }
-                    if (sub.StartsWith("lcm(") || sub.StartsWith("scm(", StringComparison.Ordinal))
+                    if (sub.StartsWith("lcm(",  StringComparison.Ordinal) || 
+                        sub.StartsWith("scm(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.LCM));
                         i += 3;

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Numerics;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
@@ -69,6 +70,19 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public override object Execute(ExpressionParameters parameters)
         {
             return Complex.Reciprocal((Complex)m_argument.Execute(parameters));
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

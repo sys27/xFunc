@@ -15,6 +15,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -152,6 +153,19 @@ namespace xFunc.Maths.Expressions.Matrices
         public override object Execute(ExpressionParameters parameters)
         {
             return new Matrix(CalculateMatrix(parameters));
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

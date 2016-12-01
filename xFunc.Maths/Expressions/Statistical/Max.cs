@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Linq;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
@@ -87,6 +88,19 @@ namespace xFunc.Maths.Expressions.Statistical
             {
                 return this.m_arguments.Max(exp => (double)exp.Execute(parameters));
             }
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

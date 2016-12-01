@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Numerics;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
@@ -74,6 +75,19 @@ namespace xFunc.Maths.Expressions
                 return Complex.Negate(result is Complex ? (Complex)result : (double)result);
 
             return -(double)result;
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

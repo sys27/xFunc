@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
@@ -57,6 +58,19 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public object Execute(ExpressionParameters parameters)
         {
             return value;
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

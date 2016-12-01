@@ -15,6 +15,7 @@
 using System;
 using System.Globalization;
 using System.Numerics;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
@@ -148,6 +149,19 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public object Execute(ExpressionParameters parameters)
         {
             return complex;
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

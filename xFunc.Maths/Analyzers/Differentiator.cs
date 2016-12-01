@@ -25,15 +25,11 @@ namespace xFunc.Maths.Analyzers
 
         private Variable variable;
         private ExpressionParameters parameters;
-        private IAnalyzer<IExpression> simplifier;
 
-        public Differentiator():this(new Simplifier()) { }
+        public Differentiator() : this(new ExpressionParameters(), new Variable("x")) { }
 
-        public Differentiator(IAnalyzer<IExpression> simplifier) : this(simplifier, new ExpressionParameters(), new Variable("x")) { }
-
-        public Differentiator(IAnalyzer<IExpression> simplifier, ExpressionParameters parameters, Variable variable)
+        public Differentiator(ExpressionParameters parameters, Variable variable)
         {
-            this.simplifier = simplifier;
             this.parameters = parameters;
             this.variable = variable;
         }

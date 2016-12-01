@@ -40,7 +40,10 @@
     <Compile Include="..\SharedCode\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Analyzers\Analyzer.cs" />
+    <Compile Include="Analyzers\Differentiator.cs" />
     <Compile Include="Analyzers\IAnalyzer.cs" />
+    <Compile Include="Analyzers\Simplifier.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="Expressions\Ceil.cs" />

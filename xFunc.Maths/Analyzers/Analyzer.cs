@@ -243,7 +243,6 @@ namespace xFunc.Maths.Analyzers
             throw new NotSupportedException();
         }
 
-
         #endregion Complex Numbers
 
         #region Trigonometric

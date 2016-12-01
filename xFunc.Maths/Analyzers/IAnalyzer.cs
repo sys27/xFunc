@@ -25,6 +25,10 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers
 {
 
+    /// <summary>
+    /// The interface for analyzers.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result of analysis.</typeparam>
     public interface IAnalyzer<TResult>
     {
 

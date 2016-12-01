@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Linq;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
@@ -88,6 +89,19 @@ namespace xFunc.Maths.Expressions
             var numbers = m_arguments.Select(item => (double)item.Execute(parameters)).ToArray();
 
             return MathExtensions.LCM(numbers);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return analyzer.Analyze(this);
         }
 
         /// <summary>

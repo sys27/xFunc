@@ -15,6 +15,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
@@ -153,6 +154,16 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public abstract object Execute(ExpressionParameters parameters);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public abstract TResult Analyze<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.

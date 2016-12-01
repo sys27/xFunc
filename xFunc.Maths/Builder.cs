@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -857,6 +858,11 @@ namespace xFunc.Maths
         public object Execute(ExpressionParameters parameters)
         {
             return current.Execute(parameters);
+        }
+
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            return this.current.Analyze(analyzer);
         }
 
         /// <summary>

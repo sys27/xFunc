@@ -16,7 +16,6 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Resources;
 using xFunc.Maths.Results;
 
 namespace xFunc.Maths

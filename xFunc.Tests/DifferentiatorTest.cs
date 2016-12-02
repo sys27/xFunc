@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -26,38 +25,25 @@ namespace xFunc.Tests
     public class DifferentiatorTest
     {
 
-        private Differentiator differentiator;
-
-        public DifferentiatorTest()
-        {
-            differentiator = new Differentiator()
-            {
-                Simplify = false
-            };
-        }
+        public DifferentiatorTest() { }
 
         private IExpression Differentiate(IExpression exp)
         {
-            return differentiator.Differentiate(exp);
+            // todo: !!!
+            return exp.Analyze(new Maths.Analyzers.Differentiator());
         }
 
         private IExpression Differentiate(IExpression exp, Variable variable)
         {
-            return differentiator.Differentiate(exp, variable);
+            return exp.Analyze(new Maths.Analyzers.Differentiator(variable));
         }
 
         private IExpression Differentiate(IExpression exp, Variable variable, ExpressionParameters parameters)
         {
-            return differentiator.Differentiate(exp, variable, parameters);
+            return exp.Analyze(new Maths.Analyzers.Differentiator(parameters, variable));
         }
 
         #region Args
-
-        [Fact]
-        public void ExpIsNullTest()
-        {
-            Assert.Throws<ArgumentNullException>(() => Differentiate(null, null, null));
-        }
 
         [Fact]
         public void VariableIsNullTest()
@@ -78,7 +64,7 @@ namespace xFunc.Tests
 
             Assert.Equal("0", exp.ToString());
         }
-        
+
         [Fact]
         public void AbsDerivativeTest1()
         {
@@ -1519,16 +1505,6 @@ namespace xFunc.Tests
             var diff = Differentiate(uf, "x", parameters);
 
             Assert.Equal("cos(x) * 1", diff.ToString());
-        }
-
-        [Fact]
-        public void WithSimplifyTest()
-        {
-            differentiator.Simplify = true;
-            var exp = new UnaryMinus(new Sin(new Variable("x")));
-            var deriv = Differentiate(exp);
-
-            Assert.Equal("-cos(x)", deriv.ToString());
         }
 
         [Fact]

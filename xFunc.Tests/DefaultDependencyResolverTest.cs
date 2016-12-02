@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
 
@@ -30,7 +31,7 @@ namespace xFunc.Tests
         public DefaultDependencyResolverTest()
         {
             this.simplifier = new Simplifier();
-            this.differentiator = new Differentiator(simplifier);
+            this.differentiator = new Differentiator();
 
             this.resolver = new DefaultDependencyResolver(
                 new Type[] { typeof(ISimplifier), typeof(IDifferentiator) },

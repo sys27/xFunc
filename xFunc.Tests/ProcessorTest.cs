@@ -23,6 +23,7 @@ using xFunc.Maths.Results;
 using System.Numerics;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Tests
 {
@@ -49,7 +50,7 @@ namespace xFunc.Tests
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null);
             var result = processor.Solve<NumberResult>(strExp);
@@ -79,7 +80,7 @@ namespace xFunc.Tests
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null)
             {
@@ -118,7 +119,7 @@ namespace xFunc.Tests
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Conjugate>())).Returns<Conjugate>(e => e);
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null);
             var result = processor.Solve<ComplexNumberResult>(strExp);
@@ -148,7 +149,7 @@ namespace xFunc.Tests
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<And>())).Returns<And>(e => e);
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null);
             var result = processor.Solve<BooleanResult>(strExp);
@@ -181,7 +182,7 @@ namespace xFunc.Tests
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Define>())).Returns<Define>(e => e);
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null);
             var result = processor.Solve<StringResult>(strExp);
@@ -214,8 +215,10 @@ namespace xFunc.Tests
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
-            differentiator.Setup(d => d.Differentiate(It.IsAny<IExpression>(), It.IsAny<Variable>(), It.IsAny<ExpressionParameters>())).Returns(() => diff);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Number>())).Returns<Number>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Derivative>())).Returns<Derivative>(e => e);
+
+            differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>())).Returns(() => diff);
 
             exp.Differentiator = differentiator.Object;
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, differentiator.Object);
@@ -245,7 +248,7 @@ namespace xFunc.Tests
             var exp = new Add(new Variable("x"), new Number(1));
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null);
             var result = processor.Parse("x + 1");
@@ -288,14 +291,14 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            simplifier.Setup(s => s.Simplify(It.IsAny<IExpression>())).Returns<IExpression>(e => e);
+            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var exp = new Add(new Variable("x"), new Number(1));
 
             var processor = new Processor(null, null, simplifier.Object, null);
             var result = processor.Simplify(exp);
 
-            simplifier.Verify(s => s.Simplify(It.IsAny<IExpression>()), Times.Once());
+            simplifier.Verify(s => s.Analyze(It.IsAny<Add>()), Times.Once());
 
             Assert.Equal(exp, result);
         }
@@ -308,12 +311,12 @@ namespace xFunc.Tests
             var exp = new Add(new Variable("x"), new Number(1));
             var diff = new Number(1);
 
-            differentiator.Setup(d => d.Differentiate(exp)).Returns(() => diff);
+            differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
 
             var processor = new Processor(null, null, null, differentiator.Object);
             var result = processor.Differentiate(exp);
 
-            differentiator.Verify(d => d.Differentiate(It.IsAny<IExpression>()), Times.Once());
+            differentiator.Verify(d => d.Analyze(exp), Times.Once());
 
             Assert.Equal(diff, result);
         }
@@ -326,13 +329,15 @@ namespace xFunc.Tests
             var exp = new Add(new Variable("x"), new Number(1));
             var diff = new Number(1);
 
-            differentiator.Setup(d => d.Differentiate(exp, new Variable("x"))).Returns(() => diff);
+            differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
 
-            var processor = new Processor(null, null, null, differentiator.Object);
+            var diffObj = differentiator.Object;
+            var processor = new Processor(null, null, null, diffObj);
             var result = processor.Differentiate(exp, new Variable("x"));
 
-            differentiator.Verify(d => d.Differentiate(It.IsAny<IExpression>(), It.IsAny<Variable>()), Times.Once());
+            differentiator.Verify(d => d.Analyze(exp), Times.Once());
 
+            Assert.Equal("x", diffObj.Variable.Name);
             Assert.Equal(diff, result);
         }
 
@@ -344,13 +349,16 @@ namespace xFunc.Tests
             var exp = new Add(new Variable("x"), new Number(1));
             var diff = new Number(1);
 
-            differentiator.Setup(d => d.Differentiate(exp, new Variable("x"), It.IsAny<ExpressionParameters>())).Returns(() => diff);
+            differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
 
-            var processor = new Processor(null, null, null, differentiator.Object);
+            var diffObj = differentiator.Object;
+            var processor = new Processor(null, null, null, diffObj);
             var result = processor.Differentiate(exp, new Variable("x"), new ExpressionParameters());
 
-            differentiator.Verify(d => d.Differentiate(It.IsAny<IExpression>(), It.IsAny<Variable>(), It.IsAny<ExpressionParameters>()), Times.Once());
+            differentiator.Verify(d => d.Analyze(exp), Times.Once());
 
+            Assert.Equal("x", diffObj.Variable.Name);
+            Assert.NotNull(diffObj.Parameters);
             Assert.Equal(diff, result);
         }
 

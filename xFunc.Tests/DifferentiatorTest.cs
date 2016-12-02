@@ -18,6 +18,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Tests
 {
@@ -29,18 +30,17 @@ namespace xFunc.Tests
 
         private IExpression Differentiate(IExpression exp)
         {
-            // todo: !!!
-            return exp.Analyze(new Maths.Analyzers.Differentiator());
+            return exp.Analyze(new Differentiator());
         }
 
         private IExpression Differentiate(IExpression exp, Variable variable)
         {
-            return exp.Analyze(new Maths.Analyzers.Differentiator(variable));
+            return exp.Analyze(new Differentiator(variable));
         }
 
         private IExpression Differentiate(IExpression exp, Variable variable, ExpressionParameters parameters)
         {
-            return exp.Analyze(new Maths.Analyzers.Differentiator(parameters, variable));
+            return exp.Analyze(new Differentiator(parameters, variable));
         }
 
         #region Args

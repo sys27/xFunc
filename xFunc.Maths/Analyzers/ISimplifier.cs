@@ -15,21 +15,14 @@
 using System;
 using xFunc.Maths.Expressions;
 
-namespace xFunc.Maths
+namespace xFunc.Maths.Analyzers
 {
 
     /// <summary>
     /// The interface for mathematical expression simplifier.
     /// </summary>
-    public interface ISimplifier
+    public interface ISimplifier : IAnalyzer<IExpression>
     {
-
-        /// <summary>
-        /// Simplifies the <paramref name="expression"/>.
-        /// </summary>
-        /// <param name="expression">A expression to simplify.</param>
-        /// <returns>A simplified expression.</returns>
-        IExpression Simplify(IExpression expression);
 
     }
 

@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions
             if (simplifier == null)
                 throw new ArgumentNullException(nameof(simplifier));
 
-            return simplifier.Simplify(this);
+            return this.Analyze(simplifier);
         }
 
         /// <summary>

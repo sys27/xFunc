@@ -13,24 +13,23 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Tests
 {
 
     public class SimplifierTest
     {
-
-        // todo: !!!
-        private Maths.Analyzers.IAnalyzer<IExpression> simplifier;
+        
+        private IAnalyzer<IExpression> simplifier;
 
         public SimplifierTest()
         {
-            simplifier = new Maths.Analyzers.Simplifier();
+            simplifier = new Simplifier();
         }
 
         private void SimpleTest(IExpression exp, IExpression expected)

@@ -111,12 +111,11 @@
     <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="IDependencyResolver.cs" />
-    <Compile Include="IDifferentiator.cs" />
+    <Compile Include="Analyzers\IDifferentiator.cs" />
     <Compile Include="IExpressionFactory.cs" />
     <Compile Include="InvalidResultException.cs" />
     <Compile Include="IParser.cs" />
-    <Compile Include="ISimplifier.cs" />
-    <Compile Include="Differentiator.cs" />
+    <Compile Include="Analyzers\ISimplifier.cs" />
     <Compile Include="ExpressionFactory.cs" />
     <Compile Include="LexerException.cs" />
     <Compile Include="ParserException.cs" />
@@ -188,7 +187,6 @@
       <DependentUpon>Resource.uk.resx</DependentUpon>
     </Compile>
     <Compile Include="Results\ComplexNumberResult.cs" />
-    <Compile Include="Simplifier.cs" />
     <Compile Include="NumeralSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">

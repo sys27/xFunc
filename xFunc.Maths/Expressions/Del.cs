@@ -27,6 +27,7 @@ namespace xFunc.Maths.Expressions
     public class Del : UnaryExpression
     {
 
+        private ISimplifier simplifier;
         private IDifferentiator differentiator;
 
         internal Del() { }
@@ -79,8 +80,14 @@ namespace xFunc.Maths.Expressions
             var variables = Helpers.GetAllVariables(m_argument).ToList();
             var vector = new Vector(variables.Count);
 
+            differentiator.Parameters = parameters;
+
             for (int i = 0; i < variables.Count; i++)
-                vector[i] = differentiator.Differentiate(m_argument, variables[i]);
+            {
+                differentiator.Variable = variables[i];
+
+                vector[i] = m_argument.Analyze(differentiator).Analyze(simplifier);
+            }
 
             return vector;
         }
@@ -134,6 +141,24 @@ namespace xFunc.Maths.Expressions
             get
             {
                 return ExpressionResultType.Expression;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the simplifier.
+        /// </summary>
+        /// <value>
+        /// The simplifier.
+        /// </value>
+        public ISimplifier Simplifier
+        {
+            get
+            {
+                return simplifier;
+            }
+            set
+            {
+                simplifier = value;
             }
         }
 

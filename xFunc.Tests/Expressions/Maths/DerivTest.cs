@@ -15,6 +15,7 @@
 using Moq;
 using System;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
@@ -29,10 +30,8 @@ namespace xFunc.Tests.Expressions.Maths
         public void ExecutePointTest()
         {
             var differentiator = new Mock<IDifferentiator>();
-            differentiator.Setup(d => d.Differentiate(It.IsAny<IExpression>(),
-                                                      It.IsAny<Variable>(),
-                                                      It.IsAny<ExpressionParameters>()))
-                          .Returns<IExpression, Variable, ExpressionParameters>((exp, v, p) => v);
+            differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
+                          .Returns<Derivative>(exp => exp.Expression);
 
             var deriv = new Derivative(new Variable("x"), new Variable("x"), new Number(2));
             deriv.Differentiator = differentiator.Object;

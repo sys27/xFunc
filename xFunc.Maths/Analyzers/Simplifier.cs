@@ -25,7 +25,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers
 {
 
-    public class Simplifier : IAnalyzer<IExpression>
+    public class Simplifier : IAnalyzer<IExpression>, ISimplifier
     {
 
         private readonly Number zero = 0;

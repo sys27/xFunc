@@ -20,7 +20,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers
 {
 
-    public class Differentiator : Analyzer<IExpression>
+    public class Differentiator : Analyzer<IExpression>, IDifferentiator
     {
 
         private Variable variable;
@@ -619,6 +619,30 @@ namespace xFunc.Maths.Analyzers
         }
 
         #endregion Hyperbolic
+
+        public Variable Variable
+        {
+            get
+            {
+                return variable;
+            }
+            set
+            {
+                variable = value;
+            }
+        }
+
+        public ExpressionParameters Parameters
+        {
+            get
+            {
+                return parameters;
+            }
+            set
+            {
+                parameters = value;
+            }
+        }
 
     }
 

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
@@ -28,7 +29,8 @@ namespace xFunc.Tests.Expressions.Maths
         public void ExecuteTest1()
         {
             var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x")), new Pow(new Variable("y"), new Number(2))), new Pow(new Variable("z"), new Number(3))));
-            exp.Differentiator = new Differentiator(new Simplifier());
+            exp.Differentiator = new Differentiator();
+            exp.Simplifier = new Simplifier();
 
             var expected = new Vector(new IExpression[] {
                                         new Number(2),
@@ -43,7 +45,8 @@ namespace xFunc.Tests.Expressions.Maths
         public void ExecuteTest2()
         {
             var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
-            exp.Differentiator = new Differentiator(new Simplifier());
+            exp.Differentiator = new Differentiator();
+            exp.Simplifier = new Simplifier();
 
             var expected = new Vector(new IExpression[] {
                                         new Number(2),

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Numerics;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Results;
@@ -42,7 +43,7 @@ namespace xFunc.Maths
         {
             lexer = new Lexer();
             simplifier = new Simplifier();
-            differentiator = new Differentiator(simplifier);
+            differentiator = new Differentiator();
             parser = new Parser(new ExpressionFactory(
                                     new DefaultDependencyResolver(new Type[] { typeof(ISimplifier), typeof(IDifferentiator) },
                                                                   new object[] { simplifier, differentiator })
@@ -137,7 +138,7 @@ namespace xFunc.Maths
         /// <returns>A simplified expression.</returns>
         public IExpression Simplify(IExpression expression)
         {
-            return simplifier.Simplify(expression);
+            return expression.Analyze(simplifier);
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression)
         {
-            return differentiator.Differentiate(expression);
+            return Differentiate(expression, new Variable("x"));
         }
 
         /// <summary>
@@ -158,7 +159,7 @@ namespace xFunc.Maths
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression, Variable variable)
         {
-            return differentiator.Differentiate(expression, variable);
+            return Differentiate(expression, variable, new ExpressionParameters());
         }
 
         /// <summary>
@@ -172,7 +173,10 @@ namespace xFunc.Maths
         /// </returns>
         public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
         {
-            return differentiator.Differentiate(expression, variable, parameters);
+            differentiator.Variable = variable;
+            differentiator.Parameters = parameters;
+
+            return expression.Analyze(differentiator);
         }
 
         /// <summary>
@@ -196,7 +200,7 @@ namespace xFunc.Maths
         public IExpression Parse(string function, bool simplify)
         {
             if (simplify)
-                return simplifier.Simplify(parser.Parse(lexer.Tokenize(function)));
+                return parser.Parse(lexer.Tokenize(function)).Analyze(simplifier);
 
             return parser.Parse(lexer.Tokenize(function));
         }

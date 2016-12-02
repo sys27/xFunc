@@ -25,6 +25,7 @@ namespace xFunc.Maths.Expressions
     public class Derivative : DifferentParametersExpression
     {
 
+        private ISimplifier simplifier;
         private IDifferentiator differentiator;
 
         internal Derivative()
@@ -102,7 +103,11 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(differentiator));
 
             var variable = this.Variable;
-            var diff = differentiator.Differentiate(this, Variable, parameters);
+
+            differentiator.Variable = variable;
+            differentiator.Parameters = parameters;
+
+            var diff = this.Analyze(differentiator);
 
             var point = this.DerivativePoint;
             if (variable != null && point != null)
@@ -115,7 +120,7 @@ namespace xFunc.Maths.Expressions
                 return diff.Execute(parameters);
             }
 
-            return diff;
+            return diff.Analyze(simplifier);
         }
 
         /// <summary>
@@ -255,6 +260,24 @@ namespace xFunc.Maths.Expressions
                     return ExpressionResultType.Number;
 
                 return ExpressionResultType.Expression;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the simplifier.
+        /// </summary>
+        /// <value>
+        /// The simplifier.
+        /// </value>
+        public ISimplifier Simplifier
+        {
+            get
+            {
+                return simplifier;
+            }
+            set
+            {
+                simplifier = value;
             }
         }
 

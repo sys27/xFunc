@@ -25,16 +25,17 @@ namespace xFunc.Tests
     public class SimplifierTest
     {
 
-        private ISimplifier simplifier;
+        // todo: !!!
+        private Maths.Analyzers.IAnalyzer<IExpression> simplifier;
 
         public SimplifierTest()
         {
-            simplifier = new Simplifier();
+            simplifier = new Maths.Analyzers.Simplifier();
         }
 
         private void SimpleTest(IExpression exp, IExpression expected)
         {
-            var simple = simplifier.Simplify(exp);
+            var simple = exp.Analyze(simplifier);
 
             Assert.Equal(expected, simple);
         }

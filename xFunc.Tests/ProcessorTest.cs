@@ -219,8 +219,11 @@ namespace xFunc.Tests
             simplifier.Setup(s => s.Analyze(It.IsAny<Derivative>())).Returns<Derivative>(e => e);
 
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>())).Returns(() => diff);
+            differentiator.SetupProperty(d => d.Variable);
+            differentiator.SetupProperty(d => d.Parameters);
 
             exp.Differentiator = differentiator.Object;
+            exp.Simplifier = simplifier.Object;
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, differentiator.Object);
             var result = processor.Solve<ExpressionResult>(strExp);
 
@@ -330,6 +333,7 @@ namespace xFunc.Tests
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
+            differentiator.SetupProperty(d => d.Variable);
 
             var diffObj = differentiator.Object;
             var processor = new Processor(null, null, null, diffObj);
@@ -350,6 +354,8 @@ namespace xFunc.Tests
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
+            differentiator.SetupProperty(d => d.Variable);
+            differentiator.SetupProperty(d => d.Parameters);
 
             var diffObj = differentiator.Object;
             var processor = new Processor(null, null, null, diffObj);

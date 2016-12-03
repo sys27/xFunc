@@ -860,6 +860,14 @@ namespace xFunc.Maths
             return current.Execute(parameters);
         }
 
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             return this.current.Analyze(analyzer);

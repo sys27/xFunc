@@ -30,6 +30,7 @@ namespace xFunc.Maths.Analyzers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{TResult}" />
+    [ExcludeFromCodeCoverage]
     public abstract class Analyzer<TResult> : IAnalyzer<TResult>
     {
 

@@ -19,12 +19,12 @@ using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
 using xFunc.Maths.Analyzers;
 
-namespace xFunc.Tests
+namespace xFunc.Tests.Analyzers
 {
 
     public class SimplifierTest
     {
-        
+
         private IAnalyzer<IExpression> simplifier;
 
         public SimplifierTest()
@@ -705,6 +705,58 @@ namespace xFunc.Tests
         }
 
         #endregion
+
+        [Fact]
+        public void Abs()
+        {
+            var abs = new Abs(new Variable("x"));
+
+            SimpleTest(abs, abs);
+        }
+
+        [Fact]
+        public void Ceil()
+        {
+            var ceil = new Ceil(new Variable("x"));
+
+            SimpleTest(ceil, ceil);
+        }
+
+        [Fact]
+        public void Define()
+        {
+            var define = new Define(new Variable("x"), new Add(new Number(2), new Number(2)));
+            var expected = new Define(new Variable("x"), new Number(4));
+
+            SimpleTest(define, expected);
+        }
+
+        [Fact]
+        public void Del()
+        {
+            var del = new Del(new Add(new Variable("x"), new Variable("x")));
+            var expected = new Del(new Mul(new Number(2), new Variable("x")));
+
+            SimpleTest(del, expected);
+        }
+
+        [Fact]
+        public void Deriv()
+        {
+            var deriv = new Derivative(new Add(new Variable("x"), new Variable("x")));
+            var expected = new Derivative(new Mul(new Number(2), new Variable("x")));
+
+            SimpleTest(deriv, expected);
+        }
+
+        [Fact]
+        public void Exp()
+        {
+            var exp = new Exp(new Add(new Variable("x"), new Variable("x")));
+            var expected = new Exp(new Mul(new Number(2), new Variable("x")));
+
+            SimpleTest(exp, expected);
+        }
 
         [Fact]
         public void PowerZero()

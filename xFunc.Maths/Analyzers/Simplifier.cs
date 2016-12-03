@@ -295,7 +295,8 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public IExpression Analyze(Derivative exp)
         {
-            // todo: !!!
+            exp.Expression = exp.Expression.Analyze(this);
+
             return exp;
         }
 
@@ -435,8 +436,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public IExpression Analyze(GCD exp)
         {
-            // todo: !!!
-            return exp;
+            return AnalyzeDiffParams(exp);
         }
 
         /// <summary>

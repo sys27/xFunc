@@ -20,16 +20,33 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers
 {
 
+    /// <summary>
+    /// The differentiator of expressions.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Analyzers.Analyzer{TResult}" />
+    /// <seealso cref="xFunc.Maths.Analyzers.IDifferentiator" />
     public class Differentiator : Analyzer<IExpression>, IDifferentiator
     {
 
         private Variable variable;
         private ExpressionParameters parameters;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Differentiator"/> class.
+        /// </summary>
         public Differentiator() : this(new ExpressionParameters(), new Variable("x")) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Differentiator"/> class.
+        /// </summary>
+        /// <param name="variable">The variable.</param>
         public Differentiator(Variable variable) : this(new ExpressionParameters(), variable) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Differentiator"/> class.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="variable">The variable.</param>
         public Differentiator(ExpressionParameters parameters, Variable variable)
         {
             this.parameters = parameters;
@@ -38,6 +55,13 @@ namespace xFunc.Maths.Analyzers
 
         #region Standard
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Abs exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -49,6 +73,13 @@ namespace xFunc.Maths.Analyzers
             return mul;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Add exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -67,6 +98,13 @@ namespace xFunc.Maths.Analyzers
             return new Number(0);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Derivative exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -79,6 +117,13 @@ namespace xFunc.Maths.Analyzers
             return diff;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Div exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -114,6 +159,13 @@ namespace xFunc.Maths.Analyzers
             return new Number(0);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Exp exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -122,6 +174,13 @@ namespace xFunc.Maths.Analyzers
             return new Mul(exp.Argument.Clone().Analyze(this), exp.Clone());
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Lb exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -134,6 +193,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Lg exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -146,6 +212,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Ln exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -154,6 +227,13 @@ namespace xFunc.Maths.Analyzers
             return new Div(exp.Argument.Clone().Analyze(this), exp.Argument.Clone());
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Log exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -176,6 +256,13 @@ namespace xFunc.Maths.Analyzers
             return div2;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Mul exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -201,11 +288,25 @@ namespace xFunc.Maths.Analyzers
             return new Number(0);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Number exp)
         {
             return new Number(0);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Pow exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -229,6 +330,13 @@ namespace xFunc.Maths.Analyzers
             return mul4;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Root exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -240,6 +348,13 @@ namespace xFunc.Maths.Analyzers
             return Analyze(pow);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Simplify exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -248,6 +363,13 @@ namespace xFunc.Maths.Analyzers
             return exp.Argument.Analyze(this);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Sqrt exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -259,6 +381,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Sub exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -277,6 +406,13 @@ namespace xFunc.Maths.Analyzers
             return new Number(0);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(UnaryMinus exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -285,6 +421,13 @@ namespace xFunc.Maths.Analyzers
             return new UnaryMinus(exp.Argument.Clone().Analyze(this));
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(UserFunction exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -296,6 +439,13 @@ namespace xFunc.Maths.Analyzers
             return parameters.Functions[exp].Analyze(this);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Variable exp)
         {
             if (exp.Equals(variable))
@@ -308,6 +458,13 @@ namespace xFunc.Maths.Analyzers
 
         #region Trigonometric
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arccos exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -322,6 +479,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arccot exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -335,6 +499,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arccsc exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -351,6 +522,13 @@ namespace xFunc.Maths.Analyzers
             return unary;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arcsec exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -366,6 +544,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arcsin exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -379,6 +564,13 @@ namespace xFunc.Maths.Analyzers
             return division;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arctan exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -391,6 +583,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Cos exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -403,6 +602,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Cot exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -416,6 +622,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Csc exp)
         {
             var unary = new UnaryMinus(exp.Argument.Clone().Analyze(this));
@@ -427,6 +640,13 @@ namespace xFunc.Maths.Analyzers
             return mul2;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Sec exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -440,6 +660,13 @@ namespace xFunc.Maths.Analyzers
             return mul2;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Sin exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -451,6 +678,13 @@ namespace xFunc.Maths.Analyzers
             return mul;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Tan exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -467,6 +701,13 @@ namespace xFunc.Maths.Analyzers
 
         #region Hyperbolic
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arcosh exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -480,6 +721,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arcoth exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -492,6 +740,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arcsch exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -508,6 +763,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arsech exp)
         {
             var inv = new Pow(exp.Argument.Clone(), new Number(2));
@@ -520,6 +782,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Arsinh exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -533,6 +802,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Artanh exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -545,6 +821,13 @@ namespace xFunc.Maths.Analyzers
             return div;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Cosh exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -556,6 +839,13 @@ namespace xFunc.Maths.Analyzers
             return mul;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Coth exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -569,6 +859,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Csch exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -582,6 +879,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Sech exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -595,6 +899,13 @@ namespace xFunc.Maths.Analyzers
             return unMinus;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Sinh exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -606,6 +917,13 @@ namespace xFunc.Maths.Analyzers
             return mul;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public override IExpression Analyze(Tanh exp)
         {
             if (!Helpers.HasVar(exp, variable))
@@ -620,6 +938,12 @@ namespace xFunc.Maths.Analyzers
 
         #endregion Hyperbolic
 
+        /// <summary>
+        /// Gets or sets the variable.
+        /// </summary>
+        /// <value>
+        /// The variable.
+        /// </value>
         public Variable Variable
         {
             get
@@ -632,6 +956,12 @@ namespace xFunc.Maths.Analyzers
             }
         }
 
+        /// <summary>
+        /// Gets or sets the parameters.
+        /// </summary>
+        /// <value>
+        /// The parameters.
+        /// </value>
         public ExpressionParameters Parameters
         {
             get

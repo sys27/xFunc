@@ -25,6 +25,11 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers
 {
 
+    /// <summary>
+    /// The simplifier of expressions.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{TResult}" />
+    /// <seealso cref="xFunc.Maths.Analyzers.ISimplifier" />
     public class Simplifier : IAnalyzer<IExpression>, ISimplifier
     {
 
@@ -77,11 +82,25 @@ namespace xFunc.Maths.Analyzers
 
         #region Standard
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Abs exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Add exp)
         {
             exp = AnalyzeBinary(exp) as Add;
@@ -229,11 +248,25 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Ceil exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Define exp)
         {
             exp.Value = exp.Value.Analyze(this);
@@ -241,17 +274,38 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Del exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Derivative exp)
         {
             // todo: !!!
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Div exp)
         {
             exp = AnalyzeBinary(exp) as Div;
@@ -336,37 +390,86 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Exp exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Fact exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Floor exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(GCD exp)
         {
             // todo: !!!
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Lb exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(LCM exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Lg exp)
         {
             exp = AnalyzeUnary(exp) as Lg;
@@ -378,6 +481,13 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Ln exp)
         {
             exp = AnalyzeUnary(exp) as Ln;
@@ -389,6 +499,13 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Log exp)
         {
             exp = AnalyzeBinary(exp) as Log;
@@ -400,11 +517,25 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Mod exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Mul exp)
         {
             exp = AnalyzeBinary(exp) as Mul;
@@ -536,11 +667,25 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Number exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Pow exp)
         {
             exp = AnalyzeBinary(exp) as Pow;
@@ -555,6 +700,13 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Root exp)
         {
             exp = AnalyzeBinary(exp) as Root;
@@ -566,21 +718,49 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Round exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Simplify exp)
         {
             return exp.Argument.Analyze(this);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sqrt exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sub exp)
         {
             exp = AnalyzeBinary(exp) as Sub;
@@ -728,6 +908,13 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(UnaryMinus exp)
         {
             exp = AnalyzeUnary(exp) as UnaryMinus;
@@ -747,22 +934,50 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Undefine exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(UserFunction exp)
         {
             // todo: !!!
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Variable exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(DelegateExpression exp)
         {
             return exp;
@@ -772,26 +987,61 @@ namespace xFunc.Maths.Analyzers
 
         #region Matrix
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Vector exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Matrix exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Determinant exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Inverse exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Transpose exp)
         {
             return AnalyzeUnary(exp);
@@ -801,31 +1051,73 @@ namespace xFunc.Maths.Analyzers
 
         #region Complex Numbers
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(ComplexNumber exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Conjugate exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Im exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Phase exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Re exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Reciprocal exp)
         {
             return AnalyzeUnary(exp);
@@ -835,61 +1127,145 @@ namespace xFunc.Maths.Analyzers
 
         #region Trigonometric
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arccos exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arccot exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arccsc exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arcsec exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arcsin exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arctan exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Cos exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Cot exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Csc exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sec exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sin exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Tan exp)
         {
             return AnalyzeTrigonometric(exp);
@@ -899,61 +1275,145 @@ namespace xFunc.Maths.Analyzers
 
         #region Hyperbolic
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arcosh exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arcoth exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arcsch exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arsech exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Arsinh exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Artanh exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Cosh exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Coth exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Csch exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sech exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sinh exp)
         {
             return AnalyzeTrigonometric(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Tanh exp)
         {
             return AnalyzeTrigonometric(exp);
@@ -963,26 +1423,61 @@ namespace xFunc.Maths.Analyzers
 
         #region Statistical
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Avg exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Max exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Min exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Product exp)
         {
             return AnalyzeDiffParams(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Sum exp)
         {
             return AnalyzeDiffParams(exp);
@@ -992,46 +1487,109 @@ namespace xFunc.Maths.Analyzers
 
         #region Logical and Bitwise
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Expressions.LogicalAndBitwise.And exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Bool exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Equality exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Implication exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(NAnd exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(NOr exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Not exp)
         {
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Expressions.LogicalAndBitwise.Or exp)
         {
             return AnalyzeBinary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(XOr exp)
         {
             return AnalyzeBinary(exp);
@@ -1041,86 +1599,205 @@ namespace xFunc.Maths.Analyzers
 
         #region Programming
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(AddAssign exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Expressions.Programming.And exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Dec exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(DivAssign exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Equal exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(For exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(GreaterOrEqual exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(GreaterThan exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(If exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Inc exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(LessOrEqual exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(LessThan exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(MulAssign exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(NotEqual exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(Expressions.Programming.Or exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(SubAssign exp)
         {
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analisys.
+        /// </returns>
         public IExpression Analyze(While exp)
         {
             return exp;

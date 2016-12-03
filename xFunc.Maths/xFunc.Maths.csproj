@@ -46,6 +46,7 @@
     <Compile Include="Analyzers\Simplifier.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />
+    <Compile Include="ExcludeFromCodeCoverage.cs" />
     <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\ComplexNumbers\ComplexNumber.cs" />
     <Compile Include="Expressions\ComplexNumbers\Conjugate.cs" />

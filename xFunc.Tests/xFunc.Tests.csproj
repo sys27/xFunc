@@ -71,7 +71,7 @@
     <Compile Include="Converters\TimeTest.cs" />
     <Compile Include="Converters\VolumeTest.cs" />
     <Compile Include="DefaultDependencyResolverTest.cs" />
-    <Compile Include="DifferentiatorTest.cs" />
+    <Compile Include="Analyzers\DifferentiatorTest.cs" />
     <Compile Include="Expressions\Maths\AbsTest.cs" />
     <Compile Include="Expressions\Maths\AddTest.cs" />
     <Compile Include="Expressions\Maths\BinaryTest.cs" />
@@ -176,7 +176,7 @@
     <Compile Include="Results\NumberResultTest.cs" />
     <Compile Include="Results\ExpressionResultTest.cs" />
     <Compile Include="Results\StringResultTest.cs" />
-    <Compile Include="SimplifierTest.cs" />
+    <Compile Include="Analyzers\SimplifierTest.cs" />
     <Compile Include="Tokens\BooleanTokenTest.cs" />
     <Compile Include="Tokens\UserFunctionTokenTest.cs" />
     <Compile Include="Tokens\FunctionTokenTest.cs" />

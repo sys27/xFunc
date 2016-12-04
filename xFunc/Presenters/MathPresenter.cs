@@ -133,11 +133,11 @@ namespace xFunc.Presenters
         {
             get
             {
-                return processor.Base;
+                return processor.NumeralSystem;
             }
             set
             {
-                processor.Base = value;
+                processor.NumeralSystem = value;
                 OnPropertyChanged(nameof(Base));
             }
         }

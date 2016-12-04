@@ -32,6 +32,21 @@ namespace xFunc.Tests
     {
 
         [Fact]
+        public void CtorTest()
+        {
+            var processor = new Processor();
+
+            Assert.NotNull(processor.Lexer);
+            Assert.NotNull(processor.Parser);
+            Assert.NotNull(processor.Differentiator);
+            Assert.NotNull(processor.Simplifier);
+            Assert.NotNull(processor.Parameters);
+
+            Assert.Equal(NumeralSystem.Decimal, processor.NumeralSystem);
+            Assert.Equal(AngleMeasurement.Degree, processor.Parameters.AngleMeasurement);
+        }
+
+        [Fact]
         public void SolveDoubleTest()
         {
             var lexer = new Mock<ILexer>();

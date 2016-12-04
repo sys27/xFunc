@@ -82,6 +82,7 @@
     <Compile Include="Expressions\Maths\DelTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ImTest.cs" />
     <Compile Include="Expressions\Maths\DerivTest.cs" />
+    <Compile Include="Expressions\Maths\LogicalAndBitwise\BoolTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\AndTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\EqualityTest.cs" />
     <Compile Include="Expressions\Maths\LogicalAndBitwise\ImplicationTest.cs" />

@@ -800,12 +800,30 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void UnaryMinusTest2()
+        {
+            var exp = new UnaryMinus(new Sin(new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void DiffVarTest()
         {
             var exp = new Mul(new Variable("x"), new Variable("y"));
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 * y", deriv.ToString());
+        }
+
+        [Fact]
+        public void VarTest()
+        {
+            var exp = new Variable("y");
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("y", deriv.ToString());
         }
 
         #endregion Common
@@ -1076,6 +1094,15 @@ namespace xFunc.Tests.Analyzers
             num.Value = 4;
             Assert.Equal("sec(4 * x)", exp.ToString());
             Assert.Equal("2 * 1 * tan(2 * x) * sec(2 * x)", deriv.ToString());
+        }
+
+        [Fact]
+        public void SecDerivativeZeroTest()
+        {
+            var exp = new Sec(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]
@@ -1355,6 +1382,15 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void ArcsecDerivativeZeroTest()
+        {
+            var exp = new Arcsec(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void ArccscDerivativeTest1()
         {
             var exp = new Arccsc(new Mul(new Number(2), new Variable("x")));
@@ -1381,6 +1417,15 @@ namespace xFunc.Tests.Analyzers
             Assert.Equal("-((2 * 1) / (abs(2 * x) * sqrt(((2 * x) ^ 2) - 1)))", deriv.ToString());
         }
 
+        [Fact]
+        public void ArccscDerivativeZeroTest()
+        {
+            var exp = new Arccsc(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
         #endregion Trigonometric
 
         #region Hyperbolic
@@ -1395,12 +1440,30 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void SinhDerivativeZeroTest()
+        {
+            var exp = new Sinh(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void CoshDerivativeTest()
         {
             var exp = new Cosh(new Mul(new Number(2), new Variable("x")));
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1 * sinh(2 * x)", deriv.ToString());
+        }
+
+        [Fact]
+        public void CoshDerivativeZeroTest()
+        {
+            var exp = new Cosh(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]
@@ -1413,12 +1476,30 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void TanhDerivativeZeroTest()
+        {
+            var exp = new Tanh(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void CothDerivativeTest()
         {
             var exp = new Coth(new Mul(new Number(2), new Variable("x")));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (sinh(2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [Fact]
+        public void CothDerivativeZeroTest()
+        {
+            var exp = new Coth(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]
@@ -1431,12 +1512,30 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void SechDerivativeZeroTest()
+        {
+            var exp = new Sech(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void CschDerivativeTest()
         {
             var exp = new Csch(new Mul(new Number(2), new Variable("x")));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(2 * 1 * coth(2 * x) * csch(2 * x))", deriv.ToString());
+        }
+
+        [Fact]
+        public void CschDerivativeZeroTest()
+        {
+            var exp = new Csch(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]
@@ -1449,12 +1548,30 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void ArsinehDerivativeZeroTest()
+        {
+            var exp = new Arsinh(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void ArcoshDerivativeTest()
         {
             var exp = new Arcosh(new Mul(new Number(2), new Variable("x")));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / sqrt(((2 * x) ^ 2) - 1)", deriv.ToString());
+        }
+
+        [Fact]
+        public void ArcoshDerivativeZeroTest()
+        {
+            var exp = new Arcosh(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]
@@ -1467,12 +1584,30 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void ArtanhDerivativeZeroTest()
+        {
+            var exp = new Artanh(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
         public void ArcothDerivativeTest()
         {
             var exp = new Arcoth(new Mul(new Number(2), new Variable("x")));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (1 - ((2 * x) ^ 2))", deriv.ToString());
+        }
+
+        [Fact]
+        public void ArcothDerivativeZeroTest()
+        {
+            var exp = new Arcoth(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]
@@ -1493,6 +1628,15 @@ namespace xFunc.Tests.Analyzers
             Assert.Equal("-((2 * 1) / (abs(2 * x) * sqrt(1 + ((2 * x) ^ 2))))", deriv.ToString());
         }
 
+        [Fact]
+        public void ArcschDerivativeZeroTest()
+        {
+            var exp = new Arcsch(new Mul(new Number(2), new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
         #endregion Hyperbolic
 
         [Fact]
@@ -1508,12 +1652,38 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void UserFunctionDerivNullTest()
+        {
+            var uf = new UserFunction("f", new IExpression[] { new Variable("x") }, 1);
+
+            Assert.Throws<ArgumentNullException>(() => Differentiate(uf, "x", null));
+        }
+
+        [Fact]
         public void DerivSimplify()
         {
             var exp = new Simplify(new Sin(new Variable("x")));
             var deriv = Differentiate(exp);
 
             Assert.Equal("cos(x) * 1", deriv.ToString());
+        }
+
+        [Fact]
+        public void DerivSimplify2()
+        {
+            var exp = new Simplify(new Sin(new Variable("z")));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
+        }
+
+        [Fact]
+        public void DerivTest()
+        {
+            var exp = new Derivative(new Number(2));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal("0", deriv.ToString());
         }
 
         [Fact]

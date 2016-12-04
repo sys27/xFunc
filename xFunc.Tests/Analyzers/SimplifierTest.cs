@@ -1271,6 +1271,15 @@ namespace xFunc.Tests.Analyzers
 
         #endregion
 
+        [Fact]
+        public void UserFunc()
+        {
+            var exp = new UserFunction("f", new IExpression[] { new Mul(new Number(2), new Number(2)) }, 1);
+            var expected = new UserFunction("f", new IExpression[] { new Number(4) }, 1);
+
+            SimpleTest(exp, expected);
+        }
+
     }
 
 }

@@ -2910,6 +2910,91 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void AddTest()
+        {
+            var tokens = lexer.Tokenize("add(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Add, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void SubTest()
+        {
+            var tokens = lexer.Tokenize("sub(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Sub, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void MulTest()
+        {
+            var tokens = lexer.Tokenize("mul(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Mul, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void DivTest()
+        {
+            var tokens = lexer.Tokenize("div(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Div, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void PowTest()
+        {
+            var tokens = lexer.Tokenize("pow(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Pow, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

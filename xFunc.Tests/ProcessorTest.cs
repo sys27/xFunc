@@ -294,8 +294,11 @@ namespace xFunc.Tests
             var exp = new Add(new Variable("x"), new Number(1));
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
-            var processor = new Processor(lexer.Object, parser.Object, null, null);
-            var result = processor.Parse("x + 1", false);
+            var processor = new Processor(lexer.Object, parser.Object, null, null)
+            {
+                DoSimplify = false
+            };
+            var result = processor.Parse("x + 1");
 
             lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
             parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());

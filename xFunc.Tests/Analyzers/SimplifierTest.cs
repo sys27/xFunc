@@ -220,6 +220,17 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AddSaveVars4()
         {
+            // x + x * 2
+            var var = new Variable("x");
+            var exp = new Add(var, new Mul(var, new Number(2)));
+            var expected = new Mul(new Number(3), var);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars5()
+        {
             // 2x + 3x
             var var = new Variable("x");
             var exp = new Add(new Mul(new Number(2), var), new Mul(new Number(3), var));
@@ -229,7 +240,7 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
-        public void AddSaveVars5()
+        public void AddSaveVars6()
         {
             // -x + x
             var var = new Variable("x");
@@ -240,12 +251,56 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
-        public void AddSaveVars6()
+        public void AddSaveVars7()
         {
             // -x + 2x
             var var = new Variable("x");
             var exp = new Add(new UnaryMinus(var), new Mul(new Number(2), var));
             var expected = var;
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars8()
+        {
+            // x * 2 + x
+            var var = new Variable("x");
+            var exp = new Add(new Mul(var, new Number(2)), var);
+            var expected = new Mul(new Number(3), var);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars9()
+        {
+            // x * 2 + x * 3
+            var var = new Variable("x");
+            var exp = new Add(new Mul(var, new Number(2)), new Mul(var, new Number(3)));
+            var expected = new Mul(new Number(5), var);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars10()
+        {
+            // 3x + -2x
+            var var = new Variable("x");
+            var exp = new Add(new Mul(new Number(3), var), new Mul(new Number(-2), var));
+            var expected = var;
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AddSaveVars11()
+        {
+            // 3x + -4x
+            var var = new Variable("x");
+            var exp = new Add(new Mul(new Number(3), var), new Mul(new Number(-4), var));
+            var expected = new UnaryMinus(var);
 
             SimpleTest(exp, expected);
         }
@@ -409,6 +464,72 @@ namespace xFunc.Tests.Analyzers
             SimpleTest(sub, expected);
         }
 
+        [Fact]
+        public void SubSameVars5()
+        {
+            // x - (x * 2)
+            var x = new Variable("x");
+            var sub = new Sub(x, new Mul(x, new Number(2)));
+            var expected = new UnaryMinus(x);
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars6()
+        {
+            // 2x - x
+            var x = new Variable("x");
+            var sub = new Sub(new Mul(new Number(2), x), x);
+            var expected = x;
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars7()
+        {
+            // (x * 2) - x
+            var x = new Variable("x");
+            var sub = new Sub(new Mul(x, new Number(2)), x);
+            var expected = x;
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars8()
+        {
+            // 3x - 2x
+            var x = new Variable("x");
+            var sub = new Sub(new Mul(new Number(3), x), new Mul(new Number(2), x));
+            var expected = x;
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars9()
+        {
+            // (x * 3) - (x * 2)
+            var x = new Variable("x");
+            var sub = new Sub(new Mul(x, new Number(3)), new Mul(x, new Number(2)));
+            var expected = x;
+
+            SimpleTest(sub, expected);
+        }
+
+        [Fact]
+        public void SubSameVars10()
+        {
+            // (x * 4) - (x * 2)
+            var x = new Variable("x");
+            var sub = new Sub(new Mul(x, new Number(4)), new Mul(x, new Number(2)));
+            var expected = new Mul(new Number(2), x);
+
+            SimpleTest(sub, expected);
+        }
+
         #endregion
 
         #region Mul
@@ -528,6 +649,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void MulSameVar1()
         {
+            // x * x
             var var = new Variable("x");
             var mul = new Mul(var, var);
             var expected = new Pow(var, new Number(2));
@@ -538,6 +660,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void MulSameVar2()
         {
+            // 2x * x
             var var = new Variable("x");
             var mul = new Mul(new Mul(new Number(2), var), var);
             var expected = new Mul(new Number(2), new Pow(var, new Number(2)));
@@ -548,9 +671,97 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void MulSameVar3()
         {
+            // 2x * 3x
             var var = new Variable("x");
             var mul = new Mul(new Mul(new Number(2), var), new Mul(new Number(3), var));
             var expected = new Mul(new Number(6), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar4()
+        {
+            // x * 2x
+            var var = new Variable("x");
+            var mul = new Mul(var, new Mul(new Number(2), var));
+            var expected = new Mul(new Number(2), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar5()
+        {
+            // x * (x * 2)
+            var var = new Variable("x");
+            var mul = new Mul(var, new Mul(var, new Number(2)));
+            var expected = new Mul(new Number(2), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        public void MulSameVar6()
+        {
+            // 2x * x
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(new Number(2), var), var);
+            var expected = new Mul(new Number(2), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar7()
+        {
+            // (x * 2) * x
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(var, new Number(2)), var);
+            var expected = new Mul(new Number(2), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar8()
+        {
+            // 2x * 3x
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(new Number(2), var), new Mul(new Number(3), var));
+            var expected = new Mul(new Number(6), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar9()
+        {
+            // (x * 2) * (x * 3)
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(var, new Number(2)), new Mul(var, new Number(3)));
+            var expected = new Mul(new Number(6), new Pow(var, new Number(2)));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar10()
+        {
+            // 2x * -2x
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(new Number(2), var), new Mul(new Number(0.5), var));
+            var expected = new Pow(var, new Number(2));
+
+            SimpleTest(mul, expected);
+        }
+
+        [Fact]
+        public void MulSameVar11()
+        {
+            // 2x * -3x
+            var var = new Variable("x");
+            var mul = new Mul(new Mul(new Number(2), var), new Mul(new Number(-0.5), var));
+            var expected = new UnaryMinus(new Pow(var, new Number(2)));
 
             SimpleTest(mul, expected);
         }

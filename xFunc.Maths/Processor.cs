@@ -68,14 +68,14 @@ namespace xFunc.Maths
         /// <param name="parameters">The collection of parameters.</param>
         public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
         {
-            this.Lexer = lexer;
-            this.Simplifier = simplifier;
-            this.Differentiator = differentiator;
-            this.Parser = parser;
+            Lexer = lexer;
+            Simplifier = simplifier;
+            Differentiator = differentiator;
+            Parser = parser;
 
-            this.Parameters = parameters;
-            this.NumeralSystem = NumeralSystem.Decimal;
-            this.DoSimplify = true;
+            Parameters = parameters;
+            NumeralSystem = NumeralSystem.Decimal;
+            DoSimplify = true;
         }
 
         /// <summary>

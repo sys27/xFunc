@@ -707,55 +707,12 @@ namespace xFunc.Tests.Analyzers
         #endregion
 
         [Fact]
-        public void Abs()
-        {
-            var abs = new Abs(new Variable("x"));
-
-            SimpleTest(abs, abs);
-        }
-
-        [Fact]
-        public void Ceil()
-        {
-            var ceil = new Ceil(new Variable("x"));
-
-            SimpleTest(ceil, ceil);
-        }
-
-        [Fact]
         public void Define()
         {
             var define = new Define(new Variable("x"), new Add(new Number(2), new Number(2)));
             var expected = new Define(new Variable("x"), new Number(4));
 
             SimpleTest(define, expected);
-        }
-
-        [Fact]
-        public void Del()
-        {
-            var del = new Del(new Add(new Variable("x"), new Variable("x")));
-            var expected = new Del(new Mul(new Number(2), new Variable("x")));
-
-            SimpleTest(del, expected);
-        }
-
-        [Fact]
-        public void Deriv()
-        {
-            var deriv = new Derivative(new Add(new Variable("x"), new Variable("x")));
-            var expected = new Derivative(new Mul(new Number(2), new Variable("x")));
-
-            SimpleTest(deriv, expected);
-        }
-
-        [Fact]
-        public void Exp()
-        {
-            var exp = new Exp(new Add(new Variable("x"), new Variable("x")));
-            var expected = new Exp(new Mul(new Number(2), new Variable("x")));
-
-            SimpleTest(exp, expected);
         }
 
         [Fact]
@@ -786,12 +743,28 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void Root()
+        {
+            var root = new Root(new Variable("x"), new Number(5));
+
+            SimpleTest(root, root);
+        }
+
+        [Fact]
         public void Log()
         {
             var log = new Log(new Variable("x"), new Variable("x"));
             var expected = new Number(1);
 
             SimpleTest(log, expected);
+        }
+
+        [Fact]
+        public void Log2()
+        {
+            var log = new Log(new Number(11), new Number(3));
+
+            SimpleTest(log, log);
         }
 
         [Fact]
@@ -804,6 +777,14 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void Ln2()
+        {
+            var ln = new Ln(new Variable("z"));
+
+            SimpleTest(ln, ln);
+        }
+
+        [Fact]
         public void Lg()
         {
             var log = new Lg(new Number(10));
@@ -813,10 +794,44 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void Lg2()
+        {
+            var log = new Lg(new Number(101));
+
+            SimpleTest(log, log);
+        }
+
+        [Fact]
+        public void Lb()
+        {
+            var log = new Lb(new Number(2));
+            var expected = new Number(1);
+
+            SimpleTest(log, expected);
+        }
+
+        [Fact]
+        public void Lb2()
+        {
+            var log = new Lb(new Number(3));
+
+            SimpleTest(log, log);
+        }
+
+        [Fact]
         public void Simplify()
         {
             var simp = new Simplify(new Pow(new Variable("x"), new Number(0)));
             var expected = new Number(1);
+
+            SimpleTest(simp, expected);
+        }
+
+        [Fact]
+        public void Deriv()
+        {
+            var simp = new Derivative(new Add(new Number(2), new Number(3)));
+            var expected = new Derivative(new Number(5));
 
             SimpleTest(simp, expected);
         }

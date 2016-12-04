@@ -177,7 +177,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return countOfParams >= 2 ? (Variable)m_arguments[1] : null;
+                return countOfParams >= 2 ? (Variable)m_arguments[1] : new Variable("x");
             }
         }
 

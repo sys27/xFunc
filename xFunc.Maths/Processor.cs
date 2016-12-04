@@ -27,7 +27,7 @@ namespace xFunc.Maths
     /// </summary>
     public class Processor
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
@@ -43,6 +43,7 @@ namespace xFunc.Maths
 
             Parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
             NumeralSystem = NumeralSystem.Decimal;
+            DoSimplify = true;
         }
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace xFunc.Maths
 
             this.Parameters = parameters;
             this.NumeralSystem = NumeralSystem.Decimal;
+            this.DoSimplify = true;
         }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace xFunc.Maths
         /// <returns>The result of solving.</returns>
         public IResult Solve(string function)
         {
-            var exp = Parse(function, true);
+            var exp = Parse(function);
             var result = exp.Execute(Parameters);
             if (result is double)
             {
@@ -106,6 +108,9 @@ namespace xFunc.Maths
             }
             if (result is IExpression)
             {
+                if (DoSimplify)
+                    return new ExpressionResult(Simplify((IExpression)result));
+
                 return new ExpressionResult((IExpression)result);
             }
 
@@ -176,24 +181,10 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="function">The function.</param>
         /// <returns>The parsed expression.</returns>
-        public IExpression Parse(string function)
-        {
-            return Parse(function, true);
-        }
-
-        /// <summary>
-        /// Parses the specified function.
-        /// </summary>
-        /// <param name="function">The function.</param>
-        /// <param name="simplify">if set to <c>true</c>, simplifies the expression.</param>
-        /// <returns>The parsed expression.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         /// <exception cref="ParserException">Error while parsing.</exception>
-        public IExpression Parse(string function, bool simplify)
+        public IExpression Parse(string function)
         {
-            if (simplify)
-                return Parser.Parse(Lexer.Tokenize(function)).Analyze(Simplifier);
-
             return Parser.Parse(Lexer.Tokenize(function));
         }
 
@@ -241,6 +232,11 @@ namespace xFunc.Maths
         /// The numeral system.
         /// </value>
         public NumeralSystem NumeralSystem { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether do simplify or not.
+        /// </summary>
+        public bool DoSimplify { get; set; }
 
     }
 

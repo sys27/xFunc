@@ -616,8 +616,8 @@ namespace xFunc.Maths.Analyzers
                     return Analyze(new Mul(new Number(firstNumber.Value / secondNumber.Value), bracketDiv.Left));
             }
 
-            // x + 2x
-            // 2x + 3x
+            // x * 2x
+            // 2x * 3x
             Number leftMultiplier = null;
             Number rightMultiplier = null;
             Variable varMultiplier = null;

@@ -5,7 +5,7 @@ Dev: [![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7
 xFunc
 =====
 
-xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. The libraries include the code that converts strings to expressions (parser, lexer and etc.).
+xFunc is a simple and easy to use application that allows you to build mathematical and logical expressions. It's written on C#. The library includes well-documented code that allows developers to parse strings to expression tree, to analyze (derivate, simplify) expressions by using lexer, parser and etc. Also, developers can easily extend the library by own lexer, parser, analyzer, token, expression implementations.
 
 xFunc is a small-sized and portable application that you can use to create complex mathematical expressions which will be automatically computed. It can be used by teachers and students alike.
 
@@ -27,12 +27,12 @@ All in all, xFunc comes packed with resourceful options dedicated to computing m
 
 ## Features:
 
-* Calculating expressions (maths and logics);
+* Calculating expressions (maths and logics, all supported expressions see on project's wiki);
 * Supporting measures of angles;
 * Derivative and simplifying expressions;
 * Plotting graphs;
 * Truth tables;
-* Supported Framework: 4.0 (or higher) and Portable (.Net 4.0 or higher, Silverlight 4 or higher and Windows Store App)
+* Supported Framework: 4.0 (or higher).
 
 ## Bug Tracker
 

@@ -975,8 +975,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public IExpression Analyze(UserFunction exp)
         {
-            // todo: !!!
-            return exp;
+            return AnalyzeDiffParams(exp);
         }
 
         /// <summary>

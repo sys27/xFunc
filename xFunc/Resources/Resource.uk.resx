@@ -798,4 +798,7 @@
   <data name="StatisticalExpanderHeader" xml:space="preserve">
     <value>Статистичні</value>
   </data>
+  <data name="CountToolTip" xml:space="preserve">
+    <value>Кількість аргументів. Приклад: count(1, 2, 3).</value>
+  </data>
 </root>

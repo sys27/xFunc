@@ -21,20 +21,20 @@ namespace xFunc.Maths.Expressions.Statistical
 {
 
     /// <summary>
-    /// Represent the Avg function.
+    /// Represent the Count function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Avg : DifferentParametersExpression
+    public class Count : DifferentParametersExpression
     {
 
-        internal Avg() : base(null, -1) { }
+        internal Count() : base(null, -1) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Avg"/> class.
+        /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
-        public Avg(IExpression[] arguments, int countOfParams)
+        public Count(IExpression[] arguments, int countOfParams)
             : base(arguments, countOfParams)
         {
             if (arguments == null)
@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(15749, 21929);
+            return base.GetHashCode(14009, 9787);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override string ToString()
         {
-            return base.ToString("avg");
+            return base.ToString("count");
         }
 
         /// <summary>
@@ -80,13 +80,13 @@ namespace xFunc.Maths.Expressions.Statistical
                 var result = this.m_arguments[0].Execute(parameters);
                 var vector = result as Vector;
                 if (vector != null)
-                    return vector.Arguments.Average(exp => (double)exp.Execute(parameters));
+                    return (double)vector.Arguments.Length;
 
-                return result;
+                return 1.0;
             }
             else
             {
-                return this.m_arguments.Average(exp => (double)exp.Execute(parameters));
+                return (double)this.m_arguments.Length;
             }
         }
 
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Avg(CloneArguments(), countOfParams);
+            return new Count(CloneArguments(), countOfParams);
         }
 
         /// <summary>

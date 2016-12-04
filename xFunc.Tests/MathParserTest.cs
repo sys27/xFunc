@@ -1429,6 +1429,25 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void CountTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Count, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Count(new[] { new Number(1), new Number(2) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void DelTest()
         {
             var tokens = new List<IToken>

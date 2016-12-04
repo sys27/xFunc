@@ -682,6 +682,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Count function. Example: count(1, 2, 3)..
+        /// </summary>
+        public static string CountToolTip {
+            get {
+                return ResourceManager.GetString("CountToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hyperbolic cosecant of &quot;x&quot;. Example: csch(90).
         /// </summary>
         public static string CschToolTip {

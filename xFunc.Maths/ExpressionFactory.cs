@@ -292,6 +292,8 @@ namespace xFunc.Maths
                     exp = new Max(); break;
                 case Functions.Avg:
                     exp = new Avg(); break;
+                case Functions.Count:
+                    exp = new Count(); break;
                 default:
                     exp = null; break;
             }

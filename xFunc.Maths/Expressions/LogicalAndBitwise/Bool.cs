@@ -23,8 +23,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// </summary>
     public class Bool : IExpression
     {
-
-        private IExpression parent;
+        
         private readonly bool value;
 
         /// <summary>
@@ -147,17 +146,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IExpression Parent
-        {
-            get
-            {
-                return parent;
-            }
-            set
-            {
-                parent = value;
-            }
-        }
+        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.

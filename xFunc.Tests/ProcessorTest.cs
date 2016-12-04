@@ -84,7 +84,7 @@ namespace xFunc.Tests
 
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, null)
             {
-                Base = NumeralSystem.Hexidecimal
+                NumeralSystem = NumeralSystem.Hexidecimal
             };
             var result = processor.Solve<StringResult>(strExp);
 

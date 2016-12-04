@@ -18,7 +18,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
 
-namespace xFunc.Tests.Expressions.Maths
+namespace xFunc.Tests.Expressions.Maths.Statistical
 {
 
     public class MaxTest
@@ -68,6 +68,22 @@ namespace xFunc.Tests.Expressions.Maths
                     new Vector(new[] { new Number(1), new Number(2), new Number(3), }),
                     new Vector(new[] { new Number(1), new Number(2), new Number(3), })
                 }, 2));
+        }
+
+        [Fact]
+        public void ToStringTest()
+        {
+            var sum = new Max(new[] { new Number(1), new Number(2) }, 2);
+
+            Assert.Equal("max(1, 2)", sum.ToString());
+        }
+
+        [Fact]
+        public void ToStringTest2()
+        {
+            var sum = new Max(new[] { new Vector(new[] { new Number(1), new Number(2) }) }, 1);
+
+            Assert.Equal("max({1, 2})", sum.ToString());
         }
 
     }

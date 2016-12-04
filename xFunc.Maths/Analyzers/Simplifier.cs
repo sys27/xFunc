@@ -88,7 +88,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Abs exp)
@@ -101,7 +101,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Add exp)
         {
@@ -255,7 +255,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Ceil exp)
@@ -268,7 +268,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Define exp)
@@ -283,7 +283,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Del exp)
@@ -296,7 +296,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Derivative exp)
         {
@@ -310,7 +310,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Div exp)
         {
@@ -401,7 +401,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Exp exp)
@@ -414,7 +414,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Fact exp)
@@ -427,7 +427,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Floor exp)
@@ -440,7 +440,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(GCD exp)
@@ -453,7 +453,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Lb exp)
         {
@@ -470,7 +470,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(LCM exp)
@@ -483,7 +483,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Lg exp)
         {
@@ -501,7 +501,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Ln exp)
         {
@@ -519,7 +519,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Log exp)
         {
@@ -537,7 +537,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Mod exp)
@@ -550,7 +550,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Mul exp)
         {
@@ -688,7 +688,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Number exp)
@@ -701,7 +701,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Pow exp)
         {
@@ -722,7 +722,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Root exp)
         {
@@ -740,7 +740,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Round exp)
@@ -753,7 +753,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Simplify exp)
         {
@@ -765,7 +765,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sqrt exp)
@@ -778,7 +778,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(Sub exp)
         {
@@ -932,7 +932,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(UnaryMinus exp)
         {
@@ -958,7 +958,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Undefine exp)
@@ -971,7 +971,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public IExpression Analyze(UserFunction exp)
         {
@@ -983,7 +983,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Variable exp)
@@ -996,7 +996,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(DelegateExpression exp)
@@ -1013,7 +1013,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Vector exp)
@@ -1026,7 +1026,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Matrix exp)
@@ -1039,7 +1039,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Determinant exp)
@@ -1052,7 +1052,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Inverse exp)
@@ -1065,7 +1065,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Transpose exp)
@@ -1082,7 +1082,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(ComplexNumber exp)
@@ -1095,7 +1095,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Conjugate exp)
@@ -1108,7 +1108,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Im exp)
@@ -1121,7 +1121,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Phase exp)
@@ -1134,7 +1134,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Re exp)
@@ -1147,7 +1147,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Reciprocal exp)
@@ -1164,7 +1164,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arccos exp)
@@ -1177,7 +1177,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arccot exp)
@@ -1190,7 +1190,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arccsc exp)
@@ -1203,7 +1203,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcsec exp)
@@ -1216,7 +1216,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcsin exp)
@@ -1229,7 +1229,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arctan exp)
@@ -1242,7 +1242,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Cos exp)
@@ -1255,7 +1255,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Cot exp)
@@ -1268,7 +1268,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Csc exp)
@@ -1281,7 +1281,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sec exp)
@@ -1294,7 +1294,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sin exp)
@@ -1307,7 +1307,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Tan exp)
@@ -1324,7 +1324,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcosh exp)
@@ -1337,7 +1337,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcoth exp)
@@ -1350,7 +1350,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcsch exp)
@@ -1363,7 +1363,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arsech exp)
@@ -1376,7 +1376,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arsinh exp)
@@ -1389,7 +1389,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Artanh exp)
@@ -1402,7 +1402,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Cosh exp)
@@ -1415,7 +1415,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Coth exp)
@@ -1428,7 +1428,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Csch exp)
@@ -1441,7 +1441,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sech exp)
@@ -1454,7 +1454,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sinh exp)
@@ -1467,7 +1467,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Tanh exp)
@@ -1484,7 +1484,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Avg exp)
@@ -1497,7 +1497,20 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
+        /// </returns>
+        [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Count exp)
+        {
+            return AnalyzeDiffParams(exp);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Max exp)
@@ -1510,7 +1523,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Min exp)
@@ -1523,7 +1536,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Product exp)
@@ -1536,7 +1549,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sum exp)
@@ -1553,7 +1566,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Expressions.LogicalAndBitwise.And exp)
@@ -1566,7 +1579,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Bool exp)
@@ -1579,7 +1592,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Equality exp)
@@ -1592,7 +1605,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Implication exp)
@@ -1605,7 +1618,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(NAnd exp)
@@ -1618,7 +1631,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(NOr exp)
@@ -1631,7 +1644,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Not exp)
@@ -1644,7 +1657,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Expressions.LogicalAndBitwise.Or exp)
@@ -1657,7 +1670,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(XOr exp)
@@ -1674,7 +1687,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(AddAssign exp)
@@ -1687,7 +1700,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Expressions.Programming.And exp)
@@ -1700,7 +1713,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Dec exp)
@@ -1713,7 +1726,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(DivAssign exp)
@@ -1726,7 +1739,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Equal exp)
@@ -1739,7 +1752,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(For exp)
@@ -1752,7 +1765,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(GreaterOrEqual exp)
@@ -1765,7 +1778,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(GreaterThan exp)
@@ -1778,7 +1791,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(If exp)
@@ -1791,7 +1804,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Inc exp)
@@ -1804,7 +1817,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(LessOrEqual exp)
@@ -1817,7 +1830,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(LessThan exp)
@@ -1830,7 +1843,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(MulAssign exp)
@@ -1843,7 +1856,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(NotEqual exp)
@@ -1856,7 +1869,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Expressions.Programming.Or exp)
@@ -1869,7 +1882,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(SubAssign exp)
@@ -1882,7 +1895,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(While exp)

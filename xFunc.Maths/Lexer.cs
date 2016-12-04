@@ -1106,6 +1106,13 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("count(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Count));
+                        i += 5;
+
+                        continue;
+                    }
                     if (letter == 'i')
                     {
                         tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));

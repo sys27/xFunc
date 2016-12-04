@@ -2844,6 +2844,23 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void CountTest()
+        {
+            var tokens = lexer.Tokenize("count(1, 2)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Count, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void DelTest()
         {
             var tokens = lexer.Tokenize("del(2x + 3y + 4z)");

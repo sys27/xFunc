@@ -279,7 +279,11 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// The Avg function
         /// </summary>
-        Avg
+        Avg,
+        /// <summary>
+        /// The Count function
+        /// </summary>
+        Count
 
     }
 

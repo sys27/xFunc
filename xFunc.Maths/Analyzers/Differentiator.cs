@@ -57,7 +57,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Abs exp)
         {
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Add exp)
         {
@@ -99,7 +99,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Derivative exp)
         {
@@ -118,7 +118,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Div exp)
         {
@@ -158,7 +158,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Exp exp)
         {
@@ -173,7 +173,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Lb exp)
         {
@@ -192,7 +192,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Lg exp)
         {
@@ -211,7 +211,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Ln exp)
         {
@@ -226,7 +226,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Log exp)
         {
@@ -255,7 +255,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Mul exp)
         {
@@ -286,7 +286,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Number exp)
         {
@@ -298,7 +298,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Pow exp)
         {
@@ -328,7 +328,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Root exp)
         {
@@ -346,7 +346,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Simplify exp)
         {
@@ -361,7 +361,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Sqrt exp)
         {
@@ -379,7 +379,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Sub exp)
         {
@@ -403,7 +403,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(UnaryMinus exp)
         {
@@ -418,7 +418,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(UserFunction exp)
         {
@@ -433,7 +433,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Variable exp)
         {
@@ -452,7 +452,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arccos exp)
         {
@@ -473,7 +473,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arccot exp)
         {
@@ -493,7 +493,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arccsc exp)
         {
@@ -516,7 +516,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arcsec exp)
         {
@@ -538,7 +538,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arcsin exp)
         {
@@ -558,7 +558,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arctan exp)
         {
@@ -577,7 +577,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Cos exp)
         {
@@ -596,7 +596,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Cot exp)
         {
@@ -616,7 +616,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Csc exp)
         {
@@ -634,7 +634,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Sec exp)
         {
@@ -654,7 +654,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Sin exp)
         {
@@ -672,7 +672,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Tan exp)
         {
@@ -695,7 +695,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arcosh exp)
         {
@@ -715,7 +715,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arcoth exp)
         {
@@ -734,7 +734,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arcsch exp)
         {
@@ -757,7 +757,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arsech exp)
         {
@@ -776,7 +776,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Arsinh exp)
         {
@@ -796,7 +796,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Artanh exp)
         {
@@ -815,7 +815,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Cosh exp)
         {
@@ -833,7 +833,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Coth exp)
         {
@@ -853,7 +853,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Csch exp)
         {
@@ -873,7 +873,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Sech exp)
         {
@@ -893,7 +893,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Sinh exp)
         {
@@ -911,7 +911,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Tanh exp)
         {

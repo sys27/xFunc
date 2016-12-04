@@ -506,6 +506,41 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("add(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Add));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("sub(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Sub));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("mul(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Mul));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("div(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Div));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("pow(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Pow));
+                        i += 3;
+
+                        continue;
+                    }
                     if (sub.StartsWith("abs(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Absolute));
@@ -765,7 +800,7 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("arccot(", StringComparison.Ordinal) || 
+                    if (sub.StartsWith("arccot(", StringComparison.Ordinal) ||
                         sub.StartsWith("arcctg(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.Arccotangent));
@@ -928,8 +963,8 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("gcd(", StringComparison.Ordinal) || 
-                        sub.StartsWith("gcf(", StringComparison.Ordinal) || 
+                    if (sub.StartsWith("gcd(", StringComparison.Ordinal) ||
+                        sub.StartsWith("gcf(", StringComparison.Ordinal) ||
                         sub.StartsWith("hcf(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.GCD));
@@ -937,7 +972,7 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (sub.StartsWith("lcm(",  StringComparison.Ordinal) || 
+                    if (sub.StartsWith("lcm(", StringComparison.Ordinal) ||
                         sub.StartsWith("scm(", StringComparison.Ordinal))
                     {
                         tokens.Add(new FunctionToken(Functions.LCM));
@@ -1124,7 +1159,7 @@ namespace xFunc.Maths
                     {
                         var magnitude = 0.0;
                         var phase = 1.0;
-                        
+
                         var phaseToken = tokens.LastOrDefault() as NumberToken;
                         if (phaseToken == null)
                             throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));

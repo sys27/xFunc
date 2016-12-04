@@ -170,6 +170,16 @@ namespace xFunc.Maths
 
             switch (token.Function)
             {
+                case Functions.Add:
+                    exp = new Add(); break;
+                case Functions.Sub:
+                    exp = new Sub(); break;
+                case Functions.Mul:
+                    exp = new Mul(); break;
+                case Functions.Div:
+                    exp = new Div(); break;
+                case Functions.Pow:
+                    exp = new Pow(); break;
                 case Functions.Absolute:
                     exp = new Abs(); break;
                 case Functions.Sine:

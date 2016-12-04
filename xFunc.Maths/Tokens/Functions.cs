@@ -24,6 +24,26 @@ namespace xFunc.Maths.Tokens
     {
 
         /// <summary>
+        /// The Add function
+        /// </summary>
+        Add,
+        /// <summary>
+        /// The Sub function
+        /// </summary>
+        Sub,
+        /// <summary>
+        /// The Mul function
+        /// </summary>
+        Mul,
+        /// <summary>
+        /// The Div function
+        /// </summary>
+        Div,
+        /// <summary>
+        /// The Pow function
+        /// </summary>
+        Pow,
+        /// <summary>
         /// abs
         /// </summary>
         Absolute,

@@ -1474,6 +1474,101 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void AddTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Add, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Add(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void SubTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Sub, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sub(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void MulTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Mul, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Mul(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void DivTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Div, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Div(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void PowTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Pow, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(1),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Pow(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

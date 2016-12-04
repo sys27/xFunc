@@ -41,7 +41,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Abs exp)
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Add exp)
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Ceil exp)
@@ -80,7 +80,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Define exp)
@@ -93,7 +93,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Del exp)
@@ -106,7 +106,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Derivative exp)
@@ -119,7 +119,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Div exp)
@@ -132,7 +132,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Exp exp)
@@ -145,7 +145,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Fact exp)
@@ -158,7 +158,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Floor exp)
@@ -171,7 +171,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(GCD exp)
@@ -184,7 +184,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Lb exp)
@@ -197,7 +197,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(LCM exp)
@@ -210,7 +210,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Lg exp)
@@ -223,7 +223,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Ln exp)
@@ -236,7 +236,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Log exp)
@@ -249,7 +249,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Mod exp)
@@ -262,7 +262,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Mul exp)
@@ -275,7 +275,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Number exp)
@@ -288,7 +288,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Pow exp)
@@ -301,7 +301,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Root exp)
@@ -314,7 +314,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Round exp)
@@ -327,7 +327,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Simplify exp)
@@ -340,7 +340,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sqrt exp)
@@ -353,7 +353,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sub exp)
@@ -366,7 +366,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(UnaryMinus exp)
@@ -379,7 +379,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Undefine exp)
@@ -392,7 +392,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(UserFunction exp)
@@ -405,7 +405,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Variable exp)
@@ -418,7 +418,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(DelegateExpression exp)
@@ -435,7 +435,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Vector exp)
@@ -448,7 +448,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Matrix exp)
@@ -461,7 +461,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Determinant exp)
@@ -474,7 +474,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Inverse exp)
@@ -487,7 +487,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Transpose exp)
@@ -504,7 +504,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(ComplexNumber exp)
@@ -517,7 +517,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Conjugate exp)
@@ -530,7 +530,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Im exp)
@@ -543,7 +543,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Phase exp)
@@ -556,7 +556,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Re exp)
@@ -569,7 +569,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Reciprocal exp)
@@ -586,7 +586,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arccos exp)
@@ -599,7 +599,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arccot exp)
@@ -612,7 +612,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arccsc exp)
@@ -625,7 +625,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcsec exp)
@@ -638,7 +638,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcsin exp)
@@ -651,7 +651,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arctan exp)
@@ -664,7 +664,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Cos exp)
@@ -677,7 +677,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Cot exp)
@@ -690,7 +690,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Csc exp)
@@ -703,7 +703,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sec exp)
@@ -716,7 +716,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sin exp)
@@ -729,7 +729,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Tan exp)
@@ -746,7 +746,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcosh exp)
@@ -759,7 +759,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcoth exp)
@@ -772,7 +772,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arcsch exp)
@@ -785,7 +785,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arsech exp)
@@ -798,7 +798,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Arsinh exp)
@@ -811,7 +811,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Artanh exp)
@@ -824,7 +824,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Cosh exp)
@@ -837,7 +837,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Coth exp)
@@ -850,7 +850,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Csch exp)
@@ -863,7 +863,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sech exp)
@@ -876,7 +876,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sinh exp)
@@ -889,7 +889,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Tanh exp)
@@ -906,7 +906,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Avg exp)
@@ -919,7 +919,20 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        public virtual TResult Analyze(Count exp)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Max exp)
@@ -932,7 +945,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Min exp)
@@ -945,7 +958,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Product exp)
@@ -958,7 +971,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sum exp)
@@ -975,7 +988,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Expressions.LogicalAndBitwise.And exp)
@@ -988,7 +1001,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Bool exp)
@@ -1001,7 +1014,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Equality exp)
@@ -1014,7 +1027,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Implication exp)
@@ -1027,7 +1040,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(NAnd exp)
@@ -1040,7 +1053,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(NOr exp)
@@ -1053,7 +1066,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Not exp)
@@ -1066,7 +1079,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Expressions.LogicalAndBitwise.Or exp)
@@ -1079,7 +1092,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(XOr exp)
@@ -1096,7 +1109,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(AddAssign exp)
@@ -1109,7 +1122,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Expressions.Programming.And exp)
@@ -1122,7 +1135,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Dec exp)
@@ -1135,7 +1148,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(DivAssign exp)
@@ -1148,7 +1161,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Equal exp)
@@ -1161,7 +1174,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(For exp)
@@ -1174,7 +1187,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(GreaterOrEqual exp)
@@ -1187,7 +1200,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(GreaterThan exp)
@@ -1200,7 +1213,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(If exp)
@@ -1213,7 +1226,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Inc exp)
@@ -1226,7 +1239,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(LessOrEqual exp)
@@ -1239,7 +1252,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(LessThan exp)
@@ -1252,7 +1265,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(MulAssign exp)
@@ -1265,7 +1278,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(NotEqual exp)
@@ -1278,7 +1291,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Expressions.Programming.Or exp)
@@ -1291,7 +1304,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(SubAssign exp)
@@ -1304,7 +1317,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
-        /// The result of analisys.
+        /// The result of analysis.
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(While exp)

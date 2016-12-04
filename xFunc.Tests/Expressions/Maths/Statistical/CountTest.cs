@@ -21,31 +21,22 @@ using Xunit;
 namespace xFunc.Tests.Expressions.Maths.Statistical
 {
 
-    public class MinTest
+    public class CountTest
     {
 
         [Fact]
         public void OneNumberTest()
         {
-            var exp = new Min(new[] { new Number(2) }, 1);
+            var exp = new Count(new[] { new Number(2) }, 1);
             var result = exp.Execute();
 
-            Assert.Equal(2.0, result);
+            Assert.Equal(1.0, result);
         }
 
         [Fact]
         public void TwoNumberTest()
         {
-            var exp = new Min(new[] { new Number(2), new Number(4) }, 2);
-            var result = exp.Execute();
-
-            Assert.Equal(2.0, result);
-        }
-
-        [Fact]
-        public void ThreeNumberTest()
-        {
-            var exp = new Min(new[] { new Number(9), new Number(2), new Number(4) }, 3);
+            var exp = new Count(new[] { new Number(2), new Number(4) }, 2);
             var result = exp.Execute();
 
             Assert.Equal(2.0, result);
@@ -54,36 +45,36 @@ namespace xFunc.Tests.Expressions.Maths.Statistical
         [Fact]
         public void VectorTest()
         {
-            var exp = new Min(new[] { new Vector(new[] { new Number(1), new Number(2), new Number(3) }) }, 1);
+            var exp = new Count(new[] { new Vector(new[] { new Number(1), new Number(2), new Number(3) }) }, 1);
             var result = exp.Execute();
 
-            Assert.Equal(1.0, result);
+            Assert.Equal(3.0, result);
         }
 
         [Fact]
         public void ArgTypeTest()
         {
             Assert.Throws<ParameterTypeMismatchException>(() =>
-            new Min(new[] {
-                new Vector(new[] { new Number(1), new Number(2), new Number(3), }),
-                new Vector(new[] { new Number(1), new Number(2), new Number(3), })
-            }, 2));
+                new Count(new[] {
+                    new Vector(new[] { new Number(1), new Number(2), new Number(3), }),
+                    new Vector(new[] { new Number(1), new Number(2), new Number(3), })
+                }, 2));
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var sum = new Min(new[] { new Number(1), new Number(2) }, 2);
+            var sum = new Count(new[] { new Number(1), new Number(2) }, 2);
 
-            Assert.Equal("min(1, 2)", sum.ToString());
+            Assert.Equal("count(1, 2)", sum.ToString());
         }
 
         [Fact]
         public void ToStringTest2()
         {
-            var sum = new Min(new[] { new Vector(new[] { new Number(1), new Number(2) }) }, 1);
+            var sum = new Count(new[] { new Vector(new[] { new Number(1), new Number(2) }) }, 1);
 
-            Assert.Equal("min({1, 2})", sum.ToString());
+            Assert.Equal("count({1, 2})", sum.ToString());
         }
 
     }

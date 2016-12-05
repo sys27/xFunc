@@ -177,4 +177,7 @@
   <data name="FormatException" xml:space="preserve">
     <value>Строка '{0}' имеет неправильный формат.</value>
   </data>
+  <data name="NotEnoughParams" xml:space="preserve">
+    <value>Недостаточно параметров.</value>
+  </data>
 </root>

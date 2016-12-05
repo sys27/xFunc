@@ -2995,6 +2995,12 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void NotEnoughParamsTest()
+        {
+            Assert.Throws<LexerException>(() => lexer.Tokenize("deriv(x,)"));
+        }
+
     }
 
 }

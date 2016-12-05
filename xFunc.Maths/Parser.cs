@@ -29,16 +29,13 @@ namespace xFunc.Maths
     /// </summary>
     public class Parser : IParser
     {
-        
+
         private IExpressionFactory factory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IExpressionFactory"/>.
         /// </summary>
-        public Parser()
-            : this(new ExpressionFactory())
-        {
-        }
+        public Parser() : this(new ExpressionFactory()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser" /> class.
@@ -197,10 +194,6 @@ namespace xFunc.Maths
                             break;
                     }
                 }
-                else if (token is NumberToken || token is VariableToken)
-                {
-                    output.Add(token);
-                }
                 else
                 {
                     while (stack.Count != 0 && (stackToken = stack.Peek()).Priority >= token.Priority)
@@ -219,7 +212,7 @@ namespace xFunc.Maths
 
             return output;
         }
-        
+
         /// <summary>
         /// Gets or sets the expression factory.
         /// </summary>
@@ -237,7 +230,7 @@ namespace xFunc.Maths
                 factory = value;
             }
         }
-        
+
     }
 
 }

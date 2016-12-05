@@ -169,6 +169,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not enough parameters..
+        /// </summary>
+        internal static string NotEnoughParams {
+            get {
+                return ResourceManager.GetString("NotEnoughParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The function is not specified..
         /// </summary>
         internal static string NotSpecifiedFunction {

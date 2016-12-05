@@ -177,4 +177,7 @@
   <data name="FormatException" xml:space="preserve">
     <value>Рядок '{0}' має неправильний формат.</value>
   </data>
+  <data name="NotEnoughParams" xml:space="preserve">
+    <value>Недостатньо параметрів.</value>
+  </data>
 </root>

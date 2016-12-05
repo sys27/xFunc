@@ -238,6 +238,9 @@ namespace xFunc.Maths
                 }
                 else if (letter == ',')
                 {
+                    if (i + 1 < function.Length && function[i + 1] == ')')
+                        throw new LexerException(Resource.NotEnoughParams);
+
                     tokens.Add(new SymbolToken(Symbols.Comma));
                 }
                 else if (letter == '~')

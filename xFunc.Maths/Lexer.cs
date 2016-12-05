@@ -147,9 +147,9 @@ namespace xFunc.Maths
 
                     tokens.Add(new OperationToken(Operations.Addition));
                 }
-                else if (letter == '-')
+                else if (letter == '-' || letter == '−')
                 {
-                    if (CheckNextSymbol(function, i, '-'))
+                    if (CheckNextSymbol(function, i, '-') || CheckNextSymbol(function, i, '−'))
                     {
                         var lastToken = tokens.LastOrDefault();
                         if (!(lastToken is VariableToken))
@@ -200,7 +200,7 @@ namespace xFunc.Maths
 
                     tokens.Add(new OperationToken(Operations.Subtraction));
                 }
-                else if (letter == '*')
+                else if (letter == '*' || letter == '×')
                 {
                     if (CheckNextSymbol(function, i, '='))
                     {
@@ -345,7 +345,7 @@ namespace xFunc.Maths
 
                         continue;
                     }
-                    if (CheckNextSymbol(function, i, '-') && CheckNextSymbol(function, i + 1, '>'))
+                    if ((CheckNextSymbol(function, i, '-') || CheckNextSymbol(function, i, '−')) && CheckNextSymbol(function, i + 1, '>'))
                     {
                         tokens.Add(new OperationToken(Operations.Equality));
                         i += 3;

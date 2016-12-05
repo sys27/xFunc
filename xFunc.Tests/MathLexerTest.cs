@@ -163,6 +163,20 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void SubAlt()
+        {
+            var tokens = lexer.Tokenize("2 − 2");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Subtraction),
+                new NumberToken(2)
+            };
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void SubAfterOpenBracket()
         {
             var tokens = lexer.Tokenize("(-2)");
@@ -224,6 +238,20 @@ namespace xFunc.Tests
         public void Mul()
         {
             var tokens = lexer.Tokenize("2 * 2");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new NumberToken(2)
+            };
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void MulAlt()
+        {
+            var tokens = lexer.Tokenize("2 × 2");
 
             var expected = new List<IToken>()
             {
@@ -381,6 +409,21 @@ namespace xFunc.Tests
         public void EqualitySymbolTest1()
         {
             var tokens = lexer.Tokenize("true <-> false");
+
+            var expected = new List<IToken>()
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Equality),
+                new BooleanToken(false)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void EqualitySymbolTestAlt1()
+        {
+            var tokens = lexer.Tokenize("true <−> false");
 
             var expected = new List<IToken>()
             {

@@ -109,6 +109,10 @@
     <Compile Include="Expressions\Statistical\Avg.cs" />
     <Compile Include="Expressions\Statistical\Max.cs" />
     <Compile Include="Expressions\Statistical\Min.cs" />
+    <Compile Include="Expressions\Statistical\Varp.cs" />
+    <Compile Include="Expressions\Statistical\Var.cs" />
+    <Compile Include="Expressions\Statistical\Stdevp.cs" />
+    <Compile Include="Expressions\Statistical\Stdev.cs" />
     <Compile Include="Expressions\Statistical\Sum.cs" />
     <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Helpers.cs" />

@@ -801,4 +801,16 @@
   <data name="CountToolTip" xml:space="preserve">
     <value>Кількість аргументів. Приклад: count(1, 2, 3).</value>
   </data>
+  <data name="VarToolTip" xml:space="preserve">
+    <value>Дисперсія випадкової величини. Приклад: var(1, 2, 3).</value>
+  </data>
+  <data name="VarpToolTip" xml:space="preserve">
+    <value>Дисперсія випадкової величини. Приклад: varp(1, 2, 3).</value>
+  </data>
+  <data name="StdevToolTip" xml:space="preserve">
+    <value>Стандартне відхилення. Приклад: stdev(1, 2, 3).</value>
+  </data>
+  <data name="StdevpToolTip" xml:space="preserve">
+    <value>Стандартне відхилення. Приклад: stdevp(1, 2, 3).</value>
+  </data>
 </root>

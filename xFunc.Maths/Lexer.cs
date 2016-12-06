@@ -1151,6 +1151,34 @@ namespace xFunc.Maths
 
                         continue;
                     }
+                    if (sub.StartsWith("var(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Var));
+                        i += 3;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("varp(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Varp));
+                        i += 4;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("stdev(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Stdev));
+                        i += 5;
+
+                        continue;
+                    }
+                    if (sub.StartsWith("stdevp(", StringComparison.Ordinal))
+                    {
+                        tokens.Add(new FunctionToken(Functions.Stdevp));
+                        i += 6;
+
+                        continue;
+                    }
                     if (letter == 'i')
                     {
                         tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));

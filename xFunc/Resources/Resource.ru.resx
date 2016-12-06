@@ -801,4 +801,16 @@
   <data name="CountToolTip" xml:space="preserve">
     <value>Количество аргументов. Пример: count(1, 2, 3).</value>
   </data>
+  <data name="VarToolTip" xml:space="preserve">
+    <value>Дисперсия случайной величины. Пример: var(1, 2, 3).</value>
+  </data>
+  <data name="VarpToolTip" xml:space="preserve">
+    <value>Дисперсия случайной величины. Пример: varp(1, 2, 3).</value>
+  </data>
+  <data name="StdevToolTip" xml:space="preserve">
+    <value>Среднеквадратическое отклонение. Пример: stdev(1, 2, 3).</value>
+  </data>
+  <data name="StdevpToolTip" xml:space="preserve">
+    <value>Среднеквадратическое отклонение. Пример: stdevp(1, 2, 3).</value>
+  </data>
 </root>

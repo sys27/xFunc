@@ -303,7 +303,23 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// The Count function
         /// </summary>
-        Count
+        Count,
+        /// <summary>
+        /// The VAR function
+        /// </summary>
+        Var,
+        /// <summary>
+        /// The VARP function
+        /// </summary>
+        Varp,
+        /// <summary>
+        /// The STDEV function
+        /// </summary>
+        Stdev,
+        /// <summary>
+        /// The STDEVP function
+        /// </summary>
+        Stdevp
 
     }
 

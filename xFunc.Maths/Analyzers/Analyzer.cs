@@ -967,6 +967,32 @@ namespace xFunc.Maths.Analyzers
         }
 
         /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        public virtual TResult Analyze(Stdev exp)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        public virtual TResult Analyze(Stdevp exp)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
@@ -975,6 +1001,32 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         /// <exception cref="System.NotSupportedException">Always.</exception>
         public virtual TResult Analyze(Sum exp)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        public virtual TResult Analyze(Var exp)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">Always.</exception>
+        public virtual TResult Analyze(Varp exp)
         {
             throw new NotSupportedException();
         }

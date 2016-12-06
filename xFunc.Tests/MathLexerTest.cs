@@ -2904,6 +2904,74 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void VarTest()
+        {
+            var tokens = lexer.Tokenize("var(4, 9)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Var, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void VarpTest()
+        {
+            var tokens = lexer.Tokenize("varp(4, 9)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Varp, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void StdevTest()
+        {
+            var tokens = lexer.Tokenize("stdev(4, 9)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Stdev, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void StdevpTest()
+        {
+            var tokens = lexer.Tokenize("stdevp(4, 9)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Stdevp, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void DelTest()
         {
             var tokens = lexer.Tokenize("del(2x + 3y + 4z)");

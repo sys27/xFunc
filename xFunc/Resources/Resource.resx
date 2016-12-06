@@ -801,4 +801,16 @@
   <data name="CountToolTip" xml:space="preserve">
     <value>The Count function. Example: count(1, 2, 3).</value>
   </data>
+  <data name="VarToolTip" xml:space="preserve">
+    <value>The VAR function. Example: var(1, 2, 3).</value>
+  </data>
+  <data name="VarpToolTip" xml:space="preserve">
+    <value>The VARP function. Example: varp(1, 2, 3).</value>
+  </data>
+  <data name="StdevToolTip" xml:space="preserve">
+    <value>The STDEV function. Example: stdev(1, 2, 3).</value>
+  </data>
+  <data name="StdevpToolTip" xml:space="preserve">
+    <value>The STDEVP function. Example: stdevp(1, 2, 3).</value>
+  </data>
 </root>

@@ -480,11 +480,35 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         TResult Analyze(Product exp);
         /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Stdev exp);
+        /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Stdevp exp);
+        /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         TResult Analyze(Sum exp);
+        /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Var exp);
+        /// <summary>
+        /// Analyzes the specified exppression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Varp exp);
 
         #endregion Statistical
 

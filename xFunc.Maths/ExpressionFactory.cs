@@ -304,6 +304,14 @@ namespace xFunc.Maths
                     exp = new Avg(); break;
                 case Functions.Count:
                     exp = new Count(); break;
+                case Functions.Var:
+                    exp = new Var(); break;
+                case Functions.Varp:
+                    exp = new Varp(); break;
+                case Functions.Stdev:
+                    exp = new Stdev(); break;
+                case Functions.Stdevp:
+                    exp = new Stdevp(); break;
                 default:
                     exp = null; break;
             }

@@ -1852,6 +1852,24 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The STDEVP function. Example: stdevp(1, 2, 3)..
+        /// </summary>
+        public static string StdevpToolTip {
+            get {
+                return ResourceManager.GetString("StdevpToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The STDEV function. Example: stdev(1, 2, 3)..
+        /// </summary>
+        public static string StdevToolTip {
+            get {
+                return ResourceManager.GetString("StdevToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &quot;-=&quot; operator. Example: x -= 2..
         /// </summary>
         public static string SubAssignToolTip {
@@ -2059,6 +2077,15 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VARP function. Example: varp(1, 2, 3)..
+        /// </summary>
+        public static string VarpToolTip {
+            get {
+                return ResourceManager.GetString("VarpToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shows the window with all entered variables..
         /// </summary>
         public static string VarScreenTitText {
@@ -2073,6 +2100,15 @@ namespace xFunc.Resources {
         public static string VarScreenTitTitle {
             get {
                 return ResourceManager.GetString("VarScreenTitTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VAR function. Example: var(1, 2, 3)..
+        /// </summary>
+        public static string VarToolTip {
+            get {
+                return ResourceManager.GetString("VarToolTip", resourceCulture);
             }
         }
         

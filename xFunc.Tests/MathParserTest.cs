@@ -1448,6 +1448,82 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void VarTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Var, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Var(new[] { new Number(4), new Number(9) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void VarpTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Varp, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Varp(new[] { new Number(4), new Number(9) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void StdevTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Stdev, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Stdev(new[] { new Number(4), new Number(9) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void StdevpTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Stdevp, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(4),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(9),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Stdevp(new[] { new Number(4), new Number(9) }, 2);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void DelTest()
         {
             var tokens = new List<IToken>

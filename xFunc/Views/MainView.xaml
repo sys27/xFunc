@@ -772,6 +772,7 @@ limitations under the License. -->
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -812,7 +813,41 @@ limitations under the License. -->
                                 <ToolTip Content="{x:Static res:Resource.CountToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="0" Tag="sum" Click="InsertDoubleArgFunc_Click">
+
+                        <Button Grid.Row="1" Grid.Column="0" Tag="var" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>var(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.VarToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1" Tag="varp" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>varp(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.VarpToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="2" Tag="stdev" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>stdev(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.StdevToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="3" Tag="stdevp" Click="InsertDoubleArgFunc_Click">
+                            <Viewbox>
+                                <TextBlock>stdevp(x)</TextBlock>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="{x:Static res:Resource.StdevpToolTip}" />
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button Grid.Row="2" Grid.Column="0" Tag="sum" Click="InsertDoubleArgFunc_Click">
                             <Viewbox>
                                 <TextBlock>∑</TextBlock>
                             </Viewbox>
@@ -820,7 +855,7 @@ limitations under the License. -->
                                 <ToolTip Content="{x:Static res:Resource.SumToolTip}" />
                             </Button.ToolTip>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="1" Tag="product" Click="InsertDoubleArgFunc_Click">
+                        <Button Grid.Row="2" Grid.Column="1" Tag="product" Click="InsertDoubleArgFunc_Click">
                             <Viewbox>
                                 <TextBlock>∏</TextBlock>
                             </Viewbox>

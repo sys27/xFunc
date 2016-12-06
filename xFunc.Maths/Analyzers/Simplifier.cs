@@ -1552,7 +1552,59 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Stdev exp)
+        {
+            return AnalyzeDiffParams(exp);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Stdevp exp)
+        {
+            return AnalyzeDiffParams(exp);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sum exp)
+        {
+            return AnalyzeDiffParams(exp);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Var exp)
+        {
+            return AnalyzeDiffParams(exp);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Varp exp)
         {
             return AnalyzeDiffParams(exp);
         }

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokens;
 
@@ -32,6 +33,11 @@ namespace xFunc.Maths
         private readonly HashSet<string> notVar;
         private readonly HashSet<char> unaryMinusOp;
 
+        private Regex regexSymbols;
+        private Regex regexOperations;
+        private Regex regexFunctions;
+        private Regex regexConst;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
         /// </summary>
@@ -39,6 +45,546 @@ namespace xFunc.Maths
         {
             notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor", "mod" };
             unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=', ',' };
+
+            regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexOperations = new Regex(@"\G([^a-zA-Z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexFunctions = new Regex(@"\G([a-z][0-9a-z]*)(\(|{)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexConst = new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        }
+
+        private void CreateSymbol(string match, IList<IToken> tokens)
+        {
+            if (match == "(")
+            {
+                tokens.Add(new SymbolToken(Symbols.OpenBracket));
+            }
+            else if (match == ")")
+            {
+                var lastToken = tokens.LastOrDefault() as SymbolToken;
+                if (lastToken != null && lastToken.Symbol == Symbols.Comma)
+                    throw new LexerException(Resource.NotEnoughParams);
+
+                tokens.Add(new SymbolToken(Symbols.CloseBracket));
+            }
+            else if (match == "{")
+            {
+                if (!(tokens.LastOrDefault() is FunctionToken))
+                    tokens.Add(new FunctionToken(Functions.Vector));
+
+                tokens.Add(new SymbolToken(Symbols.OpenBrace));
+            }
+            else if (match == "}")
+            {
+                tokens.Add(new SymbolToken(Symbols.CloseBrace));
+            }
+            else if (match == ",")
+            {
+                tokens.Add(new SymbolToken(Symbols.Comma));
+            }
+            else
+            {
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+            }
+        }
+
+        private void CreateOperations(string match, IList<IToken> tokens)
+        {
+            if (match == "+=")
+            {
+                tokens.Add(new OperationToken(Operations.AddAssign));
+            }
+            else if (match == "-=" || match == "−=")
+            {
+                tokens.Add(new OperationToken(Operations.SubAssign));
+            }
+            else if (match == "*=" || match == "×=")
+            {
+                tokens.Add(new OperationToken(Operations.MulAssign));
+            }
+            else if (match == "*" || match == "×")
+            {
+                tokens.Add(new OperationToken(Operations.Multiplication));
+            }
+            else if (match == "/")
+            {
+                tokens.Add(new OperationToken(Operations.Division));
+            }
+            else if (match == "^")
+            {
+                tokens.Add(new OperationToken(Operations.Exponentiation));
+            }
+            else if (match == "!")
+            {
+                var lastToken = tokens.LastOrDefault();
+                if (lastToken != null)
+                {
+                    var symbol = lastToken as SymbolToken;
+                    if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
+                    {
+                        tokens.Add(new OperationToken(Operations.Factorial));
+                        return;
+                    }
+                }
+
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+            }
+            else if (match == "%" || match == "mod")
+            {
+                tokens.Add(new OperationToken(Operations.Modulo));
+            }
+            else if (match == "&&")
+            {
+                tokens.Add(new OperationToken(Operations.ConditionalAnd));
+            }
+            else if (match == "||")
+            {
+                tokens.Add(new OperationToken(Operations.ConditionalOr));
+            }
+            else if (match == "==")
+            {
+                tokens.Add(new OperationToken(Operations.Equal));
+            }
+            else if (match == "!=")
+            {
+                tokens.Add(new OperationToken(Operations.NotEqual));
+            }
+            else if (match == "<=")
+            {
+                tokens.Add(new OperationToken(Operations.LessOrEqual));
+            }
+            else if (match == "<")
+            {
+                tokens.Add(new OperationToken(Operations.LessThan));
+            }
+            else if (match == ">=")
+            {
+                tokens.Add(new OperationToken(Operations.GreaterOrEqual));
+            }
+            else if (match == ">")
+            {
+                tokens.Add(new OperationToken(Operations.GreaterThan));
+            }
+            else if (match == "++")
+            {
+                tokens.Add(new OperationToken(Operations.Increment));
+            }
+            else if (match == "--" || match == "−−")
+            {
+                tokens.Add(new OperationToken(Operations.Decrement));
+            }
+            else if (match == "+")
+            {
+                var lastToken = tokens.LastOrDefault();
+                if (lastToken == null)
+                {
+                    return;
+                }
+                else
+                {
+                    var symbolToken = lastToken as SymbolToken;
+                    if (symbolToken != null && (symbolToken.Symbol == Symbols.OpenBracket ||
+                                                symbolToken.Symbol == Symbols.OpenBrace))
+                        return;
+                }
+
+                tokens.Add(new OperationToken(Operations.Addition));
+            }
+            else if (match == "-" || match == "−")
+            {
+                var lastToken = tokens.LastOrDefault();
+                if (lastToken == null)
+                {
+                    tokens.Add(new OperationToken(Operations.UnaryMinus));
+                }
+                else
+                {
+                    var symbolToken = lastToken as SymbolToken;
+                    if (symbolToken != null && (symbolToken.Symbol == Symbols.OpenBracket ||
+                                                symbolToken.Symbol == Symbols.OpenBrace ||
+                                                symbolToken.Symbol == Symbols.Comma))
+                    {
+                        tokens.Add(new OperationToken(Operations.UnaryMinus));
+                    }
+                    else
+                    {
+                        var operationToken = lastToken as OperationToken;
+                        if (operationToken != null && (operationToken.Operation == Operations.Exponentiation ||
+                                                       operationToken.Operation == Operations.Division ||
+                                                       operationToken.Operation == Operations.Assign ||
+                                                       operationToken.Operation == Operations.AddAssign ||
+                                                       operationToken.Operation == Operations.SubAssign ||
+                                                       operationToken.Operation == Operations.MulAssign ||
+                                                       operationToken.Operation == Operations.DivAssign))
+                        {
+                            tokens.Add(new OperationToken(Operations.UnaryMinus));
+                        }
+                        else
+                        {
+                            tokens.Add(new OperationToken(Operations.Subtraction));
+                        }
+                    }
+                }
+            }
+            else if (match == "/=")
+            {
+                tokens.Add(new OperationToken(Operations.DivAssign));
+            }
+            else if (match == ":=")
+            {
+                tokens.Add(new OperationToken(Operations.Assign));
+            }
+            else if (match == "not" || match == "~")
+            {
+                var lastToken = tokens.LastOrDefault();
+                if (lastToken != null)
+                {
+                    var symbol = lastToken as SymbolToken;
+                    if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
+                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+                }
+
+                tokens.Add(new OperationToken(Operations.Not));
+            }
+            else if (match == "and" || match == "&")
+            {
+                tokens.Add(new OperationToken(Operations.And));
+            }
+            else if (match == "or" || match == "|")
+            {
+                tokens.Add(new OperationToken(Operations.Or));
+            }
+            else if (match == "xor")
+            {
+                tokens.Add(new OperationToken(Operations.XOr));
+            }
+            else if (match == "impl" || match == "->" || match == "−>" || match == "=>")
+            {
+                tokens.Add(new OperationToken(Operations.Implication));
+            }
+            else if (match == "eq" || match == "<->" || match == "<−>" || match == "<=>")
+            {
+                tokens.Add(new OperationToken(Operations.Equality));
+            }
+            else if (match == "nor")
+            {
+                tokens.Add(new OperationToken(Operations.NOr));
+            }
+            else if (match == "nand")
+            {
+                tokens.Add(new OperationToken(Operations.NAnd));
+            }
+            else
+            {
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+            }
+        }
+
+        private void CreateFunction(string match, IList<IToken> tokens)
+        {
+            if (match == "add")
+            {
+                tokens.Add(new FunctionToken(Functions.Add));
+            }
+            else if (match == "sub")
+            {
+                tokens.Add(new FunctionToken(Functions.Sub));
+            }
+            else if (match == "mul")
+            {
+                tokens.Add(new FunctionToken(Functions.Mul));
+            }
+            else if (match == "div")
+            {
+                tokens.Add(new FunctionToken(Functions.Div));
+            }
+            else if (match == "pow")
+            {
+                tokens.Add(new FunctionToken(Functions.Pow));
+            }
+            else if (match == "abs")
+            {
+                tokens.Add(new FunctionToken(Functions.Absolute));
+            }
+            else if (match == "sin")
+            {
+                tokens.Add(new FunctionToken(Functions.Sine));
+            }
+            else if (match == "cos")
+            {
+                tokens.Add(new FunctionToken(Functions.Cosine));
+            }
+            else if (match == "tg" || match == "tan")
+            {
+                tokens.Add(new FunctionToken(Functions.Tangent));
+            }
+            else if (match == "ctg" || match == "cot")
+            {
+                tokens.Add(new FunctionToken(Functions.Cotangent));
+            }
+            else if (match == "sec")
+            {
+                tokens.Add(new FunctionToken(Functions.Secant));
+            }
+            else if (match == "csc" || match == "cosec")
+            {
+                tokens.Add(new FunctionToken(Functions.Cosecant));
+            }
+            else if (match == "arcsin")
+            {
+                tokens.Add(new FunctionToken(Functions.Arcsine));
+            }
+            else if (match == "arccos")
+            {
+                tokens.Add(new FunctionToken(Functions.Arccosine));
+            }
+            else if (match == "arctg" || match == "arctan")
+            {
+                tokens.Add(new FunctionToken(Functions.Arctangent));
+            }
+            else if (match == "arcctg" || match == "arccot")
+            {
+                tokens.Add(new FunctionToken(Functions.Arccotangent));
+            }
+            else if (match == "arcsec")
+            {
+                tokens.Add(new FunctionToken(Functions.Arcsecant));
+            }
+            else if (match == "arccsc" || match == "arccosec")
+            {
+                tokens.Add(new FunctionToken(Functions.Arccosecant));
+            }
+            else if (match == "sqrt")
+            {
+                tokens.Add(new FunctionToken(Functions.Sqrt));
+            }
+            else if (match == "root")
+            {
+                tokens.Add(new FunctionToken(Functions.Root));
+            }
+            else if (match == "ln")
+            {
+                tokens.Add(new FunctionToken(Functions.Ln));
+            }
+            else if (match == "lg")
+            {
+                tokens.Add(new FunctionToken(Functions.Lg));
+            }
+            else if (match == "lb" || match == "log2")
+            {
+                tokens.Add(new FunctionToken(Functions.Lb));
+            }
+            else if (match == "log")
+            {
+                tokens.Add(new FunctionToken(Functions.Log));
+            }
+            else if (match == "sh" || match == "sinh")
+            {
+                tokens.Add(new FunctionToken(Functions.Sineh));
+            }
+            else if (match == "ch" || match == "cosh")
+            {
+                tokens.Add(new FunctionToken(Functions.Cosineh));
+            }
+            else if (match == "th" || match == "tanh")
+            {
+                tokens.Add(new FunctionToken(Functions.Tangenth));
+            }
+            else if (match == "cth" || match == "coth")
+            {
+                tokens.Add(new FunctionToken(Functions.Cotangenth));
+            }
+            else if (match == "sech")
+            {
+                tokens.Add(new FunctionToken(Functions.Secanth));
+            }
+            else if (match == "csch")
+            {
+                tokens.Add(new FunctionToken(Functions.Cosecanth));
+            }
+            else if (match == "arsh" || match == "arsinh")
+            {
+                tokens.Add(new FunctionToken(Functions.Arsineh));
+            }
+            else if (match == "arch" || match == "arcosh")
+            {
+                tokens.Add(new FunctionToken(Functions.Arcosineh));
+            }
+            else if (match == "arth" || match == "artanh")
+            {
+                tokens.Add(new FunctionToken(Functions.Artangenth));
+            }
+            else if (match == "arcth" || match == "arcoth")
+            {
+                tokens.Add(new FunctionToken(Functions.Arcotangenth));
+            }
+            else if (match == "arsch" || match == "arsech")
+            {
+                tokens.Add(new FunctionToken(Functions.Arsecanth));
+            }
+            else if (match == "arcsch")
+            {
+                tokens.Add(new FunctionToken(Functions.Arcosecanth));
+            }
+            else if (match == "exp")
+            {
+                tokens.Add(new FunctionToken(Functions.Exp));
+            }
+            else if (match == "gcd" || match == "gcf" || match == "hcf")
+            {
+                tokens.Add(new FunctionToken(Functions.GCD));
+            }
+            else if (match == "lcm" || match == "scm")
+            {
+                tokens.Add(new FunctionToken(Functions.LCM));
+            }
+            else if (match == "fact")
+            {
+                tokens.Add(new FunctionToken(Functions.Factorial));
+            }
+            else if (match == "sum")
+            {
+                tokens.Add(new FunctionToken(Functions.Sum));
+            }
+            else if (match == "product")
+            {
+                tokens.Add(new FunctionToken(Functions.Product));
+            }
+            else if (match == "round")
+            {
+                tokens.Add(new FunctionToken(Functions.Round));
+            }
+            else if (match == "floor")
+            {
+                tokens.Add(new FunctionToken(Functions.Floor));
+            }
+            else if (match == "ceil")
+            {
+                tokens.Add(new FunctionToken(Functions.Ceil));
+            }
+            else if (match == "if")
+            {
+                tokens.Add(new FunctionToken(Functions.If));
+            }
+            else if (match == "for")
+            {
+                tokens.Add(new FunctionToken(Functions.For));
+            }
+            else if (match == "while")
+            {
+                tokens.Add(new FunctionToken(Functions.While));
+            }
+            else if (match == "del" || match == "nabla")
+            {
+                tokens.Add(new FunctionToken(Functions.Del));
+            }
+            else if (match == "deriv")
+            {
+                tokens.Add(new FunctionToken(Functions.Derivative));
+            }
+            else if (match == "simplify")
+            {
+                tokens.Add(new FunctionToken(Functions.Simplify));
+            }
+            else if (match == "def")
+            {
+                tokens.Add(new FunctionToken(Functions.Define));
+            }
+            else if (match == "undef")
+            {
+                tokens.Add(new FunctionToken(Functions.Undefine));
+            }
+            else if (match == "transpose")
+            {
+                tokens.Add(new FunctionToken(Functions.Transpose));
+            }
+            else if (match == "det" || match == "determinant")
+            {
+                tokens.Add(new FunctionToken(Functions.Determinant));
+            }
+            else if (match == "inverse")
+            {
+                tokens.Add(new FunctionToken(Functions.Inverse));
+            }
+            else if (match == "vector")
+            {
+                tokens.Add(new FunctionToken(Functions.Vector));
+            }
+            else if (match == "matrix")
+            {
+                tokens.Add(new FunctionToken(Functions.Matrix));
+            }
+            else if (match == "re" || match == "real")
+            {
+                tokens.Add(new FunctionToken(Functions.Re));
+            }
+            else if (match == "im" || match == "imaginary")
+            {
+                tokens.Add(new FunctionToken(Functions.Im));
+            }
+            else if (match == "phase")
+            {
+                tokens.Add(new FunctionToken(Functions.Phase));
+            }
+            else if (match == "conjugate")
+            {
+                tokens.Add(new FunctionToken(Functions.Conjugate));
+            }
+            else if (match == "reciprocal")
+            {
+                tokens.Add(new FunctionToken(Functions.Reciprocal));
+            }
+            else if (match == "min")
+            {
+                tokens.Add(new FunctionToken(Functions.Min));
+            }
+            else if (match == "max")
+            {
+                tokens.Add(new FunctionToken(Functions.Max));
+            }
+            else if (match == "avg")
+            {
+                tokens.Add(new FunctionToken(Functions.Avg));
+            }
+            else if (match == "count")
+            {
+                tokens.Add(new FunctionToken(Functions.Count));
+            }
+            else if (match == "var")
+            {
+                tokens.Add(new FunctionToken(Functions.Var));
+            }
+            else if (match == "varp")
+            {
+                tokens.Add(new FunctionToken(Functions.Varp));
+            }
+            else if (match == "stdev")
+            {
+                tokens.Add(new FunctionToken(Functions.Stdev));
+            }
+            else if (match == "stdevp")
+            {
+                tokens.Add(new FunctionToken(Functions.Stdevp));
+            }
+            else
+            {
+                tokens.Add(new UserFunctionToken(match));
+            }
+        }
+
+        private void CreateConst(string match, IList<IToken> tokens)
+        {
+            if (match == "true")
+            {
+                tokens.Add(new BooleanToken(true));
+            }
+            else if (match == "false")
+            {
+                tokens.Add(new BooleanToken(false));
+            }
+            else
+            {
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+            }
         }
 
         private static bool IsBalanced(string str)
@@ -76,278 +622,42 @@ namespace xFunc.Maths
                 throw new LexerException(Resource.NotBalanced);
 
             function = function.ToLower()
-                               .Replace(" ", "")
-                               .Replace("\t", "")
                                .Replace("\n", "")
                                .Replace("\r", "");
 
             var tokens = new List<IToken>();
+            Match match = null;
 
             for (int i = 0; i < function.Length;)
             {
-                char letter = function[i];
-                if (letter == '(')
+                var letter = function[i];
+                if (letter == ' ' || letter == '\t')
                 {
-                    tokens.Add(new SymbolToken(Symbols.OpenBracket));
-                }
-                else if (letter == '{')
-                {
-                    if (!(tokens.LastOrDefault() is FunctionToken))
-                        tokens.Add(new FunctionToken(Functions.Vector));
-
-                    tokens.Add(new SymbolToken(Symbols.OpenBrace));
-                }
-                else if (letter == ')')
-                {
-                    tokens.Add(new SymbolToken(Symbols.CloseBracket));
-                }
-                else if (letter == '}')
-                {
-                    tokens.Add(new SymbolToken(Symbols.CloseBrace));
-                }
-                else if (letter == '+')
-                {
-                    if (CheckNextSymbol(function, i, '+'))
-                    {
-                        tokens.Add(new OperationToken(Operations.Increment));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.AddAssign));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    if (i - 1 >= 0)
-                    {
-                        char pre = function[i - 1];
-                        if (pre == '(' || pre == '{')
-                        {
-                            i++;
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        i++;
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.Addition));
-                }
-                else if (letter == '-' || letter == '−')
-                {
-                    if (CheckNextSymbol(function, i, '-') || CheckNextSymbol(function, i, '−'))
-                    {
-                        tokens.Add(new OperationToken(Operations.Decrement));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.SubAssign));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (CheckNextSymbol(function, i, '>'))
-                    {
-                        tokens.Add(new OperationToken(Operations.Implication));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    if (i - 1 >= 0)
-                    {
-                        char pre = function[i - 1];
-                        if (unaryMinusOp.Contains(pre))
-                        {
-                            tokens.Add(new OperationToken(Operations.UnaryMinus));
-
-                            i++;
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        tokens.Add(new OperationToken(Operations.UnaryMinus));
-
-                        i++;
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.Subtraction));
-                }
-                else if (letter == '*' || letter == '×')
-                {
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.MulAssign));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.Multiplication));
-                }
-                else if (letter == '/')
-                {
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.DivAssign));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.Division));
-                }
-                else if (letter == '^')
-                {
-                    tokens.Add(new OperationToken(Operations.Exponentiation));
-                }
-                else if (letter == ',')
-                {
-                    if (i + 1 < function.Length && function[i + 1] == ')')
-                        throw new LexerException(Resource.NotEnoughParams);
-
-                    tokens.Add(new SymbolToken(Symbols.Comma));
-                }
-                else if (letter == '~')
-                {
-                    var lastToken = tokens.LastOrDefault();
-                    if (lastToken != null)
-                    {
-                        var symbol = lastToken as SymbolToken;
-                        if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-                    }
-
-                    tokens.Add(new OperationToken(Operations.Not));
-                }
-                else if (letter == '&')
-                {
-                    if (CheckNextSymbol(function, i, '&'))
-                    {
-                        tokens.Add(new OperationToken(Operations.ConditionalAnd));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.And));
-                }
-                else if (letter == '|')
-                {
-                    if (CheckNextSymbol(function, i, '|'))
-                    {
-                        tokens.Add(new OperationToken(Operations.ConditionalOr));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.Or));
-                }
-                else if (letter == ':' && CheckNextSymbol(function, i, '='))
-                {
-                    tokens.Add(new OperationToken(Operations.Assign));
-                    i += 2;
-
+                    i++;
                     continue;
                 }
-                else if (letter == '=')
+
+                // symbols
+                match = regexSymbols.Match(function, i);
+                if (match.Success)
                 {
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.Equal));
-                        i += 2;
+                    CreateSymbol(match.Value, tokens);
 
-                        continue;
-                    }
-                    if (CheckNextSymbol(function, i, '>'))
-                    {
-                        tokens.Add(new OperationToken(Operations.Implication));
-                        i += 2;
-
-                        continue;
-                    }
+                    i += match.Length;
+                    continue;
                 }
-                else if (letter == '!')
+
+                // operations
+                match = regexOperations.Match(function, i);
+                if (match.Success)
                 {
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.NotEqual));
-                        i += 2;
+                    CreateOperations(match.Value, tokens);
 
-                        continue;
-                    }
-
-                    var lastToken = tokens.LastOrDefault();
-                    if (lastToken != null)
-                    {
-                        var symbol = lastToken as SymbolToken;
-                        if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
-                        {
-                            tokens.Add(new OperationToken(Operations.Factorial));
-                            i++;
-
-                            continue;
-                        }
-                    }
-
-                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
+                    i += match.Length;
+                    continue;
                 }
-                else if (letter == '<')
-                {
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        if (CheckNextSymbol(function, i + 1, '>'))
-                        {
-                            tokens.Add(new OperationToken(Operations.Equality));
-                            i += 3;
 
-                            continue;
-                        }
-
-                        tokens.Add(new OperationToken(Operations.LessOrEqual));
-                        i += 2;
-
-                        continue;
-                    }
-                    if ((CheckNextSymbol(function, i, '-') || CheckNextSymbol(function, i, '−')) && CheckNextSymbol(function, i + 1, '>'))
-                    {
-                        tokens.Add(new OperationToken(Operations.Equality));
-                        i += 3;
-
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.LessThan));
-                }
-                else if (letter == '>')
-                {
-                    if (CheckNextSymbol(function, i, '='))
-                    {
-                        tokens.Add(new OperationToken(Operations.GreaterOrEqual));
-                        i += 2;
-
-                        continue;
-                    }
-
-                    tokens.Add(new OperationToken(Operations.GreaterThan));
-                }
-                else if (letter == '%')
-                {
-                    tokens.Add(new OperationToken(Operations.Modulo));
-                }
-                else if (char.IsDigit(letter))
+                if (char.IsDigit(letter))
                 {
                     int length;
                     int j;
@@ -433,809 +743,105 @@ namespace xFunc.Maths
                     tokens.Add(new NumberToken(number));
 
                     i += length;
-
-                    var f = function.Substring(i);
-                    if (i < function.Length && char.IsLetter(function[i]) && !notVar.Any(s => f.StartsWith(s, StringComparison.Ordinal)))
-                        tokens.Add(new OperationToken(Operations.Multiplication));
-
                     continue;
                 }
-                else if (char.IsLetter(letter) || letter == '°')
+
+                if (letter == '°')
                 {
-                    var sub = function.Substring(i);
-                    if (sub.StartsWith("pi", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new VariableToken("π"));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("true", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new BooleanToken(true));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("false", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new BooleanToken(false));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("vector{", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Vector));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("matrix{", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Matrix));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("exp(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Exp));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("add(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Add));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sub(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Sub));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("mul(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Mul));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("div(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Div));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("pow(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Pow));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("abs(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Absolute));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("mod", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.Modulo));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Sineh));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sinh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Sineh));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("ch(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cosineh));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("cosh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cosineh));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("th(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Tangenth));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("tanh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Tangenth));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("cth(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cotangenth));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("coth(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cotangenth));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sech(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Secanth));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("csch(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cosecanth));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arsh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arsineh));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arsinh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arsineh));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arch(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcosineh));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arcosh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcosineh));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arth(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Artangenth));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("artanh(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Artangenth));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arcth(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcotangenth));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arcoth(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcotangenth));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arsch(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arsecanth));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arsech(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arsecanth));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arcsch(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcosecanth));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sin(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Sine));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("cosec(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cosecant));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("csc(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cosecant));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("cos(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cosine));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("tg(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Tangent));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("tan(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Tangent));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("cot(", StringComparison.Ordinal) || sub.StartsWith("ctg(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Cotangent));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sec(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Secant));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arcsin(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcsine));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arccosec(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arccosecant));
-                        i += 8;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arccsc(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arccosecant));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arccos(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arccosine));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arctg(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arctangent));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arctan(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arctangent));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arccot(", StringComparison.Ordinal) ||
-                        sub.StartsWith("arcctg(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arccotangent));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("arcsec(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Arcsecant));
-                        i += 6;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sqrt(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Sqrt));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("root(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Root));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("lg(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Lg));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("ln(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Ln));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("lb(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Lb));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("log2(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Lb));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("log(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Log));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("deriv(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Derivative));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("simplify(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Simplify));
-                        i += 8;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("del(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Del));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("nabla(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Del));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("def(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Define));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("undef(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Undefine));
-                        i += 5;
-
-                        continue;
-                    }
-
-                    if (sub.StartsWith("not(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.Not));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("and", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.And));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("or", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.Or));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("xor", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.XOr));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("impl", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.Implication));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("eq", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.Equality));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("nor", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.NOr));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("nand", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new OperationToken(Operations.NAnd));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("gcd(", StringComparison.Ordinal) ||
-                        sub.StartsWith("gcf(", StringComparison.Ordinal) ||
-                        sub.StartsWith("hcf(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.GCD));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("lcm(", StringComparison.Ordinal) ||
-                        sub.StartsWith("scm(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.LCM));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("fact(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Factorial));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("sum(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Sum));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("product(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Product));
-                        i += 7;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("round(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Round));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("floor(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Floor));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("ceil(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Ceil));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("transpose(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Transpose));
-                        i += 9;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("determinant(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Determinant));
-                        i += 11;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("det(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Determinant));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("inverse(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Inverse));
-                        i += 7;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("if(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.If));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("for(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.For));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("while(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.While));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("im(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Im));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("imaginary(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Im));
-                        i += 9;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("re(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Re));
-                        i += 2;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("real(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Re));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("phase(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Phase));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("conjugate(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Conjugate));
-                        i += 9;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("reciprocal(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Reciprocal));
-                        i += 10;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("min(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Min));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("max(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Max));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("avg(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Avg));
-                        i += 3;
+                    var magnitude = 0.0;
+                    var phase = 1.0;
 
-                        continue;
-                    }
-                    if (sub.StartsWith("count(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Count));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("var(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Var));
-                        i += 3;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("varp(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Varp));
-                        i += 4;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("stdev(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Stdev));
-                        i += 5;
-
-                        continue;
-                    }
-                    if (sub.StartsWith("stdevp(", StringComparison.Ordinal))
-                    {
-                        tokens.Add(new FunctionToken(Functions.Stdevp));
-                        i += 6;
+                    var phaseToken = tokens.LastOrDefault() as NumberToken;
+                    if (phaseToken == null)
+                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
 
-                        continue;
-                    }
-                    if (letter == 'i')
-                    {
-                        tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));
-                        i++;
+                    phase = phaseToken.Number;
+                    tokens.Remove(phaseToken);
 
-                        continue;
-                    }
-                    if (letter == '°')
+                    // binary +, - or unary -
+                    var operationToken = tokens.LastOrDefault() as OperationToken;
+                    if (operationToken != null)
                     {
-                        var magnitude = 0.0;
-                        var phase = 1.0;
-
-                        var phaseToken = tokens.LastOrDefault() as NumberToken;
-                        if (phaseToken == null)
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
-                        phase = phaseToken.Number;
-                        tokens.Remove(phaseToken);
-
-                        // binary +, - or unary -
-                        var operationToken = tokens.LastOrDefault() as OperationToken;
-                        if (operationToken != null)
+                        if (tokens.Count >= 2 && (operationToken.Operation == Operations.Addition || operationToken.Operation == Operations.Subtraction))
                         {
-                            if (tokens.Count >= 2 && (operationToken.Operation == Operations.Addition || operationToken.Operation == Operations.Subtraction))
+                            var magnitudeToken = tokens[tokens.Count - 2] as NumberToken;
+                            if (magnitudeToken != null)
                             {
-                                var magnitudeToken = tokens[tokens.Count - 2] as NumberToken;
-                                if (magnitudeToken != null)
+                                magnitude = magnitudeToken.Number;
+
+                                if (operationToken.Operation == Operations.Subtraction)
+                                    phase = -phase;
+
+                                if (tokens.Count >= 3)
                                 {
-                                    magnitude = magnitudeToken.Number;
-
-                                    if (operationToken.Operation == Operations.Subtraction)
-                                        phase = -phase;
-
-                                    if (tokens.Count >= 3)
+                                    var unaryRealToken = tokens[tokens.Count - 3] as OperationToken;
+                                    if (unaryRealToken != null && unaryRealToken.Operation == Operations.UnaryMinus)
                                     {
-                                        var unaryRealToken = tokens[tokens.Count - 3] as OperationToken;
-                                        if (unaryRealToken != null && unaryRealToken.Operation == Operations.UnaryMinus)
-                                        {
-                                            magnitude = -magnitude;
+                                        magnitude = -magnitude;
 
-                                            tokens.Remove(unaryRealToken);
-                                        }
+                                        tokens.Remove(unaryRealToken);
                                     }
-
-                                    tokens.Remove(operationToken);
-                                    tokens.Remove(magnitudeToken);
                                 }
-                            }
-                            else if (operationToken.Operation == Operations.UnaryMinus)
-                            {
-                                phase = -phase;
 
                                 tokens.Remove(operationToken);
+                                tokens.Remove(magnitudeToken);
                             }
                         }
+                        else if (operationToken.Operation == Operations.UnaryMinus)
+                        {
+                            phase = -phase;
 
-                        tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
-
-                        i++;
-                        continue;
+                            tokens.Remove(operationToken);
+                        }
                     }
 
-                    int j = i + 1;
-                    for (; j < function.Length && (char.IsLetter(function[j]) || char.IsDigit(function[j])) && !notVar.Any(s => function.Substring(j).StartsWith(s, StringComparison.Ordinal)); j++) { }
+                    tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
 
-                    var str = function.Substring(i, j - i);
-                    i = j;
+                    i++;
+                    continue;
+                }
 
-                    if (i < function.Length && function[i] == '(')
-                        tokens.Add(new UserFunctionToken(str));
+                // consts
+                match = regexConst.Match(function, i);
+                if (match.Success)
+                {
+                    CreateConst(match.Value, tokens);
+
+                    i += match.Length;
+                    continue;
+                }
+
+                // functions
+                match = regexFunctions.Match(function, i);
+                if (match.Success)
+                {
+                    if (!string.IsNullOrWhiteSpace(match.Groups[2].Value))
+                    {
+                        var funcName = match.Groups[1].Value;
+                        CreateFunction(funcName, tokens);
+
+                        i += funcName.Length;
+                    }
                     else
-                        tokens.Add(new VariableToken(str));
+                    {
+                        var lastToken = tokens.LastOrDefault() as NumberToken;
+                        if (lastToken != null)
+                            tokens.Add(new OperationToken(Operations.Multiplication));
+
+                        if (match.Value == "i")
+                            tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));
+                        else if (match.Value == "pi")
+                            tokens.Add(new VariableToken("π"));
+                        else
+                            tokens.Add(new VariableToken(match.Value));
+
+                        i += match.Length;
+                    }
 
                     continue;
                 }
-                else
-                {
-                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-                }
 
-                i++;
+                //i++;
             }
 
             return CountParams(tokens);

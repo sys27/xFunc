@@ -44,6 +44,12 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             Assert.Throws<NotSupportedException>(() => dec.Execute(parameters));
         }
 
+        [Fact]
+        public void NotVarTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new Dec(new Number(1)));
+        }
+
     }
 
 }

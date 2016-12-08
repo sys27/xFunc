@@ -109,10 +109,6 @@ namespace xFunc.Maths
                 {
                     if (CheckNextSymbol(function, i, '+'))
                     {
-                        var lastToken = tokens.LastOrDefault();
-                        if (!(lastToken is VariableToken))
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
                         tokens.Add(new OperationToken(Operations.Increment));
                         i += 2;
 
@@ -120,10 +116,6 @@ namespace xFunc.Maths
                     }
                     if (CheckNextSymbol(function, i, '='))
                     {
-                        var lastToken = tokens.LastOrDefault();
-                        if (!(lastToken is VariableToken))
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
                         tokens.Add(new OperationToken(Operations.AddAssign));
                         i += 2;
 
@@ -151,10 +143,6 @@ namespace xFunc.Maths
                 {
                     if (CheckNextSymbol(function, i, '-') || CheckNextSymbol(function, i, '−'))
                     {
-                        var lastToken = tokens.LastOrDefault();
-                        if (!(lastToken is VariableToken))
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
                         tokens.Add(new OperationToken(Operations.Decrement));
                         i += 2;
 
@@ -162,10 +150,6 @@ namespace xFunc.Maths
                     }
                     if (CheckNextSymbol(function, i, '='))
                     {
-                        var lastToken = tokens.LastOrDefault();
-                        if (!(lastToken is VariableToken))
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
                         tokens.Add(new OperationToken(Operations.SubAssign));
                         i += 2;
 
@@ -204,10 +188,6 @@ namespace xFunc.Maths
                 {
                     if (CheckNextSymbol(function, i, '='))
                     {
-                        var lastToken = tokens.LastOrDefault();
-                        if (!(lastToken is VariableToken))
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
                         tokens.Add(new OperationToken(Operations.MulAssign));
                         i += 2;
 
@@ -220,10 +200,6 @@ namespace xFunc.Maths
                 {
                     if (CheckNextSymbol(function, i, '='))
                     {
-                        var lastToken = tokens.LastOrDefault();
-                        if (!(lastToken is VariableToken))
-                            throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
                         tokens.Add(new OperationToken(Operations.DivAssign));
                         i += 2;
 

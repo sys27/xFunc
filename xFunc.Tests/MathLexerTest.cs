@@ -2117,18 +2117,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void IncPrefixTest()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("++x"));
-        }
-
-        [Fact]
-        public void IncWithNumFail()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("2++"));
-        }
-
-        [Fact]
         public void DecTest()
         {
             var tokens = lexer.Tokenize("x--");
@@ -2140,18 +2128,6 @@ namespace xFunc.Tests
             };
 
             Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void DecPrefixTest()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("--x"));
-        }
-
-        [Fact]
-        public void DecWithNumFail()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("2--"));
         }
 
         [Fact]
@@ -2170,12 +2146,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void AddAssignNotVarFail()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) += 2"));
-        }
-
-        [Fact]
         public void SubAssign()
         {
             var tokens = lexer.Tokenize("x -= 2");
@@ -2188,12 +2158,6 @@ namespace xFunc.Tests
             };
 
             Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void SubAssignNotVarFail()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) -= 2"));
         }
 
         [Fact]
@@ -2212,12 +2176,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void MulAssignNotVarFail()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) *= 2"));
-        }
-
-        [Fact]
         public void DivAssign()
         {
             var tokens = lexer.Tokenize("x /= 2");
@@ -2230,12 +2188,6 @@ namespace xFunc.Tests
             };
 
             Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void DivAssignNotVarFail()
-        {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(x) /= 2"));
         }
 
         [Fact]

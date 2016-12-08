@@ -29,10 +29,7 @@ namespace xFunc.Maths
     /// </summary>
     public class Lexer : ILexer
     {
-
-        private readonly HashSet<string> notVar;
-        private readonly HashSet<char> unaryMinusOp;
-
+        
         private Regex regexSymbols;
         private Regex regexOperations;
         private Regex regexFunctions;
@@ -43,9 +40,6 @@ namespace xFunc.Maths
         /// </summary>
         public Lexer()
         {
-            notVar = new HashSet<string> { "nand", "nor", "and", "or", "xor", "mod" };
-            unaryMinusOp = new HashSet<char> { '(', '{', '*', '/', '^', '=', ',' };
-
             regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexOperations = new Regex(@"\G([^a-zA-Z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexFunctions = new Regex(@"\G([a-z][0-9a-z]*)(\(|{)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);

@@ -21,7 +21,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Programming
 {
-    
+
     public class MulAssignTest
     {
 
@@ -49,10 +49,13 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         [Fact]
         public void NumberMulBoolTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() =>
-            {
-                var add = new MulAssign(new Variable("x"), new Bool(true));
-            });
+            Assert.Throws<ParameterTypeMismatchException>(() => new MulAssign(new Variable("x"), new Bool(true)));
+        }
+
+        [Fact]
+        public void NotVarTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new MulAssign(new Number(1), new Number(1)));
         }
 
     }

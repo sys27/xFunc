@@ -49,10 +49,13 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         [Fact]
         public void NumberAddBoolTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() =>
-            {
-                var add = new AddAssign(new Variable("x"), new Bool(true));
-            });
+            Assert.Throws<ParameterTypeMismatchException>(() => new AddAssign(new Variable("x"), new Bool(true)));
+        }
+
+        [Fact]
+        public void NotVarTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new AddAssign(new Number(1), new Number(1)));
         }
 
     }

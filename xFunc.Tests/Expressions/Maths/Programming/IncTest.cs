@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Programming
 {
-    
+
     public class IncTest
     {
 
@@ -42,6 +42,12 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var inc = new Inc(new Variable("x"));
 
             Assert.Throws<NotSupportedException>(() => inc.Execute(parameters));
+        }
+
+        [Fact]
+        public void NotVarTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new Inc(new Number(1)));
         }
 
     }

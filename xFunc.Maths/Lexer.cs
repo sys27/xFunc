@@ -53,7 +53,7 @@ namespace xFunc.Maths
             regexNumberHex = new Regex(@"\G[+-]?0x[0-9a-f]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexNumberBin = new Regex(@"\G[+-]?0b[01]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexNumberOct = new Regex(@"\G[+-]?0[0-7]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([eE][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
         private void CreateSymbol(string match, IList<IToken> tokens)

@@ -46,7 +46,7 @@ namespace xFunc.Maths
         public Lexer()
         {
             regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexOperations = new Regex(@"\G([^a-zA-Z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexOperations = new Regex(@"\G([^a-z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexFunctions = new Regex(@"\G([a-z][0-9a-z]*)(\(|{)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexConst = new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 

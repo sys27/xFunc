@@ -29,11 +29,16 @@ namespace xFunc.Maths
     /// </summary>
     public class Lexer : ILexer
     {
-        
+
         private Regex regexSymbols;
         private Regex regexOperations;
         private Regex regexFunctions;
         private Regex regexConst;
+
+        private Regex regexNumberHex;
+        private Regex regexNumberBin;
+        private Regex regexNumberOct;
+        private Regex regexNumber;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
@@ -44,6 +49,11 @@ namespace xFunc.Maths
             regexOperations = new Regex(@"\G([^a-zA-Z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexFunctions = new Regex(@"\G([a-z][0-9a-z]*)(\(|{)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             regexConst = new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+            regexNumberHex = new Regex(@"\G[+-]?0x[0-9a-f]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexNumberBin = new Regex(@"\G[+-]?0b[01]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexNumberOct = new Regex(@"\G[+-]?0[0-7]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([eE][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
         private void CreateSymbol(string match, IList<IToken> tokens)
@@ -651,92 +661,43 @@ namespace xFunc.Maths
                     continue;
                 }
 
-                if (char.IsDigit(letter))
+                // hex numbers
+                match = regexNumberHex.Match(function, i);
+                if (match.Success)
                 {
-                    int length;
-                    int j;
-                    string strNumber;
-                    double number;
+                    tokens.Add(new NumberToken(Convert.ToInt64(match.Value, 16)));
 
-                    if (letter == '0' && i + 1 < function.Length)
-                    {
-                        var nextLetter = function[i + 1];
-                        if (nextLetter == 'x' && i + 2 < function.Length) // hex
-                        {
-                            i += 2;
+                    i += match.Length;
+                    continue;
+                }
 
-                            length = 1;
-                            for (j = i + 1; j < function.Length && (char.IsDigit(function[j]) || (function[j] >= 97 && function[j] <= 102)); j++) // from 'a' to 'f'
-                                length++;
+                // bin numbers
+                match = regexNumberBin.Match(function, i);
+                if (match.Success)
+                {
+                    tokens.Add(new NumberToken(Convert.ToInt64(match.Value.Replace("0b", ""), 2)));
 
-                            strNumber = function.Substring(i, length);
-                            number = Convert.ToInt64(strNumber, 16);
-                            tokens.Add(new NumberToken(number));
+                    i += match.Length;
+                    continue;
+                }
 
-                            i += length;
-                            continue;
-                        }
-                        if (nextLetter == 'b' && i + 2 < function.Length) // bin
-                        {
-                            i += 2;
+                // oct numbers
+                match = regexNumberOct.Match(function, i);
+                if (match.Success)
+                {
+                    tokens.Add(new NumberToken(Convert.ToInt64(match.Value, 8)));
 
-                            length = 1;
-                            for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
-                                length++;
+                    i += match.Length;
+                    continue;
+                }
 
-                            strNumber = function.Substring(i, length);
-                            number = Convert.ToInt64(strNumber, 2);
-                            tokens.Add(new NumberToken(number));
+                // numbers
+                match = regexNumber.Match(function, i);
+                if (match.Success)
+                {
+                    tokens.Add(new NumberToken(double.Parse(match.Value, CultureInfo.InvariantCulture)));
 
-                            i += length;
-                            continue;
-                        }
-                        if (char.IsDigit(nextLetter)) // oct
-                        {
-                            length = 1;
-                            for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
-                                length++;
-
-                            strNumber = function.Substring(i, length);
-                            number = Convert.ToInt64(strNumber, 8);
-                            tokens.Add(new NumberToken(number));
-
-                            i += length;
-                            continue;
-                        }
-                    }
-
-                    // normal number (dec)
-
-                    length = 1;
-                    for (j = i + 1; j < function.Length && char.IsDigit(function[j]); j++)
-                        length++;
-
-                    if (j < function.Length && function[j] == '.')
-                    {
-                        var temp = ++length;
-                        for (j += 1; j < function.Length && char.IsDigit(function[j]); j++)
-                            length++;
-
-                        if (temp == length)
-                            throw new LexerException(string.Format(Resource.FormatException, function.Substring(i, length)));
-                    }
-
-                    if (CheckNextSymbol(function, i + length - 1, 'e')) // exp notation
-                    {
-                        length++;
-                        if (CheckNextSymbol(function, i + length - 1, '-'))
-                            length++;
-
-                        for (j = i + length; j < function.Length && char.IsDigit(function[j]); j++)
-                            length++;
-                    }
-
-                    strNumber = function.Substring(i, length);
-                    number = double.Parse(strNumber, CultureInfo.InvariantCulture);
-                    tokens.Add(new NumberToken(number));
-
-                    i += length;
+                    i += match.Length;
                     continue;
                 }
 

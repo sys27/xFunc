@@ -1295,36 +1295,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void BinError1()
-        {
-            Assert.Throws<FormatException>(() => lexer.Tokenize("0b*01100110"));
-        }
-
-        [Fact]
-        public void BinError2()
-        {
-            Assert.Throws<ArgumentException>(() => lexer.Tokenize("0b-01100110"));
-        }
-
-        [Fact]
-        public void HexError1()
-        {
-            Assert.Throws<FormatException>(() => lexer.Tokenize("0x*FF00"));
-        }
-
-        [Fact]
-        public void HexError2()
-        {
-            Assert.Throws<ArgumentException>(() => lexer.Tokenize("0x-FF00"));
-        }
-
-        [Fact]
-        public void HexError3()
-        {
-            Assert.Throws<FormatException>(() => lexer.Tokenize("0xJFF00"));
-        }
-
-        [Fact]
         public void GCDTest()
         {
             var tokens = lexer.Tokenize("gcd(12, 16)");

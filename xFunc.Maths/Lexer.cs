@@ -40,22 +40,42 @@ namespace xFunc.Maths
         private Regex regexNumberOct;
         private Regex regexNumber;
 
+        private Regex regexComplexNumber;
+
+        private Regex regexWhitespace;
+        private Regex regexAllWhitespaces;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
         /// </summary>
         public Lexer()
         {
-            regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexOperations = new Regex(@"\G([^a-z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexFunctions = new Regex(@"\G([a-z][0-9a-z]*)(\(|{)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexConst = new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var options = RegexOptions.Compiled | RegexOptions.IgnoreCase;
 
-            regexNumberHex = new Regex(@"\G[+-]?0x[0-9a-f]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexNumberBin = new Regex(@"\G[+-]?0b[01]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexNumberOct = new Regex(@"\G[+-]?0[0-7]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", options);
+            regexOperations = new Regex(@"\G([^a-z0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", options);
+            regexFunctions = new Regex(@"\G([a-z][0-9a-z]*)(\(|{)?", options);
+            regexConst = new Regex(@"\G(true|false)", options);
+
+            regexNumberHex = new Regex(@"\G[+-]?0x[0-9a-f]+", options);
+            regexNumberBin = new Regex(@"\G[+-]?0b[01]+", options);
+            regexNumberOct = new Regex(@"\G[+-]?0[0-7]+", options);
+            regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", options);
+
+            regexComplexNumber = new Regex(@"\G([+-]?\s*\d*\.?\d+)??\s*([+-]?\s*\d*\.?\d+)°", options);
+
+            regexWhitespace = new Regex(@"\G\s+", options);
+            regexAllWhitespaces = new Regex(@"\s+", options);
         }
 
+        /// <summary>
+        /// Creates the symbol token from matched string.
+        /// </summary>
+        /// <param name="match">The matched string.</param>
+        /// <param name="tokens">The list of tokens.</param>
+        /// <exception cref="LexerException">
+        /// The specified symbol is not supported.
+        /// </exception>
         private void CreateSymbol(string match, IList<IToken> tokens)
         {
             if (match == "(")
@@ -91,6 +111,14 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Creates the operation token from matched string.
+        /// </summary>
+        /// <param name="match">The matched string.</param>
+        /// <param name="tokens">The list of tokens.</param>
+        /// <exception cref="LexerException">
+        /// The specified operation is not supported.
+        /// </exception>
         private void CreateOperations(string match, IList<IToken> tokens)
         {
             if (match == "+=")
@@ -283,6 +311,11 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Creates the function token from matched string.
+        /// </summary>
+        /// <param name="match">The matched string.</param>
+        /// <param name="tokens">The list of tokens.</param>
         private void CreateFunction(string match, IList<IToken> tokens)
         {
             if (match == "add")
@@ -575,6 +608,14 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Creates the constant token from matched string.
+        /// </summary>
+        /// <param name="match">The matched string.</param>
+        /// <param name="tokens">The list of tokens.</param>
+        /// <exception cref="LexerException">
+        /// The specified constant is not supported.
+        /// </exception>
         private void CreateConst(string match, IList<IToken> tokens)
         {
             if (match == "true")
@@ -591,6 +632,13 @@ namespace xFunc.Maths
             }
         }
 
+        /// <summary>
+        /// Determines whether brackets in the specified string is balanced.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified string is balanced; otherwise, <c>false</c>.
+        /// </returns>
         private static bool IsBalanced(string str)
         {
             int brackets = 0;
@@ -634,10 +682,11 @@ namespace xFunc.Maths
 
             for (int i = 0; i < function.Length;)
             {
-                var letter = function[i];
-                if (letter == ' ' || letter == '\t')
+                // whitespaces
+                match = regexWhitespace.Match(function, i);
+                if (match.Success)
                 {
-                    i++;
+                    i += match.Length;
                     continue;
                 }
 
@@ -646,6 +695,22 @@ namespace xFunc.Maths
                 if (match.Success)
                 {
                     CreateSymbol(match.Value, tokens);
+
+                    i += match.Length;
+                    continue;
+                }
+
+                // complex numbers
+                match = regexComplexNumber.Match(function, i);
+                if (match.Success)
+                {
+                    var magnitude = 0.0;
+                    var phase = 1.0;
+
+                    double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out magnitude);
+                    double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out phase);
+
+                    tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
 
                     i += match.Length;
                     continue;
@@ -701,61 +766,6 @@ namespace xFunc.Maths
                     continue;
                 }
 
-                if (letter == '°')
-                {
-                    var magnitude = 0.0;
-                    var phase = 1.0;
-
-                    var phaseToken = tokens.LastOrDefault() as NumberToken;
-                    if (phaseToken == null)
-                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, letter.ToString()));
-
-                    phase = phaseToken.Number;
-                    tokens.Remove(phaseToken);
-
-                    // binary +, - or unary -
-                    var operationToken = tokens.LastOrDefault() as OperationToken;
-                    if (operationToken != null)
-                    {
-                        if (tokens.Count >= 2 && (operationToken.Operation == Operations.Addition || operationToken.Operation == Operations.Subtraction))
-                        {
-                            var magnitudeToken = tokens[tokens.Count - 2] as NumberToken;
-                            if (magnitudeToken != null)
-                            {
-                                magnitude = magnitudeToken.Number;
-
-                                if (operationToken.Operation == Operations.Subtraction)
-                                    phase = -phase;
-
-                                if (tokens.Count >= 3)
-                                {
-                                    var unaryRealToken = tokens[tokens.Count - 3] as OperationToken;
-                                    if (unaryRealToken != null && unaryRealToken.Operation == Operations.UnaryMinus)
-                                    {
-                                        magnitude = -magnitude;
-
-                                        tokens.Remove(unaryRealToken);
-                                    }
-                                }
-
-                                tokens.Remove(operationToken);
-                                tokens.Remove(magnitudeToken);
-                            }
-                        }
-                        else if (operationToken.Operation == Operations.UnaryMinus)
-                        {
-                            phase = -phase;
-
-                            tokens.Remove(operationToken);
-                        }
-                    }
-
-                    tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
-
-                    i++;
-                    continue;
-                }
-
                 // consts
                 match = regexConst.Match(function, i);
                 if (match.Success)
@@ -796,7 +806,7 @@ namespace xFunc.Maths
                     continue;
                 }
 
-                //i++;
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, function));
             }
 
             return CountParams(tokens);
@@ -878,6 +888,11 @@ namespace xFunc.Maths
             return i;
         }
 
+        /// <summary>
+        /// Calculates the number of parametes of functions.
+        /// </summary>
+        /// <param name="tokens">The list of tokens.</param>
+        /// <returns>The list of tokens.</returns>
         private IEnumerable<IToken> CountParams(List<IToken> tokens)
         {
             for (int i = 0; i < tokens.Count;)
@@ -889,11 +904,6 @@ namespace xFunc.Maths
             }
 
             return tokens;
-        }
-
-        private bool CheckNextSymbol(string str, int index, char symbol)
-        {
-            return index + 1 < str.Length && str[index + 1] == symbol;
         }
 
     }

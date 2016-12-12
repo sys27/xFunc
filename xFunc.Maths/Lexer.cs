@@ -42,7 +42,8 @@ namespace xFunc.Maths
 
         private Regex regexComplexNumber;
 
-        private Regex regexWhitespace;
+        private Regex regexSkip;
+
         private Regex regexAllWhitespaces;
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace xFunc.Maths
 
             regexComplexNumber = new Regex(@"\G([+-]?\s*\d*\.?\d+)??\s*([+-]?\s*\d*\.?\d+)°", options);
 
-            regexWhitespace = new Regex(@"\G\s+", options);
+            regexSkip = new Regex(@"\G\s+", options);
             regexAllWhitespaces = new Regex(@"\s+", options);
         }
 
@@ -683,7 +684,7 @@ namespace xFunc.Maths
             for (int i = 0; i < function.Length;)
             {
                 // whitespaces
-                match = regexWhitespace.Match(function, i);
+                match = regexSkip.Match(function, i);
                 if (match.Success)
                 {
                     i += match.Length;

@@ -34,19 +34,19 @@ namespace xFunc.Maths
         /// <param name="expression">The expression that is checked.</param>
         /// <param name="arg">The variable that can be contained in the expression.</param>
         /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
-        public static bool HasVar(IExpression expression, Variable arg)
+        public static bool HasVariable(IExpression expression, Variable arg)
         {
             var bin = expression as BinaryExpression;
             if (bin != null)
-                return HasVar(bin.Left, arg) || HasVar(bin.Right, arg);
+                return HasVariable(bin.Left, arg) || HasVariable(bin.Right, arg);
 
             var un = expression as UnaryExpression;
             if (un != null)
-                return HasVar(un.Argument, arg);
+                return HasVariable(un.Argument, arg);
 
             var paramExp = expression as DifferentParametersExpression;
             if (paramExp != null)
-                return paramExp.Arguments.Any(e => HasVar(e, arg));
+                return paramExp.Arguments.Any(e => HasVariable(e, arg));
 
             return expression is Variable && expression.Equals(arg);
         }

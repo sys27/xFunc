@@ -61,7 +61,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Abs exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var div = new Div(exp.Argument.Clone(), exp.Clone());
@@ -79,11 +79,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Add exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            var first = Helpers.HasVar(exp.Left, Variable);
-            var second = Helpers.HasVar(exp.Right, Variable);
+            var first = Helpers.HasVariable(exp.Left, Variable);
+            var second = Helpers.HasVariable(exp.Right, Variable);
 
             if (first && second)
                 return new Add(exp.Left.Clone().Analyze(this), exp.Right.Clone().Analyze(this));
@@ -103,7 +103,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Derivative exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var diff = exp.Expression.Analyze(this);
@@ -122,11 +122,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Div exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            var first = Helpers.HasVar(exp.Left, Variable);
-            var second = Helpers.HasVar(exp.Right, Variable);
+            var first = Helpers.HasVariable(exp.Left, Variable);
+            var second = Helpers.HasVariable(exp.Right, Variable);
 
             if (first && second)
             {
@@ -162,7 +162,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Exp exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             return new Mul(exp.Argument.Clone().Analyze(this), exp.Clone());
@@ -177,7 +177,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Lb exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var ln = new Ln(new Number(2));
@@ -196,7 +196,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Lg exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var ln = new Ln(new Number(10));
@@ -215,7 +215,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Ln exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             return new Div(exp.Argument.Clone().Analyze(this), exp.Argument.Clone());
@@ -230,10 +230,10 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Log exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            if (Helpers.HasVar(exp.Left, Variable))
+            if (Helpers.HasVariable(exp.Left, Variable))
             {
                 var ln1 = new Ln(exp.Right.Clone());
                 var ln2 = new Ln(exp.Left.Clone());
@@ -259,11 +259,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Mul exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            var first = Helpers.HasVar(exp.Left, Variable);
-            var second = Helpers.HasVar(exp.Right, Variable);
+            var first = Helpers.HasVariable(exp.Left, Variable);
+            var second = Helpers.HasVariable(exp.Right, Variable);
 
             if (first && second)
             {
@@ -302,10 +302,10 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Pow exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            if (Helpers.HasVar(exp.Left, Variable))
+            if (Helpers.HasVariable(exp.Left, Variable))
             {
                 var sub = new Sub(exp.Right.Clone(), new Number(1));
                 var inv = new Pow(exp.Left.Clone(), sub);
@@ -332,7 +332,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Root exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var div = new Div(new Number(1), exp.Right.Clone());
@@ -350,7 +350,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Simplify exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             return exp.Argument.Analyze(this);
@@ -365,7 +365,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sqrt exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var mul = new Mul(new Number(2), exp.Clone());
@@ -383,11 +383,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sub exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            var first = Helpers.HasVar(exp.Left, Variable);
-            var second = Helpers.HasVar(exp.Right, Variable);
+            var first = Helpers.HasVariable(exp.Left, Variable);
+            var second = Helpers.HasVariable(exp.Right, Variable);
 
             if (first && second)
                 return new Sub(exp.Left.Clone().Analyze(this), exp.Right.Clone().Analyze(this));
@@ -407,7 +407,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(UnaryMinus exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             return new UnaryMinus(exp.Argument.Clone().Analyze(this));
@@ -456,7 +456,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arccos exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var pow = new Pow(exp.Argument.Clone(), new Number(2));
@@ -477,7 +477,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arccot exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var involution = new Pow(exp.Argument.Clone(), new Number(2));
@@ -497,7 +497,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arccsc exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var abs = new Abs(exp.Argument.Clone());
@@ -520,7 +520,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcsec exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var abs = new Abs(exp.Argument.Clone());
@@ -542,7 +542,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcsin exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var involution = new Pow(exp.Argument.Clone(), new Number(2));
@@ -562,7 +562,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arctan exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var involution = new Pow(exp.Argument.Clone(), new Number(2));
@@ -581,7 +581,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Cos exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sine = new Sin(exp.Argument.Clone());
@@ -600,7 +600,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Cot exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sine = new Sin(exp.Argument.Clone());
@@ -638,7 +638,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sec exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var tan = new Tan(exp.Argument.Clone());
@@ -658,7 +658,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sin exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var cos = new Cos(exp.Argument.Clone());
@@ -676,7 +676,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Tan exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var cos = new Cos(exp.Argument.Clone());
@@ -699,7 +699,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcosh exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sqr = new Pow(exp.Argument.Clone(), new Number(2));
@@ -719,7 +719,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcoth exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sqr = new Pow(exp.Argument.Clone(), new Number(2));
@@ -738,7 +738,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcsch exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var inv = new Pow(exp.Argument.Clone(), new Number(2));
@@ -780,7 +780,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arsinh exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sqr = new Pow(exp.Argument.Clone(), new Number(2));
@@ -800,7 +800,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Artanh exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sqr = new Pow(exp.Argument.Clone(), new Number(2));
@@ -819,7 +819,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Cosh exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sinh = new Sinh(exp.Argument.Clone());
@@ -837,7 +837,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Coth exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var sinh = new Sinh(exp.Argument.Clone());
@@ -857,7 +857,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Csch exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var coth = new Coth(exp.Argument.Clone());
@@ -877,7 +877,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sech exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var tanh = new Tanh(exp.Argument.Clone());
@@ -897,7 +897,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sinh exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var cosh = new Cosh(exp.Argument.Clone());
@@ -915,7 +915,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Tanh exp)
         {
-            if (!Helpers.HasVar(exp, Variable))
+            if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
             var cosh = new Cosh(exp.Argument.Clone());

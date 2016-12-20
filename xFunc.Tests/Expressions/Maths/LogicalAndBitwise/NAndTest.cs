@@ -39,6 +39,22 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
             Assert.Equal(true, nand.Execute());
         }
 
+        [Fact]
+        public void ToStringTest1()
+        {
+            var eq = new NAnd(new Bool(true), new Bool(false));
+
+            Assert.Equal("True nand False", eq.ToString());
+        }
+
+        [Fact]
+        public void ToStringTest2()
+        {
+            var eq = new And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
+
+            Assert.Equal("(True nand False) and False", eq.ToString());
+        }
+
     }
 
 }

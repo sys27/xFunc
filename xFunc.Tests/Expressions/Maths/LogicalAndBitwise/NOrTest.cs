@@ -38,6 +38,22 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
             Assert.Equal(true, nor.Execute());
         }
 
+        [Fact]
+        public void ToStringTest1()
+        {
+            var eq = new NOr(new Bool(true), new Bool(false));
+
+            Assert.Equal("True nor False", eq.ToString());
+        }
+
+        [Fact]
+        public void ToStringTest2()
+        {
+            var eq = new And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
+
+            Assert.Equal("(True nor False) and False", eq.ToString());
+        }
+
     }
 
 }

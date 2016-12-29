@@ -70,6 +70,30 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
+        public void ExecuteCrossTest()
+        {
+            var vector1 = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var vector2 = new Vector(new[] { new Number(10), new Number(20), new Number(30) });
+            var exp = new Mul(vector1, vector2);
+
+            var expected = new Vector(new[] { new Number(0), new Number(0), new Number(0) });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteCrossFailTest()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var vector1 = new Vector(new[] { new Number(1), new Number(3) });
+                var vector2 = new Vector(new[] { new Number(10), new Number(20) });
+                var exp = new Mul(vector1, vector2);
+                exp.Execute();
+            });
+        }
+
+        [Fact]
         public void ResultTypeTwoNumberTest()
         {
             var mul = new Mul(new Number(1), new Number(2));
@@ -91,13 +115,6 @@ namespace xFunc.Tests.Expressions.Maths
             var mul = new Mul(new Add(new Number(1), new Number(2)), new Variable("x"));
 
             Assert.Equal(ExpressionResultType.Number, mul.ResultType);
-        }
-
-        [Fact]
-        public void ResultTypeTwoVectorTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Mul(new Vector(new[] { new Number(1) }),
-                                                                       new Vector(new[] { new Number(2) })));
         }
 
         [Fact]

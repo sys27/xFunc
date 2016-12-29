@@ -79,6 +79,9 @@ namespace xFunc.Maths.Expressions
                 temp = m_right.Execute(parameters);
                 var rightExpResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
 
+                if (leftExpResult is Vector && rightExpResult is Vector)
+                    return ((Vector)leftExpResult).Cross((Vector)rightExpResult, parameters);
+
                 if (leftExpResult is Vector)
                 {
                     if (rightExpResult is Matrix)
@@ -149,7 +152,7 @@ namespace xFunc.Maths.Expressions
             get
             {
                 if (m_right != null && m_right.ResultType == ExpressionResultType.Vector)
-                    return ExpressionResultType.Number | ExpressionResultType.Matrix;
+                    return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
 
                 return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
@@ -166,7 +169,7 @@ namespace xFunc.Maths.Expressions
             get
             {
                 if (m_left != null && m_left.ResultType == ExpressionResultType.Vector)
-                    return ExpressionResultType.Number | ExpressionResultType.Matrix;
+                    return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
 
                 return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }
@@ -189,12 +192,11 @@ namespace xFunc.Maths.Expressions
                 if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
                     return ExpressionResultType.Number;
 
-                if ((m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType == ExpressionResultType.Vector) ||
-                    (m_right.ResultType.HasFlagNI(ExpressionResultType.Number) && m_left.ResultType == ExpressionResultType.Vector))
-                    return ExpressionResultType.Vector;
-
                 if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
                     return ExpressionResultType.Matrix;
+
+                if (m_right.ResultType == ExpressionResultType.Vector || m_left.ResultType == ExpressionResultType.Vector)
+                    return ExpressionResultType.Vector;
 
                 return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }

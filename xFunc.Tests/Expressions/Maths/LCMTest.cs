@@ -18,9 +18,21 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class LCMTest
     {
+
+        [Fact]
+        public void NullArgTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new LCM(null, 2));
+        }
+
+        [Fact]
+        public void CountDiffTest()
+        {
+            Assert.Throws<ArgumentException>(() => new LCM(new[] { new Number(1) }, 2));
+        }
 
         [Fact]
         public void ExecuteTest1()

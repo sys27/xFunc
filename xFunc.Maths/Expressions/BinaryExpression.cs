@@ -176,13 +176,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public virtual ExpressionResultType LeftType
-        {
-            get
-            {
-                return ExpressionResultType.Number;
-            }
-        }
+        public virtual ExpressionResultType LeftType { get; } = ExpressionResultType.Number;
 
         /// <summary>
         /// The right (second) operand.
@@ -211,13 +205,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public virtual ExpressionResultType RightType
-        {
-            get
-            {
-                return ExpressionResultType.Number;
-            }
-        }
+        public virtual ExpressionResultType RightType { get; } = ExpressionResultType.Number;
 
         /// <summary>
         /// Get or Set the parent expression.
@@ -240,13 +228,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public int MinParameters { get; } = 2;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -254,13 +236,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public int MaxParameters { get; } = 2;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -268,13 +244,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public int ParametersCount { get; } = 2;
 
         /// <summary>
         /// Gets the type of the result.
@@ -283,13 +253,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the result.
         /// </value>
-        public virtual ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Number;
-            }
-        }
+        public virtual ExpressionResultType ResultType { get; } = ExpressionResultType.Number;
 
     }
 

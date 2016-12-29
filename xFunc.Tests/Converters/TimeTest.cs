@@ -25,6 +25,14 @@ namespace xFunc.Tests.Converters
         private TimeConverter conv = new TimeConverter();
 
         [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(43, TimeUnits.Seconds, TimeUnits.Seconds);
+
+            Assert.Equal(43, value);
+        }
+
+        [Fact]
         public void FromSToMicro()
         {
             var value = conv.Convert(43, TimeUnits.Seconds, TimeUnits.Microseconds);

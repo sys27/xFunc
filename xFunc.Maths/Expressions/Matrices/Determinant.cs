@@ -103,13 +103,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType
-        {
-            get
-            {
-                return ExpressionResultType.Matrix;
-            }
-        }
+        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Matrix;
 
         /// <summary>
         /// Gets the type of the result.
@@ -117,13 +111,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The type of the result.
         /// </value>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Number;
-            }
-        }
+        public override ExpressionResultType ResultType { get; } = ExpressionResultType.Number;
 
     }
 

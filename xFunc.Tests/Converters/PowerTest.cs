@@ -18,11 +18,19 @@ using Xunit;
 
 namespace xFunc.Tests.Converters
 {
-    
+
     public class PowerTest
     {
 
         private PowerConverter conv = new PowerConverter();
+
+        [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(12, PowerUnits.Watts, PowerUnits.Watts);
+
+            Assert.Equal(12, value);
+        }
 
         [Fact]
         public void FromWtoK()

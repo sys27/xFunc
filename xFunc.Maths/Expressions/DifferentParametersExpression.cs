@@ -294,13 +294,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the result.
         /// </value>
-        public virtual ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Number;
-            }
-        }
+        public virtual ExpressionResultType ResultType { get; } = ExpressionResultType.Number;
 
     }
 

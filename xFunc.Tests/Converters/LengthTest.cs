@@ -25,6 +25,14 @@ namespace xFunc.Tests.Converters
         private LengthConverter conv = new LengthConverter();
 
         [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(12, LengthUnits.Metres, LengthUnits.Metres);
+
+            Assert.Equal(12, value);
+        }
+
+        [Fact]
         public void FromMtoNano()
         {
             var value = conv.Convert(12, LengthUnits.Metres, LengthUnits.Nanometres);

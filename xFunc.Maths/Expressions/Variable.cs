@@ -163,13 +163,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public int MinParameters { get; } = 0;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -177,13 +171,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters
-        {
-            get
-            {
-                return -1;
-            }
-        }
+        public int MaxParameters { get; } = -1;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -191,13 +179,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public int ParametersCount { get; } = 0;
 
         /// <summary>
         /// Gets the type of the result.
@@ -205,13 +187,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the result.
         /// </value>
-        public ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
-            }
-        }
+        public ExpressionResultType ResultType { get; } = ExpressionResultType.Number | ExpressionResultType.Boolean;
 
     }
 

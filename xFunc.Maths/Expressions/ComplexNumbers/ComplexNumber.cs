@@ -211,13 +211,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public int MinParameters { get; } = 0;
 
         /// <summary>
         /// Gets the maximum count of parameters.
@@ -225,13 +219,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters
-        {
-            get
-            {
-                return -1;
-            }
-        }
+        public int MaxParameters { get; } = -1;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -239,13 +227,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public int ParametersCount { get; } = 0;
 
         /// <summary>
         /// Gets the type of the result.
@@ -253,13 +235,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The type of the result.
         /// </value>
-        public ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.ComplexNumber;
-            }
-        }
+        public ExpressionResultType ResultType { get; } = ExpressionResultType.ComplexNumber;
 
     }
 

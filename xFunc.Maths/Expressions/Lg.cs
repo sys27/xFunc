@@ -102,13 +102,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType
-        {
-            get
-            {
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
-            }
-        }
+        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
         /// <summary>
         /// Gets the type of the result.

@@ -25,6 +25,14 @@ namespace xFunc.Tests.Converters
         private MassConverter conv = new MassConverter();
 
         [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(12, MassUnits.Kilograms, MassUnits.Kilograms);
+
+            Assert.Equal(12, value);
+        }
+
+        [Fact]
         public void FromKiloToMilli()
         {
             var value = conv.Convert(12, MassUnits.Kilograms, MassUnits.Milligrams);

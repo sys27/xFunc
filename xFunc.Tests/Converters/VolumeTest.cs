@@ -18,11 +18,19 @@ using Xunit;
 
 namespace xFunc.Tests.Converters
 {
-    
+
     public class VolumeTest
     {
 
         private VolumeConverter conv = new VolumeConverter();
+
+        [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(0.032, VolumeUnits.CubicMeters, VolumeUnits.CubicMeters);
+
+            Assert.Equal(0.032, value, 4);
+        }
 
         [Fact]
         public void FromMtoCenti()
@@ -39,7 +47,7 @@ namespace xFunc.Tests.Converters
 
             Assert.Equal(0.032, value);
         }
-        
+
         [Fact]
         public void FromMtoLitre()
         {

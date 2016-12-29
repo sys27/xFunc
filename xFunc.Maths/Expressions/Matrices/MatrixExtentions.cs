@@ -582,6 +582,30 @@ namespace xFunc.Maths.Expressions.Matrices
             return result;
         }
 
+        /// <summary>
+        /// Computes the cross product of two vectors.
+        /// </summary>
+        /// <param name="left">The vector.</param>
+        /// <param name="right">The vector.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>The cross product.</returns>
+        public static Vector Cross(this Vector left, Vector right, ExpressionParameters parameters)
+        {
+            if (left.ParametersCount != 3 || right.ParametersCount != 3)
+                throw new ArgumentException(Resource.VectorCrossException);
+
+            var args = new IExpression[3];
+            var vector1 = left.ToCalculatedArray(parameters);
+            var vector2 = right.ToCalculatedArray(parameters);
+
+            return new Vector(new IExpression[]
+            {
+                new Number(vector1[0] * vector2[1] - vector1[1] * vector2[0]),
+                new Number(vector1[1] * vector2[2] - vector1[2] * vector2[1]),
+                new Number(vector1[2] * vector2[0] - vector1[0] * vector2[2])
+            });
+        }
+
     }
 
 }

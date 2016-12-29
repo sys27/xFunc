@@ -240,15 +240,6 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
         }
 
         [Fact]
-        public void MulTwoVectorsTest()
-        {
-            var vector1 = new Vector(new[] { new Number(1), new Number(2) });
-            var vector2 = new Vector(new[] { new Number(3), new Number(4) });
-
-            Assert.Throws<ParameterTypeMismatchException>(() => new Mul(vector1, vector2));
-        }
-
-        [Fact]
         public void MatrixMulVectorTest()
         {
             var vector = new Vector(new[] { new Number(-2), new Number(1) });

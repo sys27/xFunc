@@ -180,4 +180,7 @@
   <data name="NotEnoughParams" xml:space="preserve">
     <value>Недостатньо параметрів.</value>
   </data>
+  <data name="VectorCrossException" xml:space="preserve">
+    <value>Розмір вектора має дорівнювати 3.</value>
+  </data>
 </root>

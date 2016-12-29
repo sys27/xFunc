@@ -248,5 +248,14 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("VariableNotFoundExceptionError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of vector should equal to 3..
+        /// </summary>
+        internal static string VectorCrossException {
+            get {
+                return ResourceManager.GetString("VectorCrossException", resourceCulture);
+            }
+        }
     }
 }

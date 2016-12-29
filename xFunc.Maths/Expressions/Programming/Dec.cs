@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the Licens
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -24,6 +25,7 @@ namespace xFunc.Maths.Expressions.Programming
     public class Dec : UnaryExpression
     {
 
+        [ExcludeFromCodeCoverage]
         internal Dec() { }
 
         /// <summary>

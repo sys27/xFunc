@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -24,8 +25,8 @@ namespace xFunc.Maths.Expressions
     public class Round : DifferentParametersExpression
     {
 
-        internal Round()
-            : base(null, -1) { }
+        [ExcludeFromCodeCoverage]
+        internal Round() : base(null, -1) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.

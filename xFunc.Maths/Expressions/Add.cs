@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -26,6 +27,7 @@ namespace xFunc.Maths.Expressions
     public class Add : BinaryExpression
     {
 
+        [ExcludeFromCodeCoverage]
         internal Add() { }
 
         /// <summary>

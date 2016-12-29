@@ -25,6 +25,14 @@ namespace xFunc.Tests.Converters
         private AreaConverter conv = new AreaConverter();
 
         [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(1, AreaUnits.SquareMetres, AreaUnits.SquareMetres);
+
+            Assert.Equal(1, value);
+        }
+
+        [Fact]
         public void FromMToMilli()
         {
             var value = conv.Convert(1, AreaUnits.SquareMetres, AreaUnits.SquareMillimeters);

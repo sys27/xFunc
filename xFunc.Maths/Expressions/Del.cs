@@ -124,13 +124,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType
-        {
-            get
-            {
-                return ExpressionResultType.All;
-            }
-        }
+        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.All;
 
         /// <summary>
         /// Gets the type of the result.
@@ -138,13 +132,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the result.
         /// </value>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Expression;
-            }
-        }
+        public override ExpressionResultType ResultType { get; } = ExpressionResultType.Expression;
 
         /// <summary>
         /// Gets or sets the simplifier.

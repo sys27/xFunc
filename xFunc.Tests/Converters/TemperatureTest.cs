@@ -25,6 +25,14 @@ namespace xFunc.Tests.Converters
         private TemperatureConverter conv = new TemperatureConverter();
 
         [Fact]
+        public void ConvertToSame()
+        {
+            var value = conv.Convert(12, TemperatureUnits.Celsius, TemperatureUnits.Celsius);
+
+            Assert.Equal(12, value);
+        }
+
+        [Fact]
         public void FromCToF()
         {
             var value = conv.Convert(12, TemperatureUnits.Celsius, TemperatureUnits.Fahrenheit);

@@ -102,13 +102,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The count of parameters.
         /// </value>
-        public override ExpressionResultType ArgumentType
-        {
-            get
-            {
-                return ExpressionResultType.ComplexNumber;
-            }
-        }
+        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.ComplexNumber;
 
         /// <summary>
         /// Gets the type of the result.
@@ -116,13 +110,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The type of the result.
         /// </value>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Number;
-            }
-        }
+        public override ExpressionResultType ResultType { get; } = ExpressionResultType.ComplexNumber;
 
     }
 

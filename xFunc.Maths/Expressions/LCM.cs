@@ -118,13 +118,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override int MinParameters { get; } = 2;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -132,13 +126,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters
-        {
-            get
-            {
-                return -1;
-            }
-        }
+        public override int MaxParameters { get; } = -1;
 
     }
 

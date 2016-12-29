@@ -180,4 +180,7 @@
   <data name="NotEnoughParams" xml:space="preserve">
     <value>Not enough parameters.</value>
   </data>
+  <data name="VectorCrossException" xml:space="preserve">
+    <value>The size of vector should equal to 3.</value>
+  </data>
 </root>

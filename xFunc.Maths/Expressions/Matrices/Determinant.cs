@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -24,6 +25,7 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Determinant : UnaryExpression
     {
 
+        [ExcludeFromCodeCoverage]
         internal Determinant() { }
 
         /// <summary>

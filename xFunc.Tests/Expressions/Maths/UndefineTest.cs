@@ -24,6 +24,65 @@ namespace xFunc.Tests.Expressions.Maths
     {
 
         [Fact]
+        public void ExecuteFailTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new Undefine(new Variable("x")).Execute());
+        }
+
+        [Fact]
+        public void ExecuteParamNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Undefine(new Variable("x")).Execute(null));
+        }
+
+        [Fact]
+        public void KeyNotSupportedTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new Undefine(new Variable("x")).Key = new Number(1));
+        }
+
+        [Fact]
+        public void KeyNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Undefine(new Variable("x")).Key = null);
+        }
+
+        [Fact]
+        public void EqualRefTest()
+        {
+            var exp = new Undefine(new Variable("x"));
+
+            Assert.True(exp.Equals(exp));
+        }
+
+        [Fact]
+        public void EqualDiffTypesTest()
+        {
+            var exp1 = new Undefine(new Variable("x"));
+            var exp2 = new Number(2);
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualTest()
+        {
+            var exp1 = new Undefine(new Variable("x"));
+            var exp2 = new Undefine(new Variable("x"));
+
+            Assert.True(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void Equal2Test()
+        {
+            var exp1 = new Undefine(new Variable("x"));
+            var exp2 = new Undefine(new Variable("y"));
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
         public void UndefVarTest()
         {
             var parameters = new ParameterCollection { { "a", 1 } };

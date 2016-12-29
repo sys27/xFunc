@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
@@ -25,10 +26,8 @@ namespace xFunc.Maths.Expressions
     public class LCM : DifferentParametersExpression
     {
 
-        internal LCM()
-            : base(null, -1)
-        {
-        }
+        [ExcludeFromCodeCoverage]
+        internal LCM() : base(null, -1) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.
@@ -112,7 +111,7 @@ namespace xFunc.Maths.Expressions
         {
             return new LCM(CloneArguments(), m_arguments.Length);
         }
-        
+
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>

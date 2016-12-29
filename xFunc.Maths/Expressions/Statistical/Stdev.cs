@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -27,6 +28,7 @@ namespace xFunc.Maths.Expressions.Statistical
     public class Stdev : DifferentParametersExpression
     {
 
+        [ExcludeFromCodeCoverage]
         internal Stdev() : base(null, -1) { }
 
         /// <summary>

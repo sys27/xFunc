@@ -13,9 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
-using xFunc.Maths.Results;
 
 namespace xFunc.Maths.Expressions
 {
@@ -28,6 +28,7 @@ namespace xFunc.Maths.Expressions
 
         private IExpression key;
 
+        [ExcludeFromCodeCoverage]
         internal Undefine() { }
 
         /// <summary>

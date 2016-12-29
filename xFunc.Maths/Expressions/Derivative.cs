@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
 
@@ -28,8 +29,8 @@ namespace xFunc.Maths.Expressions
         private ISimplifier simplifier;
         private IDifferentiator differentiator;
 
-        internal Derivative()
-            : base(null, -1) { }
+        [ExcludeFromCodeCoverage]
+        internal Derivative() : base(null, -1) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Collections;
@@ -28,19 +29,8 @@ namespace xFunc.Maths.Expressions
 
         private string function;
 
-        internal UserFunction()
-            : this(null, null, -1)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserFunction"/> class.
-        /// </summary>
-        /// <param name="function">The name of function.</param>
-        internal UserFunction(string function)
-            : this(function, null, -1)
-        {
-        }
+        [ExcludeFromCodeCoverage]
+        internal UserFunction() : this(null, null, -1) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.

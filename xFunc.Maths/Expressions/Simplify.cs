@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -26,6 +27,7 @@ namespace xFunc.Maths.Expressions
 
         private ISimplifier simplifier;
 
+        [ExcludeFromCodeCoverage]
         internal Simplify() { }
 
         /// <summary>

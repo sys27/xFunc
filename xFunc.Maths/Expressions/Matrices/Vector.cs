@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using xFunc.Maths.Analyzers;
@@ -26,10 +27,8 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Vector : DifferentParametersExpression
     {
 
-        internal Vector()
-            : base(null, -1)
-        {
-        }
+        [ExcludeFromCodeCoverage]
+        internal Vector() : base(null, -1) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.

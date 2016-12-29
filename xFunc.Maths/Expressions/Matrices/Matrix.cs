@@ -305,13 +305,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override int MinParameters { get; } = 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -319,13 +313,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters
-        {
-            get
-            {
-                return -1;
-            }
-        }
+        public override int MaxParameters { get; } = -1;
 
         /// <summary>
         /// Gets a value indicating whether matrix is square.
@@ -347,13 +335,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The type of the result.
         /// </value>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Matrix;
-            }
-        }
+        public override ExpressionResultType ResultType { get; } = ExpressionResultType.Matrix;
 
     }
 

@@ -97,20 +97,14 @@ namespace xFunc.Maths.Expressions
         {
             return new Log(m_right.Clone(), m_left.Clone());
         }
-        
+
         /// <summary>
         /// Gets the type of the right parameter.
         /// </summary>
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType
-        {
-            get
-            {
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
-            }
-        }
+        public override ExpressionResultType RightType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
         /// <summary>
         /// Gets the type of the result.

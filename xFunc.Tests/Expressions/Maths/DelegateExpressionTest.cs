@@ -71,6 +71,50 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
+        public void EqualRefTest()
+        {
+            var exp = new DelegateExpression(p => 1.0);
+
+            Assert.True(exp.Equals(exp));
+        }
+
+        [Fact]
+        public void EqualRefNullTest()
+        {
+            var exp = new DelegateExpression(p => 1.0);
+
+            Assert.False(exp.Equals(null));
+        }
+
+        [Fact]
+        public void EqualDiffTypeTest()
+        {
+            var exp1 = new DelegateExpression(p => 1.0);
+            var exp2 = new Number(2);
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualSameTest()
+        {
+            Func<ExpressionParameters, object> d = p => 1.0;
+            var exp1 = new DelegateExpression(d);
+            var exp2 = new DelegateExpression(d);
+
+            Assert.True(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualDiffTest()
+        {
+            var exp1 = new DelegateExpression(p => 1.0);
+            var exp2 = new DelegateExpression(p => 2.0);
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
         public void CloneTest()
         {
             Assert.Throws<NotSupportedException>(() => new DelegateExpression(x => null).Clone());

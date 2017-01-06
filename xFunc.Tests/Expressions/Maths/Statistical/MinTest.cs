@@ -86,6 +86,15 @@ namespace xFunc.Tests.Expressions.Maths.Statistical
             Assert.Equal("min({1, 2})", sum.ToString());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Min(new[] { new Number(1), new Number(2) }, 2);
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

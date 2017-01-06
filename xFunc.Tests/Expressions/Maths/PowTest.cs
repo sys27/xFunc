@@ -92,6 +92,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Throws<ParameterTypeMismatchException>(() => new Pow(new Number(10), new ComplexNumber(new Complex(3, 2))));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Pow(new Variable("x"), new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

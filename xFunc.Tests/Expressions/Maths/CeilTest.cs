@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class CeilTest
     {
 
@@ -38,6 +38,15 @@ namespace xFunc.Tests.Expressions.Maths
             var ceil = new Ceil(new Number(5.55555555));
 
             Assert.Equal("ceil(5.55555555)", ceil.ToString());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Ceil(new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

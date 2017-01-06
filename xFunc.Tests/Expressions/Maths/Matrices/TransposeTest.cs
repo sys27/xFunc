@@ -72,6 +72,15 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             Assert.Equal("transpose({{1, -2}, {4, 0}})", exp.ToString());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Transpose(new Vector(new[] { new Number(1), new Number(2) }));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

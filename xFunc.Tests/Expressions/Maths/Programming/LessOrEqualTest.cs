@@ -51,6 +51,15 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             Assert.Equal(false, lessThen.Execute(parameters));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new LessOrEqual(new Number(2), new Number(3));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

@@ -60,6 +60,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(24.0, func.Execute(expParams));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new UserFunction("f", new[] { new Number(5) }, 1);
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

@@ -273,6 +273,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Sub(new Number(5), new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

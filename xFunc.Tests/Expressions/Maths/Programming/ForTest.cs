@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Programming
 {
-    
+
     public class ForTest
     {
 
@@ -30,12 +30,25 @@ namespace xFunc.Tests.Expressions.Maths.Programming
 
             var init = new Define(new Variable("i"), new Number(0));
             var cond = new LessThan(new Variable("i"), new Number(10));
-            var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1))); 
+            var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1)));
 
             var @for = new For(new Variable("i"), init, cond, iter);
             @for.Execute(parameters);
 
             Assert.Equal(10.0, parameters.Variables["i"]);
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var init = new Define(new Variable("i"), new Number(0));
+            var cond = new LessThan(new Variable("i"), new Number(10));
+            var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1)));
+
+            var exp = new For(new Variable("i"), init, cond, iter);
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

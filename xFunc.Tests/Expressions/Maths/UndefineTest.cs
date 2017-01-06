@@ -134,6 +134,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Throws<ArgumentException>(() => undef.Execute(parameters));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Undefine(new Variable("x"));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

@@ -23,7 +23,7 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
 
     public class ReTest
     {
-        
+
         [Fact]
         public void ExecuteTest1()
         {
@@ -46,6 +46,15 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
             var exp = new Re(new ComplexNumber(complex));
 
             Assert.Equal("re(3.1+2.5i)", exp.ToString());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Re(new ComplexNumber(new Complex(2, 2)));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

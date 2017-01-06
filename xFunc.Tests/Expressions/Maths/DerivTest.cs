@@ -63,6 +63,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Derivative(new Sin(new Variable("x")), new Variable("x"), new Number(1));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

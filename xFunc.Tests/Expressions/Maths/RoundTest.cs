@@ -42,6 +42,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(expected, result);
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Mul(new Number(5), new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

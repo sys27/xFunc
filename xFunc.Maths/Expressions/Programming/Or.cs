@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new And(m_left.Clone(), m_right.Clone());
+            return new Or(m_left.Clone(), m_right.Clone());
         }
 
         /// <summary>

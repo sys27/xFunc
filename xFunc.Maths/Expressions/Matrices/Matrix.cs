@@ -175,7 +175,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Matrix((Vector[])CloneArguments());
+            return new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector)x));
         }
 
         internal double[][] ToCalculatedArray(ExpressionParameters parameters)

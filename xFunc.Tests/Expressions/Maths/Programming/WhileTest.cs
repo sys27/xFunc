@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Programming
 {
-    
+
     public class WhileTest
     {
 
@@ -37,6 +37,18 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             @while.Execute(parameters);
 
             Assert.Equal(10.0, parameters.Variables["x"]);
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var body = new Define(new Variable("x"), new Add(new Variable("x"), new Number(2)));
+            var cond = new LessThan(new Variable("x"), new Number(10));
+
+            var exp = new While(body, cond);
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

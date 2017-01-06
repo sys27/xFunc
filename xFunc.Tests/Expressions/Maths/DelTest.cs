@@ -63,6 +63,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Throws<ArgumentNullException>(() => new Del(new Variable("x")).Execute());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

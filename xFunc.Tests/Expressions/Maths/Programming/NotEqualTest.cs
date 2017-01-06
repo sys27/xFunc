@@ -136,6 +136,15 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             Assert.Equal(false, result);
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Not(new Number(2));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

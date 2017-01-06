@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class FactTest
     {
 
@@ -52,6 +52,15 @@ namespace xFunc.Tests.Expressions.Maths
             var fact = new Fact(new Number(-1));
 
             Assert.Equal(double.NaN, fact.Execute());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Fact(new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

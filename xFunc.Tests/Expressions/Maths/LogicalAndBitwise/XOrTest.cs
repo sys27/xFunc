@@ -123,6 +123,15 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
             Assert.Throws<ParameterTypeMismatchException>(() => new XOr(new Bool(true), new Number(2)));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new XOr(new Bool(true), new Bool(false));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

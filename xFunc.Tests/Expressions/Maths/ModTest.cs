@@ -58,6 +58,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(double.NaN, result);
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Mod(new Number(5), new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

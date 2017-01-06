@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class LgTest
     {
 
@@ -39,6 +39,15 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Lg(new ComplexNumber(complex));
 
             Assert.Equal(Complex.Log10(complex), exp.Execute());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Lg(new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

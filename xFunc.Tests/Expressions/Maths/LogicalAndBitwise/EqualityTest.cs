@@ -55,6 +55,15 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
             Assert.Equal("(True <=> False) and False", eq.ToString());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Equality(new Bool(true), new Bool(false));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

@@ -66,6 +66,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(Complex.Sqrt(complex), exp.Execute());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Sqrt(new Number(2));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

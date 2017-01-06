@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Programming
 {
-    
+
     public class OrTest
     {
 
@@ -44,6 +44,18 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var or = new Or(lessThen, greaterThen);
 
             Assert.Equal(true, or.Execute(parameters));
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var lessThen = new LessThan(new Variable("x"), new Number(10));
+            var greaterThen = new GreaterThan(new Variable("x"), new Number(10));
+            var exp = new Or(lessThen, greaterThen);
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

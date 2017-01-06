@@ -84,6 +84,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.False(abs1.Equals(null));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Abs(new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

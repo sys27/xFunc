@@ -19,10 +19,10 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
-    
+
     public class NotTest
     {
-        
+
         [Fact]
         public void ExecuteTest1()
         {
@@ -45,6 +45,15 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
             var exp = new Not(new Bool(true));
 
             Assert.Equal(false, exp.Execute());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Not(new Bool(false));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

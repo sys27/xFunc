@@ -41,6 +41,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(Complex.Negate(complex), exp.Execute());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new UnaryMinus(new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

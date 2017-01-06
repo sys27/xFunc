@@ -50,6 +50,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(16.0, exp.Execute());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new LCM(new Variable("x"), new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

@@ -50,6 +50,15 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             Assert.Throws<NotSupportedException>(() => new Dec(new Number(1)));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Dec(new Variable("x"));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

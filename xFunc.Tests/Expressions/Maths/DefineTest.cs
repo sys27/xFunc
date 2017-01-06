@@ -106,6 +106,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Throws<ArgumentNullException>(() => new Define(new Variable("π"), new Number(1)).Execute(null));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Define(new Variable("x"), new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

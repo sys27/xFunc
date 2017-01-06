@@ -41,6 +41,15 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(Complex.Log(complex), exp.Execute());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Ln(new Number(5));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

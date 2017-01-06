@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.Programming
 {
-    
+
     public class GreaterOrEqualTest
     {
 
@@ -49,6 +49,15 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             var lessThen = new GreaterOrEqual(new Variable("x"), new Number(10));
 
             Assert.Equal(false, lessThen.Execute(parameters));
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new GreaterOrEqual(new Number(2), new Number(3));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

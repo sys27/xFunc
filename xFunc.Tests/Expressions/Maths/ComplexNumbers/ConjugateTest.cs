@@ -48,6 +48,15 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
             Assert.Equal("conjugate(3.1+2.5i)", exp.ToString());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Conjugate(new ComplexNumber(new Complex(2, 2)));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

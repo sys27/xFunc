@@ -52,6 +52,26 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
         }
 
         [Fact]
+        public void CastToComplexTest()
+        {
+            var complex = new Complex(5, 2);
+            var exp = new ComplexNumber(complex);
+            var result = (Complex)exp;
+
+            Assert.Equal(complex, result);
+        }
+
+        [Fact]
+        public void CastToComplexNumberTest()
+        {
+            var complex = new Complex(5, 2);
+            var exp = (ComplexNumber)complex;
+            var result = new ComplexNumber(complex);
+
+            Assert.Equal(exp, result);
+        }
+
+        [Fact]
         public void EqualsTest()
         {
             var exp1 = new ComplexNumber(new Complex(5, 2));
@@ -65,6 +85,15 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
         {
             var exp1 = new ComplexNumber(new Complex(5, 2));
             var exp2 = new ComplexNumber(new Complex(3, 2));
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void NotEqualsDiffTypesTest()
+        {
+            var exp1 = new ComplexNumber(new Complex(5, 2));
+            var exp2 = new Number(2);
 
             Assert.False(exp1.Equals(exp2));
         }
@@ -131,6 +160,31 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
             var exp = new Abs(new ComplexNumber(3, 2));
 
             Assert.Equal("abs(3+2i)", exp.ToString());
+        }
+
+        [Fact]
+        public void IToStringTest()
+        {
+            var exp = new ComplexNumber(0, 1);
+
+            Assert.Equal("i", exp.ToString());
+        }
+
+        [Fact]
+        public void NegativeIToStringTest()
+        {
+            var exp = new ComplexNumber(0, -1);
+
+            Assert.Equal("-i", exp.ToString());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new ComplexNumber(new Complex(2, 2));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

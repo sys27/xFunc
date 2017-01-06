@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
             var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) });
-            
+
             Assert.Throws<ArgumentException>(() => vector1.Sub(vector2));
         }
 
@@ -180,6 +180,15 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             var result = mul2.Execute();
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Vector(new[] { new Number(1), new Number(2), new Number(3) });
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

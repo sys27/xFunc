@@ -64,6 +64,20 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
             Assert.Equal("det({{1, -2}, {4, 0}})", det.ToString());
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Transpose(new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
+                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
+            }));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

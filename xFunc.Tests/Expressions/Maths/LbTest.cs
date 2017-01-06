@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class LbTest
     {
 
@@ -28,6 +28,15 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Lb(new Number(2));
 
             Assert.Equal(Math.Log(2, 2), exp.Execute());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Lb(new Number(5));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

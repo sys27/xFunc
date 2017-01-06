@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
-    
+
     public class FloorTest
     {
 
@@ -38,6 +38,15 @@ namespace xFunc.Tests.Expressions.Maths
             var exp = new Floor(new Number(5.55555555));
 
             Assert.Equal("floor(5.55555555)", exp.ToString());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Floor(new Number(0));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

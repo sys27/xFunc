@@ -76,6 +76,15 @@ namespace xFunc.Tests.Expressions.Maths.Programming
             Assert.Equal(0.0, @if.Execute(parameters));
         }
 
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new If(new Equal(new Variable("x"), new Number(10)), new Number(3), new Number(2));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
+        }
+
     }
 
 }

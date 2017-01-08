@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         public void DecBoolTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
-            var dec = new Inc(new Variable("x"));
+            var dec = new Dec(new Variable("x"));
 
             Assert.Throws<NotSupportedException>(() => dec.Execute(parameters));
         }
@@ -47,7 +47,9 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         [Fact]
         public void NotVarTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Dec(new Number(1)));
+            var dec = new Dec(new Number(2));
+
+            Assert.Equal(1.0, dec.Execute());
         }
 
         [Fact]

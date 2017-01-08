@@ -45,9 +45,11 @@ namespace xFunc.Tests.Expressions.Maths.Programming
         }
 
         [Fact]
-        public void NotVarTest()
+        public void IncNumberTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Inc(new Number(1)));
+            var inc = new Inc(new Number(1));
+
+            Assert.Equal(2.0, inc.Execute());
         }
 
         [Fact]

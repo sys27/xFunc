@@ -56,13 +56,14 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var var = (Variable)m_argument;
-            var parameter = var.Execute(parameters);
-            if (parameter is bool)
+            var value = m_argument.Execute(parameters);
+            if (value is bool)
                 throw new NotSupportedException();
 
-            var newValue = Convert.ToDouble(parameter) + 1;
-            parameters.Variables[var.Name] = newValue;
+            var newValue = Convert.ToDouble(value) + 1;
+
+            if (m_argument is Variable)
+                parameters.Variables[((Variable)m_argument).Name] = newValue;
 
             return newValue;
         }
@@ -89,25 +90,6 @@ namespace xFunc.Maths.Expressions.Programming
         public override IExpression Clone()
         {
             return new Inc(m_argument.Clone());
-        }
-
-        /// <summary>
-        /// Gets or sets the expression.
-        /// </summary>
-        /// <value>The expression.</value>
-        public override IExpression Argument
-        {
-            get
-            {
-                return m_argument;
-            }
-            set
-            {
-                if (!(value is Variable))
-                    throw new NotSupportedException();
-
-                base.Argument = value;
-            }
         }
 
     }

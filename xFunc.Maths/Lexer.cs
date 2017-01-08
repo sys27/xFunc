@@ -51,6 +51,11 @@ namespace xFunc.Maths
         /// </summary>
         public Lexer()
         {
+            InitRegex();
+        }
+
+        private void InitRegex()
+        {
             var options = RegexOptions.Compiled | RegexOptions.IgnoreCase;
 
             regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", options);
@@ -63,7 +68,7 @@ namespace xFunc.Maths
             regexNumberOct = new Regex(@"\G[+-]?0[0-7]+", options);
             regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", options);
 
-            regexComplexNumber = new Regex(@"\G([+-]?\s*\d*\.?\d+)??\s*([+-]?\s*\d*\.?\d+)°", options);
+            regexComplexNumber = new Regex(@"\G([+-]?\s*\d*\.?\d+)??\s*[∠]?\s*([+-]?\s*\d*\.?\d+)°", options);
 
             regexSkip = new Regex(@"\G\s+", options);
             regexAllWhitespaces = new Regex(@"\s+", options);

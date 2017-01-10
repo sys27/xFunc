@@ -465,7 +465,7 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("fact(4)", exp.ToString());
+            Assert.Equal("4!", exp.ToString());
         }
 
         [Fact]

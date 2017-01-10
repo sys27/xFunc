@@ -55,7 +55,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override string ToString()
         {
-            if (m_parent is BinaryExpression && !(m_parent is Mul))
+            if (m_parent is BinaryExpression)
                 return ToString("({0} % {1})");
 
             return ToString("{0} % {1}");

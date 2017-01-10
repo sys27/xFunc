@@ -51,6 +51,14 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
+        [Fact]
+        public void ToStringTest()
+        {
+            var exp = new Round(new Number(5), new Number(0));
+
+            Assert.Equal("round(5, 0)", exp.ToString());
+        }
+
     }
 
 }

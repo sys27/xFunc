@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
@@ -70,6 +69,14 @@ namespace xFunc.Tests.Expressions.Maths
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
+        }
+
+        [Fact]
+        public void ToStringTest()
+        {
+            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
+
+            Assert.Equal("del(2 * x1 + x2 ^ 2 + x3 ^ 3)", exp.ToString());
         }
 
     }

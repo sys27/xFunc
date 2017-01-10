@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>The string that represents this expression.</returns>
         public override string ToString()
         {
-            if (m_parent is BinaryExpression && !(m_parent is Mul))
+            if (m_parent is BinaryExpression && !(m_parent is Mul || m_parent is Add || m_parent is Sub))
                 return ToString("({0} * {1})");
 
             return ToString("{0} * {1}");

@@ -249,6 +249,38 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
+        [Fact]
+        public void ToStringTest()
+        {
+            var exp = new Mul(new Number(5), new Number(0));
+
+            Assert.Equal("5 * 0", exp.ToString());
+        }
+
+        [Fact]
+        public void ToStringAddTest()
+        {
+            var exp = new Add(new Variable("x"), new Mul(new Number(5), new Number(0)));
+
+            Assert.Equal("x + 5 * 0", exp.ToString());
+        }
+
+        [Fact]
+        public void ToStringSubTest()
+        {
+            var exp = new Sub(new Variable("x"), new Mul(new Number(5), new Number(0)));
+
+            Assert.Equal("x - 5 * 0", exp.ToString());
+        }
+
+        [Fact]
+        public void ToStringMulTest()
+        {
+            var exp = new Mul(new Variable("x"), new Mul(new Number(5), new Number(0)));
+
+            Assert.Equal("x * 5 * 0", exp.ToString());
+        }
+
     }
 
 }

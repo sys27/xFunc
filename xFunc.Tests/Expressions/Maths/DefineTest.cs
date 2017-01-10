@@ -115,6 +115,14 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
+        [Fact]
+        public void ToStringTest()
+        {
+            var exp = new Define(new Variable("x"), new Number(0));
+
+            Assert.Equal("x := 0", exp.ToString());
+        }
+        
     }
 
 }

@@ -124,6 +124,7 @@
     <Compile Include="Expressions\Maths\ModTest.cs" />
     <Compile Include="Expressions\Maths\MulTest.cs" />
     <Compile Include="Expressions\Maths\PowTest.cs" />
+    <Compile Include="Expressions\Maths\SimplifyTest.cs" />
     <Compile Include="Expressions\Maths\Statistical\StdevpTest.cs" />
     <Compile Include="Expressions\Maths\Statistical\VarpTest.cs" />
     <Compile Include="Expressions\Maths\Statistical\StdevTest.cs" />

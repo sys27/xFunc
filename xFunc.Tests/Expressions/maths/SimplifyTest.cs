@@ -12,39 +12,52 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+using Moq;
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths
 {
 
-    public class LbTest
+    public class SimplifyTest
     {
 
         [Fact]
         public void ExecuteTest()
         {
-            var exp = new Lb(new Number(2));
+            var mock = new Mock<ISimplifier>();
+            mock.Setup(x => x.Analyze(It.IsAny<Simplify>())).Returns<IExpression>(x => x);
 
-            Assert.Equal(Math.Log(2, 2), exp.Execute());
+            var exp = new Simplify(new Sin(new Variable("x")));
+            exp.Simplifier = mock.Object;
+
+            Assert.Equal(exp, exp.Execute());
         }
 
         [Fact]
-        public void CloneTest()
+        public void ExecuteNullTest()
         {
-            var exp = new Lb(new Number(5));
-            var clone = exp.Clone();
-
-            Assert.Equal(exp, clone);
+            Assert.Throws<ArgumentNullException>(() => new Simplify(new Sin(new Variable("x"))).Execute());
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var exp = new Lb(new Number(5));
+            var exp = new Simplify(new Sin(new Variable("x")));
 
-            Assert.Equal("lb(5)", exp.ToString());
+            Assert.Equal("simplify(sin(x))", exp.ToString());
+        }
+
+        [Fact]
+        public void CloneTest()
+        {
+            var exp = new Simplify(new Sin(new Variable("x")));
+            var clone = exp.Clone();
+
+            Assert.Equal(exp, clone);
         }
 
     }

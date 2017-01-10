@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override string ToString()
         {
-            return ToString("fact({0})");
+            return ToString("{0}!");
         }
 
         /// <summary>

@@ -1608,7 +1608,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void DivTest()
+        public void DivFuncTest()
         {
             var tokens = new List<IToken>
             {
@@ -1627,7 +1627,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void PowTest()
+        public void PowFuncTest()
         {
             var tokens = new List<IToken>
             {
@@ -1641,6 +1641,404 @@ namespace xFunc.Tests
 
             var exp = parser.Parse(tokens);
             var expected = new Pow(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void DivTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.Division),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Div(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void PowTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.Exponentiation),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Pow(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void FactTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Factorial)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Fact(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void UnaryMinusTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new UnaryMinus(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void NotTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new OperationToken(Operations.Not),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Not(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void OrTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.Or),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Or(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void XOrTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new NumberToken(1),
+                new OperationToken(Operations.XOr),
+                new NumberToken(2)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new XOr(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void NOrTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.NOr),
+                new BooleanToken(true)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new NOr(new Bool(true), new Bool(true));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void NAndTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.NAnd),
+                new BooleanToken(true)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new NAnd(new Bool(true), new Bool(true));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ImplicationTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Implication),
+                new BooleanToken(true)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Implication(new Bool(true), new Bool(true));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void EqualityTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new BooleanToken(true),
+                new OperationToken(Operations.Equality),
+                new BooleanToken(true)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Equality(new Bool(true), new Bool(true));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void AbsTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Absolute, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Abs(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void TanTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Tangent, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Tan(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CotTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Cotangent, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Cot(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void SecTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Secant, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sec(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CscTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Cosecant, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Csc(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void LnTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Ln, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Ln(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void LgTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Lg, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Lg(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void LbTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Lb, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Lb(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ExpTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Exp, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Exp(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void FloorTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Floor, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Floor(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CeilTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Ceil, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Ceil(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void RoundTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Round, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(3),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Round(new Number(2), new Number(3));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void DefTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Define, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Define(new Variable("x"), new Number(2));
 
             Assert.Equal(expected, exp);
         }

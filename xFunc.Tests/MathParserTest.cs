@@ -19,6 +19,7 @@ using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
@@ -2039,6 +2040,329 @@ namespace xFunc.Tests
 
             var exp = parser.Parse(tokens);
             var expected = new Define(new Variable("x"), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void SqrtTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Sqrt, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sqrt(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArcsinTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arcsine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arcsin(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArccosTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arccosine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arccos(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArctanTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arctangent, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arctan(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArccotTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arccotangent, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arccot(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArcsecTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arcsecant, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arcsec(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArccscTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arccosecant, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arccsc(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void SinhTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Sineh, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sinh(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CoshTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Cosineh, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Cosh(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void TanhTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Tangenth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Tanh(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CothTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Cotangenth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Coth(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void SechTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Secanth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sech(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CschTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Cosecanth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Csch(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArsinhTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arsineh, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arsinh(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArcoshTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arcosineh, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arcosh(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArtanhTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Artangenth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Artanh(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArcothTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arcotangenth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arcoth(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArsechTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arsecanth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arsech(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ArcschTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Arcosecanth, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(2),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Arcsch(new Number(2));
 
             Assert.Equal(expected, exp);
         }

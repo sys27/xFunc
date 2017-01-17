@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Resources;
 
-[assembly: AssemblyCopyright("Copyright © 2012-2016 Dmitry Kischenko")]
+[assembly: AssemblyCopyright("Copyright © 2012-2017 Dmitry Kischenko")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

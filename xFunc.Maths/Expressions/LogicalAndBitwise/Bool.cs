@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// </summary>
     public class Bool : IExpression
     {
-        
+
         private readonly bool value;
 
         /// <summary>
@@ -201,6 +201,20 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             get
             {
                 return ExpressionResultType.Boolean;
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of this expression.
+        /// </summary>
+        /// <value>
+        /// The value of this expression.
+        /// </value>
+        public bool Value
+        {
+            get
+            {
+                return value;
             }
         }
 

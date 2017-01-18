@@ -33,19 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
-        public SubAssign(IExpression variable, IExpression exp)
-            : base(variable, exp) { }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("{0} -= {1}");
-        }
+        public SubAssign(IExpression variable, IExpression exp) : base(variable, exp) { }
 
         /// <summary>
         /// Executes this expression.

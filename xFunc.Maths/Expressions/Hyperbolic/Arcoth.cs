@@ -34,11 +34,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// Initializes a new instance of the <see cref="Arcoth"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Arcoth(IExpression expression)
-            : base(expression)
-        {
-
-        }
+        public Arcoth(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -49,15 +45,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         public override int GetHashCode()
         {
             return base.GetHashCode(3517);
-        }
-
-        /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return ToString("arcoth({0})");
         }
 
         /// <summary>
@@ -98,7 +85,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             return new Arcoth(m_argument.Clone());
         }
-        
+
     }
 
 }

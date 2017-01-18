@@ -49,15 +49,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return ToString("log({0}, {1})");
-        }
-
-        /// <summary>
         /// Executes this Log expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

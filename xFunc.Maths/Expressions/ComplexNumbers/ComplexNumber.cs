@@ -16,6 +16,7 @@ using System;
 using System.Globalization;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
@@ -103,28 +104,24 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public string ToString(IFormatter formatter)
+        {
+            return this.Analyze(formatter);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            if (complex.Real == 0)
-            {
-                if (complex.Imaginary == 1)
-                    return "i";
-                if (complex.Imaginary == -1)
-                    return "-i";
-
-                return $"{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
-            }
-
-            if (complex.Imaginary == 0)
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
-
-            if (complex.Imaginary > 0)
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
-
-            return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            return this.ToString(new CommonFormatter());
         }
 
         /// <summary>

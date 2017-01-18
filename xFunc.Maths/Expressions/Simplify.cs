@@ -34,10 +34,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Simplify"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Simplify(IExpression expression)
-            : base(expression)
-        {
-        }
+        public Simplify(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -48,15 +45,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return GetHashCode(457);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return ToString("simplify({0})");
         }
 
         /// <summary>

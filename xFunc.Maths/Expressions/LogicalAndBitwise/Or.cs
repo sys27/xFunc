@@ -33,9 +33,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Or(IExpression left, IExpression right)
-            : base(left, right)
-        { }
+        public Or(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -46,18 +44,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override int GetHashCode()
         {
             return base.GetHashCode(7727, 5657);
-        }
-
-        /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            if (m_parent is BinaryExpression)
-                return ToString("({0} or {1})");
-
-            return ToString("{0} or {1}");
         }
 
         /// <summary>

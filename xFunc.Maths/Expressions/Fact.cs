@@ -32,11 +32,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Fact(IExpression argument)
-            : base(argument)
-        {
-
-        }
+        public Fact(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -47,17 +43,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return base.GetHashCode(1453);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("{0}!");
         }
 
         /// <summary>

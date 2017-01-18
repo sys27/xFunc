@@ -33,11 +33,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Not(IExpression expression)
-            : base(expression)
-        {
-
-        }
+        public Not(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -48,15 +44,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override int GetHashCode()
         {
             return base.GetHashCode(3023);
-        }
-
-        /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return ToString("not({0})");
         }
 
         /// <summary>

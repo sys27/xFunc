@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
 {
@@ -37,6 +38,14 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters"/>
         object Execute(ExpressionParameters parameters);
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        string ToString(IFormatter formatter);
         /// <summary>
         /// Analyzes the current expression.
         /// </summary>

@@ -35,8 +35,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The itererator section.</param>
-        public For(IExpression body, IExpression init, IExpression cond, IExpression iter)
-            : base(new[] { body, init, cond, iter }, 4) { }
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : base(new[] { body, init, cond, iter }, 4) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="For" /> class.
@@ -52,17 +51,6 @@ namespace xFunc.Maths.Expressions.Programming
                 throw new ArgumentNullException(nameof(arguments));
             if (arguments.Length != countOfParams)
                 throw new ArgumentException();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return base.ToString("for");
         }
 
         /// <summary>

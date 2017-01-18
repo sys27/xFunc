@@ -33,9 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
-        public If(IExpression condition, IExpression then)
-            : base(new[] { condition, then }, 2)
-        { }
+        public If(IExpression condition, IExpression then) : base(new[] { condition, then }, 2) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -43,9 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
-        public If(IExpression condition, IExpression then, IExpression @else)
-            : base(new[] { condition, then, @else }, 3)
-        { }
+        public If(IExpression condition, IExpression then, IExpression @else) : base(new[] { condition, then, @else }, 3) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -59,17 +55,6 @@ namespace xFunc.Maths.Expressions.Programming
                 throw new ArgumentNullException(nameof(arguments));
             if (arguments.Length != countOfParams)
                 throw new ArgumentException();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("if");
         }
 
         /// <summary>

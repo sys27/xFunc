@@ -33,8 +33,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Equality(IExpression left, IExpression right)
-            : base(left, right) { }
+        public Equality(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -45,20 +44,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override int GetHashCode()
         {
             return base.GetHashCode(4211, 13009);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            if (m_parent is BinaryExpression)
-                return ToString("({0} <=> {1})");
-
-            return ToString("{0} <=> {1}");
         }
 
         /// <summary>

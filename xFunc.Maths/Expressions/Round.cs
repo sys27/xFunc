@@ -32,18 +32,14 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
-        public Round(IExpression argument) :
-            this(new[] { argument }, 1)
-        { }
+        public Round(IExpression argument) : this(new[] { argument }, 1) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
-        public Round(IExpression argument, IExpression digits) :
-            this(new[] { argument, digits }, 2)
-        { }
+        public Round(IExpression argument, IExpression digits) : this(new[] { argument, digits }, 2) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
@@ -70,17 +66,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return base.GetHashCode(4211, 10831);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return base.ToString("round");
         }
 
         /// <summary>

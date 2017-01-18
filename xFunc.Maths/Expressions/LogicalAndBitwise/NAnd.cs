@@ -34,8 +34,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public NAnd(IExpression left, IExpression right)
-            : base(left, right) { }
+        public NAnd(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -46,18 +45,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override int GetHashCode()
         {
             return base.GetHashCode(11731, 3343);
-        }
-
-        /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            if (m_parent is BinaryExpression)
-                return ToString("({0} nand {1})");
-
-            return ToString("{0} nand {1}");
         }
 
         /// <summary>

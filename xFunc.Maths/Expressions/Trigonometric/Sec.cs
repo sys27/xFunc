@@ -34,10 +34,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Sec"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Sec(IExpression expression)
-            : base(expression)
-        {
-        }
+        public Sec(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -48,15 +45,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         public override int GetHashCode()
         {
             return base.GetHashCode(6659);
-        }
-
-        /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return ToString("sec({0})");
         }
 
         /// <summary>

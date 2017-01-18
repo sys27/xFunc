@@ -16,6 +16,7 @@ using System;
 using System.Linq;
 using System.Text;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
@@ -44,10 +45,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="DifferentParametersExpression"/> class.
         /// </summary>
         /// <param name="countOfParams">The count of parameters.</param>
-        protected DifferentParametersExpression(int countOfParams)
-            : this(null, countOfParams)
-        {
-        }
+        protected DifferentParametersExpression(int countOfParams) : this(null, countOfParams) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
@@ -114,24 +112,24 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        /// <param name="function">The function.</param>
+        /// <param name="formatter">The formatter.</param>
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        protected string ToString(string function)
+        public string ToString(IFormatter formatter)
         {
-            var sb = new StringBuilder();
+            return this.Analyze(formatter);
+        }
 
-            sb.Append(function).Append('(');
-            if (m_arguments != null)
-            {
-                foreach (var item in m_arguments)
-                    sb.Append(item).Append(", ");
-                sb.Remove(sb.Length - 2, 2);
-            }
-            sb.Append(')');
-
-            return sb.ToString();
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.ToString(new CommonFormatter());
         }
 
         /// <summary>

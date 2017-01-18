@@ -48,15 +48,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return ToString("tan({0})");
-        }
-
-        /// <summary>
         /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

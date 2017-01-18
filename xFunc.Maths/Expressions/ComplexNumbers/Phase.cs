@@ -34,10 +34,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// Initializes a new instance of the <see cref="Phase"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Phase(IExpression argument)
-            : base(argument)
-        {
-        }
+        public Phase(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -48,17 +45,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public override int GetHashCode()
         {
             return base.GetHashCode(13109);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return base.ToString("phase({0})");
         }
 
         /// <summary>

@@ -32,8 +32,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Ceil" /> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded up.</param>
-        public Ceil(IExpression argument)
-            : base(argument) { }
+        public Ceil(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -44,17 +43,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return base.GetHashCode(12473);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("ceil({0})");
         }
 
         /// <summary>

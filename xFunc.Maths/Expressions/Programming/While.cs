@@ -33,19 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="body">The body of while loop.</param>
         /// <param name="condition">The condition of loop.</param>
-        public While(IExpression body, IExpression condition)
-            : base(body, condition) { }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("while({0}, {1})");
-        }
+        public While(IExpression body, IExpression condition) : base(body, condition) { }
 
         /// <summary>
         /// Executes this expression.

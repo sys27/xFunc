@@ -32,8 +32,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Floor"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded down.</param>
-        public Floor(IExpression argument)
-            : base(argument) { }
+        public Floor(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -44,17 +43,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return base.GetHashCode(11551);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("floor({0})");
         }
 
         /// <summary>

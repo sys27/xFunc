@@ -34,10 +34,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// Initializes a new instance of the <see cref="Reciprocal"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Reciprocal(IExpression argument)
-            : base(argument)
-        {
-        }
+        public Reciprocal(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -48,17 +45,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public override int GetHashCode()
         {
             return base.GetHashCode(2179);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return base.ToString("reciprocal({0})");
         }
 
         /// <summary>

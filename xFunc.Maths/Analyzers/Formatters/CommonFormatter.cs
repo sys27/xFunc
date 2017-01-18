@@ -27,9 +27,16 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers.Formatters
 {
 
+    /// <summary>
+    /// Converts expressions into string.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Analyzers.Formatters.IFormatter" />
     public class CommonFormatter : IFormatter
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommonFormatter"/> class.
+        /// </summary>
         public CommonFormatter() { }
 
         private string ToString(UnaryExpression exp, string format)
@@ -345,7 +352,7 @@ namespace xFunc.Maths.Analyzers.Formatters
             if (exp.Argument is BinaryExpression)
                 return ToString(exp, "-({0})");
             var sub = exp.Parent as Sub;
-            if (sub != null && ReferenceEquals(sub.Right, this))
+            if (sub != null && ReferenceEquals(sub.Right, exp))
                 return ToString(exp, "(-{0})");
 
             return ToString(exp, "-{0}");

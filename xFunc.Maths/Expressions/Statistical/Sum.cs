@@ -60,17 +60,6 @@ namespace xFunc.Maths.Expressions.Statistical
         }
 
         /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return base.ToString("sum");
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

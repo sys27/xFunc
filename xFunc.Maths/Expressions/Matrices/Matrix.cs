@@ -109,24 +109,6 @@ namespace xFunc.Maths.Expressions.Matrices
             return base.GetHashCode(743, 3863);
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-
-            sb.Append('{');
-            foreach (var item in m_arguments)
-                sb.Append(item).Append(", ");
-            sb.Remove(sb.Length - 2, 2).Append('}');
-
-            return sb.ToString();
-        }
-
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
         {
             var args = new Vector[this.countOfParams];

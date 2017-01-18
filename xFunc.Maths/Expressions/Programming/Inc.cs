@@ -32,19 +32,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="Inc"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Inc(IExpression argument)
-            : base(argument) { }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("{0}++");
-        }
+        public Inc(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Executes this expression.

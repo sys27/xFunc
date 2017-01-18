@@ -37,18 +37,6 @@ namespace xFunc.Maths.Expressions
         public Div(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            if (m_parent is BinaryExpression)
-                return ToString("({0} / {1})");
-
-            return ToString("{0} / {1}");
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

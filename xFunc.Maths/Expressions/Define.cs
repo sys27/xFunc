@@ -15,6 +15,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
@@ -79,12 +80,26 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        /// <returns>The string that represents this expression.</returns>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public string ToString(IFormatter formatter)
+        {
+            return this.Analyze(formatter);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
-            return $"{key} := {value}";
+            return this.ToString(new CommonFormatter());
         }
 
         /// <summary>

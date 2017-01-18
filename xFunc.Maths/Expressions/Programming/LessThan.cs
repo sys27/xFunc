@@ -33,22 +33,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public LessThan(IExpression left, IExpression right)
-            : base(left, right) { }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            if (m_parent is BinaryExpression)
-                return ToString("({0} < {1})");
-
-            return ToString("{0} < {1}");
-        }
+        public LessThan(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
         /// Executes this expression.

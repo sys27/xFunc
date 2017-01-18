@@ -32,11 +32,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Inverse"/> class.
         /// </summary>
         /// <param name="argument">A matrix.</param>
-        public Inverse(IExpression argument)
-            : base(argument)
-        {
-
-        }
+        public Inverse(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -47,17 +43,6 @@ namespace xFunc.Maths.Expressions.Matrices
         public override int GetHashCode()
         {
             return base.GetHashCode(7541);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("inverse({0})");
         }
 
         /// <summary>

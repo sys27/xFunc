@@ -34,10 +34,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        protected TrigonometricExpression(IExpression expression)
-            : base(expression)
-        {
-        }
+        protected TrigonometricExpression(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Calculates this mathematical expression (using degree).

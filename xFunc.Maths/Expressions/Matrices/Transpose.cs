@@ -32,11 +32,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Transpose"/> class.
         /// </summary>
         /// <param name="argument">The expression, which returns matrix of vector.</param>
-        public Transpose(IExpression argument)
-            : base(argument)
-        {
-
-        }
+        public Transpose(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -47,17 +43,6 @@ namespace xFunc.Maths.Expressions.Matrices
         public override int GetHashCode()
         {
             return base.GetHashCode(8461);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("transpose({0})");
         }
 
         /// <summary>

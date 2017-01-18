@@ -50,10 +50,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="firstMathExpression">The first operand.</param>
         /// <param name="secondMathExpression">The second operand.</param>
-        public LCM(IExpression firstMathExpression, IExpression secondMathExpression)
-            : base(new[] { firstMathExpression, secondMathExpression }, 2)
-        {
-        }
+        public LCM(IExpression firstMathExpression, IExpression secondMathExpression) : base(new[] { firstMathExpression, secondMathExpression }, 2) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -64,15 +61,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return base.GetHashCode(7417, 2719);
-        }
-
-        /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return base.ToString("lcm");
         }
 
         /// <summary>

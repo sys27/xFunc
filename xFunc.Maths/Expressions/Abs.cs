@@ -49,15 +49,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            return ToString("abs({0})");
-        }
-
-        /// <summary>
         /// Executes this Absolute expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

@@ -33,10 +33,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// Initializes a new instance of the <see cref="HyperbolicExpression" /> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        protected HyperbolicExpression(IExpression argument)
-            : base(argument)
-        {
-        }
+        protected HyperbolicExpression(IExpression argument) : base(argument) { }
 
         /// <summary>
         /// Gets the type of the argument.

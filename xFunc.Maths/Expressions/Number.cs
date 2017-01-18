@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
 {
@@ -82,19 +83,26 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
-        /// <returns>The string that represents this expression.</returns>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public string ToString(IFormatter formatter)
+        {
+            return this.Analyze(formatter);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
-            if (number < 0)
-            {
-                var sub = parent as Sub;
-                if (sub != null && sub.Right == this)
-                    return $"({number.ToString(System.Globalization.CultureInfo.InvariantCulture)})";
-            }
-
-            return number.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return this.ToString(new CommonFormatter());
         }
 
         /// <summary>

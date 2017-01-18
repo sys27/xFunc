@@ -38,10 +38,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Del"/> class.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        public Del(IExpression expression)
-            : base(expression)
-        {
-        }
+        public Del(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -52,17 +49,6 @@ namespace xFunc.Maths.Expressions
         public override int GetHashCode()
         {
             return GetHashCode(26321);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return ToString("del({0})");
         }
 
         /// <summary>

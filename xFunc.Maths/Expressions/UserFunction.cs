@@ -84,32 +84,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-
-            sb.Append(function).Append('(');
-            if (m_arguments != null && m_arguments.Length > 0)
-            {
-                foreach (var item in m_arguments)
-                    sb.Append(item).Append(", ");
-                sb.Remove(sb.Length - 2, 2);
-            }
-            else if (countOfParams > 0)
-            {
-                for (int i = 1; i <= countOfParams; i++)
-                    sb.AppendFormat("x{0}, ", i);
-                sb.Remove(sb.Length - 2, 2);
-            }
-            sb.Append(')');
-
-            return sb.ToString();
-        }
-
-        /// <summary>
         /// Executes the user function.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

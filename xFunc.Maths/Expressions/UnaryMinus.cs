@@ -47,21 +47,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Converts this expression to the equivalent string.
-        /// </summary>
-        /// <returns>The string that represents this expression.</returns>
-        public override string ToString()
-        {
-            if (m_argument is BinaryExpression)
-                return ToString("-({0})");
-            var sub = m_parent as Sub;
-            if (sub != null && ReferenceEquals(sub.Right, this))
-                return ToString("(-{0})");
-
-            return ToString("-{0}");
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

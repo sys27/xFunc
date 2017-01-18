@@ -46,11 +46,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="size">The size of vector.</param>
-        public Vector(int size)
-            : base(new IExpression[size], size)
-        {
-
-        }
+        public Vector(int size) : base(new IExpression[size], size) { }
 
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> at the specified index.
@@ -81,24 +77,6 @@ namespace xFunc.Maths.Expressions.Matrices
         public override int GetHashCode()
         {
             return base.GetHashCode(3121, 8369);
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-
-            sb.Append('{');
-            foreach (var item in m_arguments)
-                sb.Append(item).Append(", ");
-            sb.Remove(sb.Length - 2, 2).Append('}');
-
-            return sb.ToString();
         }
 
         private IExpression[] CalculateVector(ExpressionParameters parameters)

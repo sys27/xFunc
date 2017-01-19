@@ -39,14 +39,6 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
-        [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Lb(new Number(5));
-
-            Assert.Equal("lb(5)", exp.ToString());
-        }
-
     }
 
 }

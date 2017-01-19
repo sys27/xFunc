@@ -269,7 +269,7 @@ namespace xFunc.Maths.Analyzers.Formatters
             if (exp.Value < 0)
             {
                 var sub = exp.Parent as Sub;
-                if (sub != null && sub.Right == this)
+                if (sub != null && ReferenceEquals(sub.Right, exp))
                     return $"({exp.Value.ToString(CultureInfo.InvariantCulture)})";
             }
 

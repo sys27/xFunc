@@ -50,30 +50,6 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
-        [Fact]
-        public void ToStringTest()
-        {
-            var exp = new UnaryMinus(new Number(5));
-
-            Assert.Equal("-5", exp.ToString());
-        }
-
-        [Fact]
-        public void ToStringBinTest()
-        {
-            var exp = new UnaryMinus(new Add(new Number(5), new Number(0)));
-
-            Assert.Equal("-(5 + 0)", exp.ToString());
-        }
-
-        [Fact]
-        public void ToStringSubTest()
-        {
-            var exp = new Sub(new Number(0), new UnaryMinus(new Number(5)));
-
-            Assert.Equal("0 - (-5)", exp.ToString());
-        }
-
     }
 
 }

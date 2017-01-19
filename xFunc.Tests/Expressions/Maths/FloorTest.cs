@@ -33,14 +33,6 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Floor(new Number(5.55555555));
-
-            Assert.Equal("floor(5.55555555)", exp.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Floor(new Number(0));

@@ -143,14 +143,6 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
-        [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Undefine(new Variable("x"));
-
-            Assert.Equal("undef(x)", exp.ToString());
-        }
-
     }
 
 }

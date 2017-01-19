@@ -71,22 +71,6 @@ namespace xFunc.Tests.Expressions.Maths.Statistical
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var sum = new Min(new[] { new Number(1), new Number(2) }, 2);
-
-            Assert.Equal("min(1, 2)", sum.ToString());
-        }
-
-        [Fact]
-        public void ToStringTest2()
-        {
-            var sum = new Min(new[] { new Vector(new[] { new Number(1), new Number(2) }) }, 1);
-
-            Assert.Equal("min({1, 2})", sum.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Min(new[] { new Number(1), new Number(2) }, 2);

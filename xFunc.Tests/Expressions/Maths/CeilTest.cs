@@ -33,14 +33,6 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var ceil = new Ceil(new Number(5.55555555));
-
-            Assert.Equal("ceil(5.55555555)", ceil.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Ceil(new Number(0));

@@ -71,22 +71,6 @@ namespace xFunc.Tests.Expressions.Maths.Statistical
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var sum = new Stdevp(new[] { new Number(1), new Number(2) }, 2);
-
-            Assert.Equal("stdevp(1, 2)", sum.ToString());
-        }
-
-        [Fact]
-        public void ToStringTest2()
-        {
-            var sum = new Stdevp(new[] { new Vector(new[] { new Number(1), new Number(2) }) }, 1);
-
-            Assert.Equal("stdevp({1, 2})", sum.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Stdevp(new[] { new Number(1), new Number(2) }, 2);

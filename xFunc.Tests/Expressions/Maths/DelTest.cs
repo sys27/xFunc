@@ -71,14 +71,6 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
-        [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
-
-            Assert.Equal("del(2 * x1 + x2 ^ 2 + x3 ^ 3)", exp.ToString());
-        }
-
     }
 
 }

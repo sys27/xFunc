@@ -50,14 +50,6 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
-        [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Ln(new Number(5));
-
-            Assert.Equal("ln(5)", exp.ToString());
-        }
-
     }
 
 }

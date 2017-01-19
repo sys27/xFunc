@@ -69,22 +69,6 @@ namespace xFunc.Tests.Expressions.Maths
             Assert.Equal(exp, clone);
         }
 
-        [Fact]
-        public void ToStringArgTest()
-        {
-            var exp = new UserFunction("f", new[] { new Number(5), new Number(2) }, 1);
-
-            Assert.Equal("f(5, 2)", exp.ToString());
-        }
-
-        [Fact]
-        public void ToStringCountTest()
-        {
-            var exp = new UserFunction("f", 3);
-
-            Assert.Equal("f(x1, x2, x3)", exp.ToString());
-        }
-
     }
 
 }

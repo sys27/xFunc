@@ -40,15 +40,6 @@ namespace xFunc.Tests.Expressions.Maths.ComplexNumbers
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Reciprocal(new ComplexNumber(complex));
-
-            Assert.Equal("reciprocal(3.1+2.5i)", exp.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Reciprocal(new ComplexNumber(new Complex(2, 2)));

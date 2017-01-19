@@ -40,30 +40,6 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void ToStringExpTest()
-        {
-            var deriv = new Derivative(new Sin(new Variable("x")));
-
-            Assert.Equal("deriv(sin(x))", deriv.ToString());
-        }
-
-        [Fact]
-        public void ToStringVarTest()
-        {
-            var deriv = new Derivative(new Sin(new Variable("x")), new Variable("x"));
-
-            Assert.Equal("deriv(sin(x), x)", deriv.ToString());
-        }
-
-        [Fact]
-        public void ToStringPointTest()
-        {
-            var deriv = new Derivative(new Sin(new Variable("x")), new Variable("x"), new Number(1));
-
-            Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Derivative(new Sin(new Variable("x")), new Variable("x"), new Number(1));

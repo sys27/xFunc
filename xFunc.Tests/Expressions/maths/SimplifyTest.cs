@@ -44,14 +44,6 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Simplify(new Sin(new Variable("x")));
-
-            Assert.Equal("simplify(sin(x))", exp.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Simplify(new Sin(new Variable("x")));

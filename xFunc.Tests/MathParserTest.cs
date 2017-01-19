@@ -102,7 +102,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("log(9, 3)", exp.ToString());
+            var expected = new Log(new Number(3), new Number(9));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -133,7 +135,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("root(x, 3)", exp.ToString());
+            var expected = new Root(new Variable("x"), new Number(3));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -165,7 +169,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("deriv(sin(x))", exp.ToString());
+            var expected = new Derivative(new Sin(new Variable("x")));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -185,7 +191,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ParseAssign()
+        public void ParseDefine()
         {
             var tokens = new List<IToken>
             {
@@ -195,11 +201,13 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("x := 3", exp.ToString());
+            var expected = new Define(new Variable("x"), new Number(3));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
-        public void ParseAssignWithOneParam()
+        public void ParseDefineWithOneParam()
         {
             var tokens = new List<IToken>
             {
@@ -211,7 +219,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ParseAssignFirstParamIsNotVar()
+        public void ParseDefineFirstParamIsNotVar()
         {
             var tokens = new List<IToken>
             {
@@ -239,20 +247,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void DefineParserTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("aaa"),
-                new OperationToken(Operations.Assign),
-                new NumberToken(1)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("aaa := 1", exp.ToString());
-        }
-
-        [Fact]
         public void DefineComplexParserTest()
         {
             var tokens = new List<IToken>
@@ -266,7 +260,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void AssignUserFuncTest()
+        public void DefineUserFuncTest()
         {
             var tokens = new List<IToken>
             {
@@ -282,7 +276,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("func(x) := sin(x)", exp.ToString());
+            var expected = new Define(new UserFunction("func", new[] { new Variable("x") }, 1), new Sin(new Variable("x")));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -299,7 +295,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("1 + func(x)", exp.ToString());
+            var expected = new Add(new Number(1), new UserFunction("func", new[] { new Variable("x") }, 1));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -334,7 +332,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("undef(f(x))", exp.ToString());
+            var expected = new Undefine(new UserFunction("f", new[] { new Variable("x") }, 1));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -383,7 +383,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("cos(x) + sin(x)", exp.ToString());
+            var expected = new Add(new Cos(new Variable("x")), new Sin(new Variable("x")));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -400,7 +402,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("gcd(12, 16)", exp.ToString());
+            var expected = new GCD(new Number(12), new Number(16));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -419,7 +423,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("gcd(12, 16, 8)", exp.ToString());
+            var expected = new GCD(new[] { new Number(12), new Number(16), new Number(8) }, 3);
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -436,7 +442,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("lcm(12, 16)", exp.ToString());
+            var expected = new LCM(new Number(12), new Number(16));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -451,7 +459,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("simplify(x)", exp.ToString());
+            var expected = new Simplify(new Variable("x"));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -466,7 +476,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("4!", exp.ToString());
+            var expected = new Fact(new Number(4));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -476,77 +488,16 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Sum, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(20),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("sum(i, 20)", exp.ToString());
-        }
+            var expected = new Sum(new IExpression[] { new Variable("x"), new Number(20) }, 2);
 
-        [Fact]
-        public void SumFromToTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sum, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("sum(i, 2, 20)", exp.ToString());
-        }
-
-        [Fact]
-        public void SumFromToIncTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sum, 4),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("sum(i, 2, 20, 2)", exp.ToString());
-        }
-
-        [Fact]
-        public void SumFromToIncVarTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sum, 5),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("k"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("k"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("sum(k, 2, 20, 2, k)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -556,77 +507,16 @@ namespace xFunc.Tests
             {
                 new FunctionToken(Functions.Product, 2),
                 new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
+                new VariableToken("x"),
                 new SymbolToken(Symbols.Comma),
                 new NumberToken(20),
                 new SymbolToken(Symbols.CloseBracket)
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("product(i, 20)", exp.ToString());
-        }
+            var expected = new Product(new IExpression[] { new Variable("x"), new Number(20) }, 2);
 
-        [Fact]
-        public void ProductFromToTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Product, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("product(i, 2, 20)", exp.ToString());
-        }
-
-        [Fact]
-        public void ProductFromToIncTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Product, 4),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("i"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("product(i, 2, 20, 2)", exp.ToString());
-        }
-
-        [Fact]
-        public void ProductFromToIncVarTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Product, 5),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("k"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("k"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            var exp = parser.Parse(tokens);
-            Assert.Equal("product(k, 2, 20, 2, k)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -645,7 +535,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("{2, 3, 4}", exp.ToString());
+            var expected = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]

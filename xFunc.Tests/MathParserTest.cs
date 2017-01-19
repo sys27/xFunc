@@ -22,6 +22,7 @@ using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokens;
@@ -564,7 +565,13 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            Assert.Equal("{{2, 3}, {4, 7}}", exp.ToString());
+            var expected = new Matrix(new[]
+            {
+                new Vector(new [] { new Number(2), new Number(3) }),
+                new Vector(new [] { new Number(4), new Number(7) })
+            });
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -653,8 +660,13 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new For(
+                new Number(2),
+                new Define(new Variable("x"), new Number(0)),
+                new LessThan(new Variable("x"), new Number(10)),
+                new Define(new Variable("x"), new Add(new Variable("x"), new Number(1))));
 
-            Assert.Equal("for(2, x := 0, x < 10, x := x + 1)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -677,8 +689,11 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new While(
+                new Define(new Variable("x"), new Add(new Variable("x"), new Number(1))),
+                new Equal(new Number(1), new Number(1)));
 
-            Assert.Equal("while(x := x + 1, (1 == 1))", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -703,8 +718,14 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new If(
+                new Maths.Expressions.Programming.And(
+                    new Equal(new Variable("x"), new Number(0)),
+                    new NotEqual(new Variable("y"), new Number(0))),
+                new Number(2),
+                new Number(8));
 
-            Assert.Equal("if((x == 0) && (y != 0), 2, 8)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -722,8 +743,11 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Maths.Expressions.Programming.And(
+                new Equal(new Variable("x"), new Number(0)),
+                new NotEqual(new Variable("y"), new Number(0)));
 
-            Assert.Equal("(x == 0) && (y != 0)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -741,8 +765,11 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Maths.Expressions.Programming.Or(
+                new Equal(new Variable("x"), new Number(0)),
+                new NotEqual(new Variable("y"), new Number(0)));
 
-            Assert.Equal("(x == 0) || (y != 0)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -756,8 +783,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Equal(new Variable("x"), new Number(0));
 
-            Assert.Equal("x == 0", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -771,8 +799,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new NotEqual(new Variable("x"), new Number(0));
 
-            Assert.Equal("x != 0", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -786,8 +815,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new LessThan(new Variable("x"), new Number(0));
 
-            Assert.Equal("x < 0", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -801,8 +831,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new LessOrEqual(new Variable("x"), new Number(0));
 
-            Assert.Equal("x <= 0", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -816,8 +847,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new GreaterThan(new Variable("x"), new Number(0));
 
-            Assert.Equal("x > 0", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -831,8 +863,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new GreaterOrEqual(new Variable("x"), new Number(0));
 
-            Assert.Equal("x >= 0", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -845,8 +878,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Inc(new Variable("x"));
 
-            Assert.Equal("x++", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -872,8 +906,13 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new For(
+                new Number(2),
+                new Define(new Variable("x"), new Number(0)),
+                new LessThan(new Variable("x"), new Number(10)),
+                new Inc(new Variable("x")));
 
-            Assert.Equal("for(2, x := 0, x < 10, x++)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -886,8 +925,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Dec(new Variable("x"));
 
-            Assert.Equal("x--", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -901,8 +941,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new AddAssign(new Variable("x"), new Number(2));
 
-            Assert.Equal("x += 2", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -916,8 +957,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new MulAssign(new Variable("x"), new Number(2));
 
-            Assert.Equal("x *= 2", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -931,8 +973,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new SubAssign(new Variable("x"), new Number(2));
 
-            Assert.Equal("x -= 2", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -946,8 +989,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new DivAssign(new Variable("x"), new Number(2));
 
-            Assert.Equal("x /= 2", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -961,8 +1005,9 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
 
-            Assert.Equal("True and False", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -980,8 +1025,11 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
+            var expected = new Maths.Expressions.LogicalAndBitwise.And(
+                new GreaterThan(new Number(3), new Number(4)),
+                new LessThan(new Number(1), new Number(3)));
 
-            Assert.Equal("(3 > 4) and (1 < 3)", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
@@ -1017,7 +1065,7 @@ namespace xFunc.Tests
         [Fact]
         public void ConvertLogicExpressionToColletionTest()
         {
-            var exp = new Implication(new Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
+            var exp = new Implication(new Maths.Expressions.LogicalAndBitwise.Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
             var actual = new List<IExpression>(Helpers.ConvertExpressionToCollection(exp));
 
             Assert.Equal(3, actual.Count);
@@ -1626,7 +1674,7 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            var expected = new Or(new Number(1), new Number(2));
+            var expected = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
 
             Assert.Equal(expected, exp);
         }

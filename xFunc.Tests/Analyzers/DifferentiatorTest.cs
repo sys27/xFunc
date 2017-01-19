@@ -26,7 +26,18 @@ namespace xFunc.Tests.Analyzers
     public class DifferentiatorTest
     {
 
-        public DifferentiatorTest() { }
+        private readonly Number zero;
+        private readonly Number one;
+        private readonly Number two;
+        private readonly Variable x;
+
+        public DifferentiatorTest()
+        {
+            zero = new Number(0);
+            one = new Number(1);
+            two = new Number(2);
+            x = new Variable("x");
+        }
 
         private IExpression Differentiate(IExpression exp)
         {
@@ -50,7 +61,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = Differentiate(new Number(10), null, null);
 
-            Assert.Equal("0", exp.ToString());
+            Assert.Equal(zero, exp);
         }
 
         #endregion
@@ -62,22 +73,25 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = Differentiate(new Number(10));
 
-            Assert.Equal("0", exp.ToString());
+            Assert.Equal(zero, exp);
         }
 
         [Fact]
         public void AbsDerivativeTest1()
         {
-            var exp = Differentiate(new Abs(new Variable("x")));
+            var exp = Differentiate(new Abs(x));
+            var expected = new Mul(
+                new Number(1),
+                new Div(x, new Abs(x)));
 
             Assert.Equal("1 * (x / abs(x))", exp.ToString());
+            Assert.Equal(expected, exp);
         }
 
         [Fact]
         public void AbsDerivativeTest2()
         {
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Abs(mul);
@@ -93,7 +107,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AbsPartialDerivativeTest1()
         {
-            var exp = new Abs(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Abs(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("1 * y * ((x * y) / abs(x * y))", deriv.ToString());
         }
@@ -101,7 +115,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AbsPartialDerivativeTest2()
         {
-            var exp = new Abs(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Abs(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("x * 1 * ((x * y) / abs(x * y))", deriv.ToString());
         }
@@ -109,23 +123,25 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AbsPartialDerivativeTest3()
         {
-            var deriv = Differentiate(new Abs(new Variable("x")), new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            var deriv = Differentiate(new Abs(x), new Variable("y"));
+
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void AddDerivativeTest1()
         {
-            var exp = new Add(new Mul(new Number(2), new Variable("x")), new Number(3));
+            var exp = new Add(new Mul(new Number(2), x), new Number(3));
             var deriv = Differentiate(exp);
+            var expected = new Mul(new Number(2), new Number(1));
 
-            Assert.Equal("2 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
         public void AddDerivativeTest2()
         {
-            var exp = new Add(new Mul(new Number(2), new Variable("x")), new Mul(new Number(3), new Variable("x")));
+            var exp = new Add(new Mul(new Number(2), x), new Mul(new Number(3), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1 + 3 * 1", deriv.ToString());
@@ -136,7 +152,6 @@ namespace xFunc.Tests.Analyzers
         {
             // 2x + 3
             var num1 = new Number(2);
-            var x = new Variable("x");
             var mul1 = new Mul(num1, x);
 
             var num2 = new Number(3);
@@ -154,7 +169,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AddPartialDerivativeTest1()
         {
-            var exp = new Add(new Add(new Mul(new Variable("x"), new Variable("y")), new Variable("x")), new Variable("y"));
+            var exp = new Add(new Add(new Mul(x, new Variable("y")), x), new Variable("y"));
             var deriv = Differentiate(exp);
             Assert.Equal("1 * y + 1", deriv.ToString());
         }
@@ -162,7 +177,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AddPartialDerivativeTest2()
         {
-            var exp = new Add(new Add(new Mul(new Variable("x"), new Variable("y")), new Variable("x")), new Variable("y"));
+            var exp = new Add(new Add(new Mul(x, new Variable("y")), x), new Variable("y"));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("x * 1 + 1", deriv.ToString());
         }
@@ -170,15 +185,16 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AddPartialDerivativeTest3()
         {
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(x, new Number(1));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void DivDerivativeTest1()
         {
-            var exp = new Div(new Number(1), new Variable("x"));
+            var exp = new Div(new Number(1), x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(1 * 1) / (x ^ 2)", deriv.ToString());
@@ -188,7 +204,7 @@ namespace xFunc.Tests.Analyzers
         public void DivDerivativeTest2()
         {
             // sin(x) / x
-            var exp = new Div(new Sin(new Variable("x")), new Variable("x"));
+            var exp = new Div(new Sin(x), x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("(cos(x) * 1 * x - sin(x) * 1) / (x ^ 2)", deriv.ToString());
@@ -199,7 +215,6 @@ namespace xFunc.Tests.Analyzers
         {
             // (2x) / (3x)
             var num1 = new Number(2);
-            var x = new Variable("x");
             var mul1 = new Mul(num1, x);
 
             var num2 = new Number(3);
@@ -220,24 +235,27 @@ namespace xFunc.Tests.Analyzers
         public void DivPartialDerivativeTest1()
         {
             // (y + x ^ 2) / x
-            var exp = new Div(new Add(new Variable("y"), new Pow(new Variable("x"), new Number(2))), new Variable("x"));
+            var exp = new Div(new Add(new Variable("y"), new Pow(x, new Number(2))), x);
             var deriv = Differentiate(exp);
+
             Assert.Equal("(1 * 2 * x ^ (2 - 1) * x - (y + x ^ 2) * 1) / (x ^ 2)", deriv.ToString());
         }
 
         [Fact]
         public void DivPartialDerivativeTest2()
         {
-            var exp = new Div(new Variable("y"), new Variable("x"));
+            var exp = new Div(new Variable("y"), x);
             var deriv = Differentiate(exp);
+
             Assert.Equal("-(y * 1) / (x ^ 2)", deriv.ToString());
         }
 
         [Fact]
         public void DivPartialDerivativeTest3()
         {
-            var exp = new Div(new Variable("y"), new Variable("x"));
+            var exp = new Div(new Variable("y"), x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal("1 / x", deriv.ToString());
         }
 
@@ -245,15 +263,16 @@ namespace xFunc.Tests.Analyzers
         public void DivPartialDerivativeTest4()
         {
             // (x + 1) / x
-            var exp = new Div(new Add(new Variable("x"), new Number(1)), new Variable("x"));
+            var exp = new Div(new Add(x, new Number(1)), x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ExpDerivativeTest1()
         {
-            var exp = new Exp(new Variable("x"));
+            var exp = new Exp(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 * exp(x)", deriv.ToString());
@@ -262,7 +281,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ExpDerivativeTest2()
         {
-            var exp = new Exp(new Mul(new Number(2), new Variable("x")));
+            var exp = new Exp(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1 * exp(2 * x)", deriv.ToString());
@@ -273,7 +292,6 @@ namespace xFunc.Tests.Analyzers
         {
             // exp(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Exp(mul);
@@ -289,7 +307,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ExpPartialDerivativeTest1()
         {
-            var exp = new Exp(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Exp(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("1 * y * exp(x * y)", deriv.ToString());
         }
@@ -297,7 +315,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ExpPartialDerivativeTest2()
         {
-            var exp = new Exp(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Exp(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("x * 1 * exp(x * y)", deriv.ToString());
         }
@@ -305,15 +323,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ExpPartialDerivativeTest3()
         {
-            var exp = new Exp(new Variable("x"));
+            var exp = new Exp(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void LnDerivativeTest1()
         {
-            var exp = new Ln(new Mul(new Number(2), new Variable("x")));
+            var exp = new Ln(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (2 * x)", deriv.ToString());
@@ -324,7 +342,6 @@ namespace xFunc.Tests.Analyzers
         {
             // ln(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Ln(mul);
@@ -341,7 +358,7 @@ namespace xFunc.Tests.Analyzers
         public void LnPartialDerivativeTest1()
         {
             // ln(xy)
-            var exp = new Ln(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Ln(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(1 * y) / (x * y)", deriv.ToString());
         }
@@ -350,7 +367,7 @@ namespace xFunc.Tests.Analyzers
         public void LnPartialDerivativeTest2()
         {
             // ln(xy)
-            var exp = new Ln(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Ln(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("(x * 1) / (x * y)", deriv.ToString());
         }
@@ -360,13 +377,13 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Ln(new Variable("y"));
             var deriv = Differentiate(exp);
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void LgDerivativeTest1()
         {
-            var exp = new Lg(new Mul(new Number(2), new Variable("x")));
+            var exp = new Lg(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (2 * x * ln(10))", deriv.ToString());
@@ -377,7 +394,6 @@ namespace xFunc.Tests.Analyzers
         {
             // lg(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Lg(mul);
@@ -394,7 +410,7 @@ namespace xFunc.Tests.Analyzers
         public void LgPartialDerivativeTest1()
         {
             // lg(2xy)
-            var exp = new Lg(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
+            var exp = new Lg(new Mul(new Mul(new Number(2), x), new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(2 * 1 * y) / (2 * x * y * ln(10))", deriv.ToString());
         }
@@ -403,15 +419,15 @@ namespace xFunc.Tests.Analyzers
         public void LgPartialDerivativeTest2()
         {
             // lg(2xy)
-            var exp = new Lg(new Variable("x"));
+            var exp = new Lg(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void LbDerivativeTest1()
         {
-            var exp = new Lb(new Mul(new Number(2), new Variable("x")));
+            var exp = new Lb(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (2 * x * ln(2))", deriv.ToString());
@@ -422,7 +438,6 @@ namespace xFunc.Tests.Analyzers
         {
             // lb(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Lb(mul);
@@ -439,7 +454,7 @@ namespace xFunc.Tests.Analyzers
         public void LbPartialDerivativeTest1()
         {
             // lb(2xy)
-            var exp = new Lb(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
+            var exp = new Lb(new Mul(new Mul(new Number(2), x), new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(2 * 1 * y) / (2 * x * y * ln(2))", deriv.ToString());
         }
@@ -448,15 +463,15 @@ namespace xFunc.Tests.Analyzers
         public void LbPartialDerivativeTest2()
         {
             // lb(2xy)
-            var exp = new Lb(new Variable("x"));
+            var exp = new Lb(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void LogDerivativeTest1()
         {
-            var exp = new Log(new Variable("x"), new Number(2));
+            var exp = new Log(x, new Number(2));
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 / (x * ln(2))", deriv.ToString());
@@ -467,7 +482,6 @@ namespace xFunc.Tests.Analyzers
         {
             // log(x, 2)
             var num = new Number(2);
-            var x = new Variable("x");
 
             var exp = new Log(x, num);
             var deriv = Differentiate(exp);
@@ -482,7 +496,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void LogDerivativeTest3()
         {
-            var exp = new Log(new Number(2), new Variable("x"));
+            var exp = new Log(new Number(2), x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(ln(2) * (1 / x)) / (ln(x) ^ 2)", deriv.ToString());
@@ -491,23 +505,23 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void LogPartialDerivativeTest1()
         {
-            var exp = new Log(new Variable("x"), new Number(2));
-            var deriv = Differentiate(exp, new Variable("x"));
+            var exp = new Log(x, new Number(2));
+            var deriv = Differentiate(exp, x);
             Assert.Equal("1 / (x * ln(2))", deriv.ToString());
         }
 
         [Fact]
         public void LogPartialDerivativeTest2()
         {
-            var exp = new Log(new Variable("x"), new Number(2));
+            var exp = new Log(x, new Number(2));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void MulDerivativeTest1()
         {
-            var exp = new Mul(new Number(2), new Variable("x"));
+            var exp = new Mul(new Number(2), x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1", deriv.ToString());
@@ -518,7 +532,6 @@ namespace xFunc.Tests.Analyzers
         {
             // 2x
             var num = new Number(2);
-            var x = new Variable("x");
 
             var exp = new Mul(num, x);
             var deriv = Differentiate(exp);
@@ -534,7 +547,7 @@ namespace xFunc.Tests.Analyzers
         public void MulPartialDerivativeTest1()
         {
             // (x + 1) * (y + x)
-            var exp = new Mul(new Add(new Variable("x"), new Number(1)), new Add(new Variable("y"), new Variable("x")));
+            var exp = new Mul(new Add(x, new Number(1)), new Add(new Variable("y"), x));
             var deriv = Differentiate(exp);
             Assert.Equal("1 * (y + x) + (x + 1) * 1", deriv.ToString());
         }
@@ -543,7 +556,7 @@ namespace xFunc.Tests.Analyzers
         public void MulPartialDerivativeTest2()
         {
             // (y + 1) * (3 + x)
-            var exp = new Mul(new Add(new Variable("y"), new Number(1)), new Add(new Number(3), new Variable("x")));
+            var exp = new Mul(new Add(new Variable("y"), new Number(1)), new Add(new Number(3), x));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("1 * (3 + x)", deriv.ToString());
         }
@@ -552,7 +565,7 @@ namespace xFunc.Tests.Analyzers
         public void MulPartialDerivativeTest3()
         {
             // (x + 1) * (y + x)
-            var exp = new Mul(new Add(new Variable("x"), new Number(1)), new Add(new Variable("y"), new Variable("x")));
+            var exp = new Mul(new Add(x, new Number(1)), new Add(new Variable("y"), x));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("(x + 1) * 1", deriv.ToString());
         }
@@ -561,15 +574,15 @@ namespace xFunc.Tests.Analyzers
         public void MulPartialDerivativeTest4()
         {
             // (x + 1) * (3 + x)
-            var exp = new Mul(new Add(new Variable("x"), new Number(1)), new Add(new Number(3), new Variable("x")));
+            var exp = new Mul(new Add(x, new Number(1)), new Add(new Number(3), x));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void PowDerivativeTest1()
         {
-            var exp = new Pow(new Variable("x"), new Number(3));
+            var exp = new Pow(x, new Number(3));
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 * 3 * x ^ (3 - 1)", deriv.ToString());
@@ -579,7 +592,7 @@ namespace xFunc.Tests.Analyzers
         public void PowDerivativeTest2()
         {
             // 2 ^ (3x)
-            var exp = new Pow(new Number(2), new Mul(new Number(3), new Variable("x")));
+            var exp = new Pow(new Number(2), new Mul(new Number(3), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("ln(2) * 2 ^ (3 * x) * 3 * 1", deriv.ToString());
@@ -589,7 +602,6 @@ namespace xFunc.Tests.Analyzers
         public void PowDerivativeTest3()
         {
             // x ^ 3
-            var x = new Variable("x");
             var num1 = new Number(3);
 
             var exp = new Pow(x, num1);
@@ -620,7 +632,7 @@ namespace xFunc.Tests.Analyzers
         public void PowPartialDerivativeTest1()
         {
             // (yx) ^ 3
-            var exp = new Pow(new Mul(new Variable("y"), new Variable("x")), new Number(3));
+            var exp = new Pow(new Mul(new Variable("y"), x), new Number(3));
             var deriv = Differentiate(exp);
             Assert.Equal("y * 1 * 3 * (y * x) ^ (3 - 1)", deriv.ToString());
         }
@@ -629,7 +641,7 @@ namespace xFunc.Tests.Analyzers
         public void PowPartialDerivativeTest2()
         {
             // (yx) ^ 3
-            var exp = new Pow(new Mul(new Variable("y"), new Variable("x")), new Number(3));
+            var exp = new Pow(new Mul(new Variable("y"), x), new Number(3));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("1 * x * 3 * (y * x) ^ (3 - 1)", deriv.ToString());
         }
@@ -637,15 +649,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void PowPartialDerivativeTest3()
         {
-            var exp = new Pow(new Variable("x"), new Number(3));
+            var exp = new Pow(x, new Number(3));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void RootDerivativeTest1()
         {
-            var exp = new Root(new Variable("x"), new Number(3));
+            var exp = new Root(x, new Number(3));
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 * (1 / 3) * x ^ ((1 / 3) - 1)", deriv.ToString());
@@ -656,7 +668,6 @@ namespace xFunc.Tests.Analyzers
         {
             // root(x, 3)
             var num = new Number(3);
-            var x = new Variable("x");
 
             var exp = new Root(x, num);
             var deriv = Differentiate(exp);
@@ -671,7 +682,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void RootPartialDerivativeTest1()
         {
-            var exp = new Root(new Mul(new Variable("x"), new Variable("y")), new Number(3));
+            var exp = new Root(new Mul(x, new Variable("y")), new Number(3));
             var deriv = Differentiate(exp);
             Assert.Equal("1 * y * (1 / 3) * (x * y) ^ ((1 / 3) - 1)", deriv.ToString());
         }
@@ -681,13 +692,13 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Root(new Variable("y"), new Number(3));
             var deriv = Differentiate(exp);
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void SqrtDerivativeTest1()
         {
-            var exp = new Sqrt(new Mul(new Number(2), new Variable("x")));
+            var exp = new Sqrt(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (2 * sqrt(2 * x))", deriv.ToString());
@@ -697,7 +708,6 @@ namespace xFunc.Tests.Analyzers
         public void SqrtDerivativeTest2()
         {
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Sqrt(mul);
@@ -714,7 +724,7 @@ namespace xFunc.Tests.Analyzers
         public void SqrtPartialDerivativeTest1()
         {
             // sqrt(2xy)
-            var exp = new Sqrt(new Mul(new Mul(new Number(2), new Variable("x")), new Variable("y")));
+            var exp = new Sqrt(new Mul(new Mul(new Number(2), x), new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(2 * 1 * y) / (2 * sqrt(2 * x * y))", deriv.ToString());
         }
@@ -724,14 +734,14 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sqrt(new Variable("y"));
             var deriv = Differentiate(exp);
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void SubDerivativeTest1()
         {
             // x - sin(x)
-            var exp = new Sub(new Variable("x"), new Sin(new Variable("x")));
+            var exp = new Sub(x, new Sin(x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 - cos(x) * 1", deriv.ToString());
@@ -741,7 +751,6 @@ namespace xFunc.Tests.Analyzers
         public void SubDerivativeTest2()
         {
             var num1 = new Number(2);
-            var x = new Variable("x");
             var mul1 = new Mul(num1, x);
 
             var num2 = new Number(3);
@@ -761,7 +770,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SubPartialDerivativeTest1()
         {
-            var exp = new Sub(new Mul(new Variable("x"), new Variable("y")), new Variable("y"));
+            var exp = new Sub(new Mul(x, new Variable("y")), new Variable("y"));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("x * 1 - 1", deriv.ToString());
         }
@@ -769,7 +778,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SubPartialDerivativeTest2()
         {
-            var exp = new Sub(new Variable("x"), new Variable("y"));
+            var exp = new Sub(x, new Variable("y"));
             var deriv = Differentiate(exp);
             Assert.Equal("1", deriv.ToString());
         }
@@ -777,7 +786,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SubPartialDerivativeTest3()
         {
-            var exp = new Sub(new Variable("x"), new Variable("y"));
+            var exp = new Sub(x, new Variable("y"));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("-1", deriv.ToString());
         }
@@ -785,15 +794,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SubPartialDerivativeTest4()
         {
-            var exp = new Sub(new Variable("x"), new Number(1));
+            var exp = new Sub(x, new Number(1));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void UnaryMinusTest()
         {
-            var exp = new UnaryMinus(new Sin(new Variable("x")));
+            var exp = new UnaryMinus(new Sin(x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(cos(x) * 1)", deriv.ToString());
@@ -805,13 +814,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new UnaryMinus(new Sin(new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void DiffVarTest()
         {
-            var exp = new Mul(new Variable("x"), new Variable("y"));
+            var exp = new Mul(x, new Variable("y"));
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 * y", deriv.ToString());
@@ -833,7 +842,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SinDerivativeTest1()
         {
-            var exp = new Sin(new Variable("x"));
+            var exp = new Sin(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("cos(x) * 1", deriv.ToString());
@@ -842,7 +851,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SinDerivativeTest2()
         {
-            var exp = new Sin(new Mul(new Number(2), new Variable("x")));
+            var exp = new Sin(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("cos(2 * x) * 2 * 1", deriv.ToString());
@@ -853,7 +862,6 @@ namespace xFunc.Tests.Analyzers
         {
             // sin(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Sin(mul);
@@ -869,7 +877,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SinPartialDerivativeTest1()
         {
-            var exp = new Sin(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Sin(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("cos(x * y) * 1 * y", deriv.ToString());
         }
@@ -877,7 +885,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SinPartialDerivativeTest2()
         {
-            var exp = new Sin(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Sin(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("cos(x * y) * x * 1", deriv.ToString());
         }
@@ -887,13 +895,13 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sin(new Variable("y"));
             var deriv = Differentiate(exp);
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void CosDerivativeTest1()
         {
-            var exp = new Cos(new Variable("x"));
+            var exp = new Cos(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(sin(x) * 1)", deriv.ToString());
@@ -902,7 +910,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CosDerivativeTest2()
         {
-            var exp = new Cos(new Mul(new Number(2), new Variable("x")));
+            var exp = new Cos(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(sin(2 * x) * 2 * 1)", deriv.ToString());
@@ -913,7 +921,6 @@ namespace xFunc.Tests.Analyzers
         {
             // cos(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Cos(mul);
@@ -929,7 +936,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CosPartialDerivativeTest1()
         {
-            var exp = new Cos(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Cos(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("-(sin(x * y) * 1 * y)", deriv.ToString());
         }
@@ -937,7 +944,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CosPartialDerivativeTest2()
         {
-            var exp = new Cos(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Cos(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("-(sin(x * y) * x * 1)", deriv.ToString());
         }
@@ -945,15 +952,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CosPartialDerivativeTest3()
         {
-            var exp = new Cos(new Variable("x"));
+            var exp = new Cos(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void TanDerivativeTest1()
         {
-            var exp = new Tan(new Variable("x"));
+            var exp = new Tan(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 / (cos(x) ^ 2)", deriv.ToString());
@@ -962,7 +969,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TanDerivativeTest2()
         {
-            var exp = new Tan(new Mul(new Number(2), new Variable("x")));
+            var exp = new Tan(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (cos(2 * x) ^ 2)", deriv.ToString());
@@ -972,7 +979,6 @@ namespace xFunc.Tests.Analyzers
         public void TanDerivativeTest3()
         {
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Tan(mul);
@@ -988,7 +994,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TanPartialDerivativeTest1()
         {
-            var exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Tan(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(1 * y) / (cos(x * y) ^ 2)", deriv.ToString());
         }
@@ -996,7 +1002,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TanPartialDerivativeTest2()
         {
-            var exp = new Tan(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Tan(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("(x * 1) / (cos(x * y) ^ 2)", deriv.ToString());
         }
@@ -1004,15 +1010,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TanPartialDerivativeTest3()
         {
-            var exp = new Tan(new Variable("x"));
+            var exp = new Tan(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void CotDerivativeTest1()
         {
-            var exp = new Cot(new Variable("x"));
+            var exp = new Cot(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(1 / (sin(x) ^ 2))", deriv.ToString());
@@ -1021,7 +1027,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CotDerivativeTest2()
         {
-            var exp = new Cot(new Mul(new Number(2), new Variable("x")));
+            var exp = new Cot(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (sin(2 * x) ^ 2))", deriv.ToString());
@@ -1032,7 +1038,6 @@ namespace xFunc.Tests.Analyzers
         {
             // cot(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Cot(mul);
@@ -1048,7 +1053,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CotPartialDerivativeTest1()
         {
-            var exp = new Cot(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Cot(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("-((1 * y) / (sin(x * y) ^ 2))", deriv.ToString());
         }
@@ -1056,7 +1061,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CotPartialDerivativeTest2()
         {
-            var exp = new Cot(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Cot(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("-((x * 1) / (sin(x * y) ^ 2))", deriv.ToString());
         }
@@ -1064,15 +1069,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void CotPartialDerivativeTest3()
         {
-            var exp = new Cot(new Variable("x"));
+            var exp = new Cot(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void SecDerivativeTest1()
         {
-            var exp = new Sec(new Mul(new Number(2), new Variable("x")));
+            var exp = new Sec(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1 * tan(2 * x) * sec(2 * x)", deriv.ToString());
@@ -1083,7 +1088,6 @@ namespace xFunc.Tests.Analyzers
         {
             // sec(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Sec(mul);
@@ -1102,13 +1106,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Sec(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void CscDerivativeTest()
         {
-            var exp = new Csc(new Mul(new Number(2), new Variable("x")));
+            var exp = new Csc(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(2 * 1) * cot(2 * x) * csc(2 * x)", deriv.ToString());
@@ -1117,7 +1121,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArcsinDerivativeTest1()
         {
-            var exp = new Arcsin(new Variable("x"));
+            var exp = new Arcsin(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 / sqrt(1 - x ^ 2)", deriv.ToString());
@@ -1126,7 +1130,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArcsinDerivativeTest2()
         {
-            var exp = new Arcsin(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arcsin(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / sqrt(1 - (2 * x) ^ 2)", deriv.ToString());
@@ -1137,7 +1141,6 @@ namespace xFunc.Tests.Analyzers
         {
             // arcsin(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Arcsin(mul);
@@ -1153,7 +1156,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArcsinPartialDerivativeTest1()
         {
-            var exp = new Arcsin(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arcsin(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(1 * y) / sqrt(1 - (x * y) ^ 2)", deriv.ToString());
         }
@@ -1161,7 +1164,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArcsinPartialDerivativeTest2()
         {
-            var exp = new Arcsin(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arcsin(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("(x * 1) / sqrt(1 - (x * y) ^ 2)", deriv.ToString());
         }
@@ -1169,15 +1172,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArcsinPartialDerivativeTest3()
         {
-            var exp = new Arcsin(new Variable("x"));
+            var exp = new Arcsin(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArccosDerivativeTest1()
         {
-            var exp = new Arccos(new Variable("x"));
+            var exp = new Arccos(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(1 / sqrt(1 - x ^ 2))", deriv.ToString());
@@ -1186,7 +1189,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccosDerivativeTest2()
         {
-            var exp = new Arccos(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arccos(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / sqrt(1 - (2 * x) ^ 2))", deriv.ToString());
@@ -1197,7 +1200,6 @@ namespace xFunc.Tests.Analyzers
         {
             // arccos(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Arccos(mul);
@@ -1213,7 +1215,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccosPartialDerivativeTest1()
         {
-            var exp = new Arccos(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arccos(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("-((1 * y) / sqrt(1 - (x * y) ^ 2))", deriv.ToString());
         }
@@ -1221,7 +1223,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccosPartialDerivativeTest2()
         {
-            var exp = new Arccos(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arccos(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("-((x * 1) / sqrt(1 - (x * y) ^ 2))", deriv.ToString());
         }
@@ -1229,15 +1231,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccosPartialDerivativeTest3()
         {
-            var exp = new Arccos(new Variable("x"));
+            var exp = new Arccos(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArctanDerivativeTest1()
         {
-            var exp = new Arctan(new Variable("x"));
+            var exp = new Arctan(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("1 / (1 + x ^ 2)", deriv.ToString());
@@ -1246,7 +1248,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArctanDerivativeTest2()
         {
-            var exp = new Arctan(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arctan(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (1 + (2 * x) ^ 2)", deriv.ToString());
@@ -1257,7 +1259,6 @@ namespace xFunc.Tests.Analyzers
         {
             // arctan(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Arctan(mul);
@@ -1273,7 +1274,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArctanPartialDerivativeTest1()
         {
-            var exp = new Arctan(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arctan(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("(1 * y) / (1 + (x * y) ^ 2)", deriv.ToString());
         }
@@ -1281,7 +1282,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArctanPartialDerivativeTest2()
         {
-            var exp = new Arctan(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arctan(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("(x * 1) / (1 + (x * y) ^ 2)", deriv.ToString());
         }
@@ -1289,15 +1290,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArctanPartialDerivativeTest3()
         {
-            var exp = new Arctan(new Variable("x"));
+            var exp = new Arctan(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArccotDerivativeTest1()
         {
-            var exp = new Arccot(new Variable("x"));
+            var exp = new Arccot(x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(1 / (1 + x ^ 2))", deriv.ToString());
@@ -1306,7 +1307,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccotDerivativeTest2()
         {
-            var exp = new Arccot(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arccot(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (1 + (2 * x) ^ 2))", deriv.ToString());
@@ -1317,7 +1318,6 @@ namespace xFunc.Tests.Analyzers
         {
             // arccot(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Arccot(mul);
@@ -1333,7 +1333,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccotPartialDerivativeTest1()
         {
-            var exp = new Arccot(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arccot(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
             Assert.Equal("-((1 * y) / (1 + (x * y) ^ 2))", deriv.ToString());
         }
@@ -1341,7 +1341,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccotPartialDerivativeTest2()
         {
-            var exp = new Arccot(new Mul(new Variable("x"), new Variable("y")));
+            var exp = new Arccot(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
             Assert.Equal("-((x * 1) / (1 + (x * y) ^ 2))", deriv.ToString());
         }
@@ -1349,15 +1349,15 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArccotPartialDerivativeTest3()
         {
-            var exp = new Arccot(new Variable("x"));
+            var exp = new Arccot(x);
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArcsecDerivativeTest1()
         {
-            var exp = new Arcsec(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arcsec(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (abs(2 * x) * sqrt((2 * x) ^ 2 - 1))", deriv.ToString());
@@ -1368,7 +1368,6 @@ namespace xFunc.Tests.Analyzers
         {
             // arcsec(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Arcsec(mul);
@@ -1387,13 +1386,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arcsec(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArccscDerivativeTest1()
         {
-            var exp = new Arccsc(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arccsc(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (abs(2 * x) * sqrt((2 * x) ^ 2 - 1)))", deriv.ToString());
@@ -1404,7 +1403,6 @@ namespace xFunc.Tests.Analyzers
         {
             // arccsc(2x)
             var num = new Number(2);
-            var x = new Variable("x");
             var mul = new Mul(num, x);
 
             var exp = new Arccsc(mul);
@@ -1423,7 +1421,7 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arccsc(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         #endregion Trigonometric
@@ -1433,7 +1431,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SinhDerivativeTest()
         {
-            var exp = new Sinh(new Mul(new Number(2), new Variable("x")));
+            var exp = new Sinh(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1 * cosh(2 * x)", deriv.ToString());
@@ -1445,13 +1443,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Sinh(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void CoshDerivativeTest()
         {
-            var exp = new Cosh(new Mul(new Number(2), new Variable("x")));
+            var exp = new Cosh(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("2 * 1 * sinh(2 * x)", deriv.ToString());
@@ -1463,13 +1461,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Cosh(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void TanhDerivativeTest()
         {
-            var exp = new Tanh(new Mul(new Number(2), new Variable("x")));
+            var exp = new Tanh(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (cosh(2 * x) ^ 2)", deriv.ToString());
@@ -1481,13 +1479,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Tanh(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void CothDerivativeTest()
         {
-            var exp = new Coth(new Mul(new Number(2), new Variable("x")));
+            var exp = new Coth(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (sinh(2 * x) ^ 2))", deriv.ToString());
@@ -1499,13 +1497,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Coth(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void SechDerivativeTest()
         {
-            var exp = new Sech(new Mul(new Number(2), new Variable("x")));
+            var exp = new Sech(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(2 * 1 * tanh(2 * x) * sech(2 * x))", deriv.ToString());
@@ -1517,13 +1515,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Sech(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void CschDerivativeTest()
         {
-            var exp = new Csch(new Mul(new Number(2), new Variable("x")));
+            var exp = new Csch(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(2 * 1 * coth(2 * x) * csch(2 * x))", deriv.ToString());
@@ -1535,13 +1533,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Csch(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArsinehDerivativeTest()
         {
-            var exp = new Arsinh(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arsinh(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / sqrt((2 * x) ^ 2 + 1)", deriv.ToString());
@@ -1553,13 +1551,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arsinh(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArcoshDerivativeTest()
         {
-            var exp = new Arcosh(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arcosh(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / sqrt((2 * x) ^ 2 - 1)", deriv.ToString());
@@ -1571,13 +1569,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arcosh(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArtanhDerivativeTest()
         {
-            var exp = new Artanh(new Mul(new Number(2), new Variable("x")));
+            var exp = new Artanh(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (1 - (2 * x) ^ 2)", deriv.ToString());
@@ -1589,13 +1587,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Artanh(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArcothDerivativeTest()
         {
-            var exp = new Arcoth(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arcoth(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("(2 * 1) / (1 - (2 * x) ^ 2)", deriv.ToString());
@@ -1607,13 +1605,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arcoth(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void ArsechDerivativeTest()
         {
-            var exp = new Arsech(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arsech(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (2 * x * sqrt(1 - (2 * x) ^ 2)))", deriv.ToString());
@@ -1622,7 +1620,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void ArcschDerivativeTest()
         {
-            var exp = new Arcsch(new Mul(new Number(2), new Variable("x")));
+            var exp = new Arcsch(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("-((2 * 1) / (abs(2 * x) * sqrt(1 + (2 * x) ^ 2)))", deriv.ToString());
@@ -1634,7 +1632,7 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arcsch(new Mul(new Number(2), new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         #endregion Hyperbolic
@@ -1643,8 +1641,8 @@ namespace xFunc.Tests.Analyzers
         public void UserFunctionDerivTest()
         {
             var parameters = new FunctionCollection();
-            var uf = new UserFunction("f", new IExpression[] { new Variable("x") }, 1);
-            parameters.Add(uf, new Sin(new Variable("x")));
+            var uf = new UserFunction("f", new IExpression[] { x }, 1);
+            parameters.Add(uf, new Sin(x));
 
             var diff = Differentiate(uf, "x", parameters);
 
@@ -1654,7 +1652,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void UserFunctionDerivNullTest()
         {
-            var uf = new UserFunction("f", new IExpression[] { new Variable("x") }, 1);
+            var uf = new UserFunction("f", new IExpression[] { x }, 1);
 
             Assert.Throws<ArgumentNullException>(() => Differentiate(uf, "x", null));
         }
@@ -1662,7 +1660,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void DerivSimplify()
         {
-            var exp = new Simplify(new Sin(new Variable("x")));
+            var exp = new Simplify(new Sin(x));
             var deriv = Differentiate(exp);
 
             Assert.Equal("cos(x) * 1", deriv.ToString());
@@ -1674,22 +1672,13 @@ namespace xFunc.Tests.Analyzers
             var exp = new Simplify(new Sin(new Variable("z")));
             var deriv = Differentiate(exp);
 
-            Assert.Equal("0", deriv.ToString());
-        }
-
-        [Fact]
-        public void DerivTest()
-        {
-            var exp = new Derivative(new Number(2));
-            var deriv = Differentiate(exp);
-
-            Assert.Equal("0", deriv.ToString());
+            Assert.Equal(zero, deriv);
         }
 
         [Fact]
         public void DoubleDiffTest()
         {
-            var exp = new Derivative(new Derivative(new Sin(new Variable("x")), new Variable("x")), new Variable("x"));
+            var exp = new Derivative(new Derivative(new Sin(x), x), x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(sin(x) * 1) * 1", deriv.ToString());
@@ -1698,7 +1687,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TripleDiffTest()
         {
-            var exp = new Derivative(new Derivative(new Derivative(new Sin(new Variable("x")), new Variable("x")), new Variable("x")), new Variable("x"));
+            var exp = new Derivative(new Derivative(new Derivative(new Sin(x), x), x), x);
             var deriv = Differentiate(exp);
 
             Assert.Equal("-(cos(x) * 1 * 1) * 1", deriv.ToString());
@@ -1707,7 +1696,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void NotSupportedTest()
         {
-            Assert.Throws<NotSupportedException>(() => Differentiate(new Fact(new Variable("x"))));
+            Assert.Throws<NotSupportedException>(() => Differentiate(new Fact(x)));
         }
 
     }

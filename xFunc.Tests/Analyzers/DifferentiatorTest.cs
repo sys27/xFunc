@@ -13,12 +13,12 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Expressions.Hyperbolic;
-using xFunc.Maths.Expressions.Collections;
-using Xunit;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.Trigonometric;
+using Xunit;
 
 namespace xFunc.Tests.Analyzers
 {
@@ -29,14 +29,20 @@ namespace xFunc.Tests.Analyzers
         private readonly Number zero;
         private readonly Number one;
         private readonly Number two;
+        private readonly Number three;
+
         private readonly Variable x;
+        private readonly Variable y;
 
         public DifferentiatorTest()
         {
             zero = new Number(0);
             one = new Number(1);
             two = new Number(2);
+            three = new Number(3);
+
             x = new Variable("x");
+            y = new Variable("y");
         }
 
         private IExpression Differentiate(IExpression exp)
@@ -84,7 +90,6 @@ namespace xFunc.Tests.Analyzers
                 new Number(1),
                 new Div(x, new Abs(x)));
 
-            Assert.Equal("1 * (x / abs(x))", exp.ToString());
             Assert.Equal(expected, exp);
         }
 
@@ -143,8 +148,11 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Mul(new Number(2), x), new Mul(new Number(3), x));
             var deriv = Differentiate(exp);
+            var expected = new Add(
+                new Mul(two, one),
+                new Mul(three, one));
 
-            Assert.Equal("2 * 1 + 3 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -158,12 +166,13 @@ namespace xFunc.Tests.Analyzers
 
             var exp = new Add(mul1, num2);
             var deriv = Differentiate(exp);
+            var expected = new Mul(two, one);
 
-            Assert.Equal("2 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
 
             num1.Value = 5;
             Assert.Equal("5 * x + 3", exp.ToString());
-            Assert.Equal("2 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -171,7 +180,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Add(new Mul(x, new Variable("y")), x), new Variable("y"));
             var deriv = Differentiate(exp);
-            Assert.Equal("1 * y + 1", deriv.ToString());
+            var expected = new Add(new Mul(one, y), one);
+
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -179,7 +190,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Add(new Mul(x, new Variable("y")), x), new Variable("y"));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("x * 1 + 1", deriv.ToString());
+            var expected = new Add(new Mul(x, one), one);
+
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -255,8 +268,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Div(new Variable("y"), x);
             var deriv = Differentiate(exp, new Variable("y"));
+            var expected = new Div(one, x);
 
-            Assert.Equal("1 / x", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -274,8 +288,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Exp(x);
             var deriv = Differentiate(exp);
+            var expected = new Mul(one, new Exp(x));
 
-            Assert.Equal("1 * exp(x)", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -333,8 +348,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Ln(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
+            var expected = new Div(new Mul(two, one), new Mul(two, x));
 
-            Assert.Equal("(2 * 1) / (2 * x)", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -360,7 +376,9 @@ namespace xFunc.Tests.Analyzers
             // ln(xy)
             var exp = new Ln(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp);
-            Assert.Equal("(1 * y) / (x * y)", deriv.ToString());
+            var expected = new Div(new Mul(one, y), new Mul(x, y));
+
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -369,6 +387,8 @@ namespace xFunc.Tests.Analyzers
             // ln(xy)
             var exp = new Ln(new Mul(x, new Variable("y")));
             var deriv = Differentiate(exp, new Variable("y"));
+            var expected = new Div(new Mul(x, one), new Mul(x, y));
+
             Assert.Equal("(x * 1) / (x * y)", deriv.ToString());
         }
 
@@ -421,6 +441,7 @@ namespace xFunc.Tests.Analyzers
             // lg(2xy)
             var exp = new Lg(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -465,6 +486,7 @@ namespace xFunc.Tests.Analyzers
             // lb(2xy)
             var exp = new Lb(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -515,6 +537,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Log(x, new Number(2));
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -523,8 +546,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Mul(new Number(2), x);
             var deriv = Differentiate(exp);
+            var expected = new Mul(two, one);
 
-            Assert.Equal("2 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -535,12 +559,13 @@ namespace xFunc.Tests.Analyzers
 
             var exp = new Mul(num, x);
             var deriv = Differentiate(exp);
+            var expected = new Mul(two, one);
 
-            Assert.Equal("2 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
 
             num.Value = 3;
             Assert.Equal("3 * x", exp.ToString());
-            Assert.Equal("2 * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -549,6 +574,7 @@ namespace xFunc.Tests.Analyzers
             // (x + 1) * (y + x)
             var exp = new Mul(new Add(x, new Number(1)), new Add(new Variable("y"), x));
             var deriv = Differentiate(exp);
+
             Assert.Equal("1 * (y + x) + (x + 1) * 1", deriv.ToString());
         }
 
@@ -558,6 +584,7 @@ namespace xFunc.Tests.Analyzers
             // (y + 1) * (3 + x)
             var exp = new Mul(new Add(new Variable("y"), new Number(1)), new Add(new Number(3), x));
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal("1 * (3 + x)", deriv.ToString());
         }
 
@@ -576,6 +603,7 @@ namespace xFunc.Tests.Analyzers
             // (x + 1) * (3 + x)
             var exp = new Mul(new Add(x, new Number(1)), new Add(new Number(3), x));
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -651,6 +679,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Pow(x, new Number(3));
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -692,6 +721,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Root(new Variable("y"), new Number(3));
             var deriv = Differentiate(exp);
+
             Assert.Equal(zero, deriv);
         }
 
@@ -734,6 +764,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sqrt(new Variable("y"));
             var deriv = Differentiate(exp);
+
             Assert.Equal(zero, deriv);
         }
 
@@ -780,7 +811,8 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(x, new Variable("y"));
             var deriv = Differentiate(exp);
-            Assert.Equal("1", deriv.ToString());
+
+            Assert.Equal(one, deriv);
         }
 
         [Fact]
@@ -788,7 +820,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(x, new Variable("y"));
             var deriv = Differentiate(exp, new Variable("y"));
-            Assert.Equal("-1", deriv.ToString());
+            var expected = new UnaryMinus(one);
+
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -796,6 +830,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(x, new Number(1));
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -822,8 +857,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Mul(x, new Variable("y"));
             var deriv = Differentiate(exp);
+            var expected = new Mul(one, y);
 
-            Assert.Equal("1 * y", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -832,7 +868,7 @@ namespace xFunc.Tests.Analyzers
             var exp = new Variable("y");
             var deriv = Differentiate(exp);
 
-            Assert.Equal("y", deriv.ToString());
+            Assert.Equal(y, deriv.ToString());
         }
 
         #endregion Common
@@ -844,8 +880,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sin(x);
             var deriv = Differentiate(exp);
+            var expected = new Mul(new Cos(x), one);
 
-            Assert.Equal("cos(x) * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -895,6 +932,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sin(new Variable("y"));
             var deriv = Differentiate(exp);
+
             Assert.Equal(zero, deriv);
         }
 
@@ -954,6 +992,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Cos(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -1012,6 +1051,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Tan(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -1071,6 +1111,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Cot(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -1079,8 +1120,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sec(new Mul(new Number(2), x));
             var deriv = Differentiate(exp);
+            var expected = new Mul(new Mul(two, one), new Mul(new Tan(new Mul(two, x)), new Sec(new Mul(two, x))));
 
-            Assert.Equal("2 * 1 * tan(2 * x) * sec(2 * x)", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -1092,12 +1134,13 @@ namespace xFunc.Tests.Analyzers
 
             var exp = new Sec(mul);
             var deriv = Differentiate(exp);
+            var expected = new Mul(new Mul(two, one), new Mul(new Tan(new Mul(two, x)), new Sec(new Mul(two, x))));
 
-            Assert.Equal("2 * 1 * tan(2 * x) * sec(2 * x)", deriv.ToString());
+            Assert.Equal(expected, deriv);
 
             num.Value = 4;
             Assert.Equal("sec(4 * x)", exp.ToString());
-            Assert.Equal("2 * 1 * tan(2 * x) * sec(2 * x)", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -1123,8 +1166,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Arcsin(x);
             var deriv = Differentiate(exp);
+            var expected = new Div(one, new Sqrt(new Sub(one, new Pow(x, two))));
 
-            Assert.Equal("1 / sqrt(1 - x ^ 2)", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -1233,6 +1277,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Arccos(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -1292,6 +1337,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Arctan(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -1351,6 +1397,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Arccot(x);
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal(zero, deriv);
         }
 
@@ -1645,8 +1692,9 @@ namespace xFunc.Tests.Analyzers
             parameters.Add(uf, new Sin(x));
 
             var diff = Differentiate(uf, "x", parameters);
+            var expected = new Mul(new Cos(x), one);
 
-            Assert.Equal("cos(x) * 1", diff.ToString());
+            Assert.Equal(expected, diff);
         }
 
         [Fact]
@@ -1662,8 +1710,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Simplify(new Sin(x));
             var deriv = Differentiate(exp);
+            var expected = new Mul(new Cos(x), one);
 
-            Assert.Equal("cos(x) * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -1680,8 +1729,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Derivative(new Derivative(new Sin(x), x), x);
             var deriv = Differentiate(exp);
+            var expected = new Mul(new UnaryMinus(new Mul(new Sin(x), one)), one);
 
-            Assert.Equal("-(sin(x) * 1) * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -1689,8 +1739,9 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Derivative(new Derivative(new Derivative(new Sin(x), x), x), x);
             var deriv = Differentiate(exp);
+            var expected = new Mul(new UnaryMinus(new Mul(new Mul(new Cos(x), one), one)), one);
 
-            Assert.Equal("-(cos(x) * 1 * 1) * 1", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]

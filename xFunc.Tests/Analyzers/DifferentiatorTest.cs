@@ -391,12 +391,14 @@ namespace xFunc.Tests.Analyzers
 
             var exp = new Ln(mul);
             var deriv = Differentiate(exp);
+            var expected = new Div(new Mul(two, one), new Mul(two, x));
 
-            Assert.Equal("(2 * 1) / (2 * x)", deriv.ToString());
+            Assert.Equal(expected, deriv);
 
             num.Value = 5;
-            Assert.Equal("ln(5 * x)", exp.ToString());
-            Assert.Equal("(2 * 1) / (2 * x)", deriv.ToString());
+            var ln = new Ln(new Mul(new Number(5), x));
+            Assert.Equal(ln, exp);
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -418,7 +420,7 @@ namespace xFunc.Tests.Analyzers
             var deriv = Differentiate(exp, new Variable("y"));
             var expected = new Div(new Mul(x, one), new Mul(x, y));
 
-            Assert.Equal("(x * 1) / (x * y)", deriv.ToString());
+            Assert.Equal(expected, deriv);
         }
 
         [Fact]
@@ -452,7 +454,8 @@ namespace xFunc.Tests.Analyzers
             Assert.Equal("(2 * 1) / (2 * x * ln(10))", deriv.ToString());
 
             num.Value = 3;
-            Assert.Equal("lg(3 * x)", exp.ToString());
+            var lg = new Lg(new Mul(three, x));
+            Assert.Equal(lg, exp);
             Assert.Equal("(2 * 1) / (2 * x * ln(10))", deriv.ToString());
         }
 
@@ -497,7 +500,8 @@ namespace xFunc.Tests.Analyzers
             Assert.Equal("(2 * 1) / (2 * x * ln(2))", deriv.ToString());
 
             num.Value = 3;
-            Assert.Equal("lb(3 * x)", exp.ToString());
+            var lb = new Lb(new Mul(three, x));
+            Assert.Equal(lb, exp);
             Assert.Equal("(2 * 1) / (2 * x * ln(2))", deriv.ToString());
         }
 
@@ -597,7 +601,8 @@ namespace xFunc.Tests.Analyzers
             Assert.Equal(expected, deriv);
 
             num.Value = 3;
-            Assert.Equal("3 * x", exp.ToString());
+            var mul = new Mul(three, x);
+            Assert.Equal(mul, exp);
             Assert.Equal(expected, deriv);
         }
 
@@ -627,6 +632,7 @@ namespace xFunc.Tests.Analyzers
             // (x + 1) * (y + x)
             var exp = new Mul(new Add(x, new Number(1)), new Add(new Variable("y"), x));
             var deriv = Differentiate(exp, new Variable("y"));
+
             Assert.Equal("(x + 1) * 1", deriv.ToString());
         }
 

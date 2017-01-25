@@ -59,20 +59,6 @@ namespace xFunc.Tests.Expressions.Maths.Matrices
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(1), new Number(-2) }),
-                new Vector(new[] { new Number(4), new Number(0) })
-            });
-
-            var exp = new Inverse(matrix);
-
-            Assert.Equal("inverse({{1, -2}, {4, 0}})", exp.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Inverse(new Matrix(new[]

@@ -521,6 +521,52 @@ namespace xFunc.Tests.Analyzers.Formatters
         #region Matrix
 
         [Fact]
+        public void DeterminantToStringTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2) }),
+                new Vector(new[] { new Number(4), new Number(0) })
+            });
+
+            var det = new Determinant(matrix);
+
+            Assert.Equal("det({{1, -2}, {4, 0}})", det.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void InverseToStringTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2) }),
+                new Vector(new[] { new Number(4), new Number(0) })
+            });
+
+            var exp = new Inverse(matrix);
+
+            Assert.Equal("inverse({{1, -2}, {4, 0}})", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void TransposeToStringTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2) }),
+                new Vector(new[] { new Number(4), new Number(0) })
+            });
+
+            var exp = new Transpose(matrix);
+
+            Assert.Equal("transpose({{1, -2}, {4, 0}})", exp.ToString(commoonFormatter));
+        }
+
+        #endregion
+
+        #region Statistical
+
+        [Fact]
         public void AvgToStringTest()
         {
             var sum = new Avg(new[] { new Number(1), new Number(2) }, 2);
@@ -680,9 +726,6 @@ namespace xFunc.Tests.Analyzers.Formatters
             Assert.Equal("var({1, 2})", sum.ToString(commoonFormatter));
         }
 
-        #endregion
-
-        #region Statistical
         #endregion
 
         #region Programming

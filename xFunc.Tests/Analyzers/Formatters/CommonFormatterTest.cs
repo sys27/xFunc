@@ -3,6 +3,7 @@ using System.Numerics;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -516,6 +517,79 @@ namespace xFunc.Tests.Analyzers.Formatters
         #endregion
 
         #region Logical and Bitwise
+
+        [Fact]
+        public void BoolToStringTest()
+        {
+            var exp = new Bool(false);
+
+            Assert.Equal("False", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void EqualityToStringTest1()
+        {
+            var eq = new Equality(new Bool(true), new Bool(false));
+
+            Assert.Equal("True <=> False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void EqualityToStringTest2()
+        {
+            var eq = new And(new Equality(new Bool(true), new Bool(false)), new Bool(false));
+
+            Assert.Equal("(True <=> False) and False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ImplicationToStringTest1()
+        {
+            var eq = new Implication(new Bool(true), new Bool(false));
+
+            Assert.Equal("True => False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ImplicationToStringTest2()
+        {
+            var eq = new And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
+
+            Assert.Equal("(True => False) and False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NAndToStringTest1()
+        {
+            var eq = new NAnd(new Bool(true), new Bool(false));
+
+            Assert.Equal("True nand False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NAndToStringTest2()
+        {
+            var eq = new And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
+
+            Assert.Equal("(True nand False) and False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NOrToStringTest1()
+        {
+            var eq = new NOr(new Bool(true), new Bool(false));
+
+            Assert.Equal("True nor False", eq.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NOrToStringTest2()
+        {
+            var eq = new And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
+
+            Assert.Equal("(True nor False) and False", eq.ToString(commoonFormatter));
+        }
+
         #endregion
 
         #region Matrix

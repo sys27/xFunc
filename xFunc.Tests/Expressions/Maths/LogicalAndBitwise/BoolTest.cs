@@ -74,14 +74,6 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
         }
 
         [Fact]
-        public void ToStringTest()
-        {
-            var exp = new Bool(false);
-
-            Assert.Equal("False", exp.ToString());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Bool(false);

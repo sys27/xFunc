@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
 {
-    
+
     public class ImplicationTest
     {
 
@@ -36,22 +36,6 @@ namespace xFunc.Tests.Expressions.Maths.LogicalAndBitwise
             var impl = new Implication(new Bool(true), new Bool(true));
 
             Assert.Equal(true, impl.Execute());
-        }
-
-        [Fact]
-        public void ToStringTest1()
-        {
-            var eq = new Implication(new Bool(true), new Bool(false));
-
-            Assert.Equal("True => False", eq.ToString());
-        }
-
-        [Fact]
-        public void ToStringTest2()
-        {
-            var eq = new And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
-
-            Assert.Equal("(True => False) and False", eq.ToString());
         }
 
         [Fact]

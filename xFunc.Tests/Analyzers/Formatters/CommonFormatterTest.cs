@@ -3,8 +3,10 @@ using System.Numerics;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
@@ -228,6 +230,14 @@ namespace xFunc.Tests.Analyzers.Formatters
         }
 
         [Fact]
+        public void MulToStringDivTest()
+        {
+            var exp = new Div(new Variable("x"), new Mul(new Number(5), new Number(0)));
+
+            Assert.Equal("x / (5 * 0)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
         public void NumberTest()
         {
             var exp = new Number(3.3);
@@ -276,6 +286,14 @@ namespace xFunc.Tests.Analyzers.Formatters
         }
 
         [Fact]
+        public void PowToStringDivTest()
+        {
+            var exp = new Div(new Variable("x"), new Pow(new Number(5), new Number(0)));
+
+            Assert.Equal("x / (5 ^ 0)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
         public void RootToStringTest()
         {
             var exp = new Root(new Number(5), new Number(0));
@@ -321,6 +339,14 @@ namespace xFunc.Tests.Analyzers.Formatters
             var exp = new Sub(new Variable("x"), new Sub(new Number(5), new Number(0)));
 
             Assert.Equal("x - 5 - 0", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void SubToStringDivTest()
+        {
+            var exp = new Div(new Variable("x"), new Sub(new Number(5), new Number(0)));
+
+            Assert.Equal("x / (5 - 0)", exp.ToString(commoonFormatter));
         }
 
         [Fact]
@@ -511,9 +537,203 @@ namespace xFunc.Tests.Analyzers.Formatters
         #endregion
 
         #region Trigonometric
+
+        [Fact]
+        public void ArccosToStringTest()
+        {
+            var exp = new Arccos(new Number(5));
+
+            Assert.Equal("arccos(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArccotToStringTest()
+        {
+            var exp = new Arccot(new Number(5));
+
+            Assert.Equal("arccot(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArccscToStringTest()
+        {
+            var exp = new Arccsc(new Number(5));
+
+            Assert.Equal("arccsc(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArcsecToStringTest()
+        {
+            var exp = new Arcsec(new Number(5));
+
+            Assert.Equal("arcsec(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArcsinToStringTest()
+        {
+            var exp = new Arcsin(new Number(5));
+
+            Assert.Equal("arcsin(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArctanToStringTest()
+        {
+            var exp = new Arctan(new Number(5));
+
+            Assert.Equal("arctan(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CosToStringTest()
+        {
+            var exp = new Cos(new Number(5));
+
+            Assert.Equal("cos(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CotToStringTest()
+        {
+            var exp = new Cot(new Number(5));
+
+            Assert.Equal("cot(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CscToStringTest()
+        {
+            var exp = new Csc(new Number(5));
+
+            Assert.Equal("csc(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void SecToStringTest()
+        {
+            var exp = new Sec(new Number(5));
+
+            Assert.Equal("sec(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void SinToStringTest()
+        {
+            var exp = new Sin(new Number(5));
+
+            Assert.Equal("sin(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void TanToStringTest()
+        {
+            var exp = new Tan(new Number(5));
+
+            Assert.Equal("tan(5)", exp.ToString(commoonFormatter));
+        }
+
         #endregion
 
         #region Hyperbolic
+
+        [Fact]
+        public void ArcoshToStringTest()
+        {
+            var exp = new Arcosh(new Number(5));
+
+            Assert.Equal("arcosh(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArcothToStringTest()
+        {
+            var exp = new Arcoth(new Number(5));
+
+            Assert.Equal("arcoth(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArcschToStringTest()
+        {
+            var exp = new Arcsch(new Number(5));
+
+            Assert.Equal("arcsch(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArsechToStringTest()
+        {
+            var exp = new Arsech(new Number(5));
+
+            Assert.Equal("arsech(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArsinhToStringTest()
+        {
+            var exp = new Arsinh(new Number(5));
+
+            Assert.Equal("arsinh(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ArtanhToStringTest()
+        {
+            var exp = new Artanh(new Number(5));
+
+            Assert.Equal("artanh(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CoshToStringTest()
+        {
+            var exp = new Cosh(new Number(5));
+
+            Assert.Equal("cosh(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CothToStringTest()
+        {
+            var exp = new Coth(new Number(5));
+
+            Assert.Equal("coth(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CschToStringTest()
+        {
+            var exp = new Csch(new Number(5));
+
+            Assert.Equal("csch(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void SechToStringTest()
+        {
+            var exp = new Sech(new Number(5));
+
+            Assert.Equal("sech(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void SinhToStringTest()
+        {
+            var exp = new Sinh(new Number(5));
+
+            Assert.Equal("sinh(5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void TanhToStringTest()
+        {
+            var exp = new Tanh(new Number(5));
+
+            Assert.Equal("tanh(5)", exp.ToString(commoonFormatter));
+        }
+
         #endregion
 
         #region Logical and Bitwise
@@ -527,6 +747,54 @@ namespace xFunc.Tests.Analyzers.Formatters
         }
 
         [Fact]
+        public void AndAndToStringTest()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(true)));
+
+            Assert.Equal("True and (True and True)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void OrToStringTest()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Bool(true));
+
+            Assert.Equal("True or True", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void OrOrToStringTest()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Bool(true)));
+
+            Assert.Equal("True or (True or True)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void XOrToStringTest()
+        {
+            var exp = new XOr(new Bool(true), new Bool(true));
+
+            Assert.Equal("True xor True", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void XOrXOrToStringTest()
+        {
+            var exp = new XOr(new Bool(true), new XOr(new Bool(true), new Bool(true)));
+
+            Assert.Equal("True xor (True xor True)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NotToStringTest()
+        {
+            var exp = new Not(new Bool(true));
+
+            Assert.Equal("not(True)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
         public void EqualityToStringTest1()
         {
             var eq = new Equality(new Bool(true), new Bool(false));
@@ -537,7 +805,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void EqualityToStringTest2()
         {
-            var eq = new And(new Equality(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new Maths.Expressions.LogicalAndBitwise.And(new Equality(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True <=> False) and False", eq.ToString(commoonFormatter));
         }
@@ -553,7 +821,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ImplicationToStringTest2()
         {
-            var eq = new And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new Maths.Expressions.LogicalAndBitwise.And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True => False) and False", eq.ToString(commoonFormatter));
         }
@@ -569,7 +837,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void NAndToStringTest2()
         {
-            var eq = new And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new Maths.Expressions.LogicalAndBitwise.And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True nand False) and False", eq.ToString(commoonFormatter));
         }
@@ -585,7 +853,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void NOrToStringTest2()
         {
-            var eq = new And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new Maths.Expressions.LogicalAndBitwise.And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True nor False) and False", eq.ToString(commoonFormatter));
         }
@@ -803,6 +1071,215 @@ namespace xFunc.Tests.Analyzers.Formatters
         #endregion
 
         #region Programming
+
+        [Fact]
+        public void AddAssignToString()
+        {
+            var exp = new AddAssign(new Variable("x"), new Number(5));
+
+            Assert.Equal("x += 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void SubAssignToString()
+        {
+            var exp = new SubAssign(new Variable("x"), new Number(5));
+
+            Assert.Equal("x -= 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void MulAssignToString()
+        {
+            var exp = new MulAssign(new Variable("x"), new Number(5));
+
+            Assert.Equal("x *= 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void DivAssignToString()
+        {
+            var exp = new DivAssign(new Variable("x"), new Number(5));
+
+            Assert.Equal("x /= 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void IncToString()
+        {
+            var exp = new Inc(new Variable("x"));
+
+            Assert.Equal("x++", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void DecToString()
+        {
+            var exp = new Dec(new Variable("x"));
+
+            Assert.Equal("x--", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CondAndToString()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(true), new Bool(true));
+
+            Assert.Equal("True && True", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CondAndCondAndToString()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(true), new Maths.Expressions.Programming.And(new Bool(true), new Bool(true)));
+
+            Assert.Equal("True && (True && True)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CondOrToString()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new Bool(true), new Bool(true));
+
+            Assert.Equal("True || True", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void CondOrCondOrToString()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new Bool(true), new Maths.Expressions.Programming.Or(new Bool(true), new Bool(true)));
+
+            Assert.Equal("True || (True || True)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void EqualToString()
+        {
+            var exp = new Equal(new Number(5), new Number(5));
+
+            Assert.Equal("5 == 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void EqualEqualToString()
+        {
+            var exp = new Equal(new Bool(true), new Equal(new Number(5), new Number(5)));
+
+            Assert.Equal("True == (5 == 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NotEqualToString()
+        {
+            var exp = new NotEqual(new Number(5), new Number(5));
+
+            Assert.Equal("5 != 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void NotEqualNotEqualToString()
+        {
+            var exp = new NotEqual(new Bool(true), new NotEqual(new Number(5), new Number(5)));
+
+            Assert.Equal("True != (5 != 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void LessToString()
+        {
+            var exp = new LessThan(new Number(5), new Number(5));
+
+            Assert.Equal("5 < 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void LessLessToString()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(true), new LessThan(new Number(5), new Number(5)));
+
+            Assert.Equal("True && (5 < 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void LessOrEqualToString()
+        {
+            var exp = new LessOrEqual(new Number(5), new Number(5));
+
+            Assert.Equal("5 <= 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void LessOrEqualLessOrEqualToString()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(true), new LessOrEqual(new Number(5), new Number(5)));
+
+            Assert.Equal("True && (5 <= 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void GreatToString()
+        {
+            var exp = new GreaterThan(new Number(5), new Number(5));
+
+            Assert.Equal("5 > 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void GreatGreatToString()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(true), new GreaterThan(new Number(5), new Number(5)));
+
+            Assert.Equal("True && (5 > 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void GreatOrEqualToString()
+        {
+            var exp = new GreaterOrEqual(new Number(5), new Number(5));
+
+            Assert.Equal("5 >= 5", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void GreatOrEqualGreatOrEqualToString()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(true), new GreaterOrEqual(new Number(5), new Number(5)));
+
+            Assert.Equal("True && (5 >= 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void IfToString()
+        {
+            var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5));
+
+            Assert.Equal("if(5 == 5, 5)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void IfElseToString()
+        {
+            var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5), new Number(0));
+
+            Assert.Equal("if(5 == 5, 5, 0)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void ForToString()
+        {
+            var exp = new For(new Number(5), new Define(new Variable("x"), new Number(0)), new Equal(new Number(5), new Number(5)), new AddAssign(new Variable("x"), new Number(1)));
+
+            Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString(commoonFormatter));
+        }
+
+        [Fact]
+        public void WhileToString()
+        {
+            var exp = new While(new Number(5), new Equal(new Number(5), new Number(5)));
+
+            Assert.Equal("while(5, 5 == 5)", exp.ToString(commoonFormatter));
+        }
+
         #endregion
 
     }

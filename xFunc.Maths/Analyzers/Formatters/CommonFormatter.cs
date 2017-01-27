@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using xFunc.Maths.Expressions;
@@ -410,9 +411,10 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
         public string Analyze(DelegateExpression exp)
         {
-            return exp.ToString();
+            return "{Delegate Expression}";
         }
 
         #endregion Standard
@@ -1086,7 +1088,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Equal exp)
         {
-            if (exp.Parent is BinaryExpression)
+            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
                 return ToString(exp, "({0} == {1})");
 
             return ToString(exp, "{0} == {1}");
@@ -1109,7 +1111,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(GreaterOrEqual exp)
         {
-            if (exp.Parent is BinaryExpression)
+            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
                 return ToString(exp, "({0} >= {1})");
 
             return ToString(exp, "{0} >= {1}");
@@ -1155,7 +1157,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(LessOrEqual exp)
         {
-            if (exp.Parent is BinaryExpression)
+            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
                 return ToString(exp, "({0} <= {1})");
 
             return ToString(exp, "{0} <= {1}");
@@ -1191,7 +1193,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(NotEqual exp)
         {
-            if (exp.Parent is BinaryExpression)
+            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
                 return ToString(exp, "({0} != {1})");
 
             return ToString(exp, "{0} != {1}");

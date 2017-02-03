@@ -256,7 +256,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the value.
         /// </value>
-        public ExpressionResultType ValueType { get; } = ExpressionResultType.Number | ExpressionResultType.Boolean;
+        public ExpressionResultType ValueType { get; } = ExpressionResultType.All;
 
         /// <summary>
         /// Gets the type of the result.

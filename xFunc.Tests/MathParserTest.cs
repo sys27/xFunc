@@ -257,7 +257,10 @@ namespace xFunc.Tests
                 new ComplexNumberToken(new Complex(3, 2))
             };
 
-            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
+            var exp = parser.Parse(tokens);
+            var expected = new Define(new Variable("aaa"), new ComplexNumber(new Complex(3, 2)));
+
+            Assert.Equal(expected, exp);
         }
 
         [Fact]

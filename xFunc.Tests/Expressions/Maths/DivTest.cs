@@ -117,6 +117,22 @@ namespace xFunc.Tests.Expressions.Maths
         }
 
         [Fact]
+        public void ResultTypeTwoVarTest()
+        {
+            var exp = new Div(new Variable("x"), new Variable("x"));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.Boolean, exp.ResultType);
+        }
+
+        [Fact]
+        public void ResultTypeThreeVarTest()
+        {
+            var exp = new Div(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
+
+            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.Boolean, exp.ResultType);
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Div(new Variable("x"), new Number(0));

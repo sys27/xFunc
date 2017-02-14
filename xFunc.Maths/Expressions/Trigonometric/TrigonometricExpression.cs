@@ -82,8 +82,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (ResultType == ExpressionResultType.ComplexNumber)
+            var resultType = this.ResultType;
+            if (resultType == ExpressionResultType.ComplexNumber)
                 return ExecuteComplex(parameters);
+
             if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
                 return ExecuteDergee(parameters);
             if (parameters.AngleMeasurement == AngleMeasurement.Radian)
@@ -108,6 +110,9 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <value>
         /// The type of the result.
         /// </value>
+        /// <remarks>
+        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
+        /// </remarks>
         public override ExpressionResultType ResultType
         {
             get

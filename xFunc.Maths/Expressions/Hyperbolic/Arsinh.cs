@@ -57,8 +57,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
+            var resultType = this.ResultType;
             var result = m_argument.Execute(parameters);
-            if (ResultType == ExpressionResultType.ComplexNumber)
+            if (resultType == ExpressionResultType.ComplexNumber)
                 return ComplexExtensions.Asinh((Complex)result);
 
             return MathExtensions.Asinh((double)result);

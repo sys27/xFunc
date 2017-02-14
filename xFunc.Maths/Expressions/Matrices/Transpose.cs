@@ -56,11 +56,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
+            var argumentResultType = m_argument.ResultType;
             var result = m_argument.Execute(parameters);
 
-            if (m_argument.ResultType == ExpressionResultType.Matrix)
+            if (argumentResultType == ExpressionResultType.Matrix)
                 return ((Matrix)result).Transpose();
-            if (m_argument.ResultType == ExpressionResultType.Vector)
+            if (argumentResultType == ExpressionResultType.Vector)
                 return ((Vector)result).Transpose();
 
             throw new NotSupportedException();
@@ -104,6 +105,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The type of the result.
         /// </value>
+        /// <remarks>
+        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
+        /// </remarks>
         public override ExpressionResultType ResultType { get; } = ExpressionResultType.Matrix;
 
     }

@@ -58,10 +58,12 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
+            var resultType = this.ResultType;
+
             var leftResult = (double)m_left.Execute(parameters);
             var rightResult = m_right.Execute(parameters);
 
-            if (ResultType == ExpressionResultType.ComplexNumber)
+            if (resultType == ExpressionResultType.ComplexNumber)
                 return Complex.Log(rightResult is Complex ? (Complex)rightResult : (double)rightResult, leftResult);
 
             return Math.Log((double)rightResult, leftResult);
@@ -103,6 +105,9 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the result.
         /// </value>
+        /// <remarks>
+        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
+        /// </remarks>
         public override ExpressionResultType ResultType
         {
             get

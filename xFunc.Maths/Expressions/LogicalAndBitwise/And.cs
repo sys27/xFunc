@@ -25,6 +25,9 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     public class And : BinaryExpression
     {
 
+        private bool isChanged = false;
+        private ExpressionResultType? resultType;
+
         [ExcludeFromCodeCoverage]
         internal And() { }
 
@@ -34,6 +37,17 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         public And(IExpression left, IExpression right) : base(left, right) { }
+
+        private ExpressionResultType GetResultType()
+        {
+            if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
+                return ExpressionResultType.Number;
+
+            if (m_left.ResultType == ExpressionResultType.Boolean || m_right.ResultType == ExpressionResultType.Boolean)
+                return ExpressionResultType.Boolean;
+
+            return ExpressionResultType.Number | ExpressionResultType.Boolean;
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -88,6 +102,22 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
+        /// The left (first) operand.
+        /// </summary>
+        public override IExpression Left
+        {
+            get
+            {
+                return base.Left;
+            }
+            set
+            {
+                base.Left = value;
+                isChanged = true;
+            }
+        }
+
+        /// <summary>
         /// Gets the type of the left parameter.
         /// </summary>
         /// <value>
@@ -107,6 +137,22 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
                 }
 
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
+            }
+        }
+
+        /// <summary>
+        /// The right (second) operand.
+        /// </summary>
+        public override IExpression Right
+        {
+            get
+            {
+                return base.Right;
+            }
+            set
+            {
+                base.Right = value;
+                isChanged = true;
             }
         }
 
@@ -146,13 +192,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             get
             {
-                if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
-                    return ExpressionResultType.Number;
+                if (this.resultType == null || isChanged)
+                {
+                    resultType = GetResultType();
+                    isChanged = false;
+                }
 
-                if (m_left.ResultType == ExpressionResultType.Boolean || m_right.ResultType == ExpressionResultType.Boolean)
-                    return ExpressionResultType.Boolean;
-
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+                return resultType.Value;
             }
         }
 

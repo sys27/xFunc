@@ -27,6 +27,9 @@ namespace xFunc.Maths.Expressions
     public class Mul : BinaryExpression
     {
 
+        private bool isChanged = false;
+        private ExpressionResultType? resultType;
+
         [ExcludeFromCodeCoverage]
         internal Mul() { }
 
@@ -36,6 +39,24 @@ namespace xFunc.Maths.Expressions
         /// <param name="left">The first (left) operand.</param>
         /// <param name="right">The second (right) operand.</param>
         public Mul(IExpression left, IExpression right) : base(left, right) { }
+
+        private ExpressionResultType GetResultType()
+        {
+            if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
+                (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
+                return ExpressionResultType.ComplexNumber;
+
+            if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
+                return ExpressionResultType.Number;
+
+            if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
+                return ExpressionResultType.Matrix;
+
+            if (m_right.ResultType == ExpressionResultType.Vector || m_left.ResultType == ExpressionResultType.Vector)
+                return ExpressionResultType.Vector;
+
+            return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -131,6 +152,22 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// The left (first) operand.
+        /// </summary>
+        public override IExpression Left
+        {
+            get
+            {
+                return base.Left;
+            }
+            set
+            {
+                base.Left = value;
+                isChanged = true;
+            }
+        }
+
+        /// <summary>
         /// Gets the type of the left parameter.
         /// </summary>
         /// <value>
@@ -144,6 +181,22 @@ namespace xFunc.Maths.Expressions
                     return ExpressionResultType.Number | ExpressionResultType.Vector | ExpressionResultType.Matrix;
 
                 return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+            }
+        }
+
+        /// <summary>
+        /// The right (second) operand.
+        /// </summary>
+        public override IExpression Right
+        {
+            get
+            {
+                return base.Right;
+            }
+            set
+            {
+                base.Right = value;
+                isChanged = true;
             }
         }
 
@@ -177,20 +230,13 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
-                    (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
-                    return ExpressionResultType.ComplexNumber;
+                if (this.resultType == null || isChanged)
+                {
+                    resultType = GetResultType();
+                    isChanged = false;
+                }
 
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) && m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
-                    return ExpressionResultType.Number;
-
-                if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
-                    return ExpressionResultType.Matrix;
-
-                if (m_right.ResultType == ExpressionResultType.Vector || m_left.ResultType == ExpressionResultType.Vector)
-                    return ExpressionResultType.Vector;
-
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return resultType.Value;
             }
         }
 

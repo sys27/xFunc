@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// Initializes a new instance of the <see cref="Arcsch"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Arcsch(IExpression expression)            : base(expression)        {        }
+        public Arcsch(IExpression expression) : base(expression) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -57,8 +57,9 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
+            var resultType = this.ResultType;
             var result = m_argument.Execute(parameters);
-            if (ResultType == ExpressionResultType.ComplexNumber)
+            if (resultType == ExpressionResultType.ComplexNumber)
                 return ComplexExtensions.Acsch((Complex)result);
 
             return MathExtensions.Acsch((double)result);
@@ -85,7 +86,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             return new Arcsch(m_argument.Clone());
         }
-        
+
     }
 
 }

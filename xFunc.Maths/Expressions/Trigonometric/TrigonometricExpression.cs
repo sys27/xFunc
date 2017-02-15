@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
-    public abstract class TrigonometricExpression : UnaryExpression
+    public abstract class TrigonometricExpression : CachedUnaryExpression
     {
 
         /// <summary>
@@ -35,6 +35,17 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         protected TrigonometricExpression(IExpression expression) : base(expression) { }
+
+        /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            return m_argument.ResultType;
+        }
 
         /// <summary>
         /// Calculates this mathematical expression (using degree).
@@ -103,23 +114,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// The type of the argument.
         /// </value>
         public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return m_argument.ResultType;
-            }
-        }
 
     }
 

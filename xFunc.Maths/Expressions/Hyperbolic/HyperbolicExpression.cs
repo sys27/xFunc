@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
@@ -34,6 +35,43 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="argument">The expression.</param>
         protected HyperbolicExpression(IExpression argument) : base(argument) { }
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract Complex ExecuteComplex(ExpressionParameters parameters);
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double ExecuteNumber(ExpressionParameters parameters);
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public override object Execute(ExpressionParameters parameters)
+        {
+            var resultType = this.ResultType;
+            if (resultType == ExpressionResultType.ComplexNumber)
+                return ExecuteComplex(parameters);
+
+            return ExecuteNumber(parameters);
+        }
 
         /// <summary>
         /// Gets the type of the argument.

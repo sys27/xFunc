@@ -22,11 +22,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// <summary>
     /// Represents a OR operation.
     /// </summary>
-    public class Or : BinaryExpression
+    public class Or : CachedBinaryExpression
     {
-
-        private bool isChanged = false;
-        private ExpressionResultType? resultType;
 
         [ExcludeFromCodeCoverage]
         internal Or() { }
@@ -38,7 +35,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <param name="right">The right (second) operand.</param>
         public Or(IExpression left, IExpression right) : base(left, right) { }
 
-        private ExpressionResultType GetResultType()
+        /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
         {
             if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
                 return ExpressionResultType.Number;
@@ -102,22 +105,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// The left (first) operand.
-        /// </summary>
-        public override IExpression Left
-        {
-            get
-            {
-                return base.Left;
-            }
-            set
-            {
-                base.Left = value;
-                isChanged = true;
-            }
-        }
-
-        /// <summary>
         /// Gets the type of the left parameter.
         /// </summary>
         /// <value>
@@ -141,22 +128,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// The right (second) operand.
-        /// </summary>
-        public override IExpression Right
-        {
-            get
-            {
-                return base.Right;
-            }
-            set
-            {
-                base.Right = value;
-                isChanged = true;
-            }
-        }
-
-        /// <summary>
         /// Gets the type of the right parameter.
         /// </summary>
         /// <value>
@@ -176,29 +147,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
                 }
 
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                if (this.resultType == null || isChanged)
-                {
-                    resultType = GetResultType();
-                    isChanged = false;
-                }
-
-                return resultType.Value;
             }
         }
 

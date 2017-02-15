@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// The base class for hyperbolic functions.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
-    public abstract class HyperbolicExpression : UnaryExpression
+    public abstract class HyperbolicExpression : CachedUnaryExpression
     {
 
         /// <summary>
@@ -35,6 +35,17 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="argument">The expression.</param>
         protected HyperbolicExpression(IExpression argument) : base(argument) { }
+
+        /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            return m_argument.ResultType;
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -80,23 +91,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// The type of the argument.
         /// </value>
         public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return m_argument.ResultType;
-            }
-        }
 
     }
 

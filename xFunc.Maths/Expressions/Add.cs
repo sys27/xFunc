@@ -24,11 +24,8 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents an Addition operation.
     /// </summary>
-    public class Add : BinaryExpression
+    public class Add : CachedBinaryExpression
     {
-
-        private bool isChanged = false;
-        private ExpressionResultType? resultType;
 
         [ExcludeFromCodeCoverage]
         internal Add() { }
@@ -41,7 +38,13 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="IExpression"/>
         public Add(IExpression left, IExpression right) : base(left, right) { }
 
-        private ExpressionResultType GetResultType()
+        /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
         {
             if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
                 (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
@@ -125,22 +128,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// The left (first) operand.
-        /// </summary>
-        public override IExpression Left
-        {
-            get
-            {
-                return base.Left;
-            }
-            set
-            {
-                base.Left = value;
-                isChanged = true;
-            }
-        }
-
-        /// <summary>
         /// Gets the type of the left parameter.
         /// </summary>
         /// <value>
@@ -167,23 +154,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// The right (second) operand.
-        /// </summary>
-        public override IExpression Right
-        {
-            get
-            {
-                return base.Right;
-            }
-
-            set
-            {
-                base.Right = value;
-                isChanged = true;
-            }
-        }
-
-        /// <summary>
         /// Gets the type of the right parameter.
         /// </summary>
         /// <value>
@@ -206,29 +176,6 @@ namespace xFunc.Maths.Expressions
                 }
 
                 return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                if (this.resultType == null || isChanged)
-                {
-                    resultType = GetResultType();
-                    isChanged = false;
-                }
-
-                return resultType.Value;
             }
         }
 

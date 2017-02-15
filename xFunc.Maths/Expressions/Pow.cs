@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Exponentiation operation.
     /// </summary>
-    public class Pow : CachedBinaryExpression
+    public class Pow : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

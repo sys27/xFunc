@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Exponential function.
     /// </summary>
-    public class Exp : CachedUnaryExpression
+    public class Exp : UnaryExpression
     {
 
         [ExcludeFromCodeCoverage]

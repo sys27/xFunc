@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// <summary>
     /// Represents a OR operation.
     /// </summary>
-    public class Or : CachedBinaryExpression
+    public class Or : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

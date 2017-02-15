@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Common logarithm function.
     /// </summary>
-    public class Lg : CachedUnaryExpression
+    public class Lg : UnaryExpression
     {
 
         [ExcludeFromCodeCoverage]

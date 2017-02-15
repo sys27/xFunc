@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the unary minus.
     /// </summary>
-    public class UnaryMinus : CachedUnaryExpression
+    public class UnaryMinus : UnaryExpression
     {
 
         [ExcludeFromCodeCoverage]

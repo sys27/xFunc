@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Exponentiation operation.
     /// </summary>
-    public class Pow : BinaryExpression
+    public class Pow : CachedBinaryExpression
     {
 
         [ExcludeFromCodeCoverage]
@@ -35,6 +35,20 @@ namespace xFunc.Maths.Expressions
         /// <param name="base">The base.</param>
         /// <param name="exponent">The exponent.</param>
         public Pow(IExpression @base, IExpression exponent) : base(@base, exponent) { }
+
+        /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
+                return ExpressionResultType.ComplexNumber;
+
+            return ExpressionResultType.Number;
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -119,26 +133,6 @@ namespace xFunc.Maths.Expressions
             {
                 if (m_left != null && m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
                     return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
-
-                return ExpressionResultType.Number;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                    return ExpressionResultType.ComplexNumber;
 
                 return ExpressionResultType.Number;
             }

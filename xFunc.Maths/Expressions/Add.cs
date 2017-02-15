@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents an Addition operation.
     /// </summary>
-    public class Add : CachedBinaryExpression
+    public class Add : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

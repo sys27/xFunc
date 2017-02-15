@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Logarithm function.
     /// </summary>
-    public class Log : CachedBinaryExpression
+    public class Log : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

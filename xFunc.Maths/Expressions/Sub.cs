@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Subtraction operation.
     /// </summary>
-    public class Sub : CachedBinaryExpression
+    public class Sub : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

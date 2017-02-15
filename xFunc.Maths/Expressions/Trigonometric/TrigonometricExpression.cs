@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
-    public abstract class TrigonometricExpression : CachedUnaryExpression
+    public abstract class TrigonometricExpression : UnaryExpression
     {
 
         /// <summary>

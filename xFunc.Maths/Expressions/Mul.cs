@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Multiplication operation.
     /// </summary>
-    public class Mul : CachedBinaryExpression
+    public class Mul : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

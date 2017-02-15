@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// <summary>
     /// Represents a AND operation.
     /// </summary>
-    public class And : CachedBinaryExpression
+    public class And : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

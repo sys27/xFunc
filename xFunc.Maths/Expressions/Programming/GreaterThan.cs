@@ -36,6 +36,17 @@ namespace xFunc.Maths.Expressions.Programming
         public GreaterThan(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            return ExpressionResultType.Boolean;
+        }
+
+        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
@@ -73,23 +84,6 @@ namespace xFunc.Maths.Expressions.Programming
         public override IExpression Clone()
         {
             return new GreaterThan(m_left.Clone(), m_right.Clone());
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Boolean;
-            }
         }
 
     }

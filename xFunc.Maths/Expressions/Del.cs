@@ -41,6 +41,17 @@ namespace xFunc.Maths.Expressions
         public Del(IExpression expression) : base(expression) { }
 
         /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            return ExpressionResultType.Expression;
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -111,17 +122,6 @@ namespace xFunc.Maths.Expressions
         /// The type of the argument.
         /// </value>
         public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.All;
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType { get; } = ExpressionResultType.Expression;
 
         /// <summary>
         /// Gets or sets the simplifier.

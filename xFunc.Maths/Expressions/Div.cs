@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Division operation.
     /// </summary>
-    public class Div : CachedBinaryExpression
+    public class Div : BinaryExpression
     {
 
         [ExcludeFromCodeCoverage]

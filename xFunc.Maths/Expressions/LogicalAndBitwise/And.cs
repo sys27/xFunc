@@ -78,8 +78,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 
             if (left is bool && right is bool)
                 return (bool)left & (bool)right;
-            else
-                return (double)((int)Math.Round((double)left, MidpointRounding.AwayFromZero) & (int)Math.Round((double)right, MidpointRounding.AwayFromZero));
+
+            return (double)((int)Math.Round((double)left, MidpointRounding.AwayFromZero) & (int)Math.Round((double)right, MidpointRounding.AwayFromZero));
         }
 
         /// <summary>

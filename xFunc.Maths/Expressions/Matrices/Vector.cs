@@ -83,7 +83,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var args = new IExpression[this.countOfParams];
 
-            for (int i = 0; i < this.countOfParams; i++)
+            for (var i = 0; i < this.countOfParams; i++)
             {
                 if (!(m_arguments[i] is Number))
                 {
@@ -205,7 +205,7 @@ namespace xFunc.Maths.Expressions.Matrices
             get
             {
                 var results = new ExpressionResultType[m_arguments?.Length ?? 0];
-                for (int i = 0; i < results.Length; i++)
+                for (var i = 0; i < results.Length; i++)
                     results[i] = ExpressionResultType.Number;
 
                 return results;

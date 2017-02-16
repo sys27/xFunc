@@ -113,7 +113,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var args = new Vector[this.countOfParams];
 
-            for (int i = 0; i < this.ParametersCount; i++)
+            for (var i = 0; i < this.ParametersCount; i++)
                 if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ExpressionResultType.Matrix)
                     args[i] = (Vector)m_arguments[i].Execute(parameters);
                 else

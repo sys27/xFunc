@@ -118,7 +118,7 @@ namespace xFunc.Maths.Expressions.Statistical
                 if (countOfParams > 0)
                 {
                     result[0] = ExpressionResultType.Number | ExpressionResultType.Vector;
-                    for (int i = 1; i < result.Length; i++)
+                    for (var i = 1; i < result.Length; i++)
                         result[i] = ExpressionResultType.Number;
                 }
 

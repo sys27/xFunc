@@ -24,16 +24,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// </summary>
     public class Bool : IExpression
     {
-
-        private readonly bool value;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Bool"/> class.
         /// </summary>
         /// <param name="value">The value of this constant.</param>
         public Bool(bool value)
         {
-            this.value = value;
+            this.Value = value;
         }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public object Execute()
         {
-            return value;
+            return Value;
         }
 
         /// <summary>
@@ -57,7 +54,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters parameters)
         {
-            return value;
+            return Value;
         }
 
         /// <summary>
@@ -82,7 +79,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public static implicit operator bool(Bool boolean)
         {
-            return boolean.value;
+            return boolean.Value;
         }
 
         /// <summary>
@@ -108,7 +105,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             var boolean = obj as Bool;
 
-            return value == boolean?.value;
+            return Value == boolean?.Value;
         }
 
         /// <summary>
@@ -119,7 +116,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return value.GetHashCode() ^ 7883;
+            return Value.GetHashCode() ^ 7883;
         }
 
         /// <summary>
@@ -153,7 +150,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public IExpression Clone()
         {
-            return new Bool(value);
+            return new Bool(Value);
         }
 
         /// <summary>
@@ -167,13 +164,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public int MinParameters => 0;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -181,13 +172,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters
-        {
-            get
-            {
-                return -1;
-            }
-        }
+        public int MaxParameters => -1;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -195,13 +180,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public int ParametersCount => 0;
 
         /// <summary>
         /// Gets the type of the result.
@@ -212,13 +191,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public ExpressionResultType ResultType
-        {
-            get
-            {
-                return ExpressionResultType.Boolean;
-            }
-        }
+        public ExpressionResultType ResultType => ExpressionResultType.Boolean;
 
         /// <summary>
         /// Gets the value of this expression.
@@ -226,13 +199,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <value>
         /// The value of this expression.
         /// </value>
-        public bool Value
-        {
-            get
-            {
-                return value;
-            }
-        }
+        public bool Value { get; }
 
     }
 

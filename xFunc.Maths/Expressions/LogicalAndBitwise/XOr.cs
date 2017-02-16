@@ -150,6 +150,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
             }
         }
+
     }
 
 }

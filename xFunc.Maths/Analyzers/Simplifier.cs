@@ -31,7 +31,7 @@ namespace xFunc.Maths.Analyzers
     /// </summary>
     /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{TResult}" />
     /// <seealso cref="xFunc.Maths.Analyzers.ISimplifier" />
-    public class Simplifier : IAnalyzer<IExpression>, ISimplifier
+    public class Simplifier : ISimplifier
     {
 
         private readonly Number zero = 0;

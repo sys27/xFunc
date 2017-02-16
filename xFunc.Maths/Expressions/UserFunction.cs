@@ -14,7 +14,6 @@
 // limitations under the License.
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Collections;
 
@@ -50,7 +49,7 @@ namespace xFunc.Maths.Expressions
         {
             this.function = function;
             this.m_arguments = args;
-            this.countOfParams = countOfParams;
+            this.ParametersCount = countOfParams;
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             var exp = obj as UserFunction;
-            if (exp != null && this.function == exp.function && this.countOfParams == exp.countOfParams)
+            if (exp != null && this.function == exp.function && this.ParametersCount == exp.ParametersCount)
                 return true;
 
             return false;
@@ -78,7 +77,7 @@ namespace xFunc.Maths.Expressions
             int hash = 1721;
 
             hash = (hash * 5701) + function.GetHashCode();
-            hash = (hash * 5701) + countOfParams.GetHashCode();
+            hash = (hash * 5701) + ParametersCount.GetHashCode();
 
             return hash;
         }
@@ -129,20 +128,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new UserFunction(function, m_arguments, countOfParams);
+            return new UserFunction(function, m_arguments, ParametersCount);
         }
 
         /// <summary>
         /// Gets the name of function.
         /// </summary>
         /// <value>The name of function.</value>
-        public string Function
-        {
-            get
-            {
-                return function;
-            }
-        }
+        public string Function => function;
 
         /// <summary>
         /// Gets the minimum count of parameters. -1 - Infinity.
@@ -150,13 +143,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters
-        {
-            get
-            {
-                return countOfParams;
-            }
-        }
+        public override int MinParameters => ParametersCount;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -164,13 +151,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters
-        {
-            get
-            {
-                return countOfParams;
-            }
-        }
+        public override int MaxParameters => ParametersCount;
 
         /// <summary>
         /// Gets the type of the result.
@@ -181,7 +162,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType { get; } = ExpressionResultType.All;
+        public override ExpressionResultType ResultType => ExpressionResultType.All;
 
     }
 

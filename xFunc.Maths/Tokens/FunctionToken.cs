@@ -23,20 +23,11 @@ namespace xFunc.Maths.Tokens
     public class FunctionToken : IToken
     {
 
-        private readonly Functions function;
-        /// <summary>
-        /// The count of parameters
-        /// </summary>
-        protected int m_countOfParams;
-
         /// <summary>
         /// Initializes the <see cref="FunctionToken" /> class.
         /// </summary>
         /// <param name="function">A function.</param>
-        public FunctionToken(Functions function) :
-            this(function, -1)
-        {
-        }
+        public FunctionToken(Functions function) : this(function, -1) { }
 
         /// <summary>
         /// Initializes the <see cref="FunctionToken" /> class.
@@ -45,8 +36,8 @@ namespace xFunc.Maths.Tokens
         /// <param name="countOfParams">The count of parameters.</param>
         public FunctionToken(Functions function, int countOfParams)
         {
-            this.function = function;
-            this.m_countOfParams = countOfParams;
+            this.Function = function;
+            this.CountOfParams = countOfParams;
         }
 
         /// <summary>
@@ -67,7 +58,7 @@ namespace xFunc.Maths.Tokens
 
             var token = (FunctionToken)obj;
 
-            return this.function == token.function && this.m_countOfParams == token.m_countOfParams;
+            return this.Function == token.Function && this.CountOfParams == token.CountOfParams;
         }
 
         /// <summary>
@@ -80,8 +71,8 @@ namespace xFunc.Maths.Tokens
         {
             int hash = 6949;
 
-            hash = hash * 5437 + function.GetHashCode();
-            hash = hash * 5437 + m_countOfParams.GetHashCode();
+            hash = hash * 5437 + Function.GetHashCode();
+            hash = hash * 5437 + CountOfParams.GetHashCode();
 
             return hash;
         }
@@ -92,30 +83,18 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Function: {function} ({m_countOfParams})";
+            return $"Function: {Function} ({CountOfParams})";
         }
 
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority
-        {
-            get
-            {
-                return 100;
-            }
-        }
+        public int Priority => 100;
 
         /// <summary>
         /// Gets the function.
         /// </summary>
-        public Functions Function
-        {
-            get
-            {
-                return function;
-            }
-        }
+        public Functions Function { get; }
 
         /// <summary>
         /// Gets the count of parameters.
@@ -123,17 +102,7 @@ namespace xFunc.Maths.Tokens
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int CountOfParams
-        {
-            get
-            {
-                return m_countOfParams;
-            }
-            internal set
-            {
-                m_countOfParams = value;
-            }
-        }
+        public int CountOfParams { get; internal set; }
 
     }
 

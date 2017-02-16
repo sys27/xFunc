@@ -25,10 +25,6 @@ namespace xFunc.Maths.Expressions
     {
 
         /// <summary>
-        /// The parent expression of this expression.
-        /// </summary>
-        protected IExpression m_parent;
-        /// <summary>
         /// The left (first) operand.
         /// </summary>
         protected IExpression m_left;
@@ -174,7 +170,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public virtual ExpressionResultType LeftType { get; } = ExpressionResultType.Number;
+        public virtual ExpressionResultType LeftType => ExpressionResultType.Number;
 
         /// <summary>
         /// The right (second) operand.
@@ -205,22 +201,12 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public virtual ExpressionResultType RightType { get; } = ExpressionResultType.Number;
+        public virtual ExpressionResultType RightType => ExpressionResultType.Number;
 
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public override IExpression Parent
-        {
-            get
-            {
-                return m_parent;
-            }
-            set
-            {
-                m_parent = value;
-            }
-        }
+        public override IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -228,7 +214,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters { get; } = 2;
+        public override int MinParameters => 2;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -236,7 +222,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters { get; } = 2;
+        public override int MaxParameters => 2;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -244,7 +230,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public override int ParametersCount { get; } = 2;
+        public override int ParametersCount => 2;
 
     }
 

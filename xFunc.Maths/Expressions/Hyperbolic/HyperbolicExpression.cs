@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
@@ -36,29 +37,60 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected HyperbolicExpression(IExpression argument) : base(argument) { }
 
         /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            return m_argument.ResultType;
+        }
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract Complex ExecuteComplex(ExpressionParameters parameters);
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double ExecuteNumber(ExpressionParameters parameters);
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public override object Execute(ExpressionParameters parameters)
+        {
+            var resultType = this.ResultType;
+            if (resultType == ExpressionResultType.ComplexNumber)
+                return ExecuteComplex(parameters);
+
+            return ExecuteNumber(parameters);
+        }
+
+        /// <summary>
         /// Gets the type of the argument.
         /// </summary>
         /// <value>
         /// The type of the argument.
         /// </value>
         public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return m_argument.ResultType;
-            }
-        }
 
     }
 

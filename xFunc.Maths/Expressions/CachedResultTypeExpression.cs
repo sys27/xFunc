@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// The base class for expression with cached result type. Use this class if expression contains the complicated logic of result type calculation.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.IExpression" />
-    public abstract class CachedResultTypeExpression : IExpression
+    public abstract class CachedResultTypeExpression : IExpression, IChangedExpession
     {
 
         /// <summary>
@@ -136,6 +136,28 @@ namespace xFunc.Maths.Expressions
                 }
 
                 return m_resultType.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is changed.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is changed; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsChanged
+        {
+            get
+            {
+                return m_isChanged;
+            }
+            set
+            {
+                m_isChanged = value;
+
+                var isChangedExpression = Parent as IChangedExpession;
+                if (isChangedExpression != null)
+                    isChangedExpression.IsChanged = value;
             }
         }
 

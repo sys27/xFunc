@@ -165,7 +165,7 @@ namespace xFunc.Maths.Expressions
                 m_left = value;
                 m_left.Parent = this;
 
-                m_isChanged = true;
+                IsChanged = true;
             }
         }
 
@@ -196,7 +196,7 @@ namespace xFunc.Maths.Expressions
                 m_right = value;
                 m_right.Parent = this;
 
-                m_isChanged = true;
+                IsChanged = true;
             }
         }
 

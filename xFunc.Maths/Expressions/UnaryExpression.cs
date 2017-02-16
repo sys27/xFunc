@@ -152,7 +152,7 @@ namespace xFunc.Maths.Expressions
                 m_argument = value;
                 m_argument.Parent = this;
 
-                m_isChanged = true;
+                IsChanged = true;
             }
         }
 

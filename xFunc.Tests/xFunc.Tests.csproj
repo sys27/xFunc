@@ -76,6 +76,7 @@
     <Compile Include="Expressions\Maths\AbsTest.cs" />
     <Compile Include="Expressions\Maths\AddTest.cs" />
     <Compile Include="Expressions\Maths\BinaryTest.cs" />
+    <Compile Include="Expressions\Maths\CachedResultTypeExpressionTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ComplexNumberTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ReciprocalTest.cs" />
     <Compile Include="Expressions\Maths\ComplexNumbers\ConjugateTest.cs" />

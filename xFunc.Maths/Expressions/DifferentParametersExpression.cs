@@ -177,7 +177,7 @@ namespace xFunc.Maths.Expressions
         protected IExpression[] CloneArguments()
         {
             var args = new IExpression[m_arguments.Length];
-            for (int i = 0; i < m_arguments.Length; i++)
+            for (var i = 0; i < m_arguments.Length; i++)
                 args[i] = m_arguments[i].Clone();
 
             return args;

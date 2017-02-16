@@ -68,8 +68,8 @@ namespace xFunc.Maths.Expressions
 
             if (resultType == ExpressionResultType.ComplexNumber)
             {
-                var leftComplex = leftResult is Complex ? (Complex)leftResult : (double)leftResult;
-                var rightComplex = rightResult is Complex ? (Complex)rightResult : (double)rightResult;
+                var leftComplex = leftResult as Complex? ?? (double)leftResult;
+                var rightComplex = rightResult as Complex? ?? (double)rightResult;
 
                 return Complex.Divide(leftComplex, rightComplex);
             }

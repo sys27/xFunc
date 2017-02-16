@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
@@ -158,7 +157,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 if ((LeftType & value.ResultType) == ExpressionResultType.None)
                     throw new ParameterTypeMismatchException(LeftType, value.ResultType);
 
@@ -189,7 +188,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 if ((RightType & value.ResultType) == ExpressionResultType.None)
                     throw new ParameterTypeMismatchException(RightType, value.ResultType);
 

@@ -168,16 +168,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IExpression Parent
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-            }
-        }
+        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -185,7 +176,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters { get; } = 2;
+        public int MinParameters => 2;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -193,7 +184,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters { get; } = 2;
+        public int MaxParameters => 2;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -201,7 +192,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount { get; } = 2;
+        public int ParametersCount => 2;
 
         /// <summary>
         /// Gets or sets the key.
@@ -256,7 +247,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the value.
         /// </value>
-        public ExpressionResultType ValueType { get; } = ExpressionResultType.All;
+        public ExpressionResultType ValueType => ExpressionResultType.All;
 
         /// <summary>
         /// Gets the type of the result.
@@ -267,7 +258,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public ExpressionResultType ResultType { get; } = ExpressionResultType.Undefined;
+        public ExpressionResultType ResultType => ExpressionResultType.Undefined;
 
     }
 

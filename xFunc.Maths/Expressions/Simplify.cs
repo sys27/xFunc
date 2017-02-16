@@ -25,8 +25,6 @@ namespace xFunc.Maths.Expressions
     public class Simplify : UnaryExpression
     {
 
-        private ISimplifier simplifier;
-
         [ExcludeFromCodeCoverage]
         internal Simplify() { }
 
@@ -69,10 +67,10 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (simplifier == null)
-                throw new ArgumentNullException(nameof(simplifier));
+            if (Simplifier == null)
+                throw new ArgumentNullException(nameof(Simplifier));
 
-            return this.Analyze(simplifier);
+            return this.Analyze(Simplifier);
         }
 
         /// <summary>
@@ -103,7 +101,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.All;
+        public override ExpressionResultType ArgumentType => ExpressionResultType.All;
 
         /// <summary>
         /// Gets or sets the simplifier.
@@ -111,17 +109,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The simplifier.
         /// </value>
-        public ISimplifier Simplifier
-        {
-            get
-            {
-                return simplifier;
-            }
-            set
-            {
-                simplifier = value;
-            }
-        }
+        public ISimplifier Simplifier { get; set; }
 
     }
 

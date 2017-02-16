@@ -105,7 +105,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Round(CloneArguments(), countOfParams);
+            return new Round(CloneArguments(), ParametersCount);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters { get; } = 1;
+        public override int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -122,7 +122,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters { get; } = 2;
+        public override int MaxParameters => 2;
 
         /// <summary>
         /// The expression that represents a double-precision floating-point number to be rounded.
@@ -130,13 +130,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression that represents a double-precision floating-point number to be rounded.
         /// </value>
-        public IExpression Argument
-        {
-            get
-            {
-                return m_arguments[0];
-            }
-        }
+        public IExpression Argument => m_arguments[0];
 
         /// <summary>
         /// The expression that represents the number of fractional digits in the return value.
@@ -144,13 +138,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression that represents the number of fractional digits in the return value.
         /// </value>
-        public IExpression Digits
-        {
-            get
-            {
-                return countOfParams == 2 ? m_arguments[1] : null;
-            }
-        }
+        public IExpression Digits => ParametersCount == 2 ? m_arguments[1] : null;
 
         /// <summary>
         /// Gets the arguments types.
@@ -162,7 +150,7 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                if (countOfParams == 2)
+                if (ParametersCount == 2)
                     return new[]
                     {
                         ExpressionResultType.Number,

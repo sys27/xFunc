@@ -23,15 +23,13 @@ namespace xFunc.Maths.Tokens
     public class VariableToken : IToken
     {
 
-        private readonly string variable;
-
         /// <summary>
         /// Initializes the <see cref="VariableToken"/> class.
         /// </summary>
         /// <param name="variable">A name of variable.</param>
         public VariableToken(string variable)
         {
-            this.variable = variable;
+            this.Variable = variable;
         }
 
         /// <summary>
@@ -52,7 +50,7 @@ namespace xFunc.Maths.Tokens
 
             var token = (VariableToken)obj;
 
-            return variable == token.variable;
+            return Variable == token.Variable;
         }
 
         /// <summary>
@@ -63,7 +61,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return variable.GetHashCode();
+            return Variable.GetHashCode();
         }
 
         /// <summary>
@@ -72,30 +70,18 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Variable: {variable}";
+            return $"Variable: {Variable}";
         }
 
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority
-        {
-            get
-            {
-                return 102;
-            }
-        }
+        public int Priority => 102;
 
         /// <summary>
         /// Gets a name of variable.
         /// </summary>
-        public string Variable
-        {
-            get
-            {
-                return variable;
-            }
-        }
+        public string Variable { get; }
 
     }
 

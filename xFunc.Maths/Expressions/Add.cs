@@ -39,6 +39,30 @@ namespace xFunc.Maths.Expressions
         public Add(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
+                (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
+                return ExpressionResultType.ComplexNumber;
+
+            if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
+                return ExpressionResultType.Number;
+
+            if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
+                return ExpressionResultType.Matrix;
+
+            if (m_left.ResultType == ExpressionResultType.Vector || m_right.ResultType == ExpressionResultType.Vector)
+                return ExpressionResultType.Vector;
+
+            return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -150,36 +174,6 @@ namespace xFunc.Maths.Expressions
                     if (m_left.ResultType == ExpressionResultType.Vector)
                         return ExpressionResultType.Vector;
                 }
-
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
-                    (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
-                    return ExpressionResultType.ComplexNumber;
-
-                if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
-                    return ExpressionResultType.Number;
-
-                if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
-                    return ExpressionResultType.Matrix;
-
-                if (m_left.ResultType == ExpressionResultType.Vector || m_right.ResultType == ExpressionResultType.Vector)
-                    return ExpressionResultType.Vector;
 
                 return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
             }

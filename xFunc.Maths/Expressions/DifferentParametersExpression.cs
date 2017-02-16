@@ -14,7 +14,6 @@
 // limitations under the License.
 using System;
 using System.Linq;
-using System.Text;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;

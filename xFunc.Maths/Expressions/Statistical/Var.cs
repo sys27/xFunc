@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             var data = m_arguments;
 
-            if (countOfParams == 1)
+            if (ParametersCount == 1)
             {
                 var result = m_arguments[0].Execute(parameters);
                 var vector = result as Vector;
@@ -101,7 +101,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Var(CloneArguments(), countOfParams);
+            return new Var(CloneArguments(), ParametersCount);
         }
 
         /// <summary>
@@ -114,8 +114,8 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             get
             {
-                var result = new ExpressionResultType[countOfParams];
-                if (countOfParams > 0)
+                var result = new ExpressionResultType[ParametersCount];
+                if (ParametersCount > 0)
                 {
                     result[0] = ExpressionResultType.Number | ExpressionResultType.Vector;
                     for (var i = 1; i < result.Length; i++)
@@ -132,7 +132,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters { get; } = 1;
+        public override int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -140,7 +140,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters { get; } = -1;
+        public override int MaxParameters => -1;
 
     }
 

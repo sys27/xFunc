@@ -23,10 +23,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// </summary>
     public class Parameter : IComparable<Parameter>
     {
-
-        private readonly string key;
         private object value;
-        private ParameterType type;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parameter"/> class.
@@ -71,9 +68,9 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="type">The type of parameter.</param>
         public Parameter(string key, object value, ParameterType type)
         {
-            this.key = key;
+            this.Key = key;
             this.Value = value;
-            this.type = type;
+            this.Type = type;
         }
 
         /// <summary>
@@ -105,8 +102,8 @@ namespace xFunc.Maths.Expressions.Collections
             var param = obj as Parameter;
             if (param == null)
                 return false;
-            
-            return key == param.key && value.Equals(param.value);
+
+            return Key == param.Key && value.Equals(param.value);
         }
 
         /// <summary>
@@ -119,7 +116,7 @@ namespace xFunc.Maths.Expressions.Collections
         {
             int hash = 163;
 
-            hash = hash * 41 + key.GetHashCode();
+            hash = hash * 41 + Key.GetHashCode();
 
             return hash;
         }
@@ -132,7 +129,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", key, value, type);
+            return string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", Key, value, Type);
         }
 
         /// <summary>
@@ -142,7 +139,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns>A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.Zero This object is equal to other. Greater than zero This object is greater than other.</returns>
         public int CompareTo(Parameter other)
         {
-            return key.CompareTo(other.key);
+            return Key.CompareTo(other.Key);
         }
 
         /// <summary>
@@ -151,13 +148,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The name of parameter.
         /// </value>
-        public string Key
-        {
-            get
-            {
-                return key;
-            }
-        }
+        public string Key { get; }
 
         /// <summary>
         /// Gets or sets the value of parameter.
@@ -183,17 +174,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The type of parameter.
         /// </value>
-        public ParameterType Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                type = value;
-            }
-        }
+        public ParameterType Type { get; set; }
 
     }
 

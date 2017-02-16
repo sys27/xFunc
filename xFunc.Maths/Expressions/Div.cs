@@ -116,7 +116,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ExpressionResultType LeftType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
         /// <summary>
         /// Gets the type of the right parameter.
@@ -124,7 +124,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ExpressionResultType RightType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
     }
 

@@ -26,15 +26,13 @@ namespace xFunc.Maths.Tokens
     public class ComplexNumberToken : IToken
     {
 
-        private readonly Complex complex;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexNumberToken"/> class.
         /// </summary>
         /// <param name="complex">The complex number.</param>
         public ComplexNumberToken(Complex complex)
         {
-            this.complex = complex;
+            this.Number = complex;
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace xFunc.Maths.Tokens
             if (num == null)
                 return false;
 
-            return complex.Equals(num.complex);
+            return Number.Equals(num.Number);
         }
 
         /// <summary>
@@ -61,7 +59,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return complex.GetHashCode();
+            return Number.GetHashCode();
         }
 
         /// <summary>
@@ -72,35 +70,29 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override string ToString()
         {
-            if (complex.Real == 0)
+            if (Number.Real == 0)
             {
-                if (complex.Imaginary == 1)
+                if (Number.Imaginary == 1)
                     return "Complex Number: i";
-                if (complex.Imaginary == -1)
+                if (Number.Imaginary == -1)
                     return "Complex Number: -i";
 
-                return $"Complex Number: {complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+                return $"Complex Number: {Number.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
             }
 
-            if (complex.Imaginary == 0)
-                return $"Complex Number: {complex.Real.ToString(CultureInfo.InvariantCulture)}";
+            if (Number.Imaginary == 0)
+                return $"Complex Number: {Number.Real.ToString(CultureInfo.InvariantCulture)}";
 
-            if (complex.Imaginary > 0)
-                return $"Complex Number: {complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            if (Number.Imaginary > 0)
+                return $"Complex Number: {Number.Real.ToString(CultureInfo.InvariantCulture)}+{Number.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
 
-            return $"Complex Number: {complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            return $"Complex Number: {Number.Real.ToString(CultureInfo.InvariantCulture)}{Number.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
         }
 
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority
-        {
-            get
-            {
-                return 101;
-            }
-        }
+        public int Priority => 101;
 
         /// <summary>
         /// Gets the complex number.
@@ -108,13 +100,7 @@ namespace xFunc.Maths.Tokens
         /// <value>
         /// The complex number.
         /// </value>
-        public Complex Number
-        {
-            get
-            {
-                return complex;
-            }
-        }
+        public Complex Number { get; }
 
     }
 

@@ -36,6 +36,17 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public Not(IExpression expression) : base(expression) { }
 
         /// <summary>
+        /// Gets the result type.
+        /// </summary>
+        /// <returns>
+        /// The result type of current expression.
+        /// </returns>
+        protected override ExpressionResultType GetResultType()
+        {
+            return ExpressionResultType.Boolean;
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -97,23 +108,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             get
             {
                 return ExpressionResultType.Number | ExpressionResultType.Boolean;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                return m_argument.ResultType;
             }
         }
 

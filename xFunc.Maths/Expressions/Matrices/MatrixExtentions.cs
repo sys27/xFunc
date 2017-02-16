@@ -162,7 +162,7 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 var exps = new IExpression[left.SizeOfVectors];
 
-                for (int j = 0; j < left.SizeOfVectors; j++)
+                for (var j = 0; j < left.SizeOfVectors; j++)
                     exps[j] = new Number((double)left[i][j].Execute(parameters) + (double)right[i][j].Execute(parameters));
 
                 vectors[i] = new Vector(exps);
@@ -201,7 +201,7 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 var exps = new IExpression[left.SizeOfVectors];
 
-                for (int j = 0; j < left.SizeOfVectors; j++)
+                for (var j = 0; j < left.SizeOfVectors; j++)
                     exps[j] = new Number((double)left[i][j].Execute(parameters) - (double)right[i][j].Execute(parameters));
 
                 vectors[i] = new Vector(exps);
@@ -274,10 +274,10 @@ namespace xFunc.Maths.Expressions.Matrices
 
             Parallel.For(0, right.SizeOfVectors, i =>
             {
-                for (int j = 0; j < left.ParametersCount; j++)
+                for (var j = 0; j < left.ParametersCount; j++)
                 {
                     double el = 0;
-                    for (int k = 0; k < left.SizeOfVectors; k++)
+                    for (var k = 0; k < left.SizeOfVectors; k++)
                         el += (double)left[j][k].Execute(parameters) * (double)right[k][i].Execute(parameters);
                     result[j][i] = new Number(el);
                 }
@@ -594,7 +594,6 @@ namespace xFunc.Maths.Expressions.Matrices
             if (left.ParametersCount != 3 || right.ParametersCount != 3)
                 throw new ArgumentException(Resource.VectorCrossException);
 
-            var args = new IExpression[3];
             var vector1 = left.ToCalculatedArray(parameters);
             var vector2 = right.ToCalculatedArray(parameters);
 

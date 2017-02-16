@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
             var result = m_argument.Execute(parameters);
 
             if (resultType == ExpressionResultType.ComplexNumber)
-                return Complex.Log10(result is Complex ? (Complex)result : (double)result);
+                return Complex.Log10(result as Complex? ?? (double)result);
 
             return Math.Log10((double)result);
         }

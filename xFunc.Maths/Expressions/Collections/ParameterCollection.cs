@@ -330,13 +330,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The constants.
         /// </value>
-        public IEnumerable<Parameter> Constants
-        {
-            get
-            {
-                return consts;
-            }
-        }
+        public IEnumerable<Parameter> Constants => consts;
 
         /// <summary>
         /// Gets the collection of variables.
@@ -344,13 +338,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The collection.
         /// </value>
-        public IEnumerable<Parameter> Collection
-        {
-            get
-            {
-                return collection;
-            }
-        }
+        public IEnumerable<Parameter> Collection => collection;
 
     }
 

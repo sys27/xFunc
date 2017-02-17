@@ -99,7 +99,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The count of parameters.
         /// </value>
-        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.ComplexNumber;
+        public override ExpressionResultType ArgumentType => ExpressionResultType.ComplexNumber;
 
     }
 

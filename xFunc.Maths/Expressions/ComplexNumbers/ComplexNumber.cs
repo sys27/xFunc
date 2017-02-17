@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Globalization;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -28,7 +27,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
     public class ComplexNumber : IExpression
     {
 
-        private IExpression parent;
         private Complex complex;
 
         /// <summary>
@@ -178,29 +176,12 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The value.
         /// </value>
-        public Complex Value
-        {
-            get
-            {
-                return complex;
-            }
-        }
+        public Complex Value => complex;
 
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IExpression Parent
-        {
-            get
-            {
-                return parent;
-            }
-
-            set
-            {
-                parent = value;
-            }
-        }
+        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -208,7 +189,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters { get; } = 0;
+        public int MinParameters => 0;
 
         /// <summary>
         /// Gets the maximum count of parameters.
@@ -216,7 +197,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters { get; } = -1;
+        public int MaxParameters => -1;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -224,7 +205,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount { get; } = 0;
+        public int ParametersCount => 0;
 
         /// <summary>
         /// Gets the type of the result.
@@ -235,7 +216,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public ExpressionResultType ResultType { get; } = ExpressionResultType.ComplexNumber;
+        public ExpressionResultType ResultType => ExpressionResultType.ComplexNumber;
 
     }
 

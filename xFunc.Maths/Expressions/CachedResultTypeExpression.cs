@@ -29,11 +29,11 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Indicates that expression is changed.
         /// </summary>
-        protected bool m_isChanged = false;
+        private bool m_isChanged;
         /// <summary>
         /// The result type.
         /// </summary>
-        protected ExpressionResultType? m_resultType;
+        private ExpressionResultType? m_resultType;
 
         /// <summary>
         /// Gets the result type.

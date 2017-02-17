@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
             var result = m_argument.Execute(parameters);
 
             if (resultType == ExpressionResultType.ComplexNumber)
-                return Complex.Log(result is Complex ? (Complex)result : (double)result);
+                return Complex.Log(result as Complex? ?? (double)result);
 
             return Math.Log((double)result);
         }
@@ -108,7 +108,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ExpressionResultType ArgumentType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
     }
 

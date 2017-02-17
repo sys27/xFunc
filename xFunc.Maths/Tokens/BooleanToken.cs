@@ -23,15 +23,13 @@ namespace xFunc.Maths.Tokens
     public class BooleanToken : IToken
     {
 
-        private readonly bool value;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BooleanToken"/> class.
         /// </summary>
         /// <param name="value">The value of this token.</param>
         public BooleanToken(bool value)
         {
-            this.value = value;
+            this.Value = value;
         }
 
         /// <summary>
@@ -54,7 +52,7 @@ namespace xFunc.Maths.Tokens
 
             var token = (BooleanToken)obj;
 
-            return this.value == token.value;
+            return this.Value == token.Value;
         }
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return value.GetHashCode();
+            return Value.GetHashCode();
         }
 
         /// <summary>
@@ -76,19 +74,13 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override string ToString()
         {
-            return $"Boolean: {value}";
+            return $"Boolean: {Value}";
         }
 
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority
-        {
-            get
-            {
-                return 101;
-            }
-        }
+        public int Priority => 101;
 
         /// <summary>
         /// Gets a value.
@@ -96,13 +88,7 @@ namespace xFunc.Maths.Tokens
         /// <value>
         /// The value of this token.
         /// </value>
-        public bool Value
-        {
-            get
-            {
-                return value;
-            }
-        }
+        public bool Value { get; }
 
     }
 

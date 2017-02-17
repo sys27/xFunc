@@ -59,6 +59,9 @@ namespace xFunc.Maths.Expressions
             if (m_left.ResultType == ExpressionResultType.Vector || m_right.ResultType == ExpressionResultType.Vector)
                 return ExpressionResultType.Vector;
 
+            if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) || m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
+                return ExpressionResultType.Number;
+
             return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
         }
 

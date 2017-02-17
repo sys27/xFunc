@@ -278,7 +278,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Variable("x"), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.Boolean, exp.ResultType);
+            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -286,7 +286,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.Boolean, exp.ResultType);
+            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
         }
 
         [Fact]

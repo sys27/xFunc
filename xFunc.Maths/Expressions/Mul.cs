@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
 
             if (m_right.ResultType == ExpressionResultType.Vector || m_left.ResultType == ExpressionResultType.Vector)
                 return ExpressionResultType.Vector;
-
+            
             return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
         }
 

@@ -28,17 +28,9 @@ namespace xFunc.Maths.Expressions
     {
 
         /// <summary>
-        /// The parent expression of this expression.
-        /// </summary>
-        protected IExpression m_parent;
-        /// <summary>
         /// The arguments.
         /// </summary>
         protected IExpression[] m_arguments;
-        /// <summary>
-        /// The count of parameters.
-        /// </summary>
-        protected int countOfParams;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression"/> class.
@@ -53,7 +45,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="countOfParams">The count of parameters.</param>
         protected DifferentParametersExpression(IExpression[] arguments, int countOfParams)
         {
-            this.countOfParams = countOfParams;
+            this.ParametersCount = countOfParams;
             this.Arguments = arguments;
         }
 
@@ -177,7 +169,7 @@ namespace xFunc.Maths.Expressions
         protected IExpression[] CloneArguments()
         {
             var args = new IExpression[m_arguments.Length];
-            for (int i = 0; i < m_arguments.Length; i++)
+            for (var i = 0; i < m_arguments.Length; i++)
                 args[i] = m_arguments[i].Clone();
 
             return args;
@@ -186,17 +178,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IExpression Parent
-        {
-            get
-            {
-                return m_parent;
-            }
-            set
-            {
-                m_parent = value;
-            }
-        }
+        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -217,7 +199,7 @@ namespace xFunc.Maths.Expressions
                     if (m_arguments.Length != types.Length)
                         throw new ArgumentException(Resource.InvalidExpression);
 
-                    for (int i = 0; i < m_arguments.Length; i++)
+                    for (var i = 0; i < m_arguments.Length; i++)
                     {
                         var item = m_arguments[i];
 
@@ -244,7 +226,7 @@ namespace xFunc.Maths.Expressions
             get
             {
                 var results = new ExpressionResultType[m_arguments?.Length ?? MinParameters];
-                for (int i = 0; i < results.Length; i++)
+                for (var i = 0; i < results.Length; i++)
                     results[i] = ExpressionResultType.All;
 
                 return results;
@@ -273,17 +255,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return countOfParams;
-            }
-            set
-            {
-                countOfParams = value;
-            }
-        }
+        public int ParametersCount { get; set; }
 
         /// <summary>
         /// Gets the type of the result.
@@ -294,7 +266,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public virtual ExpressionResultType ResultType { get; } = ExpressionResultType.Number;
+        public virtual ExpressionResultType ResultType => ExpressionResultType.Number;
 
     }
 

@@ -81,9 +81,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private IExpression[] CalculateVector(ExpressionParameters parameters)
         {
-            var args = new IExpression[this.countOfParams];
+            var args = new IExpression[this.ParametersCount];
 
-            for (int i = 0; i < this.countOfParams; i++)
+            for (var i = 0; i < this.ParametersCount; i++)
             {
                 if (!(m_arguments[i] is Number))
                 {
@@ -173,7 +173,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters { get; } = 1;
+        public override int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -181,7 +181,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters { get; } = -1;
+        public override int MaxParameters => -1;
 
         /// <summary>
         /// Gets the type of the result.
@@ -192,7 +192,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType { get; } = ExpressionResultType.Vector;
+        public override ExpressionResultType ResultType => ExpressionResultType.Vector;
 
         /// <summary>
         /// Gets the arguments types.
@@ -205,7 +205,7 @@ namespace xFunc.Maths.Expressions.Matrices
             get
             {
                 var results = new ExpressionResultType[m_arguments?.Length ?? 0];
-                for (int i = 0; i < results.Length; i++)
+                for (var i = 0; i < results.Length; i++)
                     results[i] = ExpressionResultType.Number;
 
                 return results;

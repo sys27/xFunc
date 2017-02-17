@@ -26,11 +26,7 @@ namespace xFunc.Maths.Expressions
     public class DelegateExpression : IExpression
     {
 
-        /// <summary>
-        /// The parent expression of this expression.
-        /// </summary>
-        protected IExpression m_parent;
-        private Func<ExpressionParameters, object> func;
+        private readonly Func<ExpressionParameters, object> func;
 
         [ExcludeFromCodeCoverage]
         internal DelegateExpression() { }
@@ -148,17 +144,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public IExpression Parent
-        {
-            get
-            {
-                return m_parent;
-            }
-            set
-            {
-                m_parent = value;
-            }
-        }
+        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -166,7 +152,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters { get; } = 1;
+        public int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -174,7 +160,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters { get; } = 1;
+        public int MaxParameters => 1;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -182,7 +168,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount { get; } = 1;
+        public int ParametersCount => 1;
 
         /// <summary>
         /// Gets the type of the result.
@@ -193,7 +179,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public ExpressionResultType ResultType { get; } = ExpressionResultType.Number;
+        public ExpressionResultType ResultType => ExpressionResultType.Number;
 
     }
 

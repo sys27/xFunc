@@ -710,11 +710,13 @@ namespace xFunc.Maths
                 match = regexComplexNumber.Match(function, i);
                 if (match.Success)
                 {
-                    var magnitude = 0.0;
-                    var phase = 1.0;
+                    double magnitude;
+                    double phase;
 
-                    double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out magnitude);
-                    double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out phase);
+                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out magnitude))
+                        magnitude = 0.0;
+                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out phase))
+                        phase = 1.0;
 
                     tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
 

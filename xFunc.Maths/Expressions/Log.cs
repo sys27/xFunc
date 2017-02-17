@@ -78,7 +78,7 @@ namespace xFunc.Maths.Expressions
             var rightResult = m_right.Execute(parameters);
 
             if (resultType == ExpressionResultType.ComplexNumber)
-                return Complex.Log(rightResult is Complex ? (Complex)rightResult : (double)rightResult, leftResult);
+                return Complex.Log(rightResult as Complex? ?? (double)rightResult, leftResult);
 
             return Math.Log((double)rightResult, leftResult);
         }
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ExpressionResultType RightType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
     }
 

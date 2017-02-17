@@ -71,8 +71,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 
             if (arg is bool)
                 return !(bool)arg;
-            else
-                return (double)(~(int)Math.Round((double)arg, MidpointRounding.AwayFromZero));
+
+            return (double)(~(int)Math.Round((double)arg, MidpointRounding.AwayFromZero));
         }
 
         /// <summary>
@@ -103,13 +103,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType
-        {
-            get
-            {
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
-            }
-        }
+        public override ExpressionResultType ArgumentType => ExpressionResultType.Number | ExpressionResultType.Boolean;
 
     }
 

@@ -87,10 +87,10 @@ namespace xFunc.Maths.Expressions
             if (resultType == ExpressionResultType.Matrix || resultType == ExpressionResultType.Vector)
             {
                 var temp = m_left.Execute(parameters);
-                var leftExpResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
+                var leftExpResult = temp as IExpression ?? new Number((double)temp);
 
                 temp = m_right.Execute(parameters);
-                var rightExpResult = temp is IExpression ? (IExpression)temp : new Number((double)temp);
+                var rightExpResult = temp as IExpression ?? new Number((double)temp);
 
                 if (leftExpResult is Vector && rightExpResult is Vector)
                     return ((Vector)leftExpResult).Cross((Vector)rightExpResult, parameters);
@@ -123,8 +123,8 @@ namespace xFunc.Maths.Expressions
 
             if (resultType == ExpressionResultType.ComplexNumber)
             {
-                var leftComplex = leftResult is Complex ? (Complex)leftResult : (double)leftResult;
-                var rightComplex = rightResult is Complex ? (Complex)rightResult : (double)rightResult;
+                var leftComplex = leftResult as Complex? ?? (double)leftResult;
+                var rightComplex = rightResult as Complex? ?? (double)rightResult;
 
                 return Complex.Multiply(leftComplex, rightComplex);
             }

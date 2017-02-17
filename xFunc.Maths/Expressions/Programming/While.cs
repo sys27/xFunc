@@ -92,13 +92,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType
-        {
-            get
-            {
-                return ExpressionResultType.All;
-            }
-        }
+        public override ExpressionResultType LeftType => ExpressionResultType.All;
 
         /// <summary>
         /// Gets the type of the right parameter.
@@ -106,14 +100,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType
-        {
-            get
-            {
-                return ExpressionResultType.Boolean;
-            }
-        }
-
+        public override ExpressionResultType RightType => ExpressionResultType.Boolean;
     }
 
 }

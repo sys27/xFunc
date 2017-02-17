@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new For(CloneArguments(), countOfParams);
+            return new For(CloneArguments(), ParametersCount);
         }
 
         /// <summary>

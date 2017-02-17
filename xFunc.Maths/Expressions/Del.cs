@@ -28,9 +28,6 @@ namespace xFunc.Maths.Expressions
     public class Del : UnaryExpression
     {
 
-        private ISimplifier simplifier;
-        private IDifferentiator differentiator;
-
         [ExcludeFromCodeCoverage]
         internal Del() { }
 
@@ -73,19 +70,19 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (differentiator == null)
-                throw new ArgumentNullException(nameof(differentiator));
+            if (Differentiator == null)
+                throw new ArgumentNullException(nameof(Differentiator));
 
             var variables = Helpers.GetAllVariables(m_argument).ToList();
             var vector = new Vector(variables.Count);
 
-            differentiator.Parameters = parameters;
+            Differentiator.Parameters = parameters;
 
-            for (int i = 0; i < variables.Count; i++)
+            for (var i = 0; i < variables.Count; i++)
             {
-                differentiator.Variable = variables[i];
+                Differentiator.Variable = variables[i];
 
-                vector[i] = m_argument.Analyze(differentiator).Analyze(simplifier);
+                vector[i] = m_argument.Analyze(Differentiator).Analyze(Simplifier);
             }
 
             return vector;
@@ -121,7 +118,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.All;
+        public override ExpressionResultType ArgumentType => ExpressionResultType.All;
 
         /// <summary>
         /// Gets or sets the simplifier.
@@ -129,17 +126,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The simplifier.
         /// </value>
-        public ISimplifier Simplifier
-        {
-            get
-            {
-                return simplifier;
-            }
-            set
-            {
-                simplifier = value;
-            }
-        }
+        public ISimplifier Simplifier { get; set; }
 
         /// <summary>
         /// Gets or sets the differentiator.
@@ -147,17 +134,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The differentiator.
         /// </value>
-        public IDifferentiator Differentiator
-        {
-            get
-            {
-                return differentiator;
-            }
-            set
-            {
-                differentiator = value;
-            }
-        }
+        public IDifferentiator Differentiator { get; set; }
 
     }
 

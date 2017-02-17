@@ -108,7 +108,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Vector | ExpressionResultType.Matrix;
+        public override ExpressionResultType ArgumentType => ExpressionResultType.Vector | ExpressionResultType.Matrix;
 
     }
 

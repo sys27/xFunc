@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType { get; } = ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ExpressionResultType ArgumentType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
 
     }
 

@@ -24,10 +24,6 @@ namespace xFunc.Maths.Expressions
     public class ExpressionParameters
     {
 
-        private AngleMeasurement angleMeasuremnt;
-        private ParameterCollection variables;
-        private FunctionCollection functions;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
@@ -101,9 +97,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="functions">The collection of user functions.</param>
         public ExpressionParameters(AngleMeasurement angleMeasuremnt, ParameterCollection variables, FunctionCollection functions)
         {
-            this.angleMeasuremnt = angleMeasuremnt;
-            this.variables = variables;
-            this.functions = functions;
+            this.AngleMeasurement = angleMeasuremnt;
+            this.Variables = variables;
+            this.Functions = functions;
         }
 
         /// <summary>
@@ -142,17 +138,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The angle measurement.
         /// </value>
-        public AngleMeasurement AngleMeasurement
-        {
-            get
-            {
-                return angleMeasuremnt;
-            }
-            set
-            {
-                angleMeasuremnt = value;
-            }
-        }
+        public AngleMeasurement AngleMeasurement { get; set; }
 
         /// <summary>
         /// Gets the collection of variables' values.
@@ -160,13 +146,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The collection of variables' values.
         /// </value>
-        public ParameterCollection Variables
-        {
-            get
-            {
-                return variables;
-            }
-        }
+        public ParameterCollection Variables { get; }
 
         /// <summary>
         /// Gets the collection of user functions.
@@ -174,13 +154,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The collection of user functions.
         /// </value>
-        public FunctionCollection Functions
-        {
-            get
-            {
-                return functions;
-            }
-        }
+        public FunctionCollection Functions { get; }
 
     }
 

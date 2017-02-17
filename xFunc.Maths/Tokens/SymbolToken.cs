@@ -23,17 +23,14 @@ namespace xFunc.Maths.Tokens
     public class SymbolToken : IToken
     {
 
-        private readonly Symbols symbol;
-        private readonly int priority;
-
         /// <summary>
         /// Initializes the <see cref="SymbolToken"/> class.
         /// </summary>
         /// <param name="symbol">A symbol.</param>
         public SymbolToken(Symbols symbol)
         {
-            this.symbol = symbol;
-            this.priority = GetPriority();
+            this.Symbol = symbol;
+            this.Priority = GetPriority();
         }
 
         /// <summary>
@@ -53,7 +50,7 @@ namespace xFunc.Maths.Tokens
                 return false;
 
             var token = (SymbolToken)obj;
-            
+
             return this.Symbol == token.Symbol;
         }
 
@@ -65,7 +62,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return symbol.GetHashCode();
+            return Symbol.GetHashCode();
         }
 
         /// <summary>
@@ -74,14 +71,14 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Symbol: {symbol}";
+            return $"Symbol: {Symbol}";
         }
 
         private int GetPriority()
         {
-            switch (symbol)
+            switch (Symbol)
             {
-                case Symbols.OpenBracket: 
+                case Symbols.OpenBracket:
                     return 1;
                 case Symbols.CloseBracket:
                     return 2;
@@ -95,24 +92,12 @@ namespace xFunc.Maths.Tokens
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority
-        {
-            get
-            {
-                return priority;
-            }
-        }
+        public int Priority { get; }
 
         /// <summary>
         /// Gets the symbol.
         /// </summary>
-        public Symbols Symbol
-        {
-            get
-            {
-                return symbol;
-            }
-        }
+        public Symbols Symbol { get; }
 
     }
 

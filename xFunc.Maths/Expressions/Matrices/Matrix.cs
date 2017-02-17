@@ -111,9 +111,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
         {
-            var args = new Vector[this.countOfParams];
+            var args = new Vector[this.ParametersCount];
 
-            for (int i = 0; i < this.ParametersCount; i++)
+            for (var i = 0; i < this.ParametersCount; i++)
                 if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ExpressionResultType.Matrix)
                     args[i] = (Vector)m_arguments[i].Execute(parameters);
                 else
@@ -174,9 +174,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
         public void SwapRows(int firstIndex, int secondIndex)
         {
-            if (firstIndex < 0 || firstIndex >= countOfParams)
+            if (firstIndex < 0 || firstIndex >= ParametersCount)
                 throw new ArgumentException();
-            if (secondIndex < 0 || secondIndex >= countOfParams)
+            if (secondIndex < 0 || secondIndex >= ParametersCount)
                 throw new ArgumentException();
 
             var temp = m_arguments[firstIndex];
@@ -192,9 +192,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
         public void SwapColumns(int firstIndex, int secondIndex)
         {
-            if (firstIndex < 0 || firstIndex >= countOfParams)
+            if (firstIndex < 0 || firstIndex >= ParametersCount)
                 throw new ArgumentOutOfRangeException();
-            if (secondIndex < 0 || secondIndex >= countOfParams)
+            if (secondIndex < 0 || secondIndex >= ParametersCount)
                 throw new ArgumentOutOfRangeException();
 
             foreach (Vector item in m_arguments)
@@ -214,9 +214,9 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var matrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
 
-            for (int i = 0; i < sizeOfMatrix; i++)
+            for (var i = 0; i < sizeOfMatrix; i++)
             {
-                for (int j = 0; j < sizeOfMatrix; j++)
+                for (var j = 0; j < sizeOfMatrix; j++)
                     matrix[i][j] = new Number(0);
 
                 matrix[i][i] = new Number(1);
@@ -260,7 +260,7 @@ namespace xFunc.Maths.Expressions.Matrices
             get
             {
                 var results = new ExpressionResultType[m_arguments?.Length ?? MinParameters];
-                for (int i = 0; i < results.Length; i++)
+                for (var i = 0; i < results.Length; i++)
                     results[i] = ExpressionResultType.Vector;
 
                 return results;
@@ -273,13 +273,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The size of vectors.
         /// </value>
-        public int SizeOfVectors
-        {
-            get
-            {
-                return m_arguments[0].ParametersCount;
-            }
-        }
+        public int SizeOfVectors => m_arguments[0].ParametersCount;
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -287,7 +281,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters { get; } = 1;
+        public override int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -295,7 +289,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters { get; } = -1;
+        public override int MaxParameters => -1;
 
         /// <summary>
         /// Gets a value indicating whether matrix is square.
@@ -303,13 +297,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         ///   <c>true</c> if matrix is square; otherwise, <c>false</c>.
         /// </value>
-        public bool IsSquare
-        {
-            get
-            {
-                return this.countOfParams == this.SizeOfVectors;
-            }
-        }
+        public bool IsSquare => this.ParametersCount == this.SizeOfVectors;
 
         /// <summary>
         /// Gets the type of the result.
@@ -320,7 +308,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType { get; } = ExpressionResultType.Matrix;
+        public override ExpressionResultType ResultType => ExpressionResultType.Matrix;
 
     }
 

@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new If(CloneArguments(), countOfParams);
+            return new If(CloneArguments(), ParametersCount);
         }
 
         /// <summary>
@@ -105,13 +105,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override int MinParameters => 2;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -119,13 +113,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters
-        {
-            get
-            {
-                return 3;
-            }
-        }
+        public override int MaxParameters => 3;
 
         /// <summary>
         /// Gets the condition.
@@ -133,13 +121,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The condition.
         /// </value>
-        public IExpression Condition
-        {
-            get
-            {
-                return m_arguments[0];
-            }
-        }
+        public IExpression Condition => m_arguments[0];
 
         /// <summary>
         /// Gets the "then" statement.
@@ -147,13 +129,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The then.
         /// </value>
-        public IExpression Then
-        {
-            get
-            {
-                return m_arguments[1];
-            }
-        }
+        public IExpression Then => m_arguments[1];
 
         /// <summary>
         /// Gets the "else" statement.
@@ -161,13 +137,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The else.
         /// </value>
-        public IExpression Else
-        {
-            get
-            {
-                return countOfParams == 3 ? m_arguments[2] : null;
-            }
-        }
+        public IExpression Else => ParametersCount == 3 ? m_arguments[2] : null;
 
         /// <summary>
         /// Gets the type of the result.
@@ -200,7 +170,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             get
             {
-                if (countOfParams == 3)
+                if (ParametersCount == 3)
                     return new[]
                     {
                         ExpressionResultType.Boolean, // Condition

@@ -26,9 +26,6 @@ namespace xFunc.Maths.Expressions
     public class Derivative : DifferentParametersExpression
     {
 
-        private ISimplifier simplifier;
-        private IDifferentiator differentiator;
-
         [ExcludeFromCodeCoverage]
         internal Derivative() : base(null, -1) { }
 
@@ -91,15 +88,15 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (differentiator == null)
-                throw new ArgumentNullException(nameof(differentiator));
+            if (Differentiator == null)
+                throw new ArgumentNullException(nameof(Differentiator));
 
             var variable = this.Variable;
 
-            differentiator.Variable = variable;
-            differentiator.Parameters = parameters;
+            Differentiator.Variable = variable;
+            Differentiator.Parameters = parameters;
 
-            var diff = this.Analyze(differentiator);
+            var diff = this.Analyze(Differentiator);
 
             var point = this.DerivativePoint;
             if (variable != null && point != null)
@@ -112,7 +109,7 @@ namespace xFunc.Maths.Expressions
                 return diff.Execute(parameters);
             }
 
-            return diff.Analyze(simplifier);
+            return diff.Analyze(Simplifier);
         }
 
         /// <summary>
@@ -134,7 +131,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Derivative(CloneArguments(), countOfParams);
+            return new Derivative(CloneArguments(), ParametersCount);
         }
 
         /// <summary>
@@ -165,13 +162,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The variable.
         /// </value>
-        public Variable Variable
-        {
-            get
-            {
-                return countOfParams >= 2 ? (Variable)m_arguments[1] : new Variable("x");
-            }
-        }
+        public Variable Variable => ParametersCount >= 2 ? (Variable)m_arguments[1] : new Variable("x");
 
         /// <summary>
         /// Gets the derivative point.
@@ -179,13 +170,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The derivative point.
         /// </value>
-        public Number DerivativePoint
-        {
-            get
-            {
-                return countOfParams >= 3 ? (Number)m_arguments[2] : null;
-            }
-        }
+        public Number DerivativePoint => ParametersCount >= 3 ? (Number)m_arguments[2] : null;
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -216,7 +201,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters { get; } = 1;
+        public override int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -224,7 +209,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters { get; } = 3;
+        public override int MaxParameters => 3;
 
         /// <summary>
         /// Gets the type of the result.
@@ -235,16 +220,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType
-        {
-            get
-            {
-                if (countOfParams == 3)
-                    return ExpressionResultType.Number;
-
-                return ExpressionResultType.Expression;
-            }
-        }
+        public override ExpressionResultType ResultType => ParametersCount == 3 ? ExpressionResultType.Number : ExpressionResultType.Expression;
 
         /// <summary>
         /// Gets or sets the simplifier.
@@ -252,17 +228,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The simplifier.
         /// </value>
-        public ISimplifier Simplifier
-        {
-            get
-            {
-                return simplifier;
-            }
-            set
-            {
-                simplifier = value;
-            }
-        }
+        public ISimplifier Simplifier { get; set; }
 
         /// <summary>
         /// Gets or sets the differentiator.
@@ -270,17 +236,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The differentiator.
         /// </value>
-        public IDifferentiator Differentiator
-        {
-            get
-            {
-                return differentiator;
-            }
-            set
-            {
-                differentiator = value;
-            }
-        }
+        public IDifferentiator Differentiator { get; set; }
 
     }
 

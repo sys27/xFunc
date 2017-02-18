@@ -7,6 +7,7 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: YI6EFXDLg4sSRbxxqZdTI21IAWMt55JfDTTDpA6ljw7zq5UmXi9x5vbagzua5hqe
 nuget:
+  account_feed: true
   project_feed: true
   disable_publish_on_pr: true
 before_build:
@@ -27,6 +28,11 @@ artifacts:
   name: xFunc.UnitConverters Package
 - path: /.*\.symbols\.nupkg/
   name: Symbols
+before_deploy:
+- cmd: >-
+    nuget pack xFunc.Maths/xFunc.Maths.csproj
+
+    nuget pack xFunc.UnitConverts/xFunc.UnitConverts.csproj
 deploy:
 - provider: NuGet
   api_key:

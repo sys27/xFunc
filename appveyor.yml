@@ -7,8 +7,6 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: YI6EFXDLg4sSRbxxqZdTI21IAWMt55JfDTTDpA6ljw7zq5UmXi9x5vbagzua5hqe
 nuget:
-  account_feed: true
-  project_feed: true
   disable_publish_on_pr: true
 before_build:
 - cmd: nuget restore xFunc.sln
@@ -22,11 +20,9 @@ after_build:
     packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover coverage.xml
 test: off
 artifacts:
-- path: '**\xFunc.Maths.nupkg'
-  name: xFunc.Math Package
-- path: '**\xFunc.UnitConverters.nupkg'
-  name: xFunc.UnitConverters Package
-- path: /.*\.symbols\.nupkg/
+- path: '**\xFunc.*.nupkg'
+  name: Packages
+- path: '**\xFunc.*.symbols.nupkg'
   name: Symbols
 before_deploy:
 - cmd: >-
@@ -35,7 +31,9 @@ before_deploy:
     nuget pack xFunc.UnitConverts/xFunc.UnitConverts.csproj
 deploy:
 - provider: NuGet
+  server: https://ci.appveyor.com/nuget/sys27/api/v2/package
   api_key:
     secure: Wvb1TWmJaKAdppWXTK7krIPA7tF6sq7ImNKp3wj945E=
+  skip_symbols: false
   symbol_server: https://ci.appveyor.com/nuget/sys27/api/v2/package
-  artifact: xFunc.Math Package, xFunc.UnitConverters Package, Symbols
+  artifact: Packages, Symbols

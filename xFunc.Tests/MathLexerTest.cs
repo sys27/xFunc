@@ -3047,6 +3047,20 @@ namespace xFunc.Tests
             Assert.Throws<LexerException>(() => lexer.Tokenize("deriv(x,)"));
         }
 
+        [Fact]
+        public void UseGreekLettersTest()
+        {
+            var tokens = lexer.Tokenize("4 * φ");
+            var expected = new List<IToken>
+            {
+                new NumberToken(4),
+                new OperationToken(Operations.Multiplication),
+                new VariableToken("φ")
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

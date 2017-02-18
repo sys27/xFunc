@@ -29,3 +29,9 @@ deploy:
   skip_symbols: false
   symbol_server: https://ci.appveyor.com/nuget/sys27/api/v2/package
   artifact: /xFunc.*\.nupkg/
+- provider: NuGet
+  server: https://ci.appveyor.com/nuget/xfunc/api/v2/package
+  api_key:
+    secure: Wvb1TWmJaKAdppWXTK7krIPA7tF6sq7ImNKp3wj945E=
+  skip_symbols: true
+  artifact: /xFunc.*\.nupkg/

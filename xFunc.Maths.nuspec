@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>xFunc.Maths</id>
+        <version>3.3.0</version>
+        <authors>Dmitry Kischenko</authors>
+        <owners>Dmitry Kischenko</owners>
+        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+        <projectUrl>https://github.com/sys27/xFunc</projectUrl>
+        <iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=xfunc&amp;DownloadId=639207&amp;Build=20266</iconUrl>
+        <description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</description>
+        <releaseNotes></releaseNotes>
+        <copyright>Copyright 2012-2016 Dmitry Kischenko</copyright>
+        <tags>Math Expression Expressions Parser MathParser Differentiation Simplification</tags>
+    </metadata>
+    <files>
+        <file src="bin\Release\net40\**.*" target="lib\net40\" />
+    </files>
+</package>

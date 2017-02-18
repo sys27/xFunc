@@ -28,7 +28,7 @@ before_deploy:
 - cmd: >-
     nuget pack xFunc.Maths/xFunc.Maths.csproj
 
-    nuget pack xFunc.UnitConverts/xFunc.UnitConverts.csproj
+    nuget pack xFunc.UnitConverters/xFunc.UnitConverters.csproj
 deploy:
 - provider: NuGet
   server: https://ci.appveyor.com/nuget/sys27/api/v2/package
@@ -36,4 +36,4 @@ deploy:
     secure: Wvb1TWmJaKAdppWXTK7krIPA7tF6sq7ImNKp3wj945E=
   skip_symbols: false
   symbol_server: https://ci.appveyor.com/nuget/sys27/api/v2/package
-  artifact: Packages, Symbols
+  artifact: '**\xFunc.*.nupkg'

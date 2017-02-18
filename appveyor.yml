@@ -22,7 +22,7 @@ after_build:
     packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover coverage.xml
 test: off
 artifacts:
-- path: 'xFunc.*.nupkg'
+- path: '*.nupkg'
   name: Packages
 deploy:
 - provider: NuGet

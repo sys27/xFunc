@@ -247,6 +247,7 @@ namespace xFunc.Maths
                     {
                         var operationToken = lastToken as OperationToken;
                         if (operationToken != null && (operationToken.Operation == Operations.Exponentiation ||
+                                                       operationToken.Operation == Operations.Multiplication ||
                                                        operationToken.Operation == Operations.Division ||
                                                        operationToken.Operation == Operations.Assign ||
                                                        operationToken.Operation == Operations.AddAssign ||

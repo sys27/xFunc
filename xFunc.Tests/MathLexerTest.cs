@@ -205,6 +205,21 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void UnaryMinusAfterMulTest()
+        {
+            var tokens = lexer.Tokenize("2 * -2");
+            var expected = new List<IToken>
+            {
+                new NumberToken(2),
+                new OperationToken(Operations.Multiplication),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(2)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void UnaryMinusInDivision()
         {
             var tokens = lexer.Tokenize("1 / -2");

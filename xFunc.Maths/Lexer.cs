@@ -68,7 +68,7 @@ namespace xFunc.Maths
             regexNumberOct = new Regex(@"\G[+-]?0[0-7]+", options);
             regexNumber = new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", options);
 
-            regexComplexNumber = new Regex(@"\G([+-]?\s*\d*\.?\d+)??\s*[∠]?\s*([+-]?\s*\d*\.?\d+)°", options);
+            regexComplexNumber = new Regex(@"\G([+-]?\s*\d*\.?\d+)\s*([∠+-]+\s*\s*\d*\.?\d+)°", options);
 
             regexSkip = new Regex(@"\G\s+", options);
             regexAllWhitespaces = new Regex(@"\s+", options);
@@ -716,7 +716,7 @@ namespace xFunc.Maths
 
                     if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out magnitude))
                         magnitude = 0.0;
-                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out phase))
+                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out phase))
                         phase = 1.0;
 
                     tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));

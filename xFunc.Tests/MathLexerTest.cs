@@ -2687,27 +2687,13 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexPolarPhaseTest()
         {
-            var tokens = lexer.Tokenize("7.1°");
-
-            var expected = new List<IToken>
-            {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(0, 7.1))
-            };
-
-            Assert.Equal(expected, tokens.ToList());
+            Assert.Throws<LexerException>(() => lexer.Tokenize("7.1°"));
         }
 
         [Fact]
         public void ComplexPolarNegPhaseTest()
         {
-            var tokens = lexer.Tokenize("-7.1°");
-
-            var expected = new List<IToken>
-            {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(0, -7.1))
-            };
-
-            Assert.Equal(expected, tokens.ToList());
+            Assert.Throws<LexerException>(() => lexer.Tokenize("-7.1°"));
         }
 
         [Fact]

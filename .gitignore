@@ -4,6 +4,7 @@
 [Rr]elease/
 TestResults
 packages
+.idea/
 
 coverage
 coverage.xml

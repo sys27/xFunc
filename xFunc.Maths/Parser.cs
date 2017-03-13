@@ -30,8 +30,6 @@ namespace xFunc.Maths
     public class Parser : IParser
     {
 
-        private IExpressionFactory factory;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IExpressionFactory"/>.
         /// </summary>
@@ -43,7 +41,7 @@ namespace xFunc.Maths
         /// <param name="factory">The factory.</param>
         public Parser(IExpressionFactory factory)
         {
-            this.factory = factory;
+            ExpressionFactory = factory;
         }
 
         /// <summary>
@@ -133,7 +131,7 @@ namespace xFunc.Maths
 
             foreach (var token in tokens)
             {
-                var exp = factory.Create(token);
+                var exp = ExpressionFactory.Create(token);
                 if (exp == null)
                     throw new ParserException(Resource.ErrorWhileParsingTree);
 
@@ -219,17 +217,7 @@ namespace xFunc.Maths
         /// <value>
         /// The expression factory.
         /// </value>
-        public IExpressionFactory ExpressionFactory
-        {
-            get
-            {
-                return factory;
-            }
-            set
-            {
-                factory = value;
-            }
-        }
+        public IExpressionFactory ExpressionFactory { get; set; }
 
     }
 

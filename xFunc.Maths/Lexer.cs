@@ -685,12 +685,10 @@ namespace xFunc.Maths
                                .Replace("\r", "");
 
             var tokens = new List<IToken>();
-            Match match = null;
-
-            for (int i = 0; i < function.Length;)
+            for (var i = 0; i < function.Length;)
             {
                 // whitespaces
-                match = regexSkip.Match(function, i);
+                var match = regexSkip.Match(function, i);
                 if (match.Success)
                 {
                     i += match.Length;
@@ -711,12 +709,9 @@ namespace xFunc.Maths
                 match = regexComplexNumber.Match(function, i);
                 if (match.Success)
                 {
-                    double magnitude;
-                    double phase;
-
-                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out magnitude))
+                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out double magnitude))
                         magnitude = 0.0;
-                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out phase))
+                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out double phase))
                         phase = 1.0;
 
                     tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));

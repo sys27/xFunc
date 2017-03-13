@@ -46,8 +46,8 @@ namespace xFunc.Maths.Analyzers
         /// <param name="variable">The variable.</param>
         public Differentiator(ExpressionParameters parameters, Variable variable)
         {
-            this.Parameters = parameters;
-            this.Variable = variable;
+            Parameters = parameters;
+            Variable = variable;
         }
 
         #region Standard

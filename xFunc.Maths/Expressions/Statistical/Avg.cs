@@ -69,8 +69,7 @@ namespace xFunc.Maths.Expressions.Statistical
             if (ParametersCount == 1)
             {
                 var result = this.m_arguments[0].Execute(parameters);
-                var vector = result as Vector;
-                if (vector != null)
+                if (result is Vector vector)
                     return vector.Arguments.Average(exp => (double)exp.Execute(parameters));
 
                 return result;

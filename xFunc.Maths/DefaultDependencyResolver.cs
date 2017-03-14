@@ -33,9 +33,11 @@ namespace xFunc.Maths
         /// </summary>
         public DefaultDependencyResolver()
         {
-            container = new Dictionary<Type, object>();
-            container.Add(typeof(ISimplifier), new Simplifier());
-            container.Add(typeof(IDifferentiator), new Differentiator());
+            container = new Dictionary<Type, object>
+            {
+                { typeof(ISimplifier), new Simplifier() },
+                { typeof(IDifferentiator), new Differentiator() }
+            };
         }
 
         /// <summary>

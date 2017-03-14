@@ -155,8 +155,7 @@ namespace xFunc.Maths.Expressions
             {
                 m_isChanged = value;
 
-                var isChangedExpression = Parent as IChangedExpession;
-                if (isChangedExpression != null)
+                if (Parent is IChangedExpession isChangedExpression)
                     isChangedExpression.IsChanged = value;
             }
         }

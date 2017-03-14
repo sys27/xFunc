@@ -88,8 +88,8 @@ namespace xFunc.Maths.Expressions.Matrices
                 if (!(m_arguments[i] is Number))
                 {
                     var result = m_arguments[i].Execute(parameters);
-                    if (result is double)
-                        args[i] = new Number((double)result);
+                    if (result is double doubleResult)
+                        args[i] = new Number(doubleResult);
                     else
                         args[i] = new Number((int)result);
                 }

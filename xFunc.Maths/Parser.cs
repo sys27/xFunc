@@ -68,25 +68,21 @@ namespace xFunc.Maths
                 {
                     stack.Push(expression);
                 }
-                else if (expression is BinaryExpression)
+                else if (expression is BinaryExpression binExp)
                 {
-                    var binExp = expression as BinaryExpression;
                     binExp.Right = stack.Pop();
                     binExp.Left = stack.Pop();
 
                     stack.Push(binExp);
                 }
-                else if (expression is UnaryExpression)
+                else if (expression is UnaryExpression unaryMathExp)
                 {
-                    var unaryMathExp = expression as UnaryExpression;
                     unaryMathExp.Argument = stack.Pop();
 
                     stack.Push(unaryMathExp);
                 }
-                else if (expression is DifferentParametersExpression)
+                else if (expression is DifferentParametersExpression func)
                 {
-                    var func = expression as DifferentParametersExpression;
-
                     var arg = new IExpression[func.ParametersCount];
                     for (var i = func.ParametersCount - 1; i >= 0; i--)
                         arg[i] = stack.Pop();
@@ -95,20 +91,18 @@ namespace xFunc.Maths
 
                     stack.Push(func);
                 }
-                else if (expression is Define)
+                else if (expression is Define assign)
                 {
                     if (stack.Count < 2)
                         throw new ParserException(Resource.InvalidNumberOfVariables);
 
-                    var assign = expression as Define;
                     assign.Value = stack.Pop();
                     assign.Key = stack.Pop();
 
                     stack.Push(assign);
                 }
-                else if (expression is Undefine)
+                else if (expression is Undefine undef)
                 {
-                    var undef = expression as Undefine;
                     undef.Key = stack.Pop();
 
                     stack.Push(undef);
@@ -135,10 +129,8 @@ namespace xFunc.Maths
                 if (exp == null)
                     throw new ParserException(Resource.ErrorWhileParsingTree);
 
-                if (token is FunctionToken)
+                if (token is FunctionToken t)
                 {
-                    var t = token as FunctionToken;
-
                     if (t.CountOfParams < exp.MinParameters)
                         throw new ParserException(Resource.LessParams);
                     if (exp.MaxParameters != -1 && t.CountOfParams > exp.MaxParameters)
@@ -161,9 +153,8 @@ namespace xFunc.Maths
             foreach (var token in tokens)
             {
                 IToken stackToken;
-                if (token is SymbolToken)
+                if (token is SymbolToken t)
                 {
-                    var t = token as SymbolToken;
                     switch (t.Symbol)
                     {
                         case Symbols.OpenBracket:

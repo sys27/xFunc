@@ -128,16 +128,14 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            var variable = key as Variable;
-            if (variable != null)
+            if (key is Variable variable)
             {
                 parameters.Variables[variable.Name] = value.Execute(parameters);
 
                 return string.Format(Resource.AssignVariable, key, value);
             }
 
-            var function = key as UserFunction;
-            if (function != null)
+            if (key is UserFunction function)
                 parameters.Functions[function] = value;
 
             return string.Format(Resource.AssignFunction, key, value);

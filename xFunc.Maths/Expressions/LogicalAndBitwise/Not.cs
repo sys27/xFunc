@@ -69,8 +69,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             var arg = m_argument.Execute(parameters);
 
-            if (arg is bool)
-                return !(bool)arg;
+            if (arg is bool boolArg)
+                return !boolArg;
 
             return (double)(~(int)Math.Round((double)arg, MidpointRounding.AwayFromZero));
         }

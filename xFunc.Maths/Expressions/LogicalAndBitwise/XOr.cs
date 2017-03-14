@@ -77,8 +77,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             var left = m_left.Execute(parameters);
             var right = m_right.Execute(parameters);
 
-            if (left is bool && right is bool)
-                return (bool)left ^ (bool)right;
+            if (left is bool leftBool && right is bool rightBool)
+                return leftBool ^ rightBool;
 
             return (double)((int)Math.Round((double)left, MidpointRounding.AwayFromZero) ^ (int)Math.Round((double)right, MidpointRounding.AwayFromZero));
         }

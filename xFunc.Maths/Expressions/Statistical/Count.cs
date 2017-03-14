@@ -68,8 +68,7 @@ namespace xFunc.Maths.Expressions.Statistical
             if (ParametersCount == 1)
             {
                 var result = this.m_arguments[0].Execute(parameters);
-                var vector = result as Vector;
-                if (vector != null)
+                if (result is Vector vector)
                     return (double)vector.Arguments.Length;
 
                 return 1.0;

@@ -52,21 +52,9 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        public IExpression Result
-        {
-            get
-            {
-                return exp;
-            }
-        }
+        public IExpression Result => exp;
 
-        object IResult.Result
-        {
-            get
-            {
-                return exp;
-            }
-        }
+        object IResult.Result => exp;
 
     }
 

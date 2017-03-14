@@ -70,8 +70,8 @@ namespace xFunc.Maths.Expressions
         {
             var result = m_argument.Execute(parameters);
 
-            if (result is Complex)
-                return Complex.Sqrt((Complex)result);
+            if (result is Complex complex)
+                return Complex.Sqrt(complex);
 
             var doubleResult = (double)result;
             if (doubleResult < 0)

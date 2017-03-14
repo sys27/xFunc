@@ -316,8 +316,7 @@ namespace xFunc.Maths
                     exp = null; break;
             }
 
-            var diff = exp as DifferentParametersExpression;
-            if (diff != null)
+            if (exp is DifferentParametersExpression diff)
                 diff.ParametersCount = token.CountOfParams;
 
             return exp;

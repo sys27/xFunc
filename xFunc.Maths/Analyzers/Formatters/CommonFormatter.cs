@@ -269,8 +269,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         {
             if (exp.Value < 0)
             {
-                var sub = exp.Parent as Sub;
-                if (sub != null && ReferenceEquals(sub.Right, exp))
+                if (exp.Parent is Sub sub && ReferenceEquals(sub.Right, exp))
                     return $"({exp.Value.ToString(CultureInfo.InvariantCulture)})";
             }
 
@@ -352,8 +351,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         {
             if (exp.Argument is BinaryExpression)
                 return ToString(exp, "-({0})");
-            var sub = exp.Parent as Sub;
-            if (sub != null && ReferenceEquals(sub.Right, exp))
+            if (exp.Parent is Sub sub && ReferenceEquals(sub.Right, exp))
                 return ToString(exp, "(-{0})");
 
             return ToString(exp, "-{0}");

@@ -60,11 +60,11 @@ namespace xFunc.Maths.Expressions
         {
             var result = m_argument.Execute(parameters);
 
-            if (result is Complex)
-                return Complex.Abs((Complex)result);
+            if (result is Complex complex)
+                return Complex.Abs(complex);
 
-            if (result is Vector)
-                return ((Vector)result).Abs(parameters);
+            if (result is Vector vector)
+                return vector.Abs(parameters);
 
             return Math.Abs((double)result);
         }

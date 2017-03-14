@@ -36,16 +36,13 @@ namespace xFunc.Maths
         /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
         public static bool HasVariable(IExpression expression, Variable arg)
         {
-            var bin = expression as BinaryExpression;
-            if (bin != null)
+            if (expression is BinaryExpression bin)
                 return HasVariable(bin.Left, arg) || HasVariable(bin.Right, arg);
 
-            var un = expression as UnaryExpression;
-            if (un != null)
+            if (expression is UnaryExpression un)
                 return HasVariable(un.Argument, arg);
 
-            var paramExp = expression as DifferentParametersExpression;
-            if (paramExp != null)
+            if (expression is DifferentParametersExpression paramExp)
                 return paramExp.Arguments.Any(e => HasVariable(e, arg));
 
             return expression is Variable && expression.Equals(arg);
@@ -61,11 +58,8 @@ namespace xFunc.Maths
             var c = new SortedSet<Parameter>();
 
             foreach (var token in tokens)
-            {
-                var @var = token as VariableToken;
-                if (@var != null)
+                if (token is VariableToken @var)
                     c.Add(new Parameter(@var.Variable, false));
-            }
 
             return new ParameterCollection(c, false);
         }
@@ -127,20 +121,17 @@ namespace xFunc.Maths
 
         private static void GetAllVariables(IExpression expression, HashSet<Variable> collection)
         {
-            if (expression is UnaryExpression)
+            if (expression is UnaryExpression un)
             {
-                var un = (UnaryExpression)expression;
                 GetAllVariables(un.Argument, collection);
             }
-            else if (expression is BinaryExpression)
+            else if (expression is BinaryExpression bin)
             {
-                var bin = (BinaryExpression)expression;
                 GetAllVariables(bin.Left, collection);
                 GetAllVariables(bin.Right, collection);
             }
-            else if (expression is DifferentParametersExpression)
+            else if (expression is DifferentParametersExpression diff)
             {
-                var diff = (DifferentParametersExpression)expression;
                 foreach (var exp in diff.Arguments)
                     GetAllVariables(exp, collection);
             }

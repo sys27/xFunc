@@ -162,8 +162,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
         internal double[][] ToCalculatedArray(ExpressionParameters parameters)
         {
-            return (from vector in m_arguments.AsParallel().AsOrdered()
-                    select ((Vector)vector).ToCalculatedArray(parameters)).ToArray();
+            return (from Vector vector in m_arguments.AsParallel().AsOrdered()
+                    select vector.ToCalculatedArray(parameters)).ToArray();
         }
 
         /// <summary>

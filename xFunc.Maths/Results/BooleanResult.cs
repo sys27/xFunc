@@ -51,21 +51,9 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        public bool Result
-        {
-            get
-            {
-                return value;
-            }
-        }
+        public bool Result => value;
 
-        object IResult.Result
-        {
-            get
-            {
-                return value;
-            }
-        }
+        object IResult.Result => value;
 
     }
 

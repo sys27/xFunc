@@ -52,21 +52,9 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The numerical representation of result.
         /// </value>
-        public double Result
-        {
-            get
-            {
-                return number;
-            }
-        }
+        public double Result => number;
 
-        object IResult.Result
-        {
-            get
-            {
-                return number;
-            }
-        }
+        object IResult.Result => number;
 
     }
 

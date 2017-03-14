@@ -24,13 +24,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// </summary>
     public class Bool : IExpression
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bool"/> class.
         /// </summary>
         /// <param name="value">The value of this constant.</param>
         public Bool(bool value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         /// <summary>

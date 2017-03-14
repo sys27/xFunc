@@ -50,8 +50,8 @@ namespace xFunc.Maths.Expressions.Programming
 
             var newValue = Convert.ToDouble(value) - 1;
 
-            if (m_argument is Variable)
-                parameters.Variables[((Variable)m_argument).Name] = newValue;
+            if (m_argument is Variable variable)
+                parameters.Variables[variable.Name] = newValue;
 
             return newValue;
         }

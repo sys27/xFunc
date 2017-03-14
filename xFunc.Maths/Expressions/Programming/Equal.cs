@@ -59,11 +59,11 @@ namespace xFunc.Maths.Expressions.Programming
             var leftValueObject = m_left.Execute(parameters);
             var rightValueObject = m_right.Execute(parameters);
 
-            if (leftValueObject is double && rightValueObject is double)
-                return (double)leftValueObject == (double)rightValueObject;
+            if (leftValueObject is double leftDouble && rightValueObject is double rightDouble)
+                return leftDouble == rightDouble;
 
-            if (leftValueObject is bool && rightValueObject is bool)
-                return (bool)leftValueObject == (bool)rightValueObject;
+            if (leftValueObject is bool leftBool && rightValueObject is bool rightBool)
+                return leftBool == rightBool;
 
             throw new NotSupportedException();
         }

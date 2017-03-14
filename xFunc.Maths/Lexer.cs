@@ -90,8 +90,7 @@ namespace xFunc.Maths
             }
             else if (match == ")")
             {
-                var lastToken = tokens.LastOrDefault() as SymbolToken;
-                if (lastToken != null && lastToken.Symbol == Symbols.Comma)
+                if (tokens.LastOrDefault() is SymbolToken lastToken && lastToken.Symbol == Symbols.Comma)
                     throw new LexerException(Resource.NotEnoughParams);
 
                 tokens.Add(new SymbolToken(Symbols.CloseBracket));
@@ -156,8 +155,8 @@ namespace xFunc.Maths
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken != null)
                 {
-                    var symbol = lastToken as SymbolToken;
-                    if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
+                    if ((lastToken is SymbolToken symbol && symbol.Symbol == Symbols.CloseBracket) ||
+                        lastToken is NumberToken || lastToken is VariableToken)
                     {
                         tokens.Add(new OperationToken(Operations.Factorial));
                         return;
@@ -219,9 +218,8 @@ namespace xFunc.Maths
                 }
                 else
                 {
-                    var symbolToken = lastToken as SymbolToken;
-                    if (symbolToken != null && (symbolToken.Symbol == Symbols.OpenBracket ||
-                                                symbolToken.Symbol == Symbols.OpenBrace))
+                    if (lastToken is SymbolToken symbolToken &&
+                        (symbolToken.Symbol == Symbols.OpenBracket || symbolToken.Symbol == Symbols.OpenBrace))
                         return;
                 }
 
@@ -236,24 +234,23 @@ namespace xFunc.Maths
                 }
                 else
                 {
-                    var symbolToken = lastToken as SymbolToken;
-                    if (symbolToken != null && (symbolToken.Symbol == Symbols.OpenBracket ||
-                                                symbolToken.Symbol == Symbols.OpenBrace ||
-                                                symbolToken.Symbol == Symbols.Comma))
+                    if (lastToken is SymbolToken symbolToken && (symbolToken.Symbol == Symbols.OpenBracket ||
+                            symbolToken.Symbol == Symbols.OpenBrace ||
+                            symbolToken.Symbol == Symbols.Comma))
                     {
                         tokens.Add(new OperationToken(Operations.UnaryMinus));
                     }
                     else
                     {
-                        var operationToken = lastToken as OperationToken;
-                        if (operationToken != null && (operationToken.Operation == Operations.Exponentiation ||
-                                                       operationToken.Operation == Operations.Multiplication ||
-                                                       operationToken.Operation == Operations.Division ||
-                                                       operationToken.Operation == Operations.Assign ||
-                                                       operationToken.Operation == Operations.AddAssign ||
-                                                       operationToken.Operation == Operations.SubAssign ||
-                                                       operationToken.Operation == Operations.MulAssign ||
-                                                       operationToken.Operation == Operations.DivAssign))
+                        if (lastToken is OperationToken operationToken &&
+                            (operationToken.Operation == Operations.Exponentiation ||
+                            operationToken.Operation == Operations.Multiplication ||
+                            operationToken.Operation == Operations.Division ||
+                            operationToken.Operation == Operations.Assign ||
+                            operationToken.Operation == Operations.AddAssign ||
+                            operationToken.Operation == Operations.SubAssign ||
+                            operationToken.Operation == Operations.MulAssign ||
+                            operationToken.Operation == Operations.DivAssign))
                         {
                             tokens.Add(new OperationToken(Operations.UnaryMinus));
                         }
@@ -277,8 +274,8 @@ namespace xFunc.Maths
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken != null)
                 {
-                    var symbol = lastToken as SymbolToken;
-                    if ((symbol != null && symbol.Symbol == Symbols.CloseBracket) || lastToken is NumberToken || lastToken is VariableToken)
+                    if ((lastToken is SymbolToken symbol && symbol.Symbol == Symbols.CloseBracket) ||
+                        lastToken is NumberToken || lastToken is VariableToken)
                         throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
                 }
 
@@ -793,8 +790,7 @@ namespace xFunc.Maths
                     }
                     else
                     {
-                        var lastToken = tokens.LastOrDefault() as NumberToken;
-                        if (lastToken != null)
+                        if (tokens.LastOrDefault() is NumberToken lastToken)
                             tokens.Add(new OperationToken(Operations.Multiplication));
 
                         if (match.Value == "i")

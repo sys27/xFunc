@@ -69,21 +69,9 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The numerical representation of result.
         /// </value>
-        public Complex Result
-        {
-            get
-            {
-                return complex;
-            }
-        }
+        public Complex Result => complex;
 
-        object IResult.Result
-        {
-            get
-            {
-                return complex;
-            }
-        }
+        object IResult.Result => complex;
 
     }
 

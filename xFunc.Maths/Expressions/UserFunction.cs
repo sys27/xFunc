@@ -59,8 +59,7 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
-            var exp = obj as UserFunction;
-            if (exp != null && this.function == exp.function && this.ParametersCount == exp.ParametersCount)
+            if (obj is UserFunction exp && this.function == exp.function && this.ParametersCount == exp.ParametersCount)
                 return true;
 
             return false;

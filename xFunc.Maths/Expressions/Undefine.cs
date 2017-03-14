@@ -38,7 +38,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="key">The key.</param>
         public Undefine(IExpression key)
         {
-            this.Key = key;
+            Key = key;
         }
 
         /// <summary>
@@ -120,16 +120,14 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            var variable = key as Variable;
-            if (variable != null)
+            if (key is Variable variable)
             {
                 parameters.Variables.Remove(variable.Name);
 
                 return string.Format(Resource.UndefineVariable, key);
             }
 
-            var function = key as UserFunction;
-            if (function != null)
+            if (key is UserFunction function)
                 parameters.Functions.Remove(function);
 
             return string.Format(Resource.UndefineFunction, key);

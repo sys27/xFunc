@@ -412,9 +412,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (matrix.Length == 2)
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
-            int[] permutation;
-            int toggle;
-            var lu = LUPDecomposition_(matrix, out permutation, out toggle);
+            var lu = LUPDecomposition_(matrix, out int[] permutation, out int toggle);
 
             if (lu == null)
                 throw new MatrixIsInvalidException();
@@ -557,10 +555,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     result[i][j] = matrix[i][j];
             }
 
-            int[] permutation;
-            int toggle;
-            var lu = LUPDecomposition_(matrix, out permutation, out toggle);
-
+            var lu = LUPDecomposition_(matrix, out int[] permutation, out int toggle);
             if (lu == null)
                 throw new MatrixIsInvalidException();
 

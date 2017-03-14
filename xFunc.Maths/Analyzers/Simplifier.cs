@@ -677,8 +677,7 @@ namespace xFunc.Maths.Analyzers
                 return new Mul(new Number(multiplier), new Pow(varMultiplier, new Number(2)));
             }
 
-            var rightNegative = exp.Right as UnaryMinus;
-            if (rightNegative != null)
+            if (exp.Right is UnaryMinus rightNegative)
                 return new UnaryMinus(new Mul(rightNegative.Argument, exp.Left));
 
             return exp;

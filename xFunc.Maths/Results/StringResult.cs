@@ -51,21 +51,9 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The string representation of result.
         /// </value>
-        public string Result
-        {
-            get
-            {
-                return str;
-            }
-        }
+        public string Result => str;
 
-        object IResult.Result
-        {
-            get
-            {
-                return str;
-            }
-        }
+        object IResult.Result => str;
 
     }
 

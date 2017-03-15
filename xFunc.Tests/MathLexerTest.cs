@@ -2442,7 +2442,7 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(10, 45))
+                new ComplexNumberToken(Complex.FromPolarCoordinates(10, 45 * Math.PI / 180))
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2652,7 +2652,7 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, 7.1))
+                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, 7.1 * Math.PI / 180))
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2665,7 +2665,7 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, -7.1))
+                new ComplexNumberToken(Complex.FromPolarCoordinates(2.3, -7.1 * Math.PI / 180))
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2678,7 +2678,7 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(-2.3, -7.1))
+                new ComplexNumberToken(Complex.FromPolarCoordinates(-2.3, -7.1 * Math.PI / 180))
             };
 
             Assert.Equal(expected, tokens.ToList());
@@ -2729,7 +2729,7 @@ namespace xFunc.Tests
 
             var expected = new List<IToken>
             {
-                new ComplexNumberToken(Complex.FromPolarCoordinates(10, 45))
+                new ComplexNumberToken(Complex.FromPolarCoordinates(10, 45 * Math.PI / 180))
             };
 
             Assert.Equal(expected, tokens.ToList());

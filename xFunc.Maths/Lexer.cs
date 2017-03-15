@@ -711,7 +711,7 @@ namespace xFunc.Maths
                     if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out double phase))
                         phase = 1.0;
 
-                    tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase)));
+                    tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase * Math.PI / 180)));
 
                     i += match.Length;
                     continue;

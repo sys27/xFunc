@@ -30,7 +30,34 @@ namespace xFunc.Tests.Expressionss.ComplexNumbers
             var complex = new Complex(3.1, 2.5);
             var exp = new Phase(new ComplexNumber(complex));
 
-            Assert.Equal(complex.Phase, exp.Execute());
+            Assert.Equal(complex.Phase * 180 / Math.PI, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTestDegree()
+        {
+            var complex = new Complex(3.1, 2.5);
+            var exp = new Phase(new ComplexNumber(complex));
+
+            Assert.Equal(complex.Phase * 180 / Math.PI, exp.Execute(AngleMeasurement.Degree));
+        }
+
+        [Fact]
+        public void ExecuteTestGradian()
+        {
+            var complex = new Complex(3.1, 2.5);
+            var exp = new Phase(new ComplexNumber(complex));
+
+            Assert.Equal(complex.Phase * 200 / Math.PI, exp.Execute(AngleMeasurement.Gradian));
+        }
+
+        [Fact]
+        public void ExecuteTestRadian()
+        {
+            var complex = new Complex(3.1, 2.5);
+            var exp = new Phase(new ComplexNumber(complex));
+
+            Assert.Equal(complex.Phase, exp.Execute(AngleMeasurement.Radian));
         }
 
         [Fact]

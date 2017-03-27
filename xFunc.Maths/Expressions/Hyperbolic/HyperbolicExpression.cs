@@ -50,22 +50,22 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="complex">The calculation result of argument.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract Complex ExecuteComplex(ExpressionParameters parameters);
+        protected abstract Complex ExecuteComplex(Complex complex);
 
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="number">The calculation result of argument.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteNumber(ExpressionParameters parameters);
+        protected abstract double ExecuteNumber(double number);
 
         /// <summary>
         /// Executes this expression.
@@ -77,11 +77,13 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var resultType = this.ResultType;
-            if (resultType == ExpressionResultType.ComplexNumber)
-                return ExecuteComplex(parameters);
+            var result = m_argument.Execute(parameters);
+            if (result is Complex complex)
+                return ExecuteComplex(complex);
+            if (result is double number)
+                return ExecuteNumber(number);
 
-            return ExecuteNumber(parameters);
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

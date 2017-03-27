@@ -67,7 +67,13 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return !(bool)m_left.Execute(parameters) | (bool)m_right.Execute(parameters);
+            var left = m_left.Execute(parameters);
+            var right = m_right.Execute(parameters);
+
+            if (left is bool leftBool && right is bool rightBool)
+                return !leftBool | rightBool;
+
+            throw new ResultIsNotSupportedException(this, left, right);
         }
 
         /// <summary>

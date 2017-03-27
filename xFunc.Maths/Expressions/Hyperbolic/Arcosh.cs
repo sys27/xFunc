@@ -50,27 +50,27 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="complex">The calculation result of argument.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override Complex ExecuteComplex(ExpressionParameters parameters)
+        protected override Complex ExecuteComplex(Complex complex)
         {
-            return ComplexExtensions.Acosh((Complex)m_argument.Execute(parameters));
+            return ComplexExtensions.Acosh(complex);
         }
 
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="number">The calculation result of argument.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteNumber(ExpressionParameters parameters)
+        protected override double ExecuteNumber(double number)
         {
-            return MathExtensions.Acosh((double)m_argument.Execute(parameters));
+            return MathExtensions.Acosh(number);
         }
 
         /// <summary>

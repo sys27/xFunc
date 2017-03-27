@@ -68,7 +68,11 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return Complex.Conjugate((Complex)m_argument.Execute(parameters));
+            var result = m_argument.Execute(parameters);
+            if (result is Complex complex)
+                return Complex.Conjugate(complex);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

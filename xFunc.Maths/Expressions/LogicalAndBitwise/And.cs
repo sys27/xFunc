@@ -78,8 +78,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 
             if (left is bool leftBool && right is bool rightBool)
                 return leftBool & rightBool;
+            if (left is double leftDouble && right is double rightDouble)
+                return (double)((int)Math.Round(leftDouble, MidpointRounding.AwayFromZero) & (int)Math.Round(rightDouble, MidpointRounding.AwayFromZero));
 
-            return (double)((int)Math.Round((double)left, MidpointRounding.AwayFromZero) & (int)Math.Round((double)right, MidpointRounding.AwayFromZero));
+            throw new ResultIsNotSupportedException(this, left, right);
         }
 
         /// <summary>

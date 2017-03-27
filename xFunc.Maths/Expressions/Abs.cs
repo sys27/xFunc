@@ -66,7 +66,10 @@ namespace xFunc.Maths.Expressions
             if (result is Vector vector)
                 return vector.Abs(parameters);
 
-            return Math.Abs((double)result);
+            if (result is double number)
+                return Math.Abs(number);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

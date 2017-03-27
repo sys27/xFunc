@@ -50,58 +50,52 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathematical expression (using degree).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="degree">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDergee(ExpressionParameters parameters)
+        protected override double ExecuteDergee(double degree)
         {
-            var radian = (double)m_argument.Execute(parameters) * Math.PI / 180;
-
-            return MathExtensions.Cot(radian);
+            return MathExtensions.Cot(degree * Math.PI / 180);
         }
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="radian">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(ExpressionParameters parameters)
+        protected override double ExecuteRadian(double radian)
         {
-            var x = (double)m_argument.Execute(parameters);
-
-            return MathExtensions.Cot(x);
+            return MathExtensions.Cot(radian);
         }
 
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="gradian">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(ExpressionParameters parameters)
+        protected override double ExecuteGradian(double gradian)
         {
-            var radian = (double)m_argument.Execute(parameters) * Math.PI / 200;
-
-            return MathExtensions.Cot(radian);
+            return MathExtensions.Cot(gradian * Math.PI / 200);
         }
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="complex">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex ExecuteComplex(ExpressionParameters parameters)
+        protected override Complex ExecuteComplex(Complex complex)
         {
-            return ComplexExtensions.Cot((Complex)m_argument.Execute(parameters));
+            return ComplexExtensions.Cot(complex);
         }
 
         /// <summary>

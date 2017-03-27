@@ -71,8 +71,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 
             if (arg is bool boolArg)
                 return !boolArg;
+            if (arg is double doubleArg)
+                return (double)(~(int)Math.Round(doubleArg, MidpointRounding.AwayFromZero));
 
-            return (double)(~(int)Math.Round((double)arg, MidpointRounding.AwayFromZero));
+            throw new ResultIsNotSupportedException(this, arg);
         }
 
         /// <summary>

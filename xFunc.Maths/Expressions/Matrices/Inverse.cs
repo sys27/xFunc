@@ -66,7 +66,11 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return ((Matrix)m_argument.Execute(parameters)).Inverse(parameters);
+            var result = m_argument.Execute(parameters);
+            if (result is Matrix matrix)
+                return matrix.Inverse(parameters);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

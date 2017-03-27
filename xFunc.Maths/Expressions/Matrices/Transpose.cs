@@ -70,12 +70,12 @@ namespace xFunc.Maths.Expressions.Matrices
             var argumentResultType = m_argument.ResultType;
             var result = m_argument.Execute(parameters);
 
-            if (argumentResultType == ExpressionResultType.Matrix)
-                return ((Matrix)result).Transpose();
-            if (argumentResultType == ExpressionResultType.Vector)
-                return ((Vector)result).Transpose();
+            if (result is Matrix matrix)
+                return matrix.Transpose();
+            if (result is Vector vector)
+                return vector.Transpose();
 
-            throw new NotSupportedException();
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

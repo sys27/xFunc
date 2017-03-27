@@ -66,7 +66,11 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return ((Matrix)m_argument.Execute(parameters)).Determinant(parameters);
+            var result = m_argument.Execute(parameters);
+            if (result is Matrix matrix)
+                return matrix.Determinant(parameters);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>
@@ -100,7 +104,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// The type of the argument.
         /// </value>
         public override ExpressionResultType ArgumentType => ExpressionResultType.Matrix;
-        
+
     }
 
 }

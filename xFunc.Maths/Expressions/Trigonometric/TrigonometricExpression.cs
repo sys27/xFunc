@@ -50,38 +50,41 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathematical expression (using degree).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="degree">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteDergee(ExpressionParameters parameters);
+        protected abstract double ExecuteDergee(double degree);
+
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="radian">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteRadian(ExpressionParameters parameters);
+        protected abstract double ExecuteRadian(double radian);
+
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="gradian">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteGradian(ExpressionParameters parameters);
+        protected abstract double ExecuteGradian(double gradian);
+
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="complex">The calculation result of argument.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected abstract Complex ExecuteComplex(ExpressionParameters parameters);
+        protected abstract Complex ExecuteComplex(Complex complex);
 
         /// <summary>
         /// Executes this expression.
@@ -93,18 +96,21 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var resultType = this.ResultType;
-            if (resultType == ExpressionResultType.ComplexNumber)
-                return ExecuteComplex(parameters);
+            var result = m_argument.Execute(parameters);
+            if (result is Complex complex)
+                return ExecuteComplex(complex);
 
-            if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
-                return ExecuteDergee(parameters);
-            if (parameters.AngleMeasurement == AngleMeasurement.Radian)
-                return ExecuteRadian(parameters);
-            if (parameters.AngleMeasurement == AngleMeasurement.Gradian)
-                return ExecuteGradian(parameters);
+            if (result is double number)
+            {
+                if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
+                    return ExecuteDergee(number);
+                if (parameters.AngleMeasurement == AngleMeasurement.Radian)
+                    return ExecuteRadian(number);
+                if (parameters.AngleMeasurement == AngleMeasurement.Gradian)
+                    return ExecuteGradian(number);
+            }
 
-            return double.NaN;
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

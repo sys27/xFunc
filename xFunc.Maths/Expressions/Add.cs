@@ -86,26 +86,29 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var resultType = this.ResultType;
-
             var leftResult = m_left.Execute(parameters);
             var rightResult = m_right.Execute(parameters);
 
-            if (resultType == ExpressionResultType.ComplexNumber)
+            if (leftResult is Complex || rightResult is Complex)
             {
-                var leftComplex = leftResult as Complex? ?? (double)leftResult;
-                var rightComplex = rightResult as Complex? ?? (double)rightResult;
+                var leftComplex = leftResult as Complex? ?? leftResult as double?;
+                var rightComplex = rightResult as Complex? ?? rightResult as double?;
+                if (leftComplex == null || rightComplex == null)
+                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
 
-                return Complex.Add(leftComplex, rightComplex);
+                return Complex.Add(leftComplex.Value, rightComplex.Value);
             }
 
-            if (resultType == ExpressionResultType.Matrix)
-                return ((Matrix)leftResult).Add((Matrix)rightResult, parameters);
+            if (leftResult is Matrix leftMatrix && rightResult is Matrix rightMatrix)
+                return leftMatrix.Add(rightMatrix, parameters);
 
-            if (resultType == ExpressionResultType.Vector)
-                return ((Vector)leftResult).Add((Vector)rightResult, parameters);
+            if (leftResult is Vector leftVector && rightResult is Vector rightVector)
+                return leftVector.Add(rightVector, parameters);
 
-            return (double)leftResult + (double)rightResult;
+            if (leftResult is double leftDouble && rightResult is double rightDouble)
+                return leftDouble + rightDouble;
+
+            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
         }
 
         /// <summary>

@@ -56,10 +56,13 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var first = (double)m_left.Execute(parameters);
-            var second = 1 / (double)m_right.Execute(parameters);
+            var leftResult = m_left.Execute(parameters);
+            var rightResult = m_right.Execute(parameters);
 
-            return MathExtensions.Pow(first, second);
+            if (leftResult is double first && rightResult is double second)
+                return MathExtensions.Pow(first, 1 / second);
+
+            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
         }
 
         /// <summary>

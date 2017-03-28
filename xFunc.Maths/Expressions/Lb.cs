@@ -56,7 +56,11 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return Math.Log((double)m_argument.Execute(parameters), 2);
+            var result = m_argument.Execute(parameters);
+            if (result is double number)
+                return Math.Log(number, 2);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

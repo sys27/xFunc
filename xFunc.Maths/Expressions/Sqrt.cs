@@ -73,11 +73,15 @@ namespace xFunc.Maths.Expressions
             if (result is Complex complex)
                 return Complex.Sqrt(complex);
 
-            var doubleResult = (double)result;
-            if (doubleResult < 0)
-                return new Complex(0, Complex.Sqrt(doubleResult).Imaginary);
+            if (result is double number)
+            {
+                if (number < 0)
+                    return new Complex(0, Complex.Sqrt(number).Imaginary);
 
-            return Math.Sqrt(doubleResult);
+                return Math.Sqrt(number);
+            }
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

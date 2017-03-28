@@ -59,13 +59,15 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var resultType = this.ResultType;
             var result = m_argument.Execute(parameters);
 
-            if (resultType == ExpressionResultType.ComplexNumber)
-                return Complex.Exp(result as Complex? ?? (double)result);
+            if (result is Complex complex)
+                return Complex.Exp(complex);
 
-            return Math.Exp((double)result);
+            if (result is double number)
+                return Math.Exp(number);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

@@ -55,7 +55,11 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return MathExtensions.Fact(Math.Round((double)m_argument.Execute(parameters)));
+            var result = m_argument.Execute(parameters);
+            if (result is double number)
+                return MathExtensions.Fact(Math.Round(number));
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

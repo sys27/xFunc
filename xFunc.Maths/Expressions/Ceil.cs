@@ -55,7 +55,11 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return Math.Ceiling((double)m_argument.Execute(parameters));
+            var result = m_argument.Execute(parameters);
+            if (result is double number)
+                return Math.Ceiling(number);
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

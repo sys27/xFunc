@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
 
             if (m_right.ResultType == ExpressionResultType.Vector || m_left.ResultType == ExpressionResultType.Vector)
                 return ExpressionResultType.Vector;
-            
+
             return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
         }
 
@@ -84,13 +84,13 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var resultType = this.ResultType;
+            var leftResult = m_left.Execute(parameters);
+            var rightResult = m_right.Execute(parameters);
+
             if (resultType == ExpressionResultType.Matrix || resultType == ExpressionResultType.Vector)
             {
-                var temp = m_left.Execute(parameters);
-                var leftExpResult = temp as IExpression ?? new Number((double)temp);
-
-                temp = m_right.Execute(parameters);
-                var rightExpResult = temp as IExpression ?? new Number((double)temp);
+                var leftExpResult = leftResult as IExpression ?? new Number((double)leftResult);
+                var rightExpResult = rightResult as IExpression ?? new Number((double)rightResult);
 
                 if (leftExpResult is Vector && rightExpResult is Vector)
                     return ((Vector)leftExpResult).Cross((Vector)rightExpResult, parameters);
@@ -118,18 +118,20 @@ namespace xFunc.Maths.Expressions
                     return ((Matrix)rightExpResult).Mul(leftExpResult, parameters);
             }
 
-            var leftResult = m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
-
-            if (resultType == ExpressionResultType.ComplexNumber)
+            if (leftResult is Complex || rightResult is Complex)
             {
-                var leftComplex = leftResult as Complex? ?? (double)leftResult;
-                var rightComplex = rightResult as Complex? ?? (double)rightResult;
+                var leftComplex = leftResult as Complex? ?? leftResult as double?;
+                var rightComplex = rightResult as Complex? ?? rightResult as double?;
+                if (leftComplex == null || rightComplex == null)
+                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
 
-                return Complex.Multiply(leftComplex, rightComplex);
+                return Complex.Multiply(leftComplex.Value, rightComplex.Value);
             }
 
-            return (double)leftResult * (double)rightResult;
+            if (leftResult is double leftNumber && rightResult is double rightNumber)
+                return leftNumber * rightNumber;
+
+            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
         }
 
         /// <summary>

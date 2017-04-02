@@ -78,10 +78,15 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var arg = (double)Argument.Execute(parameters);
-            var digits = Digits != null ? (int)(double)Digits.Execute(parameters) : 0;
+            var argResult = Argument.Execute(parameters);
+            if (argResult is double arg)
+            {
+                var digits = Digits?.Execute(parameters);
 
-            return Math.Round(arg, digits, MidpointRounding.AwayFromZero);
+                return Math.Round(arg, (int)((digits as double?) ?? 0), MidpointRounding.AwayFromZero);
+            }
+
+            throw new ResultIsNotSupportedException(this, argResult);
         }
 
         /// <summary>

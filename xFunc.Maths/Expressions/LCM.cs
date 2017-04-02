@@ -73,7 +73,14 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var numbers = m_arguments.Select(item => (double)item.Execute(parameters)).ToArray();
+            var numbers = m_arguments.Select(item =>
+            {
+                var result = item.Execute(parameters);
+                if (result is double number)
+                    return number;
+
+                throw new ResultIsNotSupportedException(this, result);
+            }).ToArray();
 
             return MathExtensions.LCM(numbers);
         }

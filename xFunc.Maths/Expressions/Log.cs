@@ -72,15 +72,21 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var resultType = this.ResultType;
+            var leftResult = m_left.Execute(parameters);
+            if (leftResult is double leftNumber)
+            {
+                var rightResult = m_right.Execute(parameters);
 
-            var leftResult = (double)m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
+                if (rightResult is Complex complex)
+                    return Complex.Log(complex, leftNumber);
 
-            if (resultType == ExpressionResultType.ComplexNumber)
-                return Complex.Log(rightResult as Complex? ?? (double)rightResult, leftResult);
+                if (rightResult is double rightNumber)
+                    return Math.Log(rightNumber, leftNumber);
 
-            return Math.Log((double)rightResult, leftResult);
+                throw new ResultIsNotSupportedException(this, rightResult);
+            }
+
+            throw new ResultIsNotSupportedException(this, leftResult);
         }
 
         /// <summary>

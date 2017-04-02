@@ -83,39 +83,38 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var resultType = this.ResultType;
             var leftResult = m_left.Execute(parameters);
             var rightResult = m_right.Execute(parameters);
 
-            if (resultType == ExpressionResultType.Matrix || resultType == ExpressionResultType.Vector)
+            if (leftResult is Matrix || rightResult is Matrix || leftResult is Vector || rightResult is Vector)
             {
                 var leftExpResult = leftResult as IExpression ?? new Number((double)leftResult);
                 var rightExpResult = rightResult as IExpression ?? new Number((double)rightResult);
 
-                if (leftExpResult is Vector && rightExpResult is Vector)
-                    return ((Vector)leftExpResult).Cross((Vector)rightExpResult, parameters);
+                if (leftExpResult is Vector leftVector1 && rightExpResult is Vector rightVector1)
+                    return leftVector1.Cross(rightVector1, parameters);
 
-                if (leftExpResult is Vector)
+                if (leftExpResult is Vector leftVector2)
                 {
-                    if (rightExpResult is Matrix)
-                        return ((Vector)leftExpResult).Mul((Matrix)rightExpResult, parameters);
+                    if (rightExpResult is Matrix rightMaxtir1)
+                        return leftVector2.Mul(rightMaxtir1, parameters);
 
-                    return ((Vector)leftExpResult).Mul(rightExpResult, parameters);
+                    return leftVector2.Mul(rightExpResult, parameters);
                 }
-                if (rightExpResult is Vector)
+                if (rightExpResult is Vector rightVector2)
                 {
-                    if (leftExpResult is Matrix)
-                        return ((Matrix)leftExpResult).Mul((Vector)rightExpResult, parameters);
+                    if (leftExpResult is Matrix leftMatrix1)
+                        return rightVector2.Mul(leftMatrix1, parameters);
 
-                    return ((Vector)rightExpResult).Mul(leftExpResult, parameters);
+                    return rightVector2.Mul(leftExpResult, parameters);
                 }
 
-                if (leftExpResult is Matrix && rightExpResult is Matrix)
-                    return ((Matrix)leftExpResult).Mul((Matrix)rightExpResult, parameters);
-                if (leftExpResult is Matrix)
-                    return ((Matrix)leftExpResult).Mul(rightExpResult, parameters);
-                if (rightExpResult is Matrix)
-                    return ((Matrix)rightExpResult).Mul(leftExpResult, parameters);
+                if (leftExpResult is Matrix leftMatrix2 && rightExpResult is Matrix rightMatrix2)
+                    return leftMatrix2.Mul(rightMatrix2, parameters);
+                if (leftExpResult is Matrix leftMatrix3)
+                    return leftMatrix3.Mul(rightExpResult, parameters);
+                if (rightExpResult is Matrix rightMatrix3)
+                    return rightMatrix3.Mul(leftExpResult, parameters);
             }
 
             if (leftResult is Complex || rightResult is Complex)

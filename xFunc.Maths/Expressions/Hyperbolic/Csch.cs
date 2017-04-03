@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Hyperbolic cosecant function.
     /// </summary>
-    [ReverseFunction(typeof(Arcsch))]
     public class Csch : HyperbolicExpression
     {
 

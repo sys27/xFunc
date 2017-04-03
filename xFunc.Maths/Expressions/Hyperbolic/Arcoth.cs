@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Arcoth function.
     /// </summary>
-    [ReverseFunction(typeof(Coth))]
     public class Arcoth : HyperbolicExpression
     {
 

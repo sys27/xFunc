@@ -57,18 +57,11 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
-        private IExpression AnalyzeTrigonometric(UnaryExpression exp)
+        private IExpression AnalyzeTrigonometric<T>(UnaryExpression exp) where T : UnaryExpression
         {
             exp.Argument = exp.Argument.Analyze(this);
-
-            var attrs = exp.GetType().GetCustomAttributes(typeof(ReverseFunctionAttribute), false);
-            if (attrs.Length > 0)
-            {
-                var attr = (ReverseFunctionAttribute)attrs[0];
-
-                if (exp.Argument.GetType() == attr.ReverseType)
-                    return ((UnaryExpression)exp.Argument).Argument;
-            }
+            if (exp.Argument is T trigonometric)
+                return trigonometric.Argument;
 
             return exp;
         }
@@ -1092,7 +1085,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arccos exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Cos>(exp);
         }
 
         /// <summary>
@@ -1105,7 +1098,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arccot exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Cot>(exp);
         }
 
         /// <summary>
@@ -1118,7 +1111,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arccsc exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Csc>(exp);
         }
 
         /// <summary>
@@ -1131,7 +1124,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcsec exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Sec>(exp);
         }
 
         /// <summary>
@@ -1144,7 +1137,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcsin exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Sin>(exp);
         }
 
         /// <summary>
@@ -1157,7 +1150,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arctan exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Tan>(exp);
         }
 
         /// <summary>
@@ -1170,7 +1163,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Cos exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arccos>(exp);
         }
 
         /// <summary>
@@ -1183,7 +1176,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Cot exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arccot>(exp);
         }
 
         /// <summary>
@@ -1196,7 +1189,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Csc exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arccsc>(exp);
         }
 
         /// <summary>
@@ -1209,7 +1202,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sec exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arcsec>(exp);
         }
 
         /// <summary>
@@ -1222,7 +1215,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sin exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arcsin>(exp);
         }
 
         /// <summary>
@@ -1235,7 +1228,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Tan exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arctan>(exp);
         }
 
         #endregion
@@ -1252,7 +1245,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcosh exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Cosh>(exp);
         }
 
         /// <summary>
@@ -1265,7 +1258,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcoth exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Coth>(exp);
         }
 
         /// <summary>
@@ -1278,7 +1271,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arcsch exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Csch>(exp);
         }
 
         /// <summary>
@@ -1291,7 +1284,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arsech exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Sech>(exp);
         }
 
         /// <summary>
@@ -1304,7 +1297,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Arsinh exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Sinh>(exp);
         }
 
         /// <summary>
@@ -1317,7 +1310,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Artanh exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Tanh>(exp);
         }
 
         /// <summary>
@@ -1330,7 +1323,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Cosh exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arcosh>(exp);
         }
 
         /// <summary>
@@ -1343,7 +1336,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Coth exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arcoth>(exp);
         }
 
         /// <summary>
@@ -1356,7 +1349,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Csch exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arcsch>(exp);
         }
 
         /// <summary>
@@ -1369,7 +1362,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sech exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arsech>(exp);
         }
 
         /// <summary>
@@ -1382,7 +1375,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Sinh exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Arsinh>(exp);
         }
 
         /// <summary>
@@ -1395,7 +1388,7 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Tanh exp)
         {
-            return AnalyzeTrigonometric(exp);
+            return AnalyzeTrigonometric<Artanh>(exp);
         }
 
         #endregion Hyperbolic

@@ -106,7 +106,6 @@
     <Compile Include="Expressions\Programming\Or.cs" />
     <Compile Include="Expressions\Programming\SubAssign.cs" />
     <Compile Include="Expressions\Programming\While.cs" />
-    <Compile Include="Expressions\ReverseFunctionAttribute.cs" />
     <Compile Include="Expressions\Round.cs" />
     <Compile Include="Expressions\Simplify.cs" />
     <Compile Include="Expressions\Statistical\Avg.cs" />

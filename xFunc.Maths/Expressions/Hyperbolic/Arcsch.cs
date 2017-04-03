@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Arcsch function.
     /// </summary>
-    [ReverseFunction(typeof(Csch))]
     public class Arcsch : HyperbolicExpression
     {
 

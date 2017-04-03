@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Artanh function.
     /// </summary>
-    [ReverseFunction(typeof(Tanh))]
     public class Artanh : HyperbolicExpression
     {
 

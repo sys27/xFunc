@@ -32,13 +32,13 @@ namespace xFunc.Tests.Expressionss
             var sin4 = new Sin(sin3);
             var exp = new Sin(sin3);
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
 
             sin3.Left = new Number(3);
             Assert.False(sin2.IsChanged);
             Assert.True(exp.IsChanged);
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
     }

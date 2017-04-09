@@ -220,7 +220,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType => ParametersCount == 3 ? ExpressionResultType.Number : ExpressionResultType.Expression;
+        public override ResultType ResultType => ParametersCount == 3 ? ResultType.Number : ResultType.Expression;
 
         /// <summary>
         /// Gets or sets the simplifier.

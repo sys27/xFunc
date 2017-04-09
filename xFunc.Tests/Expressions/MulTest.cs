@@ -98,7 +98,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Number(1), new Number(2));
 
-            Assert.Equal(ExpressionResultType.Number, mul.ResultType);
+            Assert.Equal(ResultType.Number, mul.ResultType);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Number(1), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, mul.ResultType);
+            Assert.Equal(ResultType.Number, mul.ResultType);
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Add(new Number(1), new Number(2)), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, mul.ResultType);
+            Assert.Equal(ResultType.Number, mul.ResultType);
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace xFunc.Tests.Expressionss
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
                               new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
+            Assert.Equal(ResultType.Matrix, mul.ResultType);
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Number(1), new Vector(new[] { new Number(1) }));
 
-            Assert.Equal(ExpressionResultType.Vector, mul.ResultType);
+            Assert.Equal(ResultType.Vector, mul.ResultType);
         }
 
         [Fact]
@@ -139,7 +139,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }), new Number(1));
 
-            Assert.Equal(ExpressionResultType.Vector, mul.ResultType);
+            Assert.Equal(ResultType.Vector, mul.ResultType);
         }
 
         [Fact]
@@ -147,7 +147,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
+            Assert.Equal(ResultType.Matrix, mul.ResultType);
         }
 
         [Fact]
@@ -155,7 +155,7 @@ namespace xFunc.Tests.Expressionss
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
 
-            Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
+            Assert.Equal(ResultType.Matrix, mul.ResultType);
         }
 
         [Fact]
@@ -164,7 +164,7 @@ namespace xFunc.Tests.Expressionss
             var mul = new Mul(new Vector(new[] { new Number(1) }),
                               new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
+            Assert.Equal(ResultType.Matrix, mul.ResultType);
         }
 
         [Fact]
@@ -173,7 +173,7 @@ namespace xFunc.Tests.Expressionss
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(2) }) }),
                               new Vector(new[] { new Number(1) }));
 
-            Assert.Equal(ExpressionResultType.Matrix, mul.ResultType);
+            Assert.Equal(ResultType.Matrix, mul.ResultType);
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new ComplexNumber(2, 5), new ComplexNumber(3, 2));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Number(2), new ComplexNumber(3, 2));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Number(1), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -213,7 +213,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new ComplexNumber(3, 2), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -221,7 +221,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Vector(1), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.Vector, exp.ResultType);
+            Assert.Equal(ResultType.Vector, exp.ResultType);
         }
 
         [Fact]
@@ -229,7 +229,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Matrix(1, 1), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.Matrix, exp.ResultType);
+            Assert.Equal(ResultType.Matrix, exp.ResultType);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Number(2), new Sqrt(new Number(-9)));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -245,7 +245,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Variable("x"), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -253,7 +253,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Mul(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]

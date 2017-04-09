@@ -41,9 +41,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Boolean;
+            return ResultType.Boolean;
         }
 
         /// <summary>
@@ -98,19 +98,19 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType
+        public override ResultType LeftType
         {
             get
             {
                 if (m_right != null)
                 {
-                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
-                        return ExpressionResultType.Number;
+                    if (m_right.ResultType.HasFlagNI(ResultType.Number))
+                        return ResultType.Number;
 
-                    return ExpressionResultType.Boolean;
+                    return ResultType.Boolean;
                 }
 
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+                return ResultType.Number | ResultType.Boolean;
             }
         }
 
@@ -120,19 +120,19 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType
+        public override ResultType RightType
         {
             get
             {
                 if (m_left != null)
                 {
-                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
-                        return ExpressionResultType.Number;
+                    if (m_left.ResultType.HasFlagNI(ResultType.Number))
+                        return ResultType.Number;
 
-                    return ExpressionResultType.Boolean;
+                    return ResultType.Boolean;
                 }
 
-                return ExpressionResultType.Number | ExpressionResultType.Boolean;
+                return ResultType.Number | ResultType.Boolean;
             }
         }
 

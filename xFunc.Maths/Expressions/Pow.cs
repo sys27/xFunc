@@ -42,12 +42,12 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                return ExpressionResultType.ComplexNumber;
+            if (m_left.ResultType.HasFlagNI(ResultType.ComplexNumber))
+                return ResultType.ComplexNumber;
 
-            return ExpressionResultType.Number;
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -117,14 +117,14 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType
+        public override ResultType LeftType
         {
             get
             {
-                if (m_right != null && m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                    return ExpressionResultType.ComplexNumber;
+                if (m_right != null && m_right.ResultType.HasFlagNI(ResultType.ComplexNumber))
+                    return ResultType.ComplexNumber;
 
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+                return ResultType.Number | ResultType.ComplexNumber;
             }
         }
 
@@ -134,14 +134,14 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType
+        public override ResultType RightType
         {
             get
             {
-                if (m_left != null && m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                    return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+                if (m_left != null && m_left.ResultType.HasFlagNI(ResultType.ComplexNumber))
+                    return ResultType.Number | ResultType.ComplexNumber;
 
-                return ExpressionResultType.Number;
+                return ResultType.Number;
             }
         }
 

@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions
     /// Represents results of expressions.
     /// </summary>
     [Flags]
-    public enum ExpressionResultType
+    public enum ResultType
     {
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace xFunc.Maths.Expressions
     }
 
     /// <summary>
-    /// Extension for the <see cref="ExpressionResultType"/> enumeration.
+    /// Extension for the <see cref="ResultType"/> enumeration.
     /// </summary>
     public static class ExpressionResultTypeExtension
     {
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="type">An enumeration.</param>
         /// <param name="flag">An enumeration value.</param>
         /// <returns><c>true</c> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <c>false</c>.</returns>
-        public static bool HasFlagNI(this ExpressionResultType type, ExpressionResultType flag)
+        public static bool HasFlagNI(this ResultType type, ResultType flag)
         {
             return (type & flag) == flag;
         }

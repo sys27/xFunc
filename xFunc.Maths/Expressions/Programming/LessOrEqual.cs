@@ -41,9 +41,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Boolean;
+            return ResultType.Boolean;
         }
 
         /// <summary>

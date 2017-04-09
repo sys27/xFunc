@@ -100,7 +100,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector;
+        public override ResultType ArgumentType => ResultType.Number | ResultType.ComplexNumber | ResultType.Vector;
 
     }
 

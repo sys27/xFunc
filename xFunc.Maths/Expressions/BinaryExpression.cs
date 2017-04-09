@@ -125,9 +125,9 @@ namespace xFunc.Maths.Expressions
         /// Gets the result type.
         /// </summary>
         /// <returns>The result type of current expression.</returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Number;
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((LeftType & value.ResultType) == ExpressionResultType.None)
+                if ((LeftType & value.ResultType) == ResultType.None)
                     throw new ParameterTypeMismatchException(LeftType, value.ResultType);
 
                 m_left = value;
@@ -170,7 +170,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public virtual ExpressionResultType LeftType => ExpressionResultType.Number;
+        public virtual ResultType LeftType => ResultType.Number;
 
         /// <summary>
         /// The right (second) operand.
@@ -185,7 +185,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((RightType & value.ResultType) == ExpressionResultType.None)
+                if ((RightType & value.ResultType) == ResultType.None)
                     throw new ParameterTypeMismatchException(RightType, value.ResultType);
 
                 m_right = value;
@@ -201,7 +201,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public virtual ExpressionResultType RightType => ExpressionResultType.Number;
+        public virtual ResultType RightType => ResultType.Number;
 
         /// <summary>
         /// Get or Set the parent expression.

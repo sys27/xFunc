@@ -192,7 +192,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType => ExpressionResultType.Vector;
+        public override ResultType ResultType => ResultType.Vector;
 
         /// <summary>
         /// Gets the arguments types.
@@ -200,13 +200,13 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The arguments types.
         /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
+        public override ResultType[] ArgumentsTypes
         {
             get
             {
-                var results = new ExpressionResultType[m_arguments?.Length ?? 0];
+                var results = new ResultType[m_arguments?.Length ?? 0];
                 for (var i = 0; i < results.Length; i++)
-                    results[i] = ExpressionResultType.Number;
+                    results[i] = ResultType.Number;
 
                 return results;
             }

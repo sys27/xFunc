@@ -114,7 +114,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var args = new Vector[this.ParametersCount];
 
             for (var i = 0; i < this.ParametersCount; i++)
-                if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ExpressionResultType.Matrix)
+                if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ResultType.Matrix)
                     args[i] = (Vector)m_arguments[i].Execute(parameters);
                 else
                     args[i] = (Vector)m_arguments[i];
@@ -255,13 +255,13 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The arguments types.
         /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
+        public override ResultType[] ArgumentsTypes
         {
             get
             {
-                var results = new ExpressionResultType[m_arguments?.Length ?? MinParameters];
+                var results = new ResultType[m_arguments?.Length ?? MinParameters];
                 for (var i = 0; i < results.Length; i++)
-                    results[i] = ExpressionResultType.Vector;
+                    results[i] = ResultType.Vector;
 
                 return results;
             }
@@ -308,7 +308,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType => ExpressionResultType.Matrix;
+        public override ResultType ResultType => ResultType.Matrix;
 
     }
 

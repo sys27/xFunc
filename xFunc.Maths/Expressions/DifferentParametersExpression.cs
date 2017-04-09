@@ -205,7 +205,7 @@ namespace xFunc.Maths.Expressions
 
                         if (item != null)
                         {
-                            if ((types[i] & item.ResultType) == ExpressionResultType.None)
+                            if ((types[i] & item.ResultType) == ResultType.None)
                                 throw new ParameterTypeMismatchException(types[i], item.ResultType);
 
                             item.Parent = this;
@@ -221,13 +221,13 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The arguments types.
         /// </value>
-        public virtual ExpressionResultType[] ArgumentsTypes
+        public virtual ResultType[] ArgumentsTypes
         {
             get
             {
-                var results = new ExpressionResultType[m_arguments?.Length ?? MinParameters];
+                var results = new ResultType[m_arguments?.Length ?? MinParameters];
                 for (var i = 0; i < results.Length; i++)
-                    results[i] = ExpressionResultType.All;
+                    results[i] = ResultType.All;
 
                 return results;
             }
@@ -266,7 +266,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public virtual ExpressionResultType ResultType => ExpressionResultType.Number;
+        public virtual ResultType ResultType => ResultType.Number;
 
     }
 

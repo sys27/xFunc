@@ -108,16 +108,16 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <value>
         /// The arguments types.
         /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
+        public override ResultType[] ArgumentsTypes
         {
             get
             {
-                var result = new ExpressionResultType[ParametersCount];
+                var result = new ResultType[ParametersCount];
                 if (ParametersCount > 0)
                 {
-                    result[0] = ExpressionResultType.Number | ExpressionResultType.Vector;
+                    result[0] = ResultType.Number | ResultType.Vector;
                     for (var i = 1; i < result.Length; i++)
-                        result[i] = ExpressionResultType.Number;
+                        result[i] = ResultType.Number;
                 }
 
                 return result;

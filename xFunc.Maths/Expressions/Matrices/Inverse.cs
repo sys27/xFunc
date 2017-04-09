@@ -40,9 +40,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Matrix;
+            return ResultType.Matrix;
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType => ExpressionResultType.Matrix;
+        public override ResultType ArgumentType => ResultType.Matrix;
 
     }
 

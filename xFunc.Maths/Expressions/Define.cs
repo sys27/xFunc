@@ -232,7 +232,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((ValueType & value.ResultType) == ExpressionResultType.None)
+                if ((ValueType & value.ResultType) == ResultType.None)
                     throw new ParameterTypeMismatchException(ValueType, value.ResultType);
 
                 this.value = value;
@@ -245,7 +245,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the value.
         /// </value>
-        public ExpressionResultType ValueType => ExpressionResultType.All;
+        public ResultType ValueType => ResultType.All;
 
         /// <summary>
         /// Gets the type of the result.
@@ -256,7 +256,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public ExpressionResultType ResultType => ExpressionResultType.Undefined;
+        public ResultType ResultType => ResultType.Undefined;
 
     }
 

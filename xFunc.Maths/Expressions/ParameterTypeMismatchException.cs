@@ -26,8 +26,8 @@ namespace xFunc.Maths.Expressions
     public class ParameterTypeMismatchException : Exception
     {
 
-        private readonly ExpressionResultType expected;
-        private readonly ExpressionResultType actual;
+        private readonly ResultType expected;
+        private readonly ResultType actual;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterTypeMismatchException"/> class.
@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
-        public ParameterTypeMismatchException(ExpressionResultType expected, ExpressionResultType actual)
+        public ParameterTypeMismatchException(ResultType expected, ResultType actual)
             : base(string.Format(Resource.ParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
         {
             this.expected = expected;
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expected parameter type.
         /// </value>
-        public ExpressionResultType Expected
+        public ResultType Expected
         {
             get
             {
@@ -87,7 +87,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The actual parameter type.
         /// </value>
-        public ExpressionResultType Actual
+        public ResultType Actual
         {
             get
             {

@@ -128,9 +128,9 @@ namespace xFunc.Tests.Expressionss
         {
             var sub = new Sub(new Number(1), new Number(2));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.RightType);
-            Assert.Equal(ExpressionResultType.Number, sub.ResultType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.LeftType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.RightType);
+            Assert.Equal(ResultType.Number, sub.ResultType);
         }
 
         [Fact]
@@ -138,9 +138,9 @@ namespace xFunc.Tests.Expressionss
         {
             var sub = new Sub(new Number(1), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.RightType);
-            Assert.Equal(ExpressionResultType.Number, sub.ResultType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.LeftType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.RightType);
+            Assert.Equal(ResultType.Number, sub.ResultType);
         }
 
         [Fact]
@@ -148,9 +148,9 @@ namespace xFunc.Tests.Expressionss
         {
             var sub = new Sub(new Mul(new Number(1), new Number(2)), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.RightType);
-            Assert.Equal(ExpressionResultType.Number, sub.ResultType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.LeftType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.RightType);
+            Assert.Equal(ResultType.Number, sub.ResultType);
         }
 
         [Fact]
@@ -159,9 +159,9 @@ namespace xFunc.Tests.Expressionss
             var sub = new Sub(new Vector(new[] { new Number(1) }),
                               new Vector(new[] { new Number(2) }));
 
-            Assert.Equal(ExpressionResultType.Vector, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Vector, sub.RightType);
-            Assert.Equal(ExpressionResultType.Vector, sub.ResultType);
+            Assert.Equal(ResultType.Vector, sub.LeftType);
+            Assert.Equal(ResultType.Vector, sub.RightType);
+            Assert.Equal(ResultType.Vector, sub.ResultType);
         }
 
         [Fact]
@@ -170,9 +170,9 @@ namespace xFunc.Tests.Expressionss
             var sub = new Sub(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
                               new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            Assert.Equal(ExpressionResultType.Matrix, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Matrix, sub.RightType);
-            Assert.Equal(ExpressionResultType.Matrix, sub.ResultType);
+            Assert.Equal(ResultType.Matrix, sub.LeftType);
+            Assert.Equal(ResultType.Matrix, sub.RightType);
+            Assert.Equal(ResultType.Matrix, sub.ResultType);
         }
 
         [Fact]
@@ -218,9 +218,9 @@ namespace xFunc.Tests.Expressionss
         {
             var sub = new Sub(new Number(1), new ComplexNumber(2, 1));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.RightType);
-            Assert.Equal(ExpressionResultType.ComplexNumber, sub.ResultType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.LeftType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.RightType);
+            Assert.Equal(ResultType.ComplexNumber, sub.ResultType);
         }
 
         [Fact]
@@ -228,9 +228,9 @@ namespace xFunc.Tests.Expressionss
         {
             var sub = new Sub(new ComplexNumber(1, 3), new Number(2));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.LeftType);
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.ComplexNumber, sub.RightType);
-            Assert.Equal(ExpressionResultType.ComplexNumber, sub.ResultType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.LeftType);
+            Assert.Equal(ResultType.Number | ResultType.ComplexNumber, sub.RightType);
+            Assert.Equal(ResultType.ComplexNumber, sub.ResultType);
         }
 
         [Fact]
@@ -238,7 +238,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Number(1), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -246,7 +246,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -254,7 +254,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Vector(1), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.Vector, exp.ResultType);
+            Assert.Equal(ResultType.Vector, exp.ResultType);
         }
 
         [Fact]
@@ -262,7 +262,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Matrix(1, 1), new UserFunction("f", 1));
 
-            Assert.Equal(ExpressionResultType.Matrix, exp.ResultType);
+            Assert.Equal(ResultType.Matrix, exp.ResultType);
         }
 
         [Fact]
@@ -270,7 +270,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Number(2), new Sqrt(new Number(-9)));
 
-            Assert.Equal(ExpressionResultType.ComplexNumber, exp.ResultType);
+            Assert.Equal(ResultType.ComplexNumber, exp.ResultType);
         }
 
         [Fact]
@@ -278,7 +278,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Variable("x"), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -286,7 +286,7 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Sub(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]

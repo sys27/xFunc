@@ -33,13 +33,13 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The result type.
         /// </summary>
-        private ExpressionResultType? m_resultType;
+        private ResultType? m_resultType;
 
         /// <summary>
         /// Gets the result type.
         /// </summary>
         /// <returns>The result type of current expression.</returns>
-        protected abstract ExpressionResultType GetResultType();
+        protected abstract ResultType GetResultType();
 
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
@@ -125,7 +125,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public virtual ExpressionResultType ResultType
+        public virtual ResultType ResultType
         {
             get
             {

@@ -43,12 +43,12 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            if (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber))
-                return ExpressionResultType.ComplexNumber;
+            if (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber))
+                return ResultType.ComplexNumber;
 
-            return ExpressionResultType.Number;
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ResultType RightType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

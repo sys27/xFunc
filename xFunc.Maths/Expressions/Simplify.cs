@@ -40,9 +40,9 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Expression;
+            return ResultType.Expression;
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType => ExpressionResultType.All;
+        public override ResultType ArgumentType => ResultType.All;
 
         /// <summary>
         /// Gets or sets the simplifier.

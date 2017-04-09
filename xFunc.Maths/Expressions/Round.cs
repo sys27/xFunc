@@ -151,18 +151,18 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The arguments types.
         /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
+        public override ResultType[] ArgumentsTypes
         {
             get
             {
                 if (ParametersCount == 2)
                     return new[]
                     {
-                        ExpressionResultType.Number,
-                        ExpressionResultType.Number
+                        ResultType.Number,
+                        ResultType.Number
                     };
 
-                return new[] { ExpressionResultType.Number };
+                return new[] { ResultType.Number };
             }
         }
 

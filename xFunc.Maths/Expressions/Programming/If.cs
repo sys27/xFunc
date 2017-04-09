@@ -148,7 +148,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType
+        public override ResultType ResultType
         {
             get
             {
@@ -166,22 +166,22 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The arguments types.
         /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
+        public override ResultType[] ArgumentsTypes
         {
             get
             {
                 if (ParametersCount == 3)
                     return new[]
                     {
-                        ExpressionResultType.Boolean, // Condition
-                        ExpressionResultType.All,     // Then
-                        ExpressionResultType.All      // Else
+                        ResultType.Boolean, // Condition
+                        ResultType.All,     // Then
+                        ResultType.All      // Else
                     };
 
                 return new[]
                 {
-                    ExpressionResultType.Boolean, // Condition
-                    ExpressionResultType.All      // Then
+                    ResultType.Boolean, // Condition
+                    ResultType.All      // Then
                 };
             }
         }

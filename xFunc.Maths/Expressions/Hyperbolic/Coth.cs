@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Hyperbolic cotangent function.
     /// </summary>
-    [ReverseFunction(typeof(Arcoth))]
     public class Coth : HyperbolicExpression
     {
 

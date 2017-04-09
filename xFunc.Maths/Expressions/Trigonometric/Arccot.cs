@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Arcotangent function.
     /// </summary>
-    [ReverseFunction(typeof(Cot))]
     public class Arccot : TrigonometricExpression
     {
 

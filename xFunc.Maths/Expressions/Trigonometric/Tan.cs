@@ -23,7 +23,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents the Tangent function.
     /// </summary>
-    [ReverseFunction(typeof(Arctan))]
     public class Tan : TrigonometricExpression
     {
 

@@ -43,25 +43,25 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
-                (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
-                return ExpressionResultType.ComplexNumber;
+            if ((m_left.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_left.ResultType != ResultType.All) ||
+                (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_right.ResultType != ResultType.All))
+                return ResultType.ComplexNumber;
 
-            if (m_left.ResultType == ExpressionResultType.Number || m_right.ResultType == ExpressionResultType.Number)
-                return ExpressionResultType.Number;
+            if (m_left.ResultType == ResultType.Number || m_right.ResultType == ResultType.Number)
+                return ResultType.Number;
 
-            if (m_left.ResultType == ExpressionResultType.Matrix || m_right.ResultType == ExpressionResultType.Matrix)
-                return ExpressionResultType.Matrix;
+            if (m_left.ResultType == ResultType.Matrix || m_right.ResultType == ResultType.Matrix)
+                return ResultType.Matrix;
 
-            if (m_left.ResultType == ExpressionResultType.Vector || m_right.ResultType == ExpressionResultType.Vector)
-                return ExpressionResultType.Vector;
+            if (m_left.ResultType == ResultType.Vector || m_right.ResultType == ResultType.Vector)
+                return ResultType.Vector;
 
-            if (m_left.ResultType.HasFlagNI(ExpressionResultType.Number) || m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
-                return ExpressionResultType.Number;
+            if (m_left.ResultType.HasFlagNI(ResultType.Number) || m_right.ResultType.HasFlagNI(ResultType.Number))
+                return ResultType.Number;
 
-            return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+            return ResultType.Number | ResultType.ComplexNumber | ResultType.Vector | ResultType.Matrix;
         }
 
         /// <summary>
@@ -138,23 +138,23 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType
+        public override ResultType LeftType
         {
             get
             {
                 if (m_right != null)
                 {
-                    if (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) || m_right.ResultType.HasFlagNI(ExpressionResultType.Number))
-                        return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+                    if (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber) || m_right.ResultType.HasFlagNI(ResultType.Number))
+                        return ResultType.Number | ResultType.ComplexNumber;
 
-                    if (m_right.ResultType == ExpressionResultType.Matrix)
-                        return ExpressionResultType.Matrix;
+                    if (m_right.ResultType == ResultType.Matrix)
+                        return ResultType.Matrix;
 
-                    if (m_right.ResultType == ExpressionResultType.Vector)
-                        return ExpressionResultType.Vector;
+                    if (m_right.ResultType == ResultType.Vector)
+                        return ResultType.Vector;
                 }
 
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ResultType.Number | ResultType.ComplexNumber | ResultType.Vector | ResultType.Matrix;
             }
         }
 
@@ -164,23 +164,23 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType
+        public override ResultType RightType
         {
             get
             {
                 if (m_left != null)
                 {
-                    if (m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) || m_left.ResultType.HasFlagNI(ExpressionResultType.Number))
-                        return ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+                    if (m_left.ResultType.HasFlagNI(ResultType.ComplexNumber) || m_left.ResultType.HasFlagNI(ResultType.Number))
+                        return ResultType.Number | ResultType.ComplexNumber;
 
-                    if (m_left.ResultType == ExpressionResultType.Matrix)
-                        return ExpressionResultType.Matrix;
+                    if (m_left.ResultType == ResultType.Matrix)
+                        return ResultType.Matrix;
 
-                    if (m_left.ResultType == ExpressionResultType.Vector)
-                        return ExpressionResultType.Vector;
+                    if (m_left.ResultType == ResultType.Vector)
+                        return ResultType.Vector;
                 }
 
-                return ExpressionResultType.Number | ExpressionResultType.ComplexNumber | ExpressionResultType.Vector | ExpressionResultType.Matrix;
+                return ResultType.Number | ResultType.ComplexNumber | ResultType.Vector | ResultType.Matrix;
             }
         }
 

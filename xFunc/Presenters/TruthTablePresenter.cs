@@ -51,7 +51,7 @@ namespace xFunc.Presenters
             var tokens = lexer.Tokenize(strExp);
 
             expression = parser.Parse(tokens);
-            if (!expression.ResultType.HasFlagNI(ExpressionResultType.Boolean))
+            if (!expression.ResultType.HasFlagNI(ResultType.Boolean))
                 throw new NotSupportedException();
 
             expressions = Helpers.ConvertExpressionToCollection(expression);

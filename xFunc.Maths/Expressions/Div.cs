@@ -42,13 +42,13 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            if ((m_left.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_left.ResultType != ExpressionResultType.All) ||
-                (m_right.ResultType.HasFlagNI(ExpressionResultType.ComplexNumber) && m_right.ResultType != ExpressionResultType.All))
-                return ExpressionResultType.ComplexNumber;
+            if ((m_left.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_left.ResultType != ResultType.All) ||
+                (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_right.ResultType != ResultType.All))
+                return ResultType.ComplexNumber;
 
-            return ExpressionResultType.Number;
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ResultType LeftType => ResultType.Number | ResultType.ComplexNumber;
 
         /// <summary>
         /// Gets the type of the right parameter.
@@ -127,7 +127,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ResultType RightType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

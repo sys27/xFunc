@@ -186,11 +186,11 @@ namespace xFunc.Maths.Expressions.Programming
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        public override ExpressionResultType ResultType
+        public override ResultType ResultType
         {
             get
             {
-                return ExpressionResultType.Undefined;
+                return ResultType.Undefined;
             }
         }
 
@@ -200,16 +200,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The arguments types.
         /// </value>
-        public override ExpressionResultType[] ArgumentsTypes
+        public override ResultType[] ArgumentsTypes
         {
             get
             {
                 return new[]
                 {
-                    ExpressionResultType.All,     // Body
-                    ExpressionResultType.All,     // Initialization
-                    ExpressionResultType.Boolean, // Condition
-                    ExpressionResultType.All      // Iteration
+                    ResultType.All,     // Body
+                    ResultType.All,     // Initialization
+                    ResultType.Boolean, // Condition
+                    ResultType.All      // Iteration
                 };
             }
         }

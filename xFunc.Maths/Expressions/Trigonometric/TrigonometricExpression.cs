@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
             return m_argument.ResultType;
         }
@@ -119,7 +119,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <value>
         /// The type of the argument.
         /// </value>
-        public override ExpressionResultType ArgumentType => ExpressionResultType.Number | ExpressionResultType.ComplexNumber;
+        public override ResultType ArgumentType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

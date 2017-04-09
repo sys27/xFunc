@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Number(2), new Number(4));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Bool(true), new Bool(false));
 
-            Assert.Equal(ExpressionResultType.Boolean, exp.ResultType);
+            Assert.Equal(ResultType.Boolean, exp.ResultType);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Variable("x"), new Number(1));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Number(1), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number, exp.ResultType);
+            Assert.Equal(ResultType.Number, exp.ResultType);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Variable("x"), new Bool(true));
 
-            Assert.Equal(ExpressionResultType.Boolean, exp.ResultType);
+            Assert.Equal(ResultType.Boolean, exp.ResultType);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Bool(true), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Boolean, exp.ResultType);
+            Assert.Equal(ResultType.Boolean, exp.ResultType);
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new XOr(new Variable("y"), new Variable("x"));
 
-            Assert.Equal(ExpressionResultType.Number | ExpressionResultType.Boolean, exp.ResultType);
+            Assert.Equal(ResultType.Number | ResultType.Boolean, exp.ResultType);
         }
 
         [Fact]

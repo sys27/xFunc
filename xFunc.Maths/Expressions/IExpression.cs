@@ -96,7 +96,7 @@ namespace xFunc.Maths.Expressions
         /// <remarks>
         /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
         /// </remarks>
-        ExpressionResultType ResultType { get; }
+        ResultType ResultType { get; }
 
     }
 

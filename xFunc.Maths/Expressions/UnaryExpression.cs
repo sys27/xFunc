@@ -111,9 +111,9 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Number;
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((ArgumentType & value.ResultType) == ExpressionResultType.None)
+                if ((ArgumentType & value.ResultType) == ResultType.None)
                     throw new ParameterTypeMismatchException(ArgumentType, value.ResultType);
 
                 m_argument = value;
@@ -157,7 +157,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The type of the argument.
         /// </value>
-        public virtual ExpressionResultType ArgumentType => ExpressionResultType.Number;
+        public virtual ResultType ArgumentType => ResultType.Number;
 
         /// <summary>
         /// Get or Set the parent expression.

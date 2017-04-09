@@ -42,9 +42,9 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Number;
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The count of parameters.
         /// </value>
-        public override ExpressionResultType ArgumentType => ExpressionResultType.ComplexNumber;
+        public override ResultType ArgumentType => ResultType.ComplexNumber;
 
     }
 

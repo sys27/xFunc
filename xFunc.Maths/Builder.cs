@@ -960,7 +960,7 @@ namespace xFunc.Maths
         /// <value>
         /// The type of the result.
         /// </value>
-        public ExpressionResultType ResultType
+        public ResultType ResultType
         {
             get
             {

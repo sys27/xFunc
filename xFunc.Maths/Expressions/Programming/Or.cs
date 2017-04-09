@@ -41,9 +41,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The result type of current expression.
         /// </returns>
-        protected override ExpressionResultType GetResultType()
+        protected override ResultType GetResultType()
         {
-            return ExpressionResultType.Boolean;
+            return ResultType.Boolean;
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The type of the left parameter.
         /// </value>
-        public override ExpressionResultType LeftType => ExpressionResultType.Boolean;
+        public override ResultType LeftType => ResultType.Boolean;
 
         /// <summary>
         /// Gets the type of the right parameter.
@@ -97,7 +97,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The type of the right parameter.
         /// </value>
-        public override ExpressionResultType RightType => ExpressionResultType.Boolean;
+        public override ResultType RightType => ResultType.Boolean;
     }
 
 }

@@ -781,6 +781,9 @@ namespace xFunc.Maths
                 match = regexFunctions.Match(function, i);
                 if (match.Success)
                 {
+                    if (tokens.LastOrDefault() is NumberToken)
+                        tokens.Add(new OperationToken(Operations.Multiplication));
+
                     if (!string.IsNullOrWhiteSpace(match.Groups[2].Value))
                     {
                         var funcName = match.Groups[1].Value;
@@ -790,9 +793,6 @@ namespace xFunc.Maths
                     }
                     else
                     {
-                        if (tokens.LastOrDefault() is NumberToken lastToken)
-                            tokens.Add(new OperationToken(Operations.Multiplication));
-
                         if (match.Value == "i")
                             tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));
                         else if (match.Value == "pi")

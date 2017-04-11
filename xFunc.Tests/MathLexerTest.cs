@@ -562,6 +562,23 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void NumAndFunc()
+        {
+            var tokens = lexer.Tokenize("5cos(x)");
+
+            var expected = new List<IToken>()
+            {
+                new NumberToken(5),
+                new OperationToken(Operations.Multiplication),
+                new FunctionToken(Functions.Cosine, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new VariableToken("x"),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void VarWithNumber1()
         {
             var tokens = lexer.Tokenize("x1");

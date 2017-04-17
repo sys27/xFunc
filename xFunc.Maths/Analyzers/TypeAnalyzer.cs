@@ -522,73 +522,240 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arccos exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arccos exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arccot exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arccot exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arccsc exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arccsc exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arcsec exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arcsec exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arcsin exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arcsin exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arctan exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arctan exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Cos exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Cos exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Cot exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Cot exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Csc exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Csc exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Sec exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Sec exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Sin exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Sin exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Tan exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Tan exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         #endregion
 
@@ -599,73 +766,240 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arcosh exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arcosh exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arcoth exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arcoth exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arcsch exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arcsch exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arsech exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arsech exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Arsinh exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Arsinh exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Artanh exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Artanh exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Cosh exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Cosh exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Coth exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Coth exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Csch exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Csch exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Sech exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Sech exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Sinh exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Sinh exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Tanh exp) { throw new NotSupportedException(); }
+        public virtual ResultType Analyze(Tanh exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         #endregion Hyperbolic
 

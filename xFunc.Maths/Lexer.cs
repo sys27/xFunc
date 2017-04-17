@@ -322,287 +322,288 @@ namespace xFunc.Maths
         /// <param name="tokens">The list of tokens.</param>
         private void CreateFunction(string match, IList<IToken> tokens)
         {
-            if (match == "add")
+            var lowerMatch = match.ToLower();
+            if (lowerMatch == "add")
             {
                 tokens.Add(new FunctionToken(Functions.Add));
             }
-            else if (match == "sub")
+            else if (lowerMatch == "sub")
             {
                 tokens.Add(new FunctionToken(Functions.Sub));
             }
-            else if (match == "mul")
+            else if (lowerMatch == "mul")
             {
                 tokens.Add(new FunctionToken(Functions.Mul));
             }
-            else if (match == "div")
+            else if (lowerMatch == "div")
             {
                 tokens.Add(new FunctionToken(Functions.Div));
             }
-            else if (match == "pow")
+            else if (lowerMatch == "pow")
             {
                 tokens.Add(new FunctionToken(Functions.Pow));
             }
-            else if (match == "abs")
+            else if (lowerMatch == "abs")
             {
                 tokens.Add(new FunctionToken(Functions.Absolute));
             }
-            else if (match == "sin")
+            else if (lowerMatch == "sin")
             {
                 tokens.Add(new FunctionToken(Functions.Sine));
             }
-            else if (match == "cos")
+            else if (lowerMatch == "cos")
             {
                 tokens.Add(new FunctionToken(Functions.Cosine));
             }
-            else if (match == "tg" || match == "tan")
+            else if (lowerMatch == "tg" || lowerMatch == "tan")
             {
                 tokens.Add(new FunctionToken(Functions.Tangent));
             }
-            else if (match == "ctg" || match == "cot")
+            else if (lowerMatch == "ctg" || lowerMatch == "cot")
             {
                 tokens.Add(new FunctionToken(Functions.Cotangent));
             }
-            else if (match == "sec")
+            else if (lowerMatch == "sec")
             {
                 tokens.Add(new FunctionToken(Functions.Secant));
             }
-            else if (match == "csc" || match == "cosec")
+            else if (lowerMatch == "csc" || lowerMatch == "cosec")
             {
                 tokens.Add(new FunctionToken(Functions.Cosecant));
             }
-            else if (match == "arcsin")
+            else if (lowerMatch == "arcsin")
             {
                 tokens.Add(new FunctionToken(Functions.Arcsine));
             }
-            else if (match == "arccos")
+            else if (lowerMatch == "arccos")
             {
                 tokens.Add(new FunctionToken(Functions.Arccosine));
             }
-            else if (match == "arctg" || match == "arctan")
+            else if (lowerMatch == "arctg" || lowerMatch == "arctan")
             {
                 tokens.Add(new FunctionToken(Functions.Arctangent));
             }
-            else if (match == "arcctg" || match == "arccot")
+            else if (lowerMatch == "arcctg" || lowerMatch == "arccot")
             {
                 tokens.Add(new FunctionToken(Functions.Arccotangent));
             }
-            else if (match == "arcsec")
+            else if (lowerMatch == "arcsec")
             {
                 tokens.Add(new FunctionToken(Functions.Arcsecant));
             }
-            else if (match == "arccsc" || match == "arccosec")
+            else if (lowerMatch == "arccsc" || lowerMatch == "arccosec")
             {
                 tokens.Add(new FunctionToken(Functions.Arccosecant));
             }
-            else if (match == "sqrt")
+            else if (lowerMatch == "sqrt")
             {
                 tokens.Add(new FunctionToken(Functions.Sqrt));
             }
-            else if (match == "root")
+            else if (lowerMatch == "root")
             {
                 tokens.Add(new FunctionToken(Functions.Root));
             }
-            else if (match == "ln")
+            else if (lowerMatch == "ln")
             {
                 tokens.Add(new FunctionToken(Functions.Ln));
             }
-            else if (match == "lg")
+            else if (lowerMatch == "lg")
             {
                 tokens.Add(new FunctionToken(Functions.Lg));
             }
-            else if (match == "lb" || match == "log2")
+            else if (lowerMatch == "lb" || lowerMatch == "log2")
             {
                 tokens.Add(new FunctionToken(Functions.Lb));
             }
-            else if (match == "log")
+            else if (lowerMatch == "log")
             {
                 tokens.Add(new FunctionToken(Functions.Log));
             }
-            else if (match == "sh" || match == "sinh")
+            else if (lowerMatch == "sh" || lowerMatch == "sinh")
             {
                 tokens.Add(new FunctionToken(Functions.Sineh));
             }
-            else if (match == "ch" || match == "cosh")
+            else if (lowerMatch == "ch" || lowerMatch == "cosh")
             {
                 tokens.Add(new FunctionToken(Functions.Cosineh));
             }
-            else if (match == "th" || match == "tanh")
+            else if (lowerMatch == "th" || lowerMatch == "tanh")
             {
                 tokens.Add(new FunctionToken(Functions.Tangenth));
             }
-            else if (match == "cth" || match == "coth")
+            else if (lowerMatch == "cth" || lowerMatch == "coth")
             {
                 tokens.Add(new FunctionToken(Functions.Cotangenth));
             }
-            else if (match == "sech")
+            else if (lowerMatch == "sech")
             {
                 tokens.Add(new FunctionToken(Functions.Secanth));
             }
-            else if (match == "csch")
+            else if (lowerMatch == "csch")
             {
                 tokens.Add(new FunctionToken(Functions.Cosecanth));
             }
-            else if (match == "arsh" || match == "arsinh")
+            else if (lowerMatch == "arsh" || lowerMatch == "arsinh")
             {
                 tokens.Add(new FunctionToken(Functions.Arsineh));
             }
-            else if (match == "arch" || match == "arcosh")
+            else if (lowerMatch == "arch" || lowerMatch == "arcosh")
             {
                 tokens.Add(new FunctionToken(Functions.Arcosineh));
             }
-            else if (match == "arth" || match == "artanh")
+            else if (lowerMatch == "arth" || lowerMatch == "artanh")
             {
                 tokens.Add(new FunctionToken(Functions.Artangenth));
             }
-            else if (match == "arcth" || match == "arcoth")
+            else if (lowerMatch == "arcth" || lowerMatch == "arcoth")
             {
                 tokens.Add(new FunctionToken(Functions.Arcotangenth));
             }
-            else if (match == "arsch" || match == "arsech")
+            else if (lowerMatch == "arsch" || lowerMatch == "arsech")
             {
                 tokens.Add(new FunctionToken(Functions.Arsecanth));
             }
-            else if (match == "arcsch")
+            else if (lowerMatch == "arcsch")
             {
                 tokens.Add(new FunctionToken(Functions.Arcosecanth));
             }
-            else if (match == "exp")
+            else if (lowerMatch == "exp")
             {
                 tokens.Add(new FunctionToken(Functions.Exp));
             }
-            else if (match == "gcd" || match == "gcf" || match == "hcf")
+            else if (lowerMatch == "gcd" || lowerMatch == "gcf" || lowerMatch == "hcf")
             {
                 tokens.Add(new FunctionToken(Functions.GCD));
             }
-            else if (match == "lcm" || match == "scm")
+            else if (lowerMatch == "lcm" || lowerMatch == "scm")
             {
                 tokens.Add(new FunctionToken(Functions.LCM));
             }
-            else if (match == "fact")
+            else if (lowerMatch == "fact")
             {
                 tokens.Add(new FunctionToken(Functions.Factorial));
             }
-            else if (match == "sum")
+            else if (lowerMatch == "sum")
             {
                 tokens.Add(new FunctionToken(Functions.Sum));
             }
-            else if (match == "product")
+            else if (lowerMatch == "product")
             {
                 tokens.Add(new FunctionToken(Functions.Product));
             }
-            else if (match == "round")
+            else if (lowerMatch == "round")
             {
                 tokens.Add(new FunctionToken(Functions.Round));
             }
-            else if (match == "floor")
+            else if (lowerMatch == "floor")
             {
                 tokens.Add(new FunctionToken(Functions.Floor));
             }
-            else if (match == "ceil")
+            else if (lowerMatch == "ceil")
             {
                 tokens.Add(new FunctionToken(Functions.Ceil));
             }
-            else if (match == "if")
+            else if (lowerMatch == "if")
             {
                 tokens.Add(new FunctionToken(Functions.If));
             }
-            else if (match == "for")
+            else if (lowerMatch == "for")
             {
                 tokens.Add(new FunctionToken(Functions.For));
             }
-            else if (match == "while")
+            else if (lowerMatch == "while")
             {
                 tokens.Add(new FunctionToken(Functions.While));
             }
-            else if (match == "del" || match == "nabla")
+            else if (lowerMatch == "del" || lowerMatch == "nabla")
             {
                 tokens.Add(new FunctionToken(Functions.Del));
             }
-            else if (match == "deriv")
+            else if (lowerMatch == "deriv")
             {
                 tokens.Add(new FunctionToken(Functions.Derivative));
             }
-            else if (match == "simplify")
+            else if (lowerMatch == "simplify")
             {
                 tokens.Add(new FunctionToken(Functions.Simplify));
             }
-            else if (match == "def")
+            else if (lowerMatch == "def")
             {
                 tokens.Add(new FunctionToken(Functions.Define));
             }
-            else if (match == "undef")
+            else if (lowerMatch == "undef")
             {
                 tokens.Add(new FunctionToken(Functions.Undefine));
             }
-            else if (match == "transpose")
+            else if (lowerMatch == "transpose")
             {
                 tokens.Add(new FunctionToken(Functions.Transpose));
             }
-            else if (match == "det" || match == "determinant")
+            else if (lowerMatch == "det" || lowerMatch == "determinant")
             {
                 tokens.Add(new FunctionToken(Functions.Determinant));
             }
-            else if (match == "inverse")
+            else if (lowerMatch == "inverse")
             {
                 tokens.Add(new FunctionToken(Functions.Inverse));
             }
-            else if (match == "vector")
+            else if (lowerMatch == "vector")
             {
                 tokens.Add(new FunctionToken(Functions.Vector));
             }
-            else if (match == "matrix")
+            else if (lowerMatch == "matrix")
             {
                 tokens.Add(new FunctionToken(Functions.Matrix));
             }
-            else if (match == "re" || match == "real")
+            else if (lowerMatch == "re" || lowerMatch == "real")
             {
                 tokens.Add(new FunctionToken(Functions.Re));
             }
-            else if (match == "im" || match == "imaginary")
+            else if (lowerMatch == "im" || lowerMatch == "imaginary")
             {
                 tokens.Add(new FunctionToken(Functions.Im));
             }
-            else if (match == "phase")
+            else if (lowerMatch == "phase")
             {
                 tokens.Add(new FunctionToken(Functions.Phase));
             }
-            else if (match == "conjugate")
+            else if (lowerMatch == "conjugate")
             {
                 tokens.Add(new FunctionToken(Functions.Conjugate));
             }
-            else if (match == "reciprocal")
+            else if (lowerMatch == "reciprocal")
             {
                 tokens.Add(new FunctionToken(Functions.Reciprocal));
             }
-            else if (match == "min")
+            else if (lowerMatch == "min")
             {
                 tokens.Add(new FunctionToken(Functions.Min));
             }
-            else if (match == "max")
+            else if (lowerMatch == "max")
             {
                 tokens.Add(new FunctionToken(Functions.Max));
             }
-            else if (match == "avg")
+            else if (lowerMatch == "avg")
             {
                 tokens.Add(new FunctionToken(Functions.Avg));
             }
-            else if (match == "count")
+            else if (lowerMatch == "count")
             {
                 tokens.Add(new FunctionToken(Functions.Count));
             }
-            else if (match == "var")
+            else if (lowerMatch == "var")
             {
                 tokens.Add(new FunctionToken(Functions.Var));
             }
-            else if (match == "varp")
+            else if (lowerMatch == "varp")
             {
                 tokens.Add(new FunctionToken(Functions.Varp));
             }
-            else if (match == "stdev")
+            else if (lowerMatch == "stdev")
             {
                 tokens.Add(new FunctionToken(Functions.Stdev));
             }
-            else if (match == "stdevp")
+            else if (lowerMatch == "stdevp")
             {
                 tokens.Add(new FunctionToken(Functions.Stdevp));
             }
@@ -677,9 +678,7 @@ namespace xFunc.Maths
             if (!IsBalanced(function))
                 throw new LexerException(Resource.NotBalanced);
 
-            function = function.ToLower()
-                               .Replace("\n", "")
-                               .Replace("\r", "");
+            function = function.Replace("\n", "").Replace("\r", "");
 
             var tokens = new List<IToken>();
             for (var i = 0; i < function.Length;)
@@ -721,7 +720,7 @@ namespace xFunc.Maths
                 match = regexOperations.Match(function, i);
                 if (match.Success)
                 {
-                    CreateOperations(match.Value, tokens);
+                    CreateOperations(match.Value.ToLower(), tokens);
 
                     i += match.Length;
                     continue;
@@ -771,7 +770,7 @@ namespace xFunc.Maths
                 match = regexConst.Match(function, i);
                 if (match.Success)
                 {
-                    CreateConst(match.Value, tokens);
+                    CreateConst(match.Value.ToLower(), tokens);
 
                     i += match.Length;
                     continue;

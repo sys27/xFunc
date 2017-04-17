@@ -30,25 +30,6 @@ namespace xFunc.Maths.Analyzers
 
         public TypeAnalyzer() { }
 
-        private ResultType CheckUnary(UnaryExpression exp, ResultType expected)
-        {
-            var actualType = exp.Argument.Analyze(this);
-            if (actualType == ResultType.None)
-                return ResultType.Undefined;
-
-            if ((expected & actualType) == ResultType.None)
-                throw new ParameterTypeMismatchException(expected, actualType);
-
-            return actualType;
-        }
-
-        private ResultType CheckNumberUnary(UnaryExpression exp, ResultType expected = ResultType.Number, ResultType resultType = ResultType.Number)
-        {
-            CheckUnary(exp, expected);
-
-            return resultType;
-        }
-
         #region Standard
 
         /// <summary>
@@ -58,7 +39,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public ResultType Analyze(Abs exp)
         {
-            return CheckNumberUnary(exp, ResultType.Number | ResultType.ComplexNumber | ResultType.Vector, ResultType.Number);
+            throw new NotSupportedException();
         }
 
         /// <summary>
@@ -75,7 +56,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public ResultType Analyze(Ceil exp)
         {
-            return CheckNumberUnary(exp);
+            throw new NotSupportedException();
         }
 
         /// <summary>

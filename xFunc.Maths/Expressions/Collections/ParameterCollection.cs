@@ -93,11 +93,18 @@ namespace xFunc.Maths.Expressions.Collections
 
         private void InitializeDefaults()
         {
-            consts.Add(Parameter.CreateConstant("π", Math.PI));
-            consts.Add(Parameter.CreateConstant("e", Math.E));
-            consts.Add(Parameter.CreateConstant("g", 9.80665));
-            consts.Add(Parameter.CreateConstant("c", 299792458));
-            consts.Add(Parameter.CreateConstant("h", 6.62607004E-34));
+            consts.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
+            consts.Add(Parameter.CreateConstant("e", Math.E));  // Euler's number
+            consts.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
+            consts.Add(Parameter.CreateConstant("c", 299792458));   // Speed of Light (c0)
+            consts.Add(Parameter.CreateConstant("h", 6.62607004E-34));  // Planck Constant
+            consts.Add(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
+            consts.Add(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
+            consts.Add(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
+            consts.Add(Parameter.CreateConstant("G", 6.64078E-11)); // Gravitational constant
+            consts.Add(Parameter.CreateConstant("α", 2.5029078750958928222839)); // Feigenbaum constant
+            consts.Add(Parameter.CreateConstant("σ", 5.670367E-8)); // Stefan-Boltzmann constant
+            consts.Add(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
         }
 
         /// <summary>

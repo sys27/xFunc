@@ -1171,54 +1171,63 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Avg exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expresion.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Count exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Max exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Min exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Product exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Stdev exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Stdevp exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Sum exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Var exp) { throw new ParameterTypeMismatchException(); }
+
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
@@ -1235,7 +1244,21 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Expressions.LogicalAndBitwise.And exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Expressions.LogicalAndBitwise.And exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Number || rightResult == ResultType.Number)
+                return ResultType.Number;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1252,28 +1275,72 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Equality exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Equality exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Implication exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Implication exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(NAnd exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(NAnd exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(NOr exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(NOr exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1300,14 +1367,42 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Expressions.LogicalAndBitwise.Or exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Expressions.LogicalAndBitwise.Or exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Number || rightResult == ResultType.Number)
+                return ResultType.Number;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(XOr exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(XOr exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Number || rightResult == ResultType.Number)
+                return ResultType.Number;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         #endregion Logical and Bitwise
 
@@ -1335,7 +1430,18 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Expressions.Programming.And exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Expressions.Programming.And exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1524,7 +1630,18 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Expressions.Programming.Or exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Expressions.Programming.Or exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+                return ResultType.Boolean;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1548,7 +1665,17 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(While exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(While exp)
+        {
+            var rightResult = exp.Right.Analyze(this);
+            if (rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (rightResult == ResultType.Boolean)
+                return ResultType.Undefined;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         #endregion Programming
 

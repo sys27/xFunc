@@ -29,6 +29,7 @@ namespace xFunc.Maths.Analyzers
     // todo: exceptions!!!
     // todo: remove Flag and ResultType.All
     // todo: optimize
+    // todo: check ||
 
     public class TypeAnalyzer : IAnalyzer<ResultType>
     {
@@ -224,7 +225,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(GCD exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this));
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             if (results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
@@ -258,7 +259,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(LCM exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this));
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             if (results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
@@ -362,6 +363,15 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Number;
 
+            if (leftResult == ResultType.ComplexNumber || rightResult == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            if (leftResult == ResultType.Matrix || rightResult == ResultType.Matrix)
+                return ResultType.Matrix;
+
+            if (leftResult == ResultType.Vector || rightResult == ResultType.Vector)
+                return ResultType.Vector;
+
             // todo: !!!
 
             throw new ParameterTypeMismatchException();
@@ -384,6 +394,19 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Pow exp)
         {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Left.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
+                if (rightResult == ResultType.ComplexNumber)
+                    return ResultType.ComplexNumber;
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -543,7 +566,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Vector exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this));
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             if (results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
@@ -560,7 +583,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Matrix exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this));
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             if (results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 

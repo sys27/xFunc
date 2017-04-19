@@ -86,6 +86,19 @@ namespace xFunc.Maths.Expressions
             var leftResult = m_left.Execute(parameters);
             var rightResult = m_right.Execute(parameters);
 
+            if (leftResult is double leftNumber && rightResult is double rightNumber)
+                return leftNumber * rightNumber;
+
+            if (leftResult is Complex || rightResult is Complex)
+            {
+                var leftComplex = leftResult as Complex? ?? leftResult as double?;
+                var rightComplex = rightResult as Complex? ?? rightResult as double?;
+                if (leftComplex == null || rightComplex == null)
+                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+
+                return Complex.Multiply(leftComplex.Value, rightComplex.Value);
+            }
+
             if (leftResult is Matrix || rightResult is Matrix || leftResult is Vector || rightResult is Vector)
             {
                 var leftExpResult = leftResult as IExpression ?? new Number((double)leftResult);
@@ -116,19 +129,6 @@ namespace xFunc.Maths.Expressions
                 if (rightExpResult is Matrix rightMatrix3)
                     return rightMatrix3.Mul(leftExpResult, parameters);
             }
-
-            if (leftResult is Complex || rightResult is Complex)
-            {
-                var leftComplex = leftResult as Complex? ?? leftResult as double?;
-                var rightComplex = rightResult as Complex? ?? rightResult as double?;
-                if (leftComplex == null || rightComplex == null)
-                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
-
-                return Complex.Multiply(leftComplex.Value, rightComplex.Value);
-            }
-
-            if (leftResult is double leftNumber && rightResult is double rightNumber)
-                return leftNumber * rightNumber;
 
             throw new ResultIsNotSupportedException(this, leftResult, rightResult);
         }

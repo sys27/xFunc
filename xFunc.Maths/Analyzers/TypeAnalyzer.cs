@@ -28,6 +28,7 @@ namespace xFunc.Maths.Analyzers
 
     // todo: exceptions!!!
     // todo: remove Flag and ResultType.All
+    // todo: optimize
 
     public class TypeAnalyzer : IAnalyzer<ResultType>
     {
@@ -110,7 +111,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Define exp)
         {
-            throw new ParameterTypeMismatchException();
+            return ResultType.Undefined;
         }
 
         /// <summary>
@@ -314,6 +315,17 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Log exp)
         {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
+                return ResultType.Number;
+
+            if (leftResult == ResultType.Number && rightResult == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -382,6 +394,14 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Root exp)
         {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Number || rightResult == ResultType.Number)
+                return ResultType.Number;
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -392,6 +412,13 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Round exp)
         {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -514,14 +541,34 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Vector exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Vector exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this));
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Vector;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Matrix exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Matrix exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this));
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Matrix;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1170,70 +1217,200 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Avg exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Avg exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expresion.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Count exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Count exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Max exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Max exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Min exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Min exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Product exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Product exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Stdev exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Stdev exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Stdevp exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Stdevp exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Sum exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Sum exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Var exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Var exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified exppression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(Varp exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(Varp exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         #endregion Statistical
 
@@ -1496,7 +1673,17 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(For exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(For exp)
+        {
+            var conditionResult = exp.Condition.Analyze(this);
+            if (conditionResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (conditionResult == ResultType.Boolean)
+                return ResultType.Undefined;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1539,7 +1726,18 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultType Analyze(If exp) { throw new ParameterTypeMismatchException(); }
+        public virtual ResultType Analyze(If exp)
+        {
+            var conditionResult = exp.Condition.Analyze(this);
+            if (conditionResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            var thenResult = exp.Then.Analyze(this);
+            if (conditionResult == ResultType.Boolean)
+                return exp.ParametersCount == 2 ? thenResult : ResultType.Undefined;
+
+            throw new ParameterTypeMismatchException();
+        }
 
         /// <summary>
         /// Analyzes the specified expression.

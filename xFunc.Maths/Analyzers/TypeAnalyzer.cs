@@ -155,7 +155,10 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.ComplexNumber || rightResult == ResultType.ComplexNumber)
+            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber))
+                return ResultType.ComplexNumber;
+
+            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.Number || leftResult == ResultType.ComplexNumber))
                 return ResultType.ComplexNumber;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
@@ -422,7 +425,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number || rightResult == ResultType.Number)
+            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException();
@@ -1637,7 +1640,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
                 return ResultType.Boolean;
 
             throw new ParameterTypeMismatchException();
@@ -1858,7 +1861,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean || rightResult == ResultType.Boolean)
+            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
                 return ResultType.Boolean;
 
             throw new ParameterTypeMismatchException();

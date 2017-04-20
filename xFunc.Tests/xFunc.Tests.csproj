@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzers\Formatters\CommonFormatterTest.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTest.cs" />
     <Compile Include="BuilderTest.cs" />
     <Compile Include="Converters\AreaTest.cs" />
     <Compile Include="Converters\LengthTest.cs" />

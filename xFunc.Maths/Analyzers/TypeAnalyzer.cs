@@ -39,6 +39,36 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         public TypeAnalyzer() { }
 
+        private ResultType CheckTrigonometric(UnaryExpression exp)
+        {
+            var result = exp.Argument.Analyze(this);
+            if (result == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (result == ResultType.Number)
+                return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
+
+            throw new ParameterTypeMismatchException();
+        }
+
+        private ResultType CheckStatistical(DifferentParametersExpression exp)
+        {
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
+            if (results.Contains(ResultType.Undefined))
+                return ResultType.Undefined;
+
+            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
+                return ResultType.Number;
+
+            if (results.All(x => x == ResultType.Number))
+                return ResultType.Number;
+
+            throw new ParameterTypeMismatchException();
+        }
+
         #region Standard
 
         /// <summary>
@@ -757,17 +787,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arccos exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -777,17 +797,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arccot exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -797,17 +807,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arccsc exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -817,17 +817,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arcsec exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -837,17 +827,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arcsin exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -857,17 +837,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arctan exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -877,17 +847,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Cos exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -897,17 +857,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Cot exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -917,17 +867,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Csc exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -937,17 +877,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Sec exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -957,17 +887,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Sin exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -977,17 +897,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Tan exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         #endregion
@@ -1001,17 +911,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arcosh exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1021,17 +921,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arcoth exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1041,17 +931,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arcsch exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1061,17 +941,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arsech exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1081,17 +951,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Arsinh exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1101,17 +961,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Artanh exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1121,17 +971,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Cosh exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1141,17 +981,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Coth exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1161,17 +991,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Csch exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1181,17 +1001,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Sech exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1201,17 +1011,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Sinh exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         /// <summary>
@@ -1221,17 +1021,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Tanh exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
-                return ResultType.Number;
-
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
-            throw new ParameterTypeMismatchException();
+            return CheckTrigonometric(exp);
         }
 
         #endregion Hyperbolic
@@ -1245,17 +1035,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Avg exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1265,17 +1045,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Count exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1285,17 +1055,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Max exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1305,17 +1065,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Min exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1325,17 +1075,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Product exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1345,17 +1085,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Stdev exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1365,17 +1095,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Stdevp exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1385,17 +1105,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Sum exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1405,17 +1115,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Var exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         /// <summary>
@@ -1425,17 +1125,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Varp exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
-
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
-
-            throw new ParameterTypeMismatchException();
+            return CheckStatistical(exp);
         }
 
         #endregion Statistical

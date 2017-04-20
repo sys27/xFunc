@@ -56,10 +56,13 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftValue = (double)m_left.Execute(parameters);
-            var rightValue = (double)m_right.Execute(parameters);
+            var left = m_left.Execute(parameters);
+            var right = m_right.Execute(parameters);
 
-            return leftValue < rightValue;
+            if (left is double leftDouble && right is double rightDouble)
+                return leftDouble < rightDouble;
+
+            throw new ResultIsNotSupportedException(this, left, right);
         }
 
         /// <summary>

@@ -100,10 +100,10 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if ((leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number)))
+            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number))
                 return ResultType.ComplexNumber;
 
-            if ((rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number)))
+            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number))
                 return ResultType.ComplexNumber;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
@@ -254,8 +254,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(GCD exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
+            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
+            if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
             if (results.All(x => x == ResultType.Number))
@@ -288,8 +288,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(LCM exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
+            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
+            if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
             if (results.All(x => x == ResultType.Number))
@@ -506,10 +506,10 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if ((leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number)))
+            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number))
                 return ResultType.ComplexNumber;
 
-            if ((rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number)))
+            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number))
                 return ResultType.ComplexNumber;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)

@@ -242,11 +242,19 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
-        public void TestCeilUndefine()
+        public void TestdDefineUndefine()
         {
             var exp = new Define(new Variable("x"), new Number(-2));
 
             Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestDelVector()
+        {
+            var exp = new Del(new Number(2));
+
+            Test(exp, ResultType.Vector);
         }
 
         #endregion Standard

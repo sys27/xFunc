@@ -152,10 +152,6 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Del exp)
         {
-            var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
             return ResultType.Vector;
         }
 

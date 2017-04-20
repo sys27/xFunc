@@ -56,8 +56,8 @@ namespace xFunc.Maths.Analyzers
 
         private ResultType CheckStatistical(DifferentParametersExpression exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
+            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
+            if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
             if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
@@ -599,8 +599,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Vector exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
+            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
+            if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
             if (results.All(x => x == ResultType.Number))
@@ -616,11 +616,11 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Matrix exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
+            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
+            if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.All(x => x == ResultType.Number))
+            if (results.All(x => x == ResultType.Vector))
                 return ResultType.Matrix;
 
             throw new ParameterTypeMismatchException();

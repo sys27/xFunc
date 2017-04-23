@@ -16,6 +16,7 @@ using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
@@ -37,6 +38,11 @@ namespace xFunc.Tests.Analyzers
             var simple = exp.Analyze(analyzer);
 
             Assert.Equal(expected, simple);
+        }
+
+        private void TestException(IExpression exp)
+        {
+            Assert.Throws<ParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
 
         #region Standard
@@ -71,6 +77,14 @@ namespace xFunc.Tests.Analyzers
             var exp = new Abs(new Vector(new[] { new Number(1) }));
 
             Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestAbsException()
+        {
+            var exp = new Abs(new Bool(false));
+
+            TestException(exp);
         }
 
         [Fact]
@@ -226,6 +240,14 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void TestAddException()
+        {
+            var exp = new Add(new Bool(false), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestCeilNumber()
         {
             var exp = new Ceil(new Number(-2));
@@ -242,6 +264,14 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void TestCeilException()
+        {
+            var exp = new Ceil(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestdDefineUndefine()
         {
             var exp = new Define(new Variable("x"), new Number(-2));
@@ -255,6 +285,102 @@ namespace xFunc.Tests.Analyzers
             var exp = new Del(new Number(2));
 
             Test(exp, ResultType.Vector);
+        }
+
+        [Fact]
+        public void TestDerivExpression()
+        {
+            var exp = new Derivative(new Variable("x"));
+
+            Test(exp, ResultType.Expression);
+        }
+
+        [Fact]
+        public void TestDerivExpressionWithVar()
+        {
+            var exp = new Derivative(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Expression);
+        }
+
+        [Fact]
+        public void TestDerivNumber()
+        {
+            var exp = new Derivative(new Variable("x"), new Variable("x"), new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestDerivException()
+        {
+            var exp = new Derivative(new IExpression[] { new Variable("x"), new Number(1) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestDivNumberNumberTest()
+        {
+            var exp = new Div(new Number(1), new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestDivComplexNumberComplexNumberTest()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestDivNumberComplexNumberTest()
+        {
+            var exp = new Div(new Number(3), new ComplexNumber(2, 4));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestDivComplexNumberNumberTest()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new Number(2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestDivNumberComplexTest()
+        {
+            var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestDivTwoVarTest()
+        {
+            var exp = new Div(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestDivThreeVarTest()
+        {
+            var exp = new Div(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestDivException()
+        {
+            var exp = new Div(new Bool(false), new Bool(false));
+
+            TestException(exp);
         }
 
         #endregion Standard

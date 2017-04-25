@@ -48,9 +48,9 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.
         /// </summary>
-        /// <param name="firstMathExpression">The first operand.</param>
-        /// <param name="secondMathExpression">The second operand.</param>
-        public LCM(IExpression firstMathExpression, IExpression secondMathExpression) : base(new[] { firstMathExpression, secondMathExpression }, 2) { }
+        /// <param name="first">The first operand.</param>
+        /// <param name="second">The second operand.</param>
+        public LCM(IExpression first, IExpression second) : base(new[] { first, second }, 2) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

@@ -383,6 +383,222 @@ namespace xFunc.Tests.Analyzers
             TestException(exp);
         }
 
+        [Fact]
+        public void TestExpUndefined()
+        {
+            var exp = new Exp(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestExpNumber()
+        {
+            var exp = new Exp(new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestExpComplexNumber()
+        {
+            var exp = new Exp(new ComplexNumber(10, 10));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestExpException()
+        {
+            var exp = new Exp(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestFactUndefined()
+        {
+            var exp = new Fact(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestFactNumber()
+        {
+            var exp = new Fact(new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestFactException()
+        {
+            var exp = new Fact(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestFloorUndefined()
+        {
+            var exp = new Floor(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestFloorNumber()
+        {
+            var exp = new Floor(new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestFloorException()
+        {
+            var exp = new Floor(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestGCDUndefined()
+        {
+            var exp = new GCD(new Number(10), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestGCDnumber()
+        {
+            var exp = new GCD(new[] { new Number(10), new Number(10), new Number(10) }, 3);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestGCDException()
+        {
+            var exp = new GCD(new ComplexNumber(10), new Number(10));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestLbUndefined()
+        {
+            var exp = new Lb(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestLbNumber()
+        {
+            var exp = new Lb(new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestLbException()
+        {
+            var exp = new Lb(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestLCMUndefined()
+        {
+            var exp = new LCM(new Number(10), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestLCMnumber()
+        {
+            var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) }, 3);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestLCMException()
+        {
+            var exp = new LCM(new ComplexNumber(10), new Number(10));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestLgUndefined()
+        {
+            var exp = new Lg(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestLgNumber()
+        {
+            var exp = new Lg(new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestLgComplexNumber()
+        {
+            var exp = new Lg(new ComplexNumber(10, 10));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestLgException()
+        {
+            var exp = new Lg(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestLnUndefined()
+        {
+            var exp = new Ln(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestLnNumber()
+        {
+            var exp = new Ln(new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestLnComplexNumber()
+        {
+            var exp = new Ln(new ComplexNumber(10, 10));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestLnException()
+        {
+            var exp = new Ln(new Bool(false));
+
+            TestException(exp);
+        }
+
         #endregion Standard
 
     }

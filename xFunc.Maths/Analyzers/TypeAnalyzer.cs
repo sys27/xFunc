@@ -401,8 +401,6 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Vector || rightResult == ResultType.Vector)
                 return ResultType.Vector;
 
-            // todo: !!!
-
             throw new ParameterTypeMismatchException();
         }
 
@@ -535,11 +533,11 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (result == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
-
             if (result == ResultType.Number)
                 return ResultType.Number;
+
+            if (result == ResultType.ComplexNumber)
+                return ResultType.ComplexNumber;
 
             throw new ParameterTypeMismatchException();
         }

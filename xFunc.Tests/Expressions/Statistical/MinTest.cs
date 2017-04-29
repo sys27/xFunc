@@ -61,16 +61,6 @@ namespace xFunc.Tests.Expressionss.Statistical
         }
 
         [Fact]
-        public void ArgTypeTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() =>
-            new Min(new[] {
-                new Vector(new[] { new Number(1), new Number(2), new Number(3), }),
-                new Vector(new[] { new Number(1), new Number(2), new Number(3), })
-            }, 2));
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Min(new[] { new Number(1), new Number(2) }, 2);

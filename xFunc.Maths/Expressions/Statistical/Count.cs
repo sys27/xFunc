@@ -100,29 +100,7 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             return new Count(CloneArguments(), ParametersCount);
         }
-
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                var result = new ResultType[ParametersCount];
-                if (ParametersCount > 0)
-                {
-                    result[0] = ResultType.Number | ResultType.Vector;
-                    for (var i = 1; i < result.Length; i++)
-                        result[i] = ResultType.Number;
-                }
-
-                return result;
-            }
-        }
-
+        
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>

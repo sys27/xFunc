@@ -45,19 +45,7 @@ namespace xFunc.Tests.Expressionss.Programming
 
             Assert.Throws<NotSupportedException>(() => add.Execute(parameters));
         }
-
-        [Fact]
-        public void NumberSubBoolTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new SubAssign(new Variable("x"), new Bool(true)));
-        }
-
-        [Fact]
-        public void NotVarTest()
-        {
-            Assert.Throws<NotSupportedException>(() => new SubAssign(new Number(1), new Number(1)));
-        }
-
+        
         [Fact]
         public void CloneTest()
         {

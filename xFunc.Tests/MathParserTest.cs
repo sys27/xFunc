@@ -305,23 +305,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void DefineParseFailTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(2),
-                new OperationToken(Operations.Multiplication),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign),
-                new NumberToken(1),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
-        }
-
-        [Fact]
         public void UndefParseTest()
         {
             var tokens = new List<IToken>
@@ -352,22 +335,6 @@ namespace xFunc.Tests
             };
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
-        }
-
-        [Fact]
-        public void UndefineParseFailTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(2),
-                new OperationToken(Operations.Multiplication),
-                new FunctionToken(Functions.Undefine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
         }
 
         [Fact]

@@ -36,12 +36,6 @@ namespace xFunc.Maths.Expressions
         private ResultType? m_resultType;
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>The result type of current expression.</returns>
-        protected abstract ResultType GetResultType();
-
-        /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
@@ -114,30 +108,6 @@ namespace xFunc.Maths.Expressions
         /// The count of parameters.
         /// </value>
         public abstract int ParametersCount { get; }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// Default: Number.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public virtual ResultType ResultType
-        {
-            get
-            {
-                if (this.m_resultType == null || m_isChanged)
-                {
-                    m_resultType = GetResultType();
-                    m_isChanged = false;
-                }
-
-                return m_resultType.Value;
-            }
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is changed.

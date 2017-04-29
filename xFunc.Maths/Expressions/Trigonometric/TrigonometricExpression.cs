@@ -37,17 +37,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         protected TrigonometricExpression(IExpression expression) : base(expression) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return m_argument.ResultType;
-        }
-
-        /// <summary>
         /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="degree">The calculation result of argument.</param>
@@ -112,14 +101,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             throw new ResultIsNotSupportedException(this, result);
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

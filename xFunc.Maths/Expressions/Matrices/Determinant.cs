@@ -33,18 +33,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="argument">The argument of function.</param>
         public Determinant(IExpression argument) : base(argument) { }
-
-        /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Number;
-        }
-
+        
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
@@ -96,14 +85,6 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             return new Determinant(m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.Matrix;
 
     }
 

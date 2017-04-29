@@ -34,18 +34,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         public GreaterOrEqual(IExpression left, IExpression right) : base(left, right) { }
-
-        /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Boolean;
-        }
-
+        
         /// <summary>
         /// Executes this expression.
         /// </summary>

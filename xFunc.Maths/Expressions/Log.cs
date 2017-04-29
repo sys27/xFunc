@@ -38,20 +38,6 @@ namespace xFunc.Maths.Expressions
         public Log(IExpression arg, IExpression @base) : base(@base, arg) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            if (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber))
-                return ResultType.ComplexNumber;
-
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -110,14 +96,6 @@ namespace xFunc.Maths.Expressions
         {
             return new Log(m_right.Clone(), m_left.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

@@ -659,7 +659,71 @@ namespace xFunc.Tests.Analyzers
             TestException(exp);
         }
 
-        // todo: mul?
+        [Fact]
+        public void TestMulTwoNumberTest()
+        {
+            var mul = new Mul(new Number(1), new Number(2));
+
+            Test(mul, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestMulNumberVarTest()
+        {
+            var mul = new Mul(new Number(1), new Variable("x"));
+
+            Test(mul, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestMulTwoMatrixTest()
+        {
+            var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
+                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            Test(mul, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestMulNumberVectorTest()
+        {
+            var mul = new Mul(new Number(1), new Vector(new[] { new Number(1) }));
+
+            Test(mul, ResultType.Vector);
+        }
+
+        [Fact]
+        public void TestMulNumberMatrixTest()
+        {
+            var mul = new Mul(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            Test(mul, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestMulVectorMatrixTest()
+        {
+            var mul = new Mul(new Vector(new[] { new Number(1) }),
+                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            Test(mul, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestMulComplexNumberComplexNumberTest()
+        {
+            var exp = new Mul(new ComplexNumber(2, 5), new ComplexNumber(3, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestMulComplexNumberNumberTest()
+        {
+            var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
 
         [Fact]
         public void TestNumber()

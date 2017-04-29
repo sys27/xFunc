@@ -35,17 +35,6 @@ namespace xFunc.Maths.Expressions.Matrices
         public Transpose(IExpression argument) : base(argument) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Matrix;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -67,7 +56,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
-            var argumentResultType = m_argument.ResultType;
             var result = m_argument.Execute(parameters);
 
             if (result is Matrix matrix)
@@ -101,14 +89,6 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             return new Transpose(this.m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.Vector | ResultType.Matrix;
 
     }
 

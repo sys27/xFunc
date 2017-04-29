@@ -94,14 +94,6 @@ namespace xFunc.Maths.Expressions
             return new Abs(m_argument.Clone());
         }
 
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.Number | ResultType.ComplexNumber | ResultType.Vector;
-
     }
 
 }

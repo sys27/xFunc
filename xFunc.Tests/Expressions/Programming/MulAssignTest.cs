@@ -45,19 +45,7 @@ namespace xFunc.Tests.Expressionss.Programming
 
             Assert.Throws<NotSupportedException>(() => add.Execute(parameters));
         }
-
-        [Fact]
-        public void NumberMulBoolTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new MulAssign(new Variable("x"), new Bool(true)));
-        }
-
-        [Fact]
-        public void NotVarTest()
-        {
-            Assert.Throws<NotSupportedException>(() => new MulAssign(new Number(1), new Number(1)));
-        }
-
+        
         [Fact]
         public void CloneTest()
         {

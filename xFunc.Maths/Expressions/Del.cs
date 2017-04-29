@@ -38,17 +38,6 @@ namespace xFunc.Maths.Expressions
         public Del(IExpression expression) : base(expression) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Expression;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -111,14 +100,6 @@ namespace xFunc.Maths.Expressions
         {
             return new Del(m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.All;
 
         /// <summary>
         /// Gets or sets the simplifier.

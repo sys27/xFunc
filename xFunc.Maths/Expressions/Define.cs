@@ -232,8 +232,6 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((ValueType & value.ResultType) == ResultType.None)
-                    throw new ParameterTypeMismatchException(ValueType, value.ResultType);
 
                 this.value = value;
             }
@@ -246,17 +244,6 @@ namespace xFunc.Maths.Expressions
         /// The type of the value.
         /// </value>
         public ResultType ValueType => ResultType.All;
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public ResultType ResultType => ResultType.Undefined;
 
     }
 

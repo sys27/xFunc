@@ -16,8 +16,10 @@ using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers
@@ -974,6 +976,1033 @@ namespace xFunc.Tests.Analyzers
         }
 
         #endregion Standard
+
+        #region Matrix
+
+        [Fact]
+        public void TestVectorUndefined()
+        {
+            var exp = new Vector(new IExpression[] { new Number(10), new Variable("x") });
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestVectorNumber()
+        {
+            var exp = new Vector(new IExpression[] { new Number(10), new Number(10), new Number(10) });
+
+            Test(exp, ResultType.Vector);
+        }
+
+        [Fact]
+        public void TestVectorException()
+        {
+            var exp = new Vector(new IExpression[] { new ComplexNumber(10), new Number(10) });
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestMatrixVector()
+        {
+            var exp = new Matrix(new Vector[] { new Vector(2), new Vector(2) });
+
+            Test(exp, ResultType.Vector);
+        }
+
+        [Fact]
+        public void TestDetermenantUndefined()
+        {
+            var exp = new Determinant(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestDetermenantMatrix()
+        {
+            var exp = new Determinant(new Matrix(2, 2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestDetermenantException()
+        {
+            var exp = new Determinant(new ComplexNumber(2, 2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestInverseUndefined()
+        {
+            var exp = new Inverse(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestInverseMatrix()
+        {
+            var exp = new Inverse(new Matrix(2, 2));
+
+            Test(exp, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestInverseException()
+        {
+            var exp = new Inverse(new ComplexNumber(2, 2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestTransposeUndefined()
+        {
+            var exp = new Transpose(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestTransposeVector()
+        {
+            var exp = new Transpose(new Vector(2));
+
+            Test(exp, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestTransposeMatrix()
+        {
+            var exp = new Transpose(new Matrix(2, 2));
+
+            Test(exp, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestTransposeException()
+        {
+            var exp = new Transpose(new ComplexNumber(2, 2));
+
+            TestException(exp);
+        }
+
+        #endregion Matrix
+
+        #region Complex Numbers
+
+        [Fact]
+        public void TestComplexNumber()
+        {
+            var exp = new ComplexNumber(2, 2);
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestConjugateUndefined()
+        {
+            var exp = new Conjugate(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestConjugateComplexNumber()
+        {
+            var exp = new Conjugate(new ComplexNumber(2, 3));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestConjugateException()
+        {
+            var exp = new Conjugate(new Number(2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestImUndefined()
+        {
+            var exp = new Im(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestImComplexNumber()
+        {
+            var exp = new Im(new ComplexNumber(2, 3));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestImException()
+        {
+            var exp = new Im(new Number(2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestPhaseUndefined()
+        {
+            var exp = new Phase(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestPhaseComplexNumber()
+        {
+            var exp = new Phase(new ComplexNumber(2, 3));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestPhaseException()
+        {
+            var exp = new Phase(new Number(2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestReUndefined()
+        {
+            var exp = new Re(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestReComplexNumber()
+        {
+            var exp = new Re(new ComplexNumber(2, 3));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestReException()
+        {
+            var exp = new Re(new Number(2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestReciprocalUndefined()
+        {
+            var exp = new Reciprocal(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestReciprocalComplexNumber()
+        {
+            var exp = new Conjugate(new ComplexNumber(2, 3));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestReciprocalException()
+        {
+            var exp = new Conjugate(new Number(2));
+
+            TestException(exp);
+        }
+
+        #endregion Complex Numbers
+
+        #region Trigonometric
+
+        [Fact]
+        public void TestArccosUndefined()
+        {
+            var exp = new Arccos(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArccosNumber()
+        {
+            var exp = new Arccos(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArccosComplexNumber()
+        {
+            var exp = new Arccos(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArccosException()
+        {
+            var exp = new Arccos(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArccotUndefined()
+        {
+            var exp = new Arccot(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArccotNumber()
+        {
+            var exp = new Arccot(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArccotComplexNumber()
+        {
+            var exp = new Arccot(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArccotException()
+        {
+            var exp = new Arccot(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArccscUndefined()
+        {
+            var exp = new Arccsc(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArccscNumber()
+        {
+            var exp = new Arccsc(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArccscComplexNumber()
+        {
+            var exp = new Arccsc(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArccscException()
+        {
+            var exp = new Arccsc(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArcsecUndefined()
+        {
+            var exp = new Arcsec(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArcsecNumber()
+        {
+            var exp = new Arcsec(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArcsecComplexNumber()
+        {
+            var exp = new Arcsec(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArcsecException()
+        {
+            var exp = new Arcsec(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArcsinUndefined()
+        {
+            var exp = new Arcsin(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArcsinNumber()
+        {
+            var exp = new Arcsin(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArcsinComplexNumber()
+        {
+            var exp = new Arcsin(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArcsinException()
+        {
+            var exp = new Arcsin(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArctanUndefined()
+        {
+            var exp = new Arctan(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArctanNumber()
+        {
+            var exp = new Arctan(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArctanComplexNumber()
+        {
+            var exp = new Arctan(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArctanException()
+        {
+            var exp = new Arctan(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCosUndefined()
+        {
+            var exp = new Cos(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCosNumber()
+        {
+            var exp = new Cos(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCosComplexNumber()
+        {
+            var exp = new Cos(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestCosException()
+        {
+            var exp = new Cos(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCotUndefined()
+        {
+            var exp = new Cot(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCotNumber()
+        {
+            var exp = new Cot(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCotComplexNumber()
+        {
+            var exp = new Cot(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestCotException()
+        {
+            var exp = new Cot(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCscUndefined()
+        {
+            var exp = new Csc(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCscNumber()
+        {
+            var exp = new Csc(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCscComplexNumber()
+        {
+            var exp = new Csc(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestCscException()
+        {
+            var exp = new Csc(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestSecUndefined()
+        {
+            var exp = new Sec(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSecNumber()
+        {
+            var exp = new Sec(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSecComplexNumber()
+        {
+            var exp = new Sec(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestSecException()
+        {
+            var exp = new Sec(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestSinUndefined()
+        {
+            var exp = new Sin(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSinNumber()
+        {
+            var exp = new Sin(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSinComplexNumber()
+        {
+            var exp = new Sin(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestSinException()
+        {
+            var exp = new Sin(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestTanUndefined()
+        {
+            var exp = new Tan(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestTanNumber()
+        {
+            var exp = new Tan(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestTanComplexNumber()
+        {
+            var exp = new Tan(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestTanException()
+        {
+            var exp = new Tan(new Bool(false));
+
+            TestException(exp);
+        }
+
+        #endregion Trigonometric
+
+        #region Hyperbolic
+
+        [Fact]
+        public void TestArcoshUndefined()
+        {
+            var exp = new Arcosh(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArcoshNumber()
+        {
+            var exp = new Arcosh(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArcoshComplexNumber()
+        {
+            var exp = new Arcosh(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArcoshException()
+        {
+            var exp = new Arcosh(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArcothUndefined()
+        {
+            var exp = new Arcoth(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArcothNumber()
+        {
+            var exp = new Arcoth(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArcothComplexNumber()
+        {
+            var exp = new Arcoth(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArcothException()
+        {
+            var exp = new Arcoth(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArcschUndefined()
+        {
+            var exp = new Arcsch(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArcschNumber()
+        {
+            var exp = new Arcsch(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArcschComplexNumber()
+        {
+            var exp = new Arcsch(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArcschException()
+        {
+            var exp = new Arcsch(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArsechUndefined()
+        {
+            var exp = new Arsech(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArsechNumber()
+        {
+            var exp = new Arsech(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArsechComplexNumber()
+        {
+            var exp = new Arsech(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArsechException()
+        {
+            var exp = new Arsech(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArsinhUndefined()
+        {
+            var exp = new Arsinh(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArsinhNumber()
+        {
+            var exp = new Arsinh(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArsinhComplexNumber()
+        {
+            var exp = new Arsinh(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArsinhException()
+        {
+            var exp = new Arsinh(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestArtanhUndefined()
+        {
+            var exp = new Artanh(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestArtanhNumber()
+        {
+            var exp = new Artanh(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestArtanhComplexNumber()
+        {
+            var exp = new Artanh(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestArtanhException()
+        {
+            var exp = new Artanh(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCoshUndefined()
+        {
+            var exp = new Cosh(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCoshNumber()
+        {
+            var exp = new Cosh(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCoshComplexNumber()
+        {
+            var exp = new Cosh(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestCoshException()
+        {
+            var exp = new Cosh(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCothUndefined()
+        {
+            var exp = new Coth(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCothNumber()
+        {
+            var exp = new Coth(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCothComplexNumber()
+        {
+            var exp = new Coth(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestCothException()
+        {
+            var exp = new Coth(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCschUndefined()
+        {
+            var exp = new Csch(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCschNumber()
+        {
+            var exp = new Csch(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCschComplexNumber()
+        {
+            var exp = new Csch(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestCschException()
+        {
+            var exp = new Csch(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestSechUndefined()
+        {
+            var exp = new Sech(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSechNumber()
+        {
+            var exp = new Sech(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSechComplexNumber()
+        {
+            var exp = new Sech(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestSechException()
+        {
+            var exp = new Sech(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestSinhUndefined()
+        {
+            var exp = new Sinh(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSinhNumber()
+        {
+            var exp = new Sinh(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSinhComplexNumber()
+        {
+            var exp = new Sinh(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestSinhException()
+        {
+            var exp = new Sinh(new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestTanhUndefined()
+        {
+            var exp = new Tanh(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestTanhNumber()
+        {
+            var exp = new Tanh(new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestTanhComplexNumber()
+        {
+            var exp = new Tanh(new ComplexNumber(2, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestTanhException()
+        {
+            var exp = new Tanh(new Bool(false));
+
+            TestException(exp);
+        }
+
+        #endregion Hyperbolic
+
+        #region Statistical
+        #endregion Statistical
 
     }
 

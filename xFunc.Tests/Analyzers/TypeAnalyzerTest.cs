@@ -19,6 +19,8 @@ using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
+using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -2002,7 +2004,936 @@ namespace xFunc.Tests.Analyzers
         #endregion Hyperbolic
 
         #region Statistical
+
+        [Fact]
+        public void TestAvgUndefined()
+        {
+            var exp = new Avg(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestAvgNumber()
+        {
+            var exp = new Avg(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestAvgVector()
+        {
+            var exp = new Avg(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestAvgException()
+        {
+            var exp = new Avg(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestCountUndefined()
+        {
+            var exp = new Count(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestCountNumber()
+        {
+            var exp = new Count(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCountVector()
+        {
+            var exp = new Count(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestCountException()
+        {
+            var exp = new Count(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestMaxUndefined()
+        {
+            var exp = new Max(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestMaxNumber()
+        {
+            var exp = new Max(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestMaxVector()
+        {
+            var exp = new Max(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestMaxException()
+        {
+            var exp = new Max(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestMinUndefined()
+        {
+            var exp = new Min(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestMinNumber()
+        {
+            var exp = new Min(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestMinVector()
+        {
+            var exp = new Min(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestMinException()
+        {
+            var exp = new Min(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestProductUndefined()
+        {
+            var exp = new Product(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestProductNumber()
+        {
+            var exp = new Product(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestProductVector()
+        {
+            var exp = new Product(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestProductException()
+        {
+            var exp = new Product(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestStdevUndefined()
+        {
+            var exp = new Stdev(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestStdevNumber()
+        {
+            var exp = new Stdev(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestStdevVector()
+        {
+            var exp = new Stdev(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestStdevException()
+        {
+            var exp = new Stdev(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestStdevpUndefined()
+        {
+            var exp = new Stdevp(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestStdevpNumber()
+        {
+            var exp = new Stdevp(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestStdevpVector()
+        {
+            var exp = new Stdevp(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestStdevpException()
+        {
+            var exp = new Stdevp(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestSumUndefined()
+        {
+            var exp = new Sum(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSumNumber()
+        {
+            var exp = new Sum(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSumVector()
+        {
+            var exp = new Sum(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSumException()
+        {
+            var exp = new Sum(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestVarUndefined()
+        {
+            var exp = new Var(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestVarNumber()
+        {
+            var exp = new Var(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestVarVector()
+        {
+            var exp = new Var(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestVarException()
+        {
+            var exp = new Var(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestVarpUndefined()
+        {
+            var exp = new Varp(new[] { new Variable("x"), new Variable("y") }, 2);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestVarpNumber()
+        {
+            var exp = new Varp(new[] { new Number(3), new Number(2) }, 2);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestVarpVector()
+        {
+            var exp = new Varp(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestVarpException()
+        {
+            var exp = new Varp(new[] { new Bool(false), new Bool(false) }, 2);
+
+            TestException(exp);
+        }
+
         #endregion Statistical
+
+        #region Logical and Bitwise
+
+        [Fact]
+        public void TestAndUndefined()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestAndNumber()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Number(1), new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestAndBoolean()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestAndException()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.And(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestBool()
+        {
+            var exp = new Bool(false);
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestEqualityUndefined()
+        {
+            var exp = new Equality(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestEqualityBoolean()
+        {
+            var exp = new Equality(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestEqualityException()
+        {
+            var exp = new Equality(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestImplicationUndefined()
+        {
+            var exp = new Implication(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestImplicationBoolean()
+        {
+            var exp = new Implication(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestImplicationException()
+        {
+            var exp = new Implication(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestNAndUndefined()
+        {
+            var exp = new NAnd(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestNAndBoolean()
+        {
+            var exp = new NAnd(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestNAndException()
+        {
+            var exp = new NAnd(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestNOrUndefined()
+        {
+            var exp = new NOr(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestNOrBoolean()
+        {
+            var exp = new NOr(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestNOrException()
+        {
+            var exp = new NOr(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestNotUndefined()
+        {
+            var exp = new Not(new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestNotNumber()
+        {
+            var exp = new Not(new Number(1));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestNotBoolean()
+        {
+            var exp = new Not(new Bool(true));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestNotException()
+        {
+            var exp = new Not(new ComplexNumber(1, 2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestOrUndefined()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestOrNumber()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestOrBoolean()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestOrException()
+        {
+            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestXOrUndefined()
+        {
+            var exp = new XOr(new Variable("x"), new Variable("y"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestXOrNumber()
+        {
+            var exp = new XOr(new Number(1), new Number(2));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestXOrBoolean()
+        {
+            var exp = new XOr(new Bool(true), new Bool(false));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestXOrException()
+        {
+            var exp = new XOr(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        #endregion Logical and Bitwise
+
+        #region Programming
+
+        [Fact]
+        public void TestAddAssignUndefined()
+        {
+            var exp = new AddAssign(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestAddAssignNumber()
+        {
+            var exp = new AddAssign(new Variable("x"), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestAddAssignException()
+        {
+            var exp = new AddAssign(new Variable("x"), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestConditionalAndUndefined()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestConditionalAndNumber()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(false), new Bool(true));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestConditionalAndException()
+        {
+            var exp = new Maths.Expressions.Programming.And(new ComplexNumber(2, 3), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestDecNumber()
+        {
+            var exp = new Dec(new Number(3));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestDivAssignUndefined()
+        {
+            var exp = new DivAssign(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestDivAssignNumber()
+        {
+            var exp = new DivAssign(new Variable("x"), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestDivAssignException()
+        {
+            var exp = new DivAssign(new Variable("x"), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestEqualUndefined()
+        {
+            var exp = new Equal(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestEqualNumber()
+        {
+            var exp = new Equal(new Number(20), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestEqualBoolean()
+        {
+            var exp = new Equal(new Bool(false), new Bool(true));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestEqualException()
+        {
+            var exp = new Equal(new Variable("x"), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestForUndefined()
+        {
+            var exp = new For(null, null, new Variable("x"), null);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestForNumber()
+        {
+            var exp = new For(null, null, new Bool(false), null);
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestForException()
+        {
+            var exp = new For(null, null, new ComplexNumber(2, 3), null);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestGreaterOrEqualUndefined()
+        {
+            var exp = new GreaterOrEqual(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestGreaterOrEqualNumber()
+        {
+            var exp = new GreaterOrEqual(new Number(10), new Number(10));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestGreaterOrEqualException()
+        {
+            var exp = new GreaterOrEqual(new Bool(true), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestGreaterThanUndefined()
+        {
+            var exp = new GreaterThan(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestGreaterThanNumber()
+        {
+            var exp = new GreaterThan(new Number(10), new Number(10));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestGreaterThanException()
+        {
+            var exp = new GreaterThan(new Bool(true), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestIfUndefined()
+        {
+            var exp = new If(new Variable("x"), new Number(10));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestIfBool()
+        {
+            var exp = new If(new Bool(false), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestIfElseBool()
+        {
+            var exp = new If(new Bool(false), new Number(10), new Number(2));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestIfException()
+        {
+            var exp = new If(new ComplexNumber(2, 4), new Number(10));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestIncNumber()
+        {
+            var exp = new Inc(new Number(3));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestLessOrEqualUndefined()
+        {
+            var exp = new LessOrEqual(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestLessOrEqualNumber()
+        {
+            var exp = new LessOrEqual(new Number(10), new Number(10));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestLessOrEqualException()
+        {
+            var exp = new LessOrEqual(new Bool(true), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestLessThanUndefined()
+        {
+            var exp = new LessThan(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestLessThanNumber()
+        {
+            var exp = new LessThan(new Number(10), new Number(10));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestLessThanException()
+        {
+            var exp = new LessThan(new Bool(true), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestMulAssignUndefined()
+        {
+            var exp = new MulAssign(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestMulAssignNumber()
+        {
+            var exp = new MulAssign(new Variable("x"), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestMulAssignException()
+        {
+            var exp = new MulAssign(new Variable("x"), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestConditionalOrUndefined()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestConditionalOrNumber()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new Bool(false), new Bool(true));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestConditionalOrException()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new ComplexNumber(2, 3), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestSubAssignUndefined()
+        {
+            var exp = new SubAssign(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSubAssignNumber()
+        {
+            var exp = new SubAssign(new Variable("x"), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSubAssignException()
+        {
+            var exp = new SubAssign(new Variable("x"), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestWhileUndefined()
+        {
+            var exp = new While(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestWhileNumber()
+        {
+            var exp = new While(new Variable("x"), new Bool(false));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestWhileException()
+        {
+            var exp = new While(new Variable("x"), new Number(1));
+
+            TestException(exp);
+        }
+
+        #endregion Programming
 
     }
 

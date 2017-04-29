@@ -49,16 +49,6 @@ namespace xFunc.Tests.Expressionss.Statistical
         }
 
         [Fact]
-        public void TwoVectorsTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Product(new[]
-            {
-                new Vector(new[] { new Number(1), new Number(2) }),
-                new Vector(new[] { new Number(1), new Number(2) })
-            }, 2));
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Product(new[] { new Number(1), new Number(2) }, 2);

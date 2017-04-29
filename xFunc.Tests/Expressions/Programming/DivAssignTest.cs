@@ -47,12 +47,6 @@ namespace xFunc.Tests.Expressionss.Programming
         }
 
         [Fact]
-        public void NumberDivBoolTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new DivAssign(new Variable("x"), new Bool(true)));
-        }
-
-        [Fact]
         public void NotVarTest()
         {
             Assert.Throws<NotSupportedException>(() => new DivAssign(new Number(1), new Number(1)));

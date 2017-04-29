@@ -39,33 +39,6 @@ namespace xFunc.Maths.Expressions
         public Add(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            if ((m_left.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_left.ResultType != ResultType.All) ||
-                (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_right.ResultType != ResultType.All))
-                return ResultType.ComplexNumber;
-
-            if (m_left.ResultType == ResultType.Number || m_right.ResultType == ResultType.Number)
-                return ResultType.Number;
-
-            if (m_left.ResultType == ResultType.Matrix || m_right.ResultType == ResultType.Matrix)
-                return ResultType.Matrix;
-
-            if (m_left.ResultType == ResultType.Vector || m_right.ResultType == ResultType.Vector)
-                return ResultType.Vector;
-
-            if (m_left.ResultType.HasFlagNI(ResultType.Number) || m_right.ResultType.HasFlagNI(ResultType.Number))
-                return ResultType.Number;
-
-            return ResultType.Number | ResultType.ComplexNumber | ResultType.Vector | ResultType.Matrix;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -131,58 +104,6 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Add(m_left.Clone(), m_right.Clone());
-        }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType
-        {
-            get
-            {
-                if (m_right != null)
-                {
-                    if (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber) || m_right.ResultType.HasFlagNI(ResultType.Number))
-                        return ResultType.Number | ResultType.ComplexNumber;
-
-                    if (m_right.ResultType == ResultType.Matrix)
-                        return ResultType.Matrix;
-
-                    if (m_right.ResultType == ResultType.Vector)
-                        return ResultType.Vector;
-                }
-
-                return ResultType.Number | ResultType.ComplexNumber | ResultType.Vector | ResultType.Matrix;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType
-        {
-            get
-            {
-                if (m_left != null)
-                {
-                    if (m_left.ResultType.HasFlagNI(ResultType.ComplexNumber) || m_left.ResultType.HasFlagNI(ResultType.Number))
-                        return ResultType.Number | ResultType.ComplexNumber;
-
-                    if (m_left.ResultType == ResultType.Matrix)
-                        return ResultType.Matrix;
-
-                    if (m_left.ResultType == ResultType.Vector)
-                        return ResultType.Vector;
-                }
-
-                return ResultType.Number | ResultType.ComplexNumber | ResultType.Vector | ResultType.Matrix;
-            }
         }
 
     }

@@ -139,53 +139,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// </value>
         public IExpression Else => ParametersCount == 3 ? m_arguments[2] : null;
 
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ResultType ResultType
-        {
-            get
-            {
-                var @else = Else;
-                if (@else != null)
-                    return Then.ResultType | @else.ResultType;
-
-                return Then.ResultType;
-            }
-        }
-
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                if (ParametersCount == 3)
-                    return new[]
-                    {
-                        ResultType.Boolean, // Condition
-                        ResultType.All,     // Then
-                        ResultType.All      // Else
-                    };
-
-                return new[]
-                {
-                    ResultType.Boolean, // Condition
-                    ResultType.All      // Then
-                };
-            }
-        }
-
     }
 
 }

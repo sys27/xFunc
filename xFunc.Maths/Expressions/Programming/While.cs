@@ -36,17 +36,6 @@ namespace xFunc.Maths.Expressions.Programming
         public While(IExpression body, IExpression condition) : base(body, condition) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Undefined;
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
@@ -86,21 +75,6 @@ namespace xFunc.Maths.Expressions.Programming
             return new While(m_left.Clone(), m_right.Clone());
         }
 
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType => ResultType.All;
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType => ResultType.Boolean;
     }
 
 }

@@ -37,21 +37,6 @@ namespace xFunc.Maths.Expressions
         public Div(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            if ((m_left.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_left.ResultType != ResultType.All) ||
-                (m_right.ResultType.HasFlagNI(ResultType.ComplexNumber) && m_right.ResultType != ResultType.All))
-                return ResultType.ComplexNumber;
-
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
@@ -112,22 +97,6 @@ namespace xFunc.Maths.Expressions
         {
             return new Div(m_left.Clone(), m_right.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType => ResultType.Number | ResultType.ComplexNumber;
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

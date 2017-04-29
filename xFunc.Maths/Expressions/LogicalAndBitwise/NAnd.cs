@@ -37,17 +37,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public NAnd(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Boolean;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -98,22 +87,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             return new NAnd(m_left.Clone(), m_right.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType => ResultType.Boolean;
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType => ResultType.Boolean;
 
     }
 

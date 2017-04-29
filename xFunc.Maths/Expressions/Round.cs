@@ -145,27 +145,6 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Digits => ParametersCount == 2 ? m_arguments[1] : null;
 
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                if (ParametersCount == 2)
-                    return new[]
-                    {
-                        ResultType.Number,
-                        ResultType.Number
-                    };
-
-                return new[] { ResultType.Number };
-            }
-        }
-
     }
 
 }

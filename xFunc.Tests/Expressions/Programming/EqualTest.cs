@@ -47,13 +47,7 @@ namespace xFunc.Tests.Expressionss.Programming
 
             Assert.Equal(true, result);
         }
-
-        [Fact]
-        public void NumberAndBoolEqualTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Equal(new Number(10), new Bool(false)));
-        }
-
+        
         [Fact]
         public void NumberAndBoolVarEqualTest()
         {

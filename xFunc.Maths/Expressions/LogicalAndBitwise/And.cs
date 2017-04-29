@@ -36,23 +36,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public And(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            if (m_left.ResultType == ResultType.Number || m_right.ResultType == ResultType.Number)
-                return ResultType.Number;
-
-            if (m_left.ResultType == ResultType.Boolean || m_right.ResultType == ResultType.Boolean)
-                return ResultType.Boolean;
-
-            return ResultType.Number | ResultType.Boolean;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -104,52 +87,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public override IExpression Clone()
         {
             return new And(m_left.Clone(), m_right.Clone());
-        }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType
-        {
-            get
-            {
-                if (m_right != null)
-                {
-                    if (m_right.ResultType == ResultType.Number)
-                        return ResultType.Number;
-
-                    if (m_right.ResultType == ResultType.Boolean)
-                        return ResultType.Boolean;
-                }
-
-                return ResultType.Number | ResultType.Boolean;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType
-        {
-            get
-            {
-                if (m_left != null)
-                {
-                    if (m_left.ResultType == ResultType.Number)
-                        return ResultType.Number;
-
-                    if (m_left.ResultType == ResultType.Boolean)
-                        return ResultType.Boolean;
-                }
-
-                return ResultType.Number | ResultType.Boolean;
-            }
         }
 
     }

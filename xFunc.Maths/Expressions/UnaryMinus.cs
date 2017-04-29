@@ -36,20 +36,6 @@ namespace xFunc.Maths.Expressions
         public UnaryMinus(IExpression expression) : base(expression) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            if (m_argument.ResultType.HasFlagNI(ResultType.ComplexNumber))
-                return ResultType.ComplexNumber;
-
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -102,14 +88,6 @@ namespace xFunc.Maths.Expressions
         {
             return new UnaryMinus(m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

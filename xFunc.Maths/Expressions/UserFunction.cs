@@ -152,17 +152,6 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public override int MaxParameters => ParametersCount;
 
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ResultType ResultType => ResultType.All;
-
     }
 
 }

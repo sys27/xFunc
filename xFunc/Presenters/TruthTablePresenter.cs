@@ -51,8 +51,9 @@ namespace xFunc.Presenters
             var tokens = lexer.Tokenize(strExp);
 
             expression = parser.Parse(tokens);
-            if (!expression.ResultType.HasFlagNI(ResultType.Boolean))
-                throw new NotSupportedException();
+            //todo: !!!
+            //if (!expression.ResultType.HasFlagNI(ResultType.Boolean))
+            throw new NotSupportedException();
 
             expressions = Helpers.ConvertExpressionToCollection(expression);
             parameters = Helpers.GetParameters(tokens);
@@ -81,37 +82,13 @@ namespace xFunc.Presenters
             }
         }
 
-        public IExpression Expression
-        {
-            get
-            {
-                return expression;
-            }
-        }
+        public IExpression Expression => expression;
 
-        public IEnumerable<IExpression> Expressions
-        {
-            get
-            {
-                return expressions;
-            }
-        }
+        public IEnumerable<IExpression> Expressions => expressions;
 
-        public ParameterCollection Parameters
-        {
-            get
-            {
-                return parameters;
-            }
-        }
+        public ParameterCollection Parameters => parameters;
 
-        public IEnumerable<TruthTableRowViewModel> Table
-        {
-            get
-            {
-                return table;
-            }
-        }
+        public IEnumerable<TruthTableRowViewModel> Table => table;
 
     }
 

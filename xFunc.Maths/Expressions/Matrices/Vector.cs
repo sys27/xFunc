@@ -183,35 +183,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </value>
         public override int MaxParameters => -1;
 
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ResultType ResultType => ResultType.Vector;
-
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                var results = new ResultType[m_arguments?.Length ?? 0];
-                for (var i = 0; i < results.Length; i++)
-                    results[i] = ResultType.Number;
-
-                return results;
-            }
-        }
-
     }
 
 }

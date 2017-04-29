@@ -37,20 +37,6 @@ namespace xFunc.Maths.Expressions
         public Pow(IExpression @base, IExpression exponent) : base(@base, exponent) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            if (m_left.ResultType.HasFlagNI(ResultType.ComplexNumber))
-                return ResultType.ComplexNumber;
-
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -109,40 +95,6 @@ namespace xFunc.Maths.Expressions
         public override IExpression Clone()
         {
             return new Pow(m_left.Clone(), m_right.Clone());
-        }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType
-        {
-            get
-            {
-                if (m_right != null && m_right.ResultType.HasFlagNI(ResultType.ComplexNumber))
-                    return ResultType.ComplexNumber;
-
-                return ResultType.Number | ResultType.ComplexNumber;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType
-        {
-            get
-            {
-                if (m_left != null && m_left.ResultType.HasFlagNI(ResultType.ComplexNumber))
-                    return ResultType.Number | ResultType.ComplexNumber;
-
-                return ResultType.Number;
-            }
         }
 
     }

@@ -37,17 +37,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected HyperbolicExpression(IExpression argument) : base(argument) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return m_argument.ResultType;
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="complex">The calculation result of argument.</param>
@@ -85,14 +74,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
             throw new ResultIsNotSupportedException(this, result);
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.Number | ResultType.ComplexNumber;
 
     }
 

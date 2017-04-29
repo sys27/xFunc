@@ -34,12 +34,6 @@ namespace xFunc.Tests.Expressionss.ComplexNumbers
         }
 
         [Fact]
-        public void ReNumberTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Re(new Number(2)));
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Re(new ComplexNumber(new Complex(2, 2)));

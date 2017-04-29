@@ -122,15 +122,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>The result type of current expression.</returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
@@ -154,8 +145,6 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((LeftType & value.ResultType) == ResultType.None)
-                    throw new ParameterTypeMismatchException(LeftType, value.ResultType);
 
                 m_left = value;
                 m_left.Parent = this;
@@ -163,14 +152,6 @@ namespace xFunc.Maths.Expressions
                 IsChanged = true;
             }
         }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public virtual ResultType LeftType => ResultType.Number;
 
         /// <summary>
         /// The right (second) operand.
@@ -185,8 +166,6 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((RightType & value.ResultType) == ResultType.None)
-                    throw new ParameterTypeMismatchException(RightType, value.ResultType);
 
                 m_right = value;
                 m_right.Parent = this;
@@ -194,14 +173,6 @@ namespace xFunc.Maths.Expressions
                 IsChanged = true;
             }
         }
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public virtual ResultType RightType => ResultType.Number;
 
         /// <summary>
         /// Get or Set the parent expression.

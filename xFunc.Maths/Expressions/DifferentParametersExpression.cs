@@ -193,43 +193,6 @@ namespace xFunc.Maths.Expressions
             set
             {
                 m_arguments = value;
-                if (m_arguments != null)
-                {
-                    var types = ArgumentsTypes;
-                    if (m_arguments.Length != types.Length)
-                        throw new ArgumentException(Resource.InvalidExpression);
-
-                    for (var i = 0; i < m_arguments.Length; i++)
-                    {
-                        var item = m_arguments[i];
-
-                        if (item != null)
-                        {
-                            if ((types[i] & item.ResultType) == ResultType.None)
-                                throw new ParameterTypeMismatchException(types[i], item.ResultType);
-
-                            item.Parent = this;
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public virtual ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                var results = new ResultType[m_arguments?.Length ?? MinParameters];
-                for (var i = 0; i < results.Length; i++)
-                    results[i] = ResultType.All;
-
-                return results;
             }
         }
 
@@ -256,17 +219,6 @@ namespace xFunc.Maths.Expressions
         /// The count of parameters.
         /// </value>
         public int ParametersCount { get; set; }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public virtual ResultType ResultType => ResultType.Number;
 
     }
 

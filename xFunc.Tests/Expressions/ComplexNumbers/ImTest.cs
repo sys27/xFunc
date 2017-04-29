@@ -34,12 +34,6 @@ namespace xFunc.Tests.Expressionss.ComplexNumbers
         }
 
         [Fact]
-        public void ImNumberTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Im(new Number(2)));
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Im(new ComplexNumber(new Complex(2, 2)));

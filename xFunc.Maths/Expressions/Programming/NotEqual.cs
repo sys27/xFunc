@@ -34,18 +34,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         public NotEqual(IExpression left, IExpression right) : base(left, right) { }
-
-        /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Boolean;
-        }
-
+        
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -91,51 +80,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new Equal(m_left.Clone(), m_right.Clone());
         }
-
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType
-        {
-            get
-            {
-                if (m_right != null)
-                {
-                    if (m_right.ResultType.HasFlagNI(ResultType.Number))
-                        return ResultType.Number;
-
-                    return ResultType.Boolean;
-                }
-
-                return ResultType.Number | ResultType.Boolean;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType
-        {
-            get
-            {
-                if (m_left != null)
-                {
-                    if (m_left.ResultType.HasFlagNI(ResultType.Number))
-                        return ResultType.Number;
-
-                    return ResultType.Boolean;
-                }
-
-                return ResultType.Number | ResultType.Boolean;
-            }
-        }
-
+        
     }
 
 }

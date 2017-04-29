@@ -49,12 +49,6 @@ namespace xFunc.Tests.Expressionss.Programming
         }
 
         [Fact]
-        public void NumberAndBoolEqualTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new NotEqual(new Number(10), new Bool(false)));
-        }
-
-        [Fact]
         public void NumberAndBoolVarEqualTest()
         {
             var parameters = new ParameterCollection()

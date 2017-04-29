@@ -954,20 +954,6 @@ namespace xFunc.Maths
             }
         }
 
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        public ResultType ResultType
-        {
-            get
-            {
-                return current.ResultType;
-            }
-        }
-
         #endregion
 
         /// <summary>

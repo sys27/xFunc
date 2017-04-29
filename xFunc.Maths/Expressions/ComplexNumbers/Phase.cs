@@ -37,17 +37,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public Phase(IExpression argument) : base(argument) { }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -105,14 +94,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         {
             return new Phase(m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public override ResultType ArgumentType => ResultType.ComplexNumber;
 
     }
 

@@ -106,17 +106,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Number;
-        }
-
-        /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>
@@ -141,8 +130,6 @@ namespace xFunc.Maths.Expressions
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if ((ArgumentType & value.ResultType) == ResultType.None)
-                    throw new ParameterTypeMismatchException(ArgumentType, value.ResultType);
 
                 m_argument = value;
                 m_argument.Parent = this;
@@ -150,14 +137,6 @@ namespace xFunc.Maths.Expressions
                 IsChanged = true;
             }
         }
-
-        /// <summary>
-        /// Gets the type of the argument.
-        /// </summary>
-        /// <value>
-        /// The type of the argument.
-        /// </value>
-        public virtual ResultType ArgumentType => ResultType.Number;
 
         /// <summary>
         /// Get or Set the parent expression.

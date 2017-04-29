@@ -34,18 +34,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         public Or(IExpression left, IExpression right) : base(left, right) { }
-
-        /// <summary>
-        /// Gets the result type.
-        /// </summary>
-        /// <returns>
-        /// The result type of current expression.
-        /// </returns>
-        protected override ResultType GetResultType()
-        {
-            return ResultType.Boolean;
-        }
-
+        
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -89,21 +78,6 @@ namespace xFunc.Maths.Expressions.Programming
             return new Or(m_left.Clone(), m_right.Clone());
         }
 
-        /// <summary>
-        /// Gets the type of the left parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the left parameter.
-        /// </value>
-        public override ResultType LeftType => ResultType.Boolean;
-
-        /// <summary>
-        /// Gets the type of the right parameter.
-        /// </summary>
-        /// <value>
-        /// The type of the right parameter.
-        /// </value>
-        public override ResultType RightType => ResultType.Boolean;
     }
 
 }

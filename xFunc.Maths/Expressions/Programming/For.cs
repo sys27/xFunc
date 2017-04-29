@@ -99,13 +99,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters
-        {
-            get
-            {
-                return 4;
-            }
-        }
+        public override int MinParameters => 4;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -113,13 +107,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters
-        {
-            get
-            {
-                return 4;
-            }
-        }
+        public override int MaxParameters => 4;
 
         /// <summary>
         /// Gets the body of loop.
@@ -127,13 +115,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The body of loop.
         /// </value>
-        public IExpression Body
-        {
-            get
-            {
-                return m_arguments[0];
-            }
-        }
+        public IExpression Body => m_arguments[0];
 
         /// <summary>
         /// Gets the initializer section.
@@ -141,13 +123,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The initializer section.
         /// </value>
-        public IExpression Initialization
-        {
-            get
-            {
-                return m_arguments[1];
-            }
-        }
+        public IExpression Initialization => m_arguments[1];
 
         /// <summary>
         /// Gets the condition section.
@@ -155,13 +131,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The condition section.
         /// </value>
-        public IExpression Condition
-        {
-            get
-            {
-                return m_arguments[2];
-            }
-        }
+        public IExpression Condition => m_arguments[2];
 
         /// <summary>
         /// Gets the iterator section.
@@ -169,50 +139,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The iterator section.
         /// </value>
-        public IExpression Iteration
-        {
-            get
-            {
-                return m_arguments[3];
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ResultType ResultType
-        {
-            get
-            {
-                return ResultType.Undefined;
-            }
-        }
-
-        /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                return new[]
-                {
-                    ResultType.All,     // Body
-                    ResultType.All,     // Initialization
-                    ResultType.Boolean, // Condition
-                    ResultType.All      // Iteration
-                };
-            }
-        }
+        public IExpression Iteration => m_arguments[3];
 
     }
 

@@ -30,6 +30,7 @@ namespace xFunc.Maths.Analyzers
     // todo: remove Flag and ResultType.All
     // todo: optimize
     // todo: check ||
+    // todo: define/undefine!!!
     
     public class TypeAnalyzer : IAnalyzer<ResultType>
     {

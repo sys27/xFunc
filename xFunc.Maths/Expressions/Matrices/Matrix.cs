@@ -114,10 +114,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var args = new Vector[this.ParametersCount];
 
             for (var i = 0; i < this.ParametersCount; i++)
-                if (!(m_arguments[i] is Vector) && m_arguments[i].ResultType == ResultType.Matrix)
-                    args[i] = (Vector)m_arguments[i].Execute(parameters);
-                else
-                    args[i] = (Vector)m_arguments[i];
+                args[i] = (Vector)m_arguments[i].Execute(parameters);
 
             return args;
         }
@@ -250,24 +247,6 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Gets the arguments types.
-        /// </summary>
-        /// <value>
-        /// The arguments types.
-        /// </value>
-        public override ResultType[] ArgumentsTypes
-        {
-            get
-            {
-                var results = new ResultType[m_arguments?.Length ?? MinParameters];
-                for (var i = 0; i < results.Length; i++)
-                    results[i] = ResultType.Vector;
-
-                return results;
-            }
-        }
-
-        /// <summary>
         /// Gets the size of vectors.
         /// </summary>
         /// <value>
@@ -298,17 +277,6 @@ namespace xFunc.Maths.Expressions.Matrices
         ///   <c>true</c> if matrix is square; otherwise, <c>false</c>.
         /// </value>
         public bool IsSquare => this.ParametersCount == this.SizeOfVectors;
-
-        /// <summary>
-        /// Gets the type of the result.
-        /// </summary>
-        /// <value>
-        /// The type of the result.
-        /// </value>
-        /// <remarks>
-        /// Usage of this property can affect performance. Don't use this property each time if you need to check result type of current expression. Just store/cache value only once and use it everywhere.
-        /// </remarks>
-        public override ResultType ResultType => ResultType.Matrix;
 
     }
 

@@ -193,6 +193,10 @@ namespace xFunc.Maths.Expressions
             set
             {
                 m_arguments = value;
+                if (m_arguments != null)
+                    foreach (var item in m_arguments)
+                        if (item != null)
+                            item.Parent = this;
             }
         }
 

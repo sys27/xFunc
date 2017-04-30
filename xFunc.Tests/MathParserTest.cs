@@ -545,22 +545,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void MatrixAndNotVectorTest()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Matrix, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            Assert.Throws<ParameterTypeMismatchException>(() => parser.Parse(tokens));
-        }
-
-        [Fact]
         public void MatrixWithDiffVectorSizeTest()
         {
             var tokens = new List<IToken>

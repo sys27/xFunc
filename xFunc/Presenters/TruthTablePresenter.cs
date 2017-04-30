@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.ViewModels;
@@ -32,10 +33,12 @@ namespace xFunc.Presenters
         private IEnumerable<IExpression> expressions;
         private ParameterCollection parameters;
         private List<TruthTableRowViewModel> table;
+        private IAnalyzer<ResultType> typeAnalyzer;
 
         public TruthTablePresenter()
         {
             parser = new Parser();
+            typeAnalyzer = new TypeAnalyzer();
         }
 
         private void SetBits(int bits, int parametersCount)
@@ -51,9 +54,9 @@ namespace xFunc.Presenters
             var tokens = lexer.Tokenize(strExp);
 
             expression = parser.Parse(tokens);
-            //todo: !!!
-            //if (!expression.ResultType.HasFlagNI(ResultType.Boolean))
-            throw new NotSupportedException();
+            var resultType = expression.Analyze(typeAnalyzer);
+            if (resultType == ResultType.Undefined || resultType == ResultType.Boolean)
+                throw new NotSupportedException();
 
             expressions = Helpers.ConvertExpressionToCollection(expression);
             parameters = Helpers.GetParameters(tokens);

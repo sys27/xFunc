@@ -47,18 +47,6 @@ namespace xFunc.Tests.Expressionss.Matrices
         }
 
         [Fact]
-        public void ExecuteVectorTest()
-        {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Inverse(
-                new Vector(new[] {
-                    new Number(3),
-                    new Number(7),
-                    new Number(2),
-                    new Number(5)
-                })));
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Inverse(new Matrix(new[]

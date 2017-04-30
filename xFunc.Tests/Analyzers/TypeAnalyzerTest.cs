@@ -1102,6 +1102,14 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void TestDeterminantsException2()
+        {
+            var exp = new Determinant(new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }));
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestInverseUndefined()
         {
             var exp = new Inverse(new Variable("x"));
@@ -1121,6 +1129,14 @@ namespace xFunc.Tests.Analyzers
         public void TestInverseException()
         {
             var exp = new Inverse(new ComplexNumber(2, 2));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestInverseException2()
+        {
+            var exp = new Inverse(new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }));
 
             TestException(exp);
         }

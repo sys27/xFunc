@@ -19,7 +19,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressionss
 {
-    
+
     public class UnaryTest
     {
 

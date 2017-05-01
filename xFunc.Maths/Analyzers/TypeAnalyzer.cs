@@ -27,7 +27,6 @@ namespace xFunc.Maths.Analyzers
 {
 
     // todo: exceptions!!!
-    // todo: remove Flag and ResultType.All
     // todo: optimize
     // todo: check ||
     // todo: define/undefine!!!

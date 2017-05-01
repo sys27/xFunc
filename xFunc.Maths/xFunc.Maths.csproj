@@ -49,7 +49,6 @@
     <Compile Include="Analyzers\TypeAnalyzer.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />
-    <Compile Include="Expressions\CachedResultTypeExpression.cs" />
     <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\ComplexNumbers\ComplexNumber.cs" />
     <Compile Include="Expressions\ComplexNumbers\Conjugate.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Expressions\Floor.cs" />
     <Compile Include="Expressions\GCD.cs" />
     <Compile Include="Expressions\Hyperbolic\HyperbolicExpression.cs" />
-    <Compile Include="Expressions\IChangedExpession.cs" />
     <Compile Include="Expressions\LCM.cs" />
     <Compile Include="Expressions\Collections\FunctionCollection.cs" />
     <Compile Include="Expressions\Collections\Parameter.cs" />

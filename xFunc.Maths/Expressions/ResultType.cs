@@ -20,7 +20,6 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents results of expressions.
     /// </summary>
-    [Flags]
     public enum ResultType
     {
 
@@ -55,11 +54,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The expression returns other expression.
         /// </summary>
-        Expression = 0x40,
-        /// <summary>
-        /// Combines other parameters.
-        /// </summary>
-        All = Undefined | Number | ComplexNumber | Boolean | Vector | Matrix | Expression
+        Expression = 0x40
 
     }
 

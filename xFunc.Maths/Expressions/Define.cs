@@ -237,14 +237,6 @@ namespace xFunc.Maths.Expressions
             }
         }
 
-        /// <summary>
-        /// Gets the type of the value.
-        /// </summary>
-        /// <value>
-        /// The type of the value.
-        /// </value>
-        public ResultType ValueType => ResultType.All;
-
     }
 
 }

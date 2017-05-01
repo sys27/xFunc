@@ -176,22 +176,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ParseDerivSecondParamIsNotVar()
-        {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Derivative, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
-            };
-
-            Assert.Throws<ArgumentException>(() => parser.Parse(tokens));
-        }
-
-        [Fact]
         public void ParseDefine()
         {
             var tokens = new List<IToken>

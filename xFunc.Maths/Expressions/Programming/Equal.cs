@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions.Programming
             if (leftValueObject is bool leftBool && rightValueObject is bool rightBool)
                 return leftBool == rightBool;
 
-            throw new NotSupportedException();
+            throw new ResultIsNotSupportedException(this, leftValueObject, rightValueObject);
         }
 
         /// <summary>

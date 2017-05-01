@@ -35,15 +35,12 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">The arguments.</param>
         /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Derivative(IExpression[] args, int countOfParams)
-            : base(args, countOfParams)
+        public Derivative(IExpression[] args, int countOfParams) : base(args, countOfParams)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
             if (args.Length != countOfParams)
                 throw new ArgumentException();
-            if (countOfParams == 2 && !(args[1] is Variable))
-                throw new ArgumentException(Resource.InvalidExpression);
         }
 
         /// <summary>
@@ -171,29 +168,6 @@ namespace xFunc.Maths.Expressions
         /// The derivative point.
         /// </value>
         public Number DerivativePoint => ParametersCount >= 3 ? (Number)m_arguments[2] : null;
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        public override IExpression[] Arguments
-        {
-            get
-            {
-                return base.Arguments;
-            }
-            set
-            {
-                if (value != null &&
-                    ((value.Length >= 2 && !(value[1] is Variable)) ||
-                     (value.Length >= 3 && !(value[2] is Number))))
-                    throw new ArgumentException(Resource.InvalidExpression);
-
-                base.Arguments = value;
-            }
-        }
 
         /// <summary>
         /// Gets the minimum count of parameters.

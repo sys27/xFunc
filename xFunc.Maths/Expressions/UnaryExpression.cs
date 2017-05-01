@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
@@ -21,7 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The abstract base class that represents the unary operation.
     /// </summary>
-    public abstract class UnaryExpression : CachedResultTypeExpression
+    public abstract class UnaryExpression : IExpression
     {
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public override string ToString(IFormatter formatter)
+        public string ToString(IFormatter formatter)
         {
             return this.Analyze(formatter);
         }
@@ -111,10 +112,38 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public override object Execute()
+        public object Execute()
         {
             return Execute(null);
         }
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public abstract object Execute(ExpressionParameters parameters);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public abstract TResult Analyze<TResult>(IAnalyzer<TResult> analyzer);
+
+        /// <summary>
+        /// Clones this instance of the <see cref="IExpression" />.
+        /// </summary>
+        /// <returns>
+        /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
+        /// </returns>
+        public abstract IExpression Clone();
 
         /// <summary>
         /// Gets or sets the expression.
@@ -133,15 +162,13 @@ namespace xFunc.Maths.Expressions
 
                 m_argument = value;
                 m_argument.Parent = this;
-
-                IsChanged = true;
             }
         }
 
         /// <summary>
         /// Get or Set the parent expression.
         /// </summary>
-        public override IExpression Parent { get; set; }
+        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -149,7 +176,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public override int MinParameters => 1;
+        public virtual int MinParameters => 1;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -157,7 +184,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public override int MaxParameters => 1;
+        public virtual int MaxParameters => 1;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -165,7 +192,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public override int ParametersCount => 1;
+        public virtual int ParametersCount => 1;
 
     }
 

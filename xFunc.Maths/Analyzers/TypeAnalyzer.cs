@@ -31,7 +31,7 @@ namespace xFunc.Maths.Analyzers
     // todo: optimize
     // todo: check ||
     // todo: define/undefine!!!
-    
+
     public class TypeAnalyzer : IAnalyzer<ResultType>
     {
 
@@ -163,9 +163,14 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Derivative exp)
         {
-            if ((exp.ParametersCount >= 2 && exp.Arguments[1] is Variable) ||
-                (exp.ParametersCount >= 3 && exp.Arguments[2] is Number))
-                return exp.ParametersCount == 3 ? ResultType.Number : ResultType.Expression;
+            if (exp.ParametersCount == 1)
+                return ResultType.Expression;
+
+            if (exp.ParametersCount == 2 && exp.Arguments[1] is Variable)
+                return ResultType.Expression;
+
+            if (exp.ParametersCount == 3 && exp.Arguments[1] is Variable && exp.Arguments[2] is Number)
+                return ResultType.Number;
 
             throw new ParameterTypeMismatchException();
         }
@@ -423,17 +428,16 @@ namespace xFunc.Maths.Analyzers
         public virtual ResultType Analyze(Pow exp)
         {
             var leftResult = exp.Left.Analyze(this);
-            var rightResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number)
-            {
-                if (rightResult == ResultType.Number)
-                    return ResultType.Number;
-                if (rightResult == ResultType.ComplexNumber)
-                    return ResultType.ComplexNumber;
-            }
+            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
+                return ResultType.Number;
+
+            if (leftResult == ResultType.ComplexNumber &&
+                (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber))
+                return ResultType.ComplexNumber;
 
             throw new ParameterTypeMismatchException();
         }
@@ -1409,7 +1413,7 @@ namespace xFunc.Maths.Analyzers
                 return ResultType.Undefined;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+                return ResultType.Boolean;
 
             throw new ParameterTypeMismatchException();
         }
@@ -1427,7 +1431,7 @@ namespace xFunc.Maths.Analyzers
                 return ResultType.Undefined;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+                return ResultType.Boolean;
 
             throw new ParameterTypeMismatchException();
         }
@@ -1473,7 +1477,7 @@ namespace xFunc.Maths.Analyzers
                 return ResultType.Undefined;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+                return ResultType.Boolean;
 
             throw new ParameterTypeMismatchException();
         }
@@ -1491,7 +1495,7 @@ namespace xFunc.Maths.Analyzers
                 return ResultType.Undefined;
 
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+                return ResultType.Boolean;
 
             throw new ParameterTypeMismatchException();
         }

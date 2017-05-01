@@ -52,9 +52,10 @@ namespace xFunc.Tests.Expressionss
         {
             var uf1 = new UserFunction("func", new[] { new Variable("x") }, 1);
             var func = new DelegateExpression(p => (double)p.Variables["x"] == 10 ? 0 : 1);
-            var funcs = new FunctionCollection();
-            funcs.Add(uf1, func);
-
+            var funcs = new FunctionCollection
+            {
+                { uf1, func }
+            };
             var uf2 = new UserFunction("func", new[] { new Number(12) }, 1);
             var result = uf2.Execute(new ExpressionParameters(funcs));
 

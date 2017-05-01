@@ -47,19 +47,6 @@ namespace xFunc.Tests.Expressionss.Programming
 
             Assert.Equal(true, result);
         }
-        
-        [Fact]
-        public void NumberAndBoolVarEqualTest()
-        {
-            var parameters = new ParameterCollection()
-            {
-                new Parameter("x", 10),
-                new Parameter("y", false)
-            };
-            var equal = new Equal(new Variable("x"), new Variable("y"));
-
-            Assert.Throws<NotSupportedException>(() => (bool)equal.Execute(parameters));
-        }
 
         [Fact]
         public void BoolTrueEqualTest()

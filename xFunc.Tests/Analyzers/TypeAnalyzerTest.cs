@@ -136,39 +136,49 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TestAddNumberVectorTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Number(1), new Vector(new[] { new Number(1) })));
+            var exp = new Add(new Number(1), new Vector(new[] { new Number(1) }));
+
+            TestException(exp);
         }
 
         [Fact]
         public void TestAddVectorNumberTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Vector(new[] { new Number(1) }), new Number(1)));
+            var exp = new Add(new Vector(new[] { new Number(1) }), new Number(1));
+
+            TestException(exp);
         }
 
         [Fact]
         public void TestAddNumberMatrixTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) })));
+            var exp = new Add(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            TestException(exp);
         }
 
         [Fact]
         public void TestAddMatrixNumberTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1)));
+            var exp = new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
+
+            TestException(exp);
         }
 
         [Fact]
         public void TestAddVectorMatrixTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Vector(new[] { new Number(1) }),
-                                                                        new Matrix(new[] { new Vector(new[] { new Number(2) }) })));
+            var exp = new Add(new Vector(new[] { new Number(1) }), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+
+            TestException(exp);
         }
 
         [Fact]
         public void TestAddMatrixVectorTest()
         {
-            Assert.Throws<ParameterTypeMismatchException>(() => new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }),
-                                                                        new Vector(new[] { new Number(1) })));
+            var exp = new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Vector(new[] { new Number(1) }));
+
+            TestException(exp);
         }
 
         [Fact]
@@ -622,7 +632,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TestLogComplexNumber()
         {
-            var exp = new Log(new ComplexNumber(8, 4), new ComplexNumber(2, 4));
+            var exp = new Log(new ComplexNumber(8, 3), new Number(2));
 
             Test(exp, ResultType.ComplexNumber);
         }
@@ -750,9 +760,17 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TestPowComplexNumber()
         {
-            var exp = new Pow(new Number(4), new ComplexNumber(2, 4));
+            var exp = new Pow(new ComplexNumber(2, 4), new Number(4));
 
             Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestPowNumberComplexNumber()
+        {
+            var exp = new Pow(new Number(4), new ComplexNumber(2, 4));
+
+            TestException(exp);
         }
 
         [Fact]
@@ -1074,7 +1092,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Matrix(new Vector[] { new Vector(2), new Vector(2) });
 
-            Test(exp, ResultType.Vector);
+            Test(exp, ResultType.Matrix);
         }
 
         [Fact]
@@ -2752,7 +2770,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TestEqualException()
         {
-            var exp = new Equal(new Variable("x"), new Bool(false));
+            var exp = new Equal(new ComplexNumber(2, 3), new Bool(false));
 
             TestException(exp);
         }
@@ -2770,7 +2788,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new For(null, null, new Bool(false), null);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -3002,7 +3020,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new While(new Variable("x"), new Bool(false));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]

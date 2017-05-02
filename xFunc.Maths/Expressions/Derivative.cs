@@ -106,7 +106,10 @@ namespace xFunc.Maths.Expressions
                 return diff.Execute(parameters);
             }
 
-            return diff.Analyze(Simplifier);
+            if (Simplifier != null)
+                return diff.Analyze(Simplifier);
+
+            return diff;
         }
 
         /// <summary>

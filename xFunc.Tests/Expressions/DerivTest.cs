@@ -40,6 +40,36 @@ namespace xFunc.Tests.Expressionss
         }
 
         [Fact]
+        public void ExecuteNullDerivTest()
+        {
+            var exp = new Derivative(new Variable("x"))
+            {
+                Differentiator = null,
+                Simplifier = null
+            };
+
+            Assert.Throws<ArgumentNullException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteNullSimpTest()
+        {
+            var differentiator = new Mock<IDifferentiator>();
+            differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
+                          .Returns<Derivative>(e => e.Expression);
+
+            var exp = new Derivative(new Variable("x"))
+            {
+                Differentiator = differentiator.Object,
+                Simplifier = null
+            };
+
+            var result = exp.Execute();
+
+            Assert.Equal(result, result);
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Derivative(new Sin(new Variable("x")), new Variable("x"), new Number(1));

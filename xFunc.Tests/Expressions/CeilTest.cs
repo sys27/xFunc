@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
@@ -23,13 +24,21 @@ namespace xFunc.Tests.Expressionss
     {
 
         [Fact]
-        public void CeilCalculate()
+        public void ExecuteTestNumber()
         {
             var ceil = new Ceil(new Number(5.55555555));
             var result = ceil.Execute();
             var expected = 6.0;
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ExecuteTestExecption()
+        {
+            var exp = new Ceil(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

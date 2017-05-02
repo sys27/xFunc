@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
@@ -52,6 +53,14 @@ namespace xFunc.Tests.Expressionss
             var fact = new Fact(new Number(-1));
 
             Assert.Equal(double.NaN, fact.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Fact(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

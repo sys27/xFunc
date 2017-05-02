@@ -16,11 +16,12 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
 {
-    
+
     public class LnTest
     {
 
@@ -39,6 +40,14 @@ namespace xFunc.Tests.Expressionss
             var exp = new Ln(new ComplexNumber(complex));
 
             Assert.Equal(Complex.Log(complex), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Ln(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

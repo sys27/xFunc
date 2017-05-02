@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace xFunc.Tests.Expressionss
     {
 
         [Fact]
-        public void ExecuteTest1()
+        public void ExecuteTestNumber()
         {
             var exp = new Abs(new Number(-1));
 
@@ -34,7 +35,7 @@ namespace xFunc.Tests.Expressionss
         }
 
         [Fact]
-        public void ExecuteTest2()
+        public void ExecuteTestComplexNumber()
         {
             var exp = new Abs(new ComplexNumber(4, 2));
 
@@ -42,11 +43,19 @@ namespace xFunc.Tests.Expressionss
         }
 
         [Fact]
-        public void ExecuteTest3()
+        public void ExecuteTestVector()
         {
             var exp = new Abs(new Vector(new IExpression[] { new Number(5), new Number(4), new Number(6), new Number(7) }));
 
             Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
+        }
+
+        [Fact]
+        public void ExecuteTEstExecption()
+        {
+            var exp = new Abs(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

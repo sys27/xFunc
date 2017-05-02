@@ -17,6 +17,7 @@ using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss.Hyperbolic
@@ -43,6 +44,14 @@ namespace xFunc.Tests.Expressionss.Hyperbolic
             Assert.Equal(Complex.Tanh(complex), result);
             Assert.Equal(1.0032386273536098, result.Real, 15);
             Assert.Equal(-0.0037640256415041864, result.Imaginary, 15);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Tanh(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
@@ -28,6 +29,14 @@ namespace xFunc.Tests.Expressionss
             var exp = new Lb(new Number(2));
 
             Assert.Equal(Math.Log(2, 2), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Lb(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

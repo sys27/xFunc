@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
@@ -66,6 +67,30 @@ namespace xFunc.Tests.Expressionss
             var expected = new Complex(0, 2);
 
             Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteBoolTest()
+        {
+            var exp = new Div(new Bool(false), new Bool(true));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteComplexNumberBoolTest()
+        {
+            var exp = new Div(new ComplexNumber(2, 4), new Bool(true));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteBoolComplexNumberTest()
+        {
+            var exp = new Div(new Bool(true), new ComplexNumber(2, 4));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

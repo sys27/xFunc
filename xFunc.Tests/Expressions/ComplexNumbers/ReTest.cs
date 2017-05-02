@@ -25,12 +25,20 @@ namespace xFunc.Tests.Expressionss.ComplexNumbers
     {
 
         [Fact]
-        public void ExecuteTest1()
+        public void ExecuteComplexNumberTest()
         {
             var complex = new Complex(3.1, 2.5);
             var exp = new Re(new ComplexNumber(complex));
 
             Assert.Equal(complex.Real, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteExeptionTest()
+        {
+            var exp = new Re(new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

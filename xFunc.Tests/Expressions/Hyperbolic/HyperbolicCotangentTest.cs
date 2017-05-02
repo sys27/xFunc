@@ -18,6 +18,7 @@ using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss.Hyperbolic
@@ -44,6 +45,14 @@ namespace xFunc.Tests.Expressionss.Hyperbolic
             Assert.Equal(ComplexExtensions.Coth(complex), result);
             Assert.Equal(0.99675779656935837, result.Real, 15);
             Assert.Equal(0.0037397103763368955, result.Imaginary, 15);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Coth(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

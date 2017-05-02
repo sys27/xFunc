@@ -31,6 +31,10 @@ namespace xFunc.Maths.Analyzers
     // todo: check ||
     // todo: define/undefine!!!
 
+    /// <summary>
+    /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{ResultType}" />
     public class TypeAnalyzer : IAnalyzer<ResultType>
     {
 

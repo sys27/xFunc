@@ -736,6 +736,14 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void TestMulException()
+        {
+            var exp = new Mul(new Bool(false), new Bool(true));
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestNumber()
         {
             Test(new Number(1), ResultType.Number);
@@ -1310,7 +1318,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TestReciprocalComplexNumber()
         {
-            var exp = new Conjugate(new ComplexNumber(2, 3));
+            var exp = new Reciprocal(new ComplexNumber(2, 3));
 
             Test(exp, ResultType.ComplexNumber);
         }
@@ -1318,7 +1326,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TestReciprocalException()
         {
-            var exp = new Conjugate(new Number(2));
+            var exp = new Reciprocal(new Number(2));
 
             TestException(exp);
         }
@@ -2771,6 +2779,38 @@ namespace xFunc.Tests.Analyzers
         public void TestEqualException()
         {
             var exp = new Equal(new ComplexNumber(2, 3), new Bool(false));
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestNotEqualUndefined()
+        {
+            var exp = new NotEqual(new Variable("x"), new Variable("x"));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestNotEqualNumber()
+        {
+            var exp = new NotEqual(new Number(20), new Number(10));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestNotEqualBoolean()
+        {
+            var exp = new NotEqual(new Bool(false), new Bool(true));
+
+            Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestNotEqualException()
+        {
+            var exp = new NotEqual(new ComplexNumber(2, 3), new Bool(false));
 
             TestException(exp);
         }

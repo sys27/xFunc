@@ -918,13 +918,7 @@ namespace xFunc.Maths
         /// <value>
         /// The minimum count of parameters.
         /// </value>
-        public int MinParameters
-        {
-            get
-            {
-                return current.MinParameters;
-            }
-        }
+        public int MinParameters => current.MinParameters;
 
         /// <summary>
         /// Gets the maximum count of parameters. -1 - Infinity.
@@ -932,13 +926,7 @@ namespace xFunc.Maths
         /// <value>
         /// The maximum count of parameters.
         /// </value>
-        public int MaxParameters
-        {
-            get
-            {
-                return current.MaxParameters;
-            }
-        }
+        public int MaxParameters => current.MaxParameters;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -946,13 +934,7 @@ namespace xFunc.Maths
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                return current.ParametersCount;
-            }
-        }
+        public int ParametersCount => current.ParametersCount;
 
         #endregion
 
@@ -962,13 +944,7 @@ namespace xFunc.Maths
         /// <value>
         /// The current expression.
         /// </value>
-        public IExpression Current
-        {
-            get
-            {
-                return current;
-            }
-        }
+        public IExpression Current => current;
 
     }
 

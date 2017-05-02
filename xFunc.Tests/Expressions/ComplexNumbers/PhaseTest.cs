@@ -61,6 +61,14 @@ namespace xFunc.Tests.Expressionss.ComplexNumbers
         }
 
         [Fact]
+        public void ExecuteExeptionTest()
+        {
+            var exp = new Phase(new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Phase(new ComplexNumber(new Complex(2, 2)));

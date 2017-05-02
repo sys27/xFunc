@@ -17,6 +17,7 @@ using System.Numerics;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -60,6 +61,14 @@ namespace xFunc.Tests.Expressionss.Trigonometric
             Assert.Equal(ComplexExtensions.Cot(complex), result);
             Assert.Equal(-0.010604783470337083, result.Real, 14);
             Assert.Equal(-1.0357466377649953, result.Imaginary, 14);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Cot(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

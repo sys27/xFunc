@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -59,6 +60,14 @@ namespace xFunc.Tests.Expressionss.Trigonometric
             Assert.Equal(Complex.Acos(complex), result);
             Assert.Equal(0.60613782238729386, result.Real, 15);
             Assert.Equal(-1.9686379257930964, result.Imaginary, 15);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Arccos(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

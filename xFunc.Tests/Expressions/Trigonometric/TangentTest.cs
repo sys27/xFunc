@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -59,6 +60,14 @@ namespace xFunc.Tests.Expressionss.Trigonometric
             Assert.Equal(Complex.Tan(complex), exp.Execute());
             Assert.Equal(-0.0098843750383224935, result.Real, 14);
             Assert.Equal(0.96538587902213313, result.Imaginary, 14);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
+        {
+            var exp = new Tan(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

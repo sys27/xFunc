@@ -59,6 +59,18 @@ namespace xFunc.Maths.Expressions.Statistical
             return base.GetHashCode(1607, 6917);
         }
 
+        private double _Execute(IExpression[] expressions, ExpressionParameters parameters)
+        {
+            return expressions.Aggregate(1.0, (acc, exp) =>
+            {
+                var result = exp.Execute(parameters);
+                if (result is double doubleResult)
+                    return acc * doubleResult;
+
+                throw new ResultIsNotSupportedException();
+            });
+        }
+
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -73,12 +85,12 @@ namespace xFunc.Maths.Expressions.Statistical
             {
                 var result = this.m_arguments[0].Execute(parameters);
                 if (result is Vector vector)
-                    return vector.Arguments.Aggregate(1.0, (acc, exp) => acc * (double)exp.Execute(parameters));
+                    return _Execute(vector.Arguments, parameters);
 
                 return result;
             }
 
-            return this.m_arguments.Aggregate(1.0, (acc, exp) => acc * (double)exp.Execute(parameters));
+            return _Execute(m_arguments, parameters);
         }
 
         /// <summary>
@@ -120,7 +132,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// The maximum count of parameters.
         /// </value>
         public override int MaxParameters => -1;
-        
+
     }
 
 }

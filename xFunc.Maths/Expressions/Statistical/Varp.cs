@@ -56,6 +56,18 @@ namespace xFunc.Maths.Expressions.Statistical
             return base.GetHashCode(128219, 1811);
         }
 
+        private double[] ExecuteArray(IExpression[] expression, ExpressionParameters parameters)
+        {
+            return expression.Select(exp =>
+            {
+                var result = exp.Execute(parameters);
+                if (result is double doubleResult)
+                    return doubleResult;
+
+                throw new ResultIsNotSupportedException();
+            }).ToArray();
+        }
+
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -75,8 +87,9 @@ namespace xFunc.Maths.Expressions.Statistical
                     data = vector.Arguments;
             }
 
-            var avg = data.Average(exp => (double)exp.Execute(parameters));
-            return data.Average(exp => Math.Pow((double)exp.Execute(parameters) - avg, 2));
+            var calculatedArray = ExecuteArray(data, parameters);
+            var avg = calculatedArray.Average();
+            return calculatedArray.Average(x => Math.Pow(x - avg, 2));
         }
 
         /// <summary>

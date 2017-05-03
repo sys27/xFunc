@@ -56,6 +56,18 @@ namespace xFunc.Maths.Expressions.Statistical
             return base.GetHashCode(15749, 21929);
         }
 
+        private double _Execute(IExpression[] expressions, ExpressionParameters parameters)
+        {
+            return expressions.Average(exp =>
+            {
+                var result = exp.Execute(parameters);
+                if (result is double doubleResult)
+                    return doubleResult;
+
+                throw new ResultIsNotSupportedException();
+            });
+        }
+
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -70,12 +82,12 @@ namespace xFunc.Maths.Expressions.Statistical
             {
                 var result = this.m_arguments[0].Execute(parameters);
                 if (result is Vector vector)
-                    return vector.Arguments.Average(exp => (double)exp.Execute(parameters));
+                    return _Execute(vector.Arguments, parameters);
 
                 return result;
             }
 
-            return this.m_arguments.Average(exp => (double)exp.Execute(parameters));
+            return _Execute(m_arguments, parameters);
         }
 
         /// <summary>
@@ -101,7 +113,7 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             return new Avg(CloneArguments(), ParametersCount);
         }
-        
+
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>

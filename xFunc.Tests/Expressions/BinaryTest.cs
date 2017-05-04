@@ -18,7 +18,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressionss
 {
-    
+
     public class BinaryTest
     {
 
@@ -38,6 +38,34 @@ namespace xFunc.Tests.Expressionss
             var sub = new Sub(new Number(2), new Number(3));
 
             Assert.NotEqual<IExpression>(add, sub);
+        }
+
+        [Fact]
+        public void EqualsSameTest()
+        {
+            var exp = new Add(new Number(1), new Number(1));
+
+            Assert.True(exp.Equals(exp));
+        }
+
+        [Fact]
+        public void EqualsNullTest()
+        {
+            var exp = new Add(new Number(1), new Number(1));
+
+            Assert.False(exp.Equals(null));
+        }
+
+        [Fact]
+        public void LeftNullExceptionTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Add(null, new Number(1)));
+        }
+
+        [Fact]
+        public void RightNullExceptionTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Add(new Number(1), null));
         }
 
     }

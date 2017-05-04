@@ -132,6 +132,14 @@ namespace xFunc.Views
                 {
                     Status = ioe.Message;
                 }
+                catch (ResultIsNotSupportedException rinse)
+                {
+                    Status = rinse.Message;
+                }
+                catch (ParameterTypeMismatchException ptme)
+                {
+                    Status = ptme.Message;
+                }
                 catch (NotSupportedException)
                 {
                     Status = Resource.NotSupportedOperationError;

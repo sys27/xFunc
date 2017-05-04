@@ -82,6 +82,10 @@ namespace xFunc.Views
             {
                 Status = ptme.Message;
             }
+            catch (ResultIsNotSupportedException rinse)
+            {
+                Status = rinse.Message;
+            }
             catch (DivideByZeroException dbze)
             {
                 Status = dbze.Message;

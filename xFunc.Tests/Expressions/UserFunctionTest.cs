@@ -61,6 +61,14 @@ namespace xFunc.Tests.Expressionss
         }
 
         [Fact]
+        public void ExecuteNullTest()
+        {
+            var exp = new UserFunction("f", 0);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new UserFunction("f", new[] { new Number(5) }, 1);

@@ -41,6 +41,12 @@ namespace xFunc.Tests.Expressionss
             Assert.NotEqual<IExpression>(sine, ln);
         }
 
+        [Fact]
+        public void ArgNullExceptionTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Sin(null));
+        }
+
     }
 
 }

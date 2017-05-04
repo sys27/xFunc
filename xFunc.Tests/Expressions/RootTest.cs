@@ -14,14 +14,15 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
 {
-    
+
     public class RootTest
     {
-        
+
         [Fact]
         public void CalculateRootTest1()
         {
@@ -44,6 +45,14 @@ namespace xFunc.Tests.Expressionss
             var exp = new Root(new Number(-25), new Number(2));
 
             Assert.Equal(double.NaN, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteExceptionTest()
+        {
+            var exp = new Root(new Bool(false), new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

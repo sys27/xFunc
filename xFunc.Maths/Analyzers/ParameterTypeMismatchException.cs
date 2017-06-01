@@ -16,7 +16,7 @@ using System;
 using System.Runtime.Serialization;
 using xFunc.Maths.Resources;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Analyzers
 {
 
     /// <summary>

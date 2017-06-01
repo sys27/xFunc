@@ -59,7 +59,7 @@
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />
-    <Compile Include="Expressions\ResultType.cs" />
+    <Compile Include="Analyzers\ResultType.cs" />
     <Compile Include="Expressions\Fact.cs" />
     <Compile Include="Expressions\Floor.cs" />
     <Compile Include="Expressions\GCD.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Del.cs" />
     <Compile Include="Expressions\Mod.cs" />
-    <Compile Include="Expressions\ParameterTypeMismatchException.cs" />
+    <Compile Include="Analyzers\ParameterTypeMismatchException.cs" />
     <Compile Include="Expressions\ResultIsNotSupportedException.cs" />
     <Compile Include="Expressions\Statistical\Count.cs" />
     <Compile Include="Expressions\Statistical\Product.cs" />

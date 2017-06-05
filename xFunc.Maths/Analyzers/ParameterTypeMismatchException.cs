@@ -73,13 +73,7 @@ namespace xFunc.Maths.Analyzers
         /// <value>
         /// The expected parameter type.
         /// </value>
-        public ResultType Expected
-        {
-            get
-            {
-                return expected;
-            }
-        }
+        public ResultType Expected => expected;
 
         /// <summary>
         /// Gets the actual parameter type.
@@ -87,13 +81,7 @@ namespace xFunc.Maths.Analyzers
         /// <value>
         /// The actual parameter type.
         /// </value>
-        public ResultType Actual
-        {
-            get
-            {
-                return actual;
-            }
-        }
+        public ResultType Actual => actual;
 
     }
 

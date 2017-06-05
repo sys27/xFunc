@@ -20,6 +20,7 @@ namespace xFunc.Maths.Analyzers
     /// <summary>
     /// Represents results of expressions.
     /// </summary>
+    [Flags]
     public enum ResultType
     {
 

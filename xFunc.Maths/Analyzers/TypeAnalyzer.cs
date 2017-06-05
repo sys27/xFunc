@@ -27,8 +27,6 @@ namespace xFunc.Maths.Analyzers
 {
 
     // todo: exceptions!!!
-    // todo: optimize
-    // todo: check ||
     // todo: define/undefine!!!
 
     /// <summary>
@@ -401,13 +399,22 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Number;
 
-            if (leftResult == ResultType.ComplexNumber || rightResult == ResultType.ComplexNumber)
+            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number))
                 return ResultType.ComplexNumber;
 
-            if (leftResult == ResultType.Matrix || rightResult == ResultType.Matrix)
+            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number))
+                return ResultType.ComplexNumber;
+
+            if (leftResult == ResultType.Matrix && (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
                 return ResultType.Matrix;
 
-            if (leftResult == ResultType.Vector || rightResult == ResultType.Vector)
+            if (rightResult == ResultType.Matrix && (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
+                return ResultType.Matrix;
+
+            if (leftResult == ResultType.Vector || (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
+                return ResultType.Vector;
+
+            if (leftResult == ResultType.Vector || (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
                 return ResultType.Vector;
 
             throw new ParameterTypeMismatchException();

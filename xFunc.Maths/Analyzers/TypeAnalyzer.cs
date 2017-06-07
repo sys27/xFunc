@@ -53,7 +53,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, result);
         }
 
         private ResultType CheckStatistical(DifferentParametersExpression exp)
@@ -62,13 +62,19 @@ namespace xFunc.Maths.Analyzers
             if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.Count == 1 && (results[0] == ResultType.Number || results[0] == ResultType.Vector))
-                return ResultType.Number;
+            if (results.Count == 1)
+            {
+                if (results[0] == ResultType.Number || results[0] == ResultType.Vector)
+                    return ResultType.Number;
 
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
+                throw new ParameterTypeMismatchException();
+            }
 
-            throw new ParameterTypeMismatchException();
+            for (var i = 0; i < results.Count; i++)
+                if (results[i] != ResultType.Number)
+                    throw new ParameterTypeMismatchException();
+
+            return ResultType.Number;
         }
 
         #region Standard

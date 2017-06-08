@@ -88,6 +88,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parameter #{2} has wrong type (Expected: {0}; Actual: {1})..
+        /// </summary>
+        internal static string DifferentParameterTypeMismatchExceptionError {
+            get {
+                return ResourceManager.GetString("DifferentParameterTypeMismatchExceptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while parsing the tree..
         /// </summary>
         internal static string ErrorWhileParsingTree {

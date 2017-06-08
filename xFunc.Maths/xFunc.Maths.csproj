@@ -45,6 +45,7 @@
     <Compile Include="Analyzers\Formatters\CommonFormatter.cs" />
     <Compile Include="Analyzers\Formatters\IFormatter.cs" />
     <Compile Include="Analyzers\IAnalyzer.cs" />
+    <Compile Include="Analyzers\DifferentParameterTypeMismatchException.cs" />
     <Compile Include="Analyzers\Simplifier.cs" />
     <Compile Include="Analyzers\TypeAnalyzer.cs" />
     <Compile Include="Builder.cs" />

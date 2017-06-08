@@ -49,6 +49,11 @@ namespace xFunc.Tests.Analyzers
             Assert.Throws<ParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
 
+        private void TestDiffParamException(IExpression exp)
+        {
+            Assert.Throws<DifferentParameterTypeMismatchException>(() => exp.Analyze(analyzer));
+        }
+
         #region Standard
 
         [Fact]
@@ -2140,7 +2145,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Avg(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2172,7 +2177,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Count(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2204,7 +2209,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Max(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2236,7 +2241,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Min(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2268,7 +2273,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Product(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2300,7 +2305,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Stdev(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2332,7 +2337,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Stdevp(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2364,7 +2369,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sum(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2396,7 +2401,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Var(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -2428,7 +2433,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Varp(new[] { new Bool(false), new Bool(false) }, 2);
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         #endregion Statistical

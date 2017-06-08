@@ -67,12 +67,12 @@ namespace xFunc.Maths.Analyzers
                 if (results[0] == ResultType.Number || results[0] == ResultType.Vector)
                     return ResultType.Number;
 
-                throw new ParameterTypeMismatchException();
+                throw new DifferentParameterTypeMismatchException(ResultType.Number | ResultType.Vector, results[0], 0);
             }
 
             for (var i = 0; i < results.Count; i++)
                 if (results[i] != ResultType.Number)
-                    throw new ParameterTypeMismatchException();
+                    throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
 
             return ResultType.Number;
         }
@@ -93,7 +93,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Number || result == ResultType.ComplexNumber || result == ResultType.Vector)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber | ResultType.Vector, result);
         }
 
         /// <summary>

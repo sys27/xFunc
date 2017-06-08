@@ -183,4 +183,7 @@
   <data name="VectorCrossException" xml:space="preserve">
     <value>Розмір вектора має дорівнювати 3.</value>
   </data>
+  <data name="DifferentParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Параметр #{2} має неправильний тип. (Очікується: {0}; Фактично: {1}).</value>
+  </data>
 </root>

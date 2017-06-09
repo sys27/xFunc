@@ -272,12 +272,16 @@ namespace xFunc.Maths.Analyzers
         public virtual ResultType Analyze(GCD exp)
         {
             var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Contains(ResultType.Undefined))
+            if (results == null || results.Count == 0)
                 return ResultType.Undefined;
 
             for (var i = 0; i < results.Count; i++)
+            {
+                if (results[i] == ResultType.Undefined)
+                    return ResultType.Undefined;
                 if (results[i] != ResultType.Number)
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
+            }
 
             return ResultType.Number;
         }
@@ -307,12 +311,16 @@ namespace xFunc.Maths.Analyzers
         public virtual ResultType Analyze(LCM exp)
         {
             var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Contains(ResultType.Undefined))
+            if (results == null || results.Count == 0)
                 return ResultType.Undefined;
 
             for (var i = 0; i < results.Count; i++)
+            {
+                if (results[i] == ResultType.Undefined)
+                    return ResultType.Undefined;
                 if (results[i] != ResultType.Number)
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
+            }
 
             return ResultType.Number;
         }
@@ -499,8 +507,12 @@ namespace xFunc.Maths.Analyzers
                 return ResultType.Undefined;
 
             for (var i = 0; i < results.Count; i++)
+            {
+                if (results[i] == ResultType.Undefined)
+                    return ResultType.Undefined;
                 if (results[i] != ResultType.Number)
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
+            }
 
             return ResultType.Number;
         }
@@ -629,12 +641,16 @@ namespace xFunc.Maths.Analyzers
         public virtual ResultType Analyze(Vector exp)
         {
             var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Contains(ResultType.Undefined))
+            if (results == null || results.Count == 0)
                 return ResultType.Undefined;
 
             for (var i = 0; i < results.Count; i++)
+            {
+                if (results[i] == ResultType.Undefined)
+                    return ResultType.Undefined;
                 if (results[i] != ResultType.Number)
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
+            }
 
             return ResultType.Vector;
         }
@@ -647,12 +663,16 @@ namespace xFunc.Maths.Analyzers
         public virtual ResultType Analyze(Matrix exp)
         {
             var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Contains(ResultType.Undefined))
+            if (results == null || results.Count == 0)
                 return ResultType.Undefined;
 
             for (var i = 0; i < results.Count; i++)
-                if (results[i] != ResultType.Number)
+            {
+                if (results[i] == ResultType.Undefined)
+                    return ResultType.Undefined;
+                if (results[i] != ResultType.Vector)
                     throw new DifferentParameterTypeMismatchException(ResultType.Vector, results[i], i);
+            }
 
             return ResultType.Matrix;
         }
@@ -1181,6 +1201,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
                 return ResultType.Boolean;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 

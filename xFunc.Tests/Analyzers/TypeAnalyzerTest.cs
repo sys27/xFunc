@@ -503,7 +503,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new GCD(new ComplexNumber(10), new Number(10));
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -551,7 +551,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new LCM(new ComplexNumber(10), new Number(10));
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -839,7 +839,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Round(new ComplexNumber(10), new Number(10));
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -1097,7 +1097,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Vector(new IExpression[] { new ComplexNumber(10), new Number(10) });
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]
@@ -1105,7 +1105,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Matrix(new Vector[] { new Vector(2), new Vector(2) });
 
-            Test(exp, ResultType.Matrix);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -1121,7 +1121,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Determinant(new Matrix(2, 2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -1153,7 +1153,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Inverse(new Matrix(2, 2));
 
-            Test(exp, ResultType.Matrix);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -1193,7 +1193,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Transpose(new Matrix(2, 2));
 
-            Test(exp, ResultType.Matrix);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]

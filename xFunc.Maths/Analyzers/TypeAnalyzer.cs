@@ -27,7 +27,6 @@ namespace xFunc.Maths.Analyzers
 {
 
     // todo: exceptions!!!
-    // todo: define/undefine!!!
 
     /// <summary>
     /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
@@ -123,6 +122,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Vector && rightResult == ResultType.Vector)
                 return ResultType.Vector;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -140,7 +140,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Number)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number, result);
         }
 
         /// <summary>
@@ -150,6 +150,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Define exp)
         {
+            // TODO: !!!
             return ResultType.Undefined;
         }
 
@@ -160,6 +161,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Del exp)
         {
+            // TODO: !!!
             return ResultType.Vector;
         }
 
@@ -179,6 +181,7 @@ namespace xFunc.Maths.Analyzers
             if (exp.ParametersCount == 3 && exp.Arguments[1] is Variable && exp.Arguments[2] is Number)
                 return ResultType.Number;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -203,6 +206,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Number;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -223,7 +227,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -240,7 +244,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Number)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number, result);
         }
 
         /// <summary>
@@ -257,7 +261,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Number)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number, result);
         }
 
         /// <summary>
@@ -271,10 +275,11 @@ namespace xFunc.Maths.Analyzers
             if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
+            for (var i = 0; i < results.Count; i++)
+                if (results[i] != ResultType.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
 
-            throw new ParameterTypeMismatchException();
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -291,7 +296,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Number)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number, result);
         }
 
         /// <summary>
@@ -305,10 +310,11 @@ namespace xFunc.Maths.Analyzers
             if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
+            for (var i = 0; i < results.Count; i++)
+                if (results[i] != ResultType.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
 
-            throw new ParameterTypeMismatchException();
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -328,7 +334,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -348,7 +354,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -369,6 +375,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Number && rightResult == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -387,6 +394,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Number;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -423,6 +431,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Vector || (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
                 return ResultType.Vector;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -455,6 +464,7 @@ namespace xFunc.Maths.Analyzers
                 (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber))
                 return ResultType.ComplexNumber;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -473,6 +483,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Number;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -487,10 +498,11 @@ namespace xFunc.Maths.Analyzers
             if (results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Number;
+            for (var i = 0; i < results.Count; i++)
+                if (results[i] != ResultType.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
 
-            throw new ParameterTypeMismatchException();
+            return ResultType.Number;
         }
 
         /// <summary>
@@ -540,6 +552,7 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Vector && rightResult == ResultType.Vector)
                 return ResultType.Vector;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -560,7 +573,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -570,6 +583,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Undefine exp)
         {
+            // TODO: !!!
             return ResultType.Undefined;
         }
 
@@ -618,10 +632,11 @@ namespace xFunc.Maths.Analyzers
             if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.All(x => x == ResultType.Number))
-                return ResultType.Vector;
+            for (var i = 0; i < results.Count; i++)
+                if (results[i] != ResultType.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
 
-            throw new ParameterTypeMismatchException();
+            return ResultType.Vector;
         }
 
         /// <summary>
@@ -635,10 +650,11 @@ namespace xFunc.Maths.Analyzers
             if (results == null || results.Contains(ResultType.Undefined))
                 return ResultType.Undefined;
 
-            if (results.All(x => x == ResultType.Vector))
-                return ResultType.Matrix;
+            for (var i = 0; i < results.Count; i++)
+                if (results[i] != ResultType.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultType.Vector, results[i], i);
 
-            throw new ParameterTypeMismatchException();
+            return ResultType.Matrix;
         }
 
         /// <summary>
@@ -655,7 +671,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Matrix)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Matrix, result);
         }
 
         /// <summary>
@@ -672,7 +688,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Matrix)
                 return ResultType.Matrix;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Matrix, result);
         }
 
         /// <summary>
@@ -689,7 +705,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.Vector || result == ResultType.Matrix)
                 return ResultType.Matrix;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.Vector | ResultType.Matrix, result);
         }
 
         #endregion Matrix
@@ -720,7 +736,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -737,7 +753,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -754,7 +770,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -771,7 +787,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.Number;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
         }
 
         /// <summary>
@@ -788,7 +804,7 @@ namespace xFunc.Maths.Analyzers
             if (result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
-            throw new ParameterTypeMismatchException();
+            throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
         }
 
         #endregion Complex Numbers

@@ -47,14 +47,34 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected abstract Complex ExecuteComplex(Complex complex);
 
         /// <summary>
-        /// Executes this expression.
+        /// Calculates this mathematical expression (using degree).
         /// </summary>
-        /// <param name="number">The calculation result of argument.</param>
+        /// <param name="degree">The calculation result of argument.</param>
         /// <returns>
-        /// A result of the execution.
+        /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteNumber(double number);
+        protected abstract double ExecuteDergee(double degree);
+
+        /// <summary>
+        /// Calculates this mathematical expression (using radian).
+        /// </summary>
+        /// <param name="radian">The calculation result of argument.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double ExecuteRadian(double radian);
+
+        /// <summary>
+        /// Calculates this mathematical expression (using gradian).
+        /// </summary>
+        /// <param name="gradian">The calculation result of argument.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected abstract double ExecuteGradian(double gradian);
 
         /// <summary>
         /// Executes this expression.
@@ -69,8 +89,16 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             var result = m_argument.Execute(parameters);
             if (result is Complex complex)
                 return ExecuteComplex(complex);
+
             if (result is double number)
-                return ExecuteNumber(number);
+            {
+                if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
+                    return ExecuteDergee(number);
+                if (parameters.AngleMeasurement == AngleMeasurement.Radian)
+                    return ExecuteRadian(number);
+                if (parameters.AngleMeasurement == AngleMeasurement.Gradian)
+                    return ExecuteGradian(number);
+            }
 
             throw new ResultIsNotSupportedException(this, result);
         }

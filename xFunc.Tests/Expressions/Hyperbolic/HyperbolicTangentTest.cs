@@ -27,11 +27,27 @@ namespace xFunc.Tests.Expressionss.Hyperbolic
     {
 
         [Fact]
-        public void ExecuteTest()
+        public void ExecuteRadianTest()
         {
             var exp = new Tanh(new Number(1));
 
-            Assert.Equal(Math.Tanh(1), exp.Execute());
+            Assert.Equal(Math.Tanh(1), exp.Execute(AngleMeasurement.Radian));
+        }
+
+        [Fact]
+        public void ExecuteDegreeTest()
+        {
+            var exp = new Tanh(new Number(1));
+
+            Assert.Equal(Math.Tanh(1 * Math.PI / 180), exp.Execute(AngleMeasurement.Degree));
+        }
+
+        [Fact]
+        public void ExecuteGradianTest()
+        {
+            var exp = new Tanh(new Number(1));
+
+            Assert.Equal(Math.Tanh(1 * Math.PI / 200), exp.Execute(AngleMeasurement.Gradian));
         }
 
         [Fact]

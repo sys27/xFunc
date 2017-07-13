@@ -60,16 +60,42 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         }
 
         /// <summary>
-        /// Executes this expression.
+        /// Calculates this mathematical expression (using degree).
         /// </summary>
-        /// <param name="number">The calculation result of argument.</param>
+        /// <param name="degree">The calculation result of argument.</param>
         /// <returns>
-        /// A result of the execution.
+        /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteNumber(double number)
+        protected override double ExecuteDergee(double degree)
         {
-            return MathExtensions.Asinh(number);
+            return MathExtensions.Asinh(degree) / Math.PI * 180;
+        }
+
+        /// <summary>
+        /// Calculates this mathematical expression (using radian).
+        /// </summary>
+        /// <param name="radian">The calculation result of argument.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected override double ExecuteRadian(double radian)
+        {
+            return MathExtensions.Asinh(radian);
+        }
+
+        /// <summary>
+        /// Calculates this mathematical expression (using gradian).
+        /// </summary>
+        /// <param name="gradian">The calculation result of argument.</param>
+        /// <returns>
+        /// A result of the calculation.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        protected override double ExecuteGradian(double gradian)
+        {
+            return MathExtensions.Asinh(gradian) / Math.PI * 200;
         }
 
         /// <summary>

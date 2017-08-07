@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -33,7 +34,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="argument">The argument of function.</param>
         public Determinant(IExpression argument) : base(argument) { }
-        
+
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
@@ -55,9 +56,17 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
+            // TODO: exception!!!
             var result = m_argument.Execute(parameters);
             if (result is Matrix matrix)
+            {
+                if (matrix.Arguments.Any(x => x == null))
+                    throw new ArgumentException();
+                if (matrix.Arguments.OfType<Vector>().Any(x => x.Arguments.All(z => z == null)))
+                    throw new ArgumentException();
+
                 return matrix.Determinant(parameters);
+            }
 
             throw new ResultIsNotSupportedException(this, result);
         }

@@ -642,7 +642,7 @@ namespace xFunc.Maths.Analyzers
         {
             var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
             if (results == null || results.Count == 0)
-                return ResultType.Undefined;
+                return ResultType.Vector;
 
             for (var i = 0; i < results.Count; i++)
             {
@@ -664,7 +664,7 @@ namespace xFunc.Maths.Analyzers
         {
             var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
             if (results == null || results.Count == 0)
-                return ResultType.Undefined;
+                return ResultType.Matrix;
 
             for (var i = 0; i < results.Count; i++)
             {

@@ -47,6 +47,38 @@ namespace xFunc.Tests.Expressionss.Matrices
         }
 
         [Fact]
+        public void ExecuteEmptyTest()
+        {
+            var matrix = new Matrix(2, 2);
+            var exp = new Inverse(matrix);
+
+            Assert.Throws<ArgumentException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteIsNotSquareTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }),
+                new Vector(new[] { new Number(1), new Number(8), new Number(4), new Number(2) }),
+                new Vector(new[] { new Number(2), new Number(1), new Number(9), new Number(3) })
+            });
+            var exp = new Inverse(matrix);
+
+            Assert.Throws<ArgumentException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteVectorTest()
+        {
+            var vector = new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) });
+            var exp = new Inverse(vector);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Inverse(new Matrix(new[]

@@ -30,7 +30,7 @@ namespace xFunc.Tests.Analyzers
     public class TypeAnalyzerTest
     {
 
-        private IAnalyzer<ResultType> analyzer;
+        private ITypeAnalyzer analyzer;
 
         public TypeAnalyzerTest()
         {

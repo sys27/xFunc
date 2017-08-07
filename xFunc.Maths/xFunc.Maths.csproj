@@ -47,6 +47,7 @@
     <Compile Include="Analyzers\IAnalyzer.cs" />
     <Compile Include="Analyzers\DifferentParameterTypeMismatchException.cs" />
     <Compile Include="Analyzers\Simplifier.cs" />
+    <Compile Include="Analyzers\ITypeAnalyzer.cs" />
     <Compile Include="Analyzers\TypeAnalyzer.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -58,10 +59,24 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var result = m_argument.Execute(parameters);
 
+            // TODO: exception!!!
             if (result is Matrix matrix)
+            {
+                if (matrix.Arguments.Any(x => x == null))
+                    throw new ArgumentException();
+                if (matrix.Arguments.OfType<Vector>().Any(x => x.Arguments.All(z => z == null)))
+                    throw new ArgumentException();
+
                 return matrix.Transpose();
+            }
+
             if (result is Vector vector)
+            {
+                if (vector.Arguments.Any(x => x == null))
+                    throw new ArgumentException();
+
                 return vector.Transpose();
+            }
 
             throw new ResultIsNotSupportedException(this, result);
         }

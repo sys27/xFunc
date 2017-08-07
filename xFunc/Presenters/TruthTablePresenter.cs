@@ -33,7 +33,7 @@ namespace xFunc.Presenters
         private IEnumerable<IExpression> expressions;
         private ParameterCollection parameters;
         private List<TruthTableRowViewModel> table;
-        private IAnalyzer<ResultType> typeAnalyzer;
+        private ITypeAnalyzer typeAnalyzer;
 
         public TruthTablePresenter()
         {
@@ -55,6 +55,7 @@ namespace xFunc.Presenters
 
             expression = parser.Parse(tokens);
             var resultType = expression.Analyze(typeAnalyzer);
+            // TODO: check???
             if (resultType == ResultType.Undefined || resultType == ResultType.Boolean)
                 throw new NotSupportedException();
 

@@ -39,6 +39,38 @@ namespace xFunc.Tests.Expressionss.Matrices
         }
 
         [Fact]
+        public void ExecuteIsNotSquareTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
+                new Vector(new[] { new Number(4), new Number(0), new Number(6) })
+            });
+
+            var det = new Determinant(matrix);
+
+            Assert.Throws<ArgumentException>(() => det.Execute());
+        }
+
+        [Fact]
+        public void ExecuteVectorTest()
+        {
+            var vector = new Vector(new[] { new Number(1), new Number(-2), new Number(3) });
+            var det = new Determinant(vector);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => det.Execute());
+        }
+
+        [Fact]
+        public void ExecuteEmptyMatrixTest()
+        {
+            var matrix = new Matrix(2, 2);
+            var det = new Determinant(matrix);
+
+            Assert.Throws<ArgumentException>(() => det.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Transpose(new Matrix(new[]

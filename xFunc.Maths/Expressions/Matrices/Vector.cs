@@ -85,6 +85,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var i = 0; i < this.ParametersCount; i++)
             {
+                if (m_arguments[i] == null)
+                    continue;
+
                 if (!(m_arguments[i] is Number))
                 {
                     var result = m_arguments[i].Execute(parameters);

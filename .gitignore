@@ -5,6 +5,7 @@
 TestResults
 packages
 .idea/
+.vs/
 
 coverage
 coverage.xml

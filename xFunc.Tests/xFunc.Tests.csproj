@@ -61,7 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzers\Formatters\CommonFormatterTest.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTest.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\ComplexNumberTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\HyperbolicTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\LogicalBitwiseTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\MatrixTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\ProgrammingTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\StandardTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\StatisticalTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\TrigonometricTests.cs" />
+    <Compile Include="Analyzers\TypeAnalyzerTests\TypeAnalyzerBaseTests.cs" />
     <Compile Include="BuilderTest.cs" />
     <Compile Include="Converters\AreaTest.cs" />
     <Compile Include="Converters\LengthTest.cs" />

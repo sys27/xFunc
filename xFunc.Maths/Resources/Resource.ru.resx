@@ -186,4 +186,10 @@
   <data name="DifferentParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Параметр #{2} имеет не соответствующий тип (Ожидается: {0}; Фактически: {1}).</value>
   </data>
+  <data name="LeftParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Левый параметр имеет не соответствующий тип (Ожидается: {0}; Фактически: {1}).</value>
+  </data>
+  <data name="RightParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Правый параметр имеет не соответствующий тип (Ожидается: {0}; Фактически: {1}).</value>
+  </data>
 </root>

@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Analyzers
+namespace xFunc.Maths.Analyzers.TypeAnalyzers
 {
 
     /// <summary>

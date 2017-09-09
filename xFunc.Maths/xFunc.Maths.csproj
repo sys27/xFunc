@@ -45,10 +45,11 @@
     <Compile Include="Analyzers\Formatters\CommonFormatter.cs" />
     <Compile Include="Analyzers\Formatters\IFormatter.cs" />
     <Compile Include="Analyzers\IAnalyzer.cs" />
-    <Compile Include="Analyzers\DifferentParameterTypeMismatchException.cs" />
+    <Compile Include="Analyzers\TypeAnalyzers\BinaryParameterTypeMismatchException.cs" />
+    <Compile Include="Analyzers\TypeAnalyzers\DifferentParameterTypeMismatchException.cs" />
     <Compile Include="Analyzers\Simplifier.cs" />
-    <Compile Include="Analyzers\ITypeAnalyzer.cs" />
-    <Compile Include="Analyzers\TypeAnalyzer.cs" />
+    <Compile Include="Analyzers\TypeAnalyzers\ITypeAnalyzer.cs" />
+    <Compile Include="Analyzers\TypeAnalyzers\TypeAnalyzer.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="Expressions\Ceil.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Expressions\DelegateExpression.cs" />
     <Compile Include="Expressions\DifferentParametersExpression.cs" />
     <Compile Include="Expressions\ExpressionParameters.cs" />
-    <Compile Include="Analyzers\ResultType.cs" />
+    <Compile Include="Analyzers\TypeAnalyzers\ResultType.cs" />
     <Compile Include="Expressions\Fact.cs" />
     <Compile Include="Expressions\Floor.cs" />
     <Compile Include="Expressions\GCD.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Expressions\Matrices\Vector.cs" />
     <Compile Include="Expressions\Del.cs" />
     <Compile Include="Expressions\Mod.cs" />
-    <Compile Include="Analyzers\ParameterTypeMismatchException.cs" />
+    <Compile Include="Analyzers\TypeAnalyzers\ParameterTypeMismatchException.cs" />
     <Compile Include="Expressions\ResultIsNotSupportedException.cs" />
     <Compile Include="Expressions\Statistical\Count.cs" />
     <Compile Include="Expressions\Statistical\Product.cs" />

@@ -117,7 +117,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             if (rightResult == ResultType.ComplexNumber)
             {
-                if (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number)
+                if (leftResult == ResultType.Number)
                     return ResultType.ComplexNumber;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Left);
@@ -133,9 +133,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             if (rightResult == ResultType.Number)
             {
-                if (leftResult == ResultType.Number)
-                    return ResultType.Number;
-
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
             }
 
@@ -149,9 +146,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             if (rightResult == ResultType.Matrix)
             {
-                if (leftResult == ResultType.Matrix)
-                    return ResultType.Matrix;
-
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
             }
 
@@ -165,9 +159,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             if (rightResult == ResultType.Vector)
             {
-                if (leftResult == ResultType.Vector)
-                    return ResultType.Vector;
-
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
             }
 

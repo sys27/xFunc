@@ -373,7 +373,39 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestDivNumberComplexTest()
+        public void TestDivComplexNumberBoolException()
+        {
+            var exp = new Div(new ComplexNumber(3, 2), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestDivBoolComplexNumberException()
+        {
+            var exp = new Div(new Bool(true), new ComplexNumber(3, 2));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestDivNumberBoolException()
+        {
+            var exp = new Div(new Number(3), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestDivBoolNumberException()
+        {
+            var exp = new Div(new Bool(true), new Number(3));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestDivNumberSqrtComplexTest()
         {
             var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
 
@@ -509,6 +541,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestGCDEmpty()
+        {
+            var exp = new GCD(new IExpression[0], 0);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
         public void TestLbUndefined()
         {
             var exp = new Lb(new Variable("x"));
@@ -546,6 +586,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) }, 3);
 
             Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestLCMEmpty()
+        {
+            var exp = new LCM(new IExpression[0], 0);
+
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -666,6 +714,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Mod(new Number(4), new Number(2));
 
             Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestModNumberBoolException()
+        {
+            var exp = new Mod(new Number(4), new Bool(true));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -810,6 +866,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Root(new Number(4), new Number(2));
 
             Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void TestRootNumberBoolException()
+        {
+            var exp = new Root(new Number(2), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -963,6 +1027,30 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void SubComplexNumberComplexNumberTest()
+        {
+            var sub = new Sub(new ComplexNumber(1, 3), new ComplexNumber(3, 5));
+
+            Test(sub, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void SubComplexNumberBoolException()
+        {
+            var sub = new Sub(new ComplexNumber(1, 3), new Bool(true));
+
+            TestBinaryException(sub);
+        }
+
+        [Fact]
+        public void SubBoolComplexNumberException()
+        {
+            var sub = new Sub(new Bool(true), new ComplexNumber(1, 3));
+
+            TestBinaryException(sub);
+        }
+
+        [Fact]
         public void SubNumberAllTest()
         {
             var exp = new Sub(new Number(1), new UserFunction("f", 1));
@@ -976,6 +1064,30 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", 1));
 
             Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void SubVectorVectorTest()
+        {
+            var exp = new Sub(new Vector(1), new Vector(1));
+
+            Test(exp, ResultType.Vector);
+        }
+
+        [Fact]
+        public void SubVectorBoolTest()
+        {
+            var exp = new Sub(new Vector(1), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void SubBoolVectorTest()
+        {
+            var exp = new Sub(new Bool(true), new Vector(1));
+
+            TestBinaryException(exp);
         }
 
         [Fact]

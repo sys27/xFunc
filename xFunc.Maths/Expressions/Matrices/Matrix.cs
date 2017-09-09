@@ -15,8 +15,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -35,11 +35,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Matrix(Vector[] args)
-            : base(args, args.Length)
+        public Matrix(Vector[] args) : base(args, args.Length)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
+            if (args.Length == 0)
+                throw new ArgumentException(Resource.MatrixArgException, nameof(args));
         }
 
         /// <summary>

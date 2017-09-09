@@ -42,12 +42,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             Assert.Throws<ParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
 
-        protected void TestBinaryException(IExpression exp)
+        protected void TestBinaryException(BinaryExpression exp)
         {
             Assert.Throws<BinaryParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
 
-        protected void TestDiffParamException(IExpression exp)
+        protected void TestDiffParamException(DifferentParametersExpression exp)
         {
             Assert.Throws<DifferentParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }

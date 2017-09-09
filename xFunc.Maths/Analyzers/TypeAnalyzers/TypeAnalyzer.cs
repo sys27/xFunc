@@ -23,7 +23,7 @@ using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 
-namespace xFunc.Maths.Analyzers
+namespace xFunc.Maths.Analyzers.TypeAnalyzers
 {
 
     // todo: exceptions!!!
@@ -107,22 +107,70 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number))
-                return ResultType.ComplexNumber;
+            if (leftResult == ResultType.ComplexNumber)
+            {
+                if (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number)
+                    return ResultType.ComplexNumber;
 
-            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number))
-                return ResultType.ComplexNumber;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
+            }
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (rightResult == ResultType.ComplexNumber)
+            {
+                if (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number)
+                    return ResultType.ComplexNumber;
 
-            if (leftResult == ResultType.Matrix && rightResult == ResultType.Matrix)
-                return ResultType.Matrix;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Left);
+            }
 
-            if (leftResult == ResultType.Vector && rightResult == ResultType.Vector)
-                return ResultType.Vector;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            // TODO: !!!
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Matrix)
+            {
+                if (rightResult == ResultType.Matrix)
+                    return ResultType.Matrix;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Matrix)
+            {
+                if (leftResult == ResultType.Matrix)
+                    return ResultType.Matrix;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Vector)
+            {
+                if (rightResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Vector)
+            {
+                if (leftResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -197,16 +245,38 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber))
-                return ResultType.ComplexNumber;
+            if (leftResult == ResultType.ComplexNumber)
+            {
+                if (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber)
+                    return ResultType.ComplexNumber;
 
-            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.Number || leftResult == ResultType.ComplexNumber))
-                return ResultType.ComplexNumber;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
+            }
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (rightResult == ResultType.ComplexNumber)
+            {
+                if (leftResult == ResultType.Number || leftResult == ResultType.ComplexNumber)
+                    return ResultType.ComplexNumber;
 
-            // TODO: !!!
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -399,10 +469,22 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            // TODO: !!!
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -488,10 +570,22 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            // TODO: !!!
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -549,22 +643,70 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number))
-                return ResultType.ComplexNumber;
+            if (leftResult == ResultType.ComplexNumber)
+            {
+                if (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number)
+                    return ResultType.ComplexNumber;
 
-            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number))
-                return ResultType.ComplexNumber;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
+            }
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (rightResult == ResultType.ComplexNumber)
+            {
+                if (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number)
+                    return ResultType.ComplexNumber;
 
-            if (leftResult == ResultType.Matrix && rightResult == ResultType.Matrix)
-                return ResultType.Matrix;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Left);
+            }
 
-            if (leftResult == ResultType.Vector && rightResult == ResultType.Vector)
-                return ResultType.Vector;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            // TODO: !!!
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Matrix)
+            {
+                if (rightResult == ResultType.Matrix)
+                    return ResultType.Matrix;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Matrix)
+            {
+                if (leftResult == ResultType.Matrix)
+                    return ResultType.Matrix;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Vector)
+            {
+                if (rightResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Vector)
+            {
+                if (leftResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -1195,13 +1337,38 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
 
-            // TODO: !!!
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
+
             throw new ParameterTypeMismatchException();
         }
 
@@ -1227,8 +1394,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1245,8 +1425,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1263,8 +1456,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1281,8 +1487,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1319,11 +1538,37 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1340,11 +1585,37 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1382,8 +1653,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1427,11 +1711,37 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1465,8 +1775,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1483,8 +1806,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1504,6 +1840,7 @@ namespace xFunc.Maths.Analyzers
             if (conditionResult == ResultType.Boolean)
                 return exp.ParametersCount == 2 ? thenResult : ResultType.Undefined;
 
+            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -1529,8 +1866,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1547,8 +1897,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1582,11 +1945,37 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }
@@ -1603,8 +1992,21 @@ namespace xFunc.Maths.Analyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Boolean && rightResult == ResultType.Boolean)
-                return ResultType.Boolean;
+            if (leftResult == ResultType.Boolean)
+            {
+                if (rightResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Boolean)
+            {
+                if (leftResult == ResultType.Boolean)
+                    return ResultType.Boolean;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Boolean, leftResult, BinaryParameterType.Left);
+            }
 
             throw new ParameterTypeMismatchException();
         }

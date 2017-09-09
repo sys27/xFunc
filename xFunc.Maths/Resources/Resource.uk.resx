@@ -186,4 +186,10 @@
   <data name="DifferentParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Параметр #{2} має неправильний тип. (Очікується: {0}; Фактично: {1}).</value>
   </data>
+  <data name="LeftParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Лівий параметр має неправильний тип. (Очікується: {0}; Фактично: {1}).</value>
+  </data>
+  <data name="RightParameterTypeMismatchExceptionError" xml:space="preserve">
+    <value>Правий параметр має неправильний тип. (Очікується: {0}; Фактично: {1}).</value>
+  </data>
 </root>

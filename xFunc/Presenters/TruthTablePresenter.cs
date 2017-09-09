@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.ViewModels;
@@ -33,12 +32,10 @@ namespace xFunc.Presenters
         private IEnumerable<IExpression> expressions;
         private ParameterCollection parameters;
         private List<TruthTableRowViewModel> table;
-        private ITypeAnalyzer typeAnalyzer;
 
         public TruthTablePresenter()
         {
             parser = new Parser();
-            typeAnalyzer = new TypeAnalyzer();
         }
 
         private void SetBits(int bits, int parametersCount)
@@ -54,10 +51,6 @@ namespace xFunc.Presenters
             var tokens = lexer.Tokenize(strExp);
 
             expression = parser.Parse(tokens);
-            var resultType = expression.Analyze(typeAnalyzer);
-            // TODO: check???
-            if (resultType == ResultType.Undefined || resultType == ResultType.Boolean)
-                throw new NotSupportedException();
 
             expressions = Helpers.ConvertExpressionToCollection(expression);
             parameters = Helpers.GetParameters(tokens);
@@ -70,9 +63,11 @@ namespace xFunc.Presenters
 
                 var b = (bool)expression.Execute(parameters);
 
-                var row = new TruthTableRowViewModel(parametersCount, expressions.Count());
+                var row = new TruthTableRowViewModel(parametersCount, expressions.Count())
+                {
+                    Index = (int)Math.Pow(2, parametersCount) - i
+                };
 
-                row.Index = (int)Math.Pow(2, parametersCount) - i;
                 for (int j = 0; j < parametersCount; j++)
                     row.VarsValues[j] = (bool)parameters[parameters.ElementAt(j).Key];
 

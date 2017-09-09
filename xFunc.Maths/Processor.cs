@@ -15,6 +15,7 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Results;
@@ -40,6 +41,7 @@ namespace xFunc.Maths
                                     new DefaultDependencyResolver(new Type[] { typeof(ISimplifier), typeof(IDifferentiator) },
                                                                   new object[] { Simplifier, Differentiator })
                                 ));
+            TypeAnalyzer = new TypeAnalyzer();
 
             Parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
             NumeralSystem = NumeralSystem.Decimal;
@@ -54,7 +56,7 @@ namespace xFunc.Maths
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(lexer, parser, simplifier, differentiator, new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
+            : this(lexer, parser, simplifier, differentiator, new TypeAnalyzer(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
         }
 
@@ -65,13 +67,15 @@ namespace xFunc.Maths
         /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
+        /// <param name="typeAnalyzer">The type analyzer.</param>
         /// <param name="parameters">The collection of parameters.</param>
-        public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ExpressionParameters parameters)
+        public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ITypeAnalyzer typeAnalyzer, ExpressionParameters parameters)
         {
             Lexer = lexer;
             Simplifier = simplifier;
             Differentiator = differentiator;
             Parser = parser;
+            TypeAnalyzer = typeAnalyzer;
 
             Parameters = parameters;
             NumeralSystem = NumeralSystem.Decimal;
@@ -86,6 +90,8 @@ namespace xFunc.Maths
         public IResult Solve(string function)
         {
             var exp = Parse(function);
+            exp.Analyze(TypeAnalyzer);
+
             var result = exp.Execute(Parameters);
             if (result is double)
             {
@@ -216,6 +222,14 @@ namespace xFunc.Maths
         /// The differentiator.
         /// </value>
         public IDifferentiator Differentiator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type analyzer.
+        /// </summary>
+        /// <value>
+        /// The type analyzer.
+        /// </value>
+        public ITypeAnalyzer TypeAnalyzer { get; set; }
 
         /// <summary>
         /// Gets expression parameters object.

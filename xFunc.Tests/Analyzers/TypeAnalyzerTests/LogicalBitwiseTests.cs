@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndUndefined()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Variable("x"), new Variable("y"));
+            var exp = new And(new Variable("x"), new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndNumber()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Number(1), new Number(2));
+            var exp = new And(new Number(1), new Number(2));
 
             Test(exp, ResultType.Number);
         }
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndBoolean()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
+            var exp = new And(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndException()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.And(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+            var exp = new And(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
 
             TestException(exp);
         }
@@ -196,7 +196,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrUndefined()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Variable("x"), new Variable("y"));
+            var exp = new Or(new Variable("x"), new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -204,7 +204,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrNumber()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
+            var exp = new Or(new Number(1), new Number(2));
 
             Test(exp, ResultType.Number);
         }
@@ -212,7 +212,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrBoolean()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Bool(false));
+            var exp = new Or(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
         }
@@ -220,7 +220,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrException()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
+            var exp = new Or(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
 
             TestException(exp);
         }

@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -47,6 +47,11 @@ namespace xFunc.Tests.Analyzers
         private void TestException(IExpression exp)
         {
             Assert.Throws<ParameterTypeMismatchException>(() => exp.Analyze(analyzer));
+        }
+
+        private void TestBinaryException(IExpression exp)
+        {
+            Assert.Throws<BinaryParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
 
         private void TestDiffParamException(IExpression exp)
@@ -143,7 +148,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Number(1), new Vector(new[] { new Number(1) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -151,7 +156,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Vector(new[] { new Number(1) }), new Number(1));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -159,7 +164,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -167,7 +172,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -175,7 +180,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Vector(new[] { new Number(1) }), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -183,7 +188,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Vector(new[] { new Number(1) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -671,7 +676,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Mod(new Bool(false), new Number(2));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -815,7 +820,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Root(new Bool(false), new Number(2));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -901,7 +906,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(new Number(1), new Vector(new[] { new Number(1) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -909,7 +914,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(new Vector(new[] { new Number(1) }), new Number(1));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -917,7 +922,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -925,7 +930,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -933,7 +938,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(new Vector(new[] { new Number(1) }), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -941,7 +946,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Sub(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Vector(new[] { new Number(1) }));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -1105,7 +1110,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Matrix(new Vector[] { new Vector(2), new Vector(2) });
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Matrix);
         }
 
         [Fact]
@@ -1121,7 +1126,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Determinant(new Matrix(2, 2));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -1153,7 +1158,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Inverse(new Matrix(2, 2));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Matrix);
         }
 
         [Fact]
@@ -1193,7 +1198,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Transpose(new Matrix(2, 2));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Matrix);
         }
 
         [Fact]
@@ -2721,7 +2726,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Maths.Expressions.Programming.And(new ComplexNumber(2, 3), new Bool(false));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -2785,7 +2790,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Equal(new ComplexNumber(2, 3), new Bool(false));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -2817,7 +2822,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new NotEqual(new ComplexNumber(2, 3), new Bool(false));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -3025,7 +3030,7 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Maths.Expressions.Programming.Or(new ComplexNumber(2, 3), new Bool(false));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]

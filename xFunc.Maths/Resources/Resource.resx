@@ -192,4 +192,7 @@
   <data name="RightParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>The right parameter has wrong type (Expected: {0}; Actual: {1}).</value>
   </data>
+  <data name="SequenceNullValuesError" xml:space="preserve">
+    <value>The sequence cannot contain null values.</value>
+  </data>
 </root>

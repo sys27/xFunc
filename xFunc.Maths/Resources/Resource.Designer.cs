@@ -241,6 +241,15 @@ namespace xFunc.Maths.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The sequence cannot contain null values..
+        /// </summary>
+        internal static string SequenceNullValuesError {
+            get {
+                return ResourceManager.GetString("SequenceNullValuesError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;{0}&apos; function is removed..
         /// </summary>
         internal static string UndefineFunction {

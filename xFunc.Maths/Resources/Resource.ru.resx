@@ -192,4 +192,7 @@
   <data name="RightParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Правый параметр имеет не соответствующий тип (Ожидается: {0}; Фактически: {1}).</value>
   </data>
+  <data name="SequenceNullValuesError" xml:space="preserve">
+    <value>Последовательность не может содержать пустые значения.</value>
+  </data>
 </root>

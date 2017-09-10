@@ -16,6 +16,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -59,13 +60,12 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var result = m_argument.Execute(parameters);
 
-            // TODO: exception!!!
             if (result is Matrix matrix)
             {
                 if (matrix.Arguments.Any(x => x == null))
-                    throw new ArgumentException();
+                    throw new ArgumentException(Resource.SequenceNullValuesError);
                 if (matrix.Arguments.OfType<Vector>().Any(x => x.Arguments.All(z => z == null)))
-                    throw new ArgumentException();
+                    throw new ArgumentException(Resource.SequenceNullValuesError);
 
                 return matrix.Transpose();
             }
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (result is Vector vector)
             {
                 if (vector.Arguments.Any(x => x == null))
-                    throw new ArgumentException();
+                    throw new ArgumentException(Resource.SequenceNullValuesError);
 
                 return vector.Transpose();
             }

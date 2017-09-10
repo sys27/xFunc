@@ -189,7 +189,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Define exp)
         {
-            // TODO: !!!
             return ResultType.Undefined;
         }
 
@@ -200,7 +199,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Del exp)
         {
-            // TODO: !!!
             return ResultType.Vector;
         }
 
@@ -710,7 +708,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultType Analyze(Undefine exp)
         {
-            // TODO: !!!
             return ResultType.Undefined;
         }
 

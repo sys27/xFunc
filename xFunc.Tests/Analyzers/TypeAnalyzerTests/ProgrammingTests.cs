@@ -59,11 +59,27 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestConditionalAndNumber()
+        public void TestConditionalAndBool()
         {
             var exp = new Maths.Expressions.Programming.And(new Bool(false), new Bool(true));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestConditionalAndBoolNumberExpection()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Bool(false), new Number(1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestConditionalAndNumberBoolExpection()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Number(1), new Bool(true));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -123,11 +139,43 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestEqualNumberBoolException()
+        {
+            var exp = new Equal(new Number(20), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestEqualBoolNumberException()
+        {
+            var exp = new Equal(new Bool(true), new Number(20));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestEqualBoolean()
         {
             var exp = new Equal(new Bool(false), new Bool(true));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestEqualBoolComplexException()
+        {
+            var exp = new Equal(new Bool(false), new ComplexNumber(1, 2));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestEqualComplexBoolException()
+        {
+            var exp = new Equal(new ComplexNumber(1, 2), new Bool(true));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -155,11 +203,43 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestNotEqualNumberBoolException()
+        {
+            var exp = new NotEqual(new Number(20), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestNotEqualBoolNumberException()
+        {
+            var exp = new NotEqual(new Bool(true), new Number(20));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestNotEqualBoolean()
         {
             var exp = new NotEqual(new Bool(false), new Bool(true));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestNotEqualBoolComplexException()
+        {
+            var exp = new NotEqual(new Bool(false), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestNotEqualComplexBoolException()
+        {
+            var exp = new NotEqual(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -211,6 +291,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestGreaterOrEqualNumberBoolException()
+        {
+            var exp = new GreaterOrEqual(new Number(10), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestGreaterOrEqualBoolNumberException()
+        {
+            var exp = new GreaterOrEqual(new Bool(true), new Number(10));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestGreaterOrEqualException()
         {
             var exp = new GreaterOrEqual(new Bool(true), new Bool(false));
@@ -232,6 +328,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new GreaterThan(new Number(10), new Number(10));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestGreaterThanNumberBoolException()
+        {
+            var exp = new GreaterThan(new Number(10), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestGreaterThanBoolNumberException()
+        {
+            var exp = new GreaterThan(new Bool(true), new Number(10));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -299,6 +411,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestLessOrEqualNumberBoolException()
+        {
+            var exp = new LessOrEqual(new Number(10), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestLessOrEqualBoolNumberException()
+        {
+            var exp = new LessOrEqual(new Bool(true), new Number(10));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestLessOrEqualException()
         {
             var exp = new LessOrEqual(new Bool(true), new Bool(false));
@@ -320,6 +448,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new LessThan(new Number(10), new Number(10));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestLessThanNumberBoolException()
+        {
+            var exp = new LessThan(new Number(10), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestLessThanBoolNumberException()
+        {
+            var exp = new LessThan(new Bool(true), new Number(10));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -363,11 +507,19 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestConditionalOrNumber()
+        public void TestConditionalOrBool()
         {
             var exp = new Maths.Expressions.Programming.Or(new Bool(false), new Bool(true));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestConditionalOrBoolNumberException()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new Bool(false), new Number(2));
+
+            TestBinaryException(exp);
         }
 
         [Fact]

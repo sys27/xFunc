@@ -42,11 +42,43 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestAndNumberComplexException()
+        {
+            var exp = new And(new Number(1), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestAndComplexNumberException()
+        {
+            var exp = new And(new ComplexNumber(1, 1), new Number(2));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestAndBoolean()
         {
             var exp = new And(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestAndBoolComplexException()
+        {
+            var exp = new And(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestAndComplexBoolException()
+        {
+            var exp = new And(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -82,6 +114,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestEqualityBoolComplexException()
+        {
+            var exp = new Equality(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestEqualityComplexBoolException()
+        {
+            var exp = new Equality(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestEqualityException()
         {
             var exp = new Equality(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
@@ -103,6 +151,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Implication(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestImplicationBoolComplexException()
+        {
+            var exp = new Implication(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestImplicationComplexBoolExcetpion()
+        {
+            var exp = new Implication(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -130,6 +194,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestNAndBoolComplexException()
+        {
+            var exp = new NAnd(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestNAndComplexBoolException()
+        {
+            var exp = new NAnd(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestNAndException()
         {
             var exp = new NAnd(new ComplexNumber(1, 2), new ComplexNumber(2, 3));
@@ -151,6 +231,22 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new NOr(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestNOrBoolComplexException()
+        {
+            var exp = new NOr(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestNOrComplexBoolException()
+        {
+            var exp = new NOr(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -210,11 +306,43 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestOrNumberComplexException()
+        {
+            var exp = new Or(new Number(1), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestOrComplexNumberException()
+        {
+            var exp = new Or(new ComplexNumber(1, 1), new Number(2));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestOrBoolean()
         {
             var exp = new Or(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestOrBoolComplexException()
+        {
+            var exp = new Or(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestOrComplexBoolException()
+        {
+            var exp = new Or(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -242,11 +370,43 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestXOrNumberComplexException()
+        {
+            var exp = new XOr(new Number(1), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestXOrComplexNumberException()
+        {
+            var exp = new XOr(new ComplexNumber(1, 1), new Number(1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestXOrBoolean()
         {
             var exp = new XOr(new Bool(true), new Bool(false));
 
             Test(exp, ResultType.Boolean);
+        }
+
+        [Fact]
+        public void TestXOrBoolComplexNumberException()
+        {
+            var exp = new XOr(new Bool(true), new ComplexNumber(1, 1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestXOrComplexNumberBoolException()
+        {
+            var exp = new XOr(new ComplexNumber(1, 1), new Bool(false));
+
+            TestBinaryException(exp);
         }
 
         [Fact]

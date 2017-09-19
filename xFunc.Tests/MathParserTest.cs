@@ -490,7 +490,7 @@ namespace xFunc.Tests
             };
 
             var exp = parser.Parse(tokens);
-            var expected = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+            var expected = new Maths.Expressions.Matrices.Vector(new[] { new Number(2), new Number(3), new Number(4) });
 
             Assert.Equal(expected, exp);
         }
@@ -521,8 +521,8 @@ namespace xFunc.Tests
             var exp = parser.Parse(tokens);
             var expected = new Matrix(new[]
             {
-                new Vector(new [] { new Number(2), new Number(3) }),
-                new Vector(new [] { new Number(4), new Number(7) })
+                new Maths.Expressions.Matrices.Vector(new [] { new Number(2), new Number(3) }),
+                new Maths.Expressions.Matrices.Vector(new [] { new Number(4), new Number(7) })
             });
 
             Assert.Equal(expected, exp);

@@ -72,11 +72,11 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void SubTwoVectorsTest()
         {
-            var vector1 = new Vector(new[] { new Number(2), new Number(3) });
-            var vector2 = new Vector(new[] { new Number(7), new Number(1) });
+            var vector1 = new Maths.Expressions.Matrices.Vector(new[] { new Number(2), new Number(3) });
+            var vector2 = new Maths.Expressions.Matrices.Vector(new[] { new Number(7), new Number(1) });
             var sub = new Sub(vector1, vector2);
 
-            var expected = new Vector(new[] { new Number(-5), new Number(2) });
+            var expected = new Maths.Expressions.Matrices.Vector(new[] { new Number(-5), new Number(2) });
             var result = sub.Execute();
 
             Assert.Equal(expected, result);
@@ -87,20 +87,20 @@ namespace xFunc.Tests.Expressionss
         {
             var matrix1 = new Matrix(new[]
             {
-                new Vector(new[] { new Number(6), new Number(3) }),
-                new Vector(new[] { new Number(2), new Number(1) })
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(6), new Number(3) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(2), new Number(1) })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new[] { new Number(9), new Number(2) }),
-                new Vector(new[] { new Number(4), new Number(3) })
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(9), new Number(2) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(4), new Number(3) })
             });
             var sub = new Sub(matrix1, matrix2);
 
             var expected = new Matrix(new[]
             {
-                new Vector(new[] { new Number(-3), new Number(1) }),
-                new Vector(new[] { new Number(-2), new Number(-2) })
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(-3), new Number(1) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(-2), new Number(-2) })
             });
             var result = sub.Execute();
 
@@ -110,15 +110,15 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void Sub4MatricesTest()
         {
-            var vector1 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector2 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector3 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector4 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector1 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector2 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector3 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector4 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
             var sub1 = new Sub(vector1, vector2);
             var sub2 = new Sub(vector3, vector4);
             var sub3 = new Sub(sub1, sub2);
 
-            var expected = new Vector(new IExpression[] { new Number(0), new Number(0) });
+            var expected = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(0), new Number(0) });
 
             Assert.Equal(expected, sub3.Execute());
         }

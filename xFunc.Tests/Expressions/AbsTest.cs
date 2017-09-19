@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void ExecuteTestVector()
         {
-            var exp = new Abs(new Vector(new IExpression[] { new Number(5), new Number(4), new Number(6), new Number(7) }));
+            var exp = new Abs(new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(5), new Number(4), new Number(6), new Number(7) }));
 
             Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
         }

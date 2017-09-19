@@ -1,0 +1,19 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.vs": true,
+        "**/bin": true,
+        "**/out": true,
+        "**/packages": true,
+        "**/coverage": true,
+        "coverage.xml": true,
+        "xFunc": true,
+        "xFunc (Libs for .Net 4.0).sln": true,
+        "xFunc.sln": true,
+        "desktop.ini": true
+    }
+}

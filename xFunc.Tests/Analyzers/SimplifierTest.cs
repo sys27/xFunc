@@ -701,6 +701,7 @@ namespace xFunc.Tests.Analyzers
             SimpleTest(mul, expected);
         }
 
+        [Fact]
         public void MulSameVar6()
         {
             // 2x * x

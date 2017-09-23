@@ -28,7 +28,7 @@ namespace xFunc.Tests.Tokens
             var token = new SymbolToken(Symbols.Comma);
 
             Assert.False(token.Equals(null));
-            Assert.NotEqual(null, token);
+            Assert.NotNull(token);
         }
 
         [Fact]

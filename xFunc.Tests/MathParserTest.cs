@@ -47,7 +47,7 @@ namespace xFunc.Tests
             var exp = new Sin(new Mul(new Number(2), new Variable("x")));
             bool expected = Helpers.HasVariable(exp, new Variable("x"));
 
-            Assert.Equal(expected, true);
+            Assert.True(expected);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace xFunc.Tests
             var exp = new Sin(new Mul(new Number(2), new Number(3)));
             bool expected = Helpers.HasVariable(exp, new Variable("x"));
 
-            Assert.Equal(expected, false);
+            Assert.False(expected);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace xFunc.Tests
             var exp = new GCD(new IExpression[] { new Variable("x"), new Number(2), new Number(4) }, 3);
             var expected = Helpers.HasVariable(exp, new Variable("x"));
 
-            Assert.Equal(expected, true);
+            Assert.True(expected);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace xFunc.Tests
             var exp = new GCD(new IExpression[] { new Variable("y"), new Number(2), new Number(4) }, 3);
             var expected = Helpers.HasVariable(exp, new Variable("x"));
 
-            Assert.Equal(expected, false);
+            Assert.False(expected);
         }
 
         [Fact]

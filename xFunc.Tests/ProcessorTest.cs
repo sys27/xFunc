@@ -172,7 +172,7 @@ namespace xFunc.Tests
             lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
             parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
-            Assert.Equal(false, result.Result);
+            Assert.False(result.Result);
         }
 
         [Fact]

@@ -54,10 +54,12 @@ namespace xFunc.Tests
         [Fact]
         public void SetItemFromCollectionTest()
         {
-            var parameters = new ParameterCollection();
-            parameters["x"] = 2.3;
+            var parameters = new ParameterCollection
+            {
+                ["x"] = 2.3
+            };
 
-            Assert.Equal(1, parameters.Collection.Count());
+            Assert.Single(parameters.Collection);
             Assert.True(parameters.ContainsKey("x"));
             Assert.Equal(2.3, parameters["x"]);
         }
@@ -71,7 +73,7 @@ namespace xFunc.Tests
             };
             parameters["x"] = 3.3;
 
-            Assert.Equal(1, parameters.Collection.Count());
+            Assert.Single(parameters.Collection);
             Assert.True(parameters.ContainsKey("x"));
             Assert.Equal(3.3, parameters["x"]);
         }
@@ -95,7 +97,7 @@ namespace xFunc.Tests
                 ["π"] = 4
             };
 
-            Assert.Equal(1, parameters.Collection.Count());
+            Assert.Single(parameters.Collection);
             Assert.True(parameters.ContainsKey("π"));
             Assert.Equal(4.0, parameters["π"]);
         }
@@ -110,7 +112,7 @@ namespace xFunc.Tests
             parameters["a"] = 2;
             parameters.Remove("a");
 
-            Assert.Equal(0, parameters.Collection.Count());
+            Assert.Empty(parameters.Collection);
         }
 
     }

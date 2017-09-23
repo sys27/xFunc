@@ -28,7 +28,7 @@ namespace xFunc.Tests.Tokens
             var token = new UserFunctionToken("x");
 
             Assert.False(token.Equals(null));
-            Assert.NotEqual(null, token);
+            Assert.NotNull(token);
         }
 
         [Fact]

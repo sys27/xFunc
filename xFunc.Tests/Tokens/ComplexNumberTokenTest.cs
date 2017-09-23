@@ -29,7 +29,7 @@ namespace xFunc.Tests.Tokens
             var token = new ComplexNumberToken(new Complex(5.3, 2.1));
 
             Assert.False(token.Equals(null));
-            Assert.NotEqual(null, token);
+            Assert.NotNull(token);
         }
 
         [Fact]

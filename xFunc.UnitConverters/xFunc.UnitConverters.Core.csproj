@@ -3,6 +3,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>xFunc.UnitConverters</RootNamespace>
+    <PackageId>xFunc.UnitConverters</PackageId>
+    <Version>3.5.0</Version>
+    <Product>xFunc.UnitConverters</Product>
+    <Authors>Dmitry Kischenko</Authors>
+    <Company />
+    <Copyright>Copyright © 2012-2017 Dmitry Kischenko</Copyright>
+    <Description>xFunc.UnitConverters is a free conversion library (area, length, mass, power, temperature, time, volume and etc.).</Description>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
+    <PackageIconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=xfunc&amp;amp;DownloadId=639207&amp;amp;Build=20266</PackageIconUrl>
+    <PackageTags>Math Converter Unit Units UnitConverter</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <AssemblyVersion>3.5.0</AssemblyVersion>
+    <FileVersion>3.5.0</FileVersion>
+    <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +28,15 @@
 
   <ItemGroup>
     <None Remove="xFunc.UnitConverters.nuspec" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Link="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\NOTICE" Link="NOTICE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

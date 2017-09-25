@@ -31,7 +31,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Number(10), new Number(10));
             var result = (bool)equal.Execute();
 
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Variable("x"), new Variable("y"));
             var result = (bool)equal.Execute(parameters);
 
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Bool(true), new Bool(true));
             var result = (bool)equal.Execute();
 
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Variable("x"), new Variable("y"));
             var result = (bool)equal.Execute(parameters);
 
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Bool(true), new Bool(false));
             var result = (bool)equal.Execute();
 
-            Assert.Equal(false, result);
+            Assert.False(result);
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Variable("x"), new Variable("y"));
             var result = (bool)equal.Execute(parameters);
 
-            Assert.Equal(false, result);
+            Assert.False(result);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Bool(false), new Bool(false));
             var result = (bool)equal.Execute();
 
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var equal = new Equal(new Variable("x"), new Variable("y"));
             var result = (bool)equal.Execute(parameters);
 
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]

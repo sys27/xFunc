@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new Or(new Bool(true), new Bool(false));
 
-            Assert.Equal(true, exp.Execute());
+            Assert.True((bool)exp.Execute());
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var exp = new Or(new Bool(false), new Bool(false));
 
-            Assert.Equal(false, exp.Execute());
+            Assert.False((bool)exp.Execute());
         }
 
         [Fact]

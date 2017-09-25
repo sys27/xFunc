@@ -483,14 +483,21 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.ComplexNumber)
+            {
+                if (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number)
+                    return ResultType.ComplexNumber;
 
-            if (leftResult == ResultType.ComplexNumber && (rightResult == ResultType.ComplexNumber || rightResult == ResultType.Number))
-                return ResultType.ComplexNumber;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
+            }
 
-            if (rightResult == ResultType.ComplexNumber && (leftResult == ResultType.ComplexNumber || leftResult == ResultType.Number))
-                return ResultType.ComplexNumber;
+            if (rightResult == ResultType.ComplexNumber)
+            {
+                if (leftResult == ResultType.Number)
+                    return ResultType.ComplexNumber;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Left);
+            }
 
             if (leftResult == ResultType.Matrix && (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
                 return ResultType.Matrix;
@@ -498,11 +505,24 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (rightResult == ResultType.Matrix && (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
                 return ResultType.Matrix;
 
-            if (leftResult == ResultType.Vector || (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
+            if (leftResult == ResultType.Vector && (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
                 return ResultType.Vector;
 
-            if (leftResult == ResultType.Vector || (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
+            if (rightResult == ResultType.Vector && (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
                 return ResultType.Vector;
+
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Number)
+            {
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
+            }
 
             // TODO: !!!
             throw new ParameterTypeMismatchException();

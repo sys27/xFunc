@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var eq = new Equality(new Bool(true), new Bool(true));
 
-            Assert.Equal(true, eq.Execute());
+            Assert.True((bool)eq.Execute());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var eq = new Equality(new Bool(true), new Bool(false));
 
-            Assert.Equal(false, eq.Execute());
+            Assert.False((bool)eq.Execute());
         }
 
         [Fact]

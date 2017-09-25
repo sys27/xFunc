@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var nor = new NOr(new Bool(false), new Bool(true));
 
-            Assert.Equal(false, nor.Execute());
+            Assert.False((bool)nor.Execute());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressionss.LogicalAndBitwise
         {
             var nor = new NOr(new Bool(false), new Bool(false));
 
-            Assert.Equal(true, nor.Execute());
+            Assert.True((bool)nor.Execute());
         }
 
         [Fact]

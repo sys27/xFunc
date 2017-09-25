@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(new Variable("x"), new Number(10));
 
-            Assert.Equal(true, lessThen.Execute(parameters));
+            Assert.True((bool)lessThen.Execute(parameters));
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressionss.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var lessThen = new LessThan(new Variable("x"), new Number(10));
 
-            Assert.Equal(false, lessThen.Execute(parameters));
+            Assert.False((bool)lessThen.Execute(parameters));
         }
 
         [Fact]

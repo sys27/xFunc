@@ -749,6 +749,30 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestMulNumberBoolTest()
+        {
+            var mul = new Mul(new Number(1), new Bool(true));
+
+            TestBinaryException(mul);
+        }
+
+        [Fact]
+        public void TestMulBoolNumberTest()
+        {
+            var mul = new Mul(new Bool(true), new Number(1));
+
+            TestBinaryException(mul);
+        }
+
+        [Fact]
+        public void TestMulVarNumberTest()
+        {
+            var mul = new Mul(new Variable("x"), new Number(1));
+
+            Test(mul, ResultType.Undefined);
+        }
+
+        [Fact]
         public void TestMulTwoMatrixTest()
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
@@ -796,6 +820,30 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
 
             Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestMulComplexNumberBoolTest()
+        {
+            var exp = new Mul(new ComplexNumber(2, 5), new Bool(true));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestMulNumberComplexNumberTest()
+        {
+            var exp = new Mul(new Number(2), new ComplexNumber(3, 2));
+
+            Test(exp, ResultType.ComplexNumber);
+        }
+
+        [Fact]
+        public void TestMulBoolComplexNumberTest()
+        {
+            var exp = new Mul(new Bool(true), new ComplexNumber(2, 5));
+
+            TestBinaryException(exp);
         }
 
         [Fact]

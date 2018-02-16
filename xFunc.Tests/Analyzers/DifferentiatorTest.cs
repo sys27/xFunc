@@ -1989,6 +1989,15 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void DoubleDiffNoVarTest()
+        {
+            var exp = new Derivative(new Derivative(new Sin(new Number(1))));
+            var deriv = Differentiate(exp);
+
+            Assert.Equal(zero, deriv);
+        }
+
+        [Fact]
         public void TripleDiffTest()
         {
             var exp = new Derivative(new Derivative(new Derivative(new Sin(x), x), x), x);

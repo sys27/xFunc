@@ -33,11 +33,9 @@ namespace xFunc.Maths
         /// </summary>
         public DefaultDependencyResolver()
         {
-            container = new Dictionary<Type, object>
-            {
-                { typeof(ISimplifier), new Simplifier() },
-                { typeof(IDifferentiator), new Differentiator() }
-            };
+            container = new Dictionary<Type, object>();
+            RegisterType<ISimplifier, Simplifier>(new Simplifier());
+            RegisterType<IDifferentiator, Differentiator>(new Differentiator());
         }
 
         /// <summary>
@@ -61,7 +59,21 @@ namespace xFunc.Maths
             container = new Dictionary<Type, object>(types.Length);
 
             for (int i = 0; i < objects.Length; i++)
-                container.Add(types[i], objects[i]);
+                RegisterType(types[i], objects[i]);
+        }
+
+        private void RegisterType<TType, TValue>(TValue value) where TValue : TType
+        {
+            container.Add(typeof(TType), value);
+        }
+
+        private void RegisterType(Type type, object value)
+        {
+            var valueType = value.GetType();
+            if (valueType.GetType() != type && !type.IsAssignableFrom(valueType))
+                throw new InvalidOperationException();
+
+            container.Add(type, value);
         }
 
         /// <summary>

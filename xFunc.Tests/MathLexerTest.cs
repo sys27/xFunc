@@ -1345,6 +1345,42 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void GCFTest()
+        {
+            var tokens = lexer.Tokenize("gcf(12, 16)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.GCD, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void HCFTest()
+        {
+            var tokens = lexer.Tokenize("hcf(12, 16)");
+
+            var expected = new List<IToken>()
+            {
+                new FunctionToken(Functions.GCD, 2),
+                new SymbolToken(Symbols.OpenBracket),
+                new NumberToken(12),
+                new SymbolToken(Symbols.Comma),
+                new NumberToken(16),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void LCMTest()
         {
             var tokens = lexer.Tokenize("lcm(12, 16)");

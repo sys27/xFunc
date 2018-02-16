@@ -69,7 +69,7 @@ namespace xFunc.Tests
         [Fact]
         public void DiffInjectTest()
         {
-            var deriv = new Derivative(new Variable("x"), new Variable("x"));
+            var deriv = new Derivative(Variable.X, Variable.X);
             resolver.Resolve(deriv);
 
             Assert.NotNull(deriv.Differentiator);

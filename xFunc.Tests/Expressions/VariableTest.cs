@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNotSupportedTest()
         {
-            var exp = new Variable("x");
+            var exp = Variable.X;
 
             Assert.Throws<NotSupportedException>(() => exp.Execute());
         }
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNullTest()
         {
-            var exp = new Variable("x");
+            var exp = Variable.X;
 
             Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
         }
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest()
         {
-            var exp = new Variable("x");
+            var exp = Variable.X;
             var parameters = new ExpressionParameters();
             parameters.Variables.Add("x", 1.0);
 
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ConvertToString()
         {
-            var exp = new Variable("x");
+            var exp = Variable.X;
 
             Assert.Equal("x", exp);
         }
@@ -66,7 +66,7 @@ namespace xFunc.Tests.Expressions
         public void StringToConvert()
         {
             var exp = "x";
-            var result = new Variable("x");
+            var result = Variable.X;
 
             Assert.Equal<Variable>(result, exp);
         }

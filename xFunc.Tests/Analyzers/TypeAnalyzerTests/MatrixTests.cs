@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVectorUndefined()
         {
-            var exp = new Vector(new IExpression[] { new Number(10), new Variable("x") });
+            var exp = new Vector(new IExpression[] { new Number(10), Variable.X });
 
             Test(exp, ResultType.Undefined);
         }
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixUndefinedElement()
         {
-            var exp = new Matrix(new Vector[] { new Vector(new[] { new Variable("x") }) });
+            var exp = new Matrix(new Vector[] { new Vector(new[] { Variable.X }) });
 
             Test(exp, ResultType.Undefined);
         }
@@ -96,7 +96,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDetermenantUndefined()
         {
-            var exp = new Determinant(new Variable("x"));
+            var exp = new Determinant(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -128,7 +128,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInverseUndefined()
         {
-            var exp = new Inverse(new Variable("x"));
+            var exp = new Inverse(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -160,7 +160,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTransposeUndefined()
         {
-            var exp = new Transpose(new Variable("x"));
+            var exp = new Transpose(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }

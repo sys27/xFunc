@@ -96,7 +96,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void CloneTest()
         {
-            var exp = new Div(new Variable("x"), new Number(0));
+            var exp = new Div(Variable.X, new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

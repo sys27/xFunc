@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressionss.Programming
         public void SubAssignCalc()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var sub = new SubAssign(new Variable("x"), new Number(2));
+            var sub = new SubAssign(Variable.X, new Number(2));
             var result = sub.Execute(parameters);
             var expected = 8.0;
 
@@ -41,7 +41,7 @@ namespace xFunc.Tests.Expressionss.Programming
         public void BoolSubNumberTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
-            var add = new SubAssign(new Variable("x"), new Number(2));
+            var add = new SubAssign(Variable.X, new Number(2));
 
             Assert.Throws<NotSupportedException>(() => add.Execute(parameters));
         }
@@ -49,7 +49,7 @@ namespace xFunc.Tests.Expressionss.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new SubAssign(new Variable("x"), new Number(2));
+            var exp = new SubAssign(Variable.X, new Number(2));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

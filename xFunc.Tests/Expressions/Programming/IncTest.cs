@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressionss.Programming
         public void IncCalcTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var inc = new Inc(new Variable("x"));
+            var inc = new Inc(Variable.X);
             var result = (double)inc.Execute(parameters);
 
             Assert.Equal(11.0, result);
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressionss.Programming
         public void IncBoolTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
-            var inc = new Inc(new Variable("x"));
+            var inc = new Inc(Variable.X);
 
             Assert.Throws<NotSupportedException>(() => inc.Execute(parameters));
         }
@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressionss.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new Inc(new Variable("x"));
+            var exp = new Inc(Variable.X);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

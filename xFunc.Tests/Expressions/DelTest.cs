@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x")), new Pow(new Variable("y"), new Number(2))), new Pow(new Variable("z"), new Number(3))));
+            var exp = new Del(new Add(new Add(new Mul(new Number(2), Variable.X), new Pow(new Variable("y"), new Number(2))), new Pow(new Variable("z"), new Number(3))));
             exp.Differentiator = new Differentiator();
             exp.Simplifier = new Simplifier();
 
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void NullDiffTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Del(new Variable("x")).Execute());
+            Assert.Throws<ArgumentNullException>(() => new Del(Variable.X).Execute());
         }
 
         [Fact]

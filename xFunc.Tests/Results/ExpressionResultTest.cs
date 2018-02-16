@@ -27,7 +27,7 @@ namespace xFunc.Tests.Results
         [Fact]
         public void ResultTest()
         {
-            var exp = new Sin(new Variable("x"));
+            var exp = new Sin(Variable.X);
             var result = new ExpressionResult(exp);
 
             Assert.Equal(exp, result.Result);
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Results
         [Fact]
         public void IResultTest()
         {
-            var exp = new Sin(new Variable("x"));
+            var exp = new Sin(Variable.X);
             var result = new ExpressionResult(exp) as IResult;
 
             Assert.Equal(exp, result.Result);
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Results
         [Fact]
         public void ToStringTest()
         {
-            var exp = new Sin(new Variable("x"));
+            var exp = new Sin(Variable.X);
             var result = new ExpressionResult(exp);
 
             Assert.Equal("sin(x)", result.ToString());

@@ -41,7 +41,7 @@ namespace xFunc.Tests.Analyzers
             two = new Number(2);
             three = new Number(3);
 
-            x = new Variable("x");
+            x = Variable.X;
             y = new Variable("y");
         }
 

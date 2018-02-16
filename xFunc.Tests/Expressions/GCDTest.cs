@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void CloneTest()
         {
-            var exp = new GCD(new Variable("x"), new Number(0));
+            var exp = new GCD(Variable.X, new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

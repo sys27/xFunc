@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void ExecuteTest3()
         {
-            var uf1 = new UserFunction("func", new[] { new Variable("x") }, 1);
+            var uf1 = new UserFunction("func", new[] { Variable.X }, 1);
             var func = new DelegateExpression(p => (double)p.Variables["x"] == 10 ? 0 : 1);
             var funcs = new FunctionCollection
             {

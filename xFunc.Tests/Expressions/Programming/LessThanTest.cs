@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressionss.Programming
         public void CalculateLessTrueTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new LessThan(new Variable("x"), new Number(10));
+            var lessThen = new LessThan(Variable.X, new Number(10));
 
             Assert.True((bool)lessThen.Execute(parameters));
         }
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressionss.Programming
         public void CalculateLessFalseTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var lessThen = new LessThan(new Variable("x"), new Number(10));
+            var lessThen = new LessThan(Variable.X, new Number(10));
 
             Assert.False((bool)lessThen.Execute(parameters));
         }

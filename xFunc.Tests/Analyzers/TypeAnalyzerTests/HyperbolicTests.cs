@@ -29,7 +29,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcoshUndefined()
         {
-            var exp = new Arcosh(new Variable("x"));
+            var exp = new Arcosh(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcothUndefined()
         {
-            var exp = new Arcoth(new Variable("x"));
+            var exp = new Arcoth(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -93,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcschUndefined()
         {
-            var exp = new Arcsch(new Variable("x"));
+            var exp = new Arcsch(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArsechUndefined()
         {
-            var exp = new Arsech(new Variable("x"));
+            var exp = new Arsech(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -157,7 +157,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArsinhUndefined()
         {
-            var exp = new Arsinh(new Variable("x"));
+            var exp = new Arsinh(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -189,7 +189,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArtanhUndefined()
         {
-            var exp = new Artanh(new Variable("x"));
+            var exp = new Artanh(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -221,7 +221,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCoshUndefined()
         {
-            var exp = new Cosh(new Variable("x"));
+            var exp = new Cosh(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -253,7 +253,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCothUndefined()
         {
-            var exp = new Coth(new Variable("x"));
+            var exp = new Coth(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -285,7 +285,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCschUndefined()
         {
-            var exp = new Csch(new Variable("x"));
+            var exp = new Csch(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -317,7 +317,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSechUndefined()
         {
-            var exp = new Sech(new Variable("x"));
+            var exp = new Sech(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -349,7 +349,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSinhUndefined()
         {
-            var exp = new Sinh(new Variable("x"));
+            var exp = new Sinh(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -381,7 +381,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTanhUndefined()
         {
-            var exp = new Tanh(new Variable("x"));
+            var exp = new Tanh(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }

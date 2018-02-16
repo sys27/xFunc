@@ -183,7 +183,7 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
 
             var strExp = "x := 1";
-            var exp = new Define(new Variable("x"), new Number(1));
+            var exp = new Define(Variable.X, new Number(1));
 
             var tokens = new List<IToken>
             {
@@ -217,7 +217,7 @@ namespace xFunc.Tests
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "deriv(x)";
-            var exp = new Derivative(new Variable("x"), new Variable("x"));
+            var exp = new Derivative(Variable.X, Variable.X);
             var diff = new Number(1);
 
             var tokens = new List<IToken>
@@ -263,7 +263,7 @@ namespace xFunc.Tests
             };
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
@@ -291,7 +291,7 @@ namespace xFunc.Tests
             };
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             var processor = new Processor(lexer.Object, parser.Object, null, null)
@@ -314,7 +314,7 @@ namespace xFunc.Tests
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
 
             var processor = new Processor(null, null, simplifier.Object, null);
             var result = processor.Simplify(exp);
@@ -329,7 +329,7 @@ namespace xFunc.Tests
         {
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
@@ -347,7 +347,7 @@ namespace xFunc.Tests
         {
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
@@ -355,7 +355,7 @@ namespace xFunc.Tests
 
             var diffObj = differentiator.Object;
             var processor = new Processor(null, null, null, diffObj);
-            var result = processor.Differentiate(exp, new Variable("x"));
+            var result = processor.Differentiate(exp, Variable.X);
 
             differentiator.Verify(d => d.Analyze(exp), Times.Once());
 
@@ -368,7 +368,7 @@ namespace xFunc.Tests
         {
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
@@ -377,7 +377,7 @@ namespace xFunc.Tests
 
             var diffObj = differentiator.Object;
             var processor = new Processor(null, null, null, diffObj);
-            var result = processor.Differentiate(exp, new Variable("x"), new ExpressionParameters());
+            var result = processor.Differentiate(exp, Variable.X, new ExpressionParameters());
 
             differentiator.Verify(d => d.Analyze(exp), Times.Once());
 

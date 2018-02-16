@@ -29,7 +29,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArccosUndefined()
         {
-            var exp = new Arccos(new Variable("x"));
+            var exp = new Arccos(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArccotUndefined()
         {
-            var exp = new Arccot(new Variable("x"));
+            var exp = new Arccot(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -93,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArccscUndefined()
         {
-            var exp = new Arccsc(new Variable("x"));
+            var exp = new Arccsc(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcsecUndefined()
         {
-            var exp = new Arcsec(new Variable("x"));
+            var exp = new Arcsec(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -157,7 +157,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcsinUndefined()
         {
-            var exp = new Arcsin(new Variable("x"));
+            var exp = new Arcsin(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -189,7 +189,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArctanUndefined()
         {
-            var exp = new Arctan(new Variable("x"));
+            var exp = new Arctan(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -221,7 +221,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCosUndefined()
         {
-            var exp = new Cos(new Variable("x"));
+            var exp = new Cos(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -253,7 +253,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCotUndefined()
         {
-            var exp = new Cot(new Variable("x"));
+            var exp = new Cot(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -285,7 +285,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCscUndefined()
         {
-            var exp = new Csc(new Variable("x"));
+            var exp = new Csc(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -317,7 +317,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSecUndefined()
         {
-            var exp = new Sec(new Variable("x"));
+            var exp = new Sec(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -349,7 +349,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSinUndefined()
         {
-            var exp = new Sin(new Variable("x"));
+            var exp = new Sin(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -381,7 +381,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTanUndefined()
         {
-            var exp = new Tan(new Variable("x"));
+            var exp = new Tan(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }

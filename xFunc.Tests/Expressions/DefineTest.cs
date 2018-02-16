@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void SimpDefineTest()
         {
-            var exp = new Define(new Variable("x"), new Number(1));
+            var exp = new Define(Variable.X, new Number(1));
             var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void DefineWithFuncTest()
         {
-            var exp = new Define(new Variable("x"), new Sin(new Number(1)));
+            var exp = new Define(Variable.X, new Sin(new Number(1)));
             var parameters = new ParameterCollection();
             var expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
 
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void DefineExpTest()
         {
-            var exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
+            var exp = new Define(Variable.X, new Mul(new Number(4), new Add(new Number(8), new Number(1))));
             var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
@@ -90,7 +90,7 @@ namespace xFunc.Tests.Expressionss
         public void DefineFuncWithParamsTest()
         {
             var uf = new UserFunction("s", 1);
-            var func = new Sin(new Variable("x"));
+            var func = new Sin(Variable.X);
             var exp = new Define(uf, func);
             var parameters = new ExpressionParameters();
 
@@ -109,7 +109,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void CloneTest()
         {
-            var exp = new Define(new Variable("x"), new Number(0));
+            var exp = new Define(Variable.X, new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

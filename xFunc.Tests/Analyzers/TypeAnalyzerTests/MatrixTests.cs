@@ -58,6 +58,42 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestMatrixUndefinedElement()
+        {
+            var exp = new Matrix(new Vector[] { new Vector(new[] { new Variable("x") }) });
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestMatrixNotVectorElement()
+        {
+            DifferentParametersExpression exp = new Matrix(2, 2)
+            {
+                Arguments = new[] { new Number(2) }
+            };
+
+            TestDiffParamException(exp);
+        }
+
+        [Fact]
+        public void TestEmptyMatrix()
+        {
+            var exp = new Matrix(0, 0);
+
+            Test(exp, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestNullMatrix()
+        {
+            var exp = new Matrix(0, 0);
+            exp.Arguments = null;
+
+            Test(exp, ResultType.Matrix);
+        }
+
+        [Fact]
         public void TestDetermenantUndefined()
         {
             var exp = new Determinant(new Variable("x"));

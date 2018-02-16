@@ -602,8 +602,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
             for (var i = 0; i < results.Count; i++)
             {
-                if (results[i] == ResultType.Undefined)
-                    return ResultType.Undefined;
                 if (results[i] != ResultType.Number)
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
             }

@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressionss
         public void ExecuteTest1()
         {
             var functions = new FunctionCollection();
-            functions.Add(new UserFunction("f", new IExpression[] { new Variable("x") }, 1), new Ln(new Variable("x")));
+            functions.Add(new UserFunction("f", new IExpression[] { Variable.X }, 1), new Ln(Variable.X));
 
             var func = new UserFunction("f", new IExpression[] { new Number(1) }, 1);
             Assert.Equal(Math.Log(1), func.Execute(functions));
@@ -50,10 +50,10 @@ namespace xFunc.Tests.Expressionss
         {
             var expParams = new ExpressionParameters();
 
-            var exp = new If(new Equal(new Variable("x"), new Number(0)),
+            var exp = new If(new Equal(Variable.X, new Number(0)),
                              new Number(1),
-                             new Mul(new Variable("x"), new UserFunction("f", new[] { new Sub(new Variable("x"), new Number(1)) }, 1)));
-            expParams.Functions.Add(new UserFunction("f", new[] { new Variable("x") }, 1), exp);
+                             new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, new Number(1)) }, 1)));
+            expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }, 1), exp);
 
             var func = new UserFunction("f", new[] { new Number(4) }, 1);
 

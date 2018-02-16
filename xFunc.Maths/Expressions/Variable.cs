@@ -25,6 +25,11 @@ namespace xFunc.Maths.Expressions
     public class Variable : IExpression
     {
 
+        /// <summary>
+        /// The 'x' variable.
+        /// </summary>
+        public static readonly Variable X = new Variable("x");
+
         private readonly string name;
 
         /// <summary>

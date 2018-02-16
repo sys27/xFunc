@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndUndefined()
         {
-            var exp = new And(new Variable("x"), new Variable("y"));
+            var exp = new And(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -100,7 +100,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualityUndefined()
         {
-            var exp = new Equality(new Variable("x"), new Variable("y"));
+            var exp = new Equality(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -140,7 +140,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestImplicationUndefined()
         {
-            var exp = new Implication(new Variable("x"), new Variable("y"));
+            var exp = new Implication(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -180,7 +180,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNAndUndefined()
         {
-            var exp = new NAnd(new Variable("x"), new Variable("y"));
+            var exp = new NAnd(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -220,7 +220,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNOrUndefined()
         {
-            var exp = new NOr(new Variable("x"), new Variable("y"));
+            var exp = new NOr(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -260,7 +260,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotUndefined()
         {
-            var exp = new Not(new Variable("x"));
+            var exp = new Not(Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -292,7 +292,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrUndefined()
         {
-            var exp = new Or(new Variable("x"), new Variable("y"));
+            var exp = new Or(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }
@@ -356,7 +356,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestXOrUndefined()
         {
-            var exp = new XOr(new Variable("x"), new Variable("y"));
+            var exp = new XOr(Variable.X, new Variable("y"));
 
             Test(exp, ResultType.Undefined);
         }

@@ -7,12 +7,20 @@ configuration: Release
 environment:
   COVERALLS_REPO_TOKEN:
     secure: YI6EFXDLg4sSRbxxqZdTI21IAWMt55JfDTTDpA6ljw7zq5UmXi9x5vbagzua5hqe
+  matrix:
+    - sln: xFunc.sln
+      restore: nuget restore xFunc.sln
+    - sln: xFunc.Core.sln
+      restore: dotnet restore xFunc.Core.sln
+matrix:
+  fast_finish: true
 nuget:
   disable_publish_on_pr: true
 before_build:
-- cmd: nuget restore xFunc.sln
+- cmd: $(restore)
 build:
-  project: xFunc.sln
+  parallel: true
+  project: $(sln)
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal

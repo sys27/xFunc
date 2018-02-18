@@ -17,10 +17,10 @@ matrix:
 nuget:
   disable_publish_on_pr: true
 before_build:
-- cmd: %restore%
+- cmd: $env:restore
 build:
   parallel: true
-  project: %sln%
+  project: $env:sln
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal

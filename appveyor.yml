@@ -7,33 +7,17 @@ configuration: Release
 environment:
   COVERALLS_REPO_TOKEN:
     secure: YI6EFXDLg4sSRbxxqZdTI21IAWMt55JfDTTDpA6ljw7zq5UmXi9x5vbagzua5hqe
-  matrix:
-    - sln: xFunc.sln
-      restore: nuget restore xFunc.sln
-    - sln: xFunc.Core.sln
-      restore: dotnet restore xFunc.Core.sln
-matrix:
-  fast_finish: true
 nuget:
   disable_publish_on_pr: true
 before_build:
-- cmd: $env:restore
+- cmd: nuget restore xFunc.sln
 build:
+  project: xFunc.sln
   parallel: true
-  project: $env:sln
-  publish_nuget: true
-  publish_nuget_symbols: true
   verbosity: minimal
 after_build:
 - cmd: >-
     packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -output:coverage.xml -target:"packages\xunit.runner.console.2.3.1\tools\net452\xunit.console.x86.exe" -targetargs:"xFunc.Tests\bin\Release\xFunc.Tests.dll -nologo -noshadow" -excludebyattribute:*.ExcludeFromCodeCoverage*^ -filter:"+[xFunc.*]* -[xFunc.Tests*]* -[xFunc.*]*.Resource -[xFunc.*]*Exception"
 
     packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover coverage.xml
-deploy:
-- provider: NuGet
-  server: https://ci.appveyor.com/nuget/sys27/api/v2/package
-  api_key:
-    secure: Wvb1TWmJaKAdppWXTK7krIPA7tF6sq7ImNKp3wj945E=
-  skip_symbols: false
-  symbol_server: https://ci.appveyor.com/nuget/sys27/api/v2/package
-  artifact: /xFunc.*\.nupkg/
+deploy: off

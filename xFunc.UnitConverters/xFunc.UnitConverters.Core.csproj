@@ -8,7 +8,7 @@
     <Product>xFunc.UnitConverters</Product>
     <Authors>Dmitry Kischenko</Authors>
     <Company />
-    <Copyright>Copyright © 2012-2017 Dmitry Kischenko</Copyright>
+    <Copyright>Copyright ©2012-20187 Dmitry Kischenko</Copyright>
     <Description>xFunc.UnitConverters is a free conversion library (area, length, mass, power, temperature, time, volume and etc.).</Description>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>

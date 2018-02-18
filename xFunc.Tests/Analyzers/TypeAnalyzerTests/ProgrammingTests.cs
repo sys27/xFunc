@@ -383,7 +383,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new If(new ComplexNumber(2, 4), new Number(10));
 
-            TestException(exp);
+            TestDiffParamException(exp);
         }
 
         [Fact]

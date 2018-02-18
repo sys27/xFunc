@@ -10,10 +10,11 @@
         <iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=xfunc&amp;DownloadId=639207&amp;Build=20266</iconUrl>
         <description>xFunc.UnitConverters is a free conversion library (area, length, mass, power, temperature, time, volume and etc.).</description>
         <releaseNotes></releaseNotes>
-        <copyright>Copyright 2012-2017 Dmitry Kischenko</copyright>
+        <copyright>Copyright 2012-2018 Dmitry Kischenko</copyright>
         <tags>Math Converter Unit Units UnitConverter</tags>
     </metadata>
     <files>
         <file src="bin\Release\net40\**.*" target="lib\net40\" />
+        <file src="bin\Release\netstandard2.0\**.*" target="lib\netstandard2.0\" />
     </files>
 </package>

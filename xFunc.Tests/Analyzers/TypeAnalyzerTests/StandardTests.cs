@@ -701,6 +701,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestLogBaseIsNotNumber()
+        {
+            var exp = new Log(new Number(2), new Bool(false));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestModUndefined()
         {
             var exp = new Mod(Variable.X, new Number(2));
@@ -730,6 +738,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Mod(new Bool(false), new Number(2));
 
             TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestModNoNumbersException()
+        {
+            var exp = new Mod(new Bool(false), new Bool(false));
+
+            TestException(exp);
         }
 
         [Fact]
@@ -901,6 +917,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestPowRightIsInvalidException()
+        {
+            var exp = new Pow(new ComplexNumber(2, 2), new Bool(false));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestRootUndefined()
         {
             var exp = new Root(Variable.X, new Number(2));
@@ -930,6 +954,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Root(new Bool(false), new Number(2));
 
             TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestRootInvalidArgsException()
+        {
+            var exp = new Root(new Bool(false), new Bool(false));
+
+            TestException(exp);
         }
 
         [Fact]
@@ -1176,6 +1208,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Sub(new Add(Variable.X, Variable.X), Variable.X);
 
             Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void TestSubBoolsException()
+        {
+            var exp = new Sub(new Bool(false), new Bool(false));
+
+            TestException(exp);
         }
 
         [Fact]

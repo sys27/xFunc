@@ -26,8 +26,6 @@ using xFunc.Maths.Expressions.Trigonometric;
 namespace xFunc.Maths.Analyzers.TypeAnalyzers
 {
 
-    // todo: exceptions!!!
-
     /// <summary>
     /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
     /// </summary>
@@ -218,7 +216,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (exp.ParametersCount == 3 && exp.Arguments[1] is Variable && exp.Arguments[2] is Number)
                 return ResultType.Number;
 
-            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -433,14 +430,17 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
+                if (rightResult == ResultType.ComplexNumber)
+                    return ResultType.ComplexNumber;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.ComplexNumber)
-                return ResultType.ComplexNumber;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
+            }
 
-            // TODO: !!!
-            throw new ParameterTypeMismatchException();
+            throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
         }
 
         /// <summary>
@@ -496,20 +496,40 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 if (leftResult == ResultType.Number)
                     return ResultType.ComplexNumber;
 
-                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Left);
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, leftResult, BinaryParameterType.Left);
             }
 
-            if (leftResult == ResultType.Matrix && (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
-                return ResultType.Matrix;
+            if (leftResult == ResultType.Matrix)
+            {
+                if (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector)
+                    return ResultType.Matrix;
 
-            if (rightResult == ResultType.Matrix && (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
-                return ResultType.Matrix;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.Matrix | ResultType.Vector, rightResult, BinaryParameterType.Right);
+            }
 
-            if (leftResult == ResultType.Vector && (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector))
-                return ResultType.Vector;
+            if (rightResult == ResultType.Matrix)
+            {
+                if (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector)
+                    return ResultType.Matrix;
 
-            if (rightResult == ResultType.Vector && (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector))
-                return ResultType.Vector;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.Matrix | ResultType.Vector, leftResult, BinaryParameterType.Left);
+            }
+
+            if (leftResult == ResultType.Vector)
+            {
+                if (rightResult == ResultType.Number || rightResult == ResultType.Matrix || rightResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.Matrix | ResultType.Vector, rightResult, BinaryParameterType.Right);
+            }
+
+            if (rightResult == ResultType.Vector)
+            {
+                if (leftResult == ResultType.Number || leftResult == ResultType.Matrix || leftResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.Matrix | ResultType.Vector, leftResult, BinaryParameterType.Left);
+            }
 
             if (leftResult == ResultType.Number)
             {
@@ -524,7 +544,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
             }
 
-            // TODO: !!!
             throw new ParameterTypeMismatchException();
         }
 
@@ -550,15 +569,23 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
                 return ResultType.Undefined;
 
-            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
-                return ResultType.Number;
+            if (leftResult == ResultType.Number)
+            {
+                if (rightResult == ResultType.Number)
+                    return ResultType.Number;
 
-            if (leftResult == ResultType.ComplexNumber &&
-                (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber))
-                return ResultType.ComplexNumber;
+                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
+            }
 
-            // TODO: !!!
-            throw new ParameterTypeMismatchException();
+            if (leftResult == ResultType.ComplexNumber)
+            {
+                if (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber)
+                    return ResultType.ComplexNumber;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
+            }
+
+            throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, leftResult, BinaryParameterType.Left);
         }
 
         /// <summary>
@@ -1783,8 +1810,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (conditionResult == ResultType.Boolean)
                 return exp.ParametersCount == 2 ? thenResult : ResultType.Undefined;
 
-            // TODO: !!!
-            throw new ParameterTypeMismatchException();
+            throw new DifferentParameterTypeMismatchException(ResultType.Boolean, conditionResult, 0);
         }
 
         /// <summary>

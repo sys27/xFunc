@@ -798,6 +798,24 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestMulLeftMatrixRightException()
+        {
+            var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
+                              new Bool(false));
+
+            TestBinaryException(mul);
+        }
+
+        [Fact]
+        public void TestMulRightMatrixLeftException()
+        {
+            var mul = new Mul(new Bool(false),
+                              new Matrix(new[] { new Vector(new[] { new Number(1) }) }));
+
+            TestBinaryException(mul);
+        }
+
+        [Fact]
         public void TestMulNumberVectorTest()
         {
             var mul = new Mul(new Number(1), new Vector(new[] { new Number(1) }));
@@ -820,6 +838,31 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
                               new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(mul, ResultType.Matrix);
+        }
+
+        [Fact]
+        public void TestMulVectorNumber()
+        {
+            var mul = new Mul(new Vector(new[] { new Number(1) }),
+                              new Number(2));
+
+            Test(mul, ResultType.Vector);
+        }
+
+        [Fact]
+        public void TestMulVectorBoolException()
+        {
+            var mul = new Mul(new Vector(new[] { new Number(1) }), new Bool(false));
+
+            TestBinaryException(mul);
+        }
+
+        [Fact]
+        public void TestMulBoolVectorException()
+        {
+            var mul = new Mul(new Bool(false), new Vector(new[] { new Number(1) }));
+
+            TestBinaryException(mul);
         }
 
         [Fact]

@@ -91,6 +91,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestConditionalAndInvalidArgsException()
+        {
+            var exp = new Maths.Expressions.Programming.And(new Number(2), new Number(2));
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestDecNumber()
         {
             var exp = new Dec(new Number(3));
@@ -187,6 +195,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestEqualInvalidArgsException()
+        {
+            var exp = new Equal(new ComplexNumber(2, 3), new ComplexNumber(2, 3));
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestNotEqualUndefined()
         {
             var exp = new NotEqual(Variable.X, Variable.X);
@@ -248,6 +264,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new NotEqual(new ComplexNumber(2, 3), new Bool(false));
 
             TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestNotEqualInvalidArgsException()
+        {
+            var exp = new NotEqual(new ComplexNumber(2, 3), new ComplexNumber(2, 3));
+
+            TestException(exp);
         }
 
         [Fact]
@@ -528,6 +552,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Maths.Expressions.Programming.Or(new ComplexNumber(2, 3), new Bool(false));
 
             TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void TestConditionalOrInvalidArgsException()
+        {
+            var exp = new Maths.Expressions.Programming.Or(new ComplexNumber(2, 3), new ComplexNumber(2, 3));
+
+            TestException(exp);
         }
 
         [Fact]

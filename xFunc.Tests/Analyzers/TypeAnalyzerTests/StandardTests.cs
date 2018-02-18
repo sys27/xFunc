@@ -697,7 +697,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Log(new Bool(false), new Number(2));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -889,7 +889,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Pow(new Number(4), new ComplexNumber(2, 4));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]
@@ -897,7 +897,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Pow(new Bool(false), new Number(2));
 
-            TestException(exp);
+            TestBinaryException(exp);
         }
 
         [Fact]

@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 using Moq;
 using Xunit;
 using xFunc.Maths.Results;
@@ -24,6 +24,7 @@ using System.Numerics;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Tokenization;
 
 namespace xFunc.Tests
 {

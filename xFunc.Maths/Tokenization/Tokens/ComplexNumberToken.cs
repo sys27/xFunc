@@ -16,7 +16,7 @@ using System;
 using System.Globalization;
 using System.Numerics;
 
-namespace xFunc.Maths.Tokens
+namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>

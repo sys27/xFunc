@@ -13,36 +13,24 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
+using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Maths.Tokens
+namespace xFunc.Maths.Tokenization
 {
 
     /// <summary>
-    /// Describes special symbols. 
+    /// The interface for lexer.
     /// </summary>
-    public enum Symbols
+    public interface ILexer
     {
 
         /// <summary>
-        /// (
+        /// Converts the string into a sequence of tokens.
         /// </summary>
-        OpenBracket,
-        /// <summary>
-        /// )
-        /// </summary>
-        CloseBracket,
-        /// <summary>
-        /// {
-        /// </summary>
-        OpenBrace,
-        /// <summary>
-        /// }
-        /// </summary>
-        CloseBrace,
-        /// <summary>
-        /// ,
-        /// </summary>
-        Comma,
+        /// <param name="function">The string that contains the functions and operators.</param>
+        /// <returns>The sequence of tokens.</returns>
+        IEnumerable<IToken> Tokenize(string function);
 
     }
 

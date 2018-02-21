@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {

@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using System.Linq;
 using xFunc.Maths.Expressions.ComplexNumbers;

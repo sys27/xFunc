@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.Tokens

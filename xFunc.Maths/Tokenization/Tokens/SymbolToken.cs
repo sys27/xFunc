@@ -14,22 +14,23 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Tokens
+namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>
-    /// Represents a variable token.
+    /// Represents a symbol token.
     /// </summary>
-    public class VariableToken : IToken
+    public class SymbolToken : IToken
     {
 
         /// <summary>
-        /// Initializes the <see cref="VariableToken"/> class.
+        /// Initializes the <see cref="SymbolToken"/> class.
         /// </summary>
-        /// <param name="variable">A name of variable.</param>
-        public VariableToken(string variable)
+        /// <param name="symbol">A symbol.</param>
+        public SymbolToken(Symbols symbol)
         {
-            this.Variable = variable;
+            this.Symbol = symbol;
+            this.Priority = GetPriority();
         }
 
         /// <summary>
@@ -45,12 +46,12 @@ namespace xFunc.Maths.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(VariableToken) != obj.GetType())
+            if (typeof(SymbolToken) != obj.GetType())
                 return false;
 
-            var token = (VariableToken)obj;
+            var token = (SymbolToken)obj;
 
-            return Variable == token.Variable;
+            return this.Symbol == token.Symbol;
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return Variable.GetHashCode();
+            return Symbol.GetHashCode();
         }
 
         /// <summary>
@@ -70,18 +71,33 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Variable: {Variable}";
+            return $"Symbol: {Symbol}";
+        }
+
+        private int GetPriority()
+        {
+            switch (Symbol)
+            {
+                case Symbols.OpenBracket:
+                    return 1;
+                case Symbols.CloseBracket:
+                    return 2;
+                case Symbols.Comma:
+                    return 3;
+                default:
+                    return -1;
+            }
         }
 
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority => 102;
+        public int Priority { get; }
 
         /// <summary>
-        /// Gets a name of variable.
+        /// Gets the symbol.
         /// </summary>
-        public string Variable { get; }
+        public Symbols Symbol { get; }
 
     }
 

@@ -13,24 +13,31 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Globalization;
 
-namespace xFunc.Maths.Tokens
+namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>
-    /// Represents a number token.
+    /// Represents a function token.
     /// </summary>
-    public class NumberToken : IToken
+    public class FunctionToken : IToken
     {
 
         /// <summary>
-        /// Initializes the <see cref="NumberToken"/> class.
+        /// Initializes the <see cref="FunctionToken" /> class.
         /// </summary>
-        /// <param name="number">A number.</param>
-        public NumberToken(double number)
+        /// <param name="function">A function.</param>
+        public FunctionToken(Functions function) : this(function, -1) { }
+
+        /// <summary>
+        /// Initializes the <see cref="FunctionToken" /> class.
+        /// </summary>
+        /// <param name="function">A function.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
+        public FunctionToken(Functions function, int countOfParams)
         {
-            this.Number = number;
+            this.Function = function;
+            this.CountOfParams = countOfParams;
         }
 
         /// <summary>
@@ -46,12 +53,12 @@ namespace xFunc.Maths.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(NumberToken) != obj.GetType())
+            if (typeof(FunctionToken) != obj.GetType())
                 return false;
 
-            var token = (NumberToken)obj;
+            var token = (FunctionToken)obj;
 
-            return this.Number == token.Number;
+            return this.Function == token.Function && this.CountOfParams == token.CountOfParams;
         }
 
         /// <summary>
@@ -62,7 +69,12 @@ namespace xFunc.Maths.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return Number.GetHashCode();
+            int hash = 6949;
+
+            hash = hash * 5437 + Function.GetHashCode();
+            hash = hash * 5437 + CountOfParams.GetHashCode();
+
+            return hash;
         }
 
         /// <summary>
@@ -71,18 +83,26 @@ namespace xFunc.Maths.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Number: {Number.ToString(CultureInfo.InvariantCulture)}";
+            return $"Function: {Function} ({CountOfParams})";
         }
 
         /// <summary>
         /// Gets a priority of current token.
         /// </summary>
-        public int Priority => 101;
+        public int Priority => 100;
 
         /// <summary>
-        /// Gets the number.
+        /// Gets the function.
         /// </summary>
-        public double Number { get; }
+        public Functions Function { get; }
+
+        /// <summary>
+        /// Gets the count of parameters.
+        /// </summary>
+        /// <value>
+        /// The count of parameters.
+        /// </value>
+        public int CountOfParams { get; internal set; }
 
     }
 

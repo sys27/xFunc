@@ -17,7 +17,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using xFunc.Maths;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization;
+using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests

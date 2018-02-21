@@ -1,4 +1,4 @@
-﻿// Copyright 2012-2018 Dmitry Kischenko
+// Copyright 2012-2018 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -13,21 +13,13 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
+using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Maths.Tokens
+namespace xFunc.Maths.Tokenization.Factories
 {
- 
-    /// <summary>
-    /// Represents a token.
-    /// </summary>
-    public interface IToken
+    public interface IAbstractTokenFactory
     {
-
-        /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        int Priority { get; }
-
+        IList<IToken> CreateToken(string match, IToken lastToken);
     }
-
 }

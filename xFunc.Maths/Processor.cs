@@ -19,6 +19,7 @@ using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Results;
+using xFunc.Maths.Tokenization;
 
 namespace xFunc.Maths
 {

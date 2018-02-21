@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 
-namespace xFunc.Maths.Tokens
+namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>

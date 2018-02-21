@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {

@@ -13,25 +13,36 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Maths
+namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>
-    /// The interface for parser.
+    /// Describes special symbols. 
     /// </summary>
-    public interface IParser
+    public enum Symbols
     {
 
         /// <summary>
-        /// Parses the specified function.
+        /// (
         /// </summary>
-        /// <param name="tokens">The list of tokens.</param>
-        /// <returns>The parsed expression.</returns>
-        IExpression Parse(IEnumerable<IToken> tokens);
+        OpenBracket,
+        /// <summary>
+        /// )
+        /// </summary>
+        CloseBracket,
+        /// <summary>
+        /// {
+        /// </summary>
+        OpenBrace,
+        /// <summary>
+        /// }
+        /// </summary>
+        CloseBrace,
+        /// <summary>
+        /// ,
+        /// </summary>
+        Comma,
 
     }
 

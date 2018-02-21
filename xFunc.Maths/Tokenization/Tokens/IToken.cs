@@ -13,24 +13,20 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
-using xFunc.Maths.Tokens;
 
-namespace xFunc.Maths
+namespace xFunc.Maths.Tokenization.Tokens
 {
-
+ 
     /// <summary>
-    /// The interface for lexer.
+    /// Represents a token.
     /// </summary>
-    public interface ILexer
+    public interface IToken
     {
 
         /// <summary>
-        /// Converts the string into a sequence of tokens.
+        /// Gets a priority of current token.
         /// </summary>
-        /// <param name="function">The string that contains the functions and operators.</param>
-        /// <returns>The sequence of tokens.</returns>
-        IEnumerable<IToken> Tokenize(string function);
+        int Priority { get; }
 
     }
 

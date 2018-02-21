@@ -21,7 +21,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {

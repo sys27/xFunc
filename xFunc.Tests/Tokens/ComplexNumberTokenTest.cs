@@ -14,7 +14,7 @@
 // limitations under the License.
 using System;
 using System.Numerics;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.Tokens

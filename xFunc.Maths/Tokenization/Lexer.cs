@@ -19,9 +19,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
-using xFunc.Maths.Tokens;
+using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Maths
+namespace xFunc.Maths.Tokenization
 {
 
     /// <summary>
@@ -811,7 +811,7 @@ namespace xFunc.Maths
             return CountParams(tokens);
         }
 
-        private int _CountParams(List<IToken> tokens, int index)
+        private int CountParamsInternal(List<IToken> tokens, int index)
         {
             var func = (FunctionToken)tokens[index];
 
@@ -823,11 +823,12 @@ namespace xFunc.Maths
             for (; i < tokens.Count;)
             {
                 var token = tokens[i];
-                if (token is SymbolToken)
+                if (token is SymbolToken symbol)
                 {
-                    var symbol = token as SymbolToken;
                     if (symbol.Symbol == Symbols.OpenBrace)
+                    {
                         hasBraces = true;
+                    }
 
                     if (symbol.Symbol == Symbols.CloseBracket || symbol.Symbol == Symbols.CloseBrace)
                     {
@@ -853,7 +854,7 @@ namespace xFunc.Maths
 
                     i++;
                 }
-                else if (token is FunctionToken)
+                else if (token is FunctionToken function)
                 {
                     if (oneParam)
                     {
@@ -861,11 +862,10 @@ namespace xFunc.Maths
                         oneParam = false;
                     }
 
-                    var f = (FunctionToken)token;
-                    if (f.Function == Functions.Matrix || f.Function == Functions.Vector)
+                    if (function.Function == Functions.Matrix || function.Function == Functions.Vector)
                         hasBraces = true;
 
-                    i = _CountParams(tokens, i) + 1;
+                    i = CountParamsInternal(tokens, i) + 1;
                 }
                 else
                 {
@@ -894,12 +894,12 @@ namespace xFunc.Maths
         /// <returns>The list of tokens.</returns>
         private IEnumerable<IToken> CountParams(List<IToken> tokens)
         {
-            for (int i = 0; i < tokens.Count;)
+            for (int i = 0; i < tokens.Count; i++)
             {
                 if (tokens[i] is FunctionToken)
-                    i = _CountParams(tokens, i) + 1;
-                else
-                    i++;
+                {
+                    i = CountParamsInternal(tokens, i);
+                }
             }
 
             return tokens;

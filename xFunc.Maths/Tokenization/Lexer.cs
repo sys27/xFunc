@@ -33,6 +33,7 @@ namespace xFunc.Maths.Tokenization
         private Regex regexSymbols;
         private Regex regexOperations;
         private Regex regexFunctions;
+        private Regex regexVariables;
         private Regex regexConst;
 
         private Regex regexNumberHex;
@@ -60,7 +61,8 @@ namespace xFunc.Maths.Tokenization
 
             regexSymbols = new Regex(@"\G(\(|\)|{|}|,)", options);
             regexOperations = new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", options);
-            regexFunctions = new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)(\(|{)?", options);
+            regexFunctions = new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)(\(|{)", options);
+            regexVariables = new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", options);
             regexConst = new Regex(@"\G(true|false)", options);
 
             regexNumberHex = new Regex(@"\G[+-]?0x[0-9a-f]+", options);
@@ -119,38 +121,39 @@ namespace xFunc.Maths.Tokenization
         /// <summary>
         /// Creates the operation token from matched string.
         /// </summary>
-        /// <param name="match">The matched string.</param>
+        /// <param name="operation">The matched string.</param>
         /// <param name="tokens">The list of tokens.</param>
         /// <exception cref="LexerException">
         /// The specified operation is not supported.
         /// </exception>
-        private void CreateOperations(string match, IList<IToken> tokens)
+        private void CreateOperations(Match match, IList<IToken> tokens)
         {
-            if (match == "+=")
+            var operation = match.Value.ToLower();
+            if (operation == "+=")
             {
                 tokens.Add(new OperationToken(Operations.AddAssign));
             }
-            else if (match == "-=" || match == "−=")
+            else if (operation == "-=" || operation == "−=")
             {
                 tokens.Add(new OperationToken(Operations.SubAssign));
             }
-            else if (match == "*=" || match == "×=")
+            else if (operation == "*=" || operation == "×=")
             {
                 tokens.Add(new OperationToken(Operations.MulAssign));
             }
-            else if (match == "*" || match == "×")
+            else if (operation == "*" || operation == "×")
             {
                 tokens.Add(new OperationToken(Operations.Multiplication));
             }
-            else if (match == "/")
+            else if (operation == "/")
             {
                 tokens.Add(new OperationToken(Operations.Division));
             }
-            else if (match == "^")
+            else if (operation == "^")
             {
                 tokens.Add(new OperationToken(Operations.Exponentiation));
             }
-            else if (match == "!")
+            else if (operation == "!")
             {
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken != null)
@@ -163,53 +166,53 @@ namespace xFunc.Maths.Tokenization
                     }
                 }
 
-                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
             }
-            else if (match == "%" || match == "mod")
+            else if (operation == "%" || operation == "mod")
             {
                 tokens.Add(new OperationToken(Operations.Modulo));
             }
-            else if (match == "&&")
+            else if (operation == "&&")
             {
                 tokens.Add(new OperationToken(Operations.ConditionalAnd));
             }
-            else if (match == "||")
+            else if (operation == "||")
             {
                 tokens.Add(new OperationToken(Operations.ConditionalOr));
             }
-            else if (match == "==")
+            else if (operation == "==")
             {
                 tokens.Add(new OperationToken(Operations.Equal));
             }
-            else if (match == "!=")
+            else if (operation == "!=")
             {
                 tokens.Add(new OperationToken(Operations.NotEqual));
             }
-            else if (match == "<=")
+            else if (operation == "<=")
             {
                 tokens.Add(new OperationToken(Operations.LessOrEqual));
             }
-            else if (match == "<")
+            else if (operation == "<")
             {
                 tokens.Add(new OperationToken(Operations.LessThan));
             }
-            else if (match == ">=")
+            else if (operation == ">=")
             {
                 tokens.Add(new OperationToken(Operations.GreaterOrEqual));
             }
-            else if (match == ">")
+            else if (operation == ">")
             {
                 tokens.Add(new OperationToken(Operations.GreaterThan));
             }
-            else if (match == "++")
+            else if (operation == "++")
             {
                 tokens.Add(new OperationToken(Operations.Increment));
             }
-            else if (match == "--" || match == "−−")
+            else if (operation == "--" || operation == "−−")
             {
                 tokens.Add(new OperationToken(Operations.Decrement));
             }
-            else if (match == "+")
+            else if (operation == "+")
             {
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken == null)
@@ -225,7 +228,7 @@ namespace xFunc.Maths.Tokenization
 
                 tokens.Add(new OperationToken(Operations.Addition));
             }
-            else if (match == "-" || match == "−")
+            else if (operation == "-" || operation == "−")
             {
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken == null)
@@ -261,57 +264,57 @@ namespace xFunc.Maths.Tokenization
                     }
                 }
             }
-            else if (match == "/=")
+            else if (operation == "/=")
             {
                 tokens.Add(new OperationToken(Operations.DivAssign));
             }
-            else if (match == ":=")
+            else if (operation == ":=")
             {
                 tokens.Add(new OperationToken(Operations.Assign));
             }
-            else if (match == "not" || match == "~")
+            else if (operation == "not" || operation == "~")
             {
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken != null)
                 {
                     if ((lastToken is SymbolToken symbol && symbol.Symbol == Symbols.CloseBracket) ||
                         lastToken is NumberToken || lastToken is VariableToken)
-                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
                 }
 
                 tokens.Add(new OperationToken(Operations.Not));
             }
-            else if (match == "and" || match == "&")
+            else if (operation == "and" || operation == "&")
             {
                 tokens.Add(new OperationToken(Operations.And));
             }
-            else if (match == "or" || match == "|")
+            else if (operation == "or" || operation == "|")
             {
                 tokens.Add(new OperationToken(Operations.Or));
             }
-            else if (match == "xor")
+            else if (operation == "xor")
             {
                 tokens.Add(new OperationToken(Operations.XOr));
             }
-            else if (match == "impl" || match == "->" || match == "−>" || match == "=>")
+            else if (operation == "impl" || operation == "->" || operation == "−>" || operation == "=>")
             {
                 tokens.Add(new OperationToken(Operations.Implication));
             }
-            else if (match == "eq" || match == "<->" || match == "<−>" || match == "<=>")
+            else if (operation == "eq" || operation == "<->" || operation == "<−>" || operation == "<=>")
             {
                 tokens.Add(new OperationToken(Operations.Equality));
             }
-            else if (match == "nor")
+            else if (operation == "nor")
             {
                 tokens.Add(new OperationToken(Operations.NOr));
             }
-            else if (match == "nand")
+            else if (operation == "nand")
             {
                 tokens.Add(new OperationToken(Operations.NAnd));
             }
             else
             {
-                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
             }
         }
 
@@ -616,25 +619,56 @@ namespace xFunc.Maths.Tokenization
         /// <summary>
         /// Creates the constant token from matched string.
         /// </summary>
-        /// <param name="match">The matched string.</param>
+        /// <param name="constant">The matched string.</param>
         /// <param name="tokens">The list of tokens.</param>
         /// <exception cref="LexerException">
         /// The specified constant is not supported.
         /// </exception>
-        private void CreateConst(string match, IList<IToken> tokens)
+        private void CreateConst(Match match, IList<IToken> tokens)
         {
-            if (match == "true")
+            var constant = match.Value.ToLower();
+            if (constant == "true")
             {
                 tokens.Add(new BooleanToken(true));
             }
-            else if (match == "false")
+            else if (constant == "false")
             {
                 tokens.Add(new BooleanToken(false));
             }
             else
             {
-                throw new LexerException(string.Format(Resource.NotSupportedSymbol, match));
+                throw new LexerException(string.Format(Resource.NotSupportedSymbol, constant));
             }
+        }
+
+        private void CreateComplexNumber(Match match, IList<IToken> tokens)
+        {
+            string magnitudeString = regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty);
+            if (!DoubleTryParse(magnitudeString, out double magnitude))
+            {
+                magnitude = 0.0;
+            }
+
+            string phaseString = regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", "");
+            if (!DoubleTryParse(phaseString, out double phase))
+            {
+                phase = 1.0;
+            }
+
+            tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase * Math.PI / 180)));
+        }
+
+        private void CreateVariable(Match match, IList<IToken> tokens)
+        {
+            if (tokens.LastOrDefault() is NumberToken)
+                tokens.Add(new OperationToken(Operations.Multiplication));
+
+            if (match.Value == "i")
+                tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));
+            else if (match.Value == "pi")
+                tokens.Add(new VariableToken("π"));
+            else
+                tokens.Add(new VariableToken(match.Value));
         }
 
         /// <summary>
@@ -705,12 +739,7 @@ namespace xFunc.Maths.Tokenization
                 match = regexComplexNumber.Match(function, i);
                 if (match.Success)
                 {
-                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty), NumberStyles.Number, CultureInfo.InvariantCulture, out double magnitude))
-                        magnitude = 0.0;
-                    if (!double.TryParse(regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", ""), NumberStyles.Number, CultureInfo.InvariantCulture, out double phase))
-                        phase = 1.0;
-
-                    tokens.Add(new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase * Math.PI / 180)));
+                    CreateComplexNumber(match, tokens);
 
                     i += match.Length;
                     continue;
@@ -720,7 +749,7 @@ namespace xFunc.Maths.Tokenization
                 match = regexOperations.Match(function, i);
                 if (match.Success)
                 {
-                    CreateOperations(match.Value.ToLower(), tokens);
+                    CreateOperations(match, tokens);
 
                     i += match.Length;
                     continue;
@@ -770,7 +799,7 @@ namespace xFunc.Maths.Tokenization
                 match = regexConst.Match(function, i);
                 if (match.Success)
                 {
-                    CreateConst(match.Value.ToLower(), tokens);
+                    CreateConst(match, tokens);
 
                     i += match.Length;
                     continue;
@@ -783,25 +812,20 @@ namespace xFunc.Maths.Tokenization
                     if (tokens.LastOrDefault() is NumberToken)
                         tokens.Add(new OperationToken(Operations.Multiplication));
 
-                    if (!string.IsNullOrWhiteSpace(match.Groups[2].Value))
-                    {
-                        var funcName = match.Groups[1].Value;
-                        CreateFunction(funcName, tokens);
+                    var funcName = match.Groups[1].Value;
+                    CreateFunction(funcName, tokens);
 
-                        i += funcName.Length;
-                    }
-                    else
-                    {
-                        if (match.Value == "i")
-                            tokens.Add(new ComplexNumberToken(Complex.ImaginaryOne));
-                        else if (match.Value == "pi")
-                            tokens.Add(new VariableToken("π"));
-                        else
-                            tokens.Add(new VariableToken(match.Value));
+                    i += funcName.Length;
+                    continue;
+                }
 
-                        i += match.Length;
-                    }
+                // variables
+                match = regexVariables.Match(function, i);
+                if (match.Success)
+                {
+                    CreateVariable(match, tokens);
 
+                    i += match.Length;
                     continue;
                 }
 
@@ -809,6 +833,11 @@ namespace xFunc.Maths.Tokenization
             }
 
             return CountParams(tokens);
+        }
+
+        private bool DoubleTryParse(string str, out double number)
+        {
+            return double.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out number);
         }
 
         private int CountParamsInternal(List<IToken> tokens, int index)

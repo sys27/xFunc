@@ -113,11 +113,13 @@ namespace xFunc.Maths.Tokenization
                 {
                     result = factory.CreateToken(function, i, readOnlyTokensList);
                     if (result == null)
-                        break;
+                        continue;
 
                     i += result.ProcessedLength;
                     if (result.Token != null)
                         tokens.Add(result.Token);
+
+                    break;
                 }
 
                 if (result == null)

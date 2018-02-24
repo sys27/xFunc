@@ -21,6 +21,10 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths.Tokenization.Factories
 {
 
+    /// <summary>
+    /// The factory which creates operation tokens.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class OpeartionTokenFactory : FactoryBase
     {
 

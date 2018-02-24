@@ -19,8 +19,9 @@ namespace xFunc.Maths
 {
 
     /// <summary>
-    /// The exception that is thrown in <see cref="Lexer"/>.
+    /// The exception that is thrown in <see cref="xFunc.Maths.Tokenization.Lexer" />.
     /// </summary>
+    /// <seealso cref="System.Exception" />
     [Serializable]
     public class LexerException : Exception
     {

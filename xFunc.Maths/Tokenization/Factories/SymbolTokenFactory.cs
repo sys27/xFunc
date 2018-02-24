@@ -21,6 +21,10 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths.Tokenization.Factories
 {
 
+    /// <summary>
+    /// The factory which creates symbol tokens.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class SymbolTokenFactory : FactoryBase
     {
 
@@ -29,6 +33,16 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </summary>
         public SymbolTokenFactory() : base(new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
+        /// <exception cref="LexerException">
+        /// </exception>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var result = new FactoryResult();

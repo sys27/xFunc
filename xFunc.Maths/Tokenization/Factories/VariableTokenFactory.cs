@@ -21,6 +21,10 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths.Tokenization.Factories
 {
 
+    /// <summary>
+    /// The factory which creates variable tokens.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class VariableTokenFactory : FactoryBase
     {
 

@@ -22,6 +22,10 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths.Tokenization.Factories
 {
 
+    /// <summary>
+    /// The factory which creates complex number tokens.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class ComplexNumberTokenFactory : FactoryBase
     {
 

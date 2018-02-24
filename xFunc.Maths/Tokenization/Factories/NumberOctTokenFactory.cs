@@ -20,6 +20,10 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths.Tokenization.Factories
 {
 
+    /// <summary>
+    /// The factory which creates number tokens (from octal format).
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class NumberOctTokenFactory : FactoryBase
     {
 

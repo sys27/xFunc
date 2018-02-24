@@ -20,10 +20,25 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
     public class OpeartionTokenFactory : FactoryBase
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpeartionTokenFactory"/> class.
+        /// </summary>
         public OpeartionTokenFactory() : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
+        /// <exception cref="LexerException">
+        /// </exception>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var result = new FactoryResult();
@@ -117,11 +132,10 @@ namespace xFunc.Maths.Tokenization.Factories
                 {
                     return null;
                 }
-                else
+                else if (lastToken is SymbolToken symbolToken &&
+     (symbolToken.Symbol == Symbols.OpenBracket || symbolToken.Symbol == Symbols.OpenBrace))
                 {
-                    if (lastToken is SymbolToken symbolToken &&
-                        (symbolToken.Symbol == Symbols.OpenBracket || symbolToken.Symbol == Symbols.OpenBrace))
-                        return null;
+                    return null;
                 }
 
                 result.Token = new OperationToken(Operations.Addition);
@@ -218,5 +232,7 @@ namespace xFunc.Maths.Tokenization.Factories
             result.ProcessedLength = match.Length;
             return result;
         }
+
     }
+
 }

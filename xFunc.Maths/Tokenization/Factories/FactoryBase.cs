@@ -18,17 +18,45 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
+    /// <summary>
+    /// The base for token factory.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
     public abstract class FactoryBase : ITokenFactory
     {
+
+        /// <summary>
+        /// The regex.
+        /// </summary>
         protected Regex regex;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FactoryBase"/> class.
+        /// </summary>
+        /// <param name="regex">The regex.</param>
         protected FactoryBase(Regex regex)
         {
             this.regex = regex;
         }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>The token.</returns>
         protected abstract FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens);
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="startIndex">The start index.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
         public FactoryResult CreateToken(string function, int startIndex, ReadOnlyCollection<IToken> tokens)
         {
             var match = regex.Match(function, startIndex);
@@ -37,5 +65,7 @@ namespace xFunc.Maths.Tokenization.Factories
 
             return null;
         }
+
     }
+
 }

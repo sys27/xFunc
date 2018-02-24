@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -103,12 +104,13 @@ namespace xFunc.Maths.Tokenization
             function = function.Replace("\n", "").Replace("\r", "");
 
             var tokens = new List<IToken>();
+            var readOnlyTokensList = new ReadOnlyCollection<IToken>(tokens);
             for (var i = 0; i < function.Length;)
             {
                 FactoryResult result = null;
                 foreach (var factory in factories)
                 {
-                    result = factory.CreateToken(function, i, tokens);
+                    result = factory.CreateToken(function, i, readOnlyTokensList);
                     if (result != null)
                     {
                         i += result.ProcessedLength;

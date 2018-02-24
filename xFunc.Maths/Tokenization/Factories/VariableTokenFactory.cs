@@ -12,7 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
@@ -26,7 +26,7 @@ namespace xFunc.Maths.Tokenization.Factories
             : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase))
         { }
 
-        protected override FactoryResult CreateTokenInternal(Match match, IReadOnlyList<IToken> tokens)
+        protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             if (tokens.LastOrDefault() is NumberToken)
                 return new FactoryResult(new OperationToken(Operations.Multiplication), 0);

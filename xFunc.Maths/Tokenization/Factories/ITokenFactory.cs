@@ -12,14 +12,13 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
     public interface ITokenFactory
     {
-        FactoryResult CreateToken(string function, int startIndex, IReadOnlyList<IToken> tokens);
+        FactoryResult CreateToken(string function, int startIndex, ReadOnlyCollection<IToken> tokens);
     }
 }

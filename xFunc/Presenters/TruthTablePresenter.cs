@@ -18,7 +18,7 @@ using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Expressions.Tokenization;
+using xFunc.Maths.Tokenization;
 using xFunc.ViewModels;
 
 namespace xFunc.Presenters

@@ -12,8 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -28,9 +27,9 @@ namespace xFunc.Maths.Tokenization.Factories
             this.regex = regex;
         }
 
-        protected abstract FactoryResult CreateTokenInternal(Match match, IReadOnlyList<IToken> tokens);
+        protected abstract FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens);
 
-        public FactoryResult CreateToken(string function, int startIndex, IReadOnlyList<IToken> tokens)
+        public FactoryResult CreateToken(string function, int startIndex, ReadOnlyCollection<IToken> tokens)
         {
             var match = regex.Match(function, startIndex);
             if (match.Success)

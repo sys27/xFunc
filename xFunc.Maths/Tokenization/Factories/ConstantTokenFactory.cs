@@ -12,7 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
@@ -23,7 +23,7 @@ namespace xFunc.Maths.Tokenization.Factories
     {
         public ConstantTokenFactory() : base(new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
-        protected override FactoryResult CreateTokenInternal(Match match, IReadOnlyList<IToken> tokens)
+        protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var result = new FactoryResult();
             var constant = match.Value.ToLower();

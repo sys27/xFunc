@@ -12,7 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -22,7 +22,7 @@ namespace xFunc.Maths.Tokenization.Factories
     {
         public EmptyTokenFactory() : base(new Regex(@"\G\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
-        protected override FactoryResult CreateTokenInternal(Match match, IReadOnlyList<IToken> tokens)
+        protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             return new FactoryResult(null, match.Length);
         }

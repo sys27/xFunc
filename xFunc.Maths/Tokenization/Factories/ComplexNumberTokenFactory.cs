@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Numerics;
 using System.Text.RegularExpressions;
@@ -32,7 +32,7 @@ namespace xFunc.Maths.Tokenization.Factories
             return double.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out number);
         }
 
-        protected override FactoryResult CreateTokenInternal(Match match, IReadOnlyList<IToken> tokens)
+        protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             string magnitudeString = regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty);
             if (!DoubleTryParse(magnitudeString, out double magnitude))

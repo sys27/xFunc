@@ -33,6 +33,7 @@ namespace xFunc.Maths.Tokenization
     {
 
         private ITokenFactory[] factories;
+        private ParameterCounter parameterCounter = new ParameterCounter();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
@@ -125,101 +126,7 @@ namespace xFunc.Maths.Tokenization
                     throw new LexerException(string.Format(Resource.NotSupportedSymbol, function));
             }
 
-            return CountParams(tokens);
-        }
-
-        private int CountParamsInternal(List<IToken> tokens, int index)
-        {
-            var func = (FunctionToken)tokens[index];
-
-            int countOfParams = 0;
-            int brackets = 1;
-            bool hasBraces = false;
-            bool oneParam = true;
-            int i = index + 2;
-            for (; i < tokens.Count;)
-            {
-                var token = tokens[i];
-                if (token is SymbolToken symbol)
-                {
-                    if (symbol.Symbol == Symbols.OpenBrace)
-                    {
-                        hasBraces = true;
-                    }
-
-                    if (symbol.Symbol == Symbols.CloseBracket || symbol.Symbol == Symbols.CloseBrace)
-                    {
-                        brackets--;
-
-                        if (brackets == 0)
-                            break;
-                    }
-                    else if (symbol.Symbol == Symbols.OpenBracket || symbol.Symbol == Symbols.OpenBrace)
-                    {
-                        brackets++;
-
-                        if (oneParam)
-                        {
-                            countOfParams++;
-                            oneParam = false;
-                        }
-                    }
-                    else if (symbol.Symbol == Symbols.Comma)
-                    {
-                        oneParam = true;
-                    }
-
-                    i++;
-                }
-                else if (token is FunctionToken function)
-                {
-                    if (oneParam)
-                    {
-                        countOfParams++;
-                        oneParam = false;
-                    }
-
-                    if (function.Function == Functions.Matrix || function.Function == Functions.Vector)
-                        hasBraces = true;
-
-                    i = CountParamsInternal(tokens, i) + 1;
-                }
-                else
-                {
-                    if (oneParam)
-                    {
-                        countOfParams++;
-                        oneParam = false;
-                    }
-
-                    i++;
-                }
-            }
-
-            if (func.Function == Functions.Vector && hasBraces)
-                tokens[index] = new FunctionToken(Functions.Matrix, countOfParams);
-            else
-                func.CountOfParams = countOfParams;
-
-            return i;
-        }
-
-        /// <summary>
-        /// Calculates the number of parametes of functions.
-        /// </summary>
-        /// <param name="tokens">The list of tokens.</param>
-        /// <returns>The list of tokens.</returns>
-        private IEnumerable<IToken> CountParams(List<IToken> tokens)
-        {
-            for (int i = 0; i < tokens.Count; i++)
-            {
-                if (tokens[i] is FunctionToken)
-                {
-                    i = CountParamsInternal(tokens, i);
-                }
-            }
-
-            return tokens;
+            return parameterCounter.CountParameters(tokens);
         }
 
     }

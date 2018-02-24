@@ -19,15 +19,30 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
     public class NumberHexTokenFactory : FactoryBase
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NumberHexTokenFactory"/> class.
+        /// </summary>
         public NumberHexTokenFactory() : base(new Regex(@"\G[+-]?0x[0-9a-f]+", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var token = new NumberToken(Convert.ToInt64(match.Value, 16));
 
             return new FactoryResult(token, match.Length);
         }
+
     }
+
 }

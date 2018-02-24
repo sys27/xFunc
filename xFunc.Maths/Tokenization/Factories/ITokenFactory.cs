@@ -17,8 +17,20 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
+    /// <summary>
+    /// The factory of tokens.
+    /// </summary>
     public interface ITokenFactory
     {
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="startIndex">The start index.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>The token.</returns>
         FactoryResult CreateToken(string function, int startIndex, ReadOnlyCollection<IToken> tokens);
     }
+
 }

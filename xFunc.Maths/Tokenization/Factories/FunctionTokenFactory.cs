@@ -19,10 +19,27 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
+    /// <summary>
+    /// The factory which creates function tokens.
+    /// </summary>
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class FunctionTokenFactory : FactoryBase
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FunctionTokenFactory"/> class.
+        /// </summary>
         public FunctionTokenFactory() : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)(\(|{)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             if (tokens.LastOrDefault() is NumberToken)
@@ -323,5 +340,7 @@ namespace xFunc.Maths.Tokenization.Factories
             result.ProcessedLength = stringMatch.Length;
             return result;
         }
+
     }
+
 }

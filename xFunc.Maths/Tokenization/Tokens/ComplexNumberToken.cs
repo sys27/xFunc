@@ -22,7 +22,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// <summary>
     /// Represent complex number token.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokens.IToken" />
+    /// <seealso cref="xFunc.Maths.Tokenization.Tokens.IToken" />
     public class ComplexNumberToken : IToken
     {
 

@@ -21,10 +21,15 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
     public class ComplexNumberTokenFactory : FactoryBase
     {
+
         private Regex regexAllWhitespaces = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComplexNumberTokenFactory"/> class.
+        /// </summary>
         public ComplexNumberTokenFactory() : base(new Regex(@"\G([+-]?\s*\d*\.?\d+)\s*([∠+-]+\s*\s*\d*\.?\d+)°", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
         private bool DoubleTryParse(string str, out double number)
@@ -32,6 +37,14 @@ namespace xFunc.Maths.Tokenization.Factories
             return double.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out number);
         }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             string magnitudeString = regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty);
@@ -45,5 +58,7 @@ namespace xFunc.Maths.Tokenization.Factories
             var token = new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase * Math.PI / 180));
             return new FactoryResult(token, match.Length);
         }
+
     }
+
 }

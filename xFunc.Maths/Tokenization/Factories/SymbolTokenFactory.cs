@@ -20,8 +20,13 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
     public class SymbolTokenFactory : FactoryBase
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SymbolTokenFactory"/> class.
+        /// </summary>
         public SymbolTokenFactory() : base(new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
@@ -63,5 +68,7 @@ namespace xFunc.Maths.Tokenization.Factories
             result.ProcessedLength = match.Length;
             return result;
         }
+
     }
+
 }

@@ -19,15 +19,30 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
+
     public class NumberTokenFactory : FactoryBase
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NumberTokenFactory"/> class.
+        /// </summary>
         public NumberTokenFactory() : base(new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
 
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="match">The match.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The token.
+        /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var token = new NumberToken(double.Parse(match.Value, CultureInfo.InvariantCulture));
 
             return new FactoryResult(token, match.Length);
         }
+
     }
+
 }

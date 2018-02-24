@@ -15,10 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Factories;
 using xFunc.Maths.Tokenization.Tokens;
@@ -32,8 +28,8 @@ namespace xFunc.Maths.Tokenization
     public class Lexer : ILexer
     {
 
-        private ITokenFactory[] factories;
-        private ParameterCounter parameterCounter = new ParameterCounter();
+        private readonly ITokenFactory[] factories;
+        private readonly ParameterCounter parameterCounter = new ParameterCounter();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
@@ -56,6 +52,10 @@ namespace xFunc.Maths.Tokenization
             };
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lexer"/> class.
+        /// </summary>
+        /// <param name="factories">The factories to create tokens.</param>
         public Lexer(ITokenFactory[] factories)
         {
             this.factories = factories;
@@ -112,14 +112,12 @@ namespace xFunc.Maths.Tokenization
                 foreach (var factory in factories)
                 {
                     result = factory.CreateToken(function, i, readOnlyTokensList);
-                    if (result != null)
-                    {
-                        i += result.ProcessedLength;
-                        if (result.Token != null)
-                            tokens.Add(result.Token);
-
+                    if (result == null)
                         break;
-                    }
+
+                    i += result.ProcessedLength;
+                    if (result.Token != null)
+                        tokens.Add(result.Token);
                 }
 
                 if (result == null)

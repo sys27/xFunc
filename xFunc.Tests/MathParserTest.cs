@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -169,8 +170,10 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
+            var diff = new Differentiator();
+            var simp = new Simplifier();
             var exp = parser.Parse(tokens);
-            var expected = new Derivative(new Sin(Variable.X));
+            var expected = new Derivative(diff, simp, new Sin(Variable.X));
 
             Assert.Equal(expected, exp);
         }
@@ -413,8 +416,9 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
+            var simp = new Simplifier();
             var exp = parser.Parse(tokens);
-            var expected = new Simplify(Variable.X);
+            var expected = new Simplify(simp, Variable.X);
 
             Assert.Equal(expected, exp);
         }
@@ -1423,8 +1427,10 @@ namespace xFunc.Tests
                 new SymbolToken(Symbols.CloseBracket)
             };
 
+            var diff = new Differentiator();
+            var simp = new Simplifier();
             var exp = parser.Parse(tokens);
-            var expected = new Del(new Add(new Add(new Mul(new Number(2), Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
+            var expected = new Del(diff, simp, new Add(new Add(new Mul(new Number(2), Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
 
             Assert.Equal(expected, exp);
         }

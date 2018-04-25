@@ -218,7 +218,7 @@ namespace xFunc.Tests
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "deriv(x)";
-            var exp = new Derivative(Variable.X, Variable.X);
+            var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X);
             var diff = new Number(1);
 
             var tokens = new List<IToken>
@@ -238,8 +238,6 @@ namespace xFunc.Tests
             differentiator.SetupProperty(d => d.Variable);
             differentiator.SetupProperty(d => d.Parameters);
 
-            exp.Differentiator = differentiator.Object;
-            exp.Simplifier = simplifier.Object;
             var processor = new Processor(lexer.Object, parser.Object, simplifier.Object, differentiator.Object);
             var result = processor.Solve<ExpressionResult>(strExp);
 

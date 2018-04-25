@@ -26,13 +26,20 @@ namespace xFunc.Maths.Expressions
     {
 
         [ExcludeFromCodeCoverage]
-        internal Simplify() { }
+        internal Simplify(ISimplifier simplifier)
+        {
+            this.Simplifier = simplifier;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
         /// </summary>
+        /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The argument of function.</param>
-        public Simplify(IExpression expression) : base(expression) { }
+        public Simplify(ISimplifier simplifier, IExpression expression) : base(expression)
+        {
+            this.Simplifier = simplifier;
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -81,7 +88,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Simplify(m_argument.Clone());
+            return new Simplify(this.Simplifier, m_argument.Clone());
         }
 
         /// <summary>
@@ -90,7 +97,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The simplifier.
         /// </value>
-        public ISimplifier Simplifier { get; set; }
+        public ISimplifier Simplifier { get; private set; }
 
     }
 

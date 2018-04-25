@@ -20,6 +20,7 @@ using xFunc.Maths.Tokenization.Tokens;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using System.Linq;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths
 {
@@ -33,7 +34,7 @@ namespace xFunc.Maths
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IExpressionFactory"/>.
         /// </summary>
-        public Parser() : this(new ExpressionFactory()) { }
+        public Parser() : this(new ExpressionFactory(new Differentiator(), new Simplifier())) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser" /> class.

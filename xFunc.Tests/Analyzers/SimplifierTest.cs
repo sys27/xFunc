@@ -1033,7 +1033,8 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void Simplify()
         {
-            var simp = new Simplify(new Pow(Variable.X, new Number(0)));
+            var simpl = new Simplifier();
+            var simp = new Simplify(simpl, new Pow(Variable.X, new Number(0)));
             var expected = new Number(1);
 
             SimpleTest(simp, expected);
@@ -1042,8 +1043,10 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void Deriv()
         {
-            var simp = new Derivative(new Add(new Number(2), new Number(3)));
-            var expected = new Derivative(new Number(5));
+            var diff = new Differentiator();
+            var simpl = new Simplifier();
+            var simp = new Derivative(diff, simpl, new Add(new Number(2), new Number(3)));
+            var expected = new Derivative(diff, simpl, new Number(5));
 
             SimpleTest(simp, expected);
         }

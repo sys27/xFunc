@@ -64,7 +64,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DelToStringTest()
         {
-            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
+            var exp = new Del(null, null, new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
 
             Assert.Equal("del(2 * x1 + x2 ^ 2 + x3 ^ 3)", exp.ToString(commoonFormatter));
         }
@@ -72,7 +72,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringExpTest()
         {
-            var deriv = new Derivative(new Sin(Variable.X));
+            var deriv = new Derivative(null, null, new Sin(Variable.X));
 
             Assert.Equal("deriv(sin(x))", deriv.ToString(commoonFormatter));
         }
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringVarTest()
         {
-            var deriv = new Derivative(new Sin(Variable.X), Variable.X);
+            var deriv = new Derivative(null, null, new Sin(Variable.X), Variable.X);
 
             Assert.Equal("deriv(sin(x), x)", deriv.ToString(commoonFormatter));
         }
@@ -88,7 +88,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringPointTest()
         {
-            var deriv = new Derivative(new Sin(Variable.X), Variable.X, new Number(1));
+            var deriv = new Derivative(null, null, new Sin(Variable.X), Variable.X, new Number(1));
 
             Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString(commoonFormatter));
         }
@@ -312,7 +312,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SimplifyToStringTest()
         {
-            var exp = new Simplify(new Sin(Variable.X));
+            var exp = new Simplify(null, new Sin(Variable.X));
 
             Assert.Equal("simplify(sin(x))", exp.ToString(commoonFormatter));
         }

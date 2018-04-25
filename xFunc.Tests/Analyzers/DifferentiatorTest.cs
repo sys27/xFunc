@@ -1962,7 +1962,8 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void DerivSimplify()
         {
-            var exp = new Simplify(new Sin(x));
+            var simp = new Simplifier();
+            var exp = new Simplify(simp, new Sin(x));
             var deriv = Differentiate(exp);
             var expected = new Mul(new Cos(x), one);
 
@@ -1972,7 +1973,8 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void DerivSimplify2()
         {
-            var exp = new Simplify(new Sin(new Variable("z")));
+            var simp = new Simplifier();
+            var exp = new Simplify(simp, new Sin(new Variable("z")));
             var deriv = Differentiate(exp);
 
             Assert.Equal(zero, deriv);
@@ -1981,7 +1983,9 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void DoubleDiffTest()
         {
-            var exp = new Derivative(new Derivative(new Sin(x), x), x);
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, new Derivative(diff, simp, new Sin(x), x), x);
             var deriv = Differentiate(exp);
             var expected = new Mul(new UnaryMinus(new Mul(new Sin(x), one)), one);
 
@@ -1991,7 +1995,9 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void DoubleDiffNoVarTest()
         {
-            var exp = new Derivative(new Derivative(new Sin(new Number(1))));
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, new Derivative(diff, simp, new Sin(new Number(1))));
             var deriv = Differentiate(exp);
 
             Assert.Equal(zero, deriv);
@@ -2000,7 +2006,9 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TripleDiffTest()
         {
-            var exp = new Derivative(new Derivative(new Derivative(new Sin(x), x), x), x);
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, new Derivative(diff, simp, new Derivative(diff, simp, new Sin(x), x), x), x);
             var deriv = Differentiate(exp);
             var expected = new Mul(new UnaryMinus(new Mul(new Mul(new Cos(x), one), one)), one);
 

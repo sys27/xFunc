@@ -38,10 +38,7 @@ namespace xFunc.Maths
             Lexer = new Lexer();
             Simplifier = new Simplifier();
             Differentiator = new Differentiator();
-            Parser = new Parser(new ExpressionFactory(
-                                    new DefaultDependencyResolver(new Type[] { typeof(ISimplifier), typeof(IDifferentiator) },
-                                                                  new object[] { Simplifier, Differentiator })
-                                ));
+            Parser = new Parser(new ExpressionFactory(Differentiator, Simplifier));
             TypeAnalyzer = new TypeAnalyzer();
 
             Parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());

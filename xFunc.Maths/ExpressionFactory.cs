@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -32,23 +33,16 @@ namespace xFunc.Maths
     public class ExpressionFactory : IExpressionFactory
     {
 
-        private IDependencyResolver resolver;
+        private readonly IDifferentiator differentiator;
+        private readonly ISimplifier simplifier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionFactory"/> class.
         /// </summary>
-        public ExpressionFactory()
-            : this(new DefaultDependencyResolver())
+        public ExpressionFactory(IDifferentiator differentiator, ISimplifier simplifier)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionFactory"/> class.
-        /// </summary>
-        /// <param name="resolver">The dependency resolver.</param>
-        public ExpressionFactory(IDependencyResolver resolver)
-        {
-            this.resolver = resolver;
+            this.differentiator = differentiator;
+            this.simplifier = simplifier;
         }
 
         /// <summary>
@@ -76,9 +70,6 @@ namespace xFunc.Maths
                 result = CreateUserFunction((UserFunctionToken)token);
             else if (token is FunctionToken)
                 result = CreateFunction((FunctionToken)token);
-
-            if (resolver != null && result != null)
-                resolver.Resolve((object)result);
 
             return result;
         }
@@ -261,11 +252,11 @@ namespace xFunc.Maths
                 case Functions.Ceil:
                     exp = new Ceil(); break;
                 case Functions.Derivative:
-                    exp = new Derivative(); break;
+                    exp = new Derivative(this.differentiator, this.simplifier); break;
                 case Functions.Simplify:
-                    exp = new Simplify(); break;
+                    exp = new Simplify(this.simplifier); break;
                 case Functions.Del:
-                    exp = new Del(); break;
+                    exp = new Del(this.differentiator, this.simplifier); break;
                 case Functions.Define:
                     exp = new Define(); break;
                 case Functions.Vector:

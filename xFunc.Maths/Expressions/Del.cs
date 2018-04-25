@@ -29,13 +29,24 @@ namespace xFunc.Maths.Expressions
     {
 
         [ExcludeFromCodeCoverage]
-        internal Del() { }
+        internal Del(IDifferentiator differentiator, ISimplifier simplifier)
+        {
+            this.Differentiator = differentiator;
+            this.Simplifier = simplifier;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Del"/> class.
         /// </summary>
+        /// <param name="differentiator">The differentiator.</param>
+        /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The expression.</param>
-        public Del(IExpression expression) : base(expression) { }
+        public Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
+            : base(expression)
+        {
+            this.Differentiator = differentiator;
+            this.Simplifier = simplifier;
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -98,7 +109,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Del(m_argument.Clone());
+            return new Del(this.Differentiator, this.Simplifier, m_argument.Clone());
         }
 
         /// <summary>
@@ -107,7 +118,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The simplifier.
         /// </value>
-        public ISimplifier Simplifier { get; set; }
+        public ISimplifier Simplifier { get; private set; }
 
         /// <summary>
         /// Gets or sets the differentiator.
@@ -115,7 +126,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The differentiator.
         /// </value>
-        public IDifferentiator Differentiator { get; set; }
+        public IDifferentiator Differentiator { get; private set; }
 
     }
 

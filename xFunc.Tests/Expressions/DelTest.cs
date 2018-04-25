@@ -28,9 +28,11 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Del(new Add(new Add(new Mul(new Number(2), Variable.X), new Pow(new Variable("y"), new Number(2))), new Pow(new Variable("z"), new Number(3))));
-            exp.Differentiator = new Differentiator();
-            exp.Simplifier = new Simplifier();
+            var exp = new Add(
+                new Add(new Mul(new Number(2), Variable.X), new Pow(new Variable("y"), new Number(2))),
+                new Pow(new Variable("z"), new Number(3))
+            );
+            var del = new Del(new Differentiator(), new Simplifier(), exp);
 
             var expected = new Vector(new IExpression[] {
                                         new Number(2),
@@ -38,15 +40,17 @@ namespace xFunc.Tests.Expressionss
                                         new Mul(new Number(3), new Pow(new Variable("z"), new Number(2)))
                                     });
 
-            Assert.Equal(expected, exp.Execute());
+            Assert.Equal(expected, del.Execute());
         }
 
         [Fact]
         public void ExecuteTest2()
         {
-            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
-            exp.Differentiator = new Differentiator();
-            exp.Simplifier = new Simplifier();
+            var exp = new Add(
+                new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))),
+                new Pow(new Variable("x3"), new Number(3))
+            );
+            var del = new Del(new Differentiator(), new Simplifier(), exp);
 
             var expected = new Vector(new IExpression[] {
                                         new Number(2),
@@ -54,22 +58,26 @@ namespace xFunc.Tests.Expressionss
                                         new Mul(new Number(3), new Pow(new Variable("x3"), new Number(2)))
                                     });
 
-            Assert.Equal(expected, exp.Execute());
+            Assert.Equal(expected, del.Execute());
         }
 
         [Fact]
         public void NullDiffTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Del(Variable.X).Execute());
+            Assert.Throws<ArgumentNullException>(() => new Del(null, null, Variable.X).Execute());
         }
 
         [Fact]
         public void CloneTest()
         {
-            var exp = new Del(new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
-            var clone = exp.Clone();
+            var exp = new Add(
+                new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), 
+                new Pow(new Variable("x3"), new Number(3))
+            );
+            var del = new Del(new Differentiator(), new Simplifier(), exp);
+            var clone = del.Clone();
 
-            Assert.Equal(exp, clone);
+            Assert.Equal(del, clone);
         }
 
     }

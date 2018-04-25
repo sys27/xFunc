@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -303,7 +304,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDelVector()
         {
-            var exp = new Del(new Number(2));
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Del(diff, simp, new Number(2));
 
             Test(exp, ResultType.Vector);
         }
@@ -311,7 +314,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDerivExpression()
         {
-            var exp = new Derivative(Variable.X);
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, Variable.X);
 
             Test(exp, ResultType.Expression);
         }
@@ -319,7 +324,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDerivExpressionWithVar()
         {
-            var exp = new Derivative(Variable.X, Variable.X);
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, Variable.X, Variable.X);
 
             Test(exp, ResultType.Expression);
         }
@@ -327,7 +334,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDerivNumber()
         {
-            var exp = new Derivative(Variable.X, Variable.X, new Number(2));
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, Variable.X, Variable.X, new Number(2));
 
             Test(exp, ResultType.Number);
         }
@@ -335,7 +344,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDerivException()
         {
-            var exp = new Derivative(new IExpression[] { Variable.X, new Number(1) }, 2);
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = new Derivative(diff, simp, new IExpression[] { Variable.X, new Number(1) }, 2);
 
             TestException(exp);
         }
@@ -1034,7 +1045,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSimplify()
         {
-            Test(new Simplify(Variable.X), ResultType.Undefined);
+            var simp = new Simplifier();
+            Test(new Simplify(simp, Variable.X), ResultType.Undefined);
         }
 
         [Fact]

@@ -33,8 +33,7 @@ namespace xFunc.Tests.Expressionss
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
                           .Returns<Derivative>(exp => exp.Expression);
 
-            var deriv = new Derivative(Variable.X, Variable.X, new Number(2));
-            deriv.Differentiator = differentiator.Object;
+            var deriv = new Derivative(differentiator.Object, null, Variable.X, Variable.X, new Number(2));
 
             Assert.Equal(2.0, deriv.Execute());
         }
@@ -42,11 +41,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void ExecuteNullDerivTest()
         {
-            var exp = new Derivative(Variable.X)
-            {
-                Differentiator = null,
-                Simplifier = null
-            };
+            var exp = new Derivative(null, null, Variable.X);
 
             Assert.Throws<ArgumentNullException>(() => exp.Execute());
         }
@@ -58,11 +53,7 @@ namespace xFunc.Tests.Expressionss
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
                           .Returns<Derivative>(e => e.Expression);
 
-            var exp = new Derivative(Variable.X)
-            {
-                Differentiator = differentiator.Object,
-                Simplifier = null
-            };
+            var exp = new Derivative(differentiator.Object, null, Variable.X);
 
             var result = exp.Execute();
 
@@ -72,7 +63,7 @@ namespace xFunc.Tests.Expressionss
         [Fact]
         public void CloneTest()
         {
-            var exp = new Derivative(new Sin(Variable.X), Variable.X, new Number(1));
+            var exp = new Derivative(null, null, new Sin(Variable.X), Variable.X, new Number(1));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

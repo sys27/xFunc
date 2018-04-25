@@ -80,7 +80,6 @@
     <Compile Include="Converters\TemperatureTest.cs" />
     <Compile Include="Converters\TimeTest.cs" />
     <Compile Include="Converters\VolumeTest.cs" />
-    <Compile Include="DefaultDependencyResolverTest.cs" />
     <Compile Include="Analyzers\DifferentiatorTest.cs" />
     <Compile Include="Expressions\AbsTest.cs" />
     <Compile Include="Expressions\AddTest.cs" />

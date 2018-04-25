@@ -51,7 +51,6 @@
     <Compile Include="Analyzers\TypeAnalyzers\ITypeAnalyzer.cs" />
     <Compile Include="Analyzers\TypeAnalyzers\TypeAnalyzer.cs" />
     <Compile Include="Builder.cs" />
-    <Compile Include="DefaultDependencyResolver.cs" />
     <Compile Include="Expressions\Ceil.cs" />
     <Compile Include="Expressions\ComplexNumbers\ComplexNumber.cs" />
     <Compile Include="Expressions\ComplexNumbers\Conjugate.cs" />
@@ -121,7 +120,6 @@
     <Compile Include="Expressions\Statistical\Sum.cs" />
     <Compile Include="ComplexExtensions.cs" />
     <Compile Include="Helpers.cs" />
-    <Compile Include="IDependencyResolver.cs" />
     <Compile Include="Analyzers\IDifferentiator.cs" />
     <Compile Include="IExpressionFactory.cs" />
     <Compile Include="InvalidResultException.cs" />

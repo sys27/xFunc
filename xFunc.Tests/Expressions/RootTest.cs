@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -44,7 +45,15 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Root(new Number(-25), new Number(2));
 
-            Assert.Equal(double.NaN, exp.Execute());
+            Assert.Equal(new Complex(0, 5), exp.Execute());
+        }
+
+        [Fact]
+        public void NegativeNumberExecuteTest2()
+        {
+            var exp = new Root(new Number(-25), new Number(-2));
+
+            Assert.Equal(new Complex(0, -0.2), exp.Execute());
         }
 
         [Fact]

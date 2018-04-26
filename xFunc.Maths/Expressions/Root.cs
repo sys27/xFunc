@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -60,7 +61,12 @@ namespace xFunc.Maths.Expressions
             var rightResult = m_right.Execute(parameters);
 
             if (leftResult is double first && rightResult is double second)
+            {
+                if (first < 0 && second % 2 == 0)
+                    return new Complex(0, Complex.Pow(first, 1 / second).Imaginary);
+
                 return MathExtensions.Pow(first, 1 / second);
+            }
 
             throw new ResultIsNotSupportedException(this, leftResult, rightResult);
         }

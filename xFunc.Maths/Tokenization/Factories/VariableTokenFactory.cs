@@ -53,8 +53,6 @@ namespace xFunc.Maths.Tokenization.Factories
 
             if (variable == "i")
                 result.Token = new ComplexNumberToken(Complex.ImaginaryOne);
-            else if (variable == "pi")
-                result.Token = new VariableToken("π");
             else
                 result.Token = new VariableToken(variable);
 

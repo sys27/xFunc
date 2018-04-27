@@ -627,7 +627,7 @@ namespace xFunc.Tests
             {
                 new NumberToken(3),
                 new OperationToken(Operations.Multiplication),
-                new VariableToken("π")
+                new VariableToken("pi")
             };
             Assert.Equal(expected, tokens.ToList());
         }

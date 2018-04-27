@@ -94,6 +94,7 @@ namespace xFunc.Maths.Expressions.Collections
         private void InitializeDefaults()
         {
             consts.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
+            consts.Add(Parameter.CreateConstant("pi", Math.PI)); // Archimedes' constant
             consts.Add(Parameter.CreateConstant("e", Math.E));  // Euler's number
             consts.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
             consts.Add(Parameter.CreateConstant("c", 299792458));   // Speed of Light (c0)

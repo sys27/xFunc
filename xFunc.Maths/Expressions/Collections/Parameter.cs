@@ -164,8 +164,26 @@ namespace xFunc.Maths.Expressions.Collections
             }
             set
             {
-                this.value = !(value is bool) ? Convert.ToDouble(value) : value;
+                if (IsNumber(value))
+                    value = Convert.ToDouble(value);
+
+                this.value = value;
             }
+        }
+
+        private static bool IsNumber(object value)
+        {
+            return value is sbyte ||
+                   value is byte ||
+                   value is short ||
+                   value is ushort ||
+                   value is int ||
+                   value is uint ||
+                   value is long ||
+                   value is ulong ||
+                   value is float ||
+                   value is double ||
+                   value is decimal;
         }
 
         /// <summary>

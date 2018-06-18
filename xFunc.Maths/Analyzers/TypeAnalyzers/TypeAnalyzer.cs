@@ -171,10 +171,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Ceil exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
+            if (result == ResultType.Undefined || result == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.Number, result);
@@ -291,10 +288,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Fact exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
+            if (result == ResultType.Undefined || result == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.Number, result);
@@ -308,10 +302,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Floor exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
+            if (result == ResultType.Undefined || result == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.Number, result);
@@ -347,10 +338,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Lb exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Number)
+            if (result == ResultType.Undefined || result == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.Number, result);
@@ -452,12 +440,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Number)
             {
-                if (rightResult == ResultType.Number)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                     return ResultType.Number;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
@@ -566,26 +551,22 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+
+            if (leftResult == ResultType.Number && rightResult == ResultType.Number)
                 return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
-            {
-                if (rightResult == ResultType.Number)
-                    return ResultType.Number;
-
-                throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
-            }
 
             if (leftResult == ResultType.ComplexNumber)
             {
-                if (rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number || rightResult == ResultType.ComplexNumber)
                     return ResultType.ComplexNumber;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, rightResult, BinaryParameterType.Right);
             }
 
-            throw new BinaryParameterTypeMismatchException(ResultType.Number | ResultType.ComplexNumber, leftResult, BinaryParameterType.Left);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            throw new BinaryParameterTypeMismatchException(ResultType.Number, leftResult, BinaryParameterType.Left);
         }
 
         /// <summary>
@@ -597,13 +578,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Number)
             {
-                if (rightResult == ResultType.Number)
-                    return ResultType.Number;
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
+                    return ResultType.Undefined;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
             }
@@ -624,12 +602,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Round exp)
         {
             var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultType.Undefined))
-                return ResultType.Undefined;
-
             for (var i = 0; i < results.Count; i++)
             {
-                if (results[i] != ResultType.Number)
+                if (results[i] != ResultType.Undefined && results[i] != ResultType.Number)
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
             }
 
@@ -842,10 +817,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Determinant exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Matrix)
+            if (result == ResultType.Undefined || result == ResultType.Matrix)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.Matrix, result);
@@ -859,10 +831,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Inverse exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Matrix)
+            if (result == ResultType.Undefined || result == ResultType.Matrix)
                 return ResultType.Matrix;
 
             throw new ParameterTypeMismatchException(ResultType.Matrix, result);
@@ -876,10 +845,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Transpose exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.Vector || result == ResultType.Matrix)
+            if (result == ResultType.Undefined || result == ResultType.Vector || result == ResultType.Matrix)
                 return ResultType.Matrix;
 
             throw new ParameterTypeMismatchException(ResultType.Vector | ResultType.Matrix, result);
@@ -907,10 +873,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Conjugate exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.ComplexNumber)
+            if (result == ResultType.Undefined || result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
             throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
@@ -924,10 +887,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Im exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.ComplexNumber)
+            if (result == ResultType.Undefined || result == ResultType.ComplexNumber)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
@@ -941,10 +901,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Phase exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.ComplexNumber)
+            if (result == ResultType.Undefined || result == ResultType.ComplexNumber)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
@@ -958,10 +915,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Re exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.ComplexNumber)
+            if (result == ResultType.Undefined || result == ResultType.ComplexNumber)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
@@ -975,10 +929,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(Reciprocal exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (result == ResultType.ComplexNumber)
+            if (result == ResultType.Undefined || result == ResultType.ComplexNumber)
                 return ResultType.ComplexNumber;
 
             throw new ParameterTypeMismatchException(ResultType.ComplexNumber, result);
@@ -1400,12 +1351,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Boolean)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Boolean)
             {
-                if (rightResult == ResultType.Boolean)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
@@ -1428,12 +1376,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Boolean)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Boolean)
             {
-                if (rightResult == ResultType.Boolean)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
@@ -1456,12 +1401,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Boolean)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Boolean)
             {
-                if (rightResult == ResultType.Boolean)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
@@ -1484,12 +1426,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Boolean)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Boolean)
             {
-                if (rightResult == ResultType.Boolean)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
@@ -1617,10 +1556,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(AddAssign exp)
         {
             var rightResult = exp.Right.Analyze(this);
-            if (rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (rightResult == ResultType.Number)
+            if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException();
@@ -1635,12 +1571,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Boolean)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Boolean)
             {
-                if (rightResult == ResultType.Boolean)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
@@ -1672,10 +1605,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(DivAssign exp)
         {
             var rightResult = exp.Right.Analyze(this);
-            if (rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (rightResult == ResultType.Number)
+            if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException();
@@ -1730,10 +1660,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(For exp)
         {
             var conditionResult = exp.Condition.Analyze(this);
-            if (conditionResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (conditionResult == ResultType.Boolean)
+            if (conditionResult == ResultType.Undefined || conditionResult == ResultType.Boolean)
                 return ResultType.Undefined;
 
             throw new ParameterTypeMismatchException();
@@ -1748,12 +1675,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Number)
             {
-                if (rightResult == ResultType.Number)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
@@ -1776,12 +1700,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Number)
             {
-                if (rightResult == ResultType.Number)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
@@ -1832,12 +1753,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Number)
             {
-                if (rightResult == ResultType.Number)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
@@ -1860,12 +1778,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Number)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Number)
             {
-                if (rightResult == ResultType.Number)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
@@ -1887,10 +1802,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(MulAssign exp)
         {
             var rightResult = exp.Right.Analyze(this);
-            if (rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (rightResult == ResultType.Number)
+            if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException();
@@ -1946,12 +1858,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
-            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (leftResult == ResultType.Boolean)
+            if (leftResult == ResultType.Undefined || leftResult == ResultType.Boolean)
             {
-                if (rightResult == ResultType.Boolean)
+                if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                     return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Boolean, rightResult, BinaryParameterType.Right);
@@ -1973,10 +1882,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(SubAssign exp)
         {
             var rightResult = exp.Right.Analyze(this);
-            if (rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (rightResult == ResultType.Number)
+            if (rightResult == ResultType.Undefined || rightResult == ResultType.Number)
                 return ResultType.Number;
 
             throw new ParameterTypeMismatchException();
@@ -1990,10 +1896,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultType Analyze(While exp)
         {
             var rightResult = exp.Right.Analyze(this);
-            if (rightResult == ResultType.Undefined)
-                return ResultType.Undefined;
-
-            if (rightResult == ResultType.Boolean)
+            if (rightResult == ResultType.Undefined || rightResult == ResultType.Boolean)
                 return ResultType.Undefined;
 
             throw new ParameterTypeMismatchException();

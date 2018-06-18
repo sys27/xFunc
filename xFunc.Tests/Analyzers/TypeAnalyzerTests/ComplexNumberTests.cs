@@ -37,7 +37,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Conjugate(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.ComplexNumber);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Im(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Phase(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Re(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Reciprocal(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.ComplexNumber);
         }
 
         [Fact]

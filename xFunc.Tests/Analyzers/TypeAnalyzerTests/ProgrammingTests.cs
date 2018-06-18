@@ -31,7 +31,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new AddAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Maths.Expressions.Programming.And(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -111,7 +111,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new DivAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -303,7 +303,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new GreaterOrEqual(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -343,7 +343,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new GreaterThan(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -423,7 +423,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new LessOrEqual(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -463,7 +463,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new LessThan(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -503,7 +503,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new MulAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -527,7 +527,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Maths.Expressions.Programming.Or(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -567,7 +567,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new SubAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]

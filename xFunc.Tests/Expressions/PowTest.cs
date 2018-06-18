@@ -45,7 +45,15 @@ namespace xFunc.Tests.Expressionss
         {
             var exp = new Pow(new Number(-25), new Number(1 / 2.0));
 
-            Assert.Equal(double.NaN, exp.Execute());
+            Assert.Equal(new Complex(0, 5), exp.Execute());
+        }
+
+        [Fact]
+        public void NegativeNumberExecuteTest2()
+        {
+            var exp = new Pow(new Number(-25), new Number(-1 / 2.0));
+
+            Assert.Equal(new Complex(0, -0.2), exp.Execute());
         }
 
         [Fact]

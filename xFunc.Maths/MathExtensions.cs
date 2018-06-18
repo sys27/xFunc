@@ -15,6 +15,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 
 namespace xFunc.Maths
 {
@@ -31,10 +32,26 @@ namespace xFunc.Maths
         /// <param name="number">A double-precision floating-point number to be raised to a power.</param>
         /// <param name="power">A double-precision floating-point number that specifies a power.</param>
         /// <returns>The <paramref name="number"/> raised to the <paramref name="power"/>.</returns>
-        public static double Pow(double number, double power)
+        public static object Pow(double number, double power)
         {
-            if (number < 0 && (BitConverter.DoubleToInt64Bits(power) & 1) == 1)
-                return -Math.Pow(-number, power);
+            if (number < 0)
+            {
+                if ((BitConverter.DoubleToInt64Bits(power) & 1) == 1)
+                {
+                    return -Math.Pow(-number, power);
+                }
+                else
+                {
+                    if (power > 0)
+                    {
+                        return new Complex(0, Math.Pow(-number, power));
+                    }
+                    else
+                    {
+                        return new Complex(0, -Math.Pow(-number, power));
+                    }
+                }
+            }
 
             return Math.Pow(number, power);
         }

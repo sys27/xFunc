@@ -282,7 +282,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Ceil(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -484,7 +484,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Fact(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -508,7 +508,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Floor(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -564,7 +564,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Lb(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -724,7 +724,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Mod(Variable.X, new Number(2));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -943,7 +943,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Pow(new Number(4), new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -991,7 +991,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Root(new Number(4), new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -1019,11 +1019,11 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestRoundUndefined()
+        public void TestRoundVariable()
         {
             var exp = new Round(new Number(10), Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]

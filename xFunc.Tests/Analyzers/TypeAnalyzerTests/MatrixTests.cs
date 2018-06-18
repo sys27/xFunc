@@ -98,7 +98,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Determinant(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Number);
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Inverse(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Matrix);
         }
 
         [Fact]
@@ -162,7 +162,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Transpose(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Matrix);
         }
 
         [Fact]

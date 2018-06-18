@@ -102,7 +102,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Equality(Variable.X, new Variable("y"));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -142,7 +142,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Implication(Variable.X, new Variable("y"));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -182,7 +182,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new NAnd(Variable.X, new Variable("y"));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -222,7 +222,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new NOr(Variable.X, new Variable("y"));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]

@@ -91,31 +91,31 @@ namespace xFunc.Maths
             exp.Analyze(TypeAnalyzer);
 
             var result = exp.Execute(Parameters);
-            if (result is double)
+            if (result is double number)
             {
                 if (NumeralSystem == NumeralSystem.Decimal)
-                    return new NumberResult((double)result);
+                    return new NumberResult(number);
 
-                return new StringResult(MathExtensions.ToNewBase((int)(double)result, NumeralSystem));
+                return new StringResult(MathExtensions.ToNewBase((int)number, NumeralSystem));
             }
-            if (result is Complex)
+            if (result is Complex complex)
             {
-                return new ComplexNumberResult((Complex)result);
+                return new ComplexNumberResult(complex);
             }
-            if (result is bool)
+            if (result is bool boolean)
             {
-                return new BooleanResult((bool)result);
+                return new BooleanResult(boolean);
             }
-            if (result is string)
+            if (result is string str)
             {
-                return new StringResult((string)result);
+                return new StringResult(str);
             }
-            if (result is IExpression)
+            if (result is IExpression expression)
             {
                 if (DoSimplify)
-                    return new ExpressionResult(Simplify((IExpression)result));
+                    return new ExpressionResult(Simplify(expression));
 
-                return new ExpressionResult((IExpression)result);
+                return new ExpressionResult(expression);
             }
 
             throw new InvalidResultException();

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
@@ -58,6 +59,14 @@ namespace xFunc.Tests.Expressionss.Statistical
             var result = exp.Execute();
 
             Assert.Equal(13.0, result);
+        }
+
+        [Fact]
+        public void NotSupportedException()
+        {
+            var exp = new Var(new[] { new Bool(false), new Bool(false) }, 2);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

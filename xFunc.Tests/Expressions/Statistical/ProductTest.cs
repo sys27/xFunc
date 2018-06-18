@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
@@ -46,6 +47,14 @@ namespace xFunc.Tests.Expressionss.Statistical
             var sum = new Product(new[] { new Vector(new[] { new Number(4), new Number(2) }) }, 1);
 
             Assert.Equal(8.0, sum.Execute());
+        }
+
+        [Fact]
+        public void NotSupportedException()
+        {
+            var exp = new Product(new[] { new Bool(false), new Bool(false) }, 2);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

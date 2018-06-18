@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressionss
@@ -39,6 +40,14 @@ namespace xFunc.Tests.Expressionss
             var exp = new UnaryMinus(new ComplexNumber(complex));
 
             Assert.Equal(Complex.Negate(complex), exp.Execute());
+        }
+
+        [Fact]
+        public void NotSupportedException()
+        {
+            var exp = new UnaryMinus(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -72,6 +73,17 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                     throw new DifferentParameterTypeMismatchException(ResultType.Number, results[i], i);
 
             return ResultType.Number;
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression. This method should be only used for expessions which are not supported by xFunc (custom expression create by extendening library).
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public virtual ResultType Analyze(IExpression exp)
+        {
+            return ResultType.None;
         }
 
         #region Standard

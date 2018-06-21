@@ -32,6 +32,13 @@ namespace xFunc.Maths.Analyzers
     public interface IAnalyzer<TResult>
     {
 
+        /// <summary>
+        /// Analyzes the specified expression. This method should be only used for expessions which are not supported by xFunc (custom expression create by extendening library).
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(IExpression exp);
+
         #region Standard
 
         /// <summary>

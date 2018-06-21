@@ -75,6 +75,17 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
+        /// <summary>
+        /// Analyzes the specified expression. This method should be only used for expessions which are not supported by xFunc (custom expression create by extendening library).
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public virtual IExpression Analyze(IExpression exp)
+        {
+            return null;
+        }
+
         #region Standard
 
         /// <summary>

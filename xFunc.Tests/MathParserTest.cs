@@ -2251,6 +2251,24 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void SignTest()
+        {
+            var tokens = new List<IToken>
+            {
+                new FunctionToken(Functions.Sign, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(10),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sign(new UnaryMinus(new Number(10)));
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

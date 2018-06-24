@@ -55,11 +55,10 @@ namespace xFunc.Maths
             if (tokens == null)
                 throw new ArgumentNullException(nameof(tokens));
 
-            var tokenList = tokens.ToList();
-            if (!tokenList.Any())
+            if (!tokens.Any())
                 throw new ArgumentException(nameof(tokens));
 
-            var rpn = ConvertToReversePolishNotation(tokenList);
+            var rpn = ConvertToReversePolishNotation(tokens);
             var expressions = ConvertTokensToExpressions(rpn);
 
             var stack = new Stack<IExpression>();

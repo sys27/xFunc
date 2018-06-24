@@ -1329,5 +1329,23 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             Test(new DelegateExpression(x => null), ResultType.Undefined);
         }
 
+        [Fact]
+        public void TestSignUndefined()
+        {
+            Test(new Sign(new Number(-5)), ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSignNumber()
+        {
+            Test(new Sign(new Number(-5)), ResultType.Number);
+        }
+
+        [Fact]
+        public void TestSignException()
+        {
+            TestException(new Sign(new Bool(false)));
+        }
+
     }
 }

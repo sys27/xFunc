@@ -1,4 +1,4 @@
-﻿// Copyright 2012-2018 Dmitry Kischenko
+// Copyright 2012-2018 Dmitry Kischenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -19,33 +19,31 @@ using Xunit;
 namespace xFunc.Tests.Expressionss
 {
 
-    public class RoundTest
+    public class SignTest
     {
 
         [Fact]
-        public void CalculateRoundWithoutDigits()
+        public void PositiveSignTest()
         {
-            var round = new Round(new Number(5.555555));
-            var result = round.Execute();
-            var expected = 6.0;
+            var exp = new Sign(new Number(5));
+            var result = exp.Execute();
 
-            Assert.Equal(expected, result);
+            Assert.Equal(1, result);
         }
 
         [Fact]
-        public void CalculateRoundWithDigits()
+        public void NegativeSignTest()
         {
-            var round = new Round(new Number(5.555555), new Number(2));
-            var result = round.Execute();
-            var expected = 5.56;
+            var exp = new Sign(new Number(-5));
+            var result = exp.Execute();
 
-            Assert.Equal(expected, result);
+            Assert.Equal(-1, result);
         }
 
         [Fact]
         public void CloneTest()
         {
-            var exp = new Round(new Number(5.555555), new Number(2));
+            var exp = new Sign(new Number(-5));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

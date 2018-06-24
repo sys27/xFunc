@@ -180,6 +180,7 @@
     <Compile Include="Expressions\Undefine.cs" />
     <Compile Include="Expressions\UserFunction.cs" />
     <Compile Include="Expressions\Variable.cs" />
+    <Compile Include="Expressions\Sign.cs" />
     <Compile Include="MathExtensions.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Processor.cs" />

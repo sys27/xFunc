@@ -426,6 +426,16 @@ namespace xFunc.Maths.Analyzers.Formatters
             return "{Delegate Expression}";
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(Sign exp)
+        {
+            return ToString(exp, "sign({0})");
+        }
+
         #endregion Standard
 
         #region Matrix

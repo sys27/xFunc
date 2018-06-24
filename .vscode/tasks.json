@@ -1,35 +1,39 @@
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "xFunc.Core.sln"
-            ],
+            "label": "Build",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
+            "command": "dotnet build xFunc.Core.sln",
             "presentation": {
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
         },
         {
-            "taskName": "test",
-            "command": "dotnet",
-            "args": [
-                "test",
-                "xFunc.Tests\\xFunc.Tests.Core.csproj"
-            ],
+            "label": "Build Release",
+            "type": "shell",
+            "group": "build",
+            "command": "dotnet build xFunc.Core.sln -c Release",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build",
             "type": "shell",
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
+            "command": "dotnet test xFunc.Tests/xFunc.Tests.Core.csproj",
             "presentation": {
                 "reveal": "silent"
             },

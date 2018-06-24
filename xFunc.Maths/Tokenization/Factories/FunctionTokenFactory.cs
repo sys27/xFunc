@@ -332,6 +332,10 @@ namespace xFunc.Maths.Tokenization.Factories
             {
                 result.Token = new FunctionToken(Functions.Stdevp);
             }
+            else if (lowerMatch == "sign")
+            {
+                result.Token = new FunctionToken(Functions.Sign);
+            }
             else
             {
                 result.Token = new UserFunctionToken(stringMatch);

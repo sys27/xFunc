@@ -183,6 +183,7 @@
     <Compile Include="Expressions\UndefineTest.cs" />
     <Compile Include="Expressions\UserFunctionTest.cs" />
     <Compile Include="Expressions\VariableTest.cs" />
+    <Compile Include="Expressions\SignTest.cs" />
     <Compile Include="MathLexerTest.cs" />
     <Compile Include="MathParameterCollectionTest.cs" />
     <Compile Include="MathParserTest.cs" />

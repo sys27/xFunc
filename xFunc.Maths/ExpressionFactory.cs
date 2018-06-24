@@ -303,6 +303,8 @@ namespace xFunc.Maths
                     exp = new Stdev(); break;
                 case Functions.Stdevp:
                     exp = new Stdevp(); break;
+                case Functions.Sign:
+                    exp = new Sign(); break;
                 default:
                     exp = null; break;
             }

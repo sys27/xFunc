@@ -3209,6 +3209,22 @@ namespace xFunc.Tests
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void SignTest()
+        {
+            var tokens = lexer.Tokenize("sign(-10)");
+            var expected = new List<IToken>
+            {
+                new FunctionToken(Functions.Sign, 1),
+                new SymbolToken(Symbols.OpenBracket),
+                new OperationToken(Operations.UnaryMinus),
+                new NumberToken(10),
+                new SymbolToken(Symbols.CloseBracket)
+            };
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

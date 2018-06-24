@@ -1280,6 +1280,15 @@ namespace xFunc.Tests.Analyzers.Formatters
             Assert.Equal("while(5, 5 == 5)", exp.ToString(commoonFormatter));
         }
 
+        [Fact]
+        public void SignToString()
+        {
+            var exp = new Sign(new Number(-5));
+            var str = exp.ToString(commoonFormatter);
+
+            Assert.Equal("sign(-5)", str);
+        }
+
         #endregion
 
     }

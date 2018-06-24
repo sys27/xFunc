@@ -319,7 +319,12 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <summary>
         /// The STDEVP function
         /// </summary>
-        Stdevp
+        Stdevp,
+
+        /// <summary>
+        /// The Sign function
+        /// </summary>
+        Sign
 
     }
 

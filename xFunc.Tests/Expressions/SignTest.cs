@@ -16,7 +16,7 @@ using System;
 using xFunc.Maths.Expressions;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss
+namespace xFunc.Tests.Expressions
 {
 
     public class SignTest

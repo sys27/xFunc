@@ -20,7 +20,7 @@ using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss.Trigonometric
+namespace xFunc.Tests.Expressions.Trigonometric
 {
 
     public class CosineTest

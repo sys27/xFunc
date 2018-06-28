@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss.LogicalAndBitwise
+namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
 
     public class OrTest

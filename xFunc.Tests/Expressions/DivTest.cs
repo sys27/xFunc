@@ -19,7 +19,7 @@ using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss
+namespace xFunc.Tests.Expressions
 {
 
     public class DivTest

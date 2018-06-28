@@ -19,7 +19,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss.Statistical
+namespace xFunc.Tests.Expressions.Statistical
 {
 
     public class ProductTest

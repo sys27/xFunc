@@ -18,7 +18,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss
+namespace xFunc.Tests.Expressions
 {
 
     public class PowTest

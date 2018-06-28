@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss
+namespace xFunc.Tests.Expressions
 {
 
     public class UndefineTest

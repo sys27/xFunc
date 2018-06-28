@@ -21,7 +21,7 @@ using xFunc.Maths.Expressions.ComplexNumbers;
 using System.Numerics;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 
-namespace xFunc.Tests.Expressionss.Trigonometric
+namespace xFunc.Tests.Expressions.Trigonometric
 {
 
     public class ArccotTest

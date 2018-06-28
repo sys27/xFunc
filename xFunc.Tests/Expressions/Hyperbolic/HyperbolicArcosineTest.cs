@@ -21,7 +21,7 @@ using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss.Hyperbolic
+namespace xFunc.Tests.Expressions.Hyperbolic
 {
 
     public class HyperbolicArcosineTest

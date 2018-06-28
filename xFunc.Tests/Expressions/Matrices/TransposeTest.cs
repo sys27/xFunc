@@ -17,7 +17,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss.Matrices
+namespace xFunc.Tests.Expressions.Matrices
 {
 
     public class TransposeTest

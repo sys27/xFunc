@@ -19,7 +19,7 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss
+namespace xFunc.Tests.Expressions
 {
 
     public class SimplifyTest

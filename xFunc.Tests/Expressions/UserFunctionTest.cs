@@ -19,7 +19,7 @@ using xFunc.Maths.Expressions.Collections;
 using Xunit;
 using xFunc.Maths.Expressions.Programming;
 
-namespace xFunc.Tests.Expressionss
+namespace xFunc.Tests.Expressions
 {
 
     public class UserFunctionTest

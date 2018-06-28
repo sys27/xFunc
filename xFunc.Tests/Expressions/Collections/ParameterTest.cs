@@ -16,7 +16,7 @@ using System;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
-namespace xFunc.Tests.Expressionss.Collections
+namespace xFunc.Tests.Expressions.Collections
 {
 
     public class ParameterTest

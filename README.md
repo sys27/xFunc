@@ -34,6 +34,12 @@ All in all, xFunc comes packed with resourceful options dedicated to computing m
 * Truth tables;
 * Supported Framework: 4.0 (or higher).
 
+## Usage
+
+[Examples](https://github.com/sys27/xFunc/wiki/Examples)
+
+[Supported functions and operations](https://github.com/sys27/xFunc/wiki/Supported-functions-and-operations).
+
 ## Bug Tracker
 
 Please, if you have a bug or a feature request, [create](https://github.com/sys27/xFunc/issues) a new issue. Before creating any issue, please search for existing issues.
@@ -53,5 +59,4 @@ xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICE
 
 ## More:
 
-* [CodePlex](http://xfunc.codeplex.com/)
 * [NuGet](https://nuget.org/packages?q=xFunc)

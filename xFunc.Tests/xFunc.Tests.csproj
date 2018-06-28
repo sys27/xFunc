@@ -84,6 +84,7 @@
     <Compile Include="Expressions\AbsTest.cs" />
     <Compile Include="Expressions\AddTest.cs" />
     <Compile Include="Expressions\BinaryTest.cs" />
+    <Compile Include="Expressions\Collections\ParameterTest.cs" />
     <Compile Include="Expressions\ComplexNumbers\ComplexNumberTest.cs" />
     <Compile Include="Expressions\ComplexNumbers\ReciprocalTest.cs" />
     <Compile Include="Expressions\ComplexNumbers\ConjugateTest.cs" />

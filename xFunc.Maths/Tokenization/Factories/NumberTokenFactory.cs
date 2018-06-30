@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberTokenFactory"/> class.
         /// </summary>
-        public NumberTokenFactory() : base(new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public NumberTokenFactory() : base(new Regex(@"\G[+-]?\d*\.?\d+([e][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

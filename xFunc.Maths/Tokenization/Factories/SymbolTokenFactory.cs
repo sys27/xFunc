@@ -31,7 +31,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="SymbolTokenFactory"/> class.
         /// </summary>
-        public SymbolTokenFactory() : base(new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public SymbolTokenFactory() : base(new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

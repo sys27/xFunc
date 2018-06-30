@@ -32,7 +32,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// Initializes a new instance of the <see cref="VariableTokenFactory"/> class.
         /// </summary>
         public VariableTokenFactory()
-            : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase))
+            : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         { }
 
         /// <summary>

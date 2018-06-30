@@ -29,12 +29,12 @@ namespace xFunc.Maths.Tokenization.Factories
     public class ComplexNumberTokenFactory : FactoryBase
     {
 
-        private Regex regexAllWhitespaces = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private Regex regexAllWhitespaces = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexNumberTokenFactory"/> class.
         /// </summary>
-        public ComplexNumberTokenFactory() : base(new Regex(@"\G([+-]?\s*\d*\.?\d+)\s*([∠+-]+\s*\s*\d*\.?\d+)°", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public ComplexNumberTokenFactory() : base(new Regex(@"\G([+-]?\s*\d*\.?\d+)\s*([∠+-]+\s*\s*\d*\.?\d+)°", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         private bool DoubleTryParse(string str, out double number)
         {

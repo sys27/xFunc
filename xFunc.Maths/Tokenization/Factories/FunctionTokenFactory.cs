@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionTokenFactory"/> class.
         /// </summary>
-        public FunctionTokenFactory() : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)(\(|{)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public FunctionTokenFactory() : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)(?:\(|{)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

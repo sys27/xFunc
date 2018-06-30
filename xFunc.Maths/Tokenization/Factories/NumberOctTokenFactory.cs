@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberOctTokenFactory"/> class.
         /// </summary>
-        public NumberOctTokenFactory() : base(new Regex(@"\G[+-]?0[0-7]+", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public NumberOctTokenFactory() : base(new Regex(@"\G[+-]?0[0-7]+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

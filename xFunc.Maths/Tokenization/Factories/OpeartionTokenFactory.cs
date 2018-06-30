@@ -31,7 +31,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="OpeartionTokenFactory"/> class.
         /// </summary>
-        public OpeartionTokenFactory() : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public OpeartionTokenFactory() : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

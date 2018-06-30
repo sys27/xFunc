@@ -79,8 +79,10 @@ namespace xFunc.Maths.Tokenization.Tokens
             switch (Symbol)
             {
                 case Symbols.OpenBracket:
+                case Symbols.OpenBrace:
                     return 1;
                 case Symbols.CloseBracket:
+                case Symbols.CloseBrace:
                     return 2;
                 case Symbols.Comma:
                     return 3;

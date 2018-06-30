@@ -145,7 +145,7 @@ namespace xFunc.Maths
 
         private IEnumerable<IToken> ConvertToReversePolishNotation(IEnumerable<IToken> tokens)
         {
-            var output = new List<IToken>();
+            var output = new List<IToken>(tokens.Count());
             var stack = new Stack<IToken>();
 
             var openBracketToken = new SymbolToken(Symbols.OpenBracket);

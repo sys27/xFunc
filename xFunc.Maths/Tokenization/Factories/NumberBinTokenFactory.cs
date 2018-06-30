@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberBinTokenFactory"/> class.
         /// </summary>
-        public NumberBinTokenFactory() : base(new Regex(@"\G[+-]?0b[01]+", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public NumberBinTokenFactory() : base(new Regex(@"\G[+-]?0b[01]+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

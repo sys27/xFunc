@@ -102,8 +102,6 @@ namespace xFunc.Maths.Tokenization
             if (!IsBalanced(function))
                 throw new LexerException(Resource.NotBalanced);
 
-            function = function.Replace("\n", "").Replace("\r", "");
-
             var tokens = new List<IToken>();
             var readOnlyTokensList = new ReadOnlyCollection<IToken>(tokens);
             for (var i = 0; i < function.Length;)

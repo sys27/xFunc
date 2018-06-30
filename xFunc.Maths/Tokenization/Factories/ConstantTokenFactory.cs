@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstantTokenFactory"/> class.
         /// </summary>
-        public ConstantTokenFactory() : base(new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public ConstantTokenFactory() : base(new Regex(@"\G(true|false)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.

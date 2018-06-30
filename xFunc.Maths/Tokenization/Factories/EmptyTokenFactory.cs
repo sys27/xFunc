@@ -29,7 +29,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="EmptyTokenFactory"/> class.
         /// </summary>
-        public EmptyTokenFactory() : base(new Regex(@"\G\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase)) { }
+        public EmptyTokenFactory() : base(new Regex(@"\G\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the empty result (without token).

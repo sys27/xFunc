@@ -20,16 +20,27 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths.Tokenization
 {
 
+    /// <summary>
+    /// Builder of token list.
+    /// </summary>
     public class TokensBuilder
     {
 
         private readonly IList<IToken> tokens;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokensBuilder"/> class.
+        /// </summary>
         public TokensBuilder()
         {
             tokens = new List<IToken>();
         }
 
+        /// <summary>
+        /// Adds boolean token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="value">The value of boolean token.</param>
         public TokensBuilder Boolean(bool value)
         {
             tokens.Add(new BooleanToken(value));
@@ -37,6 +48,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds boolean token with <c>true</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder True()
         {
             tokens.Add(new BooleanToken(true));
@@ -44,6 +59,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds boolean token with <c>false</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder False()
         {
             tokens.Add(new BooleanToken(false));
@@ -51,6 +70,11 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds complex token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="complex">The value of complex token.</param>
         public TokensBuilder ComplexNumber(Complex complex)
         {
             tokens.Add(new ComplexNumberToken(complex));
@@ -58,6 +82,12 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds function token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="function">The type of function.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
         public TokensBuilder Function(Functions function, int countOfParams = 1)
         {
             tokens.Add(new FunctionToken(function, countOfParams));
@@ -65,6 +95,11 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds number token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="number">The value of number token.</param>
         public TokensBuilder Number(double number)
         {
             tokens.Add(new NumberToken(number));
@@ -72,6 +107,11 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds operation token.
+        /// </summary>
+        /// <returns>The current instance of builder..</returns>
+        /// <param name="operation">The type of operation.</param>
         public TokensBuilder Operation(Operations operation)
         {
             tokens.Add(new OperationToken(operation));
@@ -79,6 +119,11 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="symbol">The type of symbol.</param>
         public TokensBuilder Symbol(Symbols symbol)
         {
             tokens.Add(new SymbolToken(symbol));
@@ -86,6 +131,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds open bracket symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder OpenBracket()
         {
             tokens.Add(new SymbolToken(Symbols.OpenBracket));
@@ -93,6 +142,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds close bracket symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder CloseBracket()
         {
             tokens.Add(new SymbolToken(Symbols.CloseBracket));
@@ -100,6 +153,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds comma symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder Comma()
         {
             tokens.Add(new SymbolToken(Symbols.Comma));
@@ -107,6 +164,12 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds user function token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="function">The name of function.</param>
+        /// <param name="countOfParams">The count of parameters.</param>
         public TokensBuilder UserFunction(string function, int countOfParams)
         {
             tokens.Add(new UserFunctionToken(function, countOfParams));
@@ -114,6 +177,11 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds variable token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        /// <param name="variable">The name of variable.</param>
         public TokensBuilder Variable(string variable)
         {
             tokens.Add(new VariableToken(variable));
@@ -121,6 +189,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds the 'x' variable token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder VariableX()
         {
             tokens.Add(new VariableToken("x"));
@@ -128,6 +200,10 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Adds the 'y' variable token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
         public TokensBuilder VariableY()
         {
             tokens.Add(new VariableToken("y"));
@@ -135,6 +211,12 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        /// <summary>
+        /// Gets token list. 
+        /// </summary>
+        /// <value>
+        /// The token list.
+        /// </value>
         public IList<IToken> Tokens
         {
             get

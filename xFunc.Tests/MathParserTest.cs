@@ -26,6 +26,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
@@ -40,6 +41,11 @@ namespace xFunc.Tests
         public MathParserTest()
         {
             parser = new Parser();
+        }
+
+        private TokensBuilder Builder()
+        {
+            return new TokensBuilder();
         }
 
         [Fact]
@@ -93,15 +99,14 @@ namespace xFunc.Tests
         [Fact]
         public void ParseLog()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Log, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(9),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Log, 2)
+                .OpenBracket()
+                .Number(9)
+                .Comma()
+                .Number(3)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Log(new Number(3), new Number(9));
@@ -112,13 +117,12 @@ namespace xFunc.Tests
         [Fact]
         public void ParseLogWithOneParam()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Log, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(9),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Log, 1)
+                .OpenBracket()
+                .Number(9)
+                .CloseBracket()
+                .Tokens;
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
@@ -126,15 +130,14 @@ namespace xFunc.Tests
         [Fact]
         public void ParseRoot()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Root, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Root, 2)
+                .OpenBracket()
+                .VariableX()
+                .Comma()
+                .Number(3)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Root(Variable.X, new Number(3));
@@ -145,13 +148,12 @@ namespace xFunc.Tests
         [Fact]
         public void ParseRootWithOneParam()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Root, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Root, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
@@ -159,16 +161,15 @@ namespace xFunc.Tests
         [Fact]
         public void ParseDerivWithOneParam()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Derivative, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new FunctionToken(Functions.Sine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Derivative, 1)
+                .OpenBracket()
+                .Function(Functions.Sine, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .CloseBracket()
+                .Tokens;
 
             var diff = new Differentiator();
             var simp = new Simplifier();
@@ -181,12 +182,11 @@ namespace xFunc.Tests
         [Fact]
         public void ParseDefine()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign),
-                new NumberToken(3)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Assign)
+                .Number(3)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Define(Variable.X, new Number(3));
@@ -197,11 +197,10 @@ namespace xFunc.Tests
         [Fact]
         public void ParseDefineWithOneParam()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Assign)
+                .Tokens;
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
@@ -209,12 +208,11 @@ namespace xFunc.Tests
         [Fact]
         public void ParseDefineFirstParamIsNotVar()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(5),
-                new OperationToken(Operations.Assign),
-                new NumberToken(3)
-            };
+            var tokens = Builder()
+                .Number(5)
+                .Operation(Operations.Assign)
+                .Number(3)
+                .Tokens;
 
             Assert.Throws<NotSupportedException>(() => parser.Parse(tokens));
         }
@@ -222,14 +220,13 @@ namespace xFunc.Tests
         [Fact]
         public void ErrorWhileParsingTree()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sine, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Number(2)
+                .Tokens;
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
@@ -237,12 +234,11 @@ namespace xFunc.Tests
         [Fact]
         public void DefineComplexParserTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("aaa"),
-                new OperationToken(Operations.Assign),
-                new ComplexNumberToken(new Complex(3, 2))
-            };
+            var tokens = Builder()
+                .Variable("aaa")
+                .Operation(Operations.Assign)
+                .ComplexNumber(new Complex(3, 2))
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Define(new Variable("aaa"), new ComplexNumber(new Complex(3, 2)));
@@ -253,18 +249,17 @@ namespace xFunc.Tests
         [Fact]
         public void DefineUserFuncTest()
         {
-            var tokens = new List<IToken>
-            {
-                new UserFunctionToken("func", 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket),
-                new OperationToken(Operations.Assign),
-                new FunctionToken(Functions.Sine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .UserFunction("func", 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Operation(Operations.Assign)
+                .Function(Functions.Sine, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Define(new UserFunction("func", new[] { Variable.X }, 1), new Sin(Variable.X));
@@ -275,15 +270,14 @@ namespace xFunc.Tests
         [Fact]
         public void UserFunc()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(1),
-                new OperationToken(Operations.Addition),
-                new UserFunctionToken("func", 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Number(1)
+                .Operation(Operations.Addition)
+                .UserFunction("func", 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Add(new Number(1), new UserFunction("func", new[] { Variable.X }, 1));
@@ -294,16 +288,15 @@ namespace xFunc.Tests
         [Fact]
         public void UndefParseTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Undefine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new UserFunctionToken("f", 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Undefine, 1)
+                .OpenBracket()
+                .UserFunction("f", 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Undefine(new UserFunction("f", new[] { Variable.X }, 1));
@@ -314,12 +307,11 @@ namespace xFunc.Tests
         [Fact]
         public void UndefWithoutParamsTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Undefine, 0),
-                new SymbolToken(Symbols.OpenBracket),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Undefine, 0)
+                .OpenBracket()
+                .CloseBracket()
+                .Tokens;
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
@@ -327,18 +319,17 @@ namespace xFunc.Tests
         [Fact]
         public void ParserTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Cosine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket),
-                new OperationToken(Operations.Addition),
-                new FunctionToken(Functions.Sine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Cosine, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Operation(Operations.Addition)
+                .Function(Functions.Sine, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Add(new Cos(Variable.X), new Sin(Variable.X));
@@ -349,15 +340,14 @@ namespace xFunc.Tests
         [Fact]
         public void GCDTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.GCD, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(12),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(16),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.GCD, 2)
+                .OpenBracket()
+                .Number(12)
+                .Comma()
+                .Number(16)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new GCD(new Number(12), new Number(16));
@@ -368,17 +358,16 @@ namespace xFunc.Tests
         [Fact]
         public void GCDOfThreeTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.GCD, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(12),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(16),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(8),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.GCD, 3)
+                .OpenBracket()
+                .Number(12)
+                .Comma()
+                .Number(16)
+                .Comma()
+                .Number(8)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new GCD(new[] { new Number(12), new Number(16), new Number(8) }, 3);
@@ -389,15 +378,14 @@ namespace xFunc.Tests
         [Fact]
         public void LCMTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.LCM, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(12),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(16),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.LCM, 2)
+                .OpenBracket()
+                .Number(12)
+                .Comma()
+                .Number(16)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new LCM(new Number(12), new Number(16));
@@ -408,13 +396,12 @@ namespace xFunc.Tests
         [Fact]
         public void SimplifyTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Simplify, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Simplify, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
 
             var simp = new Simplifier();
             var exp = parser.Parse(tokens);
@@ -426,13 +413,12 @@ namespace xFunc.Tests
         [Fact]
         public void FactorialTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Factorial, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Factorial, 1)
+                .OpenBracket()
+                .Number(4)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Fact(new Number(4));
@@ -443,15 +429,14 @@ namespace xFunc.Tests
         [Fact]
         public void SumToTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sum, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sum, 2)
+                .OpenBracket()
+                .VariableX()
+                .Comma()
+                .Number(20)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sum(new IExpression[] { Variable.X, new Number(20) }, 2);
@@ -462,15 +447,14 @@ namespace xFunc.Tests
         [Fact]
         public void ProductToTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Product, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(20),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Product, 2)
+                .OpenBracket()
+                .VariableX()
+                .Comma()
+                .Number(20)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Product(new IExpression[] { Variable.X, new Number(20) }, 2);
@@ -481,17 +465,16 @@ namespace xFunc.Tests
         [Fact]
         public void VectorTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Vector, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(4),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Vector, 3)
+                .OpenBracket()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .Comma()
+                .Number(4)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Maths.Expressions.Matrices.Vector(new[] { new Number(2), new Number(3), new Number(4) });
@@ -502,25 +485,24 @@ namespace xFunc.Tests
         [Fact]
         public void VectorTwoDimTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Matrix, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new FunctionToken(Functions.Vector, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.Comma),
-                new FunctionToken(Functions.Vector, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(7),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Matrix, 2)
+                .OpenBracket()
+                .Function(Functions.Vector, 2)
+                .OpenBracket()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .CloseBracket()
+                .Comma()
+                .Function(Functions.Vector, 2)
+                .OpenBracket()
+                .Number(4)
+                .Comma()
+                .Number(7)
+                .CloseBracket()
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Matrix(new[]
@@ -535,27 +517,26 @@ namespace xFunc.Tests
         [Fact]
         public void MatrixWithDiffVectorSizeTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Matrix, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new FunctionToken(Functions.Vector, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.Comma),
-                new FunctionToken(Functions.Vector, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(7),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Matrix, 2)
+                .OpenBracket()
+                .Function(Functions.Vector, 2)
+                .OpenBracket()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .CloseBracket()
+                .Comma()
+                .Function(Functions.Vector, 3)
+                .OpenBracket()
+                .Number(4)
+                .Comma()
+                .Number(7)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .CloseBracket()
+                .Tokens;
 
             Assert.Throws<MatrixIsInvalidException>(() => parser.Parse(tokens));
         }
@@ -563,15 +544,14 @@ namespace xFunc.Tests
         [Fact]
         public void TooMuchParamsTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sine, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sine, 2)
+                .OpenBracket()
+                .VariableX()
+                .Comma()
+                .Number(3)
+                .CloseBracket()
+                .Tokens;
 
             Assert.Throws<ParserException>(() => parser.Parse(tokens));
         }
@@ -579,27 +559,26 @@ namespace xFunc.Tests
         [Fact]
         public void ForTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.For, 4),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign),
-                new NumberToken(0),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("x"),
-                new OperationToken(Operations.LessThan),
-                new NumberToken(10),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign),
-                new VariableToken("x"),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.For, 4)
+                .OpenBracket()
+                .Number(2)
+                .Comma()
+                .VariableX()
+                .Operation(Operations.Assign)
+                .Number(0)
+                .Comma()
+                .VariableX()
+                .Operation(Operations.LessThan)
+                .Number(10)
+                .Comma()
+                .VariableX()
+                .Operation(Operations.Assign)
+                .VariableX()
+                .Operation(Operations.Addition)
+                .Number(1)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new For(
@@ -614,21 +593,20 @@ namespace xFunc.Tests
         [Fact]
         public void WhileTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.While, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign),
-                new VariableToken("x"),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(1),
-                new OperationToken(Operations.Equal),
-                new NumberToken(1),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.While, 2)
+                .OpenBracket()
+                .VariableX()
+                .Operation(Operations.Assign)
+                .VariableX()
+                .Operation(Operations.Addition)
+                .Number(1)
+                .Comma()
+                .Number(1)
+                .Operation(Operations.Equal)
+                .Number(1)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new While(
@@ -641,23 +619,22 @@ namespace xFunc.Tests
         [Fact]
         public void IfTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.If, 3),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new OperationToken(Operations.Equal),
-                new NumberToken(0),
-                new OperationToken(Operations.ConditionalAnd),
-                new VariableToken("y"),
-                new OperationToken(Operations.NotEqual),
-                new NumberToken(0),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(8),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.If, 3)
+                .OpenBracket()
+                .VariableX()
+                .Operation(Operations.Equal)
+                .Number(0)
+                .Operation(Operations.ConditionalAnd)
+                .VariableY()
+                .Operation(Operations.NotEqual)
+                .Number(0)
+                .Comma()
+                .Number(2)
+                .Comma()
+                .Number(8)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new If(
@@ -673,16 +650,15 @@ namespace xFunc.Tests
         [Fact]
         public void ConditionalAndTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Equal),
-                new NumberToken(0),
-                new OperationToken(Operations.ConditionalAnd),
-                new VariableToken("y"),
-                new OperationToken(Operations.NotEqual),
-                new NumberToken(0)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Equal)
+                .Number(0)
+                .Operation(Operations.ConditionalAnd)
+                .VariableY()
+                .Operation(Operations.NotEqual)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Maths.Expressions.Programming.And(
@@ -695,16 +671,15 @@ namespace xFunc.Tests
         [Fact]
         public void ConditionalOrTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Equal),
-                new NumberToken(0),
-                new OperationToken(Operations.ConditionalOr),
-                new VariableToken("y"),
-                new OperationToken(Operations.NotEqual),
-                new NumberToken(0)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Equal)
+                .Number(0)
+                .Operation(Operations.ConditionalOr)
+                .VariableY()
+                .Operation(Operations.NotEqual)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Maths.Expressions.Programming.Or(
@@ -717,12 +692,11 @@ namespace xFunc.Tests
         [Fact]
         public void EqualTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Equal),
-                new NumberToken(0),
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Equal)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Equal(Variable.X, new Number(0));
@@ -733,12 +707,11 @@ namespace xFunc.Tests
         [Fact]
         public void NotEqualTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.NotEqual),
-                new NumberToken(0),
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.NotEqual)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new NotEqual(Variable.X, new Number(0));
@@ -749,12 +722,11 @@ namespace xFunc.Tests
         [Fact]
         public void LessThenTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.LessThan),
-                new NumberToken(0),
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.LessThan)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new LessThan(Variable.X, new Number(0));
@@ -765,12 +737,11 @@ namespace xFunc.Tests
         [Fact]
         public void LessOrEqualTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.LessOrEqual),
-                new NumberToken(0),
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.LessOrEqual)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new LessOrEqual(Variable.X, new Number(0));
@@ -781,12 +752,11 @@ namespace xFunc.Tests
         [Fact]
         public void GreaterThenTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.GreaterThan),
-                new NumberToken(0),
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.GreaterThan)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new GreaterThan(Variable.X, new Number(0));
@@ -797,12 +767,11 @@ namespace xFunc.Tests
         [Fact]
         public void GreaterOrEqualTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.GreaterOrEqual),
-                new NumberToken(0),
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.GreaterOrEqual)
+                .Number(0)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new GreaterOrEqual(Variable.X, new Number(0));
@@ -813,11 +782,10 @@ namespace xFunc.Tests
         [Fact]
         public void IncTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Increment)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Increment)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Inc(Variable.X);
@@ -828,24 +796,23 @@ namespace xFunc.Tests
         [Fact]
         public void IncForTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.For, 4),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("x"),
-                new OperationToken(Operations.Assign),
-                new NumberToken(0),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("x"),
-                new OperationToken(Operations.LessThan),
-                new NumberToken(10),
-                new SymbolToken(Symbols.Comma),
-                new VariableToken("x"),
-                new OperationToken(Operations.Increment),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.For, 4)
+                .OpenBracket()
+                .Number(2)
+                .Comma()
+                .VariableX()
+                .Operation(Operations.Assign)
+                .Number(0)
+                .Comma()
+                .VariableX()
+                .Operation(Operations.LessThan)
+                .Number(10)
+                .Comma()
+                .VariableX()
+                .Operation(Operations.Increment)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new For(
@@ -860,11 +827,10 @@ namespace xFunc.Tests
         [Fact]
         public void DecTest()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Decrement)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Decrement)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Dec(Variable.X);
@@ -875,12 +841,11 @@ namespace xFunc.Tests
         [Fact]
         public void AddAssing()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.AddAssign),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.AddAssign)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new AddAssign(Variable.X, new Number(2));
@@ -891,12 +856,11 @@ namespace xFunc.Tests
         [Fact]
         public void MulAssing()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.MulAssign),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.MulAssign)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new MulAssign(Variable.X, new Number(2));
@@ -907,12 +871,11 @@ namespace xFunc.Tests
         [Fact]
         public void SubAssing()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.SubAssign),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.SubAssign)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new SubAssign(Variable.X, new Number(2));
@@ -923,12 +886,11 @@ namespace xFunc.Tests
         [Fact]
         public void DivAssing()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.DivAssign),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.DivAssign)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new DivAssign(Variable.X, new Number(2));
@@ -939,12 +901,11 @@ namespace xFunc.Tests
         [Fact]
         public void BoolConstTest()
         {
-            var tokens = new List<IToken>
-            {
-                new BooleanToken(true),
-                new OperationToken(Operations.And),
-                new BooleanToken(false)
-            };
+            var tokens = Builder()
+                .True()
+                .Operation(Operations.And)
+                .False()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
@@ -955,16 +916,15 @@ namespace xFunc.Tests
         [Fact]
         public void LogicAddPriorityTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(3),
-                new OperationToken(Operations.GreaterThan),
-                new NumberToken(4),
-                new OperationToken(Operations.And),
-                new NumberToken(1),
-                new OperationToken(Operations.LessThan),
-                new NumberToken(3),
-            };
+            var tokens = Builder()
+                .Number(3)
+                .Operation(Operations.GreaterThan)
+                .Number(4)
+                .Operation(Operations.And)
+                .Number(1)
+                .Operation(Operations.LessThan)
+                .Number(3)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Maths.Expressions.LogicalAndBitwise.And(
@@ -978,20 +938,19 @@ namespace xFunc.Tests
         public void GetLogicParametersTest()
         {
             //string function = "a | b & c & (a | c)";
-            var tokens = new List<IToken>
-            {
-                new VariableToken("a"),
-                new OperationToken(Operations.Or),
-                new VariableToken("b"),
-                new OperationToken(Operations.And),
-                new VariableToken("c"),
-                new OperationToken(Operations.And),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("a"),
-                new OperationToken(Operations.Or),
-                new VariableToken("c"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Variable("a")
+                .Operation(Operations.Or)
+                .Variable("b")
+                .Operation(Operations.And)
+                .Variable("c")
+                .Operation(Operations.And)
+                .OpenBracket()
+                .Variable("a")
+                .Operation(Operations.Or)
+                .Variable("c")
+                .CloseBracket()
+                .Tokens;
             var expected = new ParameterCollection(false)
             {
                 new Parameter("a", false),
@@ -1022,10 +981,9 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexNumberTest()
         {
-            var tokens = new List<IToken>
-            {
-                new ComplexNumberToken(new Complex(3, 2))
-            };
+            var tokens = Builder()
+                .ComplexNumber(new Complex(3, 2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(new Complex(3, 2));
 
@@ -1035,10 +993,9 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexNumberNegativeTest()
         {
-            var tokens = new List<IToken>
-            {
-                new ComplexNumberToken(new Complex(3, -2))
-            };
+            var tokens = Builder()
+                .ComplexNumber(new Complex(3, -2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(new Complex(3, -2));
 
@@ -1048,10 +1005,9 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexNumberNegativeAllPartsTest()
         {
-            var tokens = new List<IToken>
-            {
-                new ComplexNumberToken(new Complex(-3, -2))
-            };
+            var tokens = Builder()
+                .ComplexNumber(new Complex(-3, -2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(new Complex(-3, -2));
 
@@ -1061,10 +1017,9 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexOnlyRePartTest()
         {
-            var tokens = new List<IToken>
-            {
-                new ComplexNumberToken(new Complex(3, 0))
-            };
+            var tokens = Builder()
+                .ComplexNumber(new Complex(3, 0))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(new Complex(3, 0));
 
@@ -1074,10 +1029,9 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexOnlyImPartTest()
         {
-            var tokens = new List<IToken>
-            {
-                new ComplexNumberToken(new Complex(0, 2))
-            };
+            var tokens = Builder()
+                .ComplexNumber(new Complex(0, 2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(new Complex(0, 2));
 
@@ -1087,10 +1041,9 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexOnlyImPartNegativeTest()
         {
-            var tokens = new List<IToken>
-            {
-                new ComplexNumberToken(new Complex(0, -2))
-            };
+            var tokens = Builder()
+                .ComplexNumber(new Complex(0, -2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(new Complex(0, -2));
 
@@ -1100,12 +1053,11 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexWithVarTest1()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Subtraction),
-                new ComplexNumberToken(new Complex(0, 2))
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Subtraction)
+                .ComplexNumber(new Complex(0, 2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Sub(Variable.X, new ComplexNumber(new Complex(0, 2)));
 
@@ -1115,12 +1067,11 @@ namespace xFunc.Tests
         [Fact]
         public void ComplexWithVarTest2()
         {
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Addition),
-                new ComplexNumberToken(new Complex(3, -2))
-            };
+            var tokens = Builder()
+                .VariableX()
+                .Operation(Operations.Addition)
+                .ComplexNumber(new Complex(3, -2))
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(Variable.X, new ComplexNumber(new Complex(3, -2)));
 
@@ -1130,13 +1081,12 @@ namespace xFunc.Tests
         [Fact]
         public void ImTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Im, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Im, 1)
+                .OpenBracket()
+                .ComplexNumber(new Complex(3, -2))
+                .CloseBracket()
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Im(new ComplexNumber(new Complex(3, -2)));
 
@@ -1146,13 +1096,12 @@ namespace xFunc.Tests
         [Fact]
         public void ReTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Re, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Re, 1)
+                .OpenBracket()
+                .ComplexNumber(new Complex(3, -2))
+                .CloseBracket()
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Re(new ComplexNumber(new Complex(3, -2)));
 
@@ -1162,13 +1111,12 @@ namespace xFunc.Tests
         [Fact]
         public void PhaseTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Phase, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Phase, 1)
+                .OpenBracket()
+                .ComplexNumber(new Complex(3, -2))
+                .CloseBracket()
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Phase(new ComplexNumber(new Complex(3, -2)));
 
@@ -1178,13 +1126,12 @@ namespace xFunc.Tests
         [Fact]
         public void ConjugateTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Conjugate, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Conjugate, 1)
+                .OpenBracket()
+                .ComplexNumber(new Complex(3, -2))
+                .CloseBracket()
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Conjugate(new ComplexNumber(new Complex(3, -2)));
 
@@ -1194,13 +1141,12 @@ namespace xFunc.Tests
         [Fact]
         public void ReciprocalTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Reciprocal, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new ComplexNumberToken(new Complex(3, -2)),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Reciprocal, 1)
+                .OpenBracket()
+                .ComplexNumber(new Complex(3, -2))
+                .CloseBracket()
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Reciprocal(new ComplexNumber(new Complex(3, -2)));
 
@@ -1210,12 +1156,11 @@ namespace xFunc.Tests
         [Fact]
         public void ModuloTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(7),
-                new OperationToken(Operations.Modulo),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(7)
+                .Operation(Operations.Modulo)
+                .Number(2)
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Mod(new Number(7), new Number(2));
 
@@ -1225,12 +1170,11 @@ namespace xFunc.Tests
         [Fact]
         public void ModuloAsFuncTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(7),
-                new OperationToken(Operations.Modulo),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(7)
+                .Operation(Operations.Modulo)
+                .Number(2)
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Mod(new Number(7), new Number(2));
 
@@ -1240,14 +1184,13 @@ namespace xFunc.Tests
         [Fact]
         public void ModuloAddTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(2),
-                new OperationToken(Operations.Addition),
-                new NumberToken(7),
-                new OperationToken(Operations.Modulo),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(2)
+                .Operation(Operations.Addition)
+                .Number(7)
+                .Operation(Operations.Modulo)
+                .Number(2)
+                .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(new Number(2), new Mod(new Number(7), new Number(2)));
 
@@ -1257,15 +1200,14 @@ namespace xFunc.Tests
         [Fact]
         public void MinTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Min, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Min, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Min(new[] { new Number(1), new Number(2) }, 2);
@@ -1276,15 +1218,14 @@ namespace xFunc.Tests
         [Fact]
         public void MaxTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Max, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Max, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Max(new[] { new Number(1), new Number(2) }, 2);
@@ -1295,15 +1236,14 @@ namespace xFunc.Tests
         [Fact]
         public void AvgTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Avg, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Avg, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Avg(new[] { new Number(1), new Number(2) }, 2);
@@ -1314,15 +1254,14 @@ namespace xFunc.Tests
         [Fact]
         public void CountTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Count, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Count, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Count(new[] { new Number(1), new Number(2) }, 2);
@@ -1333,15 +1272,14 @@ namespace xFunc.Tests
         [Fact]
         public void VarTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Var, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(9),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Var, 2)
+                .OpenBracket()
+                .Number(4)
+                .Comma()
+                .Number(9)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Var(new[] { new Number(4), new Number(9) }, 2);
@@ -1352,15 +1290,14 @@ namespace xFunc.Tests
         [Fact]
         public void VarpTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Varp, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(9),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Varp, 2)
+                .OpenBracket()
+                .Number(4)
+                .Comma()
+                .Number(9)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Varp(new[] { new Number(4), new Number(9) }, 2);
@@ -1371,15 +1308,14 @@ namespace xFunc.Tests
         [Fact]
         public void StdevTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Stdev, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(9),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Stdev, 2)
+                .OpenBracket()
+                .Number(4)
+                .Comma()
+                .Number(9)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Stdev(new[] { new Number(4), new Number(9) }, 2);
@@ -1390,15 +1326,14 @@ namespace xFunc.Tests
         [Fact]
         public void StdevpTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Stdevp, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(4),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(9),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Stdevp, 2)
+                .OpenBracket()
+                .Number(4)
+                .Comma()
+                .Number(9)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Stdevp(new[] { new Number(4), new Number(9) }, 2);
@@ -1409,23 +1344,22 @@ namespace xFunc.Tests
         [Fact]
         public void DelTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Del, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new OperationToken(Operations.Multiplication),
-                new VariableToken("x"),
-                new OperationToken(Operations.Addition),
-                new NumberToken(3),
-                new OperationToken(Operations.Multiplication),
-                new VariableToken("y"),
-                new OperationToken(Operations.Addition),
-                new NumberToken(4),
-                new OperationToken(Operations.Multiplication),
-                new VariableToken("z"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Del, 1)
+                .OpenBracket()
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .VariableX()
+                .Operation(Operations.Addition)
+                .Number(3)
+                .Operation(Operations.Multiplication)
+                .VariableY()
+                .Operation(Operations.Addition)
+                .Number(4)
+                .Operation(Operations.Multiplication)
+                .Variable("z")
+                .CloseBracket()
+                .Tokens;
 
             var diff = new Differentiator();
             var simp = new Simplifier();
@@ -1438,15 +1372,14 @@ namespace xFunc.Tests
         [Fact]
         public void AddTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Add, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Add, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Add(new Number(1), new Number(2));
@@ -1457,15 +1390,14 @@ namespace xFunc.Tests
         [Fact]
         public void SubTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sub, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sub, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sub(new Number(1), new Number(2));
@@ -1476,15 +1408,14 @@ namespace xFunc.Tests
         [Fact]
         public void MulTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Mul, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Mul, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Mul(new Number(1), new Number(2));
@@ -1495,15 +1426,14 @@ namespace xFunc.Tests
         [Fact]
         public void DivFuncTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Div, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Div, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Div(new Number(1), new Number(2));
@@ -1514,15 +1444,14 @@ namespace xFunc.Tests
         [Fact]
         public void PowFuncTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Pow, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(1),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Pow, 2)
+                .OpenBracket()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Pow(new Number(1), new Number(2));
@@ -1533,12 +1462,11 @@ namespace xFunc.Tests
         [Fact]
         public void DivTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(1),
-                new OperationToken(Operations.Division),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(1)
+                .Operation(Operations.Division)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Div(new Number(1), new Number(2));
@@ -1549,12 +1477,11 @@ namespace xFunc.Tests
         [Fact]
         public void PowTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(1),
-                new OperationToken(Operations.Exponentiation),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(1)
+                .Operation(Operations.Exponentiation)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Pow(new Number(1), new Number(2));
@@ -1565,11 +1492,10 @@ namespace xFunc.Tests
         [Fact]
         public void FactTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(2),
-                new OperationToken(Operations.Factorial)
-            };
+            var tokens = Builder()
+                .Number(2)
+                .Operation(Operations.Factorial)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Fact(new Number(2));
@@ -1580,11 +1506,10 @@ namespace xFunc.Tests
         [Fact]
         public void UnaryMinusTest()
         {
-            var tokens = new List<IToken>
-            {
-                new OperationToken(Operations.UnaryMinus),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Operation(Operations.UnaryMinus)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new UnaryMinus(new Number(2));
@@ -1595,11 +1520,10 @@ namespace xFunc.Tests
         [Fact]
         public void NotTest()
         {
-            var tokens = new List<IToken>
-            {
-                new OperationToken(Operations.Not),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Operation(Operations.Not)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Not(new Number(2));
@@ -1610,12 +1534,11 @@ namespace xFunc.Tests
         [Fact]
         public void OrTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(1),
-                new OperationToken(Operations.Or),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(1)
+                .Operation(Operations.Or)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
@@ -1626,12 +1549,11 @@ namespace xFunc.Tests
         [Fact]
         public void XOrTest()
         {
-            var tokens = new List<IToken>
-            {
-                new NumberToken(1),
-                new OperationToken(Operations.XOr),
-                new NumberToken(2)
-            };
+            var tokens = Builder()
+                .Number(1)
+                .Operation(Operations.XOr)
+                .Number(2)
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new XOr(new Number(1), new Number(2));
@@ -1642,12 +1564,11 @@ namespace xFunc.Tests
         [Fact]
         public void NOrTest()
         {
-            var tokens = new List<IToken>
-            {
-                new BooleanToken(true),
-                new OperationToken(Operations.NOr),
-                new BooleanToken(true)
-            };
+            var tokens = Builder()
+                .True()
+                .Operation(Operations.NOr)
+                .True()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new NOr(new Bool(true), new Bool(true));
@@ -1658,12 +1579,11 @@ namespace xFunc.Tests
         [Fact]
         public void NAndTest()
         {
-            var tokens = new List<IToken>
-            {
-                new BooleanToken(true),
-                new OperationToken(Operations.NAnd),
-                new BooleanToken(true)
-            };
+            var tokens = Builder()
+                .True()
+                .Operation(Operations.NAnd)
+                .True()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new NAnd(new Bool(true), new Bool(true));
@@ -1674,12 +1594,11 @@ namespace xFunc.Tests
         [Fact]
         public void ImplicationTest()
         {
-            var tokens = new List<IToken>
-            {
-                new BooleanToken(true),
-                new OperationToken(Operations.Implication),
-                new BooleanToken(true)
-            };
+            var tokens = Builder()
+                .True()
+                .Operation(Operations.Implication)
+                .True()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Implication(new Bool(true), new Bool(true));
@@ -1690,12 +1609,11 @@ namespace xFunc.Tests
         [Fact]
         public void EqualityTest()
         {
-            var tokens = new List<IToken>
-            {
-                new BooleanToken(true),
-                new OperationToken(Operations.Equality),
-                new BooleanToken(true)
-            };
+            var tokens = Builder()
+                .True()
+                .Operation(Operations.Equality)
+                .True()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Equality(new Bool(true), new Bool(true));
@@ -1706,13 +1624,12 @@ namespace xFunc.Tests
         [Fact]
         public void AbsTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Absolute, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Absolute, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Abs(new Number(2));
@@ -1723,13 +1640,12 @@ namespace xFunc.Tests
         [Fact]
         public void TanTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Tangent, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Tangent, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Tan(new Number(2));
@@ -1740,13 +1656,12 @@ namespace xFunc.Tests
         [Fact]
         public void CotTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Cotangent, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Cotangent, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Cot(new Number(2));
@@ -1757,13 +1672,12 @@ namespace xFunc.Tests
         [Fact]
         public void SecTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Secant, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Secant, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sec(new Number(2));
@@ -1774,13 +1688,12 @@ namespace xFunc.Tests
         [Fact]
         public void CscTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Cosecant, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Cosecant, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Csc(new Number(2));
@@ -1791,13 +1704,12 @@ namespace xFunc.Tests
         [Fact]
         public void LnTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Ln, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Ln, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Ln(new Number(2));
@@ -1808,13 +1720,12 @@ namespace xFunc.Tests
         [Fact]
         public void LgTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Lg, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Lg, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Lg(new Number(2));
@@ -1825,13 +1736,12 @@ namespace xFunc.Tests
         [Fact]
         public void LbTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Lb, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Lb, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Lb(new Number(2));
@@ -1842,13 +1752,12 @@ namespace xFunc.Tests
         [Fact]
         public void ExpTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Exp, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Exp, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Exp(new Number(2));
@@ -1859,13 +1768,12 @@ namespace xFunc.Tests
         [Fact]
         public void FloorTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Floor, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Floor, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Floor(new Number(2));
@@ -1876,13 +1784,12 @@ namespace xFunc.Tests
         [Fact]
         public void CeilTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Ceil, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Ceil, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Ceil(new Number(2));
@@ -1893,15 +1800,14 @@ namespace xFunc.Tests
         [Fact]
         public void RoundTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Round, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(3),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Round, 2)
+                .OpenBracket()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Round(new Number(2), new Number(3));
@@ -1912,15 +1818,14 @@ namespace xFunc.Tests
         [Fact]
         public void DefTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Define, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Define, 2)
+                .OpenBracket()
+                .VariableX()
+                .Comma()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Define(Variable.X, new Number(2));
@@ -1931,13 +1836,12 @@ namespace xFunc.Tests
         [Fact]
         public void SqrtTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sqrt, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sqrt, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sqrt(new Number(2));
@@ -1948,13 +1852,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArcsinTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arcsine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arcsine, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arcsin(new Number(2));
@@ -1965,13 +1868,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArccosTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arccosine, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arccosine, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arccos(new Number(2));
@@ -1982,13 +1884,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArctanTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arctangent, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arctangent, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arctan(new Number(2));
@@ -1999,13 +1900,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArccotTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arccotangent, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arccotangent, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arccot(new Number(2));
@@ -2016,13 +1916,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArcsecTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arcsecant, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arcsecant, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arcsec(new Number(2));
@@ -2033,13 +1932,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArccscTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arccosecant, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arccosecant, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arccsc(new Number(2));
@@ -2050,13 +1948,12 @@ namespace xFunc.Tests
         [Fact]
         public void SinhTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sineh, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sineh, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sinh(new Number(2));
@@ -2067,13 +1964,12 @@ namespace xFunc.Tests
         [Fact]
         public void CoshTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Cosineh, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Cosineh, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Cosh(new Number(2));
@@ -2084,13 +1980,12 @@ namespace xFunc.Tests
         [Fact]
         public void TanhTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Tangenth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Tangenth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Tanh(new Number(2));
@@ -2101,13 +1996,12 @@ namespace xFunc.Tests
         [Fact]
         public void CothTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Cotangenth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Cotangenth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Coth(new Number(2));
@@ -2118,13 +2012,12 @@ namespace xFunc.Tests
         [Fact]
         public void SechTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Secanth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Secanth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sech(new Number(2));
@@ -2135,13 +2028,12 @@ namespace xFunc.Tests
         [Fact]
         public void CschTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Cosecanth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Cosecanth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Csch(new Number(2));
@@ -2152,13 +2044,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArsinhTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arsineh, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arsineh, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arsinh(new Number(2));
@@ -2169,13 +2060,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArcoshTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arcosineh, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arcosineh, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arcosh(new Number(2));
@@ -2186,13 +2076,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArtanhTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Artangenth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Artangenth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Artanh(new Number(2));
@@ -2203,13 +2092,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArcothTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arcotangenth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arcotangenth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arcoth(new Number(2));
@@ -2220,13 +2108,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArsechTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arsecanth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arsecanth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arsech(new Number(2));
@@ -2237,13 +2124,12 @@ namespace xFunc.Tests
         [Fact]
         public void ArcschTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Arcosecanth, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Arcosecanth, 1)
+                .OpenBracket()
+                .Number(2)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Arcsch(new Number(2));
@@ -2254,14 +2140,13 @@ namespace xFunc.Tests
         [Fact]
         public void SignTest()
         {
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Sign, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new OperationToken(Operations.UnaryMinus),
-                new NumberToken(10),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = Builder()
+                .Function(Functions.Sign, 1)
+                .OpenBracket()
+                .Operation(Operations.UnaryMinus)
+                .Number(10)
+                .CloseBracket()
+                .Tokens;
 
             var exp = parser.Parse(tokens);
             var expected = new Sign(new UnaryMinus(new Number(10)));

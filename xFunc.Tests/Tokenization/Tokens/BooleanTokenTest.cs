@@ -16,16 +16,16 @@ using System;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
-namespace xFunc.Tests.Tokens
+namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class UserFunctionTokenTest
+    public class BooleanTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new UserFunctionToken("x");
+            var token = new BooleanToken(true);
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new UserFunctionToken("x");
+            var token = new BooleanToken(true);
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -43,17 +43,17 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new UserFunctionToken("x");
+            var token = new BooleanToken(true);
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
         }
 
         [Fact]
-        public void EqualsDiffFuncTest()
+        public void EqualsDiffBoolTest()
         {
-            var token1 = new UserFunctionToken("x");
-            var token2 = new UserFunctionToken("y");
+            var token1 = new BooleanToken(true);
+            var token2 = new BooleanToken(false);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -62,9 +62,9 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new UserFunctionToken("x");
+            var token = new BooleanToken(true);
 
-            Assert.Equal("User Function: x", token.ToString());
+            Assert.Equal("Boolean: True", token.ToString());
         }
 
     }

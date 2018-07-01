@@ -16,16 +16,16 @@ using System;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
-namespace xFunc.Tests.Tokens
+namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class OperationTokenTest
+    public class SymbolTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new SymbolToken(Symbols.Comma);
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new SymbolToken(Symbols.Comma);
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -43,17 +43,17 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new SymbolToken(Symbols.Comma);
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
         }
 
         [Fact]
-        public void EqualsDiffOperationTest()
+        public void EqualsDiffSymbolTest()
         {
-            var token1 = new OperationToken(Operations.Multiplication);
-            var token2 = new OperationToken(Operations.Subtraction);
+            var token1 = new SymbolToken(Symbols.Comma);
+            var token2 = new SymbolToken(Symbols.CloseBrace);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -62,9 +62,9 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new SymbolToken(Symbols.Comma);
 
-            Assert.Equal("Operation: Multiplication", token.ToString());
+            Assert.Equal("Symbol: Comma", token.ToString());
         }
 
     }

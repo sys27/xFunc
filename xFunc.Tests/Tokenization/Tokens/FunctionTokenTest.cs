@@ -16,16 +16,16 @@ using System;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
-namespace xFunc.Tests.Tokens
+namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class BooleanTokenTest
+    public class FunctionTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new BooleanToken(true);
+            var token = new FunctionToken(Functions.Sine, 1);
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new BooleanToken(true);
+            var token = new FunctionToken(Functions.Sine, 1);
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -43,17 +43,17 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new BooleanToken(true);
+            var token = new FunctionToken(Functions.Sine, 1);
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
         }
 
         [Fact]
-        public void EqualsDiffBoolTest()
+        public void EqualsDiffFuncTest()
         {
-            var token1 = new BooleanToken(true);
-            var token2 = new BooleanToken(false);
+            var token1 = new FunctionToken(Functions.Sine, 1);
+            var token2 = new FunctionToken(Functions.Cosine, 1);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -62,9 +62,9 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new BooleanToken(true);
+            var token = new FunctionToken(Functions.Sine, 1);
 
-            Assert.Equal("Boolean: True", token.ToString());
+            Assert.Equal("Function: Sine (1)", token.ToString());
         }
 
     }

@@ -16,16 +16,16 @@ using System;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
-namespace xFunc.Tests.Tokens
+namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class NumberTokenTest
+    public class OperationTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new NumberToken(1.1);
+            var token = new OperationToken(Operations.Multiplication);
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new NumberToken(1.1);
+            var token = new OperationToken(Operations.Multiplication);
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -43,17 +43,17 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new NumberToken(1.1);
+            var token = new OperationToken(Operations.Multiplication);
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
         }
 
         [Fact]
-        public void EqualsDiffVarTest()
+        public void EqualsDiffOperationTest()
         {
-            var token1 = new NumberToken(1.1);
-            var token2 = new NumberToken(1.14);
+            var token1 = new OperationToken(Operations.Multiplication);
+            var token2 = new OperationToken(Operations.Subtraction);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -62,9 +62,9 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new NumberToken(1.1);
+            var token = new OperationToken(Operations.Multiplication);
 
-            Assert.Equal("Number: 1.1", token.ToString());
+            Assert.Equal("Operation: Multiplication", token.ToString());
         }
 
     }

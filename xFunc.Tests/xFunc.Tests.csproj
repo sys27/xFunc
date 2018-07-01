@@ -195,7 +195,6 @@
     <Compile Include="Expressions\UserFunctionTest.cs" />
     <Compile Include="Expressions\VariableTest.cs" />
     <Compile Include="Expressions\SignTest.cs" />
-    <Compile Include="MathLexerTest.cs" />
     <Compile Include="MathParameterCollectionTest.cs" />
     <Compile Include="MathParserTest.cs" />
     <Compile Include="ProcessorTest.cs" />
@@ -206,14 +205,18 @@
     <Compile Include="Results\ExpressionResultTest.cs" />
     <Compile Include="Results\StringResultTest.cs" />
     <Compile Include="Analyzers\SimplifierTest.cs" />
-    <Compile Include="Tokens\BooleanTokenTest.cs" />
-    <Compile Include="Tokens\UserFunctionTokenTest.cs" />
-    <Compile Include="Tokens\FunctionTokenTest.cs" />
-    <Compile Include="Tokens\ComplexNumberTokenTest.cs" />
-    <Compile Include="Tokens\OperationTokenTest.cs" />
-    <Compile Include="Tokens\NumberTokenTest.cs" />
-    <Compile Include="Tokens\VariableTokenTest.cs" />
-    <Compile Include="Tokens\SymbolTokenTest.cs" />
+    <Compile Include="Tokenization\BaseLexerTests.cs" />
+    <Compile Include="Tokenization\ComplexNumberLexerTests.cs" />
+    <Compile Include="Tokenization\FunctionLexerTests.cs" />
+    <Compile Include="Tokenization\MathLexerTest.cs" />
+    <Compile Include="Tokenization\Tokens\BooleanTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\ComplexNumberTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\FunctionTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\NumberTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\OperationTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\SymbolTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\UserFunctionTokenTest.cs" />
+    <Compile Include="Tokenization\Tokens\VariableTokenTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

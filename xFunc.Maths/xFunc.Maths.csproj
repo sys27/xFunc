@@ -235,6 +235,7 @@
     <Compile Include="Tokenization\Tokens\Symbols.cs" />
     <Compile Include="Tokenization\Tokens\UserFunctionToken.cs" />
     <Compile Include="Tokenization\Tokens\VariableToken.cs" />
+    <Compile Include="Tokenization\TokensBuilder.cs" />
     <Compile Include="Tokenization\ParameterCounter.cs" />
   </ItemGroup>
   <ItemGroup>

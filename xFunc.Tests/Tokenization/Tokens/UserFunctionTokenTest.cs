@@ -16,16 +16,16 @@ using System;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
-namespace xFunc.Tests.Tokens
+namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class FunctionTokenTest
+    public class UserFunctionTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new FunctionToken(Functions.Sine, 1);
+            var token = new UserFunctionToken("x");
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new FunctionToken(Functions.Sine, 1);
+            var token = new UserFunctionToken("x");
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new FunctionToken(Functions.Sine, 1);
+            var token = new UserFunctionToken("x");
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
@@ -52,8 +52,8 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffFuncTest()
         {
-            var token1 = new FunctionToken(Functions.Sine, 1);
-            var token2 = new FunctionToken(Functions.Cosine, 1);
+            var token1 = new UserFunctionToken("x");
+            var token2 = new UserFunctionToken("y");
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -62,9 +62,9 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new FunctionToken(Functions.Sine, 1);
+            var token = new UserFunctionToken("x");
 
-            Assert.Equal("Function: Sine (1)", token.ToString());
+            Assert.Equal("User Function: x", token.ToString());
         }
 
     }

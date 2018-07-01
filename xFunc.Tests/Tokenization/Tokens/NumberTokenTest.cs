@@ -16,16 +16,16 @@ using System;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
-namespace xFunc.Tests.Tokens
+namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class SymbolTokenTest
+    public class NumberTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new SymbolToken(Symbols.Comma);
+            var token = new NumberToken(1.1);
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new SymbolToken(Symbols.Comma);
+            var token = new NumberToken(1.1);
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -43,17 +43,17 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new SymbolToken(Symbols.Comma);
+            var token = new NumberToken(1.1);
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
         }
 
         [Fact]
-        public void EqualsDiffSymbolTest()
+        public void EqualsDiffVarTest()
         {
-            var token1 = new SymbolToken(Symbols.Comma);
-            var token2 = new SymbolToken(Symbols.CloseBrace);
+            var token1 = new NumberToken(1.1);
+            var token2 = new NumberToken(1.14);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -62,9 +62,9 @@ namespace xFunc.Tests.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new SymbolToken(Symbols.Comma);
+            var token = new NumberToken(1.1);
 
-            Assert.Equal("Symbol: Comma", token.ToString());
+            Assert.Equal("Number: 1.1", token.ToString());
         }
 
     }

@@ -37,6 +37,20 @@ namespace xFunc.Maths.Tokenization
             return this;
         }
 
+        public TokensBuilder True()
+        {
+            tokens.Add(new BooleanToken(true));
+
+            return this;
+        }
+
+        public TokensBuilder False()
+        {
+            tokens.Add(new BooleanToken(false));
+
+            return this;
+        }
+
         public TokensBuilder ComplexNumber(Complex complex)
         {
             tokens.Add(new ComplexNumberToken(complex));

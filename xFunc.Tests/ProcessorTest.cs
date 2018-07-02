@@ -57,12 +57,11 @@ namespace xFunc.Tests
             var strExp = "1 + 1.1";
             var exp = new Add(new Number(1), new Number(1.1));
 
-            var tokens = new List<IToken>
-            {
-                new NumberToken(2),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1.1)
-            };
+            var tokens = new TokensBuilder()
+                .Number(2)
+                .Operation(Operations.Addition)
+                .Number(1.1)
+                .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
@@ -87,12 +86,11 @@ namespace xFunc.Tests
             var strExp = "1 + 1";
             var exp = new Add(new Number(1), new Number(1));
 
-            var tokens = new List<IToken>
-            {
-                new NumberToken(2),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1)
-            };
+            var tokens = new TokensBuilder()
+                .Number(2)
+                .Operation(Operations.Addition)
+                .Number(1)
+                .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
@@ -121,17 +119,16 @@ namespace xFunc.Tests
             var complex = new Complex(2.3, 1.4);
             var exp = new Conjugate(new ComplexNumber(complex));
 
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Conjugate, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new NumberToken(2.3),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1.4),
-                new OperationToken(Operations.Multiplication),
-                new ComplexNumberToken(Complex.ImaginaryOne),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = new TokensBuilder()
+                .Function(Functions.Conjugate)
+                .OpenBracket()
+                .Number(2.3)
+                .Operation(Operations.Addition)
+                .Number(1.4)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
+                .CloseBracket()
+                .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
@@ -156,12 +153,11 @@ namespace xFunc.Tests
             var strExp = "true & false";
             var exp = new And(new Bool(true), new Bool(false));
 
-            var tokens = new List<IToken>
-            {
-                new BooleanToken(true),
-                new OperationToken(Operations.And),
-                new BooleanToken(false)
-            };
+            var tokens = new TokensBuilder()
+                .True()
+                .Operation(Operations.And)
+                .False()
+                .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
@@ -186,15 +182,14 @@ namespace xFunc.Tests
             var strExp = "x := 1";
             var exp = new Define(Variable.X, new Number(1));
 
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Define, 2),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.Comma),
-                new NumberToken(1),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = new TokensBuilder()
+                .Function(Functions.Define, 2)
+                .OpenBracket()
+                .VariableX()
+                .Comma()
+                .Number(1)
+                .CloseBracket()
+                .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
@@ -221,13 +216,12 @@ namespace xFunc.Tests
             var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X);
             var diff = new Number(1);
 
-            var tokens = new List<IToken>
-            {
-                new FunctionToken(Functions.Derivative, 1),
-                new SymbolToken(Symbols.OpenBracket),
-                new VariableToken("x"),
-                new SymbolToken(Symbols.CloseBracket)
-            };
+            var tokens = new TokensBuilder()
+                .Function(Functions.Derivative)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
@@ -254,12 +248,11 @@ namespace xFunc.Tests
             var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
 
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1)
-            };
+            var tokens = new TokensBuilder()
+                .VariableX()
+                .Operation(Operations.Addition)
+                .Number(1)
+                .Tokens;
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
 
             var exp = new Add(Variable.X, new Number(1));
@@ -282,12 +275,11 @@ namespace xFunc.Tests
             var lexer = new Mock<ILexer>();
             var parser = new Mock<IParser>();
 
-            var tokens = new List<IToken>
-            {
-                new VariableToken("x"),
-                new OperationToken(Operations.Addition),
-                new NumberToken(1)
-            };
+            var tokens = new TokensBuilder()
+                .VariableX()
+                .Operation(Operations.Addition)
+                .Number(1)
+                .Tokens;
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
 
             var exp = new Add(Variable.X, new Number(1));

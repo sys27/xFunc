@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -37,6 +36,14 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             var eq = new Equality(new Bool(true), new Bool(false));
 
             Assert.False((bool)eq.Execute());
+        }
+
+        [Fact]
+        public void ExecuteResultIsNotSupported()
+        {
+            var eq = new Equality(new Number(1), new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => eq.Execute());
         }
 
         [Fact]

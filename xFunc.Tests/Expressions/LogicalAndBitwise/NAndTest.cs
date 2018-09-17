@@ -40,6 +40,14 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         }
 
         [Fact]
+        public void ExecuteResultIsNotSupported()
+        {
+            var exp = new NAnd(new Number(1), new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new NAnd(new Bool(true), new Bool(false));

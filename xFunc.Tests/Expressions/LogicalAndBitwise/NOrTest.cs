@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
@@ -36,6 +37,14 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             var nor = new NOr(new Bool(false), new Bool(false));
 
             Assert.True((bool)nor.Execute());
+        }
+
+        [Fact]
+        public void ExecuteResultIsNotSupported()
+        {
+            var exp = new NOr(new Number(1), new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
@@ -45,6 +46,14 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             var exp = new Not(new Bool(true));
 
             Assert.False((bool)exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteResultIsNotSupported()
+        {
+            var exp = new Not(new ComplexNumber(1));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

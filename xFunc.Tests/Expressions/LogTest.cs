@@ -16,6 +16,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -39,6 +40,22 @@ namespace xFunc.Tests.Expressions
             var exp = new Log(new ComplexNumber(complex), new Number(4));
 
             Assert.Equal(Complex.Log(complex, 4), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteLeftResultIsNotSupported()
+        {
+            var exp = new Log(new Bool(true), new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteRightResultIsNotSupported()
+        {
+            var exp = new Log(new Bool(true), new Number(10));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

@@ -235,8 +235,6 @@ namespace xFunc.Maths.Expressions.Matrices
             }
             set
             {
-                base.Arguments = value;
-
                 if (value != null && value.Length > 0)
                 {
                     var size = value[0].ParametersCount;
@@ -244,6 +242,8 @@ namespace xFunc.Maths.Expressions.Matrices
                     if (value.Any(exp => exp.ParametersCount != size))
                         throw new MatrixIsInvalidException();
                 }
+
+                base.Arguments = value;
             }
         }
 

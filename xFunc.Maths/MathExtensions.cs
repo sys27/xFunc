@@ -42,11 +42,12 @@ namespace xFunc.Maths
                 }
                 else
                 {
-                    if (power > 0)
+                    if (power > 0 && power < 1)
                     {
                         return new Complex(0, Math.Pow(-number, power));
                     }
-                    else
+
+                    if (power < 0 && power > -1)
                     {
                         return new Complex(0, -Math.Pow(-number, power));
                     }

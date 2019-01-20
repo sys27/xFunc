@@ -57,6 +57,14 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
+        public void NegativeNumberExecuteTest3()
+        {
+            var exp = new Pow(new Number(-5), new Number(2));
+
+            Assert.Equal(25.0, exp.Execute());
+        }
+
+        [Fact]
         public void ExecuteTest2()
         {
             var complex1 = new Complex(3, 2);

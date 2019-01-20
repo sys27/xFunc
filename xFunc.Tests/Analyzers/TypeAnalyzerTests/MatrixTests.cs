@@ -68,12 +68,10 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixNotVectorElement()
         {
-            DifferentParametersExpression exp = new Matrix(2, 2)
+            Assert.Throws<MatrixIsInvalidException>(() => new Matrix(2, 2)
             {
                 Arguments = new[] { new Number(2) }
-            };
-
-            TestDiffParamException(exp);
+            });
         }
 
         [Fact]

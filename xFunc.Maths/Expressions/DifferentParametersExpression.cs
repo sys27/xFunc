@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for expressions with different number of parameters.
     /// </summary>
-    public abstract class DifferentParametersExpression : IExpression
+    public abstract class DifferentParametersExpression : IFunctionExpression
     {
 
         /// <summary>

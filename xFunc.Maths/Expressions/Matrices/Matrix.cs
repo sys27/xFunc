@@ -237,9 +237,18 @@ namespace xFunc.Maths.Expressions.Matrices
             {
                 if (value != null && value.Length > 0)
                 {
-                    var size = value[0].ParametersCount;
+                    var vectors = new Vector[value.Length];
+                    for (var i = 0; i < vectors.Length; i++)
+                    {
+                        var vector = value[i] as Vector;
+                        if (vector == null)
+                            throw new MatrixIsInvalidException();
 
-                    if (value.Any(exp => exp.ParametersCount != size))
+                        vectors[i] = vector;
+                    }
+
+                    var size = vectors[0].ParametersCount;
+                    if (vectors.Any(exp => exp.ParametersCount != size))
                         throw new MatrixIsInvalidException();
                 }
 
@@ -253,7 +262,17 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         /// The size of vectors.
         /// </value>
-        public int SizeOfVectors => m_arguments[0].ParametersCount;
+        public int SizeOfVectors
+        {
+            get
+            {
+                var value = m_arguments[0] as Vector;
+                if (value == null)
+                    throw new MatrixIsInvalidException();
+
+                return value.ParametersCount;
+            }
+        }
 
         /// <summary>
         /// Gets the minimum count of parameters.

@@ -129,11 +129,11 @@ namespace xFunc.Maths
                 if (exp == null)
                     throw new ParserException(Resource.ErrorWhileParsingTree);
 
-                if (token is FunctionToken t)
+                if (token is FunctionToken t && exp is IFunctionExpression funcExp)
                 {
-                    if (t.CountOfParams < exp.MinParameters)
+                    if (t.CountOfParams < funcExp.MinParameters)
                         throw new ParserException(Resource.LessParams);
-                    if (exp.MaxParameters != -1 && t.CountOfParams > exp.MaxParameters)
+                    if (funcExp.MaxParameters != -1 && t.CountOfParams > funcExp.MaxParameters)
                         throw new ParserException(Resource.MoreParams);
                 }
 

@@ -912,30 +912,6 @@ namespace xFunc.Maths
             }
         }
 
-        /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public int MinParameters => current.MinParameters;
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public int MaxParameters => current.MaxParameters;
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int ParametersCount => current.ParametersCount;
-
         #endregion
 
         /// <summary>

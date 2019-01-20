@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for binary operations.
     /// </summary>
-    public abstract class BinaryExpression : IExpression
+    public abstract class BinaryExpression : IFunctionExpression
     {
 
         /// <summary>

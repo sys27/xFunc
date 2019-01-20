@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Undefice operation.
     /// </summary>
-    public class Undefine : IExpression
+    public class Undefine : IFunctionExpression
     {
 
         private IExpression key;

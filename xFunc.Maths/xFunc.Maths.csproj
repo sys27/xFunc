@@ -163,6 +163,7 @@
     <Compile Include="Expressions\Hyperbolic\Sinh.cs" />
     <Compile Include="Expressions\Hyperbolic\Tanh.cs" />
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Expressions\IFunctionExpression.cs" />
     <Compile Include="Expressions\Lg.cs" />
     <Compile Include="Expressions\Ln.cs" />
     <Compile Include="Expressions\Log.cs" />

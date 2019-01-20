@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Define operation.
     /// </summary>
-    public class Define : IExpression
+    public class Define : IFunctionExpression
     {
 
         private IExpression key;

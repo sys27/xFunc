@@ -1490,6 +1490,22 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void PowUnaryMinusTest()
+        {
+            var tokens = Builder()
+                .Operation(Operations.UnaryMinus)
+                .Number(1)
+                .Operation(Operations.Exponentiation)
+                .Number(2)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new UnaryMinus(new Pow(new Number(1), new Number(2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void FactTest()
         {
             var tokens = Builder()
@@ -1499,6 +1515,22 @@ namespace xFunc.Tests
 
             var exp = parser.Parse(tokens);
             var expected = new Fact(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void FactPowTest()
+        {
+            var tokens = Builder()
+                .Number(4)
+                .Operation(Operations.Factorial)
+                .Operation(Operations.Exponentiation)
+                .Number(2)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Pow(new Fact(new Number(4)), new Number(2));
 
             Assert.Equal(expected, exp);
         }

@@ -95,11 +95,11 @@ namespace xFunc.Maths.Tokenization.Tokens
                 case Operations.Division:
                 case Operations.Modulo:
                     return 11;
-                case Operations.Exponentiation:
-                    return 12;
-                case Operations.Factorial:
-                    return 13;
                 case Operations.UnaryMinus:
+                    return 12;
+                case Operations.Exponentiation:
+                    return 13;
+                case Operations.Factorial:
                     return 14;
                 case Operations.Assign:
                     return 0;

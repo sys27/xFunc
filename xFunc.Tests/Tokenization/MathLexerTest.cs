@@ -517,6 +517,69 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
+        public void NumberMulBracketTest()
+        {
+            var tokens = lexer.Tokenize("2(x + y)");
+            var expected = Builder()
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .OpenBracket()
+                .VariableX()
+                .Operation(Operations.Addition)
+                .VariableY()
+                .CloseBracket()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void NumberMulVectorTest()
+        {
+            var tokens = lexer.Tokenize("2{ 1, 2 }");
+            var expected = Builder()
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .Symbol(Symbols.CloseBrace)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void NumberMulMatrixTest()
+        {
+            var tokens = lexer.Tokenize("2{ { 1, 2 }, { 3, 4 } }");
+            var expected = Builder()
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .Function(Functions.Matrix, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .Symbol(Symbols.CloseBrace)
+                .Comma()
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(3)
+                .Comma()
+                .Number(4)
+                .Symbol(Symbols.CloseBrace)
+                .Symbol(Symbols.CloseBrace)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void VarWithNumber1()
         {
             var tokens = lexer.Tokenize("x1");

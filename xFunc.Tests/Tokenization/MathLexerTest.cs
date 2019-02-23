@@ -1529,6 +1529,62 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
+        public void DotProductTest()
+        {
+            var tokens = lexer.Tokenize("dotProduct({1, 2}, {3, 4})");
+            var expected = Builder()
+                .Function(Functions.DotProduct, 2)
+                .OpenBracket()
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .Symbol(Symbols.CloseBrace)
+                .Comma()
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(3)
+                .Comma()
+                .Number(4)
+                .Symbol(Symbols.CloseBrace)
+                .CloseBracket()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void CrossProductTest()
+        {
+            var tokens = lexer.Tokenize("crossProduct({1, 2, 3}, {4, 5, 6})");
+            var expected = Builder()
+                .Function(Functions.CrossProduct, 2)
+                .OpenBracket()
+                .Function(Functions.Vector, 3)
+                .Symbol(Symbols.OpenBrace)
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .Symbol(Symbols.CloseBrace)
+                .Comma()
+                .Function(Functions.Vector, 3)
+                .Symbol(Symbols.OpenBrace)
+                .Number(4)
+                .Comma()
+                .Number(5)
+                .Comma()
+                .Number(6)
+                .Symbol(Symbols.CloseBrace)
+                .CloseBracket()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void IfTest()
         {
             var tokens = lexer.Tokenize("if(z, x ^ 2)");

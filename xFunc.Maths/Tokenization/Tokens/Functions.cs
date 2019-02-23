@@ -254,6 +254,14 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </summary>
         Inverse,
         /// <summary>
+        /// dotProduct
+        /// </summary>
+        DotProduct,
+        /// <summary>
+        /// crossProduct
+        /// </summary>
+        CrossProduct,
+        /// <summary>
         /// vector
         /// </summary>
         Vector,

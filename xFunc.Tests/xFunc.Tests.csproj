@@ -136,7 +136,9 @@
     <Compile Include="Expressions\LbTest.cs" />
     <Compile Include="Expressions\LnTest.cs" />
     <Compile Include="Expressions\LogTest.cs" />
+    <Compile Include="Expressions\Matrices\CrossProductTests.cs" />
     <Compile Include="Expressions\Matrices\DeterminantTest.cs" />
+    <Compile Include="Expressions\Matrices\DotProductTests.cs" />
     <Compile Include="Expressions\Matrices\InverseTest.cs" />
     <Compile Include="Expressions\Matrices\MatrixTest.cs" />
     <Compile Include="Expressions\Matrices\TransposeTest.cs" />

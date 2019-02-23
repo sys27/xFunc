@@ -2186,6 +2186,72 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void DotProductTest()
+        {
+            var tokens = Builder()
+                .Function(Functions.DotProduct, 2)
+                .OpenBracket()
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .Symbol(Symbols.CloseBrace)
+                .Comma()
+                .Function(Functions.Vector, 2)
+                .Symbol(Symbols.OpenBrace)
+                .Number(3)
+                .Comma()
+                .Number(4)
+                .Symbol(Symbols.CloseBrace)
+                .CloseBracket()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new DotProduct(
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(3), new Number(4) })
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void CrossProductTest()
+        {
+            var tokens = Builder()
+                .Function(Functions.CrossProduct, 2)
+                .OpenBracket()
+                .Function(Functions.Vector, 3)
+                .Symbol(Symbols.OpenBrace)
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .Symbol(Symbols.CloseBrace)
+                .Comma()
+                .Function(Functions.Vector, 3)
+                .Symbol(Symbols.OpenBrace)
+                .Number(4)
+                .Comma()
+                .Number(5)
+                .Comma()
+                .Number(6)
+                .Symbol(Symbols.CloseBrace)
+                .CloseBracket()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new CrossProduct(
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2), new Number(3) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(4), new Number(5), new Number(6) })
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
     }
 
 }

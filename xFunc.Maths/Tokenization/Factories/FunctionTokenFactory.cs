@@ -272,6 +272,14 @@ namespace xFunc.Maths.Tokenization.Factories
             {
                 result.Token = new FunctionToken(Functions.Inverse);
             }
+            else if (lowerMatch == "dotproduct")
+            {
+                result.Token = new FunctionToken(Functions.DotProduct);
+            }
+            else if (lowerMatch == "crossproduct")
+            {
+                result.Token = new FunctionToken(Functions.CrossProduct);
+            }
             else if (lowerMatch == "vector")
             {
                 result.Token = new FunctionToken(Functions.Vector);

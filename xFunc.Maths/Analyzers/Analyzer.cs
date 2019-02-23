@@ -517,6 +517,26 @@ namespace xFunc.Maths.Analyzers
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(DotProduct exp)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(CrossProduct exp)
+        {
+            throw new NotSupportedException();
+        }
+
         #endregion Matrix
 
         #region Complex Numbers

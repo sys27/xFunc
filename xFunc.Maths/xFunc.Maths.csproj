@@ -78,7 +78,9 @@
     <Compile Include="Expressions\LogicalAndBitwise\Implication.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\NAnd.cs" />
     <Compile Include="Expressions\LogicalAndBitwise\NOr.cs" />
+    <Compile Include="Expressions\Matrices\CrossProduct.cs" />
     <Compile Include="Expressions\Matrices\Determinant.cs" />
+    <Compile Include="Expressions\Matrices\DotProduct.cs" />
     <Compile Include="Expressions\Matrices\Inverse.cs" />
     <Compile Include="Expressions\Matrices\Matrix.cs" />
     <Compile Include="Expressions\Matrices\MatrixExtentions.cs" />

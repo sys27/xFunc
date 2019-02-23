@@ -81,7 +81,7 @@ namespace xFunc.Maths.Expressions
                 var rightExpResult = rightResult as IExpression ?? new Number((double)rightResult);
 
                 if (leftExpResult is Vector leftVector1 && rightExpResult is Vector rightVector1)
-                    return leftVector1.Cross(rightVector1, parameters);
+                    return leftVector1.Mul(rightVector1, parameters);
 
                 if (leftExpResult is Vector leftVector2)
                 {

@@ -269,6 +269,10 @@ namespace xFunc.Maths
                     exp = new Determinant(); break;
                 case Functions.Inverse:
                     exp = new Inverse(); break;
+                case Functions.DotProduct:
+                    exp = new DotProduct(); break;
+                case Functions.CrossProduct:
+                    exp = new CrossProduct(); break;
                 case Functions.If:
                     exp = new If(); break;
                 case Functions.For:

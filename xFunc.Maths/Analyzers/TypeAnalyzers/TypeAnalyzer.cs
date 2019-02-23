@@ -877,6 +877,52 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             throw new ParameterTypeMismatchException(ResultType.Vector | ResultType.Matrix, result);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual ResultType Analyze(DotProduct exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Vector)
+            {
+                if (rightResult == ResultType.Vector)
+                    return ResultType.Number;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Vector, rightResult, BinaryParameterType.Right);
+            }
+
+            throw new BinaryParameterTypeMismatchException(ResultType.Vector, leftResult, BinaryParameterType.Left);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual ResultType Analyze(CrossProduct exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+            if (leftResult == ResultType.Undefined || rightResult == ResultType.Undefined)
+                return ResultType.Undefined;
+
+            if (leftResult == ResultType.Vector)
+            {
+                if (rightResult == ResultType.Vector)
+                    return ResultType.Vector;
+
+                throw new BinaryParameterTypeMismatchException(ResultType.Vector, rightResult, BinaryParameterType.Right);
+            }
+
+            throw new BinaryParameterTypeMismatchException(ResultType.Vector, leftResult, BinaryParameterType.Left);
+        }
+
         #endregion Matrix
 
         #region Complex Numbers

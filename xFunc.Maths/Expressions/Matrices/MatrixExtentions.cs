@@ -347,6 +347,31 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
+        /// Calculates ths dot product of two vectors.
+        /// </summary>
+        /// <param name="left">The left vector.</param>
+        /// <param name="right">The right vector.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// The dot product of vectors.
+        /// </returns>
+        /// <exception cref="System.ArgumentException">The size of vectors is invalid.</exception>
+        public static double Mul(this Vector left, Vector right, ExpressionParameters parameters)
+        {
+            if (left.ParametersCount != right.ParametersCount)
+                throw new ArgumentException(Resource.MatrixArgException);
+
+            var vector1 = left.ToCalculatedArray(parameters);
+            var vector2 = right.ToCalculatedArray(parameters);
+
+            var product = 0.0;
+            for (var i = 0; i < vector1.Length; i++)
+                product += vector1[i] * vector2[i];
+
+            return product;
+        }
+
+        /// <summary>
         /// Transposes the specified vector.
         /// </summary>
         /// <param name="vector">The vector.</param>
@@ -594,9 +619,9 @@ namespace xFunc.Maths.Expressions.Matrices
 
             return new Vector(new IExpression[]
             {
-                new Number(vector1[0] * vector2[1] - vector1[1] * vector2[0]),
                 new Number(vector1[1] * vector2[2] - vector1[2] * vector2[1]),
-                new Number(vector1[2] * vector2[0] - vector1[0] * vector2[2])
+                new Number(vector1[2] * vector2[0] - vector1[0] * vector2[2]),
+                new Number(vector1[0] * vector2[1] - vector1[1] * vector2[0])
             });
         }
 

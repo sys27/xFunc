@@ -156,6 +156,114 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void DotProductUndefined()
+        {
+            var exp = new DotProduct(Variable.X, Variable.X);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void DotProductLeftUndefined()
+        {
+            var exp = new DotProduct(Variable.X, new Vector(new[] { new Number(1) }));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void DotProductRightUndefined()
+        {
+            var exp = new DotProduct(new Vector(new[] { new Number(1) }), Variable.X);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void DotProduct()
+        {
+            var exp = new DotProduct(
+                new Vector(new[] { new Number(1) }),
+                new Vector(new[] { new Number(2) }));
+
+            Test(exp, ResultType.Number);
+        }
+
+        [Fact]
+        public void DotProductLeftException()
+        {
+            var exp = new DotProduct(
+                new Number(1),
+                new Vector(new[] { new Number(2) }));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void DotProductRightException()
+        {
+            var exp = new DotProduct(
+                new Vector(new[] { new Number(2) }),
+                new Number(1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void CrossProductUndefined()
+        {
+            var exp = new CrossProduct(Variable.X, Variable.X);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void CrossProductLeftUndefined()
+        {
+            var exp = new CrossProduct(Variable.X, new Vector(new[] { new Number(1) }));
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void CrossProductRightUndefined()
+        {
+            var exp = new CrossProduct(new Vector(new[] { new Number(1) }), Variable.X);
+
+            Test(exp, ResultType.Undefined);
+        }
+
+        [Fact]
+        public void CrossProduct()
+        {
+            var exp = new CrossProduct(
+                new Vector(new[] { new Number(1) }),
+                new Vector(new[] { new Number(2) }));
+
+            Test(exp, ResultType.Vector);
+        }
+
+        [Fact]
+        public void CrossProductLeftException()
+        {
+            var exp = new CrossProduct(
+                new Number(1),
+                new Vector(new[] { new Number(2) }));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
+        public void CrossProductRightException()
+        {
+            var exp = new CrossProduct(
+                new Vector(new[] { new Number(2) }),
+                new Number(1));
+
+            TestBinaryException(exp);
+        }
+
+        [Fact]
         public void TestTransposeUndefined()
         {
             var exp = new Transpose(Variable.X);

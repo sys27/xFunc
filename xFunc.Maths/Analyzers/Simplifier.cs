@@ -1011,6 +1011,26 @@ namespace xFunc.Maths.Analyzers
             return AnalyzeUnary(exp);
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual IExpression Analyze(DotProduct exp)
+        {
+            return AnalyzeBinary(exp);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual IExpression Analyze(CrossProduct exp)
+        {
+            return AnalyzeBinary(exp);
+        }
+
         #endregion Matrix
 
         #region Complex Numbers

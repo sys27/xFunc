@@ -504,6 +504,26 @@ namespace xFunc.Maths.Analyzers.Formatters
             return ToString(exp, "transpose({0})");
         }
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual string Analyze(DotProduct exp)
+        {
+            return ToString(exp, "dotProduct({0}, {1})");
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual string Analyze(CrossProduct exp)
+        {
+            return ToString(exp, "crossProduct({0}, {1})");
+        }
+
         #endregion Matrix
 
         #region Complex Numbers

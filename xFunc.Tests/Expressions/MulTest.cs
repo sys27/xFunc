@@ -70,27 +70,13 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteCrossTest()
+        public void ExecuteDotProductTest()
         {
             var vector1 = new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2), new Number(3) });
-            var vector2 = new Maths.Expressions.Matrices.Vector(new[] { new Number(10), new Number(20), new Number(30) });
+            var vector2 = new Maths.Expressions.Matrices.Vector(new[] { new Number(4), new Number(5), new Number(6) });
             var exp = new Mul(vector1, vector2);
 
-            var expected = new Maths.Expressions.Matrices.Vector(new[] { new Number(0), new Number(0), new Number(0) });
-
-            Assert.Equal(expected, exp.Execute());
-        }
-
-        [Fact]
-        public void ExecuteCrossFailTest()
-        {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                var vector1 = new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(3) });
-                var vector2 = new Maths.Expressions.Matrices.Vector(new[] { new Number(10), new Number(20) });
-                var exp = new Mul(vector1, vector2);
-                exp.Execute();
-            });
+            Assert.Equal(32.0, exp.Execute());
         }
 
         [Fact]

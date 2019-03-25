@@ -1,2 +1,2 @@
-"packages\xunit.runner.console.2.3.1\tools\net452\xunit.console.exe" xFunc.Tests\bin\Release\xFunc.Tests.dll"
+"packages\xunit.runner.console.2.4.1\tools\net472\xunit.console.exe" "xFunc.Tests\bin\Release\xFunc.Tests.dll"
 pause

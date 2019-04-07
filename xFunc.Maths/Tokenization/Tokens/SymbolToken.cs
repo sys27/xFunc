@@ -74,6 +74,40 @@ namespace xFunc.Maths.Tokenization.Tokens
             return $"Symbol: {Symbol}";
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="Symbols" />, is equal to this instance.
+        /// </summary>
+        /// <param name="symbol">The symbol.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="Symbols" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Is(Symbols symbol)
+        {
+            return Symbol == symbol;
+        }
+
+        /// <summary>
+        /// Determines whether this istance is open bracket symbol.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance is open bracket symbol; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsOpenSymbol()
+        {
+            return this.Is(Symbols.OpenBracket) || this.Is(Symbols.OpenBrace);
+        }
+
+        /// <summary>
+        /// Determines whether this istance is close bracket symbol.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance is close bracket symbol; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsCloseSymbol()
+        {
+            return this.Is(Symbols.CloseBracket) || this.Is(Symbols.CloseBrace);
+        }
+
         private int GetPriority()
         {
             switch (Symbol)

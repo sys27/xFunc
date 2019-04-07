@@ -76,7 +76,7 @@ namespace xFunc.Maths.Tokenization.Factories
             {
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken == null ||
-                    !((lastToken is SymbolToken symbol && symbol.Symbol == Symbols.CloseBracket) ||
+                    !((lastToken is SymbolToken symbol && symbol.Is(Symbols.CloseBracket)) ||
                        lastToken is NumberToken ||
                        lastToken is VariableToken))
                 {
@@ -136,8 +136,7 @@ namespace xFunc.Maths.Tokenization.Factories
                 {
                     return null;
                 }
-                else if (lastToken is SymbolToken symbolToken &&
-     (symbolToken.Symbol == Symbols.OpenBracket || symbolToken.Symbol == Symbols.OpenBrace))
+                else if (lastToken is SymbolToken symbolToken && symbolToken.IsOpenSymbol())
                 {
                     return null;
                 }
@@ -153,9 +152,8 @@ namespace xFunc.Maths.Tokenization.Factories
                 }
                 else
                 {
-                    if (lastToken is SymbolToken symbolToken && (symbolToken.Symbol == Symbols.OpenBracket ||
-                            symbolToken.Symbol == Symbols.OpenBrace ||
-                            symbolToken.Symbol == Symbols.Comma))
+                    if (lastToken is SymbolToken symbolToken &&
+                        (symbolToken.IsOpenSymbol() || symbolToken.Is(Symbols.Comma)))
                     {
                         result.Token = new OperationToken(Operations.UnaryMinus);
                     }
@@ -193,7 +191,7 @@ namespace xFunc.Maths.Tokenization.Factories
                 var lastToken = tokens.LastOrDefault();
                 if (lastToken != null)
                 {
-                    if ((lastToken is SymbolToken symbol && symbol.Symbol == Symbols.CloseBracket) ||
+                    if ((lastToken is SymbolToken symbol && symbol.Is(Symbols.CloseBracket)) ||
                         lastToken is NumberToken || lastToken is VariableToken)
                         throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
                 }

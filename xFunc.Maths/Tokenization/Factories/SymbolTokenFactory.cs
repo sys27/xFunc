@@ -57,7 +57,7 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else if (symbol == ")")
             {
-                if (tokens.LastOrDefault() is SymbolToken lastToken && lastToken.Symbol == Symbols.Comma)
+                if (tokens.LastOrDefault() is SymbolToken lastToken && lastToken.Is(Symbols.Comma))
                     throw new LexerException(Resource.NotEnoughParams);
 
                 result.Token = new SymbolToken(Symbols.CloseBracket);

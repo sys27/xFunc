@@ -33,19 +33,19 @@ namespace xFunc.Maths.Tokenization
                 var token = tokens[i];
                 if (token is SymbolToken symbol)
                 {
-                    if (symbol.Symbol == Symbols.OpenBrace)
+                    if (symbol.Is(Symbols.OpenBrace))
                     {
                         hasBraces = true;
                     }
 
-                    if (symbol.Symbol == Symbols.CloseBracket || symbol.Symbol == Symbols.CloseBrace)
+                    if (symbol.IsCloseSymbol())
                     {
                         brackets--;
 
                         if (brackets == 0)
                             break;
                     }
-                    else if (symbol.Symbol == Symbols.OpenBracket || symbol.Symbol == Symbols.OpenBrace)
+                    else if (symbol.IsOpenSymbol())
                     {
                         brackets++;
 
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Tokenization
                             oneParam = false;
                         }
                     }
-                    else if (symbol.Symbol == Symbols.Comma)
+                    else if (symbol.Is(Symbols.Comma))
                     {
                         oneParam = true;
                     }

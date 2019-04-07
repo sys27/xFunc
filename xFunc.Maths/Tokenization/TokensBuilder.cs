@@ -132,14 +132,30 @@ namespace xFunc.Maths.Tokenization
         }
 
         /// <summary>
+        /// Adds open brace symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder OpenBrace()
+        {
+            return Symbol(Symbols.OpenBrace);
+        }
+
+        /// <summary>
+        /// Adds close brace symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder CloseBrace()
+        {
+            return Symbol(Symbols.CloseBrace);
+        }
+
+        /// <summary>
         /// Adds open bracket symbol token.
         /// </summary>
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder OpenBracket()
         {
-            tokens.Add(new SymbolToken(Symbols.OpenBracket));
-
-            return this;
+            return Symbol(Symbols.OpenBracket);
         }
 
         /// <summary>
@@ -148,9 +164,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder CloseBracket()
         {
-            tokens.Add(new SymbolToken(Symbols.CloseBracket));
-
-            return this;
+            return Symbol(Symbols.CloseBracket);
         }
 
         /// <summary>
@@ -159,9 +173,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Comma()
         {
-            tokens.Add(new SymbolToken(Symbols.Comma));
-
-            return this;
+            return Symbol(Symbols.Comma);
         }
 
         /// <summary>

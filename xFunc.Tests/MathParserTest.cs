@@ -1182,6 +1182,19 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void ComplexFromPolarTest()
+        {
+            var complex = Complex.FromPolarCoordinates(10, 45 * Math.PI / 180);
+            var tokens = Builder()
+                .ComplexNumber(complex)
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(complex);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void ImTest()
         {
             var tokens = Builder()

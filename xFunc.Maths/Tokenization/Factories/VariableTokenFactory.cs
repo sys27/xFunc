@@ -45,9 +45,6 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
-            if (tokens.LastOrDefault() is NumberToken)
-                return new FactoryResult(new OperationToken(Operations.Multiplication), 0);
-
             var result = new FactoryResult();
             var variable = match.Value;
 

@@ -50,9 +50,6 @@ namespace xFunc.Maths.Tokenization.Factories
 
             if (symbol == "(")
             {
-                if (tokens.LastOrDefault() is NumberToken)
-                    return CreateMultiplication();
-
                 result.Token = new SymbolToken(Symbols.OpenBracket);
             }
             else if (symbol == ")")
@@ -64,13 +61,6 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else if (symbol == "{")
             {
-                var lastToken = tokens.LastOrDefault();
-                if (lastToken is NumberToken)
-                    return CreateMultiplication();
-
-                if (!(lastToken is FunctionToken))
-                    return new FactoryResult(new FunctionToken(Functions.Vector), 0);
-
                 result.Token = new SymbolToken(Symbols.OpenBrace);
             }
             else if (symbol == "}")
@@ -88,11 +78,6 @@ namespace xFunc.Maths.Tokenization.Factories
 
             result.ProcessedLength = match.Length;
             return result;
-        }
-
-        private FactoryResult CreateMultiplication()
-        {
-            return new FactoryResult(new OperationToken(Operations.Multiplication), 0);
         }
 
     }

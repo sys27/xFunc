@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Factories;
+using xFunc.Maths.Tokenization.PostProcessing;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
@@ -29,7 +30,7 @@ namespace xFunc.Maths.Tokenization
     {
 
         private readonly ITokenFactory[] factories;
-        private readonly ParameterCounter parameterCounter = new ParameterCounter();
+        private readonly ILexerPostProcessor[] postProcessors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
@@ -50,15 +51,24 @@ namespace xFunc.Maths.Tokenization
                 new FunctionTokenFactory(),
                 new VariableTokenFactory()
             };
+
+            postProcessors = new ILexerPostProcessor[]
+            {
+                new CreateVectorPostProcessor(),
+                new CreateMatrixPostProcessor(),
+                new CreateMultiplicationPostProcessor(),
+                new ParameterCounter(),
+            };
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
         /// </summary>
         /// <param name="factories">The factories to create tokens.</param>
-        public Lexer(ITokenFactory[] factories)
+        public Lexer(ITokenFactory[] factories, ILexerPostProcessor[] postProcessors)
         {
             this.factories = factories;
+            this.postProcessors = postProcessors;
         }
 
         /// <summary>
@@ -124,7 +134,12 @@ namespace xFunc.Maths.Tokenization
                     throw new LexerException(string.Format(Resource.NotSupportedSymbol, function));
             }
 
-            return parameterCounter.CountParameters(tokens);
+            foreach (var postProcessor in postProcessors)
+            {
+                postProcessor.Process(tokens);
+            }
+
+            return tokens;
         }
 
     }

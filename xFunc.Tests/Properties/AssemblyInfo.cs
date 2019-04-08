@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("xFunc.Tests")]
-[assembly: AssemblyCopyright("Copyright © 2012-2015 Dmitry Kischenko")]
+[assembly: AssemblyCopyright("Copyright © 2012-2019 Dmitry Kischenko")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

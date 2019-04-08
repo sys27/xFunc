@@ -12,20 +12,25 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+using System;
 using System.Collections.Generic;
 using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Maths.Tokenization
+namespace xFunc.Maths.Tokenization.PostProcessing
 {
-    internal class ParameterCounter
+
+    /// <summary>
+    /// Counts the amount of parameters.
+    /// </summary>
+    public class ParameterCounter : LexerPostProcessorBase
     {
+
         private int CountParametersInternal(IList<IToken> tokens, int index)
         {
             var func = (FunctionToken)tokens[index];
 
             int countOfParams = 0;
             int brackets = 1;
-            bool hasBraces = false;
             bool oneParam = true;
             int i = index + 2;
             for (; i < tokens.Count;)
@@ -33,11 +38,6 @@ namespace xFunc.Maths.Tokenization
                 var token = tokens[i];
                 if (token is SymbolToken symbol)
                 {
-                    if (symbol.Is(Symbols.OpenBrace))
-                    {
-                        hasBraces = true;
-                    }
-
                     if (symbol.IsCloseSymbol())
                     {
                         brackets--;
@@ -70,9 +70,6 @@ namespace xFunc.Maths.Tokenization
                         oneParam = false;
                     }
 
-                    if (function.Function == Functions.Matrix || function.Function == Functions.Vector)
-                        hasBraces = true;
-
                     i = CountParametersInternal(tokens, i) + 1;
                 }
                 else
@@ -87,26 +84,22 @@ namespace xFunc.Maths.Tokenization
                 }
             }
 
-            if (func.Function == Functions.Vector && hasBraces)
-                tokens[index] = new FunctionToken(Functions.Matrix, countOfParams);
-            else
-                func.CountOfParams = countOfParams;
+            func.CountOfParams = countOfParams;
 
             return i;
         }
 
         /// <summary>
-        /// Calculates the number of parametes of functions.
+        /// The method for post processing of tokens.
         /// </summary>
         /// <param name="tokens">The list of tokens.</param>
-        /// <returns>The list of tokens.</returns>
-        public IEnumerable<IToken> CountParameters(IList<IToken> tokens)
+        public override void Process(IList<IToken> tokens)
         {
             for (int i = 0; i < tokens.Count; i++)
                 if (tokens[i] is FunctionToken)
                     i = CountParametersInternal(tokens, i);
-
-            return tokens;
         }
+
     }
+
 }

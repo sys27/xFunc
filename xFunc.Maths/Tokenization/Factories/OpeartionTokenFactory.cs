@@ -161,13 +161,13 @@ namespace xFunc.Maths.Tokenization.Factories
                     {
                         if (lastToken is OperationToken operationToken &&
                             (operationToken.Operation == Operations.Exponentiation ||
-                            operationToken.Operation == Operations.Multiplication ||
-                            operationToken.Operation == Operations.Division ||
-                            operationToken.Operation == Operations.Assign ||
-                            operationToken.Operation == Operations.AddAssign ||
-                            operationToken.Operation == Operations.SubAssign ||
-                            operationToken.Operation == Operations.MulAssign ||
-                            operationToken.Operation == Operations.DivAssign))
+                             operationToken.Operation == Operations.Multiplication ||
+                             operationToken.Operation == Operations.Division ||
+                             operationToken.Operation == Operations.Assign ||
+                             operationToken.Operation == Operations.AddAssign ||
+                             operationToken.Operation == Operations.SubAssign ||
+                             operationToken.Operation == Operations.MulAssign ||
+                             operationToken.Operation == Operations.DivAssign))
                         {
                             result.Token = new OperationToken(Operations.UnaryMinus);
                         }

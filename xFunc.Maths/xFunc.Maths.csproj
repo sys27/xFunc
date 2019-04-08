@@ -226,6 +226,12 @@
     <Compile Include="Tokenization\Factories\OpeartionTokenFactory.cs" />
     <Compile Include="Tokenization\Factories\SymbolTokenFactory.cs" />
     <Compile Include="Tokenization\Factories\VariableTokenFactory.cs" />
+    <Compile Include="Tokenization\PostProcessing\CreateMatrixPostProcessor.cs" />
+    <Compile Include="Tokenization\PostProcessing\CreateMultiplicationPostProcessor.cs" />
+    <Compile Include="Tokenization\PostProcessing\CreateVectorPostProcessor.cs" />
+    <Compile Include="Tokenization\PostProcessing\ILexerPostProcessor.cs" />
+    <Compile Include="Tokenization\PostProcessing\LexerPostProcessorBase.cs" />
+    <Compile Include="Tokenization\PostProcessing\ParameterCounter.cs" />
     <Compile Include="Tokenization\Tokens\BooleanToken.cs" />
     <Compile Include="Tokenization\Tokens\ComplexNumberToken.cs" />
     <Compile Include="Tokenization\Tokens\FunctionToken.cs" />
@@ -239,7 +245,6 @@
     <Compile Include="Tokenization\Tokens\UserFunctionToken.cs" />
     <Compile Include="Tokenization\Tokens\VariableToken.cs" />
     <Compile Include="Tokenization\TokensBuilder.cs" />
-    <Compile Include="Tokenization\ParameterCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.uk.resx">

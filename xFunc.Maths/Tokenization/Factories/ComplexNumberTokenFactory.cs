@@ -51,11 +51,11 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
-            string magnitudeString = regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty);
+            var magnitudeString = regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty);
             if (!DoubleTryParse(magnitudeString, out double magnitude))
                 magnitude = 0.0;
 
-            string phaseString = regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", "");
+            var phaseString = regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", "");
             if (!DoubleTryParse(phaseString, out double phase))
                 phase = 1.0;
 

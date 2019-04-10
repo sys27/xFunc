@@ -99,6 +99,24 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         }
 
         [Fact]
+        public void ComplexNumberAsVariableTest()
+        {
+            var exp = new Add(
+                new Number(3),
+                new Mul(
+                    new Number(2),
+                    new Variable("i")
+                )
+            );
+            var parameters = new ExpressionParameters();
+
+            var actual = exp.Execute(parameters);
+            var expected = new Complex(3, 2);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new ComplexNumber(new Complex(2, 2));

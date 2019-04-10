@@ -51,12 +51,9 @@ namespace xFunc.Maths.Tokenization.Factories
             var result = new FactoryResult();
             var variable = match.Value;
 
-            if (variable == "i")
-                result.Token = new ComplexNumberToken(Complex.ImaginaryOne);
-            else
-                result.Token = new VariableToken(variable);
-
+            result.Token = new VariableToken(variable);
             result.ProcessedLength = variable.Length;
+
             return result;
         }
 

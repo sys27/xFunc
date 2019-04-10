@@ -36,7 +36,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Addition)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -67,7 +67,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -82,7 +82,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Addition)
                 .Number(0)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -95,7 +95,7 @@ namespace xFunc.Tests.Tokenization
             var expected = Builder()
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -109,7 +109,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.UnaryMinus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -120,7 +120,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("i");
             var expected = Builder()
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Tokenization
             var expected = Builder()
                 .Number(2)
                 .Operation(Operations.Addition)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -148,7 +148,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -165,7 +165,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -193,7 +193,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -211,7 +211,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -229,7 +229,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -247,7 +247,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -265,7 +265,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -283,7 +283,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -301,7 +301,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
 
@@ -317,7 +317,7 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Tokens;
@@ -330,7 +330,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("i ^ 2");
             var expected = Builder()
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Tokens;
@@ -347,13 +347,13 @@ namespace xFunc.Tests.Tokenization
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Operation(Operations.Addition)
                 .Number(3)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());

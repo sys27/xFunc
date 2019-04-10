@@ -241,7 +241,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Addition)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
 
             var exp = parser.Parse(tokens);
@@ -251,7 +251,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 ));
 
@@ -998,14 +998,14 @@ namespace xFunc.Tests
                 .Operation(Operations.Addition)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(
                 new Number(3),
                 new Mul(
                     new Number(2),
-                    new ComplexNumber(Complex.ImaginaryOne)
+                    new Variable("i")
                 )
             );
 
@@ -1020,14 +1020,14 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Sub(
                 new Number(3),
                 new Mul(
                     new Number(2),
-                    new ComplexNumber(Complex.ImaginaryOne)
+                    new Variable("i")
                 )
             );
 
@@ -1043,14 +1043,14 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Sub(
                 new UnaryMinus(new Number(3)),
                 new Mul(
                     new Number(2),
-                    new ComplexNumber(Complex.ImaginaryOne)
+                    new Variable("i")
                 )
             );
 
@@ -1065,14 +1065,14 @@ namespace xFunc.Tests
                 .Operation(Operations.Addition)
                 .Number(0)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(
                 new Number(3),
                 new Mul(
                     new Number(0),
-                    new ComplexNumber(Complex.ImaginaryOne)
+                    new Variable("i")
                 )
             );
 
@@ -1087,14 +1087,14 @@ namespace xFunc.Tests
                 .Operation(Operations.Addition)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(
                 new Number(0),
                 new Mul(
                     new Number(2),
-                    new ComplexNumber(Complex.ImaginaryOne)
+                    new Variable("i")
                 )
             );
 
@@ -1109,14 +1109,14 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Sub(
                 new Number(0),
                 new Mul(
                     new Number(2),
-                    new ComplexNumber(Complex.ImaginaryOne)
+                    new Variable("i")
                 )
             );
 
@@ -1134,7 +1134,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Addition)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1144,7 +1144,7 @@ namespace xFunc.Tests
                     new Number(0),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );
@@ -1163,7 +1163,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1173,7 +1173,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );
@@ -1191,7 +1191,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1200,7 +1200,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );
@@ -1218,7 +1218,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1227,7 +1227,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );
@@ -1245,7 +1245,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1254,7 +1254,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );
@@ -1272,7 +1272,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1281,7 +1281,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );
@@ -1299,7 +1299,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Subtraction)
                 .Number(2)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1308,7 +1308,7 @@ namespace xFunc.Tests
                     new Number(3),
                     new Mul(
                         new Number(2),
-                        new ComplexNumber(Complex.ImaginaryOne)
+                        new Variable("i")
                     )
                 )
             );

@@ -126,7 +126,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Addition)
                 .Number(1.4)
                 .Operation(Operations.Multiplication)
-                .ComplexNumber(Complex.ImaginaryOne)
+                .Variable("i")
                 .CloseBracket()
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);

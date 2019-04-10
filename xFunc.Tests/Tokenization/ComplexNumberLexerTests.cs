@@ -330,7 +330,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("i ^ 2");
             var expected = Builder()
-                .ComplexNumber(new Complex(0, 1))
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Tokens;

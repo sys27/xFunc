@@ -237,11 +237,23 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Variable("aaa")
                 .Operation(Operations.Assign)
-                .ComplexNumber(new Complex(3, 2))
+                .Number(3)
+                .Operation(Operations.Addition)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Define(new Variable("aaa"), new ComplexNumber(new Complex(3, 2)));
+            var expected = new Define(
+                new Variable("aaa"),
+                new Add(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                ));
 
             Assert.Equal(expected, exp);
         }
@@ -982,10 +994,20 @@ namespace xFunc.Tests
         public void ComplexNumberTest()
         {
             var tokens = Builder()
-                .ComplexNumber(new Complex(3, 2))
+                .Number(3)
+                .Operation(Operations.Addition)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(new Complex(3, 2));
+            var expected = new Add(
+                new Number(3),
+                new Mul(
+                    new Number(2),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -994,10 +1016,20 @@ namespace xFunc.Tests
         public void ComplexNumberNegativeTest()
         {
             var tokens = Builder()
-                .ComplexNumber(new Complex(3, -2))
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(new Complex(3, -2));
+            var expected = new Sub(
+                new Number(3),
+                new Mul(
+                    new Number(2),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1006,10 +1038,21 @@ namespace xFunc.Tests
         public void ComplexNumberNegativeAllPartsTest()
         {
             var tokens = Builder()
-                .ComplexNumber(new Complex(-3, -2))
+                .Operation(Operations.UnaryMinus)
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(new Complex(-3, -2));
+            var expected = new Sub(
+                new UnaryMinus(new Number(3)),
+                new Mul(
+                    new Number(2),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1018,10 +1061,20 @@ namespace xFunc.Tests
         public void ComplexOnlyRePartTest()
         {
             var tokens = Builder()
-                .ComplexNumber(new Complex(3, 0))
+                .Number(3)
+                .Operation(Operations.Addition)
+                .Number(0)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(new Complex(3, 0));
+            var expected = new Add(
+                new Number(3),
+                new Mul(
+                    new Number(0),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1030,10 +1083,20 @@ namespace xFunc.Tests
         public void ComplexOnlyImPartTest()
         {
             var tokens = Builder()
-                .ComplexNumber(new Complex(0, 2))
+                .Number(0)
+                .Operation(Operations.Addition)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(new Complex(0, 2));
+            var expected = new Add(
+                new Number(0),
+                new Mul(
+                    new Number(2),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1042,10 +1105,20 @@ namespace xFunc.Tests
         public void ComplexOnlyImPartNegativeTest()
         {
             var tokens = Builder()
-                .ComplexNumber(new Complex(0, -2))
+                .Number(0)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(new Complex(0, -2));
+            var expected = new Sub(
+                new Number(0),
+                new Mul(
+                    new Number(2),
+                    new ComplexNumber(Complex.ImaginaryOne)
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1056,10 +1129,25 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.Subtraction)
-                .ComplexNumber(new Complex(0, 2))
+                .OpenBracket()
+                .Number(0)
+                .Operation(Operations.Addition)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
+                .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Sub(Variable.X, new ComplexNumber(new Complex(0, 2)));
+            var expected = new Sub(
+                Variable.X,
+                new Add(
+                    new Number(0),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1070,10 +1158,25 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.Addition)
-                .ComplexNumber(new Complex(3, -2))
+                .OpenBracket()
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
+                .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Add(Variable.X, new ComplexNumber(new Complex(3, -2)));
+            var expected = new Add(
+                Variable.X,
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1084,11 +1187,23 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Function(Functions.Im, 1)
                 .OpenBracket()
-                .ComplexNumber(new Complex(3, -2))
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Im(new ComplexNumber(new Complex(3, -2)));
+            var expected = new Im(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1099,11 +1214,23 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Function(Functions.Re, 1)
                 .OpenBracket()
-                .ComplexNumber(new Complex(3, -2))
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Re(new ComplexNumber(new Complex(3, -2)));
+            var expected = new Re(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1114,11 +1241,23 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Function(Functions.Phase, 1)
                 .OpenBracket()
-                .ComplexNumber(new Complex(3, -2))
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Phase(new ComplexNumber(new Complex(3, -2)));
+            var expected = new Phase(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1129,11 +1268,23 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Function(Functions.Conjugate, 1)
                 .OpenBracket()
-                .ComplexNumber(new Complex(3, -2))
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Conjugate(new ComplexNumber(new Complex(3, -2)));
+            var expected = new Conjugate(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }
@@ -1144,11 +1295,23 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Function(Functions.Reciprocal, 1)
                 .OpenBracket()
-                .ComplexNumber(new Complex(3, -2))
+                .Number(3)
+                .Operation(Operations.Subtraction)
+                .Number(2)
+                .Operation(Operations.Multiplication)
+                .ComplexNumber(Complex.ImaginaryOne)
                 .CloseBracket()
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Reciprocal(new ComplexNumber(new Complex(3, -2)));
+            var expected = new Reciprocal(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new ComplexNumber(Complex.ImaginaryOne)
+                    )
+                )
+            );
 
             Assert.Equal(expected, exp);
         }

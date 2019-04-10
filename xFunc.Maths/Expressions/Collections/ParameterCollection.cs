@@ -17,6 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Numerics;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
@@ -96,6 +97,7 @@ namespace xFunc.Maths.Expressions.Collections
             consts.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
             consts.Add(Parameter.CreateConstant("pi", Math.PI)); // Archimedes' constant
             consts.Add(Parameter.CreateConstant("e", Math.E));  // Euler's number
+            consts.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne));  // Imaginary unit
             consts.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
             consts.Add(Parameter.CreateConstant("c", 299792458));   // Speed of Light (c0)
             consts.Add(Parameter.CreateConstant("h", 6.62607004E-34));  // Planck Constant

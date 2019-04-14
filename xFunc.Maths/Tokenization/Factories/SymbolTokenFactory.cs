@@ -41,7 +41,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <returns>
         /// The token.
         /// </returns>
-        /// <exception cref="LexerException">
+        /// <exception cref="TokenizeException">
         /// </exception>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
@@ -55,7 +55,7 @@ namespace xFunc.Maths.Tokenization.Factories
             else if (symbol == ")")
             {
                 if (tokens.LastOrDefault() is SymbolToken lastToken && lastToken.Is(Symbols.Comma))
-                    throw new LexerException(Resource.NotEnoughParams);
+                    throw new TokenizeException(Resource.NotEnoughParams);
 
                 result.Token = new SymbolToken(Symbols.CloseBracket);
             }
@@ -73,7 +73,7 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else
             {
-                throw new LexerException(string.Format(Resource.NotSupportedSymbol, symbol));
+                throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, symbol));
             }
 
             result.ProcessedLength = match.Length;

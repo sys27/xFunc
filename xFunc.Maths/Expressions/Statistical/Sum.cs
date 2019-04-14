@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -27,24 +26,16 @@ namespace xFunc.Maths.Expressions.Statistical
     public class Sum : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Sum() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sum"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        /// <exception cref="ArgumentException">The length of <paramref name="args"/> is not equal to <paramref name="countOfParams"/> or last parameter is not variable.</exception>
-        public Sum(IExpression[] args, int countOfParams)
-            : base(args, countOfParams)
+        public Sum(IExpression[] args) : base(args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
-            if (args.Length != countOfParams)
-                throw new ArgumentException();
-            if (countOfParams == 5 && !(args[4] is Variable))
+            if (args.Length == 5 && !(args[4] is Variable))
                 throw new ArgumentException();
         }
 
@@ -59,7 +50,7 @@ namespace xFunc.Maths.Expressions.Statistical
             return base.GetHashCode(6089, 9949);
         }
 
-        private double _Execute(IExpression[] expression, ExpressionParameters parameter)
+        private double ExecuteInternal(IExpression[] expression, ExpressionParameters parameter)
         {
             return expression.Sum(exp =>
             {
@@ -85,12 +76,12 @@ namespace xFunc.Maths.Expressions.Statistical
             {
                 var result = this.m_arguments[0].Execute(parameters);
                 if (result is Vector vector)
-                    return _Execute(vector.Arguments, parameters);
+                    return ExecuteInternal(vector.Arguments, parameters);
 
                 return result;
             }
 
-            return _Execute(m_arguments, parameters);
+            return ExecuteInternal(m_arguments, parameters);
         }
 
         /// <summary>
@@ -114,7 +105,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Sum(CloneArguments(), ParametersCount);
+            return new Sum(CloneArguments());
         }
 
         /// <summary>

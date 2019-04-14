@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
@@ -26,23 +25,15 @@ namespace xFunc.Maths.Expressions
     public class LCM : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal LCM() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LCM"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        /// <exception cref="System.ArgumentException">The length of <paramref name="args"/> is not equal to <paramref name="countOfParams"/>.</exception>
-        public LCM(IExpression[] args, int countOfParams)
-            : base(args, countOfParams)
+        public LCM(IExpression[] args) : base(args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
-            if (args.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -50,7 +41,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="first">The first operand.</param>
         /// <param name="second">The second operand.</param>
-        public LCM(IExpression first, IExpression second) : base(new[] { first, second }, 2) { }
+        public LCM(IExpression first, IExpression second) : base(new[] { first, second }) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -104,7 +95,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="LCM"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new LCM(CloneArguments(), m_arguments.Length);
+            return new LCM(CloneArguments());
         }
 
         /// <summary>

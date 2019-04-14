@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
@@ -27,15 +26,12 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Vector : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Vector() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="args">The values of vector.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IExpression[] args) : base(args, args.Length)
+        public Vector(IExpression[] args) : base(args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
@@ -47,7 +43,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="size">The size of vector.</param>
-        public Vector(int size) : base(new IExpression[size], size) { }
+        public Vector(int size) : base(new IExpression[size]) { }
 
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> at the specified index.

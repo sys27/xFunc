@@ -25,13 +25,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullArgTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new LCM(null, 2));
-        }
-
-        [Fact]
-        public void CountDiffTest()
-        {
-            Assert.Throws<ArgumentException>(() => new LCM(new[] { new Number(1) }, 2));
+            Assert.Throws<ArgumentNullException>(() => new LCM(null));
         }
 
         [Fact]
@@ -45,7 +39,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest2()
         {
-            var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) }, 3);
+            var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) });
 
             Assert.Equal(16.0, exp.Execute());
         }

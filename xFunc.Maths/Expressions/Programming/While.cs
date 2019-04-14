@@ -12,8 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -24,9 +22,6 @@ namespace xFunc.Maths.Expressions.Programming
     /// </summary>
     public class While : BinaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal While() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="While"/> class.

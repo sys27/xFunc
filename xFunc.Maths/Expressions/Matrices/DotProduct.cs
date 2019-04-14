@@ -12,11 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -26,9 +22,6 @@ namespace xFunc.Maths.Expressions.Matrices
     /// </summary>
     public class DotProduct : BinaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal DotProduct() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DotProduct"/> class.

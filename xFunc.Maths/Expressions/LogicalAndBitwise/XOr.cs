@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
@@ -24,9 +23,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// </summary>
     public class XOr : BinaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal XOr() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XOr"/> class.

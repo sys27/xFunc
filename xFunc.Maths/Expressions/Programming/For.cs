@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -25,9 +24,6 @@ namespace xFunc.Maths.Expressions.Programming
     public class For : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal For() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="For"/> class.
         /// </summary>
@@ -35,22 +31,17 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The itererator section.</param>
-        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : base(new[] { body, init, cond, iter }, 4) { }
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : base(new[] { body, init, cond, iter }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="For" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        /// <exception cref="System.ArgumentException">The length of <paramref name="arguments"/> is not equal to <paramref name="countOfParams"/>.</exception>
-        public For(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams)
+        public For(IExpression[] arguments) : base(arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
-            if (arguments.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -90,7 +81,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new For(CloneArguments(), ParametersCount);
+            return new For(CloneArguments());
         }
 
         /// <summary>

@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -25,15 +24,12 @@ namespace xFunc.Maths.Expressions.Programming
     public class If : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal If() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
-        public If(IExpression condition, IExpression then) : base(new[] { condition, then }, 2) { }
+        public If(IExpression condition, IExpression then) : base(new[] { condition, then }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -41,20 +37,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
-        public If(IExpression condition, IExpression then, IExpression @else) : base(new[] { condition, then, @else }, 3) { }
+        public If(IExpression condition, IExpression then, IExpression @else) : base(new[] { condition, then, @else }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public If(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams)
+        public If(IExpression[] arguments) : base(arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
-            if (arguments.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -96,7 +88,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new If(CloneArguments(), ParametersCount);
+            return new If(CloneArguments());
         }
 
         /// <summary>

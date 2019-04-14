@@ -186,7 +186,7 @@ namespace xFunc.Maths
         /// <param name="function">The function.</param>
         /// <returns>The parsed expression.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
-        /// <exception cref="ParserException">Error while parsing.</exception>
+        /// <exception cref="ParseException">Error while parsing.</exception>
         public IExpression Parse(string function)
         {
             return Parser.Parse(Lexer.Tokenize(function));

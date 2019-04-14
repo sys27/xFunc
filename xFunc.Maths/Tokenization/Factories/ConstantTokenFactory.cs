@@ -40,7 +40,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <returns>
         /// The token.
         /// </returns>
-        /// <exception cref="LexerException"></exception>
+        /// <exception cref="TokenizeException"></exception>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var result = new FactoryResult();
@@ -56,7 +56,7 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else
             {
-                throw new LexerException(string.Format(Resource.NotSupportedSymbol, constant));
+                throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, constant));
             }
 
             result.ProcessedLength = match.Length;

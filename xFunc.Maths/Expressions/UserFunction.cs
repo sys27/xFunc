@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Collections;
 
@@ -26,30 +25,18 @@ namespace xFunc.Maths.Expressions
     public class UserFunction : DifferentParametersExpression
     {
 
-        private string function;
-
-        [ExcludeFromCodeCoverage]
-        internal UserFunction() : this(null, null, -1) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserFunction"/> class.
-        /// </summary>
-        /// <param name="function">The name of function.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public UserFunction(string function, int countOfParams) : this(function, null, countOfParams) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.
         /// </summary>
         /// <param name="function">The name of function.</param>
         /// <param name="args">Arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public UserFunction(string function, IExpression[] args, int countOfParams)
-            : base(args, countOfParams)
+        public UserFunction(string function, IExpression[] args) : base(args)
         {
-            this.function = function;
-            this.m_arguments = args;
-            this.ParametersCount = countOfParams;
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            this.Function = function;
+            this.Arguments = args;
         }
 
         /// <summary>
@@ -59,7 +46,7 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is UserFunction exp && this.function == exp.function && this.ParametersCount == exp.ParametersCount)
+            if (obj is UserFunction exp && this.Function == exp.Function && this.ParametersCount == exp.ParametersCount)
                 return true;
 
             return false;
@@ -75,7 +62,7 @@ namespace xFunc.Maths.Expressions
         {
             int hash = 1721;
 
-            hash = (hash * 5701) + function.GetHashCode();
+            hash = (hash * 5701) + Function.GetHashCode();
             hash = (hash * 5701) + ParametersCount.GetHashCode();
 
             return hash;
@@ -127,14 +114,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new UserFunction(function, m_arguments, ParametersCount);
+            return new UserFunction(Function, m_arguments);
         }
 
         /// <summary>
         /// Gets the name of function.
         /// </summary>
         /// <value>The name of function.</value>
-        public string Function => function;
+        public string Function { get; }
 
         /// <summary>
         /// Gets the minimum count of parameters. -1 - Infinity.

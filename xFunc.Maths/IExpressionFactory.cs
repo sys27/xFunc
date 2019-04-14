@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -29,8 +30,9 @@ namespace xFunc.Maths
         /// Creates a expression from specified token.
         /// </summary>
         /// <param name="token">The token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>The expression.</returns>
-        IExpression Create(IToken token);
+        IExpression Create(IToken token, IEnumerable<IExpression> arguments);
 
     }
 

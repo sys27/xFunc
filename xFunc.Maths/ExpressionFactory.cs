@@ -12,7 +12,8 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -22,6 +23,7 @@ using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
+using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
@@ -49,27 +51,31 @@ namespace xFunc.Maths
         /// Creates a expression from specified token.
         /// </summary>
         /// <param name="token">The token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>
         /// The expression.
         /// </returns>
-        public virtual IExpression Create(IToken token)
+        public virtual IExpression Create(IToken token, IEnumerable<IExpression> arguments)
         {
             IExpression result = null;
 
-            if (token is OperationToken)
-                result = CreateOperation((OperationToken)token);
-            else if (token is NumberToken)
-                result = new Number(((NumberToken)token).Number);
-            else if (token is BooleanToken)
-                result = new Bool(((BooleanToken)token).Value);
-            else if (token is ComplexNumberToken)
-                result = new ComplexNumber(((ComplexNumberToken)token).Number);
-            else if (token is VariableToken)
-                result = new Variable(((VariableToken)token).Variable);
-            else if (token is UserFunctionToken)
-                result = CreateUserFunction((UserFunctionToken)token);
-            else if (token is FunctionToken)
-                result = CreateFunction((FunctionToken)token);
+            if (token is OperationToken operationToken)
+                result = CreateOperation(operationToken, arguments);
+            else if (token is NumberToken numberToken)
+                result = new Number(numberToken.Number);
+            else if (token is BooleanToken booleanToken)
+                result = new Bool(booleanToken.Value);
+            else if (token is ComplexNumberToken complexNumberToken)
+                result = new ComplexNumber(complexNumberToken.Number);
+            else if (token is VariableToken variableToken)
+                result = new Variable(variableToken.Variable);
+            else if (token is UserFunctionToken userFunctionToken)
+                result = CreateUserFunction(userFunctionToken, arguments);
+            else if (token is FunctionToken functionToken)
+                result = CreateFunction(functionToken, arguments);
+
+            if (result == null)
+                throw new ParseException(Resource.ErrorWhileParsingTree);
 
             return result;
         }
@@ -78,73 +84,76 @@ namespace xFunc.Maths
         /// Creates an expression object from <see cref="OperationToken"/>.
         /// </summary>
         /// <param name="token">The operation token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>An expression.</returns>
-        protected virtual IExpression CreateOperation(OperationToken token)
+        protected virtual IExpression CreateOperation(OperationToken token, IEnumerable<IExpression> arguments)
         {
+            var args = arguments.ToList();
+
             switch (token.Operation)
             {
                 case Operations.Addition:
-                    return new Add();
+                    return new Add(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Subtraction:
-                    return new Sub();
+                    return new Sub(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Multiplication:
-                    return new Mul();
+                    return new Mul(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Division:
-                    return new Div();
+                    return new Div(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Exponentiation:
-                    return new Pow();
+                    return new Pow(GetSecondAgrument(args), GetArgument(args));
                 case Operations.UnaryMinus:
-                    return new UnaryMinus();
+                    return new UnaryMinus(GetArgument(args));
                 case Operations.Factorial:
-                    return new Fact();
+                    return new Fact(GetArgument(args));
                 case Operations.Modulo:
-                    return new Mod();
+                    return new Mod(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Assign:
-                    return new Define();
+                    return new Define(GetSecondAgrument(args), GetArgument(args));
                 case Operations.ConditionalAnd:
-                    return new Expressions.Programming.And();
+                    return new Expressions.Programming.And(GetSecondAgrument(args), GetArgument(args));
                 case Operations.ConditionalOr:
-                    return new Expressions.Programming.Or();
+                    return new Expressions.Programming.Or(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Equal:
-                    return new Equal();
+                    return new Equal(GetSecondAgrument(args), GetArgument(args));
                 case Operations.NotEqual:
-                    return new NotEqual();
+                    return new NotEqual(GetSecondAgrument(args), GetArgument(args));
                 case Operations.LessThan:
-                    return new LessThan();
+                    return new LessThan(GetSecondAgrument(args), GetArgument(args));
                 case Operations.LessOrEqual:
-                    return new LessOrEqual();
+                    return new LessOrEqual(GetSecondAgrument(args), GetArgument(args));
                 case Operations.GreaterThan:
-                    return new GreaterThan();
+                    return new GreaterThan(GetSecondAgrument(args), GetArgument(args));
                 case Operations.GreaterOrEqual:
-                    return new GreaterOrEqual();
+                    return new GreaterOrEqual(GetSecondAgrument(args), GetArgument(args));
                 case Operations.AddAssign:
-                    return new AddAssign();
+                    return new AddAssign(GetSecondAgrument(args), GetArgument(args));
                 case Operations.SubAssign:
-                    return new SubAssign();
+                    return new SubAssign(GetSecondAgrument(args), GetArgument(args));
                 case Operations.MulAssign:
-                    return new MulAssign();
+                    return new MulAssign(GetSecondAgrument(args), GetArgument(args));
                 case Operations.DivAssign:
-                    return new DivAssign();
+                    return new DivAssign(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Increment:
-                    return new Inc();
+                    return new Inc(GetArgument(args));
                 case Operations.Decrement:
-                    return new Dec();
+                    return new Dec(GetArgument(args));
                 case Operations.Not:
-                    return new Not();
+                    return new Not(GetArgument(args));
                 case Operations.And:
-                    return new Expressions.LogicalAndBitwise.And();
+                    return new Expressions.LogicalAndBitwise.And(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Or:
-                    return new Expressions.LogicalAndBitwise.Or();
+                    return new Expressions.LogicalAndBitwise.Or(GetSecondAgrument(args), GetArgument(args));
                 case Operations.XOr:
-                    return new XOr();
+                    return new XOr(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Implication:
-                    return new Implication();
+                    return new Implication(GetSecondAgrument(args), GetArgument(args));
                 case Operations.Equality:
-                    return new Equality();
+                    return new Equality(GetSecondAgrument(args), GetArgument(args));
                 case Operations.NOr:
-                    return new NOr();
+                    return new NOr(GetSecondAgrument(args), GetArgument(args));
                 case Operations.NAnd:
-                    return new NAnd();
+                    return new NAnd(GetSecondAgrument(args), GetArgument(args));
                 default:
                     return null;
             }
@@ -154,179 +163,202 @@ namespace xFunc.Maths
         /// Creates an expression object from <see cref="FunctionToken"/>.
         /// </summary>
         /// <param name="token">The function token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>An expression.</returns>
-        protected virtual IExpression CreateFunction(FunctionToken token)
+        protected virtual IExpression CreateFunction(FunctionToken token, IEnumerable<IExpression> arguments)
         {
-            IExpression exp;
+            var args = arguments.ToList();
 
             switch (token.Function)
             {
                 case Functions.Add:
-                    exp = new Add(); break;
+                    return new Add(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Sub:
-                    exp = new Sub(); break;
+                    return new Sub(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Mul:
-                    exp = new Mul(); break;
+                    return new Mul(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Div:
-                    exp = new Div(); break;
+                    return new Div(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Pow:
-                    exp = new Pow(); break;
+                    return new Pow(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Absolute:
-                    exp = new Abs(); break;
+                    return new Abs(GetArgument(args));
                 case Functions.Sine:
-                    exp = new Sin(); break;
+                    return new Sin(GetArgument(args));
                 case Functions.Cosine:
-                    exp = new Cos(); break;
+                    return new Cos(GetArgument(args));
                 case Functions.Tangent:
-                    exp = new Tan(); break;
+                    return new Tan(GetArgument(args));
                 case Functions.Cotangent:
-                    exp = new Cot(); break;
+                    return new Cot(GetArgument(args));
                 case Functions.Secant:
-                    exp = new Sec(); break;
+                    return new Sec(GetArgument(args));
                 case Functions.Cosecant:
-                    exp = new Csc(); break;
+                    return new Csc(GetArgument(args));
                 case Functions.Arcsine:
-                    exp = new Arcsin(); break;
+                    return new Arcsin(GetArgument(args));
                 case Functions.Arccosine:
-                    exp = new Arccos(); break;
+                    return new Arccos(GetArgument(args));
                 case Functions.Arctangent:
-                    exp = new Arctan(); break;
+                    return new Arctan(GetArgument(args));
                 case Functions.Arccotangent:
-                    exp = new Arccot(); break;
+                    return new Arccot(GetArgument(args));
                 case Functions.Arcsecant:
-                    exp = new Arcsec(); break;
+                    return new Arcsec(GetArgument(args));
                 case Functions.Arccosecant:
-                    exp = new Arccsc(); break;
+                    return new Arccsc(GetArgument(args));
                 case Functions.Sqrt:
-                    exp = new Sqrt(); break;
+                    return new Sqrt(GetArgument(args));
                 case Functions.Root:
-                    exp = new Root(); break;
+                    return new Root(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Ln:
-                    exp = new Ln(); break;
+                    return new Ln(GetArgument(args));
                 case Functions.Lg:
-                    exp = new Lg(); break;
+                    return new Lg(GetArgument(args));
                 case Functions.Lb:
-                    exp = new Lb(); break;
+                    return new Lb(GetArgument(args));
                 case Functions.Log:
-                    exp = new Log(); break;
+                    return new Log(GetArgument(args), GetSecondAgrument(args));
                 case Functions.Sineh:
-                    exp = new Sinh(); break;
+                    return new Sinh(GetArgument(args));
                 case Functions.Cosineh:
-                    exp = new Cosh(); break;
+                    return new Cosh(GetArgument(args));
                 case Functions.Tangenth:
-                    exp = new Tanh(); break;
+                    return new Tanh(GetArgument(args));
                 case Functions.Cotangenth:
-                    exp = new Coth(); break;
+                    return new Coth(GetArgument(args));
                 case Functions.Secanth:
-                    exp = new Sech(); break;
+                    return new Sech(GetArgument(args));
                 case Functions.Cosecanth:
-                    exp = new Csch(); break;
+                    return new Csch(GetArgument(args));
                 case Functions.Arsineh:
-                    exp = new Arsinh(); break;
+                    return new Arsinh(GetArgument(args));
                 case Functions.Arcosineh:
-                    exp = new Arcosh(); break;
+                    return new Arcosh(GetArgument(args));
                 case Functions.Artangenth:
-                    exp = new Artanh(); break;
+                    return new Artanh(GetArgument(args));
                 case Functions.Arcotangenth:
-                    exp = new Arcoth(); break;
+                    return new Arcoth(GetArgument(args));
                 case Functions.Arsecanth:
-                    exp = new Arsech(); break;
+                    return new Arsech(GetArgument(args));
                 case Functions.Arcosecanth:
-                    exp = new Arcsch(); break;
+                    return new Arcsch(GetArgument(args));
                 case Functions.Exp:
-                    exp = new Exp(); break;
+                    return new Exp(GetArgument(args));
                 case Functions.GCD:
-                    exp = new GCD(); break;
+                    return new GCD(GetArguments(args, token.CountOfParams));
                 case Functions.LCM:
-                    exp = new LCM(); break;
+                    return new LCM(GetArguments(args, token.CountOfParams));
                 case Functions.Factorial:
-                    exp = new Fact(); break;
+                    return new Fact(GetArgument(args));
                 case Functions.Sum:
-                    exp = new Sum(); break;
+                    return new Sum(GetArguments(args, token.CountOfParams));
                 case Functions.Product:
-                    exp = new Product(); break;
+                    return new Product(GetArguments(args, token.CountOfParams));
                 case Functions.Round:
-                    exp = new Round(); break;
+                    return new Round(GetArguments(args, token.CountOfParams));
                 case Functions.Floor:
-                    exp = new Floor(); break;
+                    return new Floor(GetArgument(args));
                 case Functions.Ceil:
-                    exp = new Ceil(); break;
+                    return new Ceil(GetArgument(args));
                 case Functions.Derivative:
-                    exp = new Derivative(this.differentiator, this.simplifier); break;
+                    return new Derivative(this.differentiator, this.simplifier, GetArgument(args));
                 case Functions.Simplify:
-                    exp = new Simplify(this.simplifier); break;
+                    return new Simplify(this.simplifier, GetArgument(args));
                 case Functions.Del:
-                    exp = new Del(this.differentiator, this.simplifier); break;
+                    return new Del(this.differentiator, this.simplifier, GetArgument(args));
                 case Functions.Define:
-                    exp = new Define(); break;
+                    return new Define(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Vector:
-                    exp = new Vector(); break;
+                    return new Vector(GetArguments(args, token.CountOfParams));
                 case Functions.Matrix:
-                    exp = new Matrix(); break;
+                    return new Matrix(GetArguments(args, token.CountOfParams));
                 case Functions.Transpose:
-                    exp = new Transpose(); break;
+                    return new Transpose(GetArgument(args));
                 case Functions.Determinant:
-                    exp = new Determinant(); break;
+                    return new Determinant(GetArgument(args));
                 case Functions.Inverse:
-                    exp = new Inverse(); break;
+                    return new Inverse(GetArgument(args));
                 case Functions.DotProduct:
-                    exp = new DotProduct(); break;
+                    return new DotProduct(GetSecondAgrument(args), GetArgument(args));
                 case Functions.CrossProduct:
-                    exp = new CrossProduct(); break;
+                    return new CrossProduct(GetSecondAgrument(args), GetArgument(args));
                 case Functions.If:
-                    exp = new If(); break;
+                    return new If(GetArguments(args, token.CountOfParams));
                 case Functions.For:
-                    exp = new For(); break;
+                    return new For(GetArguments(args, token.CountOfParams));
                 case Functions.While:
-                    exp = new While(); break;
+                    return new While(GetSecondAgrument(args), GetArgument(args));
                 case Functions.Undefine:
-                    exp = new Undefine(); break;
+                    return new Undefine(GetArgument(args));
                 case Functions.Im:
-                    exp = new Im(); break;
+                    return new Im(GetArgument(args));
                 case Functions.Re:
-                    exp = new Re(); break;
+                    return new Re(GetArgument(args));
                 case Functions.Phase:
-                    exp = new Phase(); break;
+                    return new Phase(GetArgument(args));
                 case Functions.Conjugate:
-                    exp = new Conjugate(); break;
+                    return new Conjugate(GetArgument(args));
                 case Functions.Reciprocal:
-                    exp = new Reciprocal(); break;
+                    return new Reciprocal(GetArgument(args));
                 case Functions.Min:
-                    exp = new Min(); break;
+                    return new Min(GetArguments(args, token.CountOfParams));
                 case Functions.Max:
-                    exp = new Max(); break;
+                    return new Max(GetArguments(args, token.CountOfParams));
                 case Functions.Avg:
-                    exp = new Avg(); break;
+                    return new Avg(GetArguments(args, token.CountOfParams));
                 case Functions.Count:
-                    exp = new Count(); break;
+                    return new Count(GetArguments(args, token.CountOfParams));
                 case Functions.Var:
-                    exp = new Var(); break;
+                    return new Var(GetArguments(args, token.CountOfParams));
                 case Functions.Varp:
-                    exp = new Varp(); break;
+                    return new Varp(GetArguments(args, token.CountOfParams));
                 case Functions.Stdev:
-                    exp = new Stdev(); break;
+                    return new Stdev(GetArguments(args, token.CountOfParams));
                 case Functions.Stdevp:
-                    exp = new Stdevp(); break;
+                    return new Stdevp(GetArguments(args, token.CountOfParams));
                 case Functions.Sign:
-                    exp = new Sign(); break;
+                    return new Sign(GetArgument(args));
                 default:
-                    exp = null; break;
+                    return null;
             }
-
-            if (exp is DifferentParametersExpression diff)
-                diff.ParametersCount = token.CountOfParams;
-
-            return exp;
         }
 
         /// <summary>
         /// Creates an expression object from <see cref="UserFunctionToken"/>.
         /// </summary>
         /// <param name="token">The user-function token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>An expression.</returns>
-        protected virtual IExpression CreateUserFunction(UserFunctionToken token)
+        protected virtual IExpression CreateUserFunction(UserFunctionToken token, IEnumerable<IExpression> arguments)
         {
-            return new UserFunction(token.FunctionName, token.CountOfParams);
+            var args = arguments.ToList();
+
+            return new UserFunction(token.FunctionName, GetArguments(args, token.CountOfParams));
+        }
+
+        private IExpression GetArgument(List<IExpression> arguments)
+        {
+            if (arguments.Count < 1)
+                throw new ParseException(Resource.LessParams);
+
+            return arguments[arguments.Count - 1];
+        }
+
+        private IExpression GetSecondAgrument(List<IExpression> arguments)
+        {
+            if (arguments.Count < 2)
+                throw new ParseException(Resource.LessParams);
+
+            return arguments[arguments.Count - 2];
+        }
+
+        private IExpression[] GetArguments(List<IExpression> arguments, int count)
+        {
+            if (arguments.Count < count)
+                throw new ParseException(Resource.LessParams);
+
+            return arguments.GetRange(arguments.Count - count, count).ToArray();
         }
 
     }

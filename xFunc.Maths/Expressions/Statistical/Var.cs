@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -28,21 +27,14 @@ namespace xFunc.Maths.Expressions.Statistical
     public class Var : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Var() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Var"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public Var(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams)
+        public Var(IExpression[] arguments) : base(arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
-            if (arguments.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -113,7 +105,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Var(CloneArguments(), ParametersCount);
+            return new Var(CloneArguments());
         }
 
         /// <summary>

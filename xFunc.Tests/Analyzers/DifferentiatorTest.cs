@@ -1942,7 +1942,7 @@ namespace xFunc.Tests.Analyzers
         public void UserFunctionDerivTest()
         {
             var parameters = new FunctionCollection();
-            var uf = new UserFunction("f", new IExpression[] { x }, 1);
+            var uf = new UserFunction("f", new IExpression[] { x });
             parameters.Add(uf, new Sin(x));
 
             var diff = Differentiate(uf, "x", parameters);
@@ -1954,7 +1954,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void UserFunctionDerivNullTest()
         {
-            var uf = new UserFunction("f", new IExpression[] { x }, 1);
+            var uf = new UserFunction("f", new IExpression[] { x });
 
             Assert.Throws<ArgumentNullException>(() => Differentiate(uf, "x", null));
         }

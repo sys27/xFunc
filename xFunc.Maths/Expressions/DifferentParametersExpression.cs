@@ -16,7 +16,6 @@ using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -33,19 +32,11 @@ namespace xFunc.Maths.Expressions
         protected IExpression[] m_arguments;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DifferentParametersExpression"/> class.
-        /// </summary>
-        /// <param name="countOfParams">The count of parameters.</param>
-        protected DifferentParametersExpression(int countOfParams) : this(null, countOfParams) { }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        protected DifferentParametersExpression(IExpression[] arguments, int countOfParams)
+        protected DifferentParametersExpression(IExpression[] arguments)
         {
-            this.ParametersCount = countOfParams;
             this.Arguments = arguments;
         }
 
@@ -222,7 +213,16 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount { get; set; }
+        public int ParametersCount
+        {
+            get
+            {
+                if (Arguments == null)
+                    throw new ArgumentNullException(nameof(Arguments));
+
+                return Arguments.Length;
+            }
+        }
 
     }
 

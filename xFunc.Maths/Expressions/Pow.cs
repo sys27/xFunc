@@ -12,8 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
@@ -25,9 +23,6 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public class Pow : BinaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal Pow() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Pow"/> class.

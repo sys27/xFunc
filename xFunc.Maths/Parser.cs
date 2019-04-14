@@ -14,13 +14,11 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
-using System.Linq;
-using xFunc.Maths.Expressions.ComplexNumbers;
-using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths
 {
@@ -59,88 +57,23 @@ namespace xFunc.Maths
                 throw new ArgumentException(nameof(tokens));
 
             var rpn = ConvertToReversePolishNotation(tokens);
-            var expressions = ConvertTokensToExpressions(rpn);
 
-            var stack = new Stack<IExpression>();
-            foreach (var expression in expressions)
+            var arguments = new LinkedList<IExpression>();
+            foreach (var token in rpn)
             {
-                if (expression is Number || expression is ComplexNumber || expression is Bool || expression is Variable)
-                {
-                    stack.Push(expression);
-                }
-                else if (expression is BinaryExpression binExp)
-                {
-                    binExp.Right = stack.Pop();
-                    binExp.Left = stack.Pop();
+                var expression = ExpressionFactory.Create(token, arguments);
 
-                    stack.Push(binExp);
-                }
-                else if (expression is UnaryExpression unaryMathExp)
-                {
-                    unaryMathExp.Argument = stack.Pop();
+                if (expression is IFunctionExpression functionExpression)
+                    for (var i = 0; i < functionExpression.ParametersCount; i++)
+                        arguments.RemoveLast();
 
-                    stack.Push(unaryMathExp);
-                }
-                else if (expression is DifferentParametersExpression func)
-                {
-                    var arg = new IExpression[func.ParametersCount];
-                    for (var i = func.ParametersCount - 1; i >= 0; i--)
-                        arg[i] = stack.Pop();
-
-                    func.Arguments = arg;
-
-                    stack.Push(func);
-                }
-                else if (expression is Define assign)
-                {
-                    if (stack.Count < 2)
-                        throw new ParserException(Resource.InvalidNumberOfVariables);
-
-                    assign.Value = stack.Pop();
-                    assign.Key = stack.Pop();
-
-                    stack.Push(assign);
-                }
-                else if (expression is Undefine undef)
-                {
-                    undef.Key = stack.Pop();
-
-                    stack.Push(undef);
-                }
-                else
-                {
-                    throw new ParserException(Resource.UnexpectedError);
-                }
+                arguments.AddLast(expression);
             }
 
-            if (stack.Count > 1)
-                throw new ParserException(Resource.ErrorWhileParsingTree);
+            if (arguments.Count > 1)
+                throw new ParseException(Resource.MoreParams);
 
-            return stack.Pop();
-        }
-
-        private IEnumerable<IExpression> ConvertTokensToExpressions(IEnumerable<IToken> tokens)
-        {
-            var preOutput = new List<IExpression>();
-
-            foreach (var token in tokens)
-            {
-                var exp = ExpressionFactory.Create(token);
-                if (exp == null)
-                    throw new ParserException(Resource.ErrorWhileParsingTree);
-
-                if (token is FunctionToken t && exp is IFunctionExpression funcExp)
-                {
-                    if (t.CountOfParams < funcExp.MinParameters)
-                        throw new ParserException(Resource.LessParams);
-                    if (funcExp.MaxParameters != -1 && t.CountOfParams > funcExp.MaxParameters)
-                        throw new ParserException(Resource.MoreParams);
-                }
-
-                preOutput.Add(exp);
-            }
-
-            return preOutput;
+            return arguments.Last.Value;
         }
 
         private IEnumerable<IToken> ConvertToReversePolishNotation(IEnumerable<IToken> tokens)

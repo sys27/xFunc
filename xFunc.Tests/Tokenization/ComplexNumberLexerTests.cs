@@ -395,13 +395,13 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void ComplexPolarPhaseTest()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("7.1°"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("7.1°"));
         }
 
         [Fact]
         public void ComplexPolarNegPhaseTest()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("-7.1°"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("-7.1°"));
         }
 
         [Fact]
@@ -440,7 +440,7 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void ComplexPolarInvalidTest()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("x°"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("x°"));
         }
 
     }

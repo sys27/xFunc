@@ -25,13 +25,13 @@ namespace xFunc.Maths.Tokenization.Factories
     /// The factory which creates operation tokens.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class OpeartionTokenFactory : FactoryBase
+    public class OperationTokenFactory : FactoryBase
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OpeartionTokenFactory"/> class.
+        /// Initializes a new instance of the <see cref="OperationTokenFactory"/> class.
         /// </summary>
-        public OpeartionTokenFactory() : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
+        public OperationTokenFactory() : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.
@@ -41,7 +41,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <returns>
         /// The token.
         /// </returns>
-        /// <exception cref="LexerException">
+        /// <exception cref="TokenizeException">
         /// </exception>
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
@@ -80,7 +80,7 @@ namespace xFunc.Maths.Tokenization.Factories
                        lastToken is NumberToken ||
                        lastToken is VariableToken))
                 {
-                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
+                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, operation));
                 }
 
                 result.Token = new OperationToken(Operations.Factorial);
@@ -131,52 +131,11 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else if (operation == "+")
             {
-                var lastToken = tokens.LastOrDefault();
-                if (lastToken == null)
-                {
-                    return null;
-                }
-                else if (lastToken is SymbolToken symbolToken && symbolToken.IsOpenSymbol())
-                {
-                    return null;
-                }
-
                 result.Token = new OperationToken(Operations.Addition);
             }
             else if (operation == "-" || operation == "−")
             {
-                var lastToken = tokens.LastOrDefault();
-                if (lastToken == null)
-                {
-                    result.Token = new OperationToken(Operations.UnaryMinus);
-                }
-                else
-                {
-                    if (lastToken is SymbolToken symbolToken &&
-                        (symbolToken.IsOpenSymbol() || symbolToken.Is(Symbols.Comma)))
-                    {
-                        result.Token = new OperationToken(Operations.UnaryMinus);
-                    }
-                    else
-                    {
-                        if (lastToken is OperationToken operationToken &&
-                            (operationToken.Operation == Operations.Exponentiation ||
-                             operationToken.Operation == Operations.Multiplication ||
-                             operationToken.Operation == Operations.Division ||
-                             operationToken.Operation == Operations.Assign ||
-                             operationToken.Operation == Operations.AddAssign ||
-                             operationToken.Operation == Operations.SubAssign ||
-                             operationToken.Operation == Operations.MulAssign ||
-                             operationToken.Operation == Operations.DivAssign))
-                        {
-                            result.Token = new OperationToken(Operations.UnaryMinus);
-                        }
-                        else
-                        {
-                            result.Token = new OperationToken(Operations.Subtraction);
-                        }
-                    }
-                }
+                result.Token = new OperationToken(Operations.Subtraction);
             }
             else if (operation == "/=")
             {
@@ -193,7 +152,7 @@ namespace xFunc.Maths.Tokenization.Factories
                 {
                     if ((lastToken is SymbolToken symbol && symbol.Is(Symbols.CloseBracket)) ||
                         lastToken is NumberToken || lastToken is VariableToken)
-                        throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
+                        throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, operation));
                 }
 
                 result.Token = new OperationToken(Operations.Not);
@@ -228,7 +187,7 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else
             {
-                throw new LexerException(string.Format(Resource.NotSupportedSymbol, operation));
+                throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, operation));
             }
 
             result.ProcessedLength = match.Length;

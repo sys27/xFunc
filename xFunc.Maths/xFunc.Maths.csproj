@@ -128,8 +128,10 @@
     <Compile Include="IParser.cs" />
     <Compile Include="Analyzers\ISimplifier.cs" />
     <Compile Include="ExpressionFactory.cs" />
-    <Compile Include="LexerException.cs" />
-    <Compile Include="ParserException.cs" />
+    <Compile Include="Tokenization\PostProcessing\CreateUnaryMinusPostProcessor.cs" />
+    <Compile Include="Tokenization\PostProcessing\RemoveUnaryPlusPostProcessor.cs" />
+    <Compile Include="TokenizeException.cs" />
+    <Compile Include="ParseException.cs" />
     <Compile Include="Expressions\Abs.cs" />
     <Compile Include="Expressions\Add.cs" />
     <Compile Include="Expressions\AngleMeasurement.cs" />
@@ -223,7 +225,7 @@
     <Compile Include="Tokenization\Factories\NumberHexTokenFactory.cs" />
     <Compile Include="Tokenization\Factories\NumberOctTokenFactory.cs" />
     <Compile Include="Tokenization\Factories\NumberTokenFactory.cs" />
-    <Compile Include="Tokenization\Factories\OpeartionTokenFactory.cs" />
+    <Compile Include="Tokenization\Factories\OperationTokenFactory.cs" />
     <Compile Include="Tokenization\Factories\SymbolTokenFactory.cs" />
     <Compile Include="Tokenization\Factories\VariableTokenFactory.cs" />
     <Compile Include="Tokenization\PostProcessing\CreateMatrixPostProcessor.cs" />

@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
@@ -55,7 +54,7 @@ namespace xFunc.Maths.Analyzers.Formatters
             var sb = new StringBuilder();
 
             sb.Append(function).Append('(');
-            if (exp.Arguments != null)
+            if (exp.Arguments != null && exp.Arguments.Length > 0)
             {
                 foreach (var item in exp.Arguments)
                     sb.Append(item).Append(", ");
@@ -385,24 +384,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(UserFunction exp)
         {
-            var sb = new StringBuilder();
-
-            sb.Append(exp.Function).Append('(');
-            if (exp.Arguments != null && exp.Arguments.Length > 0)
-            {
-                foreach (var item in exp.Arguments)
-                    sb.Append(item).Append(", ");
-                sb.Remove(sb.Length - 2, 2);
-            }
-            else if (exp.ParametersCount > 0)
-            {
-                for (int i = 1; i <= exp.ParametersCount; i++)
-                    sb.AppendFormat("x{0}, ", i);
-                sb.Remove(sb.Length - 2, 2);
-            }
-            sb.Append(')');
-
-            return sb.ToString();
+            return ToString(exp, exp.Function);
         }
 
         /// <summary>
@@ -420,7 +402,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
         public string Analyze(DelegateExpression exp)
         {
             return "{Delegate Expression}";

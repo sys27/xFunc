@@ -12,8 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
@@ -26,9 +24,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public class Re : UnaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal Re() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Re"/> class.

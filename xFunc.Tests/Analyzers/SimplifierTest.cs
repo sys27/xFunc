@@ -13,12 +13,12 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Trigonometric;
-using xFunc.Maths.Expressions.Hyperbolic;
-using Xunit;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.Trigonometric;
+using Xunit;
 
 namespace xFunc.Tests.Analyzers
 {
@@ -1336,8 +1336,8 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void UserFunc()
         {
-            var exp = new UserFunction("f", new IExpression[] { new Mul(new Number(2), new Number(2)) }, 1);
-            var expected = new UserFunction("f", new IExpression[] { new Number(4) }, 1);
+            var exp = new UserFunction("f", new IExpression[] { new Mul(new Number(2), new Number(2)) });
+            var expected = new UserFunction("f", new IExpression[] { new Number(4) });
 
             SimpleTest(exp, expected);
         }

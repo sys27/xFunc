@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
@@ -27,15 +26,12 @@ namespace xFunc.Maths.Expressions.Matrices
     public class Matrix : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Matrix() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Matrix(Vector[] args) : base(args, args.Length)
+        public Matrix(IExpression[] args) : base(args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
@@ -48,8 +44,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="matrixSize">The size of the matrix.</param>
         /// <param name="vectorSize">The size of the vector.</param>
-        public Matrix(int matrixSize, int vectorSize)
-            : base(null, matrixSize)
+        public Matrix(int matrixSize, int vectorSize) : base(null)
         {
             var vectors = new Vector[matrixSize];
             for (var i = 0; i < vectors.Length; i++)

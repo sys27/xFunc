@@ -94,11 +94,11 @@ namespace xFunc.Views
 
                     Status = string.Empty;
                 }
-                catch (LexerException le)
+                catch (TokenizeException le)
                 {
                     Status = le.Message;
                 }
-                catch (ParserException pe)
+                catch (ParseException pe)
                 {
                     Status = pe.Message;
                 }

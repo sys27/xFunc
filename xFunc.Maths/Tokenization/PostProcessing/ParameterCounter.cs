@@ -62,7 +62,7 @@ namespace xFunc.Maths.Tokenization.PostProcessing
 
                     i++;
                 }
-                else if (token is FunctionToken function)
+                else if (token is FunctionToken)
                 {
                     if (oneParam)
                     {

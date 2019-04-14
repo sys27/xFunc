@@ -27,8 +27,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
     public class ComplexNumber : IExpression
     {
 
-        private Complex complex;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexNumber"/> class.
         /// </summary>
@@ -45,7 +43,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <param name="complex">The complex number.</param>
         public ComplexNumber(Complex complex)
         {
-            this.complex = complex;
+            this.Value = complex;
         }
 
         /// <summary>
@@ -57,7 +55,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public static implicit operator Complex(ComplexNumber number)
         {
-            return number.complex;
+            return number.Value;
         }
 
         /// <summary>
@@ -85,7 +83,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
             if (num == null)
                 return false;
 
-            return complex.Equals(num.complex);
+            return Value.Equals(num.Value);
         }
 
         /// <summary>
@@ -96,7 +94,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override int GetHashCode()
         {
-            return complex.GetHashCode() ^ 6421;
+            return Value.GetHashCode() ^ 6421;
         }
 
         /// <summary>
@@ -130,7 +128,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public object Execute()
         {
-            return complex;
+            return Value;
         }
 
         /// <summary>
@@ -143,7 +141,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters parameters)
         {
-            return complex;
+            return Value;
         }
 
         /// <summary>
@@ -167,7 +165,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public IExpression Clone()
         {
-            return new ComplexNumber(this.complex);
+            return new ComplexNumber(this.Value);
         }
 
         /// <summary>
@@ -176,7 +174,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <value>
         /// The value.
         /// </value>
-        public Complex Value => complex;
+        public Complex Value { get; }
 
         /// <summary>
         /// Get or Set the parent expression.

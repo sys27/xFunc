@@ -13,11 +13,11 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using xFunc.Maths.Expressions;
 using System.Collections.Generic;
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using Xunit;
 using xFunc.Maths.Expressions.Programming;
+using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
@@ -29,9 +29,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var functions = new FunctionCollection();
-            functions.Add(new UserFunction("f", new IExpression[] { Variable.X }, 1), new Ln(Variable.X));
+            functions.Add(new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X));
 
-            var func = new UserFunction("f", new IExpression[] { new Number(1) }, 1);
+            var func = new UserFunction("f", new IExpression[] { new Number(1) });
             Assert.Equal(Math.Log(1), func.Execute(functions));
         }
 
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions
         {
             var functions = new FunctionCollection();
 
-            var func = new UserFunction("f", new IExpression[] { new Number(1) }, 1);
+            var func = new UserFunction("f", new IExpression[] { new Number(1) });
 
             Assert.Throws<KeyNotFoundException>(() => func.Execute(functions));
         }
@@ -52,10 +52,10 @@ namespace xFunc.Tests.Expressions
 
             var exp = new If(new Equal(Variable.X, new Number(0)),
                              new Number(1),
-                             new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, new Number(1)) }, 1)));
-            expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }, 1), exp);
+                             new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, new Number(1)) })));
+            expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
 
-            var func = new UserFunction("f", new[] { new Number(4) }, 1);
+            var func = new UserFunction("f", new[] { new Number(4) });
 
             Assert.Equal(24.0, func.Execute(expParams));
         }
@@ -63,7 +63,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNullTest()
         {
-            var exp = new UserFunction("f", 0);
+            var exp = new UserFunction("f", new IExpression[0]);
 
             Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
         }
@@ -71,7 +71,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new UserFunction("f", new[] { new Number(5) }, 1);
+            var exp = new UserFunction("f", new[] { new Number(5) });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

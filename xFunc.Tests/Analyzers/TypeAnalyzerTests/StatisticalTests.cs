@@ -29,7 +29,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgUndefined()
         {
-            var exp = new Avg(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Avg(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgNumber()
         {
-            var exp = new Avg(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Avg(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgVector()
         {
-            var exp = new Avg(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Avg(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgOneException()
         {
-            var exp = new Avg(new[] { new Bool(false) }, 1);
+            var exp = new Avg(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgException()
         {
-            var exp = new Avg(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Avg(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -69,7 +69,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountUndefined()
         {
-            var exp = new Count(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Count(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -77,7 +77,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountNumber()
         {
-            var exp = new Count(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Count(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -85,7 +85,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountVector()
         {
-            var exp = new Count(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Count(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -93,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountOneException()
         {
-            var exp = new Count(new[] { new Bool(false) }, 1);
+            var exp = new Count(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -101,7 +101,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountException()
         {
-            var exp = new Count(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Count(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -109,7 +109,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxUndefined()
         {
-            var exp = new Max(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Max(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -117,7 +117,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxNumber()
         {
-            var exp = new Max(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Max(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxVector()
         {
-            var exp = new Max(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Max(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxOneException()
         {
-            var exp = new Max(new[] { new Bool(false) }, 1);
+            var exp = new Max(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -141,7 +141,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxException()
         {
-            var exp = new Max(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Max(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -149,7 +149,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinUndefined()
         {
-            var exp = new Min(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Min(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -157,7 +157,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinNumber()
         {
-            var exp = new Min(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Min(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -165,7 +165,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinVector()
         {
-            var exp = new Min(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Min(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -173,7 +173,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinOneException()
         {
-            var exp = new Min(new[] { new Bool(false) }, 1);
+            var exp = new Min(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -181,7 +181,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinException()
         {
-            var exp = new Min(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Min(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -189,7 +189,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductUndefined()
         {
-            var exp = new Product(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Product(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -197,7 +197,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductNumber()
         {
-            var exp = new Product(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Product(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -205,7 +205,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductVector()
         {
-            var exp = new Product(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Product(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -213,7 +213,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductOneException()
         {
-            var exp = new Product(new[] { new Bool(false) }, 1);
+            var exp = new Product(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -221,7 +221,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductException()
         {
-            var exp = new Product(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Product(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -229,7 +229,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevUndefined()
         {
-            var exp = new Stdev(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Stdev(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -237,7 +237,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevNumber()
         {
-            var exp = new Stdev(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Stdev(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -245,7 +245,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevVector()
         {
-            var exp = new Stdev(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Stdev(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -253,7 +253,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevOneException()
         {
-            var exp = new Stdev(new[] { new Bool(false) }, 1);
+            var exp = new Stdev(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -261,7 +261,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevException()
         {
-            var exp = new Stdev(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Stdev(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -269,7 +269,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpUndefined()
         {
-            var exp = new Stdevp(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Stdevp(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -277,7 +277,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpNumber()
         {
-            var exp = new Stdevp(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Stdevp(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -285,7 +285,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpVector()
         {
-            var exp = new Stdevp(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Stdevp(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -293,7 +293,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpOneException()
         {
-            var exp = new Stdevp(new[] { new Bool(false) }, 1);
+            var exp = new Stdevp(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -301,7 +301,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpException()
         {
-            var exp = new Stdevp(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Stdevp(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -309,7 +309,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumUndefined()
         {
-            var exp = new Sum(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Sum(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -317,7 +317,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumNumber()
         {
-            var exp = new Sum(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Sum(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -325,7 +325,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumVector()
         {
-            var exp = new Sum(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Sum(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -333,7 +333,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumOneException()
         {
-            var exp = new Sum(new[] { new Bool(false) }, 1);
+            var exp = new Sum(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -341,7 +341,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumException()
         {
-            var exp = new Sum(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Sum(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -349,7 +349,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarUndefined()
         {
-            var exp = new Var(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Var(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -357,7 +357,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarNumber()
         {
-            var exp = new Var(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Var(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -365,7 +365,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarVector()
         {
-            var exp = new Var(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Var(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -373,7 +373,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarOneException()
         {
-            var exp = new Var(new[] { new Bool(false) }, 1);
+            var exp = new Var(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -381,7 +381,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarException()
         {
-            var exp = new Var(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Var(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -389,7 +389,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpUndefined()
         {
-            var exp = new Varp(new[] { Variable.X, new Variable("y") }, 2);
+            var exp = new Varp(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultType.Undefined);
         }
@@ -397,7 +397,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpNumber()
         {
-            var exp = new Varp(new[] { new Number(3), new Number(2) }, 2);
+            var exp = new Varp(new[] { new Number(3), new Number(2) });
 
             Test(exp, ResultType.Number);
         }
@@ -405,7 +405,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpVector()
         {
-            var exp = new Varp(new[] { new Vector(new[] { new Number(3), new Number(2) }) }, 1);
+            var exp = new Varp(new[] { new Vector(new[] { new Number(3), new Number(2) }) });
 
             Test(exp, ResultType.Number);
         }
@@ -413,7 +413,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpOneException()
         {
-            var exp = new Varp(new[] { new Bool(false) }, 1);
+            var exp = new Varp(new[] { new Bool(false) });
 
             TestDiffParamException(exp);
         }
@@ -421,7 +421,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpException()
         {
-            var exp = new Varp(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Varp(new[] { new Bool(false), new Bool(false) });
 
             TestDiffParamException(exp);
         }

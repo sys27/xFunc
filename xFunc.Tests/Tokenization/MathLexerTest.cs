@@ -36,7 +36,7 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void NotSupportedSymbol()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("@"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("@"));
         }
 
         [Fact]
@@ -310,13 +310,13 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void NotAsOperatorFail()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("2~"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("2~"));
         }
 
         [Fact]
         public void NotWithVarAsOperatorFail()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("x~"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("x~"));
         }
 
         [Fact]
@@ -881,31 +881,31 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void NotBalancedOpen()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin(2("));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("sin(2("));
         }
 
         [Fact]
         public void NotBalancedClose()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin)2)"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("sin)2)"));
         }
 
         [Fact]
         public void NotBalancedFirstClose()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("sin)2("));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("sin)2("));
         }
 
         [Fact]
         public void NotBalancedBracesOpen()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("{2,1"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("{2,1"));
         }
 
         [Fact]
         public void NotBalancedBracesClose()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("}2,1"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("}2,1"));
         }
 
         [Fact]
@@ -1067,7 +1067,7 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void FactorialOperatorFailTest()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("!4"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("!4"));
         }
 
         [Fact]
@@ -1853,7 +1853,7 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void NumberFormatTest()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("0."));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("0."));
         }
 
         [Fact]
@@ -1925,7 +1925,7 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void NotEnoughParamsTest()
         {
-            Assert.Throws<LexerException>(() => lexer.Tokenize("deriv(x,)"));
+            Assert.Throws<TokenizeException>(() => lexer.Tokenize("deriv(x,)"));
         }
 
         [Fact]

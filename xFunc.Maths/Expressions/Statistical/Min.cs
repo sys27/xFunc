@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -28,21 +27,14 @@ namespace xFunc.Maths.Expressions.Statistical
     public class Min : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Min() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Min"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public Min(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams)
+        public Min(IExpression[] arguments) : base(arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
-            if (arguments.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -56,7 +48,7 @@ namespace xFunc.Maths.Expressions.Statistical
             return base.GetHashCode(6217, 1301);
         }
 
-        private double _Execute(IExpression[] expressions, ExpressionParameters parameters)
+        private double ExecuteInternal(IExpression[] expressions, ExpressionParameters parameters)
         {
             return expressions.Min(exp =>
             {
@@ -82,12 +74,12 @@ namespace xFunc.Maths.Expressions.Statistical
             {
                 var result = this.m_arguments[0].Execute(parameters);
                 if (result is Vector vector)
-                    return _Execute(vector.Arguments, parameters);
+                    return ExecuteInternal(vector.Arguments, parameters);
 
                 return result;
             }
 
-            return _Execute(m_arguments, parameters);
+            return ExecuteInternal(m_arguments, parameters);
         }
 
         /// <summary>
@@ -111,7 +103,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Min(CloneArguments(), ParametersCount);
+            return new Min(CloneArguments());
         }
 
         /// <summary>

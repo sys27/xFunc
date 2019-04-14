@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -27,13 +26,6 @@ namespace xFunc.Maths.Expressions
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public class Del : UnaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal Del(IDifferentiator differentiator, ISimplifier simplifier)
-        {
-            this.Differentiator = differentiator;
-            this.Simplifier = simplifier;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Del"/> class.

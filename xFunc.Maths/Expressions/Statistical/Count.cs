@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
 
@@ -27,21 +26,14 @@ namespace xFunc.Maths.Expressions.Statistical
     public class Count : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Count() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public Count(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams)
+        public Count(IExpression[] arguments) : base(arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
-            if (arguments.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -98,9 +90,9 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Count(CloneArguments(), ParametersCount);
+            return new Count(CloneArguments());
         }
-        
+
         /// <summary>
         /// Gets the minimum count of parameters.
         /// </summary>

@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -25,36 +24,28 @@ namespace xFunc.Maths.Expressions
     public class Round : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Round() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
-        public Round(IExpression argument) : this(new[] { argument }, 1) { }
+        public Round(IExpression argument) : this(new[] { argument }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
-        public Round(IExpression argument, IExpression digits) : this(new[] { argument, digits }, 2) { }
+        public Round(IExpression argument, IExpression digits) : this(new[] { argument, digits }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException">args</exception>
-        /// <exception cref="System.ArgumentException">The length of <paramref name="args"/> is not equal to <paramref name="countOfParams"/>.</exception>
-        public Round(IExpression[] args, int countOfParams)
-            : base(args, countOfParams)
+        public Round(IExpression[] args) : base(args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
-            if (args.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -110,7 +101,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Round(CloneArguments(), ParametersCount);
+            return new Round(CloneArguments());
         }
 
         /// <summary>

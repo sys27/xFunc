@@ -208,7 +208,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddNumberAllTest()
         {
-            var exp = new Add(new Number(1), new UserFunction("f", 1));
+            var exp = new Add(new Number(1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -216,7 +216,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddComplexNumberAllTest()
         {
-            var exp = new Add(new ComplexNumber(3, 2), new UserFunction("f", 1));
+            var exp = new Add(new ComplexNumber(3, 2), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -224,7 +224,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddVectorAllTest()
         {
-            var exp = new Add(new Vector(1), new UserFunction("f", 1));
+            var exp = new Add(new Vector(1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -232,7 +232,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddMatrixAllTest()
         {
-            var exp = new Add(new Matrix(1, 1), new UserFunction("f", 1));
+            var exp = new Add(new Matrix(1, 1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -346,7 +346,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var diff = new Differentiator();
             var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, new IExpression[] { Variable.X, new Number(1) }, 2);
+            var exp = new Derivative(diff, simp, new IExpression[] { Variable.X, new Number(1) });
 
             TestException(exp);
         }
@@ -538,7 +538,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGCDnumber()
         {
-            var exp = new GCD(new[] { new Number(10), new Number(10), new Number(10) }, 3);
+            var exp = new GCD(new[] { new Number(10), new Number(10), new Number(10) });
 
             Test(exp, ResultType.Number);
         }
@@ -554,7 +554,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGCDEmpty()
         {
-            var exp = new GCD(new IExpression[0], 0);
+            var exp = new GCD(new IExpression[0]);
 
             Test(exp, ResultType.Undefined);
         }
@@ -594,7 +594,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLCMnumber()
         {
-            var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) }, 3);
+            var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) });
 
             Test(exp, ResultType.Number);
         }
@@ -602,7 +602,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLCMEmpty()
         {
-            var exp = new LCM(new IExpression[0], 0);
+            var exp = new LCM(new IExpression[0]);
 
             Test(exp, ResultType.Undefined);
         }
@@ -1188,7 +1188,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberAllTest()
         {
-            var exp = new Sub(new Number(1), new UserFunction("f", 1));
+            var exp = new Sub(new Number(1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -1196,7 +1196,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubComplexNumberAllTest()
         {
-            var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", 1));
+            var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -1228,7 +1228,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubVectorAllTest()
         {
-            var exp = new Sub(new Vector(1), new UserFunction("f", 1));
+            var exp = new Sub(new Vector(1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -1236,7 +1236,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubMatrixAllTest()
         {
-            var exp = new Sub(new Matrix(1, 1), new UserFunction("f", 1));
+            var exp = new Sub(new Matrix(1, 1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -1314,7 +1314,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestUserFunction()
         {
-            Test(new UserFunction("f", 0), ResultType.Undefined);
+            Test(new UserFunction("f", new IExpression[0]), ResultType.Undefined);
         }
 
         [Fact]

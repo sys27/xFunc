@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -25,16 +24,13 @@ namespace xFunc.Maths.Expressions.Programming
     public class NotEqual : BinaryExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal NotEqual() { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NotEqual"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         public NotEqual(IExpression left, IExpression right) : base(left, right) { }
-        
+
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -80,7 +76,7 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new Equal(m_left.Clone(), m_right.Clone());
         }
-        
+
     }
 
 }

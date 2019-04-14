@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
@@ -25,9 +24,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// </summary>
     public class Sinh : HyperbolicExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal Sinh() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sinh"/> class.

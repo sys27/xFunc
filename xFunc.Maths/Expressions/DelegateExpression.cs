@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
@@ -27,9 +26,6 @@ namespace xFunc.Maths.Expressions
     {
 
         private readonly Func<ExpressionParameters, object> func;
-
-        [ExcludeFromCodeCoverage]
-        internal DelegateExpression() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateExpression"/> class.

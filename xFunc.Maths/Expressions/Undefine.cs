@@ -29,9 +29,6 @@ namespace xFunc.Maths.Expressions
 
         private IExpression key;
 
-        [ExcludeFromCodeCoverage]
-        internal Undefine() { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>

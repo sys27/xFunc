@@ -30,15 +30,13 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public static readonly Variable X = new Variable("x");
 
-        private readonly string name;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Variable"/> class.
         /// </summary>
         /// <param name="name">A name of variable.</param>
         public Variable(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
 
         /// <summary>
@@ -68,7 +66,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            return obj is Variable @var && @var.Name == name;
+            return obj is Variable @var && @var.Name == Name;
         }
 
         /// <summary>
@@ -77,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
         public override int GetHashCode()
         {
-            return name.GetHashCode() ^ 9239;
+            return Name.GetHashCode() ^ 9239;
         }
 
         /// <summary>
@@ -123,7 +121,7 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            return parameters.Variables[name];
+            return parameters.Variables[Name];
         }
 
         /// <summary>
@@ -145,13 +143,13 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="Variable"/> that is a clone of this instance.</returns>
         public IExpression Clone()
         {
-            return new Variable(name);
+            return new Variable(Name);
         }
 
         /// <summary>
         /// A name of this variable.
         /// </summary>
-        public string Name => name;
+        public string Name { get; }
 
         /// <summary>
         /// Get or Set the parent expression.

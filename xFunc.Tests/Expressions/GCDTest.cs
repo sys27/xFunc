@@ -33,7 +33,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CalcucateTest2()
         {
-            var exp = new GCD(new IExpression[] { new Number(64), new Number(16), new Number(8) }, 3);
+            var exp = new GCD(new IExpression[] { new Number(64), new Number(16), new Number(8) });
 
             Assert.Equal(8.0, exp.Execute());
         }
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions
         {
             var num1 = new Number(64);
             var num2 = new Number(16);
-            var gcd = new GCD(new[] { num1, num2 }, 2);
+            var gcd = new GCD(new[] { num1, num2 });
 
             Assert.Equal(gcd, num1.Parent);
             Assert.Equal(gcd, num2.Parent);
@@ -52,14 +52,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullArgTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new GCD(null, 0));
-        }
-
-
-        [Fact]
-        public void ArgCountTest()
-        {
-            Assert.Throws<ArgumentException>(() => new GCD(new IExpression[] { new Number(1) }, 0));
+            Assert.Throws<ArgumentNullException>(() => new GCD(null));
         }
 
         [Fact]

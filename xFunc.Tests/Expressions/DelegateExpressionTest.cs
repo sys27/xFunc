@@ -50,13 +50,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest3()
         {
-            var uf1 = new UserFunction("func", new[] { Variable.X }, 1);
+            var uf1 = new UserFunction("func", new[] { Variable.X });
             var func = new DelegateExpression(p => (double)p.Variables["x"] == 10 ? 0 : 1);
             var funcs = new FunctionCollection
             {
                 { uf1, func }
             };
-            var uf2 = new UserFunction("func", new[] { new Number(12) }, 1);
+            var uf2 = new UserFunction("func", new[] { new Number(12) });
             var result = uf2.Execute(new ExpressionParameters(funcs));
 
             Assert.Equal(1, result);

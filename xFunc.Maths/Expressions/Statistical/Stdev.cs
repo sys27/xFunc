@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -28,21 +27,14 @@ namespace xFunc.Maths.Expressions.Statistical
     public class Stdev : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Stdev() : base(null, -1) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Stdev"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
-        public Stdev(IExpression[] arguments, int countOfParams)
-            : base(arguments, countOfParams)
+        public Stdev(IExpression[] arguments) : base(arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
-            if (arguments.Length != countOfParams)
-                throw new ArgumentException();
         }
 
         /// <summary>
@@ -115,7 +107,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override IExpression Clone()
         {
-            return new Stdev(CloneArguments(), ParametersCount);
+            return new Stdev(CloneArguments());
         }
 
         /// <summary>

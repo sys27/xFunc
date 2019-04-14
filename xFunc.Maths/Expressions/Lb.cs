@@ -25,9 +25,6 @@ namespace xFunc.Maths.Expressions
     public class Lb : UnaryExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Lb() { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Lb"/> class.
         /// </summary>

@@ -42,7 +42,7 @@ namespace xFunc.Maths.Tokenization
                 new EmptyTokenFactory(),
                 new SymbolTokenFactory(),
                 new ComplexNumberTokenFactory(),
-                new OpeartionTokenFactory(),
+                new OperationTokenFactory(),
                 new NumberHexTokenFactory(),
                 new NumberBinTokenFactory(),
                 new NumberOctTokenFactory(),
@@ -54,6 +54,8 @@ namespace xFunc.Maths.Tokenization
 
             postProcessors = new ILexerPostProcessor[]
             {
+                new CreateUnaryMinusPostProcessor(),
+                new RemoveUnaryPlusPostProcessor(),
                 new CreateVectorPostProcessor(),
                 new CreateMatrixPostProcessor(),
                 new CreateMultiplicationPostProcessor(),
@@ -105,13 +107,13 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The sequence of tokens.</returns>
         /// <seealso cref="IToken"/>
         /// <exception cref="ArgumentNullException">Throws when the <paramref name="function"/> parameter is null or empty.</exception>
-        /// <exception cref="LexerException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
+        /// <exception cref="TokenizeException">Throws when <paramref name="function"/> has the not supported symbol.</exception>
         public IEnumerable<IToken> Tokenize(string function)
         {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
             if (!IsBalanced(function))
-                throw new LexerException(Resource.NotBalanced);
+                throw new TokenizeException(Resource.NotBalanced);
 
             var tokens = new List<IToken>();
             var readOnlyTokensList = new ReadOnlyCollection<IToken>(tokens);
@@ -132,7 +134,7 @@ namespace xFunc.Maths.Tokenization
                 }
 
                 if (result == null)
-                    throw new LexerException(string.Format(Resource.NotSupportedSymbol, function));
+                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, function));
             }
 
             foreach (var postProcessor in postProcessors)

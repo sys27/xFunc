@@ -84,11 +84,11 @@ namespace xFunc.Views
 
                     RefreshList();
                 }
-                catch (LexerException mle)
+                catch (TokenizeException mle)
                 {
                     MessageBox.Show(this, mle.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (ParserException mpe)
+                catch (ParseException mpe)
                 {
                     MessageBox.Show(this, mpe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
@@ -138,11 +138,11 @@ namespace xFunc.Views
 
                     RefreshList();
                 }
-                catch (LexerException mle)
+                catch (TokenizeException mle)
                 {
                     MessageBox.Show(this, mle.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                catch (ParserException mpe)
+                catch (ParseException mpe)
                 {
                     MessageBox.Show(this, mpe.Message, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }

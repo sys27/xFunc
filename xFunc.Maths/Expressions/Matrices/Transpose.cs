@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
@@ -26,9 +25,6 @@ namespace xFunc.Maths.Expressions.Matrices
     /// </summary>
     public class Transpose : UnaryExpression
     {
-
-        [ExcludeFromCodeCoverage]
-        internal Transpose() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Transpose"/> class.

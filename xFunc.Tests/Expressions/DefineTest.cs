@@ -14,8 +14,8 @@
 // limitations under the License.
 using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineFuncTest()
         {
-            var uf = new UserFunction("s", new IExpression[0], 0);
+            var uf = new UserFunction("s", new IExpression[0]);
             var func = new Sin(new Number(1));
             var exp = new Define(uf, func);
             var parameters = new ExpressionParameters();
@@ -89,7 +89,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineFuncWithParamsTest()
         {
-            var uf = new UserFunction("s", 1);
+            var uf = new UserFunction("s", new IExpression[] { Variable.X });
             var func = new Sin(Variable.X);
             var exp = new Define(uf, func);
             var parameters = new ExpressionParameters();
@@ -97,7 +97,7 @@ namespace xFunc.Tests.Expressions
             var result = exp.Execute(parameters);
 
             Assert.Equal(func, parameters.Functions[uf]);
-            Assert.Equal("The expression 'sin(x)' was assigned to the function 's(x1)'.", result);
+            Assert.Equal("The expression 'sin(x)' was assigned to the function 's(x)'.", result);
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-        
+
     }
 
 }

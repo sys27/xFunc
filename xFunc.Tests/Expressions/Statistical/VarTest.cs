@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
@@ -28,7 +27,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void OneNumberTest()
         {
-            var exp = new Var(new[] { new Number(4) }, 1);
+            var exp = new Var(new[] { new Number(4) });
             var result = exp.Execute();
 
             Assert.Equal(double.NaN, result);
@@ -37,7 +36,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void TwoNumberTest()
         {
-            var exp = new Var(new[] { new Number(4), new Number(9) }, 2);
+            var exp = new Var(new[] { new Number(4), new Number(9) });
             var result = exp.Execute();
 
             Assert.Equal(12.5, result);
@@ -46,7 +45,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void ThreeNumberTest()
         {
-            var exp = new Var(new[] { new Number(9), new Number(2), new Number(4) }, 3);
+            var exp = new Var(new[] { new Number(9), new Number(2), new Number(4) });
             var result = exp.Execute();
 
             Assert.Equal(13.0, result);
@@ -55,7 +54,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void VectorTest()
         {
-            var exp = new Var(new[] { new Vector(new[] { new Number(2), new Number(4), new Number(9) }) }, 1);
+            var exp = new Var(new[] { new Vector(new[] { new Number(2), new Number(4), new Number(9) }) });
             var result = exp.Execute();
 
             Assert.Equal(13.0, result);
@@ -64,7 +63,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void NotSupportedException()
         {
-            var exp = new Var(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Var(new[] { new Bool(false), new Bool(false) });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -72,7 +71,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void CloneTest()
         {
-            var exp = new Var(new[] { new Number(1), new Number(2) }, 2);
+            var exp = new Var(new[] { new Number(1), new Number(2) });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

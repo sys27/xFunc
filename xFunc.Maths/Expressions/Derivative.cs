@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -26,14 +24,6 @@ namespace xFunc.Maths.Expressions
     public class Derivative : DifferentParametersExpression
     {
 
-        [ExcludeFromCodeCoverage]
-        internal Derivative(IDifferentiator differentiator, ISimplifier simplifier)
-            : base(null, -1)
-        {
-            this.Differentiator = differentiator;
-            this.Simplifier = simplifier;
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
         /// </summary>
@@ -41,7 +31,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The expression.</param>
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
-            : this(differentiator, simplifier, new[] { expression }, 1) { }
+            : this(differentiator, simplifier, new[] { expression }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
@@ -51,7 +41,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression, Variable variable)
-            : this(differentiator, simplifier, new[] { expression, variable }, 2) { }
+            : this(differentiator, simplifier, new[] { expression, variable }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
@@ -62,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="variable">The variable.</param>
         /// <param name="point">The point of derivation.</param>
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression, Variable variable, Number point)
-            : this(differentiator, simplifier, new[] { expression, variable, point }, 3) { }
+            : this(differentiator, simplifier, new[] { expression, variable, point }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
@@ -70,14 +60,12 @@ namespace xFunc.Maths.Expressions
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="args">The arguments.</param>
-        /// <param name="countOfParams">The count of parameters.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args, int countOfParams) : base(args, countOfParams)
+        public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
+            : base(args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
-            if (args.Length != countOfParams)
-                throw new ArgumentException();
 
             this.Differentiator = differentiator;
             this.Simplifier = simplifier;
@@ -150,7 +138,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Derivative(this.Differentiator, this.Simplifier, CloneArguments(), ParametersCount);
+            return new Derivative(this.Differentiator, this.Simplifier, CloneArguments());
         }
 
         /// <summary>

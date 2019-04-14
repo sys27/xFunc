@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void TwoNumbersTest()
         {
-            var sum = new Sum(new[] { new Number(1), new Number(2) }, 2);
+            var sum = new Sum(new[] { new Number(1), new Number(2) });
 
             Assert.Equal(3.0, sum.Execute());
         }
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void OneNumberTest()
         {
-            var sum = new Sum(new[] { new Number(2) }, 1);
+            var sum = new Sum(new[] { new Number(2) });
 
             Assert.Equal(2.0, sum.Execute());
         }
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void VectorTest()
         {
-            var sum = new Sum(new[] { new Vector(new[] { new Number(1), new Number(2) }) }, 1);
+            var sum = new Sum(new[] { new Vector(new[] { new Number(1), new Number(2) }) });
 
             Assert.Equal(3.0, sum.Execute());
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void NotSupportedException()
         {
-            var exp = new Sum(new[] { new Bool(false), new Bool(false) }, 2);
+            var exp = new Sum(new[] { new Bool(false), new Bool(false) });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void CloneTest()
         {
-            var exp = new Sum(new[] { new Number(1), new Number(2) }, 2);
+            var exp = new Sum(new[] { new Number(1), new Number(2) });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -65,6 +65,7 @@ namespace xFunc.Maths.Tokenization
         /// Initializes a new instance of the <see cref="Lexer"/> class.
         /// </summary>
         /// <param name="factories">The factories to create tokens.</param>
+        /// <param name="postProcessors">The lexer post processors.</param>
         public Lexer(ITokenFactory[] factories, ILexerPostProcessor[] postProcessors)
         {
             this.factories = factories;

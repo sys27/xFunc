@@ -18,6 +18,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions.Hyperbolic;
 using Xunit;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths;
 
 namespace xFunc.Tests.Analyzers
 {
@@ -26,6 +27,9 @@ namespace xFunc.Tests.Analyzers
     {
 
         private IAnalyzer<IExpression> simplifier;
+
+        private readonly Number zero = 0;
+        private readonly Number one = 1;
 
         public SimplifierTest()
         {
@@ -1157,6 +1161,60 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new Csc(new Arccsc(Variable.X));
             var expected = Variable.X;
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void CosZero()
+        {
+            var exp = new Cos(zero);
+            var expected = new Number(Math.Cos(0));
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void CotZero()
+        {
+            var exp = new Cot(zero);
+            var expected = new Number(MathExtensions.Cot(0));
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void CscZero()
+        {
+            var exp = new Csc(zero);
+            var expected = new Number(MathExtensions.Csc(0));
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void SecZero()
+        {
+            var exp = new Sec(zero);
+            var expected = new Number(MathExtensions.Sec(0));
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void SinZero()
+        {
+            var exp = new Sin(zero);
+            var expected = new Number(Math.Sin(0));
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void TanZero()
+        {
+            var exp = new Tan(zero);
+            var expected = new Number(Math.Tan(0));
 
             SimpleTest(exp, expected);
         }

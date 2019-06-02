@@ -43,7 +43,6 @@ namespace xFunc.Maths
 
             Parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
             NumeralSystem = NumeralSystem.Decimal;
-            DoSimplify = true;
         }
 
         /// <summary>
@@ -53,8 +52,18 @@ namespace xFunc.Maths
         /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
-        public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator)
-            : this(lexer, parser, simplifier, differentiator, new TypeAnalyzer(), new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
+        public Processor(
+            ILexer lexer,
+            IParser parser,
+            ISimplifier simplifier,
+            IDifferentiator differentiator)
+            : this(
+                  lexer,
+                  parser,
+                  simplifier,
+                  differentiator,
+                  new TypeAnalyzer(),
+                  new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
         {
         }
 
@@ -67,7 +76,13 @@ namespace xFunc.Maths
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="typeAnalyzer">The type analyzer.</param>
         /// <param name="parameters">The collection of parameters.</param>
-        public Processor(ILexer lexer, IParser parser, ISimplifier simplifier, IDifferentiator differentiator, ITypeAnalyzer typeAnalyzer, ExpressionParameters parameters)
+        public Processor(
+            ILexer lexer,
+            IParser parser,
+            ISimplifier simplifier,
+            IDifferentiator differentiator,
+            ITypeAnalyzer typeAnalyzer,
+            ExpressionParameters parameters)
         {
             Lexer = lexer;
             Simplifier = simplifier;
@@ -77,7 +92,6 @@ namespace xFunc.Maths
 
             Parameters = parameters;
             NumeralSystem = NumeralSystem.Decimal;
-            DoSimplify = true;
         }
 
         /// <summary>
@@ -86,6 +100,17 @@ namespace xFunc.Maths
         /// <param name="function">The function.</param>
         /// <returns>The result of solving.</returns>
         public IResult Solve(string function)
+        {
+            return Solve(function, true);
+        }
+
+        /// <summary>
+        /// Solves the specified expression.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <param name="simplify">if set to <c>true</c> parser will simplify expression.</param>
+        /// <returns>The result of solving.</returns>
+        public IResult Solve(string function, bool simplify)
         {
             var exp = Parse(function);
             exp.Analyze(TypeAnalyzer);
@@ -112,7 +137,7 @@ namespace xFunc.Maths
             }
             if (result is IExpression expression)
             {
-                if (DoSimplify)
+                if (simplify)
                     return new ExpressionResult(Simplify(expression));
 
                 return new ExpressionResult(expression);
@@ -130,6 +155,18 @@ namespace xFunc.Maths
         public TResult Solve<TResult>(string function) where TResult : IResult
         {
             return (TResult)Solve(function);
+        }
+
+        /// <summary>
+        /// Solves the specified function.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="function">The function.</param>
+        /// <param name="simplify">if set to <c>true</c> parser will simplify expression.</param>
+        /// <returns>The result of solving.</returns>
+        public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult
+        {
+            return (TResult)Solve(function, simplify);
         }
 
         /// <summary>
@@ -244,11 +281,6 @@ namespace xFunc.Maths
         /// The numeral system.
         /// </value>
         public NumeralSystem NumeralSystem { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether do simplify or not.
-        /// </summary>
-        public bool DoSimplify { get; set; }
 
     }
 

@@ -29,6 +29,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Tests
 {

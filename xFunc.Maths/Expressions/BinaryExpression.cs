@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected int GetHashCode(int first, int second)
         {
-            int hash = first;
+            var hash = first;
 
             hash = hash * second + m_left.GetHashCode();
             hash = hash * second + m_right.GetHashCode();

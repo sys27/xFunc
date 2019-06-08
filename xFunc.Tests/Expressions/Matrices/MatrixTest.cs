@@ -337,7 +337,7 @@ namespace xFunc.Tests.Expressions.Matrices
 
             int[] perm;
             int toggle;
-            var actual = MatrixExtentions.LUPDecomposition(matrix, null, out perm, out toggle);
+            var actual = MatrixExtensions.LUPDecomposition(matrix, null, out perm, out toggle);
 
             Assert.Equal(expected, actual);
         }
@@ -360,7 +360,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(0.203883495145631), new Number(-0.120035304501324), new Number(0.122683142100618), new Number(-0.147396293027361) })
             });
 
-            var actual = MatrixExtentions.Inverse(matrix, null);
+            var actual = MatrixExtensions.Inverse(matrix, null);
 
             Assert.Equal(expected, actual);
         }

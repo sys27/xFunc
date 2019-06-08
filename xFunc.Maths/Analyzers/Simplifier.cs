@@ -68,7 +68,7 @@ namespace xFunc.Maths.Analyzers
 
         private IExpression AnalyzeDiffParams(DifferentParametersExpression exp)
         {
-            for (int i = 0; i < exp.Arguments.Length; i++)
+            for (var i = 0; i < exp.Arguments.Length; i++)
                 if (exp.Arguments[i] != null)
                     exp.Arguments[i] = exp.Arguments[i].Analyze(this);
 
@@ -76,7 +76,7 @@ namespace xFunc.Maths.Analyzers
         }
 
         /// <summary>
-        /// Analyzes the specified expression. This method should be only used for expessions which are not supported by xFunc (custom expression create by extendening library).
+        /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>

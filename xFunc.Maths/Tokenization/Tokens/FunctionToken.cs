@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -69,7 +68,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = 6949;
+            var hash = 6949;
 
             hash = hash * 5437 + Function.GetHashCode();
             hash = hash * 5437 + CountOfParams.GetHashCode();

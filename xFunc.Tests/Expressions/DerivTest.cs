@@ -14,7 +14,6 @@
 // limitations under the License.
 using Moq;
 using System;
-using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;

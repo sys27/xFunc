@@ -14,7 +14,6 @@
 // limitations under the License.
 using System;
 using System.Numerics;
-using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;

@@ -12,12 +12,10 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -63,13 +61,13 @@ namespace xFunc.Tests.Expressions
         {
             Variable x1 = "x";
             Number num1 = 2;
-            Mul mul1 = new Mul(num1, x1);
-            Abs abs1 = new Abs(mul1);
+            var mul1 = new Mul(num1, x1);
+            var abs1 = new Abs(mul1);
 
             Variable x2 = "x";
             Number num2 = 2;
-            Mul mul2 = new Mul(num2, x2);
-            Abs abs2 = new Abs(mul2);
+            var mul2 = new Mul(num2, x2);
+            var abs2 = new Abs(mul2);
 
             Assert.True(abs1.Equals(abs2));
             Assert.True(abs1.Equals(abs1));
@@ -80,13 +78,13 @@ namespace xFunc.Tests.Expressions
         {
             Variable x1 = "x";
             Number num1 = 2;
-            Mul mul1 = new Mul(num1, x1);
-            Abs abs1 = new Abs(mul1);
+            var mul1 = new Mul(num1, x1);
+            var abs1 = new Abs(mul1);
 
             Variable x2 = "x";
             Number num2 = 3;
-            Mul mul2 = new Mul(num2, x2);
-            Abs abs2 = new Abs(mul2);
+            var mul2 = new Mul(num2, x2);
+            var abs2 = new Abs(mul2);
 
             Assert.False(abs1.Equals(abs2));
             Assert.False(abs1.Equals(mul2));

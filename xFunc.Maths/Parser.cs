@@ -53,10 +53,11 @@ namespace xFunc.Maths
             if (tokens == null)
                 throw new ArgumentNullException(nameof(tokens));
 
-            if (!tokens.Any())
+            var tokensArray = tokens as IToken[] ?? tokens.ToArray();
+            if (!tokensArray.Any())
                 throw new ArgumentException(nameof(tokens));
 
-            var rpn = ConvertToReversePolishNotation(tokens);
+            var rpn = ConvertToReversePolishNotation(tokensArray);
 
             var arguments = new LinkedList<IExpression>();
             foreach (var token in rpn)
@@ -76,9 +77,9 @@ namespace xFunc.Maths
             return arguments.Last.Value;
         }
 
-        private IEnumerable<IToken> ConvertToReversePolishNotation(IEnumerable<IToken> tokens)
+        private IEnumerable<IToken> ConvertToReversePolishNotation(IToken[] tokens)
         {
-            var output = new List<IToken>(tokens.Count());
+            var output = new List<IToken>(tokens.Length);
             var stack = new Stack<IToken>();
 
             var openBracketToken = new SymbolToken(Symbols.OpenBracket);

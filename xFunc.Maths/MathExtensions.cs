@@ -40,17 +40,15 @@ namespace xFunc.Maths
                 {
                     return -Math.Pow(-number, power);
                 }
-                else
-                {
-                    if (power > 0 && power < 1)
-                    {
-                        return new Complex(0, Math.Pow(-number, power));
-                    }
 
-                    if (power < 0 && power > -1)
-                    {
-                        return new Complex(0, -Math.Pow(-number, power));
-                    }
+                if (power > 0 && power < 1)
+                {
+                    return new Complex(0, Math.Pow(-number, power));
+                }
+
+                if (power < 0 && power > -1)
+                {
+                    return new Complex(0, -Math.Pow(-number, power));
                 }
             }
 
@@ -304,7 +302,7 @@ namespace xFunc.Maths
 
             double result = 1;
 
-            for (double i = n; i > 0; i--)
+            for (var i = n; i > 0; i--)
                 result *= i;
 
             return result;

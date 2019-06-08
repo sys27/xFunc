@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
@@ -120,7 +119,7 @@ namespace xFunc.Tests
             var exp = new Conjugate(new ComplexNumber(complex));
 
             var tokens = new TokensBuilder()
-                .Function(Functions.Conjugate)
+                .Function(Functions.Conjugate, 1)
                 .OpenBracket()
                 .Number(2.3)
                 .Operation(Operations.Addition)
@@ -217,7 +216,7 @@ namespace xFunc.Tests
             var diff = new Number(1);
 
             var tokens = new TokensBuilder()
-                .Function(Functions.Derivative)
+                .Function(Functions.Derivative, 1)
                 .OpenBracket()
                 .VariableX()
                 .CloseBracket()
@@ -298,7 +297,6 @@ namespace xFunc.Tests
         public void SimplifyTest()
         {
             var simplifier = new Mock<ISimplifier>();
-            var differentiator = new Mock<IDifferentiator>();
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 

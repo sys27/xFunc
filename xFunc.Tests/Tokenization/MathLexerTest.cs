@@ -13,11 +13,8 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using xFunc.Maths;
-using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
@@ -507,7 +504,7 @@ namespace xFunc.Tests.Tokenization
             var expected = Builder()
                 .Number(5)
                 .Operation(Operations.Multiplication)
-                .Function(Functions.Cosine)
+                .Function(Functions.Cosine, 1)
                 .OpenBracket()
                 .VariableX()
                 .CloseBracket()

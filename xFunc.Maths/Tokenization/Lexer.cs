@@ -83,8 +83,8 @@ namespace xFunc.Maths.Tokenization
         /// </returns>
         private static bool IsBalanced(string str)
         {
-            int brackets = 0;
-            int braces = 0;
+            var brackets = 0;
+            var braces = 0;
 
             foreach (var item in str)
             {

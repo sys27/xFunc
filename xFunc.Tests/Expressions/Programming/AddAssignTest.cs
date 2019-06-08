@@ -15,7 +15,6 @@
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 

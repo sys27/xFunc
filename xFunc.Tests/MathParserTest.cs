@@ -53,7 +53,7 @@ namespace xFunc.Tests
         public void HasVarTest1()
         {
             var exp = new Sin(new Mul(new Number(2), Variable.X));
-            bool expected = Helpers.HasVariable(exp, Variable.X);
+            var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.True(expected);
         }
@@ -62,7 +62,7 @@ namespace xFunc.Tests
         public void HasVarTest2()
         {
             var exp = new Sin(new Mul(new Number(2), new Number(3)));
-            bool expected = Helpers.HasVariable(exp, Variable.X);
+            var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.False(expected);
         }
@@ -275,7 +275,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Define(new UserFunction("func", new[] { Variable.X }), new Sin(Variable.X));
+            var expected = new Define(new UserFunction("func", new IExpression[] { Variable.X }), new Sin(Variable.X));
 
             Assert.Equal(expected, exp);
         }
@@ -293,7 +293,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Add(new Number(1), new UserFunction("func", new[] { Variable.X }));
+            var expected = new Add(new Number(1), new UserFunction("func", new IExpression[] { Variable.X }));
 
             Assert.Equal(expected, exp);
         }
@@ -312,7 +312,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Undefine(new UserFunction("f", new[] { Variable.X }));
+            var expected = new Undefine(new UserFunction("f", new IExpression[] { Variable.X }));
 
             Assert.Equal(expected, exp);
         }
@@ -383,7 +383,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new GCD(new[] { new Number(12), new Number(16), new Number(8) });
+            var expected = new GCD(new IExpression[] { new Number(12), new Number(16), new Number(8) });
 
             Assert.Equal(expected, exp);
         }
@@ -490,7 +490,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Vector(new[] { new Number(2), new Number(3), new Number(4) });
+            var expected = new Vector(new IExpression[] { new Number(2), new Number(3), new Number(4) });
 
             Assert.Equal(expected, exp);
         }
@@ -518,10 +518,10 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Matrix(new[]
+            var expected = new Matrix(new IExpression[]
             {
-                new Vector(new [] { new Number(2), new Number(3) }),
-                new Vector(new [] { new Number(4), new Number(7) })
+                new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                new Vector(new IExpression[] { new Number(4), new Number(7) })
             });
 
             Assert.Equal(expected, exp);
@@ -852,7 +852,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void AddAssing()
+        public void AddAssign()
         {
             var tokens = Builder()
                 .VariableX()
@@ -867,7 +867,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void MulAssing()
+        public void MulAssign()
         {
             var tokens = Builder()
                 .VariableX()
@@ -882,7 +882,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void SubAssing()
+        public void SubAssign()
         {
             var tokens = Builder()
                 .VariableX()
@@ -897,7 +897,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void DivAssing()
+        public void DivAssign()
         {
             var tokens = Builder()
                 .VariableX()
@@ -977,7 +977,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ConvertLogicExpressionToColletionTest()
+        public void ConvertLogicExpressionToCollectionTest()
         {
             var exp = new Implication(new Maths.Expressions.LogicalAndBitwise.Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
             var actual = new List<IExpression>(Helpers.ConvertExpressionToCollection(exp));
@@ -986,7 +986,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ConvertLogicExpressionToColletionNullTest()
+        public void ConvertLogicExpressionToCollectionNullTest()
         {
             Assert.Throws<ArgumentNullException>(() => Helpers.ConvertExpressionToCollection(null));
         }
@@ -1387,7 +1387,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Min(new[] { new Number(1), new Number(2) });
+            var expected = new Min(new IExpression[] { new Number(1), new Number(2) });
 
             Assert.Equal(expected, exp);
         }
@@ -1405,7 +1405,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Max(new[] { new Number(1), new Number(2) });
+            var expected = new Max(new IExpression[] { new Number(1), new Number(2) });
 
             Assert.Equal(expected, exp);
         }
@@ -1423,7 +1423,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Avg(new[] { new Number(1), new Number(2) });
+            var expected = new Avg(new IExpression[] { new Number(1), new Number(2) });
 
             Assert.Equal(expected, exp);
         }
@@ -1441,7 +1441,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Count(new[] { new Number(1), new Number(2) });
+            var expected = new Count(new IExpression[] { new Number(1), new Number(2) });
 
             Assert.Equal(expected, exp);
         }
@@ -1459,7 +1459,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Var(new[] { new Number(4), new Number(9) });
+            var expected = new Var(new IExpression[] { new Number(4), new Number(9) });
 
             Assert.Equal(expected, exp);
         }
@@ -1477,7 +1477,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Varp(new[] { new Number(4), new Number(9) });
+            var expected = new Varp(new IExpression[] { new Number(4), new Number(9) });
 
             Assert.Equal(expected, exp);
         }
@@ -1495,7 +1495,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Stdev(new[] { new Number(4), new Number(9) });
+            var expected = new Stdev(new IExpression[] { new Number(4), new Number(9) });
 
             Assert.Equal(expected, exp);
         }
@@ -1513,7 +1513,7 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Stdevp(new[] { new Number(4), new Number(9) });
+            var expected = new Stdevp(new IExpression[] { new Number(4), new Number(9) });
 
             Assert.Equal(expected, exp);
         }
@@ -2387,8 +2387,8 @@ namespace xFunc.Tests
 
             var exp = parser.Parse(tokens);
             var expected = new DotProduct(
-                new Vector(new[] { new Number(1), new Number(2) }),
-                new Vector(new[] { new Number(3), new Number(4) })
+                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { new Number(3), new Number(4) })
             );
 
             Assert.Equal(expected, exp);
@@ -2455,17 +2455,18 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Transpose(new Matrix(new[]
-            {
-                new Vector(new [] { new Number(2), new Number(3) }),
-                new Vector(new [] { new Number(4), new Number(7) })
-            }));
+            var expected = new Transpose(new Matrix(
+                new IExpression[]
+                {
+                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { new Number(4), new Number(7) })
+                }));
 
             Assert.Equal(expected, exp);
         }
 
         [Fact]
-        public void DetermenantTest()
+        public void DeterminantTest()
         {
             var tokens = Builder()
                 .Function(Functions.Determinant, 1)
@@ -2490,11 +2491,12 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Determinant(new Matrix(new[]
-            {
-                new Vector(new [] { new Number(2), new Number(3) }),
-                new Vector(new [] { new Number(4), new Number(7) })
-            }));
+            var expected = new Determinant(new Matrix(
+                new IExpression[]
+                {
+                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { new Number(4), new Number(7) })
+                }));
 
             Assert.Equal(expected, exp);
         }
@@ -2525,11 +2527,12 @@ namespace xFunc.Tests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Inverse(new Matrix(new[]
-            {
-                new Vector(new [] { new Number(2), new Number(3) }),
-                new Vector(new [] { new Number(4), new Number(7) })
-            }));
+            var expected = new Inverse(new Matrix(
+                new IExpression[]
+                {
+                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { new Number(4), new Number(7) })
+                }));
 
             Assert.Equal(expected, exp);
         }

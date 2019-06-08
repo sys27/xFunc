@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using System.Collections.Generic;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -29,10 +28,10 @@ namespace xFunc.Maths.Tokenization.PostProcessing
         {
             var func = (FunctionToken)tokens[index];
 
-            int countOfParams = 0;
-            int brackets = 1;
-            bool oneParam = true;
-            int i = index + 2;
+            var countOfParams = 0;
+            var brackets = 1;
+            var oneParam = true;
+            var i = index + 2;
             for (; i < tokens.Count;)
             {
                 var token = tokens[i];
@@ -95,7 +94,7 @@ namespace xFunc.Maths.Tokenization.PostProcessing
         /// <param name="tokens">The list of tokens.</param>
         public override void Process(IList<IToken> tokens)
         {
-            for (int i = 0; i < tokens.Count; i++)
+            for (var i = 0; i < tokens.Count; i++)
                 if (tokens[i] is FunctionToken)
                     i = CountParametersInternal(tokens, i);
         }

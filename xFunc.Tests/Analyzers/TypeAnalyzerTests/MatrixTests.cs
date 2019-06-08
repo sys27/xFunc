@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -52,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixVector()
         {
-            var exp = new Matrix(new Vector[] { new Vector(2), new Vector(2) });
+            var exp = new Matrix(new IExpression[] { new Vector(2), new Vector(2) });
 
             Test(exp, ResultType.Matrix);
         }
@@ -60,7 +59,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixUndefinedElement()
         {
-            var exp = new Matrix(new Vector[] { new Vector(new[] { Variable.X }) });
+            var exp = new Matrix(new IExpression[] { new Vector(new IExpression[] { Variable.X }) });
 
             Test(exp, ResultType.Undefined);
         }
@@ -70,7 +69,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             Assert.Throws<MatrixIsInvalidException>(() => new Matrix(2, 2)
             {
-                Arguments = new[] { new Number(2) }
+                Arguments = new IExpression[] { new Number(2) }
             });
         }
 
@@ -85,14 +84,13 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNullMatrix()
         {
-            var exp = new Matrix(0, 0);
-            exp.Arguments = null;
+            var exp = new Matrix(0, 0) { Arguments = null };
 
             Test(exp, ResultType.Matrix);
         }
 
         [Fact]
-        public void TestDetermenantUndefined()
+        public void TestDeterminantUndefined()
         {
             var exp = new Determinant(Variable.X);
 
@@ -100,7 +98,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestDetermenantMatrix()
+        public void TestDeterminantMatrix()
         {
             var exp = new Determinant(new Matrix(2, 2));
 
@@ -108,7 +106,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestDetermenantException()
+        public void TestDeterminantException()
         {
             var exp = new Determinant(new ComplexNumber(2, 2));
 
@@ -118,7 +116,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDeterminantsException2()
         {
-            var exp = new Determinant(new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }));
+            var exp = new Determinant(
+                new Vector(new IExpression[]
+                {
+                    new Number(3),
+                    new Number(7),
+                    new Number(2),
+                    new Number(5)
+                }));
 
             TestException(exp);
         }
@@ -150,7 +155,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInverseException2()
         {
-            var exp = new Inverse(new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }));
+            var exp = new Inverse(
+                new Vector(new IExpression[]
+                {
+                    new Number(3),
+                    new Number(7),
+                    new Number(2),
+                    new Number(5)
+                }));
 
             TestException(exp);
         }
@@ -166,7 +178,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductLeftUndefined()
         {
-            var exp = new DotProduct(Variable.X, new Vector(new[] { new Number(1) }));
+            var exp = new DotProduct(Variable.X, new Vector(new IExpression[] { new Number(1) }));
 
             Test(exp, ResultType.Undefined);
         }
@@ -174,7 +186,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductRightUndefined()
         {
-            var exp = new DotProduct(new Vector(new[] { new Number(1) }), Variable.X);
+            var exp = new DotProduct(new Vector(new IExpression[] { new Number(1) }), Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -183,8 +195,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void DotProduct()
         {
             var exp = new DotProduct(
-                new Vector(new[] { new Number(1) }),
-                new Vector(new[] { new Number(2) }));
+                new Vector(new IExpression[] { new Number(1) }),
+                new Vector(new IExpression[] { new Number(2) }));
 
             Test(exp, ResultType.Number);
         }
@@ -194,7 +206,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new DotProduct(
                 new Number(1),
-                new Vector(new[] { new Number(2) }));
+                new Vector(new IExpression[] { new Number(2) }));
 
             TestBinaryException(exp);
         }
@@ -203,7 +215,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void DotProductRightException()
         {
             var exp = new DotProduct(
-                new Vector(new[] { new Number(2) }),
+                new Vector(new IExpression[] { new Number(2) }),
                 new Number(1));
 
             TestBinaryException(exp);
@@ -220,7 +232,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductLeftUndefined()
         {
-            var exp = new CrossProduct(Variable.X, new Vector(new[] { new Number(1) }));
+            var exp = new CrossProduct(Variable.X, new Vector(new IExpression[] { new Number(1) }));
 
             Test(exp, ResultType.Undefined);
         }
@@ -228,7 +240,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductRightUndefined()
         {
-            var exp = new CrossProduct(new Vector(new[] { new Number(1) }), Variable.X);
+            var exp = new CrossProduct(new Vector(new IExpression[] { new Number(1) }), Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -237,8 +249,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void CrossProduct()
         {
             var exp = new CrossProduct(
-                new Vector(new[] { new Number(1) }),
-                new Vector(new[] { new Number(2) }));
+                new Vector(new IExpression[] { new Number(1) }),
+                new Vector(new IExpression[] { new Number(2) }));
 
             Test(exp, ResultType.Vector);
         }
@@ -248,7 +260,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new CrossProduct(
                 new Number(1),
-                new Vector(new[] { new Number(2) }));
+                new Vector(new IExpression[] { new Number(2) }));
 
             TestBinaryException(exp);
         }
@@ -257,7 +269,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void CrossProductRightException()
         {
             var exp = new CrossProduct(
-                new Vector(new[] { new Number(2) }),
+                new Vector(new IExpression[] { new Number(2) }),
                 new Number(1));
 
             TestBinaryException(exp);

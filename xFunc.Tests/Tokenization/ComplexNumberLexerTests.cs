@@ -13,11 +13,9 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using xFunc.Maths;
-using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
@@ -187,7 +185,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("im(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Im)
+                .Function(Functions.Im, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)
@@ -205,7 +203,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("imaginary(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Im)
+                .Function(Functions.Im, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)
@@ -223,7 +221,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("re(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Re)
+                .Function(Functions.Re, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)
@@ -241,7 +239,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("real(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Re)
+                .Function(Functions.Re, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)
@@ -259,7 +257,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("phase(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Phase)
+                .Function(Functions.Phase, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)
@@ -277,7 +275,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("conjugate(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Conjugate)
+                .Function(Functions.Conjugate, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)
@@ -295,7 +293,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("reciprocal(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Reciprocal)
+                .Function(Functions.Reciprocal, 1)
                 .OpenBracket()
                 .Number(3)
                 .Operation(Operations.Subtraction)

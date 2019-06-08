@@ -16,6 +16,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
+using xFunc.Maths.Expressions.Collections;
 using xFunc.ViewModels;
 
 namespace xFunc.Views
@@ -40,6 +41,11 @@ namespace xFunc.Views
             nameBox.Text = variable.Variable;
             nameBox.IsEnabled = false;
             valueBox.Text = Convert.ToString(variable.Value, CultureInfo.InvariantCulture);
+            if (variable.Type != ParameterType.Normal)
+            {
+                valueBox.IsEnabled = false;
+            }
+            readOnlyBox.IsEnabled = false;
 
             nameBox.Focus();
         }
@@ -52,35 +58,14 @@ namespace xFunc.Views
 
         private void OKCommand_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
-            double value;
-
-            args.CanExecute = !string.IsNullOrWhiteSpace(this.nameBox.Text) && double.TryParse(this.valueBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value);
+            args.CanExecute = !string.IsNullOrWhiteSpace(this.nameBox.Text) && double.TryParse(this.valueBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out _);
         }
 
-        public string VariableName
-        {
-            get
-            {
-                return this.nameBox.Text;
-            }
-        }
+        public string VariableName => this.nameBox.Text;
 
-        public double Value
-        {
-            get
-            {
-                return double.Parse(this.valueBox.Text, CultureInfo.InvariantCulture);
-            }
-        }
+        public double Value => double.Parse(this.valueBox.Text, CultureInfo.InvariantCulture);
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return this.readOnlyBox.IsChecked.Value;
-            }
-        }
-
+        public bool IsReadOnly => this.readOnlyBox.IsChecked.Value;
     }
 
 }

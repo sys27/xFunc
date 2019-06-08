@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Programming;
@@ -49,7 +48,6 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
             var greaterThen = new GreaterThan(Variable.X, new Number(10));
             var exp = new And(lessThen, greaterThen);

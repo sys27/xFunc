@@ -76,23 +76,23 @@ namespace xFunc.Maths
                 throw new ArgumentNullException(nameof(expression));
 
             var collection = new List<IExpression>();
-            ConvertToColletion(expression, collection);
+            ConvertToCollection(expression, collection);
 
             return collection;
         }
 
-        private static void ConvertToColletion(IExpression expression, List<IExpression> collection)
+        private static void ConvertToCollection(IExpression expression, List<IExpression> collection)
         {
             if (expression is UnaryExpression)
             {
                 var un = expression as UnaryExpression;
-                ConvertToColletion(un.Argument, collection);
+                ConvertToCollection(un.Argument, collection);
             }
             else if (expression is BinaryExpression)
             {
                 var bin = expression as BinaryExpression;
-                ConvertToColletion(bin.Left, collection);
-                ConvertToColletion(bin.Right, collection);
+                ConvertToCollection(bin.Left, collection);
+                ConvertToCollection(bin.Right, collection);
             }
             else if (expression is Variable)
             {

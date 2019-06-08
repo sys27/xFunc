@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = 1721;
+            var hash = 1721;
 
             hash = (hash * 5701) + Function.GetHashCode();
             hash = (hash * 5701) + ParametersCount.GetHashCode();

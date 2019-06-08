@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
@@ -27,7 +26,7 @@ namespace xFunc.Views
     public partial class VariableView : Window
     {
 
-        private Processor processor;
+        private readonly Processor processor;
 
         #region Commands
 
@@ -85,7 +84,6 @@ namespace xFunc.Views
             {
                 var variable = processor.Parameters.Variables.First(v => v.Key == view.VariableName);
                 variable.Value = view.Value;
-                variable.Type = view.IsReadOnly ? ParameterType.ReadOnly : ParameterType.Normal;
 
                 RefreshList();
             }

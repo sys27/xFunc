@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -87,7 +86,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         }
 
         /// <summary>
-        /// Determines whether this istance is open bracket symbol.
+        /// Determines whether this instance is open bracket symbol.
         /// </summary>
         /// <returns>
         ///   <c>true</c> if this instance is open bracket symbol; otherwise, <c>false</c>.
@@ -98,7 +97,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         }
 
         /// <summary>
-        /// Determines whether this istance is close bracket symbol.
+        /// Determines whether this instance is close bracket symbol.
         /// </summary>
         /// <returns>
         ///   <c>true</c> if this instance is close bracket symbol; otherwise, <c>false</c>.

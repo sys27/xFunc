@@ -114,7 +114,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = 163;
+            var hash = 163;
 
             hash = hash * 41 + Key.GetHashCode();
 
@@ -139,7 +139,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns>A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.Zero This object is equal to other. Greater than zero This object is greater than other.</returns>
         public int CompareTo(Parameter other)
         {
-            return Key.CompareTo(other.Key);
+            return string.Compare(Key, other.Key, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -187,12 +187,12 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
-        /// Gets or sets the type of parameter.
+        /// Gets the type of parameter.
         /// </summary>
         /// <value>
         /// The type of parameter.
         /// </value>
-        public ParameterType Type { get; set; }
+        public ParameterType Type { get; }
 
     }
 

@@ -21,9 +21,9 @@ namespace xFunc.Maths.Expressions.Matrices
 {
 
     /// <summary>
-    /// Provides extention methods for matrices and vectors.
+    /// Provides extension methods for matrices and vectors.
     /// </summary>
-    public static class MatrixExtentions
+    public static class MatrixExtensions
     {
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             Parallel.For(0, matrix.ParametersCount, i =>
             {
-                for (int j = 0; j < matrix.SizeOfVectors; j++)
+                for (var j = 0; j < matrix.SizeOfVectors; j++)
                     result[j][i] = matrix[i][j];
             });
 
@@ -437,7 +437,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (matrix.Length == 2)
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
-            var lu = LUPDecomposition_(matrix, out int[] permutation, out int toggle);
+            var lu = LUPDecompositionInternal(matrix, out var permutation, out var toggle);
 
             if (lu == null)
                 throw new MatrixIsInvalidException();
@@ -462,18 +462,18 @@ namespace xFunc.Maths.Expressions.Matrices
             if (!matrix.IsSquare)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var result = LUPDecomposition_(matrix.ToCalculatedArray(parameters), out permutation, out toggle);
+            var result = LUPDecompositionInternal(matrix.ToCalculatedArray(parameters), out permutation, out toggle);
             var m = new Matrix(result.Length, result.Length);
-            for (int i = 0; i < result.Length; i++)
-                for (int j = 0; j < result.Length; j++)
+            for (var i = 0; i < result.Length; i++)
+                for (var j = 0; j < result.Length; j++)
                     m[i][j] = new Number(result[i][j]);
 
             return m;
         }
 
-        private static double[][] LUPDecomposition_(double[][] matrix, out int[] permutation, out int toggle)
+        private static double[][] LUPDecompositionInternal(double[][] matrix, out int[] permutation, out int toggle)
         {
-            int size = matrix.Length;
+            var size = matrix.Length;
 
             permutation = new int[size];
             for (var i = 0; i < size; i++)
@@ -483,8 +483,8 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var j = 0; j < size - 1; j++)
             {
-                double colMax = Math.Abs(matrix[j][j]);
-                int pRow = j;
+                var colMax = Math.Abs(matrix[j][j]);
+                var pRow = j;
 
                 for (var i = j + 1; i < size; i++)
                 {
@@ -497,10 +497,10 @@ namespace xFunc.Maths.Expressions.Matrices
 
                 if (pRow != j)
                 {
-                    double[] rowPtr = matrix[pRow];
+                    var rowPtr = matrix[pRow];
                     matrix[pRow] = matrix[j];
                     matrix[j] = rowPtr;
-                    int tmp = permutation[pRow];
+                    var tmp = permutation[pRow];
                     permutation[pRow] = permutation[j];
                     permutation[j] = tmp;
                     toggle = -toggle;
@@ -522,24 +522,24 @@ namespace xFunc.Maths.Expressions.Matrices
 
         private static double[] HelperSolve(double[][] lu, double[] b)
         {
-            int n = lu.Length;
-            double[] x = new double[n];
+            var n = lu.Length;
+            var x = new double[n];
             b.CopyTo(x, 0);
 
-            for (int i = 1; i < n; ++i)
+            for (var i = 1; i < n; ++i)
             {
-                double sum = x[i];
-                for (int j = 0; j < i; ++j)
+                var sum = x[i];
+                for (var j = 0; j < i; ++j)
                     sum -= lu[i][j] * x[j];
                 x[i] = sum;
             }
 
             x[n - 1] /= lu[n - 1][n - 1];
 
-            for (int i = n - 2; i >= 0; --i)
+            for (var i = n - 2; i >= 0; --i)
             {
-                double sum = x[i];
-                for (int j = i + 1; j < n; ++j)
+                var sum = x[i];
+                for (var j = i + 1; j < n; ++j)
                     sum -= lu[i][j] * x[j];
                 x[i] = sum / lu[i][i];
             }
@@ -559,18 +559,18 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var size = matrix.ParametersCount;
-            var result = Inverse_(matrix.ToCalculatedArray(parameters));
+            var result = InverseInternal(matrix.ToCalculatedArray(parameters));
             var m = new Matrix(size, size);
-            for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
+            for (var i = 0; i < size; i++)
+                for (var j = 0; j < size; j++)
                     m[i][j] = new Number(result[i][j]);
 
             return m;
         }
 
-        private static double[][] Inverse_(double[][] matrix)
+        private static double[][] InverseInternal(double[][] matrix)
         {
-            int n = matrix.Length;
+            var n = matrix.Length;
             var result = new double[n][];
 
             for (var i = 0; i < n; i++)
@@ -580,7 +580,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     result[i][j] = matrix[i][j];
             }
 
-            var lu = LUPDecomposition_(matrix, out int[] permutation, out int toggle);
+            var lu = LUPDecompositionInternal(matrix, out var permutation, out var toggle);
             if (lu == null)
                 throw new MatrixIsInvalidException();
 

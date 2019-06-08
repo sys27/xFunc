@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -22,8 +21,6 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// </summary>
     public class UserFunctionToken : FunctionToken
     {
-
-        private readonly string functionName;
 
         /// <summary>
         /// Initializes the <see cref="UserFunctionToken"/> class.
@@ -39,7 +36,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         public UserFunctionToken(string functionName, int countOfParams)
             : base(Functions.UserFunction, countOfParams)
         {
-            this.functionName = functionName;
+            this.FunctionName = functionName;
         }
 
         /// <summary>
@@ -60,7 +57,7 @@ namespace xFunc.Maths.Tokenization.Tokens
 
             var token = (UserFunctionToken)obj;
 
-            return this.functionName == token.functionName && this.CountOfParams == token.CountOfParams;
+            return this.FunctionName == token.FunctionName && this.CountOfParams == token.CountOfParams;
         }
 
         /// <summary>
@@ -71,9 +68,9 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = 4909;
+            var hash = 4909;
 
-            hash = hash * 1877 + functionName.GetHashCode();
+            hash = hash * 1877 + FunctionName.GetHashCode();
             hash = hash * 1877 + CountOfParams.GetHashCode();
 
             return hash;
@@ -85,20 +82,13 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"User Function: {functionName}";
+            return $"User Function: {FunctionName}";
         }
 
         /// <summary>
         /// Gets the name of function.
         /// </summary>
-        public string FunctionName
-        {
-            get
-            {
-                return functionName;
-            }
-        }
-
+        public string FunctionName { get; }
     }
 
 }

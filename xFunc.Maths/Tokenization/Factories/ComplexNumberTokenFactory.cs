@@ -52,11 +52,11 @@ namespace xFunc.Maths.Tokenization.Factories
         protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
         {
             var magnitudeString = regexAllWhitespaces.Replace(match.Groups[1].Value, string.Empty);
-            if (!DoubleTryParse(magnitudeString, out double magnitude))
+            if (!DoubleTryParse(magnitudeString, out var magnitude))
                 magnitude = 0.0;
 
             var phaseString = regexAllWhitespaces.Replace(match.Groups[2].Value, string.Empty).Replace("∠", "");
-            if (!DoubleTryParse(phaseString, out double phase))
+            if (!DoubleTryParse(phaseString, out var phase))
                 phase = 1.0;
 
             var token = new ComplexNumberToken(Complex.FromPolarCoordinates(magnitude, phase * Math.PI / 180));

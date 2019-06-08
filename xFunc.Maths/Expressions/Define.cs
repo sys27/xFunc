@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            int hash = 4583;
+            var hash = 4583;
 
             hash = (hash * 233) + key.GetHashCode();
             hash = (hash * 233) + value.GetHashCode();

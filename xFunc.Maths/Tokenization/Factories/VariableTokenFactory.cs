@@ -13,8 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Numerics;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 

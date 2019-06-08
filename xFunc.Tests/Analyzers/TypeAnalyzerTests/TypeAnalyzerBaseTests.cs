@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
@@ -23,9 +22,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
     public abstract class TypeAnalyzerBaseTests
     {
 
-        protected ITypeAnalyzer analyzer;
+        protected readonly ITypeAnalyzer analyzer;
 
-        public TypeAnalyzerBaseTests()
+        protected TypeAnalyzerBaseTests()
         {
             analyzer = new TypeAnalyzer();
         }

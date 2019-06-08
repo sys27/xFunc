@@ -26,10 +26,9 @@ namespace xFunc.Tests.Analyzers
     public class SimplifierTest
     {
 
-        private IAnalyzer<IExpression> simplifier;
+        private readonly IAnalyzer<IExpression> simplifier;
 
         private readonly Number zero = 0;
-        private readonly Number one = 1;
 
         public SimplifierTest()
         {
@@ -631,7 +630,7 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
-        public void MulDiffl_NumDivVar_MulNum()
+        public void MulDiff_NumDivVar_MulNum()
         {
             // (2 / x) * 2
             var mul = new Mul(new Div(new Number(2), Variable.X), new Number(2));

@@ -15,6 +15,7 @@
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -24,7 +25,7 @@ namespace xFunc.Tests.Expressions
     {
 
         [Fact]
-        public void ExecuteTest1()
+        public void ExecuteMulNumberByNumberTest()
         {
             var exp = new Mul(new Number(2), new Number(2));
 
@@ -32,7 +33,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTest2()
+        public void ExecuteMulComplexByComplexTest()
         {
             var exp = new Mul(new ComplexNumber(2, 5), new ComplexNumber(3, 2));
             var expected = new Complex(-4, 19);
@@ -41,7 +42,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTest3()
+        public void ExecuteMulComplexByNumberTest()
         {
             var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
             var expected = new Complex(4, 10);
@@ -50,7 +51,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTest4()
+        public void ExecuteMulNumberByComplexTest()
         {
             var exp = new Mul(new Number(2), new ComplexNumber(3, 2));
             var expected = new Complex(6, 4);
@@ -59,7 +60,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTest6()
+        public void ExecuteMulNumberBySqrtComplexTest()
         {
             var exp = new Mul(new Number(2), new Sqrt(new Number(-9)));
             var expected = new Complex(0, 6);
@@ -75,6 +76,171 @@ namespace xFunc.Tests.Expressions
             var exp = new Mul(vector1, vector2);
 
             Assert.Equal(32.0, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulComplexByBool()
+        {
+            var complex = new ComplexNumber(3, 2);
+            var boolean = new Bool(true);
+            var mul = new Mul(complex, boolean);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulBoolByComplex()
+        {
+            var boolean = new Bool(true);
+            var complex = new ComplexNumber(3, 2);
+            var mul = new Mul(boolean, complex);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulVectorByMatrixTest()
+        {
+            var vector = new Maths.Expressions.Matrices.Vector(new[]
+            {
+                new Number(1),
+                new Number(2),
+                new Number(3)
+            });
+            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(4) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(5) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(6) })
+            });
+            var exp = new Mul(vector, matrix);
+
+            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(32) })
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulMatrixByVectorTest()
+        {
+            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(4) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(5) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(6) })
+            });
+            var vector = new Maths.Expressions.Matrices.Vector(new[]
+            {
+                new Number(1),
+                new Number(2),
+                new Number(3)
+            });
+            var exp = new Mul(matrix, vector);
+
+            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(32) })
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulMatrixByMatrixTest()
+        {
+            var matrix1 = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2), new Number(3) })
+            });
+            var matrix2 = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(4) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(5) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(6) })
+            });
+            var exp = new Mul(matrix1, matrix2);
+
+            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(32) })
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulNunberByVectorTest()
+        {
+            var number = new Number(5);
+            var vector = new Maths.Expressions.Matrices.Vector(new[]
+            {
+                new Number(1),
+                new Number(2),
+                new Number(3)
+            });
+            var exp = new Mul(number, vector);
+
+            var expected = new Maths.Expressions.Matrices.Vector(new[]
+            {
+                new Number(5),
+                new Number(10),
+                new Number(15)
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulMatrixByNumberTest()
+        {
+            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(3), new Number(4) })
+            });
+            var number = new Number(5);
+            var exp = new Mul(matrix, number);
+
+            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(5), new Number(10) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(15), new Number(20) })
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulNumberByMatrixTest()
+        {
+            var number = new Number(5);
+            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(3), new Number(4) })
+            });
+            var exp = new Mul(number, matrix);
+
+            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            {
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(5), new Number(10) }),
+                new Maths.Expressions.Matrices.Vector(new[] { new Number(15), new Number(20) })
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteMulBoolByBoolTest()
+        {
+            var bool1 = new Bool(true);
+            var bool2 = new Bool(true);
+            var exp = new Mul(bool1, bool2);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

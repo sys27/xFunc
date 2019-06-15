@@ -46,9 +46,16 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void ExecuteInvalidParametersTest()
+        {
+            var or = new Or(new Number(1), new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => or.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
             var greaterThen = new GreaterThan(Variable.X, new Number(10));
             var exp = new Or(lessThen, greaterThen);

@@ -30,7 +30,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="body">The body of loop.</param>
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
-        /// <param name="iter">The itererator section.</param>
+        /// <param name="iter">The iterator section.</param>
         public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : base(new[] { body, init, cond, iter }) { }
 
         /// <summary>

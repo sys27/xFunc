@@ -14,6 +14,7 @@
 // limitations under the License.
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 
@@ -27,27 +28,35 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateGreaterTrueTest1()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 463) };
-            var lessThen = new GreaterOrEqual(Variable.X, new Number(10));
+            var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-            Assert.True((bool)lessThen.Execute(parameters));
+            Assert.True((bool)greaterOrEqual.Execute(parameters));
         }
 
         [Fact]
         public void CalculateGreaterTrueTest2()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var lessThen = new GreaterOrEqual(Variable.X, new Number(10));
+            var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-            Assert.True((bool)lessThen.Execute(parameters));
+            Assert.True((bool)greaterOrEqual.Execute(parameters));
         }
 
         [Fact]
         public void CalculateGreaterFalseTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new GreaterOrEqual(Variable.X, new Number(10));
+            var greaterOrEqual = new GreaterOrEqual(Variable.X, new Number(10));
 
-            Assert.False((bool)lessThen.Execute(parameters));
+            Assert.False((bool)greaterOrEqual.Execute(parameters));
+        }
+
+        [Fact]
+        public void CalculateInvalidTypeTest()
+        {
+            var greaterOrEqual = new GreaterOrEqual(new Bool(true), new Bool(true));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => greaterOrEqual.Execute());
         }
 
         [Fact]

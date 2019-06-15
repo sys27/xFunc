@@ -14,12 +14,13 @@
 // limitations under the License.
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-    
+
     public class GreaterTest
     {
 
@@ -36,9 +37,17 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateGreaterFalseTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new GreaterThan(Variable.X, new Number(10));
+            var greaterThan = new GreaterThan(Variable.X, new Number(10));
 
-            Assert.False((bool)lessThen.Execute(parameters));
+            Assert.False((bool)greaterThan.Execute(parameters));
+        }
+
+        [Fact]
+        public void CalculateInvalidTypeTest()
+        {
+            var greaterThan = new GreaterThan(new Bool(true), new Bool(true));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => greaterThan.Execute());
         }
 
         [Fact]

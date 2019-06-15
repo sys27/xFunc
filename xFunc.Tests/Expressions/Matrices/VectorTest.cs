@@ -24,6 +24,18 @@ namespace xFunc.Tests.Expressions.Matrices
     {
 
         [Fact]
+        public void NullArgumentsTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Vector(null));
+        }
+
+        [Fact]
+        public void EmptyArgumentsTest()
+        {
+            Assert.Throws<ArgumentException>(() => new Vector(new IExpression[0]));
+        }
+
+        [Fact]
         public void MulByNumberVectorTest()
         {
             var vector = new Vector(new[] { new Number(2), new Number(3) });

@@ -14,6 +14,7 @@
 // limitations under the License.
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 
@@ -39,6 +40,14 @@ namespace xFunc.Tests.Expressions.Programming
             var lessThen = new LessThan(Variable.X, new Number(10));
 
             Assert.False((bool)lessThen.Execute(parameters));
+        }
+
+        [Fact]
+        public void CalculateInvalidTypeTest()
+        {
+            var lessThen = new LessThan(new Bool(true), new Bool(true));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => lessThen.Execute());
         }
 
         [Fact]

@@ -14,6 +14,7 @@
 // limitations under the License.
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
@@ -114,6 +115,14 @@ namespace xFunc.Tests.Expressions.Programming
             var result = (bool)equal.Execute(parameters);
 
             Assert.True(result);
+        }
+
+        [Fact]
+        public void CalculateInvalidParametersTest()
+        {
+            var equal = new Equal(new ComplexNumber(3, 2), new ComplexNumber(3, 2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => equal.Execute());
         }
 
         [Fact]

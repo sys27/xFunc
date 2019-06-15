@@ -31,13 +31,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="args">The values of vector.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IExpression[] args) : base(args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-            if (args.Length == 0)
-                throw new ArgumentException(Resource.MatrixArgException, nameof(args));
-        }
+        public Vector(IExpression[] args) : base(args) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.
@@ -160,8 +154,10 @@ namespace xFunc.Maths.Expressions.Matrices
             }
             set
             {
-                if (value != null && value.Length == 0)
-                    throw new ArgumentException();
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+                if (value.Length == 0)
+                    throw new ArgumentException(Resource.MatrixArgException, nameof(value));
 
                 base.Arguments = value;
             }

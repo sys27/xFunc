@@ -12,6 +12,8 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+
+using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
@@ -69,6 +71,25 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             var exp2 = new Bool(true);
 
             Assert.True(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualsTest3()
+        {
+            var exp1 = new Bool(true);
+            var exp2 = new Number(2);
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void ToStringTest()
+        {
+            var trueExp = new Bool(true);
+            var falseExp = new Bool(false);
+
+            Assert.Equal("True", trueExp.ToString());
+            Assert.Equal("False", falseExp.ToString());
         }
 
         [Fact]

@@ -46,6 +46,14 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void CalculateInvalidParametersTest()
+        {
+            var and = new And(new Number(1), new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => and.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var lessThen = new LessThan(Variable.X, new Number(10));

@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Globalization;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
 {
@@ -68,6 +69,9 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="type">The type of parameter.</param>
         public Parameter(string key, object value, ParameterType type)
         {
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentNullException(nameof(key));
+
             this.Key = key;
             this.Value = value;
             this.Type = type;
@@ -164,6 +168,12 @@ namespace xFunc.Maths.Expressions.Collections
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                if (Type != ParameterType.Normal)
+                    throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, Key));
+
                 if (IsNumber(value))
                     value = Convert.ToDouble(value);
 

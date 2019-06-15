@@ -49,7 +49,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTEstExecption()
+        public void ExecuteTEstException()
         {
             var exp = new Abs(new Bool(false));
 

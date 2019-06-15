@@ -93,47 +93,47 @@ namespace xFunc.Maths
             switch (token.Operation)
             {
                 case Operations.Addition:
-                    return new Add(GetSecondAgrument(args), GetArgument(args));
+                    return new Add(GetSecondArgument(args), GetArgument(args));
                 case Operations.Subtraction:
-                    return new Sub(GetSecondAgrument(args), GetArgument(args));
+                    return new Sub(GetSecondArgument(args), GetArgument(args));
                 case Operations.Multiplication:
-                    return new Mul(GetSecondAgrument(args), GetArgument(args));
+                    return new Mul(GetSecondArgument(args), GetArgument(args));
                 case Operations.Division:
-                    return new Div(GetSecondAgrument(args), GetArgument(args));
+                    return new Div(GetSecondArgument(args), GetArgument(args));
                 case Operations.Exponentiation:
-                    return new Pow(GetSecondAgrument(args), GetArgument(args));
+                    return new Pow(GetSecondArgument(args), GetArgument(args));
                 case Operations.UnaryMinus:
                     return new UnaryMinus(GetArgument(args));
                 case Operations.Factorial:
                     return new Fact(GetArgument(args));
                 case Operations.Modulo:
-                    return new Mod(GetSecondAgrument(args), GetArgument(args));
+                    return new Mod(GetSecondArgument(args), GetArgument(args));
                 case Operations.Assign:
-                    return new Define(GetSecondAgrument(args), GetArgument(args));
+                    return new Define(GetSecondArgument(args), GetArgument(args));
                 case Operations.ConditionalAnd:
-                    return new Expressions.Programming.And(GetSecondAgrument(args), GetArgument(args));
+                    return new Expressions.Programming.And(GetSecondArgument(args), GetArgument(args));
                 case Operations.ConditionalOr:
-                    return new Expressions.Programming.Or(GetSecondAgrument(args), GetArgument(args));
+                    return new Expressions.Programming.Or(GetSecondArgument(args), GetArgument(args));
                 case Operations.Equal:
-                    return new Equal(GetSecondAgrument(args), GetArgument(args));
+                    return new Equal(GetSecondArgument(args), GetArgument(args));
                 case Operations.NotEqual:
-                    return new NotEqual(GetSecondAgrument(args), GetArgument(args));
+                    return new NotEqual(GetSecondArgument(args), GetArgument(args));
                 case Operations.LessThan:
-                    return new LessThan(GetSecondAgrument(args), GetArgument(args));
+                    return new LessThan(GetSecondArgument(args), GetArgument(args));
                 case Operations.LessOrEqual:
-                    return new LessOrEqual(GetSecondAgrument(args), GetArgument(args));
+                    return new LessOrEqual(GetSecondArgument(args), GetArgument(args));
                 case Operations.GreaterThan:
-                    return new GreaterThan(GetSecondAgrument(args), GetArgument(args));
+                    return new GreaterThan(GetSecondArgument(args), GetArgument(args));
                 case Operations.GreaterOrEqual:
-                    return new GreaterOrEqual(GetSecondAgrument(args), GetArgument(args));
+                    return new GreaterOrEqual(GetSecondArgument(args), GetArgument(args));
                 case Operations.AddAssign:
-                    return new AddAssign(GetSecondAgrument(args), GetArgument(args));
+                    return new AddAssign(GetSecondArgument(args), GetArgument(args));
                 case Operations.SubAssign:
-                    return new SubAssign(GetSecondAgrument(args), GetArgument(args));
+                    return new SubAssign(GetSecondArgument(args), GetArgument(args));
                 case Operations.MulAssign:
-                    return new MulAssign(GetSecondAgrument(args), GetArgument(args));
+                    return new MulAssign(GetSecondArgument(args), GetArgument(args));
                 case Operations.DivAssign:
-                    return new DivAssign(GetSecondAgrument(args), GetArgument(args));
+                    return new DivAssign(GetSecondArgument(args), GetArgument(args));
                 case Operations.Increment:
                     return new Inc(GetArgument(args));
                 case Operations.Decrement:
@@ -141,19 +141,19 @@ namespace xFunc.Maths
                 case Operations.Not:
                     return new Not(GetArgument(args));
                 case Operations.And:
-                    return new Expressions.LogicalAndBitwise.And(GetSecondAgrument(args), GetArgument(args));
+                    return new Expressions.LogicalAndBitwise.And(GetSecondArgument(args), GetArgument(args));
                 case Operations.Or:
-                    return new Expressions.LogicalAndBitwise.Or(GetSecondAgrument(args), GetArgument(args));
+                    return new Expressions.LogicalAndBitwise.Or(GetSecondArgument(args), GetArgument(args));
                 case Operations.XOr:
-                    return new XOr(GetSecondAgrument(args), GetArgument(args));
+                    return new XOr(GetSecondArgument(args), GetArgument(args));
                 case Operations.Implication:
-                    return new Implication(GetSecondAgrument(args), GetArgument(args));
+                    return new Implication(GetSecondArgument(args), GetArgument(args));
                 case Operations.Equality:
-                    return new Equality(GetSecondAgrument(args), GetArgument(args));
+                    return new Equality(GetSecondArgument(args), GetArgument(args));
                 case Operations.NOr:
-                    return new NOr(GetSecondAgrument(args), GetArgument(args));
+                    return new NOr(GetSecondArgument(args), GetArgument(args));
                 case Operations.NAnd:
-                    return new NAnd(GetSecondAgrument(args), GetArgument(args));
+                    return new NAnd(GetSecondArgument(args), GetArgument(args));
                 default:
                     return null;
             }
@@ -172,15 +172,15 @@ namespace xFunc.Maths
             switch (token.Function)
             {
                 case Functions.Add:
-                    return new Add(GetSecondAgrument(args), GetArgument(args));
+                    return new Add(GetSecondArgument(args), GetArgument(args));
                 case Functions.Sub:
-                    return new Sub(GetSecondAgrument(args), GetArgument(args));
+                    return new Sub(GetSecondArgument(args), GetArgument(args));
                 case Functions.Mul:
-                    return new Mul(GetSecondAgrument(args), GetArgument(args));
+                    return new Mul(GetSecondArgument(args), GetArgument(args));
                 case Functions.Div:
-                    return new Div(GetSecondAgrument(args), GetArgument(args));
+                    return new Div(GetSecondArgument(args), GetArgument(args));
                 case Functions.Pow:
-                    return new Pow(GetSecondAgrument(args), GetArgument(args));
+                    return new Pow(GetSecondArgument(args), GetArgument(args));
                 case Functions.Absolute:
                     return new Abs(GetArgument(args));
                 case Functions.Sine:
@@ -210,7 +210,7 @@ namespace xFunc.Maths
                 case Functions.Sqrt:
                     return new Sqrt(GetArgument(args));
                 case Functions.Root:
-                    return new Root(GetSecondAgrument(args), GetArgument(args));
+                    return new Root(GetSecondArgument(args), GetArgument(args));
                 case Functions.Ln:
                     return new Ln(GetArgument(args));
                 case Functions.Lg:
@@ -218,7 +218,7 @@ namespace xFunc.Maths
                 case Functions.Lb:
                     return new Lb(GetArgument(args));
                 case Functions.Log:
-                    return new Log(GetArgument(args), GetSecondAgrument(args));
+                    return new Log(GetArgument(args), GetSecondArgument(args));
                 case Functions.Sineh:
                     return new Sinh(GetArgument(args));
                 case Functions.Cosineh:
@@ -268,7 +268,7 @@ namespace xFunc.Maths
                 case Functions.Del:
                     return new Del(this.differentiator, this.simplifier, GetArgument(args));
                 case Functions.Define:
-                    return new Define(GetSecondAgrument(args), GetArgument(args));
+                    return new Define(GetSecondArgument(args), GetArgument(args));
                 case Functions.Vector:
                     return new Vector(GetArguments(args, token.CountOfParams));
                 case Functions.Matrix:
@@ -280,15 +280,15 @@ namespace xFunc.Maths
                 case Functions.Inverse:
                     return new Inverse(GetArgument(args));
                 case Functions.DotProduct:
-                    return new DotProduct(GetSecondAgrument(args), GetArgument(args));
+                    return new DotProduct(GetSecondArgument(args), GetArgument(args));
                 case Functions.CrossProduct:
-                    return new CrossProduct(GetSecondAgrument(args), GetArgument(args));
+                    return new CrossProduct(GetSecondArgument(args), GetArgument(args));
                 case Functions.If:
                     return new If(GetArguments(args, token.CountOfParams));
                 case Functions.For:
                     return new For(GetArguments(args, token.CountOfParams));
                 case Functions.While:
-                    return new While(GetSecondAgrument(args), GetArgument(args));
+                    return new While(GetSecondArgument(args), GetArgument(args));
                 case Functions.Undefine:
                     return new Undefine(GetArgument(args));
                 case Functions.Im:
@@ -345,7 +345,7 @@ namespace xFunc.Maths
             return arguments[arguments.Count - 1];
         }
 
-        private IExpression GetSecondAgrument(List<IExpression> arguments)
+        private IExpression GetSecondArgument(List<IExpression> arguments)
         {
             if (arguments.Count < 2)
                 throw new ParseException(Resource.LessParams);

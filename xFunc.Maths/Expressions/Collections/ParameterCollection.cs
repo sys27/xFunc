@@ -24,13 +24,13 @@ namespace xFunc.Maths.Expressions.Collections
 {
 
     /// <summary>
-    /// Strongly typed dictionaty that contains value of variables.
+    /// Strongly typed dictionary that contains value of variables.
     /// </summary>
     public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChanged
     {
 
-        private readonly HashSet<Parameter> consts;
-        private HashSet<Parameter> collection;
+        private readonly HashSet<Parameter> constants;
+        private readonly HashSet<Parameter> collection;
 
         /// <summary>
         /// Occurs when the collection changes.
@@ -49,13 +49,13 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
         /// </summary>
-        /// <param name="initConsts">if set to <c>true</c> initialize constants.</param>
-        public ParameterCollection(bool initConsts)
+        /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
+        public ParameterCollection(bool initConstants)
         {
-            consts = new HashSet<Parameter>();
+            constants = new HashSet<Parameter>();
             collection = new HashSet<Parameter>();
 
-            if (initConsts)
+            if (initConstants)
                 InitializeDefaults();
         }
 
@@ -73,13 +73,13 @@ namespace xFunc.Maths.Expressions.Collections
         /// Initializes a new instance of the <see cref="ParameterCollection" /> class.
         /// </summary>
         /// <param name="parameters">The parameters.</param>
-        /// <param name="initConsts">if set to <c>true</c> initialize constants.</param>
-        public ParameterCollection(IEnumerable<Parameter> parameters, bool initConsts)
+        /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
+        public ParameterCollection(IEnumerable<Parameter> parameters, bool initConstants)
         {
-            consts = new HashSet<Parameter>();
+            constants = new HashSet<Parameter>();
             collection = new HashSet<Parameter>(parameters);
 
-            if (initConsts)
+            if (initConstants)
                 InitializeDefaults();
         }
 
@@ -94,20 +94,20 @@ namespace xFunc.Maths.Expressions.Collections
 
         private void InitializeDefaults()
         {
-            consts.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
-            consts.Add(Parameter.CreateConstant("pi", Math.PI)); // Archimedes' constant
-            consts.Add(Parameter.CreateConstant("e", Math.E));  // Euler's number
-            consts.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne));  // Imaginary unit
-            consts.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
-            consts.Add(Parameter.CreateConstant("c", 299792458));   // Speed of Light (c0)
-            consts.Add(Parameter.CreateConstant("h", 6.62607004E-34));  // Planck Constant
-            consts.Add(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
-            consts.Add(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
-            consts.Add(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
-            consts.Add(Parameter.CreateConstant("G", 6.64078E-11)); // Gravitational constant
-            consts.Add(Parameter.CreateConstant("α", 2.5029078750958928222839)); // Feigenbaum constant
-            consts.Add(Parameter.CreateConstant("σ", 5.670367E-8)); // Stefan-Boltzmann constant
-            consts.Add(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
+            constants.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
+            constants.Add(Parameter.CreateConstant("pi", Math.PI)); // Archimedes' constant
+            constants.Add(Parameter.CreateConstant("e", Math.E));  // Euler's number
+            constants.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne));  // Imaginary unit
+            constants.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
+            constants.Add(Parameter.CreateConstant("c", 299792458));   // Speed of Light (c0)
+            constants.Add(Parameter.CreateConstant("h", 6.62607004E-34));  // Planck Constant
+            constants.Add(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
+            constants.Add(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
+            constants.Add(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
+            constants.Add(Parameter.CreateConstant("G", 6.64078E-11)); // Gravitational constant
+            constants.Add(Parameter.CreateConstant("α", 2.5029078750958928222839)); // Feigenbaum constant
+            constants.Add(Parameter.CreateConstant("σ", 5.670367E-8)); // Stefan-Boltzmann constant
+            constants.Add(Parameter.CreateConstant("γ", 0.57721566490153286060651)); // Euler–Mascheroni constant
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </returns>
         public IEnumerator<Parameter> GetEnumerator()
         {
-            foreach (var item in consts)
+            foreach (var item in constants)
                 yield return item;
 
             foreach (var item in collection)
@@ -148,17 +148,17 @@ namespace xFunc.Maths.Expressions.Collections
         {
             get
             {
-                if (collection.Count + consts.Count - 1 < index)
+                if (collection.Count + constants.Count - 1 < index)
                     throw new IndexOutOfRangeException();
 
                 if (collection.Count > index)
                     return collection.ElementAt(index).Value;
 
-                return consts.ElementAt(index - collection.Count).Value;
+                return constants.ElementAt(index - collection.Count).Value;
             }
             set
             {
-                if (collection.Count + consts.Count - 1 < index)
+                if (collection.Count + constants.Count - 1 < index)
                     throw new IndexOutOfRangeException();
 
                 if (collection.Count <= index)
@@ -191,14 +191,10 @@ namespace xFunc.Maths.Expressions.Collections
                 {
                     this.Add(key, value);
                 }
-                else if (param.Type == ParameterType.Normal)
+                else
                 {
                     param.Value = value;
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                }
-                else
-                {
-                    throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, param.Key));
                 }
             }
         }
@@ -210,7 +206,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (item != null)
                 return item;
 
-            var param = consts.FirstOrDefault(p => p.Key == key);
+            var param = constants.FirstOrDefault(p => p.Key == key);
             if (param != null)
                 return param;
 
@@ -296,43 +292,43 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
-        /// Determines whether an onject contains the specified element.
+        /// Determines whether an object contains the specified element.
         /// </summary>
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool Contains(Parameter param)
         {
-            return collection.Contains(param) || consts.Contains(param);
+            return collection.Contains(param) || constants.Contains(param);
         }
 
         /// <summary>
-        /// Determines whether an onject contains the specified element.
+        /// Determines whether an object contains the specified element.
         /// </summary>
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool ContainsInConstants(Parameter param)
         {
-            return consts.Contains(param);
+            return constants.Contains(param);
         }
 
         /// <summary>
-        /// Determines whether an onject contains the specified key.
+        /// Determines whether an object contains the specified key.
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
         public bool ContainsKey(string key)
         {
-            return collection.FirstOrDefault(p => p.Key == key) != null || consts.FirstOrDefault(p => p.Key == key) != null;
+            return collection.FirstOrDefault(p => p.Key == key) != null || constants.FirstOrDefault(p => p.Key == key) != null;
         }
 
         /// <summary>
-        /// Determines whether an onject contains the specified key.
+        /// Determines whether an object contains the specified key.
         /// </summary>
         /// <param name="key">The name of variable.</param>
         /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
         public bool ContainsKeyInConstants(string key)
         {
-            return consts.FirstOrDefault(p => p.Key == key) != null;
+            return constants.FirstOrDefault(p => p.Key == key) != null;
         }
 
         /// <summary>
@@ -341,7 +337,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <value>
         /// The constants.
         /// </value>
-        public IEnumerable<Parameter> Constants => consts;
+        public IEnumerable<Parameter> Constants => constants;
 
         /// <summary>
         /// Gets the collection of variables.

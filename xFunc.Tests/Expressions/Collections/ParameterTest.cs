@@ -12,6 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+using System;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
@@ -68,6 +69,34 @@ namespace xFunc.Tests.Expressions.Collections
             var isEqual = parameter1.Equals(parameter2);
 
             Assert.False(isEqual);
+        }
+
+        [Fact]
+        public void EmptyKeyTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Parameter(string.Empty, 1.0));
+        }
+
+        [Fact]
+        public void SetNullValueTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Parameter("x", null));
+        }
+
+        [Fact]
+        public void EditConstantParameterTest()
+        {
+            var parameter = new Parameter("x", 1.0, ParameterType.Constant);
+
+            Assert.Throws<ParameterIsReadOnlyException>(() => parameter.Value = 3.0);
+        }
+
+        [Fact]
+        public void EditReadonlyParameterTest()
+        {
+            var parameter = new Parameter("x", 1.0, ParameterType.ReadOnly);
+
+            Assert.Throws<ParameterIsReadOnlyException>(() => parameter.Value = 3.0);
         }
 
         [Fact]

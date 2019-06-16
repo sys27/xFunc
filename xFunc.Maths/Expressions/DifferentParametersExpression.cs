@@ -192,22 +192,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public abstract int MinParameters { get; }
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public abstract int MaxParameters { get; }
-
-        /// <summary>
         /// Gets or Sets the count of parameters.
         /// </summary>
         /// <value>

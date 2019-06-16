@@ -21,21 +21,7 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public interface IFunctionExpression : IExpression
     {
-        
-        /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        int MinParameters { get; }
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        int MaxParameters { get; }
+
         /// <summary>
         /// Gets the count of parameters.
         /// </summary>

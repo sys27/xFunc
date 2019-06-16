@@ -180,22 +180,6 @@ namespace xFunc.Maths.Expressions
         public Number DerivativePoint => ParametersCount >= 3 ? (Number)m_arguments[2] : null;
 
         /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public override int MinParameters => 1;
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public override int MaxParameters => 3;
-
-        /// <summary>
         /// Gets or sets the simplifier.
         /// </summary>
         /// <value>

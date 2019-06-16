@@ -85,22 +85,6 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public override int MinParameters => 4;
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public override int MaxParameters => 4;
-
-        /// <summary>
         /// Gets the body of loop.
         /// </summary>
         /// <value>

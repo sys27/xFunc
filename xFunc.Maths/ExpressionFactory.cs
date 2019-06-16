@@ -30,7 +30,7 @@ namespace xFunc.Maths
 {
 
     /// <summary>
-    /// Factory of mathematic expressions.
+    /// Factory of expressions.
     /// </summary>
     public class ExpressionFactory : IExpressionFactory
     {

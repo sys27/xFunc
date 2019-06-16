@@ -171,22 +171,6 @@ namespace xFunc.Maths.Expressions
         public IExpression Parent { get; set; }
 
         /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public virtual int MinParameters => 1;
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public virtual int MaxParameters => 1;
-
-        /// <summary>
         /// Gets the count of parameters.
         /// </summary>
         /// <value>

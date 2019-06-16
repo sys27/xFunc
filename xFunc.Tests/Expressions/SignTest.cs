@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -37,6 +38,14 @@ namespace xFunc.Tests.Expressions
             var result = exp.Execute();
 
             Assert.Equal(-1, result);
+        }
+
+        [Fact]
+        public void InvalidParameterTest()
+        {
+            var exp = new Sign(new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new Equal(m_left.Clone(), m_right.Clone());
+            return new NotEqual(m_left.Clone(), m_right.Clone());
         }
 
     }

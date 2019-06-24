@@ -40,11 +40,17 @@ namespace xFunc.Tests.Expressions.Programming
         public void BoolMulNumberTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
-            var add = new MulAssign(Variable.X, new Number(2));
+            var mul = new MulAssign(Variable.X, new Number(2));
 
-            Assert.Throws<NotSupportedException>(() => add.Execute(parameters));
+            Assert.Throws<NotSupportedException>(() => mul.Execute(parameters));
         }
-        
+
+        [Fact]
+        public void NotVarTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new MulAssign(new Number(1), new Number(1)));
+        }
+
         [Fact]
         public void CloneTest()
         {

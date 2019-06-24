@@ -27,11 +27,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
         /// </summary>
-        protected TrigonometricExpression() { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
-        /// </summary>
         /// <param name="expression">The argument of function.</param>
         protected TrigonometricExpression(IExpression expression) : base(expression) { }
 

@@ -197,8 +197,7 @@
     <Compile Include="Expressions\UserFunctionTest.cs" />
     <Compile Include="Expressions\VariableTest.cs" />
     <Compile Include="Expressions\SignTest.cs" />
-    <Compile Include="MathParameterCollectionTest.cs" />
-    <Compile Include="MathParserTest.cs" />
+    <Compile Include="ParserTest.cs" />
     <Compile Include="ProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\BooleanResultTest.cs" />

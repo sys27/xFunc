@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
@@ -134,6 +135,110 @@ namespace xFunc.Tests.Expressions.Collections
             var parameters = new ParameterCollection(true);
 
             Assert.Throws<ArgumentNullException>(() => parameters.Remove(string.Empty));
+        }
+
+        [Fact]
+        public void GetItemFromCollectionTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                new Parameter("x", 2.3)
+            };
+
+            Assert.Equal(2.3, parameters["x"]);
+        }
+
+        [Fact]
+        public void GetItemFromConstsTest()
+        {
+            var parameters = new ParameterCollection();
+
+            Assert.Equal(Math.PI, parameters["π"]);
+        }
+
+        [Fact]
+        public void GetItemKeyNotFoundTest()
+        {
+            var parameters = new ParameterCollection();
+
+            Assert.Throws<KeyNotFoundException>(() => parameters["hello"]);
+        }
+
+        [Fact]
+        public void SetItemFromCollectionTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                ["x"] = 2.3
+            };
+
+            Assert.Single(parameters.Collection);
+            Assert.True(parameters.ContainsKey("x"));
+            Assert.Equal(2.3, parameters["x"]);
+        }
+
+        [Fact]
+        public void SetExistItemFromCollectionTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                new Parameter("x", 2.3)
+            };
+            parameters["x"] = 3.3;
+
+            Assert.Single(parameters.Collection);
+            Assert.True(parameters.ContainsKey("x"));
+            Assert.Equal(3.3, parameters["x"]);
+        }
+
+        [Fact]
+        public void SetReadOnlyItemTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                new Parameter("hello", 2.5, ParameterType.ReadOnly)
+            };
+
+            Assert.Throws<ParameterIsReadOnlyException>(() => parameters["hello"] = 5);
+        }
+
+        [Fact]
+        public void OverrideConstsTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                ["π"] = 4
+            };
+
+            Assert.Single(parameters.Collection);
+            Assert.True(parameters.ContainsKey("π"));
+            Assert.Equal(4.0, parameters["π"]);
+        }
+
+        [Fact]
+        public void OverrideRemoveTest()
+        {
+            var parameters = new ParameterCollection
+            {
+                new Parameter("a", 1)
+            };
+            parameters["a"] = 2;
+            parameters.Remove("a");
+
+            Assert.Empty(parameters.Collection);
+        }
+
+        [Fact]
+        public void ClearTest()
+        {
+            var parameters = new ParameterCollection(false)
+            {
+                new Parameter("a", 1)
+            };
+
+            parameters.Clear();
+
+            Assert.Empty(parameters);
         }
 
     }

@@ -44,7 +44,13 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Throws<NotSupportedException>(() => add.Execute(parameters));
         }
-        
+
+        [Fact]
+        public void NotVarTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new SubAssign(new Number(1), new Number(1)));
+        }
+
         [Fact]
         public void CloneTest()
         {

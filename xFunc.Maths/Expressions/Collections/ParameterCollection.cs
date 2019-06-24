@@ -202,7 +202,6 @@ namespace xFunc.Maths.Expressions.Collections
         private Parameter GetParameterByKey(string key)
         {
             var item = collection.FirstOrDefault(p => p.Key == key);
-
             if (item != null)
                 return item;
 

@@ -34,12 +34,12 @@ using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 namespace xFunc.Tests
 {
 
-    public class MathParserTest
+    public class ParserTest
     {
 
         private Parser parser;
 
-        public MathParserTest()
+        public ParserTest()
         {
             parser = new Parser();
         }
@@ -330,7 +330,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ParserTest()
+        public void ParseTest()
         {
             var tokens = Builder()
                 .Function(Functions.Cosine, 1)

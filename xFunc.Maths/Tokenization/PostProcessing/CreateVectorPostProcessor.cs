@@ -24,8 +24,6 @@ namespace xFunc.Maths.Tokenization.PostProcessing
     public class CreateVectorPostProcessor : LexerPostProcessorBase
     {
 
-        private readonly FunctionToken vector = new FunctionToken(Functions.Vector);
-
         /// <summary>
         /// The method for post processing of tokens.
         /// </summary>
@@ -41,6 +39,7 @@ namespace xFunc.Maths.Tokenization.PostProcessing
                     if (previousToken is FunctionToken)
                         continue;
 
+                    var vector = new FunctionToken(Functions.Vector);
                     tokens.Insert(i, vector);
                     i++;
                 }

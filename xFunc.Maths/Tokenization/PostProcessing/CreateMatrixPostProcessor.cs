@@ -24,8 +24,6 @@ namespace xFunc.Maths.Tokenization.PostProcessing
     public class CreateMatrixPostProcessor : LexerPostProcessorBase
     {
 
-        private readonly FunctionToken matrix = new FunctionToken(Functions.Matrix);
-
         /// <summary>
         /// The method for post processing of tokens.
         /// </summary>
@@ -41,7 +39,7 @@ namespace xFunc.Maths.Tokenization.PostProcessing
                     var nextToken = GetNextToken(tokens, i);
                     if (IsVector(previousToken) && IsVector(nextToken))
                     {
-                        tokens[i - 1] = matrix;
+                        tokens[i - 1] = new FunctionToken(Functions.Matrix);
                     }
                 }
             }

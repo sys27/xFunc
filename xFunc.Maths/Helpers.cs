@@ -83,14 +83,12 @@ namespace xFunc.Maths
 
         private static void ConvertToCollection(IExpression expression, List<IExpression> collection)
         {
-            if (expression is UnaryExpression)
+            if (expression is UnaryExpression un)
             {
-                var un = expression as UnaryExpression;
                 ConvertToCollection(un.Argument, collection);
             }
-            else if (expression is BinaryExpression)
+            else if (expression is BinaryExpression bin)
             {
-                var bin = expression as BinaryExpression;
                 ConvertToCollection(bin.Left, collection);
                 ConvertToCollection(bin.Right, collection);
             }

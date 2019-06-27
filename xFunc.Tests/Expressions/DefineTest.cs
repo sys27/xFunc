@@ -107,6 +107,50 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
+        public void ExecuteWithoutParametesTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new Define(new Variable("π"), new Number(1)).Execute());
+        }
+
+        [Fact]
+        public void KeyIsNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Define(null, new Number(1)));
+        }
+
+        [Fact]
+        public void ValueIsNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Define(Variable.X, null));
+        }
+
+        [Fact]
+        public void EqualsSameReferenceTest()
+        {
+            var def = new Define(Variable.X, new Number(1));
+
+            Assert.True(def.Equals(def));
+        }
+
+        [Fact]
+        public void EqualsDifferentTypesTest()
+        {
+            var def = new Define(Variable.X, new Number(1));
+            var number = new Number(1);
+
+            Assert.False(def.Equals(number));
+        }
+
+        [Fact]
+        public void EqualsDifferentOnjectsTest()
+        {
+            var def1 = new Define(Variable.X, new Number(1));
+            var def2 = new Define(new Variable("y"), new Number(2));
+
+            Assert.False(def1.Equals(def2));
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Define(Variable.X, new Number(0));

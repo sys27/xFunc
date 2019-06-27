@@ -37,11 +37,6 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
-        protected BinaryExpression() { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
-        /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
         protected BinaryExpression(IExpression left, IExpression right)

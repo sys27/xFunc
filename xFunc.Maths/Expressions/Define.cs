@@ -37,7 +37,7 @@ namespace xFunc.Maths.Expressions
         public Define(IExpression key, IExpression value)
         {
             this.Key = key;
-            this.value = value;
+            this.Value = value;
         }
 
         /// <summary>
@@ -132,9 +132,13 @@ namespace xFunc.Maths.Expressions
             }
 
             if (key is UserFunction function)
+            {
                 parameters.Functions[function] = value;
 
-            return string.Format(Resource.AssignFunction, key, value);
+                return string.Format(Resource.AssignFunction, key, value);
+            }
+
+            throw new NotSupportedException();
         }
 
         /// <summary>

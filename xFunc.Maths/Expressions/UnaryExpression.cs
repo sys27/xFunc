@@ -33,11 +33,6 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
         /// </summary>
-        protected UnaryExpression() { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
-        /// </summary>
         /// <param name="argument">The expression.</param>
         protected UnaryExpression(IExpression argument)
         {

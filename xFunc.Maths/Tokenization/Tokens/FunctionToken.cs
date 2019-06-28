@@ -36,7 +36,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         public FunctionToken(Functions function, int countOfParams)
         {
             this.Function = function;
-            this.CountOfParams = countOfParams;
+            this.CountOfParameters = countOfParams;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Tokenization.Tokens
 
             var token = (FunctionToken)obj;
 
-            return this.Function == token.Function && this.CountOfParams == token.CountOfParams;
+            return this.Function == token.Function && this.CountOfParameters == token.CountOfParameters;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             var hash = 6949;
 
             hash = hash * 5437 + Function.GetHashCode();
-            hash = hash * 5437 + CountOfParams.GetHashCode();
+            hash = hash * 5437 + CountOfParameters.GetHashCode();
 
             return hash;
         }
@@ -82,7 +82,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Function: {Function} ({CountOfParams})";
+            return $"Function: {Function} ({CountOfParameters})";
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int CountOfParams { get; internal set; }
+        public int CountOfParameters { get; internal set; }
 
     }
 

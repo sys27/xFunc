@@ -28,62 +28,41 @@ namespace xFunc.Maths.Tokenization.PostProcessing
         {
             var func = (FunctionToken)tokens[index];
 
-            var countOfParams = 0;
-            var brackets = 1;
-            var oneParam = true;
-            var i = index + 2;
-            for (; i < tokens.Count;)
+            var countOfParameters = 0;
+            var brackets = 0;
+            var i = index + 1;
+            for (; i < tokens.Count; i++)
             {
                 var token = tokens[i];
                 if (token is SymbolToken symbol)
                 {
-                    if (symbol.IsCloseSymbol())
+                    if (symbol.IsOpenSymbol())
+                    {
+                        brackets++;
+                    }
+                    else if (symbol.IsCloseSymbol())
                     {
                         brackets--;
 
                         if (brackets == 0)
                             break;
                     }
-                    else if (symbol.IsOpenSymbol())
-                    {
-                        brackets++;
-
-                        if (oneParam)
-                        {
-                            countOfParams++;
-                            oneParam = false;
-                        }
-                    }
                     else if (symbol.Is(Symbols.Comma))
                     {
-                        oneParam = true;
+                        countOfParameters++;
                     }
-
-                    i++;
-                }
-                else if (token is FunctionToken)
-                {
-                    if (oneParam)
-                    {
-                        countOfParams++;
-                        oneParam = false;
-                    }
-
-                    i = CountParametersInternal(tokens, i) + 1;
                 }
                 else
                 {
-                    if (oneParam)
-                    {
-                        countOfParams++;
-                        oneParam = false;
-                    }
+                    if (countOfParameters == 0)
+                        countOfParameters++;
 
-                    i++;
+                    if (token is FunctionToken)
+                        i = CountParametersInternal(tokens, i);
                 }
             }
 
-            func.CountOfParams = countOfParams;
+            func.CountOfParameters = countOfParameters;
 
             return i;
         }

@@ -246,17 +246,17 @@ namespace xFunc.Maths
                 case Functions.Exp:
                     return new Exp(GetArgument(args));
                 case Functions.GCD:
-                    return new GCD(GetArguments(args, token.CountOfParams));
+                    return new GCD(GetArguments(args, token.CountOfParameters));
                 case Functions.LCM:
-                    return new LCM(GetArguments(args, token.CountOfParams));
+                    return new LCM(GetArguments(args, token.CountOfParameters));
                 case Functions.Factorial:
                     return new Fact(GetArgument(args));
                 case Functions.Sum:
-                    return new Sum(GetArguments(args, token.CountOfParams));
+                    return new Sum(GetArguments(args, token.CountOfParameters));
                 case Functions.Product:
-                    return new Product(GetArguments(args, token.CountOfParams));
+                    return new Product(GetArguments(args, token.CountOfParameters));
                 case Functions.Round:
-                    return new Round(GetArguments(args, token.CountOfParams));
+                    return new Round(GetArguments(args, token.CountOfParameters));
                 case Functions.Floor:
                     return new Floor(GetArgument(args));
                 case Functions.Ceil:
@@ -270,9 +270,9 @@ namespace xFunc.Maths
                 case Functions.Define:
                     return new Define(GetSecondArgument(args), GetArgument(args));
                 case Functions.Vector:
-                    return new Vector(GetArguments(args, token.CountOfParams));
+                    return new Vector(GetArguments(args, token.CountOfParameters));
                 case Functions.Matrix:
-                    return new Matrix(GetArguments(args, token.CountOfParams));
+                    return new Matrix(GetArguments(args, token.CountOfParameters));
                 case Functions.Transpose:
                     return new Transpose(GetArgument(args));
                 case Functions.Determinant:
@@ -284,9 +284,9 @@ namespace xFunc.Maths
                 case Functions.CrossProduct:
                     return new CrossProduct(GetSecondArgument(args), GetArgument(args));
                 case Functions.If:
-                    return new If(GetArguments(args, token.CountOfParams));
+                    return new If(GetArguments(args, token.CountOfParameters));
                 case Functions.For:
-                    return new For(GetArguments(args, token.CountOfParams));
+                    return new For(GetArguments(args, token.CountOfParameters));
                 case Functions.While:
                     return new While(GetSecondArgument(args), GetArgument(args));
                 case Functions.Undefine:
@@ -302,21 +302,21 @@ namespace xFunc.Maths
                 case Functions.Reciprocal:
                     return new Reciprocal(GetArgument(args));
                 case Functions.Min:
-                    return new Min(GetArguments(args, token.CountOfParams));
+                    return new Min(GetArguments(args, token.CountOfParameters));
                 case Functions.Max:
-                    return new Max(GetArguments(args, token.CountOfParams));
+                    return new Max(GetArguments(args, token.CountOfParameters));
                 case Functions.Avg:
-                    return new Avg(GetArguments(args, token.CountOfParams));
+                    return new Avg(GetArguments(args, token.CountOfParameters));
                 case Functions.Count:
-                    return new Count(GetArguments(args, token.CountOfParams));
+                    return new Count(GetArguments(args, token.CountOfParameters));
                 case Functions.Var:
-                    return new Var(GetArguments(args, token.CountOfParams));
+                    return new Var(GetArguments(args, token.CountOfParameters));
                 case Functions.Varp:
-                    return new Varp(GetArguments(args, token.CountOfParams));
+                    return new Varp(GetArguments(args, token.CountOfParameters));
                 case Functions.Stdev:
-                    return new Stdev(GetArguments(args, token.CountOfParams));
+                    return new Stdev(GetArguments(args, token.CountOfParameters));
                 case Functions.Stdevp:
-                    return new Stdevp(GetArguments(args, token.CountOfParams));
+                    return new Stdevp(GetArguments(args, token.CountOfParameters));
                 case Functions.Sign:
                     return new Sign(GetArgument(args));
                 default:
@@ -334,7 +334,7 @@ namespace xFunc.Maths
         {
             var args = arguments.ToList();
 
-            return new UserFunction(token.FunctionName, GetArguments(args, token.CountOfParams));
+            return new UserFunction(token.FunctionName, GetArguments(args, token.CountOfParameters));
         }
 
         private IExpression GetArgument(List<IExpression> arguments)

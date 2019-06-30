@@ -241,6 +241,95 @@ namespace xFunc.Tests.Expressions.Collections
             Assert.Empty(parameters);
         }
 
+        [Fact]
+        public void GetByIndexOutOfRangeLowerTest()
+        {
+            var parameters = new ParameterCollection(true);
+
+            Assert.Throws<IndexOutOfRangeException>(() => parameters[-1]);
+        }
+
+        [Fact]
+        public void GetByIndexOutOfRangeHigherTest()
+        {
+            var parameters = new ParameterCollection(true)
+            {
+                new Parameter("x", 1.0)
+            };
+
+            Assert.Throws<IndexOutOfRangeException>(() => parameters[parameters.Count()]);
+        }
+
+        [Fact]
+        public void GetConstantByIndexTest()
+        {
+            var parameters = new ParameterCollection(true)
+            {
+                new Parameter("x", 1.0)
+            };
+
+            var parameter = parameters[0];
+
+            Assert.Equal(Math.PI, parameter);
+        }
+
+        [Fact]
+        public void GetParameterByIndexTest()
+        {
+            var parameters = new ParameterCollection(true)
+            {
+                new Parameter("x", 1.0)
+            };
+
+            var parameter = parameters[parameters.Constants.Count()];
+
+            Assert.Equal(1.0, parameter);
+        }
+
+        [Fact]
+        public void SetByIndexOutOfRangeLowerTest()
+        {
+            var parameters = new ParameterCollection(true);
+
+            Assert.Throws<IndexOutOfRangeException>(() => parameters[-1] = new Parameter("x", 1.0));
+        }
+
+        [Fact]
+        public void SetByIndexOutOfRangeHigherTest()
+        {
+            var parameters = new ParameterCollection(true)
+            {
+                new Parameter("x", 1.0)
+            };
+
+            Assert.Throws<IndexOutOfRangeException>(() => parameters[parameters.Count()] = new Parameter("x", 1.0));
+        }
+
+        [Fact]
+        public void SetConstantByIndexTest()
+        {
+            var parameters = new ParameterCollection(true)
+            {
+                new Parameter("x", 1.0)
+            };
+
+            Assert.Throws<ParameterIsReadOnlyException>(() => parameters[0] = 1.0);
+        }
+
+        [Fact]
+        public void SetParameterByIndexTest()
+        {
+            var parameters = new ParameterCollection(true)
+            {
+                new Parameter("x", 1.0)
+            };
+
+            parameters[parameters.Constants.Count()] = 2.0;
+            var parameter = parameters[parameters.Constants.Count()];
+
+            Assert.Equal(2.0, parameter);
+        }
+
     }
 
 }

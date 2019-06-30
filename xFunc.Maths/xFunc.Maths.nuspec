@@ -5,9 +5,11 @@
         <version>$version$</version>
         <authors>Dmitry Kischenko</authors>
         <owners>Dmitry Kischenko</owners>
-        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">Apache-2.0</license>
+		<licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
         <projectUrl>https://github.com/sys27/xFunc</projectUrl>
-        <iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=xfunc&amp;DownloadId=639207&amp;Build=20266</iconUrl>
+        <iconUrl>https://raw.githubusercontent.com/sys27/xFunc/master/xFunc/Images/xFunc.ico</iconUrl>
         <description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</description>
         <releaseNotes></releaseNotes>
         <copyright>Copyright 2012-2019 Dmitry Kischenko</copyright>

@@ -43,7 +43,6 @@ namespace xFunc.Maths.Expressions.Collections
         public ParameterCollection()
             : this(true)
         {
-
         }
 
         /// <summary>
@@ -51,12 +50,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="initConstants">if set to <c>true</c> initialize constants.</param>
         public ParameterCollection(bool initConstants)
+            : this(Enumerable.Empty<Parameter>(), initConstants)
         {
-            constants = new HashSet<Parameter>();
-            collection = new HashSet<Parameter>();
-
-            if (initConstants)
-                InitializeDefaults();
         }
 
         /// <summary>
@@ -66,7 +61,6 @@ namespace xFunc.Maths.Expressions.Collections
         public ParameterCollection(IEnumerable<Parameter> parameters)
             : this(parameters, true)
         {
-
         }
 
         /// <summary>
@@ -80,7 +74,7 @@ namespace xFunc.Maths.Expressions.Collections
             collection = new HashSet<Parameter>(parameters);
 
             if (initConstants)
-                InitializeDefaults();
+                InitializeConstants();
         }
 
         /// <summary>
@@ -92,7 +86,7 @@ namespace xFunc.Maths.Expressions.Collections
             CollectionChanged?.Invoke(this, args);
         }
 
-        private void InitializeDefaults()
+        private void InitializeConstants()
         {
             constants.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
             constants.Add(Parameter.CreateConstant("pi", Math.PI)); // Archimedes' constant
@@ -148,24 +142,25 @@ namespace xFunc.Maths.Expressions.Collections
         {
             get
             {
-                if (collection.Count + constants.Count - 1 < index)
+                if (index < 0 || index >= constants.Count + collection.Count)
                     throw new IndexOutOfRangeException();
 
-                if (collection.Count > index)
-                    return collection.ElementAt(index).Value;
+                if (index < constants.Count)
+                    return constants.ElementAt(index).Value;
 
-                return constants.ElementAt(index - collection.Count).Value;
+                return collection.ElementAt(index - constants.Count).Value;
             }
             set
             {
-                if (collection.Count + constants.Count - 1 < index)
+                if (index < 0 || index >= constants.Count + collection.Count)
                     throw new IndexOutOfRangeException();
 
-                if (collection.Count <= index)
+                if (index < constants.Count)
                     throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, collection.ElementAt(index).Key));
 
-                var element = collection.ElementAt(index);
+                var element = collection.ElementAt(index - constants.Count);
                 element.Value = value;
+
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }

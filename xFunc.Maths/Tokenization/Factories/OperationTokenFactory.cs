@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
@@ -74,15 +73,6 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else if (operation == "!")
             {
-                var lastToken = tokens.LastOrDefault();
-                if (lastToken == null ||
-                    !((lastToken is SymbolToken symbol && symbol.Is(Symbols.CloseBracket)) ||
-                       lastToken is NumberToken ||
-                       lastToken is VariableToken))
-                {
-                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, operation));
-                }
-
                 result.Token = new OperationToken(Operations.Factorial);
             }
             else if (operation == "%" || operation == "mod")
@@ -147,14 +137,6 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else if (operation == "not" || operation == "~")
             {
-                var lastToken = tokens.LastOrDefault();
-                if (lastToken != null)
-                {
-                    if ((lastToken is SymbolToken symbol && symbol.Is(Symbols.CloseBracket)) ||
-                        lastToken is NumberToken || lastToken is VariableToken)
-                        throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, operation));
-                }
-
                 result.Token = new OperationToken(Operations.Not);
             }
             else if (operation == "and" || operation == "&")

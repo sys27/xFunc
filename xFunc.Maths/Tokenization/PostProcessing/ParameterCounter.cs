@@ -47,7 +47,7 @@ namespace xFunc.Maths.Tokenization.PostProcessing
                         if (brackets == 0)
                             break;
                     }
-                    else if (symbol.Is(Symbols.Comma))
+                    else if (symbol.IsComma())
                     {
                         countOfParameters++;
                     }

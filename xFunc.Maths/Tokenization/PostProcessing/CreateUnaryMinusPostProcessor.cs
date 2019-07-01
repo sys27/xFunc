@@ -51,7 +51,7 @@ namespace xFunc.Maths.Tokenization.PostProcessing
         private bool IsOpenSymbolOrComma(IToken token)
         {
             return token is SymbolToken symbolToken &&
-                   (symbolToken.IsOpenSymbol() || symbolToken.Is(Symbols.Comma));
+                   (symbolToken.IsOpenSymbol() || symbolToken.IsComma());
         }
 
         private bool IsOperationToken(IToken token)

@@ -130,6 +130,9 @@
     <Compile Include="ExpressionFactory.cs" />
     <Compile Include="Tokenization\PostProcessing\CreateUnaryMinusPostProcessor.cs" />
     <Compile Include="Tokenization\PostProcessing\RemoveUnaryPlusPostProcessor.cs" />
+    <Compile Include="Tokenization\PostProcessing\CloseBracketNotEnoughParameters.cs" />
+    <Compile Include="Tokenization\PostProcessing\FactorialNotSupportedSymbol.cs" />
+    <Compile Include="Tokenization\PostProcessing\NotOperationNotSupportedSymbol.cs" />
     <Compile Include="TokenizeException.cs" />
     <Compile Include="ParseException.cs" />
     <Compile Include="Expressions\Abs.cs" />

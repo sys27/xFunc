@@ -107,6 +107,17 @@ namespace xFunc.Maths.Tokenization.Tokens
             return this.Is(Symbols.CloseBracket) || this.Is(Symbols.CloseBrace);
         }
 
+        /// <summary>
+        /// Determines whether this instance is comma symbol.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance is comma symbol; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsComma()
+        {
+            return this.Is(Symbols.Comma);
+        }
+
         private int GetPriority()
         {
             switch (Symbol)

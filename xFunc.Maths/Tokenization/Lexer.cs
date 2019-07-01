@@ -54,6 +54,9 @@ namespace xFunc.Maths.Tokenization
 
             postProcessors = new ILexerPostProcessor[]
             {
+                new NotOperationNotSupportedSymbol(),
+                new FactorialNotSupportedSymbol(),
+                new CloseBracketNotEnoughParameters(),
                 new CreateUnaryMinusPostProcessor(),
                 new RemoveUnaryPlusPostProcessor(),
                 new CreateVectorPostProcessor(),

@@ -119,13 +119,12 @@ namespace xFunc.Maths.Tokenization
                 throw new TokenizeException(Resource.NotBalanced);
 
             var tokens = new List<IToken>();
-            var readOnlyTokensList = new ReadOnlyCollection<IToken>(tokens);
             for (var i = 0; i < function.Length;)
             {
                 FactoryResult result = null;
                 foreach (var factory in factories)
                 {
-                    result = factory.CreateToken(function, i, readOnlyTokensList);
+                    result = factory.CreateToken(function, i);
                     if (result == null)
                         continue;
 

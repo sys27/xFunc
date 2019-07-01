@@ -12,8 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
@@ -37,13 +35,11 @@ namespace xFunc.Maths.Tokenization.Factories
         /// Creates the token.
         /// </summary>
         /// <param name="match">The match.</param>
-        /// <param name="tokens">The tokens.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        /// <exception cref="TokenizeException">
-        /// </exception>
-        protected override FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens)
+        /// <exception cref="TokenizeException">Throws when <paramref name="match"/> has the not supported symbol.</exception>
+        protected override FactoryResult CreateTokenInternal(Match match)
         {
             var result = new FactoryResult();
             var symbol = match.Value;

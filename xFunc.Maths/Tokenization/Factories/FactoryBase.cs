@@ -44,24 +44,22 @@ namespace xFunc.Maths.Tokenization.Factories
         /// Creates the token.
         /// </summary>
         /// <param name="match">The match.</param>
-        /// <param name="tokens">The tokens.</param>
         /// <returns>The token.</returns>
-        protected abstract FactoryResult CreateTokenInternal(Match match, ReadOnlyCollection<IToken> tokens);
+        protected abstract FactoryResult CreateTokenInternal(Match match);
 
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
         /// <param name="startIndex">The start index.</param>
-        /// <param name="tokens">The tokens.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        public FactoryResult CreateToken(string function, int startIndex, ReadOnlyCollection<IToken> tokens)
+        public FactoryResult CreateToken(string function, int startIndex)
         {
             var match = regex.Match(function, startIndex);
             if (match.Success)
-                return CreateTokenInternal(match, tokens);
+                return CreateTokenInternal(match);
 
             return null;
         }

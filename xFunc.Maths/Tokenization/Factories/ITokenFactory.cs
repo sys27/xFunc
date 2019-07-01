@@ -12,8 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.ObjectModel;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
@@ -28,9 +26,8 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
         /// <param name="startIndex">The start index.</param>
-        /// <param name="tokens">The tokens.</param>
         /// <returns>The token.</returns>
-        FactoryResult CreateToken(string function, int startIndex, ReadOnlyCollection<IToken> tokens);
+        FactoryResult CreateToken(string function, int startIndex);
     }
 
 }

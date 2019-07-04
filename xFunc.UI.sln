@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc", "xFunc\xFunc.csproj", "{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Maths", "xFunc.Maths\xFunc.Maths.csproj", "{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.UnitConverters", "xFunc.UnitConverters\xFunc.UnitConverters.csproj", "{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Tests", "xFunc.Tests\xFunc.Tests.csproj", "{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91AD4FBF-D01A-4BD3-B3E9-CAF885CC208C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ECAAD28-E0CE-40BE-8EB0-0D055C908133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E6CD5F1-F6FD-43FB-96FD-9CDEA14453E7}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = xFunc.vsmdi
+	EndGlobalSection
+EndGlobal

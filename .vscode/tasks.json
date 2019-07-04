@@ -10,7 +10,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "dotnet build xFunc.Core.sln",
+            "command": "dotnet build xFunc.sln",
             "presentation": {
                 "reveal": "silent"
             },
@@ -20,7 +20,7 @@
             "label": "Build Release",
             "type": "shell",
             "group": "build",
-            "command": "dotnet build xFunc.Core.sln -c Release",
+            "command": "dotnet build xFunc.sln -c Release",
             "presentation": {
                 "reveal": "silent"
             },
@@ -33,7 +33,7 @@
                 "kind": "test",
                 "isDefault": true
             },
-            "command": "dotnet test xFunc.Tests/xFunc.Tests.Core.csproj",
+            "command": "dotnet test xFunc.sln",
             "presentation": {
                 "reveal": "silent"
             },

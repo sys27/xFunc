@@ -1,260 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" />
-  <Import Project="..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props')" />
-  <Import Project="..\packages\xunit.runner.console.2.4.1\build\xunit.runner.console.props" Condition="Exists('..\packages\xunit.runner.console.2.4.1\build\xunit.runner.console.props')" />
-  <Import Project="..\packages\ReportGenerator.4.0.15\build\netstandard2.0\ReportGenerator.props" Condition="Exists('..\packages\ReportGenerator.4.0.15\build\netstandard2.0\ReportGenerator.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
     <RootNamespace>xFunc.Tests</RootNamespace>
-    <AssemblyName>xFunc.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq, Version=4.10.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.10.1\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="xunit.assert, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.assert.2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.core.2.4.1\lib\net452\xunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.execution.2.4.1\lib\net452\xunit.execution.desktop.dll</HintPath>
-    </Reference>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Analyzers\Formatters\CommonFormatterTest.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\ComplexNumberTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\HyperbolicTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\LogicalBitwiseTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\MatrixTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\ProgrammingTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\StandardTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\StatisticalTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\TrigonometricTests.cs" />
-    <Compile Include="Analyzers\TypeAnalyzerTests\TypeAnalyzerBaseTests.cs" />
-    <Compile Include="BuilderTest.cs" />
-    <Compile Include="Converters\AreaTest.cs" />
-    <Compile Include="Converters\LengthTest.cs" />
-    <Compile Include="Converters\MassTest.cs" />
-    <Compile Include="Converters\PowerTest.cs" />
-    <Compile Include="Converters\TemperatureTest.cs" />
-    <Compile Include="Converters\TimeTest.cs" />
-    <Compile Include="Converters\VolumeTest.cs" />
-    <Compile Include="Analyzers\DifferentiatorTest.cs" />
-    <Compile Include="Expressions\AbsTest.cs" />
-    <Compile Include="Expressions\AddTest.cs" />
-    <Compile Include="Expressions\BinaryTest.cs" />
-    <Compile Include="Expressions\Collections\ParameterCollectionTest.cs" />
-    <Compile Include="Expressions\Collections\ParameterTest.cs" />
-    <Compile Include="Expressions\ComplexNumbers\ComplexNumberTest.cs" />
-    <Compile Include="Expressions\ComplexNumbers\ReciprocalTest.cs" />
-    <Compile Include="Expressions\ComplexNumbers\ConjugateTest.cs" />
-    <Compile Include="Expressions\ComplexNumbers\PhaseTest.cs" />
-    <Compile Include="Expressions\DelTest.cs" />
-    <Compile Include="Expressions\ComplexNumbers\ImTest.cs" />
-    <Compile Include="Expressions\DerivTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\BoolTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\AndTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\EqualityTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\ImplicationTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\NAndTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\NOrTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\NotTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\OrTest.cs" />
-    <Compile Include="Expressions\LogicalAndBitwise\XOrTest.cs" />
-    <Compile Include="Expressions\CeilTest.cs" />
-    <Compile Include="Expressions\DefineTest.cs" />
-    <Compile Include="Expressions\DelegateExpressionTest.cs" />
-    <Compile Include="Expressions\DivTest.cs" />
-    <Compile Include="Expressions\ExpTest.cs" />
-    <Compile Include="Expressions\FactTest.cs" />
-    <Compile Include="Expressions\FloorTest.cs" />
-    <Compile Include="Expressions\GCDTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicArcosecantTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicArcosineTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicArcotangentTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicArsecantTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicArsineTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicArtangentTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicCosecantTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicCosineTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicCotangentTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicSecantTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicSineTest.cs" />
-    <Compile Include="Expressions\Hyperbolic\HyperbolicTangentTest.cs" />
-    <Compile Include="Expressions\LCMTest.cs" />
-    <Compile Include="Expressions\LgTest.cs" />
-    <Compile Include="Expressions\LbTest.cs" />
-    <Compile Include="Expressions\LnTest.cs" />
-    <Compile Include="Expressions\LogTest.cs" />
-    <Compile Include="Expressions\Matrices\CrossProductTests.cs" />
-    <Compile Include="Expressions\Matrices\DeterminantTest.cs" />
-    <Compile Include="Expressions\Matrices\DotProductTests.cs" />
-    <Compile Include="Expressions\Matrices\InverseTest.cs" />
-    <Compile Include="Expressions\Matrices\MatrixTest.cs" />
-    <Compile Include="Expressions\Matrices\TransposeTest.cs" />
-    <Compile Include="Expressions\Matrices\VectorTest.cs" />
-    <Compile Include="Expressions\ModTest.cs" />
-    <Compile Include="Expressions\MulTest.cs" />
-    <Compile Include="Expressions\PowTest.cs" />
-    <Compile Include="Expressions\SimplifyTest.cs" />
-    <Compile Include="Expressions\Statistical\StdevpTest.cs" />
-    <Compile Include="Expressions\Statistical\VarpTest.cs" />
-    <Compile Include="Expressions\Statistical\StdevTest.cs" />
-    <Compile Include="Expressions\Statistical\VarTest.cs" />
-    <Compile Include="Expressions\Statistical\CountTest.cs" />
-    <Compile Include="Expressions\Statistical\ProductTest.cs" />
-    <Compile Include="Expressions\Programming\AddAssignTest.cs" />
-    <Compile Include="Expressions\Programming\AndTest.cs" />
-    <Compile Include="Expressions\Programming\DecTest.cs" />
-    <Compile Include="Expressions\Programming\DivAssignTest.cs" />
-    <Compile Include="Expressions\Programming\EqualTest.cs" />
-    <Compile Include="Expressions\Programming\NotEqualTest.cs" />
-    <Compile Include="Expressions\Programming\ForTest.cs" />
-    <Compile Include="Expressions\Programming\GreaterOrEqualTest.cs" />
-    <Compile Include="Expressions\Programming\GreaterTest.cs" />
-    <Compile Include="Expressions\Programming\IfTest.cs" />
-    <Compile Include="Expressions\Programming\IncTest.cs" />
-    <Compile Include="Expressions\Programming\LessOrEqualTest.cs" />
-    <Compile Include="Expressions\Programming\LessThanTest.cs" />
-    <Compile Include="Expressions\Programming\MulAssignTest.cs" />
-    <Compile Include="Expressions\Programming\OrTest.cs" />
-    <Compile Include="Expressions\Programming\SubAssignTest.cs" />
-    <Compile Include="Expressions\Programming\WhileTest.cs" />
-    <Compile Include="Expressions\ComplexNumbers\ReTest.cs" />
-    <Compile Include="Expressions\RootTest.cs" />
-    <Compile Include="Expressions\RoundTest.cs" />
-    <Compile Include="Expressions\SqrtTest.cs" />
-    <Compile Include="Expressions\Statistical\AvgTest.cs" />
-    <Compile Include="Expressions\Statistical\MaxTest.cs" />
-    <Compile Include="Expressions\Statistical\MinTest.cs" />
-    <Compile Include="Expressions\SubTest.cs" />
-    <Compile Include="Expressions\Statistical\SumTest.cs" />
-    <Compile Include="Expressions\Trigonometric\ArccosTest.cs" />
-    <Compile Include="Expressions\Trigonometric\ArccotTest.cs" />
-    <Compile Include="Expressions\Trigonometric\ArccscTest.cs" />
-    <Compile Include="Expressions\Trigonometric\ArcsecTest.cs" />
-    <Compile Include="Expressions\Trigonometric\ArcsinTest.cs" />
-    <Compile Include="Expressions\Trigonometric\ArctanTest.cs" />
-    <Compile Include="Expressions\Trigonometric\CosecantTest.cs" />
-    <Compile Include="Expressions\Trigonometric\CosineTest.cs" />
-    <Compile Include="Expressions\Trigonometric\CotangentTest.cs" />
-    <Compile Include="Expressions\Trigonometric\SecantTest.cs" />
-    <Compile Include="Expressions\Trigonometric\SineTest.cs" />
-    <Compile Include="Expressions\Trigonometric\TangentTest.cs" />
-    <Compile Include="Expressions\UnaryMinusTest.cs" />
-    <Compile Include="Expressions\UnaryTest.cs" />
-    <Compile Include="Expressions\UndefineTest.cs" />
-    <Compile Include="Expressions\UserFunctionTest.cs" />
-    <Compile Include="Expressions\VariableTest.cs" />
-    <Compile Include="Expressions\SignTest.cs" />
-    <Compile Include="ParserTest.cs" />
-    <Compile Include="ProcessorTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\BooleanResultTest.cs" />
-    <Compile Include="Results\ComplexNumberResultTest.cs" />
-    <Compile Include="Results\NumberResultTest.cs" />
-    <Compile Include="Results\ExpressionResultTest.cs" />
-    <Compile Include="Results\StringResultTest.cs" />
-    <Compile Include="Analyzers\SimplifierTest.cs" />
-    <Compile Include="Tokenization\BaseLexerTests.cs" />
-    <Compile Include="Tokenization\ComplexNumberLexerTests.cs" />
-    <Compile Include="Tokenization\FunctionLexerTests.cs" />
-    <Compile Include="Tokenization\MathLexerTest.cs" />
-    <Compile Include="Tokenization\Tokens\BooleanTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\ComplexNumberTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\FunctionTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\NumberTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\OperationTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\SymbolTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\UserFunctionTokenTest.cs" />
-    <Compile Include="Tokenization\Tokens\VariableTokenTest.cs" />
+    <PackageReference Include="coveralls.io" Version="1.4.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="OpenCover" Version="4.7.922" />
+    <PackageReference Include="ReportGenerator" Version="4.2.5" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
+    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj">
-      <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
-      <Name>xFunc.Maths</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj">
-      <Project>{2ecaad28-e0ce-40be-8eb0-0d055c908133}</Project>
-      <Name>xFunc.UnitConverters</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ReportGenerator.4.0.15\build\netstandard2.0\ReportGenerator.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ReportGenerator.4.0.15\build\netstandard2.0\ReportGenerator.props'))" />
-    <Error Condition="!Exists('..\packages\xunit.runner.console.2.4.1\build\xunit.runner.console.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.console.2.4.1\build\xunit.runner.console.props'))" />
-    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props'))" />
-    <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.props'))" />
-    <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.targets'))" />
-  </Target>
-  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

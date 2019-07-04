@@ -1,3 +1,3 @@
-packages\OpenCover.4.7.922\tools\OpenCover.Console.exe -register:user -output:coverage.xml -target:"packages\xunit.runner.console.2.4.1\tools\net472\xunit.console.exe" -targetargs:"xFunc.Tests\bin\Release\xFunc.Tests.dll -nologo -noshadow" -excludebyattribute:*.ExcludeFromCodeCoverage*^ -filter:"+[xFunc.*]* -[xFunc.Tests*]* -[xFunc.*]*.Resource -[xFunc.*]*Exception"
-packages\ReportGenerator.4.0.15\tools\net47\ReportGenerator.exe -reports:coverage.xml -targetdir:coverage
+"%userprofile%\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -register:user -output:coverage.xml -target:"dotnet.exe" -targetargs:"test xFunc.Tests\xFunc.Tests.csproj --no-build -c Release" -excludebyattribute:*.ExcludeFromCodeCoverage*^ -filter:"+[xFunc.*]* -[xFunc.Tests*]* -[xFunc.*]*.Resource -[xFunc.*]*Exception" -oldStyle
+dotnet "%userprofile%\.nuget\packages\reportgenerator\4.2.5\tools\netcoreapp2.1\ReportGenerator.dll" -reports:coverage.xml -targetdir:coverage
 pause

@@ -10,11 +10,9 @@
         "**/obj": true,
         "**/packages": true,
         "**/coverage": true,
-        "**/SharedCode": true,
         "coverage.xml": true,
         "xFunc": true,
-        "xFunc (Libs for .Net 4.0).sln": true,
-        "xFunc.sln": true,
+        "xFunc.UI.sln": true,
         "desktop.ini": true
     }
 }

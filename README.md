@@ -32,7 +32,7 @@ All in all, xFunc comes packed with resourceful options dedicated to computing m
 * Derivative and simplifying expressions;
 * Plotting graphs;
 * Truth tables;
-* Supported Framework: 4.0 (or higher).
+* Supported Framework: .NET Standard 2.0+;
 
 ## Usage
 

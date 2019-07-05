@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.UnitConverters", "xFu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Tests", "xFunc.Tests\xFunc.Tests.csproj", "{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.DotnetTool", "xFunc.DotnetTool\xFunc.DotnetTool.csproj", "{B24A5EAA-91A4-4BE2-8547-49097D327071}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FBBB597-B044-4824-BF2E-7629FB7AC4B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B24A5EAA-91A4-4BE2-8547-49097D327071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24A5EAA-91A4-4BE2-8547-49097D327071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24A5EAA-91A4-4BE2-8547-49097D327071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24A5EAA-91A4-4BE2-8547-49097D327071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ namespace xFunc.DotnetTool.Options
     [Verb("tokenize", HelpText = "Convert string expression to list of tokens.")]
     public class TokenizeOptions : BaseOptions
     {
-        public TokenizeOptions(string stringExpression) : base(stringExpression) { }
+        public TokenizeOptions(string stringExpression, bool debug) : base(stringExpression, debug) { }
 
         [Usage(ApplicationAlias = "xfunc")]
         public static IEnumerable<Example> Examples
@@ -16,7 +16,7 @@ namespace xFunc.DotnetTool.Options
             {
                 return new List<Example>
                 {
-                    new Example("Tokenize string expression", new TokenizeOptions("1 + 1"))
+                    new Example("Tokenize string expression", new TokenizeOptions("1 + 1", false))
                 };
             }
         }

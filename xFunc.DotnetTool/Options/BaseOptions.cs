@@ -2,9 +2,9 @@
 
 namespace xFunc.DotnetTool.Options
 {
-    public abstract class BaseOptions
+    public abstract class BaseOptions : DebugInfoOptions
     {
-        protected BaseOptions(string stringExpression)
+        protected BaseOptions(string stringExpression, bool debug) : base(debug)
         {
             StringExpression = stringExpression;
         }

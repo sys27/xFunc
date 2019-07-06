@@ -1,6 +1,6 @@
 Master: [![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7mp/branch/master?svg=true)](https://ci.appveyor.com/project/sys27/xfunc/branch/master) [![Coverage Status](https://coveralls.io/repos/github/sys27/xFunc/badge.svg?branch=master)](https://coveralls.io/github/sys27/xFunc?branch=master)  
 Dev: [![Build status](https://ci.appveyor.com/api/projects/status/pmkaff2jaj62m7mp/branch/dev?svg=true)](https://ci.appveyor.com/project/sys27/xfunc/branch/dev) [![Coverage Status](https://coveralls.io/repos/github/sys27/xFunc/badge.svg?branch=dev)](https://coveralls.io/github/sys27/xFunc?branch=dev)  
-xFunc.Maths: [![NuGet](https://img.shields.io/nuget/v/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths) [![Downloads](https://img.shields.io/nuget/dt/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths) 
+xFunc.Maths: [![NuGet](https://img.shields.io/nuget/v/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths) [![Downloads](https://img.shields.io/nuget/dt/xFunc.Maths.svg)](https://www.nuget.org/packages/xFunc.Maths)  
 xFunc.DotnetTool: [![NuGet](https://img.shields.io/nuget/v/xFunc.DotnetTool.svg)](https://www.nuget.org/packages/xFunc.DotnetTool)
 
 xFunc

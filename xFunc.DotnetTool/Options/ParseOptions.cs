@@ -7,7 +7,7 @@ namespace xFunc.DotnetTool.Options
     [Verb("parse", HelpText = "Parse string expression.")]
     public class ParseOptions : BaseOptions
     {
-        public ParseOptions(string stringExpression) : base(stringExpression) { }
+        public ParseOptions(string stringExpression, bool debug) : base(stringExpression, debug) { }
 
         [Usage(ApplicationAlias = "xfunc")]
         public static IEnumerable<Example> Examples
@@ -16,7 +16,7 @@ namespace xFunc.DotnetTool.Options
             {
                 return new List<Example>
                 {
-                    new Example("Parse string expression", new ParseOptions("1 + 1"))
+                    new Example("Parse string expression", new ParseOptions("1 + 1", false))
                 };
             }
         }

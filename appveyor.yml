@@ -10,9 +10,9 @@ environment:
 nuget:
   disable_publish_on_pr: true
 before_build:
-- cmd: nuget restore xFunc.UI.sln
+- cmd: nuget restore xFunc\xFunc.UI.sln
 build:
-  project: xFunc.UI.sln
+  project: xFunc\xFunc.UI.sln
   parallel: true
   verbosity: minimal
 after_build:

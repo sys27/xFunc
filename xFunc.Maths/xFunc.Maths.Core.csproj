@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>xFunc.Maths</RootNamespace>
     <PackageId>xFunc.Maths</PackageId>
-    <Version>3.6.0</Version>
+    <Version>3.7.1</Version>
     <Product>xFunc.Maths</Product>
     <Authors>Dmitry Kischenko</Authors>
     <Company />

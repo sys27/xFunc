@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>xFunc.UnitConverters</RootNamespace>
     <PackageId>xFunc.UnitConverters</PackageId>
-    <Version>3.6.0</Version>
+    <Version>3.7.0</Version>
     <Product>xFunc.UnitConverters</Product>
     <Authors>Dmitry Kischenko</Authors>
     <Company />

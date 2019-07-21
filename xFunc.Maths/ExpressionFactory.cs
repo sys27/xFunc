@@ -262,7 +262,7 @@ namespace xFunc.Maths
                 case Functions.Ceil:
                     return new Ceil(GetArgument(args));
                 case Functions.Derivative:
-                    return new Derivative(this.differentiator, this.simplifier, GetArgument(args));
+                    return new Derivative(this.differentiator, this.simplifier, GetArguments(args, token.CountOfParameters));
                 case Functions.Simplify:
                     return new Simplify(this.simplifier, GetArgument(args));
                 case Functions.Del:

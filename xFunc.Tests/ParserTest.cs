@@ -181,6 +181,29 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void ParseDerivWithTwoParam()
+        {
+            var tokens = Builder()
+                .Function(Functions.Derivative, 2)
+                .OpenBracket()
+                .Function(Functions.Sine, 1)
+                .OpenBracket()
+                .VariableX()
+                .CloseBracket()
+                .Comma()
+                .VariableX()
+                .CloseBracket()
+                .Tokens;
+
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = parser.Parse(tokens);
+            var expected = new Derivative(diff, simp, new Sin(Variable.X), Variable.X);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void ParseDefine()
         {
             var tokens = Builder()

@@ -1,0 +1,100 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - dev
+
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+      - dev
+
+jobs:
+  - job: xFunc
+    pool:
+      vmImage: 'windows-latest'
+
+    variables:
+      uiSolution: 'xFunc/xFunc.UI.sln'
+      solution: 'xFunc.sln'
+      buildPlatform: 'Any CPU'
+      buildConfiguration: 'Release'
+
+    steps:
+    - script: echo '##vso[task.setvariable variable=nupkgVersion]$(defaultPackageVersion)
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+    - script: echo '##vso[task.setvariable variable=nupkgVersion]$(defaultPackageVersion)-preview$(Build.BuildNumber)
+      condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+    - task: NuGetToolInstaller@1
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: restore
+        projects: '$(solution)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        projects: '$(solution)'
+        arguments: '-c Release'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: test
+        projects: '$(solution)'
+        arguments: '-c Release'
+        publishTestResults: true
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(uiSolution)'
+
+    - task: VSBuild@1
+      inputs:
+        solution: '$(uiSolution)'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+
+    - script: |
+        "%userprofile%/.nuget/packages/opencover/4.7.922/tools/OpenCover.Console.exe" -register:user -output:coverage.xml -target:"dotnet.exe" -targetargs:"test xFunc.Tests\xFunc.Tests.csproj --no-build -c Release" -excludebyattribute:*.ExcludeFromCodeCoverage*^ -filter:"+[xFunc.*]* -[xFunc.Tests*]* -[xFunc.*]*.Resource -[xFunc.*]*Exception" -oldStyle
+        "%userprofile%/.nuget/packages/coveralls.io/1.4.2/tools/coveralls.net.exe" --opencover coverage.xml
+      displayName: 'Code Coverage'
+      env: { COVERALLS_REPO_TOKEN: $(COVERALLS_REPO_TOKEN) }
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack'
+      inputs:
+        command: 'pack'
+        packagesToPack: '$(solution)'
+        outputDir: 'nupkgs'
+        nobuild: true
+        includesymbols: true
+        versioningScheme: 'byEnvVar'
+        versionEnvVar: 'nupkgVersion'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        path: xFunc.Maths/bin/Release
+        artifact: xFunc.Maths
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        path: xFunc.UnitConverters/bin/Release
+        artifact: xFunc.UnitConverters
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        path: nupkgs
+        artifact: NuGet Packages
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        path: xFunc/bin/Release
+        artifact: xFunc.UI

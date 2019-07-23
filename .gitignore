@@ -6,6 +6,8 @@ TestResults
 packages
 .idea/
 .vs/
+BenchmarkDotNet.Artifacts/
+
 desktop.ini
 .DS_Store
 

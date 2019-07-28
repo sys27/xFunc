@@ -23,18 +23,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represent the Count function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Count : DifferentParametersExpression
+    public class Count : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Count(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Count(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

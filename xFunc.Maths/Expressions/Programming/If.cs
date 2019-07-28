@@ -115,6 +115,22 @@ namespace xFunc.Maths.Expressions.Programming
         /// </value>
         public IExpression Else => ParametersCount == 3 ? m_arguments[2] : null;
 
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 2;
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => 3;
+
     }
 
 }

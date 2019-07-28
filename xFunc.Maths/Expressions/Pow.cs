@@ -32,6 +32,13 @@ namespace xFunc.Maths.Expressions
         public Pow(IExpression @base, IExpression exponent) : base(@base, exponent) { }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Pow"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public Pow((IExpression @base, IExpression exponent) arguments) : base(arguments.@base, arguments.exponent) { }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

@@ -12,6 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -22,15 +23,23 @@ namespace xFunc.Maths.Tokenization.Factories
     /// The factory which creates variable tokens.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class VariableTokenFactory : FactoryBase
+    public class IdTokenFactory : FactoryBase
     {
 
+        private readonly Dictionary<string, KeywordToken> keywords;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="VariableTokenFactory"/> class.
+        /// Initializes a new instance of the <see cref="IdTokenFactory"/> class.
         /// </summary>
-        public VariableTokenFactory()
+        public IdTokenFactory()
             : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
-        { }
+        {
+            keywords = new Dictionary<string, KeywordToken>
+            {
+                { "true", new KeywordToken(Keywords.True) },
+                { "false", new KeywordToken(Keywords.False) },
+            };
+        }
 
         /// <summary>
         /// Creates the token.
@@ -42,12 +51,12 @@ namespace xFunc.Maths.Tokenization.Factories
         protected override FactoryResult CreateTokenInternal(Match match)
         {
             var result = new FactoryResult();
-            var variable = match.Value;
+            var id = match.Value;
 
-            result.Token = new VariableToken(variable);
-            result.ProcessedLength = variable.Length;
+            if (keywords.TryGetValue(id, out var keyword))
+                return new FactoryResult(keyword, id.Length);
 
-            return result;
+            return new FactoryResult(new IdToken(id), id.Length);
         }
 
     }

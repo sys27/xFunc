@@ -29,7 +29,6 @@ namespace xFunc.Maths.Tokenization.Tokens
         public OperationToken(Operations operation)
         {
             this.Operation = operation;
-            this.Priority = GetPriority();
         }
 
         /// <summary>
@@ -72,62 +71,6 @@ namespace xFunc.Maths.Tokenization.Tokens
         {
             return $"Operation: {Operation}";
         }
-
-        private int GetPriority()
-        {
-            switch (Operation)
-            {
-                case Operations.ConditionalAnd:
-                case Operations.ConditionalOr:
-                    return 8;
-                case Operations.Equal:
-                case Operations.NotEqual:
-                case Operations.LessThan:
-                case Operations.LessOrEqual:
-                case Operations.GreaterThan:
-                case Operations.GreaterOrEqual:
-                    return 9;
-                case Operations.Addition:
-                case Operations.Subtraction:
-                    return 10;
-                case Operations.Multiplication:
-                case Operations.Division:
-                case Operations.Modulo:
-                    return 11;
-                case Operations.UnaryMinus:
-                    return 12;
-                case Operations.Exponentiation:
-                    return 13;
-                case Operations.Factorial:
-                    return 14;
-                case Operations.Assign:
-                    return 0;
-                case Operations.Not:
-                case Operations.And:
-                case Operations.Or:
-                case Operations.XOr:
-                case Operations.Implication:
-                case Operations.Equality:
-                case Operations.NOr:
-                case Operations.NAnd:
-                    return 7;
-                case Operations.AddAssign:
-                case Operations.SubAssign:
-                case Operations.MulAssign:
-                case Operations.DivAssign:
-                    return 16;
-                case Operations.Increment:
-                case Operations.Decrement:
-                    return 17;
-                default:
-                    return -1;
-            }
-        }
-
-        /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        public int Priority { get; }
 
         /// <summary>
         /// Gets the operation.

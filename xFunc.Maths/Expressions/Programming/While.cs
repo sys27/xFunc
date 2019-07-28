@@ -31,6 +31,13 @@ namespace xFunc.Maths.Expressions.Programming
         public While(IExpression body, IExpression condition) : base(body, condition) { }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="While"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public While((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+
+        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

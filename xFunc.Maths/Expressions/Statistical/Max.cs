@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represent the Max function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Max : DifferentParametersExpression
+    public class Max : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Max"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Max(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Max(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

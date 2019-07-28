@@ -67,26 +67,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixNotVectorElement()
         {
-            Assert.Throws<MatrixIsInvalidException>(() => new Matrix(2, 2)
-            {
-                Arguments = new IExpression[] { new Number(2) }
-            });
-        }
-
-        [Fact]
-        public void TestEmptyMatrix()
-        {
-            var exp = new Matrix(0, 0);
-
-            Test(exp, ResultType.Matrix);
-        }
-
-        [Fact]
-        public void TestNullMatrix()
-        {
-            var exp = new Matrix(0, 0) { Arguments = null };
-
-            Test(exp, ResultType.Matrix);
+            Assert.Throws<MatrixIsInvalidException>(() => new Matrix(new IExpression[] { new Number(2) }));
         }
 
         [Fact]
@@ -100,7 +81,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDeterminantMatrix()
         {
-            var exp = new Determinant(new Matrix(2, 2));
+            var exp = new Determinant(Matrix.Create(2, 2));
 
             Test(exp, ResultType.Number);
         }
@@ -139,7 +120,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInverseMatrix()
         {
-            var exp = new Inverse(new Matrix(2, 2));
+            var exp = new Inverse(Matrix.Create(2, 2));
 
             Test(exp, ResultType.Matrix);
         }
@@ -294,7 +275,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTransposeMatrix()
         {
-            var exp = new Transpose(new Matrix(2, 2));
+            var exp = new Transpose(Matrix.Create(2, 2));
 
             Test(exp, ResultType.Matrix);
         }

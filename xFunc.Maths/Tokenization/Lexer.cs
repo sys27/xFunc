@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Factories;
-using xFunc.Maths.Tokenization.PostProcessing;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
@@ -29,7 +28,6 @@ namespace xFunc.Maths.Tokenization
     {
 
         private readonly ITokenFactory[] factories;
-        private readonly ILexerPostProcessor[] postProcessors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Lexer"/> class.
@@ -46,22 +44,7 @@ namespace xFunc.Maths.Tokenization
                 new NumberBinTokenFactory(),
                 new NumberOctTokenFactory(),
                 new NumberTokenFactory(),
-                new ConstantTokenFactory(),
-                new FunctionTokenFactory(),
-                new VariableTokenFactory()
-            };
-
-            postProcessors = new ILexerPostProcessor[]
-            {
-                new NotOperationNotSupportedSymbol(),
-                new FactorialNotSupportedSymbol(),
-                new CloseBracketNotEnoughParameters(),
-                new CreateUnaryMinusPostProcessor(),
-                new RemoveUnaryPlusPostProcessor(),
-                new CreateVectorPostProcessor(),
-                new CreateMatrixPostProcessor(),
-                new CreateMultiplicationPostProcessor(),
-                new ParameterCounter(),
+                new IdTokenFactory()
             };
         }
 
@@ -69,11 +52,9 @@ namespace xFunc.Maths.Tokenization
         /// Initializes a new instance of the <see cref="Lexer"/> class.
         /// </summary>
         /// <param name="factories">The factories to create tokens.</param>
-        /// <param name="postProcessors">The lexer post processors.</param>
-        public Lexer(ITokenFactory[] factories, ILexerPostProcessor[] postProcessors)
+        public Lexer(ITokenFactory[] factories)
         {
             this.factories = factories;
-            this.postProcessors = postProcessors;
         }
 
         /// <summary>
@@ -117,6 +98,8 @@ namespace xFunc.Maths.Tokenization
             if (!IsBalanced(function))
                 throw new TokenizeException(Resource.NotBalanced);
 
+            function = function.ToLower();
+
             var tokens = new List<IToken>();
             for (var i = 0; i < function.Length;)
             {
@@ -136,11 +119,6 @@ namespace xFunc.Maths.Tokenization
 
                 if (result == null)
                     throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, function));
-            }
-
-            foreach (var postProcessor in postProcessors)
-            {
-                postProcessor.Process(tokens);
             }
 
             return tokens;

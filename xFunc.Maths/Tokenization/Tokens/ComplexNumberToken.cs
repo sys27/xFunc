@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-
 using System.Globalization;
 using System.Numerics;
 
@@ -88,11 +87,6 @@ namespace xFunc.Maths.Tokenization.Tokens
 
             return $"Complex Number: {Number.Real.ToString(CultureInfo.InvariantCulture)}{Number.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
         }
-
-        /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        public int Priority => 101;
 
         /// <summary>
         /// Gets the complex number.

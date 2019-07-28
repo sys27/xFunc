@@ -12,6 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
+using System;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -19,136 +20,137 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// <summary>
     /// Specifies operations.
     /// </summary>
+    [Flags]
     public enum Operations
     {
 
         /// <summary>
         /// +
         /// </summary>
-        Addition,
+        Addition = 0x1,
         /// <summary>
         /// -
         /// </summary>
-        Subtraction,
+        Subtraction = 0x2,
         /// <summary>
         /// *
         /// </summary>
-        Multiplication,
+        Multiplication = 0x4,
         /// <summary>
         /// /
         /// </summary>
-        Division,
+        Division = 0x8,
         /// <summary>
         /// ^
         /// </summary>
-        Exponentiation,
+        Exponentiation = 0x10,
         /// <summary>
         /// - (Unary)
         /// </summary>
-        UnaryMinus,
+        UnaryMinus = 0x20,
         /// <summary>
         /// !
         /// </summary>
-        Factorial,
+        Factorial = 0x40,
         /// <summary>
         /// %, mod
         /// </summary>
-        Modulo,
+        Modulo = 0x80,
 
         /// <summary>
         /// &amp;&amp;
         /// </summary>
-        ConditionalAnd,
+        ConditionalAnd = 0x100,
         /// <summary>
         /// ||
         /// </summary>
-        ConditionalOr,
+        ConditionalOr = 0x200,
         /// <summary>
         /// ==
         /// </summary>
-        Equal,
+        Equal = 0x400,
         /// <summary>
         /// !=
         /// </summary>
-        NotEqual,
+        NotEqual = 0x800,
         /// <summary>
         /// &lt;
         /// </summary>
-        LessThan,
+        LessThan = 0x1000,
         /// <summary>
         /// &lt;=
         /// </summary>
-        LessOrEqual,
+        LessOrEqual = 0x2000,
         /// <summary>
         /// &gt;
         /// </summary>
-        GreaterThan,
+        GreaterThan = 0x4000,
         /// <summary>
         /// &gt;=
         /// </summary>
-        GreaterOrEqual,
+        GreaterOrEqual = 0x8000,
         /// <summary>
         /// The increment (++)
         /// </summary>
-        Increment,
+        Increment = 0x10000,
         /// <summary>
         /// The decrement (--)
         /// </summary>
-        Decrement,
+        Decrement = 0x20000,
         /// <summary>
         /// +=
         /// </summary>
-        AddAssign,
+        AddAssign = 0x40000,
         /// <summary>
         /// -=
         /// </summary>
-        SubAssign,
+        SubAssign = 0x80000,
         /// <summary>
         /// *=
         /// </summary>
-        MulAssign,
+        MulAssign = 0x100000,
         /// <summary>
         /// /=
         /// </summary>
-        DivAssign,
+        DivAssign = 0x200000,
 
         /// <summary>
         /// :=
         /// </summary>
-        Assign,
+        Assign = 0x400000,
 
         /// <summary>
         /// ~, not
         /// </summary>
-        Not,
+        Not = 0x800000,
         /// <summary>
         /// &amp;, and
         /// </summary>
-        And,
+        And = 0x1000000,
         /// <summary>
         /// |, or
         /// </summary>
-        Or,
+        Or = 0x2000000,
         /// <summary>
         /// xor
         /// </summary>
-        XOr,
+        XOr = 0x4000000,
         /// <summary>
         /// =>, ->, impl
         /// </summary>
-        Implication,
+        Implication = 0x8000000,
         /// <summary>
         /// &lt;=>, &lt;->, eq
         /// </summary>
-        Equality,
+        Equality = 0x10000000,
         /// <summary>
         /// nor
         /// </summary>
-        NOr,
+        NOr = 0x20000000,
         /// <summary>
         /// nand
         /// </summary>
-        NAnd
+        NAnd = 0x40000000
 
     }
 

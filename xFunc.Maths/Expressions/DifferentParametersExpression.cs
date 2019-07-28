@@ -16,6 +16,7 @@ using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -23,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for expressions with different number of parameters.
     /// </summary>
-    public abstract class DifferentParametersExpression : IFunctionExpression
+    public abstract class DifferentParametersExpression : IExpression
     {
 
         /// <summary>
@@ -183,11 +184,20 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(Arguments));
+
+                // TODO: 
+                if (value.Length < MinParametersCount)
+                    throw new ParseException(Resource.LessParams);
+
+                if (value.Length > MaxParametersCount)
+                    throw new ParseException(Resource.MoreParams);
+
                 m_arguments = value;
-                if (m_arguments != null)
-                    foreach (var item in m_arguments)
-                        if (item != null)
-                            item.Parent = this;
+                foreach (var item in m_arguments)
+                    if (item != null)
+                        item.Parent = this;
             }
         }
 
@@ -207,6 +217,22 @@ namespace xFunc.Maths.Expressions
                 return Arguments.Length;
             }
         }
+
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public abstract int? MinParametersCount { get; }
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public abstract int? MaxParametersCount { get; }
 
     }
 

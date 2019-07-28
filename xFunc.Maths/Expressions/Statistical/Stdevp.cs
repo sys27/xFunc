@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represents the STDEVP function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Stdevp : DifferentParametersExpression
+    public class Stdevp : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Stdevp"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Stdevp(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Stdevp(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

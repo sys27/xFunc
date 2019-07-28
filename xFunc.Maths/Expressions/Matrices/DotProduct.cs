@@ -31,6 +31,13 @@ namespace xFunc.Maths.Expressions.Matrices
         public DotProduct(IExpression left, IExpression right) : base(left, right) { }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DotProduct"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public DotProduct((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

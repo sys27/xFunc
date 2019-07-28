@@ -28,10 +28,17 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
-        /// <param name="arg">The left operand.</param>
         /// <param name="base">The right operand.</param>
+        /// <param name="arg">The left operand.</param>
         /// <seealso cref="IExpression"/>
-        public Log(IExpression arg, IExpression @base) : base(@base, arg) { }
+        public Log(IExpression @base, IExpression arg) : base(@base, arg) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Log"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public Log((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -90,7 +97,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Log(m_right.Clone(), m_left.Clone());
+            return new Log(m_left.Clone(), m_right.Clone());
         }
 
     }

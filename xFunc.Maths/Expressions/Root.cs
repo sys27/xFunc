@@ -32,6 +32,13 @@ namespace xFunc.Maths.Expressions
         public Root(IExpression radicand, IExpression degree) : base(radicand, degree) { }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Root"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public Root((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>

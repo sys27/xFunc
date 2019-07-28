@@ -12,8 +12,7 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Text.RegularExpressions;
-using xFunc.Maths.Resources;
+using System.Collections.Generic;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
@@ -23,54 +22,38 @@ namespace xFunc.Maths.Tokenization.Factories
     /// The factory which creates symbol tokens.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class SymbolTokenFactory : FactoryBase
+    public class SymbolTokenFactory : ITokenFactory
     {
+
+        private readonly Dictionary<char, SymbolToken> map;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SymbolTokenFactory"/> class.
         /// </summary>
-        public SymbolTokenFactory() : base(new Regex(@"\G(\(|\)|{|}|,)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
+        public SymbolTokenFactory()
+        {
+            map = new Dictionary<char, SymbolToken>
+            {
+                { '(', new SymbolToken(Symbols.OpenParenthesis) },
+                { ')', new SymbolToken(Symbols.CloseParenthesis) },
+                { '{', new SymbolToken(Symbols.OpenBrace) },
+                { '}', new SymbolToken(Symbols.CloseBrace) },
+                { ',', new SymbolToken(Symbols.Comma) },
+            };
+        }
 
         /// <summary>
         /// Creates the token.
         /// </summary>
-        /// <param name="match">The match.</param>
-        /// <returns>
-        /// The token.
-        /// </returns>
-        /// <exception cref="TokenizeException">Throws when <paramref name="match"/> has the not supported symbol.</exception>
-        protected override FactoryResult CreateTokenInternal(Match match)
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="startIndex">The start index.</param>
+        /// <returns>The token.</returns>
+        public FactoryResult CreateToken(string function, int startIndex)
         {
-            var result = new FactoryResult();
-            var symbol = match.Value;
+            if (!map.TryGetValue(function[startIndex], out var symbol))
+                return null;
 
-            if (symbol == "(")
-            {
-                result.Token = new SymbolToken(Symbols.OpenBracket);
-            }
-            else if (symbol == ")")
-            {
-                result.Token = new SymbolToken(Symbols.CloseBracket);
-            }
-            else if (symbol == "{")
-            {
-                result.Token = new SymbolToken(Symbols.OpenBrace);
-            }
-            else if (symbol == "}")
-            {
-                result.Token = new SymbolToken(Symbols.CloseBrace);
-            }
-            else if (symbol == ",")
-            {
-                result.Token = new SymbolToken(Symbols.Comma);
-            }
-            else
-            {
-                throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, symbol));
-            }
-
-            result.ProcessedLength = match.Length;
-            return result;
+            return new FactoryResult(symbol, 1);
         }
 
     }

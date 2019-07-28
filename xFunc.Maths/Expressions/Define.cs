@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Define operation.
     /// </summary>
-    public class Define : IFunctionExpression
+    public class Define : IExpression
     {
 
         private IExpression key;
@@ -39,6 +39,13 @@ namespace xFunc.Maths.Expressions
             this.Key = key;
             this.Value = value;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Define"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public Define((IExpression key, IExpression value) arguments) : this(arguments.key, arguments.value) { }
 
         /// <summary>
         /// Determines whether the specified <see cref="Object" />, is equal to this instance.
@@ -167,14 +174,6 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int ParametersCount => 2;
 
         /// <summary>
         /// Gets or sets the key.

@@ -33,8 +33,7 @@ namespace xFunc.Tests.Tokenization
                 .Number(3)
                 .Operation(Operations.Addition)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -48,8 +47,7 @@ namespace xFunc.Tests.Tokenization
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -60,12 +58,11 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("-3 - 2i");
             var expected = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Subtraction)
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -79,8 +76,7 @@ namespace xFunc.Tests.Tokenization
                 .Number(3)
                 .Operation(Operations.Addition)
                 .Number(0)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -92,8 +88,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("2i");
             var expected = Builder()
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -104,10 +99,9 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("-2i");
             var expected = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -118,7 +112,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("i");
             var expected = Builder()
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -131,7 +125,7 @@ namespace xFunc.Tests.Tokenization
             var expected = Builder()
                 .Number(2)
                 .Operation(Operations.Addition)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -145,8 +139,7 @@ namespace xFunc.Tests.Tokenization
                 .VariableX()
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -162,8 +155,7 @@ namespace xFunc.Tests.Tokenization
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -185,14 +177,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("im(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Im, 1)
-                .OpenBracket()
+                .Id("im")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -203,14 +194,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("imaginary(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Im, 1)
-                .OpenBracket()
+                .Id("imaginary")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -221,14 +211,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("re(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Re, 1)
-                .OpenBracket()
+                .Id("re")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -239,14 +228,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("real(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Re, 1)
-                .OpenBracket()
+                .Id("real")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -257,14 +245,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("phase(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Phase, 1)
-                .OpenBracket()
+                .Id("phase")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -275,14 +262,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("conjugate(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Conjugate, 1)
-                .OpenBracket()
+                .Id("conjugate")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -293,14 +279,13 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("reciprocal(3 - 2i)");
             var expected = Builder()
-                .Function(Functions.Reciprocal, 1)
-                .OpenBracket()
+                .Id("reciprocal")
+                .OpenParenthesis()
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -314,8 +299,7 @@ namespace xFunc.Tests.Tokenization
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Tokens;
@@ -328,7 +312,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("i ^ 2");
             var expected = Builder()
-                .Variable("i")
+                .Id("i")
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Tokens;
@@ -344,14 +328,12 @@ namespace xFunc.Tests.Tokenization
                 .Number(3)
                 .Operation(Operations.Subtraction)
                 .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Operation(Operations.Exponentiation)
                 .Number(2)
                 .Operation(Operations.Addition)
                 .Number(3)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
+                .Id("i")
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());

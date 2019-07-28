@@ -17,26 +17,18 @@ namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>
-    /// Represents a user-function token.
+    /// Represents a id token.
     /// </summary>
-    public class UserFunctionToken : FunctionToken
+    public class IdToken : IToken
     {
 
         /// <summary>
-        /// Initializes the <see cref="UserFunctionToken"/> class.
+        /// Initializes the <see cref="IdToken"/> class.
         /// </summary>
-        /// <param name="functionName">A name of function.</param>
-        public UserFunctionToken(string functionName) : this(functionName, -1) { }
-
-        /// <summary>
-        /// Initializes the <see cref="UserFunctionToken"/> class.
-        /// </summary>
-        /// <param name="functionName">A name of function.</param>
-        /// <param name="countOfParams">A count of parameters.</param>
-        public UserFunctionToken(string functionName, int countOfParams)
-            : base(Functions.UserFunction, countOfParams)
+        /// <param name="id">An id.</param>
+        public IdToken(string id)
         {
-            this.FunctionName = functionName;
+            this.Id = id;
         }
 
         /// <summary>
@@ -52,12 +44,12 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(UserFunctionToken) != obj.GetType())
+            if (typeof(IdToken) != obj.GetType())
                 return false;
 
-            var token = (UserFunctionToken)obj;
+            var token = (IdToken)obj;
 
-            return this.FunctionName == token.FunctionName && this.CountOfParameters == token.CountOfParameters;
+            return Id == token.Id;
         }
 
         /// <summary>
@@ -68,12 +60,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            var hash = 4909;
-
-            hash = hash * 1877 + FunctionName.GetHashCode();
-            hash = hash * 1877 + CountOfParameters.GetHashCode();
-
-            return hash;
+            return Id.GetHashCode();
         }
 
         /// <summary>
@@ -82,13 +69,14 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"User Function: {FunctionName}";
+            return $"Id: {Id}";
         }
 
         /// <summary>
-        /// Gets the name of function.
+        /// Gets an id.
         /// </summary>
-        public string FunctionName { get; }
+        public string Id { get; }
+
     }
 
 }

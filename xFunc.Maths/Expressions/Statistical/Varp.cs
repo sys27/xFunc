@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represents the VARP function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Varp : DifferentParametersExpression
+    public class Varp : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Varp"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Varp(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Varp(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Log(new Number(10), new Number(2));
+            var exp = new Log(new Number(2), new Number(10));
 
             Assert.Equal(Math.Log(10, 2), exp.Execute());
         }
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest2()
         {
             var complex = new Complex(2, 3);
-            var exp = new Log(new ComplexNumber(complex), new Number(4));
+            var exp = new Log(new Number(4), new ComplexNumber(complex));
 
             Assert.Equal(Complex.Log(complex, 4), exp.Execute());
         }
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteLeftResultIsNotSupported()
         {
-            var exp = new Log(new Bool(true), new Bool(false));
+            var exp = new Log(new Bool(false), new Bool(true));
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteRightResultIsNotSupported()
         {
-            var exp = new Log(new Bool(true), new Number(10));
+            var exp = new Log(new Number(10), new Bool(true));
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Log(new Number(5), new Number(0));
+            var exp = new Log(new Number(0), new Number(5));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

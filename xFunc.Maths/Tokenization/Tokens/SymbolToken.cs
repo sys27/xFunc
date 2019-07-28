@@ -29,7 +29,6 @@ namespace xFunc.Maths.Tokenization.Tokens
         public SymbolToken(Symbols symbol)
         {
             this.Symbol = symbol;
-            this.Priority = GetPriority();
         }
 
         /// <summary>
@@ -93,7 +92,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public bool IsOpenSymbol()
         {
-            return this.Is(Symbols.OpenBracket) || this.Is(Symbols.OpenBrace);
+            return this.Is(Symbols.OpenParenthesis) || this.Is(Symbols.OpenBrace);
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public bool IsCloseSymbol()
         {
-            return this.Is(Symbols.CloseBracket) || this.Is(Symbols.CloseBrace);
+            return this.Is(Symbols.CloseParenthesis) || this.Is(Symbols.CloseBrace);
         }
 
         /// <summary>
@@ -117,28 +116,6 @@ namespace xFunc.Maths.Tokenization.Tokens
         {
             return this.Is(Symbols.Comma);
         }
-
-        private int GetPriority()
-        {
-            switch (Symbol)
-            {
-                case Symbols.OpenBracket:
-                case Symbols.OpenBrace:
-                    return 1;
-                case Symbols.CloseBracket:
-                case Symbols.CloseBrace:
-                    return 2;
-                case Symbols.Comma:
-                    return 3;
-                default:
-                    return -1;
-            }
-        }
-
-        /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        public int Priority { get; }
 
         /// <summary>
         /// Gets the symbol.

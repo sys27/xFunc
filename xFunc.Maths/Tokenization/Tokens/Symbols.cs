@@ -25,11 +25,11 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <summary>
         /// (
         /// </summary>
-        OpenBracket,
+        OpenParenthesis,
         /// <summary>
         /// )
         /// </summary>
-        CloseBracket,
+        CloseParenthesis,
         /// <summary>
         /// {
         /// </summary>

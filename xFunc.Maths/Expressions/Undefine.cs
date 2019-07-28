@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Undefice operation.
     /// </summary>
-    public class Undefine : IFunctionExpression
+    public class Undefine : IExpression
     {
 
         private IExpression key;
@@ -157,14 +157,6 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         [ExcludeFromCodeCoverage]
         public IExpression Parent { get; set; }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int ParametersCount => 1;
 
         /// <summary>
         /// Gets or sets the key.

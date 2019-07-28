@@ -12,7 +12,6 @@
 // express or implied. 
 // See the License for the specific language governing permissions and 
 // limitations under the License.
-using System.Collections.Generic;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -26,12 +25,62 @@ namespace xFunc.Maths
     {
 
         /// <summary>
-        /// Creates a expression from specified token.
+        /// Creates an expression object from <see cref="OperationToken"/>.
         /// </summary>
-        /// <param name="token">The token.</param>
+        /// <param name="token">The operation token.</param>
         /// <param name="arguments">The list of arguments.</param>
-        /// <returns>The expression.</returns>
-        IExpression Create(IToken token, IEnumerable<IExpression> arguments);
+        /// <returns>An expression.</returns>
+        IExpression CreateOperation(OperationToken token, params IExpression[] arguments);
+
+        /// <summary>
+        /// Creates an expression object from <see cref="IdToken"/>.
+        /// </summary>
+        /// <param name="token">The function token.</param>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateFunction(IdToken token, IExpression[] arguments);
+
+        /// <summary>
+        /// Creates an expression object from <see cref="NumberToken"/>.
+        /// </summary>
+        /// <param name="numberToken">The number token.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateNumber(NumberToken numberToken);
+
+        /// <summary>
+        /// Creates an expression object from <see cref="KeywordToken"/>.
+        /// </summary>
+        /// <param name="keywordToken">The keyword token.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateBoolean(KeywordToken keywordToken);
+
+        /// <summary>
+        /// Creates an expression object from <see cref="ComplexNumberToken"/>.
+        /// </summary>
+        /// <param name="complexNumberToken">The complex number token.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateComplexNumber(ComplexNumberToken complexNumberToken);
+
+        /// <summary>
+        /// Creates an expression object from <see cref="IdToken"/>.
+        /// </summary>
+        /// <param name="variableToken">The variable token.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateVariable(IdToken variableToken);
+
+        /// <summary>
+        /// Creates a vector.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateVector(IExpression[] arguments);
+
+        /// <summary>
+        /// Creates a matrix.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <returns>An expression.</returns>
+        IExpression CreateMatrix(IExpression[] arguments);
 
     }
 

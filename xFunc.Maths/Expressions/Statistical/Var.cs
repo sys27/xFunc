@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represents the VAR function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Var : DifferentParametersExpression
+    public class Var : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Var"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Var(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Var(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

@@ -98,6 +98,22 @@ namespace xFunc.Maths.Expressions
             return new LCM(CloneArguments());
         }
 
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 2;
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => null;
+
     }
 
 }

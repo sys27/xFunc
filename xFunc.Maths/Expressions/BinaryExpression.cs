@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The base class for binary operations.
     /// </summary>
-    public abstract class BinaryExpression : IFunctionExpression
+    public abstract class BinaryExpression : IExpression
     {
 
         /// <summary>
@@ -196,14 +196,6 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public virtual IExpression Parent { get; set; }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public virtual int ParametersCount => 2;
 
     }
 

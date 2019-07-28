@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represents the STDEV function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Stdev : DifferentParametersExpression
+    public class Stdev : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Stdev"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Stdev(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Stdev(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

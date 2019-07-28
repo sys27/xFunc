@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// The abstract base class that represents the unary operation.
     /// </summary>
-    public abstract class UnaryExpression : IFunctionExpression
+    public abstract class UnaryExpression : IExpression
     {
 
         /// <summary>
@@ -164,14 +164,6 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public virtual int ParametersCount => 1;
 
     }
 

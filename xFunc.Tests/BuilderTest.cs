@@ -285,7 +285,7 @@ namespace xFunc.Tests
         {
             builder.Init(3).Log((IExpression)new Number(2));
 
-            Assert.Equal(builder.Current, new Log(new Number(3), new Number(2)));
+            Assert.Equal(builder.Current, new Log(new Number(2), new Number(3)));
         }
 
         [Fact]
@@ -293,7 +293,7 @@ namespace xFunc.Tests
         {
             builder.Init(3).Log(2);
 
-            Assert.Equal(builder.Current, new Log(new Number(3), new Number(2)));
+            Assert.Equal(builder.Current, new Log(new Number(2), new Number(3)));
         }
 
         [Fact]
@@ -301,7 +301,7 @@ namespace xFunc.Tests
         {
             builder.Init(3).Log("x");
 
-            Assert.Equal(builder.Current, new Log(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Log(Variable.X, new Number(3)));
         }
 
         [Fact]

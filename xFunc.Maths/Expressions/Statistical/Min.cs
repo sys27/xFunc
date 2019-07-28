@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represent the Min function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Min : DifferentParametersExpression
+    public class Min : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Min"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Min(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Min(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

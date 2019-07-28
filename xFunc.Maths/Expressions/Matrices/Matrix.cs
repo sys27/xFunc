@@ -44,13 +44,33 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="matrixSize">The size of the matrix.</param>
         /// <param name="vectorSize">The size of the vector.</param>
-        public Matrix(int matrixSize, int vectorSize) : base(null)
+        public static Matrix Create(int matrixSize, int vectorSize)
         {
             var vectors = new Vector[matrixSize];
             for (var i = 0; i < vectors.Length; i++)
                 vectors[i] = new Vector(vectorSize);
 
-            Arguments = vectors;
+            return new Matrix(vectors);
+        }
+
+        /// <summary>
+        /// Creates an identity matrix.
+        /// </summary>
+        /// <param name="sizeOfMatrix">The size of matrix.</param>
+        /// <returns>An identity matrix.</returns>
+        public static Matrix CreateIdentity(int sizeOfMatrix)
+        {
+            var matrix = Create(sizeOfMatrix, sizeOfMatrix);
+
+            for (var i = 0; i < sizeOfMatrix; i++)
+            {
+                for (var j = 0; j < sizeOfMatrix; j++)
+                    matrix[i][j] = new Number(0);
+
+                matrix[i][i] = new Number(1);
+            }
+
+            return matrix;
         }
 
         /// <summary>
@@ -199,26 +219,6 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Creates an identity matrix.
-        /// </summary>
-        /// <param name="sizeOfMatrix">The size of matrix.</param>
-        /// <returns>An identity matrix.</returns>
-        public static Matrix CreateIdentity(int sizeOfMatrix)
-        {
-            var matrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
-
-            for (var i = 0; i < sizeOfMatrix; i++)
-            {
-                for (var j = 0; j < sizeOfMatrix; j++)
-                    matrix[i][j] = new Number(0);
-
-                matrix[i][i] = new Number(1);
-            }
-
-            return matrix;
-        }
-
-        /// <summary>
         /// Gets or sets the arguments.
         /// </summary>
         /// <value>The arguments.</value>
@@ -276,6 +276,22 @@ namespace xFunc.Maths.Expressions.Matrices
         ///   <c>true</c> if matrix is square; otherwise, <c>false</c>.
         /// </value>
         public bool IsSquare => this.ParametersCount == this.SizeOfVectors;
+
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 1;
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => null;
 
     }
 

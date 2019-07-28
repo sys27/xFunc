@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions.Statistical
     /// <summary>
     /// Represents the "product" function.
     /// </summary>
-    public class Product : DifferentParametersExpression
+    public class Product : StatisticalExpression
     {
 
         /// <summary>
@@ -31,11 +31,8 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Product(IExpression[] args)
-            : base(args)
+        public Product(IExpression[] args) : base(args)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
             if (args.Length == 5 && !(args[4] is Variable))
                 throw new ArgumentException();
         }

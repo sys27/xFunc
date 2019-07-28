@@ -120,6 +120,22 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Digits => ParametersCount == 2 ? m_arguments[1] : null;
 
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 1;
+
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => 2;
+
     }
 
 }

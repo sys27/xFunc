@@ -74,11 +74,6 @@ namespace xFunc.Maths.Tokenization.Tokens
         }
 
         /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        public int Priority => 101;
-
-        /// <summary>
         /// Gets the number.
         /// </summary>
         public double Number { get; }

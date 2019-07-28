@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void ExecuteEmptyMatrixTest()
         {
-            var matrix = new Matrix(2, 2);
+            var matrix = Matrix.Create(2, 2);
             var exp = new Transpose(matrix);
 
             Assert.Throws<ArgumentException>(() => exp.Execute());

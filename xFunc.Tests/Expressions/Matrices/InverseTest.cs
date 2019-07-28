@@ -49,7 +49,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void ExecuteEmptyTest()
         {
-            var matrix = new Matrix(2, 2);
+            var matrix = Matrix.Create(2, 2);
             var exp = new Inverse(matrix);
 
             Assert.Throws<ArgumentException>(() => exp.Execute());

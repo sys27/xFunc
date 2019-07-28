@@ -231,7 +231,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddMatrixAllTest()
         {
-            var exp = new Add(new Matrix(1, 1), new UserFunction("f", new IExpression[1]));
+            var exp = new Add(Matrix.Create(1, 1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -551,14 +551,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestGCDEmpty()
-        {
-            var exp = new GCD(new IExpression[0]);
-
-            Test(exp, ResultType.Undefined);
-        }
-
-        [Fact]
         public void TestLbUndefined()
         {
             var exp = new Lb(Variable.X);
@@ -596,14 +588,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) });
 
             Test(exp, ResultType.Number);
-        }
-
-        [Fact]
-        public void TestLCMEmpty()
-        {
-            var exp = new LCM(new IExpression[0]);
-
-            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -681,7 +665,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogUndefined()
         {
-            var exp = new Log(Variable.X, new Number(2));
+            var exp = new Log(new Number(2), Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -689,7 +673,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogNumber()
         {
-            var exp = new Log(new Number(4), new Number(2));
+            var exp = new Log(new Number(2), new Number(4));
 
             Test(exp, ResultType.Number);
         }
@@ -697,7 +681,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogComplexNumber()
         {
-            var exp = new Log(new ComplexNumber(8, 3), new Number(2));
+            var exp = new Log(new Number(2), new ComplexNumber(8, 3));
 
             Test(exp, ResultType.ComplexNumber);
         }
@@ -705,7 +689,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogException()
         {
-            var exp = new Log(new Bool(false), new Number(2));
+            var exp = new Log(new Number(2), new Bool(false));
 
             TestBinaryException(exp);
         }
@@ -713,7 +697,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogBaseIsNotNumber()
         {
-            var exp = new Log(new Number(2), new Bool(false));
+            var exp = new Log(new Bool(false), new Number(2));
 
             TestBinaryException(exp);
         }
@@ -1235,7 +1219,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubMatrixAllTest()
         {
-            var exp = new Sub(new Matrix(1, 1), new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(Matrix.Create(1, 1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }

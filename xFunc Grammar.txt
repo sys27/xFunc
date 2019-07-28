@@ -1,0 +1,50 @@
+# It's just a reference grammar for xFunc (The implementaion is not completely equal to grammar).
+
+statement = unaryAssign 
+          / binaryAssign
+          / assign
+          / exp
+
+unaryAssign = variable ('++' / '--')
+binaryAssign = variable ('+=' / '-=' / '*=' / '/=') exp
+assign = (functionDeclaration / variable) ':=' exp
+
+exp = binary 
+binary = conditional
+
+conditional = bitwise (('&&' / '||') bitwise)*
+bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '<=>' / '<->' / 'eq' / 'nor' / 'nand') equality)*
+equality = addSub (('==' / '!=' / '<' / '<=' / '>' / '>=') addSub)*
+addSub = mulDivMod (('+' / '-') mulDivMod)*
+mulDivMod = mulImplicit (('*' / '/' / '%') mulImplicit)*
+mulImplicit = '-'* number rightUnary / leftUnary
+leftUnary = ('~' / '-')* exponentiation
+exponentiation = rightUnary ('^' exponentiation)*
+rightUnary = operand '!'*
+
+operand = number
+        / vector
+        / matrix
+        / function
+        / variable
+        / boolean
+        / bracketExp
+
+digitWithoutZero = [1-9]
+digit = [0] / digitWithoutZero
+letter = [a-z]
+
+number = digitWithoutZero (digit)*
+id = letter (digit / letter)*
+variable = id
+boolean = 'true' / 'false'
+
+bracketExp = '(' exp ')'
+
+function = id '(' parameters ')'
+parameters = (statement (',' statement)*)*
+
+vector = 'vector' ('{' / '(') parameters ('}' / ')')
+matrix = 'matrix' ('{' / '(') vector (',' vector) ('}' / ')')
+
+functionDeclaration = id '(' (variable (',' variable)* / '') ')'

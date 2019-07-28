@@ -977,7 +977,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void Log2()
         {
-            var log = new Log(new Number(11), new Number(3));
+            var log = new Log(new Number(3), new Number(11));
 
             SimpleTest(log, log);
         }

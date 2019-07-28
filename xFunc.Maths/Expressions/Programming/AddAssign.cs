@@ -32,6 +32,13 @@ namespace xFunc.Maths.Expressions.Programming
         public AddAssign(IExpression variable, IExpression exp) : base(variable, exp) { }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="AddAssign"/> class.
+        /// </summary>
+        /// <param name="arguments">The tuple of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        public AddAssign((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+
+        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>

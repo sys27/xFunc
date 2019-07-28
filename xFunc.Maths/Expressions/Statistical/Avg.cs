@@ -24,18 +24,14 @@ namespace xFunc.Maths.Expressions.Statistical
     /// Represent the Avg function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
-    public class Avg : DifferentParametersExpression
+    public class Avg : StatisticalExpression
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Avg"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Avg(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public Avg(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

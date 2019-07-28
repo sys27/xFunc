@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions.Statistical
     /// <summary>
     /// Represents the "sum" function.
     /// </summary>
-    public class Sum : DifferentParametersExpression
+    public class Sum : StatisticalExpression
     {
 
         /// <summary>
@@ -33,8 +33,6 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
         public Sum(IExpression[] args) : base(args)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
             if (args.Length == 5 && !(args[4] is Variable))
                 throw new ArgumentException();
         }

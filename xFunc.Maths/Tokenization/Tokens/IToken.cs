@@ -15,17 +15,12 @@
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
- 
+
     /// <summary>
     /// Represents a token.
     /// </summary>
     public interface IToken
     {
-
-        /// <summary>
-        /// Gets a priority of current token.
-        /// </summary>
-        int Priority { get; }
 
     }
 

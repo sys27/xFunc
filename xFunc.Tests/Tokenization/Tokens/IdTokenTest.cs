@@ -18,13 +18,13 @@ using Xunit;
 namespace xFunc.Tests.Tokenization.Tokens
 {
 
-    public class BooleanTokenTest
+    public class IdTokenTest
     {
 
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new BooleanToken(true);
+            var token = new IdToken("x");
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -33,7 +33,7 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new BooleanToken(true);
+            var token = new IdToken("x");
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -42,17 +42,17 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new BooleanToken(true);
+            var token = new IdToken("x");
 
             Assert.False(token.Equals(1));
             Assert.NotEqual((object)1, token);
         }
 
         [Fact]
-        public void EqualsDiffBoolTest()
+        public void EqualsDiffVarTest()
         {
-            var token1 = new BooleanToken(true);
-            var token2 = new BooleanToken(false);
+            var token1 = new IdToken("x");
+            var token2 = new IdToken("y");
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -61,9 +61,9 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new BooleanToken(true);
+            var token = new IdToken("x");
 
-            Assert.Equal("Boolean: True", token.ToString());
+            Assert.Equal("Id: x", token.ToString());
         }
 
     }

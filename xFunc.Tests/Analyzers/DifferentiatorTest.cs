@@ -539,7 +539,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void LogDerivativeTest1()
         {
-            var exp = new Log(x, new Number(2));
+            var exp = new Log(new Number(2), x);
             var deriv = Differentiate(exp);
             var expected = new Div(one, new Mul(x, new Ln(two)));
 
@@ -552,14 +552,14 @@ namespace xFunc.Tests.Analyzers
             // log(x, 2)
             var num = new Number(2);
 
-            var exp = new Log(x, num);
+            var exp = new Log(num, x);
             var deriv = Differentiate(exp);
             var expected = new Div(one, new Mul(x, new Ln(two)));
 
             Assert.Equal(expected, deriv);
 
             num.Value = 4;
-            var log = new Log(x, new Number(4));
+            var log = new Log(new Number(4), x);
             Assert.Equal(log, exp);
             Assert.Equal(expected, deriv);
         }
@@ -567,7 +567,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void LogDerivativeTest3()
         {
-            var exp = new Log(new Number(2), x);
+            var exp = new Log(x, new Number(2));
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new UnaryMinus(new Mul(new Ln(two), new Div(one, x))),
@@ -579,7 +579,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void LogPartialDerivativeTest1()
         {
-            var exp = new Log(x, new Number(2));
+            var exp = new Log(new Number(2), x);
             var deriv = Differentiate(exp, x);
             var expected = new Div(one, new Mul(x, new Ln(two)));
 
@@ -589,7 +589,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void LogPartialDerivativeTest2()
         {
-            var exp = new Log(x, new Number(2));
+            var exp = new Log(new Number(2), x);
             var deriv = Differentiate(exp, new Variable("y"));
 
             Assert.Equal(zero, deriv);

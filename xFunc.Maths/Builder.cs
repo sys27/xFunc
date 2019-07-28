@@ -432,7 +432,7 @@ namespace xFunc.Maths
         {
             CheckCurrentExpression();
 
-            current = new Log(current, @base);
+            current = new Log(@base, current);
 
             return this;
         }

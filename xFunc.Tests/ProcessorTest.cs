@@ -119,14 +119,14 @@ namespace xFunc.Tests
             var exp = new Conjugate(new ComplexNumber(complex));
 
             var tokens = new TokensBuilder()
-                .Function(Functions.Conjugate, 1)
-                .OpenBracket()
+                .Id("conjugate")
+                .OpenParenthesis()
                 .Number(2.3)
                 .Operation(Operations.Addition)
                 .Number(1.4)
                 .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
+                .Id("i")
+                .CloseParenthesis()
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
@@ -182,12 +182,12 @@ namespace xFunc.Tests
             var exp = new Define(Variable.X, new Number(1));
 
             var tokens = new TokensBuilder()
-                .Function(Functions.Define, 2)
-                .OpenBracket()
+                .Id("define")
+                .OpenParenthesis()
                 .VariableX()
                 .Comma()
                 .Number(1)
-                .CloseBracket()
+                .CloseParenthesis()
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
@@ -216,10 +216,10 @@ namespace xFunc.Tests
             var diff = new Number(1);
 
             var tokens = new TokensBuilder()
-                .Function(Functions.Derivative, 1)
-                .OpenBracket()
+                .Id("deriv")
+                .OpenParenthesis()
                 .VariableX()
-                .CloseBracket()
+                .CloseParenthesis()
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
             parser.Setup(p => p.Parse(tokens)).Returns(() => exp);

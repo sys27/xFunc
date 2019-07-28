@@ -270,7 +270,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (left.SizeOfVectors != right.ParametersCount)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var result = new Matrix(left.ParametersCount, right.SizeOfVectors);
+            var result = Matrix.Create(left.ParametersCount, right.SizeOfVectors);
 
             Parallel.For(0, right.SizeOfVectors, i =>
             {
@@ -392,7 +392,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The transposed matrix.</returns>
         public static IExpression Transpose(this Matrix matrix)
         {
-            var result = new Matrix(matrix.SizeOfVectors, matrix.ParametersCount);
+            var result = Matrix.Create(matrix.SizeOfVectors, matrix.ParametersCount);
 
             Parallel.For(0, matrix.ParametersCount, i =>
             {
@@ -463,7 +463,7 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var result = LUPDecompositionInternal(matrix.ToCalculatedArray(parameters), out permutation, out toggle);
-            var m = new Matrix(result.Length, result.Length);
+            var m = Matrix.Create(result.Length, result.Length);
             for (var i = 0; i < result.Length; i++)
                 for (var j = 0; j < result.Length; j++)
                     m[i][j] = new Number(result[i][j]);
@@ -560,7 +560,7 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var size = matrix.ParametersCount;
             var result = InverseInternal(matrix.ToCalculatedArray(parameters));
-            var m = new Matrix(size, size);
+            var m = Matrix.Create(size, size);
             for (var i = 0; i < size; i++)
                 for (var j = 0; j < size; j++)
                     m[i][j] = new Number(result[i][j]);

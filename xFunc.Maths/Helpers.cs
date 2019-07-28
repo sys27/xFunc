@@ -58,8 +58,8 @@ namespace xFunc.Maths
             var c = new SortedSet<Parameter>();
 
             foreach (var token in tokens)
-                if (token is VariableToken @var)
-                    c.Add(new Parameter(@var.Variable, false));
+                if (token is IdToken @var)
+                    c.Add(new Parameter(@var.Id, false));
 
             return new ParameterCollection(c, false);
         }

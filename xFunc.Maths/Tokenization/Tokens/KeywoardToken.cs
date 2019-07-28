@@ -1,4 +1,4 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License.
@@ -17,18 +17,33 @@ namespace xFunc.Maths.Tokenization.Tokens
 {
 
     /// <summary>
-    /// Represents a variable token.
+    /// Describes keywords. 
     /// </summary>
-    public class VariableToken : IToken
+    public enum Keywords
+    {
+        /// <summary>
+        /// true 
+        /// </summary>
+        True,
+        /// <summary>
+        /// false
+        /// </summary>
+        False
+    }
+
+    /// <summary>
+    /// Represents a keyword token.
+    /// </summary>
+    public class KeywordToken : IToken
     {
 
         /// <summary>
-        /// Initializes the <see cref="VariableToken"/> class.
+        /// Initializes the <see cref="KeywordToken"/> class.
         /// </summary>
-        /// <param name="variable">A name of variable.</param>
-        public VariableToken(string variable)
+        /// <param name="keyword">A keyword.</param>
+        public KeywordToken(Keywords keyword)
         {
-            this.Variable = variable;
+            this.Keyword = keyword;
         }
 
         /// <summary>
@@ -44,12 +59,12 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(VariableToken) != obj.GetType())
+            if (typeof(KeywordToken) != obj.GetType())
                 return false;
 
-            var token = (VariableToken)obj;
+            var token = (KeywordToken)obj;
 
-            return Variable == token.Variable;
+            return this.Keyword == token.Keyword;
         }
 
         /// <summary>
@@ -60,7 +75,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return Variable.GetHashCode();
+            return Keyword.GetHashCode();
         }
 
         /// <summary>
@@ -69,18 +84,13 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Variable: {Variable}";
+            return $"Keyword: {Keyword}";
         }
 
         /// <summary>
-        /// Gets a priority of current token.
+        /// Gets a keyword.
         /// </summary>
-        public int Priority => 102;
-
-        /// <summary>
-        /// Gets a name of variable.
-        /// </summary>
-        public string Variable { get; }
+        public Keywords Keyword { get; }
 
     }
 

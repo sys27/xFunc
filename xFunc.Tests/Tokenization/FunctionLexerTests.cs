@@ -335,32 +335,13 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void Log()
         {
-            var tokens = lexer.Tokenize("log(2, 2)");
-            var expected = Builder()
-                .Function(Functions.Log, 2)
-                .OpenBracket()
-                .Number(2)
-                .Comma()
-                .Number(2)
-                .CloseBracket()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
+            FuncBinaryTest("log", Functions.Log);
         }
 
         [Fact]
         public void SignTest()
         {
-            var tokens = lexer.Tokenize("sign(-10)");
-            var expected = Builder()
-                .Function(Functions.Sign, 1)
-                .OpenBracket()
-                .Operation(Operations.UnaryMinus)
-                .Number(10)
-                .CloseBracket()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
+            FuncTest("sign", Functions.Sign);
         }
 
         [Fact]

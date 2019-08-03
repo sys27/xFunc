@@ -25,7 +25,7 @@ namespace xFunc.Benchmark.Benchmarks
         {
             IEnumerable<IToken> tokens = null;
             for (var i = 0; i < Iterations; i++)
-                tokens = lexer.Tokenize("(100.1 + (sin(cos(tan(ctg(x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false) + (det({{1, 2}, {3, 4}}) * log(2, 3))");
+                tokens = lexer.Tokenize("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false) + (det({{1, 2}, {3, 4}}) * 10log(2, 3))");
         }
 
     }

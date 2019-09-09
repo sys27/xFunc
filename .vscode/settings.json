@@ -11,8 +11,8 @@
         "**/packages": true,
         "**/coverage": true,
         "coverage.xml": true,
+        "coverage.cobertura.xml": true,
         "xFunc": true,
-        "xFunc.UI.sln": true,
         "desktop.ini": true
     }
 }

@@ -49,8 +49,21 @@ jobs:
       inputs:
         command: test
         projects: '$(solution)'
-        arguments: '-c Release'
+        arguments: '-c Release -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/" -p:ExcludeByAttribute="ExcludeFromCodeCoverage" -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total'
         publishTestResults: true
+
+    - task: CmdLine@2
+      inputs:
+        script: 'dotnet reportgenerator -reports:"$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -targetdir:"$(Build.SourcesDirectory)/coverage/" -reporttypes:HtmlInline_AzurePipelines'
+        workingDirectory: 'xFunc.Tests'
+        failOnStderr: true
+
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml'
+        pathToSources: '$(Build.SourcesDirectory)/coverage/'
+        failIfCoverageEmpty: true
 
     - task: NuGetCommand@2
       inputs:
@@ -61,13 +74,7 @@ jobs:
         solution: '$(uiSolution)'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-
-    - script: |
-        "%userprofile%/.nuget/packages/opencover/4.7.922/tools/OpenCover.Console.exe" -register:user -output:coverage.xml -target:"dotnet.exe" -targetargs:"test xFunc.Tests\xFunc.Tests.csproj --no-build -c Release" -excludebyattribute:*.ExcludeFromCodeCoverage*^ -filter:"+[xFunc.*]* -[xFunc.Tests*]* -[xFunc.*]*.Resource -[xFunc.*]*Exception" -oldStyle
-        "%userprofile%/.nuget/packages/coveralls.io/1.4.2/tools/coveralls.net.exe" --opencover coverage.xml
-      displayName: 'Code Coverage'
-      env: { COVERALLS_REPO_TOKEN: $(COVERALLS_REPO_TOKEN) }
-
+    
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
       inputs:

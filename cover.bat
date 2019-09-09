@@ -1,3 +1,0 @@
-"%userprofile%\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe" -register:user -output:coverage.xml -target:"dotnet.exe" -targetargs:"test xFunc.Tests\xFunc.Tests.csproj --no-build -c Release" -excludebyattribute:*.ExcludeFromCodeCoverage*^ -filter:"+[xFunc.*]* -[xFunc.Tests*]* -[xFunc.*]*.Resource -[xFunc.*]*Exception" -oldStyle
-dotnet "%userprofile%\.nuget\packages\reportgenerator\4.2.5\tools\netcoreapp2.1\ReportGenerator.dll" -reports:coverage.xml -targetdir:coverage
-pause

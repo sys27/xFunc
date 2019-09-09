@@ -13,6 +13,7 @@ desktop.ini
 
 coverage
 coverage.xml
+coverage.cobertura.xml
 
 *.com
 *.dll

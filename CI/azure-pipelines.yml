@@ -65,6 +65,11 @@ jobs:
         pathToSources: '$(Build.SourcesDirectory)/coverage/'
         failIfCoverageEmpty: true
 
+    - task: CmdLine@2
+      inputs:
+        script: '"%userprofile%/.nuget/packages/codecov/1.7.2/tools/codecov.exe" -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
+        failOnStderr: true
+
     - task: NuGetCommand@2
       inputs:
         restoreSolution: '$(uiSolution)'

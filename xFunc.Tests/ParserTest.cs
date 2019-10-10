@@ -1690,6 +1690,23 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void PowRightAssociativityTest()
+        {
+            var tokens = Builder()
+                .Number(1)
+                .Operation(Operations.Exponentiation)
+                .Number(2)
+                .Operation(Operations.Exponentiation)
+                .Number(3)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Pow(new Number(1), new Pow(new Number(2), new Number(3)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void PowUnaryMinusTest()
         {
             var tokens = Builder()

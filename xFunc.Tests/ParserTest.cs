@@ -3028,6 +3028,73 @@ namespace xFunc.Tests
             Assert.Equal(expected, exp);
         }
 
+        [Fact]
+        public void ParseSinWithIncorrectParametersCount()
+        {
+            var tokens = Builder()
+                .Id("sin")
+                .OpenParenthesis()
+                .Number(1)
+                .Comma()
+                .Number(2)
+                .CloseParenthesis()
+                .Operation(Operations.Addition)
+                .Id("cos")
+                .OpenParenthesis()
+                .CloseParenthesis()
+                .Tokens;
+
+            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
+        public void ParseSinWithoutParameters()
+        {
+            var tokens = Builder()
+                .Id("sin")
+                .OpenParenthesis()
+                .Number(1)
+                .CloseParenthesis()
+                .Id("cos")
+                .OpenParenthesis()
+                .CloseParenthesis()
+                .Tokens;
+
+            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
+        public void ParseCosWithIncorrectParametersCount()
+        {
+            var tokens = Builder()
+                .Id("cos")
+                .OpenParenthesis()
+                .Id("sin")
+                .OpenParenthesis()
+                .Number(1)
+                .CloseParenthesis()
+                .Comma()
+                .Number(2)
+                .CloseParenthesis()
+                .Operation(Operations.Addition)
+                .Tokens;
+
+            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
+        public void ParseCosWithoutOperator()
+        {
+            var tokens = Builder()
+                .Id("cos")
+                .OpenParenthesis()
+                .CloseParenthesis()
+                .Number(1)
+                .Tokens;
+
+            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+        }
+
     }
 
 }

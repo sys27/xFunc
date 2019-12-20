@@ -10,20 +10,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Codecov" Version="1.7.2" />
-    <PackageReference Include="coverlet.msbuild" Version="2.6.3">
+    <PackageReference Include="Codecov" Version="1.9.0" />
+    <PackageReference Include="coverlet.msbuild" Version="2.7.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.2.19" />
+    <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.3.9" />
   </ItemGroup>
 
   <ItemGroup>

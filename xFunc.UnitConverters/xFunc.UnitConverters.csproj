@@ -6,9 +6,9 @@
     <PackageId>xFunc.UnitConverters</PackageId>
     <Version>4.0.0</Version>
     <Product>xFunc.UnitConverters</Product>
-    <Authors>Dmitry Kischenko</Authors>
+    <Authors>Dmytro Kyshchenko</Authors>
     <Company />
-    <Copyright>Copyright ©2012-2019 Dmitry Kischenko</Copyright>
+    <Copyright>Copyright ©2012-2020 Dmytro Kyshchenko</Copyright>
     <Description>xFunc.UnitConverters is a free conversion library (area, length, mass, power, temperature, time, volume and etc.).</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/sys27/xFunc/master/xFunc/Images/xFunc.ico</PackageIconUrl>

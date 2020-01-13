@@ -1,16 +1,16 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
 using System.Linq;
@@ -126,8 +126,8 @@ namespace xFunc.Maths.Expressions.Matrices
             var n = (double)number.Execute(parameters);
 
             var numbers = (from num in vector.Arguments.AsParallel().AsOrdered()
-                           select new Number((double)num.Execute(parameters) * n))
-                          .ToArray();
+                            select new Number((double)num.Execute(parameters) * n))
+                        .ToArray();
 
             return new Vector(numbers);
         }
@@ -233,11 +233,11 @@ namespace xFunc.Maths.Expressions.Matrices
             var n = (double)number.Execute(parameters);
 
             var result = from v in matrix.Arguments.AsParallel().AsOrdered()
-                         select new Vector(
-                             (from num in ((Vector)v).Arguments
-                              select new Number((double)num.Execute(parameters) * n))
-                             .ToArray()
-                         );
+                        select new Vector(
+                            (from num in ((Vector)v).Arguments
+                            select new Number((double)num.Execute(parameters) * n))
+                            .ToArray()
+                        );
 
             return new Matrix(result.ToArray());
         }

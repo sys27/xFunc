@@ -1,16 +1,16 @@
-﻿// Copyright 2012-2019 Dmitry Kischenko
+// Copyright 2012-2019 Dmitry Kischenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 using Microsoft.Win32;
 using System;
@@ -488,7 +488,7 @@ namespace xFunc.Views
         private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = (tabControl.SelectedItem == mathTab && this.mathControl.mathExpsListBox.SelectedItem != null) ||
-                              (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
+                            (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
         }
 
         private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
@@ -502,7 +502,7 @@ namespace xFunc.Views
         private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab ||
-                              tabControl.SelectedItem == graphsTab;
+                            tabControl.SelectedItem == graphsTab;
         }
 
         private void VariablesCommand_Execute(object o, ExecutedRoutedEventArgs args)

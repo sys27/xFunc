@@ -1,16 +1,16 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
 using System.Collections.Generic;
@@ -133,7 +133,7 @@ namespace xFunc.Maths
 
         private IExpression UnaryAssign(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO: 
+            var scope = tokenEnumerator.CreateScope(); // TODO:
 
             var left = Variable(scope);
             if (left == null)
@@ -152,17 +152,17 @@ namespace xFunc.Maths
 
         private IExpression BinaryAssign(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO: 
+            var scope = tokenEnumerator.CreateScope(); // TODO:
 
             var left = Variable(scope);
             if (left == null)
                 return null;
 
             var @operator = Operator(scope,
-                                     Operations.MulAssign |
-                                     Operations.DivAssign |
-                                     Operations.AddAssign |
-                                     Operations.SubAssign);
+                                    Operations.MulAssign |
+                                    Operations.DivAssign |
+                                    Operations.AddAssign |
+                                    Operations.SubAssign);
             if (@operator != null)
             {
                 var right = Expression(scope);
@@ -179,7 +179,7 @@ namespace xFunc.Maths
 
         private IExpression Assign(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO: 
+            var scope = tokenEnumerator.CreateScope(); // TODO:
 
             var left = FunctionDeclaration(scope);
             if (left == null)
@@ -206,7 +206,7 @@ namespace xFunc.Maths
 
         private IExpression FunctionDeclaration(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO: 
+            var scope = tokenEnumerator.CreateScope(); // TODO:
 
             var id = scope.GetCurrent<IdToken>();
             if (id == null)
@@ -280,13 +280,13 @@ namespace xFunc.Maths
             while (true)
             {
                 var @operator = Operator(tokenEnumerator,
-                                         Operations.And |
-                                         Operations.Or |
-                                         Operations.XOr |
-                                         Operations.Implication |
-                                         Operations.Equality |
-                                         Operations.NOr |
-                                         Operations.NAnd);
+                                        Operations.And |
+                                        Operations.Or |
+                                        Operations.XOr |
+                                        Operations.Implication |
+                                        Operations.Equality |
+                                        Operations.NOr |
+                                        Operations.NAnd);
                 if (@operator == null)
                     return left;
 
@@ -307,12 +307,12 @@ namespace xFunc.Maths
             while (true)
             {
                 var @operator = Operator(tokenEnumerator,
-                                         Operations.Equal |
-                                         Operations.NotEqual |
-                                         Operations.LessThan |
-                                         Operations.LessOrEqual |
-                                         Operations.GreaterThan |
-                                         Operations.GreaterOrEqual);
+                                        Operations.Equal |
+                                        Operations.NotEqual |
+                                        Operations.LessThan |
+                                        Operations.LessOrEqual |
+                                        Operations.GreaterThan |
+                                        Operations.GreaterOrEqual);
                 if (@operator == null)
                     return left;
 
@@ -353,9 +353,9 @@ namespace xFunc.Maths
             while (true)
             {
                 var @operator = Operator(tokenEnumerator,
-                                         Operations.Multiplication |
-                                         Operations.Division |
-                                         Operations.Modulo);
+                                        Operations.Multiplication |
+                                        Operations.Division |
+                                        Operations.Modulo);
                 if (@operator == null)
                     return left;
 
@@ -400,9 +400,9 @@ namespace xFunc.Maths
         private IExpression LeftUnary(TokenEnumerator tokenEnumerator)
         {
             var @operator = Operator(tokenEnumerator,
-                                     Operations.Not |
-                                     Operations.UnaryMinus |
-                                     Operations.Addition);
+                                    Operations.Not |
+                                    Operations.UnaryMinus |
+                                    Operations.Addition);
             var operand = Exponentiation(tokenEnumerator);
             if (@operator == null || @operator.Operation == Operations.Addition)
                 return operand;

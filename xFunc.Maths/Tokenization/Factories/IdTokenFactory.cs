@@ -35,6 +35,7 @@ namespace xFunc.Maths.Tokenization.Factories
             : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
             // TODO: lazy
+            // TODO: dynamic init from attribute?
             keywords = new Dictionary<string, KeywordToken>
             {
                 { "true", new KeywordToken(Keywords.True) },
@@ -45,6 +46,10 @@ namespace xFunc.Maths.Tokenization.Factories
                 { "define", new KeywordToken(Keywords.Define) },
                 { "undef", new KeywordToken(Keywords.Undefine) },
                 { "undefine", new KeywordToken(Keywords.Undefine) },
+
+                { "if", new KeywordToken(Keywords.If) },
+                { "for", new KeywordToken(Keywords.For) },
+                { "while", new KeywordToken(Keywords.While) },
             };
         }
 

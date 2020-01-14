@@ -37,7 +37,20 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <summary>
         /// undef, undefine
         /// </summary>
-        Undefine
+        Undefine,
+
+        /// <summary>
+        /// if
+        /// </summary>
+        If,
+        /// <summary>
+        /// for
+        /// </summary>
+        For,
+        /// <summary>
+        /// while
+        /// </summary>
+        While,
     }
 
     /// <summary>

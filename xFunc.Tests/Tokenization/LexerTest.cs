@@ -1504,7 +1504,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("if(z, x ^ 2)");
             var expected = Builder()
-                .Id("if")
+                .If()
                 .OpenParenthesis()
                 .Id("z")
                 .Comma()
@@ -1522,7 +1522,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("if(True, 1, -1)");
             var expected = Builder()
-                .Id("if")
+                .If()
                 .OpenParenthesis()
                 .True()
                 .Comma()
@@ -1541,7 +1541,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("for(z := z + 1)");
             var expected = Builder()
-                .Id("for")
+                .For()
                 .OpenParenthesis()
                 .Id("z")
                 .Operation(Operations.Assign)
@@ -1559,7 +1559,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("while(z := z + 1)");
             var expected = Builder()
-                .Id("while")
+                .While()
                 .OpenParenthesis()
                 .Id("z")
                 .Operation(Operations.Assign)

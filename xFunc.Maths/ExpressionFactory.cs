@@ -164,9 +164,6 @@ namespace xFunc.Maths
                 { "inverse", arguments => new Inverse(GetSingleArgument(arguments)) },
                 { "dotproduct", arguments => new DotProduct(GetBinaryArguments(arguments)) },
                 { "crossproduct", arguments => new CrossProduct(GetBinaryArguments(arguments)) },
-                { "if", arguments => new If(arguments) },
-                { "for", arguments => new For(arguments) },
-                { "while", arguments => new While(GetBinaryArguments(arguments)) },
                 { "im", arguments => new Im(GetSingleArgument(arguments)) },
                 { "imaginary", arguments => new Im(GetSingleArgument(arguments)) },
                 { "re", arguments => new Re(GetSingleArgument(arguments)) },
@@ -236,8 +233,14 @@ namespace xFunc.Maths
             {
                 Keywords.True => new Bool(true),
                 Keywords.False => new Bool(false),
+
                 Keywords.Define => new Define(arguments[0], arguments[1]), // TODO:
                 Keywords.Undefine => new Undefine(arguments[0]),
+
+                Keywords.If => new If(arguments),
+                Keywords.For => new For(arguments),
+                Keywords.While => new While(arguments[0], arguments[1]), // TODO:
+
                 _ => throw new Exception(),
             };
         }

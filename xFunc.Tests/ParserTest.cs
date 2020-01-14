@@ -596,7 +596,7 @@ namespace xFunc.Tests
         public void ForTest()
         {
             var tokens = Builder()
-                .Id("for")
+                .For()
                 .OpenParenthesis()
                 .Number(2)
                 .Comma()
@@ -630,7 +630,7 @@ namespace xFunc.Tests
         public void WhileTest()
         {
             var tokens = Builder()
-                .Id("while")
+                .While()
                 .OpenParenthesis()
                 .VariableX()
                 .Operation(Operations.Assign)
@@ -656,7 +656,7 @@ namespace xFunc.Tests
         public void IfTest()
         {
             var tokens = Builder()
-                .Id("if")
+                .If()
                 .OpenParenthesis()
                 .VariableX()
                 .Operation(Operations.Equal)
@@ -833,7 +833,7 @@ namespace xFunc.Tests
         public void IncForTest()
         {
             var tokens = Builder()
-                .Id("for")
+                .For()
                 .OpenParenthesis()
                 .Number(2)
                 .Comma()

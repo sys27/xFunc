@@ -70,6 +70,33 @@ namespace xFunc.Maths.Tokenization
         }
 
         /// <summary>
+        /// Adds a keyword token with <c>if</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder If()
+        {
+            return Keyword(Keywords.If);
+        }
+
+        /// <summary>
+        /// Adds a keyword token with <c>for</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder For()
+        {
+            return Keyword(Keywords.For);
+        }
+
+        /// <summary>
+        /// Adds a keyword token with <c>while</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder While()
+        {
+            return Keyword(Keywords.While);
+        }
+
+        /// <summary>
         /// Adds a keyword token.
         /// </summary>
         /// <returns>The current instance of builder.</returns>

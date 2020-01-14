@@ -5,6 +5,9 @@ statement = unaryAssign
           / assign
           / def
           / undef
+          / if
+          / for
+          / while
           / exp
 
 unaryAssign = variable ('++' / '--')
@@ -14,6 +17,10 @@ assignmentKey = functionDeclaration / variable
 assign = assignmentKey ':=' exp
 def = ('def' / 'define') '(' assignmentKey ',' exp ')'
 undef = ('undef' / 'undefine') '(' assignmentKey ')'
+
+if = 'if' '(' conditional ',' exp (',' exp)* ')'
+for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
+while = 'while' '(' exp ',' conditional ')'
 
 exp = binary 
 binary = conditional
@@ -29,12 +36,13 @@ exponentiation = rightUnary ('^' exponentiation)*
 rightUnary = operand '!'*
 
 operand = number
-        / vector
-        / matrix
         / function
         / variable
         / boolean
+        // complex number
         / bracketExp
+        / matrix
+        / vector
 
 digitWithoutZero = [1-9]
 digit = [0] / digitWithoutZero

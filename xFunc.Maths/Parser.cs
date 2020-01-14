@@ -121,6 +121,9 @@ namespace xFunc.Maths
                 Assign(tokenEnumerator) ??
                 Def(tokenEnumerator) ??
                 Undef(tokenEnumerator) ??
+                If(tokenEnumerator) ??
+                For(tokenEnumerator) ??
+                While(tokenEnumerator) ??
                 Expression(tokenEnumerator);
         }
 
@@ -251,6 +254,109 @@ namespace xFunc.Maths
             return ExpressionFactory.CreateFromKeyword(undef, key);
         }
 
+        private IExpression If(TokenEnumerator tokenEnumerator)
+        {
+            var @if = Keyword(tokenEnumerator, Keywords.If);
+            if (@if == null)
+                return null;
+
+            if (!Symbol(tokenEnumerator, Symbols.OpenParenthesis))
+                throw new ParseException(); // TODO:
+
+            // TODO:
+            var condition = ConditionalOperator(tokenEnumerator);
+            if (condition == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.Comma))
+                throw new ParseException(); // TODO:
+
+            var then = Expression(tokenEnumerator);
+            if (then == null)
+                throw new ParseException(); // TODO:
+
+            IExpression @else = null;
+            if (Symbol(tokenEnumerator, Symbols.Comma))
+            {
+                @else = Expression(tokenEnumerator);
+                if (@else == null)
+                    throw new ParseException(); // TODO:
+            }
+
+            if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
+                throw new ParseException(); // TODO:
+
+            return ExpressionFactory.CreateFromKeyword(@if, condition, then, @else);
+        }
+
+        private IExpression For(TokenEnumerator tokenEnumerator)
+        {
+            var @for = Keyword(tokenEnumerator, Keywords.For);
+            if (@for == null)
+                return null;
+
+            if (!Symbol(tokenEnumerator, Symbols.OpenParenthesis))
+                throw new ParseException(); // TODO:
+
+            // TODO:
+            var body = Statement(tokenEnumerator);
+            if (body == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.Comma))
+                throw new ParseException(); // TODO:
+
+            var init = Statement(tokenEnumerator);
+            if (init == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.Comma))
+                throw new ParseException(); // TODO:
+
+            var condition = ConditionalOperator(tokenEnumerator);
+            if (condition == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.Comma))
+                throw new ParseException(); // TODO:
+
+            var iter = Statement(tokenEnumerator);
+            if (iter == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
+                throw new ParseException(); // TODO:
+
+            return ExpressionFactory.CreateFromKeyword(@for, body, init, condition, iter);
+        }
+
+        private IExpression While(TokenEnumerator tokenEnumerator)
+        {
+            var @while = Keyword(tokenEnumerator, Keywords.While);
+            if (@while == null)
+                return null;
+
+            if (!Symbol(tokenEnumerator, Symbols.OpenParenthesis))
+                throw new ParseException(); // TODO:
+
+            // TODO:
+            var exp = Statement(tokenEnumerator);
+            if (exp == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.Comma))
+                throw new ParseException(); // TODO:
+
+            var condition = ConditionalOperator(tokenEnumerator);
+            if (condition == null)
+                throw new ParseException(); // TODO:
+
+            if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
+                throw new ParseException(); // TODO:
+
+            return ExpressionFactory.CreateFromKeyword(@while, exp, condition);
+        }
+
         private IExpression FunctionDeclaration(TokenEnumerator tokenEnumerator)
         {
             var scope = tokenEnumerator.CreateScope(); // TODO:
@@ -354,12 +460,12 @@ namespace xFunc.Maths
             while (true)
             {
                 var @operator = Operator(tokenEnumerator,
-                                        Operations.Equal |
-                                        Operations.NotEqual |
-                                        Operations.LessThan |
-                                        Operations.LessOrEqual |
-                                        Operations.GreaterThan |
-                                        Operations.GreaterOrEqual);
+                                         Operations.Equal |
+                                         Operations.NotEqual |
+                                         Operations.LessThan |
+                                         Operations.LessOrEqual |
+                                         Operations.GreaterThan |
+                                         Operations.GreaterOrEqual);
                 if (@operator == null)
                     return left;
 
@@ -447,9 +553,9 @@ namespace xFunc.Maths
         private IExpression LeftUnary(TokenEnumerator tokenEnumerator)
         {
             var @operator = Operator(tokenEnumerator,
-                                    Operations.Not |
-                                    Operations.UnaryMinus |
-                                    Operations.Addition);
+                                     Operations.Not |
+                                     Operations.UnaryMinus |
+                                     Operations.Addition);
             var operand = Exponentiation(tokenEnumerator);
             if (@operator == null || @operator.Operation == Operations.Addition)
                 return operand;
@@ -489,39 +595,14 @@ namespace xFunc.Maths
 
         private IExpression Operand(TokenEnumerator tokenEnumerator)
         {
-            var number = Number(tokenEnumerator);
-            if (number != null)
-                return number;
-
-            var function = Function(tokenEnumerator);
-            if (function != null)
-                return function;
-
-            var variable = Variable(tokenEnumerator);
-            if (variable != null)
-                return variable;
-
-            var boolean = Boolean(tokenEnumerator);
-            if (boolean != null)
-                return boolean;
-
-            var complexNumber = ComplexNumber(tokenEnumerator);
-            if (complexNumber != null)
-                return complexNumber;
-
-            var parenExp = ParenthesesExpression(tokenEnumerator);
-            if (parenExp != null)
-                return parenExp;
-
-            var matrix = Matrix(tokenEnumerator);
-            if (matrix != null)
-                return matrix;
-
-            var vector = Vector(tokenEnumerator);
-            if (vector != null)
-                return vector;
-
-            return null;
+            return Number(tokenEnumerator) ??
+                Function(tokenEnumerator) ??
+                Variable(tokenEnumerator) ??
+                Boolean(tokenEnumerator) ??
+                ComplexNumber(tokenEnumerator) ??
+                ParenthesesExpression(tokenEnumerator) ??
+                Matrix(tokenEnumerator) ??
+                Vector(tokenEnumerator);
         }
 
         private IExpression ParenthesesExpression(TokenEnumerator tokenEnumerator)
@@ -549,7 +630,7 @@ namespace xFunc.Maths
 
             var parameterList = ParameterList(tokenEnumerator);
             if (parameterList == null)
-                return ExpressionFactory.CreateVariable(function); // TODO: Variable(id)
+                return ExpressionFactory.CreateVariable(function);
 
             return ExpressionFactory.CreateFunction(function, parameterList.ToArray());
         }

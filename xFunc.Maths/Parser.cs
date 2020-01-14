@@ -27,14 +27,9 @@ namespace xFunc.Maths
         private readonly IToken[] list;
         private int index;
 
-        internal TokenEnumerator(IToken[] list) : this(list, 0)
-        {
-        }
-
-        private TokenEnumerator(IToken[] list, int index)
+        internal TokenEnumerator(IToken[] list)
         {
             this.list = list;
-            this.index = index;
         }
 
         public TToken GetCurrent<TToken>() where TToken : class, IToken
@@ -59,17 +54,26 @@ namespace xFunc.Maths
             return true;
         }
 
-        public TokenEnumerator CreateScope()
-        {
-            return new TokenEnumerator(list, index);
-        }
+        public Scope CreateScope() => new Scope(this);
 
-        public void SwitchScope(TokenEnumerator tokenEnumerator)
-        {
-            index = tokenEnumerator.index;
-        }
+        public void Rollback(Scope scope) => scope.Rollback(this);
 
         public bool IsEnd => index >= list.Length;
+
+        internal readonly struct Scope
+        {
+            private readonly int position;
+
+            public Scope(TokenEnumerator tokenEnumerator)
+            {
+                position = tokenEnumerator.index;
+            }
+
+            public void Rollback(TokenEnumerator tokenEnumerator)
+            {
+                tokenEnumerator.index = this.position;
+            }
+        }
     }
 
     /// <summary>
@@ -129,83 +133,69 @@ namespace xFunc.Maths
 
         private IExpression UnaryAssign(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO:
+            var scope = tokenEnumerator.CreateScope();
 
-            var left = Variable(scope);
-            if (left == null)
-                return null;
-
-            var @operator = Operator(scope, Operations.Increment | Operations.Decrement);
-            if (@operator != null)
+            var left = Variable(tokenEnumerator);
+            if (left != null)
             {
-                tokenEnumerator.SwitchScope(scope);
-
-                return ExpressionFactory.CreateOperation(@operator, left);
+                var @operator = Operator(tokenEnumerator,
+                                         Operations.Increment |
+                                         Operations.Decrement);
+                if (@operator != null)
+                    return ExpressionFactory.CreateOperation(@operator, left);
             }
 
+            tokenEnumerator.Rollback(scope);
             return null;
         }
 
         private IExpression BinaryAssign(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO:
+            var scope = tokenEnumerator.CreateScope();
 
-            var left = Variable(scope);
+            var left = Variable(tokenEnumerator);
             if (left == null)
                 return null;
 
-            var @operator = Operator(scope,
+            var @operator = Operator(tokenEnumerator,
                                      Operations.MulAssign |
                                      Operations.DivAssign |
                                      Operations.AddAssign |
                                      Operations.SubAssign);
             if (@operator != null)
             {
-                var right = Expression(scope);
-                if (right == null)
-                    throw new ParseException(); // TODO:
-
-                tokenEnumerator.SwitchScope(scope);
+                var right = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 return ExpressionFactory.CreateOperation(@operator, left, right);
             }
 
+            tokenEnumerator.Rollback(scope);
             return null;
         }
 
         private IExpression AssignmentKey(TokenEnumerator tokenEnumerator)
         {
-            var left = FunctionDeclaration(tokenEnumerator);
-            if (left == null)
-            {
-                left = Variable(tokenEnumerator);
-                if (left == null)
-                    return null;
-            }
-
-            return left;
+            return FunctionDeclaration(tokenEnumerator) ??
+                Variable(tokenEnumerator);
         }
 
         private IExpression Assign(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO:
+            var scope = tokenEnumerator.CreateScope();
 
-            var left = AssignmentKey(scope);
+            var left = AssignmentKey(tokenEnumerator);
             if (left == null)
                 return null;
 
-            var @operator = Operator(scope, Operations.Assign);
+            var @operator = Operator(tokenEnumerator, Operations.Assign);
             if (@operator != null)
             {
-                var right = Expression(scope);
-                if (right == null)
-                    throw new ParseException(); // TODO:
-
-                tokenEnumerator.SwitchScope(scope);
+                var right = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 return ExpressionFactory.CreateOperation(@operator, left, right);
             }
 
+            tokenEnumerator.Rollback(scope);
             return null;
         }
 
@@ -218,16 +208,12 @@ namespace xFunc.Maths
             if (!Symbol(tokenEnumerator, Symbols.OpenParenthesis))
                 throw new ParseException(); // TODO:
 
-            var key = AssignmentKey(tokenEnumerator);
-            if (key == null)
-                throw new ParseException(); // TODO:
+            var key = AssignmentKey(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.Comma))
                 throw new ParseException(); // TODO:
 
-            var value = Expression(tokenEnumerator);
-            if (value == null)
-                throw new ParseException(); // TODO:
+            var value = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
                 throw new ParseException(); // TODO:
@@ -244,9 +230,7 @@ namespace xFunc.Maths
             if (!Symbol(tokenEnumerator, Symbols.OpenParenthesis))
                 throw new ParseException(); // TODO:
 
-            var key = AssignmentKey(tokenEnumerator);
-            if (key == null)
-                throw new ParseException(); // TODO:
+            var key = AssignmentKey(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
                 throw new ParseException(); // TODO:
@@ -264,24 +248,16 @@ namespace xFunc.Maths
                 throw new ParseException(); // TODO:
 
             // TODO:
-            var condition = ConditionalOperator(tokenEnumerator);
-            if (condition == null)
-                throw new ParseException(); // TODO:
+            var condition = ConditionalOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.Comma))
                 throw new ParseException(); // TODO:
 
-            var then = Expression(tokenEnumerator);
-            if (then == null)
-                throw new ParseException(); // TODO:
+            var then = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             IExpression @else = null;
             if (Symbol(tokenEnumerator, Symbols.Comma))
-            {
-                @else = Expression(tokenEnumerator);
-                if (@else == null)
-                    throw new ParseException(); // TODO:
-            }
+                @else = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
                 throw new ParseException(); // TODO:
@@ -299,30 +275,22 @@ namespace xFunc.Maths
                 throw new ParseException(); // TODO:
 
             // TODO:
-            var body = Statement(tokenEnumerator);
-            if (body == null)
-                throw new ParseException(); // TODO:
+            var body = Statement(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.Comma))
                 throw new ParseException(); // TODO:
 
-            var init = Statement(tokenEnumerator);
-            if (init == null)
-                throw new ParseException(); // TODO:
+            var init = Statement(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.Comma))
                 throw new ParseException(); // TODO:
 
-            var condition = ConditionalOperator(tokenEnumerator);
-            if (condition == null)
-                throw new ParseException(); // TODO:
+            var condition = ConditionalOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.Comma))
                 throw new ParseException(); // TODO:
 
-            var iter = Statement(tokenEnumerator);
-            if (iter == null)
-                throw new ParseException(); // TODO:
+            var iter = Statement(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
                 throw new ParseException(); // TODO:
@@ -340,16 +308,12 @@ namespace xFunc.Maths
                 throw new ParseException(); // TODO:
 
             // TODO:
-            var exp = Statement(tokenEnumerator);
-            if (exp == null)
-                throw new ParseException(); // TODO:
+            var exp = Statement(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.Comma))
                 throw new ParseException(); // TODO:
 
-            var condition = ConditionalOperator(tokenEnumerator);
-            if (condition == null)
-                throw new ParseException(); // TODO:
+            var condition = ConditionalOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
                 throw new ParseException(); // TODO:
@@ -359,39 +323,41 @@ namespace xFunc.Maths
 
         private IExpression FunctionDeclaration(TokenEnumerator tokenEnumerator)
         {
-            var scope = tokenEnumerator.CreateScope(); // TODO:
+            var scope = tokenEnumerator.CreateScope();
 
-            var id = scope.GetCurrent<IdToken>();
-            if (id == null)
-                return null;
-
-            scope.MoveNext();
-            if (!Symbol(scope, Symbols.OpenParenthesis))
-                return null;
-
-            var parameterList = new List<IExpression>();
-
-            var exp = Variable(scope);
-            if (exp != null)
+            var id = tokenEnumerator.GetCurrent<IdToken>(); // TODO: create new method to auto move next
+            if (id != null)
             {
-                parameterList.Add(exp);
-
-                while (Symbol(scope, Symbols.Comma))
+                tokenEnumerator.MoveNext();
+                if (Symbol(tokenEnumerator, Symbols.OpenParenthesis))
                 {
-                    exp = Variable(scope);
-                    if (exp == null)
-                        return null;
+                    var parameterList = new List<IExpression>();
 
-                    parameterList.Add(exp);
+                    var exp = Variable(tokenEnumerator);
+                    if (exp != null)
+                    {
+                        parameterList.Add(exp);
+
+                        while (Symbol(tokenEnumerator, Symbols.Comma))
+                        {
+                            exp = Variable(tokenEnumerator);
+                            if (exp == null)
+                            {
+                                tokenEnumerator.Rollback(scope);
+                                return null;
+                            }
+
+                            parameterList.Add(exp);
+                        }
+                    }
+
+                    if (Symbol(tokenEnumerator, Symbols.CloseParenthesis))
+                        return ExpressionFactory.CreateFunction(id, parameterList.ToArray());
                 }
             }
 
-            if (!Symbol(scope, Symbols.CloseParenthesis))
-                return null;
-
-            tokenEnumerator.SwitchScope(scope);
-
-            return ExpressionFactory.CreateFunction(id, parameterList.ToArray());
+            tokenEnumerator.Rollback(scope);
+            return null;
         }
 
         private IExpression Expression(TokenEnumerator tokenEnumerator)
@@ -412,13 +378,13 @@ namespace xFunc.Maths
 
             while (true)
             {
-                var @operator = Operator(tokenEnumerator, Operations.ConditionalAnd | Operations.ConditionalOr);
+                var @operator = Operator(tokenEnumerator,
+                                         Operations.ConditionalAnd |
+                                         Operations.ConditionalOr);
                 if (@operator == null)
                     return left;
 
-                var right = BitwiseOperator(tokenEnumerator);
-                if (right == null)
-                    throw new ParseException(); // TODO:
+                var right = BitwiseOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 left = ExpressionFactory.CreateOperation(@operator, left, right);
             }
@@ -433,19 +399,17 @@ namespace xFunc.Maths
             while (true)
             {
                 var @operator = Operator(tokenEnumerator,
-                                        Operations.And |
-                                        Operations.Or |
-                                        Operations.XOr |
-                                        Operations.Implication |
-                                        Operations.Equality |
-                                        Operations.NOr |
-                                        Operations.NAnd);
+                                         Operations.And |
+                                         Operations.Or |
+                                         Operations.XOr |
+                                         Operations.Implication |
+                                         Operations.Equality |
+                                         Operations.NOr |
+                                         Operations.NAnd);
                 if (@operator == null)
                     return left;
 
-                var right = EqualityOperator(tokenEnumerator);
-                if (right == null)
-                    throw new ParseException(); // TODO:
+                var right = EqualityOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 left = ExpressionFactory.CreateOperation(@operator, left, right);
             }
@@ -469,9 +433,7 @@ namespace xFunc.Maths
                 if (@operator == null)
                     return left;
 
-                var right = AddSub(tokenEnumerator);
-                if (right == null)
-                    throw new ParseException(); // TODO:
+                var right = AddSub(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 left = ExpressionFactory.CreateOperation(@operator, left, right);
             }
@@ -485,13 +447,13 @@ namespace xFunc.Maths
 
             while (true)
             {
-                var @operator = Operator(tokenEnumerator, Operations.Addition | Operations.Subtraction);
+                var @operator = Operator(tokenEnumerator,
+                                         Operations.Addition |
+                                         Operations.Subtraction);
                 if (@operator == null)
                     return left;
 
-                var right = MulDivMod(tokenEnumerator);
-                if (right == null)
-                    throw new ParseException(); // TODO:
+                var right = MulDivMod(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 left = ExpressionFactory.CreateOperation(@operator, left, right);
             }
@@ -506,15 +468,13 @@ namespace xFunc.Maths
             while (true)
             {
                 var @operator = Operator(tokenEnumerator,
-                                        Operations.Multiplication |
-                                        Operations.Division |
-                                        Operations.Modulo);
+                                         Operations.Multiplication |
+                                         Operations.Division |
+                                         Operations.Modulo);
                 if (@operator == null)
                     return left;
 
-                var right = MulImplicit(tokenEnumerator);
-                if (right == null)
-                    throw new ParseException(); // TODO:
+                var right = MulImplicit(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                 left = ExpressionFactory.CreateOperation(@operator, left, right);
             }
@@ -522,32 +482,31 @@ namespace xFunc.Maths
 
         private IExpression MulImplicit(TokenEnumerator tokenEnumerator)
         {
-            var implicitMul = MulImplicitLeftUnary(tokenEnumerator);
-            if (implicitMul != null)
-                return implicitMul;
-
-            return LeftUnary(tokenEnumerator);
+            return MulImplicitLeftUnary(tokenEnumerator) ??
+                LeftUnary(tokenEnumerator);
         }
 
         private IExpression MulImplicitLeftUnary(TokenEnumerator tokenEnumerator)
         {
             var scope = tokenEnumerator.CreateScope(); // TODO:
 
-            var @operator = Operator(scope, Operations.UnaryMinus);
-            var number = Number(scope);
-            if (number == null)
-                return null;
+            var @operator = Operator(tokenEnumerator, Operations.UnaryMinus);
+            var number = Number(tokenEnumerator);
+            if (number != null)
+            {
+                var rightUnary = RightUnary(tokenEnumerator); // TODO: operand?
+                if (rightUnary != null)
+                {
+                    if (@operator != null)
+                        number = ExpressionFactory.CreateOperation(@operator, number);
 
-            var rightUnary = RightUnary(scope); // TODO: operand?
-            if (rightUnary == null)
-                return null;
+                    // TODO:
+                    return ExpressionFactory.CreateOperation(new OperationToken(Operations.Multiplication), number, rightUnary);
+                }
+            }
 
-            tokenEnumerator.SwitchScope(scope);
-
-            if (@operator != null)
-                number = ExpressionFactory.CreateOperation(@operator, number);
-
-            return ExpressionFactory.CreateOperation(new OperationToken(Operations.Multiplication), number, rightUnary);
+            tokenEnumerator.Rollback(scope);
+            return null;
         }
 
         private IExpression LeftUnary(TokenEnumerator tokenEnumerator)
@@ -573,9 +532,7 @@ namespace xFunc.Maths
             if (@operator == null)
                 return left;
 
-            var right = Exponentiation(tokenEnumerator);
-            if (right == null)
-                throw new ParseException(); // TODO:
+            var right = Exponentiation(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             return ExpressionFactory.CreateOperation(@operator, left, right);
         }
@@ -610,9 +567,7 @@ namespace xFunc.Maths
             if (!Symbol(tokenEnumerator, Symbols.OpenParenthesis))
                 return null;
 
-            var exp = Expression(tokenEnumerator);
-            if (exp == null)
-                throw new ParseException(); // TODO:
+            var exp = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
             if (!Symbol(tokenEnumerator, Symbols.CloseParenthesis))
                 throw new ParseException(); // TODO:
@@ -642,15 +597,14 @@ namespace xFunc.Maths
 
             var parameterList = new List<IExpression>();
 
-            var exp = Statement(tokenEnumerator); // TODO: Expression(tokenEnumerator);
+            var exp = Expression(tokenEnumerator);
             if (exp != null)
             {
                 parameterList.Add(exp);
 
                 while (Symbol(tokenEnumerator, Symbols.Comma))
                 {
-                    exp = Statement(tokenEnumerator); // TODO: Expression(tokenEnumerator);
-                    if (exp == null)
+                    exp = Expression(tokenEnumerator) ??
                         throw new ParseException(Resource.NotEnoughParams);
 
                     parameterList.Add(exp);
@@ -723,9 +677,7 @@ namespace xFunc.Maths
 
                 while (Symbol(tokenEnumerator, Symbols.Comma))
                 {
-                    exp = Expression(tokenEnumerator);
-                    if (exp == null)
-                        throw new ParseException(); // TODO:
+                    exp = Expression(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                     parameterList.Add(exp);
                 }
@@ -741,11 +693,13 @@ namespace xFunc.Maths
         {
             var scope = tokenEnumerator.CreateScope();
 
-            if (!Symbol(scope, Symbols.OpenBrace) ||
-                !Symbol(scope, Symbols.OpenBrace))
+            // TODO:
+            if (!Symbol(tokenEnumerator, Symbols.OpenBrace) ||
+                tokenEnumerator.GetCurrent<SymbolToken>()?.Symbol != Symbols.OpenBrace)
+            {
+                tokenEnumerator.Rollback(scope);
                 return null;
-
-            tokenEnumerator.MoveNext();
+            }
 
             var parameterList = new List<IExpression>();
 
@@ -756,9 +710,7 @@ namespace xFunc.Maths
 
                 while (Symbol(tokenEnumerator, Symbols.Comma))
                 {
-                    exp = Vector(tokenEnumerator);
-                    if (exp == null)
-                        throw new ParseException(); // TODO:
+                    exp = Vector(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
                     parameterList.Add(exp);
                 }

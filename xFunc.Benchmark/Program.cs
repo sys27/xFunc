@@ -28,8 +28,8 @@ namespace xFunc.Benchmark
                 .Run(typeof(Program).Assembly,
                     ManualConfig.Create(DefaultConfig.Instance)
                                 .With(Job.MediumRun
-                                        .WithLaunchCount(1)
-                                        .With(CsProjCoreToolchain.NetCoreApp22))
+                                         .WithLaunchCount(1)
+                                         .With(CsProjCoreToolchain.NetCoreApp31))
                                 .With(MemoryDiagnoser.Default)
                                 .StopOnFirstError()
                 );

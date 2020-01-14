@@ -28,7 +28,16 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <summary>
         /// false
         /// </summary>
-        False
+        False,
+
+        /// <summary>
+        /// def, define
+        /// </summary>
+        Define,
+        /// <summary>
+        /// undef, undefine
+        /// </summary>
+        Undefine
     }
 
     /// <summary>

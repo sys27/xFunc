@@ -10,6 +10,7 @@
         "**/obj": true,
         "**/packages": true,
         "**/coverage": true,
+        "**/.idea": true,
         "coverage.xml": true,
         "coverage.cobertura.xml": true,
         "xFunc": true,

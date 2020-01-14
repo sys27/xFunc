@@ -156,8 +156,6 @@ namespace xFunc.Maths
                 { "simplify", arguments => new Simplify(this.simplifier, GetSingleArgument(arguments)) },
                 { "del", arguments => new Del(this.differentiator, this.simplifier, GetSingleArgument(arguments)) },
                 { "nabla", arguments => new Del(this.differentiator, this.simplifier, GetSingleArgument(arguments)) },
-                { "def", arguments => new Define(GetBinaryArguments(arguments)) },
-                { "define", arguments => new Define(GetBinaryArguments(arguments)) },
                 { "vector", arguments => new Vector(arguments) },
                 { "matrix", arguments => new Matrix(arguments) },
                 { "transpose", arguments => new Transpose(GetSingleArgument(arguments)) },
@@ -169,8 +167,6 @@ namespace xFunc.Maths
                 { "if", arguments => new If(arguments) },
                 { "for", arguments => new For(arguments) },
                 { "while", arguments => new While(GetBinaryArguments(arguments)) },
-                { "undef", arguments => new Undefine(GetSingleArgument(arguments)) },
-                { "undefine", arguments => new Undefine(GetSingleArgument(arguments)) },
                 { "im", arguments => new Im(GetSingleArgument(arguments)) },
                 { "imaginary", arguments => new Im(GetSingleArgument(arguments)) },
                 { "re", arguments => new Re(GetSingleArgument(arguments)) },
@@ -232,16 +228,18 @@ namespace xFunc.Maths
         /// Creates an expression object from <see cref="KeywordToken"/>.
         /// </summary>
         /// <param name="keywordToken">The keyword token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>An expression.</returns>
-        public virtual IExpression CreateBoolean(KeywordToken keywordToken)
+        public virtual IExpression CreateFromKeyword(KeywordToken keywordToken, params IExpression[] arguments)
         {
-            if (keywordToken.Keyword == Keywords.True)
-                return new Bool(true);
-
-            if (keywordToken.Keyword == Keywords.False)
-                return new Bool(false);
-
-            throw new Exception();
+            return keywordToken.Keyword switch
+            {
+                Keywords.True => new Bool(true),
+                Keywords.False => new Bool(false),
+                Keywords.Define => new Define(arguments[0], arguments[1]), // TODO:
+                Keywords.Undefine => new Undefine(arguments[0]),
+                _ => throw new Exception(),
+            };
         }
 
         /// <summary>

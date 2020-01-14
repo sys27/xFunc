@@ -182,7 +182,7 @@ namespace xFunc.Tests
             var exp = new Define(Variable.X, new Number(1));
 
             var tokens = new TokensBuilder()
-                .Id("define")
+                .Def()
                 .OpenParenthesis()
                 .VariableX()
                 .Comma()

@@ -51,8 +51,9 @@ namespace xFunc.Maths
         /// Creates an expression object from <see cref="KeywordToken"/>.
         /// </summary>
         /// <param name="keywordToken">The keyword token.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <returns>An expression.</returns>
-        IExpression CreateBoolean(KeywordToken keywordToken);
+        IExpression CreateFromKeyword(KeywordToken keywordToken, params IExpression[] arguments);
 
         /// <summary>
         /// Creates an expression object from <see cref="ComplexNumberToken"/>.

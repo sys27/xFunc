@@ -62,9 +62,7 @@ namespace xFunc.Maths.Expressions.Programming
             if ((bool)Condition.Execute(parameters))
                 return Then.Execute(parameters);
 
-            var @else = Else;
-
-            return @else != null ? @else.Execute(parameters) : 0.0;
+            return Else?.Execute(parameters) ?? 0.0;
         }
 
         /// <summary>

@@ -325,7 +325,7 @@ namespace xFunc.Tests
         public void UndefParseTest()
         {
             var tokens = Builder()
-                .Id("undefine")
+                .Undef()
                 .OpenParenthesis()
                 .Id("f")
                 .OpenParenthesis()
@@ -344,7 +344,7 @@ namespace xFunc.Tests
         public void UndefWithoutParamsTest()
         {
             var tokens = Builder()
-                .Id("undefine")
+                .Undef()
                 .OpenParenthesis()
                 .CloseParenthesis()
                 .Tokens;
@@ -2283,7 +2283,7 @@ namespace xFunc.Tests
         public void DefTest()
         {
             var tokens = Builder()
-                .Id("define")
+                .Def()
                 .OpenParenthesis()
                 .VariableX()
                 .Comma()

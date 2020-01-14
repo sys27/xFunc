@@ -390,7 +390,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("def(x, 2)");
             var expected = Builder()
-                .Id("def")
+                .Def()
                 .OpenParenthesis()
                 .VariableX()
                 .Comma()
@@ -406,7 +406,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("def(f(x), 2)");
             var expected = Builder()
-                .Id("def")
+                .Def()
                 .OpenParenthesis()
                 .Id("f")
                 .OpenParenthesis()
@@ -818,7 +818,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("undef(f(x))");
             var expected = Builder()
-                .Id("undef")
+                .Undef()
                 .OpenParenthesis()
                 .Id("f")
                 .OpenParenthesis()

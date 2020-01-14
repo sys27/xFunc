@@ -34,10 +34,17 @@ namespace xFunc.Maths.Tokenization.Factories
         public IdTokenFactory()
             : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            // TODO: lazy
             keywords = new Dictionary<string, KeywordToken>
             {
                 { "true", new KeywordToken(Keywords.True) },
                 { "false", new KeywordToken(Keywords.False) },
+
+                // TODO: copies?
+                { "def", new KeywordToken(Keywords.Define) },
+                { "define", new KeywordToken(Keywords.Define) },
+                { "undef", new KeywordToken(Keywords.Undefine) },
+                { "undefine", new KeywordToken(Keywords.Undefine) },
             };
         }
 

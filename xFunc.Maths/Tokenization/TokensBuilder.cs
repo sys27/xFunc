@@ -39,9 +39,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder True()
         {
-            Tokens.Add(new KeywordToken(Keywords.True));
-
-            return this;
+            return Keyword(Keywords.True);
         }
 
         /// <summary>
@@ -50,7 +48,34 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder False()
         {
-            Tokens.Add(new KeywordToken(Keywords.False));
+            return Keyword(Keywords.False);
+        }
+
+        /// <summary>
+        /// Adds a keyword token with <c>def</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder Def()
+        {
+            return Keyword(Keywords.Define);
+        }
+
+        /// <summary>
+        /// Adds a keyword token with <c>undef</c> value.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder Undef()
+        {
+            return Keyword(Keywords.Undefine);
+        }
+
+        /// <summary>
+        /// Adds a keyword token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder Keyword(Keywords keyword)
+        {
+            Tokens.Add(new KeywordToken(keyword));
 
             return this;
         }

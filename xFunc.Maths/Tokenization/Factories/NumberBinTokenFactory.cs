@@ -29,7 +29,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberBinTokenFactory"/> class.
         /// </summary>
-        public NumberBinTokenFactory() : base(new Regex(@"\G[+-]?0b[01]+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
+        public NumberBinTokenFactory() : base(new Regex(@"\G[+-]?0b([01]+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
 
         /// <summary>
         /// Creates the token.
@@ -40,7 +40,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match)
         {
-            var token = new NumberToken(Convert.ToInt64(match.Value.Replace("0b", ""), 2));
+            var token = new NumberToken(Convert.ToInt64(match.Groups[1].Value, 2));
 
             return new FactoryResult(token, match.Length);
         }

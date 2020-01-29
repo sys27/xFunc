@@ -42,11 +42,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException">args</exception>
-        public Round(IExpression[] args) : base(args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-        }
+        public Round(IExpression[] args) : base(args) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

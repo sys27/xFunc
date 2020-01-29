@@ -28,11 +28,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="Avg"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected StatisticalExpression(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        protected StatisticalExpression(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Gets the minimum count of parameters.

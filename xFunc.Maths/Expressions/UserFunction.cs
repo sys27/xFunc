@@ -33,7 +33,6 @@ namespace xFunc.Maths.Expressions
         public UserFunction(string function, IExpression[] args) : base(args)
         {
             this.Function = function;
-            this.Arguments = args ?? throw new ArgumentNullException(nameof(args));
         }
 
         /// <summary>

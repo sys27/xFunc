@@ -30,18 +30,14 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(IExpression[] args) : base(args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-        }
+        public GCD(IExpression[] args) : base(args) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GCD"/> class.
         /// </summary>
         /// <param name="first">The first operand.</param>
         /// <param name="second">The second operand.</param>
-        public GCD(IExpression first, IExpression second) : base(new[] { first, second }) { }
+        public GCD(IExpression first, IExpression second) : this(new[] { first, second }) { }
 
         /// <summary>
         /// Returns a hash code for this instance.

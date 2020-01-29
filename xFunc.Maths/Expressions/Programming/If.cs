@@ -29,7 +29,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
-        public If(IExpression condition, IExpression then) : base(new[] { condition, then }) { }
+        public If(IExpression condition, IExpression then) : this(new[] { condition, then }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -37,17 +37,13 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
-        public If(IExpression condition, IExpression then, IExpression @else) : base(new[] { condition, then, @else }) { }
+        public If(IExpression condition, IExpression then, IExpression @else) : this(new[] { condition, then, @else }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public If(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public If(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Executes this expression.

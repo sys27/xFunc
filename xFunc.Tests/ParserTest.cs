@@ -2818,7 +2818,8 @@ namespace xFunc.Tests
                 .CloseParenthesis()
                 .Tokens;
 
-            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+            // TODO:
+            Assert.Throws<ArgumentException>(() => parser.Parse(tokens));
         }
 
         [Fact]

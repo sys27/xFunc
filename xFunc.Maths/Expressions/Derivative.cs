@@ -64,9 +64,6 @@ namespace xFunc.Maths.Expressions
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
             : base(args)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
             this.Differentiator = differentiator;
             this.Simplifier = simplifier;
         }

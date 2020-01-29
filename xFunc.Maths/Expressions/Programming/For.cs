@@ -31,18 +31,14 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The iterator section.</param>
-        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : base(new[] { body, init, cond, iter }) { }
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : this(new[] { body, init, cond, iter }) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="For" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public For(IExpression[] arguments) : base(arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-        }
+        public For(IExpression[] arguments) : base(arguments) { }
 
         /// <summary>
         /// Executes this expression.

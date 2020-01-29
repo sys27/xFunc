@@ -189,10 +189,10 @@ namespace xFunc.Maths.Expressions
 
                 // TODO:
                 if (value.Length < MinParametersCount)
-                    throw new ParseException(Resource.LessParams);
+                    throw new ArgumentException(Resource.LessParams, nameof(Arguments));
 
                 if (value.Length > MaxParametersCount)
-                    throw new ParseException(Resource.MoreParams);
+                    throw new ArgumentException(Resource.MoreParams, nameof(Arguments));
 
                 m_arguments = value;
                 foreach (var item in m_arguments)

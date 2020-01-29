@@ -15,7 +15,6 @@
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -31,13 +30,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Matrix(IExpression[] args) : base(args)
-        {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-            if (args.Length == 0)
-                throw new ArgumentException(Resource.MatrixArgException, nameof(args));
-        }
+        public Matrix(IExpression[] args) : base(args) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.

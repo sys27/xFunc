@@ -38,7 +38,6 @@ namespace xFunc.Maths.Tokenization
             {
                 new EmptyTokenFactory(),
                 new SymbolTokenFactory(),
-                new ComplexNumberTokenFactory(),
                 new OperationTokenFactory(),
                 new NumberHexTokenFactory(),
                 new NumberBinTokenFactory(),

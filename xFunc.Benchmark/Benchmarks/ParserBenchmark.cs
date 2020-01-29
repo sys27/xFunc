@@ -35,7 +35,7 @@ namespace xFunc.Benchmark.Benchmarks
         {
             processor = new Parser();
 
-            // (100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false) + (det({{1, 2}, {3, 4}}) * 10log(2, 3))
+            // (100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)
             tokens = new TokensBuilder()
                 .OpenParenthesis()
                 .Number(100.1)
@@ -124,6 +124,29 @@ namespace xFunc.Benchmark.Benchmarks
                 .Comma()
                 .Number(3)
                 .CloseParenthesis()
+                .CloseParenthesis()
+                .Operation(Operations.Addition)
+                .Id("re")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(Operations.Addition)
+                .Number(2)
+                .Id("i")
+                .CloseParenthesis()
+                .Operation(Operations.Subtraction)
+                .Id("im")
+                .OpenParenthesis()
+                .Number(2)
+                .Operation(Operations.Subtraction)
+                .Number(9)
+                .Id("i")
+                .CloseParenthesis()
+                .Operation(Operations.Addition)
+                .OpenParenthesis()
+                .Number(9)
+                .Operation(Operations.Addition)
+                .Number(2)
+                .Id("i")
                 .CloseParenthesis()
                 .Tokens;
         }

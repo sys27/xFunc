@@ -43,6 +43,15 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </summary>
         Comma,
 
+        /// <summary>
+        /// ∠
+        /// </summary>
+        Angle,
+        /// <summary>
+        /// °
+        /// </summary>
+        Degree,
+
     }
 
 }

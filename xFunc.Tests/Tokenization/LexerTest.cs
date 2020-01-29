@@ -1905,6 +1905,34 @@ namespace xFunc.Tests.Tokenization
             Assert.Equal(expected, tokens.ToList());
         }
 
+        [Fact]
+        public void ComplexPolarTest()
+        {
+            var tokens = lexer.Tokenize("10 ∠ 45°");
+            var expected = Builder()
+                .Number(10)
+                .Angle()
+                .Number(45)
+                .Degree()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarPosNegTest()
+        {
+            var tokens = lexer.Tokenize("2.3 ∠ -7.1°");
+            var expected = Builder()
+                .Number(23)
+                .Angle()
+                .Number(-7.1)
+                .Degree()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
     }
 
 }

@@ -1232,12 +1232,53 @@ namespace xFunc.Tests
         {
             var complex = Complex.FromPolarCoordinates(10, 45 * Math.PI / 180);
             var tokens = Builder()
-                .ComplexNumber(complex)
+                .Number(10)
+                .Angle()
+                .Number(45 * Math.PI / 180)
+                .Degree()
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(complex);
 
             Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexFromPolarNegativeTest()
+        {
+            var complex = Complex.FromPolarCoordinates(10, -7.1);
+            var tokens = Builder()
+                .Number(10)
+                .Angle()
+                .Number(-7.1) // TODO:
+                .Degree()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new ComplexNumber(complex);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexPolarPhaseExceptionTest()
+        {
+            var tokens = Builder()
+                .Number(7.1)
+                .Degree()
+                .Tokens;
+
+            Assert.Throws<ParseException>(() => parser.Parse(tokens));
+        }
+
+        [Fact]
+        public void ComplexPolarPhaseVariableExceptionTest()
+        {
+            var tokens = Builder()
+                .VariableX()
+                .Degree()
+                .Tokens;
+
+            Assert.Throws<ParseException>(() => parser.Parse(tokens));
         }
 
         [Fact]

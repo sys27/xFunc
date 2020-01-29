@@ -39,6 +39,8 @@ namespace xFunc.Maths.Tokenization.Factories
                 { '{', new SymbolToken(Symbols.OpenBrace) },
                 { '}', new SymbolToken(Symbols.CloseBrace) },
                 { ',', new SymbolToken(Symbols.Comma) },
+                { '∠', new SymbolToken(Symbols.Angle) },
+                { '°', new SymbolToken(Symbols.Degree) },
             };
         }
 

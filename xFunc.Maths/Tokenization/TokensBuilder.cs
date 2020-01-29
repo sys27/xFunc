@@ -108,18 +108,6 @@ namespace xFunc.Maths.Tokenization
         }
 
         /// <summary>
-        /// Adds complex token.
-        /// </summary>
-        /// <returns>The current instance of builder.</returns>
-        /// <param name="complex">The value of complex token.</param>
-        public TokensBuilder ComplexNumber(Complex complex)
-        {
-            Tokens.Add(new ComplexNumberToken(complex));
-
-            return this;
-        }
-
-        /// <summary>
         /// Adds number token.
         /// </summary>
         /// <returns>The current instance of builder.</returns>
@@ -198,6 +186,24 @@ namespace xFunc.Maths.Tokenization
         public TokensBuilder Comma()
         {
             return Symbol(Symbols.Comma);
+        }
+
+        /// <summary>
+        /// Adds angle symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder Angle()
+        {
+            return Symbol(Symbols.Angle);
+        }
+
+        /// <summary>
+        /// Adds degree symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder Degree()
+        {
+            return Symbol(Symbols.Degree);
         }
 
         /// <summary>

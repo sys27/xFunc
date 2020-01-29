@@ -14,6 +14,7 @@
 // limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -246,13 +247,14 @@ namespace xFunc.Maths
         }
 
         /// <summary>
-        /// Creates an expression object from <see cref="ComplexNumberToken"/>.
+        /// Creates an complex number expression object.
         /// </summary>
-        /// <param name="complexNumberToken">The complex number token.</param>
+        /// <param name="magnitude">The magnitude of complex number.</param>
+        /// <param name="phase">The phase of complex number.</param>
         /// <returns>An expression.</returns>
-        public virtual IExpression CreateComplexNumber(ComplexNumberToken complexNumberToken)
+        public virtual IExpression CreateComplexNumber(NumberToken magnitude, NumberToken phase)
         {
-            return new ComplexNumber(complexNumberToken.Number);
+            return new ComplexNumber(Complex.FromPolarCoordinates(magnitude.Number, phase.Number));
         }
 
         /// <summary>

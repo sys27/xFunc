@@ -56,11 +56,12 @@ namespace xFunc.Maths
         IExpression CreateFromKeyword(KeywordToken keywordToken, params IExpression[] arguments);
 
         /// <summary>
-        /// Creates an expression object from <see cref="ComplexNumberToken"/>.
+        /// Creates an complex number expression object.
         /// </summary>
-        /// <param name="complexNumberToken">The complex number token.</param>
+        /// <param name="magnitude">The magnitude of complex number.</param>
+        /// <param name="phase">The phase of complex number.</param>
         /// <returns>An expression.</returns>
-        IExpression CreateComplexNumber(ComplexNumberToken complexNumberToken);
+        IExpression CreateComplexNumber(NumberToken magnitude, NumberToken phase);
 
         /// <summary>
         /// Creates an expression object from <see cref="IdToken"/>.

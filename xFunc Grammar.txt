@@ -30,19 +30,20 @@ bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '
 equality = addSub (('==' / '!=' / '<' / '<=' / '>' / '>=') addSub)*
 addSub = mulDivMod (('+' / '-') mulDivMod)*
 mulDivMod = mulImplicit (('*' / '/' / '%') mulImplicit)*
-mulImplicit = '-'* number rightUnary / leftUnary
+mulImplicit = mulImplicitLeftUnary / leftUnary
+mulImplicitLeftUnary = '-'* number rightUnary
 leftUnary = ('~' / '-')* exponentiation
 exponentiation = rightUnary ('^' exponentiation)*
-rightUnary = operand '!'*
+rightUnary = (number '!') / operand
 
-operand = number
-        / function
-        / variable
-        / boolean
-        // complex number
-        / bracketExp
-        / matrix
-        / vector
+operand = complexnumber /
+          number /
+          function /
+          variable /
+          boolean /
+          bracketExp /
+          matrix /
+          vector
 
 digitWithoutZero = [1-9]
 digit = [0] / digitWithoutZero
@@ -52,6 +53,8 @@ number = digitWithoutZero (digit)*
 id = letter (digit / letter)*
 variable = id
 boolean = 'true' / 'false'
+
+complexnumber = number '∠' number '°'
 
 bracketExp = '(' exp ')'
 

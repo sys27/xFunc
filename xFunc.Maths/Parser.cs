@@ -473,24 +473,28 @@ namespace xFunc.Maths
 
         private IExpression RightUnary(TokenEnumerator tokenEnumerator)
         {
+            var scope = tokenEnumerator.CreateScope();
+
             var number = Number(tokenEnumerator);
-            if (number == null)
-                return Operand(tokenEnumerator);
+            if (number != null)
+            {
+                var @operator = tokenEnumerator.Operator(Operations.Factorial);
+                if (@operator != null)
+                    return ExpressionFactory.CreateOperation(@operator, number);
 
-            var @operator = tokenEnumerator.Operator(Operations.Factorial);
-            if (@operator == null)
-                return number;
+                tokenEnumerator.Rollback(scope);
+            }
 
-            return ExpressionFactory.CreateOperation(@operator, number);
+            return Operand(tokenEnumerator);
         }
 
         private IExpression Operand(TokenEnumerator tokenEnumerator)
         {
-            return Number(tokenEnumerator) ??
+            return ComplexNumber(tokenEnumerator) ??
+                Number(tokenEnumerator) ??
                 Function(tokenEnumerator) ??
                 Variable(tokenEnumerator) ??
                 Boolean(tokenEnumerator) ??
-                ComplexNumber(tokenEnumerator) ??
                 ParenthesesExpression(tokenEnumerator) ??
                 Matrix(tokenEnumerator) ??
                 Vector(tokenEnumerator);
@@ -560,11 +564,30 @@ namespace xFunc.Maths
 
         private IExpression ComplexNumber(TokenEnumerator tokenEnumerator)
         {
-            var complexNumber = tokenEnumerator.GetCurrent<ComplexNumberToken>();
-            if (complexNumber == null)
-                return null;
+            var scope = tokenEnumerator.CreateScope();
 
-            return ExpressionFactory.CreateComplexNumber(complexNumber);
+            var magnitude = tokenEnumerator.GetCurrent<NumberToken>();
+            if (magnitude != null)
+            {
+                var hasAngleSymbol = tokenEnumerator.Symbol(Symbols.Angle);
+                if (hasAngleSymbol)
+                {
+                    var phase = tokenEnumerator.GetCurrent<NumberToken>();
+                    if (phase == null)
+                        throw new ParseException(); // TODO:
+
+                    var hasDegreeSymbol = tokenEnumerator.Symbol(Symbols.Degree);
+                    if (!hasDegreeSymbol)
+                        throw new ParseException(); // TODO:
+
+                    // TODO:
+                    return ExpressionFactory.CreateComplexNumber(magnitude, phase);
+                }
+            }
+
+            tokenEnumerator.Rollback(scope);
+
+            return null;
         }
 
         private IExpression Variable(TokenEnumerator tokenEnumerator)

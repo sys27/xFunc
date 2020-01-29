@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class VolumeTest
     {
 
-        private VolumeConverter conv = new VolumeConverter();
+        private readonly VolumeConverter conv = new VolumeConverter();
 
         [Fact]
         public void ConvertToSame()

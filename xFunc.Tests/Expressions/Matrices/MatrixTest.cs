@@ -334,10 +334,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(0.4), new Number(-0.0833333333333333), new Number(6.41666666666667), new Number(2.75) }),
                 new Vector(new[] { new Number(0.6), new Number(0.638888888888889), new Number(-0.601731601731602), new Number(4.90476190476191) })
             });
-
-            int[] perm;
-            int toggle;
-            var actual = MatrixExtensions.LUPDecomposition(matrix, null, out perm, out toggle);
+            var actual = MatrixExtensions.LUPDecomposition(matrix, null, out _, out _);
 
             Assert.Equal(expected, actual);
         }

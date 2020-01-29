@@ -25,7 +25,7 @@ namespace xFunc.Tests
     public class BuilderTest
     {
 
-        private Builder builder;
+        private readonly Builder builder;
 
         public BuilderTest()
         {

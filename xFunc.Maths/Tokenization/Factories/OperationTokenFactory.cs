@@ -118,11 +118,11 @@ namespace xFunc.Maths.Tokenization.Factories
             }
             else if (operation == "+")
             {
-                result.Token = new OperationToken(Operations.Addition);
+                result.Token = new OperationToken(Operations.Plus);
             }
             else if (operation == "-" || operation == "−")
             {
-                result.Token = new OperationToken(Operations.Subtraction);
+                result.Token = new OperationToken(Operations.Minus);
             }
             else if (operation == "/=")
             {

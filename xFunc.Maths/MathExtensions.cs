@@ -275,19 +275,14 @@ namespace xFunc.Maths
         /// <returns>String that contains the number in the new numeral system.</returns>
         public static string ToNewBase(int number, NumeralSystem numeralSystem)
         {
-            switch (numeralSystem)
+            return numeralSystem switch
             {
-                case NumeralSystem.Decimal:
-                    return number.ToString(CultureInfo.InvariantCulture);
-                case NumeralSystem.Binary:
-                    return "0b" + Convert.ToString(number, 2);
-                case NumeralSystem.Octal:
-                    return "0" + Convert.ToString(number, 8);
-                case NumeralSystem.Hexidecimal:
-                    return "0x" + Convert.ToString(number, 16);
-                default:
-                    return null;
-            }
+                NumeralSystem.Decimal => number.ToString(CultureInfo.InvariantCulture),
+                NumeralSystem.Binary => "0b" + Convert.ToString(number, 2),
+                NumeralSystem.Octal => "0" + Convert.ToString(number, 8),
+                NumeralSystem.Hexidecimal => "0x" + Convert.ToString(number, 16),
+                _ => null,
+            };
         }
 
         /// <summary>

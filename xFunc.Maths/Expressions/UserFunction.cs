@@ -32,11 +32,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">Arguments.</param>
         public UserFunction(string function, IExpression[] args) : base(args)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
             this.Function = function;
-            this.Arguments = args;
+            this.Arguments = args ?? throw new ArgumentNullException(nameof(args));
         }
 
         /// <summary>

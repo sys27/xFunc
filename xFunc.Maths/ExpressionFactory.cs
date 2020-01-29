@@ -52,12 +52,13 @@ namespace xFunc.Maths
 
             operations = new Dictionary<Operations, Func<IExpression[], IExpression>>
             {
-                { Operations.Addition, arguments => new Add(GetBinaryArguments(arguments)) },
-                { Operations.Subtraction, arguments => new Sub(GetBinaryArguments(arguments)) },
+                { Operations.Plus, arguments => new Add(GetBinaryArguments(arguments)) },
+                { Operations.Minus, arguments => new Sub(GetBinaryArguments(arguments)) },
                 { Operations.Multiplication, arguments => new Mul(GetBinaryArguments(arguments)) },
                 { Operations.Division, arguments => new Div(GetBinaryArguments(arguments)) },
                 { Operations.Exponentiation, arguments => new Pow(GetBinaryArguments(arguments)) },
-                { Operations.UnaryMinus, arguments => new UnaryMinus(GetSingleArgument(arguments)) },
+                // TODO:
+                // { Operations.UnaryMinus, arguments => new UnaryMinus(GetSingleArgument(arguments)) },
                 { Operations.Factorial, arguments => new Fact(GetSingleArgument(arguments)) },
                 { Operations.Modulo, arguments => new Mod(GetBinaryArguments(arguments)) },
                 { Operations.Assign, arguments => new Define(GetBinaryArguments(arguments)) },

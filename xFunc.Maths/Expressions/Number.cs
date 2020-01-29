@@ -61,11 +61,10 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
-            var num = obj as Number;
-            if (num == null)
-                return false;
+            if (obj is Number num)
+                return Value.Equals(num.Value) || Math.Abs(Value - num.Value) < 1E-14;
 
-            return Value.Equals(num.Value) || Math.Abs(Value - num.Value) < 1E-14;
+            return false;
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class AreaTest
     {
 
-        private AreaConverter conv = new AreaConverter();
+        private readonly AreaConverter conv = new AreaConverter();
 
         [Fact]
         public void ConvertToSame()

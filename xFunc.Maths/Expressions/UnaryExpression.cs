@@ -152,10 +152,7 @@ namespace xFunc.Maths.Expressions
             }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                m_argument = value;
+                m_argument = value ?? throw new ArgumentNullException(nameof(value));
                 m_argument.Parent = this;
             }
         }

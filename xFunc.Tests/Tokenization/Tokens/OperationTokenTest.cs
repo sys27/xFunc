@@ -52,7 +52,7 @@ namespace xFunc.Tests.Tokenization.Tokens
         public void EqualsDiffOperationTest()
         {
             var token1 = new OperationToken(Operations.Multiplication);
-            var token2 = new OperationToken(Operations.Subtraction);
+            var token2 = new OperationToken(Operations.Minus);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);

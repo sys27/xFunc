@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class TemperatureTest
     {
 
-        private TemperatureConverter conv = new TemperatureConverter();
+        private readonly TemperatureConverter conv = new TemperatureConverter();
 
         [Fact]
         public void ConvertToSame()

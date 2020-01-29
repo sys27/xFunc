@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +28,12 @@ namespace xFunc.Maths
     /// </summary>
     public partial class Parser : IParser
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IExpressionFactory"/>.
         /// </summary>
-        public Parser() : this(new ExpressionFactory(new Differentiator(), new Simplifier())) { }
+        public Parser() : this(new ExpressionFactory(new Differentiator(), new Simplifier()))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser" /> class.
@@ -67,14 +69,14 @@ namespace xFunc.Maths
         private IExpression Statement(TokenEnumerator tokenEnumerator)
         {
             return UnaryAssign(tokenEnumerator) ??
-                BinaryAssign(tokenEnumerator) ??
-                Assign(tokenEnumerator) ??
-                Def(tokenEnumerator) ??
-                Undef(tokenEnumerator) ??
-                If(tokenEnumerator) ??
-                For(tokenEnumerator) ??
-                While(tokenEnumerator) ??
-                Expression(tokenEnumerator);
+                   BinaryAssign(tokenEnumerator) ??
+                   Assign(tokenEnumerator) ??
+                   Def(tokenEnumerator) ??
+                   Undef(tokenEnumerator) ??
+                   If(tokenEnumerator) ??
+                   For(tokenEnumerator) ??
+                   While(tokenEnumerator) ??
+                   Expression(tokenEnumerator);
         }
 
         private IExpression UnaryAssign(TokenEnumerator tokenEnumerator)
@@ -120,7 +122,7 @@ namespace xFunc.Maths
         private IExpression AssignmentKey(TokenEnumerator tokenEnumerator)
         {
             return FunctionDeclaration(tokenEnumerator) ??
-                Variable(tokenEnumerator);
+                   Variable(tokenEnumerator);
         }
 
         private IExpression Assign(TokenEnumerator tokenEnumerator)
@@ -384,8 +386,8 @@ namespace xFunc.Maths
 
             while (true)
             {
-                var @operator = tokenEnumerator.Operator(Operations.Addition |
-                                                         Operations.Subtraction);
+                var @operator = tokenEnumerator.Operator(Operations.Plus |
+                                                         Operations.Minus);
                 if (@operator == null)
                     return left;
 
@@ -418,14 +420,14 @@ namespace xFunc.Maths
         private IExpression MulImplicit(TokenEnumerator tokenEnumerator)
         {
             return MulImplicitLeftUnary(tokenEnumerator) ??
-                LeftUnary(tokenEnumerator);
+                   LeftUnary(tokenEnumerator);
         }
 
         private IExpression MulImplicitLeftUnary(TokenEnumerator tokenEnumerator)
         {
             var scope = tokenEnumerator.CreateScope(); // TODO:
 
-            var @operator = tokenEnumerator.Operator(Operations.UnaryMinus);
+            var @operator = tokenEnumerator.Operator(Operations.Minus);
             var number = Number(tokenEnumerator);
             if (number != null)
             {
@@ -433,7 +435,9 @@ namespace xFunc.Maths
                 if (rightUnary != null)
                 {
                     if (@operator != null)
-                        number = ExpressionFactory.CreateOperation(@operator, number);
+                        // TODO:
+                        // number = ExpressionFactory.CreateOperation(@operator, number);
+                        number = new UnaryMinus(number);
 
                     // TODO:
                     return ExpressionFactory.CreateOperation(new OperationToken(Operations.Multiplication), number, rightUnary);
@@ -447,11 +451,14 @@ namespace xFunc.Maths
         private IExpression LeftUnary(TokenEnumerator tokenEnumerator)
         {
             var @operator = tokenEnumerator.Operator(Operations.Not |
-                                                     Operations.UnaryMinus |
-                                                     Operations.Addition);
+                                                     Operations.Minus |
+                                                     Operations.Plus);
             var operand = Exponentiation(tokenEnumerator);
-            if (@operator == null || @operator.Operation == Operations.Addition)
+            if (@operator == null || @operator.Operation == Operations.Plus)
                 return operand;
+
+            if (@operator.Operation == Operations.Minus)
+                return new UnaryMinus(operand); // TODO:
 
             return ExpressionFactory.CreateOperation(@operator, operand);
         }
@@ -491,13 +498,13 @@ namespace xFunc.Maths
         private IExpression Operand(TokenEnumerator tokenEnumerator)
         {
             return ComplexNumber(tokenEnumerator) ??
-                Number(tokenEnumerator) ??
-                Function(tokenEnumerator) ??
-                Variable(tokenEnumerator) ??
-                Boolean(tokenEnumerator) ??
-                ParenthesesExpression(tokenEnumerator) ??
-                Matrix(tokenEnumerator) ??
-                Vector(tokenEnumerator);
+                   Number(tokenEnumerator) ??
+                   Function(tokenEnumerator) ??
+                   Variable(tokenEnumerator) ??
+                   Boolean(tokenEnumerator) ??
+                   ParenthesesExpression(tokenEnumerator) ??
+                   Matrix(tokenEnumerator) ??
+                   Vector(tokenEnumerator);
         }
 
         private IExpression ParenthesesExpression(TokenEnumerator tokenEnumerator)
@@ -541,7 +548,7 @@ namespace xFunc.Maths
                 while (tokenEnumerator.Symbol(Symbols.Comma))
                 {
                     exp = Expression(tokenEnumerator) ??
-                        throw new ParseException(Resource.NotEnoughParams);
+                          throw new ParseException(Resource.NotEnoughParams);
 
                     parameterList.Add(exp);
                 }
@@ -677,7 +684,5 @@ namespace xFunc.Maths
         /// The expression factory.
         /// </value>
         public IExpressionFactory ExpressionFactory { get; set; }
-
     }
-
 }

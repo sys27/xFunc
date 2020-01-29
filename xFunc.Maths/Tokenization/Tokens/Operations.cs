@@ -27,11 +27,11 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <summary>
         /// +
         /// </summary>
-        Addition = 0x1,
+        Plus = 0x1,
         /// <summary>
         /// -
         /// </summary>
-        Subtraction = 0x2,
+        Minus = 0x2,
         /// <summary>
         /// *
         /// </summary>
@@ -44,10 +44,11 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// ^
         /// </summary>
         Exponentiation = 0x10,
-        /// <summary>
-        /// - (Unary)
-        /// </summary>
-        UnaryMinus = 0x20,
+        // TODO:
+        // /// <summary>
+        // /// - (Unary)
+        // /// </summary>
+        // UnaryMinus = 0x20,
         /// <summary>
         /// !
         /// </summary>

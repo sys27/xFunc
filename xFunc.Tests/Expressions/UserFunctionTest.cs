@@ -28,8 +28,10 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest1()
         {
-            var functions = new FunctionCollection();
-            functions.Add(new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X));
+            var functions = new FunctionCollection
+            {
+                { new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X) }
+            };
 
             var func = new UserFunction("f", new IExpression[] { new Number(1) });
             Assert.Equal(Math.Log(1), func.Execute(functions));

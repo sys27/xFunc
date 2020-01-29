@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class MassTest
     {
 
-        private MassConverter conv = new MassConverter();
+        private readonly MassConverter conv = new MassConverter();
 
         [Fact]
         public void ConvertToSame()

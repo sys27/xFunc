@@ -236,10 +236,8 @@ namespace xFunc.Maths.Expressions.Matrices
                     for (var i = 0; i < vectors.Length; i++)
                     {
                         var vector = value[i] as Vector;
-                        if (vector == null)
-                            throw new MatrixIsInvalidException();
 
-                        vectors[i] = vector;
+                        vectors[i] = vector ?? throw new MatrixIsInvalidException();
                     }
 
                     var size = vectors[0].ParametersCount;

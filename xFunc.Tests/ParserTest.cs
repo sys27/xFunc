@@ -262,7 +262,7 @@ namespace xFunc.Tests
                 .Id("aaa")
                 .Operation(Operations.Assign)
                 .Number(3)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -308,7 +308,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Id("func")
                 .OpenParenthesis()
                 .VariableX()
@@ -360,7 +360,7 @@ namespace xFunc.Tests
                 .OpenParenthesis()
                 .VariableX()
                 .CloseParenthesis()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Id("sin")
                 .OpenParenthesis()
                 .VariableX()
@@ -611,7 +611,7 @@ namespace xFunc.Tests
                 .VariableX()
                 .Operation(Operations.Assign)
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1)
                 .CloseParenthesis()
                 .Tokens;
@@ -635,7 +635,7 @@ namespace xFunc.Tests
                 .VariableX()
                 .Operation(Operations.Assign)
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1)
                 .Comma()
                 .Number(1)
@@ -1019,7 +1019,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1041,7 +1041,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1062,9 +1062,9 @@ namespace xFunc.Tests
         public void ComplexNumberNegativeAllPartsTest()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1085,9 +1085,9 @@ namespace xFunc.Tests
         public void ComplexNumberNegativeAllPartsWithoutMulTest()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Id("i")
                 .Tokens;
@@ -1108,7 +1108,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(0)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1130,7 +1130,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(0)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1152,7 +1152,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(0)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1174,10 +1174,10 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .OpenParenthesis()
                 .Number(0)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1203,10 +1203,10 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1288,7 +1288,7 @@ namespace xFunc.Tests
                 .Id("im")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1315,7 +1315,7 @@ namespace xFunc.Tests
                 .Id("re")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1342,7 +1342,7 @@ namespace xFunc.Tests
                 .Id("phase")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1369,7 +1369,7 @@ namespace xFunc.Tests
                 .Id("conjugate")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1396,7 +1396,7 @@ namespace xFunc.Tests
                 .Id("reciprocal")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operations.Subtraction)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -1449,7 +1449,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(7)
                 .Operation(Operations.Modulo)
                 .Number(2)
@@ -1613,11 +1613,11 @@ namespace xFunc.Tests
                 .Number(2)
                 .Operation(Operations.Multiplication)
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(3)
                 .Operation(Operations.Multiplication)
                 .VariableY()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(4)
                 .Operation(Operations.Multiplication)
                 .Id("z")
@@ -1773,7 +1773,7 @@ namespace xFunc.Tests
         public void PowUnaryMinusTest()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(1)
                 .Operation(Operations.Exponentiation)
                 .Number(2)
@@ -1840,7 +1840,7 @@ namespace xFunc.Tests
         public void UnaryMinusTest()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .Tokens;
 
@@ -1856,7 +1856,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Id("sign")
                 .OpenParenthesis()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(10)
                 .CloseParenthesis()
                 .Tokens;
@@ -1875,7 +1875,7 @@ namespace xFunc.Tests
                 .OpenParenthesis()
                 .Number(2)
                 .Comma()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .VariableX()
                 .CloseParenthesis()
                 .Tokens;
@@ -1892,7 +1892,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.Assign)
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1914,7 +1914,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.AddAssign)
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1936,7 +1936,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.SubAssign)
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1958,7 +1958,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.MulAssign)
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1980,7 +1980,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .VariableX()
                 .Operation(Operations.DivAssign)
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -2027,7 +2027,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .OpenParenthesis()
                 .Number(2)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1)
                 .CloseParenthesis()
                 .Operation(Operations.Not)
@@ -2839,7 +2839,7 @@ namespace xFunc.Tests
         public void NumAndVar()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .VariableX()
                 .Tokens;
@@ -2896,7 +2896,7 @@ namespace xFunc.Tests
                 .Operation(Operations.Multiplication)
                 .OpenParenthesis()
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .VariableY()
                 .CloseParenthesis()
                 .Tokens;
@@ -2970,7 +2970,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .OpenParenthesis()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(2)
                 .CloseParenthesis()
                 .Tokens;
@@ -2987,7 +2987,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Id("sin")
                 .OpenParenthesis()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(2)
                 .CloseParenthesis()
                 .Tokens;
@@ -3004,7 +3004,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Id("sin")
                 .OpenParenthesis()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .VariableX()
                 .CloseParenthesis()
                 .Tokens;
@@ -3019,9 +3019,9 @@ namespace xFunc.Tests
         public void Integer()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(2764786)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(46489879)
                 .Tokens;
 
@@ -3038,9 +3038,9 @@ namespace xFunc.Tests
         public void Double()
         {
             var tokens = Builder()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(45.3)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(87.64)
                 .Tokens;
 
@@ -3058,7 +3058,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .OpenParenthesis()
-                .Operation(Operations.UnaryMinus)
+                .Operation(Operations.Minus)
                 .Number(2)
                 .CloseParenthesis()
                 .Tokens;
@@ -3079,7 +3079,7 @@ namespace xFunc.Tests
                 .Comma()
                 .Number(2)
                 .CloseParenthesis()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Id("cos")
                 .OpenParenthesis()
                 .CloseParenthesis()
@@ -3117,7 +3117,7 @@ namespace xFunc.Tests
                 .Comma()
                 .Number(2)
                 .CloseParenthesis()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));

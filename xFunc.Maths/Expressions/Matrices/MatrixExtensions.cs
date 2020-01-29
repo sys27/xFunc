@@ -126,7 +126,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var n = (double)number.Execute(parameters);
 
             var numbers = (from num in vector.Arguments.AsParallel().AsOrdered()
-                            select new Number((double)num.Execute(parameters) * n))
+                           select new Number((double)num.Execute(parameters) * n))
                         .ToArray();
 
             return new Vector(numbers);
@@ -233,11 +233,11 @@ namespace xFunc.Maths.Expressions.Matrices
             var n = (double)number.Execute(parameters);
 
             var result = from v in matrix.Arguments.AsParallel().AsOrdered()
-                        select new Vector(
-                            (from num in ((Vector)v).Arguments
-                            select new Number((double)num.Execute(parameters) * n))
-                            .ToArray()
-                        );
+                         select new Vector(
+                             (from num in ((Vector)v).Arguments
+                              select new Number((double)num.Execute(parameters) * n))
+                             .ToArray()
+                         );
 
             return new Matrix(result.ToArray());
         }
@@ -437,7 +437,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (matrix.Length == 2)
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
 
-            var lu = LUPDecompositionInternal(matrix, out var permutation, out var toggle);
+            var lu = LUPDecompositionInternal(matrix, out _, out var toggle);
 
             if (lu == null)
                 throw new MatrixIsInvalidException();
@@ -580,7 +580,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     result[i][j] = matrix[i][j];
             }
 
-            var lu = LUPDecompositionInternal(matrix, out var permutation, out var toggle);
+            var lu = LUPDecompositionInternal(matrix, out var permutation, out _);
             if (lu == null)
                 throw new MatrixIsInvalidException();
 

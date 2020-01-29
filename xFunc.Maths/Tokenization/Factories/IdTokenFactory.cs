@@ -62,7 +62,6 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </returns>
         protected override FactoryResult CreateTokenInternal(Match match)
         {
-            var result = new FactoryResult();
             var id = match.Value;
 
             if (keywords.TryGetValue(id, out var keyword))

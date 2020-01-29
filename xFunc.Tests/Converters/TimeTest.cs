@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class TimeTest
     {
 
-        private TimeConverter conv = new TimeConverter();
+        private readonly TimeConverter conv = new TimeConverter();
 
         [Fact]
         public void ConvertToSame()

@@ -58,7 +58,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .Number(2)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1.1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
@@ -87,7 +87,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .Number(2)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
@@ -122,7 +122,7 @@ namespace xFunc.Tests
                 .Id("conjugate")
                 .OpenParenthesis()
                 .Number(2.3)
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1.4)
                 .Operation(Operations.Multiplication)
                 .Id("i")
@@ -249,7 +249,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
@@ -276,7 +276,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(Operations.Plus)
                 .Number(1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);

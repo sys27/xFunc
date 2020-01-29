@@ -133,9 +133,9 @@ namespace xFunc.Maths
                 foreach (var exp in diff.Arguments)
                     GetAllVariables(exp, collection);
             }
-            else if (expression is Variable)
+            else if (expression is Variable variable)
             {
-                collection.Add((Variable)expression);
+                collection.Add(variable);
             }
         }
 

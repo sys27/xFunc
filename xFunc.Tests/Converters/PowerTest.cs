@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class PowerTest
     {
 
-        private PowerConverter conv = new PowerConverter();
+        private readonly PowerConverter conv = new PowerConverter();
 
         [Fact]
         public void ConvertToSame()

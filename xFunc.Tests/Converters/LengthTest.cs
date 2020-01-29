@@ -21,7 +21,7 @@ namespace xFunc.Tests.Converters
     public class LengthTest
     {
 
-        private LengthConverter conv = new LengthConverter();
+        private readonly LengthConverter conv = new LengthConverter();
 
         [Fact]
         public void ConvertToSame()

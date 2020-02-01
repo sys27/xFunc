@@ -12,35 +12,37 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.Text.RegularExpressions;
+
+using System.Collections.Generic;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory which creates empty result (without token).
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class EmptyTokenFactory : FactoryBase
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
+    public class EmptyTokenFactory : ITokenFactory
     {
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EmptyTokenFactory"/> class.
-        /// </summary>
-        public EmptyTokenFactory() : base(new Regex(@"\G\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
-
-        /// <summary>
-        /// Creates the empty result (without token).
-        /// </summary>
-        /// <param name="match">The match.</param>
-        /// <returns>
-        /// The token.
-        /// </returns>
-        protected override FactoryResult CreateTokenInternal(Match match)
+        private readonly HashSet<char> symbols = new HashSet<char>
         {
-            return new FactoryResult(null, match.Length);
+            ' ', '\n', '\r', '\t', '\v', '\f'
+        };
+
+        /// <summary>
+        /// Creates the token.
+        /// </summary>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="startIndex">The start index.</param>
+        /// <returns>The token.</returns>
+        public FactoryResult CreateToken(string function, int startIndex)
+        {
+            var index = startIndex;
+            while (symbols.Contains(function[index]))
+                index++;
+
+            var processedLength = index - startIndex;
+
+            return processedLength > 0 ? new FactoryResult(null, processedLength) : null;
         }
-
     }
-
 }

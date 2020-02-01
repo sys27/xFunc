@@ -950,6 +950,21 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void AndKeywordTest()
+        {
+            var tokens = Builder()
+                .True()
+                .Keyword(Keywords.And)
+                .False()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void LogicAddPriorityTest()
         {
             var tokens = Builder()
@@ -1431,20 +1446,6 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ModuloAsFuncTest()
-        {
-            var tokens = Builder()
-                .Number(7)
-                .Operation(Operations.Modulo)
-                .Number(2)
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Mod(new Number(7), new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
         public void ModuloAddTest()
         {
             var tokens = Builder()
@@ -1452,6 +1453,22 @@ namespace xFunc.Tests
                 .Operation(Operations.Plus)
                 .Number(7)
                 .Operation(Operations.Modulo)
+                .Number(2)
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Add(new Number(2), new Mod(new Number(7), new Number(2)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ModuloKeywordAddTest()
+        {
+            var tokens = Builder()
+                .Number(2)
+                .Operation(Operations.Plus)
+                .Number(7)
+                .Keyword(Keywords.Mod)
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -2052,11 +2069,26 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void OrKeywordTest()
+        {
+            var tokens = Builder()
+                .Number(1)
+                .Keyword(Keywords.Or)
+                .Number(2)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void XOrTest()
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operations.XOr)
+                .Keyword(Keywords.XOr)
                 .Number(2)
                 .Tokens;
 
@@ -2071,7 +2103,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Operation(Operations.NOr)
+                .Keyword(Keywords.NOr)
                 .True()
                 .Tokens;
 
@@ -2086,7 +2118,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Operation(Operations.NAnd)
+                .Keyword(Keywords.NAnd)
                 .True()
                 .Tokens;
 
@@ -2112,11 +2144,41 @@ namespace xFunc.Tests
         }
 
         [Fact]
+        public void ImplicationKeywordTest()
+        {
+            var tokens = Builder()
+                .True()
+                .Keyword(Keywords.Impl)
+                .True()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Implication(new Bool(true), new Bool(true));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void EqualityTest()
         {
             var tokens = Builder()
                 .True()
                 .Operation(Operations.Equality)
+                .True()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Equality(new Bool(true), new Bool(true));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void EqualityKeywordTest()
+        {
+            var tokens = Builder()
+                .True()
+                .Keyword(Keywords.Eq)
                 .True()
                 .Tokens;
 

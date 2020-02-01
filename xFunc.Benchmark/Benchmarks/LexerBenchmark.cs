@@ -12,10 +12,9 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Engines;
 using xFunc.Maths.Tokenization;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Benchmark.Benchmarks
 {
@@ -25,8 +24,7 @@ namespace xFunc.Benchmark.Benchmarks
 
         private ILexer lexer;
 
-        [Params(10, 100, 1000)]
-        public int Iterations;
+        private readonly Consumer consumer = new Consumer();
 
         [GlobalSetup]
         public void Setup()
@@ -37,9 +35,7 @@ namespace xFunc.Benchmark.Benchmarks
         [Benchmark]
         public void TestLexer()
         {
-            IEnumerable<IToken> tokens = null;
-            for (var i = 0; i < Iterations; i++)
-                tokens = lexer.Tokenize("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)");
+            lexer.Tokenize("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)").Consume(consumer);
         }
 
     }

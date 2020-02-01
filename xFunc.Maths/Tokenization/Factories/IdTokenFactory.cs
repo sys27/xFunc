@@ -12,20 +12,19 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory which creates variable tokens.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class IdTokenFactory : FactoryBase
     {
-
         private readonly Dictionary<string, KeywordToken> keywords;
 
         /// <summary>
@@ -50,6 +49,16 @@ namespace xFunc.Maths.Tokenization.Factories
                 { "if", new KeywordToken(Keywords.If) },
                 { "for", new KeywordToken(Keywords.For) },
                 { "while", new KeywordToken(Keywords.While) },
+
+                { "nand", new KeywordToken(Keywords.NAnd) },
+                { "nor", new KeywordToken(Keywords.NOr) },
+                { "and", new KeywordToken(Keywords.And) },
+                { "or", new KeywordToken(Keywords.Or) },
+                { "xor", new KeywordToken(Keywords.XOr) },
+                { "not", new KeywordToken(Keywords.Not) },
+                { "eq", new KeywordToken(Keywords.Eq) },
+                { "impl", new KeywordToken(Keywords.Impl) },
+                { "mod", new KeywordToken(Keywords.Mod) },
             };
         }
 
@@ -69,7 +78,5 @@ namespace xFunc.Maths.Tokenization.Factories
 
             return new FactoryResult(new IdToken(id), id.Length);
         }
-
     }
-
 }

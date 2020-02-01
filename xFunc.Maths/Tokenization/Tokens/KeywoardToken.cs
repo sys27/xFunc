@@ -13,44 +13,95 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
     /// Describes keywords.
     /// </summary>
+    [Flags]
     public enum Keywords
     {
         /// <summary>
         /// true
         /// </summary>
-        True,
+        True = 0x1,
+
         /// <summary>
         /// false
         /// </summary>
-        False,
+        False = 0x2,
 
         /// <summary>
         /// def, define
         /// </summary>
-        Define,
+        Define = 0x4,
+
         /// <summary>
         /// undef, undefine
         /// </summary>
-        Undefine,
+        Undefine = 0x8,
 
         /// <summary>
         /// if
         /// </summary>
-        If,
+        If = 0x10,
+
         /// <summary>
         /// for
         /// </summary>
-        For,
+        For = 0x20,
+
         /// <summary>
         /// while
         /// </summary>
-        While,
+        While = 0x40,
+
+        /// <summary>
+        /// nand
+        /// </summary>
+        NAnd = 0x80,
+
+        /// <summary>
+        /// nor
+        /// </summary>
+        NOr = 0x100,
+
+        /// <summary>
+        /// and
+        /// </summary>
+        And = 0x200,
+
+        /// <summary>
+        /// Or
+        /// </summary>
+        Or = 0x400,
+
+        /// <summary>
+        /// xor
+        /// </summary>
+        XOr = 0x800,
+
+        /// <summary>
+        /// not
+        /// </summary>
+        Not = 0x1000,
+
+        /// <summary>
+        /// eq
+        /// </summary>
+        Eq = 0x2000,
+
+        /// <summary>
+        /// impl
+        /// </summary>
+        Impl = 0x4000,
+
+        /// <summary>
+        /// mod
+        /// </summary>
+        Mod = 0x8000,
     }
 
     /// <summary>
@@ -58,7 +109,6 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// </summary>
     public class KeywordToken : IToken
     {
-
         /// <summary>
         /// Initializes the <see cref="KeywordToken"/> class.
         /// </summary>
@@ -84,7 +134,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (typeof(KeywordToken) != obj.GetType())
                 return false;
 
-            var token = (KeywordToken)obj;
+            var token = (KeywordToken) obj;
 
             return this.Keyword == token.Keyword;
         }
@@ -113,7 +163,5 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets a keyword.
         /// </summary>
         public Keywords Keyword { get; }
-
     }
-
 }

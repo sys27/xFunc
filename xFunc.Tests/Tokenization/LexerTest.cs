@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths;
@@ -20,10 +21,8 @@ using Xunit;
 
 namespace xFunc.Tests.Tokenization
 {
-
     public class LexerTest : BaseLexerTests
     {
-
         [Fact]
         public void NullString()
         {
@@ -260,7 +259,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("not(2)");
             var expected = Builder()
-                .Operation(Operations.Not)
+                .Keyword(Keywords.Not)
                 .OpenParenthesis()
                 .Number(2)
                 .CloseParenthesis()
@@ -608,7 +607,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("1 and 2");
             var expected = Builder()
                 .Number(1)
-                .Operation(Operations.And)
+                .Keyword(Keywords.And)
                 .Number(2)
                 .Tokens;
 
@@ -621,7 +620,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("1 or 2");
             var expected = Builder()
                 .Number(1)
-                .Operation(Operations.Or)
+                .Keyword(Keywords.Or)
                 .Number(2)
                 .Tokens;
 
@@ -634,7 +633,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("1 xor 2");
             var expected = Builder()
                 .Number(1)
-                .Operation(Operations.XOr)
+                .Keyword(Keywords.XOr)
                 .Number(2)
                 .Tokens;
 
@@ -647,7 +646,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("true impl false");
             var expected = Builder()
                 .True()
-                .Operation(Operations.Implication)
+                .Keyword(Keywords.Impl)
                 .False()
                 .Tokens;
 
@@ -660,7 +659,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("true eq false");
             var expected = Builder()
                 .True()
-                .Operation(Operations.Equality)
+                .Keyword(Keywords.Eq)
                 .False()
                 .Tokens;
 
@@ -673,7 +672,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("true nor false");
             var expected = Builder()
                 .True()
-                .Operation(Operations.NOr)
+                .Keyword(Keywords.NOr)
                 .False()
                 .Tokens;
 
@@ -686,7 +685,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("true nand false");
             var expected = Builder()
                 .True()
-                .Operation(Operations.NAnd)
+                .Keyword(Keywords.NAnd)
                 .False()
                 .Tokens;
 
@@ -712,7 +711,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("x and x");
             var expected = Builder()
                 .VariableX()
-                .Operation(Operations.And)
+                .Keyword(Keywords.And)
                 .VariableX()
                 .Tokens;
 
@@ -738,7 +737,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("func and 1");
             var expected = Builder()
                 .Id("func")
-                .Operation(Operations.And)
+                .Keyword(Keywords.And)
                 .Number(1)
                 .Tokens;
 
@@ -1830,7 +1829,7 @@ namespace xFunc.Tests.Tokenization
             var tokens = lexer.Tokenize("7 mod 2");
             var expected = Builder()
                 .Number(7)
-                .Operation(Operations.Modulo)
+                .Keyword(Keywords.Mod)
                 .Number(2)
                 .Tokens;
 
@@ -1855,7 +1854,7 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("nOt(4)");
             var expected = Builder()
-                .Operation(Operations.Not)
+                .Keyword(Keywords.Not)
                 .OpenParenthesis()
                 .Number(4)
                 .CloseParenthesis()
@@ -1933,7 +1932,5 @@ namespace xFunc.Tests.Tokenization
 
             Assert.Equal(expected, tokens.ToList());
         }
-
     }
-
 }

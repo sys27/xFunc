@@ -243,7 +243,17 @@ namespace xFunc.Maths
                 Keywords.For => new For(arguments),
                 Keywords.While => new While(arguments[0], arguments[1]), // TODO:
 
-                _ => throw new Exception(),
+                Keywords.NAnd => new NAnd(arguments[0], arguments[1]),
+                Keywords.NOr => new NOr(arguments[0], arguments[1]),
+                Keywords.And => new Expressions.LogicalAndBitwise.And(arguments[0], arguments[1]),
+                Keywords.Or => new Expressions.LogicalAndBitwise.Or(arguments[0], arguments[1]),
+                Keywords.XOr => new XOr(arguments[0], arguments[1]),
+                Keywords.Not => new Not(arguments[0]),
+                Keywords.Eq => new Equality(arguments[0], arguments[1]),
+                Keywords.Impl => new Implication(arguments[0], arguments[1]),
+                Keywords.Mod => new Mod(arguments[0], arguments[1]),
+
+                _ => throw new Exception(), // TODO:
             };
         }
 

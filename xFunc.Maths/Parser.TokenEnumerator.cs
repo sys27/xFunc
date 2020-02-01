@@ -82,16 +82,17 @@ namespace xFunc.Maths
                 return null;
             }
 
-            public KeywordToken Keyword(Keywords keyword)
+            public KeywordToken Keyword(Keywords keywords)
             {
                 var token = Peek<KeywordToken>();
-                var result = token?.Keyword == keyword;
-                if (!result)
-                    return null;
+                if (token != null && keywords.HasFlag(token.Keyword))
+                {
+                    MoveNext();
 
-                MoveNext();
+                    return token;
+                }
 
-                return token;
+                return null;
             }
 
             public Scope CreateScope() => new Scope(this);

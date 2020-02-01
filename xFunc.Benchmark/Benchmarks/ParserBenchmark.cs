@@ -27,15 +27,12 @@ namespace xFunc.Benchmark.Benchmarks
 
         private IList<IToken> tokens;
 
-        [Params(10, 100, 1000)]
-        public int Iterations;
-
         [GlobalSetup]
         public void Setup()
         {
             processor = new Parser();
 
-            // (100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)
+            // (100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)
             tokens = new TokensBuilder()
                 .OpenParenthesis()
                 .Number(100.1)
@@ -97,6 +94,8 @@ namespace xFunc.Benchmark.Benchmarks
                 .True()
                 .Operation(Operations.Equality)
                 .False()
+                .Keyword(Keywords.Eq)
+                .True()
                 .CloseParenthesis()
                 .Operation(Operations.Plus)
                 .OpenParenthesis()
@@ -152,11 +151,9 @@ namespace xFunc.Benchmark.Benchmarks
         }
 
         [Benchmark]
-        public void Parse()
+        public IExpression Parse()
         {
-            IExpression exp = null;
-            for (var i = 0; i < Iterations; i++)
-                exp = processor.Parse(tokens);
+            return processor.Parse(tokens);
         }
     }
 }

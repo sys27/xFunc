@@ -341,13 +341,29 @@ namespace xFunc.Maths
             {
                 var @operator = tokenEnumerator.Operator(Operations.And |
                                                          Operations.Or |
-                                                         Operations.XOr |
                                                          Operations.Implication |
-                                                         Operations.Equality |
-                                                         Operations.NOr |
-                                                         Operations.NAnd);
+                                                         Operations.Equality);
                 if (@operator == null)
+                {
+                    var keyword = tokenEnumerator.Keyword(Keywords.NAnd |
+                                                          Keywords.NOr |
+                                                          Keywords.And |
+                                                          Keywords.Or |
+                                                          Keywords.XOr |
+                                                          Keywords.Not |
+                                                          Keywords.Eq |
+                                                          Keywords.Impl);
+                    if (keyword != null)
+                    {
+                        var right2 = EqualityOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
+
+                        left = ExpressionFactory.CreateFromKeyword(keyword, left, right2);
+
+                        continue;
+                    }
+
                     return left;
+                }
 
                 var right = EqualityOperator(tokenEnumerator) ?? throw new ParseException(); // TODO:
 
@@ -409,7 +425,20 @@ namespace xFunc.Maths
                                                          Operations.Division |
                                                          Operations.Modulo);
                 if (@operator == null)
+                {
+                    // TODO:
+                    var keyword = tokenEnumerator.Keyword(Keywords.Mod);
+                    if (keyword != null)
+                    {
+                        var right2 = MulImplicit(tokenEnumerator) ?? throw new ParseException(); // TODO:
+
+                        left = ExpressionFactory.CreateFromKeyword(keyword, left, right2);
+
+                        continue;
+                    }
+
                     return left;
+                }
 
                 var right = MulImplicit(tokenEnumerator) ?? throw new ParseException(); // TODO:
 

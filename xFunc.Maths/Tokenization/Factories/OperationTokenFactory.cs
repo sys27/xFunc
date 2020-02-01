@@ -12,24 +12,26 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Text.RegularExpressions;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory which creates operation tokens.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
     public class OperationTokenFactory : FactoryBase
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationTokenFactory"/> class.
         /// </summary>
-        public OperationTokenFactory() : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+|nand|nor|and|or|xor|not|eq|impl|mod)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
+        public OperationTokenFactory()
+            : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+        }
 
         /// <summary>
         /// Creates the token.
@@ -72,7 +74,7 @@ namespace xFunc.Maths.Tokenization.Factories
             {
                 result.Token = new OperationToken(Operations.Factorial);
             }
-            else if (operation == "%" || operation == "mod")
+            else if (operation == "%")
             {
                 result.Token = new OperationToken(Operations.Modulo);
             }
@@ -132,37 +134,25 @@ namespace xFunc.Maths.Tokenization.Factories
             {
                 result.Token = new OperationToken(Operations.Assign);
             }
-            else if (operation == "not" || operation == "~")
+            else if (operation == "~")
             {
                 result.Token = new OperationToken(Operations.Not);
             }
-            else if (operation == "and" || operation == "&")
+            else if (operation == "&")
             {
                 result.Token = new OperationToken(Operations.And);
             }
-            else if (operation == "or" || operation == "|")
+            else if (operation == "|")
             {
                 result.Token = new OperationToken(Operations.Or);
             }
-            else if (operation == "xor")
-            {
-                result.Token = new OperationToken(Operations.XOr);
-            }
-            else if (operation == "impl" || operation == "->" || operation == "−>" || operation == "=>")
+            else if (operation == "->" || operation == "−>" || operation == "=>")
             {
                 result.Token = new OperationToken(Operations.Implication);
             }
-            else if (operation == "eq" || operation == "<->" || operation == "<−>" || operation == "<=>")
+            else if (operation == "<->" || operation == "<−>" || operation == "<=>")
             {
                 result.Token = new OperationToken(Operations.Equality);
-            }
-            else if (operation == "nor")
-            {
-                result.Token = new OperationToken(Operations.NOr);
-            }
-            else if (operation == "nand")
-            {
-                result.Token = new OperationToken(Operations.NAnd);
             }
             else
             {
@@ -172,7 +162,5 @@ namespace xFunc.Maths.Tokenization.Factories
             result.ProcessedLength = match.Length;
             return result;
         }
-
     }
-
 }

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using xFunc.Maths.Resources;
@@ -20,13 +21,11 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
-
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
     public class Lexer : ILexer
     {
-
         private readonly ITokenFactory[] factories;
 
         /// <summary>
@@ -38,48 +37,13 @@ namespace xFunc.Maths.Tokenization
             {
                 new EmptyTokenFactory(),
                 new SymbolTokenFactory(),
-                new OperationTokenFactory(),
                 new NumberHexTokenFactory(),
                 new NumberBinTokenFactory(),
                 new NumberOctTokenFactory(),
                 new NumberTokenFactory(),
-                new IdTokenFactory()
+                new IdTokenFactory(),
+                new OperationTokenFactory()
             };
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Lexer"/> class.
-        /// </summary>
-        /// <param name="factories">The factories to create tokens.</param>
-        public Lexer(ITokenFactory[] factories)
-        {
-            this.factories = factories;
-        }
-
-        /// <summary>
-        /// Determines whether brackets in the specified string is balanced.
-        /// </summary>
-        /// <param name="str">The string.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified string is balanced; otherwise, <c>false</c>.
-        /// </returns>
-        private static bool IsBalanced(string str)
-        {
-            var brackets = 0;
-            var braces = 0;
-
-            foreach (var item in str)
-            {
-                if (item == '(') brackets++;
-                else if (item == ')') brackets--;
-                else if (item == '{') braces++;
-                else if (item == '}') braces--;
-
-                if (brackets < 0 || braces < 0)
-                    return false;
-            }
-
-            return brackets == 0 && braces == 0;
         }
 
         /// <summary>
@@ -94,35 +58,27 @@ namespace xFunc.Maths.Tokenization
         {
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
-            if (!IsBalanced(function))
-                throw new TokenizeException(Resource.NotBalanced);
 
+            // TODO: remove
             function = function.ToLower();
 
-            var tokens = new List<IToken>();
-            for (var i = 0; i < function.Length;)
+            for (var index = 0; index < function.Length;)
             {
-                FactoryResult result = null;
+                IToken result = null;
                 foreach (var factory in factories)
                 {
-                    result = factory.CreateToken(function, i);
+                    result = factory.CreateToken(function, ref index);
                     if (result == null)
                         continue;
 
-                    i += result.ProcessedLength;
-                    if (result.Token != null)
-                        tokens.Add(result.Token);
+                    yield return result;
 
                     break;
                 }
 
                 if (result == null)
-                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, function));
+                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, function[index]));
             }
-
-            return tokens;
         }
-
     }
-
 }

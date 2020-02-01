@@ -12,31 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
-
     /// <summary>
-    /// Represents a bitwise NAND operation.
+    /// Represents a bitwise NAND operator.
     /// </summary>
     public class NAnd : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NAnd"/> class.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public NAnd(IExpression left, IExpression right) : base(left, right) { }
+        public NAnd(IExpression left, IExpression right) : base(left, right)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NAnd"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public NAnd((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        internal NAnd(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -89,7 +92,5 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             return new NAnd(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

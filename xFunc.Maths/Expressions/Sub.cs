@@ -12,31 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Subtraction operation.
+    /// Represents the Subtraction operator.
     /// </summary>
     public class Sub : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sub"/> class.
         /// </summary>
         /// <param name="left">The minuend.</param>
         /// <param name="right">The subtrahend.</param>
-        public Sub(IExpression left, IExpression right) : base(left, right) { }
+        public Sub(IExpression left, IExpression right) : base(left, right)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sub"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
-        public Sub((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        /// <param name="arguments">The list of arguments.</param>
+        internal Sub(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -105,7 +108,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Sub(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

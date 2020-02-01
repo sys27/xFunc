@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the Exponential function.
     /// </summary>
     public class Exp : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Exp"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Exp(IExpression expression) : base(expression) { }
+        public Exp(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Exp"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Exp(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -84,7 +94,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Exp(m_argument.Clone());
         }
-
     }
-
 }

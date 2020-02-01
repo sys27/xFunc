@@ -12,17 +12,16 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths.Analyzers
 {
-
     /// <summary>
     /// The interface for differentiator.
     /// </summary>
     public interface IDifferentiator : IAnalyzer<IExpression>
     {
-
         /// <summary>
         /// Gets or sets the variable.
         /// </summary>
@@ -30,6 +29,7 @@ namespace xFunc.Maths.Analyzers
         /// The variable.
         /// </value>
         Variable Variable { get; set; }
+
         /// <summary>
         /// Gets or sets the parameters.
         /// </summary>
@@ -37,7 +37,5 @@ namespace xFunc.Maths.Analyzers
         /// The parameters.
         /// </value>
         ExpressionParameters Parameters { get; set; }
-
     }
-
 }

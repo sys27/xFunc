@@ -12,15 +12,14 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.UnitConverters;
 using Xunit;
 
 namespace xFunc.Tests.Converters
 {
-
     public class VolumeTest
     {
-
         private readonly VolumeConverter conv = new VolumeConverter();
 
         [Fact]
@@ -174,7 +173,5 @@ namespace xFunc.Tests.Converters
 
             Assert.Equal(1.5, value, 4);
         }
-
     }
-
 }

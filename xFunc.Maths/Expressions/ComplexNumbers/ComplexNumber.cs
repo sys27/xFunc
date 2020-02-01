@@ -12,20 +12,19 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
-
     /// <summary>
     /// Represent complex number expression.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.IExpression" />
     public class ComplexNumber : IExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ComplexNumber"/> class.
         /// </summary>
@@ -179,7 +178,5 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
     }
-
 }

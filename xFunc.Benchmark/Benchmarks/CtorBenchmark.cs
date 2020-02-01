@@ -13,19 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace xFunc.Maths.Results
+using BenchmarkDotNet.Attributes;
+using xFunc.Maths;
+using xFunc.Maths.Tokenization;
+
+namespace xFunc.Benchmark.Benchmarks
 {
-    /// <summary>
-    /// Represents the result of calculation.
-    /// </summary>
-    public interface IResult
+    public class CtorBenchmark
     {
-        /// <summary>
-        /// Gets the result.
-        /// </summary>
-        /// <value>
-        /// The result.
-        /// </value>
-        object Result { get; }
+        [Benchmark]
+        public ILexer LexerCtor()
+        {
+            return new Lexer();
+        }
+
+        [Benchmark]
+        public IParser ParserCtor()
+        {
+            return new Parser();
+        }
     }
 }

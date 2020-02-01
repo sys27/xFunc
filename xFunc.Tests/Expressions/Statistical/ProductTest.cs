@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
@@ -20,10 +21,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Statistical
 {
-
     public class ProductTest
     {
-
         [Fact]
         public void TwoNumbersTest()
         {
@@ -64,7 +63,5 @@ namespace xFunc.Tests.Expressions.Statistical
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

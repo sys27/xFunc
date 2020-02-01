@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths;
@@ -23,10 +24,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-
     public class SecantTest
     {
-
         [Fact]
         public void ExecuteDegreeTest()
         {
@@ -40,7 +39,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var exp = new Sec(new Number(1));
 
-            Assert.Equal(MathExtensions.Sec(1), (double)exp.Execute(AngleMeasurement.Radian), 15);
+            Assert.Equal(MathExtensions.Sec(1), (double) exp.Execute(AngleMeasurement.Radian), 15);
         }
 
         [Fact]
@@ -56,7 +55,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Sec(new ComplexNumber(complex));
-            var result = (Complex)exp.Execute();
+            var result = (Complex) exp.Execute();
 
             Assert.Equal(ComplexExtensions.Sec(complex), result);
             Assert.Equal(-0.26351297515838928, result.Real, 15);
@@ -79,6 +78,5 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
             Assert.Equal(exp, clone);
         }
-
     }
 }

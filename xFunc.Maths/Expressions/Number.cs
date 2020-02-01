@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Number operation.
+    /// Represents the Number operator.
     /// </summary>
     public class Number : IExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Expressions.Number"/> class.
         /// </summary>
@@ -152,7 +151,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
     }
-
 }

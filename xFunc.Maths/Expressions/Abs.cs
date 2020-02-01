@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -19,19 +20,28 @@ using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Absolute operation.
+    /// Represents the Absolute operator.
     /// </summary>
     public class Abs : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Abs"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Abs(IExpression expression) : base(expression) { }
+        public Abs(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Abs"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Abs(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -89,7 +99,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Abs(m_argument.Clone());
         }
-
     }
-
 }

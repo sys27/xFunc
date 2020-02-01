@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-
     public class ComplexNumberTests : TypeAnalyzerBaseTests
     {
-
         [Fact]
         public void TestComplexNumber()
         {
@@ -150,7 +149,5 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 
             TestException(exp);
         }
-
     }
-
 }

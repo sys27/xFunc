@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
@@ -20,16 +21,14 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-
     public class IncTest
     {
-
         [Fact]
         public void IncCalcTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var inc = new Inc(Variable.X);
-            var result = (double)inc.Execute(parameters);
+            var result = (double) inc.Execute(parameters);
 
             Assert.Equal(11.0, result);
             Assert.Equal(11.0, parameters["x"]);
@@ -60,7 +59,5 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

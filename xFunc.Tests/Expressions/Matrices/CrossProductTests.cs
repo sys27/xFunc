@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-
     public class CrossProductTests
     {
-
         [Fact]
         public void ExecuteTest()
         {
@@ -30,7 +29,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(4), new Number(5), new Number(6) })
             );
             var result = exp.Execute();
-            var expected = new Vector(new [] { new Number(-3), new Number(6), new Number(-3) });
+            var expected = new Vector(new[] { new Number(-3), new Number(6), new Number(-3) });
 
             Assert.Equal(expected, result);
         }
@@ -74,7 +73,5 @@ namespace xFunc.Tests.Expressions.Matrices
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

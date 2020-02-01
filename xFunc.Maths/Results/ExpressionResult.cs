@@ -12,18 +12,17 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths.Results
 {
-
     /// <summary>
     /// Represents the result in the expression form.
     /// </summary>
     public class ExpressionResult : IResult
     {
-
         private readonly IExpression exp;
 
         /// <summary>
@@ -55,7 +54,5 @@ namespace xFunc.Maths.Results
         public IExpression Result => exp;
 
         object IResult.Result => exp;
-
     }
-
 }

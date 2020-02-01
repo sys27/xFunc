@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Linq;
 using xFunc.Maths.Tokenization;
 using Xunit;
 
 namespace xFunc.Tests.Tokenization
 {
-
     public abstract class BaseLexerTests
     {
-
         protected readonly ILexer lexer;
 
         protected BaseLexerTests()
@@ -61,7 +60,5 @@ namespace xFunc.Tests.Tokenization
 
             Assert.Equal(expected, tokens.ToList());
         }
-
     }
-
 }

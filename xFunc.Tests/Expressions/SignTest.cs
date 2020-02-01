@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class SignTest
     {
-
         [Fact]
         public void PositiveSignTest()
         {
@@ -56,7 +55,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

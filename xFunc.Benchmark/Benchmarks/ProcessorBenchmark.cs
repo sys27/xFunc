@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using BenchmarkDotNet.Attributes;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;

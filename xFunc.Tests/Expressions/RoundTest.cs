@@ -12,15 +12,14 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class RoundTest
     {
-
         [Fact]
         public void CalculateRoundWithoutDigits()
         {
@@ -49,7 +48,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

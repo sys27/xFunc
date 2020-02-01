@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Expressions;
@@ -25,18 +26,18 @@ using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths.Analyzers.TypeAnalyzers
 {
-
     /// <summary>
     /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{ResultType}" />
     public class TypeAnalyzer : ITypeAnalyzer
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeAnalyzer"/> class.
         /// </summary>
-        public TypeAnalyzer() { }
+        public TypeAnalyzer()
+        {
+        }
 
         private ResultType CheckTrigonometric(UnaryExpression exp)
         {
@@ -1974,7 +1975,5 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         }
 
         #endregion Programming
-
     }
-
 }

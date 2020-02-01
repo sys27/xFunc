@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -20,17 +21,15 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-
     public class GreaterTest
     {
-
         [Fact]
         public void CalculateGreaterTrueTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 463) };
             var greaterThen = new GreaterThan(Variable.X, new Number(10));
 
-            Assert.True((bool)greaterThen.Execute(parameters));
+            Assert.True((bool) greaterThen.Execute(parameters));
         }
 
         [Fact]
@@ -39,7 +38,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var greaterThan = new GreaterThan(Variable.X, new Number(10));
 
-            Assert.False((bool)greaterThan.Execute(parameters));
+            Assert.False((bool) greaterThan.Execute(parameters));
         }
 
         [Fact]
@@ -58,7 +57,5 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

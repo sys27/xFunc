@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,25 +20,27 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
-
     /// <summary>
     /// Represents a vector.
     /// </summary>
     public class Vector : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="args">The values of vector.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IExpression[] args) : base(args) { }
+        public Vector(IExpression[] args) : base(args)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="size">The size of vector.</param>
-        public Vector(int size) : base(new IExpression[size]) { }
+        public Vector(int size) : base(new IExpression[size])
+        {
+        }
 
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> at the specified index.
@@ -49,14 +52,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of vector.</returns>
         public IExpression this[int index]
         {
-            get
-            {
-                return m_arguments[index];
-            }
-            set
-            {
-                m_arguments[index] = value;
-            }
+            get { return m_arguments[index]; }
+            set { m_arguments[index] = value; }
         }
 
         /// <summary>
@@ -85,7 +82,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     if (result is double doubleResult)
                         args[i] = new Number(doubleResult);
                     else
-                        args[i] = new Number((int)result);
+                        args[i] = new Number((int) result);
                 }
                 else
                 {
@@ -137,7 +134,7 @@ namespace xFunc.Maths.Expressions.Matrices
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
             return (from exp in m_arguments.AsParallel().AsOrdered()
-                    select (double)exp.Execute(parameters)).ToArray();
+                select (double) exp.Execute(parameters)).ToArray();
         }
 
         /// <summary>
@@ -148,10 +145,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </value>
         public sealed override IExpression[] Arguments
         {
-            get
-            {
-                return base.Arguments;
-            }
+            get { return base.Arguments; }
             set
             {
                 if (value == null)
@@ -178,7 +172,5 @@ namespace xFunc.Maths.Expressions.Matrices
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => null;
-
     }
-
 }

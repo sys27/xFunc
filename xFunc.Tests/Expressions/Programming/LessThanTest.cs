@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -20,17 +21,15 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-
     public class LessThanTest
     {
-
         [Fact]
         public void CalculateLessTrueTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
 
-            Assert.True((bool)lessThen.Execute(parameters));
+            Assert.True((bool) lessThen.Execute(parameters));
         }
 
         [Fact]
@@ -39,7 +38,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var lessThen = new LessThan(Variable.X, new Number(10));
 
-            Assert.False((bool)lessThen.Execute(parameters));
+            Assert.False((bool) lessThen.Execute(parameters));
         }
 
         [Fact]
@@ -58,7 +57,5 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

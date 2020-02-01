@@ -13,21 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using xFunc.Maths.Tokenization.Tokens;
+
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory of tokens.
     /// </summary>
-    public interface ITokenFactory
+    internal interface ITokenFactory
     {
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="startIndex">The start index.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>The token.</returns>
-        FactoryResult CreateToken(string function, int startIndex);
+        IToken CreateToken(string function, ref int index);
     }
-
 }

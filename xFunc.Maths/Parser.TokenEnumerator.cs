@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
@@ -69,10 +70,10 @@ namespace xFunc.Maths
                 return result;
             }
 
-            public OperationToken Operator(Operations operations)
+            public OperatorToken Operator(Operators operators)
             {
-                var token = Peek<OperationToken>();
-                if (token != null && operations.HasFlag(token.Operation))
+                var token = Peek<OperatorToken>();
+                if (token != null && operators.HasFlag(token.Operator))
                 {
                     MoveNext();
 

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,13 +20,11 @@ using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
-
     /// <summary>
     /// Represents the "sum" function.
     /// </summary>
     public class Sum : StatisticalExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sum"/> class.
         /// </summary>
@@ -105,7 +104,5 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             return new Sum(CloneArguments());
         }
-
     }
-
 }

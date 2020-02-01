@@ -12,25 +12,22 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
-
     /// <summary>
     /// The interface for lexer.
     /// </summary>
     public interface ILexer
     {
-
         /// <summary>
         /// Converts the string into a sequence of tokens.
         /// </summary>
         /// <param name="function">The string that contains the functions and operators.</param>
         /// <returns>The sequence of tokens.</returns>
         IEnumerable<IToken> Tokenize(string function);
-
     }
-
 }

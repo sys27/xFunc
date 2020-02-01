@@ -15,29 +15,31 @@
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
     /// Describes special symbols.
     /// </summary>
     public enum Symbols
     {
-
         /// <summary>
         /// (
         /// </summary>
         OpenParenthesis,
+
         /// <summary>
         /// )
         /// </summary>
         CloseParenthesis,
+
         /// <summary>
         /// {
         /// </summary>
         OpenBrace,
+
         /// <summary>
         /// }
         /// </summary>
         CloseBrace,
+
         /// <summary>
         /// ,
         /// </summary>
@@ -47,11 +49,10 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// ∠
         /// </summary>
         Angle,
+
         /// <summary>
         /// °
         /// </summary>
         Degree,
-
     }
-
 }

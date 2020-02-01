@@ -12,26 +12,23 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {
-
     /// <summary>
     /// The interface for parser.
     /// </summary>
     public interface IParser
     {
-
         /// <summary>
         /// Parses the specified function.
         /// </summary>
         /// <param name="tokens">The list of tokens.</param>
         /// <returns>The parsed expression.</returns>
         IExpression Parse(IEnumerable<IToken> tokens);
-
     }
-
 }

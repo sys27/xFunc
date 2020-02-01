@@ -15,13 +15,11 @@
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
     /// Represents a id token.
     /// </summary>
     public class IdToken : IToken
     {
-
         /// <summary>
         /// Initializes the <see cref="IdToken"/> class.
         /// </summary>
@@ -47,7 +45,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (typeof(IdToken) != obj.GetType())
                 return false;
 
-            var token = (IdToken)obj;
+            var token = (IdToken) obj;
 
             return Id == token.Id;
         }
@@ -76,7 +74,5 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets an id.
         /// </summary>
         public string Id { get; }
-
     }
-
 }

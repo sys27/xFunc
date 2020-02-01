@@ -12,37 +12,42 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the "round" function.
     /// </summary>
     public class Round : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
-        public Round(IExpression argument) : this(new[] { argument }) { }
+        public Round(IExpression argument) : this(new[] { argument })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
-        public Round(IExpression argument, IExpression digits) : this(new[] { argument, digits }) { }
+        public Round(IExpression argument, IExpression digits) : this(new[] { argument, digits })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException">args</exception>
-        public Round(IExpression[] args) : base(args) { }
+        public Round(IExpression[] args) : base(args)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -70,7 +75,7 @@ namespace xFunc.Maths.Expressions
             {
                 var digits = Digits?.Execute(parameters);
 
-                return Math.Round(arg, (int)((digits as double?) ?? 0), MidpointRounding.AwayFromZero);
+                return Math.Round(arg, (int) ((digits as double?) ?? 0), MidpointRounding.AwayFromZero);
             }
 
             throw new ResultIsNotSupportedException(this, argResult);
@@ -131,7 +136,5 @@ namespace xFunc.Maths.Expressions
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => 2;
-
     }
-
 }

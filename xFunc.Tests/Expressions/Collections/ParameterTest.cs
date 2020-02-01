@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.Collections
 {
-
     public class ParameterTest
     {
-
         [Fact]
         public void NullEqual()
         {
@@ -108,7 +107,5 @@ namespace xFunc.Tests.Expressions.Collections
 
             Assert.Equal(expected, str);
         }
-
     }
-
 }

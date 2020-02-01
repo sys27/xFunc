@@ -15,13 +15,10 @@
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
     /// Represents a token.
     /// </summary>
     public interface IToken
     {
-
     }
-
 }

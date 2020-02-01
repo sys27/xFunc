@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,13 +20,11 @@ using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
-
     /// <summary>
     /// Represents the "product" function.
     /// </summary>
     public class Product : StatisticalExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
@@ -105,7 +104,5 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             return new Product(CloneArguments());
         }
-
     }
-
 }

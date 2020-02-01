@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,13 +20,14 @@ using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the "Del" operator.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public class Del : UnaryExpression
     {
+        private readonly IDifferentiator differentiator;
+        private readonly ISimplifier simplifier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Del"/> class.
@@ -36,8 +38,21 @@ namespace xFunc.Maths.Expressions
         public Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
             : base(expression)
         {
-            this.Differentiator = differentiator;
-            this.Simplifier = simplifier;
+            this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Del"/> class.
+        /// </summary>
+        /// <param name="differentiator">The differentiator.</param>
+        /// <param name="simplifier">The simplifier.</param>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] arguments) : base(arguments)
+        {
+            this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
+            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>
@@ -62,19 +77,16 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (Differentiator == null)
-                throw new ArgumentNullException(nameof(Differentiator));
-
             var variables = Helpers.GetAllVariables(m_argument).ToList();
             var vector = new Vector(variables.Count);
 
-            Differentiator.Parameters = parameters;
+            differentiator.Parameters = parameters;
 
             for (var i = 0; i < variables.Count; i++)
             {
-                Differentiator.Variable = variables[i];
+                differentiator.Variable = variables[i];
 
-                vector[i] = m_argument.Analyze(Differentiator).Analyze(Simplifier);
+                vector[i] = m_argument.Analyze(differentiator).Analyze(simplifier);
             }
 
             return vector;
@@ -101,25 +113,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Del(this.Differentiator, this.Simplifier, m_argument.Clone());
+            return new Del(differentiator, simplifier, m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets or sets the simplifier.
-        /// </summary>
-        /// <value>
-        /// The simplifier.
-        /// </value>
-        public ISimplifier Simplifier { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the differentiator.
-        /// </summary>
-        /// <value>
-        /// The differentiator.
-        /// </value>
-        public IDifferentiator Differentiator { get; private set; }
-
     }
-
 }

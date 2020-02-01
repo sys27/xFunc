@@ -12,23 +12,24 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the unary minus.
     /// </summary>
     public class UnaryMinus : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        public UnaryMinus(IExpression expression) : base(expression) { }
+        public UnaryMinus(IExpression expression) : base(expression)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -83,7 +84,5 @@ namespace xFunc.Maths.Expressions
         {
             return new UnaryMinus(m_argument.Clone());
         }
-
     }
-
 }

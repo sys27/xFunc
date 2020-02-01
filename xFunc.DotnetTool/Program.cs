@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using CommandLine;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace xFunc.DotnetTool
         {
             Run(options, () =>
             {
-                var tokens = processor.Lexer.Tokenize(options.StringExpression);
+                var tokens = processor.Tokenize(options.StringExpression);
                 foreach (var token in tokens)
                     Console.WriteLine(token);
             });

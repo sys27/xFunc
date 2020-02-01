@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-
     public abstract class TypeAnalyzerBaseTests
     {
-
         protected readonly ITypeAnalyzer analyzer;
 
         protected TypeAnalyzerBaseTests()
@@ -50,7 +49,5 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             Assert.Throws<DifferentParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
-
     }
-
 }

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using Moq;
 using System;
 using xFunc.Maths.Analyzers;
@@ -21,16 +22,14 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class DerivTest
     {
-
         [Fact]
         public void ExecutePointTest()
         {
             var differentiator = new Mock<IDifferentiator>();
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
-                        .Returns<Derivative>(exp => exp.Expression);
+                .Returns<Derivative>(exp => exp.Expression);
 
             var deriv = new Derivative(differentiator.Object, null, Variable.X, Variable.X, new Number(2));
 
@@ -50,7 +49,7 @@ namespace xFunc.Tests.Expressions
         {
             var differentiator = new Mock<IDifferentiator>();
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
-                        .Returns<Derivative>(e => e.Expression);
+                .Returns<Derivative>(e => e.Expression);
 
             var exp = new Derivative(differentiator.Object, null, Variable.X);
 
@@ -67,7 +66,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

@@ -12,19 +12,19 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// The abstract base class that represents the unary operation.
+    /// The abstract base class that represents the unary operator.
     /// </summary>
     public abstract class UnaryExpression : IExpression
     {
-
         /// <summary>
         /// The (first) operand.
         /// </summary>
@@ -40,6 +40,21 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        protected UnaryExpression(IExpression[] arguments)
+        {
+            if (arguments.Length < 1)
+                throw new ParseException(Resource.LessParams);
+
+            if (arguments.Length > 1)
+                throw new ParseException(Resource.MoreParams);
+
+            Argument = arguments[0];
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
@@ -52,7 +67,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            return m_argument.Equals(((UnaryExpression)obj).Argument);
+            return m_argument.Equals(((UnaryExpression) obj).Argument);
         }
 
         /// <summary>
@@ -161,7 +176,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
     }
-
 }

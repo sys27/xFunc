@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,18 +20,27 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
-
     /// <summary>
     /// Represets the Transpose function.
     /// </summary>
     public class Transpose : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Transpose"/> class.
         /// </summary>
         /// <param name="argument">The expression, which returns matrix of vector.</param>
-        public Transpose(IExpression argument) : base(argument) { }
+        public Transpose(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transpose"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Transpose(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -100,7 +110,5 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             return new Transpose(this.m_argument.Clone());
         }
-
     }
-
 }

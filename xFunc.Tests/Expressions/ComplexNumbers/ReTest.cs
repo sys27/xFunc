@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.ComplexNumbers
 {
-
     public class ReTest
     {
-
         [Fact]
         public void ExecuteComplexNumberTest()
         {
@@ -48,7 +47,5 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

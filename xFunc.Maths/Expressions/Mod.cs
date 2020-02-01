@@ -12,31 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the Modulo operator.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.BinaryExpression" />
     public class Mod : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Mod"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Mod(IExpression left, IExpression right) : base(left, right) { }
+        public Mod(IExpression left, IExpression right) : base(left, right)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Mod"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Mod((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        internal Mod(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -91,7 +94,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Mod(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

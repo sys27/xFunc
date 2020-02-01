@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
@@ -26,18 +27,18 @@ using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths.Analyzers.Formatters
 {
-
     /// <summary>
     /// Converts expressions into string.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Analyzers.Formatters.IFormatter" />
     public class CommonFormatter : IFormatter
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonFormatter"/> class.
         /// </summary>
-        public CommonFormatter() { }
+        public CommonFormatter()
+        {
+        }
 
         private string ToString(UnaryExpression exp, string format)
         {
@@ -60,6 +61,7 @@ namespace xFunc.Maths.Analyzers.Formatters
                     sb.Append(item).Append(", ");
                 sb.Remove(sb.Length - 2, 2);
             }
+
             sb.Append(')');
 
             return sb.ToString();
@@ -710,7 +712,6 @@ namespace xFunc.Maths.Analyzers.Formatters
             return ToString(exp, "tan({0})");
         }
 
-
         #endregion
 
         #region Hyperbolic
@@ -1253,7 +1254,5 @@ namespace xFunc.Maths.Analyzers.Formatters
         }
 
         #endregion Programming
-
     }
-
 }

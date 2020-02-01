@@ -12,13 +12,13 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using System.Runtime.Serialization;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents an exception which is thrown if expression doesn't support result type of own argument.
     /// </summary>
@@ -26,11 +26,12 @@ namespace xFunc.Maths.Expressions
     [Serializable]
     public class ResultIsNotSupportedException : Exception
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
-        public ResultIsNotSupportedException() { }
+        public ResultIsNotSupportedException()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
@@ -42,28 +43,33 @@ namespace xFunc.Maths.Expressions
                 "The result of calculation is not supported (Function: '{0}({1})').",
                 that.GetType().Name,
                 string.Join(", ", result.Select(x => x.GetType().Name))))
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public ResultIsNotSupportedException(string message) : base(message) { }
+        public ResultIsNotSupportedException(string message) : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public ResultIsNotSupportedException(string message, Exception inner) : base(message, inner) { }
+        public ResultIsNotSupportedException(string message, Exception inner) : base(message, inner)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
-        protected ResultIsNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
+        protected ResultIsNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
-
 }

@@ -13,154 +13,110 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Text.RegularExpressions;
-using xFunc.Maths.Resources;
+using System.Collections.Generic;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
     /// <summary>
-    /// The factory which creates operation tokens.
+    /// The factory which creates @operator tokens.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class OperationTokenFactory : FactoryBase
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
+    internal class OperationTokenFactory : ITokenFactory
     {
+        private readonly HashSet<char> restrictedSymbols;
+
+        private readonly IDictionary<string, OperatorToken> operators;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationTokenFactory"/> class.
         /// </summary>
         public OperationTokenFactory()
-            : base(new Regex(@"\G([^a-zα-ω0-9(){},°\s]+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            restrictedSymbols = new HashSet<char>
+            {
+                '(', ')', '{', '}', ',', '°', ' ', '\n', '\r', '\t', '\v', '\f'
+            };
+
+            // TODO: copies
+            operators = new Dictionary<string, OperatorToken>
+            {
+                { "+", new OperatorToken(Operators.Plus) },
+                { "-", new OperatorToken(Operators.Minus) },
+                { "−", new OperatorToken(Operators.Minus) },
+                { "*", new OperatorToken(Operators.Multiplication) },
+                { "×", new OperatorToken(Operators.Multiplication) },
+                { "/", new OperatorToken(Operators.Division) },
+
+                { "^", new OperatorToken(Operators.Exponentiation) },
+                { "!", new OperatorToken(Operators.Factorial) },
+                { "%", new OperatorToken(Operators.Modulo) },
+
+                { ":=", new OperatorToken(Operators.Assign) },
+                { "+=", new OperatorToken(Operators.AddAssign) },
+                { "-=", new OperatorToken(Operators.SubAssign) },
+                { "−=", new OperatorToken(Operators.SubAssign) },
+                { "*=", new OperatorToken(Operators.MulAssign) },
+                { "×=", new OperatorToken(Operators.MulAssign) },
+                { "/=", new OperatorToken(Operators.DivAssign) },
+
+                { "&&", new OperatorToken(Operators.ConditionalAnd) },
+                { "||", new OperatorToken(Operators.ConditionalOr) },
+
+                { "==", new OperatorToken(Operators.Equal) },
+                { "!=", new OperatorToken(Operators.NotEqual) },
+                { "<=", new OperatorToken(Operators.LessOrEqual) },
+                { "<", new OperatorToken(Operators.LessThan) },
+                { ">=", new OperatorToken(Operators.GreaterOrEqual) },
+                { ">", new OperatorToken(Operators.GreaterThan) },
+
+                { "++", new OperatorToken(Operators.Increment) },
+                { "--", new OperatorToken(Operators.Decrement) },
+                { "−−", new OperatorToken(Operators.Decrement) },
+
+                { "~", new OperatorToken(Operators.Not) },
+                { "&", new OperatorToken(Operators.And) },
+                { "|", new OperatorToken(Operators.Or) },
+                { "->", new OperatorToken(Operators.Implication) },
+                { "−>", new OperatorToken(Operators.Implication) },
+                { "=>", new OperatorToken(Operators.Implication) },
+                { "<->", new OperatorToken(Operators.Equality) },
+                { "<−>", new OperatorToken(Operators.Equality) },
+                { "<=>", new OperatorToken(Operators.Equality) },
+            };
         }
 
         /// <summary>
         /// Creates the token.
         /// </summary>
-        /// <param name="match">The match.</param>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        /// <exception cref="TokenizeException">Throws when <paramref name="match"/> has the not supported symbol.</exception>
-        protected override FactoryResult CreateTokenInternal(Match match)
+        public IToken CreateToken(string function, ref int index)
         {
-            var result = new FactoryResult();
-            var operation = match.Value.ToLower();
+            var endIndex = index;
+            while (endIndex < function.Length && IsOperatorSymbol(function[endIndex]))
+                endIndex++;
 
-            if (operation == "+=")
+            if (endIndex > index)
             {
-                result.Token = new OperationToken(Operations.AddAssign);
-            }
-            else if (operation == "-=" || operation == "−=")
-            {
-                result.Token = new OperationToken(Operations.SubAssign);
-            }
-            else if (operation == "*=" || operation == "×=")
-            {
-                result.Token = new OperationToken(Operations.MulAssign);
-            }
-            else if (operation == "*" || operation == "×")
-            {
-                result.Token = new OperationToken(Operations.Multiplication);
-            }
-            else if (operation == "/")
-            {
-                result.Token = new OperationToken(Operations.Division);
-            }
-            else if (operation == "^")
-            {
-                result.Token = new OperationToken(Operations.Exponentiation);
-            }
-            else if (operation == "!")
-            {
-                result.Token = new OperationToken(Operations.Factorial);
-            }
-            else if (operation == "%")
-            {
-                result.Token = new OperationToken(Operations.Modulo);
-            }
-            else if (operation == "&&")
-            {
-                result.Token = new OperationToken(Operations.ConditionalAnd);
-            }
-            else if (operation == "||")
-            {
-                result.Token = new OperationToken(Operations.ConditionalOr);
-            }
-            else if (operation == "==")
-            {
-                result.Token = new OperationToken(Operations.Equal);
-            }
-            else if (operation == "!=")
-            {
-                result.Token = new OperationToken(Operations.NotEqual);
-            }
-            else if (operation == "<=")
-            {
-                result.Token = new OperationToken(Operations.LessOrEqual);
-            }
-            else if (operation == "<")
-            {
-                result.Token = new OperationToken(Operations.LessThan);
-            }
-            else if (operation == ">=")
-            {
-                result.Token = new OperationToken(Operations.GreaterOrEqual);
-            }
-            else if (operation == ">")
-            {
-                result.Token = new OperationToken(Operations.GreaterThan);
-            }
-            else if (operation == "++")
-            {
-                result.Token = new OperationToken(Operations.Increment);
-            }
-            else if (operation == "--" || operation == "−−")
-            {
-                result.Token = new OperationToken(Operations.Decrement);
-            }
-            else if (operation == "+")
-            {
-                result.Token = new OperationToken(Operations.Plus);
-            }
-            else if (operation == "-" || operation == "−")
-            {
-                result.Token = new OperationToken(Operations.Minus);
-            }
-            else if (operation == "/=")
-            {
-                result.Token = new OperationToken(Operations.DivAssign);
-            }
-            else if (operation == ":=")
-            {
-                result.Token = new OperationToken(Operations.Assign);
-            }
-            else if (operation == "~")
-            {
-                result.Token = new OperationToken(Operations.Not);
-            }
-            else if (operation == "&")
-            {
-                result.Token = new OperationToken(Operations.And);
-            }
-            else if (operation == "|")
-            {
-                result.Token = new OperationToken(Operations.Or);
-            }
-            else if (operation == "->" || operation == "−>" || operation == "=>")
-            {
-                result.Token = new OperationToken(Operations.Implication);
-            }
-            else if (operation == "<->" || operation == "<−>" || operation == "<=>")
-            {
-                result.Token = new OperationToken(Operations.Equality);
-            }
-            else
-            {
-                throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, operation));
+                var length = endIndex - index;
+                var operatorMatch = function.Substring(index, length);
+
+                if (operators.TryGetValue(operatorMatch, out var @operator))
+                {
+                    index = endIndex;
+
+                    return @operator;
+                }
             }
 
-            result.ProcessedLength = match.Length;
-            return result;
+            return null;
         }
+
+        private bool IsOperatorSymbol(char symbol) =>
+            !char.IsLetterOrDigit(symbol) && !restrictedSymbols.Contains(symbol);
     }
 }

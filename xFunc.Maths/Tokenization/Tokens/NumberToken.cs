@@ -12,17 +12,16 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Globalization;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
     /// Represents a number token.
     /// </summary>
     public class NumberToken : IToken
     {
-
         /// <summary>
         /// Initializes the <see cref="NumberToken"/> class.
         /// </summary>
@@ -48,7 +47,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (typeof(NumberToken) != obj.GetType())
                 return false;
 
-            var token = (NumberToken)obj;
+            var token = (NumberToken) obj;
 
             return this.Number == token.Number;
         }
@@ -77,7 +76,5 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets the number.
         /// </summary>
         public double Number { get; }
-
     }
-
 }

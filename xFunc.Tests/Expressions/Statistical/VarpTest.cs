@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
@@ -20,10 +21,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Statistical
 {
-
     public class VarpTest
     {
-
         [Fact]
         public void OneNumberTest()
         {
@@ -46,7 +45,7 @@ namespace xFunc.Tests.Expressions.Statistical
         public void ThreeNumberTest()
         {
             var exp = new Varp(new[] { new Number(9), new Number(2), new Number(4) });
-            var result = (double)exp.Execute();
+            var result = (double) exp.Execute();
 
             Assert.Equal(8.66666666666667, result, 14);
         }
@@ -55,7 +54,7 @@ namespace xFunc.Tests.Expressions.Statistical
         public void VectorTest()
         {
             var exp = new Varp(new[] { new Vector(new[] { new Number(2), new Number(4), new Number(9) }) });
-            var result = (double)exp.Execute();
+            var result = (double) exp.Execute();
 
             Assert.Equal(8.66666666666667, result, 14);
         }
@@ -76,7 +75,5 @@ namespace xFunc.Tests.Expressions.Statistical
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

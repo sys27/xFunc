@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
@@ -25,7 +26,6 @@ using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths.Analyzers
 {
-
     /// <summary>
     /// The abstract class with default Analyzer API realization. It's useful where you don't need to implement whole interface (just a few methods).
     /// </summary>
@@ -34,7 +34,6 @@ namespace xFunc.Maths.Analyzers
     [ExcludeFromCodeCoverage]
     public abstract class Analyzer<TResult> : IAnalyzer<TResult>
     {
-
         /// <summary>
         /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
         /// </summary>
@@ -1420,7 +1419,5 @@ namespace xFunc.Maths.Analyzers
         }
 
         #endregion Programming
-
     }
-
 }

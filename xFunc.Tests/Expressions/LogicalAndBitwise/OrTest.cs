@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-
     public class OrTest
     {
-
         [Fact]
         public void ExecuteTest1()
         {
@@ -44,7 +43,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new Or(new Bool(true), new Bool(false));
 
-            Assert.True((bool)exp.Execute());
+            Assert.True((bool) exp.Execute());
         }
 
         [Fact]
@@ -52,7 +51,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new Or(new Bool(false), new Bool(false));
 
-            Assert.False((bool)exp.Execute());
+            Assert.False((bool) exp.Execute());
         }
 
         [Fact]
@@ -71,7 +70,5 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

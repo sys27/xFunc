@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Jobs;
@@ -20,19 +21,22 @@ using BenchmarkDotNet.Toolchains.CsProj;
 
 namespace xFunc.Benchmark
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner
-                .Run(typeof(Program).Assembly,
+            if (args == null || args.Length == 0)
+                args = new[] { "--filter", "*" };
+
+            BenchmarkSwitcher
+                .FromAssembly(typeof(Program).Assembly)
+                .Run(args,
                     ManualConfig.Create(DefaultConfig.Instance)
-                                .With(Job.MediumRun
-                                         .WithLaunchCount(1)
-                                         .With(CsProjCoreToolchain.NetCoreApp31))
-                                .With(MemoryDiagnoser.Default)
-                                .StopOnFirstError()
-                );
+                        .With(Job.MediumRun
+                            .WithLaunchCount(1)
+                            .With(CsProjCoreToolchain.NetCoreApp31))
+                        .With(MemoryDiagnoser.Default)
+                        .StopOnFirstError());
         }
     }
 }

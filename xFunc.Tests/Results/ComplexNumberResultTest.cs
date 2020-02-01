@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Results;
 using Xunit;
 
 namespace xFunc.Tests.Results
 {
-
     public class ComplexNumberResultTest
     {
-
         [Fact]
         public void ResultTest()
         {
@@ -101,7 +100,5 @@ namespace xFunc.Tests.Results
 
             Assert.Equal("-i", token.ToString());
         }
-
     }
-
 }

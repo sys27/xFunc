@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -21,10 +22,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-
     public class StatisticalTests : TypeAnalyzerBaseTests
     {
-
         [Fact]
         public void TestAvgUndefined()
         {
@@ -424,7 +423,5 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 
             TestDiffParamException(exp);
         }
-
     }
-
 }

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -21,15 +22,13 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-
     public class EqualTest
     {
-
         [Fact]
         public void NumberEqualTest()
         {
             var equal = new Equal(new Number(10), new Number(10));
-            var result = (bool)equal.Execute();
+            var result = (bool) equal.Execute();
 
             Assert.True(result);
         }
@@ -43,7 +42,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("y", 10)
             };
             var equal = new Equal(Variable.X, new Variable("y"));
-            var result = (bool)equal.Execute(parameters);
+            var result = (bool) equal.Execute(parameters);
 
             Assert.True(result);
         }
@@ -52,7 +51,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void BoolTrueEqualTest()
         {
             var equal = new Equal(new Bool(true), new Bool(true));
-            var result = (bool)equal.Execute();
+            var result = (bool) equal.Execute();
 
             Assert.True(result);
         }
@@ -66,7 +65,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("y", true)
             };
             var equal = new Equal(Variable.X, new Variable("y"));
-            var result = (bool)equal.Execute(parameters);
+            var result = (bool) equal.Execute(parameters);
 
             Assert.True(result);
         }
@@ -75,7 +74,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void BoolTrueAndFalseEqualTest()
         {
             var equal = new Equal(new Bool(true), new Bool(false));
-            var result = (bool)equal.Execute();
+            var result = (bool) equal.Execute();
 
             Assert.False(result);
         }
@@ -89,7 +88,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("y", false)
             };
             var equal = new Equal(Variable.X, new Variable("y"));
-            var result = (bool)equal.Execute(parameters);
+            var result = (bool) equal.Execute(parameters);
 
             Assert.False(result);
         }
@@ -98,7 +97,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void BoolFalseEqualTest()
         {
             var equal = new Equal(new Bool(false), new Bool(false));
-            var result = (bool)equal.Execute();
+            var result = (bool) equal.Execute();
 
             Assert.True(result);
         }
@@ -112,7 +111,7 @@ namespace xFunc.Tests.Expressions.Programming
                 new Parameter("y", false)
             };
             var equal = new Equal(Variable.X, new Variable("y"));
-            var result = (bool)equal.Execute(parameters);
+            var result = (bool) equal.Execute(parameters);
 
             Assert.True(result);
         }
@@ -133,7 +132,5 @@ namespace xFunc.Tests.Expressions.Programming
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

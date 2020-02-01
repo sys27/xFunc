@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using Moq;
 using System;
 using xFunc.Maths.Analyzers;
@@ -21,10 +22,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class SimplifyTest
     {
-
         [Fact]
         public void ExecuteTest()
         {
@@ -45,12 +44,10 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Simplify(null, new Sin(Variable.X));
+            var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

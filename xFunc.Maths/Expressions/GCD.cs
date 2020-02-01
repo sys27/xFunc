@@ -12,32 +12,35 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents a greatest common divisor.
     /// </summary>
     public class GCD : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="GCD"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(IExpression[] args) : base(args) { }
+        public GCD(IExpression[] args) : base(args)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GCD"/> class.
         /// </summary>
         /// <param name="first">The first operand.</param>
         /// <param name="second">The second operand.</param>
-        public GCD(IExpression first, IExpression second) : this(new[] { first, second }) { }
+        public GCD(IExpression first, IExpression second) : this(new[] { first, second })
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -109,7 +112,5 @@ namespace xFunc.Maths.Expressions
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => null;
-
     }
-
 }

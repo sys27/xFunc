@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-
     public class DeterminantTest
     {
-
         [Fact]
         public void ExecuteTest()
         {
@@ -83,7 +82,5 @@ namespace xFunc.Tests.Expressions.Matrices
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

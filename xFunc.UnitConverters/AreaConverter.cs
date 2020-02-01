@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
-
     /// <summary>
     /// Represents the area converter.
     /// </summary>
     public class AreaConverter : Converter<AreaUnits>
     {
-
         private static readonly Lazy<IDictionary<object, string>> units;
 
         static AreaConverter()
@@ -64,10 +63,7 @@ namespace xFunc.UnitConverters
         /// </value>
         public override string Name
         {
-            get
-            {
-                return Resource.AreaConverterName;
-            }
+            get { return Resource.AreaConverterName; }
         }
 
         /// <summary>
@@ -78,12 +74,7 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<object, string> Units
         {
-            get
-            {
-                return units.Value;
-            }
+            get { return units.Value; }
         }
-
     }
-
 }

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -20,13 +21,11 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// The base class for expressions with different number of parameters.
     /// </summary>
     public abstract class DifferentParametersExpression : IExpression
     {
-
         /// <summary>
         /// The arguments.
         /// </summary>
@@ -56,7 +55,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var diff = (DifferentParametersExpression)obj;
+            var diff = (DifferentParametersExpression) obj;
 
             if (this.m_arguments == null && diff.m_arguments == null)
                 return true;
@@ -233,7 +232,5 @@ namespace xFunc.Maths.Expressions
         /// The maximum count of parameters.
         /// </value>
         public abstract int? MaxParametersCount { get; }
-
     }
-
 }

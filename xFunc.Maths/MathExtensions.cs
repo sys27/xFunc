@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Globalization;
 using System.Linq;
@@ -19,13 +20,11 @@ using System.Numerics;
 
 namespace xFunc.Maths
 {
-
     /// <summary>
     /// Provides static methods for additional functions.
     /// </summary>
     public static class MathExtensions
     {
-
         /// <summary>
         /// Returns a specified number raised to the specified power.
         /// </summary>
@@ -302,7 +301,5 @@ namespace xFunc.Maths
 
             return result;
         }
-
     }
-
 }

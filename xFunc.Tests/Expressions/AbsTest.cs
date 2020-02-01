@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -20,10 +21,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class AbsTest
     {
-
         [Fact]
         public void ExecuteTestNumber()
         {
@@ -45,7 +44,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Abs(new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(5), new Number(4), new Number(6), new Number(7) }));
 
-            Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
+            Assert.Equal(11.2249721603218241567, (double) exp.Execute(), 15);
         }
 
         [Fact]
@@ -99,7 +98,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

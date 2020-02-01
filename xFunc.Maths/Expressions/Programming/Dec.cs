@@ -12,23 +12,32 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the Licens
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-
     /// <summary>
     /// Represents the decrement operator.
     /// </summary>
     public class Dec : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Dec"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Dec(IExpression argument) : base(argument) { }
+        public Dec(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dec"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        internal Dec(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -75,7 +84,5 @@ namespace xFunc.Maths.Expressions.Programming
         {
             return new Dec(m_argument.Clone());
         }
-
     }
-
 }

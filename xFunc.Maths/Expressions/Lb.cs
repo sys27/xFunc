@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the binary logarithm function.
     /// </summary>
     public class Lb : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Lb"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Lb(IExpression expression) : base(expression) { }
+        public Lb(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lb"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Lb(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -80,7 +90,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Lb(m_argument.Clone());
         }
-
     }
-
 }

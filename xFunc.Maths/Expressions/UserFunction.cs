@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents user-defined functions.
     /// </summary>
     public class UserFunction : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.
         /// </summary>
@@ -84,7 +83,7 @@ namespace xFunc.Maths.Expressions
             for (var i = 0; i < m_arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Name] = (double)this.m_arguments[i].Execute(parameters);
+                newParameters[arg.Name] = (double) this.m_arguments[i].Execute(parameters);
             }
 
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
@@ -134,7 +133,5 @@ namespace xFunc.Maths.Expressions
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => null;
-
     }
-
 }

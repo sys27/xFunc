@@ -15,13 +15,11 @@
 
 namespace xFunc.Maths.Results
 {
-
     /// <summary>
     /// Represents the boolean result.
     /// </summary>
     public class BooleanResult : IResult
     {
-
         private readonly bool value;
 
         /// <summary>
@@ -53,7 +51,5 @@ namespace xFunc.Maths.Results
         public bool Result => value;
 
         object IResult.Result => value;
-
     }
-
 }

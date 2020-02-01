@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
@@ -21,10 +22,8 @@ using Xunit;
 
 namespace xFunc.Tests
 {
-
     public class BuilderTest
     {
-
         private readonly Builder builder;
 
         public BuilderTest()
@@ -43,7 +42,7 @@ namespace xFunc.Tests
         [Fact]
         public void ExpCtorTest()
         {
-            var builder = new Builder((IExpression)new Number(2));
+            var builder = new Builder((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Number(2));
         }
@@ -67,7 +66,7 @@ namespace xFunc.Tests
         [Fact]
         public void CreateExpCtorTest()
         {
-            var builder = Builder.Create((IExpression)new Number(2));
+            var builder = Builder.Create((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Number(2));
         }
@@ -115,7 +114,7 @@ namespace xFunc.Tests
         [Fact]
         public void NullParamTest()
         {
-            Assert.Throws<ArgumentNullException>(() => builder.Init((IExpression)null).Add((IExpression)new Number(2)));
+            Assert.Throws<ArgumentNullException>(() => builder.Init((IExpression) null).Add((IExpression) new Number(2)));
         }
 
         #region Standart
@@ -123,7 +122,7 @@ namespace xFunc.Tests
         [Fact]
         public void AddExpTest()
         {
-            builder.Init(3).Add((IExpression)new Number(2));
+            builder.Init(3).Add((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Add(new Number(3), new Number(2)));
         }
@@ -147,7 +146,7 @@ namespace xFunc.Tests
         [Fact]
         public void SubExpTest()
         {
-            builder.Init(3).Sub((IExpression)new Number(2));
+            builder.Init(3).Sub((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Sub(new Number(3), new Number(2)));
         }
@@ -171,7 +170,7 @@ namespace xFunc.Tests
         [Fact]
         public void MulExpTest()
         {
-            builder.Init(3).Mul((IExpression)new Number(2));
+            builder.Init(3).Mul((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Mul(new Number(3), new Number(2)));
         }
@@ -195,7 +194,7 @@ namespace xFunc.Tests
         [Fact]
         public void DivExpTest()
         {
-            builder.Init(3).Div((IExpression)new Number(2));
+            builder.Init(3).Div((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Div(new Number(3), new Number(2)));
         }
@@ -219,7 +218,7 @@ namespace xFunc.Tests
         [Fact]
         public void PowExpTest()
         {
-            builder.Init(3).Pow((IExpression)new Number(2));
+            builder.Init(3).Pow((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Pow(new Number(3), new Number(2)));
         }
@@ -251,7 +250,7 @@ namespace xFunc.Tests
         [Fact]
         public void RootExpTest()
         {
-            builder.Init(3).Root((IExpression)new Number(2));
+            builder.Init(3).Root((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Root(new Number(3), new Number(2)));
         }
@@ -283,7 +282,7 @@ namespace xFunc.Tests
         [Fact]
         public void LogExpTest()
         {
-            builder.Init(3).Log((IExpression)new Number(2));
+            builder.Init(3).Log((IExpression) new Number(2));
 
             Assert.Equal(builder.Current, new Log(new Number(2), new Number(3)));
         }
@@ -529,7 +528,5 @@ namespace xFunc.Tests
         }
 
         #endregion Hyperbolic
-
     }
-
 }

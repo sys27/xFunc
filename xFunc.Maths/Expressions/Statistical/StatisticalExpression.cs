@@ -12,23 +12,24 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
-
     /// <summary>
     /// Represent the Avg function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
     public abstract class StatisticalExpression : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Avg"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected StatisticalExpression(IExpression[] arguments) : base(arguments) { }
+        protected StatisticalExpression(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -45,7 +46,5 @@ namespace xFunc.Maths.Expressions.Statistical
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => null;
-
     }
-
 }

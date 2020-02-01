@@ -12,31 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the nth root operation.
+    /// Represents the nth root operator.
     /// </summary>
     public class Root : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Root"/> class.
         /// </summary>
         /// <param name="radicand">The radicand.</param>
         /// <param name="degree">The degree.</param>
-        public Root(IExpression radicand, IExpression degree) : base(radicand, degree) { }
+        public Root(IExpression radicand, IExpression degree) : base(radicand, degree)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Root"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Root((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        internal Root(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -94,7 +97,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Root(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

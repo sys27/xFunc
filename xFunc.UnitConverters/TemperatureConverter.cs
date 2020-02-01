@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
-
     /// <summary>
     /// Represents the temperature converter.
     /// </summary>
     public class TemperatureConverter : Converter<TemperatureUnits>
     {
-
         private static readonly Lazy<IDictionary<object, string>> units;
 
         static TemperatureConverter()
@@ -59,10 +58,7 @@ namespace xFunc.UnitConverters
         /// </value>
         public override string Name
         {
-            get
-            {
-                return Resource.TemperatureConverterName;
-            }
+            get { return Resource.TemperatureConverterName; }
         }
 
         /// <summary>
@@ -73,12 +69,7 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<object, string> Units
         {
-            get
-            {
-                return units.Value;
-            }
+            get { return units.Value; }
         }
-
     }
-
 }

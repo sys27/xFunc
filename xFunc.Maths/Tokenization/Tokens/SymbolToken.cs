@@ -15,13 +15,11 @@
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
     /// Represents a symbol token.
     /// </summary>
     public class SymbolToken : IToken
     {
-
         /// <summary>
         /// Initializes the <see cref="SymbolToken"/> class.
         /// </summary>
@@ -47,7 +45,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (typeof(SymbolToken) != obj.GetType())
                 return false;
 
-            var token = (SymbolToken)obj;
+            var token = (SymbolToken) obj;
 
             return this.Symbol == token.Symbol;
         }
@@ -121,7 +119,5 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets the symbol.
         /// </summary>
         public Symbols Symbol { get; }
-
     }
-
 }

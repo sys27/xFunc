@@ -12,17 +12,16 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 
 namespace xFunc.Maths.Results
 {
-
     /// <summary>
     /// Represents the string result
     /// </summary>
     public class StringResult : IResult
     {
-
         private readonly string str;
 
         /// <summary>
@@ -54,7 +53,5 @@ namespace xFunc.Maths.Results
         public string Result => str;
 
         object IResult.Result => str;
-
     }
-
 }

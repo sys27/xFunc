@@ -13,23 +13,33 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the "ceil" function.
     /// </summary>
     public class Ceil : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Ceil" /> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded up.</param>
-        public Ceil(IExpression argument) : base(argument) { }
+        public Ceil(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ceil"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Ceil(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -82,7 +92,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Ceil(m_argument.Clone());
         }
-
     }
-
 }

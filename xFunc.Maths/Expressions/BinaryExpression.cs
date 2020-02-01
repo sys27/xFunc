@@ -12,23 +12,24 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// The base class for binary operations.
+    /// The base class for binary operators.
     /// </summary>
     public abstract class BinaryExpression : IExpression
     {
-
         /// <summary>
         /// The left (first) operand.
         /// </summary>
         protected IExpression m_left;
+
         /// <summary>
         /// The right (second) operand.
         /// </summary>
@@ -46,6 +47,22 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        protected BinaryExpression(IExpression[] arguments)
+        {
+            if (arguments.Length < 2)
+                throw new ParseException(Resource.LessParams);
+
+            if (arguments.Length > 2)
+                throw new ParseException(Resource.MoreParams);
+
+            Left = arguments[0];
+            Right = arguments[1];
+        }
+
+        /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
@@ -58,7 +75,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = (BinaryExpression)obj;
+            var exp = (BinaryExpression) obj;
 
             return m_left.Equals(exp.Left) && m_right.Equals(exp.Right);
         }
@@ -159,16 +176,10 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public virtual IExpression Left
         {
-            get
-            {
-                return m_left;
-            }
+            get { return m_left; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                m_left = value;
+                m_left = value ?? throw new ArgumentNullException(nameof(value));
                 m_left.Parent = this;
             }
         }
@@ -178,16 +189,10 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public virtual IExpression Right
         {
-            get
-            {
-                return m_right;
-            }
+            get { return m_right; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                m_right = value;
+                m_right = value ?? throw new ArgumentNullException(nameof(value));
                 m_right.Parent = this;
             }
         }
@@ -196,7 +201,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public virtual IExpression Parent { get; set; }
-
     }
-
 }

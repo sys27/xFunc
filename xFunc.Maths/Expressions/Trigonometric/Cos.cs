@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
-
     /// <summary>
     /// Represents the Cosine function.
     /// </summary>
     public class Cos : TrigonometricExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Cos"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Cos(IExpression expression) : base(expression) { }
+        public Cos(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cos"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Cos(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -114,7 +124,5 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             return new Cos(m_argument.Clone());
         }
-
     }
-
 }

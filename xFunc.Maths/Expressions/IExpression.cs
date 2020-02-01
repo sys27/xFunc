@@ -12,23 +12,23 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Defines methods to work with expressions.
     /// </summary>
     public interface IExpression
     {
-
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
         /// </summary>
         /// <returns>A result of the execution.</returns>
         object Execute();
+
         /// <summary>
         /// Executes this expression.
         /// </summary>
@@ -45,6 +45,7 @@ namespace xFunc.Maths.Expressions
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
         string ToString(IFormatter formatter);
+
         /// <summary>
         /// Analyzes the current expression.
         /// </summary>
@@ -63,7 +64,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         IExpression Parent { get; set; }
-
     }
-
 }

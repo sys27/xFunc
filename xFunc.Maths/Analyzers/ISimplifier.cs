@@ -12,17 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths.Analyzers
 {
-
     /// <summary>
     /// The interface for mathematical expression simplifier.
     /// </summary>
     public interface ISimplifier : IAnalyzer<IExpression>
     {
-
     }
-
 }

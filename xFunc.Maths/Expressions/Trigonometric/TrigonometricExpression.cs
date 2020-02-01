@@ -12,23 +12,33 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
-
     /// <summary>
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public abstract class TrigonometricExpression : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        protected TrigonometricExpression(IExpression expression) : base(expression) { }
+        protected TrigonometricExpression(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        protected TrigonometricExpression(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Calculates this mathematical expression (using degree).
@@ -95,7 +105,5 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             throw new ResultIsNotSupportedException(this, result);
         }
-
     }
-
 }

@@ -12,16 +12,15 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Linq;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.Tokenization
 {
-
     public class FunctionLexerTests : BaseLexerTests
     {
-
         [Fact]
         public void Exp()
         {
@@ -343,10 +342,10 @@ namespace xFunc.Tests.Tokenization
                 .OpenParenthesis()
                 .Number(2)
                 .VariableX()
-                .Operation(Operations.Plus)
+                .Operation(Operators.Plus)
                 .Number(3)
                 .VariableY()
-                .Operation(Operations.Plus)
+                .Operation(Operators.Plus)
                 .Number(4)
                 .Id("z")
                 .CloseParenthesis()
@@ -364,10 +363,10 @@ namespace xFunc.Tests.Tokenization
                 .OpenParenthesis()
                 .Number(2)
                 .VariableX()
-                .Operation(Operations.Plus)
+                .Operation(Operators.Plus)
                 .Number(3)
                 .VariableY()
-                .Operation(Operations.Plus)
+                .Operation(Operators.Plus)
                 .Number(4)
                 .Id("z")
                 .CloseParenthesis()
@@ -453,7 +452,5 @@ namespace xFunc.Tests.Tokenization
         {
             FuncBinaryTest("stdevp");
         }
-
     }
-
 }

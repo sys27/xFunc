@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
-
     /// <summary>
     /// Respresents the Conjugate function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public class Conjugate : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Conjugate"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Conjugate(IExpression argument) : base(argument) { }
+        public Conjugate(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Conjugate"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Conjugate(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -82,7 +92,5 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         {
             return new Conjugate(m_argument.Clone());
         }
-
     }
-
 }

@@ -12,33 +12,36 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the Logarithm function.
     /// </summary>
     public class Log : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
         /// <param name="base">The right operand.</param>
         /// <param name="arg">The left operand.</param>
         /// <seealso cref="IExpression"/>
-        public Log(IExpression @base, IExpression arg) : base(@base, arg) { }
+        public Log(IExpression @base, IExpression arg) : base(@base, arg)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Log((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        public Log(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -99,7 +102,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Log(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

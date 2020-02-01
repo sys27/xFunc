@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -21,14 +22,12 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
 {
-
     /// <summary>
     /// Strongly typed dictionaty that contains user-defined functions.
     /// </summary>
     [Serializable]
     public class FunctionCollection : Dictionary<UserFunction, IExpression>, INotifyCollectionChanged
     {
-
         /// <summary>
         /// Occurs when the collection changes.
         /// </summary>
@@ -37,14 +36,18 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionCollection"/> class.
         /// </summary>
-        public FunctionCollection() { }
+        public FunctionCollection()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionCollection"/> class.
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
-        protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
 
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> with the specified key.
@@ -112,7 +115,5 @@ namespace xFunc.Maths.Expressions.Collections
 
             return func;
         }
-
     }
-
 }

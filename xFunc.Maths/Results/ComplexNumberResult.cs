@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Globalization;
 using System.Numerics;
 
 namespace xFunc.Maths.Results
 {
-
     /// <summary>
     /// Represents the numerical result.
     /// </summary>
     public class ComplexNumberResult : IResult
     {
-
         private readonly Complex complex;
 
         /// <summary>
@@ -72,7 +71,5 @@ namespace xFunc.Maths.Results
         public Complex Result => complex;
 
         object IResult.Result => complex;
-
     }
-
 }

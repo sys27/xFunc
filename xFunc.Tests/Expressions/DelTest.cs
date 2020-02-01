@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
@@ -20,10 +21,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class DelTest
     {
-
         [Fact]
         public void ExecuteTest1()
         {
@@ -33,11 +32,12 @@ namespace xFunc.Tests.Expressions
             );
             var del = new Del(new Differentiator(), new Simplifier(), exp);
 
-            var expected = new Vector(new IExpression[] {
-                                        new Number(2),
-                                        new Mul(new Number(2), new Variable("y")),
-                                        new Mul(new Number(3), new Pow(new Variable("z"), new Number(2)))
-                                    });
+            var expected = new Vector(new IExpression[]
+            {
+                new Number(2),
+                new Mul(new Number(2), new Variable("y")),
+                new Mul(new Number(3), new Pow(new Variable("z"), new Number(2)))
+            });
 
             Assert.Equal(expected, del.Execute());
         }
@@ -51,11 +51,12 @@ namespace xFunc.Tests.Expressions
             );
             var del = new Del(new Differentiator(), new Simplifier(), exp);
 
-            var expected = new Vector(new IExpression[] {
-                                        new Number(2),
-                                        new Mul(new Number(2), new Variable("x2")),
-                                        new Mul(new Number(3), new Pow(new Variable("x3"), new Number(2)))
-                                    });
+            var expected = new Vector(new IExpression[]
+            {
+                new Number(2),
+                new Mul(new Number(2), new Variable("x2")),
+                new Mul(new Number(3), new Pow(new Variable("x3"), new Number(2)))
+            });
 
             Assert.Equal(expected, del.Execute());
         }
@@ -78,7 +79,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(del, clone);
         }
-
     }
-
 }

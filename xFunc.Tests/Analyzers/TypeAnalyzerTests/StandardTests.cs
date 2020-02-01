@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
@@ -22,10 +23,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-
     public class StandardTests : TypeAnalyzerBaseTests
     {
-
         [Fact]
         public void TestAbsNumber()
         {
@@ -94,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddTwoVectorTest()
         {
             var add = new Add(new Vector(new[] { new Number(1) }),
-                            new Vector(new[] { new Number(2) }));
+                new Vector(new[] { new Number(2) }));
 
             Test(add, ResultType.Vector);
         }
@@ -103,7 +102,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddTwoMatrixTest()
         {
             var add = new Add(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                            new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(add, ResultType.Matrix);
         }
@@ -338,16 +337,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Derivative(diff, simp, Variable.X, Variable.X, new Number(2));
 
             Test(exp, ResultType.Number);
-        }
-
-        [Fact]
-        public void TestDerivException()
-        {
-            var diff = new Differentiator();
-            var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, new IExpression[] { Variable.X, new Number(1) });
-
-            TestException(exp);
         }
 
         [Fact]
@@ -786,7 +775,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulTwoMatrixTest()
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                            new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(mul, ResultType.Matrix);
         }
@@ -795,7 +784,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulLeftMatrixRightException()
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                            new Bool(false));
+                new Bool(false));
 
             TestBinaryException(mul);
         }
@@ -804,7 +793,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulRightMatrixLeftException()
         {
             var mul = new Mul(new Bool(false),
-                            new Matrix(new[] { new Vector(new[] { new Number(1) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(1) }) }));
 
             TestBinaryException(mul);
         }
@@ -829,7 +818,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulVectorMatrixTest()
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }),
-                            new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(mul, ResultType.Matrix);
         }
@@ -838,7 +827,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulVectorNumber()
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }),
-                            new Number(2));
+                new Number(2));
 
             Test(mul, ResultType.Vector);
         }
@@ -1066,7 +1055,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubTwoVectorTest()
         {
             var sub = new Sub(new Vector(new[] { new Number(1) }),
-                            new Vector(new[] { new Number(2) }));
+                new Vector(new[] { new Number(2) }));
 
             Test(sub, ResultType.Vector);
         }
@@ -1075,7 +1064,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubTwoMatrixTest()
         {
             var sub = new Sub(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                            new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(sub, ResultType.Matrix);
         }
@@ -1329,6 +1318,5 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             TestException(new Sign(new Bool(false)));
         }
-
     }
 }

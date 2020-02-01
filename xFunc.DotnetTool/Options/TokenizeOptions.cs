@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using CommandLine;
 using CommandLine.Text;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace xFunc.DotnetTool.Options
     [Verb("tokenize", HelpText = "Convert string expression to list of tokens.")]
     public class TokenizeOptions : BaseOptions
     {
-        public TokenizeOptions(string stringExpression, bool debug) : base(stringExpression, debug) { }
+        public TokenizeOptions(string stringExpression, bool debug) : base(stringExpression, debug)
+        {
+        }
 
         [Usage(ApplicationAlias = "xfunc")]
         public static IEnumerable<Example> Examples

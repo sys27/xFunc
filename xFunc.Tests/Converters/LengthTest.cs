@@ -12,15 +12,14 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.UnitConverters;
 using Xunit;
 
 namespace xFunc.Tests.Converters
 {
-
     public class LengthTest
     {
-
         private readonly LengthConverter conv = new LengthConverter();
 
         [Fact]
@@ -286,7 +285,5 @@ namespace xFunc.Tests.Converters
 
             Assert.Equal(46285163700000000, value, 4);
         }
-
     }
-
 }

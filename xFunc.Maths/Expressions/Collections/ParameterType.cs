@@ -15,26 +15,24 @@
 
 namespace xFunc.Maths.Expressions.Collections
 {
-
     /// <summary>
     /// Contains types of parameter.
     /// </summary>
     public enum ParameterType
     {
-
         /// <summary>
         /// Normal.
         /// </summary>
         Normal,
+
         /// <summary>
         /// Read only.
         /// </summary>
         ReadOnly,
+
         /// <summary>
         /// Constant.
         /// </summary>
         Constant
-
     }
-
 }

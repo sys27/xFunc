@@ -12,13 +12,13 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Globalization;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
 {
-
     /// <summary>
     /// Item of <see cref="ParameterCollection"/>.
     /// </summary>
@@ -34,7 +34,6 @@ namespace xFunc.Maths.Expressions.Collections
         public Parameter(string key, object value)
             : this(key, value, ParameterType.Normal)
         {
-
         }
 
         /// <summary>
@@ -44,9 +43,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
         public Parameter(string key, int value, ParameterType type)
-            : this(key, (object)value, type)
+            : this(key, (object) value, type)
         {
-
         }
 
         /// <summary>
@@ -56,9 +54,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
         public Parameter(string key, double value, ParameterType type)
-            : this(key, (object)value, type)
+            : this(key, (object) value, type)
         {
-
         }
 
         /// <summary>
@@ -203,7 +200,5 @@ namespace xFunc.Maths.Expressions.Collections
         /// The type of parameter.
         /// </value>
         public ParameterType Type { get; }
-
     }
-
 }

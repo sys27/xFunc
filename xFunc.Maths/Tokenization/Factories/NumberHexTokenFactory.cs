@@ -12,39 +12,53 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
-using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory which creates number tokens (from hex format).
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class NumberHexTokenFactory : FactoryBase
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
+    internal class NumberHexTokenFactory : ITokenFactory
     {
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NumberHexTokenFactory"/> class.
-        /// </summary>
-        public NumberHexTokenFactory() : base(new Regex(@"\G0x[0-9a-f]+", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
-
         /// <summary>
         /// Creates the token.
         /// </summary>
-        /// <param name="match">The match.</param>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        protected override FactoryResult CreateTokenInternal(Match match)
+        public IToken CreateToken(string function, ref int index)
         {
-            var token = new NumberToken(Convert.ToInt64(match.Value, 16));
+            // TODO: span?
+            if (index + 2 < function.Length &&
+                function[index] == '0' &&
+                function[index + 1] == 'x')
+            {
+                var numberStart = index + 2;
+                var numberEnd = numberStart;
+                while (numberEnd < function.Length && IsHexNumber(function[numberEnd]))
+                    numberEnd++;
 
-            return new FactoryResult(token, match.Length);
+                if (numberEnd > numberStart)
+                {
+                    var numberString = function.Substring(numberStart, numberEnd - numberStart);
+                    var token = new NumberToken(Convert.ToInt64(numberString, 16));
+
+                    index = numberEnd;
+
+                    return token;
+                }
+            }
+
+            return null;
         }
 
+        private bool IsHexNumber(char symbol)
+            => char.IsDigit(symbol) || (symbol >= 'a' && symbol <= 'f');
     }
-
 }

@@ -15,14 +15,11 @@
 
 namespace xFunc.Maths.Analyzers.Formatters
 {
-
     /// <summary>
     /// The common interface for expression formatters.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{TResult}" />
     public interface IFormatter : IAnalyzer<string>
     {
-
     }
-
 }

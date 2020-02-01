@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using xFunc.Maths.Expressions;
@@ -21,10 +22,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class UserFunctionTest
     {
-
         [Fact]
         public void ExecuteTest1()
         {
@@ -53,8 +52,8 @@ namespace xFunc.Tests.Expressions
             var expParams = new ExpressionParameters();
 
             var exp = new If(new Equal(Variable.X, new Number(0)),
-                            new Number(1),
-                            new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, new Number(1)) })));
+                new Number(1),
+                new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, new Number(1)) })));
             expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
 
             var func = new UserFunction("f", new[] { new Number(4) });
@@ -84,7 +83,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

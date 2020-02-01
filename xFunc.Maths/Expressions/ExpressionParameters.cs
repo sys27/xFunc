@@ -12,17 +12,16 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Combines all parameters of expressions.
     /// </summary>
     public class ExpressionParameters
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
@@ -154,7 +153,5 @@ namespace xFunc.Maths.Expressions
         /// The collection of user functions.
         /// </value>
         public FunctionCollection Functions { get; }
-
     }
-
 }

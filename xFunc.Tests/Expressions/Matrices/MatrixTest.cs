@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-
     public class MatrixTest
     {
-
         [Fact]
         public void MulByNumberMatrixTest()
         {
@@ -288,7 +287,6 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(-7), new Number(8), new Number(9) }),
                 new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
                 new Vector(new[] { new Number(1), new Number(-2), new Number(3) })
-
             });
 
             matrix.SwapRows(0, 2);
@@ -375,7 +373,5 @@ namespace xFunc.Tests.Expressions.Matrices
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

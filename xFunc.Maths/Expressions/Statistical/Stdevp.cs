@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,19 +20,19 @@ using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
-
     /// <summary>
     /// Represents the STDEVP function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
     public class Stdevp : StatisticalExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Stdevp"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Stdevp(IExpression[] arguments) : base(arguments) { }
+        public Stdevp(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -105,7 +106,5 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             return new Stdevp(CloneArguments());
         }
-
     }
-
 }

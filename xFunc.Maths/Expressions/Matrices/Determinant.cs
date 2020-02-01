@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,18 +20,27 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
-
     /// <summary>
     /// Represents a determinant.
     /// </summary>
     public class Determinant : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Determinant"/> class.
         /// </summary>
         /// <param name="argument">The argument of function.</param>
-        public Determinant(IExpression argument) : base(argument) { }
+        public Determinant(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Determinant"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Determinant(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -90,7 +100,5 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             return new Determinant(m_argument.Clone());
         }
-
     }
-
 }

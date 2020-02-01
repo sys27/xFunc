@@ -12,18 +12,17 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
-
     /// <summary>
     /// Represents the boolean constant.
     /// </summary>
     public class Bool : IExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Bool"/> class.
         /// </summary>
@@ -165,7 +164,5 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// The value of this expression.
         /// </value>
         public bool Value { get; }
-
     }
-
 }

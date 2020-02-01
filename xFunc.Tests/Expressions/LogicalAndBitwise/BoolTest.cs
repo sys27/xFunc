@@ -19,16 +19,14 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-
     public class BoolTest
     {
-
         [Fact]
         public void ExecuteTest1()
         {
             var exp = new Bool(false);
 
-            Assert.False((bool)exp.Execute());
+            Assert.False((bool) exp.Execute());
         }
 
         [Fact]
@@ -36,7 +34,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new Bool(false);
 
-            Assert.False((bool)exp.Execute(null));
+            Assert.False((bool) exp.Execute(null));
         }
 
         [Fact]
@@ -50,9 +48,9 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest4()
         {
-            var exp = (Bool)false;
+            var exp = (Bool) false;
 
-            Assert.False((bool)exp.Execute());
+            Assert.False((bool) exp.Execute());
         }
 
         [Fact]
@@ -100,7 +98,5 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

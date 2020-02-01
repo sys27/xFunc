@@ -12,7 +12,9 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
@@ -20,26 +22,31 @@ using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Results;
 using xFunc.Maths.Tokenization;
+using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {
-
     /// <summary>
     /// The main point of this library. Bring together all features.
     /// </summary>
     public class Processor
     {
+        private readonly ITypeAnalyzer typeAnalyzer;
+        private readonly IDifferentiator differentiator;
+        private readonly ISimplifier simplifier;
+        private readonly IParser parser;
+        private readonly ILexer lexer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
         public Processor()
         {
-            Lexer = new Lexer();
-            Simplifier = new Simplifier();
-            Differentiator = new Differentiator();
-            Parser = new Parser(new ExpressionFactory(Differentiator, Simplifier));
-            TypeAnalyzer = new TypeAnalyzer();
+            lexer = new Lexer();
+            simplifier = new Simplifier();
+            differentiator = new Differentiator();
+            parser = new Parser(differentiator, simplifier);
+            typeAnalyzer = new TypeAnalyzer();
 
             Parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
             NumeralSystem = NumeralSystem.Decimal;
@@ -84,11 +91,16 @@ namespace xFunc.Maths
             ITypeAnalyzer typeAnalyzer,
             ExpressionParameters parameters)
         {
-            Lexer = lexer;
-            Simplifier = simplifier;
-            Differentiator = differentiator;
-            Parser = parser;
-            TypeAnalyzer = typeAnalyzer;
+            this.lexer = lexer ??
+                         throw new ArgumentNullException(nameof(lexer));
+            this.simplifier = simplifier ??
+                              throw new ArgumentNullException(nameof(simplifier));
+            this.differentiator = differentiator ??
+                                  throw new ArgumentNullException(nameof(differentiator));
+            this.parser = parser ??
+                          throw new ArgumentNullException(nameof(parser));
+            this.typeAnalyzer = typeAnalyzer ??
+                                throw new ArgumentNullException(nameof(typeAnalyzer));
 
             Parameters = parameters;
             NumeralSystem = NumeralSystem.Decimal;
@@ -113,7 +125,7 @@ namespace xFunc.Maths
         public IResult Solve(string function, bool simplify)
         {
             var exp = Parse(function);
-            exp.Analyze(TypeAnalyzer);
+            exp.Analyze(typeAnalyzer);
 
             var result = exp.Execute(Parameters);
             if (result is double number)
@@ -121,20 +133,24 @@ namespace xFunc.Maths
                 if (NumeralSystem == NumeralSystem.Decimal)
                     return new NumberResult(number);
 
-                return new StringResult(MathExtensions.ToNewBase((int)number, NumeralSystem));
+                return new StringResult(MathExtensions.ToNewBase((int) number, NumeralSystem));
             }
+
             if (result is Complex complex)
             {
                 return new ComplexNumberResult(complex);
             }
+
             if (result is bool boolean)
             {
                 return new BooleanResult(boolean);
             }
+
             if (result is string str)
             {
                 return new StringResult(str);
             }
+
             if (result is IExpression expression)
             {
                 if (simplify)
@@ -154,7 +170,7 @@ namespace xFunc.Maths
         /// <returns>The result of solving.</returns>
         public TResult Solve<TResult>(string function) where TResult : IResult
         {
-            return (TResult)Solve(function);
+            return (TResult) Solve(function);
         }
 
         /// <summary>
@@ -166,7 +182,7 @@ namespace xFunc.Maths
         /// <returns>The result of solving.</returns>
         public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult
         {
-            return (TResult)Solve(function, simplify);
+            return (TResult) Solve(function, simplify);
         }
 
         /// <summary>
@@ -176,7 +192,7 @@ namespace xFunc.Maths
         /// <returns>A simplified expression.</returns>
         public IExpression Simplify(IExpression expression)
         {
-            return expression.Analyze(Simplifier);
+            return expression.Analyze(simplifier);
         }
 
         /// <summary>
@@ -211,10 +227,10 @@ namespace xFunc.Maths
         /// </returns>
         public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
         {
-            Differentiator.Variable = variable;
-            Differentiator.Parameters = parameters;
+            differentiator.Variable = variable;
+            differentiator.Parameters = parameters;
 
-            return expression.Analyze(Differentiator);
+            return expression.Analyze(differentiator);
         }
 
         /// <summary>
@@ -226,45 +242,18 @@ namespace xFunc.Maths
         /// <exception cref="ParseException">Error while parsing.</exception>
         public IExpression Parse(string function)
         {
-            return Parser.Parse(Lexer.Tokenize(function));
+            return parser.Parse(lexer.Tokenize(function));
         }
 
         /// <summary>
-        /// Gets or sets a implementation of <see cref="ILexer"/>.
+        /// Converts the string into a sequence of tokens.
         /// </summary>
-        public ILexer Lexer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the parser.
-        /// </summary>
-        /// <value>
-        /// The parser.
-        /// </value>
-        public IParser Parser { get; set; }
-
-        /// <summary>
-        /// Gets or sets the simplifier.
-        /// </summary>
-        /// <value>
-        /// The simplifier.
-        /// </value>
-        public ISimplifier Simplifier { get; set; }
-
-        /// <summary>
-        /// Gets or sets the differentiator.
-        /// </summary>
-        /// <value>
-        /// The differentiator.
-        /// </value>
-        public IDifferentiator Differentiator { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type analyzer.
-        /// </summary>
-        /// <value>
-        /// The type analyzer.
-        /// </value>
-        public ITypeAnalyzer TypeAnalyzer { get; set; }
+        /// <param name="function">The string that contains the functions and operators.</param>
+        /// <returns>The sequence of tokens.</returns>
+        public IEnumerable<IToken> Tokenize(string function)
+        {
+            return lexer.Tokenize(function);
+        }
 
         /// <summary>
         /// Gets expression parameters object.
@@ -281,7 +270,5 @@ namespace xFunc.Maths
         /// The numeral system.
         /// </value>
         public NumeralSystem NumeralSystem { get; set; }
-
     }
-
 }

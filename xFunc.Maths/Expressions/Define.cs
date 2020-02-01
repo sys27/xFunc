@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -19,13 +20,11 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Define operation.
+    /// Represents the Define operator.
     /// </summary>
     public class Define : IExpression
     {
-
         private IExpression key;
         private IExpression value;
 
@@ -43,9 +42,18 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="Define"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Define((IExpression key, IExpression value) arguments) : this(arguments.key, arguments.value) { }
+        internal Define(IExpression[] arguments)
+        {
+            if (arguments.Length < 2)
+                throw new ParseException(Resource.LessParams);
+            if (arguments.Length > 2)
+                throw new ParseException(Resource.MoreParams);
+
+            this.Key = arguments[0];
+            this.Value = arguments[1];
+        }
 
         /// <summary>
         /// Determines whether the specified <see cref="Object" />, is equal to this instance.
@@ -182,10 +190,7 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
         public IExpression Key
         {
-            get
-            {
-                return key;
-            }
+            get { return key; }
             set
             {
                 if (value == null)
@@ -207,10 +212,7 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="System.ArgumentNullException"><paramref name="value"/> is null.</exception>
         public IExpression Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
             set
             {
                 if (value == null)
@@ -219,7 +221,5 @@ namespace xFunc.Maths.Expressions
                 this.value = value;
             }
         }
-
     }
-
 }

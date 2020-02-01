@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths;
@@ -23,10 +24,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Hyperbolic
 {
-
     public class HyperbolicArcosecantTest
     {
-
         [Fact]
         public void ExecuteRadianTest()
         {
@@ -56,7 +55,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Arcsch(new ComplexNumber(complex));
-            var result = (Complex)exp.Execute();
+            var result = (Complex) exp.Execute();
 
             Assert.Equal(ComplexExtensions.Acsch(complex), result);
             Assert.Equal(0.23133469857397318, result.Real, 15);
@@ -79,7 +78,5 @@ namespace xFunc.Tests.Expressions.Hyperbolic
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

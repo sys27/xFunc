@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
-
     /// <summary>
     /// Represents the Arcsch function.
     /// </summary>
     public class Arcsch : HyperbolicExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcsch"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Arcsch(IExpression expression) : base(expression) { }
+        public Arcsch(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Arcsch"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Arcsch(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -115,7 +125,5 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             return new Arcsch(m_argument.Clone());
         }
-
     }
-
 }

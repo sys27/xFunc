@@ -15,13 +15,11 @@
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Defines methods to work with expressions.
     /// </summary>
     public interface IFunctionExpression : IExpression
     {
-
         /// <summary>
         /// Gets the count of parameters.
         /// </summary>
@@ -29,7 +27,5 @@ namespace xFunc.Maths.Expressions
         /// The count of parameters.
         /// </value>
         int ParametersCount { get; }
-
     }
-
 }

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,13 +23,11 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Collections
 {
-
     /// <summary>
     /// Strongly typed dictionary that contains value of variables.
     /// </summary>
     public class ParameterCollection : IEnumerable<Parameter>, INotifyCollectionChanged
     {
-
         private readonly HashSet<Parameter> constants;
         private readonly HashSet<Parameter> collection;
 
@@ -90,11 +89,11 @@ namespace xFunc.Maths.Expressions.Collections
         {
             constants.Add(Parameter.CreateConstant("π", Math.PI)); // Archimedes' constant
             constants.Add(Parameter.CreateConstant("pi", Math.PI)); // Archimedes' constant
-            constants.Add(Parameter.CreateConstant("e", Math.E));  // Euler's number
-            constants.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne));  // Imaginary unit
+            constants.Add(Parameter.CreateConstant("e", Math.E)); // Euler's number
+            constants.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne)); // Imaginary unit
             constants.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth
-            constants.Add(Parameter.CreateConstant("c", 299792458));   // Speed of Light (c0)
-            constants.Add(Parameter.CreateConstant("h", 6.62607004E-34));  // Planck Constant
+            constants.Add(Parameter.CreateConstant("c", 299792458)); // Speed of Light (c0)
+            constants.Add(Parameter.CreateConstant("h", 6.62607004E-34)); // Planck Constant
             constants.Add(Parameter.CreateConstant("F", 96485.33289)); // Faraday Constant
             constants.Add(Parameter.CreateConstant("ε", 8.854187817E-12)); // Electric Constant (ε0)
             constants.Add(Parameter.CreateConstant("µ", 1.2566370614E-6)); // Magnetic constant (µ0)
@@ -175,10 +174,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns>The value of variable.</returns>
         public object this[string key]
         {
-            get
-            {
-                return GetParameterByKey(key).Value;
-            }
+            get { return GetParameterByKey(key).Value; }
             set
             {
                 var param = collection.FirstOrDefault(p => p.Key == key);
@@ -340,7 +336,5 @@ namespace xFunc.Maths.Expressions.Collections
         /// The collection.
         /// </value>
         public IEnumerable<Parameter> Collection => collection;
-
     }
-
 }

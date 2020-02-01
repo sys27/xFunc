@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
@@ -20,13 +21,11 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Undefice operation.
+    /// Represents the Undefice operator.
     /// </summary>
     public class Undefine : IExpression
     {
-
         private IExpression key;
 
         /// <summary>
@@ -36,6 +35,20 @@ namespace xFunc.Maths.Expressions
         public Undefine(IExpression key)
         {
             Key = key;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Undefine"/> class.
+        /// </summary>
+        /// <param name="arguments">The key.</param>
+        internal Undefine(IExpression[] arguments)
+        {
+            if (arguments.Length < 1)
+                throw new ParseException(Resource.LessParams);
+            if (arguments.Length > 1)
+                throw new ParseException(Resource.MoreParams);
+
+            Key = arguments[0];
         }
 
         /// <summary>
@@ -165,10 +178,7 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
         public IExpression Key
         {
-            get
-            {
-                return key;
-            }
+            get { return key; }
             set
             {
                 if (value == null)
@@ -180,7 +190,5 @@ namespace xFunc.Maths.Expressions
                 key = value;
             }
         }
-
     }
-
 }

@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
-
     /// <summary>
     /// Builder of token list.
     /// </summary>
     public class TokensBuilder
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TokensBuilder"/> class.
         /// </summary>
@@ -120,13 +119,13 @@ namespace xFunc.Maths.Tokenization
         }
 
         /// <summary>
-        /// Adds operation token.
+        /// Adds operator. token.
         /// </summary>
         /// <returns>The current instance of builder..</returns>
-        /// <param name="operation">The type of operation.</param>
-        public TokensBuilder Operation(Operations operation)
+        /// <param name="operator">The type of operator.</param>
+        public TokensBuilder Operation(Operators @operator)
         {
-            Tokens.Add(new OperationToken(operation));
+            Tokens.Add(new OperatorToken(@operator));
 
             return this;
         }
@@ -248,5 +247,4 @@ namespace xFunc.Maths.Tokenization
         /// </value>
         public IList<IToken> Tokens { get; }
     }
-
 }

@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
-
     /// <summary>
     /// Represents the time converter.
     /// </summary>
     public class TimeConverter : Converter<TimeUnits>
     {
-
         private static readonly Lazy<IDictionary<object, string>> units;
 
         static TimeConverter()
@@ -60,10 +59,7 @@ namespace xFunc.UnitConverters
         /// </value>
         public override string Name
         {
-            get
-            {
-                return Resource.TimeConverterName;
-            }
+            get { return Resource.TimeConverterName; }
         }
 
         /// <summary>
@@ -74,12 +70,7 @@ namespace xFunc.UnitConverters
         /// </value>
         public override IDictionary<object, string> Units
         {
-            get
-            {
-                return units.Value;
-            }
+            get { return units.Value; }
         }
-
     }
-
 }

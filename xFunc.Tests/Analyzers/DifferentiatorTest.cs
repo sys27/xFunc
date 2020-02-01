@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
@@ -22,10 +23,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers
 {
-
     public class DifferentiatorTest
     {
-
         private readonly Number zero;
         private readonly Number one;
         private readonly Number two;
@@ -1673,10 +1672,10 @@ namespace xFunc.Tests.Analyzers
             var exp = new Arccsc(mul);
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(new Div(
-            new Mul(two, one),
-            new Mul(
-                new Abs(new Mul(two, x)),
-                new Sqrt(new Sub(new Pow(new Mul(two, x), two), one)))));
+                new Mul(two, one),
+                new Mul(
+                    new Abs(new Mul(two, x)),
+                    new Sqrt(new Sub(new Pow(new Mul(two, x), two), one)))));
 
             Assert.Equal(expected, deriv);
 
@@ -2020,7 +2019,5 @@ namespace xFunc.Tests.Analyzers
         {
             Assert.Throws<NotSupportedException>(() => Differentiate(new Fact(x)));
         }
-
     }
-
 }

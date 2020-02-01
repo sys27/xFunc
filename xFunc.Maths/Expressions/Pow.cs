@@ -12,31 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Exponentiation operation.
+    /// Represents the Exponentiation operator.
     /// </summary>
     public class Pow : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Pow"/> class.
         /// </summary>
         /// <param name="base">The base.</param>
         /// <param name="exponent">The exponent.</param>
-        public Pow(IExpression @base, IExpression exponent) : base(@base, exponent) { }
+        public Pow(IExpression @base, IExpression exponent) : base(@base, exponent)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Pow"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Pow((IExpression @base, IExpression exponent) arguments) : base(arguments.@base, arguments.exponent) { }
+        internal Pow(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -98,7 +101,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Pow(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

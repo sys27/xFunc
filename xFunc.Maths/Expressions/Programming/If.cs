@@ -12,24 +12,25 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-
     /// <summary>
     /// Represents the "if-else" statement.
     /// </summary>
     public class If : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
-        public If(IExpression condition, IExpression then) : this(new[] { condition, then }) { }
+        public If(IExpression condition, IExpression then) : this(new[] { condition, then })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
@@ -37,13 +38,17 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
-        public If(IExpression condition, IExpression then, IExpression @else) : this(new[] { condition, then, @else }) { }
+        public If(IExpression condition, IExpression then, IExpression @else) : this(new[] { condition, then, @else })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public If(IExpression[] arguments) : base(arguments) { }
+        public If(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -55,7 +60,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if ((bool)Condition.Execute(parameters))
+            if ((bool) Condition.Execute(parameters))
                 return Then.Execute(parameters);
 
             return Else?.Execute(parameters) ?? 0.0;
@@ -124,7 +129,5 @@ namespace xFunc.Maths.Expressions.Programming
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => 3;
-
     }
-
 }

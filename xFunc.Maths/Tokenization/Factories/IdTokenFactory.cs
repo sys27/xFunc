@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
@@ -22,8 +21,8 @@ namespace xFunc.Maths.Tokenization.Factories
     /// <summary>
     /// The factory which creates variable tokens.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class IdTokenFactory : FactoryBase
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
+    internal class IdTokenFactory : ITokenFactory // TODO: rename class?
     {
         private readonly Dictionary<string, KeywordToken> keywords;
 
@@ -31,10 +30,7 @@ namespace xFunc.Maths.Tokenization.Factories
         /// Initializes a new instance of the <see cref="IdTokenFactory"/> class.
         /// </summary>
         public IdTokenFactory()
-            : base(new Regex(@"\G([a-zα-ω][0-9a-zα-ω]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
-            // TODO: lazy
-            // TODO: dynamic init from attribute?
             keywords = new Dictionary<string, KeywordToken>
             {
                 { "true", new KeywordToken(Keywords.True) },
@@ -65,18 +61,28 @@ namespace xFunc.Maths.Tokenization.Factories
         /// <summary>
         /// Creates the token.
         /// </summary>
-        /// <param name="match">The match.</param>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        protected override FactoryResult CreateTokenInternal(Match match)
+        public IToken CreateToken(string function, ref int index)
         {
-            var id = match.Value;
+            if (!char.IsLetter(function[index]))
+                return null;
+
+            var endIndex = index + 1;
+            while (endIndex < function.Length && char.IsLetterOrDigit(function[endIndex]))
+                endIndex++;
+
+            var id = function.Substring(index, endIndex - index); // TODO: span
+
+            index = endIndex;
 
             if (keywords.TryGetValue(id, out var keyword))
-                return new FactoryResult(keyword, id.Length);
+                return keyword;
 
-            return new FactoryResult(new IdToken(id), id.Length);
+            return new IdToken(id);
         }
     }
 }

@@ -21,7 +21,5 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// <seealso cref="xFunc.Maths.Analyzers.IAnalyzer{ResultType}" />
     public interface ITypeAnalyzer : IAnalyzer<ResultType>
     {
-
     }
-
 }

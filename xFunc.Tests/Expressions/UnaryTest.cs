@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Expressions;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class UnaryTest
     {
-
         [Fact]
         public void EqualsTest1()
         {
@@ -46,7 +45,5 @@ namespace xFunc.Tests.Expressions
         {
             Assert.Throws<ArgumentNullException>(() => new Sin(null));
         }
-
     }
-
 }

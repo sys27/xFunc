@@ -12,30 +12,33 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
-
     /// <summary>
-    /// Represents the Equality operation.
+    /// Represents the Equality operator.
     /// </summary>
     public class Equality : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Equality"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Equality(IExpression left, IExpression right) : base(left, right) { }
+        public Equality(IExpression left, IExpression right) : base(left, right)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Equality"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Equality((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        internal Equality(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -90,7 +93,5 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             return new Equality(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

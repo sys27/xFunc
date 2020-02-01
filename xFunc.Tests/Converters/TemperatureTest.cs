@@ -12,15 +12,14 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.UnitConverters;
 using Xunit;
 
 namespace xFunc.Tests.Converters
 {
-
     public class TemperatureTest
     {
-
         private readonly TemperatureConverter conv = new TemperatureConverter();
 
         [Fact]
@@ -158,7 +157,5 @@ namespace xFunc.Tests.Converters
 
             Assert.Equal(-146.8, value, 4);
         }
-
     }
-
 }

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Statistical;
@@ -19,15 +20,13 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Statistical
 {
-
     public class StdevTest
     {
-
         [Fact]
         public void OneNumberTest()
         {
             var exp = new Stdev(new[] { new Number(4) });
-            var result = (double)exp.Execute();
+            var result = (double) exp.Execute();
 
             Assert.Equal(double.NaN, result);
         }
@@ -36,7 +35,7 @@ namespace xFunc.Tests.Expressions.Statistical
         public void TwoNumberTest()
         {
             var exp = new Stdev(new[] { new Number(4), new Number(9) });
-            var result = (double)exp.Execute();
+            var result = (double) exp.Execute();
 
             Assert.Equal(3.53553390593274, result, 14);
         }
@@ -45,7 +44,7 @@ namespace xFunc.Tests.Expressions.Statistical
         public void ThreeNumberTest()
         {
             var exp = new Stdev(new[] { new Number(9), new Number(2), new Number(4) });
-            var result = (double)exp.Execute();
+            var result = (double) exp.Execute();
 
             Assert.Equal(3.60555127546399, result, 14);
         }
@@ -54,7 +53,7 @@ namespace xFunc.Tests.Expressions.Statistical
         public void VectorTest()
         {
             var exp = new Stdev(new[] { new Vector(new[] { new Number(2), new Number(4), new Number(9) }) });
-            var result = (double)exp.Execute();
+            var result = (double) exp.Execute();
 
             Assert.Equal(3.60555127546399, result, 14);
         }
@@ -67,7 +66,5 @@ namespace xFunc.Tests.Expressions.Statistical
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

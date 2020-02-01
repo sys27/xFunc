@@ -12,18 +12,17 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Globalization;
 
 namespace xFunc.Maths.Results
 {
-
     /// <summary>
     /// Represents the numerical result.
     /// </summary>
     public class NumberResult : IResult
     {
-
         private readonly double number;
 
         /// <summary>
@@ -55,7 +54,5 @@ namespace xFunc.Maths.Results
         public double Result => number;
 
         object IResult.Result => number;
-
     }
-
 }

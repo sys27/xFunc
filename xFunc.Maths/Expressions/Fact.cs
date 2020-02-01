@@ -12,23 +12,32 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the Factorial function.
     /// </summary>
     public class Fact : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Fact(IExpression argument) : base(argument) { }
+        public Fact(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Fact"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        internal Fact(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -81,7 +90,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Fact(m_argument.Clone());
         }
-
     }
-
 }

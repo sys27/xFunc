@@ -12,17 +12,16 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 
 namespace xFunc.Maths
 {
-
     /// <summary>
     /// Trigonometric functions for Complex numbers.
     /// </summary>
     public static class ComplexExtensions
     {
-
         /// <summary>
         /// Returns the cotangent of the specified complex number.
         /// </summary>
@@ -173,7 +172,5 @@ namespace xFunc.Maths
         {
             return Complex.Log(1 / number + Complex.Sqrt(1 / Complex.Pow(number, 2) + 1));
         }
-
     }
-
 }

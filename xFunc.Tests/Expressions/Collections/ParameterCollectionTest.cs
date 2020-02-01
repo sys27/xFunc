@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
@@ -21,10 +22,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Collections
 {
-
     public class ParameterCollectionTest
     {
-
         [Fact]
         public void InitializeWithConstantsTest()
         {
@@ -329,7 +328,5 @@ namespace xFunc.Tests.Expressions.Collections
 
             Assert.Equal(2.0, parameter);
         }
-
     }
-
 }

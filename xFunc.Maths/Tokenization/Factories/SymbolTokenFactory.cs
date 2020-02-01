@@ -12,27 +12,26 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Collections.Generic;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory which creates symbol tokens.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class SymbolTokenFactory : ITokenFactory
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
+    internal class SymbolTokenFactory : ITokenFactory
     {
-
-        private readonly Dictionary<char, SymbolToken> map;
+        private readonly Dictionary<char, SymbolToken> symbols;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SymbolTokenFactory"/> class.
         /// </summary>
         public SymbolTokenFactory()
         {
-            map = new Dictionary<char, SymbolToken>
+            symbols = new Dictionary<char, SymbolToken>
             {
                 { '(', new SymbolToken(Symbols.OpenParenthesis) },
                 { ')', new SymbolToken(Symbols.CloseParenthesis) },
@@ -48,16 +47,16 @@ namespace xFunc.Maths.Tokenization.Factories
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="startIndex">The start index.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>The token.</returns>
-        public FactoryResult CreateToken(string function, int startIndex)
+        public IToken CreateToken(string function, ref int index)
         {
-            if (!map.TryGetValue(function[startIndex], out var symbol))
+            if (!symbols.TryGetValue(function[index], out var symbol))
                 return null;
 
-            return new FactoryResult(symbol, 1);
+            index++;
+
+            return symbol;
         }
-
     }
-
 }

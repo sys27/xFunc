@@ -12,18 +12,17 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the Deriv function.
     /// </summary>
     public class Derivative : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
         /// </summary>
@@ -31,7 +30,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The expression.</param>
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
-            : this(differentiator, simplifier, new[] { expression }) { }
+            : this(differentiator, simplifier, new[] { expression })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
@@ -41,7 +42,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression, Variable variable)
-            : this(differentiator, simplifier, new[] { expression, variable }) { }
+            : this(differentiator, simplifier, new[] { expression, variable })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
@@ -52,7 +55,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="variable">The variable.</param>
         /// <param name="point">The point of derivation.</param>
         public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression, Variable variable, Number point)
-            : this(differentiator, simplifier, new[] { expression, variable, point }) { }
+            : this(differentiator, simplifier, new[] { expression, variable, point })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Derivative" /> class.
@@ -61,9 +66,11 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="args">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
+        internal Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
             : base(args)
         {
+            // TODO: types validation?
+
             this.Differentiator = differentiator;
             this.Simplifier = simplifier;
         }
@@ -146,10 +153,7 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Expression
         {
-            get
-            {
-                return m_arguments[0];
-            }
+            get { return m_arguments[0]; }
             set
             {
                 if (value == null)
@@ -166,7 +170,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The variable.
         /// </value>
-        public Variable Variable => ParametersCount >= 2 ? (Variable)m_arguments[1] : Variable.X;
+        public Variable Variable => ParametersCount >= 2 ? (Variable) m_arguments[1] : Variable.X;
 
         /// <summary>
         /// Gets the derivative point.
@@ -174,7 +178,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The derivative point.
         /// </value>
-        public Number DerivativePoint => ParametersCount >= 3 ? (Number)m_arguments[2] : null;
+        public Number DerivativePoint => ParametersCount >= 3 ? (Number) m_arguments[2] : null;
 
         /// <summary>
         /// Gets or sets the simplifier.
@@ -207,7 +211,5 @@ namespace xFunc.Maths.Expressions
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => 3;
-
     }
-
 }

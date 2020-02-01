@@ -12,15 +12,14 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.Tokenization.Tokens
 {
-
     public class IdTokenTest
     {
-
         [Fact]
         public void EqualsNullTest()
         {
@@ -45,7 +44,7 @@ namespace xFunc.Tests.Tokenization.Tokens
             var token = new IdToken("x");
 
             Assert.False(token.Equals(1));
-            Assert.NotEqual((object)1, token);
+            Assert.NotEqual((object) 1, token);
         }
 
         [Fact]
@@ -65,7 +64,5 @@ namespace xFunc.Tests.Tokenization.Tokens
 
             Assert.Equal("Id: x", token.ToString());
         }
-
     }
-
 }

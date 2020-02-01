@@ -12,27 +12,28 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 
 namespace xFunc.UnitConverters
 {
-
     /// <summary>
     /// The base class for converters.
     /// </summary>
     /// <typeparam name="TUnit">The type that represents units (eg. enum).</typeparam>
     public abstract class Converter<TUnit> : IConverter
     {
-
         /// <summary>
         /// The base unit for this convertor.
         /// </summary>
         protected static TUnit BaseUnit;
+
         /// <summary>
         /// Dictionary of functions to convert from the base unit type into a specific type.
         /// </summary>
         protected static readonly Dictionary<TUnit, Func<double, double>> convTo = new Dictionary<TUnit, Func<double, double>>();
+
         /// <summary>
         /// Dictionary of functions to convert from the specified type into the base unit type.
         /// </summary>
@@ -40,7 +41,7 @@ namespace xFunc.UnitConverters
 
         double IConverter.Convert(double value, object from, object to)
         {
-            return Convert(value, (TUnit)from, (TUnit)to);
+            return Convert(value, (TUnit) from, (TUnit) to);
         }
 
         /// <summary>
@@ -90,5 +91,4 @@ namespace xFunc.UnitConverters
         /// </value>
         public abstract IDictionary<object, string> Units { get; }
     }
-
 }

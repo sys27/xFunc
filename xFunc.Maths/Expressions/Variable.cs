@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents variables in expressions.
     /// </summary>
     public class Variable : IExpression
     {
-
         /// <summary>
         /// The 'x' variable.
         /// </summary>
@@ -155,7 +154,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
     }
-
 }

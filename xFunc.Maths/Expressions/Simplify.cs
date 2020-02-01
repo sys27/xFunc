@@ -12,17 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Simplify operation.
+    /// Represents the Simplify operator.
     /// </summary>
     public class Simplify : UnaryExpression
     {
+        private readonly ISimplifier simplifier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplify"/> class.
@@ -31,7 +32,18 @@ namespace xFunc.Maths.Expressions
         /// <param name="expression">The argument of function.</param>
         public Simplify(ISimplifier simplifier, IExpression expression) : base(expression)
         {
-            this.Simplifier = simplifier;
+            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Simplify"/> class.
+        /// </summary>
+        /// <param name="simplifier">The simplifier.</param>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Simplify(ISimplifier simplifier, IExpression[] arguments) : base(arguments)
+        {
+            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>
@@ -56,10 +68,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (Simplifier == null)
-                throw new ArgumentNullException(nameof(Simplifier));
-
-            return this.Analyze(Simplifier);
+            return this.Analyze(simplifier);
         }
 
         /// <summary>
@@ -81,17 +90,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Simplify(this.Simplifier, m_argument.Clone());
+            return new Simplify(simplifier, m_argument.Clone());
         }
-
-        /// <summary>
-        /// Gets or sets the simplifier.
-        /// </summary>
-        /// <value>
-        /// The simplifier.
-        /// </value>
-        public ISimplifier Simplifier { get; private set; }
-
     }
-
 }

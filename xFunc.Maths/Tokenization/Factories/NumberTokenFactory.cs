@@ -12,39 +12,79 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Globalization;
-using System.Text.RegularExpressions;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-
     /// <summary>
     /// The factory which creates number tokens.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.FactoryBase" />
-    public class NumberTokenFactory : FactoryBase
+    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
+    internal class NumberTokenFactory : ITokenFactory
     {
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NumberTokenFactory"/> class.
-        /// </summary>
-        public NumberTokenFactory() : base(new Regex(@"\G\d*\.?\d+([e][-+]?\d+)?", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) { }
-
         /// <summary>
         /// Creates the token.
         /// </summary>
-        /// <param name="match">The match.</param>
+        /// <param name="function">The string to scan for tokens.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        protected override FactoryResult CreateTokenInternal(Match match)
+        public IToken CreateToken(string function, ref int index)
         {
-            var token = new NumberToken(double.Parse(match.Value, CultureInfo.InvariantCulture));
+            var endIndex = index;
+            ReadDigits(function, ref endIndex);
 
-            return new FactoryResult(token, match.Length);
+            if (endIndex > index)
+            {
+                if (CheckNextSymbol(function, ref endIndex, '.'))
+                {
+                    var dotIndex = endIndex;
+
+                    ReadDigits(function, ref endIndex);
+
+                    if (dotIndex == endIndex)
+                        return null;
+                }
+
+                if (CheckNextSymbol(function, ref endIndex, 'e'))
+                {
+                    // TODO:
+                    if (CheckNextSymbol(function, ref endIndex, '+') ||
+                        CheckNextSymbol(function, ref endIndex, '-'))
+                    {
+                    }
+
+                    ReadDigits(function, ref endIndex);
+                }
+
+                var numberString = function.Substring(index, endIndex - index);
+                var number = double.Parse(numberString, CultureInfo.InvariantCulture);
+
+                index = endIndex;
+
+                return new NumberToken(number);
+            }
+
+            return null;
         }
 
-    }
+        private bool CheckNextSymbol(string function, ref int index, char symbol)
+        {
+            var result = index < function.Length && function[index] == symbol;
+            if (result)
+                index++;
 
+            return result;
+        }
+
+        // TODO: no ref?
+        private void ReadDigits(string function, ref int index)
+        {
+            while (index < function.Length && char.IsDigit(function[index]))
+                index++;
+        }
+    }
 }

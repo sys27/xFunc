@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents a function in code.
     /// </summary>
     public class DelegateExpression : IExpression
     {
-
         private readonly Func<ExpressionParameters, object> func;
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            return func.Equals(((DelegateExpression)obj).func);
+            return func.Equals(((DelegateExpression) obj).func);
         }
 
         /// <summary>
@@ -141,7 +140,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
     }
-
 }

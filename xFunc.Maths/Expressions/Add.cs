@@ -12,33 +12,36 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents an Addition operation.
+    /// Represents an Addition operator.
     /// </summary>
     public class Add : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Add"/> class.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public Add(IExpression left, IExpression right) : base(left, right) { }
+        public Add(IExpression left, IExpression right) : base(left, right)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Add"/> class.
         /// </summary>
-        /// <param name="arguments">The tuple of arguments.</param>
+        /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Add((IExpression left, IExpression right) arguments) : base(arguments.left, arguments.right) { }
+        internal Add(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -107,7 +110,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Add(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

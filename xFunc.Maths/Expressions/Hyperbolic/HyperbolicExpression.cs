@@ -12,23 +12,33 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
-
     /// <summary>
     /// The base class for hyperbolic functions.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
     public abstract class HyperbolicExpression : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="HyperbolicExpression" /> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        protected HyperbolicExpression(IExpression argument) : base(argument) { }
+        protected HyperbolicExpression(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HyperbolicExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal HyperbolicExpression(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -96,7 +106,5 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
             throw new ResultIsNotSupportedException(this, result);
         }
-
     }
-
 }

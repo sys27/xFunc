@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
@@ -21,7 +22,7 @@ namespace xFunc.Maths.Tokenization.Factories
     /// The factory which creates empty result (without token).
     /// </summary>
     /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
-    public class EmptyTokenFactory : ITokenFactory
+    internal class EmptyTokenFactory : ITokenFactory
     {
         private readonly HashSet<char> symbols = new HashSet<char>
         {
@@ -32,17 +33,14 @@ namespace xFunc.Maths.Tokenization.Factories
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="startIndex">The start index.</param>
+        /// <param name="index">The start index.</param>
         /// <returns>The token.</returns>
-        public FactoryResult CreateToken(string function, int startIndex)
+        public IToken CreateToken(string function, ref int index)
         {
-            var index = startIndex;
             while (symbols.Contains(function[index]))
                 index++;
 
-            var processedLength = index - startIndex;
-
-            return processedLength > 0 ? new FactoryResult(null, processedLength) : null;
+            return null;
         }
     }
 }

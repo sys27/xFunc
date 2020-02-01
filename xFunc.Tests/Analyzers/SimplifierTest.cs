@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths;
 using xFunc.Maths.Analyzers;
@@ -22,10 +23,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers
 {
-
     public class SimplifierTest
     {
-
         private readonly IAnalyzer<IExpression> simplifier;
 
         private readonly Number zero = 0;
@@ -1340,7 +1339,5 @@ namespace xFunc.Tests.Analyzers
 
             SimpleTest(exp, expected);
         }
-
     }
-
 }

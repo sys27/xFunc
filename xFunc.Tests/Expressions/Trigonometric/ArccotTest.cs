@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths;
@@ -23,10 +24,8 @@ using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Tests.Expressions.Trigonometric
 {
-
     public class ArccotTest
     {
-
         [Fact]
         public void ExecuteRadianTest()
         {
@@ -56,7 +55,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arccot(new ComplexNumber(complex));
-            var result = (Complex)exp.Execute();
+            var result = (Complex) exp.Execute();
 
             Assert.Equal(ComplexExtensions.Acot(complex), result);
             Assert.Equal(0.23182380450040308, result.Real, 15);
@@ -79,7 +78,5 @@ namespace xFunc.Tests.Expressions.Trigonometric
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

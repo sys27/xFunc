@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using CommandLine;
 using CommandLine.Text;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace xFunc.DotnetTool.Options
     [Verb("interactive", HelpText = "Run interactive mode.")]
     public class InteractiveOptions : DebugInfoOptions
     {
-        public InteractiveOptions(bool debug) : base(debug) { }
+        public InteractiveOptions(bool debug) : base(debug)
+        {
+        }
 
         [Usage(ApplicationAlias = "xfunc")]
         public static IEnumerable<Example> Examples

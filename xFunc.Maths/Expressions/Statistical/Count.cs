@@ -12,25 +12,26 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
-
     /// <summary>
     /// Represent the Count function.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
     public class Count : StatisticalExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Count(IExpression[] arguments) : base(arguments) { }
+        public Count(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -57,12 +58,12 @@ namespace xFunc.Maths.Expressions.Statistical
             {
                 var result = this.m_arguments[0].Execute(parameters);
                 if (result is Vector vector)
-                    return (double)vector.Arguments.Length;
+                    return (double) vector.Arguments.Length;
 
                 return 1.0;
             }
 
-            return (double)this.m_arguments.Length;
+            return (double) this.m_arguments.Length;
         }
 
         /// <summary>
@@ -88,7 +89,5 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             return new Count(CloneArguments());
         }
-
     }
-
 }

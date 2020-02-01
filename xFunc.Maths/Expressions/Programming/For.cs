@@ -12,18 +12,17 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-
     /// <summary>
     /// Represents the "for" loop.
     /// </summary>
     public class For : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="For"/> class.
         /// </summary>
@@ -31,14 +30,18 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The iterator section.</param>
-        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : this(new[] { body, init, cond, iter }) { }
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : this(new[] { body, init, cond, iter })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="For" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public For(IExpression[] arguments) : base(arguments) { }
+        public For(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -50,7 +53,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            for (Initialization.Execute(parameters); (bool)Condition.Execute(parameters); Iteration.Execute(parameters))
+            for (Initialization.Execute(parameters); (bool) Condition.Execute(parameters); Iteration.Execute(parameters))
                 Body.Execute(parameters);
 
             return double.NaN;
@@ -127,7 +130,5 @@ namespace xFunc.Maths.Expressions.Programming
         /// The maximum count of parameters.
         /// </value>
         public override int? MaxParametersCount => 4;
-
     }
-
 }

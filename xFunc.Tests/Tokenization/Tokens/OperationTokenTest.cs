@@ -12,19 +12,18 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.Tokenization.Tokens
 {
-
     public class OperationTokenTest
     {
-
         [Fact]
         public void EqualsNullTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new OperatorToken(Operators.Multiplication);
 
             Assert.False(token.Equals(null));
             Assert.NotNull(token);
@@ -33,7 +32,7 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void EqualsSameObjectTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new OperatorToken(Operators.Multiplication);
 
             Assert.True(token.Equals(token));
             Assert.Equal(token, token);
@@ -42,17 +41,17 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void EqualsDiffTypeTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new OperatorToken(Operators.Multiplication);
 
             Assert.False(token.Equals(1));
-            Assert.NotEqual((object)1, token);
+            Assert.NotEqual((object) 1, token);
         }
 
         [Fact]
         public void EqualsDiffOperationTest()
         {
-            var token1 = new OperationToken(Operations.Multiplication);
-            var token2 = new OperationToken(Operations.Minus);
+            var token1 = new OperatorToken(Operators.Multiplication);
+            var token2 = new OperatorToken(Operators.Minus);
 
             Assert.False(token1.Equals(token2));
             Assert.NotEqual(token1, token2);
@@ -61,11 +60,9 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new OperationToken(Operations.Multiplication);
+            var token = new OperatorToken(Operators.Multiplication);
 
-            Assert.Equal("Operation: Multiplication", token.ToString());
+            Assert.Equal("Operator: Multiplication", token.ToString());
         }
-
     }
-
 }

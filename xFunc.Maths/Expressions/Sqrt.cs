@@ -12,25 +12,35 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the Square Root function.
     /// </summary>
     public class Sqrt : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sqrt"/> class.
         /// </summary>
         /// <param name="expression">The argument of the function.</param>
         /// <seealso cref="IExpression"/>
-        public Sqrt(IExpression expression) : base(expression) { }
+        public Sqrt(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sqrt"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Sqrt(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -90,7 +100,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Sqrt(m_argument.Clone());
         }
-
     }
-
 }

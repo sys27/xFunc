@@ -15,20 +15,18 @@
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
-
     /// <summary>
-    /// Represents a operation token.
+    /// Represents a operator token.
     /// </summary>
-    public class OperationToken : IToken
+    public class OperatorToken : IToken
     {
-
         /// <summary>
-        /// Initializes the <see cref="OperationToken"/> class.
+        /// Initializes the <see cref="OperatorToken"/> class.
         /// </summary>
-        /// <param name="operation">A operation.</param>
-        public OperationToken(Operations operation)
+        /// <param name="operator">An operator.</param>
+        public OperatorToken(Operators @operator)
         {
-            this.Operation = operation;
+            this.Operator = @operator;
         }
 
         /// <summary>
@@ -44,12 +42,12 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (this == obj)
                 return true;
 
-            if (typeof(OperationToken) != obj.GetType())
+            if (typeof(OperatorToken) != obj.GetType())
                 return false;
 
-            var token = (OperationToken)obj;
+            var token = (OperatorToken) obj;
 
-            return this.Operation == token.Operation;
+            return this.Operator == token.Operator;
         }
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// </returns>
         public override int GetHashCode()
         {
-            return Operation.GetHashCode();
+            return Operator.GetHashCode();
         }
 
         /// <summary>
@@ -69,14 +67,12 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
-            return $"Operation: {Operation}";
+            return $"Operator: {Operator}";
         }
 
         /// <summary>
-        /// Gets the operation.
+        /// Gets the operator.
         /// </summary>
-        public Operations Operation { get; }
-
+        public Operators Operator { get; }
     }
-
 }

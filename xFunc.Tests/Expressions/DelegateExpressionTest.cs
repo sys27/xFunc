@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class DelegateExpressionTest
     {
-
         [Fact]
         public void ExecuteTest1()
         {
@@ -30,7 +29,7 @@ namespace xFunc.Tests.Expressions
             {
                 new Parameter("x", 10)
             };
-            var func = new DelegateExpression(p => (double)p.Variables["x"] + 1);
+            var func = new DelegateExpression(p => (double) p.Variables["x"] + 1);
 
             var result = func.Execute(parameters);
 
@@ -51,7 +50,7 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest3()
         {
             var uf1 = new UserFunction("func", new[] { Variable.X });
-            var func = new DelegateExpression(p => (double)p.Variables["x"] == 10 ? 0 : 1);
+            var func = new DelegateExpression(p => (double) p.Variables["x"] == 10 ? 0 : 1);
             var funcs = new FunctionCollection
             {
                 { uf1, func }
@@ -120,7 +119,5 @@ namespace xFunc.Tests.Expressions
         {
             Assert.Throws<NotSupportedException>(() => new DelegateExpression(x => null).Clone());
         }
-
     }
-
 }

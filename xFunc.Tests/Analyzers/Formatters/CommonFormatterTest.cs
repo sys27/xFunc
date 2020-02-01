@@ -12,7 +12,9 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -27,10 +29,8 @@ using Matrices = xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Tests.Analyzers.Formatters
 {
-
     public class CommonFormatterTest
     {
-
         private readonly CommonFormatter commonFormatter = new CommonFormatter();
 
         #region Common
@@ -78,7 +78,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DelToStringTest()
         {
-            var exp = new Del(null, null, new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
+            var exp = new Del(new Differentiator(), new Simplifier(), new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
 
             Assert.Equal("del(2 * x1 + x2 ^ 2 + x3 ^ 3)", exp.ToString(commonFormatter));
         }
@@ -326,7 +326,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SimplifyToStringTest()
         {
-            var exp = new Simplify(null, new Sin(Variable.X));
+            var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
 
             Assert.Equal("simplify(sin(x))", exp.ToString(commonFormatter));
         }
@@ -1324,7 +1324,5 @@ namespace xFunc.Tests.Analyzers.Formatters
         }
 
         #endregion
-
     }
-
 }

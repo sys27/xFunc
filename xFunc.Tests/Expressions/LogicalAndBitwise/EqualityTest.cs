@@ -12,22 +12,21 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions.LogicalAndBitwise
 {
-
     public class EqualityTest
     {
-
         [Fact]
         public void ExecuteTest1()
         {
             var eq = new Equality(new Bool(true), new Bool(true));
 
-            Assert.True((bool)eq.Execute());
+            Assert.True((bool) eq.Execute());
         }
 
         [Fact]
@@ -35,7 +34,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var eq = new Equality(new Bool(true), new Bool(false));
 
-            Assert.False((bool)eq.Execute());
+            Assert.False((bool) eq.Execute());
         }
 
         [Fact]
@@ -54,7 +53,5 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

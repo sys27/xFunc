@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
 {
-
     /// <summary>
-    /// Represents a bitwise NOT operation.
+    /// Represents a bitwise NOT operator.
     /// </summary>
     public class Not : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Not"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Not(IExpression expression) : base(expression) { }
+        public Not(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Not"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        internal Not(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -57,7 +67,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             if (arg is bool boolArg)
                 return !boolArg;
             if (arg is double doubleArg)
-                return (double)(~(int)Math.Round(doubleArg, MidpointRounding.AwayFromZero));
+                return (double) (~(int) Math.Round(doubleArg, MidpointRounding.AwayFromZero));
 
             throw new ResultIsNotSupportedException(this, arg);
         }
@@ -83,7 +93,5 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             return new Not(m_argument.Clone());
         }
-
     }
-
 }

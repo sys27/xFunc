@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions
 {
-
     public class LbTest
     {
-
         [Fact]
         public void ExecuteTest()
         {
@@ -47,7 +46,5 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

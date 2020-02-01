@@ -12,24 +12,34 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
-
     /// <summary>
     /// Represents the Hyperbolic sine function.
     /// </summary>
     public class Sinh : HyperbolicExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sinh"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Sinh(IExpression expression) : base(expression) { }
+        public Sinh(IExpression expression) : base(expression)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sinh"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Sinh(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -115,7 +125,5 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             return new Sinh(m_argument.Clone());
         }
-
     }
-
 }

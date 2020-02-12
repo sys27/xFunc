@@ -62,7 +62,7 @@ namespace xFunc.Tests.Tokenization.Tokens
         {
             var token = new NumberToken(1.1);
 
-            Assert.Equal("Number: 1.1", token.ToString());
+            Assert.Equal("1.1", token.ToString());
         }
     }
 }

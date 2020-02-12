@@ -13,11 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Diagnostics;
+
 namespace xFunc.Maths.Tokenization.Tokens
 {
     /// <summary>
     /// Represents a id token.
     /// </summary>
+    [DebuggerDisplay("Id: {" + nameof(Id) + "}")]
     public class IdToken : IToken
     {
         /// <summary>
@@ -56,19 +59,13 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() => 439289 ^ Id.GetHashCode();
 
         /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return $"Id: {Id}";
-        }
+        public override string ToString() => Id;
 
         /// <summary>
         /// Gets an id.

@@ -31,15 +31,16 @@ namespace xFunc.Maths.Tokenization.Factories
         /// </summary>
         public SymbolTokenFactory()
         {
+            // TODO:
             symbols = new Dictionary<char, SymbolToken>
             {
-                { '(', new SymbolToken(Symbols.OpenParenthesis) },
-                { ')', new SymbolToken(Symbols.CloseParenthesis) },
-                { '{', new SymbolToken(Symbols.OpenBrace) },
-                { '}', new SymbolToken(Symbols.CloseBrace) },
-                { ',', new SymbolToken(Symbols.Comma) },
-                { '∠', new SymbolToken(Symbols.Angle) },
-                { '°', new SymbolToken(Symbols.Degree) },
+                { '(', SymbolToken.OpenParenthesis },
+                { ')', SymbolToken.CloseParenthesis },
+                { '{', SymbolToken.OpenBrace },
+                { '}', SymbolToken.CloseBrace },
+                { ',', SymbolToken.Comma },
+                { '∠', SymbolToken.Angle },
+                { '°', SymbolToken.Degree },
             };
         }
 

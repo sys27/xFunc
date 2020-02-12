@@ -13,66 +13,162 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Diagnostics;
+
 namespace xFunc.Maths.Tokenization.Tokens
 {
     /// <summary>
     /// Represents a operator token.
     /// </summary>
-    public class OperatorToken : IToken
+    [DebuggerDisplay("Operator: {" + nameof(@operator) + "}")]
+    public sealed class OperatorToken : IToken
     {
-        /// <summary>
-        /// Initializes the <see cref="OperatorToken"/> class.
-        /// </summary>
-        /// <param name="operator">An operator.</param>
-        public OperatorToken(Operators @operator)
+        private readonly string @operator;
+
+        private OperatorToken(string @operator)
         {
-            this.Operator = @operator;
-        }
-
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            if (this == obj)
-                return true;
-
-            if (typeof(OperatorToken) != obj.GetType())
-                return false;
-
-            var token = (OperatorToken) obj;
-
-            return this.Operator == token.Operator;
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Operator.GetHashCode();
+            this.@operator = @operator;
         }
 
         /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return $"Operator: {Operator}";
-        }
+        public override string ToString() => @operator;
 
         /// <summary>
-        /// Gets the operator.
+        /// +
         /// </summary>
-        public Operators Operator { get; }
+        public static OperatorToken Plus { get; } = new OperatorToken("+");
+
+        /// <summary>
+        /// -
+        /// </summary>
+        public static OperatorToken Minus { get; } = new OperatorToken("-");
+
+        /// <summary>
+        /// *
+        /// </summary>
+        public static OperatorToken Multiplication { get; } = new OperatorToken("*");
+
+        /// <summary>
+        /// /
+        /// </summary>
+        public static OperatorToken Division { get; } = new OperatorToken("/");
+
+        /// <summary>
+        /// ^
+        /// </summary>
+        public static OperatorToken Exponentiation { get; } = new OperatorToken("^");
+
+        /// <summary>
+        /// !
+        /// </summary>
+        public static OperatorToken Factorial { get; } = new OperatorToken("!");
+
+        /// <summary>
+        /// %, mod
+        /// </summary>
+        public static OperatorToken Modulo { get; } = new OperatorToken("%");
+
+        /// <summary>
+        /// &amp;&amp;
+        /// </summary>
+        public static OperatorToken ConditionalAnd { get; } = new OperatorToken("&&");
+
+        /// <summary>
+        /// ||
+        /// </summary>
+        public static OperatorToken ConditionalOr { get; } = new OperatorToken("||");
+
+        /// <summary>
+        /// ==
+        /// </summary>
+        public static OperatorToken Equal { get; } = new OperatorToken("==");
+
+        /// <summary>
+        /// !=
+        /// </summary>
+        public static OperatorToken NotEqual { get; } = new OperatorToken("!=");
+
+        /// <summary>
+        /// &lt;
+        /// </summary>
+        public static OperatorToken LessThan { get; } = new OperatorToken("<");
+
+        /// <summary>
+        /// &lt;=
+        /// </summary>
+        public static OperatorToken LessOrEqual { get; } = new OperatorToken("<=");
+
+        /// <summary>
+        /// &gt;
+        /// </summary>
+        public static OperatorToken GreaterThan { get; } = new OperatorToken(">");
+
+        /// <summary>
+        /// &gt;=
+        /// </summary>
+        public static OperatorToken GreaterOrEqual { get; } = new OperatorToken(">=");
+
+        /// <summary>
+        /// The increment (++)
+        /// </summary>
+        public static OperatorToken Increment { get; } = new OperatorToken("++");
+
+        /// <summary>
+        /// The decrement (--)
+        /// </summary>
+        public static OperatorToken Decrement { get; } = new OperatorToken("--");
+
+        /// <summary>
+        /// +=
+        /// </summary>
+        public static OperatorToken AddAssign { get; } = new OperatorToken("+=");
+
+        /// <summary>
+        /// -=
+        /// </summary>
+        public static OperatorToken SubAssign { get; } = new OperatorToken("-=");
+
+        /// <summary>
+        /// *=
+        /// </summary>
+        public static OperatorToken MulAssign { get; } = new OperatorToken("*=");
+
+        /// <summary>
+        /// /=
+        /// </summary>
+        public static OperatorToken DivAssign { get; } = new OperatorToken("/=");
+
+        /// <summary>
+        /// :=
+        /// </summary>
+        public static OperatorToken Assign { get; } = new OperatorToken(":=");
+
+        /// <summary>
+        /// ~, not
+        /// </summary>
+        public static OperatorToken Not { get; } = new OperatorToken("~");
+
+        /// <summary>
+        /// &amp;, and
+        /// </summary>
+        public static OperatorToken And { get; } = new OperatorToken("&");
+
+        /// <summary>
+        /// |, or
+        /// </summary>
+        public static OperatorToken Or { get; } = new OperatorToken("|");
+
+        /// <summary>
+        /// =>, ->, impl
+        /// </summary>
+        public static OperatorToken Implication { get; } = new OperatorToken("->");
+
+        /// <summary>
+        /// &lt;=>, &lt;->, eq
+        /// </summary>
+        public static OperatorToken Equality { get; } = new OperatorToken("<->");
     }
 }

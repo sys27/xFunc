@@ -71,7 +71,7 @@ namespace xFunc.Maths.Tokenization
                     if (result == null)
                         continue;
 
-                    yield return result;
+                    yield return result; // TODO: revert?
 
                     break;
                 }

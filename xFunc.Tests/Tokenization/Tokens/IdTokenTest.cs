@@ -60,9 +60,10 @@ namespace xFunc.Tests.Tokenization.Tokens
         [Fact]
         public void ToStringTest()
         {
-            var token = new IdToken("x");
+            var variable = "x";
+            var token = new IdToken(variable);
 
-            Assert.Equal("Id: x", token.ToString());
+            Assert.Equal(variable, token.ToString());
         }
     }
 }

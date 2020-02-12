@@ -207,7 +207,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Number(3)
                 .Tokens;
 
@@ -222,7 +222,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));
@@ -233,7 +233,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(5)
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Number(3)
                 .Tokens;
 
@@ -259,11 +259,11 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Id("aaa")
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Number(3)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
 
@@ -289,7 +289,7 @@ namespace xFunc.Tests
                 .OpenParenthesis()
                 .VariableX()
                 .CloseParenthesis()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Id("sin")
                 .OpenParenthesis()
                 .VariableX()
@@ -307,7 +307,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Id("func")
                 .OpenParenthesis()
                 .VariableX()
@@ -359,7 +359,7 @@ namespace xFunc.Tests
                 .OpenParenthesis()
                 .VariableX()
                 .CloseParenthesis()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Id("sin")
                 .OpenParenthesis()
                 .VariableX()
@@ -593,17 +593,17 @@ namespace xFunc.Tests
                 .Number(2)
                 .Comma()
                 .VariableX()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Number(0)
                 .Comma()
                 .VariableX()
-                .Operation(Operators.LessThan)
+                .Operation(OperatorToken.LessThan)
                 .Number(10)
                 .Comma()
                 .VariableX()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1)
                 .CloseParenthesis()
                 .Tokens;
@@ -625,13 +625,13 @@ namespace xFunc.Tests
                 .While()
                 .OpenParenthesis()
                 .VariableX()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1)
                 .Comma()
                 .Number(1)
-                .Operation(Operators.Equal)
+                .Operation(OperatorToken.Equal)
                 .Number(1)
                 .CloseParenthesis()
                 .Tokens;
@@ -651,11 +651,11 @@ namespace xFunc.Tests
                 .If()
                 .OpenParenthesis()
                 .VariableX()
-                .Operation(Operators.Equal)
+                .Operation(OperatorToken.Equal)
                 .Number(0)
-                .Operation(Operators.ConditionalAnd)
+                .Operation(OperatorToken.ConditionalAnd)
                 .VariableY()
-                .Operation(Operators.NotEqual)
+                .Operation(OperatorToken.NotEqual)
                 .Number(0)
                 .Comma()
                 .Number(2)
@@ -680,11 +680,11 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Equal)
+                .Operation(OperatorToken.Equal)
                 .Number(0)
-                .Operation(Operators.ConditionalAnd)
+                .Operation(OperatorToken.ConditionalAnd)
                 .VariableY()
-                .Operation(Operators.NotEqual)
+                .Operation(OperatorToken.NotEqual)
                 .Number(0)
                 .Tokens;
 
@@ -701,11 +701,11 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Equal)
+                .Operation(OperatorToken.Equal)
                 .Number(0)
-                .Operation(Operators.ConditionalOr)
+                .Operation(OperatorToken.ConditionalOr)
                 .VariableY()
-                .Operation(Operators.NotEqual)
+                .Operation(OperatorToken.NotEqual)
                 .Number(0)
                 .Tokens;
 
@@ -722,7 +722,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Equal)
+                .Operation(OperatorToken.Equal)
                 .Number(0)
                 .Tokens;
 
@@ -737,7 +737,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.NotEqual)
+                .Operation(OperatorToken.NotEqual)
                 .Number(0)
                 .Tokens;
 
@@ -752,7 +752,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.LessThan)
+                .Operation(OperatorToken.LessThan)
                 .Number(0)
                 .Tokens;
 
@@ -767,7 +767,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.LessOrEqual)
+                .Operation(OperatorToken.LessOrEqual)
                 .Number(0)
                 .Tokens;
 
@@ -782,7 +782,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.GreaterThan)
+                .Operation(OperatorToken.GreaterThan)
                 .Number(0)
                 .Tokens;
 
@@ -797,7 +797,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.GreaterOrEqual)
+                .Operation(OperatorToken.GreaterOrEqual)
                 .Number(0)
                 .Tokens;
 
@@ -812,7 +812,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Increment)
+                .Operation(OperatorToken.Increment)
                 .Tokens;
 
             var exp = parser.Parse(tokens);
@@ -830,15 +830,15 @@ namespace xFunc.Tests
                 .Number(2)
                 .Comma()
                 .VariableX()
-                .Operation(Operators.Assign)
+                .Operation(OperatorToken.Assign)
                 .Number(0)
                 .Comma()
                 .VariableX()
-                .Operation(Operators.LessThan)
+                .Operation(OperatorToken.LessThan)
                 .Number(10)
                 .Comma()
                 .VariableX()
-                .Operation(Operators.Increment)
+                .Operation(OperatorToken.Increment)
                 .CloseParenthesis()
                 .Tokens;
 
@@ -857,7 +857,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Decrement)
+                .Operation(OperatorToken.Decrement)
                 .Tokens;
 
             var exp = parser.Parse(tokens);
@@ -871,7 +871,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.AddAssign)
+                .Operation(OperatorToken.AddAssign)
                 .Number(2)
                 .Tokens;
 
@@ -886,7 +886,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.MulAssign)
+                .Operation(OperatorToken.MulAssign)
                 .Number(2)
                 .Tokens;
 
@@ -901,7 +901,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.SubAssign)
+                .Operation(OperatorToken.SubAssign)
                 .Number(2)
                 .Tokens;
 
@@ -916,7 +916,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.DivAssign)
+                .Operation(OperatorToken.DivAssign)
                 .Number(2)
                 .Tokens;
 
@@ -931,7 +931,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Operation(Operators.And)
+                .Operation(OperatorToken.And)
                 .False()
                 .Tokens;
 
@@ -946,7 +946,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Keyword(Keywords.And)
+                .Keyword(KeywordToken.And)
                 .False()
                 .Tokens;
 
@@ -961,11 +961,11 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operators.GreaterThan)
+                .Operation(OperatorToken.GreaterThan)
                 .Number(4)
-                .Operation(Operators.And)
+                .Operation(OperatorToken.And)
                 .Number(1)
-                .Operation(Operators.LessThan)
+                .Operation(OperatorToken.LessThan)
                 .Number(3)
                 .Tokens;
 
@@ -983,14 +983,14 @@ namespace xFunc.Tests
             //string function = "a | b & c & (a | c)";
             var tokens = Builder()
                 .Id("a")
-                .Operation(Operators.Or)
+                .Operation(OperatorToken.Or)
                 .Id("b")
-                .Operation(Operators.And)
+                .Operation(OperatorToken.And)
                 .Id("c")
-                .Operation(Operators.And)
+                .Operation(OperatorToken.And)
                 .OpenParenthesis()
                 .Id("a")
-                .Operation(Operators.Or)
+                .Operation(OperatorToken.Or)
                 .Id("c")
                 .CloseParenthesis()
                 .Tokens;
@@ -1026,9 +1026,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1048,9 +1048,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1069,11 +1069,11 @@ namespace xFunc.Tests
         public void ComplexNumberNegativeAllPartsTest()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1092,9 +1092,9 @@ namespace xFunc.Tests
         public void ComplexNumberNegativeAllPartsWithoutMulTest()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
                 .Id("i")
                 .Tokens;
@@ -1115,9 +1115,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(3)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(0)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1137,9 +1137,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(0)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1159,9 +1159,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(0)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1181,12 +1181,12 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .OpenParenthesis()
                 .Number(0)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1210,12 +1210,12 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1295,9 +1295,9 @@ namespace xFunc.Tests
                 .Id("im")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1322,9 +1322,9 @@ namespace xFunc.Tests
                 .Id("re")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1349,9 +1349,9 @@ namespace xFunc.Tests
                 .Id("phase")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1376,9 +1376,9 @@ namespace xFunc.Tests
                 .Id("conjugate")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1403,9 +1403,9 @@ namespace xFunc.Tests
                 .Id("reciprocal")
                 .OpenParenthesis()
                 .Number(3)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -1428,7 +1428,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(7)
-                .Operation(Operators.Modulo)
+                .Operation(OperatorToken.Modulo)
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1442,9 +1442,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(7)
-                .Operation(Operators.Modulo)
+                .Operation(OperatorToken.Modulo)
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1458,9 +1458,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(7)
-                .Keyword(Keywords.Mod)
+                .Keyword(KeywordToken.Mod)
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
@@ -1620,15 +1620,15 @@ namespace xFunc.Tests
                 .Id("del")
                 .OpenParenthesis()
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(3)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .VariableY()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(4)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("z")
                 .CloseParenthesis()
                 .Tokens;
@@ -1736,7 +1736,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operators.Division)
+                .Operation(OperatorToken.Division)
                 .Number(2)
                 .Tokens;
 
@@ -1751,7 +1751,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operators.Exponentiation)
+                .Operation(OperatorToken.Exponentiation)
                 .Number(2)
                 .Tokens;
 
@@ -1766,9 +1766,9 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operators.Exponentiation)
+                .Operation(OperatorToken.Exponentiation)
                 .Number(2)
-                .Operation(Operators.Exponentiation)
+                .Operation(OperatorToken.Exponentiation)
                 .Number(3)
                 .Tokens;
 
@@ -1782,9 +1782,9 @@ namespace xFunc.Tests
         public void PowUnaryMinusTest()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(1)
-                .Operation(Operators.Exponentiation)
+                .Operation(OperatorToken.Exponentiation)
                 .Number(2)
                 .Tokens;
 
@@ -1799,7 +1799,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Factorial)
+                .Operation(OperatorToken.Factorial)
                 .Tokens;
 
             var exp = parser.Parse(tokens);
@@ -1813,8 +1813,8 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(4)
-                .Operation(Operators.Factorial)
-                .Operation(Operators.Exponentiation)
+                .Operation(OperatorToken.Factorial)
+                .Operation(OperatorToken.Exponentiation)
                 .Number(2)
                 .Tokens;
 
@@ -1828,7 +1828,7 @@ namespace xFunc.Tests
         public void FactWithoutNumberTest()
         {
             var tokens = Builder()
-                .Operation(Operators.Factorial)
+                .Operation(OperatorToken.Factorial)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));
@@ -1839,7 +1839,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Operation(Operators.Factorial)
+                .Operation(OperatorToken.Factorial)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));
@@ -1849,7 +1849,7 @@ namespace xFunc.Tests
         public void UnaryMinusTest()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
                 .Tokens;
 
@@ -1865,7 +1865,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Id("sign")
                 .OpenParenthesis()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(10)
                 .CloseParenthesis()
                 .Tokens;
@@ -1884,7 +1884,7 @@ namespace xFunc.Tests
                 .OpenParenthesis()
                 .Number(2)
                 .Comma()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .VariableX()
                 .CloseParenthesis()
                 .Tokens;
@@ -1900,8 +1900,8 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.Assign)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Assign)
+                .Operation(OperatorToken.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1922,8 +1922,8 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.AddAssign)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.AddAssign)
+                .Operation(OperatorToken.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1944,8 +1944,8 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.SubAssign)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.SubAssign)
+                .Operation(OperatorToken.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1966,8 +1966,8 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.MulAssign)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.MulAssign)
+                .Operation(OperatorToken.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -1988,8 +1988,8 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .VariableX()
-                .Operation(Operators.DivAssign)
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.DivAssign)
+                .Operation(OperatorToken.Minus)
                 .Id("sin")
                 .OpenParenthesis()
                 .Number(2)
@@ -2009,7 +2009,7 @@ namespace xFunc.Tests
         public void NotTest()
         {
             var tokens = Builder()
-                .Operation(Operators.Not)
+                .Operation(OperatorToken.Not)
                 .Number(2)
                 .Tokens;
 
@@ -2024,7 +2024,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Not)
+                .Operation(OperatorToken.Not)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));
@@ -2036,10 +2036,10 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .OpenParenthesis()
                 .Number(2)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1)
                 .CloseParenthesis()
-                .Operation(Operators.Not)
+                .Operation(OperatorToken.Not)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));
@@ -2050,7 +2050,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Operation(Operators.Or)
+                .Operation(OperatorToken.Or)
                 .Number(2)
                 .Tokens;
 
@@ -2065,7 +2065,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Keyword(Keywords.Or)
+                .Keyword(KeywordToken.Or)
                 .Number(2)
                 .Tokens;
 
@@ -2080,7 +2080,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(1)
-                .Keyword(Keywords.XOr)
+                .Keyword(KeywordToken.XOr)
                 .Number(2)
                 .Tokens;
 
@@ -2095,7 +2095,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Keyword(Keywords.NOr)
+                .Keyword(KeywordToken.NOr)
                 .True()
                 .Tokens;
 
@@ -2110,7 +2110,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Keyword(Keywords.NAnd)
+                .Keyword(KeywordToken.NAnd)
                 .True()
                 .Tokens;
 
@@ -2125,7 +2125,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Operation(Operators.Implication)
+                .Operation(OperatorToken.Implication)
                 .True()
                 .Tokens;
 
@@ -2140,7 +2140,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Keyword(Keywords.Impl)
+                .Keyword(KeywordToken.Impl)
                 .True()
                 .Tokens;
 
@@ -2155,7 +2155,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Operation(Operators.Equality)
+                .Operation(OperatorToken.Equality)
                 .True()
                 .Tokens;
 
@@ -2170,7 +2170,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .True()
-                .Keyword(Keywords.Eq)
+                .Keyword(KeywordToken.Eq)
                 .True()
                 .Tokens;
 
@@ -2888,7 +2888,7 @@ namespace xFunc.Tests
         public void NumAndVar()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
                 .VariableX()
                 .Tokens;
@@ -2906,7 +2906,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(5)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("cos")
                 .OpenParenthesis()
                 .VariableX()
@@ -2942,10 +2942,10 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .OpenParenthesis()
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .VariableY()
                 .CloseParenthesis()
                 .Tokens;
@@ -2965,7 +2965,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .OpenBrace()
                 .Number(1)
                 .Comma()
@@ -2986,7 +2986,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .Number(2)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .OpenBrace()
                 .OpenBrace()
                 .Number(1)
@@ -3019,7 +3019,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .OpenParenthesis()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(2)
                 .CloseParenthesis()
                 .Tokens;
@@ -3036,7 +3036,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Id("sin")
                 .OpenParenthesis()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(2)
                 .CloseParenthesis()
                 .Tokens;
@@ -3053,7 +3053,7 @@ namespace xFunc.Tests
             var tokens = Builder()
                 .Id("sin")
                 .OpenParenthesis()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .VariableX()
                 .CloseParenthesis()
                 .Tokens;
@@ -3068,9 +3068,9 @@ namespace xFunc.Tests
         public void Integer()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2764786)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(46489879)
                 .Tokens;
 
@@ -3087,9 +3087,9 @@ namespace xFunc.Tests
         public void Double()
         {
             var tokens = Builder()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(45.3)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(87.64)
                 .Tokens;
 
@@ -3107,7 +3107,7 @@ namespace xFunc.Tests
         {
             var tokens = Builder()
                 .OpenParenthesis()
-                .Operation(Operators.Minus)
+                .Operation(OperatorToken.Minus)
                 .Number(2)
                 .CloseParenthesis()
                 .Tokens;
@@ -3128,7 +3128,7 @@ namespace xFunc.Tests
                 .Comma()
                 .Number(2)
                 .CloseParenthesis()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Id("cos")
                 .OpenParenthesis()
                 .CloseParenthesis()
@@ -3166,7 +3166,7 @@ namespace xFunc.Tests
                 .Comma()
                 .Number(2)
                 .CloseParenthesis()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Tokens;
 
             Assert.Throws<ParseException>(() => parser.Parse(tokens));

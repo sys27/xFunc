@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using System.Numerics;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
@@ -38,7 +37,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder True()
         {
-            return Keyword(Keywords.True);
+            return Keyword(KeywordToken.True);
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder False()
         {
-            return Keyword(Keywords.False);
+            return Keyword(KeywordToken.False);
         }
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Def()
         {
-            return Keyword(Keywords.Define);
+            return Keyword(KeywordToken.Define);
         }
 
         /// <summary>
@@ -65,7 +64,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Undef()
         {
-            return Keyword(Keywords.Undefine);
+            return Keyword(KeywordToken.Undefine);
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder If()
         {
-            return Keyword(Keywords.If);
+            return Keyword(KeywordToken.If);
         }
 
         /// <summary>
@@ -83,7 +82,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder For()
         {
-            return Keyword(Keywords.For);
+            return Keyword(KeywordToken.For);
         }
 
         /// <summary>
@@ -92,16 +91,16 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder While()
         {
-            return Keyword(Keywords.While);
+            return Keyword(KeywordToken.While);
         }
 
         /// <summary>
         /// Adds a keyword token.
         /// </summary>
         /// <returns>The current instance of builder.</returns>
-        public TokensBuilder Keyword(Keywords keyword)
+        public TokensBuilder Keyword(KeywordToken keywordToken)
         {
-            Tokens.Add(new KeywordToken(keyword));
+            Tokens.Add((keywordToken));
 
             return this;
         }
@@ -122,10 +121,10 @@ namespace xFunc.Maths.Tokenization
         /// Adds operator. token.
         /// </summary>
         /// <returns>The current instance of builder..</returns>
-        /// <param name="operator">The type of operator.</param>
-        public TokensBuilder Operation(Operators @operator)
+        /// <param name="operatorToken">The type of operator.</param>
+        public TokensBuilder Operation(OperatorToken operatorToken)
         {
-            Tokens.Add(new OperatorToken(@operator));
+            Tokens.Add(operatorToken);
 
             return this;
         }
@@ -135,9 +134,9 @@ namespace xFunc.Maths.Tokenization
         /// </summary>
         /// <returns>The current instance of builder.</returns>
         /// <param name="symbol">The type of symbol.</param>
-        public TokensBuilder Symbol(Symbols symbol)
+        public TokensBuilder Symbol(SymbolToken symbol)
         {
-            Tokens.Add(new SymbolToken(symbol));
+            Tokens.Add(symbol);
 
             return this;
         }
@@ -148,7 +147,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder OpenBrace()
         {
-            return Symbol(Symbols.OpenBrace);
+            return Symbol(SymbolToken.OpenBrace);
         }
 
         /// <summary>
@@ -157,7 +156,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder CloseBrace()
         {
-            return Symbol(Symbols.CloseBrace);
+            return Symbol(SymbolToken.CloseBrace);
         }
 
         /// <summary>
@@ -166,7 +165,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder OpenParenthesis()
         {
-            return Symbol(Symbols.OpenParenthesis);
+            return Symbol(SymbolToken.OpenParenthesis);
         }
 
         /// <summary>
@@ -175,7 +174,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder CloseParenthesis()
         {
-            return Symbol(Symbols.CloseParenthesis);
+            return Symbol(SymbolToken.CloseParenthesis);
         }
 
         /// <summary>
@@ -184,7 +183,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Comma()
         {
-            return Symbol(Symbols.Comma);
+            return Symbol(SymbolToken.Comma);
         }
 
         /// <summary>
@@ -193,7 +192,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Angle()
         {
-            return Symbol(Symbols.Angle);
+            return Symbol(SymbolToken.Angle);
         }
 
         /// <summary>
@@ -202,7 +201,7 @@ namespace xFunc.Maths.Tokenization
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Degree()
         {
-            return Symbol(Symbols.Degree);
+            return Symbol(SymbolToken.Degree);
         }
 
         /// <summary>

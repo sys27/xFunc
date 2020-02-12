@@ -21,48 +21,11 @@ namespace xFunc.Tests.Tokenization.Tokens
     public class SymbolTokenTest
     {
         [Fact]
-        public void EqualsNullTest()
-        {
-            var token = new SymbolToken(Symbols.Comma);
-
-            Assert.False(token.Equals(null));
-            Assert.NotNull(token);
-        }
-
-        [Fact]
-        public void EqualsSameObjectTest()
-        {
-            var token = new SymbolToken(Symbols.Comma);
-
-            Assert.True(token.Equals(token));
-            Assert.Equal(token, token);
-        }
-
-        [Fact]
-        public void EqualsDiffTypeTest()
-        {
-            var token = new SymbolToken(Symbols.Comma);
-
-            Assert.False(token.Equals(1));
-            Assert.NotEqual((object) 1, token);
-        }
-
-        [Fact]
-        public void EqualsDiffSymbolTest()
-        {
-            var token1 = new SymbolToken(Symbols.Comma);
-            var token2 = new SymbolToken(Symbols.CloseBrace);
-
-            Assert.False(token1.Equals(token2));
-            Assert.NotEqual(token1, token2);
-        }
-
-        [Fact]
         public void ToStringTest()
         {
-            var token = new SymbolToken(Symbols.Comma);
+            var token = SymbolToken.Comma;
 
-            Assert.Equal("Symbol: Comma", token.ToString());
+            Assert.Equal(",", token.ToString());
         }
     }
 }

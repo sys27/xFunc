@@ -121,4 +121,28 @@
   <data name="SequenceNullValuesError" xml:space="preserve">
     <value>Последовательность не может содержать пустые значения.</value>
   </data>
+  <data name="MatrixCloseBraceParseException" xml:space="preserve">
+    <value>Объявление матрицы должно заканчиваться символом '}'.</value>
+  </data>
+  <data name="MatrixCommaParseException" xml:space="preserve">
+    <value>Выражения в матрице должны быть разделены символом ','.</value>
+  </data>
+  <data name="VectorCloseBraceParseException" xml:space="preserve">
+    <value>Объявление вектора должно заканчиваться символом '}'.</value>
+  </data>
+  <data name="VectorCommaParseException" xml:space="preserve">
+    <value>Выражения в векторе должны быть разделены символом ','.</value>
+  </data>
+  <data name="PhaseParseException" xml:space="preserve">
+    <value>Аргумент комплексного числа ожидается после символа '∠'.</value>
+  </data>
+  <data name="DegreeComplexNumberParseException" xml:space="preserve">
+    <value>Символ '°' обязателен для полярной формы комплексного числа.</value>
+  </data>
+  <data name="ExponentParseException" xml:space="preserve">
+    <value>Показатель степени не может быть распарсен.</value>
+  </data>
+  <data name="SecondOperandParseException" xml:space="preserve">
+    <value>Второй операнд, оператора '{0}', не может быть распарсен.</value>
+  </data>
 </root>

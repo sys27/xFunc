@@ -171,5 +171,53 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("SequenceNullValuesError", resourceCulture);
             }
         }
+        
+        internal static string MatrixCloseBraceParseException {
+            get {
+                return ResourceManager.GetString("MatrixCloseBraceParseException", resourceCulture);
+            }
+        }
+        
+        internal static string MatrixCommaParseException {
+            get {
+                return ResourceManager.GetString("MatrixCommaParseException", resourceCulture);
+            }
+        }
+        
+        internal static string VectorCloseBraceParseException {
+            get {
+                return ResourceManager.GetString("VectorCloseBraceParseException", resourceCulture);
+            }
+        }
+        
+        internal static string VectorCommaParseException {
+            get {
+                return ResourceManager.GetString("VectorCommaParseException", resourceCulture);
+            }
+        }
+        
+        internal static string PhaseParseException {
+            get {
+                return ResourceManager.GetString("PhaseParseException", resourceCulture);
+            }
+        }
+        
+        internal static string DegreeComplexNumberParseException {
+            get {
+                return ResourceManager.GetString("DegreeComplexNumberParseException", resourceCulture);
+            }
+        }
+        
+        internal static string ExponentParseException {
+            get {
+                return ResourceManager.GetString("ExponentParseException", resourceCulture);
+            }
+        }
+        
+        internal static string SecondOperandParseException {
+            get {
+                return ResourceManager.GetString("SecondOperandParseException", resourceCulture);
+            }
+        }
     }
 }

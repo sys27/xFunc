@@ -31,41 +31,62 @@ namespace xFunc.Maths
     {
         private IExpression CreateOperator(OperatorToken token, params IExpression[] arguments)
         {
-            return token.Operator switch
-            {
-                Operators.Plus => new Add(arguments),
-                Operators.Minus => new Sub(arguments),
-                Operators.Multiplication => new Mul(arguments),
-                Operators.Division => new Div(arguments),
-                Operators.Exponentiation => new Pow(arguments),
-                Operators.Factorial => new Fact(arguments),
-                Operators.Modulo => new Mod(arguments),
-                Operators.Assign => new Define(arguments),
-                Operators.ConditionalAnd => new Expressions.Programming.And(arguments),
-                Operators.ConditionalOr => new Expressions.Programming.Or(arguments),
-                Operators.Equal => new Equal(arguments),
-                Operators.NotEqual => new NotEqual(arguments),
-                Operators.LessThan => new LessThan(arguments),
-                Operators.LessOrEqual => new LessOrEqual(arguments),
-                Operators.GreaterThan => new GreaterThan(arguments),
-                Operators.GreaterOrEqual => new GreaterOrEqual(arguments),
-                Operators.AddAssign => new AddAssign(arguments),
-                Operators.SubAssign => new SubAssign(arguments),
-                Operators.MulAssign => new MulAssign(arguments),
-                Operators.DivAssign => new DivAssign(arguments),
-                Operators.Increment => new Inc(arguments),
-                Operators.Decrement => new Dec(arguments),
-                Operators.Not => new Not(arguments),
-                Operators.And => new Expressions.LogicalAndBitwise.And(arguments),
-                Operators.Or => new Expressions.LogicalAndBitwise.Or(arguments),
-                Operators.XOr => new XOr(arguments),
-                Operators.Implication => new Implication(arguments),
-                Operators.Equality => new Equality(arguments),
-                Operators.NOr => new NOr(arguments),
-                Operators.NAnd => new NAnd(arguments),
+            if (token == OperatorToken.Plus)
+                return new Add(arguments);
+            if (token == OperatorToken.Minus)
+                return new Sub(arguments);
+            if (token == OperatorToken.Multiplication)
+                return new Mul(arguments);
+            if (token == OperatorToken.Division)
+                return new Div(arguments);
+            if (token == OperatorToken.Exponentiation)
+                return new Pow(arguments);
+            if (token == OperatorToken.Factorial)
+                return new Fact(arguments);
+            if (token == OperatorToken.Modulo)
+                return new Mod(arguments);
+            if (token == OperatorToken.ConditionalAnd)
+                return new Expressions.Programming.And(arguments);
+            if (token == OperatorToken.ConditionalOr)
+                return new Expressions.Programming.Or(arguments);
+            if (token == OperatorToken.Equal)
+                return new Equal(arguments);
+            if (token == OperatorToken.NotEqual)
+                return new NotEqual(arguments);
+            if (token == OperatorToken.LessThan)
+                return new LessThan(arguments);
+            if (token == OperatorToken.LessOrEqual)
+                return new LessOrEqual(arguments);
+            if (token == OperatorToken.GreaterThan)
+                return new GreaterThan(arguments);
+            if (token == OperatorToken.GreaterOrEqual)
+                return new GreaterOrEqual(arguments);
+            if (token == OperatorToken.Assign)
+                return new Define(arguments);
+            if (token == OperatorToken.AddAssign)
+                return new AddAssign(arguments);
+            if (token == OperatorToken.SubAssign)
+                return new SubAssign(arguments);
+            if (token == OperatorToken.MulAssign)
+                return new MulAssign(arguments);
+            if (token == OperatorToken.DivAssign)
+                return new DivAssign(arguments);
+            if (token == OperatorToken.Increment)
+                return new Inc(arguments);
+            if (token == OperatorToken.Decrement)
+                return new Dec(arguments);
+            if (token == OperatorToken.Not)
+                return new Not(arguments);
+            if (token == OperatorToken.And)
+                return new Expressions.LogicalAndBitwise.And(arguments);
+            if (token == OperatorToken.Or)
+                return new Expressions.LogicalAndBitwise.Or(arguments);
+            if (token == OperatorToken.Implication)
+                return new Implication(arguments);
+            if (token == OperatorToken.Equality)
+                return new Equality(arguments);
 
-                _ => null,
-            };
+            return null;
         }
 
         private IExpression CreateFunction(IdToken token, IExpression[] arguments)
@@ -144,12 +165,12 @@ namespace xFunc.Maths
                 "floor" => new Floor(arguments),
                 "ceil" => new Ceil(arguments),
 
-                "deriv" => new Derivative(this.differentiator, this.simplifier, arguments),
-                "derivative" => new Derivative(this.differentiator, this.simplifier, arguments),
-                "simplify" => new Simplify(this.simplifier, arguments),
+                "deriv" => new Derivative(differentiator, simplifier, arguments),
+                "derivative" => new Derivative(differentiator, simplifier, arguments),
+                "simplify" => new Simplify(simplifier, arguments),
 
-                "del" => new Del(this.differentiator, this.simplifier, arguments),
-                "nabla" => new Del(this.differentiator, this.simplifier, arguments),
+                "del" => new Del(differentiator, simplifier, arguments),
+                "nabla" => new Del(differentiator, simplifier, arguments),
 
                 "transpose" => new Transpose(arguments),
                 "det" => new Determinant(arguments),
@@ -185,31 +206,40 @@ namespace xFunc.Maths
 
         private IExpression CreateFromKeyword(KeywordToken keywordToken, params IExpression[] arguments)
         {
-            return keywordToken.Keyword switch
-            {
-                Keywords.True => new Bool(true),
-                Keywords.False => new Bool(false),
+            if (keywordToken == KeywordToken.True)
+                return new Bool(true);
+            if (keywordToken == KeywordToken.False)
+                return new Bool(false);
+            if (keywordToken == KeywordToken.Define)
+                return new Define(arguments);
+            if (keywordToken == KeywordToken.Undefine)
+                return new Undefine(arguments);
+            if (keywordToken == KeywordToken.If)
+                return new If(arguments);
+            if (keywordToken == KeywordToken.For)
+                return new For(arguments);
+            if (keywordToken == KeywordToken.While)
+                return new While(arguments);
+            if (keywordToken == KeywordToken.NAnd)
+                return new NAnd(arguments);
+            if (keywordToken == KeywordToken.NOr)
+                return new NOr(arguments);
+            if (keywordToken == KeywordToken.And)
+                return new Expressions.LogicalAndBitwise.And(arguments);
+            if (keywordToken == KeywordToken.Or)
+                return new Expressions.LogicalAndBitwise.Or(arguments);
+            if (keywordToken == KeywordToken.XOr)
+                return new XOr(arguments);
+            if (keywordToken == KeywordToken.Not)
+                return new Not(arguments);
+            if (keywordToken == KeywordToken.Eq)
+                return new Equality(arguments);
+            if (keywordToken == KeywordToken.Impl)
+                return new Implication(arguments);
+            if (keywordToken == KeywordToken.Mod)
+                return new Mod(arguments);
 
-                Keywords.Define => new Define(arguments),
-                Keywords.Undefine => new Undefine(arguments),
-
-                Keywords.If => new If(arguments),
-                Keywords.For => new For(arguments),
-                Keywords.While => new While(arguments),
-
-                Keywords.NAnd => new NAnd(arguments),
-                Keywords.NOr => new NOr(arguments),
-                Keywords.And => new Expressions.LogicalAndBitwise.And(arguments),
-                Keywords.Or => new Expressions.LogicalAndBitwise.Or(arguments),
-                Keywords.XOr => new XOr(arguments),
-                Keywords.Not => new Not(arguments),
-                Keywords.Eq => new Equality(arguments),
-                Keywords.Impl => new Implication(arguments),
-
-                Keywords.Mod => new Mod(arguments),
-
-                _ => throw new ArgumentOutOfRangeException(nameof(keywordToken.Keyword)),
-            };
+            throw new ArgumentOutOfRangeException(nameof(keywordToken));
         }
 
         private IExpression CreateNumber(NumberToken numberToken) =>
@@ -226,5 +256,11 @@ namespace xFunc.Maths
 
         private IExpression CreateMatrix(IExpression[] arguments) =>
             new Matrix(arguments);
+
+        private IExpression CreateUnaryMinux(IExpression operand) =>
+            new UnaryMinus(operand);
+
+        private IExpression CreateMultiplication(params IExpression[] arguments) =>
+            new Mul(arguments);
     }
 }

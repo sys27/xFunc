@@ -60,20 +60,20 @@ namespace xFunc.Maths
                 return token;
             }
 
-            public bool Symbol(Symbols symbol)
+            public bool Symbol(SymbolToken symbolToken)
             {
                 var token = Peek<SymbolToken>();
-                var result = token?.Symbol == symbol;
+                var result = token == symbolToken;
                 if (result)
                     MoveNext();
 
                 return result;
             }
 
-            public OperatorToken Operator(Operators operators)
+            public OperatorToken Operator(OperatorToken operatorToken)
             {
                 var token = Peek<OperatorToken>();
-                if (token != null && operators.HasFlag(token.Operator))
+                if (token == operatorToken)
                 {
                     MoveNext();
 
@@ -83,10 +83,10 @@ namespace xFunc.Maths
                 return null;
             }
 
-            public KeywordToken Keyword(Keywords keywords)
+            public KeywordToken Keyword(KeywordToken keywordToken)
             {
                 var token = Peek<KeywordToken>();
-                if (token != null && keywords.HasFlag(token.Keyword))
+                if (token == keywordToken)
                 {
                     MoveNext();
 

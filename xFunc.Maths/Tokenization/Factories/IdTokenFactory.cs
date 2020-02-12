@@ -33,28 +33,27 @@ namespace xFunc.Maths.Tokenization.Factories
         {
             keywords = new Dictionary<string, KeywordToken>
             {
-                { "true", new KeywordToken(Keywords.True) },
-                { "false", new KeywordToken(Keywords.False) },
+                { "true", KeywordToken.True },
+                { "false", KeywordToken.False },
 
-                // TODO: copies?
-                { "def", new KeywordToken(Keywords.Define) },
-                { "define", new KeywordToken(Keywords.Define) },
-                { "undef", new KeywordToken(Keywords.Undefine) },
-                { "undefine", new KeywordToken(Keywords.Undefine) },
+                { "def", KeywordToken.Define },
+                { "define", KeywordToken.Define },
+                { "undef", KeywordToken.Undefine },
+                { "undefine", KeywordToken.Undefine },
 
-                { "if", new KeywordToken(Keywords.If) },
-                { "for", new KeywordToken(Keywords.For) },
-                { "while", new KeywordToken(Keywords.While) },
+                { "if", KeywordToken.If },
+                { "for", KeywordToken.For },
+                { "while", KeywordToken.While },
 
-                { "nand", new KeywordToken(Keywords.NAnd) },
-                { "nor", new KeywordToken(Keywords.NOr) },
-                { "and", new KeywordToken(Keywords.And) },
-                { "or", new KeywordToken(Keywords.Or) },
-                { "xor", new KeywordToken(Keywords.XOr) },
-                { "not", new KeywordToken(Keywords.Not) },
-                { "eq", new KeywordToken(Keywords.Eq) },
-                { "impl", new KeywordToken(Keywords.Impl) },
-                { "mod", new KeywordToken(Keywords.Mod) },
+                { "nand", KeywordToken.NAnd },
+                { "nor", KeywordToken.NOr },
+                { "and", KeywordToken.And },
+                { "or", KeywordToken.Or },
+                { "xor", KeywordToken.XOr },
+                { "not", KeywordToken.Not },
+                { "eq", KeywordToken.Eq },
+                { "impl", KeywordToken.Impl },
+                { "mod", KeywordToken.Mod },
             };
         }
 

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Diagnostics;
 using System.Globalization;
 
 namespace xFunc.Maths.Tokenization.Tokens
@@ -20,6 +21,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// <summary>
     /// Represents a number token.
     /// </summary>
+    [DebuggerDisplay("Number: {Number.ToString(CultureInfo.InvariantCulture)}")]
     public class NumberToken : IToken
     {
         /// <summary>
@@ -58,19 +60,13 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return Number.GetHashCode();
-        }
+        public override int GetHashCode() => 430769 ^ Number.GetHashCode();
 
         /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return $"Number: {Number.ToString(CultureInfo.InvariantCulture)}";
-        }
+        public override string ToString() => Number.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Gets the number.

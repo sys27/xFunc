@@ -121,4 +121,28 @@
   <data name="SequenceNullValuesError" xml:space="preserve">
     <value>The sequence cannot contain null values.</value>
   </data>
+  <data name="MatrixCloseBraceParseException" xml:space="preserve">
+    <value>The matrix declaration should end with the '}' symbol.</value>
+  </data>
+  <data name="MatrixCommaParseException" xml:space="preserve">
+    <value>Expressions in matrix should be separated by the ',' symbol.</value>
+  </data>
+  <data name="VectorCloseBraceParseException" xml:space="preserve">
+    <value>The vector declaration should end with the '}' symbol.</value>
+  </data>
+  <data name="VectorCommaParseException" xml:space="preserve">
+    <value>Expressions in vector should be separated by the ',' symbol.</value>
+  </data>
+  <data name="PhaseParseException" xml:space="preserve">
+    <value>The phase of complex number is expected after the '∠' symbol.</value>
+  </data>
+  <data name="DegreeComplexNumberParseException" xml:space="preserve">
+    <value>The '°' symbol is required in polar complex number form.</value>
+  </data>
+  <data name="ExponentParseException" xml:space="preserve">
+    <value>Cannot parse an exponent.</value>
+  </data>
+  <data name="SecondOperandParseException" xml:space="preserve">
+    <value>Cannot parse second operand of '{0}' operator.</value>
+  </data>
 </root>

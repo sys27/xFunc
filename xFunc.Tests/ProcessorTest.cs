@@ -54,7 +54,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .Number(2)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1.1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
@@ -88,7 +88,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .Number(2)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
@@ -128,9 +128,9 @@ namespace xFunc.Tests
                 .Id("conjugate")
                 .OpenParenthesis()
                 .Number(2.3)
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1.4)
-                .Operation(Operators.Multiplication)
+                .Operation(OperatorToken.Multiplication)
                 .Id("i")
                 .CloseParenthesis()
                 .Tokens;
@@ -165,7 +165,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .True()
-                .Operation(Operators.And)
+                .Operation(OperatorToken.And)
                 .False()
                 .Tokens;
             lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
@@ -274,7 +274,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
@@ -307,7 +307,7 @@ namespace xFunc.Tests
 
             var tokens = new TokensBuilder()
                 .VariableX()
-                .Operation(Operators.Plus)
+                .Operation(OperatorToken.Plus)
                 .Number(1)
                 .Tokens;
             lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);

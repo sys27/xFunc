@@ -80,7 +80,6 @@ namespace xFunc.Maths.Tokenization.Factories
             return result;
         }
 
-        // TODO: no ref?
         private void ReadDigits(string function, ref int index)
         {
             while (index < function.Length && char.IsDigit(function[index]))

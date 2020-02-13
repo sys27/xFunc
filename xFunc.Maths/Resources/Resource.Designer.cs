@@ -219,5 +219,83 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("SecondOperandParseException", resourceCulture);
             }
         }
+        
+        internal static string FunctionOpenParenthesisParseException {
+            get {
+                return ResourceManager.GetString("FunctionOpenParenthesisParseException", resourceCulture);
+            }
+        }
+        
+        internal static string FunctionCloseParenthesisParseException {
+            get {
+                return ResourceManager.GetString("FunctionCloseParenthesisParseException", resourceCulture);
+            }
+        }
+        
+        internal static string AssignKeyParseException {
+            get {
+                return ResourceManager.GetString("AssignKeyParseException", resourceCulture);
+            }
+        }
+        
+        internal static string DefValueParseException {
+            get {
+                return ResourceManager.GetString("DefValueParseException", resourceCulture);
+            }
+        }
+        
+        internal static string IfConditionParseException {
+            get {
+                return ResourceManager.GetString("IfConditionParseException", resourceCulture);
+            }
+        }
+        
+        internal static string IfThenParseException {
+            get {
+                return ResourceManager.GetString("IfThenParseException", resourceCulture);
+            }
+        }
+        
+        internal static string IfElseParseException {
+            get {
+                return ResourceManager.GetString("IfElseParseException", resourceCulture);
+            }
+        }
+        
+        internal static string ForBodyParseException {
+            get {
+                return ResourceManager.GetString("ForBodyParseException", resourceCulture);
+            }
+        }
+        
+        internal static string ForInitParseException {
+            get {
+                return ResourceManager.GetString("ForInitParseException", resourceCulture);
+            }
+        }
+        
+        internal static string ForConditionParseException {
+            get {
+                return ResourceManager.GetString("ForConditionParseException", resourceCulture);
+            }
+        }
+        
+        internal static string ForIterParseException {
+            get {
+                return ResourceManager.GetString("ForIterParseException", resourceCulture);
+            }
+        }
+        
+        internal static string WhileBodyParseException {
+            get {
+                return ResourceManager.GetString("WhileBodyParseException", resourceCulture);
+            }
+        }
+        
+        internal static string WhileConditionParseException {
+            get {
+                return ResourceManager.GetString("WhileConditionParseException", resourceCulture);
+            }
+        }
     }
 }

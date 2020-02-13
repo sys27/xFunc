@@ -245,8 +245,21 @@ namespace xFunc.Maths
         private IExpression CreateNumber(NumberToken numberToken) =>
             new Number(numberToken.Number);
 
-        private IExpression CreateComplexNumber(NumberToken magnitude, NumberToken phase) =>
-            new ComplexNumber(Complex.FromPolarCoordinates(magnitude.Number, phase.Number));
+        private IExpression CreateComplexNumber(
+            OperatorToken magnitudeSign,
+            NumberToken magnitude,
+            OperatorToken phaseSign,
+            NumberToken phase)
+        {
+            int GetSign(OperatorToken token) =>
+                token == OperatorToken.Minus ? -1 : 1;
+
+            var magnitudeNumber = magnitude.Number * GetSign(magnitudeSign);
+            var phaseNumber = phase.Number * GetSign(phaseSign);
+            var complex = Complex.FromPolarCoordinates(magnitudeNumber, phaseNumber);
+
+            return new ComplexNumber(complex);
+        }
 
         private IExpression CreateVariable(IdToken variableToken) =>
             new Variable(variableToken.Id);

@@ -21,7 +21,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// <summary>
     /// Represents a number token.
     /// </summary>
-    [DebuggerDisplay("Number: {Number.ToString(CultureInfo.InvariantCulture)}")]
+    [DebuggerDisplay("Number: {" + nameof(Number) + "}")]
     public class NumberToken : IToken
     {
         /// <summary>

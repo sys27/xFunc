@@ -20,7 +20,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     /// <summary>
     /// Represents a operator token.
     /// </summary>
-    [DebuggerDisplay("Operator: {" + nameof(@operator) + "}")]
+    [DebuggerDisplay("Operator: {@" + nameof(@operator) + "}")]
     public sealed class OperatorToken : IToken
     {
         private readonly string @operator;

@@ -73,10 +73,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(7951, 8807);
-        }
+        public override int GetHashCode() => GetHashCode(7951, 8807);
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -98,10 +95,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -109,10 +103,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
@@ -120,10 +111,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public virtual object Execute()
-        {
-            return Execute(null);
-        }
+        public virtual object Execute() => Execute(null);
 
         /// <summary>
         /// Executes this expression.
@@ -177,16 +165,12 @@ namespace xFunc.Maths.Expressions
         /// <value>The arguments.</value>
         public virtual IExpression[] Arguments
         {
-            get
-            {
-                return m_arguments;
-            }
+            get => m_arguments;
             set
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(Arguments));
 
-                // TODO:
                 if (value.Length < MinParametersCount)
                     throw new ArgumentException(Resource.LessParams, nameof(Arguments));
 

@@ -145,4 +145,43 @@
   <data name="SecondOperandParseException" xml:space="preserve">
     <value>Cannot parse second operand of '{0}' operator.</value>
   </data>
+  <data name="FunctionOpenParenthesisParseException" xml:space="preserve">
+    <value>The '(' symbol is expected after '{0}' definition.</value>
+  </data>
+  <data name="FunctionCloseParenthesisParseException" xml:space="preserve">
+    <value>The ')' symbol is expected at the end of '{0}' definition.</value>
+  </data>
+  <data name="AssignKeyParseException" xml:space="preserve">
+    <value>Cannot parse assignment key.</value>
+  </data>
+  <data name="DefValueParseException" xml:space="preserve">
+    <value>Cannot parse value of 'def' expression.</value>
+  </data>
+  <data name="IfConditionParseException" xml:space="preserve">
+    <value>Cannot parse condition of 'if' expression.</value>
+  </data>
+  <data name="IfThenParseException" xml:space="preserve">
+    <value>Cannot parse 'then' statement of 'if' expression.</value>
+  </data>
+  <data name="IfElseParseException" xml:space="preserve">
+    <value>Cannot parse 'else' statement of 'if' expression.</value>
+  </data>
+  <data name="ForBodyParseException" xml:space="preserve">
+    <value>Cannot parse body of 'for' expression.</value>
+  </data>
+  <data name="ForInitParseException" xml:space="preserve">
+    <value>Cannot parse initializer of 'for' expression.</value>
+  </data>
+  <data name="ForConditionParseException" xml:space="preserve">
+    <value>Cannot parse condition of 'for' expression.</value>
+  </data>
+  <data name="ForIterParseException" xml:space="preserve">
+    <value>Cannot parse iterator of 'for' expression.</value>
+  </data>
+  <data name="WhileBodyParseException" xml:space="preserve">
+    <value>Cannot parse body of 'while' expression.</value>
+  </data>
+  <data name="WhileConditionParseException" xml:space="preserve">
+    <value>Cannot parse condition of 'while' expression.</value>
+  </data>
 </root>

@@ -31,7 +31,9 @@ namespace xFunc.Tests.Expressions
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
                 .Returns<Derivative>(exp => exp.Expression);
 
-            var deriv = new Derivative(differentiator.Object, null, Variable.X, Variable.X, new Number(2));
+            var simplifier = new Mock<ISimplifier>();
+
+            var deriv = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X, new Number(2));
 
             Assert.Equal(2.0, deriv.Execute());
         }
@@ -39,9 +41,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNullDerivTest()
         {
-            var exp = new Derivative(null, null, Variable.X);
-
-            Assert.Throws<ArgumentNullException>(() => exp.Execute());
+            Assert.Throws<ArgumentNullException>(() => new Derivative(null, null, Variable.X));
         }
 
         [Fact]
@@ -51,7 +51,9 @@ namespace xFunc.Tests.Expressions
             differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
                 .Returns<Derivative>(e => e.Expression);
 
-            var exp = new Derivative(differentiator.Object, null, Variable.X);
+            var simplifier = new Mock<ISimplifier>();
+
+            var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X);
 
             var result = exp.Execute();
 
@@ -61,7 +63,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Derivative(null, null, new Sin(Variable.X), Variable.X, new Number(1));
+            var exp = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, new Number(1));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

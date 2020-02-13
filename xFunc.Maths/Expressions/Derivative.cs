@@ -69,10 +69,10 @@ namespace xFunc.Maths.Expressions
         internal Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
             : base(args)
         {
-            // TODO: types validation?
-
-            this.Differentiator = differentiator;
-            this.Simplifier = simplifier;
+            this.Differentiator = differentiator ??
+                                  throw new ArgumentNullException(nameof(differentiator));
+            this.Simplifier = simplifier ??
+                              throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>
@@ -96,9 +96,6 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if (Differentiator == null)
-                throw new ArgumentNullException(nameof(Differentiator));
-
             var variable = this.Variable;
 
             Differentiator.Variable = variable;
@@ -153,13 +150,10 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Expression
         {
-            get { return m_arguments[0]; }
+            get => m_arguments[0];
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                m_arguments[0] = value;
+                m_arguments[0] = value ?? throw new ArgumentNullException(nameof(value));
                 m_arguments[0].Parent = this;
             }
         }
@@ -186,7 +180,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The simplifier.
         /// </value>
-        public ISimplifier Simplifier { get; private set; }
+        public ISimplifier Simplifier { get; }
 
         /// <summary>
         /// Gets or sets the differentiator.
@@ -194,7 +188,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The differentiator.
         /// </value>
-        public IDifferentiator Differentiator { get; private set; }
+        public IDifferentiator Differentiator { get; }
 
         /// <summary>
         /// Gets the minimum count of parameters.

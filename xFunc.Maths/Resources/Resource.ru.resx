@@ -145,4 +145,43 @@
   <data name="SecondOperandParseException" xml:space="preserve">
     <value>Второй операнд, оператора '{0}', не может быть распарсен.</value>
   </data>
+  <data name="FunctionOpenParenthesisParseException" xml:space="preserve">
+    <value>Ожидается символ '(' после объявления '{0}'.</value>
+  </data>
+  <data name="FunctionCloseParenthesisParseException" xml:space="preserve">
+    <value>Ожидается символ ')' в конце объявления '{0}'.</value>
+  </data>
+  <data name="AssignKeyParseException" xml:space="preserve">
+    <value>Ключ не может быть распарсен.</value>
+  </data>
+  <data name="DefValueParseException" xml:space="preserve">
+    <value>Значение 'def' выражения не может быть распарсено.</value>
+  </data>
+  <data name="IfConditionParseException" xml:space="preserve">
+    <value>Условие в 'if' выражении не может быть распарсено.</value>
+  </data>
+  <data name="IfThenParseException" xml:space="preserve">
+    <value>'then' в 'if' выражении не может быть распарсено.</value>
+  </data>
+  <data name="IfElseParseException" xml:space="preserve">
+    <value>'else' в 'if' выражении не может быть распарсено.</value>
+  </data>
+  <data name="ForBodyParseException" xml:space="preserve">
+    <value>Тело выражения 'for' не может быть распарсено.</value>
+  </data>
+  <data name="ForInitParseException" xml:space="preserve">
+    <value>Инициализатор в 'for' выражении не может быть распарсено.</value>
+  </data>
+  <data name="ForConditionParseException" xml:space="preserve">
+    <value>Условие в 'for' выражении не может быть распарсено.</value>
+  </data>
+  <data name="ForIterParseException" xml:space="preserve">
+    <value>Итератор в 'for' выражении не может быть распарсено.</value>
+  </data>
+  <data name="WhileBodyParseException" xml:space="preserve">
+    <value>Тело выражения 'while' не может быть распарсено.</value>
+  </data>
+  <data name="WhileConditionParseException" xml:space="preserve">
+    <value>Условие в 'while' выражении не может быть распарсено.</value>
+  </data>
 </root>

@@ -1251,17 +1251,35 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void ComplexFromPolarNegativeTest()
+        public void ComplexFromPolarNegativePhaseTest()
         {
             var complex = Complex.FromPolarCoordinates(10, -7.1);
             var tokens = Builder()
                 .Number(10)
                 .Angle()
-                .Number(-7.1) // TODO:
+                .Operation(OperatorToken.Minus)
+                .Number(7.1)
                 .Degree()
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new ComplexNumber(complex);
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ComplexFromPolarNegativeMagnitudeTest()
+        {
+            var complex = Complex.FromPolarCoordinates(10, 7.1);
+            var tokens = Builder()
+                .Operation(OperatorToken.Minus)
+                .Number(10)
+                .Angle()
+                .Number(7.1)
+                .Degree()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new UnaryMinus(new ComplexNumber(complex));
 
             Assert.Equal(expected, exp);
         }
@@ -2866,7 +2884,6 @@ namespace xFunc.Tests
                 .CloseParenthesis()
                 .Tokens;
 
-            // TODO:
             Assert.Throws<ArgumentException>(() => parser.Parse(tokens));
         }
 

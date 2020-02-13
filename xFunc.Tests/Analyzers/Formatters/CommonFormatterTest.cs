@@ -86,7 +86,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringExpTest()
         {
-            var deriv = new Derivative(null, null, new Sin(Variable.X));
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X));
 
             Assert.Equal("deriv(sin(x))", deriv.ToString(commonFormatter));
         }
@@ -94,7 +94,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringVarTest()
         {
-            var deriv = new Derivative(null, null, new Sin(Variable.X), Variable.X);
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X);
 
             Assert.Equal("deriv(sin(x), x)", deriv.ToString(commonFormatter));
         }
@@ -102,7 +102,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringPointTest()
         {
-            var deriv = new Derivative(null, null, new Sin(Variable.X), Variable.X, new Number(1));
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, new Number(1));
 
             Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString(commonFormatter));
         }

@@ -162,19 +162,19 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(OpenParenthesis(def));
 
             var key = AssignmentKey(tokenEnumerator) ??
-                      throw new ParseException(); // TODO:
+                      throw new ParseException(Resource.AssignKeyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
                 throw new ParseException(); // TODO:
 
             var value = Expression(tokenEnumerator) ??
-                        throw new ParseException(); // TODO:
+                        throw new ParseException(Resource.DefValueParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CloseParenthesis(def));
 
             return CreateFromKeyword(def, key, value);
         }
@@ -186,13 +186,13 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(OpenParenthesis(undef));
 
             var key = AssignmentKey(tokenEnumerator) ??
-                      throw new ParseException(); // TODO:
+                      throw new ParseException(Resource.AssignKeyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CloseParenthesis(undef));
 
             return CreateFromKeyword(undef, key);
         }
@@ -204,25 +204,24 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(OpenParenthesis(@if));
 
-            // TODO:
             var condition = ConditionalOperator(tokenEnumerator) ??
-                            throw new ParseException(); // TODO:
+                            throw new ParseException(Resource.IfConditionParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
                 throw new ParseException(); // TODO:
 
             var then = Expression(tokenEnumerator) ??
-                       throw new ParseException(); // TODO:
+                       throw new ParseException(Resource.IfThenParseException);
 
             IExpression @else = null;
             if (tokenEnumerator.Symbol(SymbolToken.Comma))
                 @else = Expression(tokenEnumerator) ??
-                        throw new ParseException(); // TODO:
+                        throw new ParseException(Resource.IfElseParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CloseParenthesis(@if));
 
             return CreateFromKeyword(@if, condition, then, @else);
         }
@@ -234,32 +233,31 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(OpenParenthesis(@for));
 
-            // TODO:
             var body = Statement(tokenEnumerator) ??
-                       throw new ParseException(); // TODO:
+                       throw new ParseException(Resource.ForBodyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
                 throw new ParseException(); // TODO:
 
             var init = Statement(tokenEnumerator) ??
-                       throw new ParseException(); // TODO:
+                       throw new ParseException(Resource.ForInitParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
                 throw new ParseException(); // TODO:
 
             var condition = ConditionalOperator(tokenEnumerator) ??
-                            throw new ParseException(); // TODO:
+                            throw new ParseException(Resource.ForConditionParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
                 throw new ParseException(); // TODO:
 
             var iter = Statement(tokenEnumerator) ??
-                       throw new ParseException(); // TODO:
+                       throw new ParseException(Resource.ForIterParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CloseParenthesis(@for));
 
             return CreateFromKeyword(@for, body, init, condition, iter);
         }
@@ -271,22 +269,21 @@ namespace xFunc.Maths
                 return null;
 
             if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(OpenParenthesis(@while));
 
-            // TODO:
-            var exp = Statement(tokenEnumerator) ??
-                      throw new ParseException(); // TODO:
+            var body = Statement(tokenEnumerator) ??
+                       throw new ParseException(Resource.WhileBodyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
                 throw new ParseException(); // TODO:
 
             var condition = ConditionalOperator(tokenEnumerator) ??
-                            throw new ParseException(); // TODO:
+                            throw new ParseException(Resource.WhileConditionParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CloseParenthesis(@while));
 
-            return CreateFromKeyword(@while, exp, condition);
+            return CreateFromKeyword(@while, body, condition);
         }
 
         private IExpression FunctionDeclaration(TokenEnumerator tokenEnumerator)
@@ -317,10 +314,11 @@ namespace xFunc.Maths
                 }
 
                 if (tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                    return CreateFunction(id, parameterList.ToArray());
+                    return CreateFunction(id, parameterList.ToArray()); // TODO:
             }
 
             tokenEnumerator.Rollback(scope);
+
             return null;
         }
 
@@ -631,12 +629,16 @@ namespace xFunc.Maths
         {
             var scope = tokenEnumerator.CreateScope();
 
+            var magnitudeSign = tokenEnumerator.Operator(OperatorToken.Plus) ??
+                                tokenEnumerator.Operator(OperatorToken.Minus);
             var magnitude = tokenEnumerator.GetCurrent<NumberToken>();
             if (magnitude != null)
             {
                 var hasAngleSymbol = tokenEnumerator.Symbol(SymbolToken.Angle);
                 if (hasAngleSymbol)
                 {
+                    var phaseSign = tokenEnumerator.Operator(OperatorToken.Plus) ??
+                                    tokenEnumerator.Operator(OperatorToken.Minus);
                     var phase = tokenEnumerator.GetCurrent<NumberToken>();
                     if (phase == null)
                         throw new ParseException(Resource.PhaseParseException);
@@ -645,7 +647,7 @@ namespace xFunc.Maths
                     if (!hasDegreeSymbol)
                         throw new ParseException(Resource.DegreeComplexNumberParseException);
 
-                    return CreateComplexNumber(magnitude, phase);
+                    return CreateComplexNumber(magnitudeSign, magnitude, phaseSign, phase);
                 }
             }
 
@@ -735,5 +737,11 @@ namespace xFunc.Maths
 
         private static string SecondOperand(IToken token)
             => string.Format(Resource.SecondOperandParseException, token);
+
+        private static string OpenParenthesis(IToken token)
+            => string.Format(Resource.FunctionOpenParenthesisParseException, token);
+
+        private static string CloseParenthesis(IToken token)
+            => string.Format(Resource.FunctionCloseParenthesisParseException, token);
     }
 }

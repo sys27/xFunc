@@ -32,7 +32,7 @@ namespace xFunc.Tests
         }
 
         [Fact]
-        public void DefautlCtorTest()
+        public void DefaultCtorTest()
         {
             var builder = new Builder();
 

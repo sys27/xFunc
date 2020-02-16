@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Linq;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
@@ -320,6 +319,35 @@ namespace xFunc.Tests.Tokenization
                 .Operation(OperatorToken.Plus)
                 .Number(3)
                 .Id("i")
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarTest()
+        {
+            var tokens = lexer.Tokenize("10 ∠ 45°");
+            var expected = Builder()
+                .Number(10)
+                .Angle()
+                .Number(45)
+                .Degree()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ComplexPolarPosNegTest()
+        {
+            var tokens = lexer.Tokenize("2.3 ∠ -7.1°");
+            var expected = Builder()
+                .Number(2.3)
+                .Angle()
+                .Operation(OperatorToken.Minus)
+                .Number(7.1)
+                .Degree()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());

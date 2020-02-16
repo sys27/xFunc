@@ -108,19 +108,6 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
-        public void AddBeforeNumber()
-        {
-            var tokens = lexer.Tokenize("+2");
-            var expected = Builder()
-                .Operation(OperatorToken.Plus)
-                .Number(2)
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-
-        [Fact]
         public void Sub()
         {
             var tokens = lexer.Tokenize("2 - 2");
@@ -155,18 +142,6 @@ namespace xFunc.Tests.Tokenization
                 .Operation(OperatorToken.Minus)
                 .Number(2)
                 .CloseParenthesis()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void SubBeforeNumber()
-        {
-            var tokens = lexer.Tokenize("-2");
-            var expected = Builder()
-                .Operation(OperatorToken.Minus)
-                .Number(2)
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -719,19 +694,6 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
-        public void StringVarLexerTest()
-        {
-            var tokens = lexer.Tokenize("aaa := 1");
-            var expected = Builder()
-                .Id("aaa")
-                .Operation(OperatorToken.Assign)
-                .Number(1)
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
         public void StringVarAnd()
         {
             var tokens = lexer.Tokenize("func and 1");
@@ -825,33 +787,6 @@ namespace xFunc.Tests.Tokenization
                 .CloseParenthesis()
                 .CloseParenthesis()
                 .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void HexTest()
-        {
-            var tokens = lexer.Tokenize("0xFF00");
-            var expected = Builder().Number(65280).Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void OctTest()
-        {
-            var tokens = lexer.Tokenize("0436");
-            var expected = Builder().Number(286).Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void BinTest()
-        {
-            var tokens = lexer.Tokenize("0b01100110");
-            var expected = Builder().Number(102).Tokens;
 
             Assert.Equal(expected, tokens.ToList());
         }
@@ -1034,39 +969,6 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
-        public void ZeroTest()
-        {
-            var tokens = lexer.Tokenize("0");
-            var expected = Builder().Number(0).Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void HexErrorTest()
-        {
-            var tokens = lexer.Tokenize("0x");
-            var expected = Builder()
-                .Number(0)
-                .VariableX()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void BinErrorTest()
-        {
-            var tokens = lexer.Tokenize("0b");
-            var expected = Builder()
-                .Number(0)
-                .Id("b")
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
         public void SumToTest()
         {
             var tokens = lexer.Tokenize("sum(x, 20)");
@@ -1222,9 +1124,8 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void VectorBracesTest()
         {
-            var tokens = lexer.Tokenize("vector{2, 3, 4}");
+            var tokens = lexer.Tokenize("{2, 3, 4}");
             var expected = Builder()
-                .Id("vector")
                 .OpenBrace()
                 .Number(2)
                 .Comma()
@@ -1240,18 +1141,15 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void MatrixAndVectorTest()
         {
-            var tokens = lexer.Tokenize("matrix{vector{2, 3}, vector{4, 7}}");
+            var tokens = lexer.Tokenize("{{2, 3}, {4, 7}}");
             var expected = Builder()
-                .Id("matrix")
                 .OpenBrace()
-                .Id("vector")
                 .OpenBrace()
                 .Number(2)
                 .Comma()
                 .Number(3)
                 .CloseBrace()
                 .Comma()
-                .Id("vector")
                 .OpenBrace()
                 .Number(4)
                 .Comma()
@@ -1280,23 +1178,19 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void MulMatrixTest()
         {
-            var tokens = lexer.Tokenize("matrix{vector{3}, vector{-1}} * vector{-2, 1}");
+            var tokens = lexer.Tokenize("{{3}, {-1}} * {-2, 1}");
             var expected = Builder()
-                .Id("matrix")
                 .OpenBrace()
-                .Id("vector")
                 .OpenBrace()
                 .Number(3)
                 .CloseBrace()
                 .Comma()
-                .Id("vector")
                 .OpenBrace()
                 .Operation(OperatorToken.Minus)
                 .Number(1)
                 .CloseBrace()
                 .CloseBrace()
                 .Operation(OperatorToken.Multiplication)
-                .Id("vector")
                 .OpenBrace()
                 .Operation(OperatorToken.Minus)
                 .Number(2)
@@ -1735,12 +1629,6 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
-        public void NumberFormatTest()
-        {
-            Assert.Throws<TokenizeException>(() => lexer.Tokenize("0.").First());
-        }
-
-        [Fact]
         public void TabTest()
         {
             var tokens = lexer.Tokenize("\t2 + 2");
@@ -1834,24 +1722,6 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
-        public void HexNumberCaseInsensitive()
-        {
-            var tokens = lexer.Tokenize("0XFF");
-            var expected = Builder().Number(0xFF).Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void BinNumberCaseInsensitive()
-        {
-            var tokens = lexer.Tokenize("0b1001");
-            var expected = Builder().Number(0b1001).Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
         public void TrueConstCaseInsensitive()
         {
             var tokens = lexer.Tokenize("tRuE");
@@ -1869,35 +1739,6 @@ namespace xFunc.Tests.Tokenization
                 .OpenParenthesis()
                 .VariableX()
                 .CloseParenthesis()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void ComplexPolarTest()
-        {
-            var tokens = lexer.Tokenize("10 ∠ 45°");
-            var expected = Builder()
-                .Number(10)
-                .Angle()
-                .Number(45)
-                .Degree()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        [Fact]
-        public void ComplexPolarPosNegTest()
-        {
-            var tokens = lexer.Tokenize("2.3 ∠ -7.1°");
-            var expected = Builder()
-                .Number(2.3)
-                .Angle()
-                .Operation(OperatorToken.Minus)
-                .Number(7.1)
-                .Degree()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());

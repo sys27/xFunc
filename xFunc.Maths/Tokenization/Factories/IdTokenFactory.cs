@@ -13,75 +13,79 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    /// <summary>
-    /// The factory which creates variable tokens.
-    /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
-    internal class IdTokenFactory : ITokenFactory // TODO: rename class?
+    internal class IdTokenFactory : ITokenFactory
     {
-        private readonly Dictionary<string, KeywordToken> keywords;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IdTokenFactory"/> class.
-        /// </summary>
-        public IdTokenFactory()
-        {
-            keywords = new Dictionary<string, KeywordToken>
-            {
-                { "true", KeywordToken.True },
-                { "false", KeywordToken.False },
-
-                { "def", KeywordToken.Define },
-                { "define", KeywordToken.Define },
-                { "undef", KeywordToken.Undefine },
-                { "undefine", KeywordToken.Undefine },
-
-                { "if", KeywordToken.If },
-                { "for", KeywordToken.For },
-                { "while", KeywordToken.While },
-
-                { "nand", KeywordToken.NAnd },
-                { "nor", KeywordToken.NOr },
-                { "and", KeywordToken.And },
-                { "or", KeywordToken.Or },
-                { "xor", KeywordToken.XOr },
-                { "not", KeywordToken.Not },
-                { "eq", KeywordToken.Eq },
-                { "impl", KeywordToken.Impl },
-                { "mod", KeywordToken.Mod },
-            };
-        }
-
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        public IToken CreateToken(string function, ref int index)
+        public IToken CreateToken(ref ReadOnlyMemory<char> function)
         {
-            if (!char.IsLetter(function[index]))
+            var span = function.Span;
+
+            if (!char.IsLetter(span[0]))
                 return null;
 
-            var endIndex = index + 1;
-            while (endIndex < function.Length && char.IsLetterOrDigit(function[endIndex]))
+            var endIndex = 1;
+            while (endIndex < span.Length && char.IsLetterOrDigit(span[endIndex]))
                 endIndex++;
 
-            var id = function.Substring(index, endIndex - index); // TODO: span
+            var id = span[..endIndex];
 
-            index = endIndex;
+            IToken token;
 
-            if (keywords.TryGetValue(id, out var keyword))
-                return keyword;
+            if (id.Equals("true", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.True;
+            else if (id.Equals("false", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.False;
 
-            return new IdToken(id);
+            else if (id.Equals("def", StringComparison.OrdinalIgnoreCase) ||
+                     id.Equals("define", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Define;
+            else if (id.Equals("undef", StringComparison.OrdinalIgnoreCase) ||
+                     id.Equals("undefine", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Undefine;
+
+            else if (id.Equals("if", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.If;
+            else if (id.Equals("for", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.For;
+            else if (id.Equals("while", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.While;
+
+            else if (id.Equals("nand", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.NAnd;
+            else if (id.Equals("nor", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.NOr;
+            else if (id.Equals("and", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.And;
+            else if (id.Equals("or", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Or;
+            else if (id.Equals("xor", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.XOr;
+            else if (id.Equals("not", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Not;
+            else if (id.Equals("eq", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Eq;
+            else if (id.Equals("impl", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Impl;
+            else if (id.Equals("mod", StringComparison.OrdinalIgnoreCase))
+                token = KeywordToken.Mod;
+
+            else
+                token = new IdToken(id.ToString().ToLowerInvariant()); // TODO:
+
+            function = function[endIndex..];
+
+            return token;
         }
     }
 }

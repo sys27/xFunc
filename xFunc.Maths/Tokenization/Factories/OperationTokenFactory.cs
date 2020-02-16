@@ -13,110 +13,133 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    /// <summary>
-    /// The factory which creates @operator tokens.
-    /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
     internal class OperationTokenFactory : ITokenFactory
     {
-        private readonly HashSet<char> restrictedSymbols;
-
-        private readonly IDictionary<string, OperatorToken> operators;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OperationTokenFactory"/> class.
-        /// </summary>
-        public OperationTokenFactory()
-        {
-            restrictedSymbols = new HashSet<char>
-            {
-                '(', ')', '{', '}', ',', '°', ' ', '\n', '\r', '\t', '\v', '\f'
-            };
-
-            // TODO: copies
-            operators = new Dictionary<string, OperatorToken>
-            {
-                { "+", OperatorToken.Plus },
-                { "-", OperatorToken.Minus },
-                { "−", OperatorToken.Minus },
-                { "*", OperatorToken.Multiplication },
-                { "×", OperatorToken.Multiplication },
-                { "/", OperatorToken.Division },
-
-                { "^", OperatorToken.Exponentiation },
-                { "!", OperatorToken.Factorial },
-                { "%", OperatorToken.Modulo },
-
-                { ":=", OperatorToken.Assign },
-                { "+=", OperatorToken.AddAssign },
-                { "-=", OperatorToken.SubAssign },
-                { "−=", OperatorToken.SubAssign },
-                { "*=", OperatorToken.MulAssign },
-                { "×=", OperatorToken.MulAssign },
-                { "/=", OperatorToken.DivAssign },
-
-                { "&&", OperatorToken.ConditionalAnd },
-                { "||", OperatorToken.ConditionalOr },
-
-                { "==", OperatorToken.Equal },
-                { "!=", OperatorToken.NotEqual },
-                { "<=", OperatorToken.LessOrEqual },
-                { "<", OperatorToken.LessThan },
-                { ">=", OperatorToken.GreaterOrEqual },
-                { ">", OperatorToken.GreaterThan },
-
-                { "++", OperatorToken.Increment },
-                { "--", OperatorToken.Decrement },
-                { "−−", OperatorToken.Decrement },
-
-                { "~", OperatorToken.Not },
-                { "&", OperatorToken.And },
-                { "|", OperatorToken.Or },
-                { "->", OperatorToken.Implication },
-                { "−>", OperatorToken.Implication },
-                { "=>", OperatorToken.Implication },
-                { "<->", OperatorToken.Equality },
-                { "<−>", OperatorToken.Equality },
-                { "<=>", OperatorToken.Equality },
-            };
-        }
-
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        public IToken CreateToken(string function, ref int index)
+        public IToken CreateToken(ref ReadOnlyMemory<char> function)
         {
-            var endIndex = index;
-            while (endIndex < function.Length && IsOperatorSymbol(function[endIndex]))
+            var span = function.Span;
+
+            var endIndex = 0;
+            while (endIndex < span.Length && IsOperatorSymbol(span[endIndex]))
                 endIndex++;
 
-            if (endIndex > index)
+            if (endIndex > 0 && span.Length >= endIndex)
             {
-                var length = endIndex - index;
-                var operatorMatch = function.Substring(index, length);
+                var operatorMatch = span[..endIndex];
+                IToken token;
 
-                if (operators.TryGetValue(operatorMatch, out var @operator))
-                {
-                    index = endIndex;
+                if (operatorMatch.Equals("+", StringComparison.Ordinal))
+                    token = OperatorToken.Plus;
+                else if (operatorMatch.Equals("-", StringComparison.Ordinal) ||
+                         operatorMatch.Equals("−", StringComparison.Ordinal))
+                    token = OperatorToken.Minus;
+                else if (operatorMatch.Equals("*", StringComparison.Ordinal) ||
+                         operatorMatch.Equals("×", StringComparison.Ordinal))
+                    token = OperatorToken.Multiplication;
+                else if (operatorMatch.Equals("/", StringComparison.Ordinal))
+                    token = OperatorToken.Division;
 
-                    return @operator;
-                }
+                else if (operatorMatch.Equals("^", StringComparison.Ordinal))
+                    token = OperatorToken.Exponentiation;
+                else if (operatorMatch.Equals("!", StringComparison.Ordinal))
+                    token = OperatorToken.Factorial;
+                else if (operatorMatch.Equals("%", StringComparison.Ordinal))
+                    token = OperatorToken.Modulo;
+
+                else if (operatorMatch.Equals(":=", StringComparison.Ordinal))
+                    token = OperatorToken.Assign;
+                else if (operatorMatch.Equals("+=", StringComparison.Ordinal))
+                    token = OperatorToken.AddAssign;
+                else if (operatorMatch.Equals("-=", StringComparison.Ordinal) ||
+                         operatorMatch.Equals("−=", StringComparison.Ordinal))
+                    token = OperatorToken.SubAssign;
+                else if (operatorMatch.Equals("*=", StringComparison.Ordinal) ||
+                         operatorMatch.Equals("×=", StringComparison.Ordinal))
+                    token = OperatorToken.MulAssign;
+                else if (operatorMatch.Equals("/=", StringComparison.Ordinal))
+                    token = OperatorToken.DivAssign;
+
+                else if (operatorMatch.Equals("&&", StringComparison.Ordinal))
+                    token = OperatorToken.ConditionalAnd;
+                else if (operatorMatch.Equals("||", StringComparison.Ordinal))
+                    token = OperatorToken.ConditionalOr;
+
+                else if (operatorMatch.Equals("==", StringComparison.Ordinal))
+                    token = OperatorToken.Equal;
+                else if (operatorMatch.Equals("!=", StringComparison.Ordinal))
+                    token = OperatorToken.NotEqual;
+                else if (operatorMatch.Equals("<=", StringComparison.Ordinal))
+                    token = OperatorToken.LessOrEqual;
+                else if (operatorMatch.Equals("<", StringComparison.Ordinal))
+                    token = OperatorToken.LessThan;
+                else if (operatorMatch.Equals(">=", StringComparison.Ordinal))
+                    token = OperatorToken.GreaterOrEqual;
+                else if (operatorMatch.Equals(">", StringComparison.Ordinal))
+                    token = OperatorToken.GreaterThan;
+
+                else if (operatorMatch.Equals("++", StringComparison.Ordinal))
+                    token = OperatorToken.Increment;
+                else if (operatorMatch.Equals("--", StringComparison.Ordinal) ||
+                         operatorMatch.Equals("−−", StringComparison.Ordinal))
+                    token = OperatorToken.Decrement;
+
+                else if (operatorMatch.Equals("~", StringComparison.Ordinal))
+                    token = OperatorToken.Not;
+                else if (operatorMatch.Equals("&", StringComparison.Ordinal))
+                    token = OperatorToken.And;
+                else if (operatorMatch.Equals("|", StringComparison.Ordinal))
+                    token = OperatorToken.Or;
+                else if (operatorMatch.Equals("->", StringComparison.Ordinal))
+                    token = OperatorToken.Implication;
+                else if (operatorMatch.Equals("−>", StringComparison.Ordinal))
+                    token = OperatorToken.Implication;
+                else if (operatorMatch.Equals("=>", StringComparison.Ordinal))
+                    token = OperatorToken.Implication;
+                else if (operatorMatch.Equals("<->", StringComparison.Ordinal))
+                    token = OperatorToken.Equality;
+                else if (operatorMatch.Equals("<−>", StringComparison.Ordinal))
+                    token = OperatorToken.Equality;
+                else if (operatorMatch.Equals("<=>", StringComparison.Ordinal))
+                    token = OperatorToken.Equality;
+
+                else
+                    return null;
+
+                function = function[endIndex..];
+
+                return token;
             }
 
             return null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsOperatorSymbol(char symbol) =>
-            !char.IsLetterOrDigit(symbol) && !restrictedSymbols.Contains(symbol);
+            !char.IsLetterOrDigit(symbol) &&
+            !char.IsWhiteSpace(symbol) &&
+            !IsRestrictedSymbol(symbol);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool IsRestrictedSymbol(char symbol)
+            => symbol == '(' ||
+               symbol == ')' ||
+               symbol == '{' ||
+               symbol == '}' ||
+               symbol == ',' ||
+               symbol == '°' ||
+               symbol == '∠';
     }
 }

@@ -13,65 +13,64 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    /// <summary>
-    /// The factory which creates number tokens.
-    /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
     internal class NumberTokenFactory : ITokenFactory
     {
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        public IToken CreateToken(string function, ref int index)
+        public IToken CreateToken(ref ReadOnlyMemory<char> function)
         {
-            var endIndex = index;
-            ReadDigits(function, ref endIndex);
+            var span = function.Span;
 
-            if (endIndex > index)
+            var endIndex = 0;
+            ReadDigits(span, ref endIndex);
+
+            if (endIndex > 0 && span.Length >= endIndex)
             {
-                if (CheckNextSymbol(function, ref endIndex, '.'))
+                if (CheckNextSymbol(span, ref endIndex, '.'))
                 {
                     var dotIndex = endIndex;
 
-                    ReadDigits(function, ref endIndex);
+                    ReadDigits(span, ref endIndex);
 
                     if (dotIndex == endIndex)
                         return null;
                 }
 
-                if (CheckNextSymbol(function, ref endIndex, 'e'))
+                if (CheckNextSymbol(span, ref endIndex, 'e') ||
+                    CheckNextSymbol(span, ref endIndex, 'E'))
                 {
-                    // TODO:
-                    if (CheckNextSymbol(function, ref endIndex, '+') ||
-                        CheckNextSymbol(function, ref endIndex, '-'))
-                    {
-                    }
+                    var _ = CheckNextSymbol(span, ref endIndex, '+') ||
+                            CheckNextSymbol(span, ref endIndex, '-');
 
-                    ReadDigits(function, ref endIndex);
+                    ReadDigits(span, ref endIndex);
                 }
 
-                var numberString = function.Substring(index, endIndex - index);
-                var number = double.Parse(numberString, CultureInfo.InvariantCulture);
+                var numberString = span[..endIndex];
+                var number = double.Parse(numberString, provider: CultureInfo.InvariantCulture);
+                var token = new NumberToken(number);
 
-                index = endIndex;
+                function = function[endIndex..];
 
-                return new NumberToken(number);
+                return token;
             }
 
             return null;
         }
 
-        private bool CheckNextSymbol(string function, ref int index, char symbol)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool CheckNextSymbol(in ReadOnlySpan<char> function, ref int index, char symbol)
         {
             var result = index < function.Length && function[index] == symbol;
             if (result)
@@ -80,7 +79,8 @@ namespace xFunc.Maths.Tokenization.Factories
             return result;
         }
 
-        private void ReadDigits(string function, ref int index)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void ReadDigits(in ReadOnlySpan<char> function, ref int index)
         {
             while (index < function.Length && char.IsDigit(function[index]))
                 index++;

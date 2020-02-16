@@ -17,6 +17,7 @@ using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions
 {

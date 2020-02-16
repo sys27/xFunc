@@ -14,42 +14,38 @@
 // limitations under the License.
 
 using System;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    /// <summary>
-    /// The factory which creates number tokens (from binary format).
-    /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
     internal class NumberBinTokenFactory : ITokenFactory
     {
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        public IToken CreateToken(string function, ref int index)
+        public IToken CreateToken(ref ReadOnlyMemory<char> function)
         {
-            // TODO: span?
-            if (index + 2 < function.Length &&
-                function[index] == '0' &&
-                function[index + 1] == 'b')
+            var span = function.Span;
+
+            const int prefixLength = 2;
+
+            if (span.Length > prefixLength && CheckPrefix(span))
             {
-                var numberStart = index + 2;
-                var numberEnd = numberStart;
-                while (numberEnd < function.Length && IsBinaryNumber(function[numberEnd]))
+                var numberEnd = prefixLength;
+                while (numberEnd < function.Length && IsBinaryNumber(span[numberEnd]))
                     numberEnd++;
 
-                if (numberEnd > numberStart)
+                if (numberEnd > prefixLength)
                 {
-                    var numberString = function.Substring(numberStart, numberEnd - numberStart);
-                    var token = new NumberToken(Convert.ToInt64(numberString, 2));
+                    var numberString = span[prefixLength..numberEnd];
+                    var token = new NumberToken(ParseNumbers.ToInt64(numberString, 2));
 
-                    index = numberEnd;
+                    function = function[numberEnd..];
 
                     return token;
                 }
@@ -58,6 +54,11 @@ namespace xFunc.Maths.Tokenization.Factories
             return null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool CheckPrefix(in ReadOnlySpan<char> span)
+            => span[0] == '0' && (span[1] == 'b' || span[1] == 'B');
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsBinaryNumber(char symbol)
             => symbol == '0' || symbol == '1';
     }

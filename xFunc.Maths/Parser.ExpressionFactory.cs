@@ -24,6 +24,7 @@ using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokenization.Tokens;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths
 {

@@ -13,32 +13,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    /// <summary>
-    /// The factory which creates empty result (without token).
-    /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
     internal class EmptyTokenFactory : ITokenFactory
     {
-        private readonly HashSet<char> symbols = new HashSet<char>
-        {
-            ' ', '\n', '\r', '\t', '\v', '\f'
-        };
-
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="index">The start index.</param>
         /// <returns>The token.</returns>
-        public IToken CreateToken(string function, ref int index)
+        public IToken CreateToken(ref ReadOnlyMemory<char> function)
         {
-            while (symbols.Contains(function[index]))
+            var span = function.Span;
+
+            var index = 0;
+            while (char.IsWhiteSpace(span[index]))
                 index++;
+
+            if (index > 0)
+                function = function[index..];
 
             return null;
         }

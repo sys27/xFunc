@@ -59,25 +59,24 @@ namespace xFunc.Maths.Tokenization
             if (string.IsNullOrWhiteSpace(function))
                 throw new ArgumentNullException(nameof(function), Resource.NotSpecifiedFunction);
 
-            // TODO: remove
-            function = function.ToLower();
+            var memory = function.AsMemory();
 
-            for (var index = 0; index < function.Length;)
+            while (memory.Length > 0)
             {
                 IToken result = null;
                 foreach (var factory in factories)
                 {
-                    result = factory.CreateToken(function, ref index);
+                    result = factory.CreateToken(ref memory);
                     if (result == null)
                         continue;
 
-                    yield return result; // TODO: revert?
+                    yield return result;
 
                     break;
                 }
 
                 if (result == null)
-                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, function[index]));
+                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, memory.Span[0]));
             }
         }
     }

@@ -14,41 +14,38 @@
 // limitations under the License.
 
 using System;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    /// <summary>
-    /// The factory which creates number tokens (from octal format).
-    /// </summary>
-    /// <seealso cref="xFunc.Maths.Tokenization.Factories.ITokenFactory" />
     internal class NumberOctTokenFactory : ITokenFactory
     {
         /// <summary>
         /// Creates the token.
         /// </summary>
         /// <param name="function">The string to scan for tokens.</param>
-        /// <param name="index">The start index.</param>
         /// <returns>
         /// The token.
         /// </returns>
-        public IToken CreateToken(string function, ref int index)
+        public IToken CreateToken(ref ReadOnlyMemory<char> function)
         {
-            // TODO: span?
-            if (index + 1 < function.Length &&
-                function[index] == '0')
+            var span = function.Span;
+
+            const int prefixLength = 1;
+
+            if (span.Length > prefixLength && span[0] == '0')
             {
-                var numberStart = index + 1;
-                var numberEnd = numberStart;
-                while (numberEnd < function.Length && IsOctNumber(function[numberEnd]))
+                var numberEnd = prefixLength;
+                while (numberEnd < span.Length && IsOctNumber(span[numberEnd]))
                     numberEnd++;
 
-                if (numberEnd > numberStart)
+                if (numberEnd > prefixLength)
                 {
-                    var numberString = function.Substring(numberStart, numberEnd - numberStart);
-                    var token = new NumberToken(Convert.ToInt64(numberString, 8));
+                    var numberString = span[prefixLength..numberEnd];
+                    var token = new NumberToken(ParseNumbers.ToInt64(numberString, 8));
 
-                    index = numberEnd;
+                    function = function[numberEnd..];
 
                     return token;
                 }
@@ -57,7 +54,8 @@ namespace xFunc.Maths.Tokenization.Factories
             return null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsOctNumber(char symbol)
-            => symbol >= '0' && symbol <= '7';
+            => (uint) (symbol - '0') <= '7' - '0';
     }
 }

@@ -13,21 +13,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using xFunc.Maths.Tokenization.Tokens;
+using System.Linq;
+using Xunit;
 
-namespace xFunc.Maths.Tokenization.Factories
+namespace xFunc.Tests.Tokenization
 {
-    /// <summary>
-    /// The factory of tokens.
-    /// </summary>
-    internal interface ITokenFactory
+    public class OctNumberTests : BaseLexerTests
     {
-        /// <summary>
-        /// Creates the token.
-        /// </summary>
-        /// <param name="function">The string to scan for tokens.</param>
-        /// <returns>The token.</returns>
-        IToken CreateToken(ref ReadOnlyMemory<char> function);
+        [Fact]
+        public void OctTest()
+        {
+            var tokens = lexer.Tokenize("0436");
+            var expected = Builder()
+                .Number(286)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
     }
 }

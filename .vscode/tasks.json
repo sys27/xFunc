@@ -63,9 +63,6 @@
                 "-p:Threshold=90",
                 "-p:ThresholdStat=total"
             ],
-            "presentation": {
-                "reveal": "silent"
-            },
             "problemMatcher": "$msCompile"
         },
         {
@@ -85,9 +82,6 @@
                 "-targetdir:\"../coverage\"",
                 "-reporttypes:HtmlInline_AzurePipelines"
             ],
-            "presentation": {
-                "reveal": "silent"
-            },
             "problemMatcher": "$msCompile"
         }
     ],
@@ -100,7 +94,7 @@
                 "Debug",
                 "Release"
             ],
-            "default": "Debug"
+            "default": "Release"
         }
     ]
 }

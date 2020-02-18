@@ -41,24 +41,7 @@ namespace xFunc.Maths.Results
         /// </returns>
         public override string ToString()
         {
-            // TODO:
-            if (Result.Real == 0)
-            {
-                if (Result.Imaginary == 1)
-                    return "i";
-                if (Result.Imaginary == -1)
-                    return "-i";
-
-                return $"{Result.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
-            }
-
-            if (Result.Imaginary == 0)
-                return $"{Result.Real.ToString(CultureInfo.InvariantCulture)}";
-
-            if (Result.Imaginary > 0)
-                return $"{Result.Real.ToString(CultureInfo.InvariantCulture)}+{Result.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
-
-            return $"{Result.Real.ToString(CultureInfo.InvariantCulture)}{Result.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            return Result.Format();
         }
 
         /// <summary>

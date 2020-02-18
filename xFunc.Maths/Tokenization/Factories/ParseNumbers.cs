@@ -32,7 +32,9 @@ using System.Runtime.CompilerServices;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
-    // TODO: temporary
+    // TODO: temporary?
+    // this class was copied from .NET Core source code (dotnet/runtime),
+    // we need to use Span<T> based API to convert number to number with different bases.
     [ExcludeFromCodeCoverage]
     internal static class ParseNumbers
     {

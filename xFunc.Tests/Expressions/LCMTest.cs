@@ -15,6 +15,7 @@
 
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -41,6 +42,14 @@ namespace xFunc.Tests.Expressions
             var exp = new LCM(new IExpression[] { new Number(4), new Number(16), new Number(8) });
 
             Assert.Equal(16.0, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteNotSupportedTest()
+        {
+            var exp = new LCM(new IExpression[] { new Bool(false), new Bool(true) });
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

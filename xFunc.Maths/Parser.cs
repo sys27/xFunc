@@ -223,7 +223,10 @@ namespace xFunc.Maths
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(@if));
 
-            return CreateFromKeyword(@if, condition, then, @else);
+            if (@else != null)
+                return CreateFromKeyword(@if, condition, then, @else);
+
+            return CreateFromKeyword(@if, condition, then);
         }
 
         private IExpression For(TokenEnumerator tokenEnumerator)
@@ -369,7 +372,6 @@ namespace xFunc.Maths
                                       tokenEnumerator.Keyword(KeywordToken.And) ??
                                       tokenEnumerator.Keyword(KeywordToken.Or) ??
                                       tokenEnumerator.Keyword(KeywordToken.XOr) ??
-                                      tokenEnumerator.Keyword(KeywordToken.Not) ??
                                       tokenEnumerator.Keyword(KeywordToken.Eq) ??
                                       tokenEnumerator.Keyword(KeywordToken.Impl));
 
@@ -464,11 +466,15 @@ namespace xFunc.Maths
             var number = Number(tokenEnumerator);
             if (number != null)
             {
-                var rightUnary = RightUnary(tokenEnumerator);
+                var rightUnary = Function(tokenEnumerator) ??
+                                 Variable(tokenEnumerator) ??
+                                 ParenthesesExpression(tokenEnumerator) ??
+                                 Matrix(tokenEnumerator) ??
+                                 Vector(tokenEnumerator);
                 if (rightUnary != null)
                 {
                     if (@operator != null)
-                        number = CreateUnaryMinux(number);
+                        number = CreateUnaryMinus(number);
 
                     return CreateMultiplication(number, rightUnary);
                 }
@@ -480,17 +486,18 @@ namespace xFunc.Maths
 
         private IExpression LeftUnary(TokenEnumerator tokenEnumerator)
         {
-            var @operator = tokenEnumerator.Operator(OperatorToken.Not) ??
-                            tokenEnumerator.Operator(OperatorToken.Minus) ??
-                            tokenEnumerator.Operator(OperatorToken.Plus);
+            var token = (tokenEnumerator.Operator(OperatorToken.Not) ??
+                         tokenEnumerator.Operator(OperatorToken.Minus) ??
+                         tokenEnumerator.Operator(OperatorToken.Plus)) ??
+                        (IToken) tokenEnumerator.Keyword(KeywordToken.Not);
             var operand = Exponentiation(tokenEnumerator);
-            if (@operator == null || @operator == OperatorToken.Plus)
+            if (token == null || token == OperatorToken.Plus)
                 return operand;
 
-            if (@operator == OperatorToken.Minus)
-                return CreateUnaryMinux(operand);
+            if (token == OperatorToken.Minus)
+                return CreateUnaryMinus(operand);
 
-            return CreateOperator(@operator, operand);
+            return CreateOperatorOrKeyword(token, operand);
         }
 
         private IExpression Exponentiation(TokenEnumerator tokenEnumerator)
@@ -544,10 +551,10 @@ namespace xFunc.Maths
                 return null;
 
             var exp = Expression(tokenEnumerator) ??
-                      throw new ParseException(); // TODO:
+                      throw new ParseException(Resource.ExpParenParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(string.Format(Resource.CloseParenParseException, exp));
 
             return exp;
         }
@@ -587,7 +594,7 @@ namespace xFunc.Maths
             }
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(); // TODO:
+                throw new ParseException(Resource.ParameterListCloseParseException);
 
             return parameterList;
         }

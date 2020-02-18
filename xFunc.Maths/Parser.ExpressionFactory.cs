@@ -281,7 +281,7 @@ namespace xFunc.Maths
         private IExpression CreateMatrix(IExpression[] arguments) =>
             new Matrix(arguments);
 
-        private IExpression CreateUnaryMinux(IExpression operand) =>
+        private IExpression CreateUnaryMinus(IExpression operand) =>
             new UnaryMinus(operand);
 
         private IExpression CreateMultiplication(params IExpression[] arguments) =>

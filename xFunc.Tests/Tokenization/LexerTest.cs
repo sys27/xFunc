@@ -297,6 +297,19 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void ImplicationSymbolTest2()
         {
+            var tokens = lexer.Tokenize("true −> false");
+            var expected = Builder()
+                .True()
+                .Operation(OperatorToken.Implication)
+                .False()
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void ImplicationSymbolTest3()
+        {
             var tokens = lexer.Tokenize("true => false");
             var expected = Builder()
                 .True()

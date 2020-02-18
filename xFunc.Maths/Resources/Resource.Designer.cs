@@ -303,5 +303,23 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("CommaParseException", resourceCulture);
             }
         }
+        
+        internal static string ExpParenParseException {
+            get {
+                return ResourceManager.GetString("ExpParenParseException", resourceCulture);
+            }
+        }
+        
+        internal static string CloseParenParseException {
+            get {
+                return ResourceManager.GetString("CloseParenParseException", resourceCulture);
+            }
+        }
+        
+        internal static string ParameterListCloseParseException {
+            get {
+                return ResourceManager.GetString("ParameterListCloseParseException", resourceCulture);
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
@@ -22,6 +23,7 @@ namespace xFunc.UnitConverters
     /// <summary>
     /// Represents the length converter.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class LengthConverter : Converter<LengthUnits>
     {
         private static readonly Lazy<IDictionary<object, string>> units;
@@ -75,10 +77,7 @@ namespace xFunc.UnitConverters
         /// <value>
         /// The name of this converter.
         /// </value>
-        public override string Name
-        {
-            get { return Resource.LengthConverterName; }
-        }
+        public override string Name => Resource.LengthConverterName;
 
         /// <summary>
         /// Gets the units.
@@ -86,9 +85,6 @@ namespace xFunc.UnitConverters
         /// <value>
         /// The units.
         /// </value>
-        public override IDictionary<object, string> Units
-        {
-            get { return units.Value; }
-        }
+        public override IDictionary<object, string> Units => units.Value;
     }
 }

@@ -187,4 +187,13 @@
   <data name="CommaParseException" xml:space="preserve">
     <value>The comma symbol (',') is expected after '{0}' expression.</value>
   </data>
+  <data name="ExpParenParseException" xml:space="preserve">
+    <value>Cannot parse expression after '(' symbol.</value>
+  </data>
+  <data name="CloseParenParseException" xml:space="preserve">
+    <value>The ')' symbol is expected after '{0}' expression.</value>
+  </data>
+  <data name="ParameterListCloseParseException" xml:space="preserve">
+    <value>The parameter list should end with ')' symbol.</value>
+  </data>
 </root>

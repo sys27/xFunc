@@ -55,12 +55,13 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var diff = (DifferentParametersExpression) obj;
+            var diff = (DifferentParametersExpression)obj;
 
             if (this.m_arguments == null && diff.m_arguments == null)
                 return true;
 
-            if (this.m_arguments == null || diff.m_arguments == null ||
+            if (this.m_arguments == null ||
+                diff.m_arguments == null ||
                 this.m_arguments.Length != diff.m_arguments.Length)
                 return false;
 
@@ -190,16 +191,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                if (Arguments == null)
-                    throw new ArgumentNullException(nameof(Arguments));
-
-                return Arguments.Length;
-            }
-        }
+        public int ParametersCount => Arguments.Length;
 
         /// <summary>
         /// Gets the minimum count of parameters.

@@ -187,4 +187,13 @@
   <data name="CommaParseException" xml:space="preserve">
     <value>Запятая (',') ожидается после выражения '{0}'.</value>
   </data>
+  <data name="CloseParenParseException" xml:space="preserve">
+    <value>Скобка (')') ожидается после выражения '{0}'.</value>
+  </data>
+  <data name="ExpParenParseException" xml:space="preserve">
+    <value>Выражение после символа '(' не может быть распарсено.</value>
+  </data>
+  <data name="ParameterListCloseParseException" xml:space="preserve">
+    <value>Список параметров должен заканчиваться символом ')'.</value>
+  </data>
 </root>

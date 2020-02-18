@@ -168,7 +168,7 @@ namespace xFunc.Maths
                       throw new ParseException(Resource.AssignKeyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CommaMissing(key));
 
             var value = Expression(tokenEnumerator) ??
                         throw new ParseException(Resource.DefValueParseException);
@@ -210,7 +210,7 @@ namespace xFunc.Maths
                             throw new ParseException(Resource.IfConditionParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CommaMissing(condition));
 
             var then = Expression(tokenEnumerator) ??
                        throw new ParseException(Resource.IfThenParseException);
@@ -239,19 +239,19 @@ namespace xFunc.Maths
                        throw new ParseException(Resource.ForBodyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CommaMissing(body));
 
             var init = Statement(tokenEnumerator) ??
                        throw new ParseException(Resource.ForInitParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CommaMissing(init));
 
             var condition = ConditionalOperator(tokenEnumerator) ??
                             throw new ParseException(Resource.ForConditionParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CommaMissing(condition));
 
             var iter = Statement(tokenEnumerator) ??
                        throw new ParseException(Resource.ForIterParseException);
@@ -275,7 +275,7 @@ namespace xFunc.Maths
                        throw new ParseException(Resource.WhileBodyParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.Comma))
-                throw new ParseException(); // TODO:
+                throw new ParseException(CommaMissing(body));
 
             var condition = ConditionalOperator(tokenEnumerator) ??
                             throw new ParseException(Resource.WhileConditionParseException);
@@ -360,38 +360,26 @@ namespace xFunc.Maths
 
             while (true)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.And) ??
-                                tokenEnumerator.Operator(OperatorToken.Or) ??
-                                tokenEnumerator.Operator(OperatorToken.Implication) ??
-                                tokenEnumerator.Operator(OperatorToken.Equality);
-                // TODO:
-                if (@operator == null)
-                {
-                    var keyword = tokenEnumerator.Keyword(KeywordToken.NAnd) ??
-                                  tokenEnumerator.Keyword(KeywordToken.NOr) ??
-                                  tokenEnumerator.Keyword(KeywordToken.And) ??
-                                  tokenEnumerator.Keyword(KeywordToken.Or) ??
-                                  tokenEnumerator.Keyword(KeywordToken.XOr) ??
-                                  tokenEnumerator.Keyword(KeywordToken.Not) ??
-                                  tokenEnumerator.Keyword(KeywordToken.Eq) ??
-                                  tokenEnumerator.Keyword(KeywordToken.Impl);
-                    if (keyword != null)
-                    {
-                        var right2 = EqualityOperator(tokenEnumerator) ??
-                                     throw new ParseException(SecondOperand(keyword));
+                var token = (tokenEnumerator.Operator(OperatorToken.And) ??
+                             tokenEnumerator.Operator(OperatorToken.Or) ??
+                             tokenEnumerator.Operator(OperatorToken.Implication) ??
+                             tokenEnumerator.Operator(OperatorToken.Equality)) ??
+                            (IToken) (tokenEnumerator.Keyword(KeywordToken.NAnd) ??
+                                      tokenEnumerator.Keyword(KeywordToken.NOr) ??
+                                      tokenEnumerator.Keyword(KeywordToken.And) ??
+                                      tokenEnumerator.Keyword(KeywordToken.Or) ??
+                                      tokenEnumerator.Keyword(KeywordToken.XOr) ??
+                                      tokenEnumerator.Keyword(KeywordToken.Not) ??
+                                      tokenEnumerator.Keyword(KeywordToken.Eq) ??
+                                      tokenEnumerator.Keyword(KeywordToken.Impl));
 
-                        left = CreateFromKeyword(keyword, left, right2);
-
-                        continue;
-                    }
-
+                if (token == null)
                     return left;
-                }
 
                 var right = EqualityOperator(tokenEnumerator) ??
-                            throw new ParseException(SecondOperand(@operator));
+                            throw new ParseException(SecondOperand(token));
 
-                left = CreateOperator(@operator, left, right);
+                left = CreateOperatorOrKeyword(token, left, right);
             }
         }
 
@@ -447,30 +435,18 @@ namespace xFunc.Maths
 
             while (true)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.Multiplication) ??
-                                tokenEnumerator.Operator(OperatorToken.Division) ??
-                                tokenEnumerator.Operator(OperatorToken.Modulo);
-                if (@operator == null)
-                {
-                    // TODO:
-                    var keyword = tokenEnumerator.Keyword(KeywordToken.Mod);
-                    if (keyword != null)
-                    {
-                        var right2 = MulImplicit(tokenEnumerator) ??
-                                     throw new ParseException(SecondOperand(keyword));
+                var token = (tokenEnumerator.Operator(OperatorToken.Multiplication) ??
+                             tokenEnumerator.Operator(OperatorToken.Division) ??
+                             tokenEnumerator.Operator(OperatorToken.Modulo)) ??
+                            (IToken) tokenEnumerator.Keyword(KeywordToken.Mod);
 
-                        left = CreateFromKeyword(keyword, left, right2);
-
-                        continue;
-                    }
-
+                if (token == null)
                     return left;
-                }
 
                 var right = MulImplicit(tokenEnumerator) ??
-                            throw new ParseException(SecondOperand(@operator));
+                            throw new ParseException(SecondOperand(token));
 
-                left = CreateOperator(@operator, left, right);
+                left = CreateOperatorOrKeyword(token, left, right);
             }
         }
 
@@ -604,7 +580,7 @@ namespace xFunc.Maths
                 while (tokenEnumerator.Symbol(SymbolToken.Comma))
                 {
                     exp = Expression(tokenEnumerator) ??
-                          throw new ParseException(); // TODO:
+                          throw new ParseException(CommaMissing(exp));
 
                     parameterList.Add(exp);
                 }
@@ -743,5 +719,8 @@ namespace xFunc.Maths
 
         private static string CloseParenthesis(IToken token)
             => string.Format(Resource.FunctionCloseParenthesisParseException, token);
+
+        private static string CommaMissing(IExpression previousExpression)
+            => string.Format(Resource.CommaParseException, previousExpression);
     }
 }

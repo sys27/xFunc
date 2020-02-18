@@ -30,6 +30,16 @@ namespace xFunc.Maths
 {
     public partial class Parser
     {
+        private IExpression CreateOperatorOrKeyword(IToken token, params IExpression[] arguments)
+        {
+            return token switch
+            {
+                OperatorToken operatorToken => CreateOperator(operatorToken, arguments),
+                KeywordToken keywordToken => CreateFromKeyword(keywordToken, arguments),
+                _ => throw new AggregateException(nameof(token))
+            };
+        }
+
         private IExpression CreateOperator(OperatorToken token, params IExpression[] arguments)
         {
             if (token == OperatorToken.Plus)

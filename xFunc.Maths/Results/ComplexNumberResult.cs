@@ -24,15 +24,13 @@ namespace xFunc.Maths.Results
     /// </summary>
     public class ComplexNumberResult : IResult
     {
-        private readonly Complex complex;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberResult"/> class.
         /// </summary>
         /// <param name="complex">The numerical representation of result.</param>
         public ComplexNumberResult(Complex complex)
         {
-            this.complex = complex;
+            this.Result = complex;
         }
 
         /// <summary>
@@ -43,23 +41,24 @@ namespace xFunc.Maths.Results
         /// </returns>
         public override string ToString()
         {
-            if (complex.Real == 0)
+            // TODO:
+            if (Result.Real == 0)
             {
-                if (complex.Imaginary == 1)
+                if (Result.Imaginary == 1)
                     return "i";
-                if (complex.Imaginary == -1)
+                if (Result.Imaginary == -1)
                     return "-i";
 
-                return $"{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+                return $"{Result.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
             }
 
-            if (complex.Imaginary == 0)
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
+            if (Result.Imaginary == 0)
+                return $"{Result.Real.ToString(CultureInfo.InvariantCulture)}";
 
-            if (complex.Imaginary > 0)
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            if (Result.Imaginary > 0)
+                return $"{Result.Real.ToString(CultureInfo.InvariantCulture)}+{Result.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
 
-            return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            return $"{Result.Real.ToString(CultureInfo.InvariantCulture)}{Result.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
         }
 
         /// <summary>
@@ -68,8 +67,8 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The numerical representation of result.
         /// </value>
-        public Complex Result => complex;
+        public Complex Result { get; }
 
-        object IResult.Result => complex;
+        object IResult.Result => Result;
     }
 }

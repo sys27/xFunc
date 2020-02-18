@@ -27,11 +27,13 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace xFunc.Maths.Tokenization.Factories
 {
     // TODO: temporary
+    [ExcludeFromCodeCoverage]
     internal static class ParseNumbers
     {
         public static long ToInt64(ReadOnlySpan<char> value, int fromBase)

@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -9,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build",
-            "program": "${workspaceFolder}/xFunc.Benchmark/bin/Debug/netcoreapp2.2/xFunc.Benchmark.dll",
+            "program": "${workspaceFolder}/xFunc.Benchmark/bin/Debug/netcoreapp3.1/xFunc.Benchmark.dll",
             "args": [],
             "cwd": "${workspaceFolder}/xFunc.Benchmark",
             "console": "internalConsole",
@@ -20,7 +17,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build",
-            "program": "${workspaceFolder}/xFunc.DotnetTool/bin/Debug/netcoreapp2.1/xFunc.DotnetTool.dll",
+            "program": "${workspaceFolder}/xFunc.DotnetTool/bin/Debug/netcoreapp3.0/xFunc.DotnetTool.dll",
             "args": [],
             "cwd": "${workspaceFolder}/xFunc.DotnetTool",
             "console": "integratedTerminal",

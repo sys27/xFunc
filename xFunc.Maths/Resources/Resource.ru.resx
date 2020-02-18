@@ -184,4 +184,7 @@
   <data name="WhileConditionParseException" xml:space="preserve">
     <value>Условие в 'while' выражении не может быть распарсено.</value>
   </data>
+  <data name="CommaParseException" xml:space="preserve">
+    <value>Запятая (',') ожидается после выражения '{0}'.</value>
+  </data>
 </root>

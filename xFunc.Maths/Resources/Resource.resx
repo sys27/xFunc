@@ -184,4 +184,7 @@
   <data name="WhileConditionParseException" xml:space="preserve">
     <value>Cannot parse condition of 'while' expression.</value>
   </data>
+  <data name="CommaParseException" xml:space="preserve">
+    <value>The comma symbol (',') is expected after '{0}' expression.</value>
+  </data>
 </root>

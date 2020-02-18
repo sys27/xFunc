@@ -297,5 +297,11 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("WhileConditionParseException", resourceCulture);
             }
         }
+        
+        internal static string CommaParseException {
+            get {
+                return ResourceManager.GetString("CommaParseException", resourceCulture);
+            }
+        }
     }
 }

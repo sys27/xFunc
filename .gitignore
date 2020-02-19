@@ -2,6 +2,7 @@
 [Oo]bj/
 [Dd]ebug/
 [Rr]elease/
+BenchmarkDotNet.Artifacts/
 TestResults
 packages
 .idea/

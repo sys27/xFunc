@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.UnitConverters.Core",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Tests.Core", "xFunc.Tests\xFunc.Tests.Core.csproj", "{A4C3E90E-647D-4DA8-BA97-C9034C301D37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Benchmark", "xFunc.Benchmark\xFunc.Benchmark.csproj", "{F4260E80-E9F8-4B53-9E08-8ABEB93A724F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A4C3E90E-647D-4DA8-BA97-C9034C301D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4C3E90E-647D-4DA8-BA97-C9034C301D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4C3E90E-647D-4DA8-BA97-C9034C301D37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4260E80-E9F8-4B53-9E08-8ABEB93A724F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4260E80-E9F8-4B53-9E08-8ABEB93A724F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4260E80-E9F8-4B53-9E08-8ABEB93A724F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4260E80-E9F8-4B53-9E08-8ABEB93A724F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-// Copyright 2012-2019 Dmitry Kischenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,7 +59,10 @@ namespace xFunc.Views
         {
             var x = Mouse.GetPosition(this).X;
             var y = Mouse.GetPosition(this).Y;
-            point.Text = string.Format("x: {0} {2} y: {1} {2}", Math.Round((x - centerX) / cm, 2), Math.Round(-(y - centerY) / cm, 2), Resource.cm);
+            var xCm = Math.Round((x - centerX) / cm, 2);
+            var yCm = Math.Round(-(y - centerY) / cm, 2);
+
+            point.Text = string.Format("x: {0} {2} y: {1} {2}", xCm, yCm, Resource.cm);
         }
 
         private void this_SizeChanged(object o, SizeChangedEventArgs args)
@@ -107,39 +110,13 @@ namespace xFunc.Views
 
         private void this_MouseWheel(object o, MouseWheelEventArgs args)
         {
-            if (args.Delta < 0)
-            {
-                if (slider.Value != slider.Maximum)
-                {
-                    if (slider.Value > 1)
-                    {
-                        slider.Value += 0.5;
-                    }
-                    else
-                    {
-                        slider.Value += 0.1;
-                    }
-                }
-            }
-            else
-            {
-                if (slider.Value != slider.Minimum)
-                {
-                    if (slider.Value > 1)
-                    {
-                        slider.Value -= 0.5;
-                    }
-                    else
-                    {
-                        slider.Value -= 0.1;
-                    }
-                }
-            }
+            if (slider.Value != slider.Maximum)
+                slider.Value -= (slider.Value > 1 ? 0.5 : 0.1) * Math.Sign(args.Delta);
         }
 
         private void slider_ValueChanged(object o, RoutedPropertyChangedEventArgs<double> args)
         {
-            double temp = 40;
+            const double temp = 40;
             cm = temp / args.NewValue;
             DrawCurrentCoords();
 
@@ -193,6 +170,7 @@ namespace xFunc.Views
             canvas.ClearVisuals();
             DrawGrid();
             DrawOXOY();
+
             if (exps != null)
             {
                 foreach (var exp in exps)

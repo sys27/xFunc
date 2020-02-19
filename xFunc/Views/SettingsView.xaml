@@ -1,4 +1,4 @@
-﻿<!-- Copyright 2012-2019 Dmitry Kischenko
+﻿<!-- Copyright 2012-2020 Dmytro Kyshchenko
 
 Licensed under the Apache License, Version 2.0 (the "License"); 
 you may not use this file except in compliance with the License.
@@ -46,7 +46,6 @@ limitations under the License. -->
             <ComboBoxItem Content="{x:Static res:Resource.SettingsAutoLang}" Tag="Auto" />
             <ComboBoxItem Content="English" Tag="En" />
             <ComboBoxItem Content="Русский" Tag="Ru" />
-            <ComboBoxItem Content="Українська" Tag="Uk" />
         </ComboBox>
 
         <CheckBox x:Name="positionCheckBox" Content="{x:Static res:Resource.SettingsWindowPos}" Margin="10,41,10,0" VerticalAlignment="Top" IsChecked="True" />

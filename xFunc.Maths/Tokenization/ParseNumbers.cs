@@ -30,7 +30,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace xFunc.Maths.Tokenization.Factories
+namespace xFunc.Maths.Tokenization
 {
     // TODO: temporary?
     // this class was copied from .NET Core source code (dotnet/runtime),

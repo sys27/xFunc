@@ -16,18 +16,11 @@
 using System;
 using xFunc.Maths.Tokenization.Tokens;
 
-namespace xFunc.Maths.Tokenization.Factories
+namespace xFunc.Maths.Tokenization
 {
-    internal class IdTokenFactory : ITokenFactory
+    public partial class Lexer
     {
-        /// <summary>
-        /// Creates the token.
-        /// </summary>
-        /// <param name="function">The string to scan for tokens.</param>
-        /// <returns>
-        /// The token.
-        /// </returns>
-        public IToken CreateToken(ref ReadOnlyMemory<char> function)
+        private IToken CreateIdToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 

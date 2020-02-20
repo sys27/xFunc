@@ -262,7 +262,7 @@ namespace xFunc.Maths
             OperatorToken phaseSign,
             NumberToken phase)
         {
-            int GetSign(OperatorToken token) =>
+            static int GetSign(OperatorToken token) =>
                 token == OperatorToken.Minus ? -1 : 1;
 
             var magnitudeNumber = magnitude.Number * GetSign(magnitudeSign);

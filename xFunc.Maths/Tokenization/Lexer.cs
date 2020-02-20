@@ -16,7 +16,6 @@
 using System;
 using System.Collections.Generic;
 using xFunc.Maths.Resources;
-using xFunc.Maths.Tokenization.Factories;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
@@ -24,28 +23,8 @@ namespace xFunc.Maths.Tokenization
     /// <summary>
     /// The lexer for mathematical expressions.
     /// </summary>
-    public class Lexer : ILexer
+    public partial class Lexer : ILexer
     {
-        private readonly ITokenFactory[] factories;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Lexer"/> class.
-        /// </summary>
-        public Lexer()
-        {
-            factories = new ITokenFactory[]
-            {
-                new EmptyTokenFactory(),
-                new SymbolTokenFactory(),
-                new NumberHexTokenFactory(),
-                new NumberBinTokenFactory(),
-                new NumberOctTokenFactory(),
-                new NumberTokenFactory(),
-                new IdTokenFactory(),
-                new OperationTokenFactory()
-            };
-        }
-
         /// <summary>
         /// Converts the string into a sequence of tokens.
         /// </summary>
@@ -63,21 +42,53 @@ namespace xFunc.Maths.Tokenization
 
             while (memory.Length > 0)
             {
-                IToken result = null;
-                foreach (var factory in factories)
-                {
-                    result = factory.CreateToken(ref memory);
-                    if (result == null)
-                        continue;
-
-                    yield return result;
-
-                    break;
-                }
+                var result = SkipWhiteSpaces(ref memory) ??
+                             CreateSymbol(ref memory) ??
+                             CreateNumberToken(ref memory) ??
+                             CreateIdToken(ref memory) ??
+                             CreateOperatorToken(ref memory);
 
                 if (result == null)
                     throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, memory.Span[0]));
+
+                yield return result;
             }
+        }
+
+        private IToken SkipWhiteSpaces(ref ReadOnlyMemory<char> function)
+        {
+            var span = function.Span;
+
+            var index = 0;
+            while (char.IsWhiteSpace(span[index]))
+                index++;
+
+            if (index > 0)
+                function = function[index..];
+
+            return null;
+        }
+
+        private IToken CreateSymbol(ref ReadOnlyMemory<char> function)
+        {
+            var symbol = function.Span[0] switch
+            {
+                '(' => SymbolToken.OpenParenthesis,
+                ')' => SymbolToken.CloseParenthesis,
+                '{' => SymbolToken.OpenBrace,
+                '}' => SymbolToken.CloseBrace,
+                ',' => SymbolToken.Comma,
+                '∠' => SymbolToken.Angle,
+                '°' => SymbolToken.Degree,
+                _ => null,
+            };
+
+            if (symbol == null)
+                return null;
+
+            function = function[1..];
+
+            return symbol;
         }
     }
 }

@@ -21,7 +21,7 @@ using xFunc.Maths.Resources;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// The base class for binary operators.
+    /// The base class for binary operations.
     /// </summary>
     public abstract class BinaryExpression : IExpression
     {

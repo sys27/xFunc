@@ -83,5 +83,28 @@ namespace xFunc.Tests.ParserTests
 
             ParseErrorTest(tokens);
         }
+
+        [Fact]
+        public void NoCloseParen()
+        {
+            var tokens = Builder()
+                .OpenParenthesis()
+                .Number(2)
+                .Tokens;
+
+            ParseErrorTest(tokens);
+        }
+
+        [Fact]
+        public void NoCloseParenInFunc()
+        {
+            var tokens = Builder()
+                .Id("fund")
+                .OpenParenthesis()
+                .Number(2)
+                .Tokens;
+
+            ParseErrorTest(tokens);
+        }
     }
 }

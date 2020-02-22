@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
@@ -745,291 +744,6 @@ namespace xFunc.Tests.ParserTests
         public void ConvertLogicExpressionToCollectionNullTest()
         {
             Assert.Throws<ArgumentNullException>(() => Helpers.ConvertExpressionToCollection(null));
-        }
-
-        [Fact]
-        public void ComplexNumberTest()
-        {
-            var tokens = Builder()
-                .Number(3)
-                .Operation(OperatorToken.Plus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Add(
-                new Number(3),
-                new Mul(
-                    new Number(2),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexNumberNegativeTest()
-        {
-            var tokens = Builder()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Sub(
-                new Number(3),
-                new Mul(
-                    new Number(2),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexNumberNegativeAllPartsTest()
-        {
-            var tokens = Builder()
-                .Operation(OperatorToken.Minus)
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Sub(
-                new UnaryMinus(new Number(3)),
-                new Mul(
-                    new Number(2),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexNumberNegativeAllPartsWithoutMulTest()
-        {
-            var tokens = Builder()
-                .Operation(OperatorToken.Minus)
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Sub(
-                new UnaryMinus(new Number(3)),
-                new Mul(
-                    new Number(2),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexOnlyRePartTest()
-        {
-            var tokens = Builder()
-                .Number(3)
-                .Operation(OperatorToken.Plus)
-                .Number(0)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Add(
-                new Number(3),
-                new Mul(
-                    new Number(0),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexOnlyImPartTest()
-        {
-            var tokens = Builder()
-                .Number(0)
-                .Operation(OperatorToken.Plus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Add(
-                new Number(0),
-                new Mul(
-                    new Number(2),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexOnlyImPartNegativeTest()
-        {
-            var tokens = Builder()
-                .Number(0)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Sub(
-                new Number(0),
-                new Mul(
-                    new Number(2),
-                    new Variable("i")
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexWithVarTest1()
-        {
-            var tokens = Builder()
-                .VariableX()
-                .Operation(OperatorToken.Minus)
-                .OpenParenthesis()
-                .Number(0)
-                .Operation(OperatorToken.Plus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Sub(
-                Variable.X,
-                new Add(
-                    new Number(0),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexWithVarTest2()
-        {
-            var tokens = Builder()
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .OpenParenthesis()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Add(
-                Variable.X,
-                new Sub(
-                    new Number(3),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexFromPolarTest()
-        {
-            var complex = Complex.FromPolarCoordinates(10, 45 * Math.PI / 180);
-            var tokens = Builder()
-                .Number(10)
-                .Angle()
-                .Number(45 * Math.PI / 180)
-                .Degree()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(complex);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexFromPolarNegativePhaseTest()
-        {
-            var complex = Complex.FromPolarCoordinates(10, -7.1);
-            var tokens = Builder()
-                .Number(10)
-                .Angle()
-                .Operation(OperatorToken.Minus)
-                .Number(7.1)
-                .Degree()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new ComplexNumber(complex);
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexFromPolarNegativeMagnitudeTest()
-        {
-            var complex = Complex.FromPolarCoordinates(10, 7.1);
-            var tokens = Builder()
-                .Operation(OperatorToken.Minus)
-                .Number(10)
-                .Angle()
-                .Number(7.1)
-                .Degree()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new UnaryMinus(new ComplexNumber(complex));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ComplexPolarPhaseExceptionTest()
-        {
-            var tokens = Builder()
-                .Number(7.1)
-                .Degree()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
-        public void ComplexPolarPhaseVariableExceptionTest()
-        {
-            var tokens = Builder()
-                .VariableX()
-                .Degree()
-                .Tokens;
-
-            ParseErrorTest(tokens);
         }
 
         [Fact]
@@ -2641,6 +2355,19 @@ namespace xFunc.Tests.ParserTests
                 }));
 
             Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void MatrixMissingCloseBraceTest()
+        {
+            var tokens = Builder()
+                .OpenBrace()
+                .OpenBrace()
+                .Number(1)
+                .CloseBrace()
+                .Tokens;
+
+            ParseErrorTest(tokens);
         }
 
         [Fact]

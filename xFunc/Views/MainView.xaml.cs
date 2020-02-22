@@ -488,7 +488,7 @@ namespace xFunc.Views
         private void DeleteExp_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = (tabControl.SelectedItem == mathTab && this.mathControl.mathExpsListBox.SelectedItem != null) ||
-                            (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
+                              (tabControl.SelectedItem == graphsTab && this.graphsControl.graphsList.SelectedItem != null);
         }
 
         private void Clear_Execute(object o, ExecutedRoutedEventArgs args)
@@ -502,7 +502,7 @@ namespace xFunc.Views
         private void Clear_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab ||
-                            tabControl.SelectedItem == graphsTab;
+                              tabControl.SelectedItem == graphsTab;
         }
 
         private void VariablesCommand_Execute(object o, ExecutedRoutedEventArgs args)

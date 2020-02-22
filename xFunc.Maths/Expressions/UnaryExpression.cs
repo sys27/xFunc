@@ -21,7 +21,7 @@ using xFunc.Maths.Resources;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// The abstract base class that represents the unary operator.
+    /// The abstract base class that represents the unary operation.
     /// </summary>
     public abstract class UnaryExpression : IExpression
     {

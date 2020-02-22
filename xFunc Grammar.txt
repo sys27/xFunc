@@ -61,7 +61,7 @@ bracketExp = '(' exp ')'
 function = id '(' parameters ')'
 parameters = (statement (',' statement)*)*
 
-vector = 'vector' ('{' / '(') parameters ('}' / ')')
-matrix = 'matrix' ('{' / '(') vector (',' vector) ('}' / ')')
+vector = ('{' / '(') parameters ('}' / ')')
+matrix = ('{' / '(') vector (',' vector) ('}' / ')')
 
 functionDeclaration = id '(' (variable (',' variable)* / '') ')'

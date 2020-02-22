@@ -19,7 +19,7 @@ using xFunc.Maths.Analyzers;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// Represents the Simplify operator.
+    /// Represents the Simplify function.
     /// </summary>
     public class Simplify : UnaryExpression
     {

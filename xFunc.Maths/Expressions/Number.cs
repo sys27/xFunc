@@ -20,7 +20,7 @@ using xFunc.Maths.Analyzers.Formatters;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// Represents the Number operator.
+    /// Represents a number.
     /// </summary>
     public class Number : IExpression
     {

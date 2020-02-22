@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -19,7 +20,6 @@ using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths.Analyzers
 {
-
     /// <summary>
     /// The differentiator of expressions.
     /// </summary>
@@ -27,17 +27,20 @@ namespace xFunc.Maths.Analyzers
     /// <seealso cref="xFunc.Maths.Analyzers.IDifferentiator" />
     public class Differentiator : Analyzer<IExpression>, IDifferentiator
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
-        public Differentiator() : this(new ExpressionParameters(), Variable.X) { }
+        public Differentiator() : this(new ExpressionParameters(), Variable.X)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
-        public Differentiator(Variable variable) : this(new ExpressionParameters(), variable) { }
+        public Differentiator(Variable variable) : this(new ExpressionParameters(), variable)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
@@ -942,7 +945,5 @@ namespace xFunc.Maths.Analyzers
         /// The parameters.
         /// </value>
         public ExpressionParameters Parameters { get; set; }
-
     }
-
 }

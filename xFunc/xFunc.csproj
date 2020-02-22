@@ -1,322 +1,141 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{ADF55CFC-F01F-4F6E-9B62-3894AA1D7247}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xFunc</RootNamespace>
-    <AssemblyName>xFunc</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyVersion>4.0.0</AssemblyVersion>
+    <FileVersion>4.0.0</FileVersion>
+    <InformationalVersion>4.0.0</InformationalVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright © 2012-2020 Dmytro Kyshchenko</Copyright>
+    <Title>xFunc</Title>
+    <Product>xFunc</Product>
     <ApplicationIcon>Images\xFunc.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
-    </Reference>
-    <Reference Include="Fluent, Version=6.1.0.326, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Fluent.Ribbon.6.1.0.326\lib\net45\Fluent.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <None Remove="Images\Add.png" />
+    <None Remove="Images\Clear.png" />
+    <None Remove="Images\ClearLarge.png" />
+    <None Remove="Images\Converter.png" />
+    <None Remove="Images\ConverterLarge.png" />
+    <None Remove="Images\Copy.png" />
+    <None Remove="Images\CopyLarge.png" />
+    <None Remove="Images\Copy_16.png" />
+    <None Remove="Images\Cut.png" />
+    <None Remove="Images\CutLarge.png" />
+    <None Remove="Images\Delete.png" />
+    <None Remove="Images\DeleteLarge.png" />
+    <None Remove="Images\Edit.png" />
+    <None Remove="Images\Function.png" />
+    <None Remove="Images\FunctionLarge.png" />
+    <None Remove="Images\Help.png" />
+    <None Remove="Images\Paste.png" />
+    <None Remove="Images\PasteLarge.png" />
+    <None Remove="Images\Redo.png" />
+    <None Remove="Images\RedoLarge.png" />
+    <None Remove="Images\Refresh.png" />
+    <None Remove="Images\Remove.png" />
+    <None Remove="Images\Tools.png" />
+    <None Remove="Images\Undo.png" />
+    <None Remove="Images\UndoLarge.png" />
+    <None Remove="Images\Variable.png" />
+    <None Remove="Images\VariableLarge.png" />
+    <None Remove="Images\Vars.png" />
+    <None Remove="Images\VarsLarge.png" />
+    <None Remove="Images\xFunc.ico" />
   </ItemGroup>
+
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Converters\InverseBooleanConverter.cs" />
-    <Compile Include="MiniDump.cs" />
-    <Compile Include="Presenters\GraphsPresenter.cs" />
-    <Compile Include="Presenters\MathPresenter.cs" />
-    <Compile Include="Presenters\MathWorkspace.cs" />
-    <Compile Include="Presenters\MathWorkspaceItem.cs" />
-    <Compile Include="Presenters\OutputFormats.cs" />
-    <Compile Include="Presenters\TruthTablePresenter.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
+    <PackageReference Include="Fluent.Ribbon" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
+    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Resource.Designer.cs">
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Resource.ru.Designer.cs">
+    <Compile Update="Resources\Resource.ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.ru.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Resource.uk.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.uk.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\FunctionViewModel.cs" />
-    <Compile Include="ViewModels\GraphItemViewModel.cs" />
-    <Compile Include="ViewModels\MathWorkspaceItemViewModel.cs" />
-    <Compile Include="ViewModels\TruthTableRowViewModel.cs" />
-    <Compile Include="ViewModels\VariableViewModel.cs" />
-    <Compile Include="Views\AboutView.xaml.cs">
-      <DependentUpon>AboutView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddFunctionView.xaml.cs">
-      <DependentUpon>AddFunctionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddVariableView.xaml.cs">
-      <DependentUpon>AddVariableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Converter.xaml.cs">
-      <DependentUpon>Converter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DrawingCanvas.cs" />
-    <Compile Include="Views\FunctionView.xaml.cs">
-      <DependentUpon>FunctionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GraphsControl.xaml.cs">
-      <DependentUpon>GraphsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\IGraphsView.cs" />
-    <Compile Include="Views\IMathView.cs" />
-    <Compile Include="Views\IView.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MathControl.xaml.cs">
-      <DependentUpon>MathControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PlottingGraph.xaml.cs">
-      <DependentUpon>PlottingGraph.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TruthTableControl.xaml.cs">
-      <DependentUpon>TruthTableControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\VariableView.xaml.cs">
-      <DependentUpon>VariableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WindowExtentions.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <AppDesigner Include="Properties\" />
+    <EmbeddedResource Update="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Resource.ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Page Include="Operations.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="StylesForControls.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AboutView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddFunctionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddVariableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Converter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FunctionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\GraphsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MathControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PlottingGraph.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TruthTableControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\VariableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\xFunc.ico" />
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="..\LICENSE">
       <Link>LICENSE</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="app.config" />
     <None Include="NOTICE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="ViewModels\BaseViewModel.cs" />
   </ItemGroup>
+
   <ItemGroup>
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\Clear.png" />
+    <Resource Include="Images\ClearLarge.png" />
+    <Resource Include="Images\Converter.png" />
+    <Resource Include="Images\ConverterLarge.png" />
     <Resource Include="Images\Copy.png" />
     <Resource Include="Images\CopyLarge.png" />
+    <Resource Include="Images\Copy_16.png" />
     <Resource Include="Images\Cut.png" />
     <Resource Include="Images\CutLarge.png" />
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\DeleteLarge.png" />
+    <Resource Include="Images\Edit.png" />
+    <Resource Include="Images\Function.png" />
+    <Resource Include="Images\FunctionLarge.png" />
+    <Resource Include="Images\Help.png" />
     <Resource Include="Images\Paste.png" />
     <Resource Include="Images\PasteLarge.png" />
     <Resource Include="Images\Redo.png" />
     <Resource Include="Images\RedoLarge.png" />
-    <Resource Include="Images\Undo.png" />
-    <Resource Include="Images\UndoLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Vars.png" />
-    <Resource Include="Images\VarsLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Resource.uk.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.uk.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.ru.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj">
-      <Project>{91ad4fbf-d01a-4bd3-b3e9-caf885cc208c}</Project>
-      <Name>xFunc.Maths</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj">
-      <Project>{2ecaad28-e0ce-40be-8eb0-0d055c908133}</Project>
-      <Name>xFunc.UnitConverters</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Clear.png" />
-    <Resource Include="Images\ClearLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Delete.png" />
-    <Resource Include="Images\DeleteLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Variable.png" />
-    <Resource Include="Images\VariableLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Function.png" />
-    <Resource Include="Images\FunctionLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Add.png" />
-    <Resource Include="Images\Edit.png" />
     <Resource Include="Images\Refresh.png" />
     <Resource Include="Images\Remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\LICENSE_Ms-PL.txt">
-      <Link>LICENSE_Ms-PL.txt</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Converter.png" />
-    <Resource Include="Images\ConverterLarge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Copy_16.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Tools.png" />
+    <Resource Include="Images\Undo.png" />
+    <Resource Include="Images\UndoLarge.png" />
+    <Resource Include="Images\Variable.png" />
+    <Resource Include="Images\VariableLarge.png" />
+    <Resource Include="Images\Vars.png" />
+    <Resource Include="Images\VarsLarge.png" />
+    <Resource Include="Images\xFunc.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

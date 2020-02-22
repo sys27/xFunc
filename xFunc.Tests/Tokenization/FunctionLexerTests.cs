@@ -1,347 +1,336 @@
 // Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Linq;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
 namespace xFunc.Tests.Tokenization
 {
-
     public class FunctionLexerTests : BaseLexerTests
     {
-
         [Fact]
         public void Exp()
         {
-            FuncTest("exp", Functions.Exp);
+            FuncTest("exp");
         }
 
         [Fact]
         public void Abs()
         {
-            FuncTest("abs", Functions.Absolute);
+            FuncTest("abs");
         }
 
         [Fact]
         public void Sh()
         {
-            FuncTest("sh", Functions.Sineh);
+            FuncTest("sh");
         }
 
         [Fact]
         public void Sinh()
         {
-            FuncTest("sinh", Functions.Sineh);
+            FuncTest("sinh");
         }
 
         [Fact]
         public void Ch()
         {
-            FuncTest("ch", Functions.Cosineh);
+            FuncTest("ch");
         }
 
         [Fact]
         public void Cosh()
         {
-            FuncTest("cosh", Functions.Cosineh);
+            FuncTest("cosh");
         }
 
         [Fact]
         public void Th()
         {
-            FuncTest("th", Functions.Tangenth);
+            FuncTest("th");
         }
 
         [Fact]
         public void Tanh()
         {
-            FuncTest("tanh", Functions.Tangenth);
+            FuncTest("tanh");
         }
 
         [Fact]
         public void Cth()
         {
-            FuncTest("cth", Functions.Cotangenth);
+            FuncTest("cth");
         }
 
         [Fact]
         public void Coth()
         {
-            FuncTest("coth", Functions.Cotangenth);
+            FuncTest("coth");
         }
 
         [Fact]
         public void Sech()
         {
-            FuncTest("sech", Functions.Secanth);
+            FuncTest("sech");
         }
 
         [Fact]
         public void Csch()
         {
-            FuncTest("csch", Functions.Cosecanth);
+            FuncTest("csch");
         }
 
         [Fact]
         public void Arsinh()
         {
-            FuncTest("arsinh", Functions.Arsineh);
+            FuncTest("arsinh");
         }
 
         [Fact]
         public void Arsh()
         {
-            FuncTest("arsh", Functions.Arsineh);
+            FuncTest("arsh");
         }
 
         [Fact]
         public void Arcosh()
         {
-            FuncTest("arcosh", Functions.Arcosineh);
+            FuncTest("arcosh");
         }
 
         [Fact]
         public void Arch()
         {
-            FuncTest("arch", Functions.Arcosineh);
+            FuncTest("arch");
         }
 
         [Fact]
         public void Artanh()
         {
-            FuncTest("artanh", Functions.Artangenth);
+            FuncTest("artanh");
         }
 
         [Fact]
         public void Arth()
         {
-            FuncTest("arth", Functions.Artangenth);
+            FuncTest("arth");
         }
 
         [Fact]
         public void Arcoth()
         {
-            FuncTest("arcoth", Functions.Arcotangenth);
+            FuncTest("arcoth");
         }
 
         [Fact]
         public void Arcth()
         {
-            FuncTest("arcth", Functions.Arcotangenth);
+            FuncTest("arcth");
         }
 
         [Fact]
         public void Arsech()
         {
-            FuncTest("arsech", Functions.Arsecanth);
+            FuncTest("arsech");
         }
 
         [Fact]
         public void Arsch()
         {
-            FuncTest("arsch", Functions.Arsecanth);
+            FuncTest("arsch");
         }
 
         [Fact]
         public void Arcsch()
         {
-            FuncTest("arcsch", Functions.Arcosecanth);
+            FuncTest("arcsch");
         }
 
         [Fact]
         public void Sin()
         {
-            FuncTest("sin", Functions.Sine);
+            FuncTest("sin");
         }
 
         [Fact]
         public void Cosec()
         {
-            FuncTest("cosec", Functions.Cosecant);
+            FuncTest("cosec");
         }
 
         [Fact]
         public void Csc()
         {
-            FuncTest("csc", Functions.Cosecant);
+            FuncTest("csc");
         }
 
         [Fact]
         public void Cos()
         {
-            FuncTest("cos", Functions.Cosine);
+            FuncTest("cos");
         }
 
         [Fact]
         public void Tg()
         {
-            FuncTest("tg", Functions.Tangent);
+            FuncTest("tg");
         }
 
         [Fact]
         public void Tan()
         {
-            FuncTest("tan", Functions.Tangent);
+            FuncTest("tan");
         }
 
         [Fact]
         public void Ctg()
         {
-            FuncTest("ctg", Functions.Cotangent);
+            FuncTest("ctg");
         }
 
         [Fact]
         public void Cot()
         {
-            FuncTest("cot", Functions.Cotangent);
+            FuncTest("cot");
         }
 
         [Fact]
         public void Sec()
         {
-            FuncTest("sec", Functions.Secant);
+            FuncTest("sec");
         }
 
         [Fact]
         public void Arcsin()
         {
-            FuncTest("arcsin", Functions.Arcsine);
+            FuncTest("arcsin");
         }
 
         [Fact]
         public void Arccosec()
         {
-            FuncTest("arccosec", Functions.Arccosecant);
+            FuncTest("arccosec");
         }
 
         [Fact]
         public void Arccsc()
         {
-            FuncTest("arccsc", Functions.Arccosecant);
+            FuncTest("arccsc");
         }
 
         [Fact]
         public void Arccos()
         {
-            FuncTest("arccos", Functions.Arccosine);
+            FuncTest("arccos");
         }
 
         [Fact]
         public void Arctg()
         {
-            FuncTest("arctg", Functions.Arctangent);
+            FuncTest("arctg");
         }
 
         [Fact]
         public void Arctan()
         {
-            FuncTest("arctan", Functions.Arctangent);
+            FuncTest("arctan");
         }
 
         [Fact]
         public void Arcctg()
         {
-            FuncTest("arcctg", Functions.Arccotangent);
+            FuncTest("arcctg");
         }
 
         [Fact]
         public void Arccot()
         {
-            FuncTest("arccot", Functions.Arccotangent);
+            FuncTest("arccot");
         }
 
         [Fact]
         public void Arcsec()
         {
-            FuncTest("arcsec", Functions.Arcsecant);
+            FuncTest("arcsec");
         }
 
         [Fact]
         public void Sqrt()
         {
-            FuncTest("sqrt", Functions.Sqrt);
+            FuncTest("sqrt");
         }
 
         [Fact]
         public void Round()
         {
-            FuncTest("round", Functions.Round);
+            FuncTest("round");
         }
 
         [Fact]
         public void Ceil()
         {
-            FuncTest("ceil", Functions.Ceil);
+            FuncTest("ceil");
         }
 
         [Fact]
         public void Floor()
         {
-            FuncTest("floor", Functions.Floor);
+            FuncTest("floor");
         }
 
         [Fact]
         public void Root()
         {
-            var tokens = lexer.Tokenize("root(27, 3)");
-            var expected = Builder()
-                .Function(Functions.Root, 2)
-                .OpenBracket()
-                .Number(27)
-                .Comma()
-                .Number(3)
-                .CloseBracket()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
+            FuncBinaryTest("root");
         }
 
         [Fact]
         public void Lg()
         {
-            FuncTest("lg", Functions.Lg);
+            FuncTest("lg");
         }
 
         [Fact]
         public void Ln()
         {
-            FuncTest("ln", Functions.Ln);
+            FuncTest("ln");
         }
 
         [Fact]
         public void Lb()
         {
-            FuncTest("lb", Functions.Lb);
+            FuncTest("lb");
         }
 
         [Fact]
         public void Log2()
         {
-            FuncTest("log2", Functions.Lb);
+            FuncTest("log2");
         }
 
         [Fact]
         public void Log()
         {
-            FuncBinaryTest("log", Functions.Log);
+            FuncBinaryTest("log");
         }
 
         [Fact]
         public void SignTest()
         {
-            FuncTest("sign", Functions.Sign);
+            FuncTest("sign");
         }
 
         [Fact]
@@ -349,20 +338,17 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("del(2x + 3y + 4z)");
             var expected = Builder()
-                .Function(Functions.Del, 1)
-                .OpenBracket()
+                .Id("del")
+                .OpenParenthesis()
                 .Number(2)
-                .Operation(Operations.Multiplication)
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(OperatorToken.Plus)
                 .Number(3)
-                .Operation(Operations.Multiplication)
                 .VariableY()
-                .Operation(Operations.Addition)
+                .Operation(OperatorToken.Plus)
                 .Number(4)
-                .Operation(Operations.Multiplication)
-                .Variable("z")
-                .CloseBracket()
+                .Id("z")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -373,20 +359,17 @@ namespace xFunc.Tests.Tokenization
         {
             var tokens = lexer.Tokenize("nabla(2x + 3y + 4z)");
             var expected = Builder()
-                .Function(Functions.Del, 1)
-                .OpenBracket()
+                .Id("nabla")
+                .OpenParenthesis()
                 .Number(2)
-                .Operation(Operations.Multiplication)
                 .VariableX()
-                .Operation(Operations.Addition)
+                .Operation(OperatorToken.Plus)
                 .Number(3)
-                .Operation(Operations.Multiplication)
                 .VariableY()
-                .Operation(Operations.Addition)
+                .Operation(OperatorToken.Plus)
                 .Number(4)
-                .Operation(Operations.Multiplication)
-                .Variable("z")
-                .CloseBracket()
+                .Id("z")
+                .CloseParenthesis()
                 .Tokens;
 
             Assert.Equal(expected, tokens.ToList());
@@ -395,81 +378,79 @@ namespace xFunc.Tests.Tokenization
         [Fact]
         public void AddTest()
         {
-            FuncBinaryTest("add", Functions.Add);
+            FuncBinaryTest("add");
         }
 
         [Fact]
         public void SubTest()
         {
-            FuncBinaryTest("sub", Functions.Sub);
+            FuncBinaryTest("sub");
         }
 
         [Fact]
         public void MulTest()
         {
-            FuncBinaryTest("mul", Functions.Mul);
+            FuncBinaryTest("mul");
         }
 
         [Fact]
         public void DivTest()
         {
-            FuncBinaryTest("div", Functions.Div);
+            FuncBinaryTest("div");
         }
 
         [Fact]
         public void PowTest()
         {
-            FuncBinaryTest("pow", Functions.Pow);
+            FuncBinaryTest("pow");
         }
 
         [Fact]
         public void MinTest()
         {
-            FuncBinaryTest("min", Functions.Min);
+            FuncBinaryTest("min");
         }
 
         [Fact]
         public void MaxTest()
         {
-            FuncBinaryTest("max", Functions.Max);
+            FuncBinaryTest("max");
         }
 
         [Fact]
         public void AvgTest()
         {
-            FuncBinaryTest("avg", Functions.Avg);
+            FuncBinaryTest("avg");
         }
 
         [Fact]
         public void CountTest()
         {
-            FuncBinaryTest("count", Functions.Count);
+            FuncBinaryTest("count");
         }
 
         [Fact]
         public void VarTest()
         {
-            FuncBinaryTest("var", Functions.Var);
+            FuncBinaryTest("var");
         }
 
         [Fact]
         public void VarpTest()
         {
-            FuncBinaryTest("varp", Functions.Varp);
+            FuncBinaryTest("varp");
         }
 
         [Fact]
         public void StdevTest()
         {
-            FuncBinaryTest("stdev", Functions.Stdev);
+            FuncBinaryTest("stdev");
         }
 
         [Fact]
         public void StdevpTest()
         {
-            FuncBinaryTest("stdevp", Functions.Stdevp);
+            FuncBinaryTest("stdevp");
         }
-
     }
-
 }

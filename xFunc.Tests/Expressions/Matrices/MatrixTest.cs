@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions;
@@ -19,10 +20,8 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
-
     public class MatrixTest
     {
-
         [Fact]
         public void MulByNumberMatrixTest()
         {
@@ -288,7 +287,6 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(-7), new Number(8), new Number(9) }),
                 new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
                 new Vector(new[] { new Number(1), new Number(-2), new Number(3) })
-
             });
 
             matrix.SwapRows(0, 2);
@@ -334,10 +332,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(0.4), new Number(-0.0833333333333333), new Number(6.41666666666667), new Number(2.75) }),
                 new Vector(new[] { new Number(0.6), new Number(0.638888888888889), new Number(-0.601731601731602), new Number(4.90476190476191) })
             });
-
-            int[] perm;
-            int toggle;
-            var actual = MatrixExtensions.LUPDecomposition(matrix, null, out perm, out toggle);
+            var actual = MatrixExtensions.LUPDecomposition(matrix, null, out _, out _);
 
             Assert.Equal(expected, actual);
         }
@@ -378,7 +373,5 @@ namespace xFunc.Tests.Expressions.Matrices
 
             Assert.Equal(exp, clone);
         }
-
     }
-
 }

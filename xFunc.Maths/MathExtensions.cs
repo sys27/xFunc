@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Globalization;
 using System.Linq;
@@ -19,13 +20,11 @@ using System.Numerics;
 
 namespace xFunc.Maths
 {
-
     /// <summary>
     /// Provides static methods for additional functions.
     /// </summary>
     public static class MathExtensions
     {
-
         /// <summary>
         /// Returns a specified number raised to the specified power.
         /// </summary>
@@ -275,19 +274,14 @@ namespace xFunc.Maths
         /// <returns>String that contains the number in the new numeral system.</returns>
         public static string ToNewBase(int number, NumeralSystem numeralSystem)
         {
-            switch (numeralSystem)
+            return numeralSystem switch
             {
-                case NumeralSystem.Decimal:
-                    return number.ToString(CultureInfo.InvariantCulture);
-                case NumeralSystem.Binary:
-                    return "0b" + Convert.ToString(number, 2);
-                case NumeralSystem.Octal:
-                    return "0" + Convert.ToString(number, 8);
-                case NumeralSystem.Hexidecimal:
-                    return "0x" + Convert.ToString(number, 16);
-                default:
-                    return null;
-            }
+                NumeralSystem.Decimal => number.ToString(CultureInfo.InvariantCulture),
+                NumeralSystem.Binary => "0b" + Convert.ToString(number, 2),
+                NumeralSystem.Octal => "0" + Convert.ToString(number, 8),
+                NumeralSystem.Hexidecimal => "0x" + Convert.ToString(number, 16),
+                _ => null,
+            };
         }
 
         /// <summary>
@@ -308,6 +302,30 @@ namespace xFunc.Maths
             return result;
         }
 
-    }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="complex"></param>
+        /// <returns></returns>
+        public static string Format(this Complex complex)
+        {
+            if (complex.Real == 0)
+            {
+                if (complex.Imaginary == 1)
+                    return "i";
+                if (complex.Imaginary == -1)
+                    return "-i";
 
+                return $"{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            }
+
+            if (complex.Imaginary == 0)
+                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
+
+            if (complex.Imaginary > 0)
+                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+
+            return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+        }
+    }
 }

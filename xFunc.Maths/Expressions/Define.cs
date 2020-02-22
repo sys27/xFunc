@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -19,13 +20,11 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Define operation.
+    /// Represents the Define operator.
     /// </summary>
-    public class Define : IFunctionExpression
+    public class Define : IExpression
     {
-
         private IExpression key;
         private IExpression value;
 
@@ -38,6 +37,22 @@ namespace xFunc.Maths.Expressions
         {
             this.Key = key;
             this.Value = value;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Define"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        internal Define(IExpression[] arguments)
+        {
+            if (arguments.Length < 2)
+                throw new ParseException(Resource.LessParams);
+            if (arguments.Length > 2)
+                throw new ParseException(Resource.MoreParams);
+
+            this.Key = arguments[0];
+            this.Value = arguments[1];
         }
 
         /// <summary>
@@ -63,7 +78,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -169,24 +184,13 @@ namespace xFunc.Maths.Expressions
         public IExpression Parent { get; set; }
 
         /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int ParametersCount => 2;
-
-        /// <summary>
         /// Gets or sets the key.
         /// </summary>
         /// <value>The key.</value>
         /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
         public IExpression Key
         {
-            get
-            {
-                return key;
-            }
+            get { return key; }
             set
             {
                 if (value == null)
@@ -208,10 +212,7 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="System.ArgumentNullException"><paramref name="value"/> is null.</exception>
         public IExpression Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
             set
             {
                 if (value == null)
@@ -220,7 +221,5 @@ namespace xFunc.Maths.Expressions
                 this.value = value;
             }
         }
-
     }
-
 }

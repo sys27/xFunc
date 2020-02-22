@@ -1,30 +1,29 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents user-defined functions.
     /// </summary>
     public class UserFunction : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserFunction"/> class.
         /// </summary>
@@ -32,11 +31,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="args">Arguments.</param>
         public UserFunction(string function, IExpression[] args) : base(args)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-
             this.Function = function;
-            this.Arguments = args;
         }
 
         /// <summary>
@@ -56,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -88,7 +83,7 @@ namespace xFunc.Maths.Expressions
             for (var i = 0; i < m_arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Name] = (double)this.m_arguments[i].Execute(parameters);
+                newParameters[arg.Name] = (double) this.m_arguments[i].Execute(parameters);
             }
 
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
@@ -123,6 +118,20 @@ namespace xFunc.Maths.Expressions
         /// <value>The name of function.</value>
         public string Function { get; }
 
-    }
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => null;
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => null;
+    }
 }

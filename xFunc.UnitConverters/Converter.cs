@@ -1,38 +1,39 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 
 namespace xFunc.UnitConverters
 {
-
     /// <summary>
     /// The base class for converters.
     /// </summary>
     /// <typeparam name="TUnit">The type that represents units (eg. enum).</typeparam>
     public abstract class Converter<TUnit> : IConverter
     {
-
         /// <summary>
         /// The base unit for this convertor.
         /// </summary>
         protected static TUnit BaseUnit;
+
         /// <summary>
         /// Dictionary of functions to convert from the base unit type into a specific type.
         /// </summary>
         protected static readonly Dictionary<TUnit, Func<double, double>> convTo = new Dictionary<TUnit, Func<double, double>>();
+
         /// <summary>
         /// Dictionary of functions to convert from the specified type into the base unit type.
         /// </summary>
@@ -40,7 +41,7 @@ namespace xFunc.UnitConverters
 
         double IConverter.Convert(double value, object from, object to)
         {
-            return Convert(value, (TUnit)from, (TUnit)to);
+            return Convert(value, (TUnit) from, (TUnit) to);
         }
 
         /// <summary>
@@ -90,5 +91,4 @@ namespace xFunc.UnitConverters
         /// </value>
         public abstract IDictionary<object, string> Units { get; }
     }
-
 }

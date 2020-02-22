@@ -1,0 +1,67 @@
+// It's just a reference grammar for xFunc (The implementaion is not completely equal to grammar).
+
+statement = unaryAssign 
+          / binaryAssign
+          / assign
+          / def
+          / undef
+          / if
+          / for
+          / while
+          / exp
+
+unaryAssign = variable ('++' / '--')
+binaryAssign = variable ('+=' / '-=' / '*=' / '/=') exp
+
+assignmentKey = functionDeclaration / variable
+assign = assignmentKey ':=' exp
+def = ('def' / 'define') '(' assignmentKey ',' exp ')'
+undef = ('undef' / 'undefine') '(' assignmentKey ')'
+
+if = 'if' '(' conditional ',' exp (',' exp)* ')'
+for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
+while = 'while' '(' exp ',' conditional ')'
+
+exp = binary 
+binary = conditional
+
+conditional = bitwise (('&&' / '||') bitwise)*
+bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '<=>' / '<->' / 'eq' / 'nor' / 'nand') equality)*
+equality = addSub (('==' / '!=' / '<' / '<=' / '>' / '>=') addSub)*
+addSub = mulDivMod (('+' / '-') mulDivMod)*
+mulDivMod = mulImplicit (('*' / '/' / '%') mulImplicit)*
+mulImplicit = mulImplicitLeftUnary / leftUnary
+mulImplicitLeftUnary = '-'* number rightUnary
+leftUnary = ('~' / '-')* exponentiation
+exponentiation = rightUnary ('^' exponentiation)*
+rightUnary = (number '!') / operand
+
+operand = complexnumber /
+          number /
+          function /
+          variable /
+          boolean /
+          bracketExp /
+          matrix /
+          vector
+
+digitWithoutZero = [1-9]
+digit = [0] / digitWithoutZero
+letter = [a-z]
+
+number = digitWithoutZero (digit)*
+id = letter (digit / letter)*
+variable = id
+boolean = 'true' / 'false'
+
+complexnumber = number '∠' number '°'
+
+bracketExp = '(' exp ')'
+
+function = id '(' parameters ')'
+parameters = (statement (',' statement)*)*
+
+vector = ('{' / '(') parameters ('}' / ')')
+matrix = ('{' / '(') vector (',' vector) ('}' / ')')
+
+functionDeclaration = id '(' (variable (',' variable)* / '') ')'

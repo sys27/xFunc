@@ -1,29 +1,28 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-
     /// <summary>
     /// Represents the "for" loop.
     /// </summary>
     public class For : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="For"/> class.
         /// </summary>
@@ -31,7 +30,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The iterator section.</param>
-        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : base(new[] { body, init, cond, iter }) { }
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : this(new[] { body, init, cond, iter })
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="For" /> class.
@@ -40,8 +41,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <exception cref="System.ArgumentNullException"><paramref name="arguments"/> is null.</exception>
         public For(IExpression[] arguments) : base(arguments)
         {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
         }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            for (Initialization.Execute(parameters); (bool)Condition.Execute(parameters); Iteration.Execute(parameters))
+            for (Initialization.Execute(parameters); (bool) Condition.Execute(parameters); Iteration.Execute(parameters))
                 Body.Execute(parameters);
 
             return double.NaN;
@@ -116,6 +115,20 @@ namespace xFunc.Maths.Expressions.Programming
         /// </value>
         public IExpression Iteration => m_arguments[3];
 
-    }
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 4;
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => 4;
+    }
 }

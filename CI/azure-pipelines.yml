@@ -30,8 +30,6 @@ jobs:
     - script: echo '##vso[task.setvariable variable=nupkgVersion]$(defaultPackageVersion)-preview$(Build.BuildNumber)
       condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-    - task: NuGetToolInstaller@1
-
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
       inputs:
@@ -42,14 +40,14 @@ jobs:
       displayName: 'dotnet build'
       inputs:
         projects: '$(solution)'
-        arguments: '-c Release'
+        arguments: '-c $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet test'
       inputs:
         command: test
         projects: '$(solution)'
-        arguments: '-c Release -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/" -p:ExcludeByAttribute="ExcludeFromCodeCoverage" -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total'
+        arguments: '-c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/" -p:ExcludeByAttribute="ExcludeFromCodeCoverage" -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total'
         publishTestResults: true
 
     - task: CmdLine@2
@@ -67,18 +65,20 @@ jobs:
 
     - task: CmdLine@2
       inputs:
-        script: '"%userprofile%/.nuget/packages/codecov/1.7.2/tools/codecov.exe" -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
+        script: '"%userprofile%/.nuget/packages/codecov/1.10.0/tools/codecov.exe" -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
         failOnStderr: true
 
-    - task: NuGetCommand@2
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
       inputs:
-        restoreSolution: '$(uiSolution)'
+        command: restore
+        projects: '$(uiSolution)'
 
-    - task: VSBuild@1
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
       inputs:
-        solution: '$(uiSolution)'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
+        projects: '$(uiSolution)'
+        arguments: '-c Release'
     
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
@@ -93,12 +93,12 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.Maths/bin/Release
+        path: xFunc.Maths/bin/Release/netstandard2.1
         artifact: xFunc.Maths
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc.UnitConverters/bin/Release
+        path: xFunc.UnitConverters/bin/Release/netstandard2.1
         artifact: xFunc.UnitConverters
 
     - task: PublishPipelineArtifact@1
@@ -108,5 +108,5 @@ jobs:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        path: xFunc/bin/Release
+        path: xFunc/bin/Release/netcoreapp3.1
         artifact: xFunc.UI

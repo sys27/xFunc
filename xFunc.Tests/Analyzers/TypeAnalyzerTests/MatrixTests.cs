@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -20,10 +21,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-
     public class MatrixTests : TypeAnalyzerBaseTests
     {
-
         [Fact]
         public void TestVectorUndefined()
         {
@@ -67,26 +66,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixNotVectorElement()
         {
-            Assert.Throws<MatrixIsInvalidException>(() => new Matrix(2, 2)
-            {
-                Arguments = new IExpression[] { new Number(2) }
-            });
-        }
-
-        [Fact]
-        public void TestEmptyMatrix()
-        {
-            var exp = new Matrix(0, 0);
-
-            Test(exp, ResultType.Matrix);
-        }
-
-        [Fact]
-        public void TestNullMatrix()
-        {
-            var exp = new Matrix(0, 0) { Arguments = null };
-
-            Test(exp, ResultType.Matrix);
+            Assert.Throws<MatrixIsInvalidException>(() => new Matrix(new IExpression[] { new Number(2) }));
         }
 
         [Fact]
@@ -100,7 +80,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDeterminantMatrix()
         {
-            var exp = new Determinant(new Matrix(2, 2));
+            var exp = new Determinant(Matrix.Create(2, 2));
 
             Test(exp, ResultType.Number);
         }
@@ -139,7 +119,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInverseMatrix()
         {
-            var exp = new Inverse(new Matrix(2, 2));
+            var exp = new Inverse(Matrix.Create(2, 2));
 
             Test(exp, ResultType.Matrix);
         }
@@ -294,7 +274,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTransposeMatrix()
         {
-            var exp = new Transpose(new Matrix(2, 2));
+            var exp = new Transpose(Matrix.Create(2, 2));
 
             Test(exp, ResultType.Matrix);
         }
@@ -306,7 +286,5 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 
             TestException(exp);
         }
-
     }
-
 }

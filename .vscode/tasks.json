@@ -1,64 +1,87 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
             "label": "Build",
-            "type": "shell",
+            "command": "dotnet",
+            "type": "process",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "dotnet build xFunc.sln -c ${input:configurationType}",
-            "presentation": {
-                "reveal": "silent"
-            },
+            "args": [
+                "build",
+                "${workspaceFolder}/xFunc.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/xFunc.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "problemMatcher": "$msCompile"
         },
         {
             "label": "Test",
-            "type": "shell",
+            "command": "dotnet",
+            "type": "process",
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
-            "command": "dotnet test xFunc.sln -c ${input:configurationType}",
-            "presentation": {
-                "reveal": "silent"
-            },
+            "args": [
+                "test",
+                "${workspaceFolder}/xFunc.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "problemMatcher": "$msCompile"
         },
         {
             "label": "Code Coverage",
-            "type": "shell",
             "group": "test",
-            "command": "dotnet test -c ${input:configurationType} -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=\"../coverage/\" -p:ExcludeByAttribute=\"ExcludeFromCodeCoverage\" -p:Include=\"[xFunc.*]*\" -p:Exclude=\"[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception\" -p:Threshold=90 -p:ThresholdStat=total",
-            "presentation": {
-                "reveal": "silent"
-            },
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/xFunc.sln",
+                "-c:${input:configurationType}",
+                "-p:CollectCoverage=true",
+                "-p:CoverletOutputFormat=cobertura",
+                "-p:CoverletOutput=\"../coverage/\"",
+                "-p:ExcludeByAttribute=\"ExcludeFromCodeCoverage\"",
+                "-p:Include=\"[xFunc.*]*\"",
+                "-p:Exclude=\"[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception\"",
+                "-p:Threshold=90",
+                "-p:ThresholdStat=total"
+            ],
             "problemMatcher": "$msCompile"
         },
         {
             "label": "Generate Report",
+            "group": "test",
             "dependsOn": [
                 "Code Coverage"
             ],
-            "type": "shell",
-            "group": "test",
+            "command": "dotnet",
+            "type": "process",
             "options": {
                 "cwd": "${workspaceRoot}/xFunc.Tests/"
             },
-            "command": "dotnet",
             "args": [
                 "reportgenerator",
                 "-reports:\"../coverage/coverage.cobertura.xml\"",
                 "-targetdir:\"../coverage\"",
                 "-reporttypes:HtmlInline_AzurePipelines"
             ],
-            "presentation": {
-                "reveal": "silent"
-            },
             "problemMatcher": "$msCompile"
         }
     ],
@@ -71,7 +94,7 @@
                 "Debug",
                 "Release"
             ],
-            "default": "Debug"
+            "default": "Release"
         }
     ]
 }

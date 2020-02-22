@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "xFunc.Benchmark",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build",
+            "program": "${workspaceFolder}/xFunc.Benchmark/bin/Debug/netcoreapp3.1/xFunc.Benchmark.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/xFunc.Benchmark",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "xFunc.DotnetTool",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build",
+            "program": "${workspaceFolder}/xFunc.DotnetTool/bin/Debug/netcoreapp3.0/xFunc.DotnetTool.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/xFunc.DotnetTool",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+    ]
+}

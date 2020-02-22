@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
@@ -22,10 +23,8 @@ using Xunit;
 
 namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
-
     public class StandardTests : TypeAnalyzerBaseTests
     {
-
         [Fact]
         public void TestAbsNumber()
         {
@@ -94,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddTwoVectorTest()
         {
             var add = new Add(new Vector(new[] { new Number(1) }),
-                              new Vector(new[] { new Number(2) }));
+                new Vector(new[] { new Number(2) }));
 
             Test(add, ResultType.Vector);
         }
@@ -103,7 +102,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddTwoMatrixTest()
         {
             var add = new Add(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(add, ResultType.Matrix);
         }
@@ -231,7 +230,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddMatrixAllTest()
         {
-            var exp = new Add(new Matrix(1, 1), new UserFunction("f", new IExpression[1]));
+            var exp = new Add(Matrix.Create(1, 1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -338,16 +337,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Derivative(diff, simp, Variable.X, Variable.X, new Number(2));
 
             Test(exp, ResultType.Number);
-        }
-
-        [Fact]
-        public void TestDerivException()
-        {
-            var diff = new Differentiator();
-            var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, new IExpression[] { Variable.X, new Number(1) });
-
-            TestException(exp);
         }
 
         [Fact]
@@ -551,14 +540,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestGCDEmpty()
-        {
-            var exp = new GCD(new IExpression[0]);
-
-            Test(exp, ResultType.Undefined);
-        }
-
-        [Fact]
         public void TestLbUndefined()
         {
             var exp = new Lb(Variable.X);
@@ -596,14 +577,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) });
 
             Test(exp, ResultType.Number);
-        }
-
-        [Fact]
-        public void TestLCMEmpty()
-        {
-            var exp = new LCM(new IExpression[0]);
-
-            Test(exp, ResultType.Undefined);
         }
 
         [Fact]
@@ -681,7 +654,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogUndefined()
         {
-            var exp = new Log(Variable.X, new Number(2));
+            var exp = new Log(new Number(2), Variable.X);
 
             Test(exp, ResultType.Undefined);
         }
@@ -689,7 +662,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogNumber()
         {
-            var exp = new Log(new Number(4), new Number(2));
+            var exp = new Log(new Number(2), new Number(4));
 
             Test(exp, ResultType.Number);
         }
@@ -697,7 +670,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogComplexNumber()
         {
-            var exp = new Log(new ComplexNumber(8, 3), new Number(2));
+            var exp = new Log(new Number(2), new ComplexNumber(8, 3));
 
             Test(exp, ResultType.ComplexNumber);
         }
@@ -705,7 +678,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogException()
         {
-            var exp = new Log(new Bool(false), new Number(2));
+            var exp = new Log(new Number(2), new Bool(false));
 
             TestBinaryException(exp);
         }
@@ -713,7 +686,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogBaseIsNotNumber()
         {
-            var exp = new Log(new Number(2), new Bool(false));
+            var exp = new Log(new Bool(false), new Number(2));
 
             TestBinaryException(exp);
         }
@@ -802,7 +775,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulTwoMatrixTest()
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(mul, ResultType.Matrix);
         }
@@ -811,7 +784,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulLeftMatrixRightException()
         {
             var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                              new Bool(false));
+                new Bool(false));
 
             TestBinaryException(mul);
         }
@@ -820,7 +793,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulRightMatrixLeftException()
         {
             var mul = new Mul(new Bool(false),
-                              new Matrix(new[] { new Vector(new[] { new Number(1) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(1) }) }));
 
             TestBinaryException(mul);
         }
@@ -845,7 +818,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulVectorMatrixTest()
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }),
-                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(mul, ResultType.Matrix);
         }
@@ -854,7 +827,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulVectorNumber()
         {
             var mul = new Mul(new Vector(new[] { new Number(1) }),
-                              new Number(2));
+                new Number(2));
 
             Test(mul, ResultType.Vector);
         }
@@ -1082,7 +1055,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubTwoVectorTest()
         {
             var sub = new Sub(new Vector(new[] { new Number(1) }),
-                              new Vector(new[] { new Number(2) }));
+                new Vector(new[] { new Number(2) }));
 
             Test(sub, ResultType.Vector);
         }
@@ -1091,7 +1064,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubTwoMatrixTest()
         {
             var sub = new Sub(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                              new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
+                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
 
             Test(sub, ResultType.Matrix);
         }
@@ -1235,7 +1208,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubMatrixAllTest()
         {
-            var exp = new Sub(new Matrix(1, 1), new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(Matrix.Create(1, 1), new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultType.Undefined);
         }
@@ -1345,6 +1318,5 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             TestException(new Sign(new Bool(false)));
         }
-
     }
 }

@@ -1,31 +1,31 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// The base class for expressions with different number of parameters.
     /// </summary>
-    public abstract class DifferentParametersExpression : IFunctionExpression
+    public abstract class DifferentParametersExpression : IExpression
     {
-
         /// <summary>
         /// The arguments.
         /// </summary>
@@ -60,7 +60,8 @@ namespace xFunc.Maths.Expressions
             if (this.m_arguments == null && diff.m_arguments == null)
                 return true;
 
-            if (this.m_arguments == null || diff.m_arguments == null ||
+            if (this.m_arguments == null ||
+                diff.m_arguments == null ||
                 this.m_arguments.Length != diff.m_arguments.Length)
                 return false;
 
@@ -71,12 +72,9 @@ namespace xFunc.Maths.Expressions
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(7951, 8807);
-        }
+        public override int GetHashCode() => GetHashCode(7951, 8807);
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -84,7 +82,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="first">The first.</param>
         /// <param name="second">The second.</param>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         protected int GetHashCode(int first, int second)
         {
@@ -98,10 +96,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -109,10 +104,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
@@ -120,10 +112,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public virtual object Execute()
-        {
-            return Execute(null);
-        }
+        public virtual object Execute() => Execute(null);
 
         /// <summary>
         /// Executes this expression.
@@ -177,17 +166,22 @@ namespace xFunc.Maths.Expressions
         /// <value>The arguments.</value>
         public virtual IExpression[] Arguments
         {
-            get
-            {
-                return m_arguments;
-            }
+            get => m_arguments;
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(Arguments));
+
+                if (value.Length < MinParametersCount)
+                    throw new ArgumentException(Resource.LessParams, nameof(Arguments));
+
+                if (value.Length > MaxParametersCount)
+                    throw new ArgumentException(Resource.MoreParams, nameof(Arguments));
+
                 m_arguments = value;
-                if (m_arguments != null)
-                    foreach (var item in m_arguments)
-                        if (item != null)
-                            item.Parent = this;
+                foreach (var item in m_arguments)
+                    if (item != null)
+                        item.Parent = this;
             }
         }
 
@@ -197,17 +191,22 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount
-        {
-            get
-            {
-                if (Arguments == null)
-                    throw new ArgumentNullException(nameof(Arguments));
+        public int ParametersCount => Arguments.Length;
 
-                return Arguments.Length;
-            }
-        }
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public abstract int? MinParametersCount { get; }
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public abstract int? MaxParametersCount { get; }
     }
-
 }

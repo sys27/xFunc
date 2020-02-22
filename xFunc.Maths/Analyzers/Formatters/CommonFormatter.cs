@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
@@ -26,18 +27,18 @@ using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths.Analyzers.Formatters
 {
-
     /// <summary>
     /// Converts expressions into string.
     /// </summary>
     /// <seealso cref="xFunc.Maths.Analyzers.Formatters.IFormatter" />
     public class CommonFormatter : IFormatter
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonFormatter"/> class.
         /// </summary>
-        public CommonFormatter() { }
+        public CommonFormatter()
+        {
+        }
 
         private string ToString(UnaryExpression exp, string format)
         {
@@ -60,6 +61,7 @@ namespace xFunc.Maths.Analyzers.Formatters
                     sb.Append(item).Append(", ");
                 sb.Remove(sb.Length - 2, 2);
             }
+
             sb.Append(')');
 
             return sb.ToString();
@@ -516,24 +518,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(ComplexNumber exp)
         {
-            var complex = exp.Value;
-            if (complex.Real == 0)
-            {
-                if (complex.Imaginary == 1)
-                    return "i";
-                if (complex.Imaginary == -1)
-                    return "-i";
-
-                return $"{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
-            }
-
-            if (complex.Imaginary == 0)
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
-
-            if (complex.Imaginary > 0)
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
-
-            return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+            return exp.Value.Format();
         }
 
         /// <summary>
@@ -709,7 +694,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         {
             return ToString(exp, "tan({0})");
         }
-
 
         #endregion
 
@@ -1253,7 +1237,5 @@ namespace xFunc.Maths.Analyzers.Formatters
         }
 
         #endregion Programming
-
     }
-
 }

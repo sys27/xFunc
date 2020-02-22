@@ -1,42 +1,53 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
-    /// Represents the Multiplication operation.
+    /// Represents the Multiplication operator.
     /// </summary>
     public class Mul : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Mul"/> class.
         /// </summary>
         /// <param name="left">The first (left) operand.</param>
         /// <param name="right">The second (right) operand.</param>
-        public Mul(IExpression left, IExpression right) : base(left, right) { }
+        public Mul(IExpression left, IExpression right) : base(left, right)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Mul"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        internal Mul(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -72,8 +83,8 @@ namespace xFunc.Maths.Expressions
 
             if (leftResult is Matrix || rightResult is Matrix || leftResult is Vector || rightResult is Vector)
             {
-                var leftExpResult = leftResult as IExpression ?? new Number((double)leftResult);
-                var rightExpResult = rightResult as IExpression ?? new Number((double)rightResult);
+                var leftExpResult = leftResult as IExpression ?? new Number((double) leftResult);
+                var rightExpResult = rightResult as IExpression ?? new Number((double) rightResult);
 
                 if (leftExpResult is Vector leftVector1 && rightExpResult is Vector rightVector1)
                     return leftVector1.Mul(rightVector1, parameters);
@@ -85,6 +96,7 @@ namespace xFunc.Maths.Expressions
 
                     return leftVector2.Mul(rightExpResult, parameters);
                 }
+
                 if (rightExpResult is Vector rightVector2)
                 {
                     if (leftExpResult is Matrix leftMatrix1)
@@ -125,7 +137,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Mul(m_left.Clone(), m_right.Clone());
         }
-
     }
-
 }

@@ -1,30 +1,31 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.UnitConverters.Resources;
 
 namespace xFunc.UnitConverters
 {
-
     /// <summary>
     /// Represents the area converter.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class AreaConverter : Converter<AreaUnits>
     {
-
         private static readonly Lazy<IDictionary<object, string>> units;
 
         static AreaConverter()
@@ -62,13 +63,7 @@ namespace xFunc.UnitConverters
         /// <value>
         /// The name of this converter.
         /// </value>
-        public override string Name
-        {
-            get
-            {
-                return Resource.AreaConverterName;
-            }
-        }
+        public override string Name => Resource.AreaConverterName;
 
         /// <summary>
         /// Gets the units.
@@ -76,14 +71,6 @@ namespace xFunc.UnitConverters
         /// <value>
         /// The units.
         /// </value>
-        public override IDictionary<object, string> Units
-        {
-            get
-            {
-                return units.Value;
-            }
-        }
-
+        public override IDictionary<object, string> Units => units.Value;
     }
-
 }

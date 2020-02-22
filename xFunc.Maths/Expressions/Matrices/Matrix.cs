@@ -1,31 +1,29 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
-
     /// <summary>
     /// Represents a matrix.
     /// </summary>
     public class Matrix : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
@@ -33,10 +31,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
         public Matrix(IExpression[] args) : base(args)
         {
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
-            if (args.Length == 0)
-                throw new ArgumentException(Resource.MatrixArgException, nameof(args));
         }
 
         /// <summary>
@@ -44,13 +38,33 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="matrixSize">The size of the matrix.</param>
         /// <param name="vectorSize">The size of the vector.</param>
-        public Matrix(int matrixSize, int vectorSize) : base(null)
+        public static Matrix Create(int matrixSize, int vectorSize)
         {
             var vectors = new Vector[matrixSize];
             for (var i = 0; i < vectors.Length; i++)
                 vectors[i] = new Vector(vectorSize);
 
-            Arguments = vectors;
+            return new Matrix(vectors);
+        }
+
+        /// <summary>
+        /// Creates an identity matrix.
+        /// </summary>
+        /// <param name="sizeOfMatrix">The size of matrix.</param>
+        /// <returns>An identity matrix.</returns>
+        public static Matrix CreateIdentity(int sizeOfMatrix)
+        {
+            var matrix = Create(sizeOfMatrix, sizeOfMatrix);
+
+            for (var i = 0; i < sizeOfMatrix; i++)
+            {
+                for (var j = 0; j < sizeOfMatrix; j++)
+                    matrix[i][j] = new Number(0);
+
+                matrix[i][i] = new Number(1);
+            }
+
+            return matrix;
         }
 
         /// <summary>
@@ -63,14 +77,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of matrix.</returns>
         public Vector this[int index]
         {
-            get
-            {
-                return (Vector)m_arguments[index];
-            }
-            set
-            {
-                m_arguments[index] = value;
-            }
+            get { return (Vector) m_arguments[index]; }
+            set { m_arguments[index] = value; }
         }
 
         /// <summary>
@@ -84,21 +92,15 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of matrix.</returns>
         public IExpression this[int row, int col]
         {
-            get
-            {
-                return this[row][col];
-            }
-            set
-            {
-                this[row][col] = value;
-            }
+            get { return this[row][col]; }
+            set { this[row][col] = value; }
         }
 
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -110,7 +112,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var args = new Vector[this.ParametersCount];
 
             for (var i = 0; i < this.ParametersCount; i++)
-                args[i] = (Vector)m_arguments[i].Execute(parameters);
+                args[i] = (Vector) m_arguments[i].Execute(parameters);
 
             return args;
         }
@@ -150,13 +152,13 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector)x));
+            return new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector) x));
         }
 
         internal double[][] ToCalculatedArray(ExpressionParameters parameters)
         {
             return (from Vector vector in m_arguments.AsParallel().AsOrdered()
-                    select vector.ToCalculatedArray(parameters)).ToArray();
+                select vector.ToCalculatedArray(parameters)).ToArray();
         }
 
         /// <summary>
@@ -199,35 +201,12 @@ namespace xFunc.Maths.Expressions.Matrices
         }
 
         /// <summary>
-        /// Creates an identity matrix.
-        /// </summary>
-        /// <param name="sizeOfMatrix">The size of matrix.</param>
-        /// <returns>An identity matrix.</returns>
-        public static Matrix CreateIdentity(int sizeOfMatrix)
-        {
-            var matrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
-
-            for (var i = 0; i < sizeOfMatrix; i++)
-            {
-                for (var j = 0; j < sizeOfMatrix; j++)
-                    matrix[i][j] = new Number(0);
-
-                matrix[i][i] = new Number(1);
-            }
-
-            return matrix;
-        }
-
-        /// <summary>
         /// Gets or sets the arguments.
         /// </summary>
         /// <value>The arguments.</value>
         public override IExpression[] Arguments
         {
-            get
-            {
-                return m_arguments;
-            }
+            get { return m_arguments; }
             set
             {
                 if (value != null && value.Length > 0)
@@ -236,10 +215,8 @@ namespace xFunc.Maths.Expressions.Matrices
                     for (var i = 0; i < vectors.Length; i++)
                     {
                         var vector = value[i] as Vector;
-                        if (vector == null)
-                            throw new MatrixIsInvalidException();
 
-                        vectors[i] = vector;
+                        vectors[i] = vector ?? throw new MatrixIsInvalidException();
                     }
 
                     var size = vectors[0].ParametersCount;
@@ -277,6 +254,20 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </value>
         public bool IsSquare => this.ParametersCount == this.SizeOfVectors;
 
-    }
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 1;
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => null;
+    }
 }

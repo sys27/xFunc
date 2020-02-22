@@ -1,41 +1,51 @@
-﻿// Copyright 2014 Ronny Weidemann
+// Copyright 2014 Ronny Weidemann
 // Copyright 2014-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// Represents the "ceil" function.
     /// </summary>
     public class Ceil : UnaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Ceil" /> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded up.</param>
-        public Ceil(IExpression argument) : base(argument) { }
+        public Ceil(IExpression argument) : base(argument)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ceil"/> class.
+        /// </summary>
+        /// <param name="arguments">The argument of function.</param>
+        /// <seealso cref="IExpression"/>
+        internal Ceil(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -82,7 +92,5 @@ namespace xFunc.Maths.Expressions
         {
             return new Ceil(m_argument.Clone());
         }
-
     }
-
 }

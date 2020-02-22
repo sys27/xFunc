@@ -1,35 +1,45 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
 {
-
     /// <summary>
-    /// Represents the "+=" operation.
+    /// Represents the "+=" operator.
     /// </summary>
     public class AddAssign : BinaryExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AddAssign"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
-        public AddAssign(IExpression variable, IExpression exp) : base(variable, exp) { }
+        public AddAssign(IExpression variable, IExpression exp) : base(variable, exp)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddAssign"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        /// <seealso cref="IExpression"/>
+        internal AddAssign(IExpression[] arguments) : base(arguments)
+        {
+        }
 
         /// <summary>
         /// Executes this expression.
@@ -41,12 +51,12 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var var = (Variable)m_left;
+            var var = (Variable) m_left;
             var parameter = parameters.Variables[var.Name];
             if (parameter is bool)
                 throw new NotSupportedException();
 
-            var newValue = Convert.ToDouble(parameter) + (double)m_right.Execute(parameters);
+            var newValue = Convert.ToDouble(parameter) + (double) m_right.Execute(parameters);
             parameters.Variables[var.Name] = newValue;
 
             return newValue;
@@ -81,10 +91,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         public override IExpression Left
         {
-            get
-            {
-                return m_left;
-            }
+            get { return m_left; }
             set
             {
                 if (!(value is Variable))
@@ -93,7 +100,5 @@ namespace xFunc.Maths.Expressions.Programming
                 base.Left = value;
             }
         }
-
     }
-
 }

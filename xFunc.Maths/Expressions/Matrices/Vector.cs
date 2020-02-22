@@ -1,17 +1,18 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
@@ -19,25 +20,27 @@ using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
-
     /// <summary>
     /// Represents a vector.
     /// </summary>
     public class Vector : DifferentParametersExpression
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="args">The values of vector.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IExpression[] args) : base(args) { }
+        public Vector(IExpression[] args) : base(args)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="size">The size of vector.</param>
-        public Vector(int size) : base(new IExpression[size]) { }
+        public Vector(int size) : base(new IExpression[size])
+        {
+        }
 
         /// <summary>
         /// Gets or sets the <see cref="IExpression"/> at the specified index.
@@ -49,21 +52,15 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of vector.</returns>
         public IExpression this[int index]
         {
-            get
-            {
-                return m_arguments[index];
-            }
-            set
-            {
-                m_arguments[index] = value;
-            }
+            get { return m_arguments[index]; }
+            set { m_arguments[index] = value; }
         }
 
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -85,7 +82,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     if (result is double doubleResult)
                         args[i] = new Number(doubleResult);
                     else
-                        args[i] = new Number((int)result);
+                        args[i] = new Number((int) result);
                 }
                 else
                 {
@@ -137,7 +134,7 @@ namespace xFunc.Maths.Expressions.Matrices
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
             return (from exp in m_arguments.AsParallel().AsOrdered()
-                    select (double)exp.Execute(parameters)).ToArray();
+                select (double) exp.Execute(parameters)).ToArray();
         }
 
         /// <summary>
@@ -148,10 +145,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </value>
         public sealed override IExpression[] Arguments
         {
-            get
-            {
-                return base.Arguments;
-            }
+            get { return base.Arguments; }
             set
             {
                 if (value == null)
@@ -163,6 +157,20 @@ namespace xFunc.Maths.Expressions.Matrices
             }
         }
 
-    }
+        /// <summary>
+        /// Gets the minimum count of parameters.
+        /// </summary>
+        /// <value>
+        /// The minimum count of parameters.
+        /// </value>
+        public override int? MinParametersCount => 1;
 
+        /// <summary>
+        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// </summary>
+        /// <value>
+        /// The maximum count of parameters.
+        /// </value>
+        public override int? MaxParametersCount => null;
+    }
 }

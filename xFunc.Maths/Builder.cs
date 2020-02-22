@@ -1,18 +1,20 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Expressions;
@@ -21,13 +23,11 @@ using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Maths
 {
-
     /// <summary>
     /// The expression builder.
     /// </summary>
     public class Builder : IExpression
     {
-
         private IExpression current;
 
         /// <summary>
@@ -35,7 +35,6 @@ namespace xFunc.Maths
         /// </summary>
         public Builder()
         {
-
         }
 
         /// <summary>
@@ -72,6 +71,7 @@ namespace xFunc.Maths
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
+        [ExcludeFromCodeCoverage]
         public string ToString(IFormatter formatter)
         {
             return this.Analyze(formatter);
@@ -83,6 +83,7 @@ namespace xFunc.Maths
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
+        [ExcludeFromCodeCoverage]
         public override string ToString()
         {
             return current.ToString();
@@ -137,7 +138,7 @@ namespace xFunc.Maths
         /// <returns>The builder.</returns>
         public Builder Init(double number)
         {
-            return Init((IExpression)new Number(number));
+            return Init((IExpression) new Number(number));
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace xFunc.Maths
         /// <returns>The builder.</returns>
         public Builder Init(string variable)
         {
-            return Init((IExpression)new Variable(variable));
+            return Init((IExpression) new Variable(variable));
         }
 
         private void CheckCurrentExpression()
@@ -195,7 +196,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Add(double summand)
         {
-            return Add((IExpression)new Number(summand));
+            return Add((IExpression) new Number(summand));
         }
 
         /// <summary>
@@ -206,7 +207,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Add(string summand)
         {
-            return Add((IExpression)new Variable(summand));
+            return Add((IExpression) new Variable(summand));
         }
 
         /// <summary>
@@ -232,7 +233,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sub(double subtrahend)
         {
-            return Sub((IExpression)new Number(subtrahend));
+            return Sub((IExpression) new Number(subtrahend));
         }
 
         /// <summary>
@@ -243,7 +244,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Sub(string subtrahend)
         {
-            return Sub((IExpression)new Variable(subtrahend));
+            return Sub((IExpression) new Variable(subtrahend));
         }
 
         /// <summary>
@@ -269,7 +270,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Mul(double factor)
         {
-            return Mul((IExpression)new Number(factor));
+            return Mul((IExpression) new Number(factor));
         }
 
         /// <summary>
@@ -280,7 +281,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Mul(string factor)
         {
-            return Mul((IExpression)new Variable(factor));
+            return Mul((IExpression) new Variable(factor));
         }
 
         /// <summary>
@@ -306,7 +307,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Div(double denominator)
         {
-            return Div((IExpression)new Number(denominator));
+            return Div((IExpression) new Number(denominator));
         }
 
         /// <summary>
@@ -317,7 +318,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Div(string denominator)
         {
-            return Div((IExpression)new Variable(denominator));
+            return Div((IExpression) new Variable(denominator));
         }
 
         /// <summary>
@@ -343,7 +344,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Pow(double exponent)
         {
-            return Pow((IExpression)new Number(exponent));
+            return Pow((IExpression) new Number(exponent));
         }
 
         /// <summary>
@@ -354,7 +355,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Pow(string exponent)
         {
-            return Pow((IExpression)new Variable(exponent));
+            return Pow((IExpression) new Variable(exponent));
         }
 
         /// <summary>
@@ -394,7 +395,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Root(double degree)
         {
-            return Root((IExpression)new Number(degree));
+            return Root((IExpression) new Number(degree));
         }
 
         /// <summary>
@@ -405,7 +406,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Root(string degree)
         {
-            return Root((IExpression)new Variable(degree));
+            return Root((IExpression) new Variable(degree));
         }
 
         /// <summary>
@@ -432,7 +433,7 @@ namespace xFunc.Maths
         {
             CheckCurrentExpression();
 
-            current = new Log(current, @base);
+            current = new Log(@base, current);
 
             return this;
         }
@@ -445,7 +446,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Log(double @base)
         {
-            return Log((IExpression)new Number(@base));
+            return Log((IExpression) new Number(@base));
         }
 
         /// <summary>
@@ -456,7 +457,7 @@ namespace xFunc.Maths
         /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
         public Builder Log(string @base)
         {
-            return Log((IExpression)new Variable(@base));
+            return Log((IExpression) new Variable(@base));
         }
 
         /// <summary>
@@ -881,6 +882,7 @@ namespace xFunc.Maths
         /// <returns>
         /// The analysis result.
         /// </returns>
+        [ExcludeFromCodeCoverage]
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
             return this.current.Analyze(analyzer);
@@ -892,6 +894,7 @@ namespace xFunc.Maths
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
+        [ExcludeFromCodeCoverage]
         public IExpression Clone()
         {
             return current.Clone();
@@ -903,13 +906,8 @@ namespace xFunc.Maths
         /// <exception cref="System.NotImplementedException">Always.</exception>
         public IExpression Parent
         {
-            get
-            {
-                return null;
-            }
-            set
-            {
-            }
+            [ExcludeFromCodeCoverage] get { return null; }
+            [ExcludeFromCodeCoverage] set { }
         }
 
         #endregion
@@ -921,7 +919,5 @@ namespace xFunc.Maths
         /// The current expression.
         /// </value>
         public IExpression Current => current;
-
     }
-
 }

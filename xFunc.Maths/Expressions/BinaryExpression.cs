@@ -1,34 +1,35 @@
-﻿// Copyright 2012-2020 Dmytro Kyshchenko
+// Copyright 2012-2020 Dmytro Kyshchenko
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); 
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
-// express or implied. 
-// See the License for the specific language governing permissions and 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
-
     /// <summary>
     /// The base class for binary operations.
     /// </summary>
-    public abstract class BinaryExpression : IFunctionExpression
+    public abstract class BinaryExpression : IExpression
     {
-
         /// <summary>
         /// The left (first) operand.
         /// </summary>
         protected IExpression m_left;
+
         /// <summary>
         /// The right (second) operand.
         /// </summary>
@@ -46,6 +47,22 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        protected BinaryExpression(IExpression[] arguments)
+        {
+            if (arguments.Length < 2)
+                throw new ParseException(Resource.LessParams);
+
+            if (arguments.Length > 2)
+                throw new ParseException(Resource.MoreParams);
+
+            Left = arguments[0];
+            Right = arguments[1];
+        }
+
+        /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
@@ -58,7 +75,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = (BinaryExpression)obj;
+            var exp = (BinaryExpression) obj;
 
             return m_left.Equals(exp.Left) && m_right.Equals(exp.Right);
         }
@@ -67,7 +84,7 @@ namespace xFunc.Maths.Expressions
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -80,7 +97,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="first">The first.</param>
         /// <param name="second">The second.</param>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         protected int GetHashCode(int first, int second)
         {
@@ -159,16 +176,10 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public virtual IExpression Left
         {
-            get
-            {
-                return m_left;
-            }
+            get { return m_left; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                m_left = value;
+                m_left = value ?? throw new ArgumentNullException(nameof(value));
                 m_left.Parent = this;
             }
         }
@@ -178,16 +189,10 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public virtual IExpression Right
         {
-            get
-            {
-                return m_right;
-            }
+            get { return m_right; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                m_right = value;
+                m_right = value ?? throw new ArgumentNullException(nameof(value));
                 m_right.Parent = this;
             }
         }
@@ -196,15 +201,5 @@ namespace xFunc.Maths.Expressions
         /// Get or Set the parent expression.
         /// </summary>
         public virtual IExpression Parent { get; set; }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public virtual int ParametersCount => 2;
-
     }
-
 }

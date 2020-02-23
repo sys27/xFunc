@@ -104,7 +104,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>The list of variables.</returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="expression"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null.</exception>
         public static IEnumerable<Variable> GetAllVariables(IExpression expression)
         {
             if (expression == null)

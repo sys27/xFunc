@@ -20,6 +20,9 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
+    /// <summary>
+    /// The lexer for mathematical expressions.
+    /// </summary>
     public partial class Lexer
     {
         private IToken CreateNumberToken(ref ReadOnlyMemory<char> function)
@@ -130,8 +133,8 @@ namespace xFunc.Maths.Tokenization
                 if (CheckNextSymbol(span, ref endIndex, 'e') ||
                     CheckNextSymbol(span, ref endIndex, 'E'))
                 {
-                    var _ = CheckNextSymbol(span, ref endIndex, '+') ||
-                            CheckNextSymbol(span, ref endIndex, '-');
+                    _ = CheckNextSymbol(span, ref endIndex, '+') ||
+                        CheckNextSymbol(span, ref endIndex, '-');
 
                     ReadDigits(span, ref endIndex);
                 }
@@ -147,7 +150,6 @@ namespace xFunc.Maths.Tokenization
 
             return null;
         }
-
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CheckBinPrefix(in ReadOnlySpan<char> span)
@@ -173,7 +175,7 @@ namespace xFunc.Maths.Tokenization
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsInRange(char symbol, char min, char max)
-            => (uint) (symbol - min) <= (uint) (max - min);
+            => (uint)(symbol - min) <= (uint)(max - min);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CheckNextSymbol(in ReadOnlySpan<char> function, ref int index, char symbol)

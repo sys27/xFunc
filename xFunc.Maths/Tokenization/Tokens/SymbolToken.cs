@@ -37,37 +37,37 @@ namespace xFunc.Maths.Tokenization.Tokens
         public override string ToString() => symbol.ToString();
 
         /// <summary>
-        /// (
+        /// Gets the '(' token.
         /// </summary>
         public static SymbolToken OpenParenthesis { get; } = new SymbolToken('(');
 
         /// <summary>
-        /// )
+        /// Gets the ')' token.
         /// </summary>
         public static SymbolToken CloseParenthesis { get; } = new SymbolToken(')');
 
         /// <summary>
-        /// {
+        /// Gets the '{' token.
         /// </summary>
         public static SymbolToken OpenBrace { get; } = new SymbolToken('{');
 
         /// <summary>
-        /// }
+        /// Gets the '}' token.
         /// </summary>
         public static SymbolToken CloseBrace { get; } = new SymbolToken('}');
 
         /// <summary>
-        /// ,
+        /// Gets the ',' token.
         /// </summary>
         public static SymbolToken Comma { get; } = new SymbolToken(',');
 
         /// <summary>
-        /// ∠
+        /// Gets the '∠' token.
         /// </summary>
         public static SymbolToken Angle { get; } = new SymbolToken('∠');
 
         /// <summary>
-        /// °
+        /// Gets the '°' token.
         /// </summary>
         public static SymbolToken Degree { get; } = new SymbolToken('°');
     }

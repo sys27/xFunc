@@ -19,6 +19,9 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
+    /// <summary>
+    /// The lexer for mathematical expressions.
+    /// </summary>
     public partial class Lexer
     {
         private IToken CreateOperatorToken(ref ReadOnlyMemory<char> function)
@@ -45,14 +48,12 @@ namespace xFunc.Maths.Tokenization
                 token = OperatorToken.Multiplication;
             else if (operatorMatch.Equals("/", StringComparison.Ordinal))
                 token = OperatorToken.Division;
-
             else if (operatorMatch.Equals("^", StringComparison.Ordinal))
                 token = OperatorToken.Exponentiation;
             else if (operatorMatch.Equals("!", StringComparison.Ordinal))
                 token = OperatorToken.Factorial;
             else if (operatorMatch.Equals("%", StringComparison.Ordinal))
                 token = OperatorToken.Modulo;
-
             else if (operatorMatch.Equals(":=", StringComparison.Ordinal))
                 token = OperatorToken.Assign;
             else if (operatorMatch.Equals("+=", StringComparison.Ordinal))
@@ -65,12 +66,10 @@ namespace xFunc.Maths.Tokenization
                 token = OperatorToken.MulAssign;
             else if (operatorMatch.Equals("/=", StringComparison.Ordinal))
                 token = OperatorToken.DivAssign;
-
             else if (operatorMatch.Equals("&&", StringComparison.Ordinal))
                 token = OperatorToken.ConditionalAnd;
             else if (operatorMatch.Equals("||", StringComparison.Ordinal))
                 token = OperatorToken.ConditionalOr;
-
             else if (operatorMatch.Equals("==", StringComparison.Ordinal))
                 token = OperatorToken.Equal;
             else if (operatorMatch.Equals("!=", StringComparison.Ordinal))
@@ -83,13 +82,11 @@ namespace xFunc.Maths.Tokenization
                 token = OperatorToken.GreaterOrEqual;
             else if (operatorMatch.Equals(">", StringComparison.Ordinal))
                 token = OperatorToken.GreaterThan;
-
             else if (operatorMatch.Equals("++", StringComparison.Ordinal))
                 token = OperatorToken.Increment;
             else if (operatorMatch.Equals("--", StringComparison.Ordinal) ||
                      operatorMatch.Equals("−−", StringComparison.Ordinal))
                 token = OperatorToken.Decrement;
-
             else if (operatorMatch.Equals("~", StringComparison.Ordinal))
                 token = OperatorToken.Not;
             else if (operatorMatch.Equals("&", StringComparison.Ordinal))
@@ -104,7 +101,6 @@ namespace xFunc.Maths.Tokenization
                      operatorMatch.Equals("<−>", StringComparison.Ordinal) ||
                      operatorMatch.Equals("<=>", StringComparison.Ordinal))
                 token = OperatorToken.Equality;
-
             else
                 return null;
 

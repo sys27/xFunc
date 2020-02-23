@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Csc"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Csc(IExpression expression) : base(expression)
+        public Csc(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Csc(IExpression[] arguments) : base(arguments)
+        internal Csc(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(9749);
+            return GetHashCode(9749);
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Csc(m_argument.Clone());
+            return new Csc(Argument.Clone());
         }
     }
 }

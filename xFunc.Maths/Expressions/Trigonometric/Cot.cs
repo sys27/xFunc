@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Cot"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Cot(IExpression expression) : base(expression)
+        public Cot(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Cot(IExpression[] arguments) : base(arguments)
+        internal Cot(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(8467);
+            return GetHashCode(8467);
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Cot(m_argument.Clone());
+            return new Cot(Argument.Clone());
         }
     }
 }

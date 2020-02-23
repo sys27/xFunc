@@ -30,7 +30,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="left">The first (left) operand.</param>
         /// <param name="right">The second (right) operand.</param>
-        public Mul(IExpression left, IExpression right) : base(left, right)
+        public Mul(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -39,7 +40,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Mul(IExpression[] arguments) : base(arguments)
+        internal Mul(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -51,7 +53,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(7537, 1973);
+            return GetHashCode(7537, 1973);
         }
 
         /// <summary>
@@ -65,8 +67,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftResult = m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
             if (leftResult is double leftNumber && rightResult is double rightNumber)
                 return leftNumber * rightNumber;
@@ -83,8 +85,8 @@ namespace xFunc.Maths.Expressions
 
             if (leftResult is Matrix || rightResult is Matrix || leftResult is Vector || rightResult is Vector)
             {
-                var leftExpResult = leftResult as IExpression ?? new Number((double) leftResult);
-                var rightExpResult = rightResult as IExpression ?? new Number((double) rightResult);
+                var leftExpResult = leftResult as IExpression ?? new Number((double)leftResult);
+                var rightExpResult = rightResult as IExpression ?? new Number((double)rightResult);
 
                 if (leftExpResult is Vector leftVector1 && rightExpResult is Vector rightVector1)
                     return leftVector1.Mul(rightVector1, parameters);
@@ -135,7 +137,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Mul(m_left.Clone(), m_right.Clone());
+            return new Mul(Left.Clone(), Right.Clone());
         }
     }
 }

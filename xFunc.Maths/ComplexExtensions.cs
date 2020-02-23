@@ -150,7 +150,6 @@ namespace xFunc.Maths
         public static Complex Acoth(Complex number)
         {
             return 0.5 * Complex.Log((number + 1) / (number - 1));
-            //return 0.5 * Complex.Log(1 + 1 / number) - 0.5 * Complex.Log(1 - 1 / number);
         }
 
         /// <summary>

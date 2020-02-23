@@ -20,14 +20,15 @@ namespace xFunc.Maths.Expressions.Statistical
     /// <summary>
     /// Represent the Avg function.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
+    /// <seealso cref="DifferentParametersExpression" />
     public abstract class StatisticalExpression : DifferentParametersExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Avg"/> class.
+        /// Initializes a new instance of the <see cref="StatisticalExpression"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected StatisticalExpression(IExpression[] arguments) : base(arguments)
+        protected StatisticalExpression(IExpression[] arguments)
+            : base(arguments)
         {
         }
 

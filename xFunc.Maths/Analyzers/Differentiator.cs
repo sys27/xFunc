@@ -23,14 +23,15 @@ namespace xFunc.Maths.Analyzers
     /// <summary>
     /// The differentiator of expressions.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Analyzers.Analyzer{TResult}" />
-    /// <seealso cref="xFunc.Maths.Analyzers.IDifferentiator" />
+    /// <seealso cref="Analyzer{TResult}" />
+    /// <seealso cref="IDifferentiator" />
     public class Differentiator : Analyzer<IExpression>, IDifferentiator
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
-        public Differentiator() : this(new ExpressionParameters(), Variable.X)
+        public Differentiator()
+            : this(new ExpressionParameters(), Variable.X)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Analyzers
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
-        public Differentiator(Variable variable) : this(new ExpressionParameters(), variable)
+        public Differentiator(Variable variable)
+            : this(new ExpressionParameters(), variable)
         {
         }
 
@@ -152,7 +154,7 @@ namespace xFunc.Maths.Analyzers
                 return division;
             }
 
-            //if (first)
+            // if (first)
             return new Div(exp.Left.Clone().Analyze(this), exp.Right.Clone());
         }
 

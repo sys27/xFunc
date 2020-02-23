@@ -29,7 +29,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Transpose"/> class.
         /// </summary>
         /// <param name="argument">The expression, which returns matrix of vector.</param>
-        public Transpose(IExpression argument) : base(argument)
+        public Transpose(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Transpose(IExpression[] arguments) : base(arguments)
+        internal Transpose(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(8461);
+            return GetHashCode(8461);
         }
 
         /// <summary>
@@ -61,10 +63,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="System.NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
+        /// <exception cref="NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
 
             if (result is Matrix matrix)
             {
@@ -108,7 +110,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Transpose(this.m_argument.Clone());
+            return new Transpose(this.Argument.Clone());
         }
     }
 }

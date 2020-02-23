@@ -28,8 +28,9 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="GCD"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(IExpression[] args) : base(args)
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public GCD(IExpression[] args)
+            : base(args)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="first">The first operand.</param>
         /// <param name="second">The second operand.</param>
-        public GCD(IExpression first, IExpression second) : this(new[] { first, second })
+        public GCD(IExpression first, IExpression second)
+            : this(new[] { first, second })
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(2087, 1283);
+            return GetHashCode(2087, 1283);
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var numbers = m_arguments.Select(item =>
+            var numbers = Arguments.Select(item =>
             {
                 var result = item.Execute(parameters);
                 if (result is double number)

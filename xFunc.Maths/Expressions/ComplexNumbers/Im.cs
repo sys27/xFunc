@@ -21,14 +21,15 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
     /// <summary>
     /// Represent the function which returns the imaginary part of complex number.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
+    /// <seealso cref="UnaryExpression" />
     public class Im : UnaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Im"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Im(IExpression argument) : base(argument)
+        public Im(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Im(IExpression[] arguments) : base(arguments)
+        internal Im(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(11699);
+            return GetHashCode(11699);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is Complex complex)
                 return complex.Imaginary;
 
@@ -88,7 +90,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Im(m_argument.Clone());
+            return new Im(Argument.Clone());
         }
     }
 }

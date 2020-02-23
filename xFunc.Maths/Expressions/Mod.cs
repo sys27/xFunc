@@ -20,7 +20,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the Modulo operator.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.BinaryExpression" />
+    /// <seealso cref="BinaryExpression" />
     public class Mod : BinaryExpression
     {
         /// <summary>
@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Mod(IExpression left, IExpression right) : base(left, right)
+        public Mod(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Mod(IExpression[] arguments) : base(arguments)
+        internal Mod(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(32909, 52541);
+            return GetHashCode(32909, 52541);
         }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftResult = m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
             if (leftResult is double leftNumber && rightResult is double rightNumber)
                 return leftNumber % rightNumber;
@@ -92,7 +94,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Mod(m_left.Clone(), m_right.Clone());
+            return new Mod(Left.Clone(), Right.Clone());
         }
     }
 }

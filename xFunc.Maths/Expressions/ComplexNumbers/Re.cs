@@ -21,14 +21,15 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
     /// <summary>
     /// Represent the function which returns the real part of complex number.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
+    /// <seealso cref="UnaryExpression" />
     public class Re : UnaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Re"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Re(IExpression argument) : base(argument)
+        public Re(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Re(IExpression[] arguments) : base(arguments)
+        internal Re(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(12829);
+            return GetHashCode(12829);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is Complex complex)
                 return complex.Real;
 
@@ -88,7 +90,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Re(m_argument.Clone());
+            return new Re(Argument.Clone());
         }
     }
 }

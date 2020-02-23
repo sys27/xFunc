@@ -33,6 +33,6 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Constant.
         /// </summary>
-        Constant
+        Constant,
     }
 }

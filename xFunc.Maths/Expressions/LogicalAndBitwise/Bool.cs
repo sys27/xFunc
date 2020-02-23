@@ -70,7 +70,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Bool"/> to <see cref="System.Boolean"/>.
+        /// Performs an implicit conversion from <see cref="Bool"/> to <see cref="bool"/>.
         /// </summary>
         /// <param name="boolean">The boolean.</param>
         /// <returns>
@@ -82,7 +82,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.Boolean"/> to <see cref="Bool"/>.
+        /// Performs an implicit conversion from <see cref="bool"/> to <see cref="Bool"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
@@ -94,11 +94,11 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -119,11 +119,11 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -131,10 +131,10 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -153,7 +153,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
 
@@ -163,6 +163,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <value>
         /// The value of this expression.
         /// </value>
+#pragma warning disable SA1623
         public bool Value { get; }
+#pragma warning restore SA1623
     }
 }

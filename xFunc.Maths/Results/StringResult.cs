@@ -13,35 +13,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 namespace xFunc.Maths.Results
 {
     /// <summary>
-    /// Represents the string result
+    /// Represents the string result.
     /// </summary>
     public class StringResult : IResult
     {
-        private readonly string str;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StringResult"/> class.
         /// </summary>
         /// <param name="str">The string representation of result.</param>
         public StringResult(string str)
         {
-            this.str = str;
+            this.Result = str;
         }
 
         /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            return str;
+            return Result;
         }
 
         /// <summary>
@@ -50,8 +46,14 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The string representation of result.
         /// </value>
-        public string Result => str;
+        public string Result { get; }
 
-        object IResult.Result => str;
+        /// <summary>
+        /// Gets the result.
+        /// </summary>
+        /// <value>
+        /// The result.
+        /// </value>
+        object IResult.Result => Result;
     }
 }

@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The argument of the function.</param>
         /// <seealso cref="IExpression"/>
-        public Sign(IExpression expression) : base(expression)
+        public Sign(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Sign(IExpression[] arguments) : base(arguments)
+        internal Sign(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(70687);
+            return GetHashCode(70687);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is double number)
                 return Math.Sign(number);
 
@@ -88,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Sign(m_argument.Clone());
+            return new Sign(Argument.Clone());
         }
     }
 }

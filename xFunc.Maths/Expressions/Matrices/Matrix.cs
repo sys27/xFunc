@@ -28,8 +28,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Matrix(IExpression[] args) : base(args)
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public Matrix(IExpression[] args)
+            : base(args)
         {
         }
 
@@ -38,6 +39,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="matrixSize">The size of the matrix.</param>
         /// <param name="vectorSize">The size of the vector.</param>
+        /// <returns>The matrix.</returns>
         public static Matrix Create(int matrixSize, int vectorSize)
         {
             var vectors = new Vector[matrixSize];
@@ -77,8 +79,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of matrix.</returns>
         public Vector this[int index]
         {
-            get { return (Vector) m_arguments[index]; }
-            set { m_arguments[index] = value; }
+            get { return (Vector)Arguments[index]; }
+            set { Arguments[index] = value; }
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(743, 3863);
+            return GetHashCode(743, 3863);
         }
 
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
@@ -112,7 +114,7 @@ namespace xFunc.Maths.Expressions.Matrices
             var args = new Vector[this.ParametersCount];
 
             for (var i = 0; i < this.ParametersCount; i++)
-                args[i] = (Vector) m_arguments[i].Execute(parameters);
+                args[i] = (Vector)Arguments[i].Execute(parameters);
 
             return args;
         }
@@ -125,7 +127,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
             return new Matrix(CalculateMatrix(parameters));
@@ -152,13 +154,18 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector) x));
+            return new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector)x));
         }
 
+        /// <summary>
+        /// Calculates current matrix and returns it as an two dimensional array.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>The two dimensional array which represents current vector.</returns>
         internal double[][] ToCalculatedArray(ExpressionParameters parameters)
         {
-            return (from Vector vector in m_arguments.AsParallel().AsOrdered()
-                select vector.ToCalculatedArray(parameters)).ToArray();
+            return (from Vector vector in Arguments.AsParallel().AsOrdered()
+                    select vector.ToCalculatedArray(parameters)).ToArray();
         }
 
         /// <summary>
@@ -166,7 +173,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="firstIndex">The index of first row.</param>
         /// <param name="secondIndex">The index of second row.</param>
-        /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
         public void SwapRows(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= ParametersCount)
@@ -174,9 +181,9 @@ namespace xFunc.Maths.Expressions.Matrices
             if (secondIndex < 0 || secondIndex >= ParametersCount)
                 throw new ArgumentException();
 
-            var temp = m_arguments[firstIndex];
-            m_arguments[firstIndex] = m_arguments[secondIndex];
-            m_arguments[secondIndex] = temp;
+            var temp = Arguments[firstIndex];
+            Arguments[firstIndex] = Arguments[secondIndex];
+            Arguments[secondIndex] = temp;
         }
 
         /// <summary>
@@ -184,7 +191,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="firstIndex">The index of first column.</param>
         /// <param name="secondIndex">The index of second column.</param>
-        /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
         public void SwapColumns(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= ParametersCount)
@@ -192,7 +199,7 @@ namespace xFunc.Maths.Expressions.Matrices
             if (secondIndex < 0 || secondIndex >= ParametersCount)
                 throw new ArgumentOutOfRangeException();
 
-            foreach (Vector item in m_arguments)
+            foreach (Vector item in Arguments)
             {
                 var temp = item[firstIndex];
                 item[firstIndex] = item[secondIndex];
@@ -206,7 +213,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>The arguments.</value>
         public override IExpression[] Arguments
         {
-            get { return m_arguments; }
+            get
+            {
+                return base.Arguments;
+            }
             set
             {
                 if (value != null && value.Length > 0)
@@ -238,7 +248,7 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             get
             {
-                var value = m_arguments[0] as Vector;
+                var value = Arguments[0] as Vector;
                 if (value == null)
                     throw new MatrixIsInvalidException();
 

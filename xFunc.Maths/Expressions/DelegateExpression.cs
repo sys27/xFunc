@@ -36,11 +36,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            return func.Equals(((DelegateExpression) obj).func);
+            return func.Equals(((DelegateExpression)obj).func);
         }
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -77,10 +77,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -130,14 +130,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public IExpression Clone()
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
     }

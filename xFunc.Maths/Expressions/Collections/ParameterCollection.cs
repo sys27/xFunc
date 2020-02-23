@@ -174,7 +174,10 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns>The value of variable.</returns>
         public object this[string key]
         {
-            get { return GetParameterByKey(key).Value; }
+            get
+            {
+                return GetParameterByKey(key).Value;
+            }
             set
             {
                 var param = collection.FirstOrDefault(p => p.Key == key);

@@ -29,7 +29,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Determinant"/> class.
         /// </summary>
         /// <param name="argument">The argument of function.</param>
-        public Determinant(IExpression argument) : base(argument)
+        public Determinant(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Determinant(IExpression[] arguments) : base(arguments)
+        internal Determinant(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(11317);
+            return GetHashCode(11317);
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is Matrix matrix)
             {
                 if (matrix.Arguments.Any(x => x == null))
@@ -98,7 +100,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new Determinant(m_argument.Clone());
+            return new Determinant(Argument.Clone());
         }
     }
 }

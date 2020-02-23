@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Equality(IExpression left, IExpression right) : base(left, right)
+        public Equality(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Equality(IExpression[] arguments) : base(arguments)
+        internal Equality(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -48,7 +50,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(4211, 13009);
+            return GetHashCode(4211, 13009);
         }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = m_left.Execute(parameters);
-            var right = m_right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
             if (left is bool leftBool && right is bool rightBool)
                 return (leftBool & rightBool) | (!leftBool & !rightBool);
@@ -91,7 +93,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override IExpression Clone()
         {
-            return new Equality(m_left.Clone(), m_right.Clone());
+            return new Equality(Left.Clone(), Right.Clone());
         }
     }
 }

@@ -45,7 +45,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
-        protected FunctionCollection(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected FunctionCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 
@@ -105,8 +106,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// Gets an user function.
         /// </summary>
         /// <param name="function">The function.</param>
-        /// <returns>An user function</returns>
-        /// <exception cref="System.Collections.Generic.KeyNotFoundException">The exception that is thrown when the key specified for accessing an element in a collection does not match any key in the collection.</exception>
+        /// <returns>An user function.</returns>
+        /// <exception cref="KeyNotFoundException">The exception that is thrown when the key specified for accessing an element in a collection does not match any key in the collection.</exception>
         public UserFunction GetKeyByKey(UserFunction function)
         {
             var func = Keys.FirstOrDefault(uf => uf.Equals(function));

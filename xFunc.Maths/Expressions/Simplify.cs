@@ -30,7 +30,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The argument of function.</param>
-        public Simplify(ISimplifier simplifier, IExpression expression) : base(expression)
+        public Simplify(ISimplifier simplifier, IExpression expression)
+            : base(expression)
         {
             this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
         }
@@ -41,7 +42,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Simplify(ISimplifier simplifier, IExpression[] arguments) : base(arguments)
+        internal Simplify(ISimplifier simplifier, IExpression[] arguments)
+            : base(arguments)
         {
             this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
         }
@@ -64,7 +66,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException">Simplifier is null.</exception>
+        /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
@@ -90,7 +92,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Simplify(simplifier, m_argument.Clone());
+            return new Simplify(simplifier, Argument.Clone());
         }
     }
 }

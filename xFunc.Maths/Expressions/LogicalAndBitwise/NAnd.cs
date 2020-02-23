@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public NAnd(IExpression left, IExpression right) : base(left, right)
+        public NAnd(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal NAnd(IExpression[] arguments) : base(arguments)
+        internal NAnd(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(11731, 3343);
+            return GetHashCode(11731, 3343);
         }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = m_left.Execute(parameters);
-            var right = m_right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
             if (left is bool leftBool && right is bool rightBool)
                 return !(leftBool & rightBool);
@@ -90,7 +92,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new NAnd(m_left.Clone(), m_right.Clone());
+            return new NAnd(Left.Clone(), Right.Clone());
         }
     }
 }

@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="radicand">The radicand.</param>
         /// <param name="degree">The degree.</param>
-        public Root(IExpression radicand, IExpression degree) : base(radicand, degree)
+        public Root(IExpression radicand, IExpression degree)
+            : base(radicand, degree)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Root(IExpression[] arguments) : base(arguments)
+        internal Root(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(577, 1061);
+            return GetHashCode(577, 1061);
         }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftResult = m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
             if (leftResult is double first && rightResult is double second)
             {
@@ -95,7 +97,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Root(m_left.Clone(), m_right.Clone());
+            return new Root(Left.Clone(), Right.Clone());
         }
     }
 }

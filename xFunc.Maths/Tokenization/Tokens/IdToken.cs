@@ -24,7 +24,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     public class IdToken : IToken
     {
         /// <summary>
-        /// Initializes the <see cref="IdToken"/> class.
+        /// Initializes a new instance of the <see cref="IdToken"/> class.
         /// </summary>
         /// <param name="id">An id.</param>
         public IdToken(string id)
@@ -48,7 +48,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (typeof(IdToken) != obj.GetType())
                 return false;
 
-            var token = (IdToken) obj;
+            var token = (IdToken)obj;
 
             return Id == token.Id;
         }

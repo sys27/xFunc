@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public LessOrEqual(IExpression left, IExpression right) : base(left, right)
+        public LessOrEqual(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal LessOrEqual(IExpression[] arguments) : base(arguments)
+        internal LessOrEqual(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,8 +52,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = m_left.Execute(parameters);
-            var right = m_right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
             if (left is double leftDouble && right is double rightDouble)
                 return leftDouble <= rightDouble;
@@ -80,7 +82,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new LessOrEqual(m_left.Clone(), m_right.Clone());
+            return new LessOrEqual(Left.Clone(), Right.Clone());
         }
     }
 }

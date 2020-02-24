@@ -29,16 +29,17 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="function">The name of function.</param>
         /// <param name="args">Arguments.</param>
-        public UserFunction(string function, IExpression[] args) : base(args)
+        public UserFunction(string function, IExpression[] args)
+            : base(args)
         {
             this.Function = function;
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
+        /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (obj is UserFunction exp && this.Function == exp.Function && this.ParametersCount == exp.ParametersCount)
@@ -70,7 +71,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="parameters"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
@@ -80,10 +81,10 @@ namespace xFunc.Maths.Expressions
             var func = parameters.Functions.GetKeyByKey(this);
 
             var newParameters = new ParameterCollection(parameters.Variables.Collection);
-            for (var i = 0; i < m_arguments.Length; i++)
+            for (var i = 0; i < Arguments.Length; i++)
             {
                 var arg = func.Arguments[i] as Variable;
-                newParameters[arg.Name] = (double) this.m_arguments[i].Execute(parameters);
+                newParameters[arg.Name] = (double)this.Arguments[i].Execute(parameters);
             }
 
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
@@ -109,7 +110,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new UserFunction(Function, m_arguments);
+            return new UserFunction(Function, Arguments);
         }
 
         /// <summary>

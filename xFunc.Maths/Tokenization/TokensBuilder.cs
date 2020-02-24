@@ -97,10 +97,11 @@ namespace xFunc.Maths.Tokenization
         /// <summary>
         /// Adds a keyword token.
         /// </summary>
+        /// <param name="keywordToken">The keyword.</param>
         /// <returns>The current instance of builder.</returns>
         public TokensBuilder Keyword(KeywordToken keywordToken)
         {
-            Tokens.Add((keywordToken));
+            Tokens.Add(keywordToken);
 
             return this;
         }

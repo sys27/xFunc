@@ -133,7 +133,7 @@ namespace xFunc.Maths
                 if (NumeralSystem == NumeralSystem.Decimal)
                     return new NumberResult(number);
 
-                return new StringResult(MathExtensions.ToNewBase((int) number, NumeralSystem));
+                return new StringResult(MathExtensions.ToNewBase((int)number, NumeralSystem));
             }
 
             if (result is Complex complex)
@@ -170,7 +170,7 @@ namespace xFunc.Maths
         /// <returns>The result of solving.</returns>
         public TResult Solve<TResult>(string function) where TResult : IResult
         {
-            return (TResult) Solve(function);
+            return (TResult)Solve(function);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace xFunc.Maths
         /// <returns>The result of solving.</returns>
         public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult
         {
-            return (TResult) Solve(function, simplify);
+            return (TResult)Solve(function, simplify);
         }
 
         /// <summary>

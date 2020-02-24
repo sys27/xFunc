@@ -37,82 +37,82 @@ namespace xFunc.Maths.Tokenization.Tokens
         public override string ToString() => keyword;
 
         /// <summary>
-        /// true
+        /// Gets the 'true' token.
         /// </summary>
         public static KeywordToken True { get; } = new KeywordToken("true");
 
         /// <summary>
-        /// false
+        /// Gets the 'false' token.
         /// </summary>
         public static KeywordToken False { get; } = new KeywordToken("false");
 
         /// <summary>
-        /// def, define
+        /// Gets the 'def, define' token.
         /// </summary>
         public static KeywordToken Define { get; } = new KeywordToken("def");
 
         /// <summary>
-        /// undef, undefine
+        /// Gets the 'undef, undefine' token.
         /// </summary>
         public static KeywordToken Undefine { get; } = new KeywordToken("undef");
 
         /// <summary>
-        /// if
+        /// Gets the 'if' token.
         /// </summary>
         public static KeywordToken If { get; } = new KeywordToken("if");
 
         /// <summary>
-        /// for
+        /// Gets the 'for' token.
         /// </summary>
         public static KeywordToken For { get; } = new KeywordToken("for");
 
         /// <summary>
-        /// while
+        /// Gets the 'while' token.
         /// </summary>
         public static KeywordToken While { get; } = new KeywordToken("while");
 
         /// <summary>
-        /// nand
+        /// Gets the 'nand' token.
         /// </summary>
         public static KeywordToken NAnd { get; } = new KeywordToken("nand");
 
         /// <summary>
-        /// nor
+        /// Gets the 'nor' token.
         /// </summary>
         public static KeywordToken NOr { get; } = new KeywordToken("nor");
 
         /// <summary>
-        /// and
+        /// Gets the 'and' token.
         /// </summary>
         public static KeywordToken And { get; } = new KeywordToken("and");
 
         /// <summary>
-        /// Or
+        /// Gets the 'Or' token.
         /// </summary>
         public static KeywordToken Or { get; } = new KeywordToken("or");
 
         /// <summary>
-        /// xor
+        /// Gets the 'xor' token.
         /// </summary>
         public static KeywordToken XOr { get; } = new KeywordToken("xor");
 
         /// <summary>
-        /// not
+        /// Gets the 'not' token.
         /// </summary>
         public static KeywordToken Not { get; } = new KeywordToken("not");
 
         /// <summary>
-        /// eq
+        /// Gets the 'eq' token.
         /// </summary>
         public static KeywordToken Eq { get; } = new KeywordToken("eq");
 
         /// <summary>
-        /// impl
+        /// Gets the 'impl' token.
         /// </summary>
         public static KeywordToken Impl { get; } = new KeywordToken("impl");
 
         /// <summary>
-        /// mod
+        /// Gets the 'mod' token.
         /// </summary>
         public static KeywordToken Mod { get; } = new KeywordToken("mod");
     }

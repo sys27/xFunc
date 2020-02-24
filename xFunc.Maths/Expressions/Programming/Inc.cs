@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="Inc"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Inc(IExpression argument) : base(argument)
+        public Inc(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -35,7 +36,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="Inc"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Inc(IExpression[] arguments) : base(arguments)
+        internal Inc(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,14 +51,14 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var value = m_argument.Execute(parameters);
+            var value = Argument.Execute(parameters);
             if (value is bool)
                 throw new NotSupportedException();
 
             var newValue = Convert.ToDouble(value) + 1;
 
-            if (m_argument is Variable)
-                parameters.Variables[((Variable) m_argument).Name] = newValue;
+            if (Argument is Variable)
+                parameters.Variables[((Variable)Argument).Name] = newValue;
 
             return newValue;
         }
@@ -82,7 +84,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new Inc(m_argument.Clone());
+            return new Inc(Argument.Clone());
         }
     }
 }

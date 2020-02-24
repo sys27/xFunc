@@ -30,7 +30,8 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Product(IExpression[] args) : base(args)
+        public Product(IExpression[] args)
+            : base(args)
         {
             if (args.Length == 5 && !(args[4] is Variable))
                 throw new ArgumentException();
@@ -44,7 +45,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(1607, 6917);
+            return GetHashCode(1607, 6917);
         }
 
         private double ExecuteInternal(IExpression[] expressions, ExpressionParameters parameters)
@@ -71,14 +72,14 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             if (ParametersCount == 1)
             {
-                var result = this.m_arguments[0].Execute(parameters);
+                var result = this.Arguments[0].Execute(parameters);
                 if (result is Vector vector)
                     return ExecuteInternal(vector.Arguments, parameters);
 
                 return result;
             }
 
-            return ExecuteInternal(m_arguments, parameters);
+            return ExecuteInternal(Arguments, parameters);
         }
 
         /// <summary>

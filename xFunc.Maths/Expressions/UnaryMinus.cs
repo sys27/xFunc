@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="UnaryMinus"/> class.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        public UnaryMinus(IExpression expression) : base(expression)
+        public UnaryMinus(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -39,7 +40,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(6011);
+            return GetHashCode(6011);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
 
             if (result is Complex complex)
                 return Complex.Negate(complex);
@@ -82,7 +83,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new UnaryMinus(m_argument.Clone());
+            return new UnaryMinus(Argument.Clone());
         }
     }
 }

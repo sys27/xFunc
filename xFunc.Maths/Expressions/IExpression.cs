@@ -38,11 +38,11 @@ namespace xFunc.Maths.Expressions
         object Execute(ExpressionParameters parameters);
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         string ToString(IFormatter formatter);
 
@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions
         IExpression Clone();
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         IExpression Parent { get; set; }
     }

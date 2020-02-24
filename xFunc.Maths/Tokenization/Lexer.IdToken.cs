@@ -18,6 +18,9 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths.Tokenization
 {
+    /// <summary>
+    /// The lexer for mathematical expressions.
+    /// </summary>
     public partial class Lexer
     {
         private IToken CreateIdToken(ref ReadOnlyMemory<char> function)
@@ -39,21 +42,18 @@ namespace xFunc.Maths.Tokenization
                 token = KeywordToken.True;
             else if (id.Equals("false", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.False;
-
             else if (id.Equals("def", StringComparison.OrdinalIgnoreCase) ||
                      id.Equals("define", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.Define;
             else if (id.Equals("undef", StringComparison.OrdinalIgnoreCase) ||
                      id.Equals("undefine", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.Undefine;
-
             else if (id.Equals("if", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.If;
             else if (id.Equals("for", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.For;
             else if (id.Equals("while", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.While;
-
             else if (id.Equals("nand", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.NAnd;
             else if (id.Equals("nor", StringComparison.OrdinalIgnoreCase))
@@ -72,7 +72,6 @@ namespace xFunc.Maths.Tokenization
                 token = KeywordToken.Impl;
             else if (id.Equals("mod", StringComparison.OrdinalIgnoreCase))
                 token = KeywordToken.Mod;
-
             else
                 token = new IdToken(id.ToString().ToLowerInvariant()); // TODO:
 

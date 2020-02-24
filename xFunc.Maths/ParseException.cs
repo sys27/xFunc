@@ -34,17 +34,19 @@ namespace xFunc.Maths
         /// <summary>
         /// Initializes a new instance of the <see cref="ParseException"/> class with a specified error message.
         /// </summary>
-        /// <param name="message">A <see cref="String"/> that describes the error.</param>
-        public ParseException(string message) : base(message)
+        /// <param name="message">A <see cref="string"/> that describes the error.</param>
+        public ParseException(string message)
+            : base(message)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParseException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
-        /// <param name="message">A <see cref="String"/> that describes the error.</param>
+        /// <param name="message">A <see cref="string"/> that describes the error.</param>
         /// <param name="inner">The exception that is the cause of the current exception.</param>
-        public ParseException(string message, Exception inner) : base(message, inner)
+        public ParseException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
@@ -53,7 +55,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected ParseException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ParseException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

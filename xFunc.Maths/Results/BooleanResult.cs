@@ -20,26 +20,24 @@ namespace xFunc.Maths.Results
     /// </summary>
     public class BooleanResult : IResult
     {
-        private readonly bool value;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BooleanResult"/> class.
         /// </summary>
         /// <param name="value">The value of result.</param>
         public BooleanResult(bool value)
         {
-            this.value = value;
+            this.Result = value;
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            return value.ToString();
+            return Result.ToString();
         }
 
         /// <summary>
@@ -48,8 +46,16 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        public bool Result => value;
+#pragma warning disable SA1623
+        public bool Result { get; }
+#pragma warning restore SA1623
 
-        object IResult.Result => value;
+        /// <summary>
+        /// Gets the result.
+        /// </summary>
+        /// <value>
+        /// The result.
+        /// </value>
+        object IResult.Result => Result;
     }
 }

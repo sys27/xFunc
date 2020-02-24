@@ -51,7 +51,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
         /// <param name="message">The error message.</param>
-        public ParameterTypeMismatchException(ResultType expected, ResultType actual, string message) : base(message)
+        public ParameterTypeMismatchException(ResultType expected, ResultType actual, string message)
+            : base(message)
         {
             this.expected = expected;
             this.actual = actual;
@@ -61,7 +62,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// Initializes a new instance of the <see cref="ParameterTypeMismatchException"/> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public ParameterTypeMismatchException(string message) : base(message)
+        public ParameterTypeMismatchException(string message)
+            : base(message)
         {
         }
 
@@ -70,7 +72,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
-        public ParameterTypeMismatchException(string message, Exception inner) : base(message, inner)
+        public ParameterTypeMismatchException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 

@@ -20,14 +20,15 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// The base class for hyperbolic functions.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
+    /// <seealso cref="UnaryExpression" />
     public abstract class HyperbolicExpression : UnaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HyperbolicExpression" /> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        protected HyperbolicExpression(IExpression argument) : base(argument)
+        protected HyperbolicExpression(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal HyperbolicExpression(IExpression[] arguments) : base(arguments)
+        internal HyperbolicExpression(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -90,7 +92,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is Complex complex)
                 return ExecuteComplex(complex);
 

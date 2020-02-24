@@ -22,14 +22,15 @@ namespace xFunc.Maths.Expressions.Statistical
     /// <summary>
     /// Represent the Count function.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
+    /// <seealso cref="DifferentParametersExpression" />
     public class Count : StatisticalExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Count(IExpression[] arguments) : base(arguments)
+        public Count(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -41,7 +42,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(14009, 9787);
+            return GetHashCode(14009, 9787);
         }
 
         /// <summary>
@@ -56,14 +57,14 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             if (ParametersCount == 1)
             {
-                var result = this.m_arguments[0].Execute(parameters);
+                var result = this.Arguments[0].Execute(parameters);
                 if (result is Vector vector)
-                    return (double) vector.Arguments.Length;
+                    return (double)vector.Arguments.Length;
 
                 return 1.0;
             }
 
-            return (double) this.m_arguments.Length;
+            return (double)this.Arguments.Length;
         }
 
         /// <summary>

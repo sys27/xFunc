@@ -30,7 +30,7 @@ namespace xFunc.Maths.Analyzers.Formatters
     /// <summary>
     /// Converts expressions into string.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Analyzers.Formatters.IFormatter" />
+    /// <seealso cref="IFormatter" />
     public class CommonFormatter : IFormatter
     {
         /// <summary>

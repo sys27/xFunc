@@ -25,7 +25,7 @@ namespace xFunc.Maths.Expressions
     public class Number : IExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Expressions.Number"/> class.
+        /// Initializes a new instance of the <see cref="Number"/> class.
         /// </summary>
         /// <param name="number">A number.</param>
         public Number(double number)
@@ -34,7 +34,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Defines an implicit conversion of a <see cref="Expressions.Number"/> to a double value.
+        /// Defines an implicit conversion of a <see cref="Number"/> to a double value.
         /// </summary>
         /// <param name="number">The value to convert to a double.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
@@ -44,9 +44,9 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Defines an implicit conversion of double to <see cref="Expressions.Number"/>.
+        /// Defines an implicit conversion of double to <see cref="Number"/>.
         /// </summary>
-        /// <param name="number">The value to convert to <see cref="Expressions.Number"/>.</param>
+        /// <param name="number">The value to convert to <see cref="Number"/>.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
         public static implicit operator Number(double number)
         {
@@ -78,11 +78,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -90,10 +90,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -134,7 +134,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="Expressions.Number"/> class.
+        /// Clones this instance of the <see cref="Number"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public IExpression Clone()
@@ -148,7 +148,7 @@ namespace xFunc.Maths.Expressions
         public double Value { get; set; }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
     }

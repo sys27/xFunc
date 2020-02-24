@@ -29,7 +29,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <seealso cref="IExpression"/>
-        public XOr(IExpression left, IExpression right) : base(left, right)
+        public XOr(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal XOr(IExpression[] arguments) : base(arguments)
+        internal XOr(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(3371, 2833);
+            return GetHashCode(3371, 2833);
         }
 
         /// <summary>
@@ -63,14 +65,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = m_left.Execute(parameters);
-            var right = m_right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
             if (left is bool leftBool && right is bool rightBool)
                 return leftBool ^ rightBool;
 
             if (left is double leftDouble && right is double rightDouble)
-                return (double) ((int) Math.Round(leftDouble, MidpointRounding.AwayFromZero) ^ (int) Math.Round(rightDouble, MidpointRounding.AwayFromZero));
+                return (double)((int)Math.Round(leftDouble, MidpointRounding.AwayFromZero) ^ (int)Math.Round(rightDouble, MidpointRounding.AwayFromZero));
 
             throw new ResultIsNotSupportedException(this, left, right);
         }
@@ -94,7 +96,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new XOr(m_left.Clone(), m_right.Clone());
+            return new XOr(Left.Clone(), Right.Clone());
         }
     }
 }

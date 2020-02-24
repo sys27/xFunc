@@ -35,16 +35,18 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public MatrixIsInvalidException(string message) : base(message)
+        public MatrixIsInvalidException(string message)
+            : base(message)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MatrixIsInvalidException"/> class.
         /// </summary>
-        /// <param name="message">A <see cref="String"/> that describes the error.</param>
+        /// <param name="message">A <see cref="string"/> that describes the error.</param>
         /// <param name="inner">The exception that is the cause of the current exception.</param>
-        public MatrixIsInvalidException(string message, Exception inner) : base(message, inner)
+        public MatrixIsInvalidException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 

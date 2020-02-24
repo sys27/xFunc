@@ -1,6 +1,5 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-
 // The MIT License (MIT)
 //
 // Copyright (c) .NET Foundation and Contributors
@@ -35,9 +34,17 @@ namespace xFunc.Maths.Tokenization
     // TODO: temporary?
     // this class was copied from .NET Core source code (dotnet/runtime),
     // we need to use Span<T> based API to convert number to number with different bases.
+
+    /// <summary>Methods for parsing numbers and strings.</summary>
     [ExcludeFromCodeCoverage]
     internal static class ParseNumbers
     {
+        /// <summary>
+        /// Converts the string representation of a number in a specified base to an equivalent 64-bit signed integer.
+        /// </summary>
+        /// <param name="value">A string that contains the number to convert.</param>
+        /// <param name="fromBase">The base of the number in value, which must be 2, 8, 10, or 16.</param>
+        /// <returns>A 64-bit signed integer that is equivalent to the number in value, or 0 (zero) if value is null.</returns>
         public static long ToInt64(ReadOnlySpan<char> value, int fromBase)
         {
             var i = 0;
@@ -48,7 +55,7 @@ namespace xFunc.Maths.Tokenization
             if (i == grabNumbersStart || i < length)
                 throw new FormatException();
 
-            if ((ulong) result == 0x8000000000000000 && fromBase == 10)
+            if ((ulong)result == 0x8000000000000000 && fromBase == 10)
                 throw new OverflowException();
 
             return result;
@@ -65,25 +72,25 @@ namespace xFunc.Maths.Tokenization
 
                 while (i < s.Length && IsDigit(s[i], radix, out var value))
                 {
-                    if (result > maxVal || ((long) result) < 0)
+                    if (result > maxVal || ((long)result) < 0)
                         throw new OverflowException();
 
-                    result = result * (ulong) radix + (ulong) value;
+                    result = result * (ulong)radix + (ulong)value;
                     i++;
                 }
 
-                if ((long) result < 0 && result != 0x8000000000000000)
+                if ((long)result < 0 && result != 0x8000000000000000)
                     throw new OverflowException();
             }
             else
             {
-                Debug.Assert(radix == 2 || radix == 8 || radix == 10 || radix == 16);
+                Debug.Assert(radix == 2 || radix == 8 || radix == 10 || radix == 16, "The radix should be equal to 2, 8, 10 or 16.");
                 maxVal = radix switch
                 {
-                    10 => (0xffffffffffffffff / 10),
-                    16 => (0xffffffffffffffff / 16),
-                    8 => (0xffffffffffffffff / 8),
-                    _ => (0xffffffffffffffff / 2)
+                    10 => 0xffffffffffffffff / 10,
+                    16 => 0xffffffffffffffff / 16,
+                    8 => 0xffffffffffffffff / 8,
+                    _ => 0xffffffffffffffff / 2,
                 };
 
                 while (i < s.Length && IsDigit(s[i], radix, out var value))
@@ -91,7 +98,7 @@ namespace xFunc.Maths.Tokenization
                     if (result > maxVal)
                         throw new OverflowException();
 
-                    var temp = result * (ulong) radix + (ulong) value;
+                    var temp = result * (ulong)radix + (ulong)value;
 
                     if (temp < result)
                         throw new OverflowException();
@@ -101,22 +108,22 @@ namespace xFunc.Maths.Tokenization
                 }
             }
 
-            return (long) result;
+            return (long)result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsDigit(char c, int radix, out int result)
         {
             int tmp;
-            if ((uint) (c - '0') <= 9)
+            if ((uint)(c - '0') <= 9)
             {
                 result = tmp = c - '0';
             }
-            else if ((uint) (c - 'A') <= 'Z' - 'A')
+            else if ((uint)(c - 'A') <= 'Z' - 'A')
             {
                 result = tmp = c - 'A' + 10;
             }
-            else if ((uint) (c - 'a') <= 'z' - 'a')
+            else if ((uint)(c - 'a') <= 'z' - 'a')
             {
                 result = tmp = c - 'a' + 10;
             }

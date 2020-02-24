@@ -17,6 +17,9 @@ using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
 {
+    /// <summary>
+    /// The parser for mathematical expressions.
+    /// </summary>
     public partial class Parser
     {
         private class TokenEnumerator

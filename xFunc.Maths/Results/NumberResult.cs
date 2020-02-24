@@ -35,10 +35,10 @@ namespace xFunc.Maths.Results
         }
 
         /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -53,6 +53,12 @@ namespace xFunc.Maths.Results
         /// </value>
         public double Result => number;
 
+        /// <summary>
+        /// Gets the result.
+        /// </summary>
+        /// <value>
+        /// The result.
+        /// </value>
         object IResult.Result => number;
     }
 }

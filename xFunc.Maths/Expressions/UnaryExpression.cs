@@ -28,7 +28,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The (first) operand.
         /// </summary>
-        protected IExpression m_argument;
+        private IExpression argument;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
@@ -55,10 +55,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object" /> is equal to this instance.
+        /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -67,7 +67,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            return m_argument.Equals(((UnaryExpression) obj).Argument);
+            return argument.Equals(((UnaryExpression)obj).Argument);
         }
 
         /// <summary>
@@ -90,15 +90,15 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected int GetHashCode(int first)
         {
-            return first ^ m_argument.GetHashCode();
+            return first ^ argument.GetHashCode();
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -106,10 +106,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -163,17 +163,17 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return m_argument;
+                return argument;
             }
             set
             {
-                m_argument = value ?? throw new ArgumentNullException(nameof(value));
-                m_argument.Parent = this;
+                argument = value ?? throw new ArgumentNullException(nameof(value));
+                argument.Parent = this;
             }
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
     }

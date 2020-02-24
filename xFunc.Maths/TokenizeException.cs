@@ -21,7 +21,7 @@ namespace xFunc.Maths
     /// <summary>
     /// The exception that is thrown in the process of tokenization.
     /// </summary>
-    /// <seealso cref="System.Exception" />
+    /// <seealso cref="Exception" />
     [Serializable]
     public class TokenizeException : Exception
     {
@@ -35,17 +35,19 @@ namespace xFunc.Maths
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenizeException"/> class with a specified error message.
         /// </summary>
-        /// <param name="message">A <see cref="String"/> that describes the error.</param>
-        public TokenizeException(string message) : base(message)
+        /// <param name="message">A <see cref="string"/> that describes the error.</param>
+        public TokenizeException(string message)
+            : base(message)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenizeException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
-        /// <param name="message">A <see cref="String"/> that describes the error.</param>
+        /// <param name="message">A <see cref="string"/> that describes the error.</param>
         /// <param name="inner">The exception that is the cause of the current exception.</param>
-        public TokenizeException(string message, Exception inner) : base(message, inner)
+        public TokenizeException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
@@ -54,7 +56,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected TokenizeException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected TokenizeException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

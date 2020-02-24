@@ -38,6 +38,6 @@ namespace xFunc.Maths
         /// <summary>
         /// The hexidecimal numeral system.
         /// </summary>
-        Hexidecimal = 16
+        Hexidecimal = 16,
     }
 }

@@ -34,7 +34,8 @@ namespace xFunc.Maths
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class with default implementations of <see cref="IDifferentiator"/> and <see cref="ISimplifier" />.
         /// </summary>
-        public Parser() : this(new Differentiator(), new Simplifier())
+        public Parser()
+            : this(new Differentiator(), new Simplifier())
         {
         }
 
@@ -367,7 +368,7 @@ namespace xFunc.Maths
                              tokenEnumerator.Operator(OperatorToken.Or) ??
                              tokenEnumerator.Operator(OperatorToken.Implication) ??
                              tokenEnumerator.Operator(OperatorToken.Equality)) ??
-                            (IToken) (tokenEnumerator.Keyword(KeywordToken.NAnd) ??
+                             (IToken)(tokenEnumerator.Keyword(KeywordToken.NAnd) ??
                                       tokenEnumerator.Keyword(KeywordToken.NOr) ??
                                       tokenEnumerator.Keyword(KeywordToken.And) ??
                                       tokenEnumerator.Keyword(KeywordToken.Or) ??
@@ -440,7 +441,7 @@ namespace xFunc.Maths
                 var token = (tokenEnumerator.Operator(OperatorToken.Multiplication) ??
                              tokenEnumerator.Operator(OperatorToken.Division) ??
                              tokenEnumerator.Operator(OperatorToken.Modulo)) ??
-                            (IToken) tokenEnumerator.Keyword(KeywordToken.Mod);
+                             (IToken)tokenEnumerator.Keyword(KeywordToken.Mod);
 
                 if (token == null)
                     return left;
@@ -489,7 +490,7 @@ namespace xFunc.Maths
             var token = (tokenEnumerator.Operator(OperatorToken.Not) ??
                          tokenEnumerator.Operator(OperatorToken.Minus) ??
                          tokenEnumerator.Operator(OperatorToken.Plus)) ??
-                        (IToken) tokenEnumerator.Keyword(KeywordToken.Not);
+                         (IToken)tokenEnumerator.Keyword(KeywordToken.Not);
             var operand = Exponentiation(tokenEnumerator);
             if (token == null || token == OperatorToken.Plus)
                 return operand;

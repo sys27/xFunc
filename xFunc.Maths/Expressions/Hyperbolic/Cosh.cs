@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// Initializes a new instance of the <see cref="Cosh"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Cosh(IExpression expression) : base(expression)
+        public Cosh(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Cosh(IExpression[] arguments) : base(arguments)
+        internal Cosh(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(4799);
+            return GetHashCode(4799);
         }
 
         /// <summary>
@@ -123,7 +125,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Cosh(m_argument.Clone());
+            return new Cosh(Argument.Clone());
         }
     }
 }

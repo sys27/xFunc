@@ -13,8 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Globalization;
 using System.Numerics;
 
 namespace xFunc.Maths.Results
@@ -25,7 +23,7 @@ namespace xFunc.Maths.Results
     public class ComplexNumberResult : IResult
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NumberResult"/> class.
+        /// Initializes a new instance of the <see cref="ComplexNumberResult"/> class.
         /// </summary>
         /// <param name="complex">The numerical representation of result.</param>
         public ComplexNumberResult(Complex complex)
@@ -34,10 +32,10 @@ namespace xFunc.Maths.Results
         }
 
         /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -52,6 +50,12 @@ namespace xFunc.Maths.Results
         /// </value>
         public Complex Result { get; }
 
+        /// <summary>
+        /// Gets the result.
+        /// </summary>
+        /// <value>
+        /// The result.
+        /// </value>
         object IResult.Result => Result;
     }
 }

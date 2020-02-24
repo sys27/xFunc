@@ -61,6 +61,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// The expression returns other expression.
         /// </summary>
-        Expression = 0x40
+        Expression = 0x40,
     }
 }

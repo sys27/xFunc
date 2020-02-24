@@ -30,7 +30,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="init">The initializer section.</param>
         /// <param name="cond">The condition section.</param>
         /// <param name="iter">The iterator section.</param>
-        public For(IExpression body, IExpression init, IExpression cond, IExpression iter) : this(new[] { body, init, cond, iter })
+        public For(IExpression body, IExpression init, IExpression cond, IExpression iter)
+            : this(new[] { body, init, cond, iter })
         {
         }
 
@@ -38,8 +39,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="For" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public For(IExpression[] arguments) : base(arguments)
+        /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
+        public For(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -53,7 +55,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            for (Initialization.Execute(parameters); (bool) Condition.Execute(parameters); Iteration.Execute(parameters))
+            for (Initialization.Execute(parameters); (bool)Condition.Execute(parameters); Iteration.Execute(parameters))
                 Body.Execute(parameters);
 
             return double.NaN;
@@ -89,7 +91,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The body of loop.
         /// </value>
-        public IExpression Body => m_arguments[0];
+        public IExpression Body => Arguments[0];
 
         /// <summary>
         /// Gets the initializer section.
@@ -97,7 +99,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The initializer section.
         /// </value>
-        public IExpression Initialization => m_arguments[1];
+        public IExpression Initialization => Arguments[1];
 
         /// <summary>
         /// Gets the condition section.
@@ -105,7 +107,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The condition section.
         /// </value>
-        public IExpression Condition => m_arguments[2];
+        public IExpression Condition => Arguments[2];
 
         /// <summary>
         /// Gets the iterator section.
@@ -113,7 +115,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The iterator section.
         /// </value>
-        public IExpression Iteration => m_arguments[3];
+        public IExpression Iteration => Arguments[3];
 
         /// <summary>
         /// Gets the minimum count of parameters.

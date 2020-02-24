@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Lb(IExpression expression) : base(expression)
+        public Lb(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Lb(IExpression[] arguments) : base(arguments)
+        internal Lb(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(8807);
+            return GetHashCode(8807);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is double number)
                 return Math.Log(number, 2);
 
@@ -88,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Lb(m_argument.Clone());
+            return new Lb(Argument.Clone());
         }
     }
 }

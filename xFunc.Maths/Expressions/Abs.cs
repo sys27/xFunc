@@ -31,7 +31,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Abs(IExpression expression) : base(expression)
+        public Abs(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -40,7 +41,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Abs(IExpression[] arguments) : base(arguments)
+        internal Abs(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -52,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(6329);
+            return GetHashCode(6329);
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
 
             if (result is Complex complex)
                 return Complex.Abs(complex);
@@ -93,12 +95,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Clones this instance of the <see cref="xFunc.Maths.Expressions.Abs"/> class.
+        /// Clones this instance of the <see cref="Abs"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Abs(m_argument.Clone());
+            return new Abs(Argument.Clone());
         }
     }
 }

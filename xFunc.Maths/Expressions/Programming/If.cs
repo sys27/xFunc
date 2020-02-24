@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
-        public If(IExpression condition, IExpression then) : this(new[] { condition, then })
+        public If(IExpression condition, IExpression then)
+            : this(new[] { condition, then })
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition.</param>
         /// <param name="then">The "then" statement.</param>
         /// <param name="else">The "else" statement.</param>
-        public If(IExpression condition, IExpression then, IExpression @else) : this(new[] { condition, then, @else })
+        public If(IExpression condition, IExpression then, IExpression @else)
+            : this(new[] { condition, then, @else })
         {
         }
 
@@ -46,7 +48,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public If(IExpression[] arguments) : base(arguments)
+        public If(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -60,7 +63,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if ((bool) Condition.Execute(parameters))
+            if ((bool)Condition.Execute(parameters))
                 return Then.Execute(parameters);
 
             return Else?.Execute(parameters) ?? 0.0;
@@ -96,7 +99,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The condition.
         /// </value>
-        public IExpression Condition => m_arguments[0];
+        public IExpression Condition => Arguments[0];
 
         /// <summary>
         /// Gets the "then" statement.
@@ -104,7 +107,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The then.
         /// </value>
-        public IExpression Then => m_arguments[1];
+        public IExpression Then => Arguments[1];
 
         /// <summary>
         /// Gets the "else" statement.
@@ -112,7 +115,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The else.
         /// </value>
-        public IExpression Else => ParametersCount == 3 ? m_arguments[2] : null;
+        public IExpression Else => ParametersCount == 3 ? Arguments[2] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.

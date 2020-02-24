@@ -30,7 +30,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="left">The minuend.</param>
         /// <param name="right">The subtrahend.</param>
-        public Sub(IExpression left, IExpression right) : base(left, right)
+        public Sub(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Sub"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Sub(IExpression[] arguments) : base(arguments)
+        internal Sub(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(5987, 4703);
+            return GetHashCode(5987, 4703);
         }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftResult = m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
             if (leftResult is Complex || rightResult is Complex)
             {
@@ -107,7 +109,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Sub(m_left.Clone(), m_right.Clone());
+            return new Sub(Left.Clone(), Right.Clone());
         }
     }
 }

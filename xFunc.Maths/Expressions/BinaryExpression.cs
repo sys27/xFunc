@@ -28,12 +28,12 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The left (first) operand.
         /// </summary>
-        protected IExpression m_left;
+        private IExpression left;
 
         /// <summary>
         /// The right (second) operand.
         /// </summary>
-        protected IExpression m_right;
+        private IExpression right;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
@@ -75,9 +75,9 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var exp = (BinaryExpression) obj;
+            var exp = (BinaryExpression)obj;
 
-            return m_left.Equals(exp.Left) && m_right.Equals(exp.Right);
+            return left.Equals(exp.Left) && right.Equals(exp.Right);
         }
 
         /// <summary>
@@ -103,18 +103,18 @@ namespace xFunc.Maths.Expressions
         {
             var hash = first;
 
-            hash = hash * second + m_left.GetHashCode();
-            hash = hash * second + m_right.GetHashCode();
+            hash = hash * second + left.GetHashCode();
+            hash = hash * second + right.GetHashCode();
 
             return hash;
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -122,10 +122,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -172,33 +172,39 @@ namespace xFunc.Maths.Expressions
         public abstract IExpression Clone();
 
         /// <summary>
-        /// The left (first) operand.
+        /// Gets or sets the left (first) operand.
         /// </summary>
         public virtual IExpression Left
         {
-            get { return m_left; }
+            get
+            {
+                return left;
+            }
             set
             {
-                m_left = value ?? throw new ArgumentNullException(nameof(value));
-                m_left.Parent = this;
+                left = value ?? throw new ArgumentNullException(nameof(value));
+                left.Parent = this;
             }
         }
 
         /// <summary>
-        /// The right (second) operand.
+        /// Gets or sets the right (second) operand.
         /// </summary>
         public virtual IExpression Right
         {
-            get { return m_right; }
+            get
+            {
+                return right;
+            }
             set
             {
-                m_right = value ?? throw new ArgumentNullException(nameof(value));
-                m_right.Parent = this;
+                right = value ?? throw new ArgumentNullException(nameof(value));
+                right.Parent = this;
             }
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public virtual IExpression Parent { get; set; }
     }

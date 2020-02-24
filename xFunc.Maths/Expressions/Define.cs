@@ -56,11 +56,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -82,20 +82,15 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            var hash = 4583;
-
-            hash = (hash * 233) + key.GetHashCode();
-            hash = (hash * 233) + value.GetHashCode();
-
-            return hash;
+            return HashCode.Combine(key, value);
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -103,10 +98,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -114,12 +109,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Throws <see cref="System.NotSupportedException"/>
+        /// Throws <see cref="NotSupportedException"/>.
         /// </summary>
         /// <returns>
         /// The exception.
         /// </returns>
-        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public object Execute()
         {
             throw new NotSupportedException();
@@ -133,7 +128,7 @@ namespace xFunc.Maths.Expressions
         /// The exception.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="System.ArgumentNullException"><paramref name="parameters" /> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="parameters" /> is null.</exception>
         public object Execute(ExpressionParameters parameters)
         {
             if (parameters == null)
@@ -179,7 +174,7 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
 
@@ -190,7 +185,10 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="NotSupportedException"><paramref name="value"/> is not a <see cref="Variable"/> or a <see cref="UserFunction"/>.</exception>
         public IExpression Key
         {
-            get { return key; }
+            get
+            {
+                return key;
+            }
             set
             {
                 if (value == null)
@@ -209,16 +207,16 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The value.
         /// </value>
-        /// <exception cref="System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public IExpression Value
         {
-            get { return value; }
+            get
+            {
+                return value;
+            }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                this.value = value;
+                this.value = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
     }

@@ -30,7 +30,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="base">The right operand.</param>
         /// <param name="arg">The left operand.</param>
         /// <seealso cref="IExpression"/>
-        public Log(IExpression @base, IExpression arg) : base(@base, arg)
+        public Log(IExpression @base, IExpression arg)
+            : base(@base, arg)
         {
         }
 
@@ -39,7 +40,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public Log(IExpression[] arguments) : base(arguments)
+        public Log(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -51,7 +53,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(8837, 7019);
+            return GetHashCode(8837, 7019);
         }
 
         /// <summary>
@@ -64,10 +66,10 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftResult = m_left.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
             if (leftResult is double leftNumber)
             {
-                var rightResult = m_right.Execute(parameters);
+                var rightResult = Right.Execute(parameters);
 
                 if (rightResult is Complex complex)
                     return Complex.Log(complex, leftNumber);
@@ -100,7 +102,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Log(m_left.Clone(), m_right.Clone());
+            return new Log(Left.Clone(), Right.Clone());
         }
     }
 }

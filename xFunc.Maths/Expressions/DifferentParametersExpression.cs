@@ -29,7 +29,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// The arguments.
         /// </summary>
-        protected IExpression[] m_arguments;
+        private IExpression[] arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
@@ -41,11 +41,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -57,15 +57,15 @@ namespace xFunc.Maths.Expressions
 
             var diff = (DifferentParametersExpression)obj;
 
-            if (this.m_arguments == null && diff.m_arguments == null)
+            if (this.arguments == null && diff.arguments == null)
                 return true;
 
-            if (this.m_arguments == null ||
-                diff.m_arguments == null ||
-                this.m_arguments.Length != diff.m_arguments.Length)
+            if (this.arguments == null ||
+                diff.arguments == null ||
+                this.arguments.Length != diff.arguments.Length)
                 return false;
 
-            return this.m_arguments.SequenceEqual(diff.m_arguments);
+            return this.arguments.SequenceEqual(diff.arguments);
         }
 
         /// <summary>
@@ -86,23 +86,23 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         protected int GetHashCode(int first, int second)
         {
-            return m_arguments.Aggregate(first, (current, item) => current * second + item.GetHashCode());
+            return arguments.Aggregate(first, (current, item) => current * second + item.GetHashCode());
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString() => ToString(new CommonFormatter());
 
@@ -148,15 +148,15 @@ namespace xFunc.Maths.Expressions
         /// <returns>The new array of <see cref="IExpression"/>.</returns>
         protected IExpression[] CloneArguments()
         {
-            var args = new IExpression[m_arguments.Length];
-            for (var i = 0; i < m_arguments.Length; i++)
-                args[i] = m_arguments[i].Clone();
+            var args = new IExpression[arguments.Length];
+            for (var i = 0; i < arguments.Length; i++)
+                args[i] = arguments[i].Clone();
 
             return args;
         }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
 
@@ -166,7 +166,7 @@ namespace xFunc.Maths.Expressions
         /// <value>The arguments.</value>
         public virtual IExpression[] Arguments
         {
-            get => m_arguments;
+            get => arguments;
             set
             {
                 if (value == null)
@@ -178,15 +178,15 @@ namespace xFunc.Maths.Expressions
                 if (value.Length > MaxParametersCount)
                     throw new ArgumentException(Resource.MoreParams, nameof(Arguments));
 
-                m_arguments = value;
-                foreach (var item in m_arguments)
+                arguments = value;
+                foreach (var item in arguments)
                     if (item != null)
                         item.Parent = this;
             }
         }
 
         /// <summary>
-        /// Gets or Sets the count of parameters.
+        /// Gets the count of parameters.
         /// </summary>
         /// <value>
         /// The count of parameters.

@@ -23,14 +23,15 @@ namespace xFunc.Maths.Expressions.Statistical
     /// <summary>
     /// Represent the Max function.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
+    /// <seealso cref="DifferentParametersExpression" />
     public class Max : StatisticalExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Max"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Max(IExpression[] arguments) : base(arguments)
+        public Max(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -42,7 +43,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(8431, 12107);
+            return GetHashCode(8431, 12107);
         }
 
         private double ExecuteInternal(IExpression[] expressions, ExpressionParameters parameters)
@@ -69,14 +70,14 @@ namespace xFunc.Maths.Expressions.Statistical
         {
             if (ParametersCount == 1)
             {
-                var result = this.m_arguments[0].Execute(parameters);
+                var result = this.Arguments[0].Execute(parameters);
                 if (result is Vector vector)
                     return ExecuteInternal(vector.Arguments, parameters);
 
                 return result;
             }
 
-            return ExecuteInternal(m_arguments, parameters);
+            return ExecuteInternal(Arguments, parameters);
         }
 
         /// <summary>

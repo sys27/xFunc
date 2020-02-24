@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="left">The first (left) operand.</param>
         /// <param name="right">The second (right) operand.</param>
-        public Div(IExpression left, IExpression right) : base(left, right)
+        public Div(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Div(IExpression[] arguments) : base(arguments)
+        internal Div(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -51,8 +53,8 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftResult = m_left.Execute(parameters);
-            var rightResult = m_right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
             if (leftResult is Complex || rightResult is Complex)
             {
@@ -91,7 +93,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(6091, 3457);
+            return GetHashCode(6091, 3457);
         }
 
         /// <summary>
@@ -100,7 +102,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Div(m_left.Clone(), m_right.Clone());
+            return new Div(Left.Clone(), Right.Clone());
         }
     }
 }

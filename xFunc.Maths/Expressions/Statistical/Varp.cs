@@ -23,14 +23,15 @@ namespace xFunc.Maths.Expressions.Statistical
     /// <summary>
     /// Represents the VARP function.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.DifferentParametersExpression" />
+    /// <seealso cref="DifferentParametersExpression" />
     public class Varp : StatisticalExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Varp"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Varp(IExpression[] arguments) : base(arguments)
+        public Varp(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -42,7 +43,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(128219, 1811);
+            return GetHashCode(128219, 1811);
         }
 
         private double[] ExecuteArray(IExpression[] expression, ExpressionParameters parameters)
@@ -67,11 +68,11 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var data = m_arguments;
+            var data = Arguments;
 
             if (ParametersCount == 1)
             {
-                var result = m_arguments[0].Execute(parameters);
+                var result = Arguments[0].Execute(parameters);
                 if (result is Vector vector)
                     data = vector.Arguments;
             }

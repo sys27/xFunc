@@ -36,7 +36,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// Initializes a new instance of the <see cref="ParameterIsReadOnlyException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public ParameterIsReadOnlyException(string message) : base(message)
+        public ParameterIsReadOnlyException(string message)
+            : base(message)
         {
         }
 
@@ -45,7 +46,8 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public ParameterIsReadOnlyException(string message, Exception inner) : base(message, inner)
+        public ParameterIsReadOnlyException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 

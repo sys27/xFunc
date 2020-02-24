@@ -29,8 +29,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="args">The values of vector.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IExpression[] args) : base(args)
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public Vector(IExpression[] args)
+            : base(args)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="size">The size of vector.</param>
-        public Vector(int size) : base(new IExpression[size])
+        public Vector(int size)
+            : base(new IExpression[size])
         {
         }
 
@@ -52,8 +54,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of vector.</returns>
         public IExpression this[int index]
         {
-            get { return m_arguments[index]; }
-            set { m_arguments[index] = value; }
+            get { return Arguments[index]; }
+            set { Arguments[index] = value; }
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(3121, 8369);
+            return GetHashCode(3121, 8369);
         }
 
         private IExpression[] CalculateVector(ExpressionParameters parameters)
@@ -73,20 +75,20 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var i = 0; i < this.ParametersCount; i++)
             {
-                if (m_arguments[i] == null)
+                if (Arguments[i] == null)
                     continue;
 
-                if (!(m_arguments[i] is Number))
+                if (!(Arguments[i] is Number))
                 {
-                    var result = m_arguments[i].Execute(parameters);
+                    var result = Arguments[i].Execute(parameters);
                     if (result is double doubleResult)
                         args[i] = new Number(doubleResult);
                     else
-                        args[i] = new Number((int) result);
+                        args[i] = new Number((int)result);
                 }
                 else
                 {
-                    args[i] = m_arguments[i];
+                    args[i] = Arguments[i];
                 }
             }
 
@@ -101,7 +103,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="System.NotSupportedException">Always.</exception>
+        /// <exception cref="NotSupportedException">Always.</exception>
         public override object Execute(ExpressionParameters parameters)
         {
             return new Vector(CalculateVector(parameters));
@@ -131,10 +133,15 @@ namespace xFunc.Maths.Expressions.Matrices
             return new Vector(CloneArguments());
         }
 
+        /// <summary>
+        /// Calculates current vector and returns it as an array.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>The array which represents current vector.</returns>
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
-            return (from exp in m_arguments.AsParallel().AsOrdered()
-                select (double) exp.Execute(parameters)).ToArray();
+            return (from exp in Arguments.AsParallel().AsOrdered()
+                    select (double)exp.Execute(parameters)).ToArray();
         }
 
         /// <summary>
@@ -145,7 +152,10 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </value>
         public sealed override IExpression[] Arguments
         {
-            get { return base.Arguments; }
+            get
+            {
+                return base.Arguments;
+            }
             set
             {
                 if (value == null)

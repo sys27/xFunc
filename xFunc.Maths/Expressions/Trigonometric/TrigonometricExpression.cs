@@ -20,14 +20,15 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
+    /// <seealso cref="UnaryExpression" />
     public abstract class TrigonometricExpression : UnaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TrigonometricExpression"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        protected TrigonometricExpression(IExpression expression) : base(expression)
+        protected TrigonometricExpression(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        protected TrigonometricExpression(IExpression[] arguments) : base(arguments)
+        protected TrigonometricExpression(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -89,7 +91,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is Complex complex)
                 return ExecuteComplex(complex);
 

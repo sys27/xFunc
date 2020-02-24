@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="body">The body of while loop.</param>
         /// <param name="condition">The condition of loop.</param>
-        public While(IExpression body, IExpression condition) : base(body, condition)
+        public While(IExpression body, IExpression condition)
+            : base(body, condition)
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal While(IExpression[] arguments) : base(arguments)
+        internal While(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,8 +52,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            while ((bool) m_right.Execute(parameters))
-                m_left.Execute(parameters);
+            while ((bool)Right.Execute(parameters))
+                Left.Execute(parameters);
 
             return double.NaN;
         }
@@ -77,7 +79,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new While(m_left.Clone(), m_right.Clone());
+            return new While(Left.Clone(), Right.Clone());
         }
     }
 }

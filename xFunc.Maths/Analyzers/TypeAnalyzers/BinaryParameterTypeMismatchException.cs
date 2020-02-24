@@ -32,13 +32,13 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// The right parameter.
         /// </summary>
-        Right
+        Right,
     }
 
     /// <summary>
     /// Represents an exception when the type of the actual argument does not match the expected parameter type.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Analyzers.TypeAnalyzers.ParameterTypeMismatchException" />
+    /// <seealso cref="ParameterTypeMismatchException" />
     [Serializable]
     public class BinaryParameterTypeMismatchException : ParameterTypeMismatchException
     {
@@ -59,8 +59,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             ResultType expected,
             ResultType actual,
             BinaryParameterType parameterType)
-            : base(expected, actual,
-                string.Format(parameterType == BinaryParameterType.Left ? Resource.LeftParameterTypeMismatchExceptionError : Resource.RightParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
+            : base(expected, actual, string.Format(parameterType == BinaryParameterType.Left ? Resource.LeftParameterTypeMismatchExceptionError : Resource.RightParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
         {
         }
 
@@ -70,7 +69,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
         /// <param name="message">The error message.</param>
-        public BinaryParameterTypeMismatchException(ResultType expected, ResultType actual, string message) : base(expected, actual, message)
+        public BinaryParameterTypeMismatchException(ResultType expected, ResultType actual, string message)
+            : base(expected, actual, message)
         {
         }
 
@@ -79,7 +79,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
-        public BinaryParameterTypeMismatchException(string message, Exception inner) : base(message, inner)
+        public BinaryParameterTypeMismatchException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
@@ -88,7 +89,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
-        protected BinaryParameterTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected BinaryParameterTypeMismatchException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

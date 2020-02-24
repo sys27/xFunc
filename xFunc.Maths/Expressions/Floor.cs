@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Floor"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded down.</param>
-        public Floor(IExpression argument) : base(argument)
+        public Floor(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Floor(IExpression[] arguments) : base(arguments)
+        internal Floor(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(11551);
+            return GetHashCode(11551);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is double number)
                 return Math.Floor(number);
 
@@ -90,7 +92,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Floor(m_argument.Clone());
+            return new Floor(Argument.Clone());
         }
     }
 }

@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="Dec"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Dec(IExpression argument) : base(argument)
+        public Dec(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -35,7 +36,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="Dec"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Dec(IExpression[] arguments) : base(arguments)
+        internal Dec(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,13 +51,13 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var value = m_argument.Execute(parameters);
+            var value = Argument.Execute(parameters);
             if (value is bool)
                 throw new NotSupportedException();
 
             var newValue = Convert.ToDouble(value) - 1;
 
-            if (m_argument is Variable variable)
+            if (Argument is Variable variable)
                 parameters.Variables[variable.Name] = newValue;
 
             return newValue;
@@ -82,7 +84,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new Dec(m_argument.Clone());
+            return new Dec(Argument.Clone());
         }
     }
 }

@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
         public Parameter(string key, int value, ParameterType type)
-            : this(key, (object) value, type)
+            : this(key, (object)value, type)
         {
         }
 
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of parameter.</param>
         /// <param name="type">The type of parameter.</param>
         public Parameter(string key, double value, ParameterType type)
-            : this(key, (object) value, type)
+            : this(key, (object)value, type)
         {
         }
 
@@ -86,11 +86,11 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -115,18 +115,14 @@ namespace xFunc.Maths.Expressions.Collections
         /// </returns>
         public override int GetHashCode()
         {
-            var hash = 163;
-
-            hash = hash * 41 + Key.GetHashCode();
-
-            return hash;
+            return HashCode.Combine(Key);
         }
 
         /// <summary>
-        /// Returns a <see cref="String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -159,7 +155,10 @@ namespace xFunc.Maths.Expressions.Collections
         /// </value>
         public object Value
         {
-            get { return this.value; }
+            get
+            {
+                return this.value;
+            }
             set
             {
                 if (value == null)

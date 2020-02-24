@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="expression">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        public Not(IExpression expression) : base(expression)
+        public Not(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Not(IExpression[] arguments) : base(arguments)
+        internal Not(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(3023);
+            return GetHashCode(3023);
         }
 
         /// <summary>
@@ -62,12 +64,12 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var arg = m_argument.Execute(parameters);
+            var arg = Argument.Execute(parameters);
 
             if (arg is bool boolArg)
                 return !boolArg;
             if (arg is double doubleArg)
-                return (double) (~(int) Math.Round(doubleArg, MidpointRounding.AwayFromZero));
+                return (double)(~(int)Math.Round(doubleArg, MidpointRounding.AwayFromZero));
 
             throw new ResultIsNotSupportedException(this, arg);
         }
@@ -91,7 +93,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Not(m_argument.Clone());
+            return new Not(Argument.Clone());
         }
     }
 }

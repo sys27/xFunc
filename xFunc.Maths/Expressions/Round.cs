@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
-        public Round(IExpression argument) : this(new[] { argument })
+        public Round(IExpression argument)
+            : this(new[] { argument })
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="argument">The expression that represents a double-precision floating-point number to be rounded.</param>
         /// <param name="digits">The expression that represents the number of fractional digits in the return value.</param>
-        public Round(IExpression argument, IExpression digits) : this(new[] { argument, digits })
+        public Round(IExpression argument, IExpression digits)
+            : this(new[] { argument, digits })
         {
         }
 
@@ -44,8 +46,9 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Round"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentNullException">args</exception>
-        public Round(IExpression[] args) : base(args)
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public Round(IExpression[] args)
+            : base(args)
         {
         }
 
@@ -57,7 +60,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(4211, 10831);
+            return GetHashCode(4211, 10831);
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace xFunc.Maths.Expressions
             {
                 var digits = Digits?.Execute(parameters);
 
-                return Math.Round(arg, (int) ((digits as double?) ?? 0), MidpointRounding.AwayFromZero);
+                return Math.Round(arg, (int)((digits as double?) ?? 0), MidpointRounding.AwayFromZero);
             }
 
             throw new ResultIsNotSupportedException(this, argResult);
@@ -106,20 +109,20 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// The expression that represents a double-precision floating-point number to be rounded.
+        /// Gets the expression that represents a double-precision floating-point number to be rounded.
         /// </summary>
         /// <value>
         /// The expression that represents a double-precision floating-point number to be rounded.
         /// </value>
-        public IExpression Argument => m_arguments[0];
+        public IExpression Argument => Arguments[0];
 
         /// <summary>
-        /// The expression that represents the number of fractional digits in the return value.
+        /// Gets the expression that represents the number of fractional digits in the return value.
         /// </summary>
         /// <value>
         /// The expression that represents the number of fractional digits in the return value.
         /// </value>
-        public IExpression Digits => ParametersCount == 2 ? m_arguments[1] : null;
+        public IExpression Digits => ParametersCount == 2 ? Arguments[1] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.

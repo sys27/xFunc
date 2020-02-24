@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents an exception which is thrown if expression doesn't support result type of own argument.
     /// </summary>
-    /// <seealso cref="System.Exception" />
+    /// <seealso cref="Exception" />
     [Serializable]
     public class ResultIsNotSupportedException : Exception
     {
@@ -50,7 +50,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public ResultIsNotSupportedException(string message) : base(message)
+        public ResultIsNotSupportedException(string message)
+            : base(message)
         {
         }
 
@@ -59,7 +60,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public ResultIsNotSupportedException(string message, Exception inner) : base(message, inner)
+        public ResultIsNotSupportedException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 
@@ -68,7 +70,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
-        protected ResultIsNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ResultIsNotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

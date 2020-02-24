@@ -65,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
         internal Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
             : base(args)
         {
@@ -83,7 +83,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(587, 1249);
+            return GetHashCode(587, 1249);
         }
 
         /// <summary>
@@ -150,21 +150,21 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Expression
         {
-            get => m_arguments[0];
+            get => Arguments[0];
             set
             {
-                m_arguments[0] = value ?? throw new ArgumentNullException(nameof(value));
-                m_arguments[0].Parent = this;
+                Arguments[0] = value ?? throw new ArgumentNullException(nameof(value));
+                Arguments[0].Parent = this;
             }
         }
 
         /// <summary>
-        /// Gets or sets the variable.
+        /// Gets the variable.
         /// </summary>
         /// <value>
         /// The variable.
         /// </value>
-        public Variable Variable => ParametersCount >= 2 ? (Variable) m_arguments[1] : Variable.X;
+        public Variable Variable => ParametersCount >= 2 ? (Variable)Arguments[1] : Variable.X;
 
         /// <summary>
         /// Gets the derivative point.
@@ -172,10 +172,10 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The derivative point.
         /// </value>
-        public Number DerivativePoint => ParametersCount >= 3 ? (Number) m_arguments[2] : null;
+        public Number DerivativePoint => ParametersCount >= 3 ? (Number)Arguments[2] : null;
 
         /// <summary>
-        /// Gets or sets the simplifier.
+        /// Gets the simplifier.
         /// </summary>
         /// <value>
         /// The simplifier.
@@ -183,7 +183,7 @@ namespace xFunc.Maths.Expressions
         public ISimplifier Simplifier { get; }
 
         /// <summary>
-        /// Gets or sets the differentiator.
+        /// Gets the differentiator.
         /// </summary>
         /// <value>
         /// The differentiator.

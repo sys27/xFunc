@@ -11,7 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Tests", "xFunc.Tests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.DotnetTool", "xFunc.DotnetTool\xFunc.DotnetTool.csproj", "{907CDF76-60C1-4894-9CB3-496FFFF92E13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFunc.Benchmark", "xFunc.Benchmark\xFunc.Benchmark.csproj", "{EC5FB562-9BFE-4BD9-A3E4-666D3021AF1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFunc.Benchmark", "xFunc.Benchmark\xFunc.Benchmark.csproj", "{EC5FB562-9BFE-4BD9-A3E4-666D3021AF1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E123ED4D-6784-4285-8DA0-C68865EA7E90}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		xFunc Grammar.txt = xFunc Grammar.txt
+		xFunc.ruleset = xFunc.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

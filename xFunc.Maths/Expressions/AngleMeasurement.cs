@@ -33,6 +33,6 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Gradian.
         /// </summary>
-        Gradian
+        Gradian,
     }
 }

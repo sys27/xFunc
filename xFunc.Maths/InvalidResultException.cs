@@ -35,7 +35,8 @@ namespace xFunc.Maths
         /// Initializes a new instance of the <see cref="InvalidResultException"/> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public InvalidResultException(string message) : base(message)
+        public InvalidResultException(string message)
+            : base(message)
         {
         }
 
@@ -44,7 +45,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         /// <param name="inner">The inner exception.</param>
-        public InvalidResultException(string message, Exception inner) : base(message, inner)
+        public InvalidResultException(string message, Exception inner)
+            : base(message, inner)
         {
         }
 

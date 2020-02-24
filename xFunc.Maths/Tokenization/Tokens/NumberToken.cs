@@ -25,7 +25,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     public class NumberToken : IToken
     {
         /// <summary>
-        /// Initializes the <see cref="NumberToken"/> class.
+        /// Initializes a new instance of the <see cref="NumberToken"/> class.
         /// </summary>
         /// <param name="number">A number.</param>
         public NumberToken(double number)
@@ -49,7 +49,7 @@ namespace xFunc.Maths.Tokenization.Tokens
             if (typeof(NumberToken) != obj.GetType())
                 return false;
 
-            var token = (NumberToken) obj;
+            var token = (NumberToken)obj;
 
             return this.Number == token.Number;
         }

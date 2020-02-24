@@ -28,8 +28,9 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="LCM"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public LCM(IExpression[] args) : base(args)
+        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
+        public LCM(IExpression[] args)
+            : base(args)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="first">The first operand.</param>
         /// <param name="second">The second operand.</param>
-        public LCM(IExpression first, IExpression second) : this(new[] { first, second })
+        public LCM(IExpression first, IExpression second)
+            : this(new[] { first, second })
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(7417, 2719);
+            return GetHashCode(7417, 2719);
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var numbers = m_arguments.Select(item =>
+            var numbers = Arguments.Select(item =>
             {
                 var result = item.Execute(parameters);
                 if (result is double number)

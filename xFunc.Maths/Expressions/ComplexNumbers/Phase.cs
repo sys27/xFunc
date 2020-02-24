@@ -22,14 +22,15 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
     /// <summary>
     /// Represent the Phase function.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
+    /// <seealso cref="UnaryExpression" />
     public class Phase : UnaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Phase"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Phase(IExpression argument) : base(argument)
+        public Phase(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Phase(IExpression[] arguments) : base(arguments)
+        internal Phase(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(13109);
+            return GetHashCode(13109);
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is Complex complex)
             {
                 var angleMeasurement = parameters?.AngleMeasurement ?? AngleMeasurement.Degree;
@@ -98,7 +100,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Phase(m_argument.Clone());
+            return new Phase(Argument.Clone());
         }
     }
 }

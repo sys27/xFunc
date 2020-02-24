@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public NotEqual(IExpression left, IExpression right) : base(left, right)
+        public NotEqual(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal NotEqual(IExpression[] arguments) : base(arguments)
+        internal NotEqual(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -51,8 +53,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftValue = m_left.Execute(parameters);
-            var rightValue = m_right.Execute(parameters);
+            var leftValue = Left.Execute(parameters);
+            var rightValue = Right.Execute(parameters);
 
             if (leftValue is double leftDouble && rightValue is double rightDouble)
                 return leftDouble != rightDouble;
@@ -84,7 +86,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new NotEqual(m_left.Clone(), m_right.Clone());
+            return new NotEqual(Left.Clone(), Right.Clone());
         }
     }
 }

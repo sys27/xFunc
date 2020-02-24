@@ -205,13 +205,7 @@ namespace xFunc.Maths
             return Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
         }
 
-        /// <summary>
-        /// Computes the greatest common divisor.
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns>The greatest common divisor.</returns>
-        public static double GCD(double a, double b)
+        private static double GCD(double a, double b)
         {
             while (!(b.Equals(0) || Math.Abs(b) < 1E-14))
                 b = a % (a = b);
@@ -224,8 +218,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="numbers">The numbers.</param>
         /// <returns>The greatest common divisor.</returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="numbers"/> is null.</exception>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="numbers"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="numbers" /> should contain at least 2 elements.</exception>
         public static double GCD(params double[] numbers)
         {
             if (numbers == null)
@@ -236,13 +230,7 @@ namespace xFunc.Maths
             return numbers.Aggregate(GCD);
         }
 
-        /// <summary>
-        /// Computes the least common multiple.
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns>The least common multiple.</returns>
-        public static double LCM(double a, double b)
+        private static double LCM(double a, double b)
         {
             var numerator = Math.Abs(a * b);
 
@@ -253,9 +241,9 @@ namespace xFunc.Maths
         /// Computes the polynomial least common multiple.
         /// </summary>
         /// <param name="numbers">The numbers.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="numbers"/> is null.</exception>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <returns>The least common multiple.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="numbers"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="numbers" /> should contain at least 2 elements.</exception>
         public static double LCM(params double[] numbers)
         {
             if (numbers == null)
@@ -288,7 +276,7 @@ namespace xFunc.Maths
         /// Computes the factorial.
         /// </summary>
         /// <param name="n">An argument.</param>
-        /// <returns></returns>
+        /// <returns>The factorial.</returns>
         public static double Fact(double n)
         {
             if (n < 0)
@@ -303,10 +291,10 @@ namespace xFunc.Maths
         }
 
         /// <summary>
-        ///
+        /// Formats a complex number.
         /// </summary>
-        /// <param name="complex"></param>
-        /// <returns></returns>
+        /// <param name="complex">The complex number.</param>
+        /// <returns>The formatted string.</returns>
         public static string Format(this Complex complex)
         {
             if (complex.Real == 0)

@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public DotProduct(IExpression left, IExpression right) : base(left, right)
+        public DotProduct(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -36,7 +37,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        public DotProduct(IExpression[] arguments) : base(arguments)
+        public DotProduct(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -48,7 +50,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(56401, 13709);
+            return GetHashCode(56401, 13709);
         }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = this.m_left.Execute(parameters);
-            var right = this.m_right.Execute(parameters);
+            var left = this.Left.Execute(parameters);
+            var right = this.Right.Execute(parameters);
             if (left is Vector leftVector && right is Vector rightVector)
                 return leftVector.Mul(rightVector, parameters);
 
@@ -90,7 +92,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         public override IExpression Clone()
         {
-            return new DotProduct(m_left.Clone(), m_right.Clone());
+            return new DotProduct(Left.Clone(), Right.Clone());
         }
     }
 }

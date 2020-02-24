@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
-        public DivAssign(IExpression variable, IExpression exp) : base(variable, exp)
+        public DivAssign(IExpression variable, IExpression exp)
+            : base(variable, exp)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal DivAssign(IExpression[] arguments) : base(arguments)
+        internal DivAssign(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -51,12 +53,12 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var var = (Variable) m_left;
+            var var = (Variable)Left;
             var parameter = var.Execute(parameters);
             if (parameter is bool)
                 throw new NotSupportedException();
 
-            var newValue = Convert.ToDouble(parameter) / (double) m_right.Execute(parameters);
+            var newValue = Convert.ToDouble(parameter) / (double)Right.Execute(parameters);
             parameters.Variables[var.Name] = newValue;
 
             return newValue;
@@ -83,15 +85,18 @@ namespace xFunc.Maths.Expressions.Programming
         /// </returns>
         public override IExpression Clone()
         {
-            return new DivAssign(m_left.Clone(), m_right.Clone());
+            return new DivAssign(Left.Clone(), Right.Clone());
         }
 
         /// <summary>
-        /// The left (first) operand.
+        /// Gets or sets the left (first) operand.
         /// </summary>
         public override IExpression Left
         {
-            get { return m_left; }
+            get
+            {
+                return base.Left;
+            }
             set
             {
                 if (!(value is Variable))

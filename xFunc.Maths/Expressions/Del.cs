@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents the "Del" operator.
     /// </summary>
-    /// <seealso cref="xFunc.Maths.Expressions.UnaryExpression" />
+    /// <seealso cref="UnaryExpression" />
     public class Del : UnaryExpression
     {
         private readonly IDifferentiator differentiator;
@@ -49,7 +49,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] arguments) : base(arguments)
+        internal Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] arguments)
+            : base(arguments)
         {
             this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
             this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
@@ -73,11 +74,11 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException">The differentiator is null.</exception>
+        /// <exception cref="ArgumentNullException">The differentiator is null.</exception>
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var variables = Helpers.GetAllVariables(m_argument).ToList();
+            var variables = Helpers.GetAllVariables(Argument).ToList();
             var vector = new Vector(variables.Count);
 
             differentiator.Parameters = parameters;
@@ -86,7 +87,7 @@ namespace xFunc.Maths.Expressions
             {
                 differentiator.Variable = variables[i];
 
-                vector[i] = m_argument.Analyze(differentiator).Analyze(simplifier);
+                vector[i] = Argument.Analyze(differentiator).Analyze(simplifier);
             }
 
             return vector;
@@ -113,7 +114,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Del(differentiator, simplifier, m_argument.Clone());
+            return new Del(differentiator, simplifier, Argument.Clone());
         }
     }
 }

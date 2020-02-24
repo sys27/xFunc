@@ -78,11 +78,11 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public string ToString(IFormatter formatter)
         {
@@ -90,10 +90,10 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -103,7 +103,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Do not use this method. It always throws an exception.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Never returns.</returns>
         /// <exception cref="NotSupportedException">Always.</exception>
         public object Execute()
         {
@@ -146,12 +146,12 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// A name of this variable.
+        /// Gets a name of this variable.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
-        /// Get or Set the parent expression.
+        /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
     }

@@ -27,7 +27,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="argument">The expression.</param>
-        public Fact(IExpression argument) : base(argument)
+        public Fact(IExpression argument)
+            : base(argument)
         {
         }
 
@@ -35,7 +36,8 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Fact(IExpression[] arguments) : base(arguments)
+        internal Fact(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -47,7 +49,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(1453);
+            return GetHashCode(1453);
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
             if (result is double number)
                 return MathExtensions.Fact(Math.Round(number));
 
@@ -88,7 +90,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override IExpression Clone()
         {
-            return new Fact(m_argument.Clone());
+            return new Fact(Argument.Clone());
         }
     }
 }

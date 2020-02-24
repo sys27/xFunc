@@ -28,7 +28,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Initializes a new instance of the <see cref="Arccot"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Arccot(IExpression expression) : base(expression)
+        public Arccot(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -37,7 +38,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Arccot(IExpression[] arguments) : base(arguments)
+        internal Arccot(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -49,7 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(4663);
+            return GetHashCode(4663);
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Arccot(m_argument.Clone());
+            return new Arccot(Argument.Clone());
         }
     }
 }

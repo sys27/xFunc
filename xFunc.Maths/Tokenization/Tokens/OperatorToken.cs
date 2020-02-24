@@ -37,137 +37,137 @@ namespace xFunc.Maths.Tokenization.Tokens
         public override string ToString() => @operator;
 
         /// <summary>
-        /// +
+        /// Gets the '+' token.
         /// </summary>
         public static OperatorToken Plus { get; } = new OperatorToken("+");
 
         /// <summary>
-        /// -
+        /// Gets the '-' token.
         /// </summary>
         public static OperatorToken Minus { get; } = new OperatorToken("-");
 
         /// <summary>
-        /// *
+        /// Gets the '*' token.
         /// </summary>
         public static OperatorToken Multiplication { get; } = new OperatorToken("*");
 
         /// <summary>
-        /// /
+        /// Gets the '/' token.
         /// </summary>
         public static OperatorToken Division { get; } = new OperatorToken("/");
 
         /// <summary>
-        /// ^
+        /// Gets the '^' token.
         /// </summary>
         public static OperatorToken Exponentiation { get; } = new OperatorToken("^");
 
         /// <summary>
-        /// !
+        /// Gets the '!' token.
         /// </summary>
         public static OperatorToken Factorial { get; } = new OperatorToken("!");
 
         /// <summary>
-        /// %, mod
+        /// Gets the '%, mod' token.
         /// </summary>
         public static OperatorToken Modulo { get; } = new OperatorToken("%");
 
         /// <summary>
-        /// &amp;&amp;
+        /// Gets the '&amp;&amp;' token.
         /// </summary>
         public static OperatorToken ConditionalAnd { get; } = new OperatorToken("&&");
 
         /// <summary>
-        /// ||
+        /// Gets the '||' token.
         /// </summary>
         public static OperatorToken ConditionalOr { get; } = new OperatorToken("||");
 
         /// <summary>
-        /// ==
+        /// Gets the '==' token.
         /// </summary>
         public static OperatorToken Equal { get; } = new OperatorToken("==");
 
         /// <summary>
-        /// !=
+        /// Gets the '!=' token.
         /// </summary>
         public static OperatorToken NotEqual { get; } = new OperatorToken("!=");
 
         /// <summary>
-        /// &lt;
+        /// Gets the '&lt;' token.
         /// </summary>
         public static OperatorToken LessThan { get; } = new OperatorToken("<");
 
         /// <summary>
-        /// &lt;=
+        /// Gets the '&lt;=' token.
         /// </summary>
         public static OperatorToken LessOrEqual { get; } = new OperatorToken("<=");
 
         /// <summary>
-        /// &gt;
+        /// Gets the '&gt;' token.
         /// </summary>
         public static OperatorToken GreaterThan { get; } = new OperatorToken(">");
 
         /// <summary>
-        /// &gt;=
+        /// Gets the '&gt;=' token.
         /// </summary>
         public static OperatorToken GreaterOrEqual { get; } = new OperatorToken(">=");
 
         /// <summary>
-        /// The increment (++)
+        /// Gets the 'The increment (++)' token.
         /// </summary>
         public static OperatorToken Increment { get; } = new OperatorToken("++");
 
         /// <summary>
-        /// The decrement (--)
+        /// Gets the 'The decrement (--)' token.
         /// </summary>
         public static OperatorToken Decrement { get; } = new OperatorToken("--");
 
         /// <summary>
-        /// +=
+        /// Gets the '+=' token.
         /// </summary>
         public static OperatorToken AddAssign { get; } = new OperatorToken("+=");
 
         /// <summary>
-        /// -=
+        /// Gets the '-=' token.
         /// </summary>
         public static OperatorToken SubAssign { get; } = new OperatorToken("-=");
 
         /// <summary>
-        /// *=
+        /// Gets the '*=' token.
         /// </summary>
         public static OperatorToken MulAssign { get; } = new OperatorToken("*=");
 
         /// <summary>
-        /// /=
+        /// Gets the '/=' token.
         /// </summary>
         public static OperatorToken DivAssign { get; } = new OperatorToken("/=");
 
         /// <summary>
-        /// :=
+        /// Gets the ':=' token.
         /// </summary>
         public static OperatorToken Assign { get; } = new OperatorToken(":=");
 
         /// <summary>
-        /// ~, not
+        /// Gets the '~, not' token.
         /// </summary>
         public static OperatorToken Not { get; } = new OperatorToken("~");
 
         /// <summary>
-        /// &amp;, and
+        /// Gets the '&amp;, and' token.
         /// </summary>
         public static OperatorToken And { get; } = new OperatorToken("&");
 
         /// <summary>
-        /// |, or
+        /// Gets the '|, or' token.
         /// </summary>
         public static OperatorToken Or { get; } = new OperatorToken("|");
 
         /// <summary>
-        /// =>, ->, impl
+        /// Gets the '=>, ->, impl' token.
         /// </summary>
         public static OperatorToken Implication { get; } = new OperatorToken("->");
 
         /// <summary>
-        /// &lt;=>, &lt;->, eq
+        /// Gets the '&lt;=>, &lt;->, eq' token.
         /// </summary>
         public static OperatorToken Equality { get; } = new OperatorToken("<->");
     }

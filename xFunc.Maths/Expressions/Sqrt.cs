@@ -29,7 +29,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="expression">The argument of the function.</param>
         /// <seealso cref="IExpression"/>
-        public Sqrt(IExpression expression) : base(expression)
+        public Sqrt(IExpression expression)
+            : base(expression)
         {
         }
 
@@ -38,7 +39,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Sqrt(IExpression[] arguments) : base(arguments)
+        internal Sqrt(IExpression[] arguments)
+            : base(arguments)
         {
         }
 
@@ -50,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode(1021);
+            return GetHashCode(1021);
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var result = m_argument.Execute(parameters);
+            var result = Argument.Execute(parameters);
 
             if (result is Complex complex)
                 return Complex.Sqrt(complex);
@@ -98,7 +100,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone()
         {
-            return new Sqrt(m_argument.Clone());
+            return new Sqrt(Argument.Clone());
         }
     }
 }

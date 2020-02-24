@@ -28,6 +28,9 @@ using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
 namespace xFunc.Maths
 {
+    /// <summary>
+    /// The parser for mathematical expressions.
+    /// </summary>
     public partial class Parser
     {
         private IExpression CreateOperatorOrKeyword(IToken token, params IExpression[] arguments)
@@ -36,7 +39,7 @@ namespace xFunc.Maths
             {
                 OperatorToken operatorToken => CreateOperator(operatorToken, arguments),
                 KeywordToken keywordToken => CreateFromKeyword(keywordToken, arguments),
-                _ => throw new AggregateException(nameof(token))
+                _ => throw new AggregateException(nameof(token)),
             };
         }
 
@@ -211,7 +214,7 @@ namespace xFunc.Maths
 
                 "sign" => new Sign(arguments),
 
-                var id => new UserFunction(id, arguments)
+                var id => new UserFunction(id, arguments),
             };
         }
 

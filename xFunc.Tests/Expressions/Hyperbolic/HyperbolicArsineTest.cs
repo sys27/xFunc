@@ -30,24 +30,27 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         public void ExecuteRadianTest()
         {
             var exp = new Arsinh(new Number(0.5));
+            var result = (double)exp.Execute(AngleMeasurement.Radian);
 
-            Assert.Equal(MathExtensions.Asinh(0.5), exp.Execute(AngleMeasurement.Radian));
+            Assert.Equal(0.48121182505960347, result, 15);
         }
 
         [Fact]
         public void ExecuteDegreeTest()
         {
             var exp = new Arsinh(new Number(0.5));
+            var result = (double)exp.Execute(AngleMeasurement.Degree);
 
-            Assert.Equal(MathExtensions.Asinh(0.5) / Math.PI * 180, exp.Execute(AngleMeasurement.Degree));
+            Assert.Equal(27.57140662770298, result, 15);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Arsinh(new Number(0.5));
+            var result = (double)exp.Execute(AngleMeasurement.Gradian);
 
-            Assert.Equal(MathExtensions.Asinh(0.5) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(30.634896253003312, result, 15);
         }
 
         [Fact]
@@ -55,9 +58,8 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         {
             var complex = new Complex(3, 2);
             var exp = new Arsinh(new ComplexNumber(complex));
-            var result = (Complex) exp.Execute();
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Asinh(complex), result);
             Assert.Equal(1.983387029916535432347076, result.Real, 15);
             Assert.Equal(0.5706527843210994007, result.Imaginary, 15);
         }

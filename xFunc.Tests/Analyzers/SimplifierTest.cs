@@ -1176,7 +1176,7 @@ namespace xFunc.Tests.Analyzers
         public void CotZero()
         {
             var exp = new Cot(zero);
-            var expected = new Number(MathExtensions.Cot(0));
+            var expected = new Number(double.PositiveInfinity);
 
             SimpleTest(exp, expected);
         }
@@ -1185,7 +1185,7 @@ namespace xFunc.Tests.Analyzers
         public void CscZero()
         {
             var exp = new Csc(zero);
-            var expected = new Number(MathExtensions.Csc(0));
+            var expected = new Number(double.PositiveInfinity);
 
             SimpleTest(exp, expected);
         }
@@ -1194,7 +1194,7 @@ namespace xFunc.Tests.Analyzers
         public void SecZero()
         {
             var exp = new Sec(zero);
-            var expected = new Number(MathExtensions.Sec(0));
+            var expected = new Number(1.0);
 
             SimpleTest(exp, expected);
         }

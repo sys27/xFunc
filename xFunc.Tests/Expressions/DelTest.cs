@@ -64,7 +64,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullDiffTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Del(null, null, Variable.X).Execute());
+            Assert.Throws<ArgumentNullException>(() => new Del(null, null, Variable.X));
+        }
+
+        [Fact]
+        public void NullSimplifierTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Del(new Differentiator(), null, Variable.X));
         }
 
         [Fact]

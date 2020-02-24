@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using xFunc.Maths.Resources;
@@ -72,7 +73,7 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CollectionChanged" /> event.
+        /// Raises the <see cref="CollectionChanged" /> event.
         /// </summary>
         /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
@@ -112,7 +113,7 @@ namespace xFunc.Maths.Expressions.Collections
         {
             var func = Keys.FirstOrDefault(uf => uf.Equals(function));
             if (func == null)
-                throw new KeyNotFoundException(string.Format(Resource.FunctionNotFoundExceptionError, function));
+                throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.FunctionNotFoundExceptionError, function));
 
             return func;
         }

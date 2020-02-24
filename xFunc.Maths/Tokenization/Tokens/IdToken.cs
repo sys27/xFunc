@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Diagnostics;
 
 namespace xFunc.Maths.Tokenization.Tokens
@@ -52,14 +53,6 @@ namespace xFunc.Maths.Tokenization.Tokens
 
             return Id == token.Id;
         }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode() => 439289 ^ Id.GetHashCode();
 
         /// <summary>
         /// Returns a string that represents the current object.

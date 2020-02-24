@@ -28,24 +28,11 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <summary>
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Product(IExpression[] args)
-            : base(args)
+        /// <param name="arguments">The arguments.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
+        public Product(IExpression[] arguments)
+            : base(arguments)
         {
-            if (args.Length == 5 && !(args[4] is Variable))
-                throw new ArgumentException();
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(1607, 6917);
         }
 
         private double ExecuteInternal(IExpression[] expressions, ExpressionParameters parameters)
@@ -90,7 +77,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

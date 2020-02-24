@@ -44,17 +44,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(6659);
-        }
-
-        /// <summary>
         /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="degree">The calculation result of argument.</param>
@@ -64,7 +53,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected override double ExecuteDergee(double degree)
         {
-            return 1 / Math.Cos(degree * Math.PI / 180);
+            return MathExtensions.Sec(degree * Math.PI / 180);
         }
 
         /// <summary>
@@ -77,7 +66,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected override double ExecuteRadian(double radian)
         {
-            return 1 / Math.Cos(radian);
+            return MathExtensions.Sec(radian);
         }
 
         /// <summary>
@@ -90,7 +79,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <seealso cref="ExpressionParameters" />
         protected override double ExecuteGradian(double gradian)
         {
-            return 1 / Math.Cos(gradian * Math.PI / 200);
+            return MathExtensions.Sec(gradian * Math.PI / 200);
         }
 
         /// <summary>
@@ -113,7 +102,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

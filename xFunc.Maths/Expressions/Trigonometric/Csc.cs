@@ -44,17 +44,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(9749);
-        }
-
-        /// <summary>
         /// Calculates this mathematical expression (using degree).
         /// </summary>
         /// <param name="degree">The calculation result of argument.</param>
@@ -113,7 +102,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

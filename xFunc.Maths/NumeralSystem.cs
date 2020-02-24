@@ -33,7 +33,9 @@ namespace xFunc.Maths
         /// <summary>
         /// The decimal numeral system.
         /// </summary>
+#pragma warning disable CA1720
         Decimal = 10,
+#pragma warning restore CA1720
 
         /// <summary>
         /// The hexidecimal numeral system.

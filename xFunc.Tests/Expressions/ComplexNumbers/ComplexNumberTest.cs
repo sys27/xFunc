@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -54,7 +55,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         {
             var complex = new Complex(5, 2);
             var exp = new ComplexNumber(complex);
-            var result = (Complex) exp;
+            var result = (Complex)exp;
 
             Assert.Equal(complex, result);
         }
@@ -63,7 +64,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         public void CastToComplexNumberTest()
         {
             var complex = new Complex(5, 2);
-            var exp = (ComplexNumber) complex;
+            var exp = (ComplexNumber)complex;
             var result = new ComplexNumber(complex);
 
             Assert.Equal(exp, result);
@@ -112,6 +113,21 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
             var expected = new Complex(3, 2);
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ComplexNumberAnalyzeNull()
+        {
+            var exp = new ComplexNumber(3, 2);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void ConvertToComplexTest()
+        {
+            ComplexNumber exp = null;
+            Assert.Throws<ArgumentNullException>(() => (Complex)exp);
         }
 
         [Fact]

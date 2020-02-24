@@ -29,13 +29,14 @@ namespace xFunc.Tests.Expressions.Matrices
             var vector2 = new Vector(new[] { new Number(9), new Number(5) });
             var matrix = new Matrix(new[] { vector1, vector2 });
             var number = new Number(5);
+            var exp = new Mul(matrix, number);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(10), new Number(15) }),
                 new Vector(new[] { new Number(45), new Number(25) })
             });
-            var result = matrix.Mul(number);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -53,13 +54,14 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(9), new Number(2) }),
                 new Vector(new[] { new Number(4), new Number(3) })
             });
+            var exp = new Add(matrix1, matrix2);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(15), new Number(5) }),
                 new Vector(new[] { new Number(6), new Number(4) })
             });
-            var result = matrix1.Add(matrix2);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -91,8 +93,9 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(4), new Number(3) }),
                 new Vector(new[] { new Number(1), new Number(7) })
             });
+            var exp = new Add(matrix1, matrix2);
 
-            Assert.Throws<ArgumentException>(() => matrix1.Add(matrix2));
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]
@@ -108,13 +111,14 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(9), new Number(2) }),
                 new Vector(new[] { new Number(4), new Number(3) })
             });
+            var exp = new Sub(matrix1, matrix2);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(-3), new Number(1) }),
                 new Vector(new[] { new Number(-2), new Number(-2) })
             });
-            var result = matrix1.Sub(matrix2);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -146,8 +150,9 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(4), new Number(3) }),
                 new Vector(new[] { new Number(6), new Number(1) })
             });
+            var exp = new Sub(matrix1, matrix2);
 
-            Assert.Throws<ArgumentException>(() => matrix1.Sub(matrix2));
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]
@@ -159,13 +164,14 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(3), new Number(4) }),
                 new Vector(new[] { new Number(5), new Number(6) })
             });
+            var exp = new Transpose(matrix);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(1), new Number(3), new Number(5) }),
                 new Vector(new[] { new Number(2), new Number(4), new Number(6) })
             });
-            var result = matrix.Transpose();
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -183,13 +189,14 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(3) }),
                 new Vector(new[] { new Number(-1) })
             });
+            var exp = new Mul(left, right);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(-7) }),
                 new Vector(new[] { new Number(11) })
             });
-            var result = left.Mul(right);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -209,6 +216,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(4), new Number(-1), new Number(3) }),
                 new Vector(new[] { new Number(9), new Number(6), new Number(5) })
             });
+            var exp = new Mul(left, right);
 
             var expected = new Matrix(new[]
             {
@@ -216,7 +224,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(9), new Number(-27), new Number(32) }),
                 new Vector(new[] { new Number(13), new Number(-17), new Number(26) })
             });
-            var result = left.Mul(right);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -226,16 +234,17 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var left = new Matrix(new[]
             {
-                new Vector(new[] { new Number(-2), new Number(1) }),
-                new Vector(new[] { new Number(5), new Number(4) })
-            });
-            var right = new Matrix(new[]
-            {
                 new Vector(new[] { new Number(3) }),
                 new Vector(new[] { new Number(-1) })
             });
+            var right = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(-2), new Number(1) }),
+                new Vector(new[] { new Number(5), new Number(4) })
+            });
+            var exp = new Mul(left, right);
 
-            Assert.Throws<ArgumentException>(() => right.Mul(left));
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]
@@ -247,13 +256,14 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(3) }),
                 new Vector(new[] { new Number(-1) })
             });
+            var exp = new Mul(matrix, vector);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(-6), new Number(3) }),
                 new Vector(new[] { new Number(2), new Number(-1) })
             });
-            var result = matrix.Mul(vector);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -267,10 +277,11 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
                 new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
             });
+            var exp = new Determinant(matrix);
 
-            var det = matrix.Determinant();
+            var det = exp.Execute();
 
-            Assert.Equal(204, det);
+            Assert.Equal(204.0, det);
         }
 
         [Fact]
@@ -316,28 +327,6 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
-        public void LUPTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }),
-                new Vector(new[] { new Number(1), new Number(8), new Number(4), new Number(2) }),
-                new Vector(new[] { new Number(2), new Number(1), new Number(9), new Number(3) }),
-                new Vector(new[] { new Number(5), new Number(4), new Number(7), new Number(1) })
-            });
-            var expected = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(5), new Number(4), new Number(7), new Number(1) }),
-                new Vector(new[] { new Number(0.2), new Number(7.2), new Number(2.6), new Number(1.8) }),
-                new Vector(new[] { new Number(0.4), new Number(-0.0833333333333333), new Number(6.41666666666667), new Number(2.75) }),
-                new Vector(new[] { new Number(0.6), new Number(0.638888888888889), new Number(-0.601731601731602), new Number(4.90476190476191) })
-            });
-            var actual = MatrixExtensions.LUPDecomposition(matrix, null, out _, out _);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
         public void InverseTest()
         {
             var matrix = new Matrix(new[]
@@ -347,6 +336,8 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(2), new Number(1), new Number(9), new Number(3) }),
                 new Vector(new[] { new Number(5), new Number(4), new Number(7), new Number(1) })
             });
+            var exp = new Inverse(matrix);
+
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(0.0970873786407767), new Number(-0.18270079435128), new Number(-0.114739629302736), new Number(0.224183583406884) }),
@@ -355,7 +346,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(0.203883495145631), new Number(-0.120035304501324), new Number(0.122683142100618), new Number(-0.147396293027361) })
             });
 
-            var actual = MatrixExtensions.Inverse(matrix, null);
+            var actual = exp.Execute();
 
             Assert.Equal(expected, actual);
         }

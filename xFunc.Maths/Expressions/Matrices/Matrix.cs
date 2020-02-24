@@ -98,17 +98,6 @@ namespace xFunc.Maths.Expressions.Matrices
             set { this[row][col] = value; }
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(743, 3863);
-        }
-
         private Vector[] CalculateMatrix(ExpressionParameters parameters)
         {
             var args = new Vector[this.ParametersCount];
@@ -141,7 +130,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }
@@ -177,9 +166,9 @@ namespace xFunc.Maths.Expressions.Matrices
         public void SwapRows(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= ParametersCount)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException(nameof(firstIndex));
             if (secondIndex < 0 || secondIndex >= ParametersCount)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException(nameof(secondIndex));
 
             var temp = Arguments[firstIndex];
             Arguments[firstIndex] = Arguments[secondIndex];
@@ -195,9 +184,9 @@ namespace xFunc.Maths.Expressions.Matrices
         public void SwapColumns(int firstIndex, int secondIndex)
         {
             if (firstIndex < 0 || firstIndex >= ParametersCount)
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(firstIndex));
             if (secondIndex < 0 || secondIndex >= ParametersCount)
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(secondIndex));
 
             foreach (Vector item in Arguments)
             {

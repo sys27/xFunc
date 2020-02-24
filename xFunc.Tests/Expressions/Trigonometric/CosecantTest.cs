@@ -30,24 +30,27 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void ExecuteDegreeTest()
         {
             var exp = new Csc(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Degree);
 
-            Assert.Equal(MathExtensions.Csc(Math.PI / 180), exp.Execute(AngleMeasurement.Degree));
+            Assert.Equal(57.298688498550185, result, 15);
         }
 
         [Fact]
         public void ExecuteRadianTest()
         {
             var exp = new Csc(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Radian);
 
-            Assert.Equal(MathExtensions.Csc(1), exp.Execute(AngleMeasurement.Radian));
+            Assert.Equal(1.1883951057781212, result, 15);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Csc(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Gradian);
 
-            Assert.Equal(MathExtensions.Csc(Math.PI / 200), exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(63.664595306000564, result, 15);
         }
 
         [Fact]
@@ -55,9 +58,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Csc(new ComplexNumber(complex));
-            var result = (Complex) exp.Execute();
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(ComplexExtensions.Csc(complex), result);
             Assert.Equal(0.040300578856891527, result.Real, 15);
             Assert.Equal(0.27254866146294021, result.Imaginary, 15);
         }

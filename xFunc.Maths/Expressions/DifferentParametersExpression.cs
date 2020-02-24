@@ -69,27 +69,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode() => GetHashCode(7951, 8807);
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <param name="first">The first.</param>
-        /// <param name="second">The second.</param>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        protected int GetHashCode(int first, int second)
-        {
-            return arguments.Aggregate(first, (current, item) => current * second + item.GetHashCode());
-        }
-
-        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
@@ -132,7 +111,23 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public abstract TResult Analyze<TResult>(IAnalyzer<TResult> analyzer);
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return AnalyzeInternal(analyzer);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -166,7 +161,10 @@ namespace xFunc.Maths.Expressions
         /// <value>The arguments.</value>
         public virtual IExpression[] Arguments
         {
-            get => arguments;
+            get
+            {
+                return arguments;
+            }
             set
             {
                 if (value == null)

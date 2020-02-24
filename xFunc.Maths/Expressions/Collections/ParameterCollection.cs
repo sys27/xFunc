@@ -17,6 +17,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using xFunc.Maths.Resources;
@@ -77,7 +78,7 @@ namespace xFunc.Maths.Expressions.Collections
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CollectionChanged" /> event.
+        /// Raises the <see cref="CollectionChanged" /> event.
         /// </summary>
         /// <param name="args">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
@@ -107,7 +108,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+        /// An <see cref="IEnumerator" /> object that can be used to iterate through the collection.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -118,7 +119,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+        /// A <see cref="IEnumerator{T}" /> that can be used to iterate through the collection.
         /// </returns>
         public IEnumerator<Parameter> GetEnumerator()
         {
@@ -155,7 +156,7 @@ namespace xFunc.Maths.Expressions.Collections
                     throw new IndexOutOfRangeException();
 
                 if (index < constants.Count)
-                    throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, collection.ElementAt(index).Key));
+                    throw new ParameterIsReadOnlyException(Resource.ReadOnlyError, collection.ElementAt(index).Key);
 
                 var element = collection.ElementAt(index - constants.Count);
                 element.Value = value;
@@ -203,7 +204,7 @@ namespace xFunc.Maths.Expressions.Collections
             if (param != null)
                 return param;
 
-            throw new KeyNotFoundException(string.Format(Resource.VariableNotFoundExceptionError, key));
+            throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.VariableNotFoundExceptionError, key));
         }
 
         /// <summary>

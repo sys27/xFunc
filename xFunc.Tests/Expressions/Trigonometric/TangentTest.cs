@@ -29,24 +29,27 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void ExecuteRadianTest()
         {
             var exp = new Tan(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Radian);
 
-            Assert.Equal(Math.Tan(1), exp.Execute(AngleMeasurement.Radian));
+            Assert.Equal(1.5574077246549021, result, 15);
         }
 
         [Fact]
         public void ExecuteDegreeTest()
         {
             var exp = new Tan(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Degree);
 
-            Assert.Equal(Math.Tan(1 * Math.PI / 180), exp.Execute(AngleMeasurement.Degree));
+            Assert.Equal(0.017455064928217585, result, 15);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Tan(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Gradian);
 
-            Assert.Equal(Math.Tan(1 * Math.PI / 200), exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(0.015709255323664916, result, 15);
         }
 
         [Fact]
@@ -54,11 +57,10 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Tan(new ComplexNumber(complex));
-            var result = (Complex) exp.Execute();
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Tan(complex), exp.Execute());
-            Assert.Equal(-0.0098843750383224935, result.Real, 14);
-            Assert.Equal(0.96538587902213313, result.Imaginary, 14);
+            Assert.Equal(-0.0098843750383224935, result.Real, 15);
+            Assert.Equal(0.96538587902213313, result.Imaginary, 15);
         }
 
         [Fact]

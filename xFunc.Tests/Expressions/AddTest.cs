@@ -139,6 +139,22 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
+        public void ExecuteComplexNumberAndBool()
+        {
+            var exp = new Add(new ComplexNumber(7, 3), new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteBoolAndComplexNumber()
+        {
+            var exp = new Add(new Bool(false), new ComplexNumber(7, 3));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
         public void CloneTest()
         {
             var exp = new Add(Variable.X, new Number(0));

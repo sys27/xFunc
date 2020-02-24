@@ -45,6 +45,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="arguments">The list of arguments.</param>
         protected UnaryExpression(IExpression[] arguments)
         {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+
             if (arguments.Length < 1)
                 throw new ParseException(Resource.LessParams);
 
@@ -68,29 +71,6 @@ namespace xFunc.Maths.Expressions
                 return false;
 
             return argument.Equals(((UnaryExpression)obj).Argument);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(7577);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <param name="first">The first.</param>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        protected int GetHashCode(int first)
-        {
-            return first ^ argument.GetHashCode();
         }
 
         /// <summary>
@@ -145,7 +125,23 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public abstract TResult Analyze<TResult>(IAnalyzer<TResult> analyzer);
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return AnalyzeInternal(analyzer);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.

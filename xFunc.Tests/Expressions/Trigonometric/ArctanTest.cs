@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -29,24 +28,27 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void ExecuteRadianTest()
         {
             var exp = new Arctan(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Radian);
 
-            Assert.Equal(Math.Atan(1), exp.Execute(AngleMeasurement.Radian));
+            Assert.Equal(0.7853981633974483, result, 15);
         }
 
         [Fact]
         public void ExecuteDegreeTest()
         {
             var exp = new Arctan(new Number(1));
+            var actual = (double)exp.Execute(AngleMeasurement.Degree);
 
-            Assert.Equal(Math.Atan(1) / Math.PI * 180, exp.Execute(AngleMeasurement.Degree));
+            Assert.Equal(45, actual, 15);
         }
 
         [Fact]
         public void ExecuteGradianTest()
         {
             var exp = new Arctan(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Gradian);
 
-            Assert.Equal(Math.Atan(1) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(50, result, 15);
         }
 
         [Fact]
@@ -54,9 +56,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arctan(new ComplexNumber(complex));
-            var result = (Complex) exp.Execute();
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Atan(complex), result);
             Assert.Equal(1.3389725222944935, result.Real, 15);
             Assert.Equal(0.14694666622552977, result.Imaginary, 15);
         }

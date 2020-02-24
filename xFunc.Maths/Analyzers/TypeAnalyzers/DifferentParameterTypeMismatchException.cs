@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 using xFunc.Maths.Resources;
 
@@ -38,8 +39,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
         /// <param name="index">The index of parameter.</param>
-        public DifferentParameterTypeMismatchException(ResultType expected, ResultType actual, int index)
-            : base(expected, actual, string.Format(Resource.DifferentParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString(), index + 1))
+        public DifferentParameterTypeMismatchException(ResultTypes expected, ResultTypes actual, int index)
+            : base(expected, actual, string.Format(CultureInfo.InvariantCulture, Resource.DifferentParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString(), index + 1))
         {
         }
 
@@ -65,8 +66,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParameterTypeMismatchException"/> class.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected DifferentParameterTypeMismatchException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
@@ -65,7 +66,7 @@ namespace xFunc.Maths
             // TODO: !!!
             var tokensArray = tokens as IToken[] ?? tokens.ToArray();
             if (!tokensArray.Any())
-                throw new ArgumentException(nameof(tokens));
+                throw new ArgumentNullException(nameof(tokens));
 
             var tokenEnumerator = new TokenEnumerator(tokensArray);
             var exp = Statement(tokenEnumerator);
@@ -555,7 +556,7 @@ namespace xFunc.Maths
                       throw new ParseException(Resource.ExpParenParseException);
 
             if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                throw new ParseException(string.Format(Resource.CloseParenParseException, exp));
+                throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.CloseParenParseException, exp));
 
             return exp;
         }
@@ -720,15 +721,15 @@ namespace xFunc.Maths
         }
 
         private static string SecondOperand(IToken token)
-            => string.Format(Resource.SecondOperandParseException, token);
+            => string.Format(CultureInfo.InvariantCulture, Resource.SecondOperandParseException, token);
 
         private static string OpenParenthesis(IToken token)
-            => string.Format(Resource.FunctionOpenParenthesisParseException, token);
+            => string.Format(CultureInfo.InvariantCulture, Resource.FunctionOpenParenthesisParseException, token);
 
         private static string CloseParenthesis(IToken token)
-            => string.Format(Resource.FunctionCloseParenthesisParseException, token);
+            => string.Format(CultureInfo.InvariantCulture, Resource.FunctionCloseParenthesisParseException, token);
 
         private static string CommaMissing(IExpression previousExpression)
-            => string.Format(Resource.CommaParseException, previousExpression);
+            => string.Format(CultureInfo.InvariantCulture, Resource.CommaParseException, previousExpression);
     }
 }

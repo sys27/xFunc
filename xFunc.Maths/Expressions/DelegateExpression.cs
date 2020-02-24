@@ -54,17 +54,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return 5119 ^ func.GetHashCode();
-        }
-
-        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
@@ -121,6 +110,9 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
             return analyzer.Analyze(this);
         }
 

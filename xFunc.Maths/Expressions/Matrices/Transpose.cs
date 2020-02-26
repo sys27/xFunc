@@ -57,25 +57,25 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var result = Argument.Execute(parameters);
 
-            if (result is Matrix matrix)
+            switch (result)
             {
-                if (matrix.Arguments.Any(x => x == null))
-                    throw new ArgumentException(Resource.SequenceNullValuesError);
-                if (matrix.Arguments.OfType<Vector>().Any(x => x.Arguments.All(z => z == null)))
-                    throw new ArgumentException(Resource.SequenceNullValuesError);
+                case Matrix matrix:
+                    if (matrix.Arguments.Any(x => x == null))
+                        throw new ArgumentException(Resource.SequenceNullValuesError);
+                    if (matrix.Arguments.OfType<Vector>().Any(x => x.Arguments.All(z => z == null)))
+                        throw new ArgumentException(Resource.SequenceNullValuesError);
 
-                return matrix.Transpose();
+                    return matrix.Transpose();
+
+                case Vector vector:
+                    if (vector.Arguments.Any(x => x == null))
+                        throw new ArgumentException(Resource.SequenceNullValuesError);
+
+                    return vector.Transpose();
+
+                default:
+                    throw new ResultIsNotSupportedException(this, result);
             }
-
-            if (result is Vector vector)
-            {
-                if (vector.Arguments.Any(x => x == null))
-                    throw new ArgumentException(Resource.SequenceNullValuesError);
-
-                return vector.Transpose();
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>
@@ -86,10 +86,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
@@ -97,9 +95,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Transpose(this.Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Transpose(this.Argument.Clone());
     }
 }

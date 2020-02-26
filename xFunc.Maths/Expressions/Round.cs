@@ -81,10 +81,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -92,10 +90,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Round(CloneArguments());
-        }
+        public override IExpression Clone() =>
+            new Round(CloneArguments());
 
         /// <summary>
         /// Gets the expression that represents a double-precision floating-point number to be rounded.

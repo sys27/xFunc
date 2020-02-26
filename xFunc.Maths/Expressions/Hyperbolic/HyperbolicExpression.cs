@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteDergee(double degree);
+        protected abstract double ExecuteDegree(double degree);
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -93,20 +93,16 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is Complex complex)
-                return ExecuteComplex(complex);
 
-            if (result is double number)
+            return (result, parameters?.AngleMeasurement) switch
             {
-                if (parameters == null || parameters.AngleMeasurement == AngleMeasurement.Degree)
-                    return ExecuteDergee(number);
-                if (parameters.AngleMeasurement == AngleMeasurement.Radian)
-                    return ExecuteRadian(number);
-                if (parameters.AngleMeasurement == AngleMeasurement.Gradian)
-                    return ExecuteGradian(number);
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
+                (double number, AngleMeasurement.Degree) => ExecuteDegree(number),
+                (double number, AngleMeasurement.Radian) => ExecuteRadian(number),
+                (double number, AngleMeasurement.Gradian) => ExecuteGradian(number),
+                (double number, null) => ExecuteDegree(number),
+                (Complex complex, _) => (object)ExecuteComplex(complex),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
     }
 }

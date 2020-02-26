@@ -89,9 +89,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="number">The number.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The product of matrices.</returns>
-        public static Vector Mul(this Vector vector, IExpression number, ExpressionParameters parameters)
+        public static Vector Mul(this Vector vector, Number number, ExpressionParameters parameters)
         {
-            var n = (double)number.Execute(parameters);
+            var n = number.Value;
 
             var numbers = (from num in vector.Arguments.AsParallel().AsOrdered()
                            select new Number((double)num.Execute(parameters) * n))
@@ -163,9 +163,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <param name="number">The number.</param>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>The product of matrix and number.</returns>
-        public static Matrix Mul(this Matrix matrix, IExpression number, ExpressionParameters parameters)
+        public static Matrix Mul(this Matrix matrix, Number number, ExpressionParameters parameters)
         {
-            var n = (double)number.Execute(parameters);
+            var n = number.Value;
 
             var result = from v in matrix.Arguments.AsParallel().AsOrdered()
                          select new Vector(

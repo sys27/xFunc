@@ -58,16 +58,13 @@ namespace xFunc.Maths.Expressions
         {
             var result = Argument.Execute(parameters);
 
-            if (result is Complex complex)
-                return Complex.Abs(complex);
-
-            if (result is Vector vector)
-                return vector.Abs(parameters);
-
-            if (result is double number)
-                return Math.Abs(number);
-
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                Complex complex => Complex.Abs(complex),
+                Vector vector => vector.Abs(parameters),
+                double number => Math.Abs(number),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>
@@ -78,18 +75,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="Abs"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Abs(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Abs(Argument.Clone());
     }
 }

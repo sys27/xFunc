@@ -16,7 +16,6 @@
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
@@ -35,40 +34,18 @@ namespace xFunc.Maths.Expressions.Statistical
         {
         }
 
-        private double[] ExecuteArray(IExpression[] expression, ExpressionParameters parameters)
-        {
-            return expression.Select(exp =>
-            {
-                var result = exp.Execute(parameters);
-                if (result is double doubleResult)
-                    return doubleResult;
-
-                throw new ResultIsNotSupportedException();
-            }).ToArray();
-        }
-
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="numbers">The array of expressions.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        private protected override double ExecuteInternal(double[] numbers)
         {
-            var data = Arguments;
+            var avg = numbers.Average();
 
-            if (ParametersCount == 1)
-            {
-                var result = Arguments[0].Execute(parameters);
-                if (result is Vector vector)
-                    data = vector.Arguments;
-            }
-
-            var calculatedArray = ExecuteArray(data, parameters);
-            var avg = calculatedArray.Average();
-            return calculatedArray.Average(x => Math.Pow(x - avg, 2));
+            return numbers.Average(x => Math.Pow(x - avg, 2));
         }
 
         /// <summary>
@@ -79,10 +56,8 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -90,9 +65,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Varp(CloneArguments());
-        }
+        public override IExpression Clone() =>
+            new Varp(CloneArguments());
     }
 }

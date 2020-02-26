@@ -51,10 +51,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override Complex ExecuteComplex(Complex complex)
-        {
-            return Complex.Sinh(complex);
-        }
+        protected override Complex ExecuteComplex(Complex complex) =>
+            Complex.Sinh(complex);
 
         /// <summary>
         /// Calculates this mathematical expression (using degree).
@@ -64,10 +62,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDergee(double degree)
-        {
-            return Math.Sinh(degree * Math.PI / 180);
-        }
+        protected override double ExecuteDegree(double degree) =>
+            Math.Sinh(degree * Math.PI / 180);
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -77,10 +73,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian)
-        {
-            return Math.Sinh(radian);
-        }
+        protected override double ExecuteRadian(double radian) =>
+            Math.Sinh(radian);
 
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
@@ -90,10 +84,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian)
-        {
-            return Math.Sinh(gradian * Math.PI / 200);
-        }
+        protected override double ExecuteGradian(double gradian) =>
+            Math.Sinh(gradian * Math.PI / 200);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -103,18 +95,14 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Sinh(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Sinh(Argument.Clone());
     }
 }

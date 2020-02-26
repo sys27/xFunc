@@ -64,10 +64,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator ComplexNumber(Complex number)
-        {
-            return new ComplexNumber(number);
-        }
+        public static implicit operator ComplexNumber(Complex number) =>
+            new ComplexNumber(number);
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -92,10 +90,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -103,10 +98,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
@@ -114,10 +106,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public object Execute()
-        {
-            return Value;
-        }
+        public object Execute() => Value;
 
         /// <summary>
         /// Executes this expression.
@@ -127,10 +116,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters)
-        {
-            return Value;
-        }
+        public object Execute(ExpressionParameters parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -154,10 +140,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public IExpression Clone()
-        {
-            return new ComplexNumber(this.Value);
-        }
+        public IExpression Clone() => new ComplexNumber(this.Value);
 
         /// <summary>
         /// Gets the value.

@@ -55,19 +55,15 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is Complex complex)
+
+            return (result, parameters?.AngleMeasurement) switch
             {
-                var angleMeasurement = parameters?.AngleMeasurement ?? AngleMeasurement.Degree;
-
-                if (angleMeasurement == AngleMeasurement.Degree)
-                    return complex.Phase * 180 / Math.PI;
-                if (angleMeasurement == AngleMeasurement.Gradian)
-                    return complex.Phase * 200 / Math.PI;
-
-                return complex.Phase;
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
+                (Complex complex, AngleMeasurement.Degree) => complex.Phase * 180 / Math.PI,
+                (Complex complex, AngleMeasurement.Radian) => complex.Phase,
+                (Complex complex, AngleMeasurement.Gradian) => complex.Phase * 200 / Math.PI,
+                (Complex complex, _) => complex.Phase * 180 / Math.PI,
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>
@@ -78,18 +74,14 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Phase(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Phase(Argument.Clone());
     }
 }

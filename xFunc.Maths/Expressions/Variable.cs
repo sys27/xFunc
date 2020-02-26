@@ -43,39 +43,31 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="variable">The value to convert.</param>
         /// <returns>An object that contains the converted value.</returns>
-        public static implicit operator string(Variable variable)
-        {
-            return variable?.Name;
-        }
+        public static implicit operator string(Variable variable) =>
+            variable?.Name;
 
         /// <summary>
         /// Defines an implicit conversion of a string object to a Variable object.
         /// </summary>
         /// <param name="variable">The value to convert.</param>
         /// <returns>An object that contains the converted value.</returns>
-        public static implicit operator Variable(string variable)
-        {
-            return new Variable(variable);
-        }
+        public static implicit operator Variable(string variable) =>
+            new Variable(variable);
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            return obj is Variable @var && @var.Name == Name;
-        }
+        public override bool Equals(object obj) =>
+            obj is Variable @var && @var.Name == Name;
 
         /// <summary>
         /// Returns a hash function for this type.
         /// </summary>
         /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name);
-        }
+        public override int GetHashCode() =>
+            HashCode.Combine(Name);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -84,10 +76,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) =>
+            Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -95,20 +85,15 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() =>
+            ToString(new CommonFormatter());
 
         /// <summary>
         /// Do not use this method. It always throws an exception.
         /// </summary>
         /// <returns>Never returns.</returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Execute()
-        {
-            throw new NotSupportedException();
-        }
+        public object Execute() => throw new NotSupportedException();
 
         /// <summary>
         /// Gets value of this variable from <paramref name="parameters"/>.
@@ -143,10 +128,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance of the <see cref="Variable"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="Variable"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
-        {
-            return new Variable(Name);
-        }
+        public IExpression Clone() => new Variable(Name);
 
         /// <summary>
         /// Gets a name of this variable.

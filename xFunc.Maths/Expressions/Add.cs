@@ -59,26 +59,19 @@ namespace xFunc.Maths.Expressions
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);
 
-            if (leftResult is Complex || rightResult is Complex)
+            return (leftResult, rightResult) switch
             {
-                var leftComplex = leftResult as Complex? ?? leftResult as double?;
-                var rightComplex = rightResult as Complex? ?? rightResult as double?;
-                if (leftComplex == null || rightComplex == null)
-                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                (double leftDouble, double rightDouble) => leftDouble + rightDouble,
 
-                return Complex.Add(leftComplex.Value, rightComplex.Value);
-            }
+                (double leftDouble, Complex rightComplex) => leftDouble + rightComplex,
+                (Complex leftComplex, double rightDouble) => leftComplex + rightDouble,
+                (Complex leftComplex, Complex rightComplex) => leftComplex + rightComplex,
 
-            if (leftResult is Matrix leftMatrix && rightResult is Matrix rightMatrix)
-                return leftMatrix.Add(rightMatrix, parameters);
+                (Vector leftVector, Vector rightVector) => leftVector.Add(rightVector, parameters),
+                (Matrix leftMatrix, Matrix rightMatrix) => leftMatrix.Add(rightMatrix, parameters),
 
-            if (leftResult is Vector leftVector && rightResult is Vector rightVector)
-                return leftVector.Add(rightVector, parameters);
-
-            if (leftResult is double leftDouble && rightResult is double rightDouble)
-                return leftDouble + rightDouble;
-
-            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>

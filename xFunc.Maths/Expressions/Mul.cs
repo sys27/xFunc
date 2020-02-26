@@ -59,52 +59,27 @@ namespace xFunc.Maths.Expressions
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);
 
-            if (leftResult is double leftNumber && rightResult is double rightNumber)
-                return leftNumber * rightNumber;
-
-            if (leftResult is Complex || rightResult is Complex)
+            return (leftResult, rightResult) switch
             {
-                var leftComplex = leftResult as Complex? ?? leftResult as double?;
-                var rightComplex = rightResult as Complex? ?? rightResult as double?;
-                if (leftComplex == null || rightComplex == null)
-                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                (double leftNumber, double rightNumber) => leftNumber * rightNumber,
 
-                return Complex.Multiply(leftComplex.Value, rightComplex.Value);
-            }
+                (double leftNumber, Complex rightComplex) => leftNumber * rightComplex,
+                (Complex leftComplex, double rightNumber) => leftComplex * rightNumber,
+                (Complex leftComplex, Complex rightComplex) => leftComplex * rightComplex,
 
-            if (leftResult is Matrix || rightResult is Matrix || leftResult is Vector || rightResult is Vector)
-            {
-                var leftExpResult = leftResult as IExpression ?? new Number((double)leftResult);
-                var rightExpResult = rightResult as IExpression ?? new Number((double)rightResult);
+                (Vector leftVector, Vector rightVector) => leftVector.Mul(rightVector, parameters),
+                (double leftNumber, Vector rightVector) => rightVector.Mul(leftNumber, parameters),
+                (Vector leftVector, double rightNumber) => leftVector.Mul(rightNumber, parameters),
 
-                if (leftExpResult is Vector leftVector1 && rightExpResult is Vector rightVector1)
-                    return leftVector1.Mul(rightVector1, parameters);
+                (Matrix leftMatrix, Matrix rightMatrix) => leftMatrix.Mul(rightMatrix, parameters),
+                (double leftNumber, Matrix rightMatrix) => rightMatrix.Mul(leftNumber, parameters),
+                (Matrix leftMatrix, double rightNumber) => leftMatrix.Mul(rightNumber, parameters),
 
-                if (leftExpResult is Vector leftVector2)
-                {
-                    if (rightExpResult is Matrix rightMaxtir1)
-                        return leftVector2.Mul(rightMaxtir1, parameters);
+                (Matrix leftMatrix, Vector rightVector) => leftMatrix.Mul(rightVector, parameters),
+                (Vector leftVector, Matrix rightMatrix) => leftVector.Mul(rightMatrix, parameters),
 
-                    return leftVector2.Mul(rightExpResult, parameters);
-                }
-
-                if (rightExpResult is Vector rightVector2)
-                {
-                    if (leftExpResult is Matrix leftMatrix1)
-                        return leftMatrix1.Mul(rightVector2, parameters);
-
-                    return rightVector2.Mul(leftExpResult, parameters);
-                }
-
-                if (leftExpResult is Matrix leftMatrix2 && rightExpResult is Matrix rightMatrix2)
-                    return leftMatrix2.Mul(rightMatrix2, parameters);
-                if (leftExpResult is Matrix leftMatrix3)
-                    return leftMatrix3.Mul(rightExpResult, parameters);
-                if (rightExpResult is Matrix rightMatrix3)
-                    return rightMatrix3.Mul(leftExpResult, parameters);
-            }
-
-            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -115,18 +90,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Mul(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Mul(Left.Clone(), Right.Clone());
     }
 }

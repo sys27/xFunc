@@ -55,10 +55,11 @@ namespace xFunc.Maths.Expressions.Programming
             var left = Left.Execute(parameters);
             var right = Right.Execute(parameters);
 
-            if (left is bool leftBool && right is bool rightBool)
-                return leftBool || rightBool;
-
-            throw new ResultIsNotSupportedException(this, left, right);
+            return (left, right) switch
+            {
+                (bool leftBool, bool rightBool) => leftBool || rightBool,
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>

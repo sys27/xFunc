@@ -74,19 +74,15 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="GCD"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="GCD"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new GCD(CloneArguments());
-        }
+        public override IExpression Clone() =>
+            new GCD(CloneArguments());
 
         /// <summary>
         /// Gets the minimum count of parameters.

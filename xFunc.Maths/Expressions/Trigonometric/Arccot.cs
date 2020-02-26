@@ -51,10 +51,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDergee(double degree)
-        {
-            return MathExtensions.Acot(degree) / Math.PI * 180;
-        }
+        protected override double ExecuteDegree(double degree) =>
+            MathExtensions.Acot(degree) / Math.PI * 180;
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -64,10 +62,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian)
-        {
-            return MathExtensions.Acot(radian);
-        }
+        protected override double ExecuteRadian(double radian) =>
+            MathExtensions.Acot(radian);
 
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
@@ -77,10 +73,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian)
-        {
-            return MathExtensions.Acot(gradian) / Math.PI * 200;
-        }
+        protected override double ExecuteGradian(double gradian) =>
+            MathExtensions.Acot(gradian) / Math.PI * 200;
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -89,10 +83,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex ExecuteComplex(Complex complex)
-        {
-            return ComplexExtensions.Acot(complex);
-        }
+        protected override Complex ExecuteComplex(Complex complex) =>
+            ComplexExtensions.Acot(complex);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -102,18 +94,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Arccot(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Arccot(Argument.Clone());
     }
 }

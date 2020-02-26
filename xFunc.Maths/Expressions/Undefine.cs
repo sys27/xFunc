@@ -78,10 +78,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -89,10 +86,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or functions.
@@ -101,10 +95,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Execute()
-        {
-            throw new NotSupportedException();
-        }
+        public object Execute() => throw new NotSupportedException();
 
         /// <summary>
         /// Executes this expression.
@@ -120,21 +111,19 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            if (key is Variable variable)
+            switch (key)
             {
-                parameters.Variables.Remove(variable.Name);
+                case Variable variable:
+                    parameters.Variables.Remove(variable.Name);
 
-                return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, key);
+                    return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, key);
+                case UserFunction function:
+                    parameters.Functions.Remove(function);
+
+                    return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, key);
+                default:
+                    throw new InvalidOperationException();
             }
-
-            if (key is UserFunction function)
-            {
-                parameters.Functions.Remove(function);
-
-                return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, key);
-            }
-
-            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -157,10 +146,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
-        {
-            return new Undefine(key.Clone());
-        }
+        public IExpression Clone() => new Undefine(key.Clone());
 
         /// <summary>
         /// Gets or sets the parent expression.

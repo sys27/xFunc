@@ -44,17 +44,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(4073);
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="complex">The calculation result of argument.</param>
@@ -114,7 +103,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

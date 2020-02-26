@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Globalization;
+
 namespace xFunc.Maths.Results
 {
     /// <summary>
@@ -37,7 +39,7 @@ namespace xFunc.Maths.Results
         /// </returns>
         public override string ToString()
         {
-            return Result.ToString();
+            return Result.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>

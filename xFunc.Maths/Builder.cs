@@ -33,13 +33,6 @@ namespace xFunc.Maths
         /// <summary>
         /// Initializes a new instance of the <see cref="Builder"/> class.
         /// </summary>
-        public Builder()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Builder"/> class.
-        /// </summary>
         /// <param name="initial">The initial value of builder.</param>
         public Builder(IExpression initial)
         {
@@ -86,7 +79,7 @@ namespace xFunc.Maths
         [ExcludeFromCodeCoverage]
         public override string ToString()
         {
-            return current.ToString();
+            return Current.ToString();
         }
 
         /// <summary>
@@ -126,7 +119,7 @@ namespace xFunc.Maths
         /// <returns>The builder.</returns>
         public Builder Init(IExpression initial)
         {
-            this.current = initial;
+            this.Current = initial;
 
             return this;
         }
@@ -151,22 +144,17 @@ namespace xFunc.Maths
             return Init((IExpression)new Variable(variable));
         }
 
-        private void CheckCurrentExpression()
-        {
-            if (current == null)
-                throw new ArgumentNullException(nameof(current));
-        }
-
         /// <summary>
         /// Inserts a custom expression to builder.
         /// </summary>
         /// <param name="customExpression">The custom expression.</param>
-        /// <returns>The current instance of builder.</returns>
+        /// <returns>The Current instance of builder.</returns>
         public Builder Expression(Func<IExpression, IExpression> customExpression)
         {
-            CheckCurrentExpression();
+            if (customExpression == null)
+                throw new ArgumentNullException(nameof(customExpression));
 
-            current = customExpression(current);
+            Current = customExpression(Current);
 
             return this;
         }
@@ -174,330 +162,306 @@ namespace xFunc.Maths
         #region Standart
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Add"/> operation. The current state is used as summand.
+        /// Creates the <seealso cref="Expressions.Add"/> operation. The Current state is used as summand.
         /// </summary>
         /// <param name="summand">The summand (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Add(IExpression summand)
         {
-            CheckCurrentExpression();
-
-            current = new Add(current, summand);
+            Current = new Add(Current, summand);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Add"/> operation. The current state is used as summand.
+        /// Creates the <seealso cref="Expressions.Add"/> operation. The Current state is used as summand.
         /// </summary>
         /// <param name="summand">The summand (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Add(double summand)
         {
             return Add((IExpression)new Number(summand));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Add"/> operation. The current state is used as summand.
+        /// Creates the <seealso cref="Expressions.Add"/> operation. The Current state is used as summand.
         /// </summary>
         /// <param name="summand">The summand (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Add(string summand)
         {
             return Add((IExpression)new Variable(summand));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Sub"/> operation. The current state is used as minuend.
+        /// Creates the <seealso cref="Expressions.Sub"/> operation. The Current state is used as minuend.
         /// </summary>
         /// <param name="subtrahend">The subtrahend (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sub(IExpression subtrahend)
         {
-            CheckCurrentExpression();
-
-            current = new Sub(current, subtrahend);
+            Current = new Sub(Current, subtrahend);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Sub"/> operation. The current state is used as minuend.
+        /// Creates the <seealso cref="Expressions.Sub"/> operation. The Current state is used as minuend.
         /// </summary>
         /// <param name="subtrahend">The subtrahend (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sub(double subtrahend)
         {
             return Sub((IExpression)new Number(subtrahend));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Sub"/> operation. The current state is used as minuend.
+        /// Creates the <seealso cref="Expressions.Sub"/> operation. The Current state is used as minuend.
         /// </summary>
         /// <param name="subtrahend">The subtrahend (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sub(string subtrahend)
         {
             return Sub((IExpression)new Variable(subtrahend));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Mul"/> operation. The current state is used as factor.
+        /// Creates the <seealso cref="Expressions.Mul"/> operation. The Current state is used as factor.
         /// </summary>
         /// <param name="factor">The factor (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Mul(IExpression factor)
         {
-            CheckCurrentExpression();
-
-            current = new Mul(current, factor);
+            Current = new Mul(Current, factor);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Mul"/> operation. The current state is used as factor.
+        /// Creates the <seealso cref="Expressions.Mul"/> operation. The Current state is used as factor.
         /// </summary>
         /// <param name="factor">The factor (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Mul(double factor)
         {
             return Mul((IExpression)new Number(factor));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Mul"/> operation. The current state is used as factor.
+        /// Creates the <seealso cref="Expressions.Mul"/> operation. The Current state is used as factor.
         /// </summary>
         /// <param name="factor">The factor (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Mul(string factor)
         {
             return Mul((IExpression)new Variable(factor));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Div"/> operation. The current state is used as numerator.
+        /// Creates the <seealso cref="Expressions.Div"/> operation. The Current state is used as numerator.
         /// </summary>
         /// <param name="denominator">The denominator (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Div(IExpression denominator)
         {
-            CheckCurrentExpression();
-
-            current = new Div(current, denominator);
+            Current = new Div(Current, denominator);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Div"/> operation. The current state is used as numerator.
+        /// Creates the <seealso cref="Expressions.Div"/> operation. The Current state is used as numerator.
         /// </summary>
         /// <param name="denominator">The denominator (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Div(double denominator)
         {
             return Div((IExpression)new Number(denominator));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Div"/> operation. The current state is used as numerator.
+        /// Creates the <seealso cref="Expressions.Div"/> operation. The Current state is used as numerator.
         /// </summary>
         /// <param name="denominator">The denominator (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Div(string denominator)
         {
             return Div((IExpression)new Variable(denominator));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Pow"/> operation. The current state is used as base of power.
+        /// Creates the <seealso cref="Expressions.Pow"/> operation. The Current state is used as base of power.
         /// </summary>
         /// <param name="exponent">The exponent (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Pow(IExpression exponent)
         {
-            CheckCurrentExpression();
-
-            current = new Pow(current, exponent);
+            Current = new Pow(Current, exponent);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Pow"/> operation. The current state is used as base of power.
+        /// Creates the <seealso cref="Expressions.Pow"/> operation. The Current state is used as base of power.
         /// </summary>
         /// <param name="exponent">The exponent (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Pow(double exponent)
         {
             return Pow((IExpression)new Number(exponent));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Pow"/> operation. The current state is used as base of power.
+        /// Creates the <seealso cref="Expressions.Pow"/> operation. The Current state is used as base of power.
         /// </summary>
         /// <param name="exponent">The exponent (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Pow(string exponent)
         {
             return Pow((IExpression)new Variable(exponent));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Sqrt"/> function. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Sqrt"/> function. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sqrt()
         {
-            CheckCurrentExpression();
-
-            current = new Sqrt(current);
+            Current = new Sqrt(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Root"/> operation. The current state is used as radicand.
+        /// Creates the <seealso cref="Expressions.Root"/> operation. The Current state is used as radicand.
         /// </summary>
         /// <param name="degree">The degree (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Root(IExpression degree)
         {
-            CheckCurrentExpression();
-
-            current = new Root(current, degree);
+            Current = new Root(Current, degree);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Root"/> operation. The current state is used as radicand.
+        /// Creates the <seealso cref="Expressions.Root"/> operation. The Current state is used as radicand.
         /// </summary>
         /// <param name="degree">The degree (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Root(double degree)
         {
             return Root((IExpression)new Number(degree));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Root"/> operation. The current state is used as radicand.
+        /// Creates the <seealso cref="Expressions.Root"/> operation. The Current state is used as radicand.
         /// </summary>
         /// <param name="degree">The degree (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Root(string degree)
         {
             return Root((IExpression)new Variable(degree));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Abs"/> function. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Abs"/> function. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Abs()
         {
-            CheckCurrentExpression();
-
-            current = new Abs(current);
+            Current = new Abs(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Log"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Log"/> operation. The Current state is used as argument.
         /// </summary>
         /// <param name="base">The base (expression).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Log(IExpression @base)
         {
-            CheckCurrentExpression();
-
-            current = new Log(@base, current);
+            Current = new Log(@base, Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Log"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Log"/> operation. The Current state is used as argument.
         /// </summary>
         /// <param name="base">The base (number).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Log(double @base)
         {
             return Log((IExpression)new Number(@base));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Log"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Log"/> operation. The Current state is used as argument.
         /// </summary>
         /// <param name="base">The base (variable).</param>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Log(string @base)
         {
             return Log((IExpression)new Variable(@base));
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Ln"/> function. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Ln"/> function. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Ln()
         {
-            CheckCurrentExpression();
-
-            current = new Ln(current);
+            Current = new Ln(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Lg"/> function. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Lg"/> function. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Lg()
         {
-            CheckCurrentExpression();
-
-            current = new Lg(current);
+            Current = new Lg(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Lb"/> function. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Lb"/> function. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Lb()
         {
-            CheckCurrentExpression();
-
-            current = new Lb(current);
+            Current = new Lb(Current);
 
             return this;
         }
@@ -507,169 +471,145 @@ namespace xFunc.Maths
         #region Trigonometric
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Sin"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Sin"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sin()
         {
-            CheckCurrentExpression();
-
-            current = new Sin(current);
+            Current = new Sin(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Cos"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Cos"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Cos()
         {
-            CheckCurrentExpression();
-
-            current = new Cos(current);
+            Current = new Cos(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Tan"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Tan"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Tan()
         {
-            CheckCurrentExpression();
-
-            current = new Tan(current);
+            Current = new Tan(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Cot"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Cot"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Cot()
         {
-            CheckCurrentExpression();
-
-            current = new Cot(current);
+            Current = new Cot(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Sec"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Sec"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sec()
         {
-            CheckCurrentExpression();
-
-            current = new Sec(current);
+            Current = new Sec(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Csc"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Csc"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Csc()
         {
-            CheckCurrentExpression();
-
-            current = new Csc(current);
+            Current = new Csc(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Arcsin"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arcsin"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arcsin()
         {
-            CheckCurrentExpression();
-
-            current = new Arcsin(current);
+            Current = new Arcsin(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Arccos"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arccos"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arccos()
         {
-            CheckCurrentExpression();
-
-            current = new Arccos(current);
+            Current = new Arccos(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Arctan"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arctan"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arctan()
         {
-            CheckCurrentExpression();
-
-            current = new Arctan(current);
+            Current = new Arctan(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Arccot"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arccot"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arccot()
         {
-            CheckCurrentExpression();
-
-            current = new Arccot(current);
+            Current = new Arccot(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Arcsec"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arcsec"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arcsec()
         {
-            CheckCurrentExpression();
-
-            current = new Arcsec(current);
+            Current = new Arcsec(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Trigonometric.Arccsc"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Trigonometric.Arccsc"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arccsc()
         {
-            CheckCurrentExpression();
-
-            current = new Arccsc(current);
+            Current = new Arccsc(Current);
 
             return this;
         }
@@ -679,169 +619,145 @@ namespace xFunc.Maths
         #region Hyperbolic
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Sinh"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Sinh"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sinh()
         {
-            CheckCurrentExpression();
-
-            current = new Sinh(current);
+            Current = new Sinh(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Cosh"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Cosh"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Cosh()
         {
-            CheckCurrentExpression();
-
-            current = new Cosh(current);
+            Current = new Cosh(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Tanh"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Tanh"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Tanh()
         {
-            CheckCurrentExpression();
-
-            current = new Tanh(current);
+            Current = new Tanh(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Coth"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Coth"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Coth()
         {
-            CheckCurrentExpression();
-
-            current = new Coth(current);
+            Current = new Coth(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Sech"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Sech"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Sech()
         {
-            CheckCurrentExpression();
-
-            current = new Sech(current);
+            Current = new Sech(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Csch"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Csch"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Csch()
         {
-            CheckCurrentExpression();
-
-            current = new Csch(current);
+            Current = new Csch(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Arsinh"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arsinh"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arsinh()
         {
-            CheckCurrentExpression();
-
-            current = new Arsinh(current);
+            Current = new Arsinh(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcosh"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcosh"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arcosh()
         {
-            CheckCurrentExpression();
-
-            current = new Arcosh(current);
+            Current = new Arcosh(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Artanh"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Artanh"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Artanh()
         {
-            CheckCurrentExpression();
-
-            current = new Artanh(current);
+            Current = new Artanh(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcoth"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcoth"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arcoth()
         {
-            CheckCurrentExpression();
-
-            current = new Arcoth(current);
+            Current = new Arcoth(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Arsech"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arsech"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arsech()
         {
-            CheckCurrentExpression();
-
-            current = new Arsech(current);
+            Current = new Arsech(Current);
 
             return this;
         }
 
         /// <summary>
-        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcsch"/> operation. The current state is used as argument.
+        /// Creates the <seealso cref="Expressions.Hyperbolic.Arcsch"/> operation. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>
-        /// <exception cref="ArgumentNullException">The current builder is empty.</exception>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
         public Builder Arcsch()
         {
-            CheckCurrentExpression();
-
-            current = new Arcsch(current);
+            Current = new Arcsch(Current);
 
             return this;
         }
@@ -858,7 +774,7 @@ namespace xFunc.Maths
         /// </returns>
         public object Execute()
         {
-            return current.Execute();
+            return Current.Execute();
         }
 
         /// <summary>
@@ -871,11 +787,11 @@ namespace xFunc.Maths
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters parameters)
         {
-            return current.Execute(parameters);
+            return Current.Execute(parameters);
         }
 
         /// <summary>
-        /// Analyzes the current expression.
+        /// Analyzes the Current expression.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="analyzer">The analyzer.</param>
@@ -885,7 +801,7 @@ namespace xFunc.Maths
         [ExcludeFromCodeCoverage]
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            return this.current.Analyze(analyzer);
+            return this.Current.Analyze(analyzer);
         }
 
         /// <summary>
@@ -897,7 +813,7 @@ namespace xFunc.Maths
         [ExcludeFromCodeCoverage]
         public IExpression Clone()
         {
-            return current.Clone();
+            return Current.Clone();
         }
 
         /// <summary>
@@ -915,11 +831,21 @@ namespace xFunc.Maths
         #endregion
 
         /// <summary>
-        /// Gets the current expression.
+        /// Gets the Current expression.
         /// </summary>
         /// <value>
-        /// The current expression.
+        /// The Current expression.
         /// </value>
-        public IExpression Current => current;
+        public IExpression Current
+        {
+            get
+            {
+                return current;
+            }
+            private set
+            {
+                current = value ?? throw new ArgumentNullException(nameof(value));
+            }
+        }
     }
 }

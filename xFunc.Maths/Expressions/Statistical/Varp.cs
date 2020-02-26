@@ -35,17 +35,6 @@ namespace xFunc.Maths.Expressions.Statistical
         {
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(128219, 1811);
-        }
-
         private double[] ExecuteArray(IExpression[] expression, ExpressionParameters parameters)
         {
             return expression.Select(exp =>
@@ -90,7 +79,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

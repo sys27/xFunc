@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 
@@ -66,6 +67,9 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
             return analyzer.Analyze(this);
         }
 
@@ -78,7 +82,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public static implicit operator bool(Bool boolean)
         {
-            return boolean.Value;
+            return boolean?.Value ?? throw new ArgumentNullException(nameof(boolean));
         }
 
         /// <summary>
@@ -105,17 +109,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             var boolean = obj as Bool;
 
             return Value == boolean?.Value;
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode() ^ 7883;
         }
 
         /// <summary>

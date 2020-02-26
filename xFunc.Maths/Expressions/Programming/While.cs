@@ -66,7 +66,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

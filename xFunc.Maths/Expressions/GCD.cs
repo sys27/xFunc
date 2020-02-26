@@ -45,17 +45,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(2087, 1283);
-        }
-
-        /// <summary>
         /// Executes this expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
@@ -65,16 +54,16 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var numbers = Arguments.Select(item =>
-            {
-                var result = item.Execute(parameters);
-                if (result is double number)
-                    return number;
+            return Arguments
+                .Select(item =>
+                {
+                    var result = item.Execute(parameters);
+                    if (result is double number)
+                        return number;
 
-                throw new ResultIsNotSupportedException(this, result);
-            }).ToArray();
-
-            return MathExtensions.GCD(numbers);
+                    throw new ResultIsNotSupportedException(this, result);
+                })
+                .Aggregate(MathExtensions.GCD);
         }
 
         /// <summary>
@@ -85,7 +74,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

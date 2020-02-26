@@ -91,7 +91,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ParseEmptyTokens()
         {
-            Assert.Throws<ArgumentException>(() => parser.Parse(new List<IToken>()));
+            Assert.Throws<ArgumentNullException>(() => parser.Parse(new List<IToken>()));
         }
 
         [Fact]

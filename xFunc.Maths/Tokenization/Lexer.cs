@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -49,7 +50,7 @@ namespace xFunc.Maths.Tokenization
                              CreateOperatorToken(ref memory);
 
                 if (result == null)
-                    throw new TokenizeException(string.Format(Resource.NotSupportedSymbol, memory.Span[0]));
+                    throw new TokenizeException(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, memory.Span[0]));
 
                 yield return result;
             }

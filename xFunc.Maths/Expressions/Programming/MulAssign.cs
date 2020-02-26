@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -58,7 +59,7 @@ namespace xFunc.Maths.Expressions.Programming
             if (parameter is bool)
                 throw new NotSupportedException();
 
-            var newValue = Convert.ToDouble(parameter) * (double)Right.Execute(parameters);
+            var newValue = Convert.ToDouble(parameter, CultureInfo.InvariantCulture) * (double)Right.Execute(parameters);
             parameters.Variables[var.Name] = newValue;
 
             return newValue;
@@ -72,7 +73,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

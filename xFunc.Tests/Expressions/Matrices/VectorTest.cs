@@ -39,9 +39,10 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var vector = new Vector(new[] { new Number(2), new Number(3) });
             var number = new Number(5);
+            var exp = new Mul(vector, number);
 
             var expected = new Vector(new[] { new Number(10), new Number(15) });
-            var result = vector.Mul(number);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -51,9 +52,10 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
             var vector2 = new Vector(new[] { new Number(7), new Number(1) });
+            var exp = new Add(vector1, vector2);
 
             var expected = new Vector(new[] { new Number(9), new Number(4) });
-            var result = vector1.Add(vector2);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -63,8 +65,9 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
             var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) });
+            var exp = new Add(vector1, vector2);
 
-            Assert.Throws<ArgumentException>(() => vector1.Add(vector2));
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]
@@ -72,9 +75,10 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
             var vector2 = new Vector(new[] { new Number(7), new Number(1) });
+            var exp = new Sub(vector1, vector2);
 
             var expected = new Vector(new[] { new Number(-5), new Number(2) });
-            var result = vector1.Sub(vector2);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -84,21 +88,23 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var vector1 = new Vector(new[] { new Number(2), new Number(3) });
             var vector2 = new Vector(new[] { new Number(7), new Number(1), new Number(3) });
+            var exp = new Sub(vector1, vector2);
 
-            Assert.Throws<ArgumentException>(() => vector1.Sub(vector2));
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]
         public void TransposeVectorTest()
         {
             var vector = new Vector(new[] { new Number(1), new Number(2) });
+            var exp = new Transpose(vector);
 
             var expected = new Matrix(new[]
             {
                 new Vector(new[] { new Number(1) }),
                 new Vector(new[] { new Number(2) })
             });
-            var result = vector.Transpose();
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }
@@ -112,9 +118,10 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new[] { new Number(3) }),
                 new Vector(new[] { new Number(-1) })
             });
+            var exp = new Mul(vector, matrix);
 
             var expected = new Matrix(new[] { new Vector(new[] { new Number(-7) }) });
-            var result = vector.Mul(matrix);
+            var result = exp.Execute();
 
             Assert.Equal(expected, result);
         }

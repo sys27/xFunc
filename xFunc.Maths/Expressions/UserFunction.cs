@@ -42,10 +42,9 @@ namespace xFunc.Maths.Expressions
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is UserFunction exp && this.Function == exp.Function && this.ParametersCount == exp.ParametersCount)
-                return true;
-
-            return false;
+            return obj is UserFunction exp &&
+                this.Function == exp.Function &&
+                this.ParametersCount == exp.ParametersCount;
         }
 
         /// <summary>
@@ -56,12 +55,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public override int GetHashCode()
         {
-            var hash = 1721;
-
-            hash = (hash * 5701) + Function.GetHashCode();
-            hash = (hash * 5701) + ParametersCount.GetHashCode();
-
-            return hash;
+            return HashCode.Combine(Function, ParametersCount);
         }
 
         /// <summary>
@@ -99,7 +93,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

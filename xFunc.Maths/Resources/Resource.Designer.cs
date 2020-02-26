@@ -321,5 +321,17 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ParameterListCloseParseException", resourceCulture);
             }
         }
+        
+        internal static string AtLeastTwoNumbers {
+            get {
+                return ResourceManager.GetString("AtLeastTwoNumbers", resourceCulture);
+            }
+        }
+        
+        internal static string ResultIsNotSupported {
+            get {
+                return ResourceManager.GetString("ResultIsNotSupported", resourceCulture);
+            }
+        }
     }
 }

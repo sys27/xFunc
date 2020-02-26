@@ -1955,7 +1955,7 @@ namespace xFunc.Tests.Analyzers
         {
             var uf = new UserFunction("f", new IExpression[] { x });
 
-            Assert.Throws<ArgumentNullException>(() => Differentiate(uf, "x", null));
+            Assert.Throws<InvalidOperationException>(() => Differentiate(uf, "x", null));
         }
 
         [Fact]

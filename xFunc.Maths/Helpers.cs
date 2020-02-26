@@ -54,6 +54,9 @@ namespace xFunc.Maths
         /// <returns>A collection of parameters.</returns>
         public static ParameterCollection GetParameters(IEnumerable<IToken> tokens)
         {
+            if (tokens == null)
+                throw new ArgumentNullException(nameof(tokens));
+
             var c = new SortedSet<Parameter>();
 
             foreach (var token in tokens)

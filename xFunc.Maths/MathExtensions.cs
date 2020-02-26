@@ -17,13 +17,14 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths
 {
     /// <summary>
     /// Provides static methods for additional functions.
     /// </summary>
-    public static class MathExtensions
+    internal static class MathExtensions
     {
         /// <summary>
         /// Returns a specified number raised to the specified power.
@@ -205,7 +206,13 @@ namespace xFunc.Maths
             return Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
         }
 
-        private static double GCD(double a, double b)
+        /// <summary>
+        /// Computes the polynomial greatest common divisor.
+        /// </summary>
+        /// <param name="a">The first numbers.</param>
+        /// <param name="b">The second numbers.</param>
+        /// <returns>The greatest common divisor.</returns>
+        public static double GCD(double a, double b)
         {
             while (!(b.Equals(0) || Math.Abs(b) < 1E-14))
                 b = a % (a = b);
@@ -216,42 +223,14 @@ namespace xFunc.Maths
         /// <summary>
         /// Computes the polynomial greatest common divisor.
         /// </summary>
-        /// <param name="numbers">The numbers.</param>
-        /// <returns>The greatest common divisor.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="numbers"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="numbers" /> should contain at least 2 elements.</exception>
-        public static double GCD(params double[] numbers)
-        {
-            if (numbers == null)
-                throw new ArgumentNullException(nameof(numbers));
-            if (numbers.Length < 2)
-                throw new ArgumentException();
-
-            return numbers.Aggregate(GCD);
-        }
-
-        private static double LCM(double a, double b)
+        /// <param name="a">The first numbers.</param>
+        /// <param name="b">The second numbers.</param>
+        /// <returns>The least common multiple.</returns>
+        public static double LCM(double a, double b)
         {
             var numerator = Math.Abs(a * b);
 
             return numerator / GCD(a, b);
-        }
-
-        /// <summary>
-        /// Computes the polynomial least common multiple.
-        /// </summary>
-        /// <param name="numbers">The numbers.</param>
-        /// <returns>The least common multiple.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="numbers"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="numbers" /> should contain at least 2 elements.</exception>
-        public static double LCM(params double[] numbers)
-        {
-            if (numbers == null)
-                throw new ArgumentNullException(nameof(numbers));
-            if (numbers.Length < 2)
-                throw new ArgumentException();
-
-            return numbers.Aggregate(LCM);
         }
 
         /// <summary>

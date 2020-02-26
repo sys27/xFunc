@@ -141,7 +141,18 @@ namespace xFunc.Tests.Expressions
 
             var expected = new Maths.Expressions.Matrices.Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(32) })
+                new Maths.Expressions.Matrices.Vector(new[]
+                {
+                    new Number(4), new Number(8), new Number(12)
+                }),
+                new Maths.Expressions.Matrices.Vector(new[]
+                {
+                    new Number(5), new Number(10), new Number(15)
+                }),
+                new Maths.Expressions.Matrices.Vector(new[]
+                {
+                    new Number(6), new Number(12), new Number(18)
+                })
             });
 
             Assert.Equal(expected, exp.Execute());

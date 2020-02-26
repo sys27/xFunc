@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -29,24 +28,27 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void CalculateRadianTest()
         {
             var exp = new Arcsin(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Radian);
 
-            Assert.Equal(Math.Asin(1), exp.Execute(AngleMeasurement.Radian));
+            Assert.Equal(1.5707963267948966, result, 15);
         }
 
         [Fact]
         public void CalculateDegreeTest()
         {
             var exp = new Arcsin(new Number(1));
+            var result = (double)exp.Execute(AngleMeasurement.Degree);
 
-            Assert.Equal(Math.Asin(1) / Math.PI * 180, exp.Execute(AngleMeasurement.Degree));
+            Assert.Equal(90, result, 15);
         }
 
         [Fact]
         public void CalculateGradianTest()
         {
             var exp = new Arcsin(new Number(1));
+            var actual = (double)exp.Execute(AngleMeasurement.Gradian);
 
-            Assert.Equal(Math.Asin(1) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(100, actual, 15);
         }
 
         [Fact]
@@ -54,9 +56,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arcsin(new ComplexNumber(complex));
-            var result = (Complex) exp.Execute();
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Asin(complex), result);
             Assert.Equal(0.96465850440760248, result.Real, 14);
             Assert.Equal(1.9686379257930975, result.Imaginary, 14);
         }

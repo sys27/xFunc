@@ -29,7 +29,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccos(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccos(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccos(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccot(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccot(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccot(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccsc(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccsc(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccsc(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsec(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsec(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsec(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -157,7 +157,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsin(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsin(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -173,7 +173,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsin(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arctan(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arctan(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arctan(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -221,7 +221,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Cos(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -229,7 +229,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Cos(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Cos(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -253,7 +253,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Cot(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -261,7 +261,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Cot(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -269,7 +269,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Cot(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -285,7 +285,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Csc(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -293,7 +293,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Csc(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -301,7 +301,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Csc(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -317,7 +317,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Sec(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -325,7 +325,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Sec(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -333,7 +333,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Sec(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -349,7 +349,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Sin(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -357,7 +357,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Sin(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -365,7 +365,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Sin(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]
@@ -381,7 +381,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Tan(Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -389,7 +389,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Tan(new Number(2));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -397,7 +397,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Tan(new ComplexNumber(2, 2));
 
-            Test(exp, ResultType.ComplexNumber);
+            Test(exp, ResultTypes.ComplexNumber);
         }
 
         [Fact]

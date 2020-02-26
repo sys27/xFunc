@@ -29,7 +29,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new AddAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new AddAssign(Variable.X, new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Maths.Expressions.Programming.And(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Maths.Expressions.Programming.And(new Bool(false), new Bool(true));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Dec(new Number(3));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new DivAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new DivAssign(Variable.X, new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Equal(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Equal(new Number(20), new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Equal(new Bool(false), new Bool(true));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new NotEqual(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -213,7 +213,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new NotEqual(new Number(20), new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new NotEqual(new Bool(false), new Bool(true));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -277,7 +277,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new For(null, null, Variable.X, null);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -285,7 +285,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new For(null, null, new Bool(false), null);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -301,7 +301,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new GreaterOrEqual(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -309,7 +309,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new GreaterOrEqual(new Number(10), new Number(10));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -341,7 +341,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new GreaterThan(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -349,7 +349,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new GreaterThan(new Number(10), new Number(10));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -381,7 +381,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new If(Variable.X, new Number(10));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -389,7 +389,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new If(new Bool(false), new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -397,7 +397,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new If(new Bool(false), new Number(10), new Number(2));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -413,7 +413,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Inc(new Number(3));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -421,7 +421,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new LessOrEqual(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -429,7 +429,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new LessOrEqual(new Number(10), new Number(10));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -461,7 +461,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new LessThan(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -469,7 +469,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new LessThan(new Number(10), new Number(10));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -501,7 +501,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new MulAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -509,7 +509,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new MulAssign(Variable.X, new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -525,7 +525,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Maths.Expressions.Programming.Or(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -533,7 +533,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Maths.Expressions.Programming.Or(new Bool(false), new Bool(true));
 
-            Test(exp, ResultType.Boolean);
+            Test(exp, ResultTypes.Boolean);
         }
 
         [Fact]
@@ -565,7 +565,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new SubAssign(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -573,7 +573,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new SubAssign(Variable.X, new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultTypes.Number);
         }
 
         [Fact]
@@ -589,7 +589,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new While(Variable.X, Variable.X);
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -597,7 +597,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new While(Variable.X, new Bool(false));
 
-            Test(exp, ResultType.Undefined);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]

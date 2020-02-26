@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System.Diagnostics;
+using System.Globalization;
 
 namespace xFunc.Maths.Tokenization.Tokens
 {
@@ -34,7 +35,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => symbol.ToString();
+        public override string ToString() => symbol.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Gets the '(' token.

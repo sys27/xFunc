@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// <summary>
     /// Item of <see cref="ParameterCollection"/>.
     /// </summary>
-    public class Parameter : IComparable<Parameter>
+    public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
     {
         private object value;
 
@@ -94,17 +94,11 @@ namespace xFunc.Maths.Expressions.Collections
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-                return false;
-
-            if (this == obj)
-                return true;
-
             var param = obj as Parameter;
             if (param == null)
                 return false;
 
-            return Key == param.Key && value.Equals(param.value);
+            return Equals(param);
         }
 
         /// <summary>
@@ -133,10 +127,105 @@ namespace xFunc.Maths.Expressions.Collections
         /// Compares the current object with another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
-        /// <returns>A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.Zero This object is equal to other. Greater than zero This object is greater than other.</returns>
+        /// <returns>A value that indicates the relative order of the objects being compared. The return value has the following meanings:
+        /// Less than zero - This object is less than the other parameter.
+        /// Zero - This object is equal to other.
+        /// Greater than zero - This object is greater than other.
+        /// </returns>
         public int CompareTo(Parameter other)
         {
-            return string.Compare(Key, other.Key, StringComparison.Ordinal);
+            return string.Compare(Key, other?.Key, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns><c>true</c> if the current object is equal to the other parameter; otherwise, <c>false</c>.</returns>
+        public bool Equals(Parameter other)
+        {
+            if (other is null)
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Key == other.Key && value.Equals(other.value);
+        }
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left parameter.</param>
+        /// <param name="right">The right parameter.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator ==(Parameter left, Parameter right)
+        {
+            if (left is null)
+                return right is null;
+
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is not equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left parameter.</param>
+        /// <param name="right">The right parameter.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is not equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator !=(Parameter left, Parameter right)
+        {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left parameter.</param>
+        /// <param name="right">The right parameter.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator >(Parameter left, Parameter right)
+        {
+            if (left is null || right is null)
+                return false;
+
+            return left.CompareTo(right) > 0;
+        }
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left parameter.</param>
+        /// <param name="right">The right parameter.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator <(Parameter left, Parameter right)
+        {
+            if (left is null || right is null)
+                return false;
+
+            return left.CompareTo(right) < 0;
+        }
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left parameter.</param>
+        /// <param name="right">The right parameter.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator >=(Parameter left, Parameter right)
+        {
+            return !(left < right);
+        }
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left parameter.</param>
+        /// <param name="right">The right parameter.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator <=(Parameter left, Parameter right)
+        {
+            return !(left > right);
         }
 
         /// <summary>
@@ -165,10 +254,10 @@ namespace xFunc.Maths.Expressions.Collections
                     throw new ArgumentNullException(nameof(value));
 
                 if (Type != ParameterType.Normal)
-                    throw new ParameterIsReadOnlyException(string.Format(Resource.ReadOnlyError, Key));
+                    throw new ParameterIsReadOnlyException(Resource.ReadOnlyError, Key);
 
                 if (IsNumber(value))
-                    value = Convert.ToDouble(value);
+                    value = Convert.ToDouble(value, CultureInfo.InvariantCulture);
 
                 this.value = value;
             }

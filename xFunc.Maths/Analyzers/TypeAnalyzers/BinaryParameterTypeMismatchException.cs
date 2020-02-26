@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 using xFunc.Maths.Resources;
 
@@ -56,10 +57,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="actual">The actual.</param>
         /// <param name="parameterType">Type of the parameter.</param>
         public BinaryParameterTypeMismatchException(
-            ResultType expected,
-            ResultType actual,
+            ResultTypes expected,
+            ResultTypes actual,
             BinaryParameterType parameterType)
-            : base(expected, actual, string.Format(parameterType == BinaryParameterType.Left ? Resource.LeftParameterTypeMismatchExceptionError : Resource.RightParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
+            : base(expected, actual, string.Format(CultureInfo.InvariantCulture, parameterType == BinaryParameterType.Left ? Resource.LeftParameterTypeMismatchExceptionError : Resource.RightParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
         {
         }
 
@@ -69,8 +70,17 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
         /// <param name="message">The error message.</param>
-        public BinaryParameterTypeMismatchException(ResultType expected, ResultType actual, string message)
+        public BinaryParameterTypeMismatchException(ResultTypes expected, ResultTypes actual, string message)
             : base(expected, actual, message)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryParameterTypeMismatchException"/> class.
+        /// </summary>
+        /// <param name="message">The error message that explains the reason for the exception.</param>
+        public BinaryParameterTypeMismatchException(string message)
+             : base(message)
         {
         }
 
@@ -87,8 +97,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryParameterTypeMismatchException"/> class.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected BinaryParameterTypeMismatchException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

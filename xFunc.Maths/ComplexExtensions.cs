@@ -20,7 +20,7 @@ namespace xFunc.Maths
     /// <summary>
     /// Trigonometric functions for Complex numbers.
     /// </summary>
-    public static class ComplexExtensions
+    internal static class ComplexExtensions
     {
         /// <summary>
         /// Returns the cotangent of the specified complex number.

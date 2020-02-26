@@ -13,8 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// TODO:
 #pragma warning disable SA1513
 #pragma warning disable SA1515
+#pragma warning disable CA1062
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -1025,6 +1027,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
         public virtual IExpression Analyze(DotProduct exp)
         {
             return AnalyzeBinary(exp);
@@ -1035,6 +1038,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
         public virtual IExpression Analyze(CrossProduct exp)
         {
             return AnalyzeBinary(exp);
@@ -1928,3 +1932,4 @@ namespace xFunc.Maths.Analyzers
 
 #pragma warning restore SA1513
 #pragma warning restore SA1515
+#pragma warning restore CA1062

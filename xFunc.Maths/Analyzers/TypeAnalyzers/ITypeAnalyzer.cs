@@ -19,7 +19,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
     /// </summary>
     /// <seealso cref="IAnalyzer{ResultType}" />
-    public interface ITypeAnalyzer : IAnalyzer<ResultType>
+    public interface ITypeAnalyzer : IAnalyzer<ResultTypes>
     {
     }
 }

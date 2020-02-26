@@ -44,17 +44,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(7727, 5657);
-        }
-
-        /// <summary>
         /// Executes this OR expression.
         /// </summary>
         /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
@@ -84,7 +73,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

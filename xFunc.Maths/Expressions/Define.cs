@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -75,17 +76,6 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(key, value);
-        }
-
-        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <param name="formatter">The formatter.</param>
@@ -138,14 +128,14 @@ namespace xFunc.Maths.Expressions
             {
                 parameters.Variables[variable.Name] = value.Execute(parameters);
 
-                return string.Format(Resource.AssignVariable, key, value);
+                return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
             }
 
             if (key is UserFunction function)
             {
                 parameters.Functions[function] = value;
 
-                return string.Format(Resource.AssignFunction, key, value);
+                return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
             }
 
             throw new NotSupportedException();
@@ -161,6 +151,9 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
             return analyzer.Analyze(this);
         }
 

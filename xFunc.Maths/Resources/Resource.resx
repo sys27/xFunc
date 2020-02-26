@@ -89,7 +89,7 @@
     <value>The symbol '{0}' is not supported.</value>
   </data>
   <data name="ReadOnlyError" xml:space="preserve">
-    <value>You cannot change value of "{0}".</value>
+    <value>You cannot change the read-only variable.</value>
   </data>
   <data name="UndefineFunction" xml:space="preserve">
     <value>The '{0}' function is removed.</value>
@@ -195,5 +195,11 @@
   </data>
   <data name="ParameterListCloseParseException" xml:space="preserve">
     <value>The parameter list should end with ')' symbol.</value>
+  </data>
+  <data name="AtLeastTwoNumbers" xml:space="preserve">
+    <value>The number should contain at least 2 elements.</value>
+  </data>
+  <data name="ResultIsNotSupported" xml:space="preserve">
+    <value>The result of calculation is not supported (Function: '{0}({1})').</value>
   </data>
 </root>

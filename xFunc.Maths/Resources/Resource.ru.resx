@@ -89,7 +89,7 @@
     <value>Символ '{0}' не поддерживается программой.</value>
   </data>
   <data name="ReadOnlyError" xml:space="preserve">
-    <value>Вы не можете изменить значение "{0}".</value>
+    <value>Вы не можете изменить параменты, которые предназначены только для чтения.</value>
   </data>
   <data name="UndefineFunction" xml:space="preserve">
     <value>Функция '{0}' удалена.</value>
@@ -195,5 +195,11 @@
   </data>
   <data name="ParameterListCloseParseException" xml:space="preserve">
     <value>Список параметров должен заканчиваться символом ')'.</value>
+  </data>
+  <data name="AtLeastTwoNumbers" xml:space="preserve">
+    <value>Массив чисел должен состоять из двух или более чисел.</value>
+  </data>
+  <data name="ResultIsNotSupported" xml:space="preserve">
+    <value>Результат вычислений не поддерживается (Функция: '{0}({1})').</value>
   </data>
 </root>

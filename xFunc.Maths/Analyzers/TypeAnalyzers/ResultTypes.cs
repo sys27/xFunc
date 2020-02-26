@@ -21,7 +21,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// Represents results of expressions.
     /// </summary>
     [Flags]
-    public enum ResultType
+    public enum ResultTypes
     {
         /// <summary>
         /// The expression doesn't return anything.

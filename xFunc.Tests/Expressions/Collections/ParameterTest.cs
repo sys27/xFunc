@@ -31,6 +31,25 @@ namespace xFunc.Tests.Expressions.Collections
         }
 
         [Fact]
+        public void RefEqualEqual()
+        {
+            var parameter = new Parameter("x", 1);
+            var isEqual = parameter.Equals(parameter);
+
+            Assert.True(isEqual);
+        }
+
+        [Fact]
+        public void EqualObjectEqual()
+        {
+            var parameter1 = new Parameter("x", 1);
+            var parameter2 = new Parameter("x", 1);
+            var isEqual = parameter1.Equals((object)parameter2);
+
+            Assert.True(isEqual);
+        }
+
+        [Fact]
         public void OtherType()
         {
             var parameter = new Parameter("x", 1);
@@ -68,6 +87,83 @@ namespace xFunc.Tests.Expressions.Collections
             var isEqual = parameter1.Equals(parameter2);
 
             Assert.False(isEqual);
+        }
+
+        [Fact]
+        public void GreaterTest()
+        {
+            var parameter1 = new Parameter("x", 1);
+            var parameter2 = new Parameter("a", 2);
+
+            Assert.True(parameter1 > parameter2);
+        }
+
+        [Fact]
+        public void GreaterLeftNullTest()
+        {
+            var parameter2 = new Parameter("a", 2);
+
+            Assert.False(null > parameter2);
+        }
+
+        [Fact]
+        public void GreaterRightNullTest()
+        {
+            var parameter1 = new Parameter("x", 1);
+
+            Assert.False(parameter1 > null);
+        }
+
+        [Fact]
+        public void LessTest()
+        {
+            var parameter1 = new Parameter("x", 1);
+            var parameter2 = new Parameter("y", 2);
+
+            Assert.True(parameter1 < parameter2);
+        }
+
+        [Fact]
+        public void LessLeftNullTest()
+        {
+            var parameter2 = new Parameter("y", 2);
+
+            Assert.False(null < parameter2);
+        }
+
+        [Fact]
+        public void LessRightNullTest()
+        {
+            var parameter1 = new Parameter("x", 1);
+
+            Assert.False(parameter1 < null);
+        }
+
+        [Fact]
+        public void GreaterOrEqualTest()
+        {
+            var parameter1 = new Parameter("x", 1);
+            var parameter2 = new Parameter("a", 2);
+
+            Assert.True(parameter1 >= parameter2);
+        }
+
+        [Fact]
+        public void LessOrEqualTest()
+        {
+            var parameter1 = new Parameter("x", 1);
+            var parameter2 = new Parameter("y", 2);
+
+            Assert.True(parameter1 <= parameter2);
+        }
+
+        [Fact]
+        public void CompareToNullTest()
+        {
+            var parameter = new Parameter("x", 1);
+            var result = parameter.CompareTo(null);
+
+            Assert.Equal(1, result);
         }
 
         [Fact]

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 using xFunc.Maths.Resources;
 
@@ -25,8 +26,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     [Serializable]
     public class ParameterTypeMismatchException : Exception
     {
-        private readonly ResultType expected;
-        private readonly ResultType actual;
+        private readonly ResultTypes expected;
+        private readonly ResultTypes actual;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterTypeMismatchException"/> class.
@@ -40,8 +41,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
-        public ParameterTypeMismatchException(ResultType expected, ResultType actual)
-            : this(expected, actual, string.Format(Resource.ParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
+        public ParameterTypeMismatchException(ResultTypes expected, ResultTypes actual)
+            : this(expected, actual, string.Format(CultureInfo.InvariantCulture, Resource.ParameterTypeMismatchExceptionError, expected.ToString(), actual.ToString()))
         {
         }
 
@@ -51,7 +52,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <param name="expected">The expected parameter type.</param>
         /// <param name="actual">The actual parameter type.</param>
         /// <param name="message">The error message.</param>
-        public ParameterTypeMismatchException(ResultType expected, ResultType actual, string message)
+        public ParameterTypeMismatchException(ResultTypes expected, ResultTypes actual, string message)
             : base(message)
         {
             this.expected = expected;
@@ -80,8 +81,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterTypeMismatchException"/> class.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected ParameterTypeMismatchException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -93,7 +94,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <value>
         /// The expected parameter type.
         /// </value>
-        public ResultType Expected => expected;
+        public ResultTypes Expected => expected;
 
         /// <summary>
         /// Gets the actual parameter type.
@@ -101,6 +102,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <value>
         /// The actual parameter type.
         /// </value>
-        public ResultType Actual => actual;
+        public ResultTypes Actual => actual;
     }
 }

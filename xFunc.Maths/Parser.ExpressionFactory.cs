@@ -39,7 +39,7 @@ namespace xFunc.Maths
             {
                 OperatorToken operatorToken => CreateOperator(operatorToken, arguments),
                 KeywordToken keywordToken => CreateFromKeyword(keywordToken, arguments),
-                _ => throw new AggregateException(nameof(token)),
+                _ => throw new ArgumentOutOfRangeException(nameof(token)),
             };
         }
 

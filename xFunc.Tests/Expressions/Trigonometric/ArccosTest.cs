@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var exp = new Arccos(new Number(1));
 
-            Assert.Equal(Math.Acos(1), exp.Execute(AngleMeasurement.Radian));
+            Assert.Equal(0.0, exp.Execute(AngleMeasurement.Radian));
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var exp = new Arccos(new Number(1));
 
-            Assert.Equal(Math.Acos(1) / Math.PI * 180, exp.Execute(AngleMeasurement.Degree));
+            Assert.Equal(0.0, exp.Execute(AngleMeasurement.Degree));
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var exp = new Arccos(new Number(1));
 
-            Assert.Equal(Math.Acos(1) / Math.PI * 200, exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(0.0, exp.Execute(AngleMeasurement.Gradian));
         }
 
         [Fact]
@@ -54,9 +54,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var complex = new Complex(3, 2);
             var exp = new Arccos(new ComplexNumber(complex));
-            var result = (Complex) exp.Execute();
+            var result = (Complex)exp.Execute();
 
-            Assert.Equal(Complex.Acos(complex), result);
             Assert.Equal(0.60613782238729386, result.Real, 15);
             Assert.Equal(-1.9686379257930964, result.Imaginary, 15);
         }

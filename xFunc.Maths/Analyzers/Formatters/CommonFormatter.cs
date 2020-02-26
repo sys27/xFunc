@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#pragma warning disable CA1062
+
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
@@ -42,12 +44,17 @@ namespace xFunc.Maths.Analyzers.Formatters
 
         private string ToString(UnaryExpression exp, string format)
         {
-            return string.Format(format, exp.Argument.Analyze(this));
+            var arg = exp.Argument.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, format, arg);
         }
 
         private string ToString(BinaryExpression exp, string format)
         {
-            return string.Format(format, exp.Left.Analyze(this), exp.Right.Analyze(this));
+            var left = exp.Left.Analyze(this);
+            var right = exp.Right.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, format, left, right);
         }
 
         private string ToString(DifferentParametersExpression exp, string function)
@@ -947,7 +954,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Bool exp)
         {
-            return exp.Value.ToString();
+            return exp.Value.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -1239,3 +1246,5 @@ namespace xFunc.Maths.Analyzers.Formatters
         #endregion Programming
     }
 }
+
+#pragma warning restore CA1062

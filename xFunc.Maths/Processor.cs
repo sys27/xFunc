@@ -192,6 +192,9 @@ namespace xFunc.Maths
         /// <returns>A simplified expression.</returns>
         public IExpression Simplify(IExpression expression)
         {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+
             return expression.Analyze(simplifier);
         }
 
@@ -227,6 +230,9 @@ namespace xFunc.Maths
         /// </returns>
         public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
         {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+
             differentiator.Variable = variable;
             differentiator.Parameters = parameters;
 

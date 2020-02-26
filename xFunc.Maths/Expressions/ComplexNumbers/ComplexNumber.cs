@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -53,7 +54,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public static implicit operator Complex(ComplexNumber number)
         {
-            return number.Value;
+            return number?.Value ?? throw new ArgumentNullException(nameof(number));
         }
 
         /// <summary>
@@ -82,17 +83,6 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
                 return false;
 
             return Value.Equals(num.Value);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode() ^ 6421;
         }
 
         /// <summary>
@@ -152,6 +142,9 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
             return analyzer.Analyze(this);
         }
 

@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             analyzer = new TypeAnalyzer();
         }
 
-        protected void Test(IExpression exp, ResultType expected)
+        protected void Test(IExpression exp, ResultTypes expected)
         {
             var simple = exp.Analyze(analyzer);
 

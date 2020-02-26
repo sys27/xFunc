@@ -74,7 +74,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^ 9239;
+            return HashCode.Combine(Name);
         }
 
         /// <summary>
@@ -133,6 +133,9 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
             return analyzer.Analyze(this);
         }
 

@@ -14,8 +14,10 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -40,8 +42,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="result">The result.</param>
         public ResultIsNotSupportedException(object that, params object[] result)
             : this(string.Format(
-                "The result of calculation is not supported (Function: '{0}({1})').",
-                that.GetType().Name,
+                CultureInfo.InvariantCulture,
+                Resource.ResultIsNotSupported,
+                that?.GetType().Name,
                 string.Join(", ", result.Select(x => x.GetType().Name))))
         {
         }
@@ -68,8 +71,8 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected ResultIsNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {

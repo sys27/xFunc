@@ -13,6 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// TODO:
+#pragma warning disable CA1062
+
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -428,7 +431,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(UserFunction exp)
         {
             if (Parameters == null)
-                throw new ArgumentNullException(nameof(Parameters));
+                throw new InvalidOperationException();
 
             return Parameters.Functions[exp].Analyze(this);
         }
@@ -949,3 +952,5 @@ namespace xFunc.Maths.Analyzers
         public ExpressionParameters Parameters { get; set; }
     }
 }
+
+#pragma warning restore CA1062

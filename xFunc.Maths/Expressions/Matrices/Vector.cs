@@ -58,17 +58,6 @@ namespace xFunc.Maths.Expressions.Matrices
             set { Arguments[index] = value; }
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(3121, 8369);
-        }
-
         private IExpression[] CalculateVector(ExpressionParameters parameters)
         {
             var args = new IExpression[this.ParametersCount];
@@ -117,7 +106,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The analysis result.
         /// </returns>
-        public override TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
         {
             return analyzer.Analyze(this);
         }

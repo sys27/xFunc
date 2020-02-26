@@ -55,12 +55,12 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         {
             var arg = Argument.Execute(parameters);
 
-            if (arg is bool boolArg)
-                return !boolArg;
-            if (arg is double doubleArg)
-                return (double)(~(int)Math.Round(doubleArg, MidpointRounding.AwayFromZero));
-
-            throw new ResultIsNotSupportedException(this, arg);
+            return arg switch
+            {
+                bool boolArg => !boolArg,
+                double doubleArg => (double)~(int)Math.Round(doubleArg, MidpointRounding.AwayFromZero),
+                _ => throw new ResultIsNotSupportedException(this, arg),
+            };
         }
 
         /// <summary>
@@ -71,18 +71,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="Not"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Not(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Not(Argument.Clone());
     }
 }

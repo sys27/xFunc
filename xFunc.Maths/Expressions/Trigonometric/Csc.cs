@@ -51,10 +51,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDergee(double degree)
-        {
-            return MathExtensions.Csc(degree * Math.PI / 180);
-        }
+        protected override double ExecuteDegree(double degree) =>
+            MathExtensions.Csc(degree * Math.PI / 180);
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -64,10 +62,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian)
-        {
-            return MathExtensions.Csc(radian);
-        }
+        protected override double ExecuteRadian(double radian) =>
+            MathExtensions.Csc(radian);
 
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
@@ -77,10 +73,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian)
-        {
-            return MathExtensions.Csc(gradian * Math.PI / 200);
-        }
+        protected override double ExecuteGradian(double gradian) =>
+            MathExtensions.Csc(gradian * Math.PI / 200);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -89,10 +83,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex ExecuteComplex(Complex complex)
-        {
-            return ComplexExtensions.Csc(complex);
-        }
+        protected override Complex ExecuteComplex(Complex complex) =>
+            ComplexExtensions.Csc(complex);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -102,18 +94,14 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Csc(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Csc(Argument.Clone());
     }
 }

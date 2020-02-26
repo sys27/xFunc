@@ -56,10 +56,11 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             var left = Left.Execute(parameters);
             var right = Right.Execute(parameters);
 
-            if (left is bool leftBool && right is bool rightBool)
-                return !(leftBool & rightBool);
-
-            throw new ResultIsNotSupportedException(this, left, right);
+            return (left, right) switch
+            {
+                (bool leftBool, bool rightBool) => !(leftBool & rightBool),
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -70,18 +71,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="NAnd"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new NAnd(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new NAnd(Left.Clone(), Right.Clone());
     }
 }

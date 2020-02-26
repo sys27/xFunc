@@ -52,16 +52,15 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftValueObject = Left.Execute(parameters);
-            var rightValueObject = Right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
-            if (leftValueObject is double leftDouble && rightValueObject is double rightDouble)
-                return leftDouble == rightDouble;
-
-            if (leftValueObject is bool leftBool && rightValueObject is bool rightBool)
-                return leftBool == rightBool;
-
-            throw new ResultIsNotSupportedException(this, leftValueObject, rightValueObject);
+            return (left, right) switch
+            {
+                (double leftDouble, double rightDouble) => leftDouble == rightDouble,
+                (bool leftBool, bool rightBool) => leftBool == rightBool,
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -72,10 +71,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
@@ -83,9 +80,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="Equal" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Equal(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Equal(Left.Clone(), Right.Clone());
     }
 }

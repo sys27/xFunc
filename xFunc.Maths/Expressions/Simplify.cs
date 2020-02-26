@@ -57,10 +57,8 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
-        {
-            return this.Analyze(simplifier);
-        }
+        public override object Execute(ExpressionParameters parameters) =>
+            Analyze(simplifier);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -70,18 +68,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Simplify(simplifier, Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Simplify(simplifier, Argument.Clone());
     }
 }

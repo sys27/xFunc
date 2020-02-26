@@ -56,15 +56,15 @@ namespace xFunc.Maths.Expressions
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);
 
-            if (leftResult is double first && rightResult is double second)
+            return (leftResult, rightResult) switch
             {
-                if (first < 0 && second % 2 == 0)
-                    return new Complex(0, Complex.Pow(first, 1 / second).Imaginary);
+                (double first, double second) when first < 0 && (second % 2 == 0) =>
+                    new Complex(0, Complex.Pow(first, 1 / second).Imaginary),
 
-                return MathExtensions.Pow(first, 1 / second);
-            }
+                (double first, double second) => MathExtensions.Pow(first, 1 / second),
 
-            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -75,18 +75,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Root(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Root(Left.Clone(), Right.Clone());
     }
 }

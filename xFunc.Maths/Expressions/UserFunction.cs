@@ -53,10 +53,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Function, ParametersCount);
-        }
+        public override int GetHashCode() =>
+            HashCode.Combine(Function, ParametersCount);
 
         /// <summary>
         /// Executes the user function.
@@ -93,19 +91,15 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new UserFunction(Function, Arguments);
-        }
+        public override IExpression Clone() =>
+            new UserFunction(Function, Arguments);
 
         /// <summary>
         /// Gets the name of function.

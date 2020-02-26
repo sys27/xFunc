@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -53,16 +52,15 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var leftValue = Left.Execute(parameters);
-            var rightValue = Right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
-            if (leftValue is double leftDouble && rightValue is double rightDouble)
-                return leftDouble != rightDouble;
-
-            if (leftValue is bool leftBool && rightValue is bool rightBool)
-                return leftBool != rightBool;
-
-            throw new NotSupportedException();
+            return (left, right) switch
+            {
+                (double leftDouble, double rightDouble) => leftDouble != rightDouble,
+                (bool leftBool, bool rightBool) => leftBool != rightBool,
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -73,10 +71,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
@@ -84,9 +80,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="NotEqual" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new NotEqual(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new NotEqual(Left.Clone(), Right.Clone());
     }
 }

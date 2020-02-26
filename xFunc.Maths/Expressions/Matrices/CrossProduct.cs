@@ -52,12 +52,14 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = this.Left.Execute(parameters);
-            var right = this.Right.Execute(parameters);
-            if (left is Vector leftVector && right is Vector rightVector)
-                return leftVector.Cross(rightVector, parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
-            throw new ResultIsNotSupportedException(this, new[] { left, right });
+            return (left, right) switch
+            {
+                (Vector leftVector, Vector rightVector) => leftVector.Cross(rightVector, parameters),
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -68,10 +70,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
@@ -79,9 +79,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new CrossProduct(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new CrossProduct(Left.Clone(), Right.Clone());
     }
 }

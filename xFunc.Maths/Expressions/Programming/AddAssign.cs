@@ -76,10 +76,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
@@ -87,15 +85,13 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="AddAssign" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new AddAssign(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new AddAssign(Left.Clone(), Right.Clone());
 
         /// <summary>
         /// Gets or sets the left (first) operand.
         /// </summary>
-        public override IExpression Left
+        public override IExpression Left // TODO:
         {
             get
             {

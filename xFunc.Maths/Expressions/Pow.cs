@@ -56,19 +56,13 @@ namespace xFunc.Maths.Expressions
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);
 
-            if (leftResult is Complex leftComplex && (rightResult is Complex || rightResult is double))
+            return (leftResult, rightResult) switch
             {
-                var rightComplex = rightResult as Complex? ?? rightResult as double?;
-                if (rightComplex == null)
-                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
-
-                return Complex.Pow(leftComplex, rightComplex.Value);
-            }
-
-            if (leftResult is double leftNumber && rightResult is double rightNumber)
-                return MathExtensions.Pow(leftNumber, rightNumber);
-
-            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                (double leftNumber, double rightNumber) => MathExtensions.Pow(leftNumber, rightNumber),
+                (Complex leftComplex, double rightNumber) => Complex.Pow(leftComplex, rightNumber),
+                (Complex leftComplex, Complex rightComplex) => Complex.Pow(leftComplex, rightComplex),
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -79,18 +73,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="Pow"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Pow(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Pow(Left.Clone(), Right.Clone());
     }
 }

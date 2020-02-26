@@ -126,10 +126,8 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Derivative(this.Differentiator, this.Simplifier, CloneArguments());
-        }
+        public override IExpression Clone() =>
+            new Derivative(this.Differentiator, this.Simplifier, CloneArguments());
 
         /// <summary>
         /// Gets or sets the expression.
@@ -139,7 +137,10 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Expression
         {
-            get => Arguments[0];
+            get
+            {
+                return Arguments[0];
+            }
             set
             {
                 Arguments[0] = value ?? throw new ArgumentNullException(nameof(value));

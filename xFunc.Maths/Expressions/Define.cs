@@ -124,21 +124,19 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            if (key is Variable variable)
+            switch (key)
             {
-                parameters.Variables[variable.Name] = value.Execute(parameters);
+                case Variable variable:
+                    parameters.Variables[variable.Name] = value.Execute(parameters);
 
-                return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
+                    return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
+                case UserFunction function:
+                    parameters.Functions[function] = value;
+
+                    return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
+                default:
+                    throw new NotSupportedException();
             }
-
-            if (key is UserFunction function)
-            {
-                parameters.Functions[function] = value;
-
-                return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
-            }
-
-            throw new NotSupportedException();
         }
 
         /// <summary>

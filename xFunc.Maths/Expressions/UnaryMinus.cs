@@ -44,13 +44,12 @@ namespace xFunc.Maths.Expressions
         {
             var result = Argument.Execute(parameters);
 
-            if (result is Complex complex)
-                return Complex.Negate(complex);
-
-            if (result is double number)
-                return -number;
-
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                double number => -number,
+                Complex complex => (object)Complex.Negate(complex),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>
@@ -61,18 +60,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new UnaryMinus(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new UnaryMinus(Argument.Clone());
     }
 }

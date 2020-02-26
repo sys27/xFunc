@@ -64,10 +64,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDergee(double degree)
-        {
-            return MathExtensions.Acosh(degree) / Math.PI * 180;
-        }
+        protected override double ExecuteDegree(double degree) =>
+            MathExtensions.Acosh(degree) / Math.PI * 180;
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -77,10 +75,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian)
-        {
-            return MathExtensions.Acosh(radian);
-        }
+        protected override double ExecuteRadian(double radian) =>
+            MathExtensions.Acosh(radian);
 
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
@@ -90,10 +86,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian)
-        {
-            return MathExtensions.Acosh(gradian) / Math.PI * 200;
-        }
+        protected override double ExecuteGradian(double gradian) =>
+            MathExtensions.Acosh(gradian) / Math.PI * 200;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -103,18 +97,14 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Arcosh(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Arcosh(Argument.Clone());
     }
 }

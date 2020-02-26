@@ -55,10 +55,11 @@ namespace xFunc.Maths.Expressions.Programming
             var left = Left.Execute(parameters);
             var right = Right.Execute(parameters);
 
-            if (left is bool leftBool && right is bool rightBool)
-                return leftBool && rightBool;
-
-            throw new ResultIsNotSupportedException(this, left, right);
+            return (left, right) switch
+            {
+                (bool leftBool, bool rightBool) => leftBool && rightBool,
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -69,10 +70,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
@@ -80,9 +79,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="And" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new And(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new And(Left.Clone(), Right.Clone());
     }
 }

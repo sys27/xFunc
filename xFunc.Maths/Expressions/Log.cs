@@ -56,20 +56,14 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var leftResult = Left.Execute(parameters);
-            if (leftResult is double leftNumber)
+            var rightResult = Right.Execute(parameters);
+
+            return (leftResult, rightResult) switch
             {
-                var rightResult = Right.Execute(parameters);
-
-                if (rightResult is Complex complex)
-                    return Complex.Log(complex, leftNumber);
-
-                if (rightResult is double rightNumber)
-                    return Math.Log(rightNumber, leftNumber);
-
-                throw new ResultIsNotSupportedException(this, rightResult);
-            }
-
-            throw new ResultIsNotSupportedException(this, leftResult);
+                (double leftNumber, double rightNumber) => Math.Log(rightNumber, leftNumber),
+                (double leftNumber, Complex complex) => (object)Complex.Log(complex, leftNumber),
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -80,18 +74,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="Log"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Log(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Log(Left.Clone(), Right.Clone());
     }
 }

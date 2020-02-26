@@ -56,10 +56,11 @@ namespace xFunc.Maths.Expressions
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);
 
-            if (leftResult is double leftNumber && rightResult is double rightNumber)
-                return leftNumber % rightNumber;
-
-            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+            return (leftResult, rightResult) switch
+            {
+                (double leftNumber, double rightNumber) => leftNumber % rightNumber,
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -70,10 +71,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
@@ -81,9 +80,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns the new instance of <see cref="BinaryExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Mod(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Mod(Left.Clone(), Right.Clone());
     }
 }

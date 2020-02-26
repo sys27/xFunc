@@ -51,10 +51,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override Complex ExecuteComplex(Complex complex)
-        {
-            return ComplexExtensions.Sech(complex);
-        }
+        protected override Complex ExecuteComplex(Complex complex) =>
+            ComplexExtensions.Sech(complex);
 
         /// <summary>
         /// Calculates this mathematical expression (using degree).
@@ -64,10 +62,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDergee(double degree)
-        {
-            return MathExtensions.Sech(degree * Math.PI / 180);
-        }
+        protected override double ExecuteDegree(double degree) =>
+            MathExtensions.Sech(degree * Math.PI / 180);
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -77,10 +73,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian)
-        {
-            return MathExtensions.Sech(radian);
-        }
+        protected override double ExecuteRadian(double radian) =>
+            MathExtensions.Sech(radian);
 
         /// <summary>
         /// Calculates this mathematical expression (using gradian).
@@ -90,10 +84,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian)
-        {
-            return MathExtensions.Sech(gradian * Math.PI / 200);
-        }
+        protected override double ExecuteGradian(double gradian) =>
+            MathExtensions.Sech(gradian * Math.PI / 200);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -103,18 +95,14 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Sech(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Sech(Argument.Clone());
     }
 }

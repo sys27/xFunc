@@ -68,10 +68,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
@@ -79,9 +77,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Reciprocal(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Reciprocal(Argument.Clone());
     }
 }

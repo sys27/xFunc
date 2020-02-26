@@ -56,20 +56,16 @@ namespace xFunc.Maths.Expressions
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);
 
-            if (leftResult is Complex || rightResult is Complex)
+            return (leftResult, rightResult) switch
             {
-                var leftComplex = leftResult as Complex? ?? leftResult as double?;
-                var rightComplex = rightResult as Complex? ?? rightResult as double?;
-                if (leftComplex == null || rightComplex == null)
-                    throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                (double leftNumber, double rightNumber) => leftNumber / rightNumber,
 
-                return Complex.Divide(leftComplex.Value, rightComplex.Value);
-            }
+                (double leftNumber, Complex rightComplex) => leftNumber / rightComplex,
+                (Complex leftComplex, double rightNumber) => leftComplex / rightNumber,
+                (Complex leftComplex, Complex rightComplex) => (object)(leftComplex / rightComplex),
 
-            if (leftResult is double leftNumber && rightResult is double rightNumber)
-                return leftNumber / rightNumber;
-
-            throw new ResultIsNotSupportedException(this, leftResult, rightResult);
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -80,18 +76,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Div(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new Div(Left.Clone(), Right.Clone());
     }
 }

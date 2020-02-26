@@ -16,7 +16,6 @@
 using System;
 using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
@@ -35,38 +34,16 @@ namespace xFunc.Maths.Expressions.Statistical
         {
         }
 
-        private double ExecuteInternal(IExpression[] expression, ExpressionParameters parameter)
-        {
-            return expression.Sum(exp =>
-            {
-                var result = exp.Execute(parameter);
-                if (result is double doubleResult)
-                    return doubleResult;
-
-                throw new ResultIsNotSupportedException();
-            });
-        }
-
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="numbers">The array of expressions.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        private protected override double ExecuteInternal(double[] numbers)
         {
-            if (ParametersCount == 1)
-            {
-                var result = this.Arguments[0].Execute(parameters);
-                if (result is Vector vector)
-                    return ExecuteInternal(vector.Arguments, parameters);
-
-                return result;
-            }
-
-            return ExecuteInternal(Arguments, parameters);
+            return numbers.Sum();
         }
 
         /// <summary>

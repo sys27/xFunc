@@ -55,10 +55,11 @@ namespace xFunc.Maths.Expressions.Programming
             var left = Left.Execute(parameters);
             var right = Right.Execute(parameters);
 
-            if (left is double leftDouble && right is double rightDouble)
-                return leftDouble >= rightDouble;
-
-            throw new ResultIsNotSupportedException(this, left, right);
+            return (left, right) switch
+            {
+                (double leftDouble, double rightDouble) => leftDouble >= rightDouble,
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -69,10 +70,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
@@ -80,9 +79,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="GreaterOrEqual" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new GreaterOrEqual(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new GreaterOrEqual(Left.Clone(), Right.Clone());
     }
 }

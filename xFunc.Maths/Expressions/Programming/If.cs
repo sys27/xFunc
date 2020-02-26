@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -77,10 +76,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="If" />.
@@ -88,10 +85,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="If" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new If(CloneArguments());
-        }
+        public override IExpression Clone() =>
+            new If(CloneArguments());
 
         /// <summary>
         /// Gets the condition.

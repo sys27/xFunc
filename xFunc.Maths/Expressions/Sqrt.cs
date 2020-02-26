@@ -56,18 +56,13 @@ namespace xFunc.Maths.Expressions
         {
             var result = Argument.Execute(parameters);
 
-            if (result is Complex complex)
-                return Complex.Sqrt(complex);
-
-            if (result is double number)
+            return result switch
             {
-                if (number < 0)
-                    return new Complex(0, Complex.Sqrt(number).Imaginary);
-
-                return Math.Sqrt(number);
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
+                double number when number < 0 => new Complex(0, Complex.Sqrt(number).Imaginary),
+                double number => Math.Sqrt(number),
+                Complex complex => (object)Complex.Sqrt(complex),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>
@@ -78,18 +73,13 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="Sqrt"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Sqrt(Argument.Clone());
-        }
+        public override IExpression Clone() => new Sqrt(Argument.Clone());
     }
 }

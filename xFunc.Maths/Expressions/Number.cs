@@ -38,20 +38,16 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="number">The value to convert to a double.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator double(Number number)
-        {
-            return number?.Value ?? double.NaN;
-        }
+        public static implicit operator double(Number number) =>
+            number?.Value ?? double.NaN;
 
         /// <summary>
         /// Defines an implicit conversion of double to <see cref="Number"/>.
         /// </summary>
         /// <param name="number">The value to convert to <see cref="Number"/>.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator Number(double number)
-        {
-            return new Number(number);
-        }
+        public static implicit operator Number(double number) =>
+            new Number(number);
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
@@ -73,10 +69,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) =>
+            Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -84,19 +78,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() =>
+            ToString(new CommonFormatter());
 
         /// <summary>
         /// Returns a number. Don't use this method if your expression has variables.
         /// </summary>
         /// <returns>A result of the execution.</returns>
-        public object Execute()
-        {
-            return Value;
-        }
+        public object Execute() => Value;
 
         /// <summary>
         /// Returns a number.
@@ -104,10 +93,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the execution.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        public object Execute(ExpressionParameters parameters)
-        {
-            return Value;
-        }
+        public object Execute(ExpressionParameters parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -129,10 +115,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance of the <see cref="Number"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
-        {
-            return new Number(Value);
-        }
+        public IExpression Clone() => new Number(Value);
 
         /// <summary>
         /// Gets or Sets a number.

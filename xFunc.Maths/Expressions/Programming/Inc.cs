@@ -77,10 +77,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
@@ -88,9 +86,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="Inc" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Inc(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Inc(Argument.Clone());
     }
 }

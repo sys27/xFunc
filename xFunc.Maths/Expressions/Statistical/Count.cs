@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
@@ -37,24 +35,12 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <summary>
         /// Executes this expression.
         /// </summary>
-        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <param name="numbers">The array of expressions.</param>
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
-        {
-            if (ParametersCount == 1)
-            {
-                var result = this.Arguments[0].Execute(parameters);
-                if (result is Vector vector)
-                    return (double)vector.Arguments.Length;
-
-                return 1.0;
-            }
-
-            return (double)this.Arguments.Length;
-        }
+        private protected override double ExecuteInternal(double[] numbers) =>
+            numbers.Length;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -64,10 +50,8 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -75,9 +59,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Count(CloneArguments());
-        }
+        public override IExpression Clone() =>
+            new Count(CloneArguments());
     }
 }

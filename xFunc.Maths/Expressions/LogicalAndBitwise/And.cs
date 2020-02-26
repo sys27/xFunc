@@ -56,12 +56,12 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             var left = Left.Execute(parameters);
             var right = Right.Execute(parameters);
 
-            if (left is bool leftBool && right is bool rightBool)
-                return leftBool & rightBool;
-            if (left is double leftDouble && right is double rightDouble)
-                return (double)((int)Math.Round(leftDouble, MidpointRounding.AwayFromZero) & (int)Math.Round(rightDouble, MidpointRounding.AwayFromZero));
-
-            throw new ResultIsNotSupportedException(this, left, right);
+            return (left, right) switch
+            {
+                (bool leftBool, bool rightBool) => leftBool & rightBool,
+                (double leftDouble, double rightDouble) => (double)((int)Math.Round(leftDouble, MidpointRounding.AwayFromZero) & (int)Math.Round(rightDouble, MidpointRounding.AwayFromZero)),
+                _ => throw new ResultIsNotSupportedException(this, left, right),
+            };
         }
 
         /// <summary>
@@ -72,18 +72,14 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="And"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new And(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new And(Left.Clone(), Right.Clone());
     }
 }

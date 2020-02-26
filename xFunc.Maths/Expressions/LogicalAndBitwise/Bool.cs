@@ -39,10 +39,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public object Execute()
-        {
-            return Value;
-        }
+        public object Execute() => Value;
 
         /// <summary>
         /// Executes this expression.
@@ -52,10 +49,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters)
-        {
-            return Value;
-        }
+        public object Execute(ExpressionParameters parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -92,10 +86,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator Bool(bool value)
-        {
-            return new Bool(value);
-        }
+        public static implicit operator Bool(bool value) => new Bool(value);
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -118,10 +109,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -129,10 +117,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -140,10 +125,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public IExpression Clone()
-        {
-            return new Bool(Value);
-        }
+        public IExpression Clone() => new Bool(Value);
 
         /// <summary>
         /// Gets or sets the parent expression.

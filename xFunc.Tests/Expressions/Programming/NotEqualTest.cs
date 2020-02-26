@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Programming
             };
             var equal = new NotEqual(Variable.X, new Variable("y"));
 
-            Assert.Throws<NotSupportedException>(() => equal.Execute(parameters));
+            Assert.Throws<ResultIsNotSupportedException>(() => equal.Execute(parameters));
         }
 
         [Fact]

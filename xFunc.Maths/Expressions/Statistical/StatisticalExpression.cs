@@ -13,7 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
+using System.Linq;
+using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
 {
@@ -30,6 +31,46 @@ namespace xFunc.Maths.Expressions.Statistical
         protected StatisticalExpression(IExpression[] arguments)
             : base(arguments)
         {
+        }
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="numbers">The array of expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        private protected abstract double ExecuteInternal(double[] numbers);
+
+        /// <summary>
+        /// Executes this expression.
+        /// </summary>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        /// <seealso cref="ExpressionParameters" />
+        public override object Execute(ExpressionParameters parameters)
+        {
+            var data = Arguments;
+
+            if (ParametersCount == 1)
+            {
+                var result = Arguments[0].Execute(parameters);
+                if (result is Vector vector)
+                    data = vector.Arguments;
+            }
+
+            var calculated = data.Select(exp =>
+            {
+                var result = exp.Execute(parameters);
+                if (result is double doubleResult)
+                    return doubleResult;
+
+                throw new ResultIsNotSupportedException();
+            }).ToArray();
+
+            return ExecuteInternal(calculated);
         }
 
         /// <summary>

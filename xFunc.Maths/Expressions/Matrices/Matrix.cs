@@ -117,10 +117,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="NotSupportedException">Always.</exception>
-        public override object Execute(ExpressionParameters parameters)
-        {
-            return new Matrix(CalculateMatrix(parameters));
-        }
+        public override object Execute(ExpressionParameters parameters) =>
+            new Matrix(CalculateMatrix(parameters));
 
         /// <summary>
         /// Analyzes the current expression.
@@ -130,10 +128,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -141,10 +137,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector)x));
-        }
+        public override IExpression Clone() =>
+            new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector)x));
 
         /// <summary>
         /// Calculates current matrix and returns it as an two dimensional array.

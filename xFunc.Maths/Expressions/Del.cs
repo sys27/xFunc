@@ -38,8 +38,10 @@ namespace xFunc.Maths.Expressions
         public Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
             : base(expression)
         {
-            this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
-            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+            this.differentiator = differentiator ??
+                                  throw new ArgumentNullException(nameof(differentiator));
+            this.simplifier = simplifier ??
+                              throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>

@@ -22,10 +22,6 @@ namespace xFunc.DotnetTool.Options
     [Verb("interactive", HelpText = "Run interactive mode.")]
     public class InteractiveOptions : DebugInfoOptions
     {
-        public InteractiveOptions(bool debug) : base(debug)
-        {
-        }
-
         [Usage(ApplicationAlias = "xfunc")]
         public static IEnumerable<Example> Examples
         {
@@ -33,7 +29,7 @@ namespace xFunc.DotnetTool.Options
             {
                 return new List<Example>
                 {
-                    new Example("Run iteractive mode", new InteractiveOptions(false))
+                    new Example("Run iteractive mode", new InteractiveOptions())
                 };
             }
         }

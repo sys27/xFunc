@@ -18,7 +18,9 @@
             "request": "launch",
             "preLaunchTask": "Build",
             "program": "${workspaceFolder}/xFunc.DotnetTool/bin/Debug/netcoreapp3.0/xFunc.DotnetTool.dll",
-            "args": [],
+            "args": [
+                "interactive"
+            ],
             "cwd": "${workspaceFolder}/xFunc.DotnetTool",
             "console": "integratedTerminal",
             "stopAtEntry": false

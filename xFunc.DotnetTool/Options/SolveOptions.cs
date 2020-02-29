@@ -16,15 +16,15 @@
 using CommandLine;
 using CommandLine.Text;
 using System.Collections.Generic;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.DotnetTool.Options
 {
     [Verb("solve", HelpText = "Calculate result of expression.")]
     public class SolveOptions : BaseOptions
     {
-        public SolveOptions(string stringExpression, bool debug) : base(stringExpression, debug)
-        {
-        }
+        [Option('a', "angle", Default = AngleMeasurement.Degree, Required = false, HelpText = "Angle Measurement")]
+        public AngleMeasurement Angle { get; set; }
 
         [Usage(ApplicationAlias = "xfunc")]
         public static IEnumerable<Example> Examples
@@ -33,7 +33,12 @@ namespace xFunc.DotnetTool.Options
             {
                 return new List<Example>
                 {
-                    new Example("Calculate string expression", new SolveOptions("1 + 1", false))
+                    new Example(
+                        "Calculate string expression",
+                        new SolveOptions { StringExpression = "1 + 1" }),
+                    new Example(
+                        "Set angle measurement",
+                        new SolveOptions { StringExpression = "1 + 1" , Angle = AngleMeasurement.Radian })
                 };
             }
         }

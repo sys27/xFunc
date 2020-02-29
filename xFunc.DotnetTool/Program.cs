@@ -21,7 +21,6 @@ using xFunc.Maths;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Tokenization;
 
 namespace xFunc.DotnetTool
 {
@@ -52,6 +51,8 @@ namespace xFunc.DotnetTool
         {
             Run(options, () =>
             {
+                processor.Parameters.AngleMeasurement = options.Angle;
+
                 var result = processor.Solve(options.StringExpression);
                 Console.WriteLine(result);
             });
@@ -63,9 +64,28 @@ namespace xFunc.DotnetTool
             {
                 Console.Write("> ");
 
-                var stringExpression = Console.ReadLine().ToLower();
-                if (stringExpression == "quit" || stringExpression == "exit")
+                var stringExpression = Console.ReadLine()?.ToLower();
+                if (stringExpression == null ||
+                    stringExpression == "#quit" ||
+                    stringExpression == "#exit")
+                {
                     break;
+                }
+                else if (stringExpression == "#degree")
+                {
+                    processor.Parameters.AngleMeasurement = AngleMeasurement.Degree;
+                    continue;
+                }
+                else if (stringExpression == "#radian")
+                {
+                    processor.Parameters.AngleMeasurement = AngleMeasurement.Radian;
+                    continue;
+                }
+                else if (stringExpression == "#gradian")
+                {
+                    processor.Parameters.AngleMeasurement = AngleMeasurement.Gradian;
+                    continue;
+                }
 
                 Run(options, () =>
                 {

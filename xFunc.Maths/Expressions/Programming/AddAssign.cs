@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Globalization;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -22,14 +21,14 @@ namespace xFunc.Maths.Expressions.Programming
     /// <summary>
     /// Represents the "+=" operator.
     /// </summary>
-    public class AddAssign : BinaryExpression
+    public class AddAssign : VariableBinaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddAssign"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
-        public AddAssign(IExpression variable, IExpression exp)
+        public AddAssign(Variable variable, IExpression exp)
             : base(variable, exp)
         {
         }
@@ -57,15 +56,22 @@ namespace xFunc.Maths.Expressions.Programming
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            var var = (Variable)Left;
-            var parameter = parameters.Variables[var.Name];
-            if (parameter is bool)
-                throw new NotSupportedException();
+            var result = Variable.Execute(parameters);
+            if (result is double value)
+            {
+                var rightResult = Right.Execute(parameters);
+                if (rightResult is double rightValue)
+                {
+                    var newValue = value + rightValue;
+                    parameters.Variables[Variable.Name] = newValue;
 
-            var newValue = Convert.ToDouble(parameter, CultureInfo.InvariantCulture) + (double)Right.Execute(parameters);
-            parameters.Variables[var.Name] = newValue;
+                    return newValue;
+                }
 
-            return newValue;
+                throw new ResultIsNotSupportedException(this, rightResult);
+            }
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>
@@ -86,24 +92,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// Returns the new instance of <see cref="AddAssign" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new AddAssign(Left.Clone(), Right.Clone());
-
-        /// <summary>
-        /// Gets or sets the left (first) operand.
-        /// </summary>
-        public override IExpression Left // TODO:
-        {
-            get
-            {
-                return base.Left;
-            }
-            set
-            {
-                if (!(value is Variable))
-                    throw new NotSupportedException();
-
-                base.Left = value;
-            }
-        }
+            new AddAssign((Variable)Variable.Clone(), Right.Clone());
     }
 }

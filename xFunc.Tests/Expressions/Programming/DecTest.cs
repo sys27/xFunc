@@ -28,10 +28,16 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var dec = new Dec(Variable.X);
-            var result = (double) dec.Execute(parameters);
+            var result = (double)dec.Execute(parameters);
 
             Assert.Equal(9.0, result);
             Assert.Equal(9.0, parameters["x"]);
+        }
+
+        [Fact]
+        public void DecNullParameters()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Dec(Variable.X).Execute());
         }
 
         [Fact]
@@ -40,15 +46,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection() { new Parameter("x", true) };
             var dec = new Dec(Variable.X);
 
-            Assert.Throws<NotSupportedException>(() => dec.Execute(parameters));
-        }
-
-        [Fact]
-        public void NotVarTest()
-        {
-            var dec = new Dec(new Number(2));
-
-            Assert.Equal(1.0, dec.Execute());
+            Assert.Throws<ResultIsNotSupportedException>(() => dec.Execute(parameters));
         }
 
         [Fact]

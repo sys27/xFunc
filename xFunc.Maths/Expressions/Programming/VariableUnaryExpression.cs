@@ -14,7 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Linq;
+using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -22,28 +22,46 @@ using xFunc.Maths.Resources;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// The base class for expressions with different number of parameters.
+    /// The abstract base class that represents the unary operation with variable as argument.
     /// </summary>
-    public abstract class DifferentParametersExpression : IExpression
+    public abstract class VariableUnaryExpression : IExpression
     {
-        private IExpression[] arguments;
+        private Variable variable;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
+        /// Initializes a new instance of the <see cref="VariableUnaryExpression"/> class.
         /// </summary>
-        /// <param name="arguments">The arguments.</param>
-        protected DifferentParametersExpression(IExpression[] arguments)
+        /// <param name="argument">The expression.</param>
+        protected VariableUnaryExpression(Variable argument)
         {
-            this.Arguments = arguments;
+            Variable = argument;
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="object" />, is equal to this instance.
+        /// Initializes a new instance of the <see cref="VariableUnaryExpression"/> class.
+        /// </summary>
+        /// <param name="arguments">The list of arguments.</param>
+        protected VariableUnaryExpression(IExpression[] arguments)
+        {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+
+            if (arguments.Length < 1)
+                throw new ParseException(Resource.LessParams);
+
+            if (arguments.Length > 1)
+                throw new ParseException(Resource.MoreParams);
+
+            Debug.Assert(arguments[0] is Variable, "The argument is not variable");
+
+            Variable = (Variable)arguments[0];
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -52,17 +70,7 @@ namespace xFunc.Maths.Expressions
             if (obj == null || this.GetType() != obj.GetType())
                 return false;
 
-            var diff = (DifferentParametersExpression)obj;
-
-            if (this.arguments == null && diff.arguments == null)
-                return true;
-
-            if (this.arguments == null ||
-                diff.arguments == null ||
-                this.arguments.Length != diff.arguments.Length)
-                return false;
-
-            return this.arguments.SequenceEqual(diff.arguments);
+            return variable.Equals(((VariableUnaryExpression)obj).Variable);
         }
 
         /// <summary>
@@ -88,7 +96,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public virtual object Execute() => Execute(null);
+        public object Execute() => Execute(null);
 
         /// <summary>
         /// Executes this expression.
@@ -135,73 +143,25 @@ namespace xFunc.Maths.Expressions
         public abstract IExpression Clone();
 
         /// <summary>
-        /// Closes the arguments.
+        /// Gets or sets the variable.
         /// </summary>
-        /// <returns>The new array of <see cref="IExpression"/>.</returns>
-        protected IExpression[] CloneArguments()
+        /// <value>The variable.</value>
+        public virtual Variable Variable
         {
-            var args = new IExpression[arguments.Length];
-            for (var i = 0; i < arguments.Length; i++)
-                args[i] = arguments[i].Clone();
-
-            return args;
+            get
+            {
+                return variable;
+            }
+            set
+            {
+                variable = value ?? throw new ArgumentNullException(nameof(value));
+                variable.Parent = this;
+            }
         }
 
         /// <summary>
         /// Gets or sets the parent expression.
         /// </summary>
         public IExpression Parent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>The arguments.</value>
-        public virtual IExpression[] Arguments
-        {
-            get
-            {
-                return arguments;
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(Arguments));
-
-                if (value.Length < MinParametersCount)
-                    throw new ArgumentException(Resource.LessParams, nameof(Arguments));
-
-                if (value.Length > MaxParametersCount)
-                    throw new ArgumentException(Resource.MoreParams, nameof(Arguments));
-
-                arguments = value;
-                foreach (var item in arguments)
-                    if (item != null)
-                        item.Parent = this;
-            }
-        }
-
-        /// <summary>
-        /// Gets the count of parameters.
-        /// </summary>
-        /// <value>
-        /// The count of parameters.
-        /// </value>
-        public int ParametersCount => Arguments.Length;
-
-        /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public abstract int? MinParametersCount { get; }
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public abstract int? MaxParametersCount { get; }
     }
 }

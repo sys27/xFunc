@@ -14,7 +14,6 @@
 // limitations under the Licens
 
 using System;
-using System.Globalization;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -22,13 +21,13 @@ namespace xFunc.Maths.Expressions.Programming
     /// <summary>
     /// Represents the decrement operator.
     /// </summary>
-    public class Dec : UnaryExpression
+    public class Dec : VariableUnaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Dec"/> class.
         /// </summary>
-        /// <param name="argument">The expression.</param>
-        public Dec(IExpression argument)
+        /// <param name="argument">The variable.</param>
+        public Dec(Variable argument)
             : base(argument)
         {
         }
@@ -52,21 +51,19 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var value = Argument.Execute(parameters);
-            if (value is bool)
-                throw new NotSupportedException();
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
 
-            var newValue = Convert.ToDouble(value, CultureInfo.InvariantCulture) - 1;
-
-            if (Argument is Variable variable)
+            var result = Variable.Execute(parameters);
+            if (result is double value)
             {
-                if (parameters == null)
-                    throw new ArgumentNullException(nameof(parameters));
+                var newValue = value - 1;
+                parameters.Variables[Variable.Name] = newValue;
 
-                parameters.Variables[variable.Name] = newValue;
+                return newValue;
             }
 
-            return newValue;
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>
@@ -87,6 +84,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// Returns the new instance of <see cref="Inc" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new Dec(Argument.Clone());
+            new Dec((Variable)Variable.Clone());
     }
 }

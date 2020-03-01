@@ -25,9 +25,6 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class UnaryExpression : IExpression
     {
-        /// <summary>
-        /// The (first) operand.
-        /// </summary>
         private IExpression argument;
 
         /// <summary>

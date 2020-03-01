@@ -97,9 +97,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestDecNumber()
+        public void TestDec()
         {
-            var exp = new Dec(new Number(3));
+            var exp = new Dec(Variable.X);
 
             Test(exp, ResultTypes.Number);
         }
@@ -409,9 +409,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestIncNumber()
+        public void TestInc()
         {
-            var exp = new Inc(new Number(3));
+            var exp = new Inc(Variable.X);
 
             Test(exp, ResultTypes.Number);
         }

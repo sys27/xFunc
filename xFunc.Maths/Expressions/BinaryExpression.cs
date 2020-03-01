@@ -25,14 +25,7 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class BinaryExpression : IExpression
     {
-        /// <summary>
-        /// The left (first) operand.
-        /// </summary>
         private IExpression left;
-
-        /// <summary>
-        /// The right (second) operand.
-        /// </summary>
         private IExpression right;
 
         /// <summary>

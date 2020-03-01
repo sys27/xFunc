@@ -1056,7 +1056,10 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(AddAssign exp)
         {
-            return ToString(exp, "{0} += {1}");
+            var left = exp.Variable.Analyze(this);
+            var right = exp.Right.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, "{0} += {1}", left, right);
         }
 
         /// <summary>
@@ -1079,7 +1082,9 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Dec exp)
         {
-            return ToString(exp, "{0}--");
+            var arg = exp.Variable.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, "{0}--", arg);
         }
 
         /// <summary>
@@ -1089,7 +1094,10 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(DivAssign exp)
         {
-            return ToString(exp, "{0} /= {1}");
+            var left = exp.Variable.Analyze(this);
+            var right = exp.Right.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, "{0} /= {1}", left, right);
         }
 
         /// <summary>
@@ -1158,7 +1166,9 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Inc exp)
         {
-            return ToString(exp, "{0}++");
+            var arg = exp.Variable.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, "{0}++", arg);
         }
 
         /// <summary>
@@ -1194,7 +1204,10 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(MulAssign exp)
         {
-            return ToString(exp, "{0} *= {1}");
+            var left = exp.Variable.Analyze(this);
+            var right = exp.Right.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, "{0} *= {1}", left, right);
         }
 
         /// <summary>
@@ -1230,7 +1243,10 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(SubAssign exp)
         {
-            return ToString(exp, "{0} -= {1}");
+            var left = exp.Variable.Analyze(this);
+            var right = exp.Right.Analyze(this);
+
+            return string.Format(CultureInfo.InvariantCulture, "{0} -= {1}", left, right);
         }
 
         /// <summary>

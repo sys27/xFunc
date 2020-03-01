@@ -28,10 +28,16 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
             var inc = new Inc(Variable.X);
-            var result = (double) inc.Execute(parameters);
+            var result = (double)inc.Execute(parameters);
 
             Assert.Equal(11.0, result);
             Assert.Equal(11.0, parameters["x"]);
+        }
+
+        [Fact]
+        public void IncNullParameters()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Inc(Variable.X).Execute());
         }
 
         [Fact]
@@ -40,15 +46,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection() { new Parameter("x", true) };
             var inc = new Inc(Variable.X);
 
-            Assert.Throws<NotSupportedException>(() => inc.Execute(parameters));
-        }
-
-        [Fact]
-        public void IncNumberTest()
-        {
-            var inc = new Inc(new Number(1));
-
-            Assert.Equal(2.0, inc.Execute());
+            Assert.Throws<ResultIsNotSupportedException>(() => inc.Execute(parameters));
         }
 
         [Fact]

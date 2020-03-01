@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Globalization;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -22,14 +21,14 @@ namespace xFunc.Maths.Expressions.Programming
     /// <summary>
     /// Represents the "-=" operator.
     /// </summary>
-    public class SubAssign : BinaryExpression
+    public class SubAssign : VariableBinaryExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SubAssign"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
-        public SubAssign(IExpression variable, IExpression exp)
+        public SubAssign(Variable variable, IExpression exp)
             : base(variable, exp)
         {
         }
@@ -54,15 +53,25 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var var = (Variable)Left;
-            var parameter = var.Execute(parameters);
-            if (parameter is bool)
-                throw new NotSupportedException();
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
 
-            var newValue = Convert.ToDouble(parameter, CultureInfo.InvariantCulture) - (double)Right.Execute(parameters);
-            parameters.Variables[var.Name] = newValue;
+            var result = Variable.Execute(parameters);
+            if (result is double value)
+            {
+                var rightResult = Right.Execute(parameters);
+                if (rightResult is double rightValue)
+                {
+                    var newValue = value - rightValue;
+                    parameters.Variables[Variable.Name] = newValue;
 
-            return newValue;
+                    return newValue;
+                }
+
+                throw new ResultIsNotSupportedException(this, rightResult);
+            }
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>
@@ -83,24 +92,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// Returns the new instance of <see cref="SubAssign" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new SubAssign(Left.Clone(), Right.Clone());
-
-        /// <summary>
-        /// Gets or sets the left (first) operand.
-        /// </summary>
-        public override IExpression Left
-        {
-            get
-            {
-                return base.Left;
-            }
-            set
-            {
-                if (!(value is Variable))
-                    throw new NotSupportedException();
-
-                base.Left = value;
-            }
-        }
+            new SubAssign((Variable)Variable.Clone(), Right.Clone());
     }
 }

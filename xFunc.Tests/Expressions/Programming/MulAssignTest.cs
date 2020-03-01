@@ -16,6 +16,7 @@
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
 using Xunit;
 
@@ -36,18 +37,29 @@ namespace xFunc.Tests.Expressions.Programming
         }
 
         [Fact]
+        public void MulNullParameters()
+        {
+            var exp = new MulAssign(Variable.X, new Number(1));
+
+            Assert.Throws<ArgumentNullException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void MulValueBoolParameters()
+        {
+            var exp = new MulAssign(Variable.X, new Bool(false));
+            var parameters = new ParameterCollection { new Parameter("x", 1) };
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
+        }
+
+        [Fact]
         public void BoolMulNumberTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
             var mul = new MulAssign(Variable.X, new Number(2));
 
-            Assert.Throws<NotSupportedException>(() => mul.Execute(parameters));
-        }
-
-        [Fact]
-        public void NotVarTest()
-        {
-            Assert.Throws<NotSupportedException>(() => new MulAssign(new Number(1), new Number(1)));
+            Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute(parameters));
         }
 
         [Fact]

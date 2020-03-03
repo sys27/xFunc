@@ -35,6 +35,12 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
+        public void NullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Vector(new IExpression[] { null, null }));
+        }
+
+        [Fact]
         public void MulByNumberVectorTest()
         {
             var vector = new Vector(new[] { new Number(2), new Number(3) });
@@ -56,6 +62,16 @@ namespace xFunc.Tests.Expressions.Matrices
 
             var expected = new Vector(new[] { new Number(9), new Number(4) });
             var result = exp.Execute();
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void VectorWithAddTest()
+        {
+            var vector = new Vector(new[] { new Add(new Number(2), new Number(3)) });
+            var expected = new Vector(new[] { new Number(5) });
+            var result = vector.Execute();
 
             Assert.Equal(expected, result);
         }

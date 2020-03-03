@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
@@ -38,7 +39,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Or(IExpression[] arguments)
+        internal Or(IList<IExpression> arguments)
             : base(arguments)
         {
         }

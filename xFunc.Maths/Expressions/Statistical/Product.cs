@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
@@ -29,7 +30,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public Product(IExpression[] arguments)
+        public Product(IList<IExpression> arguments)
             : base(arguments)
         {
         }

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Resources;
@@ -39,7 +40,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Transpose(IExpression[] arguments)
+        internal Transpose(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -57,25 +58,12 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var result = Argument.Execute(parameters);
 
-            switch (result)
+            return result switch
             {
-                case Matrix matrix:
-                    if (matrix.Arguments.Any(x => x == null))
-                        throw new ArgumentException(Resource.SequenceNullValuesError);
-                    if (matrix.Arguments.OfType<Vector>().Any(x => x.Arguments.All(z => z == null)))
-                        throw new ArgumentException(Resource.SequenceNullValuesError);
-
-                    return matrix.Transpose();
-
-                case Vector vector:
-                    if (vector.Arguments.Any(x => x == null))
-                        throw new ArgumentException(Resource.SequenceNullValuesError);
-
-                    return vector.Transpose();
-
-                default:
-                    throw new ResultIsNotSupportedException(this, result);
-            }
+                Matrix matrix => matrix.Transpose(),
+                Vector vector => vector.Transpose(),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>

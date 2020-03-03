@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -47,7 +48,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public If(IExpression[] arguments)
+        public If(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -94,7 +95,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The condition.
         /// </value>
-        public IExpression Condition => Arguments[0];
+        public IExpression Condition => this[0];
 
         /// <summary>
         /// Gets the "then" statement.
@@ -102,7 +103,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The then.
         /// </value>
-        public IExpression Then => Arguments[1];
+        public IExpression Then => this[1];
 
         /// <summary>
         /// Gets the "else" statement.
@@ -110,7 +111,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The else.
         /// </value>
-        public IExpression Else => ParametersCount == 3 ? Arguments[2] : null;
+        public IExpression Else => ParametersCount == 3 ? this[2] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -121,7 +122,7 @@ namespace xFunc.Maths.Expressions.Programming
         public override int? MinParametersCount => 2;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -38,7 +39,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Mod(IExpression[] arguments)
+        internal Mod(IList<IExpression> arguments)
             : base(arguments)
         {
         }

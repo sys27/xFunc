@@ -61,15 +61,6 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
-        public void ExecuteEmptyMatrixTest()
-        {
-            var matrix = Matrix.Create(2, 2);
-            var det = new Determinant(matrix);
-
-            Assert.Throws<ArgumentException>(() => det.Execute());
-        }
-
-        [Fact]
         public void CloneTest()
         {
             var exp = new Transpose(new Matrix(new[]

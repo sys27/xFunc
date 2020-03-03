@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Statistical
@@ -27,7 +28,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="Count"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Count(IExpression[] arguments)
+        public Count(IList<IExpression> arguments)
             : base(arguments)
         {
         }

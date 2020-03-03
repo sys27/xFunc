@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
 
@@ -319,7 +320,7 @@ namespace xFunc.Maths
                 }
 
                 if (tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
-                    return CreateFunction(id, parameterList.ToArray()); // TODO:
+                    return CreateFunction(id, parameterList);
             }
 
             tokenEnumerator.Rollback(scope);
@@ -571,10 +572,10 @@ namespace xFunc.Maths
             if (parameterList == null)
                 return CreateVariable(function);
 
-            return CreateFunction(function, parameterList.ToArray());
+            return CreateFunction(function, parameterList);
         }
 
-        private IEnumerable<IExpression> ParameterList(TokenEnumerator tokenEnumerator)
+        private IList<IExpression> ParameterList(TokenEnumerator tokenEnumerator)
         {
             if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
                 return null;
@@ -660,7 +661,7 @@ namespace xFunc.Maths
             return CreateFromKeyword(boolean);
         }
 
-        private IExpression Vector(TokenEnumerator tokenEnumerator)
+        private Vector Vector(TokenEnumerator tokenEnumerator)
         {
             if (!tokenEnumerator.Symbol(SymbolToken.OpenBrace))
                 return null;
@@ -684,7 +685,7 @@ namespace xFunc.Maths
             if (!tokenEnumerator.Symbol(SymbolToken.CloseBrace))
                 throw new ParseException(Resource.VectorCloseBraceParseException);
 
-            return CreateVector(parameterList.ToArray());
+            return CreateVector(parameterList);
         }
 
         private IExpression Matrix(TokenEnumerator tokenEnumerator)
@@ -693,25 +694,25 @@ namespace xFunc.Maths
 
             if (tokenEnumerator.Symbol(SymbolToken.OpenBrace))
             {
-                var parameterList = new List<IExpression>();
+                var vectors = new List<Vector>();
 
                 var exp = Vector(tokenEnumerator);
                 if (exp != null)
                 {
-                    parameterList.Add(exp);
+                    vectors.Add(exp);
 
                     while (tokenEnumerator.Symbol(SymbolToken.Comma))
                     {
                         exp = Vector(tokenEnumerator) ??
                               throw new ParseException(Resource.MatrixCommaParseException);
 
-                        parameterList.Add(exp);
+                        vectors.Add(exp);
                     }
 
                     if (!tokenEnumerator.Symbol(SymbolToken.CloseBrace))
                         throw new ParseException(Resource.MatrixCloseBraceParseException);
 
-                    return CreateMatrix(parameterList.ToArray()); // TODO:
+                    return CreateMatrix(vectors);
                 }
             }
 

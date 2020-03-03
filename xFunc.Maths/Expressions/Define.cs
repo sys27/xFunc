@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -45,11 +46,11 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Define(IExpression[] arguments)
+        internal Define(IList<IExpression> arguments)
         {
-            if (arguments.Length < 2)
+            if (arguments.Count < 2)
                 throw new ParseException(Resource.LessParams);
-            if (arguments.Length > 2)
+            if (arguments.Count > 2)
                 throw new ParseException(Resource.MoreParams);
 
             this.Key = arguments[0];

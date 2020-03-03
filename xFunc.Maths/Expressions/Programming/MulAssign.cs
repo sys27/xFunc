@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -38,7 +39,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal MulAssign(IExpression[] arguments)
+        internal MulAssign(IList<IExpression> arguments)
             : base(arguments)
         {
         }

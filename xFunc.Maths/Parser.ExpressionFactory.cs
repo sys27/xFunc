@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -103,7 +104,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression CreateFunction(IdToken token, IExpression[] arguments)
+        private IExpression CreateFunction(IdToken token, IList<IExpression> arguments)
         {
             return token.Id switch
             {
@@ -278,10 +279,10 @@ namespace xFunc.Maths
         private IExpression CreateVariable(IdToken variableToken) =>
             new Variable(variableToken.Id);
 
-        private IExpression CreateVector(IExpression[] arguments) =>
+        private Vector CreateVector(IList<IExpression> arguments) =>
             new Vector(arguments);
 
-        private IExpression CreateMatrix(IExpression[] arguments) =>
+        private Matrix CreateMatrix(IList<Vector> arguments) =>
             new Matrix(arguments);
 
         private IExpression CreateUnaryMinus(IExpression operand) =>

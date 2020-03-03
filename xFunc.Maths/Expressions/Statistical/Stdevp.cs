@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
@@ -29,7 +30,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="Stdevp"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Stdevp(IExpression[] arguments)
+        public Stdevp(IList<IExpression> arguments)
             : base(arguments)
         {
         }

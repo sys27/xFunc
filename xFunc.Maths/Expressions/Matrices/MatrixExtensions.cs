@@ -15,7 +15,6 @@
 
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -51,10 +50,13 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var exps = new IExpression[left.ParametersCount];
 
-            Parallel.For(
-                fromInclusive: 0,
-                toExclusive: left.ParametersCount,
-                body: i => exps[i] = new Number((double)left.Arguments[i].Execute(parameters) + (double)right.Arguments[i].Execute(parameters)));
+            for (var i = 0; i < exps.Length; i++)
+            {
+                var leftNumber = (double)left[i].Execute(parameters);
+                var rightNumber = (double)right[i].Execute(parameters);
+
+                exps[i] = new Number(leftNumber + rightNumber);
+            }
 
             return new Vector(exps);
         }
@@ -74,10 +76,13 @@ namespace xFunc.Maths.Expressions.Matrices
 
             var exps = new IExpression[left.ParametersCount];
 
-            Parallel.For(
-                fromInclusive: 0,
-                toExclusive: left.ParametersCount,
-                body: i => exps[i] = new Number((double)left.Arguments[i].Execute(parameters) - (double)right.Arguments[i].Execute(parameters)));
+            for (var i = 0; i < exps.Length; i++)
+            {
+                var leftNumber = (double)left[i].Execute(parameters);
+                var rightNumber = (double)right[i].Execute(parameters);
+
+                exps[i] = new Number(leftNumber - rightNumber);
+            }
 
             return new Vector(exps);
         }
@@ -91,11 +96,14 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The product of matrices.</returns>
         public static Vector Mul(this Vector vector, Number number, ExpressionParameters parameters)
         {
-            var n = number.Value;
+            var size = vector.ParametersCount;
+            var numbers = new IExpression[size];
 
-            var numbers = (from num in vector.Arguments.AsParallel().AsOrdered()
-                           select new Number((double)num.Execute(parameters) * n))
-                .ToArray();
+            for (var index = 0; index < size; index++)
+            {
+                var argNumber = (double)vector[index].Execute(parameters);
+                numbers[index] = new Number(argNumber * number.Value);
+            }
 
             return new Vector(numbers);
         }
@@ -110,20 +118,26 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Add(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
-            if (left.ParametersCount != right.ParametersCount || left.SizeOfVectors != right.SizeOfVectors)
+            if (left.Rows != right.Rows ||
+                left.Columns != right.Columns)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var vectors = new Vector[left.ParametersCount];
+            var vectors = new Vector[left.Rows];
 
-            Parallel.For(0, left.ParametersCount, i =>
+            for (var i = 0; i < vectors.Length; i++)
             {
-                var exps = new IExpression[left.SizeOfVectors];
+                var exps = new IExpression[left.Columns];
 
-                for (var j = 0; j < left.SizeOfVectors; j++)
-                    exps[j] = new Number((double)left[i][j].Execute(parameters) + (double)right[i][j].Execute(parameters));
+                for (var j = 0; j < exps.Length; j++)
+                {
+                    var leftNumber = (double)left[i][j].Execute(parameters);
+                    var rightNumber = (double)right[i][j].Execute(parameters);
+
+                    exps[j] = new Number(leftNumber + rightNumber);
+                }
 
                 vectors[i] = new Vector(exps);
-            });
+            }
 
             return new Matrix(vectors);
         }
@@ -138,20 +152,26 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Sub(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
-            if (left.ParametersCount != right.ParametersCount || left.SizeOfVectors != right.SizeOfVectors)
+            if (left.Rows != right.Rows ||
+                left.Columns != right.Columns)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var vectors = new Vector[left.ParametersCount];
+            var vectors = new Vector[left.Rows];
 
-            Parallel.For(0, left.ParametersCount, i =>
+            for (var i = 0; i < vectors.Length; i++)
             {
-                var exps = new IExpression[left.SizeOfVectors];
+                var exps = new IExpression[left.Columns];
 
-                for (var j = 0; j < left.SizeOfVectors; j++)
-                    exps[j] = new Number((double)left[i][j].Execute(parameters) - (double)right[i][j].Execute(parameters));
+                for (var j = 0; j < exps.Length; j++)
+                {
+                    var leftNumber = (double)left[i][j].Execute(parameters);
+                    var rightNumber = (double)right[i][j].Execute(parameters);
+
+                    exps[j] = new Number(leftNumber - rightNumber);
+                }
 
                 vectors[i] = new Vector(exps);
-            });
+            }
 
             return new Matrix(vectors);
         }
@@ -165,15 +185,19 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The product of matrix and number.</returns>
         public static Matrix Mul(this Matrix matrix, Number number, ExpressionParameters parameters)
         {
-            var n = number.Value;
+            var vectors = new Vector[matrix.Rows];
 
-            var result = from v in matrix.Arguments.AsParallel().AsOrdered()
-                         select new Vector(
-                             (from num in ((Vector)v).Arguments
-                              select new Number((double)num.Execute(parameters) * n))
-                             .ToArray());
+            for (var i = 0; i < vectors.Length; i++)
+            {
+                var vector = new IExpression[matrix.Columns];
 
-            return new Matrix(result.ToArray());
+                for (var j = 0; j < vector.Length; j++)
+                    vector[j] = new Number((double)matrix[i][j].Execute(parameters) * number.Value);
+
+                vectors[i] = new Vector(vector);
+            }
+
+            return new Matrix(vectors);
         }
 
         /// <summary>
@@ -188,23 +212,35 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <exception cref="ArgumentException">The size of matrices is invalid.</exception>
         public static Matrix Mul(this Matrix left, Matrix right, ExpressionParameters parameters)
         {
-            if (left.SizeOfVectors != right.ParametersCount)
+            if (left.Columns != right.Rows)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var result = Matrix.Create(left.ParametersCount, right.SizeOfVectors);
+            var rows = left.Rows;
+            var columns = right.Columns;
+            var vectors = new Vector[rows];
 
-            Parallel.For(0, right.SizeOfVectors, i =>
+            for (var i = 0; i < rows; i++)
             {
-                for (var j = 0; j < left.ParametersCount; j++)
-                {
-                    double el = 0;
-                    for (var k = 0; k < left.SizeOfVectors; k++)
-                        el += (double)left[j][k].Execute(parameters) * (double)right[k][i].Execute(parameters);
-                    result[j][i] = new Number(el);
-                }
-            });
+                var vector = new IExpression[columns];
 
-            return result;
+                for (var j = 0; j < columns; j++)
+                {
+                    var element = 0.0;
+                    for (var k = 0; k < left.Columns; k++)
+                    {
+                        var leftNumber = (double)left[i][k].Execute(parameters);
+                        var rightNumber = (double)right[k][j].Execute(parameters);
+
+                        element += leftNumber * rightNumber;
+                    }
+
+                    vector[j] = new Number(element);
+                }
+
+                vectors[i] = new Vector(vector);
+            }
+
+            return new Matrix(vectors);
         }
 
         /// <summary>
@@ -275,7 +311,8 @@ namespace xFunc.Maths.Expressions.Matrices
         {
             var vectors = new Vector[vector.ParametersCount];
 
-            Parallel.For(0, vectors.Length, i => vectors[i] = new Vector(new[] { vector[i] }));
+            for (var i = 0; i < vector.ParametersCount; i++)
+                vectors[i] = new Vector(new[] { vector[i] });
 
             return new Matrix(vectors);
         }
@@ -287,15 +324,19 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The transposed matrix.</returns>
         public static IExpression Transpose(this Matrix matrix)
         {
-            var result = Matrix.Create(matrix.SizeOfVectors, matrix.ParametersCount);
+            var vectors = new Vector[matrix.Columns];
 
-            Parallel.For(0, matrix.ParametersCount, i =>
+            for (var i = 0; i < vectors.Length; i++)
             {
-                for (var j = 0; j < matrix.SizeOfVectors; j++)
-                    result[j][i] = matrix[i][j];
-            });
+                var vector = new IExpression[matrix.Rows];
 
-            return result;
+                for (var j = 0; j < vector.Length; j++)
+                    vector[j] = matrix[j][i];
+
+                vectors[i] = new Vector(vector);
+            }
+
+            return new Matrix(vectors);
         }
 
         /// <summary>
@@ -421,14 +462,21 @@ namespace xFunc.Maths.Expressions.Matrices
             if (!matrix.IsSquare)
                 throw new ArgumentException(Resource.MatrixArgException);
 
-            var size = matrix.ParametersCount;
+            var size = matrix.Rows;
             var result = InverseInternal(matrix.ToCalculatedArray(parameters));
-            var m = Matrix.Create(size, size);
-            for (var i = 0; i < size; i++)
-                for (var j = 0; j < size; j++)
-                    m[i][j] = new Number(result[i][j]);
+            var vectors = new Vector[size];
 
-            return m;
+            for (var i = 0; i < size; i++)
+            {
+                var vector = new IExpression[size];
+
+                for (var j = 0; j < size; j++)
+                    vector[j] = new Number(result[i][j]);
+
+                vectors[i] = new Vector(vector);
+            }
+
+            return new Matrix(vectors);
         }
 
         private static double[][] InverseInternal(double[][] matrix)

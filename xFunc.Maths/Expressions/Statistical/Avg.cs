@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
@@ -28,7 +29,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="Avg"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        public Avg(IExpression[] arguments)
+        public Avg(IList<IExpression> arguments)
             : base(arguments)
         {
         }

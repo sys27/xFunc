@@ -74,9 +74,9 @@ namespace xFunc.Maths.Analyzers
 
         private IExpression AnalyzeDiffParams(DifferentParametersExpression exp)
         {
-            for (var i = 0; i < exp.Arguments.Length; i++)
-                if (exp.Arguments[i] != null)
-                    exp.Arguments[i] = exp.Arguments[i].Analyze(this);
+            for (var i = 0; i < exp.ParametersCount; i++)
+                if (exp[i] != null)
+                    exp[i] = exp[i].Analyze(this);
 
             return exp;
         }
@@ -913,7 +913,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public virtual IExpression Analyze(UserFunction exp)
         {
-            return AnalyzeDiffParams(exp);
+            for (var i = 0; i < exp.ParametersCount; i++)
+                if (exp[i] != null)
+                    exp[i] = exp[i].Analyze(this);
+
+            return exp;
         }
 
         /// <summary>
@@ -980,7 +984,11 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public virtual IExpression Analyze(Matrix exp)
         {
-            return AnalyzeDiffParams(exp);
+            for (var i = 0; i < exp.Rows; i++)
+                if (exp[i] != null)
+                    exp[i] = (Vector)exp[i].Analyze(this);
+
+            return exp;
         }
 
         /// <summary>

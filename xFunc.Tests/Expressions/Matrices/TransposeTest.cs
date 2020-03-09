@@ -43,15 +43,6 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
-        public void ExecuteEmptyMatrixTest()
-        {
-            var matrix = Matrix.Create(2, 2);
-            var exp = new Transpose(matrix);
-
-            Assert.Throws<ArgumentException>(() => exp.Execute());
-        }
-
-        [Fact]
         public void ExecuteVectorTest()
         {
             var vector = new Vector(new[] { new Number(1), new Number(2) });
@@ -64,15 +55,6 @@ namespace xFunc.Tests.Expressions.Matrices
             var exp = new Transpose(vector);
 
             Assert.Equal(expected, exp.Execute());
-        }
-
-        [Fact]
-        public void ExecuteEmptyVectorTest()
-        {
-            var vector = new Vector(2);
-            var exp = new Transpose(vector);
-
-            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
@@ -42,11 +43,11 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>
         /// <param name="arguments">The key.</param>
-        internal Undefine(IExpression[] arguments)
+        internal Undefine(IList<IExpression> arguments)
         {
-            if (arguments.Length < 1)
+            if (arguments.Count < 1)
                 throw new ParseException(Resource.LessParams);
-            if (arguments.Length > 1)
+            if (arguments.Count > 1)
                 throw new ParseException(Resource.MoreParams);
 
             Key = arguments[0];

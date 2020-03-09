@@ -222,10 +222,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (exp.ParametersCount == 1)
                 return ResultTypes.Expression;
 
-            if (exp.ParametersCount == 2 && exp.Arguments[1] is Variable)
+            if (exp.ParametersCount == 2 && exp[1] is Variable)
                 return ResultTypes.Expression;
 
-            if (exp.ParametersCount == 3 && exp.Arguments[1] is Variable && exp.Arguments[2] is Number)
+            if (exp.ParametersCount == 3 && exp[1] is Variable && exp[2] is Number)
                 return ResultTypes.Number;
 
             throw new ParameterTypeMismatchException();
@@ -330,10 +330,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(GCD exp)
         {
-            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Count == 0)
-                return ResultTypes.Undefined;
-
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             for (var i = 0; i < results.Count; i++)
             {
                 if (results[i] == ResultTypes.Undefined)
@@ -366,10 +363,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(LCM exp)
         {
-            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Count == 0)
-                return ResultTypes.Undefined;
-
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             for (var i = 0; i < results.Count; i++)
             {
                 if (results[i] == ResultTypes.Undefined)
@@ -801,10 +795,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Vector exp)
         {
-            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Count == 0)
-                return ResultTypes.Vector;
-
+            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
             for (var i = 0; i < results.Count; i++)
             {
                 if (results[i] == ResultTypes.Undefined)
@@ -823,17 +814,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public virtual ResultTypes Analyze(Matrix exp)
         {
-            var results = exp.Arguments?.Where(x => x != null).Select(x => x.Analyze(this)).ToList();
-            if (results == null || results.Count == 0)
-                return ResultTypes.Matrix;
-
+            var results = exp.Vectors.Select(x => x.Analyze(this)).ToList();
             for (var i = 0; i < results.Count; i++)
-            {
                 if (results[i] == ResultTypes.Undefined)
                     return ResultTypes.Undefined;
-                if (results[i] != ResultTypes.Vector)
-                    throw new DifferentParameterTypeMismatchException(ResultTypes.Vector, results[i], i);
-            }
 
             return ResultTypes.Matrix;
         }
@@ -874,7 +858,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public virtual ResultTypes Analyze(Transpose exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.Vector || result == ResultTypes.Matrix)
+            if (result == ResultTypes.Undefined ||
+                result == ResultTypes.Vector ||
+                result == ResultTypes.Matrix)
                 return ResultTypes.Matrix;
 
             throw new ParameterTypeMismatchException(ResultTypes.Vector | ResultTypes.Matrix, result);

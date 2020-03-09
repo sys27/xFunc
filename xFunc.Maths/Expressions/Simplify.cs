@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -42,7 +43,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Simplify(ISimplifier simplifier, IExpression[] arguments)
+        internal Simplify(ISimplifier simplifier, IList<IExpression> arguments)
             : base(arguments)
         {
             this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));

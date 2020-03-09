@@ -62,7 +62,7 @@ namespace xFunc.Maths.Analyzers.Formatters
             var sb = new StringBuilder();
 
             sb.Append(function).Append('(');
-            if (exp.Arguments != null && exp.Arguments.Length > 0)
+            if (exp.Arguments != null && exp.ParametersCount > 0)
             {
                 foreach (var item in exp.Arguments)
                     sb.Append(item).Append(", ");
@@ -393,7 +393,19 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(UserFunction exp)
         {
-            return ToString(exp, exp.Function);
+            var sb = new StringBuilder();
+
+            sb.Append(exp.Function).Append('(');
+            if (exp.ParametersCount > 0)
+            {
+                foreach (var item in exp.Arguments)
+                    sb.Append(item).Append(", ");
+                sb.Remove(sb.Length - 2, 2);
+            }
+
+            sb.Append(')');
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -457,7 +469,7 @@ namespace xFunc.Maths.Analyzers.Formatters
             var sb = new StringBuilder();
 
             sb.Append('{');
-            foreach (var item in exp.Arguments)
+            foreach (var item in exp.Vectors)
                 sb.Append(item).Append(", ");
             sb.Remove(sb.Length - 2, 2).Append('}');
 

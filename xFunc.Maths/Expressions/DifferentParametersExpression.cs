@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -26,15 +27,50 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class DifferentParametersExpression : IExpression
     {
-        private IExpression[] arguments;
+        private readonly IList<IExpression> arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DifferentParametersExpression" /> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected DifferentParametersExpression(IExpression[] arguments)
+        protected DifferentParametersExpression(IList<IExpression> arguments)
         {
-            this.Arguments = arguments;
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+
+            if (arguments.Count < MinParametersCount)
+                throw new ArgumentException(Resource.LessParams, nameof(arguments));
+
+            if (arguments.Count > MaxParametersCount)
+                throw new ArgumentException(Resource.MoreParams, nameof(arguments));
+
+            if (arguments.Any(exp => exp is null))
+                throw new ArgumentNullException(nameof(arguments));
+
+            this.arguments = arguments;
+            foreach (var item in arguments)
+                item.Parent = this;
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="IExpression"/> at the specified index.
+        /// </summary>
+        /// <value>
+        /// The <see cref="IExpression"/>.
+        /// </value>
+        /// <param name="index">The index.</param>
+        /// <returns>The argument.</returns>
+        public IExpression this[int index]
+        {
+            get
+            {
+                return arguments[index];
+            }
+            set
+            {
+                arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
+                value.Parent = this;
+            }
         }
 
         /// <summary>
@@ -59,7 +95,7 @@ namespace xFunc.Maths.Expressions
 
             if (this.arguments == null ||
                 diff.arguments == null ||
-                this.arguments.Length != diff.arguments.Length)
+                this.arguments.Count != diff.arguments.Count)
                 return false;
 
             return this.arguments.SequenceEqual(diff.arguments);
@@ -140,8 +176,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>The new array of <see cref="IExpression"/>.</returns>
         protected IExpression[] CloneArguments()
         {
-            var args = new IExpression[arguments.Length];
-            for (var i = 0; i < arguments.Length; i++)
+            var args = new IExpression[ParametersCount];
+            for (var i = 0; i < ParametersCount; i++)
                 args[i] = arguments[i].Clone();
 
             return args;
@@ -153,32 +189,10 @@ namespace xFunc.Maths.Expressions
         public IExpression Parent { get; set; }
 
         /// <summary>
-        /// Gets or sets the arguments.
+        /// Gets the arguments.
         /// </summary>
         /// <value>The arguments.</value>
-        public virtual IExpression[] Arguments
-        {
-            get
-            {
-                return arguments;
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(Arguments));
-
-                if (value.Length < MinParametersCount)
-                    throw new ArgumentException(Resource.LessParams, nameof(Arguments));
-
-                if (value.Length > MaxParametersCount)
-                    throw new ArgumentException(Resource.MoreParams, nameof(Arguments));
-
-                arguments = value;
-                foreach (var item in arguments)
-                    if (item != null)
-                        item.Parent = this;
-            }
-        }
+        public IEnumerable<IExpression> Arguments => arguments;
 
         /// <summary>
         /// Gets the count of parameters.
@@ -186,7 +200,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The count of parameters.
         /// </value>
-        public int ParametersCount => Arguments.Length;
+        public int ParametersCount => arguments.Count;
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -197,7 +211,7 @@ namespace xFunc.Maths.Expressions
         public abstract int? MinParametersCount { get; }
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
@@ -37,7 +38,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal HyperbolicExpression(IExpression[] arguments)
+        internal HyperbolicExpression(IList<IExpression> arguments)
             : base(arguments)
         {
         }

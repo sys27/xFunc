@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 
@@ -29,7 +30,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public GCD(IExpression[] args)
+        public GCD(IList<IExpression> args)
             : base(args)
         {
         }
@@ -93,7 +94,7 @@ namespace xFunc.Maths.Expressions
         public override int? MinParametersCount => 2;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

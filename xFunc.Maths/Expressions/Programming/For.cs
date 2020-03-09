@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -40,7 +41,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="arguments">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="arguments"/> is null.</exception>
-        public For(IExpression[] arguments)
+        public For(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -87,7 +88,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The body of loop.
         /// </value>
-        public IExpression Body => Arguments[0];
+        public IExpression Body => this[0];
 
         /// <summary>
         /// Gets the initializer section.
@@ -95,7 +96,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The initializer section.
         /// </value>
-        public IExpression Initialization => Arguments[1];
+        public IExpression Initialization => this[1];
 
         /// <summary>
         /// Gets the condition section.
@@ -103,7 +104,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The condition section.
         /// </value>
-        public IExpression Condition => Arguments[2];
+        public IExpression Condition => this[2];
 
         /// <summary>
         /// Gets the iterator section.
@@ -111,7 +112,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The iterator section.
         /// </value>
-        public IExpression Iteration => Arguments[3];
+        public IExpression Iteration => this[3];
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -122,7 +123,7 @@ namespace xFunc.Maths.Expressions.Programming
         public override int? MinParametersCount => 4;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

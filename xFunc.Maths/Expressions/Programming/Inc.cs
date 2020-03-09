@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -36,7 +37,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// Initializes a new instance of the <see cref="Inc"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Inc(IExpression[] arguments)
+        internal Inc(IList<IExpression> arguments)
             : base(arguments)
         {
         }

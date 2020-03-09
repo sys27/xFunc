@@ -275,7 +275,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForUndefined()
         {
-            var exp = new For(null, null, Variable.X, null);
+            var exp = new For(Variable.X, Variable.X, Variable.X, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -283,7 +283,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForNumber()
         {
-            var exp = new For(null, null, new Bool(false), null);
+            var exp = new For(Variable.X, Variable.X, new Bool(false), Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -291,7 +291,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForException()
         {
-            var exp = new For(null, null, new ComplexNumber(2, 3), null);
+            var exp = new For(Variable.X, Variable.X, new ComplexNumber(2, 3), Variable.X);
 
             TestException(exp);
         }

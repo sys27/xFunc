@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -36,7 +37,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Fact"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Fact(IExpression[] arguments)
+        internal Fact(IList<IExpression> arguments)
             : base(arguments)
         {
         }

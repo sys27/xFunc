@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -39,7 +40,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Sub"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        internal Sub(IExpression[] arguments)
+        internal Sub(IList<IExpression> arguments)
             : base(arguments)
         {
         }

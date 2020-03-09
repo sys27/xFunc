@@ -14,9 +14,8 @@
 // limitations under the License.
 
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -30,58 +29,9 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </summary>
         /// <param name="args">The values of vector.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Vector(IExpression[] args)
+        public Vector(IList<IExpression> args)
             : base(args)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Vector"/> class.
-        /// </summary>
-        /// <param name="size">The size of vector.</param>
-        public Vector(int size)
-            : base(new IExpression[size])
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets the <see cref="IExpression"/> at the specified index.
-        /// </summary>
-        /// <value>
-        /// The <see cref="IExpression"/>.
-        /// </value>
-        /// <param name="index">The index.</param>
-        /// <returns>The element of vector.</returns>
-        public IExpression this[int index]
-        {
-            get { return Arguments[index]; }
-            set { Arguments[index] = value; }
-        }
-
-        private IExpression[] CalculateVector(ExpressionParameters parameters)
-        {
-            var args = new IExpression[this.ParametersCount];
-
-            for (var i = 0; i < this.ParametersCount; i++)
-            {
-                if (Arguments[i] == null)
-                    continue;
-
-                if (!(Arguments[i] is Number))
-                {
-                    var result = Arguments[i].Execute(parameters);
-                    if (result is double doubleResult)
-                        args[i] = new Number(doubleResult);
-                    else
-                        args[i] = new Number((int)result);
-                }
-                else
-                {
-                    args[i] = Arguments[i];
-                }
-            }
-
-            return args;
         }
 
         /// <summary>
@@ -92,9 +42,31 @@ namespace xFunc.Maths.Expressions.Matrices
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="NotSupportedException">Always.</exception>
-        public override object Execute(ExpressionParameters parameters) =>
-            new Vector(CalculateVector(parameters));
+        public override object Execute(ExpressionParameters parameters)
+        {
+            var args = new IExpression[ParametersCount];
+
+            for (var i = 0; i < ParametersCount; i++)
+            {
+                if (this[i] == null)
+                    continue;
+
+                if (this[i] is Number)
+                {
+                    args[i] = this[i];
+                }
+                else
+                {
+                    var result = this[i].Execute(parameters);
+                    if (result is double doubleResult)
+                        args[i] = new Number(doubleResult);
+                    else
+                        args[i] = new Number((int)result); // TODO:
+                }
+            }
+
+            return new Vector(args);
+        }
 
         /// <summary>
         /// Analyzes the current expression.
@@ -123,31 +95,12 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The array which represents current vector.</returns>
         internal double[] ToCalculatedArray(ExpressionParameters parameters)
         {
-            return (from exp in Arguments.AsParallel().AsOrdered()
-                    select (double)exp.Execute(parameters)).ToArray();
-        }
+            var results = new double[ParametersCount];
 
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        public sealed override IExpression[] Arguments
-        {
-            get
-            {
-                return base.Arguments;
-            }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-                if (value.Length == 0)
-                    throw new ArgumentException(Resource.MatrixArgException, nameof(value));
+            for (var i = 0; i < ParametersCount; i++)
+                results[i] = (double)this[i].Execute(parameters);
 
-                base.Arguments = value;
-            }
+            return results;
         }
 
         /// <summary>
@@ -159,7 +112,7 @@ namespace xFunc.Maths.Expressions.Matrices
         public override int? MinParametersCount => 1;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

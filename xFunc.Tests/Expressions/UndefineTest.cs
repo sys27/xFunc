@@ -97,7 +97,11 @@ namespace xFunc.Tests.Expressions
             var key1 = new UserFunction("f", new IExpression[0]);
             var key2 = new UserFunction("f", new IExpression[1]);
 
-            var functions = new FunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
+            var functions = new FunctionCollection
+            {
+                { key1, new Number(1) },
+                { key2, new Number(2) },
+            };
 
             var undef = new Undefine(key1);
             var result = undef.Execute(functions);
@@ -111,9 +115,13 @@ namespace xFunc.Tests.Expressions
         public void UndefFuncWithParamsTest()
         {
             var key1 = new UserFunction("f", new IExpression[0]);
-            var key2 = new UserFunction("f", new IExpression[1] { Variable.X });
+            var key2 = new UserFunction("f", new IExpression[] { Variable.X });
 
-            var functions = new FunctionCollection { { key1, new Number(1) }, { key2, new Number(2) } };
+            var functions = new FunctionCollection
+            {
+                { key1, new Number(1) },
+                { key2, new Number(2) },
+            };
 
             var undef = new Undefine(key2);
             var result = undef.Execute(functions);

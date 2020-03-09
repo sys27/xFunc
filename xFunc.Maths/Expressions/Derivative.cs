@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -66,7 +67,10 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        internal Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] args)
+        internal Derivative(
+            IDifferentiator differentiator,
+            ISimplifier simplifier,
+            IList<IExpression> args)
             : base(args)
         {
             this.Differentiator = differentiator ??
@@ -139,12 +143,12 @@ namespace xFunc.Maths.Expressions
         {
             get
             {
-                return Arguments[0];
+                return this[0];
             }
             set
             {
-                Arguments[0] = value ?? throw new ArgumentNullException(nameof(value));
-                Arguments[0].Parent = this;
+                this[0] = value ?? throw new ArgumentNullException(nameof(value));
+                this[0].Parent = this;
             }
         }
 
@@ -154,7 +158,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The variable.
         /// </value>
-        public Variable Variable => ParametersCount >= 2 ? (Variable)Arguments[1] : Variable.X;
+        public Variable Variable => ParametersCount >= 2 ? (Variable)this[1] : Variable.X;
 
         /// <summary>
         /// Gets the derivative point.
@@ -162,7 +166,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The derivative point.
         /// </value>
-        public Number DerivativePoint => ParametersCount >= 3 ? (Number)Arguments[2] : null;
+        public Number DerivativePoint => ParametersCount >= 3 ? (Number)this[2] : null;
 
         /// <summary>
         /// Gets the simplifier.
@@ -189,7 +193,7 @@ namespace xFunc.Maths.Expressions
         public override int? MinParametersCount => 1;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

@@ -285,48 +285,6 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
-        public void SwapRowsTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
-                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
-                new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
-            });
-            var expected = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(-7), new Number(8), new Number(9) }),
-                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
-                new Vector(new[] { new Number(1), new Number(-2), new Number(3) })
-            });
-
-            matrix.SwapRows(0, 2);
-
-            Assert.Equal(expected, matrix);
-        }
-
-        [Fact]
-        public void SwapColumnsTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
-                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
-                new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
-            });
-            var expected = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(3), new Number(-2), new Number(1) }),
-                new Vector(new[] { new Number(6), new Number(0), new Number(4) }),
-                new Vector(new[] { new Number(9), new Number(8), new Number(-7) })
-            });
-
-            matrix.SwapColumns(0, 2);
-
-            Assert.Equal(expected, matrix);
-        }
-
-        [Fact]
         public void InverseTest()
         {
             var matrix = new Matrix(new[]
@@ -363,6 +321,81 @@ namespace xFunc.Tests.Expressions.Matrices
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
+        }
+
+        [Fact]
+        public void NullVectorArrayTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Matrix(null));
+        }
+
+        [Fact]
+        public void NullTest()
+        {
+            Assert.Throws<ArgumentException>(() => new Matrix(new Vector[0]));
+        }
+
+        [Fact]
+        public void NullVectorElementTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Matrix(new[]
+            {
+                new Vector(new IExpression[] { null, null }),
+                new Vector(new IExpression[] { null, null }),
+            }));
+        }
+
+        [Fact]
+        public void SetNullTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            Assert.Throws<ArgumentNullException>(() => matrix[0] = null);
+        }
+
+        [Fact]
+        public void SetTest()
+        {
+            var vector = new Vector(new[] { new Number(-2), new Number(1) });
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            matrix[0] = vector;
+
+            Assert.Equal(vector, matrix[0]);
+        }
+
+        [Fact]
+        public void ExecuteTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            var result = matrix.Execute();
+
+            Assert.True(matrix.Equals(result));
+        }
+
+        [Fact]
+        public void MatrixAnalyzeNull()
+        {
+            var exp = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(-1) })
+            });
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
     }
 }

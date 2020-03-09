@@ -46,15 +46,6 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
-        public void ExecuteEmptyTest()
-        {
-            var matrix = Matrix.Create(2, 2);
-            var exp = new Inverse(matrix);
-
-            Assert.Throws<ArgumentException>(() => exp.Execute());
-        }
-
-        [Fact]
         public void ExecuteIsNotSquareTest()
         {
             var matrix = new Matrix(new[]

@@ -222,7 +222,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddVectorAllTest()
         {
-            var exp = new Add(new Vector(1), new UserFunction("f", new IExpression[1]));
+            var vector = new Vector(new[] { new Number(1) });
+            var exp = new Add(vector, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -230,7 +231,11 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddMatrixAllTest()
         {
-            var exp = new Add(Matrix.Create(1, 1), new UserFunction("f", new IExpression[1]));
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1) })
+            });
+            var exp = new Add(matrix, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -1176,7 +1181,9 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubVectorVectorTest()
         {
-            var exp = new Sub(new Vector(1), new Vector(1));
+            var left = new Vector(new[] { new Number(3) });
+            var right = new Vector(new[] { new Number(1) });
+            var exp = new Sub(left, right);
 
             Test(exp, ResultTypes.Vector);
         }
@@ -1184,7 +1191,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubVectorBoolTest()
         {
-            var exp = new Sub(new Vector(1), new Bool(true));
+            var vector = new Vector(new[] { new Number(1) });
+            var exp = new Sub(vector, new Bool(true));
 
             TestBinaryException(exp);
         }
@@ -1192,7 +1200,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubBoolVectorTest()
         {
-            var exp = new Sub(new Bool(true), new Vector(1));
+            var vector = new Vector(new[] { new Number(1) });
+            var exp = new Sub(new Bool(true), vector);
 
             TestBinaryException(exp);
         }
@@ -1200,7 +1209,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubVectorAllTest()
         {
-            var exp = new Sub(new Vector(1), new UserFunction("f", new IExpression[1]));
+            var vector = new Vector(new[] { new Number(1) });
+            var exp = new Sub(vector, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -1208,7 +1218,11 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubMatrixAllTest()
         {
-            var exp = new Sub(Matrix.Create(1, 1), new UserFunction("f", new IExpression[1]));
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1) })
+            });
+            var exp = new Sub(matrix, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
         }

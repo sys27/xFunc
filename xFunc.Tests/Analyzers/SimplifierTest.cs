@@ -14,10 +14,10 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Hyperbolic;
+using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
@@ -1336,6 +1336,15 @@ namespace xFunc.Tests.Analyzers
         {
             var exp = new UserFunction("f", new IExpression[] { new Mul(new Number(2), new Number(2)) });
             var expected = new UserFunction("f", new IExpression[] { new Number(4) });
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void DiffTest()
+        {
+            var exp = new Count(new IExpression[] { new Add(new Number(2), new Number(2)) });
+            var expected = new Count(new IExpression[] { new Number(4) });
 
             SimpleTest(exp, expected);
         }

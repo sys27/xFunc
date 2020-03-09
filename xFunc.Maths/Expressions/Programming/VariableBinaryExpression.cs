@@ -14,12 +14,13 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Programming
 {
     /// <summary>
     /// The base class for binary operations with variable as first (left) operand.
@@ -44,15 +45,15 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="VariableBinaryExpression"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        protected VariableBinaryExpression(IExpression[] arguments)
+        protected VariableBinaryExpression(IList<IExpression> arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            if (arguments.Length < 2)
+            if (arguments.Count < 2)
                 throw new ParseException(Resource.LessParams);
 
-            if (arguments.Length > 2)
+            if (arguments.Count > 2)
                 throw new ParseException(Resource.MoreParams);
 
             Debug.Assert(arguments[0] is Variable, "The argument is not variable.");

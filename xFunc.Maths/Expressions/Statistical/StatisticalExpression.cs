@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Expressions.Matrices;
 
@@ -28,7 +29,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// Initializes a new instance of the <see cref="StatisticalExpression"/> class.
         /// </summary>
         /// <param name="arguments">The arguments.</param>
-        protected StatisticalExpression(IExpression[] arguments)
+        protected StatisticalExpression(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -56,7 +57,7 @@ namespace xFunc.Maths.Expressions.Statistical
 
             if (ParametersCount == 1)
             {
-                var result = Arguments[0].Execute(parameters);
+                var result = this[0].Execute(parameters);
                 if (result is Vector vector)
                     data = vector.Arguments;
             }
@@ -82,7 +83,7 @@ namespace xFunc.Maths.Expressions.Statistical
         public override int? MinParametersCount => 1;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

@@ -14,59 +14,43 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
     /// <summary>
     /// Represents a matrix.
     /// </summary>
-    public class Matrix : DifferentParametersExpression
+    public class Matrix : IExpression
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Matrix"/> class.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Matrix(IExpression[] args)
-            : base(args)
-        {
-        }
+        private const int MinParametersCount = 1;
+
+        private readonly IList<Vector> vectors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
-        /// <param name="matrixSize">The size of the matrix.</param>
-        /// <param name="vectorSize">The size of the vector.</param>
-        /// <returns>The matrix.</returns>
-        public static Matrix Create(int matrixSize, int vectorSize)
+        /// <param name="vectors">The vectors.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="vectors"/> is null.</exception>
+        public Matrix(IList<Vector> vectors)
         {
-            var vectors = new Vector[matrixSize];
-            for (var i = 0; i < vectors.Length; i++)
-                vectors[i] = new Vector(vectorSize);
+            if (vectors == null)
+                throw new ArgumentNullException(nameof(vectors));
 
-            return new Matrix(vectors);
-        }
+            if (vectors.Count < MinParametersCount)
+                throw new ArgumentException(Resource.LessParams, nameof(vectors));
 
-        /// <summary>
-        /// Creates an identity matrix.
-        /// </summary>
-        /// <param name="sizeOfMatrix">The size of matrix.</param>
-        /// <returns>An identity matrix.</returns>
-        public static Matrix CreateIdentity(int sizeOfMatrix)
-        {
-            var matrix = Create(sizeOfMatrix, sizeOfMatrix);
+            var size = vectors[0].ParametersCount;
+            if (vectors.Any(exp => exp.ParametersCount != size))
+                throw new MatrixIsInvalidException();
 
-            for (var i = 0; i < sizeOfMatrix; i++)
-            {
-                for (var j = 0; j < sizeOfMatrix; j++)
-                    matrix[i][j] = new Number(0);
-
-                matrix[i][i] = new Number(1);
-            }
-
-            return matrix;
+            this.vectors = vectors;
+            foreach (var item in vectors)
+                item.Parent = this;
         }
 
         /// <summary>
@@ -79,34 +63,64 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of matrix.</returns>
         public Vector this[int index]
         {
-            get { return (Vector)Arguments[index]; }
-            set { Arguments[index] = value; }
+            get
+            {
+                return vectors[index];
+            }
+            set
+            {
+                vectors[index] = value ?? throw new ArgumentNullException(nameof(value));
+                value.Parent = this;
+            }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="IExpression"/> with the specified index.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <value>
-        /// The <see cref="IExpression"/>.
-        /// </value>
-        /// <param name="row">The row.</param>
-        /// <param name="col">The column.</param>
-        /// <returns>The element of matrix.</returns>
-        public IExpression this[int row, int col]
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
         {
-            get { return this[row][col]; }
-            set { this[row][col] = value; }
+            if (this == obj)
+                return true;
+
+            if (obj == null || this.GetType() != obj.GetType())
+                return false;
+
+            var matrix = (Matrix)obj;
+
+            if (this.vectors.Count != matrix.vectors.Count)
+                return false;
+
+            return this.vectors.SequenceEqual(matrix.vectors);
         }
 
-        private Vector[] CalculateMatrix(ExpressionParameters parameters)
-        {
-            var args = new Vector[this.ParametersCount];
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
-            for (var i = 0; i < this.ParametersCount; i++)
-                args[i] = (Vector)Arguments[i].Execute(parameters);
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public override string ToString() => ToString(new CommonFormatter());
 
-            return args;
-        }
+        /// <summary>
+        /// Executes this expression. Don't use this method if your expression has variables or user-functions.
+        /// </summary>
+        /// <returns>
+        /// A result of the execution.
+        /// </returns>
+        public object Execute() => Execute(null);
 
         /// <summary>
         /// Executes this expression.
@@ -116,9 +130,15 @@ namespace xFunc.Maths.Expressions.Matrices
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        /// <exception cref="NotSupportedException">Always.</exception>
-        public override object Execute(ExpressionParameters parameters) =>
-            new Matrix(CalculateMatrix(parameters));
+        public object Execute(ExpressionParameters parameters)
+        {
+            var args = new Vector[Rows];
+
+            for (var i = 0; i < Rows; i++)
+                args[i] = (Vector)vectors[i].Execute(parameters);
+
+            return new Matrix(args);
+        }
 
         /// <summary>
         /// Analyzes the current expression.
@@ -128,8 +148,13 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
-            analyzer.Analyze(this);
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return analyzer.Analyze(this);
+        }
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -137,8 +162,15 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Matrix(Array.ConvertAll(CloneArguments(), x => (Vector)x));
+        public IExpression Clone()
+        {
+            var args = new Vector[Rows];
+
+            for (var i = 0; i < Rows; i++)
+                args[i] = (Vector)vectors[i].Clone();
+
+            return new Matrix(args);
+        }
 
         /// <summary>
         /// Calculates current matrix and returns it as an two dimensional array.
@@ -147,97 +179,40 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The two dimensional array which represents current vector.</returns>
         internal double[][] ToCalculatedArray(ExpressionParameters parameters)
         {
-            return (from Vector vector in Arguments.AsParallel().AsOrdered()
-                    select vector.ToCalculatedArray(parameters)).ToArray();
+            var results = new double[Rows][];
+
+            for (var i = 0; i < Rows; i++)
+                results[i] = vectors[i].ToCalculatedArray(parameters);
+
+            return results;
         }
 
         /// <summary>
-        /// Swaps the rows of matrix.
+        /// Gets or sets the parent expression.
         /// </summary>
-        /// <param name="firstIndex">The index of first row.</param>
-        /// <param name="secondIndex">The index of second row.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
-        public void SwapRows(int firstIndex, int secondIndex)
-        {
-            if (firstIndex < 0 || firstIndex >= ParametersCount)
-                throw new ArgumentOutOfRangeException(nameof(firstIndex));
-            if (secondIndex < 0 || secondIndex >= ParametersCount)
-                throw new ArgumentOutOfRangeException(nameof(secondIndex));
-
-            var temp = Arguments[firstIndex];
-            Arguments[firstIndex] = Arguments[secondIndex];
-            Arguments[secondIndex] = temp;
-        }
+        public IExpression Parent { get; set; }
 
         /// <summary>
-        /// Swaps the columns of matrix.
+        /// Gets the vectors.
         /// </summary>
-        /// <param name="firstIndex">The index of first column.</param>
-        /// <param name="secondIndex">The index of second column.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="firstIndex"/> or <paramref name="secondIndex"/> is out of range.</exception>
-        public void SwapColumns(int firstIndex, int secondIndex)
-        {
-            if (firstIndex < 0 || firstIndex >= ParametersCount)
-                throw new ArgumentOutOfRangeException(nameof(firstIndex));
-            if (secondIndex < 0 || secondIndex >= ParametersCount)
-                throw new ArgumentOutOfRangeException(nameof(secondIndex));
-
-            foreach (Vector item in Arguments)
-            {
-                var temp = item[firstIndex];
-                item[firstIndex] = item[secondIndex];
-                item[secondIndex] = temp;
-            }
-        }
+        /// <value>The vectors.</value>
+        public IEnumerable<Vector> Vectors => vectors;
 
         /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>The arguments.</value>
-        public override IExpression[] Arguments
-        {
-            get
-            {
-                return base.Arguments;
-            }
-            set
-            {
-                if (value != null && value.Length > 0)
-                {
-                    var vectors = new Vector[value.Length];
-                    for (var i = 0; i < vectors.Length; i++)
-                    {
-                        var vector = value[i] as Vector;
-
-                        vectors[i] = vector ?? throw new MatrixIsInvalidException();
-                    }
-
-                    var size = vectors[0].ParametersCount;
-                    if (vectors.Any(exp => exp.ParametersCount != size))
-                        throw new MatrixIsInvalidException();
-                }
-
-                base.Arguments = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the size of vectors.
+        /// Gets the count of rows.
         /// </summary>
         /// <value>
-        /// The size of vectors.
+        /// The count of rows.
         /// </value>
-        public int SizeOfVectors
-        {
-            get
-            {
-                var value = Arguments[0] as Vector;
-                if (value == null)
-                    throw new MatrixIsInvalidException();
+        public int Rows => vectors.Count;
 
-                return value.ParametersCount;
-            }
-        }
+        /// <summary>
+        /// Gets the count of columns.
+        /// </summary>
+        /// <value>
+        /// The count of columns.
+        /// </value>
+        public int Columns => vectors[0].ParametersCount;
 
         /// <summary>
         /// Gets a value indicating whether matrix is square.
@@ -245,22 +220,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <value>
         ///   <c>true</c> if matrix is square; otherwise, <c>false</c>.
         /// </value>
-        public bool IsSquare => this.ParametersCount == this.SizeOfVectors;
-
-        /// <summary>
-        /// Gets the minimum count of parameters.
-        /// </summary>
-        /// <value>
-        /// The minimum count of parameters.
-        /// </value>
-        public override int? MinParametersCount => 1;
-
-        /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
-        /// </summary>
-        /// <value>
-        /// The maximum count of parameters.
-        /// </value>
-        public override int? MaxParametersCount => null;
+        public bool IsSquare => Rows == Columns;
     }
 }

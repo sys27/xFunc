@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace xFunc.Maths.Expressions.Trigonometric
@@ -37,7 +38,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        protected TrigonometricExpression(IExpression[] arguments)
+        protected TrigonometricExpression(IList<IExpression> arguments)
             : base(arguments)
         {
         }

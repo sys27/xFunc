@@ -879,7 +879,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DeterminantToStringTest()
         {
-            var matrix = new Matrix(new IExpression[]
+            var matrix = new Matrix(new[]
             {
                 new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
                 new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
@@ -893,7 +893,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void InverseToStringTest()
         {
-            var matrix = new Matrix(new IExpression[]
+            var matrix = new Matrix(new[]
             {
                 new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
                 new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
@@ -927,7 +927,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void TransposeToStringTest()
         {
-            var matrix = new Matrix(new IExpression[]
+            var matrix = new Matrix(new[]
             {
                 new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
                 new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })

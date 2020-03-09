@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
 
@@ -38,7 +39,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Arcosh(IExpression[] arguments)
+        internal Arcosh(IList<IExpression> arguments)
             : base(arguments)
         {
         }

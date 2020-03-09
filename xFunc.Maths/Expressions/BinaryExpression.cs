@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -43,15 +44,15 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        protected BinaryExpression(IExpression[] arguments)
+        protected BinaryExpression(IList<IExpression> arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            if (arguments.Length < 2)
+            if (arguments.Count < 2)
                 throw new ParseException(Resource.LessParams);
 
-            if (arguments.Length > 2)
+            if (arguments.Count > 2)
                 throw new ParseException(Resource.MoreParams);
 
             Left = arguments[0];
@@ -148,7 +149,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Gets or sets the left (first) operand.
         /// </summary>
-        public virtual IExpression Left
+        public IExpression Left
         {
             get
             {
@@ -164,7 +165,7 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Gets or sets the right (second) operand.
         /// </summary>
-        public virtual IExpression Right
+        public IExpression Right
         {
             get
             {

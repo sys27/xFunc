@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -47,7 +48,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        public Round(IExpression[] args)
+        internal Round(IList<IExpression> args)
             : base(args)
         {
         }
@@ -99,7 +100,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression that represents a double-precision floating-point number to be rounded.
         /// </value>
-        public IExpression Argument => Arguments[0];
+        public IExpression Argument => this[0];
 
         /// <summary>
         /// Gets the expression that represents the number of fractional digits in the return value.
@@ -107,7 +108,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression that represents the number of fractional digits in the return value.
         /// </value>
-        public IExpression Digits => ParametersCount == 2 ? Arguments[1] : null;
+        public IExpression Digits => ParametersCount == 2 ? this[1] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.
@@ -118,7 +119,7 @@ namespace xFunc.Maths.Expressions
         public override int? MinParametersCount => 1;
 
         /// <summary>
-        /// Gets the maximum count of parameters. -1 - Infinity.
+        /// Gets the maximum count of parameters. <c>null</c> - Infinity.
         /// </summary>
         /// <value>
         /// The maximum count of parameters.

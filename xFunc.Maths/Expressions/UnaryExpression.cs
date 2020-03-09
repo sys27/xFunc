@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Resources;
@@ -40,15 +41,15 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
-        protected UnaryExpression(IExpression[] arguments)
+        protected UnaryExpression(IList<IExpression> arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            if (arguments.Length < 1)
+            if (arguments.Count < 1)
                 throw new ParseException(Resource.LessParams);
 
-            if (arguments.Length > 1)
+            if (arguments.Count > 1)
                 throw new ParseException(Resource.MoreParams);
 
             Argument = arguments[0];
@@ -143,7 +144,7 @@ namespace xFunc.Maths.Expressions
         /// Gets or sets the expression.
         /// </summary>
         /// <value>The expression.</value>
-        public virtual IExpression Argument
+        public IExpression Argument
         {
             get
             {

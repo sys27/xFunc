@@ -417,7 +417,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Matrix(new IExpression[]
+            var expected = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(2), new Number(3) }),
                 new Vector(new IExpression[] { new Number(4), new Number(7) })
@@ -2126,7 +2126,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Transpose(new Matrix(
-                new IExpression[]
+                new[]
                 {
                     new Vector(new IExpression[] { new Number(2), new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
@@ -2159,7 +2159,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Determinant(new Matrix(
-                new IExpression[]
+                new[]
                 {
                     new Vector(new IExpression[] { new Number(2), new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
@@ -2192,7 +2192,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Inverse(new Matrix(
-                new IExpression[]
+                new[]
                 {
                     new Vector(new IExpression[] { new Number(2), new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
@@ -2348,7 +2348,7 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new Mul(
                 new Number(2),
-                new Matrix(new IExpression[]
+                new Matrix(new[]
                 {
                     new Vector(new IExpression[] { new Number(1), new Number(2) }),
                     new Vector(new IExpression[] { new Number(3), new Number(4) })

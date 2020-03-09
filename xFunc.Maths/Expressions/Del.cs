@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions.Matrices;
@@ -51,7 +52,10 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Del(IDifferentiator differentiator, ISimplifier simplifier, IExpression[] arguments)
+        internal Del(
+            IDifferentiator differentiator,
+            ISimplifier simplifier,
+            IList<IExpression> arguments)
             : base(arguments)
         {
             this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
@@ -70,7 +74,7 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var variables = Helpers.GetAllVariables(Argument).ToList();
-            var vector = new Vector(variables.Count);
+            var vector = new IExpression[variables.Count];
 
             differentiator.Parameters = parameters;
 
@@ -81,7 +85,7 @@ namespace xFunc.Maths.Expressions
                 vector[i] = Argument.Analyze(differentiator).Analyze(simplifier);
             }
 
-            return vector;
+            return new Vector(vector);
         }
 
         /// <summary>

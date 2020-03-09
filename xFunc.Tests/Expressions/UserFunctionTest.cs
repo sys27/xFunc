@@ -66,13 +66,55 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new UserFunction("f", new IExpression[0]);
 
-            Assert.Throws<ArgumentNullException>(() => exp.Execute(null));
+            Assert.Throws<ArgumentNullException>(() => exp.Execute());
         }
 
         [Fact]
         public void ArgumentsAreNullTest()
         {
             Assert.Throws<ArgumentNullException>(() => new UserFunction("f", null));
+        }
+
+        [Fact]
+        public void SetNullTest()
+        {
+            var exp = new UserFunction("f", new[] { new Number(5) });
+
+            Assert.Throws<ArgumentNullException>(() => exp[0] = null);
+        }
+
+        [Fact]
+        public void EqualDiffNameTest()
+        {
+            var exp1 = new UserFunction("f", new[] { new Number(5) });
+            var exp2 = new UserFunction("f2", new[] { new Number(5) });
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualDiffCountTest()
+        {
+            var exp1 = new UserFunction("f", new[] { new Number(5) });
+            var exp2 = new UserFunction("f", new[] { new Number(5), new Number(2) });
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualDiffTypeTest()
+        {
+            var exp1 = new UserFunction("f", new[] { new Number(5) });
+
+            Assert.False(exp1.Equals(Variable.X));
+        }
+
+        [Fact]
+        public void ComplexNumberAnalyzeNull()
+        {
+            var exp = new UserFunction("f", new[] { new Number(5) });
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
 
         [Fact]

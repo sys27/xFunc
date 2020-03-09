@@ -50,23 +50,24 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMatrixVector()
         {
-            var exp = new Matrix(new IExpression[] { new Vector(2), new Vector(2) });
+            var exp = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1) }),
+                new Vector(new[] { new Number(1) })
+            });
 
             Test(exp, ResultTypes.Matrix);
         }
 
         [Fact]
-        public void TestMatrixUndefinedElement()
+        public void TestMatrixVectorUndefined()
         {
-            var exp = new Matrix(new IExpression[] { new Vector(new IExpression[] { Variable.X }) });
+            var exp = new Matrix(new[]
+            {
+                new Vector(new[] { Variable.X }),
+            });
 
             Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestMatrixNotVectorElement()
-        {
-            Assert.Throws<MatrixIsInvalidException>(() => new Matrix(new IExpression[] { new Number(2) }));
         }
 
         [Fact]
@@ -80,7 +81,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDeterminantMatrix()
         {
-            var exp = new Determinant(Matrix.Create(2, 2));
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { new Number(3), new Number(4) }),
+            });
+            var exp = new Determinant(matrix);
 
             Test(exp, ResultTypes.Number);
         }
@@ -119,7 +125,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInverseMatrix()
         {
-            var exp = new Inverse(Matrix.Create(2, 2));
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { new Number(3), new Number(4) }),
+            });
+            var exp = new Inverse(matrix);
 
             Test(exp, ResultTypes.Matrix);
         }
@@ -264,17 +275,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestTransposeVector()
-        {
-            var exp = new Transpose(new Vector(2));
-
-            Test(exp, ResultTypes.Matrix);
-        }
-
-        [Fact]
         public void TestTransposeMatrix()
         {
-            var exp = new Transpose(Matrix.Create(2, 2));
+            var matrix = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { new Number(3), new Number(4) }),
+            });
+            var exp = new Transpose(matrix);
 
             Test(exp, ResultTypes.Matrix);
         }

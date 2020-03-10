@@ -16,8 +16,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
+using static xFunc.Maths.Tokenization.Tokens.SymbolToken;
 
 namespace xFunc.Maths.Tokenization
 {
@@ -74,13 +76,13 @@ namespace xFunc.Maths.Tokenization
         {
             var symbol = function.Span[0] switch
             {
-                '(' => SymbolToken.OpenParenthesis,
-                ')' => SymbolToken.CloseParenthesis,
-                '{' => SymbolToken.OpenBrace,
-                '}' => SymbolToken.CloseBrace,
-                ',' => SymbolToken.Comma,
-                '∠' => SymbolToken.Angle,
-                '°' => SymbolToken.Degree,
+                '(' => OpenParenthesis,
+                ')' => CloseParenthesis,
+                '{' => OpenBrace,
+                '}' => CloseBrace,
+                ',' => Comma,
+                '∠' => Angle,
+                '°' => Degree,
                 _ => null,
             };
 
@@ -91,5 +93,9 @@ namespace xFunc.Maths.Tokenization
 
             return symbol;
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool Compare(ReadOnlySpan<char> id, string str) =>
+            id.Equals(str, StringComparison.OrdinalIgnoreCase);
     }
 }

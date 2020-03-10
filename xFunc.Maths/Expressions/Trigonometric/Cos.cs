@@ -45,17 +45,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathematical expression (using degree).
-        /// </summary>
-        /// <param name="degree">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDegree(double degree) =>
-            Math.Cos(degree * Math.PI / 180);
-
-        /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="radian">The calculation result of argument.</param>
@@ -63,19 +52,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian) =>
+        protected override double ExecuteInternal(double radian) =>
             Math.Cos(radian);
-
-        /// <summary>
-        /// Calculates this mathematical expression (using gradian).
-        /// </summary>
-        /// <param name="gradian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian) =>
-            Math.Cos(gradian * Math.PI / 200);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).

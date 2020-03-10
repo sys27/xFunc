@@ -15,9 +15,8 @@
 
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Numerics;
-using xFunc.Maths.Resources;
+using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths
 {
@@ -293,6 +292,40 @@ namespace xFunc.Maths
                 return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
 
             return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
+        }
+
+        /// <summary>
+        /// Converts a <paramref name="value"/> from specified angle measurement to radians.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="from">The angle measurement.</param>
+        /// <returns>The radians.</returns>
+        public static double ToRadians(this double value, AngleMeasurement? from)
+        {
+            return from switch
+            {
+                AngleMeasurement.Degree => value * Math.PI / 180,
+                AngleMeasurement.Radian => value,
+                AngleMeasurement.Gradian => value * Math.PI / 200,
+                _ => value * Math.PI / 180,
+            };
+        }
+
+        /// <summary>
+        /// Converts a <paramref name="value"/> from radians to specified angle measurement.
+        /// </summary>
+        /// <param name="value">The value in radians.</param>
+        /// <param name="to">The angle measurement.</param>
+        /// <returns>The converted value.</returns>
+        public static double FromRadians(this double value, AngleMeasurement? to)
+        {
+            return to switch
+            {
+                AngleMeasurement.Degree => value / Math.PI * 180,
+                AngleMeasurement.Radian => value,
+                AngleMeasurement.Gradian => value / Math.PI * 200,
+                _ => value / Math.PI * 180,
+            };
         }
     }
 }

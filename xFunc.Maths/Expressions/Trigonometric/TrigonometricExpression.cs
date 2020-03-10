@@ -19,7 +19,7 @@ using System.Numerics;
 namespace xFunc.Maths.Expressions.Trigonometric
 {
     /// <summary>
-    /// The base class for trigonomeric functions. This is an <c>abstract</c> class.
+    /// The base class for trigonometric functions. This is an <c>abstract</c> class.
     /// </summary>
     /// <seealso cref="UnaryExpression" />
     public abstract class TrigonometricExpression : UnaryExpression
@@ -44,16 +44,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathematical expression (using degree).
-        /// </summary>
-        /// <param name="degree">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteDegree(double degree);
-
-        /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="radian">The calculation result of argument.</param>
@@ -61,17 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteRadian(double radian);
-
-        /// <summary>
-        /// Calculates this mathematical expression (using gradian).
-        /// </summary>
-        /// <param name="gradian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteGradian(double gradian);
+        protected abstract double ExecuteInternal(double radian);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -94,13 +74,10 @@ namespace xFunc.Maths.Expressions.Trigonometric
         {
             var result = Argument.Execute(parameters);
 
-            return (result, parameters?.AngleMeasurement) switch
+            return result switch
             {
-                (double number, AngleMeasurement.Degree) => ExecuteDegree(number),
-                (double number, AngleMeasurement.Radian) => ExecuteRadian(number),
-                (double number, AngleMeasurement.Gradian) => ExecuteGradian(number),
-                (double number, null) => ExecuteDegree(number),
-                (Complex complex, _) => (object)ExecuteComplex(complex),
+                double number => ExecuteInternal(number.ToRadians(parameters?.AngleMeasurement)),
+                Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

@@ -23,7 +23,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
     /// <summary>
     /// Represents teh Arcsine function.
     /// </summary>
-    public class Arcsin : TrigonometricExpression
+    public class Arcsin : InverseTrigonometricExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcsin"/> class.
@@ -45,17 +45,6 @@ namespace xFunc.Maths.Expressions.Trigonometric
         }
 
         /// <summary>
-        /// Calculates this mathematical expression (using degree).
-        /// </summary>
-        /// <param name="degree">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDegree(double degree) =>
-            Math.Asin(degree) / Math.PI * 180;
-
-        /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="radian">The calculation result of argument.</param>
@@ -63,19 +52,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian) =>
+        protected override double ExecuteInternal(double radian) =>
             Math.Asin(radian);
-
-        /// <summary>
-        /// Calculates this mathematical expression (using gradian).
-        /// </summary>
-        /// <param name="gradian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian) =>
-            Math.Asin(gradian) / Math.PI * 200;
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).

@@ -54,16 +54,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         protected abstract Complex ExecuteComplex(Complex complex);
 
         /// <summary>
-        /// Calculates this mathematical expression (using degree).
-        /// </summary>
-        /// <param name="degree">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteDegree(double degree);
-
-        /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="radian">The calculation result of argument.</param>
@@ -71,17 +61,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteRadian(double radian);
-
-        /// <summary>
-        /// Calculates this mathematical expression (using gradian).
-        /// </summary>
-        /// <param name="gradian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteGradian(double gradian);
+        protected abstract double ExecuteInternal(double radian);
 
         /// <summary>
         /// Executes this expression.
@@ -95,13 +75,10 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         {
             var result = Argument.Execute(parameters);
 
-            return (result, parameters?.AngleMeasurement) switch
+            return result switch
             {
-                (double number, AngleMeasurement.Degree) => ExecuteDegree(number),
-                (double number, AngleMeasurement.Radian) => ExecuteRadian(number),
-                (double number, AngleMeasurement.Gradian) => ExecuteGradian(number),
-                (double number, null) => ExecuteDegree(number),
-                (Complex complex, _) => (object)ExecuteComplex(complex),
+                double number => ExecuteInternal(number.ToRadians(parameters?.AngleMeasurement)),
+                Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

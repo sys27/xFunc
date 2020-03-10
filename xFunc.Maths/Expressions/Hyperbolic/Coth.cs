@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -56,17 +55,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             ComplexExtensions.Coth(complex);
 
         /// <summary>
-        /// Calculates this mathematical expression (using degree).
-        /// </summary>
-        /// <param name="degree">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDegree(double degree) =>
-            MathExtensions.Coth(degree * Math.PI / 180);
-
-        /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="radian">The calculation result of argument.</param>
@@ -74,19 +62,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian) =>
+        protected override double ExecuteInternal(double radian) =>
             MathExtensions.Coth(radian);
-
-        /// <summary>
-        /// Calculates this mathematical expression (using gradian).
-        /// </summary>
-        /// <param name="gradian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian) =>
-            MathExtensions.Coth(gradian * Math.PI / 200);
 
         /// <summary>
         /// Analyzes the current expression.

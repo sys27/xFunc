@@ -76,11 +76,10 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// </returns>
         public override bool Equals(object obj)
         {
-            var num = obj as ComplexNumber;
-            if (num == null)
-                return false;
+            if (obj is ComplexNumber num)
+                return Value.Equals(num.Value);
 
-            return Value.Equals(num.Value);
+            return false;
         }
 
         /// <summary>

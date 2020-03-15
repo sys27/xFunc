@@ -13,33 +13,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
     /// <summary>
-    /// Represents the Tangent function.
+    /// The base class for inverse trigonometric functions. This is an <c>abstract</c> class.
     /// </summary>
-    public class Tan : TrigonometricExpression
+    /// <seealso cref="UnaryExpression" />
+    public abstract class InverseTrigonometricExpression : UnaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tan"/> class.
+        /// Initializes a new instance of the <see cref="InverseTrigonometricExpression"/> class.
         /// </summary>
         /// <param name="expression">The argument of function.</param>
-        public Tan(IExpression expression)
+        protected InverseTrigonometricExpression(IExpression expression)
             : base(expression)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tan"/> class.
+        /// Initializes a new instance of the <see cref="InverseTrigonometricExpression"/> class.
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Tan(IList<IExpression> arguments)
+        protected InverseTrigonometricExpression(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -52,8 +51,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(double radian) =>
-            Math.Tan(radian);
+        protected abstract double ExecuteInternal(double radian);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -62,25 +60,26 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex ExecuteComplex(Complex complex) =>
-            Complex.Tan(complex);
+        protected abstract Complex ExecuteComplex(Complex complex);
 
         /// <summary>
-        /// Analyzes the current expression.
+        /// Executes this expression.
         /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// The analysis result.
+        /// A result of the calculation.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
-            analyzer.Analyze(this);
+        /// <seealso cref="ExpressionParameters" />
+        public override object Execute(ExpressionParameters parameters)
+        {
+            var result = Argument.Execute(parameters);
 
-        /// <summary>
-        /// Clones this instance.
-        /// </summary>
-        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Tan(Argument.Clone());
+            return result switch
+            {
+                double number => ExecuteInternal(number).FromRadians(parameters?.AngleMeasurement),
+                Complex complex => (object)ExecuteComplex(complex),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
+        }
     }
 }

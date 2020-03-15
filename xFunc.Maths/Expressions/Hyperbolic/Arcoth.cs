@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -23,7 +22,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
     /// <summary>
     /// Represents the Arcoth function.
     /// </summary>
-    public class Arcoth : HyperbolicExpression
+    public class Arcoth : InverseHyperbolicExpression
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Arcoth"/> class.
@@ -56,17 +55,6 @@ namespace xFunc.Maths.Expressions.Hyperbolic
             ComplexExtensions.Acoth(complex);
 
         /// <summary>
-        /// Calculates this mathematical expression (using degree).
-        /// </summary>
-        /// <param name="degree">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteDegree(double degree) =>
-            MathExtensions.Acoth(degree) / Math.PI * 180;
-
-        /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
         /// <param name="radian">The calculation result of argument.</param>
@@ -74,19 +62,8 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteRadian(double radian) =>
+        protected override double ExecuteInternal(double radian) =>
             MathExtensions.Acoth(radian);
-
-        /// <summary>
-        /// Calculates this mathematical expression (using gradian).
-        /// </summary>
-        /// <param name="gradian">The calculation result of argument.</param>
-        /// <returns>
-        /// A result of the calculation.
-        /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteGradian(double gradian) =>
-            MathExtensions.Acoth(gradian) / Math.PI * 200;
 
         /// <summary>
         /// Analyzes the current expression.

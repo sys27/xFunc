@@ -103,9 +103,6 @@
   <data name="ParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Несоответствующий тип параметра (Ожидается: {0}; Фактически: {1}).</value>
   </data>
-  <data name="NotEnoughParams" xml:space="preserve">
-    <value>Недостаточно параметров.</value>
-  </data>
   <data name="VectorCrossException" xml:space="preserve">
     <value>Размер вектора должен быть равер 3.</value>
   </data>
@@ -117,9 +114,6 @@
   </data>
   <data name="RightParameterTypeMismatchExceptionError" xml:space="preserve">
     <value>Правый параметр имеет не соответствующий тип (Ожидается: {0}; Фактически: {1}).</value>
-  </data>
-  <data name="SequenceNullValuesError" xml:space="preserve">
-    <value>Последовательность не может содержать пустые значения.</value>
   </data>
   <data name="MatrixCloseBraceParseException" xml:space="preserve">
     <value>Объявление матрицы должно заканчиваться символом '}'.</value>
@@ -195,9 +189,6 @@
   </data>
   <data name="ParameterListCloseParseException" xml:space="preserve">
     <value>Список параметров должен заканчиваться символом ')'.</value>
-  </data>
-  <data name="AtLeastTwoNumbers" xml:space="preserve">
-    <value>Массив чисел должен состоять из двух или более чисел.</value>
   </data>
   <data name="ResultIsNotSupported" xml:space="preserve">
     <value>Результат вычислений не поддерживается (Функция: '{0}({1})').</value>

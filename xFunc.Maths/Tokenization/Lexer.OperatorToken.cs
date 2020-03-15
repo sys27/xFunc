@@ -16,6 +16,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using xFunc.Maths.Tokenization.Tokens;
+using static xFunc.Maths.Tokenization.Tokens.OperatorToken;
 
 namespace xFunc.Maths.Tokenization
 {
@@ -38,69 +39,69 @@ namespace xFunc.Maths.Tokenization
             var operatorMatch = span[..endIndex];
             IToken token;
 
-            if (operatorMatch.Equals("+", StringComparison.Ordinal))
-                token = OperatorToken.Plus;
-            else if (operatorMatch.Equals("-", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("−", StringComparison.Ordinal))
-                token = OperatorToken.Minus;
-            else if (operatorMatch.Equals("*", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("×", StringComparison.Ordinal))
-                token = OperatorToken.Multiplication;
-            else if (operatorMatch.Equals("/", StringComparison.Ordinal))
-                token = OperatorToken.Division;
-            else if (operatorMatch.Equals("^", StringComparison.Ordinal))
-                token = OperatorToken.Exponentiation;
-            else if (operatorMatch.Equals("!", StringComparison.Ordinal))
-                token = OperatorToken.Factorial;
-            else if (operatorMatch.Equals("%", StringComparison.Ordinal))
-                token = OperatorToken.Modulo;
-            else if (operatorMatch.Equals(":=", StringComparison.Ordinal))
-                token = OperatorToken.Assign;
-            else if (operatorMatch.Equals("+=", StringComparison.Ordinal))
-                token = OperatorToken.AddAssign;
-            else if (operatorMatch.Equals("-=", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("−=", StringComparison.Ordinal))
-                token = OperatorToken.SubAssign;
-            else if (operatorMatch.Equals("*=", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("×=", StringComparison.Ordinal))
-                token = OperatorToken.MulAssign;
-            else if (operatorMatch.Equals("/=", StringComparison.Ordinal))
-                token = OperatorToken.DivAssign;
-            else if (operatorMatch.Equals("&&", StringComparison.Ordinal))
-                token = OperatorToken.ConditionalAnd;
-            else if (operatorMatch.Equals("||", StringComparison.Ordinal))
-                token = OperatorToken.ConditionalOr;
-            else if (operatorMatch.Equals("==", StringComparison.Ordinal))
-                token = OperatorToken.Equal;
-            else if (operatorMatch.Equals("!=", StringComparison.Ordinal))
-                token = OperatorToken.NotEqual;
-            else if (operatorMatch.Equals("<=", StringComparison.Ordinal))
-                token = OperatorToken.LessOrEqual;
-            else if (operatorMatch.Equals("<", StringComparison.Ordinal))
-                token = OperatorToken.LessThan;
-            else if (operatorMatch.Equals(">=", StringComparison.Ordinal))
-                token = OperatorToken.GreaterOrEqual;
-            else if (operatorMatch.Equals(">", StringComparison.Ordinal))
-                token = OperatorToken.GreaterThan;
-            else if (operatorMatch.Equals("++", StringComparison.Ordinal))
-                token = OperatorToken.Increment;
-            else if (operatorMatch.Equals("--", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("−−", StringComparison.Ordinal))
-                token = OperatorToken.Decrement;
-            else if (operatorMatch.Equals("~", StringComparison.Ordinal))
-                token = OperatorToken.Not;
-            else if (operatorMatch.Equals("&", StringComparison.Ordinal))
-                token = OperatorToken.And;
-            else if (operatorMatch.Equals("|", StringComparison.Ordinal))
-                token = OperatorToken.Or;
-            else if (operatorMatch.Equals("->", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("−>", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("=>", StringComparison.Ordinal))
-                token = OperatorToken.Implication;
-            else if (operatorMatch.Equals("<->", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("<−>", StringComparison.Ordinal) ||
-                     operatorMatch.Equals("<=>", StringComparison.Ordinal))
-                token = OperatorToken.Equality;
+            if (Compare(operatorMatch, "+"))
+                token = Plus;
+            else if (Compare(operatorMatch, "-") ||
+                     Compare(operatorMatch, "−"))
+                token = Minus;
+            else if (Compare(operatorMatch, "*") ||
+                     Compare(operatorMatch, "×"))
+                token = Multiplication;
+            else if (Compare(operatorMatch, "/"))
+                token = Division;
+            else if (Compare(operatorMatch, "^"))
+                token = Exponentiation;
+            else if (Compare(operatorMatch, "!"))
+                token = Factorial;
+            else if (Compare(operatorMatch, "%"))
+                token = Modulo;
+            else if (Compare(operatorMatch, ":="))
+                token = Assign;
+            else if (Compare(operatorMatch, "+="))
+                token = AddAssign;
+            else if (Compare(operatorMatch, "-=") ||
+                     Compare(operatorMatch, "−="))
+                token = SubAssign;
+            else if (Compare(operatorMatch, "*=") ||
+                     Compare(operatorMatch, "×="))
+                token = MulAssign;
+            else if (Compare(operatorMatch, "/="))
+                token = DivAssign;
+            else if (Compare(operatorMatch, "&&"))
+                token = ConditionalAnd;
+            else if (Compare(operatorMatch, "||"))
+                token = ConditionalOr;
+            else if (Compare(operatorMatch, "=="))
+                token = Equal;
+            else if (Compare(operatorMatch, "!="))
+                token = NotEqual;
+            else if (Compare(operatorMatch, "<="))
+                token = LessOrEqual;
+            else if (Compare(operatorMatch, "<"))
+                token = LessThan;
+            else if (Compare(operatorMatch, ">="))
+                token = GreaterOrEqual;
+            else if (Compare(operatorMatch, ">"))
+                token = GreaterThan;
+            else if (Compare(operatorMatch, "++"))
+                token = Increment;
+            else if (Compare(operatorMatch, "--") ||
+                     Compare(operatorMatch, "−−"))
+                token = Decrement;
+            else if (Compare(operatorMatch, "~"))
+                token = Not;
+            else if (Compare(operatorMatch, "&"))
+                token = And;
+            else if (Compare(operatorMatch, "|"))
+                token = Or;
+            else if (Compare(operatorMatch, "->") ||
+                     Compare(operatorMatch, "−>") ||
+                     Compare(operatorMatch, "=>"))
+                token = Implication;
+            else if (Compare(operatorMatch, "<->") ||
+                     Compare(operatorMatch, "<−>") ||
+                     Compare(operatorMatch, "<=>"))
+                token = Equality;
             else
                 return null;
 

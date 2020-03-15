@@ -19,7 +19,6 @@ using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Results;
 using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
@@ -48,57 +47,46 @@ namespace xFunc.Maths
             parser = new Parser(differentiator, simplifier);
             typeAnalyzer = new TypeAnalyzer();
 
-            Parameters = new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection());
+            Parameters = new ExpressionParameters();
             NumeralSystem = NumeralSystem.Decimal;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor"/> class.
         /// </summary>
-        /// <param name="lexer">The lexer.</param>
-        /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         public Processor(
-            ILexer lexer,
-            IParser parser,
             ISimplifier simplifier,
             IDifferentiator differentiator)
             : this(
-                lexer,
-                parser,
                 simplifier,
                 differentiator,
                 new TypeAnalyzer(),
-                new ExpressionParameters(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection()))
+                new ExpressionParameters())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Processor" /> class.
         /// </summary>
-        /// <param name="lexer">The lexer.</param>
-        /// <param name="parser">The parser.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="typeAnalyzer">The type analyzer.</param>
         /// <param name="parameters">The collection of parameters.</param>
         public Processor(
-            ILexer lexer,
-            IParser parser,
             ISimplifier simplifier,
             IDifferentiator differentiator,
             ITypeAnalyzer typeAnalyzer,
             ExpressionParameters parameters)
         {
-            this.lexer = lexer ??
-                         throw new ArgumentNullException(nameof(lexer));
+            this.lexer = new Lexer();
+            this.parser = new Parser();
+
             this.simplifier = simplifier ??
                               throw new ArgumentNullException(nameof(simplifier));
             this.differentiator = differentiator ??
                                   throw new ArgumentNullException(nameof(differentiator));
-            this.parser = parser ??
-                          throw new ArgumentNullException(nameof(parser));
             this.typeAnalyzer = typeAnalyzer ??
                                 throw new ArgumentNullException(nameof(typeAnalyzer));
 
@@ -111,10 +99,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="function">The function.</param>
         /// <returns>The result of solving.</returns>
-        public IResult Solve(string function)
-        {
-            return Solve(function, true);
-        }
+        public IResult Solve(string function) => Solve(function, true);
 
         /// <summary>
         /// Solves the specified expression.
@@ -168,10 +153,8 @@ namespace xFunc.Maths
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="function">The function.</param>
         /// <returns>The result of solving.</returns>
-        public TResult Solve<TResult>(string function) where TResult : IResult
-        {
-            return (TResult)Solve(function);
-        }
+        public TResult Solve<TResult>(string function) where TResult : IResult =>
+            (TResult)Solve(function);
 
         /// <summary>
         /// Solves the specified function.
@@ -180,10 +163,8 @@ namespace xFunc.Maths
         /// <param name="function">The function.</param>
         /// <param name="simplify">if set to <c>true</c> parser will simplify expression.</param>
         /// <returns>The result of solving.</returns>
-        public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult
-        {
-            return (TResult)Solve(function, simplify);
-        }
+        public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult =>
+            (TResult)Solve(function, simplify);
 
         /// <summary>
         /// Simplifies the <paramref name="expression"/>.
@@ -203,10 +184,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>Returns the derivative.</returns>
-        public IExpression Differentiate(IExpression expression)
-        {
-            return Differentiate(expression, Variable.X);
-        }
+        public IExpression Differentiate(IExpression expression) =>
+            Differentiate(expression, Variable.X);
 
         /// <summary>
         /// Differentiates the specified expression.
@@ -214,10 +193,8 @@ namespace xFunc.Maths
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         /// <returns>Returns the derivative.</returns>
-        public IExpression Differentiate(IExpression expression, Variable variable)
-        {
-            return Differentiate(expression, variable, new ExpressionParameters());
-        }
+        public IExpression Differentiate(IExpression expression, Variable variable) =>
+            Differentiate(expression, variable, new ExpressionParameters());
 
         /// <summary>
         /// Differentiates the specified expression.
@@ -246,20 +223,16 @@ namespace xFunc.Maths
         /// <returns>The parsed expression.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         /// <exception cref="ParseException">Error while parsing.</exception>
-        public IExpression Parse(string function)
-        {
-            return parser.Parse(lexer.Tokenize(function));
-        }
+        public IExpression Parse(string function) =>
+            parser.Parse(lexer.Tokenize(function));
 
         /// <summary>
         /// Converts the string into a sequence of tokens.
         /// </summary>
         /// <param name="function">The string that contains the functions and operators.</param>
         /// <returns>The sequence of tokens.</returns>
-        public IEnumerable<IToken> Tokenize(string function)
-        {
-            return lexer.Tokenize(function);
-        }
+        public IEnumerable<IToken> Tokenize(string function) =>
+            lexer.Tokenize(function);
 
         /// <summary>
         /// Gets expression parameters object.

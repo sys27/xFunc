@@ -13,10 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Tokenization.Tokens;
 using Moq;
 using Xunit;
 using xFunc.Maths.Results;
@@ -24,7 +22,6 @@ using System.Numerics;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Tokenization;
 
 namespace xFunc.Tests
 {
@@ -44,33 +41,17 @@ namespace xFunc.Tests
         [Fact]
         public void SolveDoubleTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "1 + 1.1";
-            var exp = new Add(new Number(1), new Number(1.1));
-
-            var tokens = new TokensBuilder()
-                .Number(2)
-                .Operation(OperatorToken.Plus)
-                .Number(1.1)
-                .Tokens;
-            lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Solve<NumberResult>(strExp);
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.Equal(2.1, result.Result);
         }
@@ -78,27 +59,14 @@ namespace xFunc.Tests
         [Fact]
         public void SolveDoubleHexTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "1 + 1";
-            var exp = new Add(new Number(1), new Number(1));
-
-            var tokens = new TokensBuilder()
-                .Number(2)
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Tokens;
-            lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object)
             {
@@ -106,48 +74,24 @@ namespace xFunc.Tests
             };
             var result = processor.Solve<StringResult>(strExp);
 
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
-
             Assert.Equal("0x2", result.Result);
         }
 
         [Fact]
         public void SolveComplexTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "conjugate(2.3 + 1.4i)";
             var complex = new Complex(2.3, 1.4);
-            var exp = new Conjugate(new ComplexNumber(complex));
-
-            var tokens = new TokensBuilder()
-                .Id("conjugate")
-                .OpenParenthesis()
-                .Number(2.3)
-                .Operation(OperatorToken.Plus)
-                .Number(1.4)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Conjugate>())).Returns<Conjugate>(e => e);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Solve<ComplexNumberResult>(strExp);
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.Equal(Complex.Conjugate(complex), result.Result);
         }
@@ -155,33 +99,17 @@ namespace xFunc.Tests
         [Fact]
         public void SolveBoolTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "true & false";
-            var exp = new And(new Bool(true), new Bool(false));
-
-            var tokens = new TokensBuilder()
-                .True()
-                .Operation(OperatorToken.And)
-                .False()
-                .Tokens;
-            lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<And>())).Returns<And>(e => e);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Solve<BooleanResult>(strExp);
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.False(result.Result);
         }
@@ -189,36 +117,17 @@ namespace xFunc.Tests
         [Fact]
         public void SolveStringTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "x := 1";
-            var exp = new Define(Variable.X, new Number(1));
-
-            var tokens = new TokensBuilder()
-                .Def()
-                .OpenParenthesis()
-                .VariableX()
-                .Comma()
-                .Number(1)
-                .CloseParenthesis()
-                .Tokens;
-            lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Define>())).Returns<Define>(e => e);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Solve<StringResult>(strExp);
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.Equal("The value '1' was assigned to the variable 'x'.", result.Result);
         }
@@ -226,23 +135,12 @@ namespace xFunc.Tests
         [Fact]
         public void SolveExpTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "deriv(x)";
             var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X);
             var diff = new Number(1);
-
-            var tokens = new TokensBuilder()
-                .Id("deriv")
-                .OpenParenthesis()
-                .VariableX()
-                .CloseParenthesis()
-                .Tokens;
-            lexer.Setup(l => l.Tokenize(strExp)).Returns(() => tokens);
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Number>())).Returns<Number>(e => e);
             simplifier.Setup(s => s.Analyze(It.IsAny<Derivative>())).Returns<Derivative>(e => e);
@@ -252,14 +150,9 @@ namespace xFunc.Tests
             differentiator.SetupProperty(d => d.Parameters);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Solve<ExpressionResult>(strExp);
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.Equal(new Number(1), result.Result);
         }
@@ -267,32 +160,17 @@ namespace xFunc.Tests
         [Fact]
         public void ParseTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var tokens = new TokensBuilder()
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Tokens;
-            lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
-
             var exp = new Add(Variable.X, new Number(1));
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Parse("x + 1");
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.Equal(exp, result);
         }
@@ -300,30 +178,15 @@ namespace xFunc.Tests
         [Fact]
         public void ParseBoolTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var tokens = new TokensBuilder()
-                .VariableX()
-                .Operation(OperatorToken.Plus)
-                .Number(1)
-                .Tokens;
-            lexer.Setup(l => l.Tokenize("x + 1")).Returns(() => tokens);
-
             var exp = new Add(Variable.X, new Number(1));
-            parser.Setup(p => p.Parse(tokens)).Returns(() => exp);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Parse("x + 1");
-
-            lexer.Verify(l => l.Tokenize(It.IsAny<string>()), Times.Once());
-            parser.Verify(p => p.Parse(It.IsAny<IEnumerable<IToken>>()), Times.Once());
 
             Assert.Equal(exp, result);
         }
@@ -331,8 +194,6 @@ namespace xFunc.Tests
         [Fact]
         public void SimplifyTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
@@ -341,8 +202,6 @@ namespace xFunc.Tests
             var exp = new Add(Variable.X, new Number(1));
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Simplify(exp);
@@ -355,8 +214,6 @@ namespace xFunc.Tests
         [Fact]
         public void DiffExpTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
@@ -366,8 +223,6 @@ namespace xFunc.Tests
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
 
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Differentiate(exp);
@@ -380,8 +235,6 @@ namespace xFunc.Tests
         [Fact]
         public void DiffVarTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
@@ -393,8 +246,6 @@ namespace xFunc.Tests
 
             var diffObj = differentiator.Object;
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 diffObj);
             var result = processor.Differentiate(exp, Variable.X);
@@ -408,8 +259,6 @@ namespace xFunc.Tests
         [Fact]
         public void DiffParamsTest()
         {
-            var lexer = new Mock<ILexer>();
-            var parser = new Mock<IParser>();
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
@@ -422,8 +271,6 @@ namespace xFunc.Tests
 
             var diffObj = differentiator.Object;
             var processor = new Processor(
-                lexer.Object,
-                parser.Object,
                 simplifier.Object,
                 diffObj);
             var result = processor.Differentiate(exp, Variable.X, new ExpressionParameters());

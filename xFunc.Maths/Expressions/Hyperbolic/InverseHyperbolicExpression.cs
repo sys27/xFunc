@@ -15,30 +15,30 @@
 
 using System.Collections.Generic;
 using System.Numerics;
-using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
     /// <summary>
-    /// Represents the Arcsch function.
+    /// The base class for inverse hyperbolic functions.
     /// </summary>
-    public class Arcsch : InverseHyperbolicExpression
+    /// <seealso cref="UnaryExpression" />
+    public abstract class InverseHyperbolicExpression : UnaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsch"/> class.
+        /// Initializes a new instance of the <see cref="InverseHyperbolicExpression" /> class.
         /// </summary>
-        /// <param name="expression">The argument of function.</param>
-        public Arcsch(IExpression expression)
-            : base(expression)
+        /// <param name="argument">The expression.</param>
+        protected InverseHyperbolicExpression(IExpression argument)
+            : base(argument)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Arcsch"/> class.
+        /// Initializes a new instance of the <see cref="InverseHyperbolicExpression"/> class.
         /// </summary>
         /// <param name="arguments">The argument of function.</param>
         /// <seealso cref="IExpression"/>
-        internal Arcsch(IList<IExpression> arguments)
+        internal InverseHyperbolicExpression(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -51,8 +51,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override Complex ExecuteComplex(Complex complex) =>
-            ComplexExtensions.Acsch(complex);
+        protected abstract Complex ExecuteComplex(Complex complex);
 
         /// <summary>
         /// Calculates this mathematical expression (using radian).
@@ -62,25 +61,26 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(double radian) =>
-            MathExtensions.Acsch(radian);
+        protected abstract double ExecuteInternal(double radian);
 
         /// <summary>
-        /// Analyzes the current expression.
+        /// Executes this expression.
         /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="parameters">An object that contains all parameters and functions for expressions.</param>
         /// <returns>
-        /// The analysis result.
+        /// A result of the execution.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
-            analyzer.Analyze(this);
+        /// <seealso cref="ExpressionParameters" />
+        public override object Execute(ExpressionParameters parameters)
+        {
+            var result = Argument.Execute(parameters);
 
-        /// <summary>
-        /// Clones this instance.
-        /// </summary>
-        /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Arcsch(Argument.Clone());
+            return result switch
+            {
+                double number => ExecuteInternal(number).FromRadians(parameters?.AngleMeasurement),
+                Complex complex => (object)ExecuteComplex(complex),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
+        }
     }
 }

@@ -83,10 +83,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => this.Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -94,10 +91,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => this.ToString(new CommonFormatter());
 
         /// <summary>
         /// Throws <see cref="NotSupportedException"/>.
@@ -106,10 +100,7 @@ namespace xFunc.Maths.Expressions
         /// The exception.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public object Execute()
-        {
-            throw new NotSupportedException();
-        }
+        public object Execute() => throw new NotSupportedException();
 
         /// <summary>
         /// Executes this expression.
@@ -160,10 +151,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance of the <see cref="Define"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public IExpression Clone()
-        {
-            return new Define(key.Clone(), value.Clone());
-        }
+        public IExpression Clone() => new Define(key.Clone(), value.Clone());
 
         /// <summary>
         /// Gets or sets the parent expression.

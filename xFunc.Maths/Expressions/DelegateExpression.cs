@@ -60,10 +60,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter)
-        {
-            return this.Analyze(formatter);
-        }
+        public string ToString(IFormatter formatter) => this.Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -71,10 +68,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return this.ToString(new CommonFormatter());
-        }
+        public override string ToString() => this.ToString(new CommonFormatter());
 
         /// <summary>
         /// Executes this expression. Don't use this method if your expression has variables or user-functions.
@@ -82,10 +76,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public object Execute()
-        {
-            return func(null);
-        }
+        public object Execute() => func(null);
 
         /// <summary>
         /// Executes this expression.
@@ -95,10 +86,8 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters)
-        {
-            return func(parameters);
-        }
+        public object Execute(ExpressionParameters parameters) =>
+            func(parameters);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -123,10 +112,7 @@ namespace xFunc.Maths.Expressions
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public IExpression Clone()
-        {
-            throw new NotSupportedException();
-        }
+        public IExpression Clone() => throw new NotSupportedException();
 
         /// <summary>
         /// Gets or sets the parent expression.

@@ -15,6 +15,7 @@
 
 using System;
 using xFunc.Maths.Tokenization.Tokens;
+using static xFunc.Maths.Tokenization.Tokens.KeywordToken;
 
 namespace xFunc.Maths.Tokenization
 {
@@ -38,40 +39,38 @@ namespace xFunc.Maths.Tokenization
 
             IToken token;
 
-            if (id.Equals("true", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.True;
-            else if (id.Equals("false", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.False;
-            else if (id.Equals("def", StringComparison.OrdinalIgnoreCase) ||
-                     id.Equals("define", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Define;
-            else if (id.Equals("undef", StringComparison.OrdinalIgnoreCase) ||
-                     id.Equals("undefine", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Undefine;
-            else if (id.Equals("if", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.If;
-            else if (id.Equals("for", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.For;
-            else if (id.Equals("while", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.While;
-            else if (id.Equals("nand", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.NAnd;
-            else if (id.Equals("nor", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.NOr;
-            else if (id.Equals("and", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.And;
-            else if (id.Equals("or", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Or;
-            else if (id.Equals("xor", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.XOr;
-            else if (id.Equals("not", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Not;
-            else if (id.Equals("eq", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Eq;
-            else if (id.Equals("impl", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Impl;
-            else if (id.Equals("mod", StringComparison.OrdinalIgnoreCase))
-                token = KeywordToken.Mod;
+            if (Compare(id, "true"))
+                token = True;
+            else if (Compare(id, "false"))
+                token = False;
+            else if (Compare(id, "def") || Compare(id, "define"))
+                token = Define;
+            else if (Compare(id, "undef") || Compare(id, "undefine"))
+                token = Undefine;
+            else if (Compare(id, "if"))
+                token = If;
+            else if (Compare(id, "for"))
+                token = For;
+            else if (Compare(id, "while"))
+                token = While;
+            else if (Compare(id, "nand"))
+                token = NAnd;
+            else if (Compare(id, "nor"))
+                token = NOr;
+            else if (Compare(id, "and"))
+                token = And;
+            else if (Compare(id, "or"))
+                token = Or;
+            else if (Compare(id, "xor"))
+                token = XOr;
+            else if (Compare(id, "not"))
+                token = Not;
+            else if (Compare(id, "eq"))
+                token = Eq;
+            else if (Compare(id, "impl"))
+                token = Impl;
+            else if (Compare(id, "mod"))
+                token = Mod;
             else
                 token = new IdToken(id.ToString().ToLowerInvariant()); // TODO:
 

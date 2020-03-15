@@ -62,7 +62,7 @@ namespace xFunc.Maths.Analyzers.Formatters
             var sb = new StringBuilder();
 
             sb.Append(function).Append('(');
-            if (exp.Arguments != null && exp.ParametersCount > 0)
+            if (exp.ParametersCount > 0)
             {
                 foreach (var item in exp.Arguments)
                     sb.Append(item).Append(", ");

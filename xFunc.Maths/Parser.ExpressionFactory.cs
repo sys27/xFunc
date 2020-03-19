@@ -61,9 +61,9 @@ namespace xFunc.Maths
             if (token == OperatorToken.Modulo)
                 return new Mod(arguments);
             if (token == OperatorToken.ConditionalAnd)
-                return new Expressions.Programming.And(arguments);
+                return new ConditionalAnd(arguments);
             if (token == OperatorToken.ConditionalOr)
-                return new Expressions.Programming.Or(arguments);
+                return new ConditionalOr(arguments);
             if (token == OperatorToken.Equal)
                 return new Equal(arguments);
             if (token == OperatorToken.NotEqual)
@@ -93,9 +93,9 @@ namespace xFunc.Maths
             if (token == OperatorToken.Not)
                 return new Not(arguments);
             if (token == OperatorToken.And)
-                return new Expressions.LogicalAndBitwise.And(arguments);
+                return new And(arguments);
             if (token == OperatorToken.Or)
-                return new Expressions.LogicalAndBitwise.Or(arguments);
+                return new Or(arguments);
             if (token == OperatorToken.Implication)
                 return new Implication(arguments);
             if (token == OperatorToken.Equality)
@@ -240,9 +240,9 @@ namespace xFunc.Maths
             if (keywordToken == KeywordToken.NOr)
                 return new NOr(arguments);
             if (keywordToken == KeywordToken.And)
-                return new Expressions.LogicalAndBitwise.And(arguments);
+                return new And(arguments);
             if (keywordToken == KeywordToken.Or)
-                return new Expressions.LogicalAndBitwise.Or(arguments);
+                return new Or(arguments);
             if (keywordToken == KeywordToken.XOr)
                 return new XOr(arguments);
             if (keywordToken == KeywordToken.Not)

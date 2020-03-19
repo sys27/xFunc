@@ -116,7 +116,7 @@ namespace xFunc.Maths
 
                 public void Rollback(TokenEnumerator tokenEnumerator)
                 {
-                    tokenEnumerator.index = this.position;
+                    tokenEnumerator.index = position;
                 }
             }
         }

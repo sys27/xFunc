@@ -30,7 +30,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="number">A number.</param>
         public Number(double number)
         {
-            this.Value = number;
+            Value = number;
         }
 
         /// <summary>

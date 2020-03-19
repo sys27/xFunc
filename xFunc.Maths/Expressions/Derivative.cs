@@ -73,9 +73,9 @@ namespace xFunc.Maths.Expressions
             IList<IExpression> args)
             : base(args)
         {
-            this.Differentiator = differentiator ??
+            Differentiator = differentiator ??
                                   throw new ArgumentNullException(nameof(differentiator));
-            this.Simplifier = simplifier ??
+            Simplifier = simplifier ??
                               throw new ArgumentNullException(nameof(simplifier));
         }
 
@@ -89,14 +89,14 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var variable = this.Variable;
+            var variable = Variable;
 
             Differentiator.Variable = variable;
             Differentiator.Parameters = parameters;
 
-            var diff = this.Analyze(Differentiator);
+            var diff = Analyze(Differentiator);
 
-            var point = this.DerivativePoint;
+            var point = DerivativePoint;
             if (variable != null && point != null)
             {
                 if (parameters == null)
@@ -131,7 +131,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone() =>
-            new Derivative(this.Differentiator, this.Simplifier, CloneArguments());
+            new Derivative(Differentiator, Simplifier, CloneArguments());
 
         /// <summary>
         /// Gets or sets the expression.

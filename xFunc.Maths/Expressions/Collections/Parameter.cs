@@ -69,9 +69,9 @@ namespace xFunc.Maths.Expressions.Collections
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
 
-            this.Key = key;
-            this.Value = value;
-            this.Type = type;
+            Key = key;
+            Value = value;
+            Type = type;
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace xFunc.Maths.Expressions.Collections
         {
             get
             {
-                return this.value;
+                return value;
             }
             set
             {

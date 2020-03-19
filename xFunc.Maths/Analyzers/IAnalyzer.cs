@@ -614,7 +614,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        TResult Analyze(Expressions.LogicalAndBitwise.And exp);
+        TResult Analyze(And exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -663,7 +663,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        TResult Analyze(Expressions.LogicalAndBitwise.Or exp);
+        TResult Analyze(Or exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -688,7 +688,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        TResult Analyze(Expressions.Programming.And exp);
+        TResult Analyze(ConditionalAnd exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -779,7 +779,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        TResult Analyze(Expressions.Programming.Or exp);
+        TResult Analyze(ConditionalOr exp);
 
         /// <summary>
         /// Analyzes the specified expression.

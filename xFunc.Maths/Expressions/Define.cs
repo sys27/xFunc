@@ -37,8 +37,8 @@ namespace xFunc.Maths.Expressions
         /// <param name="value">The value.</param>
         public Define(IExpression key, IExpression value)
         {
-            this.Key = key;
-            this.Value = value;
+            Key = key;
+            Value = value;
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace xFunc.Maths.Expressions
             if (arguments.Count > 2)
                 throw new ParseException(Resource.MoreParams);
 
-            this.Key = arguments[0];
-            this.Value = arguments[1];
+            Key = arguments[0];
+            Value = arguments[1];
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter) => this.Analyze(formatter);
+        public string ToString(IFormatter formatter) => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -91,7 +91,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString() => this.ToString(new CommonFormatter());
+        public override string ToString() => ToString(new CommonFormatter());
 
         /// <summary>
         /// Throws <see cref="NotSupportedException"/>.

@@ -86,15 +86,15 @@ namespace xFunc.Maths.Expressions.Matrices
             if (this == obj)
                 return true;
 
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
 
             var matrix = (Matrix)obj;
 
-            if (this.vectors.Count != matrix.vectors.Count)
+            if (vectors.Count != matrix.vectors.Count)
                 return false;
 
-            return this.vectors.SequenceEqual(matrix.vectors);
+            return vectors.SequenceEqual(matrix.vectors);
         }
 
         /// <summary>

@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <param name="number">A number.</param>
         public NumberToken(double number)
         {
-            this.Number = number;
+            Number = number;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace xFunc.Maths.Tokenization.Tokens
 
             var token = (NumberToken)obj;
 
-            return this.Number == token.Number;
+            return Number == token.Number;
         }
 
         /// <summary>

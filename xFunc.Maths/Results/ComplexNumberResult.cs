@@ -28,7 +28,7 @@ namespace xFunc.Maths.Results
         /// <param name="complex">The numerical representation of result.</param>
         public ComplexNumberResult(Complex complex)
         {
-            this.Result = complex;
+            Result = complex;
         }
 
         /// <summary>

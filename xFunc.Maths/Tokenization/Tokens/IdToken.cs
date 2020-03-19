@@ -30,7 +30,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <param name="id">An id.</param>
         public IdToken(string id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         /// <summary>

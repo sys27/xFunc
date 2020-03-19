@@ -95,9 +95,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="functions">The collection of user functions.</param>
         public ExpressionParameters(AngleMeasurement angleMeasurement, ParameterCollection variables, FunctionCollection functions)
         {
-            this.AngleMeasurement = angleMeasurement;
-            this.Variables = variables;
-            this.Functions = functions;
+            AngleMeasurement = angleMeasurement;
+            Variables = variables;
+            Functions = functions;
         }
 
         /// <summary>

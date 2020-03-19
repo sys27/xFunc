@@ -28,7 +28,7 @@ namespace xFunc.Maths.Results
         /// <param name="value">The value of result.</param>
         public BooleanResult(bool value)
         {
-            this.Result = value;
+            Result = value;
         }
 
         /// <summary>

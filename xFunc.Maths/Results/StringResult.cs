@@ -26,7 +26,7 @@ namespace xFunc.Maths.Results
         /// <param name="str">The string representation of result.</param>
         public StringResult(string str)
         {
-            this.Result = str;
+            Result = str;
         }
 
         /// <summary>

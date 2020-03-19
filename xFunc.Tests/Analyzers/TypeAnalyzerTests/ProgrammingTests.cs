@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndUndefined()
         {
-            var exp = new Maths.Expressions.Programming.And(Variable.X, Variable.X);
+            var exp = new ConditionalAnd(Variable.X, Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -59,7 +59,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndBool()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(false), new Bool(true));
+            var exp = new ConditionalAnd(new Bool(false), new Bool(true));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -67,7 +67,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndBoolNumberExpection()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(false), new Number(1));
+            var exp = new ConditionalAnd(new Bool(false), new Number(1));
 
             TestBinaryException(exp);
         }
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndNumberBoolExpection()
         {
-            var exp = new Maths.Expressions.Programming.And(new Number(1), new Bool(true));
+            var exp = new ConditionalAnd(new Number(1), new Bool(true));
 
             TestBinaryException(exp);
         }
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndException()
         {
-            var exp = new Maths.Expressions.Programming.And(new ComplexNumber(2, 3), new Bool(false));
+            var exp = new ConditionalAnd(new ComplexNumber(2, 3), new Bool(false));
 
             TestBinaryException(exp);
         }
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndInvalidArgsException()
         {
-            var exp = new Maths.Expressions.Programming.And(new Number(2), new Number(2));
+            var exp = new ConditionalAnd(new Number(2), new Number(2));
 
             TestException(exp);
         }
@@ -523,7 +523,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrUndefined()
         {
-            var exp = new Maths.Expressions.Programming.Or(Variable.X, Variable.X);
+            var exp = new ConditionalOr(Variable.X, Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -531,7 +531,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrBool()
         {
-            var exp = new Maths.Expressions.Programming.Or(new Bool(false), new Bool(true));
+            var exp = new ConditionalOr(new Bool(false), new Bool(true));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -539,7 +539,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrBoolNumberException()
         {
-            var exp = new Maths.Expressions.Programming.Or(new Bool(false), new Number(2));
+            var exp = new ConditionalOr(new Bool(false), new Number(2));
 
             TestBinaryException(exp);
         }
@@ -547,7 +547,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrException()
         {
-            var exp = new Maths.Expressions.Programming.Or(new ComplexNumber(2, 3), new Bool(false));
+            var exp = new ConditionalOr(new ComplexNumber(2, 3), new Bool(false));
 
             TestBinaryException(exp);
         }
@@ -555,7 +555,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrInvalidArgsException()
         {
-            var exp = new Maths.Expressions.Programming.Or(new ComplexNumber(2, 3), new ComplexNumber(2, 3));
+            var exp = new ConditionalOr(new ComplexNumber(2, 3), new ComplexNumber(2, 3));
 
             TestException(exp);
         }

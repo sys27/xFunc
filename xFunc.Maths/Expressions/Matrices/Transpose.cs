@@ -84,6 +84,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new Transpose(this.Argument.Clone());
+            new Transpose(Argument.Clone());
     }
 }

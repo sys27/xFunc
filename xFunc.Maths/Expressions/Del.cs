@@ -58,8 +58,10 @@ namespace xFunc.Maths.Expressions
             IList<IExpression> arguments)
             : base(arguments)
         {
-            this.differentiator = differentiator ?? throw new ArgumentNullException(nameof(differentiator));
-            this.simplifier = simplifier ?? throw new ArgumentNullException(nameof(simplifier));
+            this.differentiator = differentiator ??
+                                  throw new ArgumentNullException(nameof(differentiator));
+            this.simplifier = simplifier ??
+                              throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>
@@ -96,10 +98,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
@@ -107,9 +107,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Del(differentiator, simplifier, Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Del(differentiator, simplifier, Argument.Clone());
     }
 }

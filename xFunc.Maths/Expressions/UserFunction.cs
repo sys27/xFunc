@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="arguments">Arguments.</param>
         public UserFunction(string function, IList<IExpression> arguments)
         {
-            this.Function = function;
+            Function = function;
 
             this.arguments = arguments ??
                              throw new ArgumentNullException(nameof(arguments));
@@ -74,8 +74,8 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             return obj is UserFunction exp &&
-                this.Function == exp.Function &&
-                this.ParametersCount == exp.ParametersCount;
+                Function == exp.Function &&
+                ParametersCount == exp.ParametersCount;
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace xFunc.Maths.Expressions
             for (var i = 0; i < ParametersCount; i++)
             {
                 var arg = func.arguments[i] as Variable;
-                newParameters[arg.Name] = (double)this.arguments[i].Execute(parameters);
+                newParameters[arg.Name] = (double)arguments[i].Execute(parameters);
             }
 
             var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);

@@ -48,9 +48,6 @@ namespace xFunc.Maths.Expressions.Matrices
 
             for (var i = 0; i < ParametersCount; i++)
             {
-                if (this[i] == null)
-                    continue;
-
                 if (this[i] is Number)
                 {
                     args[i] = this[i];
@@ -61,7 +58,7 @@ namespace xFunc.Maths.Expressions.Matrices
                     if (result is double doubleResult)
                         args[i] = new Number(doubleResult);
                     else
-                        args[i] = new Number((int)result); // TODO:
+                        throw new ResultIsNotSupportedException(this, result);
                 }
             }
 

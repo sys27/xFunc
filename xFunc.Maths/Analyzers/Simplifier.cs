@@ -1600,7 +1600,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Expressions.LogicalAndBitwise.And exp)
+        public virtual IExpression Analyze(And exp)
         {
             return AnalyzeBinary(exp);
         }
@@ -1691,7 +1691,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Expressions.LogicalAndBitwise.Or exp)
+        public virtual IExpression Analyze(Or exp)
         {
             return AnalyzeBinary(exp);
         }
@@ -1734,7 +1734,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Expressions.Programming.And exp)
+        public virtual IExpression Analyze(ConditionalAnd exp)
         {
             return exp;
         }
@@ -1903,7 +1903,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Expressions.Programming.Or exp)
+        public virtual IExpression Analyze(ConditionalOr exp)
         {
             return exp;
         }

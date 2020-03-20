@@ -17,6 +17,7 @@ using System;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions;
 using Xunit;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Tests.Expressions.Matrices
 {
@@ -38,6 +39,14 @@ namespace xFunc.Tests.Expressions.Matrices
         public void NullTest()
         {
             Assert.Throws<ArgumentNullException>(() => new Vector(new IExpression[] { null, null }));
+        }
+
+        [Fact]
+        public void VectorArgumentIsNotNumber()
+        {
+            var exp = new Vector(new IExpression[] { new Bool(false) });
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

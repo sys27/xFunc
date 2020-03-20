@@ -72,7 +72,7 @@ namespace xFunc.Maths.Expressions.Programming
             if (this == obj)
                 return true;
 
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
 
             var exp = (VariableBinaryExpression)obj;

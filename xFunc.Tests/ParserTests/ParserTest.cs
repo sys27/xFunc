@@ -479,7 +479,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.Programming.And(
+            var expected = new ConditionalAnd(
                 new Equal(Variable.X, new Number(0)),
                 new NotEqual(new Variable("y"), new Number(0)));
 
@@ -513,7 +513,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.Programming.Or(
+            var expected = new ConditionalOr(
                 new Equal(Variable.X, new Number(0)),
                 new NotEqual(new Variable("y"), new Number(0)));
 
@@ -661,7 +661,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
+            var expected = new And(new Bool(true), new Bool(false));
 
             Assert.Equal(expected, exp);
         }
@@ -676,7 +676,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(false));
+            var expected = new And(new Bool(true), new Bool(false));
 
             Assert.Equal(expected, exp);
         }
@@ -695,7 +695,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.LogicalAndBitwise.And(
+            var expected = new And(
                 new GreaterThan(new Number(3), new Number(4)),
                 new LessThan(new Number(1), new Number(3)));
 
@@ -734,7 +734,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ConvertLogicExpressionToCollectionTest()
         {
-            var exp = new Implication(new Maths.Expressions.LogicalAndBitwise.Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
+            var exp = new Implication(new Or(new Variable("a"), new Variable("b")), new Not(new Variable("c")));
             var actual = new List<IExpression>(Helpers.ConvertExpressionToCollection(exp));
 
             Assert.Equal(3, actual.Count);
@@ -1417,7 +1417,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
+            var expected = new Or(new Number(1), new Number(2));
 
             Assert.Equal(expected, exp);
         }
@@ -1432,7 +1432,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Maths.Expressions.LogicalAndBitwise.Or(new Number(1), new Number(2));
+            var expected = new Or(new Number(1), new Number(2));
 
             Assert.Equal(expected, exp);
         }

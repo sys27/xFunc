@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="name">A name of variable.</param>
         public Variable(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         /// <summary>

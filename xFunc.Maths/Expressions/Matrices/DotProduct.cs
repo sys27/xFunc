@@ -53,8 +53,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = this.Left.Execute(parameters);
-            var right = this.Right.Execute(parameters);
+            var left = Left.Execute(parameters);
+            var right = Right.Execute(parameters);
 
             return (left, right) switch
             {

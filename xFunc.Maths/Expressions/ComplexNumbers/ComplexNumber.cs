@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <param name="complex">The complex number.</param>
         public ComplexNumber(Complex complex)
         {
-            this.Value = complex;
+            Value = complex;
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public IExpression Clone() => new ComplexNumber(this.Value);
+        public IExpression Clone() => new ComplexNumber(Value);
 
         /// <summary>
         /// Gets the value.

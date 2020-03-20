@@ -80,8 +80,8 @@ namespace xFunc.Maths
             ITypeAnalyzer typeAnalyzer,
             ExpressionParameters parameters)
         {
-            this.lexer = new Lexer();
-            this.parser = new Parser();
+            lexer = new Lexer();
+            parser = new Parser();
 
             this.simplifier = simplifier ??
                               throw new ArgumentNullException(nameof(simplifier));

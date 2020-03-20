@@ -951,7 +951,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Expressions.LogicalAndBitwise.And exp)
+        public string Analyze(And exp)
         {
             if (exp.Parent is BinaryExpression)
                 return ToString(exp, "({0} and {1})");
@@ -1036,7 +1036,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Expressions.LogicalAndBitwise.Or exp)
+        public string Analyze(Or exp)
         {
             if (exp.Parent is BinaryExpression)
                 return ToString(exp, "({0} or {1})");
@@ -1079,7 +1079,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Expressions.Programming.And exp)
+        public string Analyze(ConditionalAnd exp)
         {
             if (exp.Parent is BinaryExpression)
                 return ToString(exp, "({0} && {1})");
@@ -1240,7 +1240,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Expressions.Programming.Or exp)
+        public string Analyze(ConditionalOr exp)
         {
             if (exp.Parent is BinaryExpression)
                 return ToString(exp, "({0} || {1})");

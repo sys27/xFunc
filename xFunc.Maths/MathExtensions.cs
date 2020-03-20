@@ -17,6 +17,7 @@ using System;
 using System.Globalization;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths
 {
@@ -25,6 +26,11 @@ namespace xFunc.Maths
     /// </summary>
     internal static class MathExtensions
     {
+        /// <summary>
+        /// The constant which is used to compare two double numbers.
+        /// </summary>
+        public const double Epsilon = 1E-15;
+
         /// <summary>
         /// Returns a specified number raised to the specified power.
         /// </summary>
@@ -326,6 +332,79 @@ namespace xFunc.Maths
                 AngleMeasurement.Gradian => value / Math.PI * 200,
                 _ => value / Math.PI * 180,
             };
+        }
+
+        /// <summary>
+        /// Check that double is an integer.
+        /// </summary>
+        /// <param name="value">The double value.</param>
+        /// <returns>true if <paramref name="value"/> is an integer; otherwise, false.</returns>
+        public static bool IsInt(this double value) =>
+            Math.Abs(value % 1) <= Epsilon;
+
+        /// <summary>
+        /// Calculates AND operation between two double values.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of AND operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static double And(this double left, double right)
+        {
+            if (!left.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!right.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return (int)left & (int)right;
+        }
+
+        /// <summary>
+        /// Calculates OR operation between two double values.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of OR operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static double Or(this double left, double right)
+        {
+            if (!left.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!right.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return (int)left | (int)right;
+        }
+
+        /// <summary>
+        /// Calculates XOR operation between two double values.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of XOR operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static double XOr(this double left, double right)
+        {
+            if (!left.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!right.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return (int)left ^ (int)right;
+        }
+
+        /// <summary>
+        /// Calculates NOT operation.
+        /// </summary>
+        /// <param name="value">The left operand.</param>
+        /// <returns>The result of NOT operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="value"/> is not an integer.</exception>
+        public static double Not(this double value)
+        {
+            if (!value.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(value));
+
+            return ~(int)value;
         }
     }
 }

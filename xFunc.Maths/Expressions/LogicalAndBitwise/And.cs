@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
@@ -60,7 +59,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             return (left, right) switch
             {
                 (bool leftBool, bool rightBool) => leftBool & rightBool,
-                (double leftDouble, double rightDouble) => (double)((int)Math.Round(leftDouble, MidpointRounding.AwayFromZero) & (int)Math.Round(rightDouble, MidpointRounding.AwayFromZero)),
+                (double leftDouble, double rightDouble) => leftDouble.And(rightDouble),
                 _ => throw new ResultIsNotSupportedException(this, left, right),
             };
         }

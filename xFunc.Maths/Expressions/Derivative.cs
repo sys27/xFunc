@@ -73,10 +73,10 @@ namespace xFunc.Maths.Expressions
             IList<IExpression> args)
             : base(args)
         {
-            this.Differentiator = differentiator ??
-                                  throw new ArgumentNullException(nameof(differentiator));
-            this.Simplifier = simplifier ??
-                              throw new ArgumentNullException(nameof(simplifier));
+            Differentiator = differentiator ??
+                             throw new ArgumentNullException(nameof(differentiator));
+            Simplifier = simplifier ??
+                         throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>
@@ -89,14 +89,14 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var variable = this.Variable;
+            var variable = Variable;
 
             Differentiator.Variable = variable;
             Differentiator.Parameters = parameters;
 
-            var diff = this.Analyze(Differentiator);
+            var diff = Analyze(Differentiator);
 
-            var point = this.DerivativePoint;
+            var point = DerivativePoint;
             if (variable != null && point != null)
             {
                 if (parameters == null)
@@ -121,17 +121,15 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public override IExpression Clone() =>
-            new Derivative(this.Differentiator, this.Simplifier, CloneArguments());
+            new Derivative(Differentiator, Simplifier, CloneArguments());
 
         /// <summary>
         /// Gets or sets the expression.

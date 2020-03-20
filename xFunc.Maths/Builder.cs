@@ -67,7 +67,7 @@ namespace xFunc.Maths
         [ExcludeFromCodeCoverage]
         public string ToString(IFormatter formatter)
         {
-            return this.Analyze(formatter);
+            return Analyze(formatter);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace xFunc.Maths
         /// <returns>The builder.</returns>
         public Builder Init(IExpression initial)
         {
-            this.Current = initial;
+            Current = initial;
 
             return this;
         }
@@ -801,7 +801,7 @@ namespace xFunc.Maths
         [ExcludeFromCodeCoverage]
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            return this.Current.Analyze(analyzer);
+            return Current.Analyze(analyzer);
         }
 
         /// <summary>

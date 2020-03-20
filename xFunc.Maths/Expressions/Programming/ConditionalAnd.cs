@@ -21,24 +21,24 @@ namespace xFunc.Maths.Expressions.Programming
     /// <summary>
     /// Represents a conditional-AND operator.
     /// </summary>
-    public class And : BinaryExpression
+    public class ConditionalAnd : BinaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="And"/> class.
+        /// Initializes a new instance of the <see cref="ConditionalAnd"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public And(IExpression left, IExpression right)
+        public ConditionalAnd(IExpression left, IExpression right)
             : base(left, right)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="And"/> class.
+        /// Initializes a new instance of the <see cref="ConditionalAnd"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal And(IList<IExpression> arguments)
+        internal ConditionalAnd(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -78,9 +78,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// Creates the clone of this instance.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="And" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="ConditionalAnd" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new And(Left.Clone(), Right.Clone());
+            new ConditionalAnd(Left.Clone(), Right.Clone());
     }
 }

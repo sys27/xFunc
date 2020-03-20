@@ -763,7 +763,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AndAndToStringTest()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Maths.Expressions.LogicalAndBitwise.And(new Bool(true), new Bool(true)));
+            var exp = new And(new Bool(true), new And(new Bool(true), new Bool(true)));
 
             Assert.Equal("True and (True and True)", exp.ToString(commonFormatter));
         }
@@ -771,7 +771,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void OrToStringTest()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Bool(true));
+            var exp = new Or(new Bool(true), new Bool(true));
 
             Assert.Equal("True or True", exp.ToString(commonFormatter));
         }
@@ -779,7 +779,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void OrOrToStringTest()
         {
-            var exp = new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Maths.Expressions.LogicalAndBitwise.Or(new Bool(true), new Bool(true)));
+            var exp = new Or(new Bool(true), new Or(new Bool(true), new Bool(true)));
 
             Assert.Equal("True or (True or True)", exp.ToString(commonFormatter));
         }
@@ -819,7 +819,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void EqualityToStringTest2()
         {
-            var eq = new Maths.Expressions.LogicalAndBitwise.And(new Equality(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new Equality(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True <=> False) and False", eq.ToString(commonFormatter));
         }
@@ -835,7 +835,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ImplicationToStringTest2()
         {
-            var eq = new Maths.Expressions.LogicalAndBitwise.And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True => False) and False", eq.ToString(commonFormatter));
         }
@@ -851,7 +851,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void NAndToStringTest2()
         {
-            var eq = new Maths.Expressions.LogicalAndBitwise.And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True nand False) and False", eq.ToString(commonFormatter));
         }
@@ -867,7 +867,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void NOrToStringTest2()
         {
-            var eq = new Maths.Expressions.LogicalAndBitwise.And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
 
             Assert.Equal("(True nor False) and False", eq.ToString(commonFormatter));
         }
@@ -1157,7 +1157,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CondAndToString()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(true), new Bool(true));
+            var exp = new ConditionalAnd(new Bool(true), new Bool(true));
 
             Assert.Equal("True && True", exp.ToString(commonFormatter));
         }
@@ -1165,7 +1165,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CondAndCondAndToString()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(true), new Maths.Expressions.Programming.And(new Bool(true), new Bool(true)));
+            var exp = new ConditionalAnd(new Bool(true), new ConditionalAnd(new Bool(true), new Bool(true)));
 
             Assert.Equal("True && (True && True)", exp.ToString(commonFormatter));
         }
@@ -1173,7 +1173,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CondOrToString()
         {
-            var exp = new Maths.Expressions.Programming.Or(new Bool(true), new Bool(true));
+            var exp = new ConditionalOr(new Bool(true), new Bool(true));
 
             Assert.Equal("True || True", exp.ToString(commonFormatter));
         }
@@ -1181,7 +1181,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CondOrCondOrToString()
         {
-            var exp = new Maths.Expressions.Programming.Or(new Bool(true), new Maths.Expressions.Programming.Or(new Bool(true), new Bool(true)));
+            var exp = new ConditionalOr(new Bool(true), new ConditionalOr(new Bool(true), new Bool(true)));
 
             Assert.Equal("True || (True || True)", exp.ToString(commonFormatter));
         }
@@ -1229,7 +1229,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void LessLessToString()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(true), new LessThan(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(new Bool(true), new LessThan(new Number(5), new Number(5)));
 
             Assert.Equal("True && (5 < 5)", exp.ToString(commonFormatter));
         }
@@ -1245,7 +1245,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void LessOrEqualLessOrEqualToString()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(true), new LessOrEqual(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(new Bool(true), new LessOrEqual(new Number(5), new Number(5)));
 
             Assert.Equal("True && (5 <= 5)", exp.ToString(commonFormatter));
         }
@@ -1261,7 +1261,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void GreatGreatToString()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(true), new GreaterThan(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(new Bool(true), new GreaterThan(new Number(5), new Number(5)));
 
             Assert.Equal("True && (5 > 5)", exp.ToString(commonFormatter));
         }
@@ -1277,7 +1277,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void GreatOrEqualGreatOrEqualToString()
         {
-            var exp = new Maths.Expressions.Programming.And(new Bool(true), new GreaterOrEqual(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(new Bool(true), new GreaterOrEqual(new Number(5), new Number(5)));
 
             Assert.Equal("True && (5 >= 5)", exp.ToString(commonFormatter));
         }

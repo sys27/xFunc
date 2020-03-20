@@ -13,7 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -38,6 +40,30 @@ namespace xFunc.Tests.Expressions
             var expected = 5.56;
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ExecuteArgumentIsNotNumber()
+        {
+            var exp = new Round(new Bool(false), new Number(2));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteDigitstIsNotNumber()
+        {
+            var exp = new Round(new Number(5.5), new Bool(false));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteArgumentIsNotInteger()
+        {
+            var exp = new Round(new Number(5.5), new Number(2.5));
+
+            Assert.Throws<InvalidOperationException>(() => exp.Execute());
         }
 
         [Fact]

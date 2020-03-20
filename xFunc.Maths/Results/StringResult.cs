@@ -26,7 +26,7 @@ namespace xFunc.Maths.Results
         /// <param name="str">The string representation of result.</param>
         public StringResult(string str)
         {
-            this.Result = str;
+            Result = str;
         }
 
         /// <summary>
@@ -35,10 +35,7 @@ namespace xFunc.Maths.Results
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return Result;
-        }
+        public override string ToString() => Result;
 
         /// <summary>
         /// Gets the string representation of result.

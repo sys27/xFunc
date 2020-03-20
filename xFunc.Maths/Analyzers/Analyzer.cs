@@ -1084,7 +1084,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public virtual TResult Analyze(Expressions.LogicalAndBitwise.And exp)
+        public virtual TResult Analyze(And exp)
         {
             throw new NotSupportedException();
         }
@@ -1175,7 +1175,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public virtual TResult Analyze(Expressions.LogicalAndBitwise.Or exp)
+        public virtual TResult Analyze(Or exp)
         {
             throw new NotSupportedException();
         }
@@ -1218,7 +1218,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public virtual TResult Analyze(Expressions.Programming.And exp)
+        public virtual TResult Analyze(ConditionalAnd exp)
         {
             throw new NotSupportedException();
         }
@@ -1387,7 +1387,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public virtual TResult Analyze(Expressions.Programming.Or exp)
+        public virtual TResult Analyze(ConditionalOr exp)
         {
             throw new NotSupportedException();
         }

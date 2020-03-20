@@ -53,10 +53,12 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is double number)
-                return MathExtensions.Fact(Math.Round(number));
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                double number => MathExtensions.Fact(Math.Round(number)),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>

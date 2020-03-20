@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Expressions;
-using xFunc.Maths;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 using xFunc.Maths.Expressions.ComplexNumbers;

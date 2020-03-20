@@ -1357,7 +1357,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Expressions.LogicalAndBitwise.And exp)
+        public virtual ResultTypes Analyze(And exp)
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -1528,7 +1528,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Expressions.LogicalAndBitwise.Or exp)
+        public virtual ResultTypes Analyze(Or exp)
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -1628,7 +1628,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Expressions.Programming.And exp)
+        public virtual ResultTypes Analyze(ConditionalAnd exp)
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);
@@ -1915,7 +1915,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(Expressions.Programming.Or exp)
+        public virtual ResultTypes Analyze(ConditionalOr exp)
         {
             var leftResult = exp.Left.Analyze(this);
             var rightResult = exp.Right.Analyze(this);

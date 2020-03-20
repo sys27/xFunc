@@ -85,20 +85,20 @@ namespace xFunc.Maths.Expressions
             if (this == obj)
                 return true;
 
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
                 return false;
 
             var diff = (DifferentParametersExpression)obj;
 
-            if (this.arguments == null && diff.arguments == null)
+            if (arguments == null && diff.arguments == null)
                 return true;
 
-            if (this.arguments == null ||
+            if (arguments == null ||
                 diff.arguments == null ||
-                this.arguments.Count != diff.arguments.Count)
+                arguments.Count != diff.arguments.Count)
                 return false;
 
-            return this.arguments.SequenceEqual(diff.arguments);
+            return arguments.SequenceEqual(diff.arguments);
         }
 
         /// <summary>

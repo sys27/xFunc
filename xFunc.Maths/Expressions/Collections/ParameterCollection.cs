@@ -184,7 +184,7 @@ namespace xFunc.Maths.Expressions.Collections
                 var param = collection.FirstOrDefault(p => p.Key == key);
                 if (param == null)
                 {
-                    this.Add(key, value);
+                    Add(key, value);
                 }
                 else
                 {
@@ -231,7 +231,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of variable.</param>
         public void Add(string key)
         {
-            this.Add(new Parameter(key, 0));
+            Add(new Parameter(key, 0));
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of variable.</param>
         public void Add(string key, object value)
         {
-            this.Add(new Parameter(key, value));
+            Add(new Parameter(key, value));
         }
 
         /// <summary>

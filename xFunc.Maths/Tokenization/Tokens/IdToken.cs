@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Diagnostics;
 
 namespace xFunc.Maths.Tokenization.Tokens
@@ -30,7 +29,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// <param name="id">An id.</param>
         public IdToken(string id)
         {
-            this.Id = id;
+            Id = id;
         }
 
         /// <summary>

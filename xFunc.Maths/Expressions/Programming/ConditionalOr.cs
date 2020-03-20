@@ -21,24 +21,24 @@ namespace xFunc.Maths.Expressions.Programming
     /// <summary>
     /// Represents a conditional-OR operator.
     /// </summary>
-    public class Or : BinaryExpression
+    public class ConditionalOr : BinaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Or"/> class.
+        /// Initializes a new instance of the <see cref="ConditionalOr"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
         /// <param name="right">The right (second) operand.</param>
-        public Or(IExpression left, IExpression right)
+        public ConditionalOr(IExpression left, IExpression right)
             : base(left, right)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Or"/> class.
+        /// Initializes a new instance of the <see cref="ConditionalOr"/> class.
         /// </summary>
         /// <param name="arguments">The list of arguments.</param>
         /// <seealso cref="IExpression"/>
-        internal Or(IList<IExpression> arguments)
+        internal ConditionalOr(IList<IExpression> arguments)
             : base(arguments)
         {
         }
@@ -71,20 +71,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Creates the clone of this instance.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="Or" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="ConditionalOr" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone()
-        {
-            return new Or(Left.Clone(), Right.Clone());
-        }
+        public override IExpression Clone() =>
+            new ConditionalOr(Left.Clone(), Right.Clone());
     }
 }

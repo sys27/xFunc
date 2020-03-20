@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
             var greaterThen = new GreaterThan(Variable.X, new Number(-10));
-            var and = new And(lessThen, greaterThen);
+            var and = new ConditionalAnd(lessThen, greaterThen);
 
             Assert.True((bool) and.Execute(parameters));
         }
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
             var greaterThen = new GreaterThan(Variable.X, new Number(10));
-            var and = new And(lessThen, greaterThen);
+            var and = new ConditionalAnd(lessThen, greaterThen);
 
             Assert.False((bool) and.Execute(parameters));
         }
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateInvalidParametersTest()
         {
-            var and = new And(new Number(1), new Number(2));
+            var and = new ConditionalAnd(new Number(1), new Number(2));
 
             Assert.Throws<ResultIsNotSupportedException>(() => and.Execute());
         }
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var lessThen = new LessThan(Variable.X, new Number(10));
             var greaterThen = new GreaterThan(Variable.X, new Number(10));
-            var exp = new And(lessThen, greaterThen);
+            var exp = new ConditionalAnd(lessThen, greaterThen);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

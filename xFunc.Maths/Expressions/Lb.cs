@@ -55,10 +55,12 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is double number)
-                return Math.Log(number, 2);
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                double number => Math.Log(number, 2),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>
@@ -69,18 +71,14 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance of the <see cref="Lb"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone()
-        {
-            return new Lb(Argument.Clone());
-        }
+        public override IExpression Clone() =>
+            new Lb(Argument.Clone());
     }
 }

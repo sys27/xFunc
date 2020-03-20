@@ -59,10 +59,12 @@ namespace xFunc.Maths.Expressions
                 .Select(item =>
                 {
                     var result = item.Execute(parameters);
-                    if (result is double number)
-                        return number;
 
-                    throw new ResultIsNotSupportedException(this, result);
+                    return result switch
+                    {
+                        double number => number,
+                        _ => throw new ResultIsNotSupportedException(this, result),
+                    };
                 })
                 .Aggregate(MathExtensions.GCD);
         }

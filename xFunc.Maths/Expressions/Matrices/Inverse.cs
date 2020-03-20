@@ -13,11 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {
@@ -80,6 +77,6 @@ namespace xFunc.Maths.Expressions.Matrices
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new Inverse(this.Argument.Clone());
+            new Inverse(Argument.Clone());
     }
 }

@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             return arg switch
             {
                 bool boolArg => !boolArg,
-                double doubleArg => (double)~(int)Math.Round(doubleArg, MidpointRounding.AwayFromZero),
+                double doubleArg => doubleArg.Not(),
                 _ => throw new ResultIsNotSupportedException(this, arg),
             };
         }

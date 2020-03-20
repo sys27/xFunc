@@ -44,7 +44,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new If(
-                new And(
+                new ConditionalAnd(
                     new Equal(Variable.X, new Number(0)),
                     new NotEqual(new Variable("y"), new Number(0))),
                 new Number(2),
@@ -73,7 +73,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new If(
-                new And(
+                new ConditionalAnd(
                     new Equal(Variable.X, new Number(0)),
                     new NotEqual(new Variable("y"), new Number(0))),
                 new Number(2));

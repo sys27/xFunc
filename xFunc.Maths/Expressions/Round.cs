@@ -65,13 +65,13 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is double arg)
+            var digits = Digits?.Execute(parameters) ?? 0.0;
+            if (result is double arg && digits is double digitsDouble)
             {
-                var digits = (double?)Digits?.Execute(parameters) ?? 0.0;
-                if (!digits.IsInt())
+                if (!digitsDouble.IsInt())
                     throw new InvalidOperationException(Resource.ValueIsNotInteger);
 
-                return Math.Round(arg, (int)digits, MidpointRounding.AwayFromZero);
+                return Math.Round(arg, (int)digitsDouble, MidpointRounding.AwayFromZero);
             }
 
             throw new ResultIsNotSupportedException(this, result);

@@ -15,9 +15,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
 {

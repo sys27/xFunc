@@ -37,10 +37,8 @@ namespace xFunc.Maths.Results
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return Result.ToString(CultureInfo.InvariantCulture);
-        }
+        public override string ToString() =>
+            Result.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Gets the result.

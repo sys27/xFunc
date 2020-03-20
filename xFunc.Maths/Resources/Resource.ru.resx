@@ -193,4 +193,7 @@
   <data name="ResultIsNotSupported" xml:space="preserve">
     <value>Результат вычислений не поддерживается (Функция: '{0}({1})').</value>
   </data>
+  <data name="ValueIsNotInteger" xml:space="preserve">
+    <value>Значение не является целым числом.</value>
+  </data>
 </root>

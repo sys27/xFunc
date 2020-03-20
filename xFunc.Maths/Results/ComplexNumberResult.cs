@@ -37,10 +37,7 @@ namespace xFunc.Maths.Results
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return Result.Format();
-        }
+        public override string ToString() => Result.Format();
 
         /// <summary>
         /// Gets the numerical representation of result.

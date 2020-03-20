@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions
         public override bool Equals(object obj)
         {
             if (obj is Number num)
-                return Value.Equals(num.Value) || Math.Abs(Value - num.Value) < 1E-14;
+                return Value.Equals(num.Value) || Math.Abs(Value - num.Value) < MathExtensions.Epsilon;
 
             return false;
         }

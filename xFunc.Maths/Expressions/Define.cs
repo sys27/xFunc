@@ -48,8 +48,12 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="IExpression"/>
         internal Define(IList<IExpression> arguments)
         {
+            if (arguments == null)
+                throw new ArgumentNullException(nameof(arguments));
+
             if (arguments.Count < 2)
                 throw new ParseException(Resource.LessParams);
+
             if (arguments.Count > 2)
                 throw new ParseException(Resource.MoreParams);
 

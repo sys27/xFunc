@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths.Results
@@ -40,10 +39,7 @@ namespace xFunc.Maths.Results
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return exp.ToString();
-        }
+        public override string ToString() => exp.ToString();
 
         /// <summary>
         /// Gets the result.

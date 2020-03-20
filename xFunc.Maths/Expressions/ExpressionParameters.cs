@@ -105,30 +105,24 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="angleMeasurement">The angle measurement.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(AngleMeasurement angleMeasurement)
-        {
-            return new ExpressionParameters(angleMeasurement);
-        }
+        public static implicit operator ExpressionParameters(AngleMeasurement angleMeasurement) =>
+            new ExpressionParameters(angleMeasurement);
 
         /// <summary>
         /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="ParameterCollection"/>.
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(ParameterCollection parameters)
-        {
-            return new ExpressionParameters(parameters);
-        }
+        public static implicit operator ExpressionParameters(ParameterCollection parameters) =>
+            new ExpressionParameters(parameters);
 
         /// <summary>
         /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="FunctionCollection"/>.
         /// </summary>
         /// <param name="functions">The collection of user functions.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(FunctionCollection functions)
-        {
-            return new ExpressionParameters(functions);
-        }
+        public static implicit operator ExpressionParameters(FunctionCollection functions) =>
+            new ExpressionParameters(functions);
 
         /// <summary>
         /// Gets or sets the angle measurement.

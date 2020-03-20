@@ -74,9 +74,9 @@ namespace xFunc.Maths.Expressions
             : base(args)
         {
             Differentiator = differentiator ??
-                                  throw new ArgumentNullException(nameof(differentiator));
+                             throw new ArgumentNullException(nameof(differentiator));
             Simplifier = simplifier ??
-                              throw new ArgumentNullException(nameof(simplifier));
+                         throw new ArgumentNullException(nameof(simplifier));
         }
 
         /// <summary>
@@ -121,10 +121,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return analyzer.Analyze(this);
-        }
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
+            analyzer.Analyze(this);
 
         /// <summary>
         /// Clones this instance.

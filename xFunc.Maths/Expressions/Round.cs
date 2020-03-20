@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions
 {
@@ -63,15 +64,17 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var argResult = Argument.Execute(parameters);
-            if (argResult is double arg)
+            var result = Argument.Execute(parameters);
+            if (result is double arg)
             {
-                var digits = Digits?.Execute(parameters); // TODO:
+                var digits = (double?)Digits?.Execute(parameters) ?? 0.0;
+                if (!digits.IsInt())
+                    throw new InvalidOperationException(Resource.ValueIsNotInteger);
 
-                return Math.Round(arg, (int)((digits as double?) ?? 0), MidpointRounding.AwayFromZero);
+                return Math.Round(arg, (int)digits, MidpointRounding.AwayFromZero);
             }
 
-            throw new ResultIsNotSupportedException(this, argResult);
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

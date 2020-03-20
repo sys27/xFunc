@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -31,14 +32,6 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         }
 
         [Fact]
-        public void ExecuteTest2()
-        {
-            var exp = new And(new Number(1.5), new Number(2.5));
-
-            Assert.Equal(2.0, exp.Execute());
-        }
-
-        [Fact]
         public void ExecuteTest3()
         {
             var exp = new And(new Bool(true), new Bool(false));
@@ -52,6 +45,22 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             var exp = new And(new Bool(true), new Bool(true));
 
             Assert.True((bool) exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTestLeftIsNotInt()
+        {
+            var exp = new And(new Number(1.5), new Number(1));
+
+            Assert.Throws<ArgumentException>(() => exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteTestRightIsNotInt()
+        {
+            var exp = new And(new Number(1), new Number(1.5));
+
+            Assert.Throws<ArgumentException>(() => exp.Execute());
         }
 
         [Fact]

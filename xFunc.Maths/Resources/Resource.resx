@@ -193,4 +193,7 @@
   <data name="ResultIsNotSupported" xml:space="preserve">
     <value>The result of calculation is not supported (Function: '{0}({1})').</value>
   </data>
+  <data name="ValueIsNotInteger" xml:space="preserve">
+    <value>The value is not an integer.</value>
+  </data>
 </root>

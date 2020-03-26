@@ -13,7 +13,7 @@
     <Company />
     <Copyright>Copyright ©2012-2020 Dmytro Kyshchenko</Copyright>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/sys27/xFunc/master/xFunc/Images/xFunc.ico</PackageIconUrl>
+    <PackageIcon>xFunc.ico</PackageIcon>
     <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
     <AssemblyVersion>4.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
@@ -29,6 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\xFunc.Maths\xFunc.Maths.csproj" />
     <ProjectReference Include="..\xFunc.UnitConverters\xFunc.UnitConverters.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\xFunc\Images\xFunc.ico" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

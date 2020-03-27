@@ -12,7 +12,7 @@
     <Copyright>Copyright © 2012-2020 Dmytro Kyshchenko</Copyright>
     <Description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</Description>
     <PackageProjectUrl>https://github.com/sys27/xFunc</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/sys27/xFunc/master/xFunc/Images/xFunc.ico</PackageIconUrl>
+    <PackageIcon>xFunc.ico</PackageIcon>
     <PackageTags>Math Expression Expressions Parser MathParser Differentiation Simplification</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>4.0.0</AssemblyVersion>
@@ -27,6 +27,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <CodeAnalysisRuleSet>..\xFunc.ruleset</CodeAnalysisRuleSet>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -40,6 +41,7 @@
     <None Include="..\NOTICE" Link="NOTICE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\xFunc\Images\xFunc.ico" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +53,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

@@ -110,8 +110,7 @@ namespace xFunc.Views
 
         private void this_MouseWheel(object o, MouseWheelEventArgs args)
         {
-            if (slider.Value != slider.Maximum)
-                slider.Value -= (slider.Value > 1 ? 0.5 : 0.1) * Math.Sign(args.Delta);
+            slider.Value -= (slider.Value > 1 ? 0.5 : 0.1) * Math.Sign(args.Delta);
         }
 
         private void slider_ValueChanged(object o, RoutedPropertyChangedEventArgs<double> args)
@@ -320,27 +319,27 @@ namespace xFunc.Views
             using (var context = geometry.Open())
             {
                 bool startFlag = true;
-                double y;
                 double tempY;
                 for (double x = -centerX / cm; x <= (currentWidth - centerX) / cm; x += 0.03 * slider.Value)
                 {
                     parameters.Variables["x"] = x;
-                    y = (double)exp.Execute(parameters);
-
-                    tempY = centerY - (y * cm);
-                    if (double.IsNaN(y) || tempY < 0 || tempY > currentHeight)
+                    if (exp.Execute(parameters) is double y)
                     {
-                        startFlag = true;
-                    }
-                    else
-                    {
-                        if (startFlag)
+                        tempY = centerY - (y * cm);
+                        if (double.IsNaN(y) || tempY < 0 || tempY > currentHeight)
                         {
-                            context.BeginFigure(new Point(centerX + (x * cm), tempY), false, false);
-                            startFlag = false;
+                            startFlag = true;
                         }
+                        else
+                        {
+                            if (startFlag)
+                            {
+                                context.BeginFigure(new Point(centerX + (x * cm), tempY), false, false);
+                                startFlag = false;
+                            }
 
-                        context.LineTo(new Point(centerX + (x * cm), tempY), true, false);
+                            context.LineTo(new Point(centerX + (x * cm), tempY), true, false);
+                        }
                     }
                 }
             }

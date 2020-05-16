@@ -30,7 +30,7 @@ namespace xFunc.Maths
         /// <summary>
         /// The constant which is used to compare two double numbers.
         /// </summary>
-        public const double Epsilon = 1E-15;
+        public const double Epsilon = 1E-14;
 
         /// <summary>
         /// Returns a specified number raised to the specified power.
@@ -42,6 +42,7 @@ namespace xFunc.Maths
         {
             if (number < 0)
             {
+                // TODO:
                 if ((BitConverter.DoubleToInt64Bits(power) & 1) == 1)
                 {
                     return -Math.Pow(-number, power);
@@ -282,17 +283,17 @@ namespace xFunc.Maths
         /// <returns>The formatted string.</returns>
         public static string Format(this Complex complex)
         {
-            if (complex.Real == 0)
+            if (Equals(complex.Real, 0))
             {
-                if (complex.Imaginary == 1)
+                if (Equals(complex.Imaginary, 1))
                     return "i";
-                if (complex.Imaginary == -1)
+                if (Equals(complex.Imaginary, -1))
                     return "-i";
 
                 return $"{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";
             }
 
-            if (complex.Imaginary == 0)
+            if (Equals(complex.Imaginary, 0))
                 return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
 
             if (complex.Imaginary > 0)

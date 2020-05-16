@@ -55,6 +55,15 @@ namespace xFunc.Maths.Expressions
             new Variable(variable);
 
         /// <summary>
+        /// Deconstructs <see cref="Variable"/> to <see cref="string"/>.
+        /// </summary>
+        /// <param name="variable">The name of variable.</param>
+        public void Deconstruct(out string variable)
+        {
+            variable = Name;
+        }
+
+        /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>

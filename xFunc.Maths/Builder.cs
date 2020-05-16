@@ -384,6 +384,18 @@ namespace xFunc.Maths
         }
 
         /// <summary>
+        /// Creates the <seealso cref="Expressions.Exp"/> function. The Current state is used as argument.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        /// <exception cref="ArgumentNullException">The Current builder is empty.</exception>
+        public Builder Exp()
+        {
+            Current = new Exp(Current);
+
+            return this;
+        }
+
+        /// <summary>
         /// Creates the <seealso cref="Expressions.Abs"/> function. The Current state is used as argument.
         /// </summary>
         /// <returns>The builder.</returns>

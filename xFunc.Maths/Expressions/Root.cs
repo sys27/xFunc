@@ -59,6 +59,7 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
+                // TODO:
                 (double first, double second) when first < 0 && (second % 2 == 0) =>
                     new Complex(0, Complex.Pow(first, 1 / second).Imaginary),
 

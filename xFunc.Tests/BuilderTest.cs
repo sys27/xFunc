@@ -318,6 +318,14 @@ namespace xFunc.Tests
             Assert.Equal(builder.Current, new Lb(new Number(3)));
         }
 
+        [Fact]
+        public void ExpNumberTest()
+        {
+            var builder = new Builder(3).Exp();
+
+            Assert.Equal(builder.Current, new Exp(new Number(3)));
+        }
+
         #endregion Standart
 
         #region Trigonometric

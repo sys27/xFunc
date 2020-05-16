@@ -51,7 +51,7 @@ namespace xFunc.Maths.Tokenization.Tokens
 
             var token = (NumberToken)obj;
 
-            return Number == token.Number;
+            return MathExtensions.Equals(Number, token.Number);
         }
 
         /// <summary>

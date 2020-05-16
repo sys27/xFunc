@@ -84,10 +84,9 @@ namespace xFunc.Maths.Tokenization
             }
             else
             {
-                Debug.Assert(radix == 2 || radix == 8 || radix == 10 || radix == 16, "The radix should be equal to 2, 8, 10 or 16.");
+                Debug.Assert(radix == 2 || radix == 8 || radix == 16, "The radix should be equal to 2, 8, 10 or 16.");
                 maxVal = radix switch
                 {
-                    10 => 0xffffffffffffffff / 10,
                     16 => 0xffffffffffffffff / 16,
                     8 => 0xffffffffffffffff / 8,
                     _ => 0xffffffffffffffff / 2,

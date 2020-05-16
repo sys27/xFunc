@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions.Programming
 
             return (left, right) switch
             {
-                (double leftDouble, double rightDouble) => leftDouble == rightDouble,
+                (double leftDouble, double rightDouble) => MathExtensions.Equals(leftDouble, rightDouble),
                 (bool leftBool, bool rightBool) => leftBool == rightBool,
                 _ => throw new ResultIsNotSupportedException(this, left, right),
             };

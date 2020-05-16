@@ -379,7 +379,13 @@ namespace xFunc.Maths.Analyzers
         [ExcludeFromCodeCoverage]
         public virtual IExpression Analyze(Exp exp)
         {
-            return AnalyzeUnary(exp);
+            exp = AnalyzeUnary(exp);
+
+            // exp(ln(y)) -> y
+            if (exp.Argument is Ln ln)
+                return ln.Argument;
+
+            return exp;
         }
 
         /// <summary>
@@ -681,7 +687,18 @@ namespace xFunc.Maths.Analyzers
             if (exp.Right.Equals(one))
                 return exp.Left;
 
-            return exp;
+            return (exp.Left, exp.Right) switch
+            {
+                // x ^ log(x, y) -> y
+                (var left, Log log) when left.Equals(log.Left) => log.Right,
+                // e ^ ln(y) -> y
+                (Variable variable, Ln ln) when variable.Name == "e" => ln.Argument,
+                // 10 ^ lg(y) -> y
+                (Number number, Lg lg) when MathExtensions.Equals(number.Value, 10) => lg.Argument,
+                // 2 ^ lb(y) -> y
+                (Number number, Lb lb) when MathExtensions.Equals(number.Value, 2) => lb.Argument,
+                _ => exp,
+            };
         }
 
         /// <summary>

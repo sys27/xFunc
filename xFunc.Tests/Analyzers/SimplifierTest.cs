@@ -948,6 +948,50 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
+        public void PowLog()
+        {
+            var pow = new Pow(
+                new Number(30),
+                new Log(new Number(30), new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(pow, expected);
+        }
+
+        [Fact]
+        public void PowLg()
+        {
+            var pow = new Pow(
+                new Number(10),
+                new Lg(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(pow, expected);
+        }
+
+        [Fact]
+        public void PowLn()
+        {
+            var pow = new Pow(
+                new Variable("e"),
+                new Ln(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(pow, expected);
+        }
+
+        [Fact]
+        public void PowLb()
+        {
+            var pow = new Pow(
+                new Number(2),
+                new Lb(new Variable("x")));
+            var expected = new Variable("x");
+
+            SimpleTest(pow, expected);
+        }
+
+        [Fact]
         public void RootOne()
         {
             var root = new Root(Variable.X, new Number(1));
@@ -962,6 +1006,23 @@ namespace xFunc.Tests.Analyzers
             var root = new Root(Variable.X, new Number(5));
 
             SimpleTest(root, root);
+        }
+
+        [Fact]
+        public void Exp()
+        {
+            var exp = new Exp(new Number(30));
+
+            SimpleTest(exp, exp);
+        }
+
+        [Fact]
+        public void ExpLn()
+        {
+            var exp = new Exp(new Ln(new Number(30)));
+            var expected = new Number(30);
+
+            SimpleTest(exp, expected);
         }
 
         [Fact]

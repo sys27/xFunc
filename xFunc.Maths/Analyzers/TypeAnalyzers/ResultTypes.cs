@@ -62,5 +62,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// The expression returns other expression.
         /// </summary>
         Expression = 0x40,
+
+        /// <summary>
+        /// The expression returns a number or a complex number.
+        /// </summary>
+        NumberAndComplex = Number | ComplexNumber,
     }
 }

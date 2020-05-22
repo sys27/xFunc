@@ -1,0 +1,66 @@
+name: xFunc
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+    branches:
+      - master
+      - dev
+
+jobs:
+
+  build:
+    runs-on: windows-latest
+
+    env:
+      uiSolution: 'xFunc/xFunc.UI.sln'
+      solution: 'xFunc.sln'
+      buildConfiguration: 'Release'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.300
+
+    - name: Restore xFunc
+      run: dotnet restore $env:solution
+
+    - name: Restore xFunc.UI
+      run: dotnet restore $env:uiSolution
+
+    - name: Build xFunc
+      run: dotnet build -c $env:buildConfiguration --no-restore $env:solution
+
+    - name: Build xFunc UI
+      run: dotnet build -c $env:buildConfiguration --no-restore $env:uiSolution
+
+    - name: Test xFunc
+      run: dotnet test --no-restore -c $env:buildConfiguration -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="./coverage/" -p:ExcludeByAttribute="ExcludeFromCodeCoverage" -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total $env:solution
+
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
+      with:
+        reports: ./coverage/coverage.cobertura.xml
+        targetdir: ./coverage/
+        reporttypes: HtmlInline
+      
+    - name: Publush coverage
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage/coverage.cobertura.xml
+        fail_ci_if_error: true
+
+    - name: Pack NuGet
+      # TODO: version
+      run: dotnet pack --no-logo --no-build -o ./nupkgs --include-symbols $env:solution
+
+    # TODO: artifacts?

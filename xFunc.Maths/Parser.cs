@@ -74,6 +74,7 @@ namespace xFunc.Maths
 
         private IExpression Statement(TokenReader tokenReader)
         {
+            // TODO: to expressions?
             return UnaryAssign(tokenReader) ??
                    BinaryAssign(tokenReader) ??
                    Assign(tokenReader) ??
@@ -349,12 +350,40 @@ namespace xFunc.Maths
 
         private IExpression Expression(TokenReader tokenReader)
         {
-            return Binary(tokenReader);
+            return Ternary(tokenReader);
         }
 
-        private IExpression Binary(TokenReader tokenReader)
+        private IExpression Ternary(TokenReader tokenReader)
         {
-            return ConditionalOperator(tokenReader);
+            var scope = tokenReader.CreateScope();
+
+            var condition = ConditionalOperator(tokenReader);
+            if (condition == null)
+            {
+                tokenReader.Rollback(scope);
+
+                return null;
+            }
+
+            if (!tokenReader.Symbol(SymbolToken.QuestionMark))
+            {
+                tokenReader.Commit();
+
+                return condition;
+            }
+
+            var then = Expression(tokenReader) ??
+                       throw new ParseException(Resource.TernaryThenParseException);
+
+            if (!tokenReader.Symbol(SymbolToken.Colon))
+                throw new ParseException(Resource.TernaryColonParseException);
+
+            var @else = Expression(tokenReader) ??
+                        throw new ParseException(Resource.TernaryElseParseException);
+
+            tokenReader.Commit();
+
+            return CreateTernary(condition, then, @else);
         }
 
         private IExpression ConditionalOperator(TokenReader tokenReader)

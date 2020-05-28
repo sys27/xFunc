@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateIfElseTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
 
             var cond = new Equal(Variable.X, new Number(10));
             var @if = new If(cond, new Number(20), new Number(0));
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateIfElseNegativeNumberTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var parameters = new ParameterCollection { new Parameter("x", 0) };
 
             var cond = new Equal(Variable.X, new Number(0));
             var @if = new If(cond, new Number(1), new UnaryMinus(new Number(1)));
@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateIfTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
 
             var cond = new Equal(Variable.X, new Number(10));
             var @if = new If(cond, new Number(20));
@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateElseTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var parameters = new ParameterCollection { new Parameter("x", 0) };
 
             var cond = new Equal(Variable.X, new Number(10));
             var @if = new If(cond, new Number(20));
@@ -88,6 +88,17 @@ namespace xFunc.Tests.Expressions.Programming
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
+        }
+
+        [Fact]
+        public void ConditionIsNotBoolTest()
+        {
+            var exp = new If(
+                new Number(1),
+                new Number(1),
+                new Number(1));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
     }
 }

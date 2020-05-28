@@ -291,5 +291,8 @@ namespace xFunc.Maths
 
         private IExpression CreateMultiplication(params IExpression[] arguments)
             => new Mul(arguments);
+
+        private IExpression CreateTernary(IExpression condition, IExpression then, IExpression @else)
+            => new If(condition, then, @else);
     }
 }

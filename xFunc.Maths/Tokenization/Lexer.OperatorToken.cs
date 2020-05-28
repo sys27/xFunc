@@ -28,8 +28,8 @@ namespace xFunc.Maths.Tokenization
         {
             var span = function.Span;
             var first = span[0];
-            var second = span.Length >= 2 ? (char?)span[1] : null;
-            var third = span.Length >= 3 ? (char?)span[2] : null;
+            var second = span.Length >= 2 ? span[1] : default;
+            var third = span.Length >= 3 ? span[2] : default;
 
             var (token, size) = (first, second, third) switch
             {

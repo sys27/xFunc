@@ -71,5 +71,15 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets the '°' token.
         /// </summary>
         public static SymbolToken Degree { get; } = new SymbolToken('°');
+
+        /// <summary>
+        /// Gets the ':' token.
+        /// </summary>
+        public static SymbolToken Colon { get; } = new SymbolToken(':');
+
+        /// <summary>
+        /// Gets the '?' token.
+        /// </summary>
+        public static SymbolToken QuestionMark { get; } = new SymbolToken('?');
     }
 }

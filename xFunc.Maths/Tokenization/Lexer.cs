@@ -46,10 +46,10 @@ namespace xFunc.Maths.Tokenization
             while (memory.Length > 0)
             {
                 var result = SkipWhiteSpaces(ref memory) ??
-                             CreateSymbol(ref memory) ??
                              CreateNumberToken(ref memory) ??
                              CreateIdToken(ref memory) ??
-                             CreateOperatorToken(ref memory);
+                             CreateOperatorToken(ref memory) ??
+                             CreateSymbol(ref memory);
 
                 if (result == null)
                     throw new TokenizeException(string.Format(CultureInfo.InvariantCulture, Resource.NotSupportedSymbol, memory.Span[0]));
@@ -83,6 +83,8 @@ namespace xFunc.Maths.Tokenization
                 ',' => Comma,
                 '∠' => Angle,
                 '°' => Degree,
+                ':' => Colon,
+                '?' => QuestionMark,
                 _ => null,
             };
 

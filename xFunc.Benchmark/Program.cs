@@ -32,10 +32,10 @@ namespace xFunc.Benchmark
                 .FromAssembly(typeof(Program).Assembly)
                 .Run(args,
                     ManualConfig.Create(DefaultConfig.Instance)
-                        .With(Job.MediumRun
+                        .AddJob(Job.MediumRun
                             .WithLaunchCount(1)
-                            .With(CsProjCoreToolchain.NetCoreApp31))
-                        .With(MemoryDiagnoser.Default)
+                            .WithToolchain(CsProjCoreToolchain.NetCoreApp31))
+                        .AddDiagnoser(MemoryDiagnoser.Default)
                         .StopOnFirstError());
         }
     }

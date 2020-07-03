@@ -30,6 +30,8 @@ jobs:
     - script: echo '##vso[task.setvariable variable=nupkgVersion]$(defaultPackageVersion)-preview$(Build.BuildNumber)
       condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
+    - script: dotnet tool install --global Codecov.Tool
+
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
       inputs:
@@ -65,7 +67,7 @@ jobs:
 
     - task: CmdLine@2
       inputs:
-        script: '"%userprofile%/.nuget/packages/codecov/1.10.0/tools/codecov.exe" -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
+        script: codecov -f "$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -t $(CODECOV_TOKEN)'
         failOnStderr: true
 
     - task: DotNetCoreCLI@2

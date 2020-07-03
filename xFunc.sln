@@ -20,6 +20,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		xFunc.ruleset = xFunc.ruleset
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{7D6A31E3-42CF-49E7-A0D2-657A460388BC}"
+ProjectSection(SolutionItems) = preProject
+	CI\azure-pipelines.yml = CI\azure-pipelines.yml
+	CI\codecov.yml = CI\codecov.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,5 +58,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {028E8ACD-15B2-427A-86B7-72750EDC6F0F}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D6A31E3-42CF-49E7-A0D2-657A460388BC} = {E123ED4D-6784-4285-8DA0-C68865EA7E90}
 	EndGlobalSection
 EndGlobal

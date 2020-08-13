@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Diagnostics;
 
 namespace xFunc.Maths.Tokenization.Tokens
@@ -27,7 +28,7 @@ namespace xFunc.Maths.Tokenization.Tokens
 
         private KeywordToken(string keyword)
         {
-            this.keyword = keyword;
+            this.keyword = keyword ?? throw new ArgumentNullException(nameof(keyword));
         }
 
         /// <summary>

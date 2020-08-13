@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+
 namespace xFunc.Maths.Results
 {
     /// <summary>
@@ -26,7 +28,7 @@ namespace xFunc.Maths.Results
         /// <param name="str">The string representation of result.</param>
         public StringResult(string str)
         {
-            Result = str;
+            Result = str ?? throw new ArgumentNullException(nameof(str));
         }
 
         /// <summary>

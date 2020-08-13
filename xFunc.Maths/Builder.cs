@@ -36,7 +36,7 @@ namespace xFunc.Maths
         /// <param name="initial">The initial value of builder.</param>
         public Builder(IExpression initial)
         {
-            Init(initial);
+            Current = initial;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace xFunc.Maths
         /// <param name="number">The initial value of builder.</param>
         public Builder(double number)
         {
-            Init(number);
+            Current = new Number(number);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace xFunc.Maths
         /// <param name="variable">The initial value of builder.</param>
         public Builder(string variable)
         {
-            Init(variable);
+            Current = new Variable(variable);
         }
 
         /// <summary>
@@ -110,38 +110,6 @@ namespace xFunc.Maths
         public static Builder Create(string variable)
         {
             return new Builder(variable);
-        }
-
-        /// <summary>
-        /// Initializes the builder.
-        /// </summary>
-        /// <param name="initial">The initial value of builder.</param>
-        /// <returns>The builder.</returns>
-        public Builder Init(IExpression initial)
-        {
-            Current = initial;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Initializes the builder.
-        /// </summary>
-        /// <param name="number">The initial value of builder.</param>
-        /// <returns>The builder.</returns>
-        public Builder Init(double number)
-        {
-            return Init((IExpression)new Number(number));
-        }
-
-        /// <summary>
-        /// Initializes the builder.
-        /// </summary>
-        /// <param name="variable">The initial value of builder.</param>
-        /// <returns>The builder.</returns>
-        public Builder Init(string variable)
-        {
-            return Init((IExpression)new Variable(variable));
         }
 
         /// <summary>

@@ -22,15 +22,13 @@ namespace xFunc.Maths.Results
     /// </summary>
     public class NumberResult : IResult
     {
-        private readonly double number;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberResult"/> class.
         /// </summary>
         /// <param name="number">The numerical representation of result.</param>
         public NumberResult(double number)
         {
-            this.number = number;
+            Result = number;
         }
 
         /// <summary>
@@ -39,7 +37,7 @@ namespace xFunc.Maths.Results
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString() => number.ToString(CultureInfo.InvariantCulture);
+        public override string ToString() => Result.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Gets the numerical representation of result.
@@ -47,7 +45,7 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The numerical representation of result.
         /// </value>
-        public double Result => number;
+        public double Result { get; }
 
         /// <summary>
         /// Gets the result.
@@ -55,6 +53,6 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        object IResult.Result => number;
+        object IResult.Result => Result;
     }
 }

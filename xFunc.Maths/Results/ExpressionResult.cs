@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
 
 namespace xFunc.Maths.Results
@@ -22,15 +23,13 @@ namespace xFunc.Maths.Results
     /// </summary>
     public class ExpressionResult : IResult
     {
-        private readonly IExpression exp;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionResult"/> class.
         /// </summary>
         /// <param name="exp">The expression.</param>
         public ExpressionResult(IExpression exp)
         {
-            this.exp = exp;
+            Result = exp ?? throw new ArgumentNullException(nameof(exp));
         }
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace xFunc.Maths.Results
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString() => exp.ToString();
+        public override string ToString() => Result.ToString();
 
         /// <summary>
         /// Gets the result.
@@ -47,7 +46,7 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        public IExpression Result => exp;
+        public IExpression Result { get; }
 
         /// <summary>
         /// Gets the result.
@@ -55,6 +54,6 @@ namespace xFunc.Maths.Results
         /// <value>
         /// The result.
         /// </value>
-        object IResult.Result => exp;
+        object IResult.Result => Result;
     }
 }

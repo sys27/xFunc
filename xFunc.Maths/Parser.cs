@@ -16,7 +16,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Matrices;
@@ -64,166 +63,181 @@ namespace xFunc.Maths
             if (tokens == null)
                 throw new ArgumentNullException(nameof(tokens));
 
-            // TODO: !!!
-            var tokensArray = tokens as IToken[] ?? tokens.ToArray();
-            if (!tokensArray.Any())
-                throw new ArgumentNullException(nameof(tokens));
-
-            var tokenEnumerator = new TokenEnumerator(tokensArray);
-            var exp = Statement(tokenEnumerator);
-            if (exp == null || !tokenEnumerator.IsEnd)
+            using var tokenReader = new TokenReader(tokens);
+            var exp = Statement(tokenReader);
+            var token = tokenReader.GetCurrent<IToken>();
+            if (exp == null || !tokenReader.IsEnd || token != null)
                 throw new ParseException(Resource.ErrorWhileParsingTree);
 
             return exp;
         }
 
-        private IExpression Statement(TokenEnumerator tokenEnumerator)
+        private IExpression Statement(TokenReader tokenReader)
         {
-            return UnaryAssign(tokenEnumerator) ??
-                   BinaryAssign(tokenEnumerator) ??
-                   Assign(tokenEnumerator) ??
-                   Def(tokenEnumerator) ??
-                   Undef(tokenEnumerator) ??
-                   If(tokenEnumerator) ??
-                   For(tokenEnumerator) ??
-                   While(tokenEnumerator) ??
-                   Expression(tokenEnumerator);
+            return UnaryAssign(tokenReader) ??
+                   BinaryAssign(tokenReader) ??
+                   Assign(tokenReader) ??
+                   Def(tokenReader) ??
+                   Undef(tokenReader) ??
+                   If(tokenReader) ??
+                   For(tokenReader) ??
+                   While(tokenReader) ??
+                   Expression(tokenReader);
         }
 
-        private IExpression UnaryAssign(TokenEnumerator tokenEnumerator)
+        private IExpression UnaryAssign(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var left = Variable(tokenEnumerator);
+            var left = Variable(tokenReader);
             if (left != null)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.Increment) ??
-                                tokenEnumerator.Operator(OperatorToken.Decrement);
+                var @operator = tokenReader.Operator(OperatorToken.Increment) ??
+                                tokenReader.Operator(OperatorToken.Decrement);
                 if (@operator != null)
+                {
+                    tokenReader.Commit();
+
                     return CreateOperator(@operator, left);
+                }
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
+
             return null;
         }
 
-        private IExpression BinaryAssign(TokenEnumerator tokenEnumerator)
+        private IExpression BinaryAssign(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var left = Variable(tokenEnumerator);
+            var left = Variable(tokenReader);
             if (left == null)
-                return null;
+            {
+                tokenReader.Rollback(scope);
 
-            var @operator = tokenEnumerator.Operator(OperatorToken.MulAssign) ??
-                            tokenEnumerator.Operator(OperatorToken.DivAssign) ??
-                            tokenEnumerator.Operator(OperatorToken.AddAssign) ??
-                            tokenEnumerator.Operator(OperatorToken.SubAssign);
+                return null;
+            }
+
+            var @operator = tokenReader.Operator(OperatorToken.MulAssign) ??
+                            tokenReader.Operator(OperatorToken.DivAssign) ??
+                            tokenReader.Operator(OperatorToken.AddAssign) ??
+                            tokenReader.Operator(OperatorToken.SubAssign);
             if (@operator != null)
             {
-                var right = Expression(tokenEnumerator) ??
+                var right = Expression(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
+
+                tokenReader.Commit();
 
                 return CreateOperator(@operator, left, right);
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
+
             return null;
         }
 
-        private IExpression AssignmentKey(TokenEnumerator tokenEnumerator)
+        private IExpression AssignmentKey(TokenReader tokenReader)
         {
-            return FunctionDeclaration(tokenEnumerator) ??
-                   Variable(tokenEnumerator);
+            return FunctionDeclaration(tokenReader) ??
+                   Variable(tokenReader);
         }
 
-        private IExpression Assign(TokenEnumerator tokenEnumerator)
+        private IExpression Assign(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var left = AssignmentKey(tokenEnumerator);
+            var left = AssignmentKey(tokenReader);
             if (left == null)
-                return null;
+            {
+                tokenReader.Rollback(scope);
 
-            var @operator = tokenEnumerator.Operator(OperatorToken.Assign);
+                return null;
+            }
+
+            var @operator = tokenReader.Operator(OperatorToken.Assign);
             if (@operator != null)
             {
-                var right = Expression(tokenEnumerator) ??
+                var right = Expression(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
+
+                tokenReader.Commit();
 
                 return CreateOperator(@operator, left, right);
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
+
             return null;
         }
 
-        private IExpression Def(TokenEnumerator tokenEnumerator)
+        private IExpression Def(TokenReader tokenReader)
         {
-            var def = tokenEnumerator.Keyword(KeywordToken.Define);
+            var def = tokenReader.Keyword(KeywordToken.Define);
             if (def == null)
                 return null;
 
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 throw new ParseException(OpenParenthesis(def));
 
-            var key = AssignmentKey(tokenEnumerator) ??
+            var key = AssignmentKey(tokenReader) ??
                       throw new ParseException(Resource.AssignKeyParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.Comma))
+            if (!tokenReader.Symbol(SymbolToken.Comma))
                 throw new ParseException(CommaMissing(key));
 
-            var value = Expression(tokenEnumerator) ??
+            var value = Expression(tokenReader) ??
                         throw new ParseException(Resource.DefValueParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(def));
 
             return CreateFromKeyword(def, key, value);
         }
 
-        private IExpression Undef(TokenEnumerator tokenEnumerator)
+        private IExpression Undef(TokenReader tokenReader)
         {
-            var undef = tokenEnumerator.Keyword(KeywordToken.Undefine);
+            var undef = tokenReader.Keyword(KeywordToken.Undefine);
             if (undef == null)
                 return null;
 
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 throw new ParseException(OpenParenthesis(undef));
 
-            var key = AssignmentKey(tokenEnumerator) ??
+            var key = AssignmentKey(tokenReader) ??
                       throw new ParseException(Resource.AssignKeyParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(undef));
 
             return CreateFromKeyword(undef, key);
         }
 
-        private IExpression If(TokenEnumerator tokenEnumerator)
+        private IExpression If(TokenReader tokenReader)
         {
-            var @if = tokenEnumerator.Keyword(KeywordToken.If);
+            var @if = tokenReader.Keyword(KeywordToken.If);
             if (@if == null)
                 return null;
 
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 throw new ParseException(OpenParenthesis(@if));
 
-            var condition = ConditionalOperator(tokenEnumerator) ??
+            var condition = ConditionalOperator(tokenReader) ??
                             throw new ParseException(Resource.IfConditionParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.Comma))
+            if (!tokenReader.Symbol(SymbolToken.Comma))
                 throw new ParseException(CommaMissing(condition));
 
-            var then = Expression(tokenEnumerator) ??
+            var then = Expression(tokenReader) ??
                        throw new ParseException(Resource.IfThenParseException);
 
             IExpression @else = null;
-            if (tokenEnumerator.Symbol(SymbolToken.Comma))
-                @else = Expression(tokenEnumerator) ??
+            if (tokenReader.Symbol(SymbolToken.Comma))
+                @else = Expression(tokenReader) ??
                         throw new ParseException(Resource.IfElseParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(@if));
 
             if (@else != null)
@@ -232,86 +246,87 @@ namespace xFunc.Maths
             return CreateFromKeyword(@if, condition, then);
         }
 
-        private IExpression For(TokenEnumerator tokenEnumerator)
+        private IExpression For(TokenReader tokenReader)
         {
-            var @for = tokenEnumerator.Keyword(KeywordToken.For);
+            var @for = tokenReader.Keyword(KeywordToken.For);
             if (@for == null)
                 return null;
 
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 throw new ParseException(OpenParenthesis(@for));
 
-            var body = Statement(tokenEnumerator) ??
+            var body = Statement(tokenReader) ??
                        throw new ParseException(Resource.ForBodyParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.Comma))
+            if (!tokenReader.Symbol(SymbolToken.Comma))
                 throw new ParseException(CommaMissing(body));
 
-            var init = Statement(tokenEnumerator) ??
+            var init = Statement(tokenReader) ??
                        throw new ParseException(Resource.ForInitParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.Comma))
+            if (!tokenReader.Symbol(SymbolToken.Comma))
                 throw new ParseException(CommaMissing(init));
 
-            var condition = ConditionalOperator(tokenEnumerator) ??
+            var condition = ConditionalOperator(tokenReader) ??
                             throw new ParseException(Resource.ForConditionParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.Comma))
+            if (!tokenReader.Symbol(SymbolToken.Comma))
                 throw new ParseException(CommaMissing(condition));
 
-            var iter = Statement(tokenEnumerator) ??
+            var iter = Statement(tokenReader) ??
                        throw new ParseException(Resource.ForIterParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(@for));
 
             return CreateFromKeyword(@for, body, init, condition, iter);
         }
 
-        private IExpression While(TokenEnumerator tokenEnumerator)
+        private IExpression While(TokenReader tokenReader)
         {
-            var @while = tokenEnumerator.Keyword(KeywordToken.While);
+            var @while = tokenReader.Keyword(KeywordToken.While);
             if (@while == null)
                 return null;
 
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 throw new ParseException(OpenParenthesis(@while));
 
-            var body = Statement(tokenEnumerator) ??
+            var body = Statement(tokenReader) ??
                        throw new ParseException(Resource.WhileBodyParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.Comma))
+            if (!tokenReader.Symbol(SymbolToken.Comma))
                 throw new ParseException(CommaMissing(body));
 
-            var condition = ConditionalOperator(tokenEnumerator) ??
+            var condition = ConditionalOperator(tokenReader) ??
                             throw new ParseException(Resource.WhileConditionParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(@while));
 
             return CreateFromKeyword(@while, body, condition);
         }
 
-        private IExpression FunctionDeclaration(TokenEnumerator tokenEnumerator)
+        private IExpression FunctionDeclaration(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var id = tokenEnumerator.GetCurrent<IdToken>();
-            if (id != null && tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            var id = tokenReader.GetCurrent<IdToken>();
+            if (id != null && tokenReader.Symbol(SymbolToken.OpenParenthesis))
             {
                 var parameterList = new List<IExpression>();
 
-                var exp = Variable(tokenEnumerator);
+                var exp = Variable(tokenReader);
                 if (exp != null)
                 {
                     parameterList.Add(exp);
 
-                    while (tokenEnumerator.Symbol(SymbolToken.Comma))
+                    while (tokenReader.Symbol(SymbolToken.Comma))
                     {
-                        exp = Variable(tokenEnumerator);
+                        exp = Variable(tokenReader);
                         if (exp == null)
                         {
-                            tokenEnumerator.Rollback(scope);
+                            tokenReader.Rollback(scope);
+
                             return null;
                         }
 
@@ -319,181 +334,188 @@ namespace xFunc.Maths
                     }
                 }
 
-                if (tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+                if (tokenReader.Symbol(SymbolToken.CloseParenthesis))
+                {
+                    tokenReader.Commit();
+
                     return CreateFunction(id, parameterList);
+                }
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
 
             return null;
         }
 
-        private IExpression Expression(TokenEnumerator tokenEnumerator)
+        private IExpression Expression(TokenReader tokenReader)
         {
-            return Binary(tokenEnumerator);
+            return Binary(tokenReader);
         }
 
-        private IExpression Binary(TokenEnumerator tokenEnumerator)
+        private IExpression Binary(TokenReader tokenReader)
         {
-            return ConditionalOperator(tokenEnumerator);
+            return ConditionalOperator(tokenReader);
         }
 
-        private IExpression ConditionalOperator(TokenEnumerator tokenEnumerator)
+        private IExpression ConditionalOperator(TokenReader tokenReader)
         {
-            var left = BitwiseOperator(tokenEnumerator);
+            var left = BitwiseOperator(tokenReader);
             if (left == null)
                 return null;
 
             while (true)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.ConditionalAnd) ??
-                                tokenEnumerator.Operator(OperatorToken.ConditionalOr);
+                var @operator = tokenReader.Operator(OperatorToken.ConditionalAnd) ??
+                                tokenReader.Operator(OperatorToken.ConditionalOr);
                 if (@operator == null)
                     return left;
 
-                var right = BitwiseOperator(tokenEnumerator) ??
+                var right = BitwiseOperator(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
                 left = CreateOperator(@operator, left, right);
             }
         }
 
-        private IExpression BitwiseOperator(TokenEnumerator tokenEnumerator)
+        private IExpression BitwiseOperator(TokenReader tokenReader)
         {
-            var left = EqualityOperator(tokenEnumerator);
+            var left = EqualityOperator(tokenReader);
             if (left == null)
                 return null;
 
             while (true)
             {
-                var token = (tokenEnumerator.Operator(OperatorToken.And) ??
-                             tokenEnumerator.Operator(OperatorToken.Or) ??
-                             tokenEnumerator.Operator(OperatorToken.Implication) ??
-                             tokenEnumerator.Operator(OperatorToken.Equality)) ??
-                             (IToken)(tokenEnumerator.Keyword(KeywordToken.NAnd) ??
-                                      tokenEnumerator.Keyword(KeywordToken.NOr) ??
-                                      tokenEnumerator.Keyword(KeywordToken.And) ??
-                                      tokenEnumerator.Keyword(KeywordToken.Or) ??
-                                      tokenEnumerator.Keyword(KeywordToken.XOr) ??
-                                      tokenEnumerator.Keyword(KeywordToken.Eq) ??
-                                      tokenEnumerator.Keyword(KeywordToken.Impl));
+                var token = (tokenReader.Operator(OperatorToken.And) ??
+                             tokenReader.Operator(OperatorToken.Or) ??
+                             tokenReader.Operator(OperatorToken.Implication) ??
+                             tokenReader.Operator(OperatorToken.Equality)) ??
+                            (IToken)(tokenReader.Keyword(KeywordToken.NAnd) ??
+                                     tokenReader.Keyword(KeywordToken.NOr) ??
+                                     tokenReader.Keyword(KeywordToken.And) ??
+                                     tokenReader.Keyword(KeywordToken.Or) ??
+                                     tokenReader.Keyword(KeywordToken.XOr) ??
+                                     tokenReader.Keyword(KeywordToken.Eq) ??
+                                     tokenReader.Keyword(KeywordToken.Impl));
 
                 if (token == null)
                     return left;
 
-                var right = EqualityOperator(tokenEnumerator) ??
+                var right = EqualityOperator(tokenReader) ??
                             throw new ParseException(SecondOperand(token));
 
                 left = CreateOperatorOrKeyword(token, left, right);
             }
         }
 
-        private IExpression EqualityOperator(TokenEnumerator tokenEnumerator)
+        private IExpression EqualityOperator(TokenReader tokenReader)
         {
-            var left = AddSub(tokenEnumerator);
+            var left = AddSub(tokenReader);
             if (left == null)
                 return null;
 
             while (true)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.Equal) ??
-                                tokenEnumerator.Operator(OperatorToken.NotEqual) ??
-                                tokenEnumerator.Operator(OperatorToken.LessThan) ??
-                                tokenEnumerator.Operator(OperatorToken.LessOrEqual) ??
-                                tokenEnumerator.Operator(OperatorToken.GreaterThan) ??
-                                tokenEnumerator.Operator(OperatorToken.GreaterOrEqual);
+                var @operator = tokenReader.Operator(OperatorToken.Equal) ??
+                                tokenReader.Operator(OperatorToken.NotEqual) ??
+                                tokenReader.Operator(OperatorToken.LessThan) ??
+                                tokenReader.Operator(OperatorToken.LessOrEqual) ??
+                                tokenReader.Operator(OperatorToken.GreaterThan) ??
+                                tokenReader.Operator(OperatorToken.GreaterOrEqual);
                 if (@operator == null)
                     return left;
 
-                var right = AddSub(tokenEnumerator) ??
+                var right = AddSub(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
                 left = CreateOperator(@operator, left, right);
             }
         }
 
-        private IExpression AddSub(TokenEnumerator tokenEnumerator)
+        private IExpression AddSub(TokenReader tokenReader)
         {
-            var left = MulDivMod(tokenEnumerator);
+            var left = MulDivMod(tokenReader);
             if (left == null)
                 return null;
 
             while (true)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.Plus) ??
-                                tokenEnumerator.Operator(OperatorToken.Minus);
+                var @operator = tokenReader.Operator(OperatorToken.Plus) ??
+                                tokenReader.Operator(OperatorToken.Minus);
                 if (@operator == null)
                     return left;
 
-                var right = MulDivMod(tokenEnumerator) ??
+                var right = MulDivMod(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
                 left = CreateOperator(@operator, left, right);
             }
         }
 
-        private IExpression MulDivMod(TokenEnumerator tokenEnumerator)
+        private IExpression MulDivMod(TokenReader tokenReader)
         {
-            var left = MulImplicit(tokenEnumerator);
+            var left = MulImplicit(tokenReader);
             if (left == null)
                 return null;
 
             while (true)
             {
-                var token = (tokenEnumerator.Operator(OperatorToken.Multiplication) ??
-                             tokenEnumerator.Operator(OperatorToken.Division) ??
-                             tokenEnumerator.Operator(OperatorToken.Modulo)) ??
-                             (IToken)tokenEnumerator.Keyword(KeywordToken.Mod);
+                var token = (tokenReader.Operator(OperatorToken.Multiplication) ??
+                             tokenReader.Operator(OperatorToken.Division) ??
+                             tokenReader.Operator(OperatorToken.Modulo)) ??
+                            (IToken)tokenReader.Keyword(KeywordToken.Mod);
 
                 if (token == null)
                     return left;
 
-                var right = MulImplicit(tokenEnumerator) ??
+                var right = MulImplicit(tokenReader) ??
                             throw new ParseException(SecondOperand(token));
 
                 left = CreateOperatorOrKeyword(token, left, right);
             }
         }
 
-        private IExpression MulImplicit(TokenEnumerator tokenEnumerator)
+        private IExpression MulImplicit(TokenReader tokenReader)
         {
-            return MulImplicitLeftUnary(tokenEnumerator) ??
-                   LeftUnary(tokenEnumerator);
+            return MulImplicitLeftUnary(tokenReader) ??
+                   LeftUnary(tokenReader);
         }
 
-        private IExpression MulImplicitLeftUnary(TokenEnumerator tokenEnumerator)
+        private IExpression MulImplicitLeftUnary(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var @operator = tokenEnumerator.Operator(OperatorToken.Minus);
-            var number = Number(tokenEnumerator);
+            var @operator = tokenReader.Operator(OperatorToken.Minus);
+            var number = Number(tokenReader);
             if (number != null)
             {
-                var rightUnary = Function(tokenEnumerator) ??
-                                 Variable(tokenEnumerator) ??
-                                 ParenthesesExpression(tokenEnumerator) ??
-                                 Matrix(tokenEnumerator) ??
-                                 Vector(tokenEnumerator);
+                var rightUnary = Function(tokenReader) ??
+                                 Variable(tokenReader) ??
+                                 ParenthesesExpression(tokenReader) ??
+                                 Matrix(tokenReader) ??
+                                 Vector(tokenReader);
                 if (rightUnary != null)
                 {
                     if (@operator != null)
                         number = CreateUnaryMinus(number);
 
+                    tokenReader.Commit();
+
                     return CreateMultiplication(number, rightUnary);
                 }
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
+
             return null;
         }
 
-        private IExpression LeftUnary(TokenEnumerator tokenEnumerator)
+        private IExpression LeftUnary(TokenReader tokenReader)
         {
-            var token = (tokenEnumerator.Operator(OperatorToken.Not) ??
-                         tokenEnumerator.Operator(OperatorToken.Minus) ??
-                         tokenEnumerator.Operator(OperatorToken.Plus)) ??
-                         (IToken)tokenEnumerator.Keyword(KeywordToken.Not);
-            var operand = Exponentiation(tokenEnumerator);
+            var token = (tokenReader.Operator(OperatorToken.Not) ??
+                         tokenReader.Operator(OperatorToken.Minus) ??
+                         tokenReader.Operator(OperatorToken.Plus)) ??
+                        (IToken)tokenReader.Keyword(KeywordToken.Not);
+            var operand = Exponentiation(tokenReader);
             if (token == null || token == OperatorToken.Plus)
                 return operand;
 
@@ -503,220 +525,228 @@ namespace xFunc.Maths
             return CreateOperatorOrKeyword(token, operand);
         }
 
-        private IExpression Exponentiation(TokenEnumerator tokenEnumerator)
+        private IExpression Exponentiation(TokenReader tokenReader)
         {
-            var left = RightUnary(tokenEnumerator);
+            var left = RightUnary(tokenReader);
             if (left == null)
                 return null;
 
-            var @operator = tokenEnumerator.Operator(OperatorToken.Exponentiation);
+            var @operator = tokenReader.Operator(OperatorToken.Exponentiation);
             if (@operator == null)
                 return left;
 
-            var right = Exponentiation(tokenEnumerator) ??
+            var right = Exponentiation(tokenReader) ??
                         throw new ParseException(Resource.ExponentParseException);
 
             return CreateOperator(@operator, left, right);
         }
 
-        private IExpression RightUnary(TokenEnumerator tokenEnumerator)
+        private IExpression RightUnary(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var number = Number(tokenEnumerator);
+            var number = Number(tokenReader);
             if (number != null)
             {
-                var @operator = tokenEnumerator.Operator(OperatorToken.Factorial);
+                var @operator = tokenReader.Operator(OperatorToken.Factorial);
                 if (@operator != null)
-                    return CreateOperator(@operator, number);
+                {
+                    tokenReader.Commit();
 
-                tokenEnumerator.Rollback(scope);
+                    return CreateOperator(@operator, number);
+                }
             }
 
-            return Operand(tokenEnumerator);
+            tokenReader.Rollback(scope);
+
+            return Operand(tokenReader);
         }
 
-        private IExpression Operand(TokenEnumerator tokenEnumerator)
+        private IExpression Operand(TokenReader tokenReader)
         {
-            return ComplexNumber(tokenEnumerator) ??
-                   Number(tokenEnumerator) ??
-                   Function(tokenEnumerator) ??
-                   Variable(tokenEnumerator) ??
-                   Boolean(tokenEnumerator) ??
-                   ParenthesesExpression(tokenEnumerator) ??
-                   Matrix(tokenEnumerator) ??
-                   Vector(tokenEnumerator);
+            return ComplexNumber(tokenReader) ??
+                   Number(tokenReader) ??
+                   Function(tokenReader) ??
+                   Variable(tokenReader) ??
+                   Boolean(tokenReader) ??
+                   ParenthesesExpression(tokenReader) ??
+                   Matrix(tokenReader) ??
+                   Vector(tokenReader);
         }
 
-        private IExpression ParenthesesExpression(TokenEnumerator tokenEnumerator)
+        private IExpression ParenthesesExpression(TokenReader tokenReader)
         {
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 return null;
 
-            var exp = Expression(tokenEnumerator) ??
+            var exp = Expression(tokenReader) ??
                       throw new ParseException(Resource.ExpParenParseException);
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(string.Format(CultureInfo.InvariantCulture, Resource.CloseParenParseException, exp));
 
             return exp;
         }
 
-        private IExpression Function(TokenEnumerator tokenEnumerator)
+        private IExpression Function(TokenReader tokenReader)
         {
-            var function = tokenEnumerator.GetCurrent<IdToken>();
+            var function = tokenReader.GetCurrent<IdToken>();
             if (function == null)
                 return null;
 
-            var parameterList = ParameterList(tokenEnumerator);
+            var parameterList = ParameterList(tokenReader);
             if (parameterList == null)
                 return CreateVariable(function);
 
             return CreateFunction(function, parameterList);
         }
 
-        private IList<IExpression> ParameterList(TokenEnumerator tokenEnumerator)
+        private IList<IExpression> ParameterList(TokenReader tokenReader)
         {
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 return null;
 
             var parameterList = new List<IExpression>();
 
-            var exp = Expression(tokenEnumerator);
+            var exp = Expression(tokenReader);
             if (exp != null)
             {
                 parameterList.Add(exp);
 
-                while (tokenEnumerator.Symbol(SymbolToken.Comma))
+                while (tokenReader.Symbol(SymbolToken.Comma))
                 {
-                    exp = Expression(tokenEnumerator) ??
+                    exp = Expression(tokenReader) ??
                           throw new ParseException(CommaMissing(exp));
 
                     parameterList.Add(exp);
                 }
             }
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseParenthesis))
+            if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(Resource.ParameterListCloseParseException);
 
             return parameterList;
         }
 
-        private IExpression Number(TokenEnumerator tokenEnumerator)
+        private IExpression Number(TokenReader tokenReader)
         {
-            var number = tokenEnumerator.GetCurrent<NumberToken>();
+            var number = tokenReader.GetCurrent<NumberToken>();
             if (number == null)
                 return null;
 
             return CreateNumber(number);
         }
 
-        private IExpression ComplexNumber(TokenEnumerator tokenEnumerator)
+        private IExpression ComplexNumber(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            var magnitudeSign = tokenEnumerator.Operator(OperatorToken.Plus) ??
-                                tokenEnumerator.Operator(OperatorToken.Minus);
-            var magnitude = tokenEnumerator.GetCurrent<NumberToken>();
+            var magnitudeSign = tokenReader.Operator(OperatorToken.Plus) ??
+                                tokenReader.Operator(OperatorToken.Minus);
+            var magnitude = tokenReader.GetCurrent<NumberToken>();
             if (magnitude != null)
             {
-                var hasAngleSymbol = tokenEnumerator.Symbol(SymbolToken.Angle);
+                var hasAngleSymbol = tokenReader.Symbol(SymbolToken.Angle);
                 if (hasAngleSymbol)
                 {
-                    var phaseSign = tokenEnumerator.Operator(OperatorToken.Plus) ??
-                                    tokenEnumerator.Operator(OperatorToken.Minus);
-                    var phase = tokenEnumerator.GetCurrent<NumberToken>();
+                    var phaseSign = tokenReader.Operator(OperatorToken.Plus) ??
+                                    tokenReader.Operator(OperatorToken.Minus);
+                    var phase = tokenReader.GetCurrent<NumberToken>();
                     if (phase == null)
                         throw new ParseException(Resource.PhaseParseException);
 
-                    var hasDegreeSymbol = tokenEnumerator.Symbol(SymbolToken.Degree);
+                    var hasDegreeSymbol = tokenReader.Symbol(SymbolToken.Degree);
                     if (!hasDegreeSymbol)
                         throw new ParseException(Resource.DegreeComplexNumberParseException);
+
+                    tokenReader.Commit();
 
                     return CreateComplexNumber(magnitudeSign, magnitude, phaseSign, phase);
                 }
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
 
             return null;
         }
 
-        private IExpression Variable(TokenEnumerator tokenEnumerator)
+        private IExpression Variable(TokenReader tokenReader)
         {
-            var variable = tokenEnumerator.GetCurrent<IdToken>();
+            var variable = tokenReader.GetCurrent<IdToken>();
             if (variable == null)
                 return null;
 
             return CreateVariable(variable);
         }
 
-        private IExpression Boolean(TokenEnumerator tokenEnumerator)
+        private IExpression Boolean(TokenReader tokenReader)
         {
-            var boolean = tokenEnumerator.Keyword(KeywordToken.True) ??
-                          tokenEnumerator.Keyword(KeywordToken.False);
+            var boolean = tokenReader.Keyword(KeywordToken.True) ??
+                          tokenReader.Keyword(KeywordToken.False);
             if (boolean == null)
                 return null;
 
             return CreateFromKeyword(boolean);
         }
 
-        private Vector Vector(TokenEnumerator tokenEnumerator)
+        private Vector Vector(TokenReader tokenReader)
         {
-            if (!tokenEnumerator.Symbol(SymbolToken.OpenBrace))
+            if (!tokenReader.Symbol(SymbolToken.OpenBrace))
                 return null;
 
             var parameterList = new List<IExpression>();
 
-            var exp = Expression(tokenEnumerator);
+            var exp = Expression(tokenReader);
             if (exp != null)
             {
                 parameterList.Add(exp);
 
-                while (tokenEnumerator.Symbol(SymbolToken.Comma))
+                while (tokenReader.Symbol(SymbolToken.Comma))
                 {
-                    exp = Expression(tokenEnumerator) ??
+                    exp = Expression(tokenReader) ??
                           throw new ParseException(Resource.VectorCommaParseException);
 
                     parameterList.Add(exp);
                 }
             }
 
-            if (!tokenEnumerator.Symbol(SymbolToken.CloseBrace))
+            if (!tokenReader.Symbol(SymbolToken.CloseBrace))
                 throw new ParseException(Resource.VectorCloseBraceParseException);
 
             return CreateVector(parameterList);
         }
 
-        private IExpression Matrix(TokenEnumerator tokenEnumerator)
+        private IExpression Matrix(TokenReader tokenReader)
         {
-            var scope = tokenEnumerator.CreateScope();
+            var scope = tokenReader.CreateScope();
 
-            if (tokenEnumerator.Symbol(SymbolToken.OpenBrace))
+            if (tokenReader.Symbol(SymbolToken.OpenBrace))
             {
                 var vectors = new List<Vector>();
 
-                var exp = Vector(tokenEnumerator);
+                var exp = Vector(tokenReader);
                 if (exp != null)
                 {
                     vectors.Add(exp);
 
-                    while (tokenEnumerator.Symbol(SymbolToken.Comma))
+                    while (tokenReader.Symbol(SymbolToken.Comma))
                     {
-                        exp = Vector(tokenEnumerator) ??
+                        exp = Vector(tokenReader) ??
                               throw new ParseException(Resource.MatrixCommaParseException);
 
                         vectors.Add(exp);
                     }
 
-                    if (!tokenEnumerator.Symbol(SymbolToken.CloseBrace))
+                    if (!tokenReader.Symbol(SymbolToken.CloseBrace))
                         throw new ParseException(Resource.MatrixCloseBraceParseException);
+
+                    tokenReader.Commit();
 
                     return CreateMatrix(vectors);
                 }
             }
 
-            tokenEnumerator.Rollback(scope);
+            tokenReader.Rollback(scope);
 
             return null;
         }

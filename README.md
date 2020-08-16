@@ -54,8 +54,8 @@ xFunc is released under [Apache 2.0 License](http://www.apache.org/licenses/LICE
 [@RonnyCSHARP](https://github.com/ronnycsharp)
 
 [Fluent.Ribbon](https://github.com/fluentribbon/Fluent.Ribbon)  
-[AppVeyor](https://www.appveyor.com/)  
-[OpenCover](https://github.com/OpenCover/opencover)  
+[Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)  
+[Coverlet](https://github.com/coverlet-coverage/coverlet)  
 [ReportGenerator](https://github.com/danielpalme/ReportGenerator)
 
 ## More:

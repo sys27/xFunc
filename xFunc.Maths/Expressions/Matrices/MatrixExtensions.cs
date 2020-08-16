@@ -15,6 +15,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Matrices
@@ -216,31 +217,45 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.MatrixArgException);
 
             var rows = left.Rows;
-            var columns = right.Columns;
             var vectors = new Vector[rows];
 
-            for (var i = 0; i < rows; i++)
+            if (rows <= 10)
             {
-                var vector = new IExpression[columns];
-
-                for (var j = 0; j < columns; j++)
-                {
-                    var element = 0.0;
-                    for (var k = 0; k < left.Columns; k++)
-                    {
-                        var leftNumber = (double)left[i][k].Execute(parameters);
-                        var rightNumber = (double)right[k][j].Execute(parameters);
-
-                        element += leftNumber * rightNumber;
-                    }
-
-                    vector[j] = new Number(element);
-                }
-
-                vectors[i] = new Vector(vector);
+                for (var row = 0; row < rows; row++)
+                    vectors[row] = MulMatrixRow(left, right, parameters, row);
+            }
+            else
+            {
+                Parallel.For(0, rows, row => vectors[row] = MulMatrixRow(left, right, parameters, row));
             }
 
             return new Matrix(vectors);
+        }
+
+        private static Vector MulMatrixRow(
+            Matrix left,
+            Matrix right,
+            ExpressionParameters parameters,
+            int i)
+        {
+            var columns = right.Columns;
+            var vector = new IExpression[columns];
+
+            for (var j = 0; j < columns; j++)
+            {
+                var element = 0.0;
+                for (var k = 0; k < left.Columns; k++)
+                {
+                    var leftNumber = (double)left[i][k].Execute(parameters);
+                    var rightNumber = (double)right[k][j].Execute(parameters);
+
+                    element += leftNumber * rightNumber;
+                }
+
+                vector[j] = new Number(element);
+            }
+
+            return new Vector(vector);
         }
 
         /// <summary>

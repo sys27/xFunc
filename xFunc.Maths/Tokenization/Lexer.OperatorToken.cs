@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Runtime.CompilerServices;
 using xFunc.Maths.Tokenization.Tokens;
 using static xFunc.Maths.Tokenization.Tokens.OperatorToken;
 
@@ -28,102 +27,57 @@ namespace xFunc.Maths.Tokenization
         private IToken CreateOperatorToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
+            var first = span[0];
+            var second = span.Length >= 2 ? (char?)span[1] : null;
+            var third = span.Length >= 3 ? (char?)span[2] : null;
 
-            var endIndex = 0;
-            while (endIndex < span.Length && IsOperatorSymbol(span[endIndex]))
-                endIndex++;
+            var (token, size) = (first, second, third) switch
+            {
+                ('<', '-', '>') => (Equality, 3),
+                ('<', '−', '>') => (Equality, 3),
+                ('<', '=', '>') => (Equality, 3),
 
-            if (endIndex <= 0 || span.Length < endIndex)
-                return null;
+                (':', '=', _) => (Assign, 2),
+                ('+', '=', _) => (AddAssign, 2),
+                ('-', '=', _) => (SubAssign, 2),
+                ('−', '=', _) => (SubAssign, 2),
+                ('*', '=', _) => (MulAssign, 2),
+                ('×', '=', _) => (MulAssign, 2),
+                ('/', '=', _) => (DivAssign, 2),
+                ('&', '&', _) => (ConditionalAnd, 2),
+                ('|', '|', _) => (ConditionalOr, 2),
+                ('=', '=', _) => (Equal, 2),
+                ('!', '=', _) => (NotEqual, 2),
+                ('<', '=', _) => (LessOrEqual, 2),
+                ('>', '=', _) => (GreaterOrEqual, 2),
+                ('+', '+', _) => (Increment, 2),
+                ('-', '-', _) => (Decrement, 2),
+                ('−', '−', _) => (Decrement, 2),
+                ('-', '>', _) => (Implication, 2),
+                ('−', '>', _) => (Implication, 2),
+                ('=', '>', _) => (Implication, 2),
 
-            var operatorMatch = span[..endIndex];
-            IToken token;
+                ('+', _, _) => (Plus, 1),
+                ('-', _, _) => (Minus, 1),
+                ('−', _, _) => (Minus, 1),
+                ('*', _, _) => (Multiplication, 1),
+                ('×', _, _) => (Multiplication, 1),
+                ('/', _, _) => (Division, 1),
+                ('^', _, _) => (Exponentiation, 1),
+                ('!', _, _) => (Factorial, 1),
+                ('%', _, _) => (Modulo, 1),
+                ('<', _, _) => (LessThan, 1),
+                ('>', _, _) => (GreaterThan, 1),
+                ('~', _, _) => (Not, 1),
+                ('&', _, _) => (And, 1),
+                ('|', _, _) => (Or, 1),
 
-            if (Compare(operatorMatch, "+"))
-                token = Plus;
-            else if (Compare(operatorMatch, "-") ||
-                     Compare(operatorMatch, "−"))
-                token = Minus;
-            else if (Compare(operatorMatch, "*") ||
-                     Compare(operatorMatch, "×"))
-                token = Multiplication;
-            else if (Compare(operatorMatch, "/"))
-                token = Division;
-            else if (Compare(operatorMatch, "^"))
-                token = Exponentiation;
-            else if (Compare(operatorMatch, "!"))
-                token = Factorial;
-            else if (Compare(operatorMatch, "%"))
-                token = Modulo;
-            else if (Compare(operatorMatch, ":="))
-                token = Assign;
-            else if (Compare(operatorMatch, "+="))
-                token = AddAssign;
-            else if (Compare(operatorMatch, "-=") ||
-                     Compare(operatorMatch, "−="))
-                token = SubAssign;
-            else if (Compare(operatorMatch, "*=") ||
-                     Compare(operatorMatch, "×="))
-                token = MulAssign;
-            else if (Compare(operatorMatch, "/="))
-                token = DivAssign;
-            else if (Compare(operatorMatch, "&&"))
-                token = ConditionalAnd;
-            else if (Compare(operatorMatch, "||"))
-                token = ConditionalOr;
-            else if (Compare(operatorMatch, "=="))
-                token = Equal;
-            else if (Compare(operatorMatch, "!="))
-                token = NotEqual;
-            else if (Compare(operatorMatch, "<="))
-                token = LessOrEqual;
-            else if (Compare(operatorMatch, "<"))
-                token = LessThan;
-            else if (Compare(operatorMatch, ">="))
-                token = GreaterOrEqual;
-            else if (Compare(operatorMatch, ">"))
-                token = GreaterThan;
-            else if (Compare(operatorMatch, "++"))
-                token = Increment;
-            else if (Compare(operatorMatch, "--") ||
-                     Compare(operatorMatch, "−−"))
-                token = Decrement;
-            else if (Compare(operatorMatch, "~"))
-                token = Not;
-            else if (Compare(operatorMatch, "&"))
-                token = And;
-            else if (Compare(operatorMatch, "|"))
-                token = Or;
-            else if (Compare(operatorMatch, "->") ||
-                     Compare(operatorMatch, "−>") ||
-                     Compare(operatorMatch, "=>"))
-                token = Implication;
-            else if (Compare(operatorMatch, "<->") ||
-                     Compare(operatorMatch, "<−>") ||
-                     Compare(operatorMatch, "<=>"))
-                token = Equality;
-            else
-                return null;
+                _ => (null, 0),
+            };
 
-            function = function[endIndex..];
+            function = function[size..];
 
             return token;
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsOperatorSymbol(char symbol) =>
-            !char.IsLetterOrDigit(symbol) &&
-            !char.IsWhiteSpace(symbol) &&
-            !IsRestrictedSymbol(symbol);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsRestrictedSymbol(char symbol)
-            => symbol == '(' ||
-               symbol == ')' ||
-               symbol == '{' ||
-               symbol == '}' ||
-               symbol == ',' ||
-               symbol == '°' ||
-               symbol == '∠';
     }
 }

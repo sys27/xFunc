@@ -248,6 +248,92 @@ namespace xFunc.Tests.Expressions.Matrices
         }
 
         [Fact]
+        public void MulMatrices4()
+        {
+            var left = new Matrix(new[]
+            {
+                new Vector(new[] { new Number(1) }),
+                new Vector(new[] { new Number(2) }),
+                new Vector(new[] { new Number(3) }),
+                new Vector(new[] { new Number(4) }),
+                new Vector(new[] { new Number(5) }),
+                new Vector(new[] { new Number(6) }),
+                new Vector(new[] { new Number(7) }),
+                new Vector(new[] { new Number(8) }),
+                new Vector(new[] { new Number(9) }),
+                new Vector(new[] { new Number(10) }),
+                new Vector(new[] { new Number(11) }),
+            });
+            var right = new Matrix(new[]
+            {
+                new Vector(new[]
+                {
+                    new Number(1),
+                    new Number(2),
+                    new Number(3),
+                    new Number(4),
+                    new Number(5),
+                    new Number(6),
+                    new Number(7),
+                    new Number(8),
+                    new Number(9),
+                    new Number(10),
+                    new Number(11),
+                }),
+            });
+            var exp = new Mul(left, right);
+            var expected = new Matrix(new[]
+            {
+                new Vector(new[]
+                {
+                    new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6), new Number(7), new Number(8), new Number(9), new Number(10), new Number(11),
+                }),
+                new Vector(new[]
+                {
+                    new Number(2), new Number(4), new Number(6), new Number(8), new Number(10), new Number(12), new Number(14), new Number(16), new Number(18), new Number(20), new Number(22),
+                }),
+                new Vector(new[]
+                {
+                    new Number(3), new Number(6), new Number(9), new Number(12), new Number(15), new Number(18), new Number(21), new Number(24), new Number(27), new Number(30), new Number(33),
+                }),
+                new Vector(new[]
+                {
+                    new Number(4), new Number(8), new Number(12), new Number(16), new Number(20), new Number(24), new Number(28), new Number(32), new Number(36), new Number(40), new Number(44),
+                }),
+                new Vector(new[]
+                {
+                    new Number(5), new Number(10), new Number(15), new Number(20), new Number(25), new Number(30), new Number(35), new Number(40), new Number(45), new Number(50), new Number(55),
+                }),
+                new Vector(new[]
+                {
+                    new Number(6), new Number(12), new Number(18), new Number(24), new Number(30), new Number(36), new Number(42), new Number(48), new Number(54), new Number(60), new Number(66),
+                }),
+                new Vector(new[]
+                {
+                    new Number(7), new Number(14), new Number(21), new Number(28), new Number(35), new Number(42), new Number(49), new Number(56), new Number(63), new Number(70), new Number(77),
+                }),
+                new Vector(new[]
+                {
+                    new Number(8), new Number(16), new Number(24), new Number(32), new Number(40), new Number(48), new Number(56), new Number(64), new Number(72), new Number(80), new Number(88),
+                }),
+                new Vector(new[]
+                {
+                    new Number(9), new Number(18), new Number(27), new Number(36), new Number(45), new Number(54), new Number(63), new Number(72), new Number(81), new Number(90), new Number(99),
+                }),
+                new Vector(new[]
+                {
+                    new Number(10), new Number(20), new Number(30), new Number(40), new Number(50), new Number(60), new Number(70), new Number(80), new Number(90), new Number(100), new Number(110),
+                }),
+                new Vector(new[]
+                {
+                    new Number(11), new Number(22), new Number(33), new Number(44), new Number(55), new Number(66), new Number(77), new Number(88), new Number(99), new Number(110), new Number(121),
+                }),
+            });
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
         public void MatrixMulVectorTest()
         {
             var vector = new Vector(new[] { new Number(-2), new Number(1) });

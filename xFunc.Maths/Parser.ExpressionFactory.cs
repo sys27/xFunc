@@ -257,8 +257,9 @@ namespace xFunc.Maths
             throw new ArgumentOutOfRangeException(nameof(keywordToken));
         }
 
-        private IExpression CreateNumber(NumberToken numberToken) =>
-            new Number(numberToken.Number);
+        // TODO: positional cache
+        private IExpression CreateNumber(NumberToken numberToken)
+            => new Number(numberToken.Number);
 
         private IExpression CreateComplexNumber(
             OperatorToken magnitudeSign,
@@ -266,8 +267,8 @@ namespace xFunc.Maths
             OperatorToken phaseSign,
             NumberToken phase)
         {
-            static int GetSign(OperatorToken token) =>
-                token == OperatorToken.Minus ? -1 : 1;
+            static int GetSign(OperatorToken token)
+                => token == OperatorToken.Minus ? -1 : 1;
 
             var magnitudeNumber = magnitude.Number * GetSign(magnitudeSign);
             var phaseNumber = phase.Number * GetSign(phaseSign);
@@ -276,19 +277,19 @@ namespace xFunc.Maths
             return new ComplexNumber(complex);
         }
 
-        private IExpression CreateVariable(IdToken variableToken) =>
-            new Variable(variableToken.Id);
+        private IExpression CreateVariable(IdToken variableToken)
+            => new Variable(variableToken.Id);
 
-        private Vector CreateVector(IList<IExpression> arguments) =>
-            new Vector(arguments);
+        private Vector CreateVector(IList<IExpression> arguments)
+            => new Vector(arguments);
 
-        private Matrix CreateMatrix(IList<Vector> arguments) =>
-            new Matrix(arguments);
+        private Matrix CreateMatrix(IList<Vector> arguments)
+            => new Matrix(arguments);
 
-        private IExpression CreateUnaryMinus(IExpression operand) =>
-            new UnaryMinus(operand);
+        private IExpression CreateUnaryMinus(IExpression operand)
+            => new UnaryMinus(operand);
 
-        private IExpression CreateMultiplication(params IExpression[] arguments) =>
-            new Mul(arguments);
+        private IExpression CreateMultiplication(params IExpression[] arguments)
+            => new Mul(arguments);
     }
 }

@@ -20,7 +20,6 @@ using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.ComplexNumbers;
-using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
@@ -91,38 +90,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void ParseEmptyTokens()
         {
-            Assert.Throws<ArgumentNullException>(() => parser.Parse(new List<IToken>()));
-        }
-
-        [Fact]
-        public void ParseLog()
-        {
-            var tokens = Builder()
-                .Id("log")
-                .OpenParenthesis()
-                .Number(9)
-                .Comma()
-                .Number(3)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Log(new Number(9), new Number(3));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ParseLogWithOneParam()
-        {
-            var tokens = Builder()
-                .Id("log")
-                .OpenParenthesis()
-                .Number(9)
-                .CloseParenthesis()
-                .Tokens;
-
-            ParseErrorTest(tokens);
+            Assert.Throws<ParseException>(() => parser.Parse(new List<IToken>()));
         }
 
         [Fact]
@@ -272,6 +240,42 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
+        public void GCFTest()
+        {
+            var tokens = Builder()
+                .Id("gcf")
+                .OpenParenthesis()
+                .Number(12)
+                .Comma()
+                .Number(16)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new GCD(new Number(12), new Number(16));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void HCFTest()
+        {
+            var tokens = Builder()
+                .Id("hcf")
+                .OpenParenthesis()
+                .Number(12)
+                .Comma()
+                .Number(16)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new GCD(new Number(12), new Number(16));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void GCDOfThreeTest()
         {
             var tokens = Builder()
@@ -310,6 +314,24 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
+        public void SCMTest()
+        {
+            var tokens = Builder()
+                .Id("scm")
+                .OpenParenthesis()
+                .Number(12)
+                .Comma()
+                .Number(16)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new LCM(new Number(12), new Number(16));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
         public void SimplifyTest()
         {
             var tokens = Builder()
@@ -331,6 +353,22 @@ namespace xFunc.Tests.ParserTests
         {
             var tokens = Builder()
                 .Id("factorial")
+                .OpenParenthesis()
+                .Number(4)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Fact(new Number(4));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void FactorialShortTest()
+        {
+            var tokens = Builder()
+                .Id("fact")
                 .OpenParenthesis()
                 .Number(4)
                 .CloseParenthesis()
@@ -747,141 +785,6 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
-        public void ImTest()
-        {
-            var tokens = Builder()
-                .Id("im")
-                .OpenParenthesis()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Im(
-                new Sub(
-                    new Number(3),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ReTest()
-        {
-            var tokens = Builder()
-                .Id("re")
-                .OpenParenthesis()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Re(
-                new Sub(
-                    new Number(3),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void PhaseTest()
-        {
-            var tokens = Builder()
-                .Id("phase")
-                .OpenParenthesis()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Phase(
-                new Sub(
-                    new Number(3),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ConjugateTest()
-        {
-            var tokens = Builder()
-                .Id("conjugate")
-                .OpenParenthesis()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Conjugate(
-                new Sub(
-                    new Number(3),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ReciprocalTest()
-        {
-            var tokens = Builder()
-                .Id("reciprocal")
-                .OpenParenthesis()
-                .Number(3)
-                .Operation(OperatorToken.Minus)
-                .Number(2)
-                .Operation(OperatorToken.Multiplication)
-                .Id("i")
-                .CloseParenthesis()
-                .Tokens;
-            var exp = parser.Parse(tokens);
-            var expected = new Reciprocal(
-                new Sub(
-                    new Number(3),
-                    new Mul(
-                        new Number(2),
-                        new Variable("i")
-                    )
-                )
-            );
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
         public void ModuloTest()
         {
             var tokens = Builder()
@@ -1076,6 +979,34 @@ namespace xFunc.Tests.ParserTests
         {
             var tokens = Builder()
                 .Id("del")
+                .OpenParenthesis()
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .VariableX()
+                .Operation(OperatorToken.Plus)
+                .Number(3)
+                .Operation(OperatorToken.Multiplication)
+                .VariableY()
+                .Operation(OperatorToken.Plus)
+                .Number(4)
+                .Operation(OperatorToken.Multiplication)
+                .Id("z")
+                .CloseParenthesis()
+                .Tokens;
+
+            var diff = new Differentiator();
+            var simp = new Simplifier();
+            var exp = parser.Parse(tokens);
+            var expected = new Del(diff, simp, new Add(new Add(new Mul(new Number(2), Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void NablaTest()
+        {
+            var tokens = Builder()
+                .Id("nabla")
                 .OpenParenthesis()
                 .Number(2)
                 .Operation(OperatorToken.Multiplication)
@@ -1559,118 +1490,6 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
-        public void TanTest()
-        {
-            var tokens = Builder()
-                .Id("tan")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Tan(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CotTest()
-        {
-            var tokens = Builder()
-                .Id("cot")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Cot(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void SecTest()
-        {
-            var tokens = Builder()
-                .Id("sec")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sec(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CscTest()
-        {
-            var tokens = Builder()
-                .Id("csc")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Csc(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void LnTest()
-        {
-            var tokens = Builder()
-                .Id("ln")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Ln(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void LgTest()
-        {
-            var tokens = Builder()
-                .Id("lg")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Lg(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void LbTest()
-        {
-            var tokens = Builder()
-                .Id("lb")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Lb(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
         public void ExpTest()
         {
             var tokens = Builder()
@@ -1748,294 +1567,6 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Sqrt(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcsinTest()
-        {
-            var tokens = Builder()
-                .Id("arcsin")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcsin(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArccosTest()
-        {
-            var tokens = Builder()
-                .Id("arccos")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccos(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArctanTest()
-        {
-            var tokens = Builder()
-                .Id("arctan")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arctan(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArccotTest()
-        {
-            var tokens = Builder()
-                .Id("arccot")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccot(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcsecTest()
-        {
-            var tokens = Builder()
-                .Id("arcsec")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcsec(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArccscTest()
-        {
-            var tokens = Builder()
-                .Id("arccsc")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arccsc(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void SinhTest()
-        {
-            var tokens = Builder()
-                .Id("sinh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sinh(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CoshTest()
-        {
-            var tokens = Builder()
-                .Id("cosh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Cosh(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void TanhTest()
-        {
-            var tokens = Builder()
-                .Id("tanh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Tanh(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CothTest()
-        {
-            var tokens = Builder()
-                .Id("coth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Coth(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void SechTest()
-        {
-            var tokens = Builder()
-                .Id("sech")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Sech(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void CschTest()
-        {
-            var tokens = Builder()
-                .Id("csch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Csch(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArsinhTest()
-        {
-            var tokens = Builder()
-                .Id("arsinh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arsinh(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcoshTest()
-        {
-            var tokens = Builder()
-                .Id("arcosh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcosh(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArtanhTest()
-        {
-            var tokens = Builder()
-                .Id("artanh")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Artanh(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcothTest()
-        {
-            var tokens = Builder()
-                .Id("arcoth")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcoth(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArsechTest()
-        {
-            var tokens = Builder()
-                .Id("arsech")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arsech(new Number(2));
-
-            Assert.Equal(expected, exp);
-        }
-
-        [Fact]
-        public void ArcschTest()
-        {
-            var tokens = Builder()
-                .Id("arcsch")
-                .OpenParenthesis()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            var exp = parser.Parse(tokens);
-            var expected = new Arcsch(new Number(2));
 
             Assert.Equal(expected, exp);
         }
@@ -2140,6 +1671,39 @@ namespace xFunc.Tests.ParserTests
         {
             var tokens = Builder()
                 .Id("determinant")
+                .OpenParenthesis()
+                .OpenBrace()
+                .OpenBrace()
+                .Number(2)
+                .Comma()
+                .Number(3)
+                .CloseBrace()
+                .Comma()
+                .OpenBrace()
+                .Number(4)
+                .Comma()
+                .Number(7)
+                .CloseBrace()
+                .CloseBrace()
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Determinant(new Matrix(
+                new[]
+                {
+                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { new Number(4), new Number(7) })
+                }));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void DetTest()
+        {
+            var tokens = Builder()
+                .Id("det")
                 .OpenParenthesis()
                 .OpenBrace()
                 .OpenBrace()

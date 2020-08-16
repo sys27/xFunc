@@ -257,6 +257,7 @@ namespace xFunc.Maths
             throw new ArgumentOutOfRangeException(nameof(keywordToken));
         }
 
+        // TODO: positional cache
         private IExpression CreateNumber(NumberToken numberToken)
             => new Number(numberToken.Number);
 

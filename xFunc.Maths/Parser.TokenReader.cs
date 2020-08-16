@@ -16,6 +16,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Diagnostics;
 using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Maths
@@ -71,8 +72,8 @@ namespace xFunc.Maths
 
             private TToken Read<TToken>() where TToken : class, IToken
             {
-                if (readIndex > writeIndex)
-                    throw new Exception();
+                // readIndex > writeIndex
+                Debug.Assert(readIndex <= writeIndex, "The read index should be less than or equal to write index.");
 
                 // read from enumerator and write to buffer
                 if (readIndex == writeIndex)
@@ -96,24 +97,19 @@ namespace xFunc.Maths
                 }
 
                 // readIndex < writeIndex
-                // read from buffer
-                if (writeIndex >= 0)
-                {
-                    return buffer[readIndex + 1] as TToken;
-                }
+                Debug.Assert(writeIndex >= 0, "The write index should be greater than or equal to 0.");
 
-                throw new NotSupportedException();
+                // read from buffer
+                return buffer[readIndex + 1] as TToken;
             }
 
             private void Rollback(int index)
             {
-                if (index < -1 || index > writeIndex)
-                    throw new ArgumentOutOfRangeException(nameof(index));
+                Debug.Assert(index >= -1 && index <= writeIndex, "The index should be between [-1, writeIndex].");
 
                 scopeCount--;
 
-                if (scopeCount < 0)
-                    throw new Exception();
+                Debug.Assert(scopeCount >= 0, "The scope count should be greater than or equal to 0.");
 
                 readIndex = index;
             }
@@ -144,8 +140,7 @@ namespace xFunc.Maths
             {
                 scopeCount--;
 
-                if (scopeCount < 0)
-                    throw new Exception();
+                Debug.Assert(scopeCount >= 0, "The scope count should be greater than or equal to 0.");
 
                 if (scopeCount == 0 && readIndex == writeIndex)
                     Flush();

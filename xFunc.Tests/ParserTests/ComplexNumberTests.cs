@@ -332,5 +332,194 @@ namespace xFunc.Tests.ParserTests
 
             ParseErrorTest(tokens);
         }
+
+        [Fact]
+        public void ImTest()
+        {
+            var tokens = Builder()
+                .Id("im")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Im(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ImaginaryTest()
+        {
+            var tokens = Builder()
+                .Id("imaginary")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Im(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ReTest()
+        {
+            var tokens = Builder()
+                .Id("re")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Re(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void RealTest()
+        {
+            var tokens = Builder()
+                .Id("real")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Re(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void PhaseTest()
+        {
+            var tokens = Builder()
+                .Id("phase")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Phase(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ConjugateTest()
+        {
+            var tokens = Builder()
+                .Id("conjugate")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Conjugate(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ReciprocalTest()
+        {
+            var tokens = Builder()
+                .Id("reciprocal")
+                .OpenParenthesis()
+                .Number(3)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Operation(OperatorToken.Multiplication)
+                .Id("i")
+                .CloseParenthesis()
+                .Tokens;
+            var exp = parser.Parse(tokens);
+            var expected = new Reciprocal(
+                new Sub(
+                    new Number(3),
+                    new Mul(
+                        new Number(2),
+                        new Variable("i")
+                    )
+                )
+            );
+
+            Assert.Equal(expected, exp);
+        }
     }
 }

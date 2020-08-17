@@ -206,6 +206,24 @@ namespace xFunc.Maths.Tokenization
         }
 
         /// <summary>
+        /// Adds colon symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder Colon()
+        {
+            return Symbol(SymbolToken.Colon);
+        }
+
+        /// <summary>
+        /// Adds question mark symbol token.
+        /// </summary>
+        /// <returns>The current instance of builder.</returns>
+        public TokensBuilder QuestionMark()
+        {
+            return Symbol(SymbolToken.QuestionMark);
+        }
+
+        /// <summary>
         /// Adds variable token.
         /// </summary>
         /// <returns>The current instance of builder.</returns>

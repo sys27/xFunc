@@ -22,8 +22,9 @@ if = 'if' '(' conditional ',' exp (',' exp)* ')'
 for = 'for' '(' statement ',' exp ',' conditional ',' statement ')'
 while = 'while' '(' exp ',' conditional ')'
 
-exp = binary 
-binary = conditional
+exp = ternary 
+
+ternary = conditional ('?' exp ':' exp)*
 
 conditional = bitwise (('&&' / '||') bitwise)*
 bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '<=>' / '<->' / 'eq' / 'nor' / 'nand') equality)*

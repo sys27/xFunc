@@ -196,4 +196,13 @@
   <data name="ValueIsNotInteger" xml:space="preserve">
     <value>The value is not an integer.</value>
   </data>
+  <data name="TernaryThenParseException" xml:space="preserve">
+    <value>Cannot parse 'then' statement of ternary operator.</value>
+  </data>
+  <data name="TernaryElseParseException" xml:space="preserve">
+    <value>Cannot parse 'else' statement of ternary operator.</value>
+  </data>
+  <data name="TernaryColonParseException" xml:space="preserve">
+    <value>The ':' symbol is expected 'then' expression.</value>
+  </data>
 </root>

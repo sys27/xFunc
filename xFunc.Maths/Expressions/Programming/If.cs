@@ -63,10 +63,16 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            if ((bool)Condition.Execute(parameters))
-                return Then.Execute(parameters);
+            var result = Condition.Execute(parameters);
+            if (result is bool condition)
+            {
+                if (condition)
+                    return Then.Execute(parameters);
 
-            return Else?.Execute(parameters) ?? 0.0;
+                return Else?.Execute(parameters) ?? 0.0;
+            }
+
+            throw new ResultIsNotSupportedException(this, result);
         }
 
         /// <summary>

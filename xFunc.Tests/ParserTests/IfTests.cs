@@ -14,7 +14,9 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
+using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Tokenization.Tokens;
 using Xunit;
 
@@ -203,6 +205,91 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             ParseErrorTest(tokens);
+        }
+
+        [Fact]
+        public void TernaryTest()
+        {
+            var tokens = Builder()
+                .True()
+                .QuestionMark()
+                .Number(1)
+                .Colon()
+                .Operation(OperatorToken.Minus)
+                .Number(1)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new If(
+                new Bool(true),
+                new Number(1),
+                new UnaryMinus(new Number(1)));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void TernaryElseMissingTest()
+        {
+            var tokens = Builder()
+                .True()
+                .QuestionMark()
+                .Number(1)
+                .Colon()
+                .Tokens;
+
+            ParseErrorTest(tokens);
+        }
+
+        [Fact]
+        public void TernaryIfMissingTest()
+        {
+            var tokens = Builder()
+                .True()
+                .QuestionMark()
+                .Colon()
+                .Operation(OperatorToken.Minus)
+                .Number(1)
+                .Tokens;
+
+            ParseErrorTest(tokens);
+        }
+
+        [Fact]
+        public void TernaryColonMissingTest()
+        {
+            var tokens = Builder()
+                .True()
+                .QuestionMark()
+                .Number(1)
+                .Tokens;
+
+            ParseErrorTest(tokens);
+        }
+
+        [Fact]
+        public void TernaryAsExpressionTest()
+        {
+            var tokens = Builder()
+                .Id("sin")
+                .OpenParenthesis()
+                .True()
+                .QuestionMark()
+                .Number(1)
+                .Colon()
+                .Operation(OperatorToken.Minus)
+                .Number(1)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Sin(
+                new If(
+                    new Bool(true),
+                    new Number(1),
+                    new UnaryMinus(new Number(1))));
+
+            Assert.Equal(expected, exp);
         }
     }
 }

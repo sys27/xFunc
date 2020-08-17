@@ -320,5 +320,23 @@ namespace xFunc.Maths.Resources {
                 return ResourceManager.GetString("ValueIsNotInteger", resourceCulture);
             }
         }
+        
+        internal static string TernaryThenParseException {
+            get {
+                return ResourceManager.GetString("TernaryThenParseException", resourceCulture);
+            }
+        }
+        
+        internal static string TernaryElseParseException {
+            get {
+                return ResourceManager.GetString("TernaryElseParseException", resourceCulture);
+            }
+        }
+        
+        internal static string TernaryColonParseException {
+            get {
+                return ResourceManager.GetString("TernaryColonParseException", resourceCulture);
+            }
+        }
     }
 }

@@ -1413,6 +1413,22 @@ namespace xFunc.Tests.Tokenization
         }
 
         [Fact]
+        public void TernaryOperatorTest()
+        {
+            var tokens = lexer.Tokenize("True ? 1 : -1");
+            var expected = Builder()
+                .True()
+                .QuestionMark()
+                .Number(1)
+                .Colon()
+                .Operation(OperatorToken.Minus)
+                .Number(1)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
         public void ForTest()
         {
             var tokens = lexer.Tokenize("for(z := z + 1)");

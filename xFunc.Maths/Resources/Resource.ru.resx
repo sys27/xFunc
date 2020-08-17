@@ -196,4 +196,13 @@
   <data name="ValueIsNotInteger" xml:space="preserve">
     <value>Значение не является целым числом.</value>
   </data>
+  <data name="TernaryElseParseException" xml:space="preserve">
+    <value>'else' в тернарном операторе не может быть распарсено.</value>
+  </data>
+  <data name="TernaryThenParseException" xml:space="preserve">
+    <value>'then' в тернарном операторе не может быть распарсено.</value>
+  </data>
+  <data name="TernaryColonParseException" xml:space="preserve">
+    <value>Ожидается символ ':' после выражения 'then'.</value>
+  </data>
 </root>

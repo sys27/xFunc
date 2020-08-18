@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -30,15 +29,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="argument">The variable.</param>
         public Inc(Variable argument)
             : base(argument)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Inc"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        internal Inc(IList<IExpression> arguments)
-            : base(arguments)
         {
         }
 

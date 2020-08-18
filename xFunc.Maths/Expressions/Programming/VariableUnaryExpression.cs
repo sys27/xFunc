@@ -14,11 +14,8 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
-using xFunc.Maths.Resources;
 
 namespace xFunc.Maths.Expressions.Programming
 {
@@ -36,26 +33,6 @@ namespace xFunc.Maths.Expressions.Programming
         protected VariableUnaryExpression(Variable argument)
         {
             Variable = argument;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VariableUnaryExpression"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        protected VariableUnaryExpression(IList<IExpression> arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-
-            if (arguments.Count < 1)
-                throw new ParseException(Resource.LessParams);
-
-            if (arguments.Count > 1)
-                throw new ParseException(Resource.MoreParams);
-
-            Debug.Assert(arguments[0] is Variable, "The argument is not variable");
-
-            Variable = (Variable)arguments[0];
         }
 
         /// <summary>
@@ -147,7 +124,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// Gets or sets the variable.
         /// </summary>
         /// <value>The variable.</value>
-        public virtual Variable Variable
+        public Variable Variable
         {
             get
             {

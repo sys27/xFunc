@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -30,16 +29,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="condition">The condition of loop.</param>
         public While(IExpression body, IExpression condition)
             : base(body, condition)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="While"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <seealso cref="IExpression"/>
-        internal While(IList<IExpression> arguments)
-            : base(arguments)
         {
         }
 

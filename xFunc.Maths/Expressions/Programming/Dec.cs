@@ -14,7 +14,6 @@
 // limitations under the Licens
 
 using System;
-using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -30,15 +29,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="argument">The variable.</param>
         public Dec(Variable argument)
             : base(argument)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Dec"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        internal Dec(IList<IExpression> arguments)
-            : base(arguments)
         {
         }
 

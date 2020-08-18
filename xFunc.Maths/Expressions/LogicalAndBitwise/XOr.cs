@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.LogicalAndBitwise
@@ -31,16 +30,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <seealso cref="IExpression"/>
         public XOr(IExpression left, IExpression right)
             : base(left, right)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XOr"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <seealso cref="IExpression"/>
-        internal XOr(IList<IExpression> arguments)
-            : base(arguments)
         {
         }
 

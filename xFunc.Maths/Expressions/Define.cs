@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -39,26 +38,6 @@ namespace xFunc.Maths.Expressions
         {
             Key = key;
             Value = value;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Define"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <seealso cref="IExpression"/>
-        internal Define(IList<IExpression> arguments)
-        {
-            if (arguments == null)
-                throw new ArgumentNullException(nameof(arguments));
-
-            if (arguments.Count < 2)
-                throw new ParseException(Resource.LessParams);
-
-            if (arguments.Count > 2)
-                throw new ParseException(Resource.MoreParams);
-
-            Key = arguments[0];
-            Value = arguments[1];
         }
 
         /// <summary>

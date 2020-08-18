@@ -63,7 +63,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void CloneTest()
         {
-            var exp = new Transpose(new Matrix(new[]
+            var exp = new Determinant(new Matrix(new[]
             {
                 new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
                 new Vector(new[] { new Number(4), new Number(0), new Number(6) }),

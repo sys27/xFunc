@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -31,16 +30,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="exp">The expression.</param>
         public SubAssign(Variable variable, IExpression exp)
             : base(variable, exp)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SubAssign"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <seealso cref="IExpression"/>
-        internal SubAssign(IList<IExpression> arguments)
-            : base(arguments)
         {
         }
 

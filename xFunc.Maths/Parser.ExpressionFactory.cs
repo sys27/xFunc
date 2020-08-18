@@ -13,9 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -34,76 +35,6 @@ namespace xFunc.Maths
     /// </summary>
     public partial class Parser
     {
-        private IExpression CreateOperatorOrKeyword(IToken token, params IExpression[] arguments)
-        {
-            return token switch
-            {
-                OperatorToken operatorToken => CreateOperator(operatorToken, arguments),
-                KeywordToken keywordToken => CreateFromKeyword(keywordToken, arguments),
-                _ => throw new ArgumentOutOfRangeException(nameof(token)),
-            };
-        }
-
-        private IExpression CreateOperator(OperatorToken token, params IExpression[] arguments)
-        {
-            if (token == OperatorToken.Plus)
-                return new Add(arguments);
-            if (token == OperatorToken.Minus)
-                return new Sub(arguments);
-            if (token == OperatorToken.Multiplication)
-                return new Mul(arguments);
-            if (token == OperatorToken.Division)
-                return new Div(arguments);
-            if (token == OperatorToken.Exponentiation)
-                return new Pow(arguments);
-            if (token == OperatorToken.Factorial)
-                return new Fact(arguments);
-            if (token == OperatorToken.Modulo)
-                return new Mod(arguments);
-            if (token == OperatorToken.ConditionalAnd)
-                return new ConditionalAnd(arguments);
-            if (token == OperatorToken.ConditionalOr)
-                return new ConditionalOr(arguments);
-            if (token == OperatorToken.Equal)
-                return new Equal(arguments);
-            if (token == OperatorToken.NotEqual)
-                return new NotEqual(arguments);
-            if (token == OperatorToken.LessThan)
-                return new LessThan(arguments);
-            if (token == OperatorToken.LessOrEqual)
-                return new LessOrEqual(arguments);
-            if (token == OperatorToken.GreaterThan)
-                return new GreaterThan(arguments);
-            if (token == OperatorToken.GreaterOrEqual)
-                return new GreaterOrEqual(arguments);
-            if (token == OperatorToken.Assign)
-                return new Define(arguments);
-            if (token == OperatorToken.AddAssign)
-                return new AddAssign(arguments);
-            if (token == OperatorToken.SubAssign)
-                return new SubAssign(arguments);
-            if (token == OperatorToken.MulAssign)
-                return new MulAssign(arguments);
-            if (token == OperatorToken.DivAssign)
-                return new DivAssign(arguments);
-            if (token == OperatorToken.Increment)
-                return new Inc(arguments);
-            if (token == OperatorToken.Decrement)
-                return new Dec(arguments);
-            if (token == OperatorToken.Not)
-                return new Not(arguments);
-            if (token == OperatorToken.And)
-                return new And(arguments);
-            if (token == OperatorToken.Or)
-                return new Or(arguments);
-            if (token == OperatorToken.Implication)
-                return new Implication(arguments);
-            if (token == OperatorToken.Equality)
-                return new Equality(arguments);
-
-            return null;
-        }
-
         private IExpression CreateFunction(IdToken token, IList<IExpression> arguments)
         {
             return token.Id switch
@@ -219,45 +150,153 @@ namespace xFunc.Maths
             };
         }
 
-        private IExpression CreateFromKeyword(KeywordToken keywordToken, params IExpression[] arguments)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateUndef(IExpression first)
+            => new Undefine(first);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateAssign(IExpression first, IExpression second)
+            => new Define(first, second);
+
+        private IExpression CreateBinaryAssign(
+            OperatorToken token,
+            Variable first,
+            IExpression second)
+        {
+            if (token == OperatorToken.AddAssign)
+                return new AddAssign(first, second);
+            if (token == OperatorToken.SubAssign)
+                return new SubAssign(first, second);
+            if (token == OperatorToken.MulAssign)
+                return new MulAssign(first, second);
+
+            // if (token == OperatorToken.DivAssign)
+            Debug.Assert(token == OperatorToken.DivAssign, "Only '+=', '-=', '*=', '/=' operators are allowed here.");
+
+            return new DivAssign(first, second);
+        }
+
+        private IExpression CreateUnaryAssign(OperatorToken token, Variable first)
+        {
+            if (token == OperatorToken.Increment)
+                return new Inc(first);
+
+            // if (token == OperatorToken.Decrement)
+            Debug.Assert(token == OperatorToken.Decrement, "Only '++' and '--' operators are allowed here.");
+
+            return new Dec(first);
+        }
+
+        private IExpression CreateConditionalOperator(
+            OperatorToken token,
+            IExpression first,
+            IExpression second)
+        {
+            if (token == OperatorToken.ConditionalAnd)
+                return new ConditionalAnd(first, second);
+
+            // if (token == OperatorToken.ConditionalOr)
+            Debug.Assert(token == OperatorToken.ConditionalOr, "Only '&&' and '||' are allowed here.");
+
+            return new ConditionalOr(first, second);
+        }
+
+        private IExpression CreateBitwiseOperator(
+            IToken token,
+            IExpression first,
+            IExpression second)
+        {
+            if (token == OperatorToken.And || token == KeywordToken.And)
+                return new And(first, second);
+            if (token == OperatorToken.Or || token == KeywordToken.Or)
+                return new Or(first, second);
+            if (token == OperatorToken.Implication || token == KeywordToken.Impl)
+                return new Implication(first, second);
+            if (token == OperatorToken.Equality || token == KeywordToken.Eq)
+                return new Equality(first, second);
+
+            if (token == KeywordToken.NAnd)
+                return new NAnd(first, second);
+            if (token == KeywordToken.NOr)
+                return new NOr(first, second);
+
+            // if (token == KeywordToken.XOr)
+            Debug.Assert(token == KeywordToken.XOr, "Incorrect token type.");
+
+            return new XOr(first, second);
+        }
+
+        private IExpression CreateEqualityOperator(
+            OperatorToken token,
+            IExpression first,
+            IExpression second)
+        {
+            if (token == OperatorToken.Equal)
+                return new Equal(first, second);
+            if (token == OperatorToken.NotEqual)
+                return new NotEqual(first, second);
+            if (token == OperatorToken.LessThan)
+                return new LessThan(first, second);
+            if (token == OperatorToken.LessOrEqual)
+                return new LessOrEqual(first, second);
+            if (token == OperatorToken.GreaterThan)
+                return new GreaterThan(first, second);
+
+            // if (token == OperatorToken.GreaterOrEqual)
+            Debug.Assert(token == OperatorToken.GreaterOrEqual, "Incorrect token type.");
+
+            return new GreaterOrEqual(first, second);
+        }
+
+        private IExpression CreateAddSub(OperatorToken token, IExpression first, IExpression second)
+        {
+            if (token == OperatorToken.Plus)
+                return new Add(first, second);
+
+            // if (token == OperatorToken.Minus)
+            Debug.Assert(token == OperatorToken.Minus, "Only '+', '-' are allowed here.");
+
+            return new Sub(first, second);
+        }
+
+        private IExpression CreateMulDivMod(IToken token, IExpression first, IExpression second)
+        {
+            if (token == OperatorToken.Multiplication)
+                return new Mul(first, second);
+            if (token == OperatorToken.Division)
+                return new Div(first, second);
+
+            // if (token == OperatorToken.Modulo || token == KeywordToken.Mod)
+            Debug.Assert(token == OperatorToken.Modulo || token == KeywordToken.Mod, "Only '*', '/', '%', 'mod' are allowed here.");
+
+            return new Mod(first, second);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateNot(IExpression argument)
+            => new Not(argument);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateExponentiation(IExpression first, IExpression second)
+            => new Pow(first, second);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateFactorial(IExpression first)
+            => new Fact(first);
+
+        private IExpression CreateBoolean(KeywordToken keywordToken)
         {
             if (keywordToken == KeywordToken.True)
                 return new Bool(true);
-            if (keywordToken == KeywordToken.False)
-                return new Bool(false);
-            if (keywordToken == KeywordToken.Define)
-                return new Define(arguments);
-            if (keywordToken == KeywordToken.Undefine)
-                return new Undefine(arguments);
-            if (keywordToken == KeywordToken.If)
-                return new If(arguments);
-            if (keywordToken == KeywordToken.For)
-                return new For(arguments);
-            if (keywordToken == KeywordToken.While)
-                return new While(arguments);
-            if (keywordToken == KeywordToken.NAnd)
-                return new NAnd(arguments);
-            if (keywordToken == KeywordToken.NOr)
-                return new NOr(arguments);
-            if (keywordToken == KeywordToken.And)
-                return new And(arguments);
-            if (keywordToken == KeywordToken.Or)
-                return new Or(arguments);
-            if (keywordToken == KeywordToken.XOr)
-                return new XOr(arguments);
-            if (keywordToken == KeywordToken.Not)
-                return new Not(arguments);
-            if (keywordToken == KeywordToken.Eq)
-                return new Equality(arguments);
-            if (keywordToken == KeywordToken.Impl)
-                return new Implication(arguments);
-            if (keywordToken == KeywordToken.Mod)
-                return new Mod(arguments);
 
-            throw new ArgumentOutOfRangeException(nameof(keywordToken));
+            // if (keywordToken == KeywordToken.False)
+            Debug.Assert(keywordToken == KeywordToken.False, "Only True and False keywords are allowed here.");
+
+            return new Bool(false);
         }
 
         // TODO: positional cache
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private IExpression CreateNumber(NumberToken numberToken)
             => new Number(numberToken.Number);
 
@@ -277,22 +316,44 @@ namespace xFunc.Maths
             return new ComplexNumber(complex);
         }
 
-        private IExpression CreateVariable(IdToken variableToken)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Variable CreateVariable(IdToken variableToken)
             => new Variable(variableToken.Id);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Vector CreateVector(IList<IExpression> arguments)
             => new Vector(arguments);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Matrix CreateMatrix(IList<Vector> arguments)
             => new Matrix(arguments);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private IExpression CreateUnaryMinus(IExpression operand)
             => new UnaryMinus(operand);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private IExpression CreateMultiplication(params IExpression[] arguments)
             => new Mul(arguments);
 
-        private IExpression CreateTernary(IExpression condition, IExpression then, IExpression @else)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateIf(IExpression condition, IExpression then)
+            => new If(condition, then);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateIf(IExpression condition, IExpression then, IExpression @else)
             => new If(condition, then, @else);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateFor(
+            IExpression body,
+            IExpression init,
+            IExpression cond,
+            IExpression iter)
+            => new For(body, init, cond, iter);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private IExpression CreateWhile(IExpression body, IExpression condition)
+            => new While(body, condition);
     }
 }

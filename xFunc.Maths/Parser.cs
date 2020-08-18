@@ -99,7 +99,7 @@ namespace xFunc.Maths
                 {
                     tokenReader.Commit();
 
-                    return CreateOperator(@operator, left);
+                    return CreateUnaryAssign(@operator, left);
                 }
             }
 
@@ -131,7 +131,7 @@ namespace xFunc.Maths
 
                 tokenReader.Commit();
 
-                return CreateOperator(@operator, left, right);
+                return CreateBinaryAssign(@operator, left, right);
             }
 
             tokenReader.Rollback(scope);
@@ -165,7 +165,7 @@ namespace xFunc.Maths
 
                 tokenReader.Commit();
 
-                return CreateOperator(@operator, left, right);
+                return CreateAssign(left, right);
             }
 
             tokenReader.Rollback(scope);
@@ -194,7 +194,7 @@ namespace xFunc.Maths
             if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(def));
 
-            return CreateFromKeyword(def, key, value);
+            return CreateAssign(key, value);
         }
 
         private IExpression Undef(TokenReader tokenReader)
@@ -212,7 +212,7 @@ namespace xFunc.Maths
             if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(undef));
 
-            return CreateFromKeyword(undef, key);
+            return CreateUndef(key);
         }
 
         private IExpression If(TokenReader tokenReader)
@@ -242,9 +242,9 @@ namespace xFunc.Maths
                 throw new ParseException(CloseParenthesis(@if));
 
             if (@else != null)
-                return CreateFromKeyword(@if, condition, then, @else);
+                return CreateIf(condition, then, @else);
 
-            return CreateFromKeyword(@if, condition, then);
+            return CreateIf(condition, then);
         }
 
         private IExpression For(TokenReader tokenReader)
@@ -280,7 +280,7 @@ namespace xFunc.Maths
             if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(@for));
 
-            return CreateFromKeyword(@for, body, init, condition, iter);
+            return CreateFor(body, init, condition, iter);
         }
 
         private IExpression While(TokenReader tokenReader)
@@ -304,7 +304,7 @@ namespace xFunc.Maths
             if (!tokenReader.Symbol(SymbolToken.CloseParenthesis))
                 throw new ParseException(CloseParenthesis(@while));
 
-            return CreateFromKeyword(@while, body, condition);
+            return CreateWhile(body, condition);
         }
 
         private IExpression FunctionDeclaration(TokenReader tokenReader)
@@ -383,7 +383,7 @@ namespace xFunc.Maths
 
             tokenReader.Commit();
 
-            return CreateTernary(condition, then, @else);
+            return CreateIf(condition, then, @else);
         }
 
         private IExpression ConditionalOperator(TokenReader tokenReader)
@@ -402,7 +402,7 @@ namespace xFunc.Maths
                 var right = BitwiseOperator(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
-                left = CreateOperator(@operator, left, right);
+                left = CreateConditionalOperator(@operator, left, right);
             }
         }
 
@@ -432,7 +432,7 @@ namespace xFunc.Maths
                 var right = EqualityOperator(tokenReader) ??
                             throw new ParseException(SecondOperand(token));
 
-                left = CreateOperatorOrKeyword(token, left, right);
+                left = CreateBitwiseOperator(token, left, right);
             }
         }
 
@@ -456,7 +456,7 @@ namespace xFunc.Maths
                 var right = AddSub(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
-                left = CreateOperator(@operator, left, right);
+                left = CreateEqualityOperator(@operator, left, right);
             }
         }
 
@@ -476,7 +476,7 @@ namespace xFunc.Maths
                 var right = MulDivMod(tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
-                left = CreateOperator(@operator, left, right);
+                left = CreateAddSub(@operator, left, right);
             }
         }
 
@@ -499,7 +499,7 @@ namespace xFunc.Maths
                 var right = MulImplicit(tokenReader) ??
                             throw new ParseException(SecondOperand(token));
 
-                left = CreateOperatorOrKeyword(token, left, right);
+                left = CreateMulDivMod(token, left, right);
             }
         }
 
@@ -551,7 +551,7 @@ namespace xFunc.Maths
             if (token == OperatorToken.Minus)
                 return CreateUnaryMinus(operand);
 
-            return CreateOperatorOrKeyword(token, operand);
+            return CreateNot(operand);
         }
 
         private IExpression Exponentiation(TokenReader tokenReader)
@@ -567,7 +567,7 @@ namespace xFunc.Maths
             var right = Exponentiation(tokenReader) ??
                         throw new ParseException(Resource.ExponentParseException);
 
-            return CreateOperator(@operator, left, right);
+            return CreateExponentiation(left, right);
         }
 
         private IExpression RightUnary(TokenReader tokenReader)
@@ -582,7 +582,7 @@ namespace xFunc.Maths
                 {
                     tokenReader.Commit();
 
-                    return CreateOperator(@operator, number);
+                    return CreateFactorial(number);
                 }
             }
 
@@ -699,7 +699,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression Variable(TokenReader tokenReader)
+        private Variable Variable(TokenReader tokenReader)
         {
             var variable = tokenReader.GetCurrent<IdToken>();
             if (variable == null)
@@ -715,7 +715,7 @@ namespace xFunc.Maths
             if (boolean == null)
                 return null;
 
-            return CreateFromKeyword(boolean);
+            return CreateBoolean(boolean);
         }
 
         private Vector Vector(TokenReader tokenReader)

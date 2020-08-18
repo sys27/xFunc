@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
@@ -30,16 +29,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// <param name="right">The right (second) operand.</param>
         public GreaterThan(IExpression left, IExpression right)
             : base(left, right)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GreaterThan"/> class.
-        /// </summary>
-        /// <param name="arguments">The list of arguments.</param>
-        /// <seealso cref="IExpression"/>
-        internal GreaterThan(IList<IExpression> arguments)
-            : base(arguments)
         {
         }
 

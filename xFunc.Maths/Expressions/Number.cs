@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents a number.
     /// </summary>
-    public class Number : IExpression
+    public class Number : IExpression, IEquatable<Number>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Number"/> class.
@@ -38,8 +38,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="number">The value to convert to a double.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator double(Number number) =>
-            number?.Value ?? double.NaN;
+        public static implicit operator double(Number number)
+            => number?.Value ?? double.NaN;
 
         /// <summary>
         /// Defines an implicit conversion of double to <see cref="Number"/>.
@@ -50,17 +50,57 @@ namespace xFunc.Maths.Expressions
             new Number(number);
 
         /// <summary>
+        /// Deconstructs <see cref="Number"/> to <see cref="double"/>.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        public void Deconstruct(out double number)
+        {
+            number = Value;
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="other">The object to compare with the current object.</param>
+        /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
+        public bool Equals(Number other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return MathExtensions.Equals(Value, other.Value);
+        }
+
+        /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Number num)
-                return MathExtensions.Equals(Value, num.Value);
+            if (ReferenceEquals(null, obj))
+                return false;
 
-            return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (obj.GetType() != this.GetType())
+                return false;
+
+            return Equals((Number)obj);
         }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public override int GetHashCode()
+            => HashCode.Combine(Value);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -69,8 +109,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public string ToString(IFormatter formatter) =>
-            Analyze(formatter);
+        public string ToString(IFormatter formatter)
+            => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -78,8 +118,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString() =>
-            ToString(new CommonFormatter());
+        public override string ToString()
+            => ToString(new CommonFormatter());
 
         /// <summary>
         /// Returns a number. Don't use this method if your expression has variables.

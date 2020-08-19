@@ -14,6 +14,7 @@
 // limitations under the License.
 
 // TODO:
+#pragma warning disable SA1012
 #pragma warning disable SA1513
 #pragma warning disable SA1515
 #pragma warning disable CA1062
@@ -40,6 +41,7 @@ namespace xFunc.Maths.Analyzers
     {
         private readonly Number zero = 0;
         private readonly Number one = 1;
+        private readonly Number minusOne = -1;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplifier"/> class.
@@ -81,17 +83,6 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
-        /// <summary>
-        /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public IExpression Analyze(IExpression exp)
-        {
-            return null;
-        }
-
         #region Standard
 
         /// <summary>
@@ -102,10 +93,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Abs exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Abs exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -118,125 +106,92 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeBinary(exp);
 
-            // plus zero
-            if (exp.Left.Equals(zero))
-                return exp.Right;
-            if (exp.Right.Equals(zero))
-                return exp.Left;
-
-            if (exp.Left is Number && exp.Right is Number)
-                return new Number((double)exp.Execute());
-
-            // x + x
-            if (exp.Left is Variable leftVar && exp.Right is Variable rightVar && leftVar.Name == rightVar.Name)
-                return new Mul(new Number(2), leftVar);
-
-            if (exp.Left is UnaryMinus)
-                (exp.Left, exp.Right) = (exp.Right, exp.Left);
-
-            if (exp.Right is UnaryMinus unMinus)
-                return Analyze(new Sub(exp.Left, unMinus.Argument));
-
-            // 2 + (2 + x)
-            // 2 + (x + 2)
-            // (2 + x) + 2
-            // (x + 2) + 2
-            var bracketAdd = exp.Left as Add;
-            var firstNumber = exp.Right as Number;
-            if (bracketAdd == null)
+            return exp switch
             {
-                bracketAdd = exp.Right as Add;
-                firstNumber = exp.Left as Number;
-            }
+                // plus zero
+                (Number number, _) when number.Equals(zero) => exp.Right,
+                (_, Number number) when number.Equals(zero) => exp.Left,
 
-            if (bracketAdd != null && firstNumber != null)
-            {
-                if (bracketAdd.Left is Number secondNumberLeft)
-                    return Analyze(new Add(bracketAdd.Right, new Number(firstNumber.Value + secondNumberLeft.Value)));
+                // const + const
+                (Number left, Number right) => new Number(left + right),
 
-                if (bracketAdd.Right is Number secondNumberRight)
-                    return Analyze(new Add(bracketAdd.Left, new Number(firstNumber.Value + secondNumberRight.Value)));
-            }
+                // x + x
+                (Variable left, Variable right) when left.Name == right.Name
+                    => new Mul(new Number(2), left),
 
-            // 2 + (2 - x)
-            // 2 + (x - 2)
-            // (2 - x) + 2
-            // (x - 2) + 2
-            var bracketSub = exp.Left as Sub;
-            firstNumber = exp.Right as Number;
-            if (bracketSub == null)
-            {
-                bracketSub = exp.Right as Sub;
-                firstNumber = exp.Left as Number;
-            }
+                // -y + x
+                (UnaryMinus minus, _) => Analyze(new Sub(exp.Right, minus.Argument)),
 
-            if (bracketSub != null && firstNumber != null)
-            {
-                if (bracketSub.Left is Number secondNumberLeft)
-                    return Analyze(new Sub(new Number(firstNumber.Value + secondNumberLeft.Value), bracketSub.Right));
+                // x + (-y)
+                (_, UnaryMinus minus) => Analyze(new Sub(exp.Left, minus.Argument)),
 
-                if (bracketSub.Right is Number secondNumberRight)
-                    return Analyze(new Add(new Number(firstNumber.Value - secondNumberRight.Value), bracketSub.Left));
-            }
+                // 2 + (2 + x)
+                (Number number, Add(Number left, var right))
+                    => Analyze(new Add(right, new Number(number.Value + left.Value))),
 
-            // x + 2x
-            // 2x + 3x
-            Number leftMultiplier = null;
-            Number rightMultiplier = null;
-            Variable varMultiplier = null;
-            if (exp.Left is Variable leftVariable && exp.Right is Mul rightMul1)
-            {
-                leftMultiplier = 1;
-                varMultiplier = leftVariable;
+                // 2 + (x + 2)
+                (Number number, Add(var left, Number right))
+                    => Analyze(new Add(left, new Number(number.Value + right.Value))),
 
-                if (rightMul1.Left is Number mulLeftNumber && rightMul1.Right.Equals(varMultiplier))
-                    rightMultiplier = mulLeftNumber;
-                else if (rightMul1.Right is Number mulRightNumber && rightMul1.Left.Equals(varMultiplier))
-                    rightMultiplier = mulRightNumber;
-            }
-            else if (exp.Right is Variable rightVariable && exp.Left is Mul leftMul1)
-            {
-                rightMultiplier = 1;
-                varMultiplier = rightVariable;
+                // (2 + x) + 2
+                (Add(Number left, var right), Number number)
+                    => Analyze(new Add(right, new Number(number.Value + left.Value))),
 
-                if (leftMul1.Left is Number mulLeftNumber && leftMul1.Right.Equals(varMultiplier))
-                    leftMultiplier = mulLeftNumber;
-                else if (leftMul1.Right is Number mulRightNumber && leftMul1.Left.Equals(varMultiplier))
-                    leftMultiplier = mulRightNumber;
-            }
-            else if (exp.Left is Mul leftMul2 && exp.Right is Mul rightMul3)
-            {
-                varMultiplier = leftMul2.Left as Variable;
-                if (varMultiplier == null)
-                    varMultiplier = leftMul2.Right as Variable;
+                // (x + 2) + 2
+                (Add(var left, Number right), Number number)
+                    => Analyze(new Add(left, new Number(number.Value + right.Value))),
 
-                if (varMultiplier != null)
-                {
-                    if (leftMul2.Left is Number mulLeftNumber1 && leftMul2.Right.Equals(varMultiplier))
-                        leftMultiplier = mulLeftNumber1;
-                    else if (leftMul2.Right is Number mulRightNumber1 && leftMul2.Left.Equals(varMultiplier))
-                        leftMultiplier = mulRightNumber1;
+                // 2 + (2 - x)
+                (Number number, Sub(Number left, var right))
+                    => Analyze(new Sub(new Number(number.Value + left.Value), right)),
 
-                    if (rightMul3.Left is Number mulLeftNumber2 && rightMul3.Right.Equals(varMultiplier))
-                        rightMultiplier = mulLeftNumber2;
-                    else if (rightMul3.Right is Number mulRightNumber2 && rightMul3.Left.Equals(varMultiplier))
-                        rightMultiplier = mulRightNumber2;
-                }
-            }
+                // 2 + (x - 2)
+                (Number number, Sub(var left, Number right))
+                    => Analyze(new Add(new Number(number.Value - right.Value), left)),
 
-            if (leftMultiplier != null && rightMultiplier != null)
-            {
-                var multiplier = leftMultiplier.Value + rightMultiplier.Value;
+                // (2 - x) + 2
+                (Sub(Number left, var right), Number number)
+                    => Analyze(new Sub(new Number(number.Value + left.Value), right)),
 
-                if (MathExtensions.Equals(multiplier, 1))
-                    return varMultiplier;
-                if (MathExtensions.Equals(multiplier, -1))
-                    return new UnaryMinus(varMultiplier);
+                // (x - 2) + 2
+                (Sub(var left, Number right), Number number)
+                    => Analyze(new Add(new Number(number.Value - right.Value), left)),
 
-                return new Mul(new Number(multiplier), varMultiplier);
-            }
+                // TODO: nested complex 'x'
 
-            return exp;
+                // x + xb
+                (Variable x1, Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(b.Value + 1), x1)),
+
+                // x + bx
+                (Variable x1, Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(b.Value + 1), x1)),
+
+                // ax + x
+                (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value + 1), x1)),
+                // xa + x
+                (Mul(Variable x1, Number a), Variable x2) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value + 1), x1)),
+
+                // ax + bx
+                (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value + b.Value), x1)),
+
+                // ax + xb
+                (Mul(Number a, Variable x1), Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value + b.Value), x1)),
+
+                // xa + bx
+                (Mul(Variable x1, Number a), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value + b.Value), x1)),
+
+                // xa + xb
+                (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value + b.Value), x1)),
+
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -247,10 +202,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Ceil exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Ceil exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -275,10 +227,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Del exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Del exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -305,64 +254,61 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeBinary(exp);
 
-            // 0 / x
-            if (exp.Left.Equals(zero) && !exp.Right.Equals(zero))
-                return zero;
-            // x / 0
-            if (exp.Right.Equals(zero) && !exp.Left.Equals(zero))
-                throw new DivideByZeroException();
-            // x / 1
-            if (exp.Right.Equals(one))
-                return exp.Left;
-
-            if (exp.Left is Number && exp.Right is Number)
-                return new Number((double)exp.Execute());
-
-            if (exp.Left is Variable && exp.Right is Variable)
-                return one;
-
-            // (2 * x) / 2
-            // (x * 2) / 2
-            if (exp.Left is Mul bracketMulLeft && exp.Right is Number firstNumberRight)
+            return exp switch
             {
-                if (bracketMulLeft.Left is Number secondNumberLeft)
-                    return Analyze(new Div(bracketMulLeft.Right, new Number((double)firstNumberRight.Execute() / (double)secondNumberLeft.Execute())));
+                // 0 / 0
+                (Number left, Number right) when left.Equals(zero) && right.Equals(zero)
+                    => new Number(double.NaN),
 
-                if (bracketMulLeft.Right is Number secondNumberRight)
-                    return Analyze(new Div(bracketMulLeft.Left, new Number((double)firstNumberRight.Execute() / (double)secondNumberRight.Execute())));
-            }
-            // 2 / (2 * x)
-            // 2 / (x * 2)
-            else if (exp.Right is Mul bracketMulRight && exp.Left is Number firstNumberLeft)
-            {
-                if (bracketMulRight.Left is Number secondNumberLeft)
-                    return Analyze(new Div(new Number((double)firstNumberLeft.Execute() / (double)secondNumberLeft.Execute()), bracketMulRight.Right));
+                // 0 / x
+                (Number number, _) when number.Equals(zero) => zero.Clone(),
 
-                if (bracketMulRight.Right is Number secondNumberRight)
-                    return Analyze(new Div(new Number((double)firstNumberLeft.Execute() / (double)secondNumberRight.Execute()), bracketMulRight.Left));
-            }
-            // (2 / x) / 2
-            // (x / 2) / 2
-            else if (exp.Left is Div bracketDivLeft && exp.Right is Number firstNumberDivRight)
-            {
-                if (bracketDivLeft.Left is Number secondNumberLeft)
-                    return Analyze(new Div(new Number((double)firstNumberDivRight.Execute() / (double)secondNumberLeft.Execute()), bracketDivLeft.Right));
+                // x / 0
+                (_, Number number) when number.Equals(zero) => throw new DivideByZeroException(),
 
-                if (bracketDivLeft.Right is Number secondNumberRight)
-                    return Analyze(new Div(bracketDivLeft.Left, new Number((double)firstNumberDivRight.Execute() * (double)secondNumberRight.Execute())));
-            }
-            // 2 / (2 / x)
-            // 2 / (x / 2)
-            else if (exp.Right is Div bracketDivRight && exp.Left is Number firstNumberDivLeft)
-            {
-                if (bracketDivRight.Left is Number secondNumberLeft)
-                    return Analyze(new Mul(new Number((double)firstNumberDivLeft.Execute() / (double)secondNumberLeft.Execute()), bracketDivRight.Right));
+                // x / 1
+                (var left, Number number) when number.Equals(one) => left,
 
-                if (bracketDivRight.Right is Number secondNumberRight)
-                    return Analyze(new Div(new Number((double)firstNumberDivLeft.Execute() * (double)secondNumberRight.Execute()), bracketDivRight.Left));
-            }
+                // const / const
+                (Number left, Number right) => new Number(left.Value / right.Value),
 
-            return exp;
+                // x / x
+                (Variable left, Variable right) when left.Equals(right) => one.Clone(),
+
+                // (2 * x) / 2
+                (Mul(Number left, var right), Number number)
+                    => Analyze(new Div(right, new Number(number.Value / left.Value))),
+
+                // (x * 2) / 2
+                (Mul(var left, Number right), Number number)
+                    => Analyze(new Div(left, new Number(number.Value / right.Value))),
+
+                // 2 / (2 * x)
+                (Number number, Mul(Number left, var right))
+                    => Analyze(new Div(new Number(number.Value / left.Value), right)),
+
+                // 2 / (x * 2)
+                (Number number, Mul(var left, Number right))
+                    => Analyze(new Div(new Number(number.Value / right.Value), left)),
+
+                // (2 / x) / 2
+                (Div(Number left, var right), Number number)
+                    => Analyze(new Div(new Number(left.Value / number.Value), right)),
+
+                // (x / 2) / 2
+                (Div(var left, Number right), Number number)
+                    => Analyze(new Div(left, new Number(right.Value * number.Value))),
+
+                // 2 / (2 / x)
+                (Number number, Div(Number left, var right))
+                    => Analyze(new Mul(new Number(number.Value / left.Value), right)),
+
+                // 2 / (x / 2)
+                (Number number, Div(var left, Number right))
+                    => Analyze(new Div(new Number(number.Value * right.Value), left)),
+
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -372,7 +318,6 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
         public IExpression Analyze(Exp exp)
         {
             exp = AnalyzeUnary(exp);
@@ -392,10 +337,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Fact exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Fact exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -405,10 +347,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Floor exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Floor exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -418,10 +357,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(GCD exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(GCD exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -434,10 +370,11 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeUnary(exp);
 
-            if (exp.Argument.Equals(new Number(2)))
-                return one;
-
-            return exp;
+            return exp switch
+            {
+                (Number(var number)) _ when MathExtensions.Equals(number, 2) => one.Clone(),
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -448,10 +385,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(LCM exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(LCM exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -464,11 +398,12 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeUnary(exp);
 
-            // lg(10)
-            if (exp.Argument.Equals(new Number(10)))
-                return one;
-
-            return exp;
+            return exp switch
+            {
+                // lg(10)
+                (Number(var number)) _ when MathExtensions.Equals(number, 10) => one.Clone(),
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -483,8 +418,8 @@ namespace xFunc.Maths.Analyzers
             exp = AnalyzeUnary(exp);
 
             // ln(e)
-            if (exp.Argument.Equals(new Variable("e")))
-                return one;
+            if (exp.Argument is Variable("e"))
+                return one.Clone();
 
             return exp;
         }
@@ -502,7 +437,7 @@ namespace xFunc.Maths.Analyzers
 
             // log(4x, 4x)
             if (exp.Left.Equals(exp.Right))
-                return one;
+                return one.Clone();
 
             return exp;
         }
@@ -515,10 +450,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Mod exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(Mod exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -531,125 +463,98 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeBinary(exp);
 
-            // mul by zero
-            if (exp.Left.Equals(zero) || exp.Right.Equals(zero))
-                return zero;
-
-            // mul by 1
-            if (exp.Left.Equals(one))
-                return exp.Right;
-            if (exp.Right.Equals(one))
-                return exp.Left;
-
-            if (exp.Left is Number && exp.Right is Number)
-                return new Number((double)exp.Execute());
-
-            if (exp.Left is Variable && exp.Right is Variable)
-                return new Pow(exp.Left, new Number(2));
-
-            // 2 * (2 * x)
-            // 2 * (x * 2)
-            // (2 * x) * 2
-            // (x * 2) * 2
-            var bracketMul = exp.Left as Mul;
-            var firstNumber = exp.Right as Number;
-            if (bracketMul == null)
+            return exp switch
             {
-                bracketMul = exp.Right as Mul;
-                firstNumber = exp.Left as Number;
-            }
+                // mul by zero
+                (Number number, _) when number.Equals(zero) => zero.Clone(),
+                (_, Number number) when number.Equals(zero) => zero.Clone(),
 
-            if (bracketMul != null && firstNumber != null)
-            {
-                if (bracketMul.Left is Number secondNumberLeft)
-                    return Analyze(new Mul(new Number(firstNumber.Value * secondNumberLeft.Value), bracketMul.Right));
+                // mul by 1
+                (Number number, var right) when number.Equals(one) => right,
+                (var left, Number number) when number.Equals(one) => left,
 
-                if (bracketMul.Right is Number secondNumberRight)
-                    return Analyze(new Mul(new Number(firstNumber.Value * secondNumberRight.Value), bracketMul.Left));
-            }
+                // mul by -1
+                (Number number, var right) when number.Equals(minusOne) => new UnaryMinus(right),
+                (var left, Number number) when number.Equals(minusOne) => new UnaryMinus(left),
 
-            // 2 * (2 / x)
-            // 2 * (x / 2)
-            // (2 / x) * 2
-            // (x / 2) * 2
-            var bracketDiv = exp.Left as Div;
-            firstNumber = exp.Right as Number;
-            if (bracketDiv == null)
-            {
-                bracketDiv = exp.Right as Div;
-                firstNumber = exp.Left as Number;
-            }
+                // const * const
+                (Number left, Number right) => new Number(left.Value * right.Value),
 
-            if (bracketDiv != null && firstNumber != null)
-            {
-                if (bracketDiv.Left is Number secondNumberLeft)
-                    return Analyze(new Div(new Number(firstNumber.Value * secondNumberLeft.Value), bracketDiv.Right));
+                // x * -y
+                (var left, UnaryMinus minus) => new UnaryMinus(new Mul(left, minus.Argument)),
 
-                if (bracketDiv.Right is Number secondNumberRight)
-                    return Analyze(new Mul(new Number(firstNumber.Value / secondNumberRight.Value), bracketDiv.Left));
-            }
+                // x * x
+                (Variable left, Variable right) when left.Equals(right)
+                    => new Pow(left, new Number(2)),
 
-            // x * 2x
-            // 2x * 3x
-            Number leftMultiplier = null;
-            Number rightMultiplier = null;
-            Variable varMultiplier = null;
-            if (exp.Left is Variable leftVariable && exp.Right is Mul rightMul1)
-            {
-                leftMultiplier = 1;
-                varMultiplier = leftVariable;
+                // 2 * (2 * x)
+                (Number number, Mul(Number left, var right))
+                    => Analyze(new Mul(new Number(number.Value * left.Value), right)),
 
-                if (rightMul1.Left is Number mulLeftNumber && rightMul1.Right.Equals(varMultiplier))
-                    rightMultiplier = mulLeftNumber;
-                else if (rightMul1.Right is Number mulRightNumber && rightMul1.Left.Equals(varMultiplier))
-                    rightMultiplier = mulRightNumber;
-            }
-            else if (exp.Right is Variable rightVariable && exp.Left is Mul leftMul1)
-            {
-                rightMultiplier = 1;
-                varMultiplier = rightVariable;
+                // 2 * (x * 2)
+                (Number number, Mul(var left, Number right))
+                    => Analyze(new Mul(new Number(number.Value * right.Value), left)),
 
-                if (leftMul1.Left is Number mulLeftNumber && leftMul1.Right.Equals(varMultiplier))
-                    leftMultiplier = mulLeftNumber;
-                else if (leftMul1.Right is Number mulRightNumber && leftMul1.Left.Equals(varMultiplier))
-                    leftMultiplier = mulRightNumber;
-            }
-            else if (exp.Left is Mul leftMul2 && exp.Right is Mul rightMul2)
-            {
-                varMultiplier = leftMul2.Left as Variable;
-                if (varMultiplier == null)
-                    varMultiplier = leftMul2.Right as Variable;
+                // (2 * x) * 2
+                (Mul(Number left, var right), Number number)
+                    => Analyze(new Mul(new Number(number.Value * left.Value), right)),
 
-                if (varMultiplier != null)
-                {
-                    if (leftMul2.Left is Number mulLeftNumber1 && leftMul2.Right.Equals(varMultiplier))
-                        leftMultiplier = mulLeftNumber1;
-                    else if (leftMul2.Right is Number mulRightNumber1 && leftMul2.Left.Equals(varMultiplier))
-                        leftMultiplier = mulRightNumber1;
+                // (x * 2) * 2
+                (Mul(var left, Number right), Number number)
+                    => Analyze(new Mul(new Number(number.Value * right.Value), left)),
 
-                    if (rightMul2.Left is Number mulLeftNumber2 && rightMul2.Right.Equals(varMultiplier))
-                        rightMultiplier = mulLeftNumber2;
-                    else if (rightMul2.Right is Number mulRightNumber2 && rightMul2.Left.Equals(varMultiplier))
-                        rightMultiplier = mulRightNumber2;
-                }
-            }
+                // 2 * (2 / x)
+                (Number number, Div(Number left, var right))
+                    => Analyze(new Div(new Number(number.Value * left.Value), right)),
 
-            if (leftMultiplier != null && rightMultiplier != null)
-            {
-                var multiplier = leftMultiplier.Value * rightMultiplier.Value;
+                // 2 * (x / 2)
+                (Number number, Div(var left, Number right))
+                    => Analyze(new Mul(new Number(number.Value / right.Value), left)),
 
-                if (MathExtensions.Equals(multiplier, 1))
-                    return new Pow(varMultiplier, new Number(2));
-                if (MathExtensions.Equals(multiplier, -1))
-                    return new UnaryMinus(new Pow(varMultiplier, new Number(2)));
+                // (2 / x) * 2
+                (Div(Number left, var right), Number number)
+                    => Analyze(new Div(new Number(number.Value * left.Value), right)),
 
-                return new Mul(new Number(multiplier), new Pow(varMultiplier, new Number(2)));
-            }
+                // (x / 2) * 2
+                (Div(var left, Number right), Number number)
+                    => Analyze(new Mul(new Number(number.Value / right.Value), left)),
 
-            if (exp.Right is UnaryMinus rightNegative)
-                return new UnaryMinus(new Mul(rightNegative.Argument, exp.Left));
+                // TODO: nested complex 'x'
 
-            return exp;
+                // x * xb
+                (Variable x1, Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(b, new Pow(x1, new Number(2)))),
+
+                // x * bx
+                (Variable x1, Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(b, new Pow(x1, new Number(2)))),
+
+                // ax * x
+                (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
+                    => Analyze(new Mul(a, new Pow(x1, new Number(2)))),
+
+                // xa * x
+                (Mul(Variable x1, Number a), Variable x2) when x1.Equals(x2)
+                    => Analyze(new Mul(a, new Pow(x1, new Number(2)))),
+
+                // ax + bx
+                (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+
+                // ax + xb
+                (Mul(Number a, Variable x1), Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+
+                // xa + bx
+                (Mul(Variable x1, Number a), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+
+                // xa + xb
+                (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -660,10 +565,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Number exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Number exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -676,15 +578,12 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeBinary(exp);
 
-            // x^0
-            if (exp.Right.Equals(zero))
-                return one;
-            // x^1
-            if (exp.Right.Equals(one))
-                return exp.Left;
-
             return (exp.Left, exp.Right) switch
             {
+                // x^0
+                (_, Number number) when number.Equals(zero) => one.Clone(),
+                // x^1
+                (var left, Number number) when number.Equals(one) => left,
                 // x ^ log(x, y) -> y
                 (var left, Log log) when left.Equals(log.Left) => log.Right,
                 // e ^ ln(y) -> y
@@ -708,11 +607,12 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeBinary(exp);
 
-            // root(x, 1)
-            if (exp.Right.Equals(one))
-                return exp.Left;
-
-            return exp;
+            return exp switch
+            {
+                // root(x, 1)
+                (var left, Number number) when number.Equals(one) => left,
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -723,10 +623,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Round exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Round exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -735,10 +632,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Simplify exp)
-        {
-            return exp.Argument.Analyze(this);
-        }
+        public IExpression Analyze(Simplify exp) => exp.Argument.Analyze(this);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -748,10 +642,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Sqrt exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Sqrt exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -764,119 +655,88 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeBinary(exp);
 
-            // sub zero
-            if (exp.Left.Equals(zero))
-                return Analyze(new UnaryMinus(exp.Right));
-            if (exp.Right.Equals(zero))
-                return exp.Left;
-
-            if (exp.Left is Number && exp.Right is Number)
-                return new Number((double)exp.Execute());
-
-            if (exp.Left is Variable && exp.Right is Variable)
-                return zero;
-
-            if (exp.Right is UnaryMinus unMinus)
-                return new Add(exp.Left, unMinus.Argument);
-
-            // (2 + x) - 2
-            // (x + 2) - 2
-            if (exp.Left is Add bracketAddLeft1 && exp.Right is Number firstNumberRight1)
+            return exp switch
             {
-                if (bracketAddLeft1.Left is Number secondNumberLeft)
-                    return Analyze(new Add(bracketAddLeft1.Right, new Number((double)firstNumberRight1.Execute() - (double)secondNumberLeft.Execute())));
+                // plus zero
+                (Number number, _) when number.Equals(zero) => Analyze(new UnaryMinus(exp.Right)),
+                (_, Number number) when number.Equals(zero) => exp.Left,
 
-                if (bracketAddLeft1.Right is Number secondNumberRight)
-                    return Analyze(new Add(bracketAddLeft1.Left, new Number((double)firstNumberRight1.Execute() - (double)secondNumberRight.Execute())));
-            }
-            // 2 - (2 + x)
-            // 2 - (x + 2)
-            else if (exp.Right is Add bracketAddRight1 && exp.Left is Number firstNumberLeft1)
-            {
-                if (bracketAddRight1.Left is Number secondNumberLeft)
-                    return Analyze(new Sub(new Number((double)firstNumberLeft1.Execute() - (double)secondNumberLeft.Execute()), bracketAddRight1.Right));
+                // const - const
+                (Number left, Number right) => new Number(left - right),
 
-                if (bracketAddRight1.Right is Number secondNumberRight)
-                    return Analyze(new Sub(new Number((double)firstNumberLeft1.Execute() - (double)secondNumberRight.Execute()), bracketAddRight1.Left));
-            }
-            // (2 - x) - 2
-            // (x - 2) - 2
-            else if (exp.Left is Sub bracketSubLeft && exp.Right is Number firstNumberRight2)
-            {
-                if (bracketSubLeft.Left is Number secondNumberLeft)
-                    return Analyze(new Sub(new Number((double)firstNumberRight2.Execute() - (double)secondNumberLeft.Execute()), bracketSubLeft.Right));
+                // x + x
+                (Variable left, Variable right) when left.Name == right.Name => zero.Clone(),
 
-                if (bracketSubLeft.Right is Number secondNumberRight)
-                    return Analyze(new Sub(bracketSubLeft.Left, new Number((double)firstNumberRight2.Execute() + (double)secondNumberRight.Execute())));
-            }
-            // 2 - (2 - x)
-            // 2 - (x - 2)
-            else if (exp.Right is Sub bracketSubRight && exp.Left is Number firstNumberLeft2)
-            {
-                if (bracketSubRight.Left is Number secondNumberLeft)
-                    return Analyze(new Add(new Number((double)firstNumberLeft2.Execute() - (double)secondNumberLeft.Execute()), bracketSubRight.Right));
+                // x - -y
+                (_, UnaryMinus minus) => new Add(exp.Left, minus.Argument),
 
-                if (bracketSubRight.Right is Number secondNumberRight)
-                    return Analyze(new Sub(new Number((double)firstNumberLeft2.Execute() + (double)secondNumberRight.Execute()), bracketSubRight.Left));
-            }
+                // (2 + x) - 2
+                (Add(Number left, var right), Number number)
+                    => Analyze(new Add(right, new Number(number.Value - left.Value))),
 
-            // 2x - x
-            Number leftMultiplier = null;
-            Number rightMultiplier = null;
-            Variable varMultiplier = null;
-            if (exp.Left is Variable leftVariable && exp.Right is Mul rightMul1)
-            {
-                leftMultiplier = 1;
-                varMultiplier = leftVariable;
+                // (x + 2) - 2
+                (Add(var left, Number right), Number number)
+                    => Analyze(new Add(left, new Number(number.Value - right.Value))),
 
-                if (rightMul1.Left is Number mulLeft && rightMul1.Right.Equals(varMultiplier))
-                    rightMultiplier = mulLeft;
-                else if (rightMul1.Right is Number mulRight && rightMul1.Left.Equals(varMultiplier))
-                    rightMultiplier = mulRight;
-            }
-            else if (exp.Right is Variable rightVariable && exp.Left is Mul leftMul1)
-            {
-                rightMultiplier = 1;
-                varMultiplier = rightVariable;
+                // 2 - (2 + x)
+                (Number number, Add(Number left, var right))
+                    => Analyze(new Sub(new Number(number.Value - left.Value), right)),
 
-                if (leftMul1.Left is Number mulLeft && leftMul1.Right.Equals(varMultiplier))
-                    leftMultiplier = mulLeft;
-                else if (leftMul1.Right is Number mulRight && leftMul1.Left.Equals(varMultiplier))
-                    leftMultiplier = mulRight;
-            }
-            else if (exp.Left is Mul leftMul2 && exp.Right is Mul rightMul2)
-            {
-                varMultiplier = leftMul2.Left as Variable;
-                if (varMultiplier == null)
-                    varMultiplier = leftMul2.Right as Variable;
+                // 2 - (x + 2)
+                (Number number, Add(var left, Number right))
+                    => Analyze(new Sub(new Number(number.Value - right.Value), left)),
 
-                if (varMultiplier != null)
-                {
-                    if (leftMul2.Left is Number mulLeft1 && leftMul2.Right.Equals(varMultiplier))
-                        leftMultiplier = mulLeft1;
-                    else if (leftMul2.Right is Number mulRight1 && leftMul2.Left.Equals(varMultiplier))
-                        leftMultiplier = mulRight1;
+                // (2 - x) - 2
+                (Sub(Number left, var right), Number number)
+                    => Analyze(new Sub(new Number(number.Value - left.Value), right)),
 
-                    if (rightMul2.Left is Number mulLeft2 && rightMul2.Right.Equals(varMultiplier))
-                        rightMultiplier = mulLeft2;
-                    else if (rightMul2.Right is Number mulRight2 && rightMul2.Left.Equals(varMultiplier))
-                        rightMultiplier = mulRight2;
-                }
-            }
+                // (x - 2) - 2
+                (Sub(var left, Number right), Number number)
+                    => Analyze(new Sub(left, new Number(number.Value + right.Value))),
 
-            if (leftMultiplier != null && rightMultiplier != null)
-            {
-                var multiplier = leftMultiplier.Value - rightMultiplier.Value;
+                // 2 - (2 - x)
+                (Number number, Sub(Number left, var right))
+                    => Analyze(new Add(new Number(number.Value - left.Value), right)),
 
-                if (MathExtensions.Equals(multiplier, -1))
-                    return new UnaryMinus(varMultiplier);
-                if (MathExtensions.Equals(multiplier, 1))
-                    return varMultiplier;
+                // 2 - (x - 2)
+                (Number number, Sub(var left, Number right))
+                    => Analyze(new Sub(new Number(number.Value + right.Value), left)),
 
-                return new Mul(new Number(multiplier), varMultiplier);
-            }
+                // TODO: nested complex 'x'
 
-            return exp;
+                // x - xb
+                (Variable x1, Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(1 - b.Value), x1)),
+
+                // x - bx
+                (Variable x1, Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(1 - b.Value), x1)),
+
+                // ax - x
+                (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value - 1), x1)),
+                // xa - x
+                (Mul(Variable x1, Number a), Variable x2) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value - 1), x1)),
+
+                // ax - bx
+                (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value - b.Value), x1)),
+
+                // ax - xb
+                (Mul(Number a, Variable x1), Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value - b.Value), x1)),
+
+                // xa - bx
+                (Mul(Variable x1, Number a), Mul(Number b, Variable x2)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value - b.Value), x1)),
+
+                // xa - xb
+                (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
+                    => Analyze(new Mul(new Number(a.Value - b.Value), x1)),
+
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -890,18 +750,12 @@ namespace xFunc.Maths.Analyzers
         {
             exp = AnalyzeUnary(exp);
 
-            // -(-x)
-            if (exp.Argument is UnaryMinus unMinus)
-                return unMinus.Argument;
-            // -1
-            if (exp.Argument is Number number)
+            return exp switch
             {
-                number.Value = -number.Value;
-
-                return number;
-            }
-
-            return exp;
+                (UnaryMinus minus) _ => minus.Argument,
+                (Number number) _ => new Number(-number.Value),
+                _ => exp,
+            };
         }
 
         /// <summary>
@@ -912,10 +766,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Undefine exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Undefine exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -941,10 +792,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Variable exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Variable exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -954,10 +802,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(DelegateExpression exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(DelegateExpression exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -965,10 +810,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Sign exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Sign exp) => exp;
 
         #endregion Standard
 
@@ -982,10 +824,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Vector exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Vector exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1012,10 +851,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Determinant exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Determinant exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1025,10 +861,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Inverse exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Inverse exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1038,10 +871,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Transpose exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Transpose exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1049,10 +879,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(DotProduct exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(DotProduct exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1060,10 +887,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(CrossProduct exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(CrossProduct exp) => AnalyzeBinary(exp);
 
         #endregion Matrix
 
@@ -1077,10 +901,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(ComplexNumber exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(ComplexNumber exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1090,10 +911,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Conjugate exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Conjugate exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1103,10 +921,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Im exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Im exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1116,10 +931,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Phase exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Phase exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1129,10 +941,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Re exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Re exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1142,10 +951,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Reciprocal exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Reciprocal exp) => AnalyzeUnary(exp);
 
         #endregion Complex Numbers
 
@@ -1158,10 +964,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arccos exp)
-        {
-            return AnalyzeTrigonometric<Cos>(exp);
-        }
+        public IExpression Analyze(Arccos exp) => AnalyzeTrigonometric<Cos>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1170,10 +973,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arccot exp)
-        {
-            return AnalyzeTrigonometric<Cot>(exp);
-        }
+        public IExpression Analyze(Arccot exp) => AnalyzeTrigonometric<Cot>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1182,10 +982,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arccsc exp)
-        {
-            return AnalyzeTrigonometric<Csc>(exp);
-        }
+        public IExpression Analyze(Arccsc exp) => AnalyzeTrigonometric<Csc>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1194,10 +991,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arcsec exp)
-        {
-            return AnalyzeTrigonometric<Sec>(exp);
-        }
+        public IExpression Analyze(Arcsec exp) => AnalyzeTrigonometric<Sec>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1206,10 +1000,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arcsin exp)
-        {
-            return AnalyzeTrigonometric<Sin>(exp);
-        }
+        public IExpression Analyze(Arcsin exp) => AnalyzeTrigonometric<Sin>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1218,10 +1009,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arctan exp)
-        {
-            return AnalyzeTrigonometric<Tan>(exp);
-        }
+        public IExpression Analyze(Arctan exp) => AnalyzeTrigonometric<Tan>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1233,10 +1021,12 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Cos exp)
         {
             var simplifiedExp = AnalyzeTrigonometric<Arccos>(exp);
-            if (simplifiedExp is Cos cos && cos.Argument.Equals(zero))
-                return one;
 
-            return simplifiedExp;
+            return simplifiedExp switch
+            {
+                Cos(Number number) when number.Equals(zero) => one.Clone(),
+                _ => simplifiedExp,
+            };
         }
 
         /// <summary>
@@ -1249,10 +1039,12 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Cot exp)
         {
             var simplifiedExp = AnalyzeTrigonometric<Arccot>(exp);
-            if (simplifiedExp is Cot cot && cot.Argument.Equals(zero))
-                return new Number(double.PositiveInfinity);
 
-            return simplifiedExp;
+            return simplifiedExp switch
+            {
+                Cot(Number number) when number.Equals(zero) => new Number(double.PositiveInfinity),
+                _ => simplifiedExp,
+            };
         }
 
         /// <summary>
@@ -1265,10 +1057,12 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Csc exp)
         {
             var simplifiedExp = AnalyzeTrigonometric<Arccsc>(exp);
-            if (simplifiedExp is Csc csc && csc.Argument.Equals(zero))
-                return new Number(double.PositiveInfinity);
 
-            return simplifiedExp;
+            return simplifiedExp switch
+            {
+                Csc(Number number) when number.Equals(zero) => new Number(double.PositiveInfinity),
+                _ => simplifiedExp,
+            };
         }
 
         /// <summary>
@@ -1281,10 +1075,12 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Sec exp)
         {
             var simplifiedExp = AnalyzeTrigonometric<Arcsec>(exp);
-            if (simplifiedExp is Sec sec && sec.Argument.Equals(zero))
-                return one;
 
-            return simplifiedExp;
+            return simplifiedExp switch
+            {
+                Sec(Number number) when number.Equals(zero) => one.Clone(),
+                _ => simplifiedExp,
+            };
         }
 
         /// <summary>
@@ -1297,10 +1093,12 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Sin exp)
         {
             var simplifiedExp = AnalyzeTrigonometric<Arcsin>(exp);
-            if (simplifiedExp is Sin sin && sin.Argument.Equals(zero))
-                return zero;
 
-            return simplifiedExp;
+            return simplifiedExp switch
+            {
+                Sin(Number number) when number.Equals(zero) => zero.Clone(),
+                _ => simplifiedExp,
+            };
         }
 
         /// <summary>
@@ -1313,10 +1111,12 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Tan exp)
         {
             var simplifiedExp = AnalyzeTrigonometric<Arctan>(exp);
-            if (simplifiedExp is Tan tan && tan.Argument.Equals(zero))
-                return zero;
 
-            return simplifiedExp;
+            return simplifiedExp switch
+            {
+                Tan(Number number) when number.Equals(zero) => zero.Clone(),
+                _ => simplifiedExp,
+            };
         }
 
         #endregion
@@ -1330,10 +1130,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arcosh exp)
-        {
-            return AnalyzeTrigonometric<Cosh>(exp);
-        }
+        public IExpression Analyze(Arcosh exp) => AnalyzeTrigonometric<Cosh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1342,10 +1139,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arcoth exp)
-        {
-            return AnalyzeTrigonometric<Coth>(exp);
-        }
+        public IExpression Analyze(Arcoth exp) => AnalyzeTrigonometric<Coth>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1354,10 +1148,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arcsch exp)
-        {
-            return AnalyzeTrigonometric<Csch>(exp);
-        }
+        public IExpression Analyze(Arcsch exp) => AnalyzeTrigonometric<Csch>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1366,10 +1157,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arsech exp)
-        {
-            return AnalyzeTrigonometric<Sech>(exp);
-        }
+        public IExpression Analyze(Arsech exp) => AnalyzeTrigonometric<Sech>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1378,10 +1166,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Arsinh exp)
-        {
-            return AnalyzeTrigonometric<Sinh>(exp);
-        }
+        public IExpression Analyze(Arsinh exp) => AnalyzeTrigonometric<Sinh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1390,10 +1175,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Artanh exp)
-        {
-            return AnalyzeTrigonometric<Tanh>(exp);
-        }
+        public IExpression Analyze(Artanh exp) => AnalyzeTrigonometric<Tanh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1402,10 +1184,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Cosh exp)
-        {
-            return AnalyzeTrigonometric<Arcosh>(exp);
-        }
+        public IExpression Analyze(Cosh exp) => AnalyzeTrigonometric<Arcosh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1414,10 +1193,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Coth exp)
-        {
-            return AnalyzeTrigonometric<Arcoth>(exp);
-        }
+        public IExpression Analyze(Coth exp) => AnalyzeTrigonometric<Arcoth>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1426,10 +1202,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Csch exp)
-        {
-            return AnalyzeTrigonometric<Arcsch>(exp);
-        }
+        public IExpression Analyze(Csch exp) => AnalyzeTrigonometric<Arcsch>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1438,10 +1211,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Sech exp)
-        {
-            return AnalyzeTrigonometric<Arsech>(exp);
-        }
+        public IExpression Analyze(Sech exp) => AnalyzeTrigonometric<Arsech>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1450,10 +1220,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Sinh exp)
-        {
-            return AnalyzeTrigonometric<Arsinh>(exp);
-        }
+        public IExpression Analyze(Sinh exp) => AnalyzeTrigonometric<Arsinh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1462,10 +1229,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public IExpression Analyze(Tanh exp)
-        {
-            return AnalyzeTrigonometric<Artanh>(exp);
-        }
+        public IExpression Analyze(Tanh exp) => AnalyzeTrigonometric<Artanh>(exp);
 
         #endregion Hyperbolic
 
@@ -1479,10 +1243,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Avg exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Avg exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1492,10 +1253,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Count exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Count exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1505,10 +1263,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Max exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Max exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1518,10 +1273,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Min exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Min exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1531,10 +1283,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Product exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Product exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1544,10 +1293,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Stdev exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Stdev exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1557,10 +1303,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Stdevp exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Stdevp exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1570,10 +1313,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Sum exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Sum exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1583,10 +1323,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Var exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Var exp) => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1596,10 +1333,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Varp exp)
-        {
-            return AnalyzeDiffParams(exp);
-        }
+        public IExpression Analyze(Varp exp) => AnalyzeDiffParams(exp);
 
         #endregion Statistical
 
@@ -1613,10 +1347,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(And exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(And exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1626,10 +1357,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Bool exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Bool exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1639,10 +1367,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Equality exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(Equality exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1652,10 +1377,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Implication exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(Implication exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1665,10 +1387,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(NAnd exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(NAnd exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1678,10 +1397,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(NOr exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(NOr exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1691,10 +1407,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Not exp)
-        {
-            return AnalyzeUnary(exp);
-        }
+        public IExpression Analyze(Not exp) => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1704,10 +1417,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Or exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(Or exp) => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1717,10 +1427,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(XOr exp)
-        {
-            return AnalyzeBinary(exp);
-        }
+        public IExpression Analyze(XOr exp) => AnalyzeBinary(exp);
 
         #endregion Logical and Bitwise
 
@@ -1734,10 +1441,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(AddAssign exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(AddAssign exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1747,10 +1451,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(ConditionalAnd exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(ConditionalAnd exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1760,10 +1461,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Dec exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Dec exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1773,10 +1471,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(DivAssign exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(DivAssign exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1786,10 +1481,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Equal exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Equal exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1799,10 +1491,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(For exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(For exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1812,10 +1501,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(GreaterOrEqual exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(GreaterOrEqual exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1825,10 +1511,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(GreaterThan exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(GreaterThan exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1838,10 +1521,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(If exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(If exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1851,10 +1531,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(Inc exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(Inc exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1864,10 +1541,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(LessOrEqual exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(LessOrEqual exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1877,10 +1551,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(LessThan exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(LessThan exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1890,10 +1561,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(MulAssign exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(MulAssign exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1903,10 +1571,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(NotEqual exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(NotEqual exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1916,10 +1581,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(ConditionalOr exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(ConditionalOr exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1929,10 +1591,7 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(SubAssign exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(SubAssign exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1942,15 +1601,13 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Analyze(While exp)
-        {
-            return exp;
-        }
+        public IExpression Analyze(While exp) => exp;
 
         #endregion Programming
     }
 }
 
+#pragma warning restore SA1012
 #pragma warning restore SA1513
 #pragma warning restore SA1515
 #pragma warning restore CA1062

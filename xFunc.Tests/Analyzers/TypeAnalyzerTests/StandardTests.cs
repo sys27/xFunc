@@ -44,7 +44,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAbsVariable()
         {
-            var exp = new Abs(Variable.X);
+            var exp = new Abs(new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -76,7 +76,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddNumberVarTest()
         {
-            var add = new Add(new Number(1), Variable.X);
+            var add = new Add(new Number(1), new Variable("x"));
 
             Test(add, ResultTypes.Undefined);
         }
@@ -84,7 +84,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddComplicatedTest()
         {
-            var add = new Add(new Mul(new Number(1), new Number(2)), Variable.X);
+            var add = new Add(new Mul(new Number(1), new Number(2)), new Variable("x"));
 
             Test(add, ResultTypes.Undefined);
         }
@@ -251,7 +251,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddTwoVarTest()
         {
-            var exp = new Add(Variable.X, Variable.X);
+            var exp = new Add(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -259,7 +259,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddThreeVarTest()
         {
-            var exp = new Add(new Add(Variable.X, Variable.X), Variable.X);
+            var exp = new Add(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -283,7 +283,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCeilVariable()
         {
-            var exp = new Ceil(Variable.X);
+            var exp = new Ceil(new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -299,7 +299,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestdDefineUndefine()
         {
-            var exp = new Define(Variable.X, new Number(-2));
+            var exp = new Define(new Variable("x"), new Number(-2));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -319,7 +319,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var diff = new Differentiator();
             var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, Variable.X);
+            var exp = new Derivative(diff, simp, new Variable("x"));
 
             Test(exp, ResultTypes.Expression);
         }
@@ -329,7 +329,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var diff = new Differentiator();
             var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, Variable.X, Variable.X);
+            var exp = new Derivative(diff, simp, new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Expression);
         }
@@ -339,7 +339,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var diff = new Differentiator();
             var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, Variable.X, Variable.X, new Number(2));
+            var exp = new Derivative(diff, simp, new Variable("x"), new Variable("x"), new Number(2));
 
             Test(exp, ResultTypes.Number);
         }
@@ -419,7 +419,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivTwoVarTest()
         {
-            var exp = new Div(Variable.X, Variable.X);
+            var exp = new Div(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -427,7 +427,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivThreeVarTest()
         {
-            var exp = new Div(new Add(Variable.X, Variable.X), Variable.X);
+            var exp = new Div(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -443,7 +443,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestExpUndefined()
         {
-            var exp = new Exp(Variable.X);
+            var exp = new Exp(new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -475,7 +475,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestFactUndefined()
         {
-            var exp = new Fact(Variable.X);
+            var exp = new Fact(new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -499,7 +499,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestFloorUndefined()
         {
-            var exp = new Floor(Variable.X);
+            var exp = new Floor(new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -523,7 +523,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGCDUndefined()
         {
-            var exp = new GCD(new Number(10), Variable.X);
+            var exp = new GCD(new Number(10), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -547,7 +547,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLbUndefined()
         {
-            var exp = new Lb(Variable.X);
+            var exp = new Lb(new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -571,7 +571,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLCMUndefined()
         {
-            var exp = new LCM(new Number(10), Variable.X);
+            var exp = new LCM(new Number(10), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -595,7 +595,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLgUndefined()
         {
-            var exp = new Lg(Variable.X);
+            var exp = new Lg(new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -627,7 +627,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLnUndefined()
         {
-            var exp = new Ln(Variable.X);
+            var exp = new Ln(new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -659,7 +659,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogUndefined()
         {
-            var exp = new Log(new Number(2), Variable.X);
+            var exp = new Log(new Number(2), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -699,7 +699,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestModUndefined()
         {
-            var exp = new Mod(Variable.X, new Number(2));
+            var exp = new Mod(new Variable("x"), new Number(2));
 
             Test(exp, ResultTypes.Number);
         }
@@ -747,7 +747,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulNumberVarTest()
         {
-            var mul = new Mul(new Number(1), Variable.X);
+            var mul = new Mul(new Number(1), new Variable("x"));
 
             Test(mul, ResultTypes.Undefined);
         }
@@ -771,7 +771,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulVarNumberTest()
         {
-            var mul = new Mul(Variable.X, new Number(1));
+            var mul = new Mul(new Variable("x"), new Number(1));
 
             Test(mul, ResultTypes.Undefined);
         }
@@ -910,7 +910,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestPowUndefined()
         {
-            var exp = new Pow(Variable.X, new Number(2));
+            var exp = new Pow(new Variable("x"), new Number(2));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -958,7 +958,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestRootUndefined()
         {
-            var exp = new Root(Variable.X, new Number(2));
+            var exp = new Root(new Variable("x"), new Number(2));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -998,7 +998,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestRoundVariable()
         {
-            var exp = new Round(new Number(10), Variable.X);
+            var exp = new Round(new Number(10), new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -1023,13 +1023,13 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestSimplify()
         {
             var simp = new Simplifier();
-            Test(new Simplify(simp, Variable.X), ResultTypes.Undefined);
+            Test(new Simplify(simp, new Variable("x")), ResultTypes.Undefined);
         }
 
         [Fact]
         public void TestSqrt()
         {
-            Test(new Sqrt(Variable.X), ResultTypes.Undefined);
+            Test(new Sqrt(new Variable("x")), ResultTypes.Undefined);
         }
 
         [Fact]
@@ -1043,7 +1043,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberVarTest()
         {
-            var sub = new Sub(new Number(1), Variable.X);
+            var sub = new Sub(new Number(1), new Variable("x"));
 
             Test(sub, ResultTypes.Undefined);
         }
@@ -1051,7 +1051,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubComplicatedTest()
         {
-            var sub = new Sub(new Mul(new Number(1), new Number(2)), Variable.X);
+            var sub = new Sub(new Mul(new Number(1), new Number(2)), new Variable("x"));
 
             Test(sub, ResultTypes.Undefined);
         }
@@ -1238,7 +1238,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubTwoVarTest()
         {
-            var exp = new Sub(Variable.X, Variable.X);
+            var exp = new Sub(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -1246,7 +1246,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubThreeVarTest()
         {
-            var exp = new Sub(new Add(Variable.X, Variable.X), Variable.X);
+            var exp = new Sub(new Add(new Variable("x"), new Variable("x")), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -1262,7 +1262,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestUnaryMinusUndefined()
         {
-            var exp = new UnaryMinus(Variable.X);
+            var exp = new UnaryMinus(new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -1294,7 +1294,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestUndefine()
         {
-            Test(new Undefine(Variable.X), ResultTypes.Undefined);
+            Test(new Undefine(new Variable("x")), ResultTypes.Undefined);
         }
 
         [Fact]
@@ -1306,7 +1306,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVariable()
         {
-            Test(new Sqrt(Variable.X), ResultTypes.Undefined);
+            Test(new Sqrt(new Variable("x")), ResultTypes.Undefined);
         }
 
         [Fact]

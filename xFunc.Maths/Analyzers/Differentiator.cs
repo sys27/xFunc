@@ -34,7 +34,7 @@ namespace xFunc.Maths.Analyzers
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
         public Differentiator()
-            : this(new ExpressionParameters(), Variable.X)
+            : this(new ExpressionParameters(), new Variable("x"))
         {
         }
 

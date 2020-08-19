@@ -20,25 +20,25 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
 {
     public class AddSimplifierTest : BaseSimplifierTest
     {
-        [Fact]
+        [Fact(DisplayName = "0 + x")]
         public void AddFirstZero()
         {
-            var add = new Add(new Number(0), Variable.X);
-            var expected = Variable.X;
+            var add = new Add(new Number(0), new Variable("x"));
+            var expected = new Variable("x");
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x + 0")]
         public void AddSecondZero()
         {
-            var add = new Add(Variable.X, new Number(0));
-            var expected = Variable.X;
+            var add = new Add(new Variable("x"), new Number(0));
+            var expected = new Variable("x");
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "3 + 2")]
         public void AddTwoNumbers()
         {
             var add = new Add(new Number(3), new Number(2));
@@ -47,247 +47,230 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "-x + 2")]
         public void AddFirstUnaryMinus()
         {
-            var add = new Add(new UnaryMinus(Variable.X), new Number(2));
-            var expected = new Sub(new Number(2), Variable.X);
+            var add = new Add(new UnaryMinus(new Variable("x")), new Number(2));
+            var expected = new Sub(new Number(2), new Variable("x"));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2 + (-x)")]
         public void AddSecondUnaryMinus()
         {
-            var add = new Add(new Number(2), new UnaryMinus(Variable.X));
-            var expected = new Sub(new Number(2), Variable.X);
+            var add = new Add(new Number(2), new UnaryMinus(new Variable("x")));
+            var expected = new Sub(new Number(2), new Variable("x"));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2 + (2 + x)")]
         public void AddDiffNumAdd_NumAddVar_()
         {
-            // 2 + (2 + x)
-            var add = new Add(new Number(2), new Add(new Number(2), Variable.X));
-            var expected = new Add(Variable.X, new Number(4));
+            var add = new Add(new Number(2), new Add(new Number(2), new Variable("x")));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2 + (x + 2)")]
         public void AddDiffNumAdd_VarAddNum_()
         {
-            // 2 + (x + 2)
-            var add = new Add(new Number(2), new Add(Variable.X, new Number(2)));
-            var expected = new Add(Variable.X, new Number(4));
+            var add = new Add(new Number(2), new Add(new Variable("x"), new Number(2)));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "(2 + x) + 2")]
         public void AddDiff_NumAddVar_AddNum()
         {
-            // (2 + x) + 2
-            var add = new Add(new Add(new Number(2), Variable.X), new Number(2));
-            var expected = new Add(Variable.X, new Number(4));
+            var add = new Add(new Add(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "(x + 2) + 2")]
         public void AddDiff_VarAddNum_AddNum()
         {
-            // (x + 2) + 2
-            var add = new Add(new Add(Variable.X, new Number(2)), new Number(2));
-            var expected = new Add(Variable.X, new Number(4));
+            var add = new Add(new Add(new Variable("x"), new Number(2)), new Number(2));
+            var expected = new Add(new Variable("x"), new Number(4));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2 + (2 - x)")]
         public void AddDiffNum_NumSubVar_()
         {
-            // 2 + (2 - x)
-            var add = new Add(new Number(2), new Sub(new Number(2), Variable.X));
-            var expected = new Sub(new Number(4), Variable.X);
+            var add = new Add(new Number(2), new Sub(new Number(2), new Variable("x")));
+            var expected = new Sub(new Number(4), new Variable("x"));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2 + (x - 2)")]
         public void AddDiffNum_VarSubNum_()
         {
-            // 2 + (x - 2)
-            var add = new Add(new Number(2), new Sub(Variable.X, new Number(2)));
-            var expected = Variable.X;
+            var add = new Add(new Number(2), new Sub(new Variable("x"), new Number(2)));
+            var expected = new Variable("x");
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "(2 - x) + 2")]
         public void AddDiff_NumSubVar_AddNum()
         {
-            // (2 - x) + 2
-            var add = new Add(new Sub(new Number(2), Variable.X), new Number(2));
-            var expected = new Sub(new Number(4), Variable.X);
+            var add = new Add(new Sub(new Number(2), new Variable("x")), new Number(2));
+            var expected = new Sub(new Number(4), new Variable("x"));
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "(x - 2) + 2")]
         public void AddDiff_VarSubNum_AddNum()
         {
-            // (x - 2) + 2
-            var add = new Add(new Sub(Variable.X, new Number(2)), new Number(2));
-            var expected = Variable.X;
+            var add = new Add(new Sub(new Variable("x"), new Number(2)), new Number(2));
+            var expected = new Variable("x");
 
             SimpleTest(add, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x + x")]
         public void AddSaveVars1()
         {
-            // x + x
-            var var = Variable.X;
-            var exp = new Add(var, var);
-            var expected = new Mul(new Number(2), var);
+            var exp = new Add(new Variable("x"), new Variable("x"));
+            var expected = new Mul(new Number(2), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2x + x")]
         public void AddSaveVars2()
         {
-            // 2x + x
-            var var = Variable.X;
-            var exp = new Add(new Mul(new Number(2), var), var);
-            var expected = new Mul(new Number(3), var);
+            var exp = new Add(new Mul(new Number(2), new Variable("x")), new Variable("x"));
+            var expected = new Mul(new Number(3), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x + 2x")]
         public void AddSaveVars3()
         {
-            // x + 2x
-            var var = Variable.X;
-            var exp = new Add(var, new Mul(new Number(2), var));
-            var expected = new Mul(new Number(3), var);
+            var exp = new Add(new Variable("x"), new Mul(new Number(2), new Variable("x")));
+            var expected = new Mul(new Number(3), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x + x * 2")]
         public void AddSaveVars4()
         {
-            // x + x * 2
-            var var = Variable.X;
-            var exp = new Add(var, new Mul(var, new Number(2)));
-            var expected = new Mul(new Number(3), var);
+            var exp = new Add(new Variable("x"), new Mul(new Variable("x"), new Number(2)));
+            var expected = new Mul(new Number(3), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "2x + 3x")]
         public void AddSaveVars5()
         {
-            // 2x + 3x
-            var var = Variable.X;
-            var exp = new Add(new Mul(new Number(2), var), new Mul(new Number(3), var));
-            var expected = new Mul(new Number(5), var);
+            var exp = new Add(
+                new Mul(new Number(2), new Variable("x")),
+                new Mul(new Number(3), new Variable("x"))
+            );
+            var expected = new Mul(new Number(5), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "-x + x")]
         public void AddSaveVars6()
         {
-            // -x + x
-            var var = Variable.X;
-            var exp = new Add(new UnaryMinus(var), var);
+            var exp = new Add(new UnaryMinus(new Variable("x")), new Variable("x"));
             var expected = new Number(0);
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "-x + 2x")]
         public void AddSaveVars7()
         {
-            // -x + 2x
-            var var = Variable.X;
-            var exp = new Add(new UnaryMinus(var), new Mul(new Number(2), var));
-            var expected = var;
+            var exp = new Add(
+                new UnaryMinus(new Variable("x")),
+                new Mul(new Number(2), new Variable("x"))
+            );
+            var expected = new Variable("x");
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x * 2 + x")]
         public void AddSaveVars8()
         {
-            // x * 2 + x
-            var var = Variable.X;
-            var exp = new Add(new Mul(var, new Number(2)), var);
-            var expected = new Mul(new Number(3), var);
+            var exp = new Add(new Mul(new Variable("x"), new Number(2)), new Variable("x"));
+            var expected = new Mul(new Number(3), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x * 2 + x * 3")]
         public void AddSaveVars9()
         {
-            // x * 2 + x * 3
-            var var = Variable.X;
-            var exp = new Add(new Mul(var, new Number(2)), new Mul(var, new Number(3)));
-            var expected = new Mul(new Number(5), var);
+            var exp = new Add(
+                new Mul(new Variable("x"), new Number(2)),
+                new Mul(new Variable("x"), new Number(3))
+            );
+            var expected = new Mul(new Number(5), new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "3x + -2x")]
         public void AddSaveVars10()
         {
-            // 3x + -2x
-            var var = Variable.X;
-            var exp = new Add(new Mul(new Number(3), var), new Mul(new Number(-2), var));
-            var expected = var;
+            var exp = new Add(
+                new Mul(new Number(3), new Variable("x")),
+                new Mul(new Number(-2), new Variable("x"))
+            );
+            var expected = new Variable("x");
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "3x + -4x")]
         public void AddSaveVars11()
         {
-            // 3x + -4x
-            var var = Variable.X;
-            var exp = new Add(new Mul(new Number(3), var), new Mul(new Number(-4), var));
-            var expected = new UnaryMinus(var);
+            var exp = new Add(
+                new Mul(new Number(3), new Variable("x")),
+                new Mul(new Number(-4), new Variable("x"))
+            );
+            var expected = new UnaryMinus(new Variable("x"));
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "-2x + x * 3")]
         public void AddSameVars12()
         {
-            // -2x + x*3
-            var var = Variable.X;
             var exp = new Add(
-                new Mul(new Number(-2), var),
-                new Mul(var, new Number(3)));
-            var expected = var;
+                new Mul(new Number(-2), new Variable("x")),
+                new Mul(new Variable("x"), new Number(3))
+            );
+            var expected = new Variable("x");
 
             SimpleTest(exp, expected);
         }
 
-        [Fact]
+        [Fact(DisplayName = "x * 3 + -2x")]
         public void AddSameVars13()
         {
-            // x*3 + -2x
-            var var = Variable.X;
             var exp = new Add(
-                new Mul(var, new Number(3)),
-                new Mul(new Number(-2), var));
-            var expected = var;
+                new Mul(new Variable("x"), new Number(3)),
+                new Mul(new Number(-2), new Variable("x"))
+            );
+            var expected = new Variable("x");
 
             SimpleTest(exp, expected);
         }

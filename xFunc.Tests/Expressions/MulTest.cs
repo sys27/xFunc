@@ -256,7 +256,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Mul(Variable.X, new Number(0));
+            var exp = new Mul(new Variable("x"), new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

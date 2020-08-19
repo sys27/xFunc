@@ -33,7 +33,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Define(Variable.X, new Number(3));
+            var expected = new Define(new Variable("x"), new Number(3));
 
             Assert.Equal(expected, exp);
         }
@@ -107,8 +107,8 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Define(
-                new UserFunction("func", new IExpression[] { Variable.X, new Variable("y") }),
-                new Sin(Variable.X));
+                new UserFunction("func", new IExpression[] { new Variable("x"), new Variable("y") }),
+                new Sin(new Variable("x")));
 
             Assert.Equal(expected, exp);
         }
@@ -128,7 +128,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Define(
-                Variable.X,
+                new Variable("x"),
                 new UnaryMinus(new Sin(new Number(2)))
             );
 
@@ -145,7 +145,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new AddAssign(Variable.X, new Number(2));
+            var expected = new AddAssign(new Variable("x"), new Number(2));
 
             Assert.Equal(expected, exp);
         }
@@ -160,7 +160,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new MulAssign(Variable.X, new Number(2));
+            var expected = new MulAssign(new Variable("x"), new Number(2));
 
             Assert.Equal(expected, exp);
         }
@@ -175,7 +175,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new SubAssign(Variable.X, new Number(2));
+            var expected = new SubAssign(new Variable("x"), new Number(2));
 
             Assert.Equal(expected, exp);
         }
@@ -190,7 +190,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new DivAssign(Variable.X, new Number(2));
+            var expected = new DivAssign(new Variable("x"), new Number(2));
 
             Assert.Equal(expected, exp);
         }
@@ -210,7 +210,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new AddAssign(
-                Variable.X,
+                new Variable("x"),
                 new UnaryMinus(new Sin(new Number(2)))
             );
 
@@ -232,7 +232,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new SubAssign(
-                Variable.X,
+                new Variable("x"),
                 new UnaryMinus(new Sin(new Number(2)))
             );
 
@@ -254,7 +254,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new MulAssign(
-                Variable.X,
+                new Variable("x"),
                 new UnaryMinus(new Sin(new Number(2)))
             );
 
@@ -276,7 +276,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new DivAssign(
-                Variable.X,
+                new Variable("x"),
                 new UnaryMinus(new Sin(new Number(2)))
             );
 

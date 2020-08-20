@@ -45,7 +45,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder("x");
 
-            Assert.Equal(builder.Current, Variable.X);
+            Assert.Equal(builder.Current, new Variable("x"));
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace xFunc.Tests
         {
             var builder = Builder.Create("x");
 
-            Assert.Equal(builder.Current, Variable.X);
+            Assert.Equal(builder.Current, new Variable("x"));
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Add("x");
 
-            Assert.Equal(builder.Current, new Add(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Add(new Number(3), new Variable("x")));
         }
 
         [Fact]
@@ -155,7 +155,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Sub("x");
 
-            Assert.Equal(builder.Current, new Sub(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Sub(new Number(3), new Variable("x")));
         }
 
         [Fact]
@@ -179,7 +179,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Mul("x");
 
-            Assert.Equal(builder.Current, new Mul(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Mul(new Number(3), new Variable("x")));
         }
 
         [Fact]
@@ -203,7 +203,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Div("x");
 
-            Assert.Equal(builder.Current, new Div(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Div(new Number(3), new Variable("x")));
         }
 
         [Fact]
@@ -227,7 +227,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Pow("x");
 
-            Assert.Equal(builder.Current, new Pow(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Pow(new Number(3), new Variable("x")));
         }
 
         [Fact]
@@ -259,7 +259,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Root("x");
 
-            Assert.Equal(builder.Current, new Root(new Number(3), Variable.X));
+            Assert.Equal(builder.Current, new Root(new Number(3), new Variable("x")));
         }
 
         [Fact]
@@ -291,7 +291,7 @@ namespace xFunc.Tests
         {
             var builder = new Builder(3).Log("x");
 
-            Assert.Equal(builder.Current, new Log(Variable.X, new Number(3)));
+            Assert.Equal(builder.Current, new Log(new Variable("x"), new Number(3)));
         }
 
         [Fact]

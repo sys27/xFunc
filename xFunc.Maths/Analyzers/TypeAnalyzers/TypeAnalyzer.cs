@@ -16,7 +16,6 @@
 // TODO:
 #pragma warning disable CA1062
 
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -135,17 +134,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 _ => throw new ParameterTypeMismatchException(),
             };
-        }
-
-        /// <summary>
-        /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public ResultTypes Analyze(IExpression exp)
-        {
-            return ResultTypes.None;
         }
 
         #region Standard

@@ -42,7 +42,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new While(
-                new Define(Variable.X, new Add(Variable.X, new Number(1))),
+                new Define(new Variable("x"), new Add(new Variable("x"), new Number(1))),
                 new Equal(new Number(1), new Number(1)));
 
             Assert.Equal(expected, exp);

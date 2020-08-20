@@ -60,6 +60,17 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Deconstructs <see cref="BinaryExpression"/>.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        public void Deconstruct(out IExpression left, out IExpression right)
+        {
+            left = Left;
+            right = Right;
+        }
+
+        /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>

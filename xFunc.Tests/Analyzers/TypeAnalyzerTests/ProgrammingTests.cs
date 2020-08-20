@@ -27,7 +27,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddAssignUndefined()
         {
-            var exp = new AddAssign(Variable.X, Variable.X);
+            var exp = new AddAssign(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddAssignNumber()
         {
-            var exp = new AddAssign(Variable.X, new Number(10));
+            var exp = new AddAssign(new Variable("x"), new Number(10));
 
             Test(exp, ResultTypes.Number);
         }
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddAssignException()
         {
-            var exp = new AddAssign(Variable.X, new Bool(false));
+            var exp = new AddAssign(new Variable("x"), new Bool(false));
 
             TestException(exp);
         }
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndUndefined()
         {
-            var exp = new ConditionalAnd(Variable.X, Variable.X);
+            var exp = new ConditionalAnd(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -99,7 +99,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDec()
         {
-            var exp = new Dec(Variable.X);
+            var exp = new Dec(new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -107,7 +107,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivAssignUndefined()
         {
-            var exp = new DivAssign(Variable.X, Variable.X);
+            var exp = new DivAssign(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -115,7 +115,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivAssignNumber()
         {
-            var exp = new DivAssign(Variable.X, new Number(10));
+            var exp = new DivAssign(new Variable("x"), new Number(10));
 
             Test(exp, ResultTypes.Number);
         }
@@ -123,7 +123,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivAssignException()
         {
-            var exp = new DivAssign(Variable.X, new Bool(false));
+            var exp = new DivAssign(new Variable("x"), new Bool(false));
 
             TestException(exp);
         }
@@ -131,7 +131,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualUndefined()
         {
-            var exp = new Equal(Variable.X, Variable.X);
+            var exp = new Equal(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -203,7 +203,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualUndefined()
         {
-            var exp = new NotEqual(Variable.X, Variable.X);
+            var exp = new NotEqual(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -275,7 +275,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForUndefined()
         {
-            var exp = new For(Variable.X, Variable.X, Variable.X, Variable.X);
+            var exp = new For(new Variable("x"), new Variable("x"), new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -283,7 +283,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForNumber()
         {
-            var exp = new For(Variable.X, Variable.X, new Bool(false), Variable.X);
+            var exp = new For(new Variable("x"), new Variable("x"), new Bool(false), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -291,7 +291,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForException()
         {
-            var exp = new For(Variable.X, Variable.X, new ComplexNumber(2, 3), Variable.X);
+            var exp = new For(new Variable("x"), new Variable("x"), new ComplexNumber(2, 3), new Variable("x"));
 
             TestException(exp);
         }
@@ -299,7 +299,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterOrEqualUndefined()
         {
-            var exp = new GreaterOrEqual(Variable.X, Variable.X);
+            var exp = new GreaterOrEqual(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -339,7 +339,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterThanUndefined()
         {
-            var exp = new GreaterThan(Variable.X, Variable.X);
+            var exp = new GreaterThan(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -379,7 +379,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestIfUndefined()
         {
-            var exp = new If(Variable.X, new Number(10));
+            var exp = new If(new Variable("x"), new Number(10));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -411,7 +411,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInc()
         {
-            var exp = new Inc(Variable.X);
+            var exp = new Inc(new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -419,7 +419,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessOrEqualUndefined()
         {
-            var exp = new LessOrEqual(Variable.X, Variable.X);
+            var exp = new LessOrEqual(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -459,7 +459,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessThanUndefined()
         {
-            var exp = new LessThan(Variable.X, Variable.X);
+            var exp = new LessThan(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -499,7 +499,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulAssignUndefined()
         {
-            var exp = new MulAssign(Variable.X, Variable.X);
+            var exp = new MulAssign(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -507,7 +507,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulAssignNumber()
         {
-            var exp = new MulAssign(Variable.X, new Number(10));
+            var exp = new MulAssign(new Variable("x"), new Number(10));
 
             Test(exp, ResultTypes.Number);
         }
@@ -515,7 +515,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulAssignException()
         {
-            var exp = new MulAssign(Variable.X, new Bool(false));
+            var exp = new MulAssign(new Variable("x"), new Bool(false));
 
             TestException(exp);
         }
@@ -523,7 +523,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrUndefined()
         {
-            var exp = new ConditionalOr(Variable.X, Variable.X);
+            var exp = new ConditionalOr(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -563,7 +563,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSubAssignUndefined()
         {
-            var exp = new SubAssign(Variable.X, Variable.X);
+            var exp = new SubAssign(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Number);
         }
@@ -571,7 +571,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSubAssignNumber()
         {
-            var exp = new SubAssign(Variable.X, new Number(10));
+            var exp = new SubAssign(new Variable("x"), new Number(10));
 
             Test(exp, ResultTypes.Number);
         }
@@ -579,7 +579,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSubAssignException()
         {
-            var exp = new SubAssign(Variable.X, new Bool(false));
+            var exp = new SubAssign(new Variable("x"), new Bool(false));
 
             TestException(exp);
         }
@@ -587,7 +587,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestWhileUndefined()
         {
-            var exp = new While(Variable.X, Variable.X);
+            var exp = new While(new Variable("x"), new Variable("x"));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -595,7 +595,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestWhileNumber()
         {
-            var exp = new While(Variable.X, new Bool(false));
+            var exp = new While(new Variable("x"), new Bool(false));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -603,7 +603,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestWhileException()
         {
-            var exp = new While(Variable.X, new Number(1));
+            var exp = new While(new Variable("x"), new Number(1));
 
             TestException(exp);
         }

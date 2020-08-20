@@ -156,7 +156,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The variable.
         /// </value>
-        public Variable Variable => ParametersCount >= 2 ? (Variable)this[1] : Variable.X;
+        public Variable Variable => ParametersCount >= 2 ? (Variable)this[1] : new Variable("x");
 
         /// <summary>
         /// Gets the derivative point.

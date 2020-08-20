@@ -195,7 +195,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Sub(
-                Variable.X,
+                new Variable("x"),
                 new Add(
                     new Number(0),
                     new Mul(
@@ -224,7 +224,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(
-                Variable.X,
+                new Variable("x"),
                 new Sub(
                     new Number(3),
                     new Mul(

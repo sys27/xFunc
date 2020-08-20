@@ -22,13 +22,8 @@ namespace xFunc.Maths.Expressions
     /// <summary>
     /// Represents variables in expressions.
     /// </summary>
-    public class Variable : IExpression
+    public class Variable : IExpression, IEquatable<Variable>
     {
-        /// <summary>
-        /// The 'x' variable.
-        /// </summary>
-        public static readonly Variable X = new Variable("x");
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Variable"/> class.
         /// </summary>
@@ -43,16 +38,16 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="variable">The value to convert.</param>
         /// <returns>An object that contains the converted value.</returns>
-        public static implicit operator string(Variable variable) =>
-            variable?.Name;
+        public static implicit operator string(Variable variable)
+            => variable?.Name;
 
         /// <summary>
         /// Defines an implicit conversion of a string object to a Variable object.
         /// </summary>
         /// <param name="variable">The value to convert.</param>
         /// <returns>An object that contains the converted value.</returns>
-        public static implicit operator Variable(string variable) =>
-            new Variable(variable);
+        public static implicit operator Variable(string variable)
+            => new Variable(variable);
 
         /// <summary>
         /// Deconstructs <see cref="Variable"/> to <see cref="string"/>.
@@ -66,17 +61,44 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
+        /// <param name="other">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        public bool Equals(Variable other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Name == other.Name;
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj) =>
-            obj is Variable @var && @var.Name == Name;
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (obj.GetType() != this.GetType())
+                return false;
+
+            return Equals((Variable)obj);
+        }
 
         /// <summary>
         /// Returns a hash function for this type.
         /// </summary>
         /// <returns>A hash code for the current <see cref="Variable"/>.</returns>
-        public override int GetHashCode() =>
-            HashCode.Combine(Name);
+        public override int GetHashCode()
+            => HashCode.Combine(Name);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

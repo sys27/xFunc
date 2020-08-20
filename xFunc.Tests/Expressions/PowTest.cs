@@ -103,7 +103,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Pow(Variable.X, new Number(0));
+            var exp = new Pow(new Variable("x"), new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

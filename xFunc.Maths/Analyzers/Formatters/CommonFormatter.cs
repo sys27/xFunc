@@ -74,17 +74,6 @@ namespace xFunc.Maths.Analyzers.Formatters
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual string Analyze(IExpression exp)
-        {
-            return string.Empty;
-        }
-
         #region Standard
 
         /// <summary>

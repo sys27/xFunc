@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions
             var mock = new Mock<ISimplifier>();
             mock.Setup(x => x.Analyze(It.IsAny<Simplify>())).Returns<IExpression>(x => x);
 
-            var exp = new Simplify(mock.Object, new Sin(new Variable("x")));
+            var exp = new Simplify(mock.Object, new Sin(Variable.X));
 
             Assert.Equal(exp, exp.Execute());
         }
@@ -38,13 +38,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Simplify(null, new Sin(new Variable("x"))).Execute());
+            Assert.Throws<ArgumentNullException>(() => new Simplify(null, new Sin(Variable.X)).Execute());
         }
 
         [Fact]
         public void CloneTest()
         {
-            var exp = new Simplify(new Simplifier(), new Sin(new Variable("x")));
+            var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

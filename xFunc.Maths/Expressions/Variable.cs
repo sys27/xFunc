@@ -25,6 +25,11 @@ namespace xFunc.Maths.Expressions
     public class Variable : IExpression, IEquatable<Variable>
     {
         /// <summary>
+        /// The 'x' variable.
+        /// </summary>
+        public static readonly Variable X = new Variable("x");
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Variable"/> class.
         /// </summary>
         /// <param name="name">A name of variable.</param>

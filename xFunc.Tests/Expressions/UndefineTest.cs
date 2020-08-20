@@ -25,31 +25,31 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteFailTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Undefine(new Variable("x")).Execute());
+            Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Execute());
         }
 
         [Fact]
         public void ExecuteParamNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Undefine(new Variable("x")).Execute(null));
+            Assert.Throws<ArgumentNullException>(() => new Undefine(Variable.X).Execute(null));
         }
 
         [Fact]
         public void KeyNotSupportedTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Undefine(new Variable("x")).Key = new Number(1));
+            Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Key = new Number(1));
         }
 
         [Fact]
         public void KeyNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Undefine(new Variable("x")).Key = null);
+            Assert.Throws<ArgumentNullException>(() => new Undefine(Variable.X).Key = null);
         }
 
         [Fact]
         public void EqualRefTest()
         {
-            var exp = new Undefine(new Variable("x"));
+            var exp = new Undefine(Variable.X);
 
             Assert.True(exp.Equals(exp));
         }
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualDiffTypesTest()
         {
-            var exp1 = new Undefine(new Variable("x"));
+            var exp1 = new Undefine(Variable.X);
             var exp2 = new Number(2);
 
             Assert.False(exp1.Equals(exp2));
@@ -66,8 +66,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualTest()
         {
-            var exp1 = new Undefine(new Variable("x"));
-            var exp2 = new Undefine(new Variable("x"));
+            var exp1 = new Undefine(Variable.X);
+            var exp2 = new Undefine(Variable.X);
 
             Assert.True(exp1.Equals(exp2));
         }
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void Equal2Test()
         {
-            var exp1 = new Undefine(new Variable("x"));
+            var exp1 = new Undefine(Variable.X);
             var exp2 = new Undefine(new Variable("y"));
 
             Assert.False(exp1.Equals(exp2));
@@ -115,7 +115,7 @@ namespace xFunc.Tests.Expressions
         public void UndefFuncWithParamsTest()
         {
             var key1 = new UserFunction("f", new IExpression[0]);
-            var key2 = new UserFunction("f", new IExpression[] { new Variable("x") });
+            var key2 = new UserFunction("f", new IExpression[] { Variable.X });
 
             var functions = new FunctionCollection
             {
@@ -144,7 +144,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Undefine(new Variable("x"));
+            var exp = new Undefine(Variable.X);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

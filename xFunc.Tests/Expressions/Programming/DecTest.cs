@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void DecCalcTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var dec = new Dec(new Variable("x"));
+            var dec = new Dec(Variable.X);
             var result = (double)dec.Execute(parameters);
 
             Assert.Equal(9.0, result);
@@ -37,14 +37,14 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void DecNullParameters()
         {
-            Assert.Throws<ArgumentNullException>(() => new Dec(new Variable("x")).Execute());
+            Assert.Throws<ArgumentNullException>(() => new Dec(Variable.X).Execute());
         }
 
         [Fact]
         public void DecBoolTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
-            var dec = new Dec(new Variable("x"));
+            var dec = new Dec(Variable.X);
 
             Assert.Throws<ResultIsNotSupportedException>(() => dec.Execute(parameters));
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new Dec(new Variable("x"));
+            var exp = new Dec(Variable.X);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -139,7 +139,7 @@ namespace xFunc.Tests
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "deriv(x)";
-            var exp = new Derivative(differentiator.Object, simplifier.Object, new Variable("x"), new Variable("x"));
+            var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X);
             var diff = new Number(1);
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Number>())).Returns<Number>(e => e);
@@ -163,7 +163,7 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
@@ -181,7 +181,7 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
 
             var processor = new Processor(
                 simplifier.Object,
@@ -199,7 +199,7 @@ namespace xFunc.Tests
 
             simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
 
             var processor = new Processor(
                 simplifier.Object,
@@ -217,7 +217,7 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
@@ -238,7 +238,7 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
@@ -248,7 +248,7 @@ namespace xFunc.Tests
             var processor = new Processor(
                 simplifier.Object,
                 diffObj);
-            var result = processor.Differentiate(exp, new Variable("x"));
+            var result = processor.Differentiate(exp, Variable.X);
 
             differentiator.Verify(d => d.Analyze(exp), Times.Once());
 
@@ -262,7 +262,7 @@ namespace xFunc.Tests
             var simplifier = new Mock<ISimplifier>();
             var differentiator = new Mock<IDifferentiator>();
 
-            var exp = new Add(new Variable("x"), new Number(1));
+            var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
             differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
@@ -273,7 +273,7 @@ namespace xFunc.Tests
             var processor = new Processor(
                 simplifier.Object,
                 diffObj);
-            var result = processor.Differentiate(exp, new Variable("x"), new ExpressionParameters());
+            var result = processor.Differentiate(exp, Variable.X, new ExpressionParameters());
 
             differentiator.Verify(d => d.Analyze(exp), Times.Once());
 

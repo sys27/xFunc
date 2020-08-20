@@ -69,10 +69,19 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         }
 
         [Fact]
-        public void PowerZero()
+        public void PowerXZero()
         {
             var pow = new Pow(new Variable("x"), new Number(0));
             var expected = new Number(1);
+
+            SimpleTest(pow, expected);
+        }
+
+        [Fact]
+        public void PowerZeroX()
+        {
+            var pow = new Pow(new Number(0), new Variable("x"));
+            var expected = new Number(0);
 
             SimpleTest(pow, expected);
         }

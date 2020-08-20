@@ -14,7 +14,6 @@
 // limitations under the License.
 
 // TODO:
-#pragma warning disable SA1012
 #pragma warning disable SA1513
 #pragma warning disable SA1515
 #pragma warning disable CA1062
@@ -39,10 +38,6 @@ namespace xFunc.Maths.Analyzers
     /// <seealso cref="ISimplifier" />
     public class Simplifier : ISimplifier
     {
-        private readonly Number zero = 0;
-        private readonly Number one = 1;
-        private readonly Number minusOne = -1;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Simplifier"/> class.
         /// </summary>
@@ -109,8 +104,8 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // plus zero
-                (Number number, _) when number.Equals(zero) => exp.Right,
-                (_, Number number) when number.Equals(zero) => exp.Left,
+                (Number(var number), _) when MathExtensions.Equals(number, 0) => exp.Right,
+                (_, Number(var number)) when MathExtensions.Equals(number, 0) => exp.Left,
 
                 // const + const
                 (Number left, Number right) => new Number(left + right),
@@ -257,23 +252,26 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // 0 / 0
-                (Number left, Number right) when left.Equals(zero) && right.Equals(zero)
+                (Number(var left), Number(var right))
+                    when MathExtensions.Equals(left, 0) && MathExtensions.Equals(right, 0)
                     => new Number(double.NaN),
 
                 // 0 / x
-                (Number number, _) when number.Equals(zero) => zero.Clone(),
+                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                    => new Number(0),
 
                 // x / 0
-                (_, Number number) when number.Equals(zero) => throw new DivideByZeroException(),
+                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                    => throw new DivideByZeroException(),
 
                 // x / 1
-                (var left, Number number) when number.Equals(one) => left,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
 
                 // const / const
                 (Number left, Number right) => new Number(left.Value / right.Value),
 
                 // x / x
-                (Variable left, Variable right) when left.Equals(right) => one.Clone(),
+                (Variable left, Variable right) when left.Equals(right) => new Number(1),
 
                 // (2 * x) / 2
                 (Mul(Number left, var right), Number number)
@@ -372,7 +370,7 @@ namespace xFunc.Maths.Analyzers
 
             return exp switch
             {
-                (Number(var number)) _ when MathExtensions.Equals(number, 2) => one.Clone(),
+                (Number(var number)) _ when MathExtensions.Equals(number, 2) => new Number(1),
                 _ => exp,
             };
         }
@@ -401,7 +399,7 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // lg(10)
-                (Number(var number)) _ when MathExtensions.Equals(number, 10) => one.Clone(),
+                (Number(var number)) _ when MathExtensions.Equals(number, 10) => new Number(1),
                 _ => exp,
             };
         }
@@ -419,7 +417,7 @@ namespace xFunc.Maths.Analyzers
 
             // ln(e)
             if (exp.Argument is Variable("e"))
-                return one.Clone();
+                return new Number(1);
 
             return exp;
         }
@@ -437,7 +435,7 @@ namespace xFunc.Maths.Analyzers
 
             // log(4x, 4x)
             if (exp.Left.Equals(exp.Right))
-                return one.Clone();
+                return new Number(1);
 
             return exp;
         }
@@ -466,16 +464,18 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // mul by zero
-                (Number number, _) when number.Equals(zero) => zero.Clone(),
-                (_, Number number) when number.Equals(zero) => zero.Clone(),
+                (Number(var number), _) when MathExtensions.Equals(number, 0) => new Number(0),
+                (_, Number(var number)) when MathExtensions.Equals(number, 0) => new Number(0),
 
                 // mul by 1
-                (Number number, var right) when number.Equals(one) => right,
-                (var left, Number number) when number.Equals(one) => left,
+                (Number(var number), var right) when MathExtensions.Equals(number, 1) => right,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
 
                 // mul by -1
-                (Number number, var right) when number.Equals(minusOne) => new UnaryMinus(right),
-                (var left, Number number) when number.Equals(minusOne) => new UnaryMinus(left),
+                (Number(var number), var right) when MathExtensions.Equals(number, -1)
+                    => new UnaryMinus(right),
+                (var left, Number(var number)) when MathExtensions.Equals(number, -1)
+                    => new UnaryMinus(left),
 
                 // const * const
                 (Number left, Number right) => new Number(left.Value * right.Value),
@@ -581,9 +581,11 @@ namespace xFunc.Maths.Analyzers
             return (exp.Left, exp.Right) switch
             {
                 // x^0
-                (_, Number number) when number.Equals(zero) => one.Clone(),
+                (_, Number(var number)) when MathExtensions.Equals(number, 0) => new Number(1),
+                // 0^x
+                (Number(var number), _) when MathExtensions.Equals(number, 0) => new Number(0),
                 // x^1
-                (var left, Number number) when number.Equals(one) => left,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
                 // x ^ log(x, y) -> y
                 (var left, Log log) when left.Equals(log.Left) => log.Right,
                 // e ^ ln(y) -> y
@@ -610,7 +612,7 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // root(x, 1)
-                (var left, Number number) when number.Equals(one) => left,
+                (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
                 _ => exp,
             };
         }
@@ -658,14 +660,16 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // plus zero
-                (Number number, _) when number.Equals(zero) => Analyze(new UnaryMinus(exp.Right)),
-                (_, Number number) when number.Equals(zero) => exp.Left,
+                (Number(var number), _) when MathExtensions.Equals(number, 0)
+                    => Analyze(new UnaryMinus(exp.Right)),
+                (_, Number(var number)) when MathExtensions.Equals(number, 0)
+                    => exp.Left,
 
                 // const - const
                 (Number left, Number right) => new Number(left - right),
 
                 // x + x
-                (Variable left, Variable right) when left.Name == right.Name => zero.Clone(),
+                (Variable left, Variable right) when left.Name == right.Name => new Number(0),
 
                 // x - -y
                 (_, UnaryMinus minus) => new Add(exp.Left, minus.Argument),
@@ -1024,7 +1028,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Cos(Number number) when number.Equals(zero) => one.Clone(),
+                Cos(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(1),
                 _ => simplifiedExp,
             };
         }
@@ -1042,7 +1046,8 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Cot(Number number) when number.Equals(zero) => new Number(double.PositiveInfinity),
+                Cot(Number(var number)) when MathExtensions.Equals(number, 0)
+                    => new Number(double.PositiveInfinity),
                 _ => simplifiedExp,
             };
         }
@@ -1060,7 +1065,8 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Csc(Number number) when number.Equals(zero) => new Number(double.PositiveInfinity),
+                Csc(Number(var number)) when MathExtensions.Equals(number, 0)
+                    => new Number(double.PositiveInfinity),
                 _ => simplifiedExp,
             };
         }
@@ -1078,7 +1084,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Sec(Number number) when number.Equals(zero) => one.Clone(),
+                Sec(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(1),
                 _ => simplifiedExp,
             };
         }
@@ -1096,7 +1102,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Sin(Number number) when number.Equals(zero) => zero.Clone(),
+                Sin(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(0),
                 _ => simplifiedExp,
             };
         }
@@ -1114,7 +1120,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Tan(Number number) when number.Equals(zero) => zero.Clone(),
+                Tan(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(0),
                 _ => simplifiedExp,
             };
         }
@@ -1607,7 +1613,6 @@ namespace xFunc.Maths.Analyzers
     }
 }
 
-#pragma warning restore SA1012
 #pragma warning restore SA1513
 #pragma warning restore SA1515
 #pragma warning restore CA1062

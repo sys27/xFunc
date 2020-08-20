@@ -294,7 +294,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             SimpleTest(mul, expected);
         }
 
-        [Fact(DisplayName = "sin(cos(x))")]
+        [Fact(DisplayName = "cos(cos(x)) * -sin(x)")]
         public void MulNegativeRightParamTest1()
         {
             var mul = new Mul(

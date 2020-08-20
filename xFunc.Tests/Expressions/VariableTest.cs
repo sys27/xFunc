@@ -65,5 +65,55 @@ namespace xFunc.Tests.Expressions
 
             Assert.Equal<Variable>(result, exp);
         }
+
+        [Fact]
+        public void EqualsVariableNullTest()
+        {
+            var variable = new Variable("x");
+
+            Assert.False(variable.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsObjectNullTest()
+        {
+            var variable = new Variable("x");
+
+            Assert.False(variable.Equals((object)null));
+        }
+
+        [Fact]
+        public void EqualsVariableThisTest()
+        {
+            var variable = new Variable("x");
+
+            Assert.True(variable.Equals(variable));
+        }
+
+        [Fact]
+        public void EqualsObjectThisTest()
+        {
+            var variable = new Variable("x");
+
+            Assert.True(variable.Equals((object)variable));
+        }
+
+        [Fact]
+        public void EqualsTest()
+        {
+            var left = new Variable("x");
+            var right = new Variable("x");
+
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public void NotEqualsTest()
+        {
+            var left = new Variable("x");
+            var right = new Variable("y");
+
+            Assert.False(left.Equals(right));
+        }
     }
 }

@@ -78,8 +78,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AbsDerivativeTest2()
         {
-            var num = new Number(2);
-            var mul = new Mul(num, Variable.X);
+            var mul = new Mul(new Number(2), Variable.X);
 
             var exp = new Abs(mul);
             var deriv = Differentiate(exp);
@@ -93,7 +92,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            mul.Left = new Number(3);
             var abs = new Abs(new Mul(new Number(3), Variable.X));
             Assert.Equal(abs, exp);
             Assert.Equal(expected, deriv);
@@ -169,15 +168,15 @@ namespace xFunc.Tests.Analyzers
         public void AddDerivativeTest3()
         {
             // 2x + 3
-            var num1 = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Add(new Mul(num1, Variable.X), new Number(3));
+            var exp = new Add(mul, new Number(3));
             var deriv = Differentiate(exp);
             var expected = new Mul(new Number(2), new Number(1));
 
             Assert.Equal(expected, deriv);
 
-            num1.Value = 5;
+            mul.Left = new Number(5);
             var add = new Add(new Mul(new Number(5), Variable.X), new Number(3));
             Assert.Equal(add, exp);
             Assert.Equal(expected, deriv);
@@ -252,11 +251,8 @@ namespace xFunc.Tests.Analyzers
         public void DivDerivativeTest3()
         {
             // (2x) / (3x)
-            var num1 = new Number(2);
-            var mul1 = new Mul(num1, Variable.X);
-
-            var num2 = new Number(3);
-            var mul2 = new Mul(num2, Variable.X);
+            var mul1 = new Mul(new Number(2), Variable.X);
+            var mul2 = new Mul(new Number(3), Variable.X);
 
             var exp = new Div(mul1, mul2);
             var deriv = Differentiate(exp);
@@ -276,8 +272,8 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num1.Value = 4;
-            num2.Value = 5;
+            mul1.Left = new Number(4);
+            mul2.Left = new Number(5);
             var div = new Div(
                 new Mul(new Number(4), Variable.X),
                 new Mul(new Number(5), Variable.X)
@@ -377,9 +373,9 @@ namespace xFunc.Tests.Analyzers
         public void ExpDerivativeTest3()
         {
             // exp(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Exp(new Mul(num, Variable.X));
+            var exp = new Exp(mul);
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Mul(new Number(2), new Number(1)),
@@ -388,7 +384,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 6;
+            mul.Left = new Number(6);
             var exp2 = new Exp(new Mul(new Number(6), Variable.X));
             Assert.Equal(exp2, exp);
             Assert.Equal(expected, deriv);
@@ -446,8 +442,7 @@ namespace xFunc.Tests.Analyzers
         public void LnDerivativeTest2()
         {
             // ln(2x)
-            var num = new Number(2);
-            var mul = new Mul(num, Variable.X);
+            var mul = new Mul(new Number(2), Variable.X);
 
             var exp = new Ln(mul);
             var deriv = Differentiate(exp);
@@ -458,7 +453,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 5;
+            mul.Left = new Number(5);
             var ln = new Ln(new Mul(new Number(5), Variable.X));
             Assert.Equal(ln, exp);
             Assert.Equal(expected, deriv);
@@ -518,9 +513,9 @@ namespace xFunc.Tests.Analyzers
         public void LgDerivativeTest2()
         {
             // lg(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Lg(new Mul(num, Variable.X));
+            var exp = new Lg(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -529,7 +524,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            mul.Left = new Number(3);
             var lg = new Lg(new Mul(new Number(3), Variable.X));
             Assert.Equal(lg, exp);
             Assert.Equal(expected, deriv);
@@ -579,9 +574,9 @@ namespace xFunc.Tests.Analyzers
         public void LbDerivativeTest2()
         {
             // lb(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Lb(new Mul(num, Variable.X));
+            var exp = new Lb(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -590,7 +585,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            mul.Left = new Number(3);
             var lb = new Lb(new Mul(new Number(3), Variable.X));
             Assert.Equal(lb, exp);
             Assert.Equal(expected, deriv);
@@ -637,15 +632,13 @@ namespace xFunc.Tests.Analyzers
         public void LogDerivativeTest2()
         {
             // log(x, 2)
-            var num = new Number(2);
-
-            var exp = new Log(num, Variable.X);
+            var exp = new Log(new Number(2), Variable.X);
             var deriv = Differentiate(exp);
             var expected = new Div(new Number(1), new Mul(Variable.X, new Ln(new Number(2))));
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 4;
+            exp.Left = new Number(4);
             var log = new Log(new Number(4), Variable.X);
             Assert.Equal(log, exp);
             Assert.Equal(expected, deriv);
@@ -702,15 +695,13 @@ namespace xFunc.Tests.Analyzers
         public void MulDerivativeTest2()
         {
             // 2x
-            var num = new Number(2);
-
-            var exp = new Mul(num, Variable.X);
+            var exp = new Mul(new Number(2), Variable.X);
             var deriv = Differentiate(exp);
             var expected = new Mul(new Number(2), new Number(1));
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            exp.Left = new Number(3);
             var mul = new Mul(new Number(3), Variable.X);
             Assert.Equal(mul, exp);
             Assert.Equal(expected, deriv);
@@ -808,9 +799,7 @@ namespace xFunc.Tests.Analyzers
         public void PowDerivativeTest3()
         {
             // x ^ 3
-            var num1 = new Number(3);
-
-            var exp = new Pow(Variable.X, num1);
+            var exp = new Pow(Variable.X, new Number(3));
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Number(1),
@@ -822,7 +811,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num1.Value = 4;
+            exp.Right = new Number(4);
             var pow1 = new Pow(Variable.X, new Number(4));
             Assert.Equal(pow1, exp);
             Assert.Equal(expected, deriv);
@@ -832,9 +821,9 @@ namespace xFunc.Tests.Analyzers
         public void PowDerivativeTest4()
         {
             // 2 ^ (3x)
-            var num1 = new Number(3);
+            var mul = new Mul(new Number(3), Variable.X);
 
-            var exp = new Pow(new Number(2), new Mul(num1, Variable.X));
+            var exp = new Pow(new Number(2), mul);
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Mul(
@@ -846,7 +835,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num1.Value = 4;
+            mul.Left = new Number(4);
             var pow2 = new Pow(new Number(2), new Mul(new Number(4), Variable.X));
             Assert.Equal(pow2, exp);
             Assert.Equal(expected, deriv);
@@ -924,9 +913,7 @@ namespace xFunc.Tests.Analyzers
         public void RootDerivativeTest2()
         {
             // root(x, 3)
-            var num = new Number(3);
-
-            var exp = new Root(Variable.X, num);
+            var exp = new Root(Variable.X, new Number(3));
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Number(1),
@@ -941,7 +928,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 4;
+            exp.Right = new Number(4);
             var root = new Root(Variable.X, new Number(4));
             Assert.Equal(root, exp);
             Assert.Equal(expected, deriv);
@@ -991,9 +978,9 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SqrtDerivativeTest2()
         {
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Sqrt(new Mul(num, Variable.X));
+            var exp = new Sqrt(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -1002,7 +989,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            mul.Left = new Number(3);
             var sqrt = new Sqrt(new Mul(new Number(3), Variable.X));
             Assert.Equal(sqrt, exp);
             Assert.Equal(expected, deriv);
@@ -1055,13 +1042,10 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void SubDerivativeTest2()
         {
-            var num1 = new Number(2);
-            var num2 = new Number(3);
+            var mul1 = new Mul(new Number(2), Variable.X);
+            var mul2 = new Mul(new Number(3), Variable.X);
 
-            var exp = new Sub(
-                new Mul(num1, Variable.X),
-                new Mul(num2, Variable.X)
-            );
+            var exp = new Sub(mul1, mul2);
             var deriv = Differentiate(exp);
             var expected = new Sub(
                 new Mul(new Number(2), new Number(1)),
@@ -1070,8 +1054,8 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num1.Value = 5;
-            num2.Value = 4;
+            mul1.Left = new Number(5);
+            mul2.Left = new Number(4);
             var sub = new Sub(
                 new Mul(new Number(5), Variable.X),
                 new Mul(new Number(4), Variable.X)
@@ -1187,9 +1171,9 @@ namespace xFunc.Tests.Analyzers
         public void SinDerivativeTest3()
         {
             // sin(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Sin(new Mul(num, Variable.X));
+            var exp = new Sin(mul);
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Cos(new Mul(new Number(2), Variable.X)),
@@ -1198,7 +1182,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            mul.Left = new Number(3);
             var sin = new Sin(new Mul(new Number(3), Variable.X));
             Assert.Equal(sin, exp);
             Assert.Equal(expected, deriv);
@@ -1268,9 +1252,9 @@ namespace xFunc.Tests.Analyzers
         public void CosDerivativeTest3()
         {
             // cos(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Cos(new Mul(num, Variable.X));
+            var exp = new Cos(mul);
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Mul(
@@ -1281,7 +1265,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 7;
+            mul.Left = new Number(7);
             var cos = new Cos(new Mul(new Number(7), Variable.X));
             Assert.Equal(cos, exp);
             Assert.Equal(expected, deriv);
@@ -1352,9 +1336,9 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void TanDerivativeTest3()
         {
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Tan(new Mul(num, Variable.X));
+            var exp = new Tan(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -1363,7 +1347,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 5;
+            mul.Left = new Number(5);
             var tan = new Tan(new Mul(new Number(5), Variable.X));
             Assert.Equal(tan, exp);
             Assert.Equal(expected, deriv);
@@ -1435,9 +1419,9 @@ namespace xFunc.Tests.Analyzers
         public void CotDerivativeTest3()
         {
             // cot(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Cot(new Mul(num, Variable.X));
+            var exp = new Cot(mul);
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Div(
@@ -1448,7 +1432,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 3;
+            mul.Left = new Number(3);
             var cot = new Cot(new Mul(new Number(3), Variable.X));
             Assert.Equal(cot, exp);
             Assert.Equal(expected, deriv);
@@ -1513,9 +1497,9 @@ namespace xFunc.Tests.Analyzers
         public void SecDerivativeTest2()
         {
             // sec(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Sec(new Mul(num, Variable.X));
+            var exp = new Sec(mul);
             var deriv = Differentiate(exp);
             var expected = new Mul(
                 new Mul(new Number(2), new Number(1)),
@@ -1527,7 +1511,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 4;
+            mul.Left = new Number(4);
             var sec = new Sec(new Mul(new Number(4), Variable.X));
             Assert.Equal(sec, exp);
             Assert.Equal(expected, deriv);
@@ -1593,9 +1577,9 @@ namespace xFunc.Tests.Analyzers
         public void ArcsinDerivativeTest3()
         {
             // arcsin(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Arcsin(new Mul(num, Variable.X));
+            var exp = new Arcsin(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -1609,7 +1593,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 5;
+            mul.Left = new Number(5);
             var arcsin = new Arcsin(new Mul(new Number(5), Variable.X));
             Assert.Equal(arcsin, exp);
             Assert.Equal(expected, deriv);
@@ -1699,9 +1683,9 @@ namespace xFunc.Tests.Analyzers
         public void ArccosDerivativeTest3()
         {
             // arccos(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Arccos(new Mul(num, Variable.X));
+            var exp = new Arccos(mul);
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Div(
@@ -1717,7 +1701,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 6;
+            mul.Left = new Number(6);
             var arccos = new Arccos(new Mul(new Number(6), Variable.X));
             Assert.Equal(arccos, exp);
             Assert.Equal(expected, deriv);
@@ -1804,9 +1788,9 @@ namespace xFunc.Tests.Analyzers
         public void ArctanDerivativeTest3()
         {
             // arctan(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Arctan(new Mul(num, Variable.X));
+            var exp = new Arctan(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -1818,7 +1802,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 6;
+            mul.Left = new Number(6);
             var arctan = new Arctan(new Mul(new Number(6), Variable.X));
             Assert.Equal(arctan, exp);
             Assert.Equal(expected, deriv);
@@ -1902,9 +1886,9 @@ namespace xFunc.Tests.Analyzers
         public void ArccotDerivativeTest3()
         {
             // arccot(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Arccot(new Mul(num, Variable.X));
+            var exp = new Arccot(mul);
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Div(
@@ -1918,7 +1902,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 4;
+            mul.Left = new Number(4);
             var arccot = new Arccot(new Mul(new Number(4), Variable.X));
             Assert.Equal(arccot, exp);
             Assert.Equal(expected, deriv);
@@ -1992,9 +1976,9 @@ namespace xFunc.Tests.Analyzers
         public void ArcsecDerivativeTest2()
         {
             // arcsec(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Arcsec(new Mul(num, Variable.X));
+            var exp = new Arcsec(mul);
             var deriv = Differentiate(exp);
             var expected = new Div(
                 new Mul(new Number(2), new Number(1)),
@@ -2011,7 +1995,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 4;
+            mul.Left = new Number(4);
             var arcsec = new Arcsec(new Mul(new Number(4), Variable.X));
             Assert.Equal(arcsec, exp);
             Assert.Equal(expected, deriv);
@@ -2052,9 +2036,9 @@ namespace xFunc.Tests.Analyzers
         public void ArccscDerivativeTest2()
         {
             // arccsc(2x)
-            var num = new Number(2);
+            var mul = new Mul(new Number(2), Variable.X);
 
-            var exp = new Arccsc(new Mul(num, Variable.X));
+            var exp = new Arccsc(mul);
             var deriv = Differentiate(exp);
             var expected = new UnaryMinus(
                 new Div(
@@ -2073,7 +2057,7 @@ namespace xFunc.Tests.Analyzers
 
             Assert.Equal(expected, deriv);
 
-            num.Value = 4;
+            mul.Left = new Number(4);
             var arccsc = new Arccsc(new Mul(new Number(4), Variable.X));
             Assert.Equal(arccsc, exp);
             Assert.Equal(expected, deriv);

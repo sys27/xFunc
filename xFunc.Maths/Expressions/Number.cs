@@ -46,8 +46,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="number">The value to convert to <see cref="Number"/>.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator Number(double number) =>
-            new Number(number);
+        public static implicit operator Number(double number)
+            => new Number(number);
 
         /// <summary>
         /// Deconstructs <see cref="Number"/> to <see cref="double"/>.
@@ -178,8 +178,8 @@ namespace xFunc.Maths.Expressions
         public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
 
         /// <summary>
-        /// Gets or Sets a number.
+        /// Gets a number.
         /// </summary>
-        public double Value { get; set; }
+        public double Value { get; }
     }
 }

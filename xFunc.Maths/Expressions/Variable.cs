@@ -35,6 +35,9 @@ namespace xFunc.Maths.Expressions
         /// <param name="name">A name of variable.</param>
         public Variable(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
+
             Name = name;
         }
 

@@ -34,17 +34,6 @@ namespace xFunc.Maths.Analyzers
     [ExcludeFromCodeCoverage]
     public abstract class Analyzer<TResult> : IAnalyzer<TResult>
     {
-        /// <summary>
-        /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual TResult Analyze(IExpression exp)
-        {
-            throw new NotSupportedException();
-        }
-
         #region Standard
 
         /// <summary>

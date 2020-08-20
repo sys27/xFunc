@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void AddAssignCalc()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 10) };
-            var add = new AddAssign(Variable.X, new Number(2));
+            var add = new AddAssign(new Variable("x"), new Number(2));
             var result = add.Execute(parameters);
             var expected = 12.0;
 
@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void AddNullParameters()
         {
-            var exp = new AddAssign(Variable.X, new Number(1));
+            var exp = new AddAssign(new Variable("x"), new Number(1));
 
             Assert.Throws<ArgumentNullException>(() => exp.Execute());
         }
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void SubValueBoolParameters()
         {
-            var exp = new AddAssign(Variable.X, new Bool(false));
+            var exp = new AddAssign(new Variable("x"), new Bool(false));
             var parameters = new ParameterCollection { new Parameter("x", 1) };
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void BoolAddNumberTest()
         {
             var parameters = new ParameterCollection() { new Parameter("x", true) };
-            var add = new AddAssign(Variable.X, new Number(2));
+            var add = new AddAssign(new Variable("x"), new Number(2));
 
             Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
         }
@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new AddAssign(Variable.X, new Number(2));
+            var exp = new AddAssign(new Variable("x"), new Number(2));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

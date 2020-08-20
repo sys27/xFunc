@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void SimpDefineTest()
         {
-            var exp = new Define(Variable.X, new Number(1));
+            var exp = new Define(new Variable("x"), new Number(1));
             var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
@@ -38,7 +38,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineWithFuncTest()
         {
-            var exp = new Define(Variable.X, new Sin(new Number(1)));
+            var exp = new Define(new Variable("x"), new Sin(new Number(1)));
             var parameters = new ParameterCollection();
             var expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
 
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineExpTest()
         {
-            var exp = new Define(Variable.X, new Mul(new Number(4), new Add(new Number(8), new Number(1))));
+            var exp = new Define(new Variable("x"), new Mul(new Number(4), new Add(new Number(8), new Number(1))));
             var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
@@ -88,8 +88,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineFuncWithParamsTest()
         {
-            var uf = new UserFunction("s", new IExpression[] { Variable.X });
-            var func = new Sin(Variable.X);
+            var uf = new UserFunction("s", new IExpression[] { new Variable("x") });
+            var func = new Sin(new Variable("x"));
             var exp = new Define(uf, func);
             var parameters = new ExpressionParameters();
 
@@ -120,13 +120,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ValueIsNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Define(Variable.X, null));
+            Assert.Throws<ArgumentNullException>(() => new Define(new Variable("x"), null));
         }
 
         [Fact]
         public void EqualsSameReferenceTest()
         {
-            var def = new Define(Variable.X, new Number(1));
+            var def = new Define(new Variable("x"), new Number(1));
 
             Assert.True(def.Equals(def));
         }
@@ -134,7 +134,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsDifferentTypesTest()
         {
-            var def = new Define(Variable.X, new Number(1));
+            var def = new Define(new Variable("x"), new Number(1));
             var number = new Number(1);
 
             Assert.False(def.Equals(number));
@@ -143,7 +143,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsDifferentOnjectsTest()
         {
-            var def1 = new Define(Variable.X, new Number(1));
+            var def1 = new Define(new Variable("x"), new Number(1));
             var def2 = new Define(new Variable("y"), new Number(2));
 
             Assert.False(def1.Equals(def2));
@@ -152,7 +152,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Define(Variable.X, new Number(0));
+            var exp = new Define(new Variable("x"), new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

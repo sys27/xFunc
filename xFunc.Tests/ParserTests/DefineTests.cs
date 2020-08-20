@@ -33,7 +33,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Define(Variable.X, new Number(2));
+            var expected = new Define(new Variable("x"), new Number(2));
 
             Assert.Equal(expected, exp);
         }

@@ -28,15 +28,8 @@ namespace xFunc.Maths.Analyzers
     /// The interface for analyzers.
     /// </summary>
     /// <typeparam name="TResult">The type of the result of analysis.</typeparam>
-    public interface IAnalyzer<TResult>
+    public interface IAnalyzer<out TResult>
     {
-        /// <summary>
-        /// Analyzes the specified expression. This method should be only used for expressions which are not supported by xFunc (custom expression create by extending library).
-        /// </summary>
-        /// <param name="exp">The expression.</param>
-        /// <returns>The result of analysis.</returns>
-        TResult Analyze(IExpression exp);
-
         #region Standard
 
         /// <summary>

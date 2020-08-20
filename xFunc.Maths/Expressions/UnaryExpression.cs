@@ -56,6 +56,15 @@ namespace xFunc.Maths.Expressions
         }
 
         /// <summary>
+        /// Deconstructs <see cref="UnaryExpression"/>.
+        /// </summary>
+        /// <param name="argument">The argument.</param>
+        public void Deconstruct(out IExpression argument)
+        {
+            argument = Argument;
+        }
+
+        /// <summary>
         /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>

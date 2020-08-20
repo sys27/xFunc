@@ -42,9 +42,9 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void ZeroDivByZero()
         {
             var div = new Div(new Number(0), new Number(0));
-            var expected = new Number(double.NaN);
+            var actual = (Number)div.Analyze(simplifier);
 
-            SimpleTest(div, expected);
+            Assert.True(actual.IsNaN);
         }
 
         [Fact(DisplayName = "x / 1")]

@@ -39,10 +39,6 @@ namespace xFunc.Maths.Expressions
 
             this.arguments = arguments ??
                              throw new ArgumentNullException(nameof(arguments));
-
-            foreach (var item in arguments)
-                if (item != null)
-                    item.Parent = this;
         }
 
         /// <summary>
@@ -62,7 +58,6 @@ namespace xFunc.Maths.Expressions
             set
             {
                 arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
-                value.Parent = this;
             }
         }
 
@@ -167,11 +162,6 @@ namespace xFunc.Maths.Expressions
 
             return new UserFunction(Function, args);
         }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the arguments.

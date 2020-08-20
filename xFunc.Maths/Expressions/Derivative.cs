@@ -146,7 +146,6 @@ namespace xFunc.Maths.Expressions
             set
             {
                 this[0] = value ?? throw new ArgumentNullException(nameof(value));
-                this[0].Parent = this;
             }
         }
 

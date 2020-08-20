@@ -128,11 +128,6 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         public IExpression Clone() => new Bool(Value);
 
         /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
-
-        /// <summary>
         /// Gets the value of this expression.
         /// </summary>
         /// <value>

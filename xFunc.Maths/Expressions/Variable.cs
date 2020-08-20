@@ -165,10 +165,5 @@ namespace xFunc.Maths.Expressions
         /// Gets a name of this variable.
         /// </summary>
         public string Name { get; }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

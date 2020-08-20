@@ -385,18 +385,18 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void CotZero()
         {
             var exp = new Cot(zero);
-            var expected = new Number(double.PositiveInfinity);
+            var actual = (Number)exp.Analyze(simplifier);
 
-            SimpleTest(exp, expected);
+            Assert.True(actual.IsPositiveInfinity);
         }
 
         [Fact]
         public void CscZero()
         {
             var exp = new Csc(zero);
-            var expected = new Number(double.PositiveInfinity);
+            var actual = (Number)exp.Analyze(simplifier);
 
-            SimpleTest(exp, expected);
+            Assert.True(actual.IsPositiveInfinity);
         }
 
         [Fact]

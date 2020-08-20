@@ -21,9 +21,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
 {
     public abstract class BaseSimplifierTest
     {
-        private readonly IAnalyzer<IExpression> simplifier;
-
-        private readonly Number zero = 0;
+        protected readonly IAnalyzer<IExpression> simplifier;
 
         protected BaseSimplifierTest()
         {

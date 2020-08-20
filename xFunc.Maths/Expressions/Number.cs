@@ -158,13 +158,28 @@ namespace xFunc.Maths.Expressions
         public IExpression Clone() => new Number(Value);
 
         /// <summary>
+        /// Gets a value indicating whether the current value is not a number (NaN).
+        /// </summary>
+        public bool IsNaN => double.IsNaN(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to infinity.
+        /// </summary>
+        public bool IsInfinity => double.IsInfinity(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to positive infinity.
+        /// </summary>
+        public bool IsPositiveInfinity => double.IsPositiveInfinity(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to negative infinity.
+        /// </summary>
+        public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
+
+        /// <summary>
         /// Gets or Sets a number.
         /// </summary>
         public double Value { get; set; }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

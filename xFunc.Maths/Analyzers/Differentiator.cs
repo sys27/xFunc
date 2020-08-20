@@ -110,9 +110,11 @@ namespace xFunc.Maths.Analyzers
             if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            var diff = exp.Expression.Analyze(this);
-            if (exp.Parent is Derivative)
+            var diff = exp.Expression;
+            if (diff is Derivative)
                 diff = diff.Analyze(this);
+
+            diff = diff.Analyze(this);
 
             return diff;
         }

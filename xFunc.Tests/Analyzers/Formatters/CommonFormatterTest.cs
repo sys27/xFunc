@@ -78,9 +78,19 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DelToStringTest()
         {
-            var exp = new Del(new Differentiator(), new Simplifier(), new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
+            var exp = new Del(
+                new Differentiator(),
+                new Simplifier(),
+                new Add(
+                    new Add(
+                        new Mul(new Number(2), new Variable("x1")),
+                        new Pow(new Variable("x2"), new Number(2))
+                    ),
+                    new Pow(new Variable("x3"), new Number(3))
+                )
+            );
 
-            Assert.Equal("del(2 * x1 + x2 ^ 2 + x3 ^ 3)", exp.ToString(commonFormatter));
+            Assert.Equal("del(((2 * x1) + (x2 ^ 2)) + (x3 ^ 3))", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -224,7 +234,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Add(new Variable("x"), new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x + 5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("x + (5 * 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -232,7 +242,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Variable("x"), new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x - 5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 * 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -240,7 +250,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(new Variable("x"), new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x * 5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 * 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -264,7 +274,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(1), new Number(-3.3));
 
-            Assert.Equal("1 - (-3.3)", exp.ToString(commonFormatter));
+            Assert.Equal("1 - -3.3", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -280,7 +290,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Add(new Variable("x"), new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x + 5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("x + (5 ^ 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -288,7 +298,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Variable("x"), new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x - 5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 ^ 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -296,7 +306,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(new Variable("x"), new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x * 5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 ^ 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -352,7 +362,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Variable("x"), new Sub(new Number(5), new Number(0)));
 
-            Assert.Equal("x - 5 - 0", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 - 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -384,7 +394,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(0), new UnaryMinus(new Number(5)));
 
-            Assert.Equal("0 - (-5)", exp.ToString(commonFormatter));
+            Assert.Equal("0 - -5", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -1311,7 +1321,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new While(new Number(5), new Equal(new Number(5), new Number(5)));
 
-            Assert.Equal("while(5, 5 == 5)", exp.ToString(commonFormatter));
+            Assert.Equal("while(5, (5 == 5))", exp.ToString(commonFormatter));
         }
 
         [Fact]

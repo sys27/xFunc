@@ -148,10 +148,5 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// The value.
         /// </value>
         public Complex Value { get; }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

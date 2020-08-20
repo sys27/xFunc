@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -148,12 +147,6 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         public IExpression Clone() => new Undefine(key.Clone());
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        [ExcludeFromCodeCoverage]
-        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets or sets the key.

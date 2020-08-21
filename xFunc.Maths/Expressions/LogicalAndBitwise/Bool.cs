@@ -22,7 +22,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
     /// <summary>
     /// Represents the boolean constant.
     /// </summary>
-    public class Bool : IExpression
+    public class Bool : IExpression, IEquatable<Bool>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Bool"/> class.
@@ -75,9 +75,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// The result of the conversion.
         /// </returns>
         public static implicit operator bool(Bool boolean)
-        {
-            return boolean?.Value ?? throw new ArgumentNullException(nameof(boolean));
-        }
+            => boolean?.Value ?? throw new ArgumentNullException(nameof(boolean));
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="bool"/> to <see cref="Bool"/>.
@@ -86,7 +84,26 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator Bool(bool value) => new Bool(value);
+        public static implicit operator Bool(bool value)
+            => new Bool(value);
+
+        /// <summary>
+        /// Determines whether the specified <see cref="Bool" />, is equal to this instance.
+        /// </summary>
+        /// <param name="other">The object to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified object is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Equals(Bool other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Value == other.Value;
+        }
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -97,10 +114,24 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// </returns>
         public override bool Equals(object obj)
         {
-            var boolean = obj as Bool;
+            if (ReferenceEquals(null, obj))
+                return false;
 
-            return Value == boolean?.Value;
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (obj.GetType() != this.GetType())
+                return false;
+
+            return Equals((Bool)obj);
         }
+
+        /// <summary>
+        /// Returns a hash function for this type.
+        /// </summary>
+        /// <returns>A hash code for the current <see cref="Bool"/>.</returns>
+        public override int GetHashCode() =>
+            HashCode.Combine(Value);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

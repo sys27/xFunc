@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
@@ -23,7 +22,7 @@ using xFunc.Maths.Resources;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// Represents the Undefice operator.
+    /// Represents the Undefine operator.
     /// </summary>
     public class Undefine : IExpression
     {
@@ -36,20 +35,6 @@ namespace xFunc.Maths.Expressions
         public Undefine(IExpression key)
         {
             Key = key;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Undefine"/> class.
-        /// </summary>
-        /// <param name="arguments">The key.</param>
-        internal Undefine(IList<IExpression> arguments)
-        {
-            if (arguments.Count < 1)
-                throw new ParseException(Resource.LessParams);
-            if (arguments.Count > 1)
-                throw new ParseException(Resource.MoreParams);
-
-            Key = arguments[0];
         }
 
         /// <summary>

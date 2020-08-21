@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new Bool(false);
 
-            Assert.False((bool) exp.Execute());
+            Assert.False((bool)exp.Execute());
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         {
             var exp = new Bool(false);
 
-            Assert.False((bool) exp.Execute(null));
+            Assert.False((bool)exp.Execute(null));
         }
 
         [Fact]
@@ -48,13 +48,13 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest4()
         {
-            var exp = (Bool) false;
+            var exp = (Bool)false;
 
-            Assert.False((bool) exp.Execute());
+            Assert.False((bool)exp.Execute());
         }
 
         [Fact]
-        public void EqualsTest()
+        public void NotEqualsTest()
         {
             var exp1 = new Bool(false);
             var exp2 = new Bool(true);
@@ -63,7 +63,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         }
 
         [Fact]
-        public void EqualsTest2()
+        public void EqualsTest()
         {
             var exp1 = new Bool(true);
             var exp2 = new Bool(true);
@@ -72,12 +72,44 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         }
 
         [Fact]
-        public void EqualsTest3()
+        public void DifferentTypesEqualsTest()
         {
             var exp1 = new Bool(true);
             var exp2 = new Number(2);
 
             Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void EqualsBoolNullTest()
+        {
+            var boolean = new Bool(true);
+
+            Assert.False(boolean.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsObjectNullTest()
+        {
+            var boolean = new Bool(true);
+
+            Assert.False(boolean.Equals((object)null));
+        }
+
+        [Fact]
+        public void EqualsBoolThisTest()
+        {
+            var boolean = new Bool(true);
+
+            Assert.True(boolean.Equals(boolean));
+        }
+
+        [Fact]
+        public void EqualsObjectThisTest()
+        {
+            var boolean = new Bool(true);
+
+            Assert.True(boolean.Equals((object)boolean));
         }
 
         [Fact]

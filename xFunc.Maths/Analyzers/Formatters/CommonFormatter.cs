@@ -15,7 +15,6 @@
 
 #pragma warning disable CA1062
 
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using xFunc.Maths.Expressions;
@@ -52,7 +51,12 @@ namespace xFunc.Maths.Analyzers.Formatters
         private string ToString(BinaryExpression exp, string format)
         {
             var left = exp.Left.Analyze(this);
+            if (exp.Left is BinaryExpression)
+                left = $"({left})";
+
             var right = exp.Right.Analyze(this);
+            if (exp.Right is BinaryExpression)
+                right = $"({right})";
 
             return string.Format(CultureInfo.InvariantCulture, format, left, right);
         }
@@ -93,9 +97,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Add exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is Add))
-                return ToString(exp, "({0} + {1})");
-
             return ToString(exp, "{0} + {1}");
         }
 
@@ -146,9 +147,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Div exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} / {1})");
-
             return ToString(exp, "{0} / {1}");
         }
 
@@ -249,9 +247,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Mod exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} % {1})");
-
             return ToString(exp, "{0} % {1}");
         }
 
@@ -262,9 +257,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Mul exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is Mul || exp.Parent is Add || exp.Parent is Sub))
-                return ToString(exp, "({0} * {1})");
-
             return ToString(exp, "{0} * {1}");
         }
 
@@ -275,12 +267,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Number exp)
         {
-            if (exp.Value < 0)
-            {
-                if (exp.Parent is Sub sub && ReferenceEquals(sub.Right, exp))
-                    return $"({exp.Value.ToString(CultureInfo.InvariantCulture)})";
-            }
-
             return exp.Value.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -291,9 +277,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Pow exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is Add || exp.Parent is Sub || exp.Parent is Mul))
-                return ToString(exp, "({0} ^ {1})");
-
             return ToString(exp, "{0} ^ {1}");
         }
 
@@ -344,9 +327,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Sub exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is Sub))
-                return ToString(exp, "({0} - {1})");
-
             return ToString(exp, "{0} - {1}");
         }
 
@@ -359,8 +339,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         {
             if (exp.Argument is BinaryExpression)
                 return ToString(exp, "-({0})");
-            if (exp.Parent is Sub sub && ReferenceEquals(sub.Right, exp))
-                return ToString(exp, "(-{0})");
 
             return ToString(exp, "-{0}");
         }
@@ -942,9 +920,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(And exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} and {1})");
-
             return ToString(exp, "{0} and {1}");
         }
 
@@ -965,9 +940,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Equality exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} <=> {1})");
-
             return ToString(exp, "{0} <=> {1}");
         }
 
@@ -978,9 +950,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Implication exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} => {1})");
-
             return ToString(exp, "{0} => {1}");
         }
 
@@ -991,9 +960,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(NAnd exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} nand {1})");
-
             return ToString(exp, "{0} nand {1}");
         }
 
@@ -1004,9 +970,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(NOr exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} nor {1})");
-
             return ToString(exp, "{0} nor {1}");
         }
 
@@ -1027,9 +990,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Or exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} or {1})");
-
             return ToString(exp, "{0} or {1}");
         }
 
@@ -1040,9 +1000,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(XOr exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} xor {1})");
-
             return ToString(exp, "{0} xor {1}");
         }
 
@@ -1070,9 +1027,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(ConditionalAnd exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} && {1})");
-
             return ToString(exp, "{0} && {1}");
         }
 
@@ -1108,9 +1062,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(Equal exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
-                return ToString(exp, "({0} == {1})");
-
             return ToString(exp, "{0} == {1}");
         }
 
@@ -1131,9 +1082,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(GreaterOrEqual exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
-                return ToString(exp, "({0} >= {1})");
-
             return ToString(exp, "{0} >= {1}");
         }
 
@@ -1144,9 +1092,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(GreaterThan exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} > {1})");
-
             return ToString(exp, "{0} > {1}");
         }
 
@@ -1179,9 +1124,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(LessOrEqual exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
-                return ToString(exp, "({0} <= {1})");
-
             return ToString(exp, "{0} <= {1}");
         }
 
@@ -1192,9 +1134,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(LessThan exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} < {1})");
-
             return ToString(exp, "{0} < {1}");
         }
 
@@ -1218,9 +1157,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(NotEqual exp)
         {
-            if (exp.Parent is BinaryExpression && !(exp.Parent is While))
-                return ToString(exp, "({0} != {1})");
-
             return ToString(exp, "{0} != {1}");
         }
 
@@ -1231,9 +1167,6 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// <returns>The result of analysis.</returns>
         public string Analyze(ConditionalOr exp)
         {
-            if (exp.Parent is BinaryExpression)
-                return ToString(exp, "({0} || {1})");
-
             return ToString(exp, "{0} || {1}");
         }
 

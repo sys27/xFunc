@@ -26,8 +26,8 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateOrTrueTest1()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new LessThan(new Variable("x"), new Number(10));
-            var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
+            var lessThen = new LessThan(Variable.X, new Number(10));
+            var greaterThen = new GreaterThan(Variable.X, new Number(-10));
             var or = new ConditionalOr(lessThen, greaterThen);
 
             Assert.True((bool) or.Execute(parameters));
@@ -37,8 +37,8 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateOrTrueTest2()
         {
             var parameters = new ParameterCollection() { new Parameter("x", 0) };
-            var lessThen = new LessThan(new Variable("x"), new Number(-10));
-            var greaterThen = new GreaterThan(new Variable("x"), new Number(-10));
+            var lessThen = new LessThan(Variable.X, new Number(-10));
+            var greaterThen = new GreaterThan(Variable.X, new Number(-10));
             var or = new ConditionalOr(lessThen, greaterThen);
 
             Assert.True((bool) or.Execute(parameters));
@@ -55,8 +55,8 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var lessThen = new LessThan(new Variable("x"), new Number(10));
-            var greaterThen = new GreaterThan(new Variable("x"), new Number(10));
+            var lessThen = new LessThan(Variable.X, new Number(10));
+            var greaterThen = new GreaterThan(Variable.X, new Number(10));
             var exp = new ConditionalOr(lessThen, greaterThen);
             var clone = exp.Clone();
 

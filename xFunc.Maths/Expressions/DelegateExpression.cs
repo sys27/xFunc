@@ -113,10 +113,5 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="NotSupportedException">Always.</exception>
         public IExpression Clone() => throw new NotSupportedException();
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

@@ -162,13 +162,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 argument = value ?? throw new ArgumentNullException(nameof(value));
-                argument.Parent = this;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

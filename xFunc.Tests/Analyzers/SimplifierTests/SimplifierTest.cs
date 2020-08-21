@@ -44,8 +44,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void DoubleUnary()
         {
-            var un = new UnaryMinus(new UnaryMinus(new Variable("x")));
-            var expected = new Variable("x");
+            var un = new UnaryMinus(new UnaryMinus(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(un, expected);
         }
@@ -62,8 +62,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void Define()
         {
-            var define = new Define(new Variable("x"), new Add(new Number(2), new Number(2)));
-            var expected = new Define(new Variable("x"), new Number(4));
+            var define = new Define(Variable.X, new Add(new Number(2), new Number(2)));
+            var expected = new Define(Variable.X, new Number(4));
 
             SimpleTest(define, expected);
         }
@@ -71,7 +71,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void PowerXZero()
         {
-            var pow = new Pow(new Variable("x"), new Number(0));
+            var pow = new Pow(Variable.X, new Number(0));
             var expected = new Number(1);
 
             SimpleTest(pow, expected);
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void PowerZeroX()
         {
-            var pow = new Pow(new Number(0), new Variable("x"));
+            var pow = new Pow(new Number(0), Variable.X);
             var expected = new Number(0);
 
             SimpleTest(pow, expected);
@@ -89,8 +89,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void PowerOne()
         {
-            var pow = new Pow(new Variable("x"), new Number(1));
-            var expected = new Variable("x");
+            var pow = new Pow(Variable.X, new Number(1));
+            var expected = Variable.X;
 
             SimpleTest(pow, expected);
         }
@@ -100,8 +100,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var pow = new Pow(
                 new Number(30),
-                new Log(new Number(30), new Variable("x")));
-            var expected = new Variable("x");
+                new Log(new Number(30), Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(pow, expected);
         }
@@ -111,8 +111,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var pow = new Pow(
                 new Number(10),
-                new Lg(new Variable("x")));
-            var expected = new Variable("x");
+                new Lg(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(pow, expected);
         }
@@ -122,8 +122,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var pow = new Pow(
                 new Variable("e"),
-                new Ln(new Variable("x")));
-            var expected = new Variable("x");
+                new Ln(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(pow, expected);
         }
@@ -133,8 +133,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var pow = new Pow(
                 new Number(2),
-                new Lb(new Variable("x")));
-            var expected = new Variable("x");
+                new Lb(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(pow, expected);
         }
@@ -142,8 +142,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void RootOne()
         {
-            var root = new Root(new Variable("x"), new Number(1));
-            var expected = new Variable("x");
+            var root = new Root(Variable.X, new Number(1));
+            var expected = Variable.X;
 
             SimpleTest(root, expected);
         }
@@ -151,7 +151,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void Root()
         {
-            var root = new Root(new Variable("x"), new Number(5));
+            var root = new Root(Variable.X, new Number(5));
 
             SimpleTest(root, root);
         }
@@ -176,7 +176,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void Log()
         {
-            var log = new Log(new Variable("x"), new Variable("x"));
+            var log = new Log(Variable.X, Variable.X);
             var expected = new Number(1);
 
             SimpleTest(log, expected);
@@ -245,7 +245,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void Simplify()
         {
             var simpl = new Simplifier();
-            var simp = new Simplify(simpl, new Pow(new Variable("x"), new Number(0)));
+            var simp = new Simplify(simpl, new Pow(Variable.X, new Number(0)));
             var expected = new Number(1);
 
             SimpleTest(simp, expected);
@@ -267,8 +267,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArcsinSin()
         {
-            var exp = new Arcsin(new Sin(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arcsin(new Sin(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -276,8 +276,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArccosCos()
         {
-            var exp = new Arccos(new Cos(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arccos(new Cos(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -285,8 +285,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArctanTan()
         {
-            var exp = new Arctan(new Tan(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arctan(new Tan(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -294,8 +294,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArccotCot()
         {
-            var exp = new Arccot(new Cot(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arccot(new Cot(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -303,8 +303,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArcsecSec()
         {
-            var exp = new Arcsec(new Sec(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arcsec(new Sec(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -312,8 +312,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArccscCsc()
         {
-            var exp = new Arccsc(new Csc(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arccsc(new Csc(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -321,8 +321,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void SinArcsin()
         {
-            var exp = new Sin(new Arcsin(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Sin(new Arcsin(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -330,8 +330,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void CosArccos()
         {
-            var exp = new Cos(new Arccos(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Cos(new Arccos(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -339,8 +339,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void TanArctan()
         {
-            var exp = new Tan(new Arctan(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Tan(new Arctan(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -348,8 +348,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void CotArccot()
         {
-            var exp = new Cot(new Arccot(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Cot(new Arccot(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -357,8 +357,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void SecArcsec()
         {
-            var exp = new Sec(new Arcsec(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Sec(new Arcsec(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -366,8 +366,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void CscArccsc()
         {
-            var exp = new Csc(new Arccsc(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Csc(new Arccsc(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -385,18 +385,18 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void CotZero()
         {
             var exp = new Cot(zero);
-            var expected = new Number(double.PositiveInfinity);
+            var actual = (Number)exp.Analyze(simplifier);
 
-            SimpleTest(exp, expected);
+            Assert.True(actual.IsPositiveInfinity);
         }
 
         [Fact]
         public void CscZero()
         {
             var exp = new Csc(zero);
-            var expected = new Number(double.PositiveInfinity);
+            var actual = (Number)exp.Analyze(simplifier);
 
-            SimpleTest(exp, expected);
+            Assert.True(actual.IsPositiveInfinity);
         }
 
         [Fact]
@@ -433,8 +433,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArsinhSinh()
         {
-            var exp = new Arsinh(new Sinh(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arsinh(new Sinh(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -442,8 +442,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArcoshCosh()
         {
-            var exp = new Arcosh(new Cosh(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arcosh(new Cosh(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -451,8 +451,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArtanhTanh()
         {
-            var exp = new Artanh(new Tanh(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Artanh(new Tanh(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -460,8 +460,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArcothCoth()
         {
-            var exp = new Arcoth(new Coth(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arcoth(new Coth(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -469,8 +469,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArsechSech()
         {
-            var exp = new Arsech(new Sech(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arsech(new Sech(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -478,8 +478,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ArcschCsch()
         {
-            var exp = new Arcsch(new Csch(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Arcsch(new Csch(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -487,8 +487,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void SinhArsinh()
         {
-            var exp = new Sinh(new Arsinh(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Sinh(new Arsinh(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -496,8 +496,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void CoshArcosh()
         {
-            var exp = new Cosh(new Arcosh(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Cosh(new Arcosh(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -505,8 +505,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void TanhArtanh()
         {
-            var exp = new Tanh(new Artanh(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Tanh(new Artanh(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -514,8 +514,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void CothArcoth()
         {
-            var exp = new Coth(new Arcoth(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Coth(new Arcoth(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -523,8 +523,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void SechArsech()
         {
-            var exp = new Sech(new Arsech(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Sech(new Arsech(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -532,8 +532,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void CschArcsch()
         {
-            var exp = new Csch(new Arcsch(new Variable("x")));
-            var expected = new Variable("x");
+            var exp = new Csch(new Arcsch(Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }

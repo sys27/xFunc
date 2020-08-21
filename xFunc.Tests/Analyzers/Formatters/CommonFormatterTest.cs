@@ -54,7 +54,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AddToStringBinTest()
         {
-            var exp = new Mul(new Variable("x"), new Add(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Add(new Number(5), new Number(0)));
 
             Assert.Equal("x * (5 + 0)", exp.ToString(commonFormatter));
         }
@@ -70,7 +70,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DefineToStringTest()
         {
-            var exp = new Define(new Variable("x"), new Number(0));
+            var exp = new Define(Variable.X, new Number(0));
 
             Assert.Equal("x := 0", exp.ToString(commonFormatter));
         }
@@ -78,15 +78,25 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DelToStringTest()
         {
-            var exp = new Del(new Differentiator(), new Simplifier(), new Add(new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))), new Pow(new Variable("x3"), new Number(3))));
+            var exp = new Del(
+                new Differentiator(),
+                new Simplifier(),
+                new Add(
+                    new Add(
+                        new Mul(new Number(2), new Variable("x1")),
+                        new Pow(new Variable("x2"), new Number(2))
+                    ),
+                    new Pow(new Variable("x3"), new Number(3))
+                )
+            );
 
-            Assert.Equal("del(2 * x1 + x2 ^ 2 + x3 ^ 3)", exp.ToString(commonFormatter));
+            Assert.Equal("del(((2 * x1) + (x2 ^ 2)) + (x3 ^ 3))", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void DerivativeToStringExpTest()
         {
-            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(new Variable("x")));
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X));
 
             Assert.Equal("deriv(sin(x))", deriv.ToString(commonFormatter));
         }
@@ -94,7 +104,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringVarTest()
         {
-            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(new Variable("x")), new Variable("x"));
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X);
 
             Assert.Equal("deriv(sin(x), x)", deriv.ToString(commonFormatter));
         }
@@ -102,7 +112,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringPointTest()
         {
-            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(new Variable("x")), new Variable("x"), new Number(1));
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, new Number(1));
 
             Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString(commonFormatter));
         }
@@ -118,7 +128,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DivToStringBinTest()
         {
-            var exp = new Mul(new Variable("x"), new Div(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Div(new Number(5), new Number(0)));
 
             Assert.Equal("x * (5 / 0)", exp.ToString(commonFormatter));
         }
@@ -206,7 +216,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ModToStringBinTest()
         {
-            var exp = new Mul(new Variable("x"), new Mod(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Mod(new Number(5), new Number(0)));
 
             Assert.Equal("x * (5 % 0)", exp.ToString(commonFormatter));
         }
@@ -222,31 +232,31 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulToStringAddTest()
         {
-            var exp = new Add(new Variable("x"), new Mul(new Number(5), new Number(0)));
+            var exp = new Add(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x + 5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("x + (5 * 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void MulToStringSubTest()
         {
-            var exp = new Sub(new Variable("x"), new Mul(new Number(5), new Number(0)));
+            var exp = new Sub(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x - 5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 * 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void MulToStringMulTest()
         {
-            var exp = new Mul(new Variable("x"), new Mul(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x * 5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 * 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void MulToStringDivTest()
         {
-            var exp = new Div(new Variable("x"), new Mul(new Number(5), new Number(0)));
+            var exp = new Div(Variable.X, new Mul(new Number(5), new Number(0)));
 
             Assert.Equal("x / (5 * 0)", exp.ToString(commonFormatter));
         }
@@ -264,7 +274,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(1), new Number(-3.3));
 
-            Assert.Equal("1 - (-3.3)", exp.ToString(commonFormatter));
+            Assert.Equal("1 - -3.3", exp.ToString(commonFormatter));
         }
 
         [Fact]
@@ -278,31 +288,31 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void PowToStringAddTest()
         {
-            var exp = new Add(new Variable("x"), new Pow(new Number(5), new Number(0)));
+            var exp = new Add(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x + 5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("x + (5 ^ 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void PowToStringSubTest()
         {
-            var exp = new Sub(new Variable("x"), new Pow(new Number(5), new Number(0)));
+            var exp = new Sub(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x - 5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 ^ 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void PowToStringMulTest()
         {
-            var exp = new Mul(new Variable("x"), new Pow(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x * 5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 ^ 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void PowToStringDivTest()
         {
-            var exp = new Div(new Variable("x"), new Pow(new Number(5), new Number(0)));
+            var exp = new Div(Variable.X, new Pow(new Number(5), new Number(0)));
 
             Assert.Equal("x / (5 ^ 0)", exp.ToString(commonFormatter));
         }
@@ -326,7 +336,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SimplifyToStringTest()
         {
-            var exp = new Simplify(new Simplifier(), new Sin(new Variable("x")));
+            var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
 
             Assert.Equal("simplify(sin(x))", exp.ToString(commonFormatter));
         }
@@ -350,15 +360,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SubToStringSubTest()
         {
-            var exp = new Sub(new Variable("x"), new Sub(new Number(5), new Number(0)));
+            var exp = new Sub(Variable.X, new Sub(new Number(5), new Number(0)));
 
-            Assert.Equal("x - 5 - 0", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 - 0)", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void SubToStringDivTest()
         {
-            var exp = new Div(new Variable("x"), new Sub(new Number(5), new Number(0)));
+            var exp = new Div(Variable.X, new Sub(new Number(5), new Number(0)));
 
             Assert.Equal("x / (5 - 0)", exp.ToString(commonFormatter));
         }
@@ -384,13 +394,13 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(0), new UnaryMinus(new Number(5)));
 
-            Assert.Equal("0 - (-5)", exp.ToString(commonFormatter));
+            Assert.Equal("0 - -5", exp.ToString(commonFormatter));
         }
 
         [Fact]
         public void UndefineToStringTest()
         {
-            var exp = new Undefine(new Variable("x"));
+            var exp = new Undefine(Variable.X);
 
             Assert.Equal("undef(x)", exp.ToString(commonFormatter));
         }
@@ -406,7 +416,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void VariableTest()
         {
-            var exp = new Variable("x");
+            var exp = Variable.X;
 
             Assert.Equal("x", exp.ToString(commonFormatter));
         }
@@ -1109,7 +1119,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AddAssignToString()
         {
-            var exp = new AddAssign(new Variable("x"), new Number(5));
+            var exp = new AddAssign(Variable.X, new Number(5));
 
             Assert.Equal("x += 5", exp.ToString(commonFormatter));
         }
@@ -1117,7 +1127,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SubAssignToString()
         {
-            var exp = new SubAssign(new Variable("x"), new Number(5));
+            var exp = new SubAssign(Variable.X, new Number(5));
 
             Assert.Equal("x -= 5", exp.ToString(commonFormatter));
         }
@@ -1125,7 +1135,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulAssignToString()
         {
-            var exp = new MulAssign(new Variable("x"), new Number(5));
+            var exp = new MulAssign(Variable.X, new Number(5));
 
             Assert.Equal("x *= 5", exp.ToString(commonFormatter));
         }
@@ -1133,7 +1143,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DivAssignToString()
         {
-            var exp = new DivAssign(new Variable("x"), new Number(5));
+            var exp = new DivAssign(Variable.X, new Number(5));
 
             Assert.Equal("x /= 5", exp.ToString(commonFormatter));
         }
@@ -1141,7 +1151,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void IncToString()
         {
-            var exp = new Inc(new Variable("x"));
+            var exp = new Inc(Variable.X);
 
             Assert.Equal("x++", exp.ToString(commonFormatter));
         }
@@ -1149,7 +1159,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DecToString()
         {
-            var exp = new Dec(new Variable("x"));
+            var exp = new Dec(Variable.X);
 
             Assert.Equal("x--", exp.ToString(commonFormatter));
         }
@@ -1301,7 +1311,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ForToString()
         {
-            var exp = new For(new Number(5), new Define(new Variable("x"), new Number(0)), new Equal(new Number(5), new Number(5)), new AddAssign(new Variable("x"), new Number(1)));
+            var exp = new For(new Number(5), new Define(Variable.X, new Number(0)), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, new Number(1)));
 
             Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString(commonFormatter));
         }
@@ -1311,7 +1321,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new While(new Number(5), new Equal(new Number(5), new Number(5)));
 
-            Assert.Equal("while(5, 5 == 5)", exp.ToString(commonFormatter));
+            Assert.Equal("while(5, (5 == 5))", exp.ToString(commonFormatter));
         }
 
         [Fact]

@@ -34,7 +34,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Undefine(new UserFunction("f", new IExpression[] { new Variable("x") }));
+            var expected = new Undefine(new UserFunction("f", new IExpression[] { Variable.X }));
 
             Assert.Equal(expected, exp);
         }

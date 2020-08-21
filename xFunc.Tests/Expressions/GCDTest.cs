@@ -22,7 +22,7 @@ namespace xFunc.Tests.Expressions
     public class GCDTest
     {
         [Fact]
-        public void CalcucateTest1()
+        public void CalculateTest1()
         {
             var exp = new GCD(new Number(12), new Number(16));
 
@@ -30,22 +30,11 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void CalcucateTest2()
+        public void CalculateTest2()
         {
             var exp = new GCD(new IExpression[] { new Number(64), new Number(16), new Number(8) });
 
             Assert.Equal(8.0, exp.Execute());
-        }
-
-        [Fact]
-        public void DifferentArgsParentTest()
-        {
-            var num1 = new Number(64);
-            var num2 = new Number(16);
-            var gcd = new GCD(new[] { num1, num2 });
-
-            Assert.Equal(gcd, num1.Parent);
-            Assert.Equal(gcd, num2.Parent);
         }
 
         [Fact]
@@ -57,7 +46,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new GCD(new Variable("x"), new Number(0));
+            var exp = new GCD(Variable.X, new Number(0));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

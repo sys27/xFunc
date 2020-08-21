@@ -26,7 +26,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVectorUndefined()
         {
-            var exp = new Vector(new IExpression[] { new Number(10), new Variable("x") });
+            var exp = new Vector(new IExpression[] { new Number(10), Variable.X });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -64,7 +64,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Matrix(new[]
             {
-                new Vector(new[] { new Variable("x") }),
+                new Vector(new[] { Variable.X }),
             });
 
             Test(exp, ResultTypes.Undefined);
@@ -73,7 +73,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDeterminantUndefined()
         {
-            var exp = new Determinant(new Variable("x"));
+            var exp = new Determinant(Variable.X);
 
             Test(exp, ResultTypes.Number);
         }
@@ -117,7 +117,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestInverseUndefined()
         {
-            var exp = new Inverse(new Variable("x"));
+            var exp = new Inverse(Variable.X);
 
             Test(exp, ResultTypes.Matrix);
         }
@@ -161,7 +161,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductUndefined()
         {
-            var exp = new DotProduct(new Variable("x"), new Variable("x"));
+            var exp = new DotProduct(Variable.X, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -169,7 +169,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductLeftUndefined()
         {
-            var exp = new DotProduct(new Variable("x"), new Vector(new IExpression[] { new Number(1) }));
+            var exp = new DotProduct(Variable.X, new Vector(new IExpression[] { new Number(1) }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -177,7 +177,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductRightUndefined()
         {
-            var exp = new DotProduct(new Vector(new IExpression[] { new Number(1) }), new Variable("x"));
+            var exp = new DotProduct(new Vector(new IExpression[] { new Number(1) }), Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -215,7 +215,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductUndefined()
         {
-            var exp = new CrossProduct(new Variable("x"), new Variable("x"));
+            var exp = new CrossProduct(Variable.X, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -223,7 +223,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductLeftUndefined()
         {
-            var exp = new CrossProduct(new Variable("x"), new Vector(new IExpression[] { new Number(1) }));
+            var exp = new CrossProduct(Variable.X, new Vector(new IExpression[] { new Number(1) }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -231,7 +231,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductRightUndefined()
         {
-            var exp = new CrossProduct(new Vector(new IExpression[] { new Number(1) }), new Variable("x"));
+            var exp = new CrossProduct(new Vector(new IExpression[] { new Number(1) }), Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -269,7 +269,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTransposeUndefined()
         {
-            var exp = new Transpose(new Variable("x"));
+            var exp = new Transpose(Variable.X);
 
             Test(exp, ResultTypes.Matrix);
         }

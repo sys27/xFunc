@@ -27,7 +27,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgUndefined()
         {
-            var exp = new Avg(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Avg(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -67,7 +67,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountUndefined()
         {
-            var exp = new Count(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Count(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -107,7 +107,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxUndefined()
         {
-            var exp = new Max(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Max(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -147,7 +147,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinUndefined()
         {
-            var exp = new Min(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Min(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -187,7 +187,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductUndefined()
         {
-            var exp = new Product(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Product(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -227,7 +227,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevUndefined()
         {
-            var exp = new Stdev(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Stdev(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -267,7 +267,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpUndefined()
         {
-            var exp = new Stdevp(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Stdevp(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -307,7 +307,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumUndefined()
         {
-            var exp = new Sum(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Sum(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -347,7 +347,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarUndefined()
         {
-            var exp = new Var(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Var(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -387,7 +387,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpUndefined()
         {
-            var exp = new Varp(new[] { new Variable("x"), new Variable("y") });
+            var exp = new Varp(new[] { Variable.X, new Variable("y") });
 
             Test(exp, ResultTypes.Undefined);
         }

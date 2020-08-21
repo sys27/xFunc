@@ -415,8 +415,7 @@ namespace xFunc.Maths
         /// <param name="left">The current number.</param>
         /// <param name="right">The number to compare with the current number.</param>
         /// <returns><c>true</c> if the specified number is equal to the current number; otherwise, <c>false</c>.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Equals(double left, double right) =>
-            left.Equals(right) || Math.Abs(left - right) < Epsilon;
+            Math.Abs(left - right) < Epsilon;
     }
 }

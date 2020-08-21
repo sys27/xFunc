@@ -46,8 +46,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="number">The value to convert to <see cref="Number"/>.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator Number(double number) =>
-            new Number(number);
+        public static implicit operator Number(double number)
+            => new Number(number);
 
         /// <summary>
         /// Deconstructs <see cref="Number"/> to <see cref="double"/>.
@@ -158,13 +158,28 @@ namespace xFunc.Maths.Expressions
         public IExpression Clone() => new Number(Value);
 
         /// <summary>
-        /// Gets or Sets a number.
+        /// Gets a value indicating whether the current value is not a number (NaN).
         /// </summary>
-        public double Value { get; set; }
+        public bool IsNaN => double.IsNaN(Value);
 
         /// <summary>
-        /// Gets or sets the parent expression.
+        /// Gets a value indicating whether the current number evaluates to infinity.
         /// </summary>
-        public IExpression Parent { get; set; }
+        public bool IsInfinity => double.IsInfinity(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to positive infinity.
+        /// </summary>
+        public bool IsPositiveInfinity => double.IsPositiveInfinity(Value);
+
+        /// <summary>
+        /// Gets a value indicating whether the current number evaluates to negative infinity.
+        /// </summary>
+        public bool IsNegativeInfinity => double.IsNegativeInfinity(Value);
+
+        /// <summary>
+        /// Gets a number.
+        /// </summary>
+        public double Value { get; }
     }
 }

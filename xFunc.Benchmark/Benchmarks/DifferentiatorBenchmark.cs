@@ -39,14 +39,14 @@ namespace xFunc.Benchmark.Benchmarks
                             new Cos(
                                 new Tan(
                                     new Cot(
-                                        new Pow(new Variable("x"), new Number(2))
+                                        new Pow(Variable.X, new Number(2))
                                     )
                                 )
                             )
                         )
                     ),
                     new Ln(
-                        new Pow(new Variable("x"), new Number(2)
+                        new Pow(Variable.X, new Number(2)
                         )
                     )
                 ),
@@ -54,7 +54,7 @@ namespace xFunc.Benchmark.Benchmarks
                     new Arccos(
                         new Arctan(
                             new Arccot(
-                                new Pow(new Variable("x"), new Number(10))
+                                new Pow(Variable.X, new Number(10))
                             )
                         )
                     )

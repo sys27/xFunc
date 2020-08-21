@@ -185,7 +185,7 @@ namespace xFunc.Maths
         /// <param name="expression">The expression.</param>
         /// <returns>Returns the derivative.</returns>
         public IExpression Differentiate(IExpression expression) =>
-            Differentiate(expression, new Variable("x"));
+            Differentiate(expression, Variable.X);
 
         /// <summary>
         /// Differentiates the specified expression.

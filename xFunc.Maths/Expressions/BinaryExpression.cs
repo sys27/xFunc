@@ -169,7 +169,6 @@ namespace xFunc.Maths.Expressions
             set
             {
                 left = value ?? throw new ArgumentNullException(nameof(value));
-                left.Parent = this;
             }
         }
 
@@ -185,13 +184,7 @@ namespace xFunc.Maths.Expressions
             set
             {
                 right = value ?? throw new ArgumentNullException(nameof(value));
-                right.Parent = this;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public virtual IExpression Parent { get; set; }
     }
 }

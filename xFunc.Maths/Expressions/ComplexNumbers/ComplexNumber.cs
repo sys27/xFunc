@@ -53,9 +53,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// The result of the conversion.
         /// </returns>
         public static implicit operator Complex(ComplexNumber number)
-        {
-            return number?.Value ?? throw new ArgumentNullException(nameof(number));
-        }
+            => number?.Value ?? throw new ArgumentNullException(nameof(number));
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="Complex"/> to <see cref="ComplexNumber"/>.
@@ -64,8 +62,8 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator ComplexNumber(Complex number) =>
-            new ComplexNumber(number);
+        public static implicit operator ComplexNumber(Complex number)
+            => new ComplexNumber(number);
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -148,10 +146,5 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// The value.
         /// </value>
         public Complex Value { get; }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

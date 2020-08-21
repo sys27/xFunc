@@ -25,11 +25,19 @@ namespace xFunc.Maths.Expressions
     public class Variable : IExpression, IEquatable<Variable>
     {
         /// <summary>
+        /// The 'x' variable.
+        /// </summary>
+        public static readonly Variable X = new Variable("x");
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Variable"/> class.
         /// </summary>
         /// <param name="name">A name of variable.</param>
         public Variable(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
+
             Name = name;
         }
 
@@ -165,10 +173,5 @@ namespace xFunc.Maths.Expressions
         /// Gets a name of this variable.
         /// </summary>
         public string Name { get; }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

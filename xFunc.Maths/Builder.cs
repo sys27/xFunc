@@ -796,18 +796,6 @@ namespace xFunc.Maths
             return Current.Clone();
         }
 
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        /// <exception cref="NotImplementedException">Always.</exception>
-        public IExpression Parent
-        {
-            [ExcludeFromCodeCoverage]
-            get { return null; }
-            [ExcludeFromCodeCoverage]
-            set { }
-        }
-
         #endregion
 
         /// <summary>

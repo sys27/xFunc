@@ -59,10 +59,5 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
         IExpression Clone();
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        IExpression Parent { get; set; }
     }
 }

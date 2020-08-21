@@ -23,8 +23,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "0 - x")]
         public void SubFirstZero()
         {
-            var sub = new Sub(new Number(0), new Variable("x"));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(new Number(0), Variable.X);
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -32,8 +32,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x - 0")]
         public void SubSecondZero()
         {
-            var sub = new Sub(new Variable("x"), new Number(0));
-            var expected = new Variable("x");
+            var sub = new Sub(Variable.X, new Number(0));
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -50,8 +50,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 - -x")]
         public void SubSecondUnaryMinus()
         {
-            var sub = new Sub(new Number(2), new UnaryMinus(new Variable("x")));
-            var expected = new Add(new Number(2), new Variable("x"));
+            var sub = new Sub(new Number(2), new UnaryMinus(Variable.X));
+            var expected = new Add(new Number(2), Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -59,8 +59,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(2 + x) - 2")]
         public void SubDiff_NumAddVar_SubNum()
         {
-            var sub = new Sub(new Add(new Number(2), new Variable("x")), new Number(2));
-            var expected = new Variable("x");
+            var sub = new Sub(new Add(new Number(2), Variable.X), new Number(2));
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -68,8 +68,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x + 2) - 2")]
         public void SubDiff_VarAddNum_SubNum()
         {
-            var sub = new Sub(new Add(new Variable("x"), new Number(2)), new Number(2));
-            var expected = new Variable("x");
+            var sub = new Sub(new Add(Variable.X, new Number(2)), new Number(2));
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -77,8 +77,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 - (2 + x)")]
         public void SubDiffNumSub_NumAddVar_()
         {
-            var sub = new Sub(new Number(2), new Add(new Number(2), new Variable("x")));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(new Number(2), new Add(new Number(2), Variable.X));
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -86,8 +86,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 - (x + 2)")]
         public void SubDiffNumSub_VarAddNum_()
         {
-            var sub = new Sub(new Number(2), new Add(new Variable("x"), new Number(2)));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(new Number(2), new Add(Variable.X, new Number(2)));
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -95,8 +95,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(2 - x) - 2")]
         public void SubDiff_NumSubVar_SubNum()
         {
-            var sub = new Sub(new Sub(new Number(2), new Variable("x")), new Number(2));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(new Sub(new Number(2), Variable.X), new Number(2));
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -104,8 +104,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x - 2) - 2")]
         public void SubDiff_VarSubNum_SubNum()
         {
-            var sub = new Sub(new Sub(new Variable("x"), new Number(2)), new Number(2));
-            var expected = new Sub(new Variable("x"), new Number(4));
+            var sub = new Sub(new Sub(Variable.X, new Number(2)), new Number(2));
+            var expected = new Sub(Variable.X, new Number(4));
 
             SimpleTest(sub, expected);
         }
@@ -113,8 +113,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 - (2 - x)")]
         public void SubDiffNumSub_NumSubVar_()
         {
-            var sub = new Sub(new Number(2), new Sub(new Number(2), new Variable("x")));
-            var expected = new Variable("x");
+            var sub = new Sub(new Number(2), new Sub(new Number(2), Variable.X));
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -122,8 +122,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 - (x - 2)")]
         public void SubDiffNumSub_VarSubNum_()
         {
-            var sub = new Sub(new Number(2), new Sub(new Variable("x"), new Number(2)));
-            var expected = new Sub(new Number(4), new Variable("x"));
+            var sub = new Sub(new Number(2), new Sub(Variable.X, new Number(2)));
+            var expected = new Sub(new Number(4), Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -131,7 +131,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x - x")]
         public void SubSameVars1()
         {
-            var sub = new Sub(new Variable("x"), new Variable("x"));
+            var sub = new Sub(Variable.X, Variable.X);
             var expected = new Number(0);
 
             SimpleTest(sub, expected);
@@ -140,8 +140,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x - x) - x")]
         public void SubSameVars2()
         {
-            var sub = new Sub(new Sub(new Variable("x"), new Variable("x")), new Variable("x"));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(new Sub(Variable.X, Variable.X), Variable.X);
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -149,8 +149,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2x - x")]
         public void SubSameVars3()
         {
-            var sub = new Sub(new Mul(new Number(2), new Variable("x")), new Variable("x"));
-            var expected = new Variable("x");
+            var sub = new Sub(new Mul(new Number(2), Variable.X), Variable.X);
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -158,8 +158,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x - 2x")]
         public void SubSameVars4()
         {
-            var sub = new Sub(new Variable("x"), new Mul(new Number(2), new Variable("x")));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(Variable.X, new Mul(new Number(2), Variable.X));
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -167,8 +167,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x - (x * 2)")]
         public void SubSameVars5()
         {
-            var sub = new Sub(new Variable("x"), new Mul(new Variable("x"), new Number(2)));
-            var expected = new UnaryMinus(new Variable("x"));
+            var sub = new Sub(Variable.X, new Mul(Variable.X, new Number(2)));
+            var expected = new UnaryMinus(Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -176,8 +176,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2x - x")]
         public void SubSameVars6()
         {
-            var sub = new Sub(new Mul(new Number(2), new Variable("x")), new Variable("x"));
-            var expected = new Variable("x");
+            var sub = new Sub(new Mul(new Number(2), Variable.X), Variable.X);
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -185,8 +185,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x * 2) - x")]
         public void SubSameVars7()
         {
-            var sub = new Sub(new Mul(new Variable("x"), new Number(2)), new Variable("x"));
-            var expected = new Variable("x");
+            var sub = new Sub(new Mul(Variable.X, new Number(2)), Variable.X);
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -195,10 +195,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void SubSameVars8()
         {
             var sub = new Sub(
-                new Mul(new Number(3), new Variable("x")),
-                new Mul(new Number(2), new Variable("x"))
+                new Mul(new Number(3), Variable.X),
+                new Mul(new Number(2), Variable.X)
             );
-            var expected = new Variable("x");
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -207,10 +207,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void SubSameVars9()
         {
             var sub = new Sub(
-                new Mul(new Variable("x"), new Number(3)),
-                new Mul(new Variable("x"), new Number(2))
+                new Mul(Variable.X, new Number(3)),
+                new Mul(Variable.X, new Number(2))
             );
-            var expected = new Variable("x");
+            var expected = Variable.X;
 
             SimpleTest(sub, expected);
         }
@@ -219,10 +219,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void SubSameVars10()
         {
             var sub = new Sub(
-                new Mul(new Variable("x"), new Number(4)),
-                new Mul(new Variable("x"), new Number(2))
+                new Mul(Variable.X, new Number(4)),
+                new Mul(Variable.X, new Number(2))
             );
-            var expected = new Mul(new Number(2), new Variable("x"));
+            var expected = new Mul(new Number(2), Variable.X);
 
             SimpleTest(sub, expected);
         }
@@ -231,10 +231,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void AddSameVars11()
         {
             var exp = new Sub(
-                new Mul(new Number(3), new Variable("x")),
-                new Mul(new Variable("x"), new Number(2))
+                new Mul(new Number(3), Variable.X),
+                new Mul(Variable.X, new Number(2))
             );
-            var expected = new Variable("x");
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }
@@ -243,10 +243,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void AddSameVars12()
         {
             var exp = new Sub(
-                new Mul(new Variable("x"), new Number(3)),
-                new Mul(new Number(2), new Variable("x"))
+                new Mul(Variable.X, new Number(3)),
+                new Mul(new Number(2), Variable.X)
             );
-            var expected = new Variable("x");
+            var expected = Variable.X;
 
             SimpleTest(exp, expected);
         }

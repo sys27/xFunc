@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateLessTrueTest1()
         {
             var parameters = new ParameterCollection { new Parameter("x", 0) };
-            var lessOrEqual = new LessOrEqual(new Variable("x"), new Number(10));
+            var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
             Assert.True((bool) lessOrEqual.Execute(parameters));
         }
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateLessTrueTest2()
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };
-            var lessOrEqual = new LessOrEqual(new Variable("x"), new Number(10));
+            var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
             Assert.True((bool) lessOrEqual.Execute(parameters));
         }
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void CalculateLessFalseTest()
         {
             var parameters = new ParameterCollection { new Parameter("x", 666) };
-            var lessOrEqual = new LessOrEqual(new Variable("x"), new Number(10));
+            var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
             Assert.False((bool) lessOrEqual.Execute(parameters));
         }

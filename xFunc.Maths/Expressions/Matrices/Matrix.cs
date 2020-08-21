@@ -49,8 +49,6 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new MatrixIsInvalidException();
 
             this.vectors = vectors;
-            foreach (var item in vectors)
-                item.Parent = this;
         }
 
         /// <summary>
@@ -70,7 +68,6 @@ namespace xFunc.Maths.Expressions.Matrices
             set
             {
                 vectors[index] = value ?? throw new ArgumentNullException(nameof(value));
-                value.Parent = this;
             }
         }
 
@@ -186,11 +183,6 @@ namespace xFunc.Maths.Expressions.Matrices
 
             return results;
         }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
 
         /// <summary>
         /// Gets the vectors.

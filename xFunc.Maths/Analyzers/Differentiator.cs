@@ -34,7 +34,7 @@ namespace xFunc.Maths.Analyzers
         /// Initializes a new instance of the <see cref="Differentiator"/> class.
         /// </summary>
         public Differentiator()
-            : this(new ExpressionParameters(), new Variable("x"))
+            : this(new ExpressionParameters(), Variable.X)
         {
         }
 
@@ -110,9 +110,11 @@ namespace xFunc.Maths.Analyzers
             if (!Helpers.HasVariable(exp, Variable))
                 return new Number(0);
 
-            var diff = exp.Expression.Analyze(this);
-            if (exp.Parent is Derivative)
+            var diff = exp.Expression;
+            if (diff is Derivative)
                 diff = diff.Analyze(this);
+
+            diff = diff.Analyze(this);
 
             return diff;
         }

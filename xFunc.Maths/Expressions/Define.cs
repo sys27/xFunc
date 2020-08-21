@@ -137,11 +137,6 @@ namespace xFunc.Maths.Expressions
         public IExpression Clone() => new Define(key.Clone(), value.Clone());
 
         /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
-
-        /// <summary>
         /// Gets or sets the key.
         /// </summary>
         /// <value>The key.</value>

@@ -133,13 +133,7 @@ namespace xFunc.Maths.Expressions.Programming
             set
             {
                 variable = value ?? throw new ArgumentNullException(nameof(value));
-                variable.Parent = this;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the parent expression.
-        /// </summary>
-        public IExpression Parent { get; set; }
     }
 }

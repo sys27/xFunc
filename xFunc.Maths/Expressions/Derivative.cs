@@ -146,7 +146,6 @@ namespace xFunc.Maths.Expressions
             set
             {
                 this[0] = value ?? throw new ArgumentNullException(nameof(value));
-                this[0].Parent = this;
             }
         }
 
@@ -156,7 +155,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The variable.
         /// </value>
-        public Variable Variable => ParametersCount >= 2 ? (Variable)this[1] : new Variable("x");
+        public Variable Variable => ParametersCount >= 2 ? (Variable)this[1] : Variable.X;
 
         /// <summary>
         /// Gets the derivative point.

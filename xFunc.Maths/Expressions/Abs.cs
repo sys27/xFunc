@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -61,9 +62,10 @@ namespace xFunc.Maths.Expressions
 
             return result switch
             {
+                double number => Math.Abs(number),
+                Angle angle => Angle.Abs(angle),
                 Complex complex => Complex.Abs(complex),
                 Vector vector => vector.Abs(parameters),
-                double number => Math.Abs(number),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

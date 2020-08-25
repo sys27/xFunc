@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -57,6 +58,14 @@ namespace xFunc.Maths
                 "lb" => new Lb(arguments),
                 "log2" => new Lb(arguments),
                 "log" => new Log(arguments),
+
+                "todeg" => new ToDegree(arguments),
+                "todegree" => new ToDegree(arguments),
+                "torad" => new ToRadian(arguments),
+                "toradian" => new ToRadian(arguments),
+                "tograd" => new ToGradian(arguments),
+                "togradian" => new ToGradian(arguments),
+                "tonumber" => new ToNumber(arguments),
 
                 "sin" => new Sin(arguments),
                 "cos" => new Cos(arguments),
@@ -299,6 +308,9 @@ namespace xFunc.Maths
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private IExpression CreateNumber(NumberToken numberToken)
             => new Number(numberToken.Number);
+
+        private IExpression CreateAngleNumber(NumberToken numberToken, AngleUnit unit)
+            => new Angle(numberToken.Number, unit).AsExpression();
 
         private IExpression CreateComplexNumber(
             OperatorToken magnitudeSign,

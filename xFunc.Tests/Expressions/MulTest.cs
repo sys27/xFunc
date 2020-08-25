@@ -13,11 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
+using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
 
 namespace xFunc.Tests.Expressions
 {
@@ -70,8 +74,14 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteDotProductTest()
         {
-            var vector1 = new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2), new Number(3) });
-            var vector2 = new Maths.Expressions.Matrices.Vector(new[] { new Number(4), new Number(5), new Number(6) });
+            var vector1 = new Vector(new IExpression[]
+            {
+                new Number(1), new Number(2), new Number(3)
+            });
+            var vector2 = new Vector(new IExpression[]
+            {
+                new Number(4), new Number(5), new Number(6)
+            });
             var exp = new Mul(vector1, vector2);
 
             Assert.Equal(32.0, exp.Execute());
@@ -100,23 +110,23 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulVectorByMatrixTest()
         {
-            var vector = new Maths.Expressions.Matrices.Vector(new[]
+            var vector = new Vector(new IExpression[]
             {
                 new Number(1),
                 new Number(2),
                 new Number(3)
             });
-            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            var matrix = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(4) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(5) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(6) })
+                new Vector(new IExpression[] { new Number(4) }),
+                new Vector(new IExpression[] { new Number(5) }),
+                new Vector(new IExpression[] { new Number(6) })
             });
             var exp = new Mul(vector, matrix);
 
-            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            var expected = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(32) })
+                new Vector(new IExpression[] { new Number(32) })
             });
 
             Assert.Equal(expected, exp.Execute());
@@ -125,13 +135,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulMatrixByVectorTest()
         {
-            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            var matrix = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(4) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(5) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(6) })
+                new Vector(new IExpression[] { new Number(4) }),
+                new Vector(new IExpression[] { new Number(5) }),
+                new Vector(new IExpression[] { new Number(6) })
             });
-            var vector = new Maths.Expressions.Matrices.Vector(new[]
+            var vector = new Vector(new IExpression[]
             {
                 new Number(1),
                 new Number(2),
@@ -139,17 +149,17 @@ namespace xFunc.Tests.Expressions
             });
             var exp = new Mul(matrix, vector);
 
-            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            var expected = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[]
+                new Vector(new IExpression[]
                 {
                     new Number(4), new Number(8), new Number(12)
                 }),
-                new Maths.Expressions.Matrices.Vector(new[]
+                new Vector(new IExpression[]
                 {
                     new Number(5), new Number(10), new Number(15)
                 }),
-                new Maths.Expressions.Matrices.Vector(new[]
+                new Vector(new IExpression[]
                 {
                     new Number(6), new Number(12), new Number(18)
                 })
@@ -161,31 +171,31 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulMatrixByMatrixTest()
         {
-            var matrix1 = new Maths.Expressions.Matrices.Matrix(new[]
+            var matrix1 = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2), new Number(3) })
+                new Vector(new IExpression[] { new Number(1), new Number(2), new Number(3) })
             });
-            var matrix2 = new Maths.Expressions.Matrices.Matrix(new[]
+            var matrix2 = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(4) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(5) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(6) })
+                new Vector(new IExpression[] { new Number(4) }),
+                new Vector(new IExpression[] { new Number(5) }),
+                new Vector(new IExpression[] { new Number(6) })
             });
             var exp = new Mul(matrix1, matrix2);
 
-            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            var expected = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(32) })
+                new Vector(new IExpression[] { new Number(32) })
             });
 
             Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
-        public void ExecuteMulNunberByVectorTest()
+        public void ExecuteMulNumberByVectorTest()
         {
             var number = new Number(5);
-            var vector = new Maths.Expressions.Matrices.Vector(new[]
+            var vector = new Vector(new IExpression[]
             {
                 new Number(1),
                 new Number(2),
@@ -193,7 +203,7 @@ namespace xFunc.Tests.Expressions
             });
             var exp = new Mul(number, vector);
 
-            var expected = new Maths.Expressions.Matrices.Vector(new[]
+            var expected = new Vector(new IExpression[]
             {
                 new Number(5),
                 new Number(10),
@@ -206,18 +216,18 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulMatrixByNumberTest()
         {
-            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            var matrix = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(3), new Number(4) })
+                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { new Number(3), new Number(4) })
             });
             var number = new Number(5);
             var exp = new Mul(matrix, number);
 
-            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            var expected = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(5), new Number(10) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(15), new Number(20) })
+                new Vector(new IExpression[] { new Number(5), new Number(10) }),
+                new Vector(new IExpression[] { new Number(15), new Number(20) })
             });
 
             Assert.Equal(expected, exp.Execute());
@@ -227,20 +237,66 @@ namespace xFunc.Tests.Expressions
         public void ExecuteMulNumberByMatrixTest()
         {
             var number = new Number(5);
-            var matrix = new Maths.Expressions.Matrices.Matrix(new[]
+            var matrix = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(1), new Number(2) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(3), new Number(4) })
+                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { new Number(3), new Number(4) })
             });
             var exp = new Mul(number, matrix);
 
-            var expected = new Maths.Expressions.Matrices.Matrix(new[]
+            var expected = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(5), new Number(10) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(15), new Number(20) })
+                new Vector(new IExpression[] { new Number(5), new Number(10) }),
+                new Vector(new IExpression[] { new Number(15), new Number(20) })
             });
 
             Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void MulNumberAndDegree()
+        {
+            var exp = new Mul(new Number(2), Angle.Degree(10).AsExpression());
+            var actual = exp.Execute();
+            var expected = Angle.Degree(20);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MulRadianAndNumber()
+        {
+            var exp = new Mul(Angle.Radian(10).AsExpression(), new Number(2));
+            var actual = exp.Execute();
+            var expected = Angle.Radian(20);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MulDegreeAndRadian()
+        {
+            var exp = new Mul(
+                Angle.Radian(Math.PI).AsExpression(),
+                Angle.Degree(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = Angle.Degree(1800);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void MulGradianAndGradian()
+        {
+            var exp = new Mul(
+                Angle.Gradian(10).AsExpression(),
+                Angle.Gradian(20).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = Angle.Gradian(200);
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]

@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -62,14 +63,18 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftDouble, double rightDouble) => leftDouble + rightDouble,
+                (double left, double right) => left + right,
 
-                (double leftDouble, Complex rightComplex) => leftDouble + rightComplex,
-                (Complex leftComplex, double rightDouble) => leftComplex + rightDouble,
-                (Complex leftComplex, Complex rightComplex) => leftComplex + rightComplex,
+                (double left, Angle right) => left + right,
+                (Angle left, double right) => left + right,
+                (Angle left, Angle right) => left + right,
 
-                (Vector leftVector, Vector rightVector) => leftVector.Add(rightVector, parameters),
-                (Matrix leftMatrix, Matrix rightMatrix) => leftMatrix.Add(rightMatrix, parameters),
+                (double left, Complex right) => left + right,
+                (Complex left, double right) => left + right,
+                (Complex left, Complex right) => left + right,
+
+                (Vector left, Vector right) => left.Add(right, parameters),
+                (Matrix left, Matrix right) => left.Add(right, parameters),
 
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };

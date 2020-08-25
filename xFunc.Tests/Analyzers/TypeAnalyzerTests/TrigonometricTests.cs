@@ -37,7 +37,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccos(new Number(2));
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccot(new Number(2));
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arccsc(new Number(2));
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsec(new Number(2));
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arcsin(new Number(2));
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Arctan(new Number(2));
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]

@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
@@ -58,13 +59,12 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="radian">The calculation result of argument.</param>
+        /// <param name="angle">The angle.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(double radian) =>
-            Math.Sinh(radian);
+        protected override double ExecuteInternal(Angle angle) =>
+            Math.Sinh(angle.Value);
 
         /// <summary>
         /// Analyzes the current expression.

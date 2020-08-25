@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -25,10 +26,19 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class SecantTest
     {
         [Fact]
-        public void ExecuteDegreeTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Sec(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Degree);
+            var result = (double)exp.Execute();
+
+            Assert.Equal(1.0001523280439077, result, 15);
+        }
+
+        [Fact]
+        public void ExecuteDegreeTest()
+        {
+            var exp = new Sec(Angle.Degree(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(1.0001523280439077, result, 15);
         }
@@ -36,8 +46,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteRadianTest()
         {
-            var exp = new Sec(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Radian);
+            var exp = new Sec(Angle.Radian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(1.8508157176809255, result, 15);
         }
@@ -45,8 +55,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Sec(new Number(1));
-            var actual = (double)exp.Execute(AngleMeasurement.Gradian);
+            var exp = new Sec(Angle.Gradian(1).AsExpression());
+            var actual = (double)exp.Execute();
 
             Assert.Equal(1.0001233827397618, actual, 15);
         }

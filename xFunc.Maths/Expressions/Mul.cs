@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
 using Vector = xFunc.Maths.Expressions.Matrices.Vector;
 
@@ -62,22 +63,26 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftNumber, double rightNumber) => leftNumber * rightNumber,
+                (double left, double right) => left * right,
 
-                (double leftNumber, Complex rightComplex) => leftNumber * rightComplex,
-                (Complex leftComplex, double rightNumber) => leftComplex * rightNumber,
-                (Complex leftComplex, Complex rightComplex) => leftComplex * rightComplex,
+                (double left, Angle right) => left * right,
+                (Angle left, double right) => left * right,
+                (Angle left, Angle right) => left * right,
 
-                (Vector leftVector, Vector rightVector) => leftVector.Mul(rightVector, parameters),
-                (double leftNumber, Vector rightVector) => rightVector.Mul(leftNumber, parameters),
-                (Vector leftVector, double rightNumber) => leftVector.Mul(rightNumber, parameters),
+                (double left, Complex right) => left * right,
+                (Complex left, double right) => left * right,
+                (Complex left, Complex right) => left * right,
 
-                (Matrix leftMatrix, Matrix rightMatrix) => leftMatrix.Mul(rightMatrix, parameters),
-                (double leftNumber, Matrix rightMatrix) => rightMatrix.Mul(leftNumber, parameters),
-                (Matrix leftMatrix, double rightNumber) => leftMatrix.Mul(rightNumber, parameters),
+                (Vector left, Vector right) => left.Mul(right, parameters),
+                (double left, Vector right) => right.Mul(left, parameters),
+                (Vector left, double right) => left.Mul(right, parameters),
 
-                (Matrix leftMatrix, Vector rightVector) => leftMatrix.Mul(rightVector, parameters),
-                (Vector leftVector, Matrix rightMatrix) => leftVector.Mul(rightMatrix, parameters),
+                (Matrix left, Matrix right) => left.Mul(right, parameters),
+                (double left, Matrix right) => right.Mul(left, parameters),
+                (Matrix left, double right) => left.Mul(right, parameters),
+
+                (Matrix left, Vector right) => left.Mul(right, parameters),
+                (Vector left, Matrix right) => left.Mul(right, parameters),
 
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };

@@ -95,7 +95,7 @@ namespace xFunc.Maths.Expressions
             if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj.GetType() != this.GetType())
+            if (typeof(Variable) != obj.GetType())
                 return false;
 
             return Equals((Variable)obj);

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
@@ -32,7 +33,17 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTestExecption()
+        public void ExecuteTestAngleNumber()
+        {
+            var ceil = new Ceil(Angle.Degree(5.55555555).AsExpression());
+            var result = ceil.Execute();
+            var expected = Angle.Degree(6);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
         {
             var exp = new Ceil(Bool.False);
 

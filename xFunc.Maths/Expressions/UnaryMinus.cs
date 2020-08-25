@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions
 {
@@ -47,6 +48,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => -number,
+                Angle angle => -angle,
                 Complex complex => (object)Complex.Negate(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
@@ -80,7 +82,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new UnaryMinus(Argument.Clone());
+        public override IExpression Clone()
+            => new UnaryMinus(Argument.Clone());
     }
 }

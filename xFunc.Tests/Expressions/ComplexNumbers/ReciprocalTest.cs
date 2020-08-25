@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         }
 
         [Fact]
-        public void ExecuteExeptionTest()
+        public void ExecuteExceptionTest()
         {
             var exp = new Reciprocal(new Number(2));
 

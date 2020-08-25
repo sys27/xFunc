@@ -18,6 +18,7 @@ using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using System.Numerics;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 
 namespace xFunc.Tests.Expressions.Trigonometric
@@ -25,30 +26,12 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class ArccotTest
     {
         [Fact]
-        public void ExecuteRadianTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Arccot(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Radian);
-
-            Assert.Equal(0.7853981633974483, result, 15);
-        }
-
-        [Fact]
-        public void ExecuteDegreeTest()
-        {
-            var exp = new Arccot(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Degree);
-
-            Assert.Equal(45, result, 15);
-        }
-
-        [Fact]
-        public void ExecuteGradianTest()
-        {
-            var exp = new Arccot(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Gradian);
-
-            Assert.Equal(50, result, 15);
+            var result = exp.Execute();
+            var expected = Angle.Radian(0.7853981633974483);
+            Assert.Equal(expected, result);
         }
 
         [Fact]

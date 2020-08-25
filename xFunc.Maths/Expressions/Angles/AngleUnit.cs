@@ -13,12 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace xFunc.Maths.Expressions
+namespace xFunc.Maths.Expressions.Angles
 {
     /// <summary>
     /// Specifies a measurement of angle.
     /// </summary>
-    public enum AngleMeasurement
+    public enum AngleUnit
     {
         /// <summary>
         /// Degree.

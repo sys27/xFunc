@@ -15,6 +15,7 @@
 
 using System.Collections.Generic;
 using System.Numerics;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Hyperbolic
 {
@@ -77,7 +78,7 @@ namespace xFunc.Maths.Expressions.Hyperbolic
 
             return result switch
             {
-                double number => ExecuteInternal(number).FromRadians(parameters?.AngleMeasurement),
+                double number => Angle.Radian(ExecuteInternal(number)),
                 Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

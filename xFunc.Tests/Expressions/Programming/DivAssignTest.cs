@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void DivValueBoolParameters()
         {
-            var exp = new DivAssign(Variable.X, new Bool(false));
+            var exp = new DivAssign(Variable.X, Bool.False);
             var parameters = new ParameterCollection { new Parameter("x", 1) };
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));

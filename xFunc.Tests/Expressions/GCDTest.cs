@@ -41,7 +41,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CalculateWrongArgumentTypeTest()
         {
-            var exp = new GCD(new IExpression[] { new Bool(true), new Number(16), new Number(8) });
+            var exp = new GCD(new IExpression[] { Bool.True, new Number(16), new Number(8) });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

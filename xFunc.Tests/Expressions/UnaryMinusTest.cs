@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NotSupportedException()
         {
-            var exp = new UnaryMinus(new Bool(false));
+            var exp = new UnaryMinus(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void NotSupportedException()
         {
-            var exp = new Min(new[] { new Bool(false), new Bool(false) });
+            var exp = new Min(new[] { Bool.False, Bool.False });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

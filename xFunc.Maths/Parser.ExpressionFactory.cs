@@ -287,12 +287,12 @@ namespace xFunc.Maths
         private IExpression CreateBoolean(KeywordToken keywordToken)
         {
             if (keywordToken == KeywordToken.True)
-                return new Bool(true);
+                return Bool.True;
 
             // if (keywordToken == KeywordToken.False)
             Debug.Assert(keywordToken == KeywordToken.False, "Only True and False keywords are allowed here.");
 
-            return new Bool(false);
+            return Bool.False;
         }
 
         // TODO: positional cache

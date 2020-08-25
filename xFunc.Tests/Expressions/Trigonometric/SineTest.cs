@@ -74,7 +74,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Sin(new Bool(false));
+            var exp = new Sin(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

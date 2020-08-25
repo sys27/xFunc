@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void SubValueBoolParameters()
         {
-            var exp = new SubAssign(Variable.X, new Bool(false));
+            var exp = new SubAssign(Variable.X, Bool.False);
             var parameters = new ParameterCollection { new Parameter("x", 1) };
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));

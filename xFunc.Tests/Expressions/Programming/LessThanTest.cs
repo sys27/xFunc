@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateInvalidTypeTest()
         {
-            var lessThen = new LessThan(new Bool(true), new Bool(true));
+            var lessThen = new LessThan(Bool.True, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => lessThen.Execute());
         }

@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void InvalidParameterTest()
         {
-            var exp = new Sign(new Bool(false));
+            var exp = new Sign(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

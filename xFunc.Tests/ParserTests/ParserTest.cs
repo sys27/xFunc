@@ -699,7 +699,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new And(new Bool(true), new Bool(false));
+            var expected = new And(Bool.True, Bool.False);
 
             Assert.Equal(expected, exp);
         }
@@ -714,7 +714,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new And(new Bool(true), new Bool(false));
+            var expected = new And(Bool.True, Bool.False);
 
             Assert.Equal(expected, exp);
         }
@@ -1393,7 +1393,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new NOr(new Bool(true), new Bool(true));
+            var expected = new NOr(Bool.True, Bool.True);
 
             Assert.Equal(expected, exp);
         }
@@ -1408,7 +1408,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new NAnd(new Bool(true), new Bool(true));
+            var expected = new NAnd(Bool.True, Bool.True);
 
             Assert.Equal(expected, exp);
         }
@@ -1423,7 +1423,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Implication(new Bool(true), new Bool(true));
+            var expected = new Implication(Bool.True, Bool.True);
 
             Assert.Equal(expected, exp);
         }
@@ -1438,7 +1438,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Implication(new Bool(true), new Bool(true));
+            var expected = new Implication(Bool.True, Bool.True);
 
             Assert.Equal(expected, exp);
         }
@@ -1453,7 +1453,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Equality(new Bool(true), new Bool(true));
+            var expected = new Equality(Bool.True, Bool.True);
 
             Assert.Equal(expected, exp);
         }
@@ -1468,7 +1468,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Equality(new Bool(true), new Bool(true));
+            var expected = new Equality(Bool.True, Bool.True);
 
             Assert.Equal(expected, exp);
         }

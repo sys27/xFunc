@@ -104,7 +104,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteWrongArgumentTypeTest()
         {
-            var exp = new Pow(new Bool(true), new Bool(true));
+            var exp = new Pow(Bool.True, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

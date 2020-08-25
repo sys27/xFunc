@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTEstException()
         {
-            var exp = new Abs(new Bool(false));
+            var exp = new Abs(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

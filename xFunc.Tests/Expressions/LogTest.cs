@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteLeftResultIsNotSupported()
         {
-            var exp = new Log(new Bool(false), new Bool(true));
+            var exp = new Log(Bool.False, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteRightResultIsNotSupported()
         {
-            var exp = new Log(new Number(10), new Bool(true));
+            var exp = new Log(new Number(10), Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

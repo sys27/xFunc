@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void MulValueBoolParameters()
         {
-            var exp = new MulAssign(Variable.X, new Bool(false));
+            var exp = new MulAssign(Variable.X, Bool.False);
             var parameters = new ParameterCollection { new Parameter("x", 1) };
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute(parameters));

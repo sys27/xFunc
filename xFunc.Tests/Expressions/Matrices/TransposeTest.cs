@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void ExecuteWrongArgumentTypeTest()
         {
-            var exp = new Transpose(new Bool(true));
+            var exp = new Transpose(Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

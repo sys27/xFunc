@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteResultIsNotSupported()
         {
-            var exp = new Mod(new Bool(true), new Bool(false));
+            var exp = new Mod(Bool.True, Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

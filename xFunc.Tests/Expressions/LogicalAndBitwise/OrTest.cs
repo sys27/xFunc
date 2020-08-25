@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest3()
         {
-            var exp = new Or(new Bool(true), new Bool(false));
+            var exp = new Or(Bool.True, Bool.False);
 
             Assert.True((bool) exp.Execute());
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest4()
         {
-            var exp = new Or(new Bool(false), new Bool(false));
+            var exp = new Or(Bool.False, Bool.False);
 
             Assert.False((bool) exp.Execute());
         }
@@ -74,7 +74,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void CloneTest()
         {
-            var exp = new Or(new Bool(true), new Bool(false));
+            var exp = new Or(Bool.True, Bool.False);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

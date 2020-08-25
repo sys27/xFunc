@@ -28,7 +28,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// Initializes a new instance of the <see cref="Bool"/> class.
         /// </summary>
         /// <param name="value">The value of this constant.</param>
-        public Bool(bool value)
+        private Bool(bool value)
         {
             Value = value;
         }
@@ -185,5 +185,15 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
 #pragma warning disable SA1623
         public bool Value { get; }
 #pragma warning restore SA1623
+
+        /// <summary>
+        /// The <c>true</c> constant.
+        /// </summary>
+        public static readonly Bool True = new Bool(true);
+
+        /// <summary>
+        /// The <c>false</c> constant.
+        /// </summary>
+        public static readonly Bool False = new Bool(false);
     }
 }

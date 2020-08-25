@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateInvalidTypeTest()
         {
-            var greaterOrEqual = new GreaterOrEqual(new Bool(true), new Bool(true));
+            var greaterOrEqual = new GreaterOrEqual(Bool.True, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => greaterOrEqual.Execute());
         }

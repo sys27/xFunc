@@ -221,7 +221,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new If(
-                new Bool(true),
+                Bool.True,
                 new Number(1),
                 new UnaryMinus(new Number(1)));
 
@@ -285,7 +285,7 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new Sin(
                 new If(
-                    new Bool(true),
+                    Bool.True,
                     new Number(1),
                     new UnaryMinus(new Number(1))));
 

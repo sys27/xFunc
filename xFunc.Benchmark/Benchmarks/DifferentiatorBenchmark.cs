@@ -23,6 +23,7 @@ namespace xFunc.Benchmark.Benchmarks
     public class DifferentiatorBenchmark
     {
         private Differentiator differentiator;
+        private DifferentiatorContext context;
 
         private IExpression complexExp;
 
@@ -30,6 +31,7 @@ namespace xFunc.Benchmark.Benchmarks
         public void Setup()
         {
             differentiator = new Differentiator();
+            context = DifferentiatorContext.Default();
 
             // (abs(sin(cos(tan(ctg(x ^ 2))))) - ln(x ^ 2)) + arcsin(arccos(arctan(arcctg(x ^ 10))))
             complexExp = new Add(
@@ -64,6 +66,6 @@ namespace xFunc.Benchmark.Benchmarks
 
         [Benchmark]
         public IExpression ComplexExpression()
-            => complexExp.Analyze(differentiator, DifferentiatorContext.Default());
+            => complexExp.Analyze(differentiator, context);
     }
 }

@@ -183,8 +183,8 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public IExpression Value
         {
-            get { return value; }
-            set { this.value = value ?? throw new ArgumentNullException(nameof(value)); }
+            get => value;
+            set => this.value = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

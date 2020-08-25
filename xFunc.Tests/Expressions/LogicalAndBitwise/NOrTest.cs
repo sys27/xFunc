@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest1()
         {
-            var nor = new NOr(new Bool(false), new Bool(true));
+            var nor = new NOr(Bool.False, Bool.True);
 
             Assert.False((bool) nor.Execute());
         }
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest2()
         {
-            var nor = new NOr(new Bool(false), new Bool(false));
+            var nor = new NOr(Bool.False, Bool.False);
 
             Assert.True((bool) nor.Execute());
         }
@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void CloneTest()
         {
-            var exp = new NOr(new Bool(true), new Bool(false));
+            var exp = new NOr(Bool.True, Bool.False);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -43,7 +43,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddAssignException()
         {
-            var exp = new AddAssign(Variable.X, new Bool(false));
+            var exp = new AddAssign(Variable.X, Bool.False);
 
             TestException(exp);
         }
@@ -59,7 +59,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndBool()
         {
-            var exp = new ConditionalAnd(new Bool(false), new Bool(true));
+            var exp = new ConditionalAnd(Bool.False, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -67,7 +67,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndBoolNumberExpection()
         {
-            var exp = new ConditionalAnd(new Bool(false), new Number(1));
+            var exp = new ConditionalAnd(Bool.False, new Number(1));
 
             TestBinaryException(exp);
         }
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndNumberBoolExpection()
         {
-            var exp = new ConditionalAnd(new Number(1), new Bool(true));
+            var exp = new ConditionalAnd(new Number(1), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndException()
         {
-            var exp = new ConditionalAnd(new ComplexNumber(2, 3), new Bool(false));
+            var exp = new ConditionalAnd(new ComplexNumber(2, 3), Bool.False);
 
             TestBinaryException(exp);
         }
@@ -123,7 +123,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivAssignException()
         {
-            var exp = new DivAssign(Variable.X, new Bool(false));
+            var exp = new DivAssign(Variable.X, Bool.False);
 
             TestException(exp);
         }
@@ -147,7 +147,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualNumberBoolException()
         {
-            var exp = new Equal(new Number(20), new Bool(true));
+            var exp = new Equal(new Number(20), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -155,7 +155,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualBoolNumberException()
         {
-            var exp = new Equal(new Bool(true), new Number(20));
+            var exp = new Equal(Bool.True, new Number(20));
 
             TestBinaryException(exp);
         }
@@ -163,7 +163,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualBoolean()
         {
-            var exp = new Equal(new Bool(false), new Bool(true));
+            var exp = new Equal(Bool.False, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -171,7 +171,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualBoolComplexException()
         {
-            var exp = new Equal(new Bool(false), new ComplexNumber(1, 2));
+            var exp = new Equal(Bool.False, new ComplexNumber(1, 2));
 
             TestBinaryException(exp);
         }
@@ -179,7 +179,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualComplexBoolException()
         {
-            var exp = new Equal(new ComplexNumber(1, 2), new Bool(true));
+            var exp = new Equal(new ComplexNumber(1, 2), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -187,7 +187,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestEqualException()
         {
-            var exp = new Equal(new ComplexNumber(2, 3), new Bool(false));
+            var exp = new Equal(new ComplexNumber(2, 3), Bool.False);
 
             TestBinaryException(exp);
         }
@@ -219,7 +219,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualNumberBoolException()
         {
-            var exp = new NotEqual(new Number(20), new Bool(true));
+            var exp = new NotEqual(new Number(20), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -227,7 +227,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualBoolNumberException()
         {
-            var exp = new NotEqual(new Bool(true), new Number(20));
+            var exp = new NotEqual(Bool.True, new Number(20));
 
             TestBinaryException(exp);
         }
@@ -235,7 +235,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualBoolean()
         {
-            var exp = new NotEqual(new Bool(false), new Bool(true));
+            var exp = new NotEqual(Bool.False, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -243,7 +243,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualBoolComplexException()
         {
-            var exp = new NotEqual(new Bool(false), new ComplexNumber(1, 1));
+            var exp = new NotEqual(Bool.False, new ComplexNumber(1, 1));
 
             TestBinaryException(exp);
         }
@@ -251,7 +251,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualComplexBoolException()
         {
-            var exp = new NotEqual(new ComplexNumber(1, 1), new Bool(false));
+            var exp = new NotEqual(new ComplexNumber(1, 1), Bool.False);
 
             TestBinaryException(exp);
         }
@@ -259,7 +259,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotEqualException()
         {
-            var exp = new NotEqual(new ComplexNumber(2, 3), new Bool(false));
+            var exp = new NotEqual(new ComplexNumber(2, 3), Bool.False);
 
             TestBinaryException(exp);
         }
@@ -283,7 +283,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestForNumber()
         {
-            var exp = new For(Variable.X, Variable.X, new Bool(false), Variable.X);
+            var exp = new For(Variable.X, Variable.X, Bool.False, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -315,7 +315,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterOrEqualNumberBoolException()
         {
-            var exp = new GreaterOrEqual(new Number(10), new Bool(true));
+            var exp = new GreaterOrEqual(new Number(10), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -323,7 +323,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterOrEqualBoolNumberException()
         {
-            var exp = new GreaterOrEqual(new Bool(true), new Number(10));
+            var exp = new GreaterOrEqual(Bool.True, new Number(10));
 
             TestBinaryException(exp);
         }
@@ -331,7 +331,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterOrEqualException()
         {
-            var exp = new GreaterOrEqual(new Bool(true), new Bool(false));
+            var exp = new GreaterOrEqual(Bool.True, Bool.False);
 
             TestException(exp);
         }
@@ -355,7 +355,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterThanNumberBoolException()
         {
-            var exp = new GreaterThan(new Number(10), new Bool(true));
+            var exp = new GreaterThan(new Number(10), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -363,7 +363,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterThanBoolNumberException()
         {
-            var exp = new GreaterThan(new Bool(true), new Number(10));
+            var exp = new GreaterThan(Bool.True, new Number(10));
 
             TestBinaryException(exp);
         }
@@ -371,7 +371,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestGreaterThanException()
         {
-            var exp = new GreaterThan(new Bool(true), new Bool(false));
+            var exp = new GreaterThan(Bool.True, Bool.False);
 
             TestException(exp);
         }
@@ -387,7 +387,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestIfBool()
         {
-            var exp = new If(new Bool(false), new Number(10));
+            var exp = new If(Bool.False, new Number(10));
 
             Test(exp, ResultTypes.Number);
         }
@@ -395,7 +395,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestIfElseBool()
         {
-            var exp = new If(new Bool(false), new Number(10), new Number(2));
+            var exp = new If(Bool.False, new Number(10), new Number(2));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -435,7 +435,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessOrEqualNumberBoolException()
         {
-            var exp = new LessOrEqual(new Number(10), new Bool(true));
+            var exp = new LessOrEqual(new Number(10), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -443,7 +443,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessOrEqualBoolNumberException()
         {
-            var exp = new LessOrEqual(new Bool(true), new Number(10));
+            var exp = new LessOrEqual(Bool.True, new Number(10));
 
             TestBinaryException(exp);
         }
@@ -451,7 +451,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessOrEqualException()
         {
-            var exp = new LessOrEqual(new Bool(true), new Bool(false));
+            var exp = new LessOrEqual(Bool.True, Bool.False);
 
             TestException(exp);
         }
@@ -475,7 +475,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessThanNumberBoolException()
         {
-            var exp = new LessThan(new Number(10), new Bool(true));
+            var exp = new LessThan(new Number(10), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -483,7 +483,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessThanBoolNumberException()
         {
-            var exp = new LessThan(new Bool(true), new Number(10));
+            var exp = new LessThan(Bool.True, new Number(10));
 
             TestBinaryException(exp);
         }
@@ -491,7 +491,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLessThanException()
         {
-            var exp = new LessThan(new Bool(true), new Bool(false));
+            var exp = new LessThan(Bool.True, Bool.False);
 
             TestException(exp);
         }
@@ -515,7 +515,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulAssignException()
         {
-            var exp = new MulAssign(Variable.X, new Bool(false));
+            var exp = new MulAssign(Variable.X, Bool.False);
 
             TestException(exp);
         }
@@ -531,7 +531,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrBool()
         {
-            var exp = new ConditionalOr(new Bool(false), new Bool(true));
+            var exp = new ConditionalOr(Bool.False, Bool.True);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -539,7 +539,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrBoolNumberException()
         {
-            var exp = new ConditionalOr(new Bool(false), new Number(2));
+            var exp = new ConditionalOr(Bool.False, new Number(2));
 
             TestBinaryException(exp);
         }
@@ -547,7 +547,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrException()
         {
-            var exp = new ConditionalOr(new ComplexNumber(2, 3), new Bool(false));
+            var exp = new ConditionalOr(new ComplexNumber(2, 3), Bool.False);
 
             TestBinaryException(exp);
         }
@@ -579,7 +579,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSubAssignException()
         {
-            var exp = new SubAssign(Variable.X, new Bool(false));
+            var exp = new SubAssign(Variable.X, Bool.False);
 
             TestException(exp);
         }
@@ -595,7 +595,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestWhileNumber()
         {
-            var exp = new While(Variable.X, new Bool(false));
+            var exp = new While(Variable.X, Bool.False);
 
             Test(exp, ResultTypes.Undefined);
         }

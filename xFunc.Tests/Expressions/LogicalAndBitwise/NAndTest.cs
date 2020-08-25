@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest1()
         {
-            var nand = new NAnd(new Bool(true), new Bool(true));
+            var nand = new NAnd(Bool.True, Bool.True);
 
             Assert.False((bool) nand.Execute());
         }
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest2()
         {
-            var nand = new NAnd(new Bool(false), new Bool(true));
+            var nand = new NAnd(Bool.False, Bool.True);
 
             Assert.True((bool) nand.Execute());
         }
@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void CloneTest()
         {
-            var exp = new NAnd(new Bool(true), new Bool(false));
+            var exp = new NAnd(Bool.True, Bool.False);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -66,9 +66,7 @@ namespace xFunc.Maths
         /// </returns>
         [ExcludeFromCodeCoverage]
         public string ToString(IFormatter formatter)
-        {
-            return Analyze(formatter);
-        }
+            => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -78,9 +76,7 @@ namespace xFunc.Maths
         /// </returns>
         [ExcludeFromCodeCoverage]
         public override string ToString()
-        {
-            return Current.ToString();
-        }
+            => Current.ToString();
 
         /// <summary>
         /// Creates the builder.
@@ -88,9 +84,7 @@ namespace xFunc.Maths
         /// <param name="initial">The initial value of builder.</param>
         /// <returns>The new instance of builder.</returns>
         public static Builder Create(IExpression initial)
-        {
-            return new Builder(initial);
-        }
+            => new Builder(initial);
 
         /// <summary>
         /// Creates the builder.
@@ -98,9 +92,7 @@ namespace xFunc.Maths
         /// <param name="number">The initial value of builder.</param>
         /// <returns>The new instance of builder.</returns>
         public static Builder Create(double number)
-        {
-            return new Builder(number);
-        }
+            => new Builder(number);
 
         /// <summary>
         /// Creates the builder.
@@ -108,9 +100,7 @@ namespace xFunc.Maths
         /// <param name="variable">The initial value of builder.</param>
         /// <returns>The new instance of builder.</returns>
         public static Builder Create(string variable)
-        {
-            return new Builder(variable);
-        }
+            => new Builder(variable);
 
         /// <summary>
         /// Inserts a custom expression to builder.
@@ -752,10 +742,7 @@ namespace xFunc.Maths
         /// <returns>
         /// A result of the execution.
         /// </returns>
-        public object Execute()
-        {
-            return Current.Execute();
-        }
+        public object Execute() => Current.Execute();
 
         /// <summary>
         /// Executes this expression.
@@ -766,9 +753,7 @@ namespace xFunc.Maths
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         public object Execute(ExpressionParameters parameters)
-        {
-            return Current.Execute(parameters);
-        }
+            => Current.Execute(parameters);
 
         /// <summary>
         /// Analyzes the Current expression.
@@ -780,9 +765,21 @@ namespace xFunc.Maths
         /// </returns>
         [ExcludeFromCodeCoverage]
         public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
-        {
-            return Current.Analyze(analyzer);
-        }
+            => Current.Analyze(analyzer);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        [ExcludeFromCodeCoverage]
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+            => Current.Analyze(analyzer, context);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -791,10 +788,7 @@ namespace xFunc.Maths
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
         [ExcludeFromCodeCoverage]
-        public IExpression Clone()
-        {
-            return Current.Clone();
-        }
+        public IExpression Clone() => Current.Clone();
 
         #endregion
 
@@ -806,14 +800,8 @@ namespace xFunc.Maths
         /// </value>
         public IExpression Current
         {
-            get
-            {
-                return current;
-            }
-            private set
-            {
-                current = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => current;
+            private set => current = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

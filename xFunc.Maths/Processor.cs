@@ -205,15 +205,17 @@ namespace xFunc.Maths
         /// <returns>
         /// Returns the derivative.
         /// </returns>
-        public IExpression Differentiate(IExpression expression, Variable variable, ExpressionParameters parameters)
+        public IExpression Differentiate(
+            IExpression expression,
+            Variable variable,
+            ExpressionParameters parameters)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));
 
-            differentiator.Variable = variable;
-            differentiator.Parameters = parameters;
+            var context = new DifferentiatorContext(parameters, variable);
 
-            return expression.Analyze(differentiator);
+            return expression.Analyze(differentiator, context);
         }
 
         /// <summary>

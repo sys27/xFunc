@@ -997,7 +997,7 @@ namespace xFunc.Maths.Analyzers
         }
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
@@ -1010,7 +1010,7 @@ namespace xFunc.Maths.Analyzers
         }
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
@@ -1036,7 +1036,7 @@ namespace xFunc.Maths.Analyzers
         }
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>
@@ -1049,7 +1049,7 @@ namespace xFunc.Maths.Analyzers
         }
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>

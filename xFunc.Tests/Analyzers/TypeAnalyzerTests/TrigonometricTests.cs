@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArccosException()
         {
-            var exp = new Arccos(new Bool(false));
+            var exp = new Arccos(Bool.False);
 
             TestException(exp);
         }
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArccotException()
         {
-            var exp = new Arccot(new Bool(false));
+            var exp = new Arccot(Bool.False);
 
             TestException(exp);
         }
@@ -115,7 +115,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArccscException()
         {
-            var exp = new Arccsc(new Bool(false));
+            var exp = new Arccsc(Bool.False);
 
             TestException(exp);
         }
@@ -147,7 +147,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcsecException()
         {
-            var exp = new Arcsec(new Bool(false));
+            var exp = new Arcsec(Bool.False);
 
             TestException(exp);
         }
@@ -179,7 +179,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcsinException()
         {
-            var exp = new Arcsin(new Bool(false));
+            var exp = new Arcsin(Bool.False);
 
             TestException(exp);
         }
@@ -211,7 +211,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArctanException()
         {
-            var exp = new Arctan(new Bool(false));
+            var exp = new Arctan(Bool.False);
 
             TestException(exp);
         }
@@ -243,7 +243,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCosException()
         {
-            var exp = new Cos(new Bool(false));
+            var exp = new Cos(Bool.False);
 
             TestException(exp);
         }
@@ -275,7 +275,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCotException()
         {
-            var exp = new Cot(new Bool(false));
+            var exp = new Cot(Bool.False);
 
             TestException(exp);
         }
@@ -307,7 +307,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCscException()
         {
-            var exp = new Csc(new Bool(false));
+            var exp = new Csc(Bool.False);
 
             TestException(exp);
         }
@@ -339,7 +339,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSecException()
         {
-            var exp = new Sec(new Bool(false));
+            var exp = new Sec(Bool.False);
 
             TestException(exp);
         }
@@ -371,7 +371,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSinException()
         {
-            var exp = new Sin(new Bool(false));
+            var exp = new Sin(Bool.False);
 
             TestException(exp);
         }
@@ -403,7 +403,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTanException()
         {
-            var exp = new Tan(new Bool(false));
+            var exp = new Tan(Bool.False);
 
             TestException(exp);
         }

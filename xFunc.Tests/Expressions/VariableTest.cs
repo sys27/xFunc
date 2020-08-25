@@ -22,6 +22,12 @@ namespace xFunc.Tests.Expressions
     public class VariableTest
     {
         [Fact]
+        public void NullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Variable(null));
+        }
+
+        [Fact]
         public void ExecuteNotSupportedTest()
         {
             var exp = Variable.X;
@@ -114,6 +120,39 @@ namespace xFunc.Tests.Expressions
             var right = new Variable("y");
 
             Assert.False(left.Equals(right));
+        }
+
+        [Fact]
+        public void EqualsDiffTypesTest()
+        {
+            var left = Variable.X;
+            var right = new Number(2);
+
+            Assert.False(left.Equals(right));
+        }
+
+        [Fact]
+        public void ImplicitNullToString()
+        {
+            Variable x = null;
+
+            Assert.Throws<ArgumentNullException>(() => (string)x);
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = Variable.X;
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = Variable.X;
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
     }
 }

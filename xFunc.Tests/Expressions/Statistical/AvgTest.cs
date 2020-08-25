@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void NotSupportedException()
         {
-            var exp = new Avg(new[] { new Bool(false), new Bool(false) });
+            var exp = new Avg(new[] { Bool.False, Bool.False });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

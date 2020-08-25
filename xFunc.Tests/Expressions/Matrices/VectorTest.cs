@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void VectorArgumentIsNotNumber()
         {
-            var exp = new Vector(new IExpression[] { new Bool(false) });
+            var exp = new Vector(new IExpression[] { Bool.False });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

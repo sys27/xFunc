@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Cos(new Bool(false));
+            var exp = new Cos(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

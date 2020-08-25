@@ -55,6 +55,16 @@ namespace xFunc.Maths.Expressions
         TResult Analyze<TResult>(IAnalyzer<TResult> analyzer);
 
         /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        TResult Analyze<TResult, TContext>(IAnalyzer<TResult, TContext> analyzer, TContext context);
+
+        /// <summary>
         /// Clones this instance of the <see cref="IExpression"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>

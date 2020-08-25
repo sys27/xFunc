@@ -16,6 +16,7 @@
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
@@ -119,6 +120,14 @@ namespace xFunc.Tests.Expressions
             var expected = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(0), new Number(0) });
 
             Assert.Equal(expected, sub3.Execute());
+        }
+
+        [Fact]
+        public void ExecuteWrongArgumentTypeTest()
+        {
+            var exp = new Sub(Bool.True, Bool.True);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

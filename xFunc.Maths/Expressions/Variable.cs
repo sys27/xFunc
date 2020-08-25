@@ -47,7 +47,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="variable">The value to convert.</param>
         /// <returns>An object that contains the converted value.</returns>
         public static implicit operator string(Variable variable)
-            => variable?.Name;
+            => variable?.Name ?? throw new ArgumentNullException(nameof(variable));
 
         /// <summary>
         /// Defines an implicit conversion of a string object to a Variable object.
@@ -161,6 +161,24 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return analyzer.Analyze(this, context);
         }
 
         /// <summary>

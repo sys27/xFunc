@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -24,7 +25,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Bool(false);
+            var exp = Bool.False;
 
             Assert.False((bool)exp.Execute());
         }
@@ -32,7 +33,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest2()
         {
-            var exp = new Bool(false);
+            var exp = Bool.False;
 
             Assert.False((bool)exp.Execute(null));
         }
@@ -40,7 +41,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest3()
         {
-            var exp = new Bool(false);
+            var exp = Bool.False;
 
             Assert.False(exp);
         }
@@ -56,8 +57,8 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void NotEqualsTest()
         {
-            var exp1 = new Bool(false);
-            var exp2 = new Bool(true);
+            var exp1 = Bool.False;
+            var exp2 = Bool.True;
 
             Assert.False(exp1.Equals(exp2));
         }
@@ -65,8 +66,8 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void EqualsTest()
         {
-            var exp1 = new Bool(true);
-            var exp2 = new Bool(true);
+            var exp1 = Bool.True;
+            var exp2 = Bool.True;
 
             Assert.True(exp1.Equals(exp2));
         }
@@ -74,7 +75,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void DifferentTypesEqualsTest()
         {
-            var exp1 = new Bool(true);
+            var exp1 = Bool.True;
             var exp2 = new Number(2);
 
             Assert.False(exp1.Equals(exp2));
@@ -83,7 +84,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void EqualsBoolNullTest()
         {
-            var boolean = new Bool(true);
+            var boolean = Bool.True;
 
             Assert.False(boolean.Equals(null));
         }
@@ -91,7 +92,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void EqualsObjectNullTest()
         {
-            var boolean = new Bool(true);
+            var boolean = Bool.True;
 
             Assert.False(boolean.Equals((object)null));
         }
@@ -99,7 +100,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void EqualsBoolThisTest()
         {
-            var boolean = new Bool(true);
+            var boolean = Bool.True;
 
             Assert.True(boolean.Equals(boolean));
         }
@@ -107,16 +108,40 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void EqualsObjectThisTest()
         {
-            var boolean = new Bool(true);
+            var boolean = Bool.True;
 
             Assert.True(boolean.Equals((object)boolean));
         }
 
         [Fact]
+        public void ImplicitNullToString()
+        {
+            Bool x = null;
+
+            Assert.Throws<ArgumentNullException>(() => (bool)x);
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = Bool.True;
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = Bool.True;
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
+        }
+
+        [Fact]
         public void ToStringTest()
         {
-            var trueExp = new Bool(true);
-            var falseExp = new Bool(false);
+            var trueExp = Bool.True;
+            var falseExp = Bool.False;
 
             Assert.Equal("True", trueExp.ToString());
             Assert.Equal("False", falseExp.ToString());
@@ -125,7 +150,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void CloneTest()
         {
-            var exp = new Bool(false);
+            var exp = Bool.False;
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

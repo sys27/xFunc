@@ -25,6 +25,15 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class ArcsinTest
     {
         [Fact]
+        public void CalculateDefaultTest()
+        {
+            var exp = new Arcsin(new Number(1));
+            var result = (double)exp.Execute();
+
+            Assert.Equal(90, result, 15);
+        }
+
+        [Fact]
         public void CalculateRadianTest()
         {
             var exp = new Arcsin(new Number(1));
@@ -65,7 +74,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Arcsin(new Bool(false));
+            var exp = new Arcsin(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

@@ -31,8 +31,6 @@ namespace xFunc.Tests.Analyzers.Formatters
 {
     public class CommonFormatterTest
     {
-        private readonly CommonFormatter commonFormatter = new CommonFormatter();
-
         #region Common
 
         [Fact]
@@ -40,7 +38,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Abs(new Number(5));
 
-            Assert.Equal("abs(5)", exp.ToString(commonFormatter));
+            Assert.Equal("abs(5)", exp.ToString());
         }
 
         [Fact]
@@ -48,7 +46,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Add(new Number(5), new Number(0));
 
-            Assert.Equal("5 + 0", exp.ToString(commonFormatter));
+            Assert.Equal("5 + 0", exp.ToString());
         }
 
         [Fact]
@@ -56,7 +54,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(Variable.X, new Add(new Number(5), new Number(0)));
 
-            Assert.Equal("x * (5 + 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 + 0)", exp.ToString());
         }
 
         [Fact]
@@ -64,7 +62,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var ceil = new Ceil(new Number(5.55555555));
 
-            Assert.Equal("ceil(5.55555555)", ceil.ToString(commonFormatter));
+            Assert.Equal("ceil(5.55555555)", ceil.ToString());
         }
 
         [Fact]
@@ -72,7 +70,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Define(Variable.X, new Number(0));
 
-            Assert.Equal("x := 0", exp.ToString(commonFormatter));
+            Assert.Equal("x := 0", exp.ToString());
         }
 
         [Fact]
@@ -90,7 +88,7 @@ namespace xFunc.Tests.Analyzers.Formatters
                 )
             );
 
-            Assert.Equal("del(((2 * x1) + (x2 ^ 2)) + (x3 ^ 3))", exp.ToString(commonFormatter));
+            Assert.Equal("del(((2 * x1) + (x2 ^ 2)) + (x3 ^ 3))", exp.ToString());
         }
 
         [Fact]
@@ -98,7 +96,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X));
 
-            Assert.Equal("deriv(sin(x))", deriv.ToString(commonFormatter));
+            Assert.Equal("deriv(sin(x))", deriv.ToString());
         }
 
         [Fact]
@@ -106,7 +104,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X);
 
-            Assert.Equal("deriv(sin(x), x)", deriv.ToString(commonFormatter));
+            Assert.Equal("deriv(sin(x), x)", deriv.ToString());
         }
 
         [Fact]
@@ -114,7 +112,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, new Number(1));
 
-            Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString(commonFormatter));
+            Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString());
         }
 
         [Fact]
@@ -122,7 +120,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Div(new Number(5), new Number(0));
 
-            Assert.Equal("5 / 0", exp.ToString(commonFormatter));
+            Assert.Equal("5 / 0", exp.ToString());
         }
 
         [Fact]
@@ -130,7 +128,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(Variable.X, new Div(new Number(5), new Number(0)));
 
-            Assert.Equal("x * (5 / 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 / 0)", exp.ToString());
         }
 
         [Fact]
@@ -138,7 +136,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Exp(new Number(5));
 
-            Assert.Equal("exp(5)", exp.ToString(commonFormatter));
+            Assert.Equal("exp(5)", exp.ToString());
         }
 
         [Fact]
@@ -146,7 +144,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Fact(new Number(5));
 
-            Assert.Equal("5!", exp.ToString(commonFormatter));
+            Assert.Equal("5!", exp.ToString());
         }
 
         [Fact]
@@ -154,7 +152,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Floor(new Number(5.55555555));
 
-            Assert.Equal("floor(5.55555555)", exp.ToString(commonFormatter));
+            Assert.Equal("floor(5.55555555)", exp.ToString());
         }
 
         [Fact]
@@ -162,7 +160,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new GCD(new Number(5), new Number(0));
 
-            Assert.Equal("gcd(5, 0)", exp.ToString(commonFormatter));
+            Assert.Equal("gcd(5, 0)", exp.ToString());
         }
 
         [Fact]
@@ -170,7 +168,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new LCM(new Number(5), new Number(0));
 
-            Assert.Equal("lcm(5, 0)", exp.ToString(commonFormatter));
+            Assert.Equal("lcm(5, 0)", exp.ToString());
         }
 
         [Fact]
@@ -178,7 +176,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Lb(new Number(5));
 
-            Assert.Equal("lb(5)", exp.ToString(commonFormatter));
+            Assert.Equal("lb(5)", exp.ToString());
         }
 
         [Fact]
@@ -186,7 +184,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Lg(new Number(5));
 
-            Assert.Equal("lg(5)", exp.ToString(commonFormatter));
+            Assert.Equal("lg(5)", exp.ToString());
         }
 
         [Fact]
@@ -194,7 +192,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Ln(new Number(5));
 
-            Assert.Equal("ln(5)", exp.ToString(commonFormatter));
+            Assert.Equal("ln(5)", exp.ToString());
         }
 
         [Fact]
@@ -202,7 +200,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Log(new Number(0), new Number(5));
 
-            Assert.Equal("log(0, 5)", exp.ToString(commonFormatter));
+            Assert.Equal("log(0, 5)", exp.ToString());
         }
 
         [Fact]
@@ -210,7 +208,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mod(new Number(5), new Number(0));
 
-            Assert.Equal("5 % 0", exp.ToString(commonFormatter));
+            Assert.Equal("5 % 0", exp.ToString());
         }
 
         [Fact]
@@ -218,7 +216,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(Variable.X, new Mod(new Number(5), new Number(0)));
 
-            Assert.Equal("x * (5 % 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 % 0)", exp.ToString());
         }
 
         [Fact]
@@ -226,7 +224,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(new Number(5), new Number(0));
 
-            Assert.Equal("5 * 0", exp.ToString(commonFormatter));
+            Assert.Equal("5 * 0", exp.ToString());
         }
 
         [Fact]
@@ -234,7 +232,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Add(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x + (5 * 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x + (5 * 0)", exp.ToString());
         }
 
         [Fact]
@@ -242,7 +240,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x - (5 * 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 * 0)", exp.ToString());
         }
 
         [Fact]
@@ -250,7 +248,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x * (5 * 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 * 0)", exp.ToString());
         }
 
         [Fact]
@@ -258,7 +256,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Div(Variable.X, new Mul(new Number(5), new Number(0)));
 
-            Assert.Equal("x / (5 * 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x / (5 * 0)", exp.ToString());
         }
 
         [Fact]
@@ -266,7 +264,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Number(3.3);
 
-            Assert.Equal("3.3", exp.ToString(commonFormatter));
+            Assert.Equal("3.3", exp.ToString());
         }
 
         [Fact]
@@ -274,7 +272,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(1), new Number(-3.3));
 
-            Assert.Equal("1 - -3.3", exp.ToString(commonFormatter));
+            Assert.Equal("1 - -3.3", exp.ToString());
         }
 
         [Fact]
@@ -282,7 +280,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Pow(new Number(5), new Number(0));
 
-            Assert.Equal("5 ^ 0", exp.ToString(commonFormatter));
+            Assert.Equal("5 ^ 0", exp.ToString());
         }
 
         [Fact]
@@ -290,7 +288,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Add(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x + (5 ^ 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x + (5 ^ 0)", exp.ToString());
         }
 
         [Fact]
@@ -298,7 +296,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x - (5 ^ 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 ^ 0)", exp.ToString());
         }
 
         [Fact]
@@ -306,7 +304,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Mul(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x * (5 ^ 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x * (5 ^ 0)", exp.ToString());
         }
 
         [Fact]
@@ -314,7 +312,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Div(Variable.X, new Pow(new Number(5), new Number(0)));
 
-            Assert.Equal("x / (5 ^ 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x / (5 ^ 0)", exp.ToString());
         }
 
         [Fact]
@@ -322,7 +320,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Root(new Number(5), new Number(0));
 
-            Assert.Equal("root(5, 0)", exp.ToString(commonFormatter));
+            Assert.Equal("root(5, 0)", exp.ToString());
         }
 
         [Fact]
@@ -330,7 +328,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Round(new Number(5), new Number(0));
 
-            Assert.Equal("round(5, 0)", exp.ToString(commonFormatter));
+            Assert.Equal("round(5, 0)", exp.ToString());
         }
 
         [Fact]
@@ -338,7 +336,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Simplify(new Simplifier(), new Sin(Variable.X));
 
-            Assert.Equal("simplify(sin(x))", exp.ToString(commonFormatter));
+            Assert.Equal("simplify(sin(x))", exp.ToString());
         }
 
         [Fact]
@@ -346,7 +344,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sqrt(new Number(5));
 
-            Assert.Equal("sqrt(5)", exp.ToString(commonFormatter));
+            Assert.Equal("sqrt(5)", exp.ToString());
         }
 
         [Fact]
@@ -354,7 +352,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(5), new Number(0));
 
-            Assert.Equal("5 - 0", exp.ToString(commonFormatter));
+            Assert.Equal("5 - 0", exp.ToString());
         }
 
         [Fact]
@@ -362,7 +360,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(Variable.X, new Sub(new Number(5), new Number(0)));
 
-            Assert.Equal("x - (5 - 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x - (5 - 0)", exp.ToString());
         }
 
         [Fact]
@@ -370,7 +368,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Div(Variable.X, new Sub(new Number(5), new Number(0)));
 
-            Assert.Equal("x / (5 - 0)", exp.ToString(commonFormatter));
+            Assert.Equal("x / (5 - 0)", exp.ToString());
         }
 
         [Fact]
@@ -378,7 +376,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new UnaryMinus(new Number(5));
 
-            Assert.Equal("-5", exp.ToString(commonFormatter));
+            Assert.Equal("-5", exp.ToString());
         }
 
         [Fact]
@@ -386,7 +384,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new UnaryMinus(new Add(new Number(5), new Number(0)));
 
-            Assert.Equal("-(5 + 0)", exp.ToString(commonFormatter));
+            Assert.Equal("-(5 + 0)", exp.ToString());
         }
 
         [Fact]
@@ -394,7 +392,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sub(new Number(0), new UnaryMinus(new Number(5)));
 
-            Assert.Equal("0 - -5", exp.ToString(commonFormatter));
+            Assert.Equal("0 - -5", exp.ToString());
         }
 
         [Fact]
@@ -402,7 +400,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Undefine(Variable.X);
 
-            Assert.Equal("undef(x)", exp.ToString(commonFormatter));
+            Assert.Equal("undef(x)", exp.ToString());
         }
 
         [Fact]
@@ -410,7 +408,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new UserFunction("f", new IExpression[] { new Number(5), new Number(2) });
 
-            Assert.Equal("f(5, 2)", exp.ToString(commonFormatter));
+            Assert.Equal("f(5, 2)", exp.ToString());
         }
 
         [Fact]
@@ -418,7 +416,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = Variable.X;
 
-            Assert.Equal("x", exp.ToString(commonFormatter));
+            Assert.Equal("x", exp.ToString());
         }
 
         [Fact]
@@ -426,7 +424,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new DelegateExpression(param => 0d);
 
-            Assert.Equal("{Delegate Expression}", exp.ToString(commonFormatter));
+            Assert.Equal("{Delegate Expression}", exp.ToString());
         }
 
         #endregion Common
@@ -438,7 +436,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var complex = new ComplexNumber(3, -2);
 
-            Assert.Equal("3-2i", complex.ToString(commonFormatter));
+            Assert.Equal("3-2i", complex.ToString());
         }
 
         [Fact]
@@ -446,7 +444,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var complex = new ComplexNumber(-3, 2);
 
-            Assert.Equal("-3+2i", complex.ToString(commonFormatter));
+            Assert.Equal("-3+2i", complex.ToString());
         }
 
         [Fact]
@@ -454,7 +452,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var complex = new ComplexNumber(3, 2);
 
-            Assert.Equal("3+2i", complex.ToString(commonFormatter));
+            Assert.Equal("3+2i", complex.ToString());
         }
 
         [Fact]
@@ -462,7 +460,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var complex = new ComplexNumber(-3, -2);
 
-            Assert.Equal("-3-2i", complex.ToString(commonFormatter));
+            Assert.Equal("-3-2i", complex.ToString());
         }
 
         [Fact]
@@ -470,7 +468,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var complex = new ComplexNumber(-3, 0);
 
-            Assert.Equal("-3", complex.ToString(commonFormatter));
+            Assert.Equal("-3", complex.ToString());
         }
 
         [Fact]
@@ -478,7 +476,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var complex = new ComplexNumber(0, -2);
 
-            Assert.Equal("-2i", complex.ToString(commonFormatter));
+            Assert.Equal("-2i", complex.ToString());
         }
 
         [Fact]
@@ -486,7 +484,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Add(new ComplexNumber(3, 2), new ComplexNumber(3, 2));
 
-            Assert.Equal("3+2i + 3+2i", exp.ToString(commonFormatter));
+            Assert.Equal("3+2i + 3+2i", exp.ToString());
         }
 
         [Fact]
@@ -494,7 +492,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Abs(new ComplexNumber(3, 2));
 
-            Assert.Equal("abs(3+2i)", exp.ToString(commonFormatter));
+            Assert.Equal("abs(3+2i)", exp.ToString());
         }
 
         [Fact]
@@ -502,7 +500,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new ComplexNumber(0, 1);
 
-            Assert.Equal("i", exp.ToString(commonFormatter));
+            Assert.Equal("i", exp.ToString());
         }
 
         [Fact]
@@ -510,7 +508,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new ComplexNumber(0, -1);
 
-            Assert.Equal("-i", exp.ToString(commonFormatter));
+            Assert.Equal("-i", exp.ToString());
         }
 
         [Fact]
@@ -519,7 +517,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var complex = new Complex(3.1, 2.5);
             var exp = new Conjugate(new ComplexNumber(complex));
 
-            Assert.Equal("conjugate(3.1+2.5i)", exp.ToString(commonFormatter));
+            Assert.Equal("conjugate(3.1+2.5i)", exp.ToString());
         }
 
         [Fact]
@@ -528,7 +526,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var complex = new Complex(3.1, 2.5);
             var exp = new Im(new ComplexNumber(complex));
 
-            Assert.Equal("im(3.1+2.5i)", exp.ToString(commonFormatter));
+            Assert.Equal("im(3.1+2.5i)", exp.ToString());
         }
 
         [Fact]
@@ -537,7 +535,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var complex = new Complex(3.1, 2.5);
             var exp = new Phase(new ComplexNumber(complex));
 
-            Assert.Equal("phase(3.1+2.5i)", exp.ToString(commonFormatter));
+            Assert.Equal("phase(3.1+2.5i)", exp.ToString());
         }
 
         [Fact]
@@ -546,7 +544,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var complex = new Complex(3.1, 2.5);
             var exp = new Reciprocal(new ComplexNumber(complex));
 
-            Assert.Equal("reciprocal(3.1+2.5i)", exp.ToString(commonFormatter));
+            Assert.Equal("reciprocal(3.1+2.5i)", exp.ToString());
         }
 
         [Fact]
@@ -555,7 +553,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var complex = new Complex(3.1, 2.5);
             var exp = new Re(new ComplexNumber(complex));
 
-            Assert.Equal("re(3.1+2.5i)", exp.ToString(commonFormatter));
+            Assert.Equal("re(3.1+2.5i)", exp.ToString());
         }
 
         #endregion
@@ -567,7 +565,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arccos(new Number(5));
 
-            Assert.Equal("arccos(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arccos(5)", exp.ToString());
         }
 
         [Fact]
@@ -575,7 +573,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arccot(new Number(5));
 
-            Assert.Equal("arccot(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arccot(5)", exp.ToString());
         }
 
         [Fact]
@@ -583,7 +581,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arccsc(new Number(5));
 
-            Assert.Equal("arccsc(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arccsc(5)", exp.ToString());
         }
 
         [Fact]
@@ -591,7 +589,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arcsec(new Number(5));
 
-            Assert.Equal("arcsec(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arcsec(5)", exp.ToString());
         }
 
         [Fact]
@@ -599,7 +597,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arcsin(new Number(5));
 
-            Assert.Equal("arcsin(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arcsin(5)", exp.ToString());
         }
 
         [Fact]
@@ -607,7 +605,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arctan(new Number(5));
 
-            Assert.Equal("arctan(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arctan(5)", exp.ToString());
         }
 
         [Fact]
@@ -615,7 +613,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Cos(new Number(5));
 
-            Assert.Equal("cos(5)", exp.ToString(commonFormatter));
+            Assert.Equal("cos(5)", exp.ToString());
         }
 
         [Fact]
@@ -623,7 +621,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Cot(new Number(5));
 
-            Assert.Equal("cot(5)", exp.ToString(commonFormatter));
+            Assert.Equal("cot(5)", exp.ToString());
         }
 
         [Fact]
@@ -631,7 +629,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Csc(new Number(5));
 
-            Assert.Equal("csc(5)", exp.ToString(commonFormatter));
+            Assert.Equal("csc(5)", exp.ToString());
         }
 
         [Fact]
@@ -639,7 +637,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sec(new Number(5));
 
-            Assert.Equal("sec(5)", exp.ToString(commonFormatter));
+            Assert.Equal("sec(5)", exp.ToString());
         }
 
         [Fact]
@@ -647,7 +645,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sin(new Number(5));
 
-            Assert.Equal("sin(5)", exp.ToString(commonFormatter));
+            Assert.Equal("sin(5)", exp.ToString());
         }
 
         [Fact]
@@ -655,7 +653,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Tan(new Number(5));
 
-            Assert.Equal("tan(5)", exp.ToString(commonFormatter));
+            Assert.Equal("tan(5)", exp.ToString());
         }
 
         #endregion
@@ -667,7 +665,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arcosh(new Number(5));
 
-            Assert.Equal("arcosh(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arcosh(5)", exp.ToString());
         }
 
         [Fact]
@@ -675,7 +673,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arcoth(new Number(5));
 
-            Assert.Equal("arcoth(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arcoth(5)", exp.ToString());
         }
 
         [Fact]
@@ -683,7 +681,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arcsch(new Number(5));
 
-            Assert.Equal("arcsch(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arcsch(5)", exp.ToString());
         }
 
         [Fact]
@@ -691,7 +689,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arsech(new Number(5));
 
-            Assert.Equal("arsech(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arsech(5)", exp.ToString());
         }
 
         [Fact]
@@ -699,7 +697,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Arsinh(new Number(5));
 
-            Assert.Equal("arsinh(5)", exp.ToString(commonFormatter));
+            Assert.Equal("arsinh(5)", exp.ToString());
         }
 
         [Fact]
@@ -707,7 +705,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Artanh(new Number(5));
 
-            Assert.Equal("artanh(5)", exp.ToString(commonFormatter));
+            Assert.Equal("artanh(5)", exp.ToString());
         }
 
         [Fact]
@@ -715,7 +713,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Cosh(new Number(5));
 
-            Assert.Equal("cosh(5)", exp.ToString(commonFormatter));
+            Assert.Equal("cosh(5)", exp.ToString());
         }
 
         [Fact]
@@ -723,7 +721,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Coth(new Number(5));
 
-            Assert.Equal("coth(5)", exp.ToString(commonFormatter));
+            Assert.Equal("coth(5)", exp.ToString());
         }
 
         [Fact]
@@ -731,7 +729,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Csch(new Number(5));
 
-            Assert.Equal("csch(5)", exp.ToString(commonFormatter));
+            Assert.Equal("csch(5)", exp.ToString());
         }
 
         [Fact]
@@ -739,7 +737,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sech(new Number(5));
 
-            Assert.Equal("sech(5)", exp.ToString(commonFormatter));
+            Assert.Equal("sech(5)", exp.ToString());
         }
 
         [Fact]
@@ -747,7 +745,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Sinh(new Number(5));
 
-            Assert.Equal("sinh(5)", exp.ToString(commonFormatter));
+            Assert.Equal("sinh(5)", exp.ToString());
         }
 
         [Fact]
@@ -755,7 +753,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Tanh(new Number(5));
 
-            Assert.Equal("tanh(5)", exp.ToString(commonFormatter));
+            Assert.Equal("tanh(5)", exp.ToString());
         }
 
         #endregion
@@ -765,126 +763,138 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void BoolToStringTest()
         {
-            var exp = new Bool(false);
+            var exp = Bool.False;
 
-            Assert.Equal("False", exp.ToString(commonFormatter));
+            Assert.Equal("False", exp.ToString());
         }
 
         [Fact]
         public void AndAndToStringTest()
         {
-            var exp = new And(new Bool(true), new And(new Bool(true), new Bool(true)));
+            var exp = new And(Bool.True, new And(Bool.True, Bool.True));
 
-            Assert.Equal("True and (True and True)", exp.ToString(commonFormatter));
+            Assert.Equal("True and (True and True)", exp.ToString());
         }
 
         [Fact]
         public void OrToStringTest()
         {
-            var exp = new Or(new Bool(true), new Bool(true));
+            var exp = new Or(Bool.True, Bool.True);
 
-            Assert.Equal("True or True", exp.ToString(commonFormatter));
+            Assert.Equal("True or True", exp.ToString());
         }
 
         [Fact]
         public void OrOrToStringTest()
         {
-            var exp = new Or(new Bool(true), new Or(new Bool(true), new Bool(true)));
+            var exp = new Or(Bool.True, new Or(Bool.True, Bool.True));
 
-            Assert.Equal("True or (True or True)", exp.ToString(commonFormatter));
+            Assert.Equal("True or (True or True)", exp.ToString());
         }
 
         [Fact]
         public void XOrToStringTest()
         {
-            var exp = new XOr(new Bool(true), new Bool(true));
+            var exp = new XOr(Bool.True, Bool.True);
 
-            Assert.Equal("True xor True", exp.ToString(commonFormatter));
+            Assert.Equal("True xor True", exp.ToString());
         }
 
         [Fact]
         public void XOrXOrToStringTest()
         {
-            var exp = new XOr(new Bool(true), new XOr(new Bool(true), new Bool(true)));
+            var exp = new XOr(Bool.True, new XOr(Bool.True, Bool.True));
 
-            Assert.Equal("True xor (True xor True)", exp.ToString(commonFormatter));
+            Assert.Equal("True xor (True xor True)", exp.ToString());
         }
 
         [Fact]
         public void NotToStringTest()
         {
-            var exp = new Not(new Bool(true));
+            var exp = new Not(Bool.True);
 
-            Assert.Equal("not(True)", exp.ToString(commonFormatter));
+            Assert.Equal("not(True)", exp.ToString());
         }
 
         [Fact]
         public void EqualityToStringTest1()
         {
-            var eq = new Equality(new Bool(true), new Bool(false));
+            var eq = new Equality(Bool.True, Bool.False);
 
-            Assert.Equal("True <=> False", eq.ToString(commonFormatter));
+            Assert.Equal("True <=> False", eq.ToString());
         }
 
         [Fact]
         public void EqualityToStringTest2()
         {
-            var eq = new And(new Equality(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new Equality(Bool.True, Bool.False), Bool.False);
 
-            Assert.Equal("(True <=> False) and False", eq.ToString(commonFormatter));
+            Assert.Equal("(True <=> False) and False", eq.ToString());
         }
 
         [Fact]
         public void ImplicationToStringTest1()
         {
-            var eq = new Implication(new Bool(true), new Bool(false));
+            var eq = new Implication(Bool.True, Bool.False);
 
-            Assert.Equal("True => False", eq.ToString(commonFormatter));
+            Assert.Equal("True => False", eq.ToString());
         }
 
         [Fact]
         public void ImplicationToStringTest2()
         {
-            var eq = new And(new Implication(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new Implication(Bool.True, Bool.False), Bool.False);
 
-            Assert.Equal("(True => False) and False", eq.ToString(commonFormatter));
+            Assert.Equal("(True => False) and False", eq.ToString());
         }
 
         [Fact]
         public void NAndToStringTest1()
         {
-            var eq = new NAnd(new Bool(true), new Bool(false));
+            var eq = new NAnd(Bool.True, Bool.False);
 
-            Assert.Equal("True nand False", eq.ToString(commonFormatter));
+            Assert.Equal("True nand False", eq.ToString());
         }
 
         [Fact]
         public void NAndToStringTest2()
         {
-            var eq = new And(new NAnd(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new NAnd(Bool.True, Bool.False), Bool.False);
 
-            Assert.Equal("(True nand False) and False", eq.ToString(commonFormatter));
+            Assert.Equal("(True nand False) and False", eq.ToString());
         }
 
         [Fact]
         public void NOrToStringTest1()
         {
-            var eq = new NOr(new Bool(true), new Bool(false));
+            var eq = new NOr(Bool.True, Bool.False);
 
-            Assert.Equal("True nor False", eq.ToString(commonFormatter));
+            Assert.Equal("True nor False", eq.ToString());
         }
 
         [Fact]
         public void NOrToStringTest2()
         {
-            var eq = new And(new NOr(new Bool(true), new Bool(false)), new Bool(false));
+            var eq = new And(new NOr(Bool.True, Bool.False), Bool.False);
 
-            Assert.Equal("(True nor False) and False", eq.ToString(commonFormatter));
+            Assert.Equal("(True nor False) and False", eq.ToString());
         }
 
         #endregion
 
         #region Matrix
+
+        [Fact]
+        public void MatrixToStringTest()
+        {
+            var matrix = new Matrix(new[]
+            {
+                new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
+                new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
+            });
+
+            Assert.Equal("{{1, -2}, {4, 0}}", matrix.ToString());
+        }
 
         [Fact]
         public void DeterminantToStringTest()
@@ -897,7 +907,7 @@ namespace xFunc.Tests.Analyzers.Formatters
 
             var det = new Determinant(matrix);
 
-            Assert.Equal("det({{1, -2}, {4, 0}})", det.ToString(commonFormatter));
+            Assert.Equal("det({{1, -2}, {4, 0}})", det.ToString());
         }
 
         [Fact]
@@ -911,7 +921,7 @@ namespace xFunc.Tests.Analyzers.Formatters
 
             var exp = new Inverse(matrix);
 
-            Assert.Equal("inverse({{1, -2}, {4, 0}})", exp.ToString(commonFormatter));
+            Assert.Equal("inverse({{1, -2}, {4, 0}})", exp.ToString());
         }
 
         [Fact]
@@ -921,7 +931,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var right = new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) });
             var exp = new DotProduct(left, right);
 
-            Assert.Equal("dotProduct({1, -2}, {4, 0})", exp.ToString(commonFormatter));
+            Assert.Equal("dotProduct({1, -2}, {4, 0})", exp.ToString());
         }
 
         [Fact]
@@ -931,7 +941,7 @@ namespace xFunc.Tests.Analyzers.Formatters
             var right = new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) });
             var exp = new CrossProduct(left, right);
 
-            Assert.Equal("crossProduct({1, -2}, {4, 0})", exp.ToString(commonFormatter));
+            Assert.Equal("crossProduct({1, -2}, {4, 0})", exp.ToString());
         }
 
         [Fact]
@@ -945,7 +955,7 @@ namespace xFunc.Tests.Analyzers.Formatters
 
             var exp = new Transpose(matrix);
 
-            Assert.Equal("transpose({{1, -2}, {4, 0}})", exp.ToString(commonFormatter));
+            Assert.Equal("transpose({{1, -2}, {4, 0}})", exp.ToString());
         }
 
         #endregion
@@ -957,7 +967,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Avg(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("avg(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("avg(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -965,7 +975,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Avg(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("avg({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("avg({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -973,7 +983,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Count(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("count(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("count(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -981,7 +991,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Count(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("count({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("count({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -989,7 +999,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Max(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("max(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("max(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -997,7 +1007,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Max(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("max({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("max({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1005,7 +1015,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Min(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("min(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("min(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1013,7 +1023,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Min(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("min({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("min({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1021,7 +1031,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Product(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("product(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("product(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1029,7 +1039,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Product(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("product({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("product({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1037,7 +1047,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Stdevp(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("stdevp(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("stdevp(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1045,7 +1055,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Stdevp(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("stdevp({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("stdevp({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1053,7 +1063,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Stdev(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("stdev(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("stdev(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1061,7 +1071,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Stdev(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("stdev({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("stdev({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1069,7 +1079,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Sum(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("sum(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("sum(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1077,7 +1087,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Sum(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("sum({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("sum({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1085,7 +1095,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Varp(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("varp(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("varp(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1093,7 +1103,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Varp(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("varp({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("varp({1, 2})", sum.ToString());
         }
 
         [Fact]
@@ -1101,7 +1111,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Var(new IExpression[] { new Number(1), new Number(2) });
 
-            Assert.Equal("var(1, 2)", sum.ToString(commonFormatter));
+            Assert.Equal("var(1, 2)", sum.ToString());
         }
 
         [Fact]
@@ -1109,7 +1119,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var sum = new Var(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
 
-            Assert.Equal("var({1, 2})", sum.ToString(commonFormatter));
+            Assert.Equal("var({1, 2})", sum.ToString());
         }
 
         #endregion
@@ -1121,7 +1131,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new AddAssign(Variable.X, new Number(5));
 
-            Assert.Equal("x += 5", exp.ToString(commonFormatter));
+            Assert.Equal("x += 5", exp.ToString());
         }
 
         [Fact]
@@ -1129,7 +1139,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new SubAssign(Variable.X, new Number(5));
 
-            Assert.Equal("x -= 5", exp.ToString(commonFormatter));
+            Assert.Equal("x -= 5", exp.ToString());
         }
 
         [Fact]
@@ -1137,7 +1147,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new MulAssign(Variable.X, new Number(5));
 
-            Assert.Equal("x *= 5", exp.ToString(commonFormatter));
+            Assert.Equal("x *= 5", exp.ToString());
         }
 
         [Fact]
@@ -1145,7 +1155,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new DivAssign(Variable.X, new Number(5));
 
-            Assert.Equal("x /= 5", exp.ToString(commonFormatter));
+            Assert.Equal("x /= 5", exp.ToString());
         }
 
         [Fact]
@@ -1153,7 +1163,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Inc(Variable.X);
 
-            Assert.Equal("x++", exp.ToString(commonFormatter));
+            Assert.Equal("x++", exp.ToString());
         }
 
         [Fact]
@@ -1161,39 +1171,39 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Dec(Variable.X);
 
-            Assert.Equal("x--", exp.ToString(commonFormatter));
+            Assert.Equal("x--", exp.ToString());
         }
 
         [Fact]
         public void CondAndToString()
         {
-            var exp = new ConditionalAnd(new Bool(true), new Bool(true));
+            var exp = new ConditionalAnd(Bool.True, Bool.True);
 
-            Assert.Equal("True && True", exp.ToString(commonFormatter));
+            Assert.Equal("True && True", exp.ToString());
         }
 
         [Fact]
         public void CondAndCondAndToString()
         {
-            var exp = new ConditionalAnd(new Bool(true), new ConditionalAnd(new Bool(true), new Bool(true)));
+            var exp = new ConditionalAnd(Bool.True, new ConditionalAnd(Bool.True, Bool.True));
 
-            Assert.Equal("True && (True && True)", exp.ToString(commonFormatter));
+            Assert.Equal("True && (True && True)", exp.ToString());
         }
 
         [Fact]
         public void CondOrToString()
         {
-            var exp = new ConditionalOr(new Bool(true), new Bool(true));
+            var exp = new ConditionalOr(Bool.True, Bool.True);
 
-            Assert.Equal("True || True", exp.ToString(commonFormatter));
+            Assert.Equal("True || True", exp.ToString());
         }
 
         [Fact]
         public void CondOrCondOrToString()
         {
-            var exp = new ConditionalOr(new Bool(true), new ConditionalOr(new Bool(true), new Bool(true)));
+            var exp = new ConditionalOr(Bool.True, new ConditionalOr(Bool.True, Bool.True));
 
-            Assert.Equal("True || (True || True)", exp.ToString(commonFormatter));
+            Assert.Equal("True || (True || True)", exp.ToString());
         }
 
         [Fact]
@@ -1201,15 +1211,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new Equal(new Number(5), new Number(5));
 
-            Assert.Equal("5 == 5", exp.ToString(commonFormatter));
+            Assert.Equal("5 == 5", exp.ToString());
         }
 
         [Fact]
         public void EqualEqualToString()
         {
-            var exp = new Equal(new Bool(true), new Equal(new Number(5), new Number(5)));
+            var exp = new Equal(Bool.True, new Equal(new Number(5), new Number(5)));
 
-            Assert.Equal("True == (5 == 5)", exp.ToString(commonFormatter));
+            Assert.Equal("True == (5 == 5)", exp.ToString());
         }
 
         [Fact]
@@ -1217,15 +1227,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new NotEqual(new Number(5), new Number(5));
 
-            Assert.Equal("5 != 5", exp.ToString(commonFormatter));
+            Assert.Equal("5 != 5", exp.ToString());
         }
 
         [Fact]
         public void NotEqualNotEqualToString()
         {
-            var exp = new NotEqual(new Bool(true), new NotEqual(new Number(5), new Number(5)));
+            var exp = new NotEqual(Bool.True, new NotEqual(new Number(5), new Number(5)));
 
-            Assert.Equal("True != (5 != 5)", exp.ToString(commonFormatter));
+            Assert.Equal("True != (5 != 5)", exp.ToString());
         }
 
         [Fact]
@@ -1233,15 +1243,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new LessThan(new Number(5), new Number(5));
 
-            Assert.Equal("5 < 5", exp.ToString(commonFormatter));
+            Assert.Equal("5 < 5", exp.ToString());
         }
 
         [Fact]
         public void LessLessToString()
         {
-            var exp = new ConditionalAnd(new Bool(true), new LessThan(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(Bool.True, new LessThan(new Number(5), new Number(5)));
 
-            Assert.Equal("True && (5 < 5)", exp.ToString(commonFormatter));
+            Assert.Equal("True && (5 < 5)", exp.ToString());
         }
 
         [Fact]
@@ -1249,15 +1259,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new LessOrEqual(new Number(5), new Number(5));
 
-            Assert.Equal("5 <= 5", exp.ToString(commonFormatter));
+            Assert.Equal("5 <= 5", exp.ToString());
         }
 
         [Fact]
         public void LessOrEqualLessOrEqualToString()
         {
-            var exp = new ConditionalAnd(new Bool(true), new LessOrEqual(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(Bool.True, new LessOrEqual(new Number(5), new Number(5)));
 
-            Assert.Equal("True && (5 <= 5)", exp.ToString(commonFormatter));
+            Assert.Equal("True && (5 <= 5)", exp.ToString());
         }
 
         [Fact]
@@ -1265,15 +1275,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new GreaterThan(new Number(5), new Number(5));
 
-            Assert.Equal("5 > 5", exp.ToString(commonFormatter));
+            Assert.Equal("5 > 5", exp.ToString());
         }
 
         [Fact]
         public void GreatGreatToString()
         {
-            var exp = new ConditionalAnd(new Bool(true), new GreaterThan(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(Bool.True, new GreaterThan(new Number(5), new Number(5)));
 
-            Assert.Equal("True && (5 > 5)", exp.ToString(commonFormatter));
+            Assert.Equal("True && (5 > 5)", exp.ToString());
         }
 
         [Fact]
@@ -1281,15 +1291,15 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new GreaterOrEqual(new Number(5), new Number(5));
 
-            Assert.Equal("5 >= 5", exp.ToString(commonFormatter));
+            Assert.Equal("5 >= 5", exp.ToString());
         }
 
         [Fact]
         public void GreatOrEqualGreatOrEqualToString()
         {
-            var exp = new ConditionalAnd(new Bool(true), new GreaterOrEqual(new Number(5), new Number(5)));
+            var exp = new ConditionalAnd(Bool.True, new GreaterOrEqual(new Number(5), new Number(5)));
 
-            Assert.Equal("True && (5 >= 5)", exp.ToString(commonFormatter));
+            Assert.Equal("True && (5 >= 5)", exp.ToString());
         }
 
         [Fact]
@@ -1297,7 +1307,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5));
 
-            Assert.Equal("if(5 == 5, 5)", exp.ToString(commonFormatter));
+            Assert.Equal("if(5 == 5, 5)", exp.ToString());
         }
 
         [Fact]
@@ -1305,7 +1315,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5), new Number(0));
 
-            Assert.Equal("if(5 == 5, 5, 0)", exp.ToString(commonFormatter));
+            Assert.Equal("if(5 == 5, 5, 0)", exp.ToString());
         }
 
         [Fact]
@@ -1313,7 +1323,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new For(new Number(5), new Define(Variable.X, new Number(0)), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, new Number(1)));
 
-            Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString(commonFormatter));
+            Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString());
         }
 
         [Fact]
@@ -1321,14 +1331,14 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var exp = new While(new Number(5), new Equal(new Number(5), new Number(5)));
 
-            Assert.Equal("while(5, (5 == 5))", exp.ToString(commonFormatter));
+            Assert.Equal("while(5, (5 == 5))", exp.ToString());
         }
 
         [Fact]
         public void SignToString()
         {
             var exp = new Sign(new Number(-5));
-            var str = exp.ToString(commonFormatter);
+            var str = exp.ToString();
 
             Assert.Equal("sign(-5)", str);
         }

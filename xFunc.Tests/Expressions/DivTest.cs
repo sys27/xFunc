@@ -70,7 +70,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteBoolTest()
         {
-            var exp = new Div(new Bool(false), new Bool(true));
+            var exp = new Div(Bool.False, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -78,7 +78,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteComplexNumberBoolTest()
         {
-            var exp = new Div(new ComplexNumber(2, 4), new Bool(true));
+            var exp = new Div(new ComplexNumber(2, 4), Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -86,7 +86,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteBoolComplexNumberTest()
         {
-            var exp = new Div(new Bool(true), new ComplexNumber(2, 4));
+            var exp = new Div(Bool.True, new ComplexNumber(2, 4));
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

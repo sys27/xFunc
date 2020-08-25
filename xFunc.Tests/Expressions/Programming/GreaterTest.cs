@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateInvalidTypeTest()
         {
-            var greaterThan = new GreaterThan(new Bool(true), new Bool(true));
+            var greaterThan = new GreaterThan(Bool.True, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => greaterThan.Execute());
         }

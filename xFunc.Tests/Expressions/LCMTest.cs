@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNotSupportedTest()
         {
-            var exp = new LCM(new IExpression[] { new Bool(false), new Bool(true) });
+            var exp = new LCM(new IExpression[] { Bool.False, Bool.True });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

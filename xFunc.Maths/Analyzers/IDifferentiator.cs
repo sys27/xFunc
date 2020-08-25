@@ -20,22 +20,7 @@ namespace xFunc.Maths.Analyzers
     /// <summary>
     /// The interface for differentiator.
     /// </summary>
-    public interface IDifferentiator : IAnalyzer<IExpression>
+    public interface IDifferentiator : IAnalyzer<IExpression, DifferentiatorContext>
     {
-        /// <summary>
-        /// Gets or sets the variable.
-        /// </summary>
-        /// <value>
-        /// The variable.
-        /// </value>
-        Variable Variable { get; set; }
-
-        /// <summary>
-        /// Gets or sets the parameters.
-        /// </summary>
-        /// <value>
-        /// The parameters.
-        /// </value>
-        ExpressionParameters Parameters { get; set; }
     }
 }

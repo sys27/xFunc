@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
 using Xunit;
 
@@ -76,6 +77,30 @@ namespace xFunc.Tests.Expressions
             var number = new Number(1);
 
             Assert.Equal(1.0, number.Execute());
+        }
+
+        [Fact]
+        public void ImplicitNullToNumber()
+        {
+            Number x = null;
+
+            Assert.Throws<ArgumentNullException>(() => (double)x);
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = new Number(1);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = new Number(1);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
     }
 }

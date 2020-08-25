@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest3()
         {
-            var exp = new Not(new Bool(true));
+            var exp = new Not(Bool.True);
 
             Assert.False((bool) exp.Execute());
         }
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void CloneTest()
         {
-            var exp = new Not(new Bool(false));
+            var exp = new Not(Bool.False);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

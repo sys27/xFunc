@@ -56,7 +56,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Fact(new Bool(false));
+            var exp = new Fact(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

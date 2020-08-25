@@ -116,11 +116,19 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         }
 
         [Fact]
-        public void ComplexNumberAnalyzeNull()
+        public void ComplexNumberAnalyzeNull1()
         {
             var exp = new ComplexNumber(3, 2);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void ComplexNumberAnalyzeNull2()
+        {
+            var exp = new ComplexNumber(3, 2);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
 
         [Fact]

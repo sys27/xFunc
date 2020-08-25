@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void NotSupportedException()
         {
-            var exp = new Sum(new[] { new Bool(false), new Bool(false) });
+            var exp = new Sum(new[] { Bool.False, Bool.False });
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

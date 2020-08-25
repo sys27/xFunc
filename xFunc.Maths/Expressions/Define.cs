@@ -99,19 +99,16 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            switch (key)
+            if (key is Variable variable)
             {
-                case Variable variable:
-                    parameters.Variables[variable.Name] = value.Execute(parameters);
+                parameters.Variables[variable.Name] = value.Execute(parameters);
 
-                    return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
-                case UserFunction function:
-                    parameters.Functions[function] = value;
-
-                    return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
-                default:
-                    throw new NotSupportedException();
+                return string.Format(CultureInfo.InvariantCulture, Resource.AssignVariable, key, value);
             }
+
+            parameters.Functions[(UserFunction)key] = value;
+
+            return string.Format(CultureInfo.InvariantCulture, Resource.AssignFunction, key, value);
         }
 
         /// <summary>
@@ -128,6 +125,24 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return analyzer.Analyze(this, context);
         }
 
         /// <summary>
@@ -168,14 +183,8 @@ namespace xFunc.Maths.Expressions
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public IExpression Value
         {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => value;
+            set => this.value = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

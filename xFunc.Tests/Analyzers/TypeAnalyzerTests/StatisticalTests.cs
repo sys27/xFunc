@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgOneException()
         {
-            var exp = new Avg(new[] { new Bool(false) });
+            var exp = new Avg(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -59,7 +59,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAvgException()
         {
-            var exp = new Avg(new[] { new Bool(false), new Bool(false) });
+            var exp = new Avg(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountOneException()
         {
-            var exp = new Count(new[] { new Bool(false) });
+            var exp = new Count(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -99,7 +99,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCountException()
         {
-            var exp = new Count(new[] { new Bool(false), new Bool(false) });
+            var exp = new Count(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -131,7 +131,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxOneException()
         {
-            var exp = new Max(new[] { new Bool(false) });
+            var exp = new Max(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -139,7 +139,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMaxException()
         {
-            var exp = new Max(new[] { new Bool(false), new Bool(false) });
+            var exp = new Max(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -171,7 +171,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinOneException()
         {
-            var exp = new Min(new[] { new Bool(false) });
+            var exp = new Min(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -179,7 +179,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMinException()
         {
-            var exp = new Min(new[] { new Bool(false), new Bool(false) });
+            var exp = new Min(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -211,7 +211,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductOneException()
         {
-            var exp = new Product(new[] { new Bool(false) });
+            var exp = new Product(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -219,7 +219,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestProductException()
         {
-            var exp = new Product(new[] { new Bool(false), new Bool(false) });
+            var exp = new Product(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -251,7 +251,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevOneException()
         {
-            var exp = new Stdev(new[] { new Bool(false) });
+            var exp = new Stdev(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -259,7 +259,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevException()
         {
-            var exp = new Stdev(new[] { new Bool(false), new Bool(false) });
+            var exp = new Stdev(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -291,7 +291,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpOneException()
         {
-            var exp = new Stdevp(new[] { new Bool(false) });
+            var exp = new Stdevp(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -299,7 +299,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestStdevpException()
         {
-            var exp = new Stdevp(new[] { new Bool(false), new Bool(false) });
+            var exp = new Stdevp(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -331,7 +331,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumOneException()
         {
-            var exp = new Sum(new[] { new Bool(false) });
+            var exp = new Sum(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -339,7 +339,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSumException()
         {
-            var exp = new Sum(new[] { new Bool(false), new Bool(false) });
+            var exp = new Sum(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -371,7 +371,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarOneException()
         {
-            var exp = new Var(new[] { new Bool(false) });
+            var exp = new Var(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -379,7 +379,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarException()
         {
-            var exp = new Var(new[] { new Bool(false), new Bool(false) });
+            var exp = new Var(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -411,7 +411,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpOneException()
         {
-            var exp = new Varp(new[] { new Bool(false) });
+            var exp = new Varp(new[] { Bool.False });
 
             TestDiffParamException(exp);
         }
@@ -419,7 +419,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestVarpException()
         {
-            var exp = new Varp(new[] { new Bool(false), new Bool(false) });
+            var exp = new Varp(new[] { Bool.False, Bool.False });
 
             TestDiffParamException(exp);
         }

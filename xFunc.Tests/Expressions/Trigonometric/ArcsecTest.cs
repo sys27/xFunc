@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Arcsec(new Bool(false));
+            var exp = new Arcsec(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

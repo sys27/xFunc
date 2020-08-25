@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcoshException()
         {
-            var exp = new Arcosh(new Bool(false));
+            var exp = new Arcosh(Bool.False);
 
             TestException(exp);
         }
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcothException()
         {
-            var exp = new Arcoth(new Bool(false));
+            var exp = new Arcoth(Bool.False);
 
             TestException(exp);
         }
@@ -115,7 +115,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcschException()
         {
-            var exp = new Arcsch(new Bool(false));
+            var exp = new Arcsch(Bool.False);
 
             TestException(exp);
         }
@@ -147,7 +147,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArsechException()
         {
-            var exp = new Arsech(new Bool(false));
+            var exp = new Arsech(Bool.False);
 
             TestException(exp);
         }
@@ -179,7 +179,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArsinhException()
         {
-            var exp = new Arsinh(new Bool(false));
+            var exp = new Arsinh(Bool.False);
 
             TestException(exp);
         }
@@ -211,7 +211,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArtanhException()
         {
-            var exp = new Artanh(new Bool(false));
+            var exp = new Artanh(Bool.False);
 
             TestException(exp);
         }
@@ -243,7 +243,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCoshException()
         {
-            var exp = new Cosh(new Bool(false));
+            var exp = new Cosh(Bool.False);
 
             TestException(exp);
         }
@@ -275,7 +275,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCothException()
         {
-            var exp = new Coth(new Bool(false));
+            var exp = new Coth(Bool.False);
 
             TestException(exp);
         }
@@ -307,7 +307,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCschException()
         {
-            var exp = new Csch(new Bool(false));
+            var exp = new Csch(Bool.False);
 
             TestException(exp);
         }
@@ -339,7 +339,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSechException()
         {
-            var exp = new Sech(new Bool(false));
+            var exp = new Sech(Bool.False);
 
             TestException(exp);
         }
@@ -371,7 +371,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSinhException()
         {
-            var exp = new Sinh(new Bool(false));
+            var exp = new Sinh(Bool.False);
 
             TestException(exp);
         }
@@ -403,7 +403,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTanhException()
         {
-            var exp = new Tanh(new Bool(false));
+            var exp = new Tanh(Bool.False);
 
             TestException(exp);
         }

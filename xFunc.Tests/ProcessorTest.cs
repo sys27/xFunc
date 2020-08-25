@@ -139,15 +139,18 @@ namespace xFunc.Tests
             var differentiator = new Mock<IDifferentiator>();
 
             var strExp = "deriv(x)";
-            var exp = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X);
             var diff = new Number(1);
 
-            simplifier.Setup(s => s.Analyze(It.IsAny<Number>())).Returns<Number>(e => e);
-            simplifier.Setup(s => s.Analyze(It.IsAny<Derivative>())).Returns<Derivative>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Number>()))
+                .Returns<Number>(e => e);
+            simplifier
+                .Setup(s => s.Analyze(It.IsAny<Derivative>()))
+                .Returns<Derivative>(e => e);
 
-            differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>())).Returns(() => diff);
-            differentiator.SetupProperty(d => d.Variable);
-            differentiator.SetupProperty(d => d.Parameters);
+            differentiator
+                .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
+                .Returns(() => diff);
 
             var processor = new Processor(
                 simplifier.Object,
@@ -220,14 +223,17 @@ namespace xFunc.Tests
             var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
-            differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
+            differentiator
+                .Setup(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()))
+                .Returns(() => diff);
 
             var processor = new Processor(
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Differentiate(exp);
 
-            differentiator.Verify(d => d.Analyze(exp), Times.Once());
+            differentiator
+                .Verify(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()), Times.Once());
 
             Assert.Equal(diff, result);
         }
@@ -241,8 +247,9 @@ namespace xFunc.Tests
             var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
-            differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
-            differentiator.SetupProperty(d => d.Variable);
+            differentiator
+                .Setup(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()))
+                .Returns(() => diff);
 
             var diffObj = differentiator.Object;
             var processor = new Processor(
@@ -250,9 +257,9 @@ namespace xFunc.Tests
                 diffObj);
             var result = processor.Differentiate(exp, Variable.X);
 
-            differentiator.Verify(d => d.Analyze(exp), Times.Once());
+            differentiator
+                .Verify(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()), Times.Once());
 
-            Assert.Equal("x", diffObj.Variable.Name);
             Assert.Equal(diff, result);
         }
 
@@ -265,9 +272,9 @@ namespace xFunc.Tests
             var exp = new Add(Variable.X, new Number(1));
             var diff = new Number(1);
 
-            differentiator.Setup(d => d.Analyze(exp)).Returns(() => diff);
-            differentiator.SetupProperty(d => d.Variable);
-            differentiator.SetupProperty(d => d.Parameters);
+            differentiator
+                .Setup(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()))
+                .Returns(() => diff);
 
             var diffObj = differentiator.Object;
             var processor = new Processor(
@@ -275,10 +282,9 @@ namespace xFunc.Tests
                 diffObj);
             var result = processor.Differentiate(exp, Variable.X, new ExpressionParameters());
 
-            differentiator.Verify(d => d.Analyze(exp), Times.Once());
+            differentiator
+                .Verify(d => d.Analyze(exp, It.IsAny<DifferentiatorContext>()), Times.Once());
 
-            Assert.Equal("x", diffObj.Variable.Name);
-            Assert.NotNull(diffObj.Parameters);
             Assert.Equal(diff, result);
         }
     }

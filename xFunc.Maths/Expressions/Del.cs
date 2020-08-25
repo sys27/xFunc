@@ -78,13 +78,15 @@ namespace xFunc.Maths.Expressions
             var variables = Helpers.GetAllVariables(Argument).ToList();
             var vector = new IExpression[variables.Count];
 
-            differentiator.Parameters = parameters;
+            var context = new DifferentiatorContext(parameters);
 
             for (var i = 0; i < variables.Count; i++)
             {
-                differentiator.Variable = variables[i];
+                context.Variable = variables[i];
 
-                vector[i] = Argument.Analyze(differentiator).Analyze(simplifier);
+                vector[i] = Argument
+                    .Analyze(differentiator, context)
+                    .Analyze(simplifier);
             }
 
             return new Vector(vector);
@@ -98,8 +100,21 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
-            analyzer.Analyze(this);
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+            => analyzer.Analyze(this);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        private protected override TResult AnalyzeInternal<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+            => analyzer.Analyze(this, context);
 
         /// <summary>
         /// Clones this instance.

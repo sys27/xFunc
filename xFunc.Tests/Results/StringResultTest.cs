@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Results;
 using Xunit;
 
@@ -34,6 +35,12 @@ namespace xFunc.Tests.Results
             var result = new StringResult("hello") as IResult;
 
             Assert.Equal("hello", result.Result);
+        }
+
+        [Fact]
+        public void NullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new StringResult(null));
         }
 
         [Fact]

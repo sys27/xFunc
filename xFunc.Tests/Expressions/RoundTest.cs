@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteArgumentIsNotNumber()
         {
-            var exp = new Round(new Bool(false), new Number(2));
+            var exp = new Round(Bool.False, new Number(2));
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteDigitstIsNotNumber()
         {
-            var exp = new Round(new Number(5.5), new Bool(false));
+            var exp = new Round(new Number(5.5), Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

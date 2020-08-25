@@ -119,5 +119,21 @@ namespace xFunc.Tests.Expressions
         {
             Assert.Throws<NotSupportedException>(() => new DelegateExpression(x => null).Clone());
         }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = new DelegateExpression(p => 1.0);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = new DelegateExpression(p => 1.0);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
+        }
     }
 }

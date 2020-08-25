@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateInvalidTypeTest()
         {
-            var lessOrEqual = new LessOrEqual(new Bool(true), new Bool(true));
+            var lessOrEqual = new LessOrEqual(Bool.True, Bool.True);
 
             Assert.Throws<ResultIsNotSupportedException>(() => lessOrEqual.Execute());
         }

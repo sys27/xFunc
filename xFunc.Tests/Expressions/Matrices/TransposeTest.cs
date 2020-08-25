@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using Xunit;
 
@@ -54,6 +55,14 @@ namespace xFunc.Tests.Expressions.Matrices
             var exp = new Transpose(vector);
 
             Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteWrongArgumentTypeTest()
+        {
+            var exp = new Transpose(Bool.True);
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

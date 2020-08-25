@@ -13,10 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma warning disable CA1062
-
-using System.Globalization;
-using System.Text;
+using System;
+using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
@@ -26,384 +24,297 @@ using xFunc.Maths.Expressions.Programming;
 using xFunc.Maths.Expressions.Statistical;
 using xFunc.Maths.Expressions.Trigonometric;
 
-namespace xFunc.Maths.Analyzers.Formatters
+namespace xFunc.Maths.Analyzers
 {
     /// <summary>
-    /// Converts expressions into string.
+    /// The abstract class with default Analyzer API realization. It's useful where you don't need to implement whole interface (just a few methods).
     /// </summary>
-    /// <seealso cref="IFormatter" />
-    public class CommonFormatter : IFormatter
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+    /// <seealso cref="IAnalyzer{TResult,TContext}" />
+    [ExcludeFromCodeCoverage]
+    public class Analyzer<TResult, TContext> : IAnalyzer<TResult, TContext>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommonFormatter"/> class.
-        /// </summary>
-        public CommonFormatter()
-        {
-        }
-
-        private string ToString(UnaryExpression exp, string format)
-        {
-            var arg = exp.Argument.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, format, arg);
-        }
-
-        private string ToString(BinaryExpression exp, string format)
-        {
-            var left = exp.Left.Analyze(this);
-            if (exp.Left is BinaryExpression)
-                left = $"({left})";
-
-            var right = exp.Right.Analyze(this);
-            if (exp.Right is BinaryExpression)
-                right = $"({right})";
-
-            return string.Format(CultureInfo.InvariantCulture, format, left, right);
-        }
-
-        private string ToString(DifferentParametersExpression exp, string function)
-        {
-            var sb = new StringBuilder();
-
-            sb.Append(function).Append('(');
-            if (exp.ParametersCount > 0)
-            {
-                foreach (var item in exp.Arguments)
-                    sb.Append(item).Append(", ");
-                sb.Remove(sb.Length - 2, 2);
-            }
-
-            sb.Append(')');
-
-            return sb.ToString();
-        }
-
         #region Standard
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Abs exp)
-        {
-            return ToString(exp, "abs({0})");
-        }
+        public virtual TResult Analyze(Abs exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Add exp)
-        {
-            return ToString(exp, "{0} + {1}");
-        }
+        public virtual TResult Analyze(Add exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Ceil exp)
-        {
-            return ToString(exp, "ceil({0})");
-        }
+        public virtual TResult Analyze(Ceil exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Define exp)
-        {
-            return $"{exp.Key.Analyze(this)} := {exp.Value.Analyze(this)}";
-        }
+        public virtual TResult Analyze(Define exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Del exp)
-        {
-            return ToString(exp, "del({0})");
-        }
+        public virtual TResult Analyze(Del exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Derivative exp)
-        {
-            return ToString(exp, "deriv");
-        }
+        public virtual TResult Analyze(Derivative exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Div exp)
-        {
-            return ToString(exp, "{0} / {1}");
-        }
+        public virtual TResult Analyze(Div exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Exp exp)
-        {
-            return ToString(exp, "exp({0})");
-        }
+        public virtual TResult Analyze(Exp exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Fact exp)
-        {
-            return ToString(exp, "{0}!");
-        }
+        public virtual TResult Analyze(Fact exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Floor exp)
-        {
-            return ToString(exp, "floor({0})");
-        }
+        public virtual TResult Analyze(Floor exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(GCD exp)
-        {
-            return ToString(exp, "gcd");
-        }
+        public virtual TResult Analyze(GCD exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Lb exp)
-        {
-            return ToString(exp, "lb({0})");
-        }
+        public virtual TResult Analyze(Lb exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(LCM exp)
-        {
-            return ToString(exp, "lcm");
-        }
+        public virtual TResult Analyze(LCM exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Lg exp)
-        {
-            return ToString(exp, "lg({0})");
-        }
+        public virtual TResult Analyze(Lg exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Ln exp)
-        {
-            return ToString(exp, "ln({0})");
-        }
+        public virtual TResult Analyze(Ln exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Log exp)
-        {
-            return ToString(exp, "log({0}, {1})");
-        }
+        public virtual TResult Analyze(Log exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Mod exp)
-        {
-            return ToString(exp, "{0} % {1}");
-        }
+        public virtual TResult Analyze(Mod exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Mul exp)
-        {
-            return ToString(exp, "{0} * {1}");
-        }
+        public virtual TResult Analyze(Mul exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Number exp)
-        {
-            return exp.Value.ToString(CultureInfo.InvariantCulture);
-        }
+        public virtual TResult Analyze(Number exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Pow exp)
-        {
-            return ToString(exp, "{0} ^ {1}");
-        }
+        public virtual TResult Analyze(Pow exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Root exp)
-        {
-            return ToString(exp, "root({0}, {1})");
-        }
+        public virtual TResult Analyze(Root exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Round exp)
-        {
-            return ToString(exp, "round");
-        }
+        public virtual TResult Analyze(Round exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Simplify exp)
-        {
-            return ToString(exp, "simplify({0})");
-        }
+        public virtual TResult Analyze(Simplify exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sqrt exp)
-        {
-            return ToString(exp, "sqrt({0})");
-        }
+        public virtual TResult Analyze(Sqrt exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sub exp)
-        {
-            return ToString(exp, "{0} - {1}");
-        }
+        public virtual TResult Analyze(Sub exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(UnaryMinus exp)
-        {
-            if (exp.Argument is BinaryExpression)
-                return ToString(exp, "-({0})");
-
-            return ToString(exp, "-{0}");
-        }
+        public virtual TResult Analyze(UnaryMinus exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Undefine exp)
-        {
-            return $"undef({exp.Key.Analyze(this)})";
-        }
+        public virtual TResult Analyze(Undefine exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(UserFunction exp)
-        {
-            var sb = new StringBuilder();
-
-            sb.Append(exp.Function).Append('(');
-            if (exp.ParametersCount > 0)
-            {
-                foreach (var item in exp.Arguments)
-                    sb.Append(item).Append(", ");
-                sb.Remove(sb.Length - 2, 2);
-            }
-
-            sb.Append(')');
-
-            return sb.ToString();
-        }
+        public virtual TResult Analyze(UserFunction exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Variable exp)
-        {
-            return exp.Name;
-        }
+        public virtual TResult Analyze(Variable exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(DelegateExpression exp)
-        {
-            return "{Delegate Expression}";
-        }
+        public virtual TResult Analyze(DelegateExpression exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sign exp)
-        {
-            return ToString(exp, "sign({0})");
-        }
+        public virtual TResult Analyze(Sign exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Standard
 
@@ -413,85 +324,64 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Vector exp)
-        {
-            var sb = new StringBuilder();
-
-            sb.Append('{');
-            foreach (var item in exp.Arguments)
-                sb.Append(item).Append(", ");
-            sb.Remove(sb.Length - 2, 2).Append('}');
-
-            return sb.ToString();
-        }
+        public virtual TResult Analyze(Vector exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Matrix exp)
-        {
-            var sb = new StringBuilder();
-
-            sb.Append('{');
-            foreach (var item in exp.Vectors)
-                sb.Append(item).Append(", ");
-            sb.Remove(sb.Length - 2, 2).Append('}');
-
-            return sb.ToString();
-        }
+        public virtual TResult Analyze(Matrix exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Determinant exp)
-        {
-            return ToString(exp, "det({0})");
-        }
+        public virtual TResult Analyze(Determinant exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Inverse exp)
-        {
-            return ToString(exp, "inverse({0})");
-        }
+        public virtual TResult Analyze(Inverse exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Transpose exp)
-        {
-            return ToString(exp, "transpose({0})");
-        }
+        public virtual TResult Analyze(Transpose exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual string Analyze(DotProduct exp)
-        {
-            return ToString(exp, "dotProduct({0}, {1})");
-        }
+        public virtual TResult Analyze(DotProduct exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual string Analyze(CrossProduct exp)
-        {
-            return ToString(exp, "crossProduct({0}, {1})");
-        }
+        public virtual TResult Analyze(CrossProduct exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Matrix
 
@@ -501,61 +391,55 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(ComplexNumber exp)
-        {
-            return exp.Value.Format();
-        }
+        public virtual TResult Analyze(ComplexNumber exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Conjugate exp)
-        {
-            return ToString(exp, "conjugate({0})");
-        }
+        public virtual TResult Analyze(Conjugate exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Im exp)
-        {
-            return ToString(exp, "im({0})");
-        }
+        public virtual TResult Analyze(Im exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Phase exp)
-        {
-            return ToString(exp, "phase({0})");
-        }
+        public virtual TResult Analyze(Phase exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Re exp)
-        {
-            return ToString(exp, "re({0})");
-        }
+        public virtual TResult Analyze(Re exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Reciprocal exp)
-        {
-            return ToString(exp, "reciprocal({0})");
-        }
+        public virtual TResult Analyze(Reciprocal exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Complex Numbers
 
@@ -565,121 +449,109 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arccos exp)
-        {
-            return ToString(exp, "arccos({0})");
-        }
+        public virtual TResult Analyze(Arccos exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arccot exp)
-        {
-            return ToString(exp, "arccot({0})");
-        }
+        public virtual TResult Analyze(Arccot exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arccsc exp)
-        {
-            return ToString(exp, "arccsc({0})");
-        }
+        public virtual TResult Analyze(Arccsc exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arcsec exp)
-        {
-            return ToString(exp, "arcsec({0})");
-        }
+        public virtual TResult Analyze(Arcsec exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arcsin exp)
-        {
-            return ToString(exp, "arcsin({0})");
-        }
+        public virtual TResult Analyze(Arcsin exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arctan exp)
-        {
-            return ToString(exp, "arctan({0})");
-        }
+        public virtual TResult Analyze(Arctan exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Cos exp)
-        {
-            return ToString(exp, "cos({0})");
-        }
+        public virtual TResult Analyze(Cos exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Cot exp)
-        {
-            return ToString(exp, "cot({0})");
-        }
+        public virtual TResult Analyze(Cot exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Csc exp)
-        {
-            return ToString(exp, "csc({0})");
-        }
+        public virtual TResult Analyze(Csc exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sec exp)
-        {
-            return ToString(exp, "sec({0})");
-        }
+        public virtual TResult Analyze(Sec exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sin exp)
-        {
-            return ToString(exp, "sin({0})");
-        }
+        public virtual TResult Analyze(Sin exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Tan exp)
-        {
-            return ToString(exp, "tan({0})");
-        }
+        public virtual TResult Analyze(Tan exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion
 
@@ -689,121 +561,109 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arcosh exp)
-        {
-            return ToString(exp, "arcosh({0})");
-        }
+        public virtual TResult Analyze(Arcosh exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arcoth exp)
-        {
-            return ToString(exp, "arcoth({0})");
-        }
+        public virtual TResult Analyze(Arcoth exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arcsch exp)
-        {
-            return ToString(exp, "arcsch({0})");
-        }
+        public virtual TResult Analyze(Arcsch exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arsech exp)
-        {
-            return ToString(exp, "arsech({0})");
-        }
+        public virtual TResult Analyze(Arsech exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Arsinh exp)
-        {
-            return ToString(exp, "arsinh({0})");
-        }
+        public virtual TResult Analyze(Arsinh exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Artanh exp)
-        {
-            return ToString(exp, "artanh({0})");
-        }
+        public virtual TResult Analyze(Artanh exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Cosh exp)
-        {
-            return ToString(exp, "cosh({0})");
-        }
+        public virtual TResult Analyze(Cosh exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Coth exp)
-        {
-            return ToString(exp, "coth({0})");
-        }
+        public virtual TResult Analyze(Coth exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Csch exp)
-        {
-            return ToString(exp, "csch({0})");
-        }
+        public virtual TResult Analyze(Csch exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sech exp)
-        {
-            return ToString(exp, "sech({0})");
-        }
+        public virtual TResult Analyze(Sech exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sinh exp)
-        {
-            return ToString(exp, "sinh({0})");
-        }
+        public virtual TResult Analyze(Sinh exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Tanh exp)
-        {
-            return ToString(exp, "tanh({0})");
-        }
+        public virtual TResult Analyze(Tanh exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Hyperbolic
 
@@ -813,101 +673,91 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Avg exp)
-        {
-            return ToString(exp, "avg");
-        }
+        public virtual TResult Analyze(Avg exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expresion.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Count exp)
-        {
-            return ToString(exp, "count");
-        }
+        public virtual TResult Analyze(Count exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Max exp)
-        {
-            return ToString(exp, "max");
-        }
+        public virtual TResult Analyze(Max exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Min exp)
-        {
-            return ToString(exp, "min");
-        }
+        public virtual TResult Analyze(Min exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Product exp)
-        {
-            return ToString(exp, "product");
-        }
+        public virtual TResult Analyze(Product exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Stdev exp)
-        {
-            return ToString(exp, "stdev");
-        }
+        public virtual TResult Analyze(Stdev exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Stdevp exp)
-        {
-            return ToString(exp, "stdevp");
-        }
+        public virtual TResult Analyze(Stdevp exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Sum exp)
-        {
-            return ToString(exp, "sum");
-        }
+        public virtual TResult Analyze(Sum exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Var exp)
-        {
-            return ToString(exp, "var");
-        }
+        public virtual TResult Analyze(Var exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Varp exp)
-        {
-            return ToString(exp, "varp");
-        }
+        public virtual TResult Analyze(Varp exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Statistical
 
@@ -917,91 +767,82 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(And exp)
-        {
-            return ToString(exp, "{0} and {1}");
-        }
+        public virtual TResult Analyze(And exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Bool exp)
-        {
-            return exp.Value.ToString(CultureInfo.InvariantCulture);
-        }
+        public virtual TResult Analyze(Bool exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Equality exp)
-        {
-            return ToString(exp, "{0} <=> {1}");
-        }
+        public virtual TResult Analyze(Equality exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Implication exp)
-        {
-            return ToString(exp, "{0} => {1}");
-        }
+        public virtual TResult Analyze(Implication exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(NAnd exp)
-        {
-            return ToString(exp, "{0} nand {1}");
-        }
+        public virtual TResult Analyze(NAnd exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(NOr exp)
-        {
-            return ToString(exp, "{0} nor {1}");
-        }
+        public virtual TResult Analyze(NOr exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Not exp)
-        {
-            return ToString(exp, "not({0})");
-        }
+        public virtual TResult Analyze(Not exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Or exp)
-        {
-            return ToString(exp, "{0} or {1}");
-        }
+        public virtual TResult Analyze(Or exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(XOr exp)
-        {
-            return ToString(exp, "{0} xor {1}");
-        }
+        public virtual TResult Analyze(XOr exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Logical and Bitwise
 
@@ -1011,190 +852,155 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(AddAssign exp)
-        {
-            var left = exp.Variable.Analyze(this);
-            var right = exp.Right.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0} += {1}", left, right);
-        }
+        public virtual TResult Analyze(AddAssign exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(ConditionalAnd exp)
-        {
-            return ToString(exp, "{0} && {1}");
-        }
+        public virtual TResult Analyze(ConditionalAnd exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Dec exp)
-        {
-            var arg = exp.Variable.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0}--", arg);
-        }
+        public virtual TResult Analyze(Dec exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(DivAssign exp)
-        {
-            var left = exp.Variable.Analyze(this);
-            var right = exp.Right.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0} /= {1}", left, right);
-        }
+        public virtual TResult Analyze(DivAssign exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Equal exp)
-        {
-            return ToString(exp, "{0} == {1}");
-        }
+        public virtual TResult Analyze(Equal exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(For exp)
-        {
-            return ToString(exp, "for");
-        }
+        public virtual TResult Analyze(For exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(GreaterOrEqual exp)
-        {
-            return ToString(exp, "{0} >= {1}");
-        }
+        public virtual TResult Analyze(GreaterOrEqual exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(GreaterThan exp)
-        {
-            return ToString(exp, "{0} > {1}");
-        }
+        public virtual TResult Analyze(GreaterThan exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(If exp)
-        {
-            return ToString(exp, "if");
-        }
+        public virtual TResult Analyze(If exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(Inc exp)
-        {
-            var arg = exp.Variable.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0}++", arg);
-        }
+        public virtual TResult Analyze(Inc exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(LessOrEqual exp)
-        {
-            return ToString(exp, "{0} <= {1}");
-        }
+        public virtual TResult Analyze(LessOrEqual exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(LessThan exp)
-        {
-            return ToString(exp, "{0} < {1}");
-        }
+        public virtual TResult Analyze(LessThan exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(MulAssign exp)
-        {
-            var left = exp.Variable.Analyze(this);
-            var right = exp.Right.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0} *= {1}", left, right);
-        }
+        public virtual TResult Analyze(MulAssign exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(NotEqual exp)
-        {
-            return ToString(exp, "{0} != {1}");
-        }
+        public virtual TResult Analyze(NotEqual exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(ConditionalOr exp)
-        {
-            return ToString(exp, "{0} || {1}");
-        }
+        public virtual TResult Analyze(ConditionalOr exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(SubAssign exp)
-        {
-            var left = exp.Variable.Analyze(this);
-            var right = exp.Right.Analyze(this);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0} -= {1}", left, right);
-        }
+        public virtual TResult Analyze(SubAssign exp, TContext context)
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public string Analyze(While exp)
-        {
-            return ToString(exp, "while({0}, {1})");
-        }
+        public virtual TResult Analyze(While exp, TContext context)
+            => throw new NotSupportedException();
 
         #endregion Programming
     }
 }
-
-#pragma warning restore CA1062

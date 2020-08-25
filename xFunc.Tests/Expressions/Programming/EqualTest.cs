@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolTrueEqualTest()
         {
-            var equal = new Equal(new Bool(true), new Bool(true));
+            var equal = new Equal(Bool.True, Bool.True);
             var result = (bool) equal.Execute();
 
             Assert.True(result);
@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolTrueAndFalseEqualTest()
         {
-            var equal = new Equal(new Bool(true), new Bool(false));
+            var equal = new Equal(Bool.True, Bool.False);
             var result = (bool) equal.Execute();
 
             Assert.False(result);
@@ -96,7 +96,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolFalseEqualTest()
         {
-            var equal = new Equal(new Bool(false), new Bool(false));
+            var equal = new Equal(Bool.False, Bool.False);
             var result = (bool) equal.Execute();
 
             Assert.True(result);

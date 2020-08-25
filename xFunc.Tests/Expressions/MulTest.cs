@@ -81,7 +81,7 @@ namespace xFunc.Tests.Expressions
         public void ExecuteMulComplexByBool()
         {
             var complex = new ComplexNumber(3, 2);
-            var boolean = new Bool(true);
+            var boolean = Bool.True;
             var mul = new Mul(complex, boolean);
 
             Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute());
@@ -90,7 +90,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulBoolByComplex()
         {
-            var boolean = new Bool(true);
+            var boolean = Bool.True;
             var complex = new ComplexNumber(3, 2);
             var mul = new Mul(boolean, complex);
 
@@ -246,8 +246,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulBoolByBoolTest()
         {
-            var bool1 = new Bool(true);
-            var bool2 = new Bool(true);
+            var bool1 = Bool.True;
+            var bool2 = Bool.True;
             var exp = new Mul(bool1, bool2);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());

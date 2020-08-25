@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Floor(new Bool(false));
+            var exp = new Floor(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

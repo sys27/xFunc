@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteTestException()
         {
-            var exp = new Arsinh(new Bool(false));
+            var exp = new Arsinh(Bool.False);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

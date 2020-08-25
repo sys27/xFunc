@@ -60,14 +60,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>The argument.</returns>
         public IExpression this[int index]
         {
-            get
-            {
-                return arguments[index];
-            }
-            set
-            {
-                arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => arguments[index];
+            set => arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -87,12 +81,7 @@ namespace xFunc.Maths.Expressions
 
             var diff = (DifferentParametersExpression)obj;
 
-            if (arguments == null && diff.arguments == null)
-                return true;
-
-            if (arguments == null ||
-                diff.arguments == null ||
-                arguments.Count != diff.arguments.Count)
+            if (arguments.Count != diff.arguments.Count)
                 return false;
 
             return arguments.SequenceEqual(diff.arguments);
@@ -153,11 +142,41 @@ namespace xFunc.Maths.Expressions
         /// Analyzes the current expression.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return AnalyzeInternal(analyzer, context);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="analyzer">The analyzer.</param>
         /// <returns>
         /// The analysis result.
         /// </returns>
         private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        private protected abstract TResult AnalyzeInternal<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.

@@ -16,6 +16,7 @@
 using System.Numerics;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
+using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
 namespace xFunc.Tests.Expressions
@@ -98,6 +99,14 @@ namespace xFunc.Tests.Expressions
             var exp = new Pow(new ComplexNumber(complex), new Number(10));
 
             Assert.Equal(Complex.Pow(complex, 10), exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteWrongArgumentTypeTest()
+        {
+            var exp = new Pow(new Bool(true), new Bool(true));
+
+            Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
 
         [Fact]

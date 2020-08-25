@@ -96,19 +96,16 @@ namespace xFunc.Maths.Expressions
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
 
-            switch (key)
+            if (key is Variable variable)
             {
-                case Variable variable:
-                    parameters.Variables.Remove(variable.Name);
+                parameters.Variables.Remove(variable.Name);
 
-                    return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, key);
-                case UserFunction function:
-                    parameters.Functions.Remove(function);
-
-                    return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, key);
-                default:
-                    throw new InvalidOperationException();
+                return string.Format(CultureInfo.InvariantCulture, Resource.UndefineVariable, key);
             }
+
+            parameters.Functions.Remove((UserFunction)key);
+
+            return string.Format(CultureInfo.InvariantCulture, Resource.UndefineFunction, key);
         }
 
         /// <summary>
@@ -125,6 +122,24 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return analyzer.Analyze(this, context);
         }
 
         /// <summary>

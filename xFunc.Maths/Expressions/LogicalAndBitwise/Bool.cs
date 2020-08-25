@@ -68,6 +68,24 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         }
 
         /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return analyzer.Analyze(this, context);
+        }
+
+        /// <summary>
         /// Performs an implicit conversion from <see cref="Bool"/> to <see cref="bool"/>.
         /// </summary>
         /// <param name="boolean">The boolean.</param>

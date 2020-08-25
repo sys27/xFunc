@@ -63,7 +63,7 @@ namespace xFunc.Benchmark.Benchmarks
         }
 
         [Benchmark]
-        public IExpression ComplexExpression() =>
-            complexExp.Analyze(differentiator);
+        public IExpression ComplexExpression()
+            => complexExp.Analyze(differentiator, DifferentiatorContext.Default());
     }
 }

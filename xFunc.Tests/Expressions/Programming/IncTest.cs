@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Programming;
@@ -26,7 +27,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void IncCalcTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var inc = new Inc(Variable.X);
             var result = (double)inc.Execute(parameters);
 
@@ -43,10 +44,51 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void IncBoolTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var parameters = new ParameterCollection { new Parameter("x", true) };
             var inc = new Inc(Variable.X);
 
             Assert.Throws<ResultIsNotSupportedException>(() => inc.Execute(parameters));
+        }
+
+        [Fact]
+        public void SameEqualsTest()
+        {
+            var inc = new Inc(Variable.X);
+
+            Assert.True(inc.Equals(inc));
+        }
+
+        [Fact]
+        public void EqualsNullTest()
+        {
+            var inc = new Inc(Variable.X);
+
+            Assert.False(inc.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsDifferentTypeTest()
+        {
+            var inc = new Inc(Variable.X);
+            var dec = new Dec(Variable.X);
+
+            Assert.False(inc.Equals(dec));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var inc = new Inc(Variable.X);
+
+            Assert.Throws<ArgumentNullException>(() => inc.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var inc = new Inc(Variable.X);
+
+            Assert.Throws<ArgumentNullException>(() => inc.Analyze<string, object>(null, null));
         }
 
         [Fact]

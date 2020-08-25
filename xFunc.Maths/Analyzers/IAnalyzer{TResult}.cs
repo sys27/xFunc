@@ -564,14 +564,14 @@ namespace xFunc.Maths.Analyzers
         TResult Analyze(Product exp);
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         TResult Analyze(Stdev exp);
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
@@ -585,14 +585,14 @@ namespace xFunc.Maths.Analyzers
         TResult Analyze(Sum exp);
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         TResult Analyze(Var exp);
 
         /// <summary>
-        /// Analyzes the specified exppression.
+        /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>

@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="number">The value to convert to a double.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
         public static implicit operator double(Number number)
-            => number?.Value ?? double.NaN;
+            => number?.Value ?? throw new ArgumentNullException(nameof(number));
 
         /// <summary>
         /// Defines an implicit conversion of double to <see cref="Number"/>.
@@ -149,6 +149,24 @@ namespace xFunc.Maths.Expressions
                 throw new ArgumentNullException(nameof(analyzer));
 
             return analyzer.Analyze(this);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return analyzer.Analyze(this, context);
         }
 
         /// <summary>

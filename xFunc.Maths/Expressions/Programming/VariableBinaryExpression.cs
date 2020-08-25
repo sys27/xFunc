@@ -111,11 +111,41 @@ namespace xFunc.Maths.Expressions.Programming
         /// Analyzes the current expression.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+        {
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
+
+            return AnalyzeInternal(analyzer, context);
+        }
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="analyzer">The analyzer.</param>
         /// <returns>
         /// The analysis result.
         /// </returns>
         private protected abstract TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        private protected abstract TResult AnalyzeInternal<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context);
 
         /// <summary>
         /// Clones this instance of the <see cref="IExpression" />.
@@ -130,14 +160,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         public Variable Variable
         {
-            get
-            {
-                return variable;
-            }
-            set
-            {
-                variable = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => variable;
+            set => variable = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -145,14 +169,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         public IExpression Right
         {
-            get
-            {
-                return right;
-            }
-            set
-            {
-                right = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => right;
+            set => right = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

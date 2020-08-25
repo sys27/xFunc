@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -110,6 +111,30 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
             var boolean = new Bool(true);
 
             Assert.True(boolean.Equals((object)boolean));
+        }
+
+        [Fact]
+        public void ImplicitNullToString()
+        {
+            Bool x = null;
+
+            Assert.Throws<ArgumentNullException>(() => (bool)x);
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = new Bool(true);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = new Bool(true);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
 
         [Fact]

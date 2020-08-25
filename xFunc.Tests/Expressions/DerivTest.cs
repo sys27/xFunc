@@ -28,12 +28,18 @@ namespace xFunc.Tests.Expressions
         public void ExecutePointTest()
         {
             var differentiator = new Mock<IDifferentiator>();
-            differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
-                .Returns<Derivative>(exp => exp.Expression);
+            differentiator
+                .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
+                .Returns<Derivative, DifferentiatorContext>((exp, context) => exp.Expression);
 
             var simplifier = new Mock<ISimplifier>();
 
-            var deriv = new Derivative(differentiator.Object, simplifier.Object, Variable.X, Variable.X, new Number(2));
+            var deriv = new Derivative(
+                differentiator.Object,
+                simplifier.Object,
+                Variable.X,
+                Variable.X,
+                new Number(2));
 
             Assert.Equal(2.0, deriv.Execute());
         }
@@ -48,8 +54,9 @@ namespace xFunc.Tests.Expressions
         public void ExecuteNullSimpTest()
         {
             var differentiator = new Mock<IDifferentiator>();
-            differentiator.Setup(d => d.Analyze(It.IsAny<Derivative>()))
-                .Returns<Derivative>(e => e.Expression);
+            differentiator
+                .Setup(d => d.Analyze(It.IsAny<Derivative>(), It.IsAny<DifferentiatorContext>()))
+                .Returns<Derivative, DifferentiatorContext>((e, context) => e.Expression);
 
             var simplifier = new Mock<ISimplifier>();
 

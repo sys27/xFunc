@@ -312,9 +312,10 @@ namespace xFunc.Maths
         {
             return from switch
             {
-                AngleMeasurement.Degree => value * Math.PI / 180,
                 AngleMeasurement.Radian => value,
                 AngleMeasurement.Gradian => value * Math.PI / 200,
+
+                // AngleMeasurement.Degree
                 _ => value * Math.PI / 180,
             };
         }
@@ -329,9 +330,10 @@ namespace xFunc.Maths
         {
             return to switch
             {
-                AngleMeasurement.Degree => value / Math.PI * 180,
                 AngleMeasurement.Radian => value,
                 AngleMeasurement.Gradian => value / Math.PI * 200,
+
+                // AngleMeasurement.Degree
                 _ => value / Math.PI * 180,
             };
         }

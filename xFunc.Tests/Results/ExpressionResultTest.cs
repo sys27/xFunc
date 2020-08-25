@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Trigonometric;
 using xFunc.Maths.Results;
@@ -38,6 +39,12 @@ namespace xFunc.Tests.Results
             var result = new ExpressionResult(exp) as IResult;
 
             Assert.Equal(exp, result.Result);
+        }
+
+        [Fact]
+        public void NullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ExpressionResult(null));
         }
 
         [Fact]

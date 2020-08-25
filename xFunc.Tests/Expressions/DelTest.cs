@@ -27,7 +27,10 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest1()
         {
             var exp = new Add(
-                new Add(new Mul(new Number(2), Variable.X), new Pow(new Variable("y"), new Number(2))),
+                new Add(
+                    new Mul(new Number(2), Variable.X),
+                    new Pow(new Variable("y"), new Number(2))
+                ),
                 new Pow(new Variable("z"), new Number(3))
             );
             var del = new Del(new Differentiator(), new Simplifier(), exp);

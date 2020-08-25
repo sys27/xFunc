@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -27,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void DivAssignCalc()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var div = new DivAssign(Variable.X, new Number(2));
             var result = div.Execute(parameters);
             var expected = 5.0;
@@ -56,10 +57,51 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolDivNumberTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var parameters = new ParameterCollection { new Parameter("x", true) };
             var add = new DivAssign(Variable.X, new Number(2));
 
             Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
+        }
+
+        [Fact]
+        public void SameEqualsTest()
+        {
+            var exp = new DivAssign(Variable.X, new Number(1));
+
+            Assert.True(exp.Equals(exp));
+        }
+
+        [Fact]
+        public void EqualsNullTest()
+        {
+            var exp = new DivAssign(Variable.X, new Number(1));
+
+            Assert.False(exp.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsDifferentTypeTest()
+        {
+            var exp1 = new DivAssign(Variable.X, new Number(1));
+            var exp2 = new MulAssign(Variable.X, new Number(1));
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = new DivAssign(Variable.X, new Number(1));
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = new DivAssign(Variable.X, new Number(1));
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
 
         [Fact]

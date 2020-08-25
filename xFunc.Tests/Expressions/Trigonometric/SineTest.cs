@@ -25,6 +25,15 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class SineTest
     {
         [Fact]
+        public void ExecuteDefaultTest()
+        {
+            var exp = new Sin(new Number(1));
+            var result = (double)exp.Execute();
+
+            Assert.Equal(0.017452406437283512, result, 15);
+        }
+
+        [Fact]
         public void ExecuteRadianTest()
         {
             var exp = new Sin(new Number(1));

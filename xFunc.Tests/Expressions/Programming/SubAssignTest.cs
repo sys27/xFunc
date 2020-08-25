@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -60,6 +61,47 @@ namespace xFunc.Tests.Expressions.Programming
             var add = new SubAssign(Variable.X, new Number(2));
 
             Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
+        }
+
+        [Fact]
+        public void SameEqualsTest()
+        {
+            var exp = new SubAssign(Variable.X, new Number(1));
+
+            Assert.True(exp.Equals(exp));
+        }
+
+        [Fact]
+        public void EqualsNullTest()
+        {
+            var exp = new SubAssign(Variable.X, new Number(1));
+
+            Assert.False(exp.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsDifferentTypeTest()
+        {
+            var exp1 = new SubAssign(Variable.X, new Number(1));
+            var exp2 = new DivAssign(Variable.X, new Number(1));
+
+            Assert.False(exp1.Equals(exp2));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = new SubAssign(Variable.X, new Number(1));
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = new SubAssign(Variable.X, new Number(1));
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
 
         [Fact]

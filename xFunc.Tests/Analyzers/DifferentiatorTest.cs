@@ -33,25 +33,13 @@ namespace xFunc.Tests.Analyzers
         }
 
         private IExpression Differentiate(IExpression exp)
-            => exp.Analyze(new Differentiator());
+            => exp.Analyze(new Differentiator(), DifferentiatorContext.Default());
 
         private IExpression Differentiate(IExpression exp, Variable variable)
-            => exp.Analyze(new Differentiator(variable));
+            => exp.Analyze(new Differentiator(), new DifferentiatorContext(new ExpressionParameters(), variable));
 
         private IExpression Differentiate(IExpression exp, Variable variable, ExpressionParameters parameters)
-            => exp.Analyze(new Differentiator(parameters, variable));
-
-        #region Args
-
-        [Fact]
-        public void VariableIsNullTest()
-        {
-            var exp = Differentiate(new Number(10), null, null);
-
-            Assert.Equal(zero, exp);
-        }
-
-        #endregion
+            => exp.Analyze(new Differentiator(), new DifferentiatorContext(parameters, variable));
 
         #region Common
 
@@ -61,6 +49,12 @@ namespace xFunc.Tests.Analyzers
             var exp = Differentiate(new Number(10));
 
             Assert.Equal(zero, exp);
+        }
+
+        [Fact]
+        public void VariableNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => Differentiate(new Number(10), null));
         }
 
         [Fact]
@@ -2395,7 +2389,7 @@ namespace xFunc.Tests.Analyzers
         }
 
         [Fact]
-        public void UserFunctionDerivNullTest()
+        public void UserFunctionNullParamsDerivTest()
         {
             var uf = new UserFunction("f", new IExpression[] { Variable.X });
 

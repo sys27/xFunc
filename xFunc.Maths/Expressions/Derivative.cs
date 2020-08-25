@@ -90,11 +90,8 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var variable = Variable;
-
-            Differentiator.Variable = variable;
-            Differentiator.Parameters = parameters;
-
-            var diff = Analyze(Differentiator);
+            var context = new DifferentiatorContext(parameters, variable);
+            var diff = Analyze(Differentiator, context);
 
             var point = DerivativePoint;
             if (variable != null && point != null)
@@ -121,8 +118,21 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// The analysis result.
         /// </returns>
-        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer) =>
-            analyzer.Analyze(this);
+        private protected override TResult AnalyzeInternal<TResult>(IAnalyzer<TResult> analyzer)
+            => analyzer.Analyze(this);
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        private protected override TResult AnalyzeInternal<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
+            => analyzer.Analyze(this, context);
 
         /// <summary>
         /// Clones this instance.
@@ -139,14 +149,8 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Expression
         {
-            get
-            {
-                return this[0];
-            }
-            set
-            {
-                this[0] = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get { return this[0]; }
+            set { this[0] = value ?? throw new ArgumentNullException(nameof(value)); }
         }
 
         /// <summary>

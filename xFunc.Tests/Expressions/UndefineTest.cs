@@ -23,6 +23,12 @@ namespace xFunc.Tests.Expressions
     public class UndefineTest
     {
         [Fact]
+        public void InvalidTypeTest()
+        {
+            Assert.Throws<NotSupportedException>(() => new Undefine(new Number(1)));
+        }
+
+        [Fact]
         public void ExecuteFailTest()
         {
             Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Execute());
@@ -148,6 +154,22 @@ namespace xFunc.Tests.Expressions
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
+        }
+
+        [Fact]
+        public void NullAnalyzerTest1()
+        {
+            var exp = new Undefine(Variable.X);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
+        }
+
+        [Fact]
+        public void NullAnalyzerTest2()
+        {
+            var exp = new Undefine(Variable.X);
+
+            Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
     }
 }

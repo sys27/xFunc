@@ -118,9 +118,6 @@
   <data name="AndToolTip" xml:space="preserve">
     <value>Побитовая операция И. Пример: x and y, x &amp; y</value>
   </data>
-  <data name="AnglesGroupHeader" xml:space="preserve">
-    <value>Меры измерения углов</value>
-  </data>
   <data name="AnswerBaseGroupHeader" xml:space="preserve">
     <value>Система счисления</value>
   </data>
@@ -268,15 +265,6 @@
   <data name="DefToolTip" xml:space="preserve">
     <value>Назначает значение переменной или пользовательской функции. Пример: x := 1, f(x) := sin(x)</value>
   </data>
-  <data name="DegreeButtonHeader" xml:space="preserve">
-    <value>Градусы</value>
-  </data>
-  <data name="DegreeScreenTipText" xml:space="preserve">
-    <value>Использовать градусы как единицы измерения углов</value>
-  </data>
-  <data name="DegreeScreenTipTitle" xml:space="preserve">
-    <value>Градусы (Ctrl+Alt+D)</value>
-  </data>
   <data name="DeleteExpButtonHeader" xml:space="preserve">
     <value>Удалить</value>
   </data>
@@ -354,15 +342,6 @@
   </data>
   <data name="GCDToolTip" xml:space="preserve">
     <value>Наибольший общий делитель. Пример: gcd(2, 4)</value>
-  </data>
-  <data name="GradianButtonHeader" xml:space="preserve">
-    <value>Грады</value>
-  </data>
-  <data name="GradianScreenTipText" xml:space="preserve">
-    <value>Использовать грады как единицы измерения углов</value>
-  </data>
-  <data name="GradianScreenTipTitle" xml:space="preserve">
-    <value>Грады (Ctrl+Alt+G)</value>
   </data>
   <data name="GraphsTab" xml:space="preserve">
     <value>Графики</value>
@@ -463,15 +442,6 @@
   <data name="ProgExpanderHeader" xml:space="preserve">
     <value>Программирование</value>
   </data>
-  <data name="RadianButtonHeader" xml:space="preserve">
-    <value>Радианы</value>
-  </data>
-  <data name="RadianScreenTipText" xml:space="preserve">
-    <value>Использовать радианы как единицы измерения углов</value>
-  </data>
-  <data name="RadianScreenTipTitle" xml:space="preserve">
-    <value>Радианы (Ctrl+Alt+R)</value>
-  </data>
   <data name="RedoButtonHeader" xml:space="preserve">
     <value>Вернуть</value>
   </data>
@@ -496,9 +466,6 @@
   <data name="SechToolTip" xml:space="preserve">
     <value>Гиперболический секанс числа "x". Пример: sech(90)</value>
   </data>
-  <data name="SettingsAngle" xml:space="preserve">
-    <value>Единицы измерения угла по умолчанию:</value>
-  </data>
   <data name="SettingsAutoLang" xml:space="preserve">
     <value>Автоматически</value>
   </data>
@@ -510,12 +477,6 @@
   </data>
   <data name="SettingsDec" xml:space="preserve">
     <value>Десятичная</value>
-  </data>
-  <data name="SettingsDegree" xml:space="preserve">
-    <value>Градусы</value>
-  </data>
-  <data name="SettingsGradian" xml:space="preserve">
-    <value>Грады</value>
   </data>
   <data name="SettingsHex" xml:space="preserve">
     <value>Шестнадцатеричная</value>
@@ -538,11 +499,8 @@
   <data name="SettingsOct" xml:space="preserve">
     <value>Восьмеричная</value>
   </data>
-  <data name="SettingsRadian" xml:space="preserve">
-    <value>Радианы</value>
-  </data>
   <data name="SettingsRemember" xml:space="preserve">
-    <value>Запоминать систему счисления и единицы измерения угла</value>
+    <value>Запоминать систему счисления</value>
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Сбросить настройки</value>

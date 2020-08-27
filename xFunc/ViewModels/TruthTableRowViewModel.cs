@@ -12,45 +12,28 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
 
 namespace xFunc.ViewModels
 {
 
     public class TruthTableRowViewModel
     {
-
-        private int index;
-        private bool[] varsValues;
-        private bool[] values;
-
         public TruthTableRowViewModel(int varsCount, int valuesCount)
         {
-            varsValues = new bool[varsCount];
-            values = new bool[valuesCount];
+            VarsValues = new bool[varsCount];
+            Values = new bool[valuesCount];
         }
 
-        public int Index
-        {
-            get { return index; }
-            set { index = value; }
-        }
+        public int Index { get; set; }
 
-        public bool[] VarsValues
-        {
-            get { return varsValues; }
-        }
+        public bool[] VarsValues { get; }
 
-        public bool[] Values
-        {
-            get { return values; }
-            set { values = value; }
-        }
+        public bool[] Values { get; set; }
 
         public bool Result
         {
-            get { return values[values.Length - 1]; }
-            set { values[values.Length - 1] = value; }
+            get => Values[^1];
+            set => Values[^1] = value;
         }
 
     }

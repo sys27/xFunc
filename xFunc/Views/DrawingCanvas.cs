@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,7 +23,7 @@ namespace xFunc.Views
     public class DrawingCanvas : Canvas
     {
 
-        private List<Visual> visuals = new List<Visual>();
+        private readonly List<Visual> visuals = new List<Visual>();
 
         public DrawingCanvas()
         {
@@ -59,13 +59,7 @@ namespace xFunc.Views
             visuals.Clear();
         }
 
-        protected override int VisualChildrenCount
-        {
-            get
-            {
-                return visuals.Count;
-            }
-        }
+        protected override int VisualChildrenCount => visuals.Count;
 
     }
 

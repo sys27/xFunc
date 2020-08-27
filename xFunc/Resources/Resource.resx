@@ -118,9 +118,6 @@
   <data name="AndToolTip" xml:space="preserve">
     <value>Bitwise AND operation. Example: x and y, x &amp; y</value>
   </data>
-  <data name="AnglesGroupHeader" xml:space="preserve">
-    <value>Angles</value>
-  </data>
   <data name="AnswerBaseGroupHeader" xml:space="preserve">
     <value>Answer Base</value>
   </data>
@@ -268,15 +265,6 @@
   <data name="DefToolTip" xml:space="preserve">
     <value>Assigns the value to specified variable or creates an user-function. Example: x := 1, f(x) := sin(x)</value>
   </data>
-  <data name="DegreeButtonHeader" xml:space="preserve">
-    <value>Dergee</value>
-  </data>
-  <data name="DegreeScreenTipText" xml:space="preserve">
-    <value>Use degrees as a unit of angle measure</value>
-  </data>
-  <data name="DegreeScreenTipTitle" xml:space="preserve">
-    <value>Degree (Ctrl+Alt+D)</value>
-  </data>
   <data name="DeleteExpButtonHeader" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -354,15 +342,6 @@
   </data>
   <data name="GCDToolTip" xml:space="preserve">
     <value>Greatest common divisor. Example: gcd(2, 4)</value>
-  </data>
-  <data name="GradianButtonHeader" xml:space="preserve">
-    <value>Gradian</value>
-  </data>
-  <data name="GradianScreenTipText" xml:space="preserve">
-    <value>Use gradians as a unit of angle measure</value>
-  </data>
-  <data name="GradianScreenTipTitle" xml:space="preserve">
-    <value>Gradian (Ctrl+Alt+G)</value>
   </data>
   <data name="GraphsTab" xml:space="preserve">
     <value>Charts</value>
@@ -463,15 +442,6 @@
   <data name="ProgExpanderHeader" xml:space="preserve">
     <value>Programming</value>
   </data>
-  <data name="RadianButtonHeader" xml:space="preserve">
-    <value>Radian</value>
-  </data>
-  <data name="RadianScreenTipText" xml:space="preserve">
-    <value>Use radians as a unit of angle measure</value>
-  </data>
-  <data name="RadianScreenTipTitle" xml:space="preserve">
-    <value>Radian (Ctrl+Alt+R)</value>
-  </data>
   <data name="RedoButtonHeader" xml:space="preserve">
     <value>Redo</value>
   </data>
@@ -496,9 +466,6 @@
   <data name="SechToolTip" xml:space="preserve">
     <value>Hyperbolic secant of "x". Example: sech(90)</value>
   </data>
-  <data name="SettingsAngle" xml:space="preserve">
-    <value>Default _angle measurement:</value>
-  </data>
   <data name="SettingsAutoLang" xml:space="preserve">
     <value>Automatic</value>
   </data>
@@ -510,12 +477,6 @@
   </data>
   <data name="SettingsDec" xml:space="preserve">
     <value>Decimal</value>
-  </data>
-  <data name="SettingsDegree" xml:space="preserve">
-    <value>Degree</value>
-  </data>
-  <data name="SettingsGradian" xml:space="preserve">
-    <value>Gradian</value>
   </data>
   <data name="SettingsHex" xml:space="preserve">
     <value>Hexadecimal</value>
@@ -538,11 +499,8 @@
   <data name="SettingsOct" xml:space="preserve">
     <value>Octal</value>
   </data>
-  <data name="SettingsRadian" xml:space="preserve">
-    <value>Radian</value>
-  </data>
   <data name="SettingsRemember" xml:space="preserve">
-    <value>_Remember number base and angle measurement</value>
+    <value>_Remember number base</value>
   </data>
   <data name="SettingsReset" xml:space="preserve">
     <value>Reset</value>

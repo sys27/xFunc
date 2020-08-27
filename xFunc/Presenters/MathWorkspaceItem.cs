@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using xFunc.Maths.Results;
 
 namespace xFunc.Presenters
@@ -20,45 +20,18 @@ namespace xFunc.Presenters
 
     public class MathWorkspaceItem
     {
-
-        private string strExp;
-        private IResult result;
-        private string answer;
-
         public MathWorkspaceItem(string strExp, IResult result, string answer)
         {
-            this.strExp = strExp;
-            this.result = result;
-            this.answer = answer;
+            this.StringExpression = strExp;
+            this.Result = result;
+            this.Answer = answer;
         }
 
-        public string StringExpression
-        {
-            get
-            {
-                return strExp;
-            }
-        }
+        public string StringExpression { get; }
 
-        public IResult Result
-        {
-            get
-            {
-                return result;
-            }
-        }
+        public IResult Result { get; }
 
-        public string Answer
-        {
-            get
-            {
-                return answer;
-            }
-            internal set
-            {
-                answer = value;
-            }
-        }
+        public string Answer { get; internal set; }
 
     }
 

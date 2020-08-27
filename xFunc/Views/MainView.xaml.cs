@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
@@ -22,7 +23,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Linq;
 using xFunc.Maths;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Presenters;
 using xFunc.Properties;
@@ -34,11 +34,11 @@ namespace xFunc.Views
     public partial class MainView : Fluent.RibbonWindow
     {
 
-        private Processor processor;
+        private readonly Processor processor;
 
-        private MathPresenter mathPresenter;
-        private GraphsPresenter graphsPresenter;
-        private TruthTablePresenter truthTablePresenter;
+        private readonly MathPresenter mathPresenter;
+        private readonly GraphsPresenter graphsPresenter;
+        private readonly TruthTablePresenter truthTablePresenter;
         private string fileName;
 
         #region Commands
@@ -47,10 +47,6 @@ namespace xFunc.Views
         public static RoutedCommand OpenCommand = new RoutedCommand();
         public static RoutedCommand SaveCommand = new RoutedCommand();
         public static RoutedCommand SaveAsCommand = new RoutedCommand();
-
-        public static RoutedCommand DegreeCommand = new RoutedCommand();
-        public static RoutedCommand RadianCommand = new RoutedCommand();
-        public static RoutedCommand GradianCommand = new RoutedCommand();
 
         public static RoutedCommand AutoFormatCommand = new RoutedCommand();
         public static RoutedCommand NormalFormatCommand = new RoutedCommand();
@@ -99,28 +95,7 @@ namespace xFunc.Views
 
         private void mathPresenter_PropertyChanged(object o, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName == nameof(mathPresenter.AngleMeasurement))
-            {
-                switch (mathPresenter.AngleMeasurement)
-                {
-                    case AngleMeasurement.Degree:
-                        radianButton.IsChecked = false;
-                        gradianButton.IsChecked = false;
-                        degreeButton.IsChecked = true;
-                        break;
-                    case AngleMeasurement.Radian:
-                        degreeButton.IsChecked = false;
-                        gradianButton.IsChecked = false;
-                        radianButton.IsChecked = true;
-                        break;
-                    case AngleMeasurement.Gradian:
-                        degreeButton.IsChecked = false;
-                        radianButton.IsChecked = false;
-                        gradianButton.IsChecked = true;
-                        break;
-                }
-            }
-            else if (args.PropertyName == nameof(mathPresenter.Base))
+            if (args.PropertyName == nameof(mathPresenter.Base))
             {
                 switch (mathPresenter.Base)
                 {
@@ -206,7 +181,6 @@ namespace xFunc.Views
 
             tabControl.SelectedIndex = Settings.Default.SelectedTabIndex;
 
-            mathPresenter.AngleMeasurement = Settings.Default.AngleMeasurement;
             mathPresenter.Base = Settings.Default.NumberBase;
             mathPresenter.OutputFormat = Settings.Default.OutputFormat;
 
@@ -261,7 +235,6 @@ namespace xFunc.Views
 
             if (Settings.Default.RememberBaseAndAngle)
             {
-                Settings.Default.AngleMeasurement = mathPresenter.AngleMeasurement;
                 Settings.Default.NumberBase = mathPresenter.Base;
                 Settings.Default.OutputFormat = mathPresenter.OutputFormat;
             }
@@ -422,21 +395,6 @@ namespace xFunc.Views
         private void FormatButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
         {
             args.CanExecute = tabControl.SelectedItem == mathTab;
-        }
-
-        private void DegreeButton_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.AngleMeasurement = AngleMeasurement.Degree;
-        }
-
-        private void RadianButton_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.AngleMeasurement = AngleMeasurement.Radian;
-        }
-
-        private void GradianButton_Execute(object o, ExecutedRoutedEventArgs args)
-        {
-            mathPresenter.AngleMeasurement = AngleMeasurement.Gradian;
         }
 
         private void AngleButtons_CanExecute(object o, CanExecuteRoutedEventArgs args)
@@ -646,10 +604,7 @@ namespace xFunc.Views
                 Settings.Default.RememberBaseAndAngle = settingsView.RememberNumberAndAngle;
                 if (!settingsView.RememberNumberAndAngle)
                 {
-                    Settings.Default.AngleMeasurement = settingsView.Angle;
                     Settings.Default.NumberBase = settingsView.Base;
-
-                    mathPresenter.AngleMeasurement = settingsView.Angle;
                     mathPresenter.Base = settingsView.Base;
                 }
                 Settings.Default.MaxCountOfExpressions = settingsView.MaxCountOfExps;

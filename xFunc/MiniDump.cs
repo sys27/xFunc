@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -49,11 +50,9 @@ namespace xFunc
 
         public static void CreateMiniDump()
         {
-            using (var stream = new FileStream(DumpFile, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                var thisProcess = Process.GetCurrentProcess();
-                MiniDumpWriteDump(thisProcess.Handle, thisProcess.Id, stream.SafeFileHandle.DangerousGetHandle(), MINIDUMP_TYPE.MiniDumpWithFullMemory, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
-            }
+            using var stream = new FileStream(DumpFile, FileMode.Create, FileAccess.Write, FileShare.None);
+            var thisProcess = Process.GetCurrentProcess();
+            MiniDumpWriteDump(thisProcess.Handle, thisProcess.Id, stream.SafeFileHandle.DangerousGetHandle(), MINIDUMP_TYPE.MiniDumpWithFullMemory, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
         }
 
     }

@@ -16,6 +16,7 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using Xunit;
 
@@ -24,43 +25,17 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
     public class PhaseTest
     {
         [Fact]
-        public void ExecuteTest1()
+        public void ExecuteTest()
         {
             var complex = new Complex(3.1, 2.5);
             var exp = new Phase(new ComplexNumber(complex));
+            var expected = Angle.Radian(complex.Phase);
 
-            Assert.Equal(complex.Phase * 180 / Math.PI, exp.Execute());
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]
-        public void ExecuteTestDegree()
-        {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Phase(new ComplexNumber(complex));
-
-            Assert.Equal(complex.Phase * 180 / Math.PI, exp.Execute(AngleMeasurement.Degree));
-        }
-
-        [Fact]
-        public void ExecuteTestGradian()
-        {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Phase(new ComplexNumber(complex));
-
-            Assert.Equal(complex.Phase * 200 / Math.PI, exp.Execute(AngleMeasurement.Gradian));
-        }
-
-        [Fact]
-        public void ExecuteTestRadian()
-        {
-            var complex = new Complex(3.1, 2.5);
-            var exp = new Phase(new ComplexNumber(complex));
-
-            Assert.Equal(complex.Phase, exp.Execute(AngleMeasurement.Radian));
-        }
-
-        [Fact]
-        public void ExecuteExeptionTest()
+        public void ExecuteExceptionTest()
         {
             var exp = new Phase(new Number(2));
 

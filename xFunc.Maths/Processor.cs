@@ -19,6 +19,7 @@ using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Results;
 using xFunc.Maths.Tokenization;
 using xFunc.Maths.Tokenization.Tokens;
@@ -119,6 +120,11 @@ namespace xFunc.Maths
                     return new NumberResult(number);
 
                 return new StringResult(MathExtensions.ToNewBase((int)number, NumeralSystem));
+            }
+
+            if (result is Angle angle)
+            {
+                return new AngleNumberResult(angle);
             }
 
             if (result is Complex complex)

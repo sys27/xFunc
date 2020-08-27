@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
@@ -22,11 +23,21 @@ namespace xFunc.Tests.Expressions
     public class FloorTest
     {
         [Fact]
-        public void FloorCalculate()
+        public void ExecuteNumberTest()
         {
             var floor = new Floor(new Number(5.55555555));
             var result = floor.Execute();
             var expected = 5.0;
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ExecuteAngleTest()
+        {
+            var floor = new Floor(Angle.Degree(5.55555555).AsExpression());
+            var result = floor.Execute();
+            var expected = Angle.Degree(5);
 
             Assert.Equal(expected, result);
         }

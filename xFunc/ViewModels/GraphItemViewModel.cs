@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Windows.Media;
 using xFunc.Maths.Expressions;
 
@@ -23,13 +23,12 @@ namespace xFunc.ViewModels
     {
 
         private bool isChecked;
-        private IExpression exp;
         private DrawingVisual visual;
         private Color color;
 
         public GraphItemViewModel(IExpression exp, bool isChecked, DrawingVisual visual, Color color)
         {
-            this.exp = exp;
+            this.Expression = exp;
             this.isChecked = isChecked;
             this.visual = visual;
             this.color = color;
@@ -37,7 +36,7 @@ namespace xFunc.ViewModels
 
         public override string ToString()
         {
-            return exp.ToString();
+            return Expression.ToString();
         }
 
         public bool IsChecked
@@ -53,13 +52,7 @@ namespace xFunc.ViewModels
             }
         }
 
-        public IExpression Expression
-        {
-            get
-            {
-                return exp;
-            }
-        }
+        public IExpression Expression { get; }
 
         public DrawingVisual Visual
         {

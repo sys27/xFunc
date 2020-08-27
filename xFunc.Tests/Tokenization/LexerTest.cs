@@ -1772,5 +1772,125 @@ namespace xFunc.Tests.Tokenization
 
             Assert.Equal(expected, tokens.ToList());
         }
+
+        [Fact]
+        public void DegreesTest()
+        {
+            var tokens = lexer.Tokenize("1 degrees");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Degree)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void DegreeTest()
+        {
+            var tokens = lexer.Tokenize("1 degree");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Degree)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void DegTest()
+        {
+            var tokens = lexer.Tokenize("1 deg");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Degree)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void DegSymbolTest()
+        {
+            var tokens = lexer.Tokenize("1°");
+            var expected = Builder()
+                .Number(1)
+                .Symbol(SymbolToken.Degree)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void RadiansTest()
+        {
+            var tokens = lexer.Tokenize("1 radians");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Radian)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void RadianTest()
+        {
+            var tokens = lexer.Tokenize("1 radian");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Radian)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void RadTest()
+        {
+            var tokens = lexer.Tokenize("1 rad");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Radian)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void GradiansTest()
+        {
+            var tokens = lexer.Tokenize("1 gradians");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Gradian)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void GradianTest()
+        {
+            var tokens = lexer.Tokenize("1 gradian");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Gradian)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void GradTest()
+        {
+            var tokens = lexer.Tokenize("1 grad");
+            var expected = Builder()
+                .Number(1)
+                .Keyword(KeywordToken.Gradian)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
     }
 }

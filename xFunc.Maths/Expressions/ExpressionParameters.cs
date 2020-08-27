@@ -26,16 +26,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
         /// </summary>
         public ExpressionParameters()
-            : this(AngleMeasurement.Degree, new ParameterCollection(), new FunctionCollection())
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
-        /// </summary>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasurement)
-            : this(angleMeasurement, new ParameterCollection(), new FunctionCollection())
+            : this(new ParameterCollection(), new FunctionCollection())
         {
         }
 
@@ -44,7 +35,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
         public ExpressionParameters(ParameterCollection parameters)
-            : this(AngleMeasurement.Degree, parameters, new FunctionCollection())
+            : this(parameters, new FunctionCollection())
         {
         }
 
@@ -53,27 +44,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="functions">The collection of user functions.</param>
         public ExpressionParameters(FunctionCollection functions)
-            : this(AngleMeasurement.Degree, new ParameterCollection(), functions)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
-        /// </summary>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        /// <param name="variables">The collection of variables' values.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasurement, ParameterCollection variables)
-            : this(angleMeasurement, variables, new FunctionCollection())
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
-        /// </summary>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        /// <param name="functions">The collection of user functions.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasurement, FunctionCollection functions)
-            : this(angleMeasurement, new ParameterCollection(), functions)
+            : this(new ParameterCollection(), functions)
         {
         }
 
@@ -83,54 +54,26 @@ namespace xFunc.Maths.Expressions
         /// <param name="variables">The collection of variables' values.</param>
         /// <param name="functions">The collection of user functions.</param>
         public ExpressionParameters(ParameterCollection variables, FunctionCollection functions)
-            : this(AngleMeasurement.Degree, variables, functions)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionParameters"/> class.
-        /// </summary>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        /// <param name="variables">The collection of variables' values.</param>
-        /// <param name="functions">The collection of user functions.</param>
-        public ExpressionParameters(AngleMeasurement angleMeasurement, ParameterCollection variables, FunctionCollection functions)
-        {
-            AngleMeasurement = angleMeasurement;
             Variables = variables;
             Functions = functions;
         }
-
-        /// <summary>
-        /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="AngleMeasurement"/>.
-        /// </summary>
-        /// <param name="angleMeasurement">The angle measurement.</param>
-        /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(AngleMeasurement angleMeasurement) =>
-            new ExpressionParameters(angleMeasurement);
 
         /// <summary>
         /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="ParameterCollection"/>.
         /// </summary>
         /// <param name="parameters">The collection of variables' values.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(ParameterCollection parameters) =>
-            new ExpressionParameters(parameters);
+        public static implicit operator ExpressionParameters(ParameterCollection parameters)
+            => new ExpressionParameters(parameters);
 
         /// <summary>
         /// Creates a <see cref="ExpressionParameters"/> from the specified <see cref="FunctionCollection"/>.
         /// </summary>
         /// <param name="functions">The collection of user functions.</param>
         /// <returns>The created <see cref="ExpressionParameters"/>.</returns>
-        public static implicit operator ExpressionParameters(FunctionCollection functions) =>
-            new ExpressionParameters(functions);
-
-        /// <summary>
-        /// Gets or sets the angle measurement.
-        /// </summary>
-        /// <value>
-        /// The angle measurement.
-        /// </value>
-        public AngleMeasurement AngleMeasurement { get; set; }
+        public static implicit operator ExpressionParameters(FunctionCollection functions)
+            => new ExpressionParameters(functions);
 
         /// <summary>
         /// Gets the collection of variables' values.

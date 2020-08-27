@@ -13,9 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Linq;
 using xFunc.Maths.Tokenization;
-using Xunit;
 
 namespace xFunc.Tests.Tokenization
 {
@@ -29,36 +27,6 @@ namespace xFunc.Tests.Tokenization
         }
 
         protected TokensBuilder Builder()
-        {
-            return new TokensBuilder();
-        }
-
-        protected void FuncTest(string functionName)
-        {
-            var tokens = lexer.Tokenize($"{functionName}(3)");
-            var expected = Builder()
-                .Id(functionName)
-                .OpenParenthesis()
-                .Number(3)
-                .CloseParenthesis()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
-
-        protected void FuncBinaryTest(string functionName)
-        {
-            var tokens = lexer.Tokenize($"{functionName}(1, 2)");
-            var expected = Builder()
-                .Id(functionName)
-                .OpenParenthesis()
-                .Number(1)
-                .Comma()
-                .Number(2)
-                .CloseParenthesis()
-                .Tokens;
-
-            Assert.Equal(expected, tokens.ToList());
-        }
+            => new TokensBuilder();
     }
 }

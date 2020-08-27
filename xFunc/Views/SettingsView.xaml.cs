@@ -12,12 +12,11 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using xFunc.Maths;
-using xFunc.Maths.Expressions;
 using xFunc.Properties;
 
 namespace xFunc.Views
@@ -44,7 +43,6 @@ namespace xFunc.Views
             RememberNumberAndAngle = Settings.Default.RememberBaseAndAngle;
             if (!RememberNumberAndAngle)
             {
-                Angle = Settings.Default.AngleMeasurement;
                 Base = Settings.Default.NumberBase;
             }
             MaxCountOfExps = Settings.Default.MaxCountOfExpressions;
@@ -74,122 +72,56 @@ namespace xFunc.Views
 
         public string ProgramLanguage
         {
-            get
-            {
-                return (string)this.langComboBox.SelectedValue;
-            }
-            internal set
-            {
-                this.langComboBox.SelectedValue = value;
-            }
+            get => (string)this.langComboBox.SelectedValue;
+            internal set => this.langComboBox.SelectedValue = value;
         }
 
         public bool RememberStateAndPosition
         {
-            get
-            {
-                return this.positionCheckBox.IsChecked.Value;
-            }
-            internal set
-            {
-                this.positionCheckBox.IsChecked = value;
-            }
+            get => this.positionCheckBox.IsChecked.Value;
+            internal set => this.positionCheckBox.IsChecked = value;
         }
 
         public bool RememberRightToolBar
         {
-            get
-            {
-                return this.toolBarCheckBox.IsChecked.Value;
-            }
-            internal set
-            {
-                this.toolBarCheckBox.IsChecked = value;
-            }
+            get => this.toolBarCheckBox.IsChecked.Value;
+            internal set => this.toolBarCheckBox.IsChecked = value;
         }
 
         public bool RememberNumberAndAngle
         {
-            get
-            {
-                return this.numAndAngleCheckBox.IsChecked.Value;
-            }
-            internal set
-            {
-                this.numAndAngleCheckBox.IsChecked = value;
-            }
-        }
-
-        public AngleMeasurement Angle
-        {
-            get
-            {
-                return (AngleMeasurement)this.angleComboBox.SelectedValue;
-            }
-            internal set
-            {
-                this.angleComboBox.SelectedValue = value;
-            }
+            get => this.numAndAngleCheckBox.IsChecked.Value;
+            internal set => this.numAndAngleCheckBox.IsChecked = value;
         }
 
         public NumeralSystem Base
         {
-            get
-            {
-                return (NumeralSystem)this.baseComboBox.SelectedValue;
-            }
-            internal set
-            {
-                this.baseComboBox.SelectedValue = value;
-            }
+            get => (NumeralSystem)this.baseComboBox.SelectedValue;
+            internal set => this.baseComboBox.SelectedValue = value;
         }
 
         public int MaxCountOfExps
         {
-            get
-            {
-                return int.Parse(this.maxCountOfExpsTextBox.Text);
-            }
-            internal set
-            {
-                this.maxCountOfExpsTextBox.Text = value.ToString();
-            }
+            get => int.Parse(this.maxCountOfExpsTextBox.Text);
+            internal set => this.maxCountOfExpsTextBox.Text = value.ToString();
         }
 
         public Color ChartColor
         {
-            get
-            {
-                return this.chartColorGallery.SelectedColor.Value;
-            }
-            internal set
-            {
-                this.chartColorGallery.SelectedColor = value;
-            }
+            get => this.chartColorGallery.SelectedColor.Value;
+            internal set => this.chartColorGallery.SelectedColor = value;
         }
 
         public bool SaveUserFunctions
         {
-            get
-            {
-                return this.saveUserFuncCheckBox.IsChecked.Value;
-            }
-            internal set
-            {
-                this.saveUserFuncCheckBox.IsChecked = value;
-            }
+            get => this.saveUserFuncCheckBox.IsChecked.Value;
+            internal set => this.saveUserFuncCheckBox.IsChecked = value;
         }
 
         public bool SaveDump
         {
-            get
-            {
-                return this.saveDumpCheckBox.IsChecked.Value;
-            }
-            internal set
-            {
-                this.saveDumpCheckBox.IsChecked = value;
-            }
+            get => this.saveDumpCheckBox.IsChecked.Value;
+            internal set => this.saveDumpCheckBox.IsChecked = value;
         }
 
     }

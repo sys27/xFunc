@@ -18,6 +18,7 @@
 using System.Globalization;
 using System.Text;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -34,13 +35,6 @@ namespace xFunc.Maths.Analyzers.Formatters
     /// <seealso cref="IFormatter" />
     public class CommonFormatter : IFormatter
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommonFormatter"/> class.
-        /// </summary>
-        public CommonFormatter()
-        {
-        }
-
         private string ToString(UnaryExpression exp, string format)
         {
             var arg = exp.Argument.Analyze(this);
@@ -268,6 +262,56 @@ namespace xFunc.Maths.Analyzers.Formatters
         public string Analyze(Number exp)
         {
             return exp.Value.ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(AngleNumber exp)
+        {
+            return exp.Value.ToString();
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(ToDegree exp)
+        {
+            return ToString(exp, "todegree({0})");
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(ToRadian exp)
+        {
+            return ToString(exp, "toradian({0})");
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(ToGradian exp)
+        {
+            return ToString(exp, "togradian({0})");
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(ToNumber exp)
+        {
+            return ToString(exp, "tonumber({0})");
         }
 
         /// <summary>

@@ -21,6 +21,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -38,13 +39,6 @@ namespace xFunc.Maths.Analyzers
     /// <seealso cref="ISimplifier" />
     public class Simplifier : ISimplifier
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Simplifier"/> class.
-        /// </summary>
-        public Simplifier()
-        {
-        }
-
         private T AnalyzeUnary<T>(T exp) where T : UnaryExpression
         {
             exp.Argument = exp.Argument.Analyze(this);
@@ -566,6 +560,84 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         [ExcludeFromCodeCoverage]
         public IExpression Analyze(Number exp) => exp;
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public IExpression Analyze(AngleNumber exp) => exp;
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public IExpression Analyze(ToDegree exp)
+        {
+            exp = AnalyzeUnary(exp);
+
+            return exp.Argument switch
+            {
+                Number number => Angle.Degree(number.Value).AsExpression(),
+                AngleNumber({ Unit: AngleUnit.Degree }) number => number,
+                AngleNumber(var angle) => angle.ToDegree().AsExpression(),
+                _ => exp,
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public IExpression Analyze(ToRadian exp)
+        {
+            exp = AnalyzeUnary(exp);
+
+            return exp.Argument switch
+            {
+                Number number => Angle.Radian(number.Value).AsExpression(),
+                AngleNumber({ Unit: AngleUnit.Radian }) number => number,
+                AngleNumber(var angle) => angle.ToRadian().AsExpression(),
+                _ => exp,
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public IExpression Analyze(ToGradian exp)
+        {
+            exp = AnalyzeUnary(exp);
+
+            return exp.Argument switch
+            {
+                Number number => Angle.Gradian(number.Value).AsExpression(),
+                AngleNumber({ Unit: AngleUnit.Gradian }) number => number,
+                AngleNumber(var angle) => angle.ToGradian().AsExpression(),
+                _ => exp,
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public IExpression Analyze(ToNumber exp)
+        {
+            exp = AnalyzeUnary(exp);
+
+            return exp.Argument switch
+            {
+                AngleNumber(var angle) => new Number(angle.Value),
+                _ => exp,
+            };
+        }
 
         /// <summary>
         /// Analyzes the specified expression.

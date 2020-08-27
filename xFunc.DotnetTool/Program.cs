@@ -51,8 +51,6 @@ namespace xFunc.DotnetTool
         {
             Run(options, () =>
             {
-                processor.Parameters.AngleMeasurement = options.Angle;
-
                 var result = processor.Solve(options.StringExpression);
                 Console.WriteLine(result);
             });
@@ -70,21 +68,6 @@ namespace xFunc.DotnetTool
                     stringExpression == "#exit")
                 {
                     break;
-                }
-                else if (stringExpression == "#degree")
-                {
-                    processor.Parameters.AngleMeasurement = AngleMeasurement.Degree;
-                    continue;
-                }
-                else if (stringExpression == "#radian")
-                {
-                    processor.Parameters.AngleMeasurement = AngleMeasurement.Radian;
-                    continue;
-                }
-                else if (stringExpression == "#gradian")
-                {
-                    processor.Parameters.AngleMeasurement = AngleMeasurement.Gradian;
-                    continue;
                 }
 
                 Run(options, () =>

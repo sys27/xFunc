@@ -17,7 +17,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using xFunc.Maths;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
@@ -70,8 +69,7 @@ namespace xFunc.Views
             {
                 try
                 {
-                    var userFunc = processor.Parse(view.FunctionName) as UserFunction;
-                    if (userFunc == null)
+                    if (!(processor.Parse(view.FunctionName) is UserFunction userFunc))
                     {
                         MessageBox.Show(this, Resource.AddFuncError, Resource.ErrorHeader, MessageBoxButton.OK, MessageBoxImage.Warning);
 

@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using xFunc.Maths;
-using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
@@ -159,26 +159,14 @@ namespace xFunc.Views
 
         public string Status
         {
-            get
-            {
-                return (string)GetValue(StatusProperty);
-            }
-            set
-            {
-                SetValue(StatusProperty, value);
-            }
+            get => (string)GetValue(StatusProperty);
+            set => SetValue(StatusProperty, value);
         }
 
         public TruthTablePresenter Presenter
         {
-            get
-            {
-                return presenter;
-            }
-            set
-            {
-                presenter = value;
-            }
+            get => presenter;
+            set => presenter = value;
         }
 
     }

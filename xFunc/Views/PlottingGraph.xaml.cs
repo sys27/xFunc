@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -42,7 +43,7 @@ namespace xFunc.Views
 
         public PlottingGraph()
         {
-            this.parameters = new ExpressionParameters(AngleMeasurement.Radian, new ParameterCollection { { "x", 0 } });
+            this.parameters = new ExpressionParameters(new ParameterCollection { { "x", 0 } });
 
             InitializeComponent();
         }

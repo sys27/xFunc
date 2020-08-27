@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -25,27 +26,12 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class ArccosTest
     {
         [Fact]
-        public void ExecuteRadianTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Arccos(new Number(1));
+            var expected = Angle.Radian(0);
 
-            Assert.Equal(0.0, exp.Execute(AngleMeasurement.Radian));
-        }
-
-        [Fact]
-        public void ExecuteDegreeTest()
-        {
-            var exp = new Arccos(new Number(1));
-
-            Assert.Equal(0.0, exp.Execute(AngleMeasurement.Degree));
-        }
-
-        [Fact]
-        public void ExecuteGradianTest()
-        {
-            var exp = new Arccos(new Number(1));
-
-            Assert.Equal(0.0, exp.Execute(AngleMeasurement.Gradian));
+            Assert.Equal(expected, exp.Execute());
         }
 
         [Fact]

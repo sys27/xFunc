@@ -18,6 +18,7 @@
 
 using System.Linq;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -34,13 +35,6 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// <seealso cref="IAnalyzer{ResultType}" />
     public class TypeAnalyzer : ITypeAnalyzer
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TypeAnalyzer"/> class.
-        /// </summary>
-        public TypeAnalyzer()
-        {
-        }
-
         private ResultTypes CheckTrigonometric(UnaryExpression exp)
         {
             var result = exp.Argument.Analyze(this);
@@ -49,8 +43,22 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             {
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.Number,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-                _ => ResultTypes.NumberAndComplex.ThrowFor(result),
+                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
+            };
+        }
+
+        private ResultTypes CheckInverseTrigonometric(UnaryExpression exp)
+        {
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.AngleNumber,
+                ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
+                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
             };
         }
 
@@ -146,15 +154,16 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public ResultTypes Analyze(Abs exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined)
-                return ResultTypes.Undefined;
 
-            if (result == ResultTypes.Number ||
-                result == ResultTypes.ComplexNumber ||
-                result == ResultTypes.Vector)
-                return ResultTypes.Number;
-
-            throw new ParameterTypeMismatchException(ResultTypes.NumberAndComplex | ResultTypes.Vector, result);
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                ResultTypes.ComplexNumber => ResultTypes.Number,
+                ResultTypes.Vector => ResultTypes.Number,
+                _ => throw new ParameterTypeMismatchException(ResultTypes.NumberOrComplex | ResultTypes.Vector, result),
+            };
         }
 
         /// <summary>
@@ -174,6 +183,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
+                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+
                 (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
@@ -184,8 +197,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
 
-                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberAndComplex.ThrowForLeft(leftResult),
-                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberAndComplex.ThrowForRight(rightResult),
+                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
+                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
 
                 (_, ResultTypes.Vector) => ResultTypes.Vector.ThrowForLeft(leftResult),
                 (ResultTypes.Vector, _) => ResultTypes.Vector.ThrowForRight(rightResult),
@@ -205,10 +218,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public ResultTypes Analyze(Ceil exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.Number)
-                return ResultTypes.Number;
 
-            return ResultTypes.Number.ThrowFor(result);
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.Number.ThrowFor(result),
+            };
         }
 
         /// <summary>
@@ -267,6 +284,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
+                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+
                 (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
@@ -274,8 +295,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
 
-                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberAndComplex.ThrowForLeft(leftResult),
-                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberAndComplex.ThrowForRight(rightResult),
+                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
+                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
 
                 _ => throw new ParameterTypeMismatchException(),
             };
@@ -295,7 +316,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-                _ => ResultTypes.NumberAndComplex.ThrowFor(result),
+                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
             };
         }
 
@@ -321,10 +342,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public ResultTypes Analyze(Floor exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.Number)
-                return ResultTypes.Number;
 
-            return ResultTypes.Number.ThrowFor(result);
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.Number.ThrowFor(result),
+            };
         }
 
         /// <summary>
@@ -393,7 +418,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-                _ => ResultTypes.NumberAndComplex.ThrowFor(result),
+                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
             };
         }
 
@@ -411,7 +436,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-                _ => ResultTypes.NumberAndComplex.ThrowFor(result),
+                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
             };
         }
 
@@ -433,7 +458,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
                 (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
 
-                (ResultTypes.Number, _) => ResultTypes.NumberAndComplex.ThrowForRight(rightResult),
+                (ResultTypes.Number, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
 
                 _ => ResultTypes.Number.ThrowForLeft(leftResult),
             };
@@ -482,6 +507,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
+                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+
                 (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
@@ -499,8 +528,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
 
-                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberAndComplex.ThrowForLeft(leftResult),
-                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberAndComplex.ThrowForRight(rightResult),
+                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
+                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
 
                 (_, ResultTypes.Vector) => throw new BinaryParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Matrix | ResultTypes.Vector, leftResult, BinaryParameterType.Left),
                 (ResultTypes.Vector, _) => throw new BinaryParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Matrix | ResultTypes.Vector, rightResult, BinaryParameterType.Right),
@@ -517,9 +546,81 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Number exp)
+        public ResultTypes Analyze(Number exp) => ResultTypes.Number;
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(AngleNumber exp)
+            => ResultTypes.AngleNumber;
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(ToDegree exp)
         {
-            return ResultTypes.Number;
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Number => ResultTypes.AngleNumber,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(ToRadian exp)
+        {
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Number => ResultTypes.AngleNumber,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(ToGradian exp)
+        {
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Number => ResultTypes.AngleNumber,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(ToNumber exp)
+        {
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.AngleNumber => ResultTypes.Number,
+                _ => ResultTypes.AngleNumber.ThrowFor(result),
+            };
         }
 
         /// <summary>
@@ -627,6 +728,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Number,
 
+                (ResultTypes.Number, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.Number) => ResultTypes.AngleNumber,
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.AngleNumber,
+
                 (ResultTypes.Number, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.Number) => ResultTypes.ComplexNumber,
                 (ResultTypes.ComplexNumber, ResultTypes.ComplexNumber) => ResultTypes.ComplexNumber,
@@ -637,8 +742,8 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
 
-                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberAndComplex.ThrowForLeft(leftResult),
-                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberAndComplex.ThrowForRight(rightResult),
+                (_, ResultTypes.ComplexNumber) => ResultTypes.NumberOrComplex.ThrowForLeft(leftResult),
+                (ResultTypes.ComplexNumber, _) => ResultTypes.NumberOrComplex.ThrowForRight(rightResult),
 
                 (_, ResultTypes.Vector) => ResultTypes.Vector.ThrowForLeft(leftResult),
                 (ResultTypes.Vector, _) => ResultTypes.Vector.ThrowForRight(rightResult),
@@ -663,8 +768,9 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             {
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
                 ResultTypes.ComplexNumber => ResultTypes.ComplexNumber,
-                _ => ResultTypes.NumberAndComplex.ThrowFor(result),
+                _ => ResultTypes.NumberOrComplex.ThrowFor(result),
             };
         }
 
@@ -752,10 +858,10 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Matrix exp)
         {
+            // TODO: pool?
             var results = exp.Vectors.Select(x => x.Analyze(this)).ToList();
-            for (var i = 0; i < results.Count; i++)
-                if (results[i] == ResultTypes.Undefined)
-                    return ResultTypes.Undefined;
+            if (results.Any(result => result == ResultTypes.Undefined))
+                return ResultTypes.Undefined;
 
             return ResultTypes.Matrix;
         }
@@ -945,7 +1051,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arccos exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -955,7 +1061,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arccot exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -965,7 +1071,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arccsc exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -975,7 +1081,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arcsec exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -985,7 +1091,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arcsin exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -995,7 +1101,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arctan exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -1069,7 +1175,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arcosh exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -1079,7 +1185,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arcoth exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -1089,7 +1195,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arcsch exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -1099,7 +1205,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arsech exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -1109,7 +1215,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Arsinh exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>
@@ -1119,7 +1225,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Artanh exp)
         {
-            return CheckTrigonometric(exp);
+            return CheckInverseTrigonometric(exp);
         }
 
         /// <summary>

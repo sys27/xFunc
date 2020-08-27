@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -46,13 +47,13 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="radian">The calculation result of argument.</param>
+        /// <param name="angle">The angle.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(double radian) =>
-            MathExtensions.Sec(radian);
+        protected override double ExecuteInternal(Angle angle) =>
+            MathExtensions.Sec(angle.Value);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).

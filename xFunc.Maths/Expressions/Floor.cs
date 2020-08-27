@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions
 {
@@ -55,10 +56,13 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is double number)
-                return Math.Floor(number);
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                double number => Math.Floor(number),
+                Angle angle => Angle.Floor(angle),
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>

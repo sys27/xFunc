@@ -16,6 +16,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -206,6 +207,51 @@ namespace xFunc.Maths.Analyzers
         /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(Number exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(AngleNumber exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToDegree exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToRadian exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToGradian exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(ToNumber exp, TContext context)
             => throw new NotSupportedException();
 
         /// <summary>

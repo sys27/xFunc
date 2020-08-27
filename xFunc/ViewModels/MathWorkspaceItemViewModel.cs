@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using xFunc.Maths.Results;
 using xFunc.Presenters;
 
@@ -21,55 +21,21 @@ namespace xFunc.ViewModels
 
     public class MathWorkspaceItemViewModel
     {
-
-        private int index;
-        private MathWorkspaceItem item;
-
         public MathWorkspaceItemViewModel(int index, MathWorkspaceItem item)
         {
-            this.index = index;
-            this.item = item;
+            this.Index = index;
+            this.Item = item;
         }
 
-        public int Index
-        {
-            get
-            {
-                return index;
-            }
-        }
+        public int Index { get; }
 
-        public MathWorkspaceItem Item
-        {
-            get
-            {
-                return item;
-            }
-        }
+        public MathWorkspaceItem Item { get; }
 
-        public string StringExpression
-        {
-            get
-            {
-                return item.StringExpression;
-            }
-        }
+        public string StringExpression => Item.StringExpression;
 
-        public IResult Result
-        {
-            get
-            {
-                return item.Result;
-            }
-        }
+        public IResult Result => Item.Result;
 
-        public string Answer
-        {
-            get
-            {
-                return item.Answer;
-            }
-        }
+        public string Answer => Item.Answer;
 
     }
 

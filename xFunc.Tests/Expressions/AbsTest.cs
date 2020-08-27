@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -32,6 +33,15 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
+        public void ExecuteTestAngleNumber()
+        {
+            var exp = new Abs(Angle.Degree(-10).AsExpression());
+            var expected = Angle.Degree(10);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
         public void ExecuteTestComplexNumber()
         {
             var exp = new Abs(new ComplexNumber(4, 2));
@@ -44,7 +54,7 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Abs(new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(5), new Number(4), new Number(6), new Number(7) }));
 
-            Assert.Equal(11.2249721603218241567, (double) exp.Execute(), 15);
+            Assert.Equal(11.2249721603218241567, (double)exp.Execute(), 15);
         }
 
         [Fact]

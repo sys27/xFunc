@@ -138,7 +138,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
             if (ReferenceEquals(this, obj))
                 return true;
 
-            if (obj.GetType() != this.GetType())
+            if (typeof(Bool) != obj.GetType())
                 return false;
 
             return Equals((Bool)obj);

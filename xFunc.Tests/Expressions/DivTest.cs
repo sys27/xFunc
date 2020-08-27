@@ -13,8 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -65,6 +67,52 @@ namespace xFunc.Tests.Expressions
             var expected = new Complex(0, 2);
 
             Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void DivNumberAndDegree()
+        {
+            var exp = new Div(new Number(10), Angle.Degree(2).AsExpression());
+            var actual = exp.Execute();
+            var expected = Angle.Degree(5);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DivRadianAndNumber()
+        {
+            var exp = new Div(Angle.Radian(10).AsExpression(), new Number(2));
+            var actual = exp.Execute();
+            var expected = Angle.Radian(5);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DivDegreeAndRadian()
+        {
+            var exp = new Div(
+                Angle.Radian(Math.PI).AsExpression(),
+                Angle.Degree(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = Angle.Degree(18);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DivGradianAndGradian()
+        {
+            var exp = new Div(
+                Angle.Gradian(20).AsExpression(),
+                Angle.Gradian(10).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = Angle.Gradian(2);
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]

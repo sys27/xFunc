@@ -15,6 +15,7 @@
 
 using System.Collections.Generic;
 using System.Numerics;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Trigonometric
 {
@@ -46,12 +47,11 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="radian">The calculation result of argument.</param>
+        /// <param name="angle">The angle.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        /// <seealso cref="ExpressionParameters" />
-        protected abstract double ExecuteInternal(double radian);
+        protected abstract double ExecuteInternal(Angle angle);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -76,7 +76,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             return result switch
             {
-                double number => ExecuteInternal(number.ToRadians(parameters?.AngleMeasurement)),
+                double number => ExecuteInternal(Angle.Degree(number).ToRadian()),
+                Angle angle => ExecuteInternal(angle.ToRadian()),
                 Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

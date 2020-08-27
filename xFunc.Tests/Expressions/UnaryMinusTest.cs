@@ -16,6 +16,7 @@
 using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
@@ -25,7 +26,7 @@ namespace xFunc.Tests.Expressions
     public class UnaryMinusTest
     {
         [Fact]
-        public void ExecuteTest1()
+        public void ExecuteNumberTest()
         {
             var exp = new UnaryMinus(new Number(10));
 
@@ -33,7 +34,16 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteTest2()
+        public void ExecuteAngleNumberTest()
+        {
+            var exp = new UnaryMinus(Angle.Degree(10).AsExpression());
+            var expected = Angle.Degree(-10);
+
+            Assert.Equal(expected, exp.Execute());
+        }
+
+        [Fact]
+        public void ExecuteComplexTest()
         {
             var complex = new Complex(2, 3);
             var exp = new UnaryMinus(new ComplexNumber(complex));

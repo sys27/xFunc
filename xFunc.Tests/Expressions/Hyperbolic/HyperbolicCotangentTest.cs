@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -25,10 +26,19 @@ namespace xFunc.Tests.Expressions.Hyperbolic
     public class HyperbolicCotangentTest
     {
         [Fact]
-        public void ExecuteRadianTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Coth(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Radian);
+            var result = (double)exp.Execute();
+
+            Assert.Equal(57.30159715911299, result, 15);
+        }
+
+        [Fact]
+        public void ExecuteRadianTest()
+        {
+            var exp = new Coth(Angle.Radian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(1.3130352854993312, result, 15);
         }
@@ -36,8 +46,8 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteDegreeTest()
         {
-            var exp = new Coth(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Degree);
+            var exp = new Coth(Angle.Degree(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(57.30159715911299, result, 15);
         }
@@ -45,8 +55,8 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Coth(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Gradian);
+            var exp = new Coth(Angle.Gradian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(63.66721313838742, result, 15);
         }

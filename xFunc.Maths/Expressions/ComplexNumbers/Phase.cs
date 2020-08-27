@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.ComplexNumbers
 {
@@ -57,12 +58,9 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         {
             var result = Argument.Execute(parameters);
 
-            return (result, parameters?.AngleMeasurement) switch
+            return result switch
             {
-                (Complex complex, AngleMeasurement.Degree) => complex.Phase * 180 / Math.PI,
-                (Complex complex, AngleMeasurement.Radian) => complex.Phase,
-                (Complex complex, AngleMeasurement.Gradian) => complex.Phase * 200 / Math.PI,
-                (Complex complex, _) => complex.Phase * 180 / Math.PI,
+                Complex complex => Angle.Radian(complex.Phase),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }
@@ -95,7 +93,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Phase(Argument.Clone());
+        public override IExpression Clone()
+            => new Phase(Argument.Clone());
     }
 }

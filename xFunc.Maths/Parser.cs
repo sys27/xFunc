@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Resources;
 using xFunc.Maths.Tokenization.Tokens;
@@ -662,6 +663,16 @@ namespace xFunc.Maths
             var number = tokenReader.GetCurrent<NumberToken>();
             if (number == null)
                 return null;
+
+            if (tokenReader.Symbol(SymbolToken.Degree) ||
+                tokenReader.Keyword(KeywordToken.Degree) != null)
+                return CreateAngleNumber(number, AngleUnit.Degree);
+
+            if (tokenReader.Keyword(KeywordToken.Radian) != null)
+                return CreateAngleNumber(number, AngleUnit.Radian);
+
+            if (tokenReader.Keyword(KeywordToken.Gradian) != null)
+                return CreateAngleNumber(number, AngleUnit.Gradian);
 
             return CreateNumber(number);
         }

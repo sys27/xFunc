@@ -16,6 +16,7 @@
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
@@ -31,6 +32,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Abs(new Number(-2));
 
             Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestAbsAngleNumber()
+        {
+            var exp = new Abs(Angle.Degree(1).AsExpression());
+
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -66,213 +75,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestAddTwoNumberTest()
-        {
-            var add = new Add(new Number(1), new Number(2));
-
-            Test(add, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestAddNumberVarTest()
-        {
-            var add = new Add(new Number(1), Variable.X);
-
-            Test(add, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddComplicatedTest()
-        {
-            var add = new Add(new Mul(new Number(1), new Number(2)), Variable.X);
-
-            Test(add, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddTwoVectorTest()
-        {
-            var add = new Add(new Vector(new[] { new Number(1) }),
-                new Vector(new[] { new Number(2) }));
-
-            Test(add, ResultTypes.Vector);
-        }
-
-        [Fact]
-        public void TestAddTwoMatrixTest()
-        {
-            var add = new Add(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Test(add, ResultTypes.Matrix);
-        }
-
-        [Fact]
-        public void TestAddNumberVectorTest()
-        {
-            var exp = new Add(new Number(1), new Vector(new[] { new Number(1) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddBoolVectorException()
-        {
-            var exp = new Add(Bool.True, new Vector(new[] { new Number(1) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddVectorNumberTest()
-        {
-            var exp = new Add(new Vector(new[] { new Number(1) }), Bool.True);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddNumberMatrixTest()
-        {
-            var exp = new Add(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddMatrixNumberTest()
-        {
-            var exp = new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddVectorMatrixTest()
-        {
-            var exp = new Add(new Vector(new[] { new Number(1) }), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddMatrixVectorTest()
-        {
-            var exp = new Add(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Vector(new[] { new Number(1) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestAddNumberComplexNumberTest()
-        {
-            var add = new Add(new Number(1), new ComplexNumber(2, 1));
-
-            Test(add, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestAddBoolComplexNumberException()
-        {
-            var add = new Add(Bool.True, new ComplexNumber(2, 1));
-
-            TestBinaryException(add);
-        }
-
-        [Fact]
-        public void TestAddComplexNumberNumberTest()
-        {
-            var add = new Add(new ComplexNumber(1, 3), new Number(2));
-
-            Test(add, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestAddComplexNumberBoolException()
-        {
-            var add = new Add(new ComplexNumber(1, 3), Bool.True);
-
-            TestBinaryException(add);
-        }
-
-        [Fact]
-        public void TestAddComplexNumberComplexNumberTest()
-        {
-            var add = new Add(new ComplexNumber(1, 3), new ComplexNumber(2, 5));
-
-            Test(add, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestAddNumberAllTest()
-        {
-            var exp = new Add(new Number(1), new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddComplexNumberAllTest()
-        {
-            var exp = new Add(new ComplexNumber(3, 2), new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddVectorAllTest()
-        {
-            var vector = new Vector(new[] { new Number(1) });
-            var exp = new Add(vector, new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddMatrixAllTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(1) })
-            });
-            var exp = new Add(matrix, new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddNumberSqrtComplexTest()
-        {
-            var exp = new Add(new Number(2), new Sqrt(new Number(-9)));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddTwoVarTest()
-        {
-            var exp = new Add(Variable.X, Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddThreeVarTest()
-        {
-            var exp = new Add(new Add(Variable.X, Variable.X), Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestAddException()
-        {
-            var exp = new Add(Bool.False, Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
         public void TestCeilNumber()
         {
             var exp = new Ceil(new Number(-2));
@@ -281,11 +83,19 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestCeilAngle()
+        {
+            var exp = new Ceil(Angle.Degree(5.5).AsExpression());
+
+            Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
         public void TestCeilVariable()
         {
             var exp = new Ceil(Variable.X);
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -342,102 +152,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Derivative(diff, simp, Variable.X, Variable.X, new Number(2));
 
             Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestDivNumberNumberTest()
-        {
-            var exp = new Div(new Number(1), new Number(2));
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestDivComplexNumberComplexNumberTest()
-        {
-            var exp = new Div(new ComplexNumber(3, 2), new ComplexNumber(2, 4));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestDivNumberComplexNumberTest()
-        {
-            var exp = new Div(new Number(3), new ComplexNumber(2, 4));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestDivComplexNumberNumberTest()
-        {
-            var exp = new Div(new ComplexNumber(3, 2), new Number(2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestDivComplexNumberBoolException()
-        {
-            var exp = new Div(new ComplexNumber(3, 2), Bool.True);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestDivBoolComplexNumberException()
-        {
-            var exp = new Div(Bool.True, new ComplexNumber(3, 2));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestDivNumberBoolException()
-        {
-            var exp = new Div(new Number(3), Bool.True);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestDivBoolNumberException()
-        {
-            var exp = new Div(Bool.True, new Number(3));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestDivNumberSqrtComplexTest()
-        {
-            var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestDivTwoVarTest()
-        {
-            var exp = new Div(Variable.X, Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestDivThreeVarTest()
-        {
-            var exp = new Div(new Add(Variable.X, Variable.X), Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestDivException()
-        {
-            var exp = new Div(Bool.False, Bool.False);
-
-            TestException(exp);
         }
 
         [Fact]
@@ -501,7 +215,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Floor(Variable.X);
 
-            Test(exp, ResultTypes.Number);
+            Test(exp, ResultTypes.Undefined);
         }
 
         [Fact]
@@ -510,6 +224,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new Floor(new Number(10));
 
             Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestFloorAngle()
+        {
+            var exp = new Floor(Angle.Degree(5.5).AsExpression());
+
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -579,7 +301,10 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLCMnumber()
         {
-            var exp = new LCM(new[] { new Number(10), new Number(10), new Number(10) });
+            var exp = new LCM(new IExpression[]
+            {
+                new Number(10), new Number(10), new Number(10)
+            });
 
             Test(exp, ResultTypes.Number);
         }
@@ -737,171 +462,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestMulTwoNumberTest()
-        {
-            var mul = new Mul(new Number(1), new Number(2));
-
-            Test(mul, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestMulNumberVarTest()
-        {
-            var mul = new Mul(new Number(1), Variable.X);
-
-            Test(mul, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestMulNumberBoolTest()
-        {
-            var mul = new Mul(new Number(1), Bool.True);
-
-            TestBinaryException(mul);
-        }
-
-        [Fact]
-        public void TestMulBoolNumberTest()
-        {
-            var mul = new Mul(Bool.True, new Number(1));
-
-            TestBinaryException(mul);
-        }
-
-        [Fact]
-        public void TestMulVarNumberTest()
-        {
-            var mul = new Mul(Variable.X, new Number(1));
-
-            Test(mul, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestMulTwoMatrixTest()
-        {
-            var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Test(mul, ResultTypes.Matrix);
-        }
-
-        [Fact]
-        public void TestMulLeftMatrixRightException()
-        {
-            var mul = new Mul(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                Bool.False);
-
-            TestBinaryException(mul);
-        }
-
-        [Fact]
-        public void TestMulRightMatrixLeftException()
-        {
-            var mul = new Mul(Bool.False,
-                new Matrix(new[] { new Vector(new[] { new Number(1) }) }));
-
-            TestBinaryException(mul);
-        }
-
-        [Fact]
-        public void TestMulNumberVectorTest()
-        {
-            var mul = new Mul(new Number(1), new Vector(new[] { new Number(1) }));
-
-            Test(mul, ResultTypes.Vector);
-        }
-
-        [Fact]
-        public void TestMulNumberMatrixTest()
-        {
-            var mul = new Mul(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Test(mul, ResultTypes.Matrix);
-        }
-
-        [Fact]
-        public void TestMulVectorMatrixTest()
-        {
-            var mul = new Mul(new Vector(new[] { new Number(1) }),
-                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Test(mul, ResultTypes.Matrix);
-        }
-
-        [Fact]
-        public void TestMulVectorNumber()
-        {
-            var mul = new Mul(new Vector(new[] { new Number(1) }),
-                new Number(2));
-
-            Test(mul, ResultTypes.Vector);
-        }
-
-        [Fact]
-        public void TestMulVectorBoolException()
-        {
-            var mul = new Mul(new Vector(new[] { new Number(1) }), Bool.False);
-
-            TestBinaryException(mul);
-        }
-
-        [Fact]
-        public void TestMulBoolVectorException()
-        {
-            var mul = new Mul(Bool.False, new Vector(new[] { new Number(1) }));
-
-            TestBinaryException(mul);
-        }
-
-        [Fact]
-        public void TestMulComplexNumberComplexNumberTest()
-        {
-            var exp = new Mul(new ComplexNumber(2, 5), new ComplexNumber(3, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestMulComplexNumberNumberTest()
-        {
-            var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestMulComplexNumberBoolTest()
-        {
-            var exp = new Mul(new ComplexNumber(2, 5), Bool.True);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestMulNumberComplexNumberTest()
-        {
-            var exp = new Mul(new Number(2), new ComplexNumber(3, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestMulBoolComplexNumberTest()
-        {
-            var exp = new Mul(Bool.True, new ComplexNumber(2, 5));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void TestMulException()
-        {
-            var exp = new Mul(Bool.False, Bool.True);
-
-            TestException(exp);
-        }
-
-        [Fact]
         public void TestNumber()
         {
             Test(new Number(1), ResultTypes.Number);
@@ -1033,233 +593,6 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void SubTwoNumberTest()
-        {
-            var sub = new Sub(new Number(1), new Number(2));
-
-            Test(sub, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void SubNumberVarTest()
-        {
-            var sub = new Sub(new Number(1), Variable.X);
-
-            Test(sub, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubComplicatedTest()
-        {
-            var sub = new Sub(new Mul(new Number(1), new Number(2)), Variable.X);
-
-            Test(sub, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubTwoVectorTest()
-        {
-            var sub = new Sub(new Vector(new[] { new Number(1) }),
-                new Vector(new[] { new Number(2) }));
-
-            Test(sub, ResultTypes.Vector);
-        }
-
-        [Fact]
-        public void SubTwoMatrixTest()
-        {
-            var sub = new Sub(new Matrix(new[] { new Vector(new[] { new Number(1) }) }),
-                new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            Test(sub, ResultTypes.Matrix);
-        }
-
-        [Fact]
-        public void SubNumberVectorTest()
-        {
-            var exp = new Sub(new Number(1), new Vector(new[] { new Number(1) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubVectorNumberTest()
-        {
-            var exp = new Sub(new Vector(new[] { new Number(1) }), new Number(1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubNumberMatrixTest()
-        {
-            var exp = new Sub(new Number(1), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubMatrixNumberTest()
-        {
-            var exp = new Sub(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Number(1));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubVectorMatrixTest()
-        {
-            var exp = new Sub(new Vector(new[] { new Number(1) }), new Matrix(new[] { new Vector(new[] { new Number(2) }) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubMatrixVectorTest()
-        {
-            var exp = new Sub(new Matrix(new[] { new Vector(new[] { new Number(2) }) }), new Vector(new[] { new Number(1) }));
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubNumberComplexNumberTest()
-        {
-            var sub = new Sub(new Number(1), new ComplexNumber(2, 1));
-
-            Test(sub, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void SubComplexNumberNumberTest()
-        {
-            var sub = new Sub(new ComplexNumber(1, 3), new Number(2));
-
-            Test(sub, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void SubComplexNumberComplexNumberTest()
-        {
-            var sub = new Sub(new ComplexNumber(1, 3), new ComplexNumber(3, 5));
-
-            Test(sub, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void SubComplexNumberBoolException()
-        {
-            var sub = new Sub(new ComplexNumber(1, 3), Bool.True);
-
-            TestBinaryException(sub);
-        }
-
-        [Fact]
-        public void SubBoolComplexNumberException()
-        {
-            var sub = new Sub(Bool.True, new ComplexNumber(1, 3));
-
-            TestBinaryException(sub);
-        }
-
-        [Fact]
-        public void SubNumberAllTest()
-        {
-            var exp = new Sub(new Number(1), new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubComplexNumberAllTest()
-        {
-            var exp = new Sub(new ComplexNumber(3, 2), new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubVectorVectorTest()
-        {
-            var left = new Vector(new[] { new Number(3) });
-            var right = new Vector(new[] { new Number(1) });
-            var exp = new Sub(left, right);
-
-            Test(exp, ResultTypes.Vector);
-        }
-
-        [Fact]
-        public void SubVectorBoolTest()
-        {
-            var vector = new Vector(new[] { new Number(1) });
-            var exp = new Sub(vector, Bool.True);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubBoolVectorTest()
-        {
-            var vector = new Vector(new[] { new Number(1) });
-            var exp = new Sub(Bool.True, vector);
-
-            TestBinaryException(exp);
-        }
-
-        [Fact]
-        public void SubVectorAllTest()
-        {
-            var vector = new Vector(new[] { new Number(1) });
-            var exp = new Sub(vector, new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubMatrixAllTest()
-        {
-            var matrix = new Matrix(new[]
-            {
-                new Vector(new[] { new Number(1) })
-            });
-            var exp = new Sub(matrix, new UserFunction("f", new IExpression[1]));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubNumberComplexTest()
-        {
-            var exp = new Sub(new Number(2), new Sqrt(new Number(-9)));
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubTwoVarTest()
-        {
-            var exp = new Sub(Variable.X, Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void SubThreeVarTest()
-        {
-            var exp = new Sub(new Add(Variable.X, Variable.X), Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestSubBoolsException()
-        {
-            var exp = new Sub(Bool.False, Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
         public void TestUnaryMinusUndefined()
         {
             var exp = new UnaryMinus(Variable.X);
@@ -1273,6 +606,14 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
             var exp = new UnaryMinus(new Number(10));
 
             Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestUnaryMinusAngleNumber()
+        {
+            var exp = new UnaryMinus(Angle.Degree(10).AsExpression());
+
+            Test(exp, ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -1331,6 +672,78 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestSignException()
         {
             TestException(new Sign(Bool.False));
+        }
+
+        [Fact]
+        public void TestAngleNumber()
+        {
+            Test(Angle.Degree(10).AsExpression(), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToDegreeNumber()
+        {
+            Test(new ToDegree(new Number(10)), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToDegreeAngle()
+        {
+            Test(new ToDegree(Angle.Radian(10).AsExpression()), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToDegreeException()
+        {
+            TestException(new ToDegree(Bool.True));
+        }
+
+        [Fact]
+        public void TestToRadianNumber()
+        {
+            Test(new ToRadian(new Number(10)), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToRadianAngle()
+        {
+            Test(new ToRadian(Angle.Degree(10).AsExpression()), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToRadianException()
+        {
+            TestException(new ToRadian(Bool.True));
+        }
+
+        [Fact]
+        public void TestToGradianNumber()
+        {
+            Test(new ToGradian(new Number(10)), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToGradianAngle()
+        {
+            Test(new ToGradian(Angle.Radian(10).AsExpression()), ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestToGradianException()
+        {
+            TestException(new ToGradian(Bool.True));
+        }
+
+        [Fact]
+        public void TestToNumber()
+        {
+            Test(new ToNumber(Angle.Degree(10).AsExpression()), ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestToNumberException()
+        {
+            TestException(new ToNumber(Bool.True));
         }
     }
 }

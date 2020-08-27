@@ -22,6 +22,7 @@ using System.Numerics;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Tests
 {
@@ -35,7 +36,6 @@ namespace xFunc.Tests
             Assert.NotNull(processor.Parameters);
 
             Assert.Equal(NumeralSystem.Decimal, processor.NumeralSystem);
-            Assert.Equal(AngleMeasurement.Degree, processor.Parameters.AngleMeasurement);
         }
 
         [Fact]
@@ -158,6 +158,25 @@ namespace xFunc.Tests
             var result = processor.Solve<ExpressionResult>(strExp);
 
             Assert.Equal(new Number(1), result.Result);
+        }
+
+        [Fact]
+        public void SolveAngleTest()
+        {
+            var simplifier = new Mock<ISimplifier>();
+            var differentiator = new Mock<IDifferentiator>();
+
+            var strExp = "90 degree";
+
+            simplifier.Setup(s => s.Analyze(It.IsAny<Add>())).Returns<Add>(e => e);
+
+            var processor = new Processor(
+                simplifier.Object,
+                differentiator.Object);
+            var result = processor.Solve<AngleNumberResult>(strExp);
+            var expected = Angle.Degree(90);
+
+            Assert.Equal(expected, result.Result);
         }
 
         [Fact]

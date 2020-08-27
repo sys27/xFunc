@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -25,30 +26,13 @@ namespace xFunc.Tests.Expressions.Hyperbolic
     public class HyperbolicArsecantTest
     {
         [Fact]
-        public void ExecuteRadianTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Arsech(new Number(0.5));
-            var result = (double)exp.Execute(AngleMeasurement.Radian);
+            var result = exp.Execute();
+            var expected = Angle.Radian(1.3169578969248166);
 
-            Assert.Equal(1.3169578969248166, result, 15);
-        }
-
-        [Fact]
-        public void ExecuteDegreeTest()
-        {
-            var exp = new Arsech(new Number(0.5));
-            var result = (double)exp.Execute(AngleMeasurement.Degree);
-
-            Assert.Equal(75.45612929021688, result, 15);
-        }
-
-        [Fact]
-        public void ExecuteGradianTest()
-        {
-            var exp = new Arsech(new Number(0.5));
-            var result = (double)exp.Execute(AngleMeasurement.Gradian);
-
-            Assert.Equal(83.84014365579654, result, 15);
+            Assert.Equal(expected, result);
         }
 
         [Fact]

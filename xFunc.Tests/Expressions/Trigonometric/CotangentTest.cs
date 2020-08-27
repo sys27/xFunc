@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -25,10 +26,19 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class CotangentTest
     {
         [Fact]
-        public void ExecuteRadianTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Cot(new Number(1));
-            var actual = (double)exp.Execute(AngleMeasurement.Radian);
+            var actual = (double)exp.Execute();
+
+            Assert.Equal(57.28996163075943, actual, 15);
+        }
+
+        [Fact]
+        public void ExecuteRadianTest()
+        {
+            var exp = new Cot(Angle.Radian(1).AsExpression());
+            var actual = (double)exp.Execute();
 
             Assert.Equal(0.6420926159343308, actual, 15);
         }
@@ -36,8 +46,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteDegreeTest()
         {
-            var exp = new Cot(new Number(1));
-            var actual = (double)exp.Execute(AngleMeasurement.Degree);
+            var exp = new Cot(Angle.Degree(1).AsExpression());
+            var actual = (double)exp.Execute();
 
             Assert.Equal(57.28996163075943, actual, 15);
         }
@@ -45,8 +55,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Cot(new Number(1));
-            var actual =(double) exp.Execute(AngleMeasurement.Gradian);
+            var exp = new Cot(Angle.Gradian(1).AsExpression());
+            var actual =(double) exp.Execute();
 
             Assert.Equal(63.65674116287158, actual, 15);
         }

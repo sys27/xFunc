@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -25,10 +26,19 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class CosecantTest
     {
         [Fact]
-        public void ExecuteDegreeTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Csc(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Degree);
+            var result = (double)exp.Execute();
+
+            Assert.Equal(57.298688498550185, result, 15);
+        }
+
+        [Fact]
+        public void ExecuteDegreeTest()
+        {
+            var exp = new Csc(Angle.Degree(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(57.298688498550185, result, 15);
         }
@@ -36,8 +46,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteRadianTest()
         {
-            var exp = new Csc(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Radian);
+            var exp = new Csc(Angle.Radian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(1.1883951057781212, result, 15);
         }
@@ -45,8 +55,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Csc(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Gradian);
+            var exp = new Csc(Angle.Gradian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(63.664595306000564, result, 15);
         }

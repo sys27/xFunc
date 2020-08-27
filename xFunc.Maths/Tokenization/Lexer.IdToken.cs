@@ -43,6 +43,12 @@ namespace xFunc.Maths.Tokenization
                 token = True;
             else if (Compare(id, "false"))
                 token = False;
+            else if (Compare(id, "degrees") || Compare(id, "degree") || Compare(id, "deg"))
+                token = Degree;
+            else if (Compare(id, "radians") || Compare(id, "radian") || Compare(id, "rad"))
+                token = Radian;
+            else if (Compare(id, "gradians") || Compare(id, "gradian") || Compare(id, "grad"))
+                token = Gradian;
             else if (Compare(id, "def") || Compare(id, "define"))
                 token = Define;
             else if (Compare(id, "undef") || Compare(id, "undefine"))

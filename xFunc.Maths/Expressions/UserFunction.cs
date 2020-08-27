@@ -51,14 +51,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>The argument.</returns>
         public IExpression this[int index]
         {
-            get
-            {
-                return arguments[index];
-            }
-            set
-            {
-                arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => arguments[index];
+            set => arguments[index] = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -130,7 +124,7 @@ namespace xFunc.Maths.Expressions
                 newParameters[arg.Name] = (double)arguments[i].Execute(parameters);
             }
 
-            var expParam = new ExpressionParameters(parameters.AngleMeasurement, newParameters, parameters.Functions);
+            var expParam = new ExpressionParameters(newParameters, parameters.Functions);
             return parameters.Functions[this].Execute(expParam);
         }
 

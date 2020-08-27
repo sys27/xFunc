@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,66 +28,63 @@ namespace xFunc.Presenters
     public class TruthTablePresenter
     {
 
-        private Lexer lexer;
-        private Parser parser;
-        private IExpression expression;
-        private IEnumerable<IExpression> expressions;
-        private ParameterCollection parameters;
+        private readonly Lexer lexer;
+        private readonly Parser parser;
+
         private List<TruthTableRowViewModel> table;
 
         public TruthTablePresenter()
         {
+            lexer = new Lexer();
             parser = new Parser();
         }
 
         private void SetBits(int bits, int parametersCount)
         {
             for (int i = 0; i < parametersCount; i++)
-                parameters[i] = ((bits >> i) & 1) == 1 ? true : false;
+                Parameters[i] = ((bits >> i) & 1) == 1;
         }
 
         public void Generate(string strExp)
         {
-            lexer = new Lexer();
-
             var tokens = lexer.Tokenize(strExp);
 
-            expression = parser.Parse(tokens);
+            Expression = parser.Parse(tokens);
 
-            expressions = Helpers.ConvertExpressionToCollection(expression);
-            parameters = Helpers.GetParameters(tokens);
+            Expressions = Helpers.ConvertExpressionToCollection(Expression);
+            Parameters = Helpers.GetParameters(tokens);
             table = new List<TruthTableRowViewModel>();
 
-            var parametersCount = parameters.Count();
+            var parametersCount = Parameters.Count();
             for (int i = (int)Math.Pow(2, parametersCount) - 1; i >= 0; i--)
             {
                 SetBits(i, parametersCount);
 
-                var b = (bool)expression.Execute(parameters);
+                var b = (bool)Expression.Execute(Parameters);
 
-                var row = new TruthTableRowViewModel(parametersCount, expressions.Count())
+                var row = new TruthTableRowViewModel(parametersCount, Expressions.Count())
                 {
                     Index = (int)Math.Pow(2, parametersCount) - i
                 };
 
                 for (int j = 0; j < parametersCount; j++)
-                    row.VarsValues[j] = (bool)parameters[parameters.ElementAt(j).Key];
+                    row.VarsValues[j] = (bool)Parameters[Parameters.ElementAt(j).Key];
 
-                for (int j = 0; j < expressions.Count() - 1; j++)
-                    row.Values[j] = (bool)expressions.ElementAt(j).Execute(parameters);
+                for (int j = 0; j < Expressions.Count() - 1; j++)
+                    row.Values[j] = (bool)Expressions.ElementAt(j).Execute(Parameters);
 
-                if (expressions.Count() != 0)
+                if (Expressions.Count() != 0)
                     row.Result = b;
 
                 table.Add(row);
             }
         }
 
-        public IExpression Expression => expression;
+        public IExpression Expression { get; private set; }
 
-        public IEnumerable<IExpression> Expressions => expressions;
+        public IEnumerable<IExpression> Expressions { get; private set; }
 
-        public ParameterCollection Parameters => parameters;
+        public ParameterCollection Parameters { get; private set; }
 
         public IEnumerable<TruthTableRowViewModel> Table => table;
 

@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using xFunc.Maths.Expressions.Collections;
 
 namespace xFunc.ViewModels
@@ -21,36 +21,18 @@ namespace xFunc.ViewModels
     public class VariableViewModel
     {
 
-        private Parameter parameter;
+        private readonly Parameter parameter;
 
         public VariableViewModel(Parameter parameter)
         {
             this.parameter = parameter;
         }
 
-        public string Variable
-        {
-            get
-            {
-                return parameter.Key;
-            }
-        }
+        public string Variable => parameter.Key;
 
-        public object Value
-        {
-            get
-            {
-                return parameter.Value;
-            }
-        }
+        public object Value => parameter.Value;
 
-        public ParameterType Type
-        {
-            get
-            {
-                return parameter.Type;
-            }
-        }
+        public ParameterType Type => parameter.Type;
 
     }
 

@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,9 +21,7 @@ namespace xFunc.Presenters
 
     public class MathWorkspace : IList<MathWorkspaceItem>
     {
-
-        private int maxCountOfExps;
-        private List<MathWorkspaceItem> expressions;
+        private readonly List<MathWorkspaceItem> expressions;
 
         public MathWorkspace()
             : this(20)
@@ -32,20 +30,14 @@ namespace xFunc.Presenters
 
         public MathWorkspace(int maxCountOfExps)
         {
-            this.maxCountOfExps = maxCountOfExps;
+            this.MaxCountOfExpressions = maxCountOfExps;
             expressions = new List<MathWorkspaceItem>(maxCountOfExps >= 20 ? 20 : maxCountOfExps);
         }
 
         public MathWorkspaceItem this[int index]
         {
-            get
-            {
-                return expressions[index];
-            }
-            set
-            {
-                expressions[index] = value;
-            }
+            get => expressions[index];
+            set => expressions[index] = value;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -60,7 +52,7 @@ namespace xFunc.Presenters
 
         public void Add(MathWorkspaceItem item)
         {
-            if (expressions.Count >= maxCountOfExps)
+            if (expressions.Count >= MaxCountOfExpressions)
                 expressions.RemoveAt(0);
 
             expressions.Add(item);
@@ -68,7 +60,7 @@ namespace xFunc.Presenters
 
         public void AddRange(IEnumerable<MathWorkspaceItem> items)
         {
-            while (expressions.Count >= maxCountOfExps)
+            while (expressions.Count >= MaxCountOfExpressions)
                 expressions.RemoveAt(0);
 
             expressions.AddRange(items);
@@ -81,7 +73,7 @@ namespace xFunc.Presenters
 
         public void Insert(int index, MathWorkspaceItem item)
         {
-            if (expressions.Count >= maxCountOfExps)
+            if (expressions.Count >= MaxCountOfExpressions)
                 expressions.RemoveAt(0);
 
             expressions.Insert(index, item);
@@ -112,33 +104,11 @@ namespace xFunc.Presenters
             expressions.CopyTo(items, index);
         }
 
-        public int Count
-        {
-            get
-            {
-                return expressions.Count;
-            }
-        }
+        public int Count => expressions.Count;
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReadOnly => false;
 
-        public int MaxCountOfExpressions
-        {
-            get
-            {
-                return maxCountOfExps;
-            }
-            set
-            {
-                maxCountOfExps = value;
-            }
-        }
+        public int MaxCountOfExpressions { get; set; }
 
     }
 

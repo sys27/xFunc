@@ -15,6 +15,7 @@
 
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
@@ -44,14 +45,14 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineWithFuncTest()
         {
-            var exp = new Define(Variable.X, new Sin(new Number(1)));
+            var exp = new Define(Variable.X, new Sin(Angle.Radian(1).AsExpression()));
             var parameters = new ParameterCollection();
-            var expParams = new ExpressionParameters(AngleMeasurement.Radian, parameters);
+            var expParams = new ExpressionParameters(parameters);
 
             var answer = exp.Execute(expParams);
 
             Assert.Equal(Math.Sin(1), parameters["x"]);
-            Assert.Equal("The value 'sin(1)' was assigned to the variable 'x'.", answer);
+            Assert.Equal("The value 'sin(1 radian)' was assigned to the variable 'x'.", answer);
         }
 
         [Fact]

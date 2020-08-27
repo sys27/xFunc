@@ -116,5 +116,20 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets the 'mod' token.
         /// </summary>
         public static KeywordToken Mod { get; } = new KeywordToken("mod");
+
+        /// <summary>
+        /// Gets the 'deg' token.
+        /// </summary>
+        public static KeywordToken Degree { get; } = new KeywordToken("deg");
+
+        /// <summary>
+        /// Gets the 'rad' token.
+        /// </summary>
+        public static KeywordToken Radian { get; } = new KeywordToken("rad");
+
+        /// <summary>
+        /// Gets the 'grad' token.
+        /// </summary>
+        public static KeywordToken Gradian { get; } = new KeywordToken("grad");
     }
 }

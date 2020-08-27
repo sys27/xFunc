@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions
 {
@@ -59,11 +60,15 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                (double leftNumber, double rightNumber) => leftNumber / rightNumber,
+                (double left, double right) => left / right,
 
-                (double leftNumber, Complex rightComplex) => leftNumber / rightComplex,
-                (Complex leftComplex, double rightNumber) => leftComplex / rightNumber,
-                (Complex leftComplex, Complex rightComplex) => (object)(leftComplex / rightComplex),
+                (double left, Angle right) => left / right,
+                (Angle left, double right) => left / right,
+                (Angle left, Angle right) => left / right,
+
+                (double left, Complex right) => left / right,
+                (Complex left, double right) => left / right,
+                (Complex left, Complex right) => (object)(left / right),
 
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };

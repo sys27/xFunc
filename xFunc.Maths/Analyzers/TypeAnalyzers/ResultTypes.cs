@@ -64,8 +64,18 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         Expression = 0x40,
 
         /// <summary>
+        /// The expression returns an angle.
+        /// </summary>
+        AngleNumber = 0x80,
+
+        /// <summary>
         /// The expression returns a number or a complex number.
         /// </summary>
-        NumberAndComplex = Number | ComplexNumber,
+        NumberOrComplex = Number | ComplexNumber,
+
+        /// <summary>
+        /// The expression returns a number or a angle number.
+        /// </summary>
+        NumberOrAngle = Number | AngleNumber,
     }
 }

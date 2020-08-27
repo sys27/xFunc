@@ -15,6 +15,7 @@
 
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -25,10 +26,19 @@ namespace xFunc.Tests.Expressions.Trigonometric
     public class TangentTest
     {
         [Fact]
-        public void ExecuteRadianTest()
+        public void ExecuteNumberTest()
         {
             var exp = new Tan(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Radian);
+            var result = (double)exp.Execute();
+
+            Assert.Equal(0.017455064928217585, result, 15);
+        }
+
+        [Fact]
+        public void ExecuteRadianTest()
+        {
+            var exp = new Tan(Angle.Radian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(1.5574077246549021, result, 15);
         }
@@ -36,8 +46,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteDegreeTest()
         {
-            var exp = new Tan(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Degree);
+            var exp = new Tan(Angle.Degree(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(0.017455064928217585, result, 15);
         }
@@ -45,8 +55,8 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Tan(new Number(1));
-            var result = (double)exp.Execute(AngleMeasurement.Gradian);
+            var exp = new Tan(Angle.Gradian(1).AsExpression());
+            var result = (double)exp.Execute();
 
             Assert.Equal(0.015709255323664916, result, 15);
         }

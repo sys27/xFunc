@@ -30,13 +30,6 @@ namespace xFunc.Maths.Analyzers
     /// <seealso cref="IDifferentiator" />
     public class Differentiator : Analyzer<IExpression, DifferentiatorContext>, IDifferentiator
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Differentiator"/> class.
-        /// </summary>
-        public Differentiator()
-        {
-        }
-
         #region Standard
 
         /// <summary>

@@ -288,17 +288,6 @@ namespace xFunc.Tests.ParserTests
         }
 
         [Fact]
-        public void ComplexPolarPhaseExceptionTest()
-        {
-            var tokens = Builder()
-                .Number(7.1)
-                .Degree()
-                .Tokens;
-
-            ParseErrorTest(tokens);
-        }
-
-        [Fact]
         public void ComplexFromPolarMissingPhaseTest()
         {
             var tokens = Builder()

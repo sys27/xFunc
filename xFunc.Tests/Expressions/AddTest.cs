@@ -13,12 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Numerics;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
-using xFunc.Maths.Expressions.Matrices;
 using Xunit;
+using Vector = xFunc.Maths.Expressions.Matrices.Vector;
+using Matrix = xFunc.Maths.Expressions.Matrices.Matrix;
 
 namespace xFunc.Tests.Expressions
 {
@@ -79,11 +82,11 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void AddTwoVectorsTest()
         {
-            var vector1 = new Maths.Expressions.Matrices.Vector(new[] { new Number(2), new Number(3) });
-            var vector2 = new Maths.Expressions.Matrices.Vector(new[] { new Number(7), new Number(1) });
+            var vector1 = new Vector(new IExpression[] { new Number(2), new Number(3) });
+            var vector2 = new Vector(new IExpression[] { new Number(7), new Number(1) });
             var add = new Add(vector1, vector2);
 
-            var expected = new Maths.Expressions.Matrices.Vector(new[] { new Number(9), new Number(4) });
+            var expected = new Vector(new IExpression[] { new Number(9), new Number(4) });
             var result = add.Execute();
 
             Assert.Equal(expected, result);
@@ -94,20 +97,20 @@ namespace xFunc.Tests.Expressions
         {
             var matrix1 = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(6), new Number(3) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { new Number(6), new Number(3) }),
+                new Vector(new IExpression[] { new Number(2), new Number(1) })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(9), new Number(2) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(4), new Number(3) })
+                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(4), new Number(3) })
             });
             var add = new Add(matrix1, matrix2);
 
             var expected = new Matrix(new[]
             {
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(15), new Number(5) }),
-                new Maths.Expressions.Matrices.Vector(new[] { new Number(6), new Number(4) })
+                new Vector(new IExpression[] { new Number(15), new Number(5) }),
+                new Vector(new IExpression[] { new Number(6), new Number(4) })
             });
             var result = add.Execute();
 
@@ -117,21 +120,67 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void Add4MatricesTest()
         {
-            var vector1 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector2 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector3 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector4 = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector1 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector2 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector3 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector4 = new Vector(new IExpression[] { new Number(1), new Number(2) });
             var add1 = new Add(vector1, vector2);
             var add2 = new Add(vector3, vector4);
             var add3 = new Add(add1, add2);
 
-            var expected = new Maths.Expressions.Matrices.Vector(new IExpression[] { new Number(4), new Number(8) });
+            var expected = new Vector(new IExpression[] { new Number(4), new Number(8) });
 
             Assert.Equal(expected, add3.Execute());
         }
 
         [Fact]
-        public void ExecuteTestExecption()
+        public void AddNumberAndDegree()
+        {
+            var exp = new Add(new Number(1), Angle.Degree(10).AsExpression());
+            var actual = exp.Execute();
+            var expected = Angle.Degree(11);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void AddRadianAndNumber()
+        {
+            var exp = new Add(Angle.Radian(10).AsExpression(), new Number(1));
+            var actual = exp.Execute();
+            var expected = Angle.Radian(11);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void AddDegreeAndRadian()
+        {
+            var exp = new Add(
+                Angle.Degree(10).AsExpression(),
+                Angle.Radian(Math.PI).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = Angle.Degree(190);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void AddGradianAndGradian()
+        {
+            var exp = new Add(
+                Angle.Gradian(10).AsExpression(),
+                Angle.Gradian(20).AsExpression()
+            );
+            var actual = exp.Execute();
+            var expected = Angle.Gradian(30);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ExecuteTestException()
         {
             var exp = new Add(Bool.False, Bool.False);
 

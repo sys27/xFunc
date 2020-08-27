@@ -32,10 +32,6 @@ limitations under the License. -->
         <CommandBinding Command="views:MainView.NormalFormatCommand" Executed="NormalButton_Execute" CanExecute="FormatButtons_CanExecute" />
         <CommandBinding Command="views:MainView.ExponentialFormatCommand" Executed="ExponentialButton_Execute" CanExecute="FormatButtons_CanExecute" />
 
-        <CommandBinding Command="views:MainView.DegreeCommand" Executed="DegreeButton_Execute" CanExecute="AngleButtons_CanExecute" />
-        <CommandBinding Command="views:MainView.RadianCommand" Executed="RadianButton_Execute" CanExecute="AngleButtons_CanExecute" />
-        <CommandBinding Command="views:MainView.GradianCommand" Executed="GradianButton_Execute" CanExecute="AngleButtons_CanExecute" />
-
         <CommandBinding Command="views:MainView.BinCommand" Executed="BinCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.OctCommand" Executed="OctCommand_Execute" CanExecute="BaseCommands_CanExecute" />
         <CommandBinding Command="views:MainView.DecCommand" Executed="DecCommand_Execute" CanExecute="BaseCommands_CanExecute" />
@@ -57,10 +53,6 @@ limitations under the License. -->
         <KeyBinding Command="views:MainView.OpenCommand" Key="O" Modifiers="Control" />
         <KeyBinding Command="views:MainView.SaveCommand" Key="S" Modifiers="Control" />
         <KeyBinding Command="views:MainView.SaveAsCommand" Key="S" Modifiers="Control+Shift" />
-
-        <KeyBinding Command="views:MainView.DegreeCommand" Key="D" Modifiers="Control+Alt" />
-        <KeyBinding Command="views:MainView.RadianCommand" Key="R" Modifiers="Control+Alt" />
-        <KeyBinding Command="views:MainView.GradianCommand" Key="G" Modifiers="Control+Alt" />
 
         <KeyBinding Command="views:MainView.DeleteExpCommand" Key="Delete" />
         <KeyBinding Command="views:MainView.ClearCommand" Key="Delete" Modifiers="Shift" />
@@ -147,38 +139,6 @@ limitations under the License. -->
                             <ribbon:ScreenTip Title="{x:Static res:Resource.PasteScreenTipTitle}" Text="{x:Static res:Resource.PasteScreenTipText}" />
                         </ribbon:Button.ToolTip>
                     </ribbon:Button>
-                </ribbon:RibbonGroupBox>
-                <ribbon:RibbonGroupBox x:Name="AnglesGroupBox"  Header="{x:Static res:Resource.AnglesGroupHeader}">
-                    <ribbon:ToggleButton x:Name="degreeButton" Header="{x:Static res:Resource.DegreeButtonHeader}" SizeDefinition="Large" Command="views:MainView.DegreeCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Deg</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                        <ribbon:ToggleButton.ToolTip>
-                            <ribbon:ScreenTip Title="{x:Static res:Resource.DegreeScreenTipTitle}" Text="{x:Static res:Resource.DegreeScreenTipText}" />
-                        </ribbon:ToggleButton.ToolTip>
-                    </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="radianButton" Header="{x:Static res:Resource.RadianButtonHeader}" SizeDefinition="Large" Command="views:MainView.RadianCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Rad</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                        <ribbon:ToggleButton.ToolTip>
-                            <ribbon:ScreenTip Title="{x:Static res:Resource.RadianScreenTipTitle}" Text="{x:Static res:Resource.RadianScreenTipText}" />
-                        </ribbon:ToggleButton.ToolTip>
-                    </ribbon:ToggleButton>
-                    <ribbon:ToggleButton x:Name="gradianButton" Header="{x:Static res:Resource.GradianButtonHeader}" SizeDefinition="Large" Command="views:MainView.GradianCommand">
-                        <ribbon:ToggleButton.LargeIcon>
-                            <Viewbox>
-                                <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Grad</TextBlock>
-                            </Viewbox>
-                        </ribbon:ToggleButton.LargeIcon>
-                        <ribbon:ToggleButton.ToolTip>
-                            <ribbon:ScreenTip Title="{x:Static res:Resource.GradianScreenTipTitle}" Text="{x:Static res:Resource.GradianScreenTipText}" />
-                        </ribbon:ToggleButton.ToolTip>
-                    </ribbon:ToggleButton>
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox x:Name="OutputFormatGroupBox"  Header="{x:Static res:Resource.OutputFormatGroupHeader}">
                     <ribbon:ToggleButton x:Name="autoButton" Header="{x:Static res:Resource.AutoFormatButtonHeader}" SizeDefinition="Large" Command="views:MainView.AutoFormatCommand">

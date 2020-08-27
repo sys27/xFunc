@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Collections.Generic;
 using xFunc.Maths;
 using xFunc.Properties;
@@ -25,11 +25,11 @@ namespace xFunc.Presenters
     public class GraphsPresenter
     {
 
-        private IGraphsView view;
+        private readonly IGraphsView view;
 
-        private Processor processor;
-        private int countOfGraphs;
-        private List<GraphItemViewModel> listOfGraphs;
+        private readonly Processor processor;
+        private readonly int countOfGraphs;
+        private readonly List<GraphItemViewModel> listOfGraphs;
 
         public GraphsPresenter(IGraphsView view, Processor processor)
         {
@@ -73,13 +73,7 @@ namespace xFunc.Presenters
             view.Graphs = listOfGraphs.AsReadOnly();
         }
 
-        public int CountOfGraphs
-        {
-            get
-            {
-                return listOfGraphs.Count;
-            }
-        }
+        public int CountOfGraphs => listOfGraphs.Count;
 
     }
 

@@ -12,13 +12,12 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using xFunc.Maths;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Results;
 using xFunc.Properties;
 using xFunc.ViewModels;
@@ -30,11 +29,9 @@ namespace xFunc.Presenters
     public class MathPresenter : INotifyPropertyChanged
     {
 
-        private IMathView view;
+        private readonly IMathView view;
 
-        private Processor processor;
-        private MathWorkspace workspace;
-
+        private readonly Processor processor;
         private OutputFormats outputFormat;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,7 +41,7 @@ namespace xFunc.Presenters
             this.view = view;
 
             this.processor = processor;
-            workspace = new MathWorkspace(Settings.Default.MaxCountOfExpressions);
+            Workspace = new MathWorkspace(Settings.Default.MaxCountOfExpressions);
         }
 
         protected void OnPropertyChanged(string name)
@@ -54,7 +51,7 @@ namespace xFunc.Presenters
 
         private void UpdateList()
         {
-            var vm = workspace.Select((t, i) => new MathWorkspaceItemViewModel(i + 1, t));
+            var vm = Workspace.Select((t, i) => new MathWorkspaceItemViewModel(i + 1, t));
 
             view.MathExpressions = vm;
         }
@@ -65,27 +62,26 @@ namespace xFunc.Presenters
                 throw new ArgumentNullException(nameof(strExp));
 
             var exps = strExp.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-                            .Select(str => str.Trim());
+                             .Select(str => str.Trim());
 
             foreach (var s in exps)
             {
                 var result = processor.Solve(s);
-                var num = result as NumberResult;
-                if (num != null)
+                if (result is NumberResult num)
                 {
                     if (outputFormat == OutputFormats.Normal)
                     {
-                        workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("F", CultureInfo.InvariantCulture)));
+                        Workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("F", CultureInfo.InvariantCulture)));
                         continue;
                     }
                     if (outputFormat == OutputFormats.Exponential)
                     {
-                        workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("E", CultureInfo.InvariantCulture)));
+                        Workspace.Add(new MathWorkspaceItem(s, result, num.Result.ToString("E", CultureInfo.InvariantCulture)));
                         continue;
                     }
                 }
 
-                workspace.Add(new MathWorkspaceItem(s, result, result.ToString()));
+                Workspace.Add(new MathWorkspaceItem(s, result, result.ToString()));
             }
 
             UpdateList();
@@ -93,7 +89,7 @@ namespace xFunc.Presenters
 
         public void Clear()
         {
-            workspace.Clear();
+            Workspace.Clear();
 
             UpdateList();
         }
@@ -103,31 +99,12 @@ namespace xFunc.Presenters
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            workspace.Remove(item.Item);
+            Workspace.Remove(item.Item);
 
             UpdateList();
         }
 
-        public MathWorkspace Workspace
-        {
-            get
-            {
-                return workspace;
-            }
-        }
-
-        public AngleMeasurement AngleMeasurement
-        {
-            get
-            {
-                return processor.Parameters.AngleMeasurement;
-            }
-            set
-            {
-                processor.Parameters.AngleMeasurement = value;
-                OnPropertyChanged(nameof(AngleMeasurement));
-            }
-        }
+        public MathWorkspace Workspace { get; }
 
         public NumeralSystem Base
         {

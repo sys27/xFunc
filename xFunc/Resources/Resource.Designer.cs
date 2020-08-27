@@ -241,15 +241,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Angles.
-        /// </summary>
-        public static string AnglesGroupHeader {
-            get {
-                return ResourceManager.GetString("AnglesGroupHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Answer Base.
         /// </summary>
         public static string AnswerBaseGroupHeader {
@@ -736,33 +727,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dergee.
-        /// </summary>
-        public static string DegreeButtonHeader {
-            get {
-                return ResourceManager.GetString("DegreeButtonHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use degrees as a unit of angle measure.
-        /// </summary>
-        public static string DegreeScreenTipText {
-            get {
-                return ResourceManager.GetString("DegreeScreenTipText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Degree (Ctrl+Alt+D).
-        /// </summary>
-        public static string DegreeScreenTipTitle {
-            get {
-                return ResourceManager.GetString("DegreeScreenTipTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string DeleteExpButtonHeader {
@@ -1020,33 +984,6 @@ namespace xFunc.Resources {
         public static string GCDToolTip {
             get {
                 return ResourceManager.GetString("GCDToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gradian.
-        /// </summary>
-        public static string GradianButtonHeader {
-            get {
-                return ResourceManager.GetString("GradianButtonHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use gradians as a unit of angle measure.
-        /// </summary>
-        public static string GradianScreenTipText {
-            get {
-                return ResourceManager.GetString("GradianScreenTipText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gradian (Ctrl+Alt+G).
-        /// </summary>
-        public static string GradianScreenTipTitle {
-            get {
-                return ResourceManager.GetString("GradianScreenTipTitle", resourceCulture);
             }
         }
         
@@ -1438,33 +1375,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Radian.
-        /// </summary>
-        public static string RadianButtonHeader {
-            get {
-                return ResourceManager.GetString("RadianButtonHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use radians as a unit of angle measure.
-        /// </summary>
-        public static string RadianScreenTipText {
-            get {
-                return ResourceManager.GetString("RadianScreenTipText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Radian (Ctrl+Alt+R).
-        /// </summary>
-        public static string RadianScreenTipTitle {
-            get {
-                return ResourceManager.GetString("RadianScreenTipTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Reciprocal function. Example: reciprocal(3+2i)..
         /// </summary>
         public static string ReciprocalToolTip {
@@ -1555,15 +1465,6 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default _angle measurement:.
-        /// </summary>
-        public static string SettingsAngle {
-            get {
-                return ResourceManager.GetString("SettingsAngle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Automatic.
         /// </summary>
         public static string SettingsAutoLang {
@@ -1605,24 +1506,6 @@ namespace xFunc.Resources {
         public static string SettingsDefaultChartColor {
             get {
                 return ResourceManager.GetString("SettingsDefaultChartColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Degree.
-        /// </summary>
-        public static string SettingsDegree {
-            get {
-                return ResourceManager.GetString("SettingsDegree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gradian.
-        /// </summary>
-        public static string SettingsGradian {
-            get {
-                return ResourceManager.GetString("SettingsGradian", resourceCulture);
             }
         }
         
@@ -1690,16 +1573,7 @@ namespace xFunc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Radian.
-        /// </summary>
-        public static string SettingsRadian {
-            get {
-                return ResourceManager.GetString("SettingsRadian", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Remember number base and angle measurement.
+        ///   Looks up a localized string similar to _Remember number base.
         /// </summary>
         public static string SettingsRemember {
             get {

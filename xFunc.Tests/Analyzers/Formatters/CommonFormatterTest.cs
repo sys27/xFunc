@@ -17,6 +17,7 @@ using System.Numerics;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
@@ -265,6 +266,46 @@ namespace xFunc.Tests.Analyzers.Formatters
             var exp = new Number(3.3);
 
             Assert.Equal("3.3", exp.ToString());
+        }
+
+        [Fact]
+        public void AngleNumberTest()
+        {
+            var exp = Angle.Degree(10).AsExpression();
+
+            Assert.Equal("10 degree", exp.ToString());
+        }
+
+        [Fact]
+        public void ToDegreeTest()
+        {
+            var exp = new ToDegree(new Number(10));
+
+            Assert.Equal("todegree(10)", exp.ToString());
+        }
+
+        [Fact]
+        public void ToRadianTest()
+        {
+            var exp = new ToRadian(new Number(10));
+
+            Assert.Equal("toradian(10)", exp.ToString());
+        }
+
+        [Fact]
+        public void ToGradianTest()
+        {
+            var exp = new ToGradian(new Number(10));
+
+            Assert.Equal("togradian(10)", exp.ToString());
+        }
+
+        [Fact]
+        public void ToNumberTest()
+        {
+            var exp = new ToNumber(Angle.Degree(10).AsExpression());
+
+            Assert.Equal("tonumber(10 degree)", exp.ToString());
         }
 
         [Fact]

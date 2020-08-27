@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
-        public void ExecuteExeptionTest()
+        public void ExecuteExceptionTest()
         {
             var exp = new Exp(Bool.False);
 

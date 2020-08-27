@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using xFunc.Maths.Expressions;
 
 namespace xFunc.ViewModels
@@ -20,31 +20,17 @@ namespace xFunc.ViewModels
 
     public class FunctionViewModel
     {
-
-        private UserFunction function;
-        private IExpression value;
+        private readonly IExpression value;
 
         public FunctionViewModel(UserFunction function, IExpression value)
         {
-            this.function = function;
+            this.Function = function;
             this.value = value;
         }
 
-        public UserFunction Function
-        {
-            get
-            {
-                return function;
-            }
-        }
+        public UserFunction Function { get; }
 
-        public string Value
-        {
-            get
-            {
-                return value.ToString();
-            }
-        }
+        public string Value => value.ToString();
 
     }
 

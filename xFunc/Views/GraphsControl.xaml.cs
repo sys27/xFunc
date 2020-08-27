@@ -12,6 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,6 @@ namespace xFunc.Views
 
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register(nameof(Status), typeof(string), typeof(GraphsControl));
 
-        private GraphsPresenter presenter;
-
         public GraphsControl()
         {
             InitializeComponent();
@@ -40,7 +39,7 @@ namespace xFunc.Views
 
         public GraphsControl(GraphsPresenter presenter)
         {
-            this.presenter = presenter;
+            this.Presenter = presenter;
 
             InitializeComponent();
         }
@@ -51,7 +50,7 @@ namespace xFunc.Views
             {
                 try
                 {
-                    presenter.Add(graphExpressionBox.Text);
+                    Presenter.Add(graphExpressionBox.Text);
                     Status = string.Empty;
                 }
                 catch (TokenizeException mle)
@@ -84,7 +83,7 @@ namespace xFunc.Views
                 }
                 catch (KeyNotFoundException)
                 {
-                    presenter.Remove(presenter.CountOfGraphs - 1);
+                    Presenter.Remove(Presenter.CountOfGraphs - 1);
 
                     Status = Resource.VariableNotFoundExceptionError;
                 }
@@ -98,7 +97,7 @@ namespace xFunc.Views
                 }
                 catch (NotSupportedException)
                 {
-                    presenter.Remove(presenter.CountOfGraphs - 1);
+                    Presenter.Remove(Presenter.CountOfGraphs - 1);
 
                     Status = Resource.NotSupportedOperationError;
                 }
@@ -121,32 +120,16 @@ namespace xFunc.Views
         {
             var item = ((Button)o).Tag as GraphItemViewModel;
 
-            presenter.Remove(item);
+            Presenter.Remove(item);
         }
 
         public string Status
         {
-            get
-            {
-                return (string)GetValue(StatusProperty);
-            }
-            set
-            {
-                SetValue(StatusProperty, value);
-            }
+            get => (string)GetValue(StatusProperty);
+            set => SetValue(StatusProperty, value);
         }
 
-        public GraphsPresenter Presenter
-        {
-            get
-            {
-                return presenter;
-            }
-            set
-            {
-                presenter = value;
-            }
-        }
+        public GraphsPresenter Presenter { get; set; }
 
         public IEnumerable<GraphItemViewModel> Graphs
         {

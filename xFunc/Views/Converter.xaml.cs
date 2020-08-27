@@ -12,7 +12,7 @@
 // express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using System;
+
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
@@ -25,10 +25,7 @@ namespace xFunc.Views
 
     public partial class Converter : Window
     {
-
-        private readonly IConverter[] converters;
-
-        private MathControl mathControl;
+        private readonly MathControl mathControl;
 
         public static RoutedCommand CalculateCommand = new RoutedCommand();
         public static RoutedCommand CopyFromCommand = new RoutedCommand();
@@ -36,7 +33,7 @@ namespace xFunc.Views
 
         public Converter(MathControl mathControl)
         {
-            converters = new IConverter[]
+            Converters = new IConverter[]
             {
                 new AreaConverter(),
                 new UnitConverters.LengthConverter(),
@@ -50,7 +47,7 @@ namespace xFunc.Views
 
             InitializeComponent();
 
-            convertersComboBox.ItemsSource = converters;
+            convertersComboBox.ItemsSource = Converters;
             SetUnits();
         }
 
@@ -62,9 +59,8 @@ namespace xFunc.Views
             var conv = (IConverter)convertersComboBox.SelectedItem;
             var from = (KeyValuePair<object, string>)fromComboBox.SelectedItem;
             var to = (KeyValuePair<object, string>)toComboBox.SelectedItem;
-            double value;
 
-            if (double.TryParse(fromTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+            if (double.TryParse(fromTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
                 toTextBox.Text = conv.Convert(value, from.Key, to.Key).ToString(CultureInfo.InvariantCulture);
         }
 
@@ -76,9 +72,8 @@ namespace xFunc.Views
             var conv = (IConverter)convertersComboBox.SelectedItem;
             var from = (KeyValuePair<object, string>)fromComboBox.SelectedItem;
             var to = (KeyValuePair<object, string>)toComboBox.SelectedItem;
-            double value;
 
-            if (double.TryParse(toTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+            if (double.TryParse(toTextBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
                 fromTextBox.Text = conv.Convert(value, to.Key, from.Key).ToString(CultureInfo.InvariantCulture);
         }
 
@@ -160,13 +155,7 @@ namespace xFunc.Views
             ConvertFromTo();
         }
 
-        public IConverter[] Converters
-        {
-            get
-            {
-                return converters;
-            }
-        }
+        public IConverter[] Converters { get; }
 
         public dynamic Units
         {

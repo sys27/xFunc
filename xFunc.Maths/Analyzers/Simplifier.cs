@@ -349,6 +349,24 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Trunc exp) => AnalyzeUnary(exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        [ExcludeFromCodeCoverage]
+        public IExpression Analyze(Frac exp) => AnalyzeUnary(exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        [ExcludeFromCodeCoverage]
         public IExpression Analyze(GCD exp) => AnalyzeDiffParams(exp);
 
         /// <summary>

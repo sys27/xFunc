@@ -179,6 +179,26 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
+        public string Analyze(Trunc exp)
+        {
+            return ToString(exp, "trunc({0})");
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public string Analyze(Frac exp)
+        {
+            return ToString(exp, "frac({0})");
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
         public string Analyze(GCD exp)
         {
             return ToString(exp, "gcd");

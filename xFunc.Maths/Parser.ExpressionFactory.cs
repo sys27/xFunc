@@ -119,6 +119,9 @@ namespace xFunc.Maths
                 "round" => new Round(arguments),
                 "floor" => new Floor(arguments),
                 "ceil" => new Ceil(arguments),
+                "truncate" => new Trunc(arguments),
+                "trunc" => new Trunc(arguments),
+                "frac" => new Frac(arguments),
 
                 "deriv" => new Derivative(differentiator, simplifier, arguments),
                 "derivative" => new Derivative(differentiator, simplifier, arguments),

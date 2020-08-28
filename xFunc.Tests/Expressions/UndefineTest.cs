@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void InvalidTypeTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Undefine(new Number(1)));
+            Assert.Throws<NotSupportedException>(() => new Undefine(Number.One));
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void KeyNotSupportedTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Key = new Number(1));
+            Assert.Throws<NotSupportedException>(() => new Undefine(Variable.X).Key = Number.One);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace xFunc.Tests.Expressions
         public void EqualDiffTypesTest()
         {
             var exp1 = new Undefine(Variable.X);
-            var exp2 = new Number(2);
+            var exp2 = Number.Two;
 
             Assert.False(exp1.Equals(exp2));
         }
@@ -105,8 +105,8 @@ namespace xFunc.Tests.Expressions
 
             var functions = new FunctionCollection
             {
-                { key1, new Number(1) },
-                { key2, new Number(2) },
+                { key1, Number.One },
+                { key2, Number.Two },
             };
 
             var undef = new Undefine(key1);
@@ -125,8 +125,8 @@ namespace xFunc.Tests.Expressions
 
             var functions = new FunctionCollection
             {
-                { key1, new Number(1) },
-                { key2, new Number(2) },
+                { key1, Number.One },
+                { key2, Number.Two },
             };
 
             var undef = new Undefine(key2);

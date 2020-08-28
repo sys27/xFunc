@@ -35,7 +35,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void HasVarTest1()
         {
-            var exp = new Sin(new Mul(new Number(2), Variable.X));
+            var exp = new Sin(new Mul(Number.Two, Variable.X));
             var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.True(expected);
@@ -44,7 +44,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void HasVarTest2()
         {
-            var exp = new Sin(new Mul(new Number(2), new Number(3)));
+            var exp = new Sin(new Mul(Number.Two, new Number(3)));
             var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.False(expected);
@@ -53,7 +53,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void HasVarDiffTest1()
         {
-            var exp = new GCD(new IExpression[] { Variable.X, new Number(2), new Number(4) });
+            var exp = new GCD(new IExpression[] { Variable.X, Number.Two, new Number(4) });
             var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.True(expected);
@@ -62,7 +62,7 @@ namespace xFunc.Tests.ParserTests
         [Fact]
         public void HasVarDiffTest2()
         {
-            var exp = new GCD(new IExpression[] { new Variable("y"), new Number(2), new Number(4) });
+            var exp = new GCD(new IExpression[] { new Variable("y"), Number.Two, new Number(4) });
             var expected = Helpers.HasVariable(exp, Variable.X);
 
             Assert.False(expected);
@@ -194,7 +194,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Add(new Number(1), new UserFunction("func", new IExpression[] { Variable.X }));
+            var expected = new Add(Number.One, new UserFunction("func", new IExpression[] { Variable.X }));
 
             Assert.Equal(expected, exp);
         }
@@ -429,7 +429,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Vector(new IExpression[] { new Number(2), new Number(3), new Number(4) });
+            var expected = new Vector(new IExpression[] { Number.Two, new Number(3), new Number(4) });
 
             Assert.Equal(expected, exp);
         }
@@ -456,7 +456,7 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                new Vector(new IExpression[] { Number.Two, new Number(3) }),
                 new Vector(new IExpression[] { new Number(4), new Number(7) })
             });
 
@@ -517,8 +517,8 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new ConditionalAnd(
-                new Equal(Variable.X, new Number(0)),
-                new NotEqual(new Variable("y"), new Number(0)));
+                new Equal(Variable.X, Number.Zero),
+                new NotEqual(new Variable("y"), Number.Zero));
 
             Assert.Equal(expected, exp);
         }
@@ -551,8 +551,8 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new ConditionalOr(
-                new Equal(Variable.X, new Number(0)),
-                new NotEqual(new Variable("y"), new Number(0)));
+                new Equal(Variable.X, Number.Zero),
+                new NotEqual(new Variable("y"), Number.Zero));
 
             Assert.Equal(expected, exp);
         }
@@ -580,7 +580,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Equal(Variable.X, new Number(0));
+            var expected = new Equal(Variable.X, Number.Zero);
 
             Assert.Equal(expected, exp);
         }
@@ -595,7 +595,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new NotEqual(Variable.X, new Number(0));
+            var expected = new NotEqual(Variable.X, Number.Zero);
 
             Assert.Equal(expected, exp);
         }
@@ -610,7 +610,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new LessThan(Variable.X, new Number(0));
+            var expected = new LessThan(Variable.X, Number.Zero);
 
             Assert.Equal(expected, exp);
         }
@@ -625,7 +625,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new LessOrEqual(Variable.X, new Number(0));
+            var expected = new LessOrEqual(Variable.X, Number.Zero);
 
             Assert.Equal(expected, exp);
         }
@@ -640,7 +640,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new GreaterThan(Variable.X, new Number(0));
+            var expected = new GreaterThan(Variable.X, Number.Zero);
 
             Assert.Equal(expected, exp);
         }
@@ -655,7 +655,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new GreaterOrEqual(Variable.X, new Number(0));
+            var expected = new GreaterOrEqual(Variable.X, Number.Zero);
 
             Assert.Equal(expected, exp);
         }
@@ -734,7 +734,7 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new And(
                 new GreaterThan(new Number(3), new Number(4)),
-                new LessThan(new Number(1), new Number(3)));
+                new LessThan(Number.One, new Number(3)));
 
             Assert.Equal(expected, exp);
         }
@@ -792,7 +792,7 @@ namespace xFunc.Tests.ParserTests
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Mod(new Number(7), new Number(2));
+            var expected = new Mod(new Number(7), Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -808,7 +808,7 @@ namespace xFunc.Tests.ParserTests
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Add(new Number(2), new Mod(new Number(7), new Number(2)));
+            var expected = new Add(Number.Two, new Mod(new Number(7), Number.Two));
 
             Assert.Equal(expected, exp);
         }
@@ -824,7 +824,7 @@ namespace xFunc.Tests.ParserTests
                 .Number(2)
                 .Tokens;
             var exp = parser.Parse(tokens);
-            var expected = new Add(new Number(2), new Mod(new Number(7), new Number(2)));
+            var expected = new Add(Number.Two, new Mod(new Number(7), Number.Two));
 
             Assert.Equal(expected, exp);
         }
@@ -842,7 +842,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Min(new IExpression[] { new Number(1), new Number(2) });
+            var expected = new Min(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal(expected, exp);
         }
@@ -860,7 +860,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Max(new IExpression[] { new Number(1), new Number(2) });
+            var expected = new Max(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal(expected, exp);
         }
@@ -878,7 +878,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Avg(new IExpression[] { new Number(1), new Number(2) });
+            var expected = new Avg(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal(expected, exp);
         }
@@ -896,7 +896,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Count(new IExpression[] { new Number(1), new Number(2) });
+            var expected = new Count(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal(expected, exp);
         }
@@ -996,7 +996,7 @@ namespace xFunc.Tests.ParserTests
             var diff = new Differentiator();
             var simp = new Simplifier();
             var exp = parser.Parse(tokens);
-            var expected = new Del(diff, simp, new Add(new Add(new Mul(new Number(2), Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
+            var expected = new Del(diff, simp, new Add(new Add(new Mul(Number.Two, Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
 
             Assert.Equal(expected, exp);
         }
@@ -1024,7 +1024,7 @@ namespace xFunc.Tests.ParserTests
             var diff = new Differentiator();
             var simp = new Simplifier();
             var exp = parser.Parse(tokens);
-            var expected = new Del(diff, simp, new Add(new Add(new Mul(new Number(2), Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
+            var expected = new Del(diff, simp, new Add(new Add(new Mul(Number.Two, Variable.X), new Mul(new Number(3), new Variable("y"))), new Mul(new Number(4), new Variable("z"))));
 
             Assert.Equal(expected, exp);
         }
@@ -1042,7 +1042,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Add(new Number(1), new Number(2));
+            var expected = new Add(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1060,7 +1060,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Sub(new Number(1), new Number(2));
+            var expected = new Sub(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1078,7 +1078,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Mul(new Number(1), new Number(2));
+            var expected = new Mul(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1096,7 +1096,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Div(new Number(1), new Number(2));
+            var expected = new Div(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1114,7 +1114,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Pow(new Number(1), new Number(2));
+            var expected = new Pow(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1129,7 +1129,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Div(new Number(1), new Number(2));
+            var expected = new Div(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1144,7 +1144,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Pow(new Number(1), new Number(2));
+            var expected = new Pow(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1161,7 +1161,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Pow(new Number(1), new Pow(new Number(2), new Number(3)));
+            var expected = new Pow(Number.One, new Pow(Number.Two, new Number(3)));
 
             Assert.Equal(expected, exp);
         }
@@ -1177,7 +1177,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new UnaryMinus(new Pow(new Number(1), new Number(2)));
+            var expected = new UnaryMinus(new Pow(Number.One, Number.Two));
 
             Assert.Equal(expected, exp);
         }
@@ -1191,7 +1191,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Fact(new Number(2));
+            var expected = new Fact(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1207,7 +1207,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Pow(new Fact(new Number(4)), new Number(2));
+            var expected = new Pow(new Fact(new Number(4)), Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1242,7 +1242,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new UnaryMinus(new Number(2));
+            var expected = new UnaryMinus(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1278,7 +1278,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new GCD(new Number(2), new UnaryMinus(Variable.X));
+            var expected = new GCD(Number.Two, new UnaryMinus(Variable.X));
 
             Assert.Equal(expected, exp);
         }
@@ -1292,7 +1292,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Not(new Number(2));
+            var expected = new Not(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1306,7 +1306,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Not(new Number(2));
+            var expected = new Not(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1347,7 +1347,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Or(new Number(1), new Number(2));
+            var expected = new Or(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1362,7 +1362,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Or(new Number(1), new Number(2));
+            var expected = new Or(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1377,7 +1377,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new XOr(new Number(1), new Number(2));
+            var expected = new XOr(Number.One, Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1483,7 +1483,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Abs(new Number(2));
+            var expected = new Abs(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1499,7 +1499,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Exp(new Number(2));
+            var expected = new Exp(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1515,7 +1515,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Floor(new Number(2));
+            var expected = new Floor(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1531,7 +1531,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Ceil(new Number(2));
+            var expected = new Ceil(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1547,7 +1547,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Trunc(new Number(2));
+            var expected = new Trunc(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1563,7 +1563,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Trunc(new Number(2));
+            var expected = new Trunc(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1579,7 +1579,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Frac(new Number(2));
+            var expected = new Frac(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1597,7 +1597,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Round(new Number(2), new Number(3));
+            var expected = new Round(Number.Two, new Number(3));
 
             Assert.Equal(expected, exp);
         }
@@ -1613,7 +1613,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Sqrt(new Number(2));
+            var expected = new Sqrt(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -1640,7 +1640,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new DotProduct(
-                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
                 new Vector(new IExpression[] { new Number(3), new Number(4) })
             );
 
@@ -1673,7 +1673,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new CrossProduct(
-                new Vector(new IExpression[] { new Number(1), new Number(2), new Number(3) }),
+                new Vector(new IExpression[] { Number.One, Number.Two, new Number(3) }),
                 new Vector(new IExpression[] { new Number(4), new Number(5), new Number(6) })
             );
 
@@ -1706,7 +1706,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Transpose(new Matrix(
                 new[]
                 {
-                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { Number.Two, new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
                 }));
 
@@ -1739,7 +1739,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Determinant(new Matrix(
                 new[]
                 {
-                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { Number.Two, new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
                 }));
 
@@ -1772,7 +1772,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Determinant(new Matrix(
                 new[]
                 {
-                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { Number.Two, new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
                 }));
 
@@ -1805,7 +1805,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Inverse(new Matrix(
                 new[]
                 {
-                    new Vector(new IExpression[] { new Number(2), new Number(3) }),
+                    new Vector(new IExpression[] { Number.Two, new Number(3) }),
                     new Vector(new IExpression[] { new Number(4), new Number(7) })
                 }));
 
@@ -1849,7 +1849,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Mul(
-                new UnaryMinus(new Number(2)),
+                new UnaryMinus(Number.Two),
                 Variable.X);
 
             Assert.Equal(expected, exp);
@@ -1906,7 +1906,7 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Mul(
-                new Number(2),
+                Number.Two,
                 new Add(
                     Variable.X,
                     new Variable("y")));
@@ -1929,8 +1929,8 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Mul(
-                new Number(2),
-                new Vector(new IExpression[] { new Number(1), new Number(2) }));
+                Number.Two,
+                new Vector(new IExpression[] { Number.One, Number.Two }));
 
             Assert.Equal(expected, exp);
         }
@@ -1958,10 +1958,10 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Mul(
-                new Number(2),
+                Number.Two,
                 new Matrix(new[]
                 {
-                    new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                    new Vector(new IExpression[] { Number.One, Number.Two }),
                     new Vector(new IExpression[] { new Number(3), new Number(4) })
                 }));
 
@@ -1992,7 +1992,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Number(2);
+            var expected = Number.Two;
 
             Assert.Equal(expected, exp);
         }
@@ -2009,7 +2009,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Sin(new Number(2));
+            var expected = new Sin(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -2080,7 +2080,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new UnaryMinus(new Number(2));
+            var expected = new UnaryMinus(Number.Two);
 
             Assert.Equal(expected, exp);
         }

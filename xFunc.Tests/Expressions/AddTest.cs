@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestNumber1()
         {
-            var exp = new Add(new Number(1), new Number(2));
+            var exp = new Add(Number.One, Number.Two);
 
             Assert.Equal(3.0, exp.Execute());
         }
@@ -38,7 +38,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestNumber2()
         {
-            var exp = new Add(new Number(-3), new Number(2));
+            var exp = new Add(new Number(-3), Number.Two);
 
             Assert.Equal(-1.0, exp.Execute());
         }
@@ -64,7 +64,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestComplexNumberNumber()
         {
-            var exp = new Add(new ComplexNumber(7, 3), new Number(2));
+            var exp = new Add(new ComplexNumber(7, 3), Number.Two);
             var expected = new Complex(9, 3);
 
             Assert.Equal(expected, exp.Execute());
@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest6()
         {
-            var exp = new Add(new Number(2), new Sqrt(new Number(-9)));
+            var exp = new Add(Number.Two, new Sqrt(new Number(-9)));
             var expected = new Complex(2, 3);
 
             Assert.Equal(expected, exp.Execute());
@@ -82,8 +82,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void AddTwoVectorsTest()
         {
-            var vector1 = new Vector(new IExpression[] { new Number(2), new Number(3) });
-            var vector2 = new Vector(new IExpression[] { new Number(7), new Number(1) });
+            var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
+            var vector2 = new Vector(new IExpression[] { new Number(7), Number.One });
             var add = new Add(vector1, vector2);
 
             var expected = new Vector(new IExpression[] { new Number(9), new Number(4) });
@@ -98,11 +98,11 @@ namespace xFunc.Tests.Expressions
             var matrix1 = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { Number.Two, Number.One })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(9), Number.Two }),
                 new Vector(new IExpression[] { new Number(4), new Number(3) })
             });
             var add = new Add(matrix1, matrix2);
@@ -120,10 +120,10 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void Add4MatricesTest()
         {
-            var vector1 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector2 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector3 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector4 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector1 = new Vector(new IExpression[] { Number.One, Number.Two });
+            var vector2 = new Vector(new IExpression[] { Number.One, Number.Two });
+            var vector3 = new Vector(new IExpression[] { Number.One, Number.Two });
+            var vector4 = new Vector(new IExpression[] { Number.One, Number.Two });
             var add1 = new Add(vector1, vector2);
             var add2 = new Add(vector3, vector4);
             var add3 = new Add(add1, add2);
@@ -136,7 +136,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void AddNumberAndDegree()
         {
-            var exp = new Add(new Number(1), Angle.Degree(10).AsExpression());
+            var exp = new Add(Number.One, Angle.Degree(10).AsExpression());
             var actual = exp.Execute();
             var expected = Angle.Degree(11);
 
@@ -146,7 +146,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void AddRadianAndNumber()
         {
-            var exp = new Add(Angle.Radian(10).AsExpression(), new Number(1));
+            var exp = new Add(Angle.Radian(10).AsExpression(), Number.One);
             var actual = exp.Execute();
             var expected = Angle.Radian(11);
 
@@ -206,7 +206,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Add(Variable.X, new Number(0));
+            var exp = new Add(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

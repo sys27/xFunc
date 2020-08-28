@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void CloneTest()
         {
-            var exp = new Artanh(new Number(1));
+            var exp = new Artanh(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

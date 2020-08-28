@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Div(new Number(1), new Number(2));
+            var exp = new Div(Number.One, Number.Two);
 
             Assert.Equal(1.0 / 2.0, exp.Execute());
         }
@@ -54,7 +54,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest4()
         {
-            var exp = new Div(new ComplexNumber(3, 2), new Number(2));
+            var exp = new Div(new ComplexNumber(3, 2), Number.Two);
             var expected = new Complex(1.5, 1);
 
             Assert.Equal(expected, exp.Execute());
@@ -63,7 +63,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest6()
         {
-            var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
+            var exp = new Div(new Sqrt(new Number(-16)), Number.Two);
             var expected = new Complex(0, 2);
 
             Assert.Equal(expected, exp.Execute());
@@ -82,7 +82,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DivRadianAndNumber()
         {
-            var exp = new Div(Angle.Radian(10).AsExpression(), new Number(2));
+            var exp = new Div(Angle.Radian(10).AsExpression(), Number.Two);
             var actual = exp.Execute();
             var expected = Angle.Radian(5);
 
@@ -142,7 +142,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Div(Variable.X, new Number(0));
+            var exp = new Div(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

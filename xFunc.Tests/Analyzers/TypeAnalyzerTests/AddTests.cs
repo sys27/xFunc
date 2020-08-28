@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddTwoNumberTest()
         {
-            var add = new Add(new Number(1), new Number(2));
+            var add = new Add(Number.One, Number.Two);
 
             Test(add, ResultTypes.Number);
         }
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddNumberVarTest()
         {
-            var add = new Add(new Number(1), Variable.X);
+            var add = new Add(Number.One, Variable.X);
 
             Test(add, ResultTypes.Undefined);
         }
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddComplicatedTest()
         {
-            var add = new Add(new Mul(new Number(1), new Number(2)), Variable.X);
+            var add = new Add(new Mul(Number.One, Number.Two), Variable.X);
 
             Test(add, ResultTypes.Undefined);
         }
@@ -53,8 +53,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddTwoVectorTest()
         {
             var add = new Add(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Vector(new IExpression[] { new Number(2) })
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.Two })
             );
 
             Test(add, ResultTypes.Vector);
@@ -64,8 +64,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddTwoMatrixTest()
         {
             var add = new Add(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(1) }) }),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                new Matrix(new[] { new Vector(new IExpression[] { Number.One }) }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             Test(add, ResultTypes.Matrix);
@@ -75,8 +75,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddNumberVectorTest()
         {
             var exp = new Add(
-                new Number(1),
-                new Vector(new IExpression[] { new Number(1) })
+                Number.One,
+                new Vector(new IExpression[] { Number.One })
             );
 
             TestBinaryException(exp);
@@ -85,7 +85,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddBoolVectorException()
         {
-            var exp = new Add(Bool.True, new Vector(new IExpression[] { new Number(1) }));
+            var exp = new Add(Bool.True, new Vector(new IExpression[] { Number.One }));
 
             TestBinaryException(exp);
         }
@@ -93,7 +93,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddVectorNumberTest()
         {
-            var exp = new Add(new Vector(new IExpression[] { new Number(1) }), Bool.True);
+            var exp = new Add(new Vector(new IExpression[] { Number.One }), Bool.True);
 
             TestBinaryException(exp);
         }
@@ -102,8 +102,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddNumberMatrixTest()
         {
             var exp = new Add(
-                new Number(1),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                Number.One,
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             TestBinaryException(exp);
@@ -113,8 +113,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddMatrixNumberTest()
         {
             var exp = new Add(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) }),
-                new Number(1)
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) }),
+                Number.One
             );
 
             TestBinaryException(exp);
@@ -124,8 +124,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddVectorMatrixTest()
         {
             var exp = new Add(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                new Vector(new IExpression[] { Number.One }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             TestBinaryException(exp);
@@ -135,8 +135,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestAddMatrixVectorTest()
         {
             var exp = new Add(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) }),
-                new Vector(new IExpression[] { new Number(1) })
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) }),
+                new Vector(new IExpression[] { Number.One })
             );
 
             TestBinaryException(exp);
@@ -145,7 +145,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddNumberComplexNumberTest()
         {
-            var add = new Add(new Number(1), new ComplexNumber(2, 1));
+            var add = new Add(Number.One, new ComplexNumber(2, 1));
 
             Test(add, ResultTypes.ComplexNumber);
         }
@@ -161,7 +161,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddComplexNumberNumberTest()
         {
-            var add = new Add(new ComplexNumber(1, 3), new Number(2));
+            var add = new Add(new ComplexNumber(1, 3), Number.Two);
 
             Test(add, ResultTypes.ComplexNumber);
         }
@@ -185,7 +185,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddNumberAllTest()
         {
-            var exp = new Add(new Number(1), new UserFunction("f", new IExpression[1]));
+            var exp = new Add(Number.One, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -201,7 +201,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddVectorAllTest()
         {
-            var vector = new Vector(new IExpression[] { new Number(1) });
+            var vector = new Vector(new IExpression[] { Number.One });
             var exp = new Add(vector, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
@@ -212,7 +212,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1) })
+                new Vector(new IExpression[] { Number.One })
             });
             var exp = new Add(matrix, new UserFunction("f", new IExpression[1]));
 
@@ -222,7 +222,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAddNumberSqrtComplexTest()
         {
-            var exp = new Add(new Number(2), new Sqrt(new Number(-9)));
+            var exp = new Add(Number.Two, new Sqrt(new Number(-9)));
 
             Test(exp, ResultTypes.Undefined);
         }

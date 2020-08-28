@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void DivAssignCalc()
         {
             var parameters = new ParameterCollection { new Parameter("x", 10) };
-            var div = new DivAssign(Variable.X, new Number(2));
+            var div = new DivAssign(Variable.X, Number.Two);
             var result = div.Execute(parameters);
             var expected = 5.0;
 
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void DivNullParameters()
         {
-            var exp = new DivAssign(Variable.X, new Number(1));
+            var exp = new DivAssign(Variable.X, Number.One);
 
             Assert.Throws<ArgumentNullException>(() => exp.Execute());
         }
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Programming
         public void BoolDivNumberTest()
         {
             var parameters = new ParameterCollection { new Parameter("x", true) };
-            var add = new DivAssign(Variable.X, new Number(2));
+            var add = new DivAssign(Variable.X, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));
         }
@@ -66,7 +66,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void SameEqualsTest()
         {
-            var exp = new DivAssign(Variable.X, new Number(1));
+            var exp = new DivAssign(Variable.X, Number.One);
 
             Assert.True(exp.Equals(exp));
         }
@@ -74,7 +74,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void EqualsNullTest()
         {
-            var exp = new DivAssign(Variable.X, new Number(1));
+            var exp = new DivAssign(Variable.X, Number.One);
 
             Assert.False(exp.Equals(null));
         }
@@ -82,8 +82,8 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void EqualsDifferentTypeTest()
         {
-            var exp1 = new DivAssign(Variable.X, new Number(1));
-            var exp2 = new MulAssign(Variable.X, new Number(1));
+            var exp1 = new DivAssign(Variable.X, Number.One);
+            var exp2 = new MulAssign(Variable.X, Number.One);
 
             Assert.False(exp1.Equals(exp2));
         }
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = new DivAssign(Variable.X, new Number(1));
+            var exp = new DivAssign(Variable.X, Number.One);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -99,7 +99,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = new DivAssign(Variable.X, new Number(1));
+            var exp = new DivAssign(Variable.X, Number.One);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
@@ -107,7 +107,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new DivAssign(Variable.X, new Number(2));
+            var exp = new DivAssign(Variable.X, Number.Two);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

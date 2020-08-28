@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new UnaryMinus(new Number(0));
+            var exp = new UnaryMinus(Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
@@ -71,7 +71,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = new UnaryMinus(new Number(1));
+            var exp = new UnaryMinus(Number.One);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -79,7 +79,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = new UnaryMinus(new Number(1));
+            var exp = new UnaryMinus(Number.One);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }

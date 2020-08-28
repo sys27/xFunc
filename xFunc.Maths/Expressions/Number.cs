@@ -25,6 +25,21 @@ namespace xFunc.Maths.Expressions
     public class Number : IExpression, IEquatable<Number>
     {
         /// <summary>
+        /// 0.
+        /// </summary>
+        public static readonly Number Zero = new Number(0);
+
+        /// <summary>
+        /// 1.
+        /// </summary>
+        public static readonly Number One = new Number(1);
+
+        /// <summary>
+        /// 2.
+        /// </summary>
+        public static readonly Number Two = new Number(2);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Number"/> class.
         /// </summary>
         /// <param name="number">A number.</param>

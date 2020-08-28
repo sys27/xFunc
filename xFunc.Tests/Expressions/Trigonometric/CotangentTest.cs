@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new Cot(new Number(1));
+            var exp = new Cot(Number.One);
             var actual = (double)exp.Execute();
 
             Assert.Equal(57.28996163075943, actual, 15);
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void CloneTest()
         {
-            var exp = new Cot(new Number(1));
+            var exp = new Cot(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

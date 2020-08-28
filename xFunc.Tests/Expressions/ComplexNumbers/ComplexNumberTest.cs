@@ -92,7 +92,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         public void NotEqualsDiffTypesTest()
         {
             var exp1 = new ComplexNumber(new Complex(5, 2));
-            var exp2 = new Number(2);
+            var exp2 = Number.Two;
 
             Assert.False(exp1.Equals(exp2));
         }
@@ -103,7 +103,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
             var exp = new Add(
                 new Number(3),
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );

@@ -38,7 +38,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Add(
                 new Number(3),
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );
@@ -60,7 +60,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Sub(
                 new Number(3),
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );
@@ -83,7 +83,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Sub(
                 new UnaryMinus(new Number(3)),
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );
@@ -105,7 +105,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Sub(
                 new UnaryMinus(new Number(3)),
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );
@@ -127,7 +127,7 @@ namespace xFunc.Tests.ParserTests
             var expected = new Add(
                 new Number(3),
                 new Mul(
-                    new Number(0),
+                    Number.Zero,
                     new Variable("i")
                 )
             );
@@ -147,9 +147,9 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Add(
-                new Number(0),
+                Number.Zero,
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );
@@ -169,9 +169,9 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
             var exp = parser.Parse(tokens);
             var expected = new Sub(
-                new Number(0),
+                Number.Zero,
                 new Mul(
-                    new Number(2),
+                    Number.Two,
                     new Variable("i")
                 )
             );
@@ -197,9 +197,9 @@ namespace xFunc.Tests.ParserTests
             var expected = new Sub(
                 Variable.X,
                 new Add(
-                    new Number(0),
+                    Number.Zero,
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -228,7 +228,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -340,7 +340,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -367,7 +367,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -394,7 +394,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -421,7 +421,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -448,7 +448,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -475,7 +475,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )
@@ -502,7 +502,7 @@ namespace xFunc.Tests.ParserTests
                 new Sub(
                     new Number(3),
                     new Mul(
-                        new Number(2),
+                        Number.Two,
                         new Variable("i")
                     )
                 )

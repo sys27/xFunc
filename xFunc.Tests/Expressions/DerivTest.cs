@@ -39,7 +39,7 @@ namespace xFunc.Tests.Expressions
                 simplifier.Object,
                 Variable.X,
                 Variable.X,
-                new Number(2));
+                Number.Two);
 
             Assert.Equal(2.0, deriv.Execute());
         }
@@ -70,7 +70,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, new Number(1));
+            var exp = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

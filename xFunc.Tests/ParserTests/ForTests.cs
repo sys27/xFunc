@@ -48,10 +48,10 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new For(
-                new Number(2),
-                new Define(Variable.X, new Number(0)),
+                Number.Two,
+                new Define(Variable.X, Number.Zero),
                 new LessThan(Variable.X, new Number(10)),
-                new Define(Variable.X, new Add(Variable.X, new Number(1))));
+                new Define(Variable.X, new Add(Variable.X, Number.One)));
 
             Assert.Equal(expected, exp);
         }
@@ -79,8 +79,8 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new For(
-                new Number(2),
-                new Define(Variable.X, new Number(0)),
+                Number.Two,
+                new Define(Variable.X, Number.Zero),
                 new LessThan(Variable.X, new Number(10)),
                 new Inc(Variable.X));
 

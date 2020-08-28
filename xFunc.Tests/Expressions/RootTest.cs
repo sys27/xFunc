@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NegativeNumberExecuteTest()
         {
-            var exp = new Root(new Number(-25), new Number(2));
+            var exp = new Root(new Number(-25), Number.Two);
 
             Assert.Equal(new Complex(0, 5), exp.Execute());
         }
@@ -66,7 +66,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Root(Variable.X, new Number(0));
+            var exp = new Root(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

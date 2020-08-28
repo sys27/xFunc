@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteResultIsNotSupported()
         {
-            var exp = new NOr(new Number(1), new Number(2));
+            var exp = new NOr(Number.One, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

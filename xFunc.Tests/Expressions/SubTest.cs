@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Sub(new Number(1), new Number(2));
+            var exp = new Sub(Number.One, Number.Two);
 
             Assert.Equal(-1.0, exp.Execute());
         }
@@ -56,7 +56,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest4()
         {
-            var exp = new Sub(new ComplexNumber(7, 3), new Number(2));
+            var exp = new Sub(new ComplexNumber(7, 3), Number.Two);
             var expected = new Complex(5, 3);
 
             Assert.Equal(expected, exp.Execute());
@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest6()
         {
-            var exp = new Sub(new Number(2), new Sqrt(new Number(-9)));
+            var exp = new Sub(Number.Two, new Sqrt(new Number(-9)));
             var expected = new Complex(2, -3);
 
             Assert.Equal(expected, exp.Execute());
@@ -74,11 +74,11 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void SubTwoVectorsTest()
         {
-            var vector1 = new Vector(new IExpression[] { new Number(2), new Number(3) });
-            var vector2 = new Vector(new IExpression[] { new Number(7), new Number(1) });
+            var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
+            var vector2 = new Vector(new IExpression[] { new Number(7), Number.One });
             var sub = new Sub(vector1, vector2);
 
-            var expected = new Vector(new IExpression[] { new Number(-5), new Number(2) });
+            var expected = new Vector(new IExpression[] { new Number(-5), Number.Two });
             var result = sub.Execute();
 
             Assert.Equal(expected, result);
@@ -90,18 +90,18 @@ namespace xFunc.Tests.Expressions
             var matrix1 = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { Number.Two, Number.One })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(9), Number.Two }),
                 new Vector(new IExpression[] { new Number(4), new Number(3) })
             });
             var sub = new Sub(matrix1, matrix2);
 
             var expected = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(-3), new Number(1) }),
+                new Vector(new IExpression[] { new Number(-3), Number.One }),
                 new Vector(new IExpression[] { new Number(-2), new Number(-2) })
             });
             var result = sub.Execute();
@@ -112,15 +112,15 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void Sub4MatricesTest()
         {
-            var vector1 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector2 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector3 = new Vector(new IExpression[] { new Number(1), new Number(2) });
-            var vector4 = new Vector(new IExpression[] { new Number(1), new Number(2) });
+            var vector1 = new Vector(new IExpression[] { Number.One, Number.Two });
+            var vector2 = new Vector(new IExpression[] { Number.One, Number.Two });
+            var vector3 = new Vector(new IExpression[] { Number.One, Number.Two });
+            var vector4 = new Vector(new IExpression[] { Number.One, Number.Two });
             var sub1 = new Sub(vector1, vector2);
             var sub2 = new Sub(vector3, vector4);
             var sub3 = new Sub(sub1, sub2);
 
-            var expected = new Vector(new IExpression[] { new Number(0), new Number(0) });
+            var expected = new Vector(new IExpression[] { Number.Zero, Number.Zero });
 
             Assert.Equal(expected, sub3.Execute());
         }
@@ -128,7 +128,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void SubNumberAndDegree()
         {
-            var exp = new Sub(new Number(1), Angle.Degree(10).AsExpression());
+            var exp = new Sub(Number.One, Angle.Degree(10).AsExpression());
             var actual = exp.Execute();
             var expected = Angle.Degree(-9);
 
@@ -138,7 +138,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void SubRadianAndNumber()
         {
-            var exp = new Sub(Angle.Radian(10).AsExpression(), new Number(1));
+            var exp = new Sub(Angle.Radian(10).AsExpression(), Number.One);
             var actual = exp.Execute();
             var expected = Angle.Radian(9);
 
@@ -182,7 +182,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Sub(new Number(5), new Number(0));
+            var exp = new Sub(new Number(5), Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

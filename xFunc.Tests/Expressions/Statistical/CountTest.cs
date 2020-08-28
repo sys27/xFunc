@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void OneNumberTest()
         {
-            var exp = new Count(new[] { new Number(2) });
+            var exp = new Count(new[] { Number.Two });
             var result = exp.Execute();
 
             Assert.Equal(1.0, result);
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void TwoNumberTest()
         {
-            var exp = new Count(new[] { new Number(2), new Number(4) });
+            var exp = new Count(new[] { Number.Two, new Number(4) });
             var result = exp.Execute();
 
             Assert.Equal(2.0, result);
@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void VectorTest()
         {
-            var exp = new Count(new[] { new Vector(new[] { new Number(1), new Number(2), new Number(3) }) });
+            var exp = new Count(new[] { new Vector(new[] { Number.One, Number.Two, new Number(3) }) });
             var result = exp.Execute();
 
             Assert.Equal(3.0, result);
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void CloneTest()
         {
-            var exp = new Count(new[] { new Number(1), new Number(2) });
+            var exp = new Count(new[] { Number.One, Number.Two });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

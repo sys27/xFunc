@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest3()
         {
-            var exp = new Mod(new Number(0), new Number(5));
+            var exp = new Mod(Number.Zero, new Number(5));
             var result = exp.Execute();
 
             Assert.Equal(0.0, result);
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest4()
         {
-            var exp = new Mod(new Number(5), new Number(0));
+            var exp = new Mod(new Number(5), Number.Zero);
             var result = exp.Execute();
 
             Assert.Equal(double.NaN, result);
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Mod(new Number(5), new Number(0));
+            var exp = new Mod(new Number(5), Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

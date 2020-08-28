@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Angles
         public void EqualDiffTypeTest()
         {
             var exp = Angle.Degree(10).AsExpression();
-            var number = new Number(1);
+            var number = Number.One;
 
             Assert.False(exp.Equals(number));
         }

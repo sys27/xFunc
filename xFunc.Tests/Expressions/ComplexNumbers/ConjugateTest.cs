@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         [Fact]
         public void ExecuteExceptionTest()
         {
-            var exp = new Conjugate(new Number(2));
+            var exp = new Conjugate(Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

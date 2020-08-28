@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new Cosh(new Number(1));
+            var exp = new Cosh(Number.One);
             var result = (double)exp.Execute();
 
             Assert.Equal(1.0001523125762564, result, 15);
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void CloneTest()
         {
-            var exp = new Cosh(new Number(1));
+            var exp = new Cosh(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

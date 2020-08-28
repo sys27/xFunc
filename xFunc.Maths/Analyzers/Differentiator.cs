@@ -44,7 +44,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Abs exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Analyzers
                 (true, true) => new Add(exp.Left.Analyze(this, context), exp.Right.Analyze(this, context)),
                 (true, _) => exp.Left.Analyze(this, context),
                 (_, true) => exp.Right.Analyze(this, context),
-                _ => new Number(0),
+                _ => Number.Zero,
             };
         }
 
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Derivative exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             var diff = exp.Expression;
             if (diff is Derivative)
@@ -115,7 +115,7 @@ namespace xFunc.Maths.Analyzers
                         new Sub(
                             new Mul(exp.Left.Analyze(this, context), exp.Right.Clone()),
                             new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context))),
-                        new Pow(exp.Right.Clone(), new Number(2))),
+                        new Pow(exp.Right.Clone(), Number.Two)),
 
                 (true, _) =>
                     new Div(exp.Left.Analyze(this, context), exp.Right.Clone()),
@@ -123,9 +123,9 @@ namespace xFunc.Maths.Analyzers
                 (_, true) =>
                     new Div(
                         new UnaryMinus(new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context))),
-                        new Pow(exp.Right.Clone(), new Number(2))),
+                        new Pow(exp.Right.Clone(), Number.Two)),
 
-                _ => new Number(0),
+                _ => Number.Zero,
             };
         }
 
@@ -140,7 +140,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Exp exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Mul(exp.Argument.Analyze(this, context), exp.Clone());
         }
@@ -156,13 +156,13 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Lb exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Mul(
                     exp.Argument.Clone(),
-                    new Ln(new Number(2))));
+                    new Ln(Number.Two)));
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Lg exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
@@ -196,7 +196,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Ln exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(exp.Argument.Analyze(this, context), exp.Argument.Clone());
         }
@@ -229,7 +229,7 @@ namespace xFunc.Maths.Analyzers
                         new Ln(exp.Left.Clone())));
             }
 
-            return new Number(0);
+            return Number.Zero;
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace xFunc.Maths.Analyzers
                 (_, true) =>
                     new Mul(exp.Left.Clone(), exp.Right.Analyze(this, context)),
 
-                _ => new Number(0),
+                _ => Number.Zero,
             };
         }
 
@@ -272,7 +272,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Number exp, DifferentiatorContext context)
         {
-            return new Number(0);
+            return Number.Zero;
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(AngleNumber exp, DifferentiatorContext context)
         {
-            return new Number(0);
+            return Number.Zero;
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace xFunc.Maths.Analyzers
                         exp.Right.Clone(),
                         new Pow(
                             exp.Left.Clone(),
-                            new Sub(exp.Right.Clone(), new Number(1)))));
+                            new Sub(exp.Right.Clone(), Number.One))));
             }
 
             if (Helpers.HasVariable(exp.Right, context.Variable))
@@ -318,7 +318,7 @@ namespace xFunc.Maths.Analyzers
                     exp.Right.Analyze(this, context));
             }
 
-            return new Number(0);
+            return Number.Zero;
         }
 
         /// <summary>
@@ -332,11 +332,11 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Root exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             var pow = new Pow(
                 exp.Left.Clone(),
-                new Div(new Number(1), exp.Right.Clone()));
+                new Div(Number.One, exp.Right.Clone()));
 
             return Analyze(pow, context);
         }
@@ -352,7 +352,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Simplify exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return exp.Argument.Analyze(this, context);
         }
@@ -368,11 +368,11 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Sqrt exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
-                new Mul(new Number(2), exp.Clone()));
+                new Mul(Number.Two, exp.Clone()));
         }
 
         /// <summary>
@@ -393,7 +393,7 @@ namespace xFunc.Maths.Analyzers
                 (true, true) => new Sub(exp.Left.Analyze(this, context), exp.Right.Analyze(this, context)),
                 (true, _) => exp.Left.Analyze(this, context),
                 (_, true) => new UnaryMinus(exp.Right.Analyze(this, context)),
-                _ => new Number(0),
+                _ => Number.Zero,
             };
         }
 
@@ -408,7 +408,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(UnaryMinus exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(exp.Argument.Analyze(this, context));
         }
@@ -440,7 +440,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Variable exp, DifferentiatorContext context)
         {
             if (exp.Equals(context.Variable))
-                return new Number(1);
+                return Number.One;
 
             return exp.Clone();
         }
@@ -460,15 +460,15 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arccos exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Sqrt(
                         new Sub(
-                            new Number(1),
-                            new Pow(exp.Argument.Clone(), new Number(2))))));
+                            Number.One,
+                            new Pow(exp.Argument.Clone(), Number.Two)))));
         }
 
         /// <summary>
@@ -482,14 +482,14 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arccot exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Add(
-                        new Number(1),
-                        new Pow(exp.Argument.Clone(), new Number(2)))));
+                        Number.One,
+                        new Pow(exp.Argument.Clone(), Number.Two))));
         }
 
         /// <summary>
@@ -503,7 +503,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arccsc exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Div(
@@ -512,8 +512,8 @@ namespace xFunc.Maths.Analyzers
                         new Abs(exp.Argument.Clone()),
                         new Sqrt(
                             new Sub(
-                                new Pow(exp.Argument.Clone(), new Number(2)),
-                                new Number(1))))));
+                                new Pow(exp.Argument.Clone(), Number.Two),
+                                Number.One)))));
         }
 
         /// <summary>
@@ -527,7 +527,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arcsec exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
@@ -535,8 +535,8 @@ namespace xFunc.Maths.Analyzers
                     new Abs(exp.Argument.Clone()),
                     new Sqrt(
                         new Sub(
-                            new Pow(exp.Argument.Clone(), new Number(2)),
-                            new Number(1)))));
+                            new Pow(exp.Argument.Clone(), Number.Two),
+                            Number.One))));
         }
 
         /// <summary>
@@ -550,14 +550,14 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arcsin exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Sqrt(
                     new Sub(
-                        new Number(1),
-                        new Pow(exp.Argument.Clone(), new Number(2)))));
+                        Number.One,
+                        new Pow(exp.Argument.Clone(), Number.Two))));
         }
 
         /// <summary>
@@ -571,13 +571,13 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arctan exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Add(
-                    new Number(1),
-                    new Pow(exp.Argument.Clone(), new Number(2))));
+                    Number.One,
+                    new Pow(exp.Argument.Clone(), Number.Two)));
         }
 
         /// <summary>
@@ -591,7 +591,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Cos exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Mul(
@@ -610,14 +610,14 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Cot exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Pow(
                         new Sin(exp.Argument.Clone()),
-                        new Number(2))));
+                        Number.Two)));
         }
 
         /// <summary>
@@ -648,7 +648,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Sec exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
@@ -668,7 +668,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Sin exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Mul(
                 new Cos(exp.Argument.Clone()),
@@ -686,13 +686,13 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Tan exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Pow(
                     new Cos(exp.Argument.Clone()),
-                    new Number(2)));
+                    Number.Two));
         }
 
         #endregion
@@ -710,14 +710,14 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arcosh exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Sqrt(
                     new Sub(
-                        new Pow(exp.Argument.Clone(), new Number(2)),
-                        new Number(1))));
+                        new Pow(exp.Argument.Clone(), Number.Two),
+                        Number.One)));
         }
 
         /// <summary>
@@ -731,13 +731,13 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arcoth exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Sub(
-                    new Number(1),
-                    new Pow(exp.Argument.Clone(), new Number(2))));
+                    Number.One,
+                    new Pow(exp.Argument.Clone(), Number.Two)));
         }
 
         /// <summary>
@@ -751,7 +751,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arcsch exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Div(
@@ -760,8 +760,8 @@ namespace xFunc.Maths.Analyzers
                         new Abs(exp.Argument.Clone()),
                         new Sqrt(
                             new Add(
-                                new Number(1),
-                                new Pow(exp.Argument.Clone(), new Number(2)))))));
+                                Number.One,
+                                new Pow(exp.Argument.Clone(), Number.Two))))));
         }
 
         /// <summary>
@@ -781,8 +781,8 @@ namespace xFunc.Maths.Analyzers
                         exp.Argument.Clone(),
                         new Sqrt(
                             new Sub(
-                                new Number(1),
-                                new Pow(exp.Argument.Clone(), new Number(2)))))));
+                                Number.One,
+                                new Pow(exp.Argument.Clone(), Number.Two))))));
         }
 
         /// <summary>
@@ -796,14 +796,14 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Arsinh exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Sqrt(
                     new Add(
-                        new Pow(exp.Argument.Clone(), new Number(2)),
-                        new Number(1))));
+                        new Pow(exp.Argument.Clone(), Number.Two),
+                        Number.One)));
         }
 
         /// <summary>
@@ -817,13 +817,13 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Artanh exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Sub(
-                    new Number(1),
-                    new Pow(exp.Argument.Clone(), new Number(2))));
+                    Number.One,
+                    new Pow(exp.Argument.Clone(), Number.Two)));
         }
 
         /// <summary>
@@ -837,7 +837,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Cosh exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
@@ -855,14 +855,14 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Coth exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Div(
                     exp.Argument.Analyze(this, context),
                     new Pow(
                         new Sinh(exp.Argument.Clone()),
-                        new Number(2))));
+                        Number.Two)));
         }
 
         /// <summary>
@@ -876,7 +876,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Csch exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Mul(
@@ -897,7 +897,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Sech exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new UnaryMinus(
                 new Mul(
@@ -918,7 +918,7 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Sinh exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Mul(
                 exp.Argument.Analyze(this, context),
@@ -936,13 +936,13 @@ namespace xFunc.Maths.Analyzers
         public override IExpression Analyze(Tanh exp, DifferentiatorContext context)
         {
             if (!Helpers.HasVariable(exp, context.Variable))
-                return new Number(0);
+                return Number.Zero;
 
             return new Div(
                 exp.Argument.Analyze(this, context),
                 new Pow(
                     new Cosh(exp.Argument.Clone()),
-                    new Number(2)));
+                    Number.Two));
         }
 
         #endregion Hyperbolic

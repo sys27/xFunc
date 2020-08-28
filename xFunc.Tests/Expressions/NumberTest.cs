@@ -24,7 +24,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsNumberNullTest()
         {
-            var number = new Number(0);
+            var number = Number.Zero;
 
             Assert.False(number.Equals(null));
         }
@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsObjectNullTest()
         {
-            var number = new Number(0);
+            var number = Number.Zero;
 
             Assert.False(number.Equals((object)null));
         }
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsNumberThisTest()
         {
-            var number = new Number(0);
+            var number = Number.Zero;
 
             Assert.True(number.Equals(number));
         }
@@ -48,7 +48,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsObjectThisTest()
         {
-            var number = new Number(0);
+            var number = Number.Zero;
 
             Assert.True(number.Equals((object)number));
         }
@@ -56,8 +56,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsTest()
         {
-            var left = new Number(0);
-            var right = new Number(0);
+            var left = Number.Zero;
+            var right = Number.Zero;
 
             Assert.True(left.Equals(right));
         }
@@ -65,8 +65,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NotEqualsTest()
         {
-            var left = new Number(0);
-            var right = new Number(1);
+            var left = Number.Zero;
+            var right = Number.One;
 
             Assert.False(left.Equals(right));
         }
@@ -74,7 +74,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest()
         {
-            var number = new Number(1);
+            var number = Number.One;
 
             Assert.Equal(1.0, number.Execute());
         }
@@ -90,7 +90,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = new Number(1);
+            var exp = Number.One;
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -98,7 +98,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = new Number(1);
+            var exp = Number.One;
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }

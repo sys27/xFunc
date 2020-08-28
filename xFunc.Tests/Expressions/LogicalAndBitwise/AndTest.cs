@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new And(new Number(1), new Number(3));
+            var exp = new And(Number.One, new Number(3));
 
             Assert.Equal(1.0, exp.Execute());
         }
@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTestLeftIsNotInt()
         {
-            var exp = new And(new Number(1.5), new Number(1));
+            var exp = new And(new Number(1.5), Number.One);
 
             Assert.Throws<ArgumentException>(() => exp.Execute());
         }
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTestRightIsNotInt()
         {
-            var exp = new And(new Number(1), new Number(1.5));
+            var exp = new And(Number.One, new Number(1.5));
 
             Assert.Throws<ArgumentException>(() => exp.Execute());
         }

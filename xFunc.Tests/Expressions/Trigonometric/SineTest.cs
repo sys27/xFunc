@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new Sin(new Number(1));
+            var exp = new Sin(Number.One);
             var result = (double)exp.Execute();
 
             Assert.Equal(0.017452406437283512, result, 15);
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void CloneTest()
         {
-            var exp = new Sin(new Number(1));
+            var exp = new Sin(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -103,7 +103,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Abs(new Number(0));
+            var exp = new Abs(Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

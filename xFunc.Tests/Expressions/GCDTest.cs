@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new GCD(Variable.X, new Number(0));
+            var exp = new GCD(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
@@ -81,7 +81,7 @@ namespace xFunc.Tests.Expressions
         public void EqualsDiffTypesTest()
         {
             var exp = new GCD(new IExpression[] { new Number(16), new Number(8) });
-            var number = new Number(2);
+            var number = Number.Two;
 
             Assert.False(exp.Equals(number));
         }
@@ -90,7 +90,7 @@ namespace xFunc.Tests.Expressions
         public void EqualsDiffCountTest()
         {
             var exp1 = new GCD(new IExpression[] { new Number(16), new Number(8) });
-            var exp2 = new GCD(new IExpression[] { new Number(16), new Number(8), new Number(2) });
+            var exp2 = new GCD(new IExpression[] { new Number(16), new Number(8), Number.Two });
 
             Assert.False(exp1.Equals(exp2));
         }

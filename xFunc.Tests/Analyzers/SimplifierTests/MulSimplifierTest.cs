@@ -24,8 +24,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "0 * x")]
         public void MulByFirstZero()
         {
-            var mul = new Mul(new Number(0), Variable.X);
-            var expected = new Number(0);
+            var mul = new Mul(Number.Zero, Variable.X);
+            var expected = Number.Zero;
 
             SimpleTest(mul, expected);
         }
@@ -33,8 +33,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x * 0")]
         public void MulBySecondZero()
         {
-            var mul = new Mul(Variable.X, new Number(0));
-            var expected = new Number(0);
+            var mul = new Mul(Variable.X, Number.Zero);
+            var expected = Number.Zero;
 
             SimpleTest(mul, expected);
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "1 * x")]
         public void MulFirstOne()
         {
-            var mul = new Mul(new Number(1), Variable.X);
+            var mul = new Mul(Number.One, Variable.X);
             var expected = Variable.X;
 
             SimpleTest(mul, expected);
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x * 1")]
         public void MulSecondOne()
         {
-            var mul = new Mul(Variable.X, new Number(1));
+            var mul = new Mul(Variable.X, Number.One);
             var expected = Variable.X;
 
             SimpleTest(mul, expected);
@@ -78,7 +78,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 * 3")]
         public void MulTwoNumbers()
         {
-            var mul = new Mul(new Number(2), new Number(3));
+            var mul = new Mul(Number.Two, new Number(3));
             var expected = new Number(6);
 
             SimpleTest(mul, expected);
@@ -87,7 +87,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 * (2 * x)")]
         public void MulDiffNumMul_NumMulVar_()
         {
-            var mul = new Mul(new Number(2), new Mul(new Number(2), Variable.X));
+            var mul = new Mul(Number.Two, new Mul(Number.Two, Variable.X));
             var expected = new Mul(new Number(4), Variable.X);
 
             SimpleTest(mul, expected);
@@ -96,7 +96,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 * (x * 2)")]
         public void MulDiffNumMul_VarMulNum_()
         {
-            var mul = new Mul(new Number(2), new Mul(Variable.X, new Number(2)));
+            var mul = new Mul(Number.Two, new Mul(Variable.X, Number.Two));
             var expected = new Mul(new Number(4), Variable.X);
 
             SimpleTest(mul, expected);
@@ -105,7 +105,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(2 * x) * 2")]
         public void MulDiff_NumMulVar_MulNum()
         {
-            var mul = new Mul(new Mul(new Number(2), Variable.X), new Number(2));
+            var mul = new Mul(new Mul(Number.Two, Variable.X), Number.Two);
             var expected = new Mul(new Number(4), Variable.X);
 
             SimpleTest(mul, expected);
@@ -114,7 +114,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x * 2) * 2")]
         public void MulDiff_VarMulNum_MulNum()
         {
-            var mul = new Mul(new Mul(Variable.X, new Number(2)), new Number(2));
+            var mul = new Mul(new Mul(Variable.X, Number.Two), Number.Two);
             var expected = new Mul(new Number(4), Variable.X);
 
             SimpleTest(mul, expected);
@@ -123,7 +123,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 * (2 / x)")]
         public void MulDiffNumMul_NumDivVar_()
         {
-            var mul = new Mul(new Number(2), new Div(new Number(2), Variable.X));
+            var mul = new Mul(Number.Two, new Div(Number.Two, Variable.X));
             var expected = new Div(new Number(4), Variable.X);
 
             SimpleTest(mul, expected);
@@ -132,7 +132,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2 * (x / 2)")]
         public void MulDiffNumMul_VarDivNum_()
         {
-            var mul = new Mul(new Number(2), new Div(Variable.X, new Number(2)));
+            var mul = new Mul(Number.Two, new Div(Variable.X, Number.Two));
             var expected = Variable.X;
 
             SimpleTest(mul, expected);
@@ -141,7 +141,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(2 / x) * 2")]
         public void MulDiff_NumDivVar_MulNum()
         {
-            var mul = new Mul(new Div(new Number(2), Variable.X), new Number(2));
+            var mul = new Mul(new Div(Number.Two, Variable.X), Number.Two);
             var expected = new Div(new Number(4), Variable.X);
 
             SimpleTest(mul, expected);
@@ -150,7 +150,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x / 2) * 2")]
         public void MulDiff_VarDivNum_MulNum()
         {
-            var mul = new Mul(new Div(Variable.X, new Number(2)), new Number(2));
+            var mul = new Mul(new Div(Variable.X, Number.Two), Number.Two);
             var expected = Variable.X;
 
             SimpleTest(mul, expected);
@@ -160,7 +160,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar1()
         {
             var mul = new Mul(Variable.X, Variable.X);
-            var expected = new Pow(Variable.X, new Number(2));
+            var expected = new Pow(Variable.X, Number.Two);
 
             SimpleTest(mul, expected);
         }
@@ -168,8 +168,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2x * x")]
         public void MulSameVar2()
         {
-            var mul = new Mul(new Mul(new Number(2), Variable.X), Variable.X);
-            var expected = new Mul(new Number(2), new Pow(Variable.X, new Number(2)));
+            var mul = new Mul(new Mul(Number.Two, Variable.X), Variable.X);
+            var expected = new Mul(Number.Two, new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -178,10 +178,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar3()
         {
             var mul = new Mul(
-                new Mul(new Number(2), Variable.X),
+                new Mul(Number.Two, Variable.X),
                 new Mul(new Number(3), Variable.X)
             );
-            var expected = new Mul(new Number(6), new Pow(Variable.X, new Number(2)));
+            var expected = new Mul(new Number(6), new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -189,8 +189,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x * 2x")]
         public void MulSameVar4()
         {
-            var mul = new Mul(Variable.X, new Mul(new Number(2), Variable.X));
-            var expected = new Mul(new Number(2), new Pow(Variable.X, new Number(2)));
+            var mul = new Mul(Variable.X, new Mul(Number.Two, Variable.X));
+            var expected = new Mul(Number.Two, new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -198,8 +198,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "x * (x * 2)")]
         public void MulSameVar5()
         {
-            var mul = new Mul(Variable.X, new Mul(Variable.X, new Number(2)));
-            var expected = new Mul(new Number(2), new Pow(Variable.X, new Number(2)));
+            var mul = new Mul(Variable.X, new Mul(Variable.X, Number.Two));
+            var expected = new Mul(Number.Two, new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -207,8 +207,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "2x * x")]
         public void MulSameVar6()
         {
-            var mul = new Mul(new Mul(new Number(2), Variable.X), Variable.X);
-            var expected = new Mul(new Number(2), new Pow(Variable.X, new Number(2)));
+            var mul = new Mul(new Mul(Number.Two, Variable.X), Variable.X);
+            var expected = new Mul(Number.Two, new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -216,8 +216,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact(DisplayName = "(x * 2) * x")]
         public void MulSameVar7()
         {
-            var mul = new Mul(new Mul(Variable.X, new Number(2)), Variable.X);
-            var expected = new Mul(new Number(2), new Pow(Variable.X, new Number(2)));
+            var mul = new Mul(new Mul(Variable.X, Number.Two), Variable.X);
+            var expected = new Mul(Number.Two, new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -226,10 +226,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar8()
         {
             var mul = new Mul(
-                new Mul(new Number(2), Variable.X),
+                new Mul(Number.Two, Variable.X),
                 new Mul(new Number(3), Variable.X)
             );
-            var expected = new Mul(new Number(6), new Pow(Variable.X, new Number(2)));
+            var expected = new Mul(new Number(6), new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -238,10 +238,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar9()
         {
             var mul = new Mul(
-                new Mul(Variable.X, new Number(2)),
+                new Mul(Variable.X, Number.Two),
                 new Mul(Variable.X, new Number(3))
             );
-            var expected = new Mul(new Number(6), new Pow(Variable.X, new Number(2)));
+            var expected = new Mul(new Number(6), new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -250,10 +250,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar10()
         {
             var mul = new Mul(
-                new Mul(new Number(2), Variable.X),
+                new Mul(Number.Two, Variable.X),
                 new Mul(new Number(0.5), Variable.X)
             );
-            var expected = new Pow(Variable.X, new Number(2));
+            var expected = new Pow(Variable.X, Number.Two);
 
             SimpleTest(mul, expected);
         }
@@ -262,10 +262,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar11()
         {
             var mul = new Mul(
-                new Mul(new Number(2), Variable.X),
+                new Mul(Number.Two, Variable.X),
                 new Mul(new Number(-0.5), Variable.X)
             );
-            var expected = new UnaryMinus(new Pow(Variable.X, new Number(2)));
+            var expected = new UnaryMinus(new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -274,10 +274,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar12()
         {
             var mul = new Mul(
-                new Mul(new Number(2), Variable.X),
+                new Mul(Number.Two, Variable.X),
                 new Mul(Variable.X, new Number(-3))
             );
-            var expected = new Mul(new Number(-6), new Pow(Variable.X, new Number(2)));
+            var expected = new Mul(new Number(-6), new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }
@@ -286,10 +286,10 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void MulSameVar13()
         {
             var mul = new Mul(
-                new Mul(Variable.X, new Number(2)),
+                new Mul(Variable.X, Number.Two),
                 new Mul(new Number(-3), Variable.X)
             );
-            var expected = new Mul(new Number(-6), new Pow(Variable.X, new Number(2)));
+            var expected = new Mul(new Number(-6), new Pow(Variable.X, Number.Two));
 
             SimpleTest(mul, expected);
         }

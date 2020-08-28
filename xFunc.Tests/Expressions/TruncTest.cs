@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Trunc(new Number(0));
+            var exp = new Trunc(Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

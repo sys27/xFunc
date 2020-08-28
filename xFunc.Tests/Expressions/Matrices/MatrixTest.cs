@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void MulByNumberMatrixTest()
         {
-            var vector1 = new Vector(new IExpression[] { new Number(2), new Number(3) });
+            var vector1 = new Vector(new IExpression[] { Number.Two, new Number(3) });
             var vector2 = new Vector(new IExpression[] { new Number(9), new Number(5) });
             var matrix = new Matrix(new[] { vector1, vector2 });
             var number = new Number(5);
@@ -47,11 +47,11 @@ namespace xFunc.Tests.Expressions.Matrices
             var matrix1 = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { Number.Two, Number.One })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(9), Number.Two }),
                 new Vector(new IExpression[] { new Number(4), new Number(3) })
             });
             var exp = new Add(matrix1, matrix2);
@@ -72,7 +72,7 @@ namespace xFunc.Tests.Expressions.Matrices
             Assert.Throws<MatrixIsInvalidException>(() =>
                 new Matrix(new[]
                 {
-                    new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                    new Vector(new IExpression[] { new Number(9), Number.Two }),
                     new Vector(new IExpression[] { new Number(4), new Number(3), new Number(9) })
                 }));
         }
@@ -83,13 +83,13 @@ namespace xFunc.Tests.Expressions.Matrices
             var matrix1 = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { Number.Two, Number.One })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(9), Number.Two }),
                 new Vector(new IExpression[] { new Number(4), new Number(3) }),
-                new Vector(new IExpression[] { new Number(1), new Number(7) })
+                new Vector(new IExpression[] { Number.One, new Number(7) })
             });
             var exp = new Add(matrix1, matrix2);
 
@@ -102,18 +102,18 @@ namespace xFunc.Tests.Expressions.Matrices
             var matrix1 = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { Number.Two, Number.One })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(9), Number.Two }),
                 new Vector(new IExpression[] { new Number(4), new Number(3) })
             });
             var exp = new Sub(matrix1, matrix2);
 
             var expected = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(-3), new Number(1) }),
+                new Vector(new IExpression[] { new Number(-3), Number.One }),
                 new Vector(new IExpression[] { new Number(-2), new Number(-2) })
             });
             var result = exp.Execute();
@@ -127,7 +127,7 @@ namespace xFunc.Tests.Expressions.Matrices
             Assert.Throws<MatrixIsInvalidException>(() =>
                 new Matrix(new[]
                 {
-                    new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                    new Vector(new IExpression[] { new Number(9), Number.Two }),
                     new Vector(new IExpression[] { new Number(4), new Number(3), new Number(9) })
                 }));
         }
@@ -138,13 +138,13 @@ namespace xFunc.Tests.Expressions.Matrices
             var matrix1 = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1) })
+                new Vector(new IExpression[] { Number.Two, Number.One })
             });
             var matrix2 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(9), new Number(2) }),
+                new Vector(new IExpression[] { new Number(9), Number.Two }),
                 new Vector(new IExpression[] { new Number(4), new Number(3) }),
-                new Vector(new IExpression[] { new Number(6), new Number(1) })
+                new Vector(new IExpression[] { new Number(6), Number.One })
             });
             var exp = new Sub(matrix1, matrix2);
 
@@ -156,7 +156,7 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
                 new Vector(new IExpression[] { new Number(3), new Number(4) }),
                 new Vector(new IExpression[] { new Number(5), new Number(6) })
             });
@@ -164,8 +164,8 @@ namespace xFunc.Tests.Expressions.Matrices
 
             var expected = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(3), new Number(5) }),
-                new Vector(new IExpression[] { new Number(2), new Number(4), new Number(6) })
+                new Vector(new IExpression[] { Number.One, new Number(3), new Number(5) }),
+                new Vector(new IExpression[] { Number.Two, new Number(4), new Number(6) })
             });
             var result = exp.Execute();
 
@@ -177,7 +177,7 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var left = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(-2), new Number(1) }),
+                new Vector(new IExpression[] { new Number(-2), Number.One }),
                 new Vector(new IExpression[] { new Number(5), new Number(4) })
             });
             var right = new Matrix(new[]
@@ -208,7 +208,7 @@ namespace xFunc.Tests.Expressions.Matrices
             });
             var right = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(3), new Number(2), new Number(5) }),
+                new Vector(new IExpression[] { new Number(3), Number.Two, new Number(5) }),
                 new Vector(new IExpression[] { new Number(4), new Number(-1), new Number(3) }),
                 new Vector(new IExpression[] { new Number(9), new Number(6), new Number(5) })
             });
@@ -235,7 +235,7 @@ namespace xFunc.Tests.Expressions.Matrices
             });
             var right = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(-2), new Number(1) }),
+                new Vector(new IExpression[] { new Number(-2), Number.One }),
                 new Vector(new IExpression[] { new Number(5), new Number(4) })
             });
             var exp = new Mul(left, right);
@@ -248,8 +248,8 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var left = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1) }),
-                new Vector(new IExpression[] { new Number(2) }),
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.Two }),
                 new Vector(new IExpression[] { new Number(3) }),
                 new Vector(new IExpression[] { new Number(4) }),
                 new Vector(new IExpression[] { new Number(5) }),
@@ -264,8 +264,8 @@ namespace xFunc.Tests.Expressions.Matrices
             {
                 new Vector(new IExpression[]
                 {
-                    new Number(1),
-                    new Number(2),
+                    Number.One,
+                    Number.Two,
                     new Number(3),
                     new Number(4),
                     new Number(5),
@@ -282,11 +282,11 @@ namespace xFunc.Tests.Expressions.Matrices
             {
                 new Vector(new IExpression[]
                 {
-                    new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6), new Number(7), new Number(8), new Number(9), new Number(10), new Number(11),
+                    Number.One, Number.Two, new Number(3), new Number(4), new Number(5), new Number(6), new Number(7), new Number(8), new Number(9), new Number(10), new Number(11),
                 }),
                 new Vector(new IExpression[]
                 {
-                    new Number(2), new Number(4), new Number(6), new Number(8), new Number(10), new Number(12), new Number(14), new Number(16), new Number(18), new Number(20), new Number(22),
+                    Number.Two, new Number(4), new Number(6), new Number(8), new Number(10), new Number(12), new Number(14), new Number(16), new Number(18), new Number(20), new Number(22),
                 }),
                 new Vector(new IExpression[]
                 {
@@ -332,7 +332,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void MatrixMulVectorTest()
         {
-            var vector = new Vector(new IExpression[] { new Number(-2), new Number(1) });
+            var vector = new Vector(new IExpression[] { new Number(-2), Number.One });
             var matrix = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(3) }),
@@ -343,7 +343,7 @@ namespace xFunc.Tests.Expressions.Matrices
             var expected = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(-6), new Number(3) }),
-                new Vector(new IExpression[] { new Number(2), new Number(-1) })
+                new Vector(new IExpression[] { Number.Two, new Number(-1) })
             });
             var result = exp.Execute();
 
@@ -355,8 +355,8 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(-2), new Number(3) }),
-                new Vector(new IExpression[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new IExpression[] { Number.One, new Number(-2), new Number(3) }),
+                new Vector(new IExpression[] { new Number(4), Number.Zero, new Number(6) }),
                 new Vector(new IExpression[] { new Number(-7), new Number(8), new Number(9) })
             });
             var exp = new Determinant(matrix);
@@ -371,10 +371,10 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(3), new Number(7), new Number(2), new Number(5) }),
-                new Vector(new IExpression[] { new Number(1), new Number(8), new Number(4), new Number(2) }),
-                new Vector(new IExpression[] { new Number(2), new Number(1), new Number(9), new Number(3) }),
-                new Vector(new IExpression[] { new Number(5), new Number(4), new Number(7), new Number(1) })
+                new Vector(new IExpression[] { new Number(3), new Number(7), Number.Two, new Number(5) }),
+                new Vector(new IExpression[] { Number.One, new Number(8), new Number(4), Number.Two }),
+                new Vector(new IExpression[] { Number.Two, Number.One, new Number(9), new Number(3) }),
+                new Vector(new IExpression[] { new Number(5), new Number(4), new Number(7), Number.One })
             });
             var exp = new Inverse(matrix);
 
@@ -396,8 +396,8 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var exp = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(-2), new Number(3) }),
-                new Vector(new IExpression[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new IExpression[] { Number.One, new Number(-2), new Number(3) }),
+                new Vector(new IExpression[] { new Number(4), Number.Zero, new Number(6) }),
                 new Vector(new IExpression[] { new Number(-7), new Number(8), new Number(9) })
             });
             var clone = exp.Clone();
@@ -442,7 +442,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void SetTest()
         {
-            var vector = new Vector(new IExpression[] { new Number(-2), new Number(1) });
+            var vector = new Vector(new IExpression[] { new Number(-2), Number.One });
             var matrix = new Matrix(new[]
             {
                 new Vector(new IExpression[] { new Number(3) }),
@@ -524,7 +524,7 @@ namespace xFunc.Tests.Expressions.Matrices
                 new Vector(new IExpression[] { new Number(3) }),
                 new Vector(new IExpression[] { new Number(-1) })
             });
-            var number = new Number(2);
+            var number = Number.Two;
 
             Assert.False(matrix.Equals(number));
         }

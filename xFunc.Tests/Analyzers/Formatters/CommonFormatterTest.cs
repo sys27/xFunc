@@ -44,7 +44,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AddToStringTest()
         {
-            var exp = new Add(new Number(5), new Number(0));
+            var exp = new Add(new Number(5), Number.Zero);
 
             Assert.Equal("5 + 0", exp.ToString());
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AddToStringBinTest()
         {
-            var exp = new Mul(Variable.X, new Add(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Add(new Number(5), Number.Zero));
 
             Assert.Equal("x * (5 + 0)", exp.ToString());
         }
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DefineToStringTest()
         {
-            var exp = new Define(Variable.X, new Number(0));
+            var exp = new Define(Variable.X, Number.Zero);
 
             Assert.Equal("x := 0", exp.ToString());
         }
@@ -81,8 +81,8 @@ namespace xFunc.Tests.Analyzers.Formatters
                 new Simplifier(),
                 new Add(
                     new Add(
-                        new Mul(new Number(2), new Variable("x1")),
-                        new Pow(new Variable("x2"), new Number(2))
+                        new Mul(Number.Two, new Variable("x1")),
+                        new Pow(new Variable("x2"), Number.Two)
                     ),
                     new Pow(new Variable("x3"), new Number(3))
                 )
@@ -110,7 +110,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DerivativeToStringPointTest()
         {
-            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, new Number(1));
+            var deriv = new Derivative(new Differentiator(), new Simplifier(), new Sin(Variable.X), Variable.X, Number.One);
 
             Assert.Equal("deriv(sin(x), x, 1)", deriv.ToString());
         }
@@ -118,7 +118,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DivToStringTest()
         {
-            var exp = new Div(new Number(5), new Number(0));
+            var exp = new Div(new Number(5), Number.Zero);
 
             Assert.Equal("5 / 0", exp.ToString());
         }
@@ -126,7 +126,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DivToStringBinTest()
         {
-            var exp = new Mul(Variable.X, new Div(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Div(new Number(5), Number.Zero));
 
             Assert.Equal("x * (5 / 0)", exp.ToString());
         }
@@ -174,7 +174,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void GCDToStringTest()
         {
-            var exp = new GCD(new Number(5), new Number(0));
+            var exp = new GCD(new Number(5), Number.Zero);
 
             Assert.Equal("gcd(5, 0)", exp.ToString());
         }
@@ -182,7 +182,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void LCMToStringTest()
         {
-            var exp = new LCM(new Number(5), new Number(0));
+            var exp = new LCM(new Number(5), Number.Zero);
 
             Assert.Equal("lcm(5, 0)", exp.ToString());
         }
@@ -214,7 +214,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void LogToStringTest()
         {
-            var exp = new Log(new Number(0), new Number(5));
+            var exp = new Log(Number.Zero, new Number(5));
 
             Assert.Equal("log(0, 5)", exp.ToString());
         }
@@ -222,7 +222,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ModToStringTest()
         {
-            var exp = new Mod(new Number(5), new Number(0));
+            var exp = new Mod(new Number(5), Number.Zero);
 
             Assert.Equal("5 % 0", exp.ToString());
         }
@@ -230,7 +230,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ModToStringBinTest()
         {
-            var exp = new Mul(Variable.X, new Mod(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Mod(new Number(5), Number.Zero));
 
             Assert.Equal("x * (5 % 0)", exp.ToString());
         }
@@ -238,7 +238,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulToStringTest()
         {
-            var exp = new Mul(new Number(5), new Number(0));
+            var exp = new Mul(new Number(5), Number.Zero);
 
             Assert.Equal("5 * 0", exp.ToString());
         }
@@ -246,7 +246,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulToStringAddTest()
         {
-            var exp = new Add(Variable.X, new Mul(new Number(5), new Number(0)));
+            var exp = new Add(Variable.X, new Mul(new Number(5), Number.Zero));
 
             Assert.Equal("x + (5 * 0)", exp.ToString());
         }
@@ -254,7 +254,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulToStringSubTest()
         {
-            var exp = new Sub(Variable.X, new Mul(new Number(5), new Number(0)));
+            var exp = new Sub(Variable.X, new Mul(new Number(5), Number.Zero));
 
             Assert.Equal("x - (5 * 0)", exp.ToString());
         }
@@ -262,7 +262,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulToStringMulTest()
         {
-            var exp = new Mul(Variable.X, new Mul(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Mul(new Number(5), Number.Zero));
 
             Assert.Equal("x * (5 * 0)", exp.ToString());
         }
@@ -270,7 +270,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MulToStringDivTest()
         {
-            var exp = new Div(Variable.X, new Mul(new Number(5), new Number(0)));
+            var exp = new Div(Variable.X, new Mul(new Number(5), Number.Zero));
 
             Assert.Equal("x / (5 * 0)", exp.ToString());
         }
@@ -326,7 +326,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void NumberSubTest()
         {
-            var exp = new Sub(new Number(1), new Number(-3.3));
+            var exp = new Sub(Number.One, new Number(-3.3));
 
             Assert.Equal("1 - -3.3", exp.ToString());
         }
@@ -334,7 +334,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void PowToStringTest()
         {
-            var exp = new Pow(new Number(5), new Number(0));
+            var exp = new Pow(new Number(5), Number.Zero);
 
             Assert.Equal("5 ^ 0", exp.ToString());
         }
@@ -342,7 +342,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void PowToStringAddTest()
         {
-            var exp = new Add(Variable.X, new Pow(new Number(5), new Number(0)));
+            var exp = new Add(Variable.X, new Pow(new Number(5), Number.Zero));
 
             Assert.Equal("x + (5 ^ 0)", exp.ToString());
         }
@@ -350,7 +350,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void PowToStringSubTest()
         {
-            var exp = new Sub(Variable.X, new Pow(new Number(5), new Number(0)));
+            var exp = new Sub(Variable.X, new Pow(new Number(5), Number.Zero));
 
             Assert.Equal("x - (5 ^ 0)", exp.ToString());
         }
@@ -358,7 +358,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void PowToStringMulTest()
         {
-            var exp = new Mul(Variable.X, new Pow(new Number(5), new Number(0)));
+            var exp = new Mul(Variable.X, new Pow(new Number(5), Number.Zero));
 
             Assert.Equal("x * (5 ^ 0)", exp.ToString());
         }
@@ -366,7 +366,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void PowToStringDivTest()
         {
-            var exp = new Div(Variable.X, new Pow(new Number(5), new Number(0)));
+            var exp = new Div(Variable.X, new Pow(new Number(5), Number.Zero));
 
             Assert.Equal("x / (5 ^ 0)", exp.ToString());
         }
@@ -374,7 +374,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void RootToStringTest()
         {
-            var exp = new Root(new Number(5), new Number(0));
+            var exp = new Root(new Number(5), Number.Zero);
 
             Assert.Equal("root(5, 0)", exp.ToString());
         }
@@ -382,7 +382,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void RoundToStringTest()
         {
-            var exp = new Round(new Number(5), new Number(0));
+            var exp = new Round(new Number(5), Number.Zero);
 
             Assert.Equal("round(5, 0)", exp.ToString());
         }
@@ -406,7 +406,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SubToStringTest()
         {
-            var exp = new Sub(new Number(5), new Number(0));
+            var exp = new Sub(new Number(5), Number.Zero);
 
             Assert.Equal("5 - 0", exp.ToString());
         }
@@ -414,7 +414,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SubToStringSubTest()
         {
-            var exp = new Sub(Variable.X, new Sub(new Number(5), new Number(0)));
+            var exp = new Sub(Variable.X, new Sub(new Number(5), Number.Zero));
 
             Assert.Equal("x - (5 - 0)", exp.ToString());
         }
@@ -422,7 +422,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SubToStringDivTest()
         {
-            var exp = new Div(Variable.X, new Sub(new Number(5), new Number(0)));
+            var exp = new Div(Variable.X, new Sub(new Number(5), Number.Zero));
 
             Assert.Equal("x / (5 - 0)", exp.ToString());
         }
@@ -438,7 +438,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void UnaryMinusToStringBinTest()
         {
-            var exp = new UnaryMinus(new Add(new Number(5), new Number(0)));
+            var exp = new UnaryMinus(new Add(new Number(5), Number.Zero));
 
             Assert.Equal("-(5 + 0)", exp.ToString());
         }
@@ -446,7 +446,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void UnaryMinusToStringSubTest()
         {
-            var exp = new Sub(new Number(0), new UnaryMinus(new Number(5)));
+            var exp = new Sub(Number.Zero, new UnaryMinus(new Number(5)));
 
             Assert.Equal("0 - -5", exp.ToString());
         }
@@ -462,7 +462,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void UserFunctionToStringArgTest()
         {
-            var exp = new UserFunction("f", new IExpression[] { new Number(5), new Number(2) });
+            var exp = new UserFunction("f", new IExpression[] { new Number(5), Number.Two });
 
             Assert.Equal("f(5, 2)", exp.ToString());
         }
@@ -945,8 +945,8 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var matrix = new Matrix(new[]
             {
-                new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
-                new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
+                new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) }),
+                new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero })
             });
 
             Assert.Equal("{{1, -2}, {4, 0}}", matrix.ToString());
@@ -957,8 +957,8 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var matrix = new Matrix(new[]
             {
-                new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
-                new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
+                new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) }),
+                new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero })
             });
 
             var det = new Determinant(matrix);
@@ -971,8 +971,8 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var matrix = new Matrix(new[]
             {
-                new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
-                new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
+                new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) }),
+                new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero })
             });
 
             var exp = new Inverse(matrix);
@@ -983,8 +983,8 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void DotProductToStringTest()
         {
-            var left = new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) });
-            var right = new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) });
+            var left = new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) });
+            var right = new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero });
             var exp = new DotProduct(left, right);
 
             Assert.Equal("dotProduct({1, -2}, {4, 0})", exp.ToString());
@@ -993,8 +993,8 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CrossProductToStringTest()
         {
-            var left = new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) });
-            var right = new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) });
+            var left = new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) });
+            var right = new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero });
             var exp = new CrossProduct(left, right);
 
             Assert.Equal("crossProduct({1, -2}, {4, 0})", exp.ToString());
@@ -1005,8 +1005,8 @@ namespace xFunc.Tests.Analyzers.Formatters
         {
             var matrix = new Matrix(new[]
             {
-                new Matrices.Vector(new IExpression[] { new Number(1), new Number(-2) }),
-                new Matrices.Vector(new IExpression[] { new Number(4), new Number(0) })
+                new Matrices.Vector(new IExpression[] { Number.One, new Number(-2) }),
+                new Matrices.Vector(new IExpression[] { new Number(4), Number.Zero })
             });
 
             var exp = new Transpose(matrix);
@@ -1021,7 +1021,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AvgToStringTest()
         {
-            var sum = new Avg(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Avg(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("avg(1, 2)", sum.ToString());
         }
@@ -1029,7 +1029,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AvgToStringTest2()
         {
-            var sum = new Avg(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Avg(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("avg({1, 2})", sum.ToString());
         }
@@ -1037,7 +1037,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CountToStringTest()
         {
-            var sum = new Count(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Count(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("count(1, 2)", sum.ToString());
         }
@@ -1045,7 +1045,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void CountToStringTest2()
         {
-            var sum = new Count(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Count(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("count({1, 2})", sum.ToString());
         }
@@ -1053,7 +1053,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ToStringTest()
         {
-            var sum = new Max(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Max(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("max(1, 2)", sum.ToString());
         }
@@ -1061,7 +1061,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ToStringTest2()
         {
-            var sum = new Max(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Max(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("max({1, 2})", sum.ToString());
         }
@@ -1069,7 +1069,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MinToStringTest()
         {
-            var sum = new Min(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Min(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("min(1, 2)", sum.ToString());
         }
@@ -1077,7 +1077,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void MinToStringTest2()
         {
-            var sum = new Min(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Min(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("min({1, 2})", sum.ToString());
         }
@@ -1085,7 +1085,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ProductToStringTest()
         {
-            var sum = new Product(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Product(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("product(1, 2)", sum.ToString());
         }
@@ -1093,7 +1093,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ProductToStringTest2()
         {
-            var sum = new Product(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Product(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("product({1, 2})", sum.ToString());
         }
@@ -1101,7 +1101,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void StdevpToStringTest()
         {
-            var sum = new Stdevp(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Stdevp(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("stdevp(1, 2)", sum.ToString());
         }
@@ -1109,7 +1109,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void StdevpToStringTest2()
         {
-            var sum = new Stdevp(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Stdevp(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("stdevp({1, 2})", sum.ToString());
         }
@@ -1117,7 +1117,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void StdevToStringTest()
         {
-            var sum = new Stdev(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Stdev(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("stdev(1, 2)", sum.ToString());
         }
@@ -1125,7 +1125,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void StdevToStringTest2()
         {
-            var sum = new Stdev(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Stdev(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("stdev({1, 2})", sum.ToString());
         }
@@ -1133,7 +1133,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SumToStringTest()
         {
-            var sum = new Sum(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Sum(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("sum(1, 2)", sum.ToString());
         }
@@ -1141,7 +1141,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void SumToStringTest2()
         {
-            var sum = new Sum(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Sum(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("sum({1, 2})", sum.ToString());
         }
@@ -1149,7 +1149,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void VarpToStringTest()
         {
-            var sum = new Varp(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Varp(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("varp(1, 2)", sum.ToString());
         }
@@ -1157,7 +1157,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void VarpToStringTest2()
         {
-            var sum = new Varp(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Varp(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("varp({1, 2})", sum.ToString());
         }
@@ -1165,7 +1165,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void VarToStringTest()
         {
-            var sum = new Var(new IExpression[] { new Number(1), new Number(2) });
+            var sum = new Var(new IExpression[] { Number.One, Number.Two });
 
             Assert.Equal("var(1, 2)", sum.ToString());
         }
@@ -1173,7 +1173,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void VarToStringTest2()
         {
-            var sum = new Var(new IExpression[] { new Matrices.Vector(new IExpression[] { new Number(1), new Number(2) }) });
+            var sum = new Var(new IExpression[] { new Matrices.Vector(new IExpression[] { Number.One, Number.Two }) });
 
             Assert.Equal("var({1, 2})", sum.ToString());
         }
@@ -1369,7 +1369,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void IfElseToString()
         {
-            var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5), new Number(0));
+            var exp = new If(new Equal(new Number(5), new Number(5)), new Number(5), Number.Zero);
 
             Assert.Equal("if(5 == 5, 5, 0)", exp.ToString());
         }
@@ -1377,7 +1377,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ForToString()
         {
-            var exp = new For(new Number(5), new Define(Variable.X, new Number(0)), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, new Number(1)));
+            var exp = new For(new Number(5), new Define(Variable.X, Number.Zero), new Equal(new Number(5), new Number(5)), new AddAssign(Variable.X, Number.One));
 
             Assert.Equal("for(5, x := 0, 5 == 5, x += 1)", exp.ToString());
         }

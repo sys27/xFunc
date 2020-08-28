@@ -27,15 +27,15 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { Number.One, Number.Two }),
                 new Vector(new[] { new Number(3), new Number(4) }),
                 new Vector(new[] { new Number(5), new Number(6) })
             });
 
             var expected = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1), new Number(3), new Number(5) }),
-                new Vector(new[] { new Number(2), new Number(4), new Number(6) })
+                new Vector(new[] { Number.One, new Number(3), new Number(5) }),
+                new Vector(new[] { Number.Two, new Number(4), new Number(6) })
             });
             var exp = new Transpose(matrix);
 
@@ -45,12 +45,12 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void ExecuteVectorTest()
         {
-            var vector = new Vector(new[] { new Number(1), new Number(2) });
+            var vector = new Vector(new[] { Number.One, Number.Two });
 
             var expected = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1) }),
-                new Vector(new[] { new Number(2) })
+                new Vector(new[] { Number.One }),
+                new Vector(new[] { Number.Two })
             });
             var exp = new Transpose(vector);
 
@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void CloneTest()
         {
-            var exp = new Transpose(new Vector(new[] { new Number(1), new Number(2) }));
+            var exp = new Transpose(new Vector(new[] { Number.One, Number.Two }));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

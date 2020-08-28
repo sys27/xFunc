@@ -14,9 +14,9 @@
 // limitations under the License.
 
 using BenchmarkDotNet.Attributes;
+using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Benchmark.Benchmarks
 {
@@ -33,35 +33,9 @@ namespace xFunc.Benchmark.Benchmarks
             differentiator = new Differentiator();
             context = DifferentiatorContext.Default();
 
-            // (abs(sin(cos(tan(ctg(x ^ 2))))) - ln(x ^ 2)) + arcsin(arccos(arctan(arcctg(x ^ 10))))
-            complexExp = new Add(
-                new Sub(
-                    new Abs(
-                        new Sin(
-                            new Cos(
-                                new Tan(
-                                    new Cot(
-                                        new Pow(Variable.X, new Number(2))
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    new Ln(
-                        new Pow(Variable.X, new Number(2)
-                        )
-                    )
-                ),
-                new Arcsin(
-                    new Arccos(
-                        new Arctan(
-                            new Arccot(
-                                new Pow(Variable.X, new Number(10))
-                            )
-                        )
-                    )
-                )
-            );
+            var processor = new Processor();
+
+            complexExp = processor.Parse("(2 * abs(3 * sin(4 * cos(5 * tan(6 * ctg(x ^ 2))))) - ln(x ^ 2)) + arcsin(arccos(arctan(arcctg(x ^ 10))))");
         }
 
         [Benchmark]

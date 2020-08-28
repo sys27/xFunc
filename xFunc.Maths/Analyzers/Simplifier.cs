@@ -106,7 +106,7 @@ namespace xFunc.Maths.Analyzers
 
                 // x + x
                 (Variable left, Variable right) when left.Name == right.Name
-                    => new Mul(new Number(2), left),
+                    => new Mul(Number.Two, left),
 
                 // -y + x
                 (UnaryMinus minus, _) => Analyze(new Sub(exp.Right, minus.Argument)),
@@ -252,7 +252,7 @@ namespace xFunc.Maths.Analyzers
 
                 // 0 / x
                 (Number(var number), _) when MathExtensions.Equals(number, 0)
-                    => new Number(0),
+                    => Number.Zero,
 
                 // x / 0
                 (_, Number(var number)) when MathExtensions.Equals(number, 0)
@@ -265,7 +265,7 @@ namespace xFunc.Maths.Analyzers
                 (Number left, Number right) => new Number(left.Value / right.Value),
 
                 // x / x
-                (Variable left, Variable right) when left.Equals(right) => new Number(1),
+                (Variable left, Variable right) when left.Equals(right) => Number.One,
 
                 // (2 * x) / 2
                 (Mul(Number left, var right), Number number)
@@ -382,7 +382,7 @@ namespace xFunc.Maths.Analyzers
 
             return exp switch
             {
-                (Number(var number)) _ when MathExtensions.Equals(number, 2) => new Number(1),
+                (Number(var number)) _ when MathExtensions.Equals(number, 2) => Number.One,
                 _ => exp,
             };
         }
@@ -411,7 +411,7 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // lg(10)
-                (Number(var number)) _ when MathExtensions.Equals(number, 10) => new Number(1),
+                (Number(var number)) _ when MathExtensions.Equals(number, 10) => Number.One,
                 _ => exp,
             };
         }
@@ -429,7 +429,7 @@ namespace xFunc.Maths.Analyzers
 
             // ln(e)
             if (exp.Argument is Variable("e"))
-                return new Number(1);
+                return Number.One;
 
             return exp;
         }
@@ -447,7 +447,7 @@ namespace xFunc.Maths.Analyzers
 
             // log(4x, 4x)
             if (exp.Left.Equals(exp.Right))
-                return new Number(1);
+                return Number.One;
 
             return exp;
         }
@@ -476,8 +476,8 @@ namespace xFunc.Maths.Analyzers
             return exp switch
             {
                 // mul by zero
-                (Number(var number), _) when MathExtensions.Equals(number, 0) => new Number(0),
-                (_, Number(var number)) when MathExtensions.Equals(number, 0) => new Number(0),
+                (Number(var number), _) when MathExtensions.Equals(number, 0) => Number.Zero,
+                (_, Number(var number)) when MathExtensions.Equals(number, 0) => Number.Zero,
 
                 // mul by 1
                 (Number(var number), var right) when MathExtensions.Equals(number, 1) => right,
@@ -497,7 +497,7 @@ namespace xFunc.Maths.Analyzers
 
                 // x * x
                 (Variable left, Variable right) when left.Equals(right)
-                    => new Pow(left, new Number(2)),
+                    => new Pow(left, Number.Two),
 
                 // 2 * (2 * x)
                 (Number number, Mul(Number left, var right))
@@ -535,35 +535,35 @@ namespace xFunc.Maths.Analyzers
 
                 // x * xb
                 (Variable x1, Mul(Variable x2, Number b)) when x1.Equals(x2)
-                    => Analyze(new Mul(b, new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(b, new Pow(x1, Number.Two))),
 
                 // x * bx
                 (Variable x1, Mul(Number b, Variable x2)) when x1.Equals(x2)
-                    => Analyze(new Mul(b, new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(b, new Pow(x1, Number.Two))),
 
                 // ax * x
                 (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
-                    => Analyze(new Mul(a, new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(a, new Pow(x1, Number.Two))),
 
                 // xa * x
                 (Mul(Variable x1, Number a), Variable x2) when x1.Equals(x2)
-                    => Analyze(new Mul(a, new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(a, new Pow(x1, Number.Two))),
 
                 // ax + bx
                 (Mul(Number a, Variable x1), Mul(Number b, Variable x2)) when x1.Equals(x2)
-                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, Number.Two))),
 
                 // ax + xb
                 (Mul(Number a, Variable x1), Mul(Variable x2, Number b)) when x1.Equals(x2)
-                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, Number.Two))),
 
                 // xa + bx
                 (Mul(Variable x1, Number a), Mul(Number b, Variable x2)) when x1.Equals(x2)
-                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, Number.Two))),
 
                 // xa + xb
                 (Mul(Variable x1, Number a), Mul(Variable x2, Number b)) when x1.Equals(x2)
-                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, new Number(2)))),
+                    => Analyze(new Mul(new Number(a.Value * b.Value), new Pow(x1, Number.Two))),
 
                 _ => exp,
             };
@@ -671,9 +671,9 @@ namespace xFunc.Maths.Analyzers
             return (exp.Left, exp.Right) switch
             {
                 // x^0
-                (_, Number(var number)) when MathExtensions.Equals(number, 0) => new Number(1),
+                (_, Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
                 // 0^x
-                (Number(var number), _) when MathExtensions.Equals(number, 0) => new Number(0),
+                (Number(var number), _) when MathExtensions.Equals(number, 0) => Number.Zero,
                 // x^1
                 (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
                 // x ^ log(x, y) -> y
@@ -759,7 +759,7 @@ namespace xFunc.Maths.Analyzers
                 (Number left, Number right) => new Number(left - right),
 
                 // x + x
-                (Variable left, Variable right) when left.Name == right.Name => new Number(0),
+                (Variable left, Variable right) when left.Name == right.Name => Number.Zero,
 
                 // x - -y
                 (_, UnaryMinus minus) => new Add(exp.Left, minus.Argument),
@@ -1118,7 +1118,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Cos(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(1),
+                Cos(Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
                 _ => simplifiedExp,
             };
         }
@@ -1174,7 +1174,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Sec(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(1),
+                Sec(Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
                 _ => simplifiedExp,
             };
         }
@@ -1192,7 +1192,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Sin(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(0),
+                Sin(Number(var number)) when MathExtensions.Equals(number, 0) => Number.Zero,
                 _ => simplifiedExp,
             };
         }
@@ -1210,7 +1210,7 @@ namespace xFunc.Maths.Analyzers
 
             return simplifiedExp switch
             {
-                Tan(Number(var number)) when MathExtensions.Equals(number, 0) => new Number(0),
+                Tan(Number(var number)) when MathExtensions.Equals(number, 0) => Number.Zero,
                 _ => simplifiedExp,
             };
         }

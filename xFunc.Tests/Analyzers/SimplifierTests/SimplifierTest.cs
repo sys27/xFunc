@@ -53,7 +53,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void UnaryNumber()
         {
-            var un = new UnaryMinus(new Number(1));
+            var un = new UnaryMinus(Number.One);
             var expected = new Number(-1);
 
             SimpleTest(un, expected);
@@ -62,7 +62,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void Define()
         {
-            var define = new Define(Variable.X, new Add(new Number(2), new Number(2)));
+            var define = new Define(Variable.X, new Add(Number.Two, Number.Two));
             var expected = new Define(Variable.X, new Number(4));
 
             SimpleTest(define, expected);
@@ -71,8 +71,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void PowerXZero()
         {
-            var pow = new Pow(Variable.X, new Number(0));
-            var expected = new Number(1);
+            var pow = new Pow(Variable.X, Number.Zero);
+            var expected = Number.One;
 
             SimpleTest(pow, expected);
         }
@@ -80,8 +80,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void PowerZeroX()
         {
-            var pow = new Pow(new Number(0), Variable.X);
-            var expected = new Number(0);
+            var pow = new Pow(Number.Zero, Variable.X);
+            var expected = Number.Zero;
 
             SimpleTest(pow, expected);
         }
@@ -89,7 +89,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void PowerOne()
         {
-            var pow = new Pow(Variable.X, new Number(1));
+            var pow = new Pow(Variable.X, Number.One);
             var expected = Variable.X;
 
             SimpleTest(pow, expected);
@@ -132,7 +132,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void PowLb()
         {
             var pow = new Pow(
-                new Number(2),
+                Number.Two,
                 new Lb(Variable.X));
             var expected = Variable.X;
 
@@ -142,7 +142,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void RootOne()
         {
-            var root = new Root(Variable.X, new Number(1));
+            var root = new Root(Variable.X, Number.One);
             var expected = Variable.X;
 
             SimpleTest(root, expected);
@@ -177,7 +177,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void Log()
         {
             var log = new Log(Variable.X, Variable.X);
-            var expected = new Number(1);
+            var expected = Number.One;
 
             SimpleTest(log, expected);
         }
@@ -194,7 +194,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void Ln()
         {
             var ln = new Ln(new Variable("e"));
-            var expected = new Number(1);
+            var expected = Number.One;
 
             SimpleTest(ln, expected);
         }
@@ -211,7 +211,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void Lg()
         {
             var log = new Lg(new Number(10));
-            var expected = new Number(1);
+            var expected = Number.One;
 
             SimpleTest(log, expected);
         }
@@ -227,8 +227,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void Lb()
         {
-            var log = new Lb(new Number(2));
-            var expected = new Number(1);
+            var log = new Lb(Number.Two);
+            var expected = Number.One;
 
             SimpleTest(log, expected);
         }
@@ -245,8 +245,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void Simplify()
         {
             var simpl = new Simplifier();
-            var simp = new Simplify(simpl, new Pow(Variable.X, new Number(0)));
-            var expected = new Number(1);
+            var simp = new Simplify(simpl, new Pow(Variable.X, Number.Zero));
+            var expected = Number.One;
 
             SimpleTest(simp, expected);
         }
@@ -256,7 +256,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var diff = new Differentiator();
             var simpl = new Simplifier();
-            var simp = new Derivative(diff, simpl, new Add(new Number(2), new Number(3)));
+            var simp = new Derivative(diff, simpl, new Add(Number.Two, new Number(3)));
             var expected = new Derivative(diff, simpl, new Number(5));
 
             SimpleTest(simp, expected);
@@ -543,7 +543,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void UserFunc()
         {
-            var exp = new UserFunction("f", new IExpression[] { new Mul(new Number(2), new Number(2)) });
+            var exp = new UserFunction("f", new IExpression[] { new Mul(Number.Two, Number.Two) });
             var expected = new UserFunction("f", new IExpression[] { new Number(4) });
 
             SimpleTest(exp, expected);
@@ -552,7 +552,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void DiffTest()
         {
-            var exp = new Count(new IExpression[] { new Add(new Number(2), new Number(2)) });
+            var exp = new Count(new IExpression[] { new Add(Number.Two, Number.Two) });
             var expected = new Count(new IExpression[] { new Number(4) });
 
             SimpleTest(exp, expected);

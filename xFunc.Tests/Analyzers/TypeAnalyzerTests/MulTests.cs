@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulTwoNumberTest()
         {
-            var mul = new Mul(new Number(1), new Number(2));
+            var mul = new Mul(Number.One, Number.Two);
 
             Test(mul, ResultTypes.Number);
         }
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulNumberVarTest()
         {
-            var mul = new Mul(new Number(1), Variable.X);
+            var mul = new Mul(Number.One, Variable.X);
 
             Test(mul, ResultTypes.Undefined);
         }
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulNumberBoolTest()
         {
-            var mul = new Mul(new Number(1), Bool.True);
+            var mul = new Mul(Number.One, Bool.True);
 
             TestBinaryException(mul);
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulBoolNumberTest()
         {
-            var mul = new Mul(Bool.True, new Number(1));
+            var mul = new Mul(Bool.True, Number.One);
 
             TestBinaryException(mul);
         }
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulVarNumberTest()
         {
-            var mul = new Mul(Variable.X, new Number(1));
+            var mul = new Mul(Variable.X, Number.One);
 
             Test(mul, ResultTypes.Undefined);
         }
@@ -69,8 +69,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulTwoMatrixTest()
         {
             var mul = new Mul(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(1) }) }),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                new Matrix(new[] { new Vector(new IExpression[] { Number.One }) }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             Test(mul, ResultTypes.Matrix);
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulLeftMatrixRightException()
         {
             var mul = new Mul(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(1) }) }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.One }) }),
                 Bool.False
             );
 
@@ -92,7 +92,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var mul = new Mul(
                 Bool.False,
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(1) }) })
+                new Matrix(new[] { new Vector(new IExpression[] { Number.One }) })
             );
 
             TestBinaryException(mul);
@@ -102,8 +102,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulNumberVectorTest()
         {
             var mul = new Mul(
-                new Number(1),
-                new Vector(new IExpression[] { new Number(1) })
+                Number.One,
+                new Vector(new IExpression[] { Number.One })
             );
 
             Test(mul, ResultTypes.Vector);
@@ -113,8 +113,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulNumberMatrixTest()
         {
             var mul = new Mul(
-                new Number(1),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                Number.One,
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             Test(mul, ResultTypes.Matrix);
@@ -124,8 +124,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulVectorMatrixTest()
         {
             var mul = new Mul(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                new Vector(new IExpression[] { Number.One }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             Test(mul, ResultTypes.Matrix);
@@ -135,8 +135,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulVectorNumber()
         {
             var mul = new Mul(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Number(2)
+                new Vector(new IExpression[] { Number.One }),
+                Number.Two
             );
 
             Test(mul, ResultTypes.Vector);
@@ -145,7 +145,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulVectorBoolException()
         {
-            var mul = new Mul(new Vector(new IExpression[] { new Number(1) }), Bool.False);
+            var mul = new Mul(new Vector(new IExpression[] { Number.One }), Bool.False);
 
             TestBinaryException(mul);
         }
@@ -153,7 +153,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulBoolVectorException()
         {
-            var mul = new Mul(Bool.False, new Vector(new IExpression[] { new Number(1) }));
+            var mul = new Mul(Bool.False, new Vector(new IExpression[] { Number.One }));
 
             TestBinaryException(mul);
         }
@@ -169,7 +169,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulComplexNumberNumberTest()
         {
-            var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
+            var exp = new Mul(new ComplexNumber(2, 5), Number.Two);
 
             Test(exp, ResultTypes.ComplexNumber);
         }
@@ -185,7 +185,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestMulNumberComplexNumberTest()
         {
-            var exp = new Mul(new Number(2), new ComplexNumber(3, 2));
+            var exp = new Mul(Number.Two, new ComplexNumber(3, 2));
 
             Test(exp, ResultTypes.ComplexNumber);
         }

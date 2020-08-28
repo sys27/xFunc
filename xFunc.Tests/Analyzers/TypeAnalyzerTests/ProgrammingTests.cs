@@ -67,7 +67,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndBoolNumberExpection()
         {
-            var exp = new ConditionalAnd(Bool.False, new Number(1));
+            var exp = new ConditionalAnd(Bool.False, Number.One);
 
             TestBinaryException(exp);
         }
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndNumberBoolExpection()
         {
-            var exp = new ConditionalAnd(new Number(1), Bool.True);
+            var exp = new ConditionalAnd(Number.One, Bool.True);
 
             TestBinaryException(exp);
         }
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalAndInvalidArgsException()
         {
-            var exp = new ConditionalAnd(new Number(2), new Number(2));
+            var exp = new ConditionalAnd(Number.Two, Number.Two);
 
             TestException(exp);
         }
@@ -395,7 +395,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestIfElseBool()
         {
-            var exp = new If(Bool.False, new Number(10), new Number(2));
+            var exp = new If(Bool.False, new Number(10), Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -539,7 +539,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConditionalOrBoolNumberException()
         {
-            var exp = new ConditionalOr(Bool.False, new Number(2));
+            var exp = new ConditionalOr(Bool.False, Number.Two);
 
             TestBinaryException(exp);
         }
@@ -603,7 +603,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestWhileException()
         {
-            var exp = new While(Variable.X, new Number(1));
+            var exp = new While(Variable.X, Number.One);
 
             TestException(exp);
         }

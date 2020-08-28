@@ -28,8 +28,8 @@ namespace xFunc.Tests.Expressions
         {
             var exp = new Add(
                 new Add(
-                    new Mul(new Number(2), Variable.X),
-                    new Pow(new Variable("y"), new Number(2))
+                    new Mul(Number.Two, Variable.X),
+                    new Pow(new Variable("y"), Number.Two)
                 ),
                 new Pow(new Variable("z"), new Number(3))
             );
@@ -37,9 +37,9 @@ namespace xFunc.Tests.Expressions
 
             var expected = new Vector(new IExpression[]
             {
-                new Number(2),
-                new Mul(new Number(2), new Variable("y")),
-                new Mul(new Number(3), new Pow(new Variable("z"), new Number(2)))
+                Number.Two,
+                new Mul(Number.Two, new Variable("y")),
+                new Mul(new Number(3), new Pow(new Variable("z"), Number.Two))
             });
 
             Assert.Equal(expected, del.Execute());
@@ -49,16 +49,16 @@ namespace xFunc.Tests.Expressions
         public void ExecuteTest2()
         {
             var exp = new Add(
-                new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))),
+                new Add(new Mul(Number.Two, new Variable("x1")), new Pow(new Variable("x2"), Number.Two)),
                 new Pow(new Variable("x3"), new Number(3))
             );
             var del = new Del(new Differentiator(), new Simplifier(), exp);
 
             var expected = new Vector(new IExpression[]
             {
-                new Number(2),
-                new Mul(new Number(2), new Variable("x2")),
-                new Mul(new Number(3), new Pow(new Variable("x3"), new Number(2)))
+                Number.Two,
+                new Mul(Number.Two, new Variable("x2")),
+                new Mul(new Number(3), new Pow(new Variable("x3"), Number.Two))
             });
 
             Assert.Equal(expected, del.Execute());
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Expressions
         public void CloneTest()
         {
             var exp = new Add(
-                new Add(new Mul(new Number(2), new Variable("x1")), new Pow(new Variable("x2"), new Number(2))),
+                new Add(new Mul(Number.Two, new Variable("x1")), new Pow(new Variable("x2"), Number.Two)),
                 new Pow(new Variable("x3"), new Number(3))
             );
             var del = new Del(new Differentiator(), new Simplifier(), exp);

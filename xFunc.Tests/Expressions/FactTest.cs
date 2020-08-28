@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest2()
         {
-            var fact = new Fact(new Number(0));
+            var fact = new Fact(Number.Zero);
 
             Assert.Equal(1.0, fact.Execute());
         }
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest3()
         {
-            var fact = new Fact(new Number(1));
+            var fact = new Fact(Number.One);
 
             Assert.Equal(1.0, fact.Execute());
         }
@@ -64,7 +64,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Fact(new Number(0));
+            var exp = new Fact(Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

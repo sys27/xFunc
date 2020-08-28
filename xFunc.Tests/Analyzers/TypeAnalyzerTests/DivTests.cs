@@ -27,7 +27,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
  [Fact]
         public void TestDivNumberNumberTest()
         {
-            var exp = new Div(new Number(1), new Number(2));
+            var exp = new Div(Number.One, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -51,7 +51,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivComplexNumberNumberTest()
         {
-            var exp = new Div(new ComplexNumber(3, 2), new Number(2));
+            var exp = new Div(new ComplexNumber(3, 2), Number.Two);
 
             Test(exp, ResultTypes.ComplexNumber);
         }
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestDivNumberSqrtComplexTest()
         {
-            var exp = new Div(new Sqrt(new Number(-16)), new Number(2));
+            var exp = new Div(new Sqrt(new Number(-16)), Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }

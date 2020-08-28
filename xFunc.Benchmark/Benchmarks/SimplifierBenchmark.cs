@@ -14,33 +14,30 @@
 // limitations under the License.
 
 using BenchmarkDotNet.Attributes;
-using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths;
+using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Tokenization;
-using xFunc.Maths.Tokenization.Tokens;
 
 namespace xFunc.Benchmark.Benchmarks
 {
-    public class ParserBenchmark
+    public class SimplifierBenchmark
     {
-        private Parser parser;
+        private Simplifier simplifier;
 
-        private IList<IToken> tokens;
+        private IExpression exp;
 
         [GlobalSetup]
         public void Setup()
         {
-            parser = new Parser();
+            simplifier = new Simplifier();
 
-            var lexer = new Lexer();
+            var processor = new Processor();
 
-            tokens = lexer.Tokenize("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)").ToList();
+            exp = processor.Parse("0 + x + x + 0 + 1 + 2 + 3 + x + (2 * x) + (3 * x) + (x * 4) - 0 - x - 0 - 1 - 2 - 3 - (2 * x) - (x * 3) + (x * 0) - (0 * x) + (1 * x) - (x * 1) * (x * x) * (2 * x) * (x * 3) + (x ^ 0) + (x ^ 0) + (e ^ ln(1)) + cos(arccos(0)) + (x * 0) + tan(arctan(0)) + sin(arcsin(x)) - (0 * x)");
         }
 
         [Benchmark]
-        public IExpression Parse()
-            => parser.Parse(tokens);
+        public IExpression Simplify()
+            => exp.Analyze(simplifier);
     }
 }

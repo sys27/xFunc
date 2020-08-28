@@ -126,7 +126,7 @@ namespace xFunc.Tests.Expressions
         public void EqualsDiffTypesTest()
         {
             var left = Variable.X;
-            var right = new Number(2);
+            var right = Number.Two;
 
             Assert.False(left.Equals(right));
         }

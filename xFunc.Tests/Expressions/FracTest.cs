@@ -73,7 +73,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Frac(new Number(0));
+            var exp = new Frac(Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

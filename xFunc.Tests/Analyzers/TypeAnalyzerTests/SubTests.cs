@@ -28,7 +28,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubTwoNumberTest()
         {
-            var sub = new Sub(new Number(1), new Number(2));
+            var sub = new Sub(Number.One, Number.Two);
 
             Test(sub, ResultTypes.Number);
         }
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberVarTest()
         {
-            var sub = new Sub(new Number(1), Variable.X);
+            var sub = new Sub(Number.One, Variable.X);
 
             Test(sub, ResultTypes.Undefined);
         }
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubComplicatedTest()
         {
-            var sub = new Sub(new Mul(new Number(1), new Number(2)), Variable.X);
+            var sub = new Sub(new Mul(Number.One, Number.Two), Variable.X);
 
             Test(sub, ResultTypes.Undefined);
         }
@@ -53,8 +53,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubTwoVectorTest()
         {
             var sub = new Sub(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Vector(new IExpression[] { new Number(2) })
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.Two })
             );
 
             Test(sub, ResultTypes.Vector);
@@ -64,8 +64,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubTwoMatrixTest()
         {
             var sub = new Sub(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(1) }) }),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                new Matrix(new[] { new Vector(new IExpression[] { Number.One }) }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             Test(sub, ResultTypes.Matrix);
@@ -75,8 +75,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubNumberVectorTest()
         {
             var exp = new Sub(
-                new Number(1),
-                new Vector(new IExpression[] { new Number(1) })
+                Number.One,
+                new Vector(new IExpression[] { Number.One })
             );
 
             TestBinaryException(exp);
@@ -86,8 +86,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubVectorNumberTest()
         {
             var exp = new Sub(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Number(1)
+                new Vector(new IExpression[] { Number.One }),
+                Number.One
             );
 
             TestBinaryException(exp);
@@ -97,8 +97,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubNumberMatrixTest()
         {
             var exp = new Sub(
-                new Number(1),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                Number.One,
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             TestBinaryException(exp);
@@ -108,8 +108,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubMatrixNumberTest()
         {
             var exp = new Sub(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) }),
-                new Number(1)
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) }),
+                Number.One
             );
 
             TestBinaryException(exp);
@@ -119,8 +119,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubVectorMatrixTest()
         {
             var exp = new Sub(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) })
+                new Vector(new IExpression[] { Number.One }),
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) })
             );
 
             TestBinaryException(exp);
@@ -130,8 +130,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubMatrixVectorTest()
         {
             var exp = new Sub(
-                new Matrix(new[] { new Vector(new IExpression[] { new Number(2) }) }),
-                new Vector(new IExpression[] { new Number(1) })
+                new Matrix(new[] { new Vector(new IExpression[] { Number.Two }) }),
+                new Vector(new IExpression[] { Number.One })
             );
 
             TestBinaryException(exp);
@@ -140,7 +140,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberComplexNumberTest()
         {
-            var sub = new Sub(new Number(1), new ComplexNumber(2, 1));
+            var sub = new Sub(Number.One, new ComplexNumber(2, 1));
 
             Test(sub, ResultTypes.ComplexNumber);
         }
@@ -148,7 +148,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubComplexNumberNumberTest()
         {
-            var sub = new Sub(new ComplexNumber(1, 3), new Number(2));
+            var sub = new Sub(new ComplexNumber(1, 3), Number.Two);
 
             Test(sub, ResultTypes.ComplexNumber);
         }
@@ -180,7 +180,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberAllTest()
         {
-            var exp = new Sub(new Number(1), new UserFunction("f", new IExpression[1]));
+            var exp = new Sub(Number.One, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -197,7 +197,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void SubVectorVectorTest()
         {
             var left = new Vector(new IExpression[] { new Number(3) });
-            var right = new Vector(new IExpression[] { new Number(1) });
+            var right = new Vector(new IExpression[] { Number.One });
             var exp = new Sub(left, right);
 
             Test(exp, ResultTypes.Vector);
@@ -206,7 +206,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubVectorBoolTest()
         {
-            var vector = new Vector(new IExpression[] { new Number(1) });
+            var vector = new Vector(new IExpression[] { Number.One });
             var exp = new Sub(vector, Bool.True);
 
             TestBinaryException(exp);
@@ -215,7 +215,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubBoolVectorTest()
         {
-            var vector = new Vector(new IExpression[] { new Number(1) });
+            var vector = new Vector(new IExpression[] { Number.One });
             var exp = new Sub(Bool.True, vector);
 
             TestBinaryException(exp);
@@ -224,7 +224,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubVectorAllTest()
         {
-            var vector = new Vector(new IExpression[] { new Number(1) });
+            var vector = new Vector(new IExpression[] { Number.One });
             var exp = new Sub(vector, new UserFunction("f", new IExpression[1]));
 
             Test(exp, ResultTypes.Undefined);
@@ -235,7 +235,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1) })
+                new Vector(new IExpression[] { Number.One })
             });
             var exp = new Sub(matrix, new UserFunction("f", new IExpression[1]));
 
@@ -245,7 +245,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void SubNumberComplexTest()
         {
-            var exp = new Sub(new Number(2), new Sqrt(new Number(-9)));
+            var exp = new Sub(Number.Two, new Sqrt(new Number(-9)));
 
             Test(exp, ResultTypes.Undefined);
         }

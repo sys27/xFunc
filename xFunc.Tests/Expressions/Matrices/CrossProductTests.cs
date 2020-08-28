@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Matrices
         public void ExecuteTest()
         {
             var exp = new CrossProduct(
-                new Vector(new[] { new Number(1), new Number(2), new Number(3) }),
+                new Vector(new[] { Number.One, Number.Two, new Number(3) }),
                 new Vector(new[] { new Number(4), new Number(5), new Number(6) })
             );
             var result = exp.Execute();
@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void ExecuteTypeExceptionTest()
         {
-            var exp = new CrossProduct(new Number(1), new Number(2));
+            var exp = new CrossProduct(Number.One, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -46,8 +46,8 @@ namespace xFunc.Tests.Expressions.Matrices
         public void ExecuteLeftTypeExceptionTest()
         {
             var exp = new CrossProduct(
-                new Number(1),
-                new Vector(new[] { new Number(1), new Number(2), new Number(3) }));
+                Number.One,
+                new Vector(new[] { Number.One, Number.Two, new Number(3) }));
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -56,8 +56,8 @@ namespace xFunc.Tests.Expressions.Matrices
         public void ExecuteRightTypeExceptionTest()
         {
             var exp = new CrossProduct(
-                new Vector(new[] { new Number(1), new Number(2), new Number(3) }),
-                new Number(2));
+                new Vector(new[] { Number.One, Number.Two, new Number(3) }),
+                Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -66,8 +66,8 @@ namespace xFunc.Tests.Expressions.Matrices
         public void CloneTest()
         {
             var exp = new CrossProduct(
-                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
-                new Vector(new[] { new Number(4), new Number(0), new Number(6) })
+                new Vector(new[] { Number.One, new Number(-2), new Number(3) }),
+                new Vector(new[] { new Number(4), Number.Zero, new Number(6) })
             );
             var clone = exp.Clone();
 

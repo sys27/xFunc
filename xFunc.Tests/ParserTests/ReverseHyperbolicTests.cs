@@ -32,7 +32,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arsinh(new Number(2));
+            var expected = new Arsinh(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -48,7 +48,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arsinh(new Number(2));
+            var expected = new Arsinh(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -64,7 +64,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcosh(new Number(2));
+            var expected = new Arcosh(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -80,7 +80,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcosh(new Number(2));
+            var expected = new Arcosh(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -96,7 +96,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Artanh(new Number(2));
+            var expected = new Artanh(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -112,7 +112,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Artanh(new Number(2));
+            var expected = new Artanh(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -128,7 +128,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcoth(new Number(2));
+            var expected = new Arcoth(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -144,7 +144,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcoth(new Number(2));
+            var expected = new Arcoth(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -160,7 +160,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arsech(new Number(2));
+            var expected = new Arsech(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -176,7 +176,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arsech(new Number(2));
+            var expected = new Arsech(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -192,7 +192,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcsch(new Number(2));
+            var expected = new Arcsch(Number.Two);
 
             Assert.Equal(expected, exp);
         }

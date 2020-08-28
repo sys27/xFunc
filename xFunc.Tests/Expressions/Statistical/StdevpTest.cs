@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void ThreeNumberTest()
         {
-            var exp = new Stdevp(new[] { new Number(9), new Number(2), new Number(4) });
+            var exp = new Stdevp(new[] { new Number(9), Number.Two, new Number(4) });
             var result = (double) exp.Execute();
 
             Assert.Equal(2.94392028877595, result, 14);
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void VectorTest()
         {
-            var exp = new Stdevp(new[] { new Vector(new[] { new Number(2), new Number(4), new Number(9) }) });
+            var exp = new Stdevp(new[] { new Vector(new[] { Number.Two, new Number(4), new Number(9) }) });
             var result = (double) exp.Execute();
 
             Assert.Equal(2.94392028877595, result, 14);
@@ -61,7 +61,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void CloneTest()
         {
-            var exp = new Stdevp(new[] { new Number(1), new Number(2) });
+            var exp = new Stdevp(new[] { Number.One, Number.Two });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

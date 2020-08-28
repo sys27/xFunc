@@ -17,61 +17,29 @@ using BenchmarkDotNet.Attributes;
 using xFunc.Maths;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Matrices;
-using xFunc.Maths.Expressions.Statistical;
 
 namespace xFunc.Benchmark.Benchmarks
 {
     public class TypeAnalyzerBenchmark
     {
-        private Processor processor;
         private TypeAnalyzer analyzer;
 
-        private GCD gcd;
-        private GCD gcdUndefined;
-
-        private Matrix matrix;
-
-        private Count count;
-
+        private IExpression gcd;
+        private IExpression gcdUndefined;
+        private IExpression matrix;
+        private IExpression count;
         private IExpression exp;
 
         [GlobalSetup]
         public void Setup()
         {
-            processor = new Processor();
+            var processor = new Processor();
             analyzer = new TypeAnalyzer();
 
-            gcd = new GCD(new IExpression[]
-            {
-                new Number(2), new Number(4), new Number(6), new Number(8),
-                new Number(2), new Number(4), new Number(6), new Number(8),
-                new Number(2), new Number(4), new Number(6), new Number(8),
-                new Number(2), new Number(4), new Number(6), new Number(8),
-            });
-            gcdUndefined = new GCD(new IExpression[]
-            {
-                new Number(2), new Number(4), new Number(6), new Number(8),
-                new Number(2), new Number(4), new Number(6), new Number(8),
-                Variable.X, new Number(4), new Number(6), new Number(8),
-                new Number(2), new Number(4), new Number(6), new Number(8),
-            });
-
-            matrix = new Matrix(new[]
-            {
-                new Vector(new IExpression[] { new Number(2), new Number(2), new Number(2), }),
-                new Vector(new IExpression[] { new Number(2), new Number(2), new Number(2), }),
-                new Vector(new IExpression[] { new Number(2), new Number(2), new Number(2), }),
-            });
-
-            count = new Count(new IExpression[]
-            {
-                new Number(2), new Number(2), new Number(2), new Number(2),
-                new Number(2), new Number(2), new Number(2), new Number(2),
-                new Number(2), new Number(2), new Number(2), new Number(2),
-                new Number(2), new Number(2), new Number(2), new Number(2),
-            });
-
+            gcd = processor.Parse("gcd(2, 4, 6, 8, 2, 4, 6, 8, 2, 4, 6, 8, 2, 4, 6, 8)");
+            gcdUndefined = processor.Parse("gcd(2, 4, 6, 8, 2, 4, 6, 8, x, 4, 6, 8, 2, 4, 6, 8)");
+            matrix = processor.Parse("{{2, 2, 2}, {2, 2, 2}, {2, 2, 2}}");
+            count = processor.Parse("count(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)");
             exp = processor.Parse("count(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) + (2 * sin(4 * cos(6 * tan(8 * cot(pi) ^ 2) ^ 3) ^ 4) ^ 5 + 2 * sin(4 * cos(6 * tan(8 * cot(pi) ^ 2) ^ 3) ^ 4) ^ 5 + 2 * sin(4 * cos(6 * tan(8 * cot(pi) ^ 2) ^ 3) ^ 4) ^ 5 + 2 * sin(4 * cos(6 * tan(8 * cot(pi) ^ 2) ^ 3) ^ 4) ^ 5) * 10 ^ 6");
         }
 

@@ -131,7 +131,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new NotEqual(new Number(2), new Number(2));
+            var exp = new NotEqual(Number.Two, Number.Two);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -32,7 +32,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcsin(new Number(2));
+            var expected = new Arcsin(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -48,7 +48,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arccos(new Number(2));
+            var expected = new Arccos(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -64,7 +64,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arctan(new Number(2));
+            var expected = new Arctan(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -80,7 +80,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arctan(new Number(2));
+            var expected = new Arctan(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -96,7 +96,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arccot(new Number(2));
+            var expected = new Arccot(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -112,7 +112,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arccot(new Number(2));
+            var expected = new Arccot(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -128,7 +128,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arcsec(new Number(2));
+            var expected = new Arcsec(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -144,7 +144,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arccsc(new Number(2));
+            var expected = new Arccsc(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -160,7 +160,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Arccsc(new Number(2));
+            var expected = new Arccsc(Number.Two);
 
             Assert.Equal(expected, exp);
         }

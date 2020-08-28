@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new LCM(Variable.X, new Number(0));
+            var exp = new LCM(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteResultIsNotSupported()
         {
-            var exp = new NAnd(new Number(1), new Number(2));
+            var exp = new NAnd(Number.One, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

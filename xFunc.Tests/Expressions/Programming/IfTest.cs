@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ParameterCollection { new Parameter("x", 10) };
 
             var cond = new Equal(Variable.X, new Number(10));
-            var @if = new If(cond, new Number(20), new Number(0));
+            var @if = new If(cond, new Number(20), Number.Zero);
 
             Assert.Equal(20.0, @if.Execute(parameters));
 
@@ -49,8 +49,8 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var parameters = new ParameterCollection { new Parameter("x", 0) };
 
-            var cond = new Equal(Variable.X, new Number(0));
-            var @if = new If(cond, new Number(1), new UnaryMinus(new Number(1)));
+            var cond = new Equal(Variable.X, Number.Zero);
+            var @if = new If(cond, Number.One, new UnaryMinus(Number.One));
 
             Assert.Equal(1.0, @if.Execute(parameters));
 
@@ -84,7 +84,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new If(new Equal(Variable.X, new Number(10)), new Number(3), new Number(2));
+            var exp = new If(new Equal(Variable.X, new Number(10)), new Number(3), Number.Two);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
@@ -94,9 +94,9 @@ namespace xFunc.Tests.Expressions.Programming
         public void ConditionIsNotBoolTest()
         {
             var exp = new If(
-                new Number(1),
-                new Number(1),
-                new Number(1));
+                Number.One,
+                Number.One,
+                Number.One);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

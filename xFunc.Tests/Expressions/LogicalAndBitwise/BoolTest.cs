@@ -76,7 +76,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         public void DifferentTypesEqualsTest()
         {
             var exp1 = Bool.True;
-            var exp2 = new Number(2);
+            var exp2 = Number.Two;
 
             Assert.False(exp1.Equals(exp2));
         }

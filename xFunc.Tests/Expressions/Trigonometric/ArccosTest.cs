@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new Arccos(new Number(1));
+            var exp = new Arccos(Number.One);
             var expected = Angle.Radian(0);
 
             Assert.Equal(expected, exp.Execute());
@@ -56,7 +56,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void CloneTest()
         {
-            var exp = new Arccos(new Number(1));
+            var exp = new Arccos(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

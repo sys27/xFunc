@@ -68,7 +68,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Sqrt(new Number(2));
+            var exp = new Sqrt(Number.Two);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

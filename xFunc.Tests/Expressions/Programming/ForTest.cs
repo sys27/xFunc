@@ -33,9 +33,9 @@ namespace xFunc.Tests.Expressions.Programming
         {
             var parameters = new ExpressionParameters();
 
-            var init = new Define(new Variable("i"), new Number(0));
+            var init = new Define(new Variable("i"), Number.Zero);
             var cond = new LessThan(new Variable("i"), new Number(10));
-            var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1)));
+            var iter = new Define(new Variable("i"), new Add(new Variable("i"), Number.One));
 
             var @for = new For(new Variable("i"), init, cond, iter);
             @for.Execute(parameters);
@@ -46,9 +46,9 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var init = new Define(new Variable("i"), new Number(0));
+            var init = new Define(new Variable("i"), Number.Zero);
             var cond = new LessThan(new Variable("i"), new Number(10));
-            var iter = new Define(new Variable("i"), new Add(new Variable("i"), new Number(1)));
+            var iter = new Define(new Variable("i"), new Add(new Variable("i"), Number.One));
 
             var exp = new For(new Variable("i"), init, cond, iter);
             var clone = exp.Clone();

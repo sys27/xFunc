@@ -17,28 +17,27 @@ using BenchmarkDotNet.Attributes;
 using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Trigonometric;
 
 namespace xFunc.Benchmark.Benchmarks
 {
-    public class DifferentiatorBenchmark
+    public class SimplifierBenchmark
     {
-        private Differentiator differentiator;
+        private Simplifier simplifier;
 
-        private IExpression complexExp;
+        private IExpression exp;
 
         [GlobalSetup]
         public void Setup()
         {
-            differentiator = new Differentiator();
+            simplifier = new Simplifier();
 
             var processor = new Processor();
 
-            complexExp = processor.Parse("(2 * abs(3 * sin(4 * cos(5 * tan(6 * ctg(x ^ 2))))) - ln(x ^ 2)) + arcsin(arccos(arctan(arcctg(x ^ 10))))");
+            exp = processor.Parse("0 + x + x + 0 + 1 + 2 + 3 + x + (2 * x) + (3 * x) + (x * 4) - 0 - x - 0 - 1 - 2 - 3 - (2 * x) - (x * 3) + (x * 0) - (0 * x) + (1 * x) - (x * 1) * (x * x) * (2 * x) * (x * 3) + (x ^ 0) + (x ^ 0) + (e ^ ln(1)) + cos(arccos(0)) + (x * 0) + tan(arctan(0)) + sin(arcsin(x)) - (0 * x)");
         }
 
         [Benchmark]
-        public IExpression ComplexExpression()
-            => complexExp.Analyze(differentiator);
+        public IExpression Simplify()
+            => exp.Analyze(simplifier);
     }
 }

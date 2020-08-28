@@ -15,6 +15,7 @@
 
 using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
+using System.Linq;
 using xFunc.Maths;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Tokenization;
@@ -24,148 +25,22 @@ namespace xFunc.Benchmark.Benchmarks
 {
     public class ParserBenchmark
     {
-        private Parser processor;
+        private Parser parser;
 
         private IList<IToken> tokens;
 
         [GlobalSetup]
         public void Setup()
         {
-            processor = new Parser();
+            parser = new Parser();
 
-            // (100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)
-            tokens = new TokensBuilder()
-                .OpenBracket()
-                .Number(100.1)
-                .Operation(Operations.Addition)
-                .Number(2)
-                .Operation(Operations.Multiplication)
-                .OpenBracket()
-                .Number(3)
-                .Operation(Operations.Multiplication)
-                .Function(Functions.Sine, 1)
-                .OpenBracket()
-                .Number(4)
-                .Operation(Operations.Multiplication)
-                .Function(Functions.Cosine, 1)
-                .OpenBracket()
-                .Number(5)
-                .Operation(Operations.Multiplication)
-                .Function(Functions.Tangent, 1)
-                .OpenBracket()
-                .Number(6)
-                .Operation(Operations.Multiplication)
-                .Function(Functions.Cotangent, 1)
-                .OpenBracket()
-                .Number(10)
-                .Operation(Operations.Multiplication)
-                .VariableX()
-                .CloseBracket()
-                .CloseBracket()
-                .CloseBracket()
-                .CloseBracket()
-                .Operation(Operations.Multiplication)
-                .Number(3)
-                .CloseBracket()
-                .Operation(Operations.Division)
-                .OpenBracket()
-                .UserFunction("func", 3)
-                .OpenBracket()
-                .Variable("a")
-                .Comma()
-                .Variable("b")
-                .Comma()
-                .Variable("c")
-                .CloseBracket()
-                .Operation(Operations.Exponentiation)
-                .Number(2)
-                .CloseBracket()
-                .CloseBracket()
-                .Operation(Operations.Subtraction)
-                .OpenBracket()
-                .Function(Functions.Cosine, 1)
-                .OpenBracket()
-                .VariableY()
-                .CloseBracket()
-                .Operation(Operations.Subtraction)
-                .Number(111.3)
-                .CloseBracket()
-                .Operation(Operations.And)
-                .OpenBracket()
-                .True()
-                .Operation(Operations.Or)
-                .False()
-                .Operation(Operations.Implication)
-                .True()
-                .Operation(Operations.Equality)
-                .False()
-                .Operation(Operations.Equality)
-                .True()
-                .CloseBracket()
-                .Operation(Operations.Addition)
-                .OpenBracket()
-                .Function(Functions.Determinant, 1)
-                .OpenBracket()
-                .Function(Functions.Matrix, 2)
-                .OpenBrace()
-                .Function(Functions.Vector, 2)
-                .OpenBrace()
-                .Number(1)
-                .Comma()
-                .Number(2)
-                .CloseBrace()
-                .Comma()
-                .Function(Functions.Vector, 2)
-                .OpenBrace()
-                .Number(3)
-                .Comma()
-                .Number(4)
-                .CloseBrace()
-                .CloseBrace()
-                .CloseBracket()
-                .Operation(Operations.Multiplication)
-                .Number(10)
-                .Operation(Operations.Multiplication)
-                .Function(Functions.Log, 2)
-                .OpenBracket()
-                .Number(2)
-                .Comma()
-                .Number(3)
-                .CloseBracket()
-                .CloseBracket()
-                .Operation(Operations.Addition)
-                .Function(Functions.Re, 1)
-                .OpenBracket()
-                .Number(3)
-                .Operation(Operations.Addition)
-                .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
-                .Operation(Operations.Subtraction)
-                .Function(Functions.Im, 1)
-                .OpenBracket()
-                .Number(2)
-                .Operation(Operations.Subtraction)
-                .Number(9)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
-                .Operation(Operations.Addition)
-                .OpenBracket()
-                .Number(9)
-                .Operation(Operations.Addition)
-                .Number(2)
-                .Operation(Operations.Multiplication)
-                .Variable("i")
-                .CloseBracket()
-                .Tokens;
+            var lexer = new Lexer();
+
+            tokens = lexer.Tokenize("(100.1 + 2(3sin(4cos(5tan(6ctg(10x)))) * 3) / (func(a, b, c) ^ 2)) - (cos(y) - 111.3) & (true | false -> true <-> false eq true) + (det({{1, 2}, {3, 4}}) * 10log(2, 3)) + re(3 + 2i) - im(2 - 9i) + (9 + 2i)").ToList();
         }
 
         [Benchmark]
         public IExpression Parse()
-        {
-            return processor.Parse(tokens);
-        }
+            => parser.Parse(tokens);
     }
 }

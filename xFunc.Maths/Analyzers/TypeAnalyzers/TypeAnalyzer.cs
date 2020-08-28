@@ -16,7 +16,6 @@
 // TODO:
 #pragma warning disable CA1062
 
-using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -32,6 +31,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
     /// <summary>
     /// Type Analyzer checks the expression tree for argument type and result type. If result type is Undefined, then Type Analyzer cannot determine the right type and bypass current expression.
     /// </summary>
+    /// <seealso cref="ITypeAnalyzer"/>
     /// <seealso cref="IAnalyzer{ResultType}" />
     public class TypeAnalyzer : ITypeAnalyzer
     {
@@ -64,21 +64,24 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
         private ResultTypes CheckStatistical(DifferentParametersExpression exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            if (results.Contains(ResultTypes.Undefined))
-                return ResultTypes.Undefined;
-
-            if (results.Count == 1)
+            if (exp.ParametersCount == 1)
             {
-                if (results[0] == ResultTypes.Number || results[0] == ResultTypes.Vector)
+                var result = exp[0].Analyze(this);
+                if (result == ResultTypes.Number || result == ResultTypes.Vector)
                     return ResultTypes.Number;
 
-                throw new DifferentParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Vector, results[0], 0);
+                throw new DifferentParameterTypeMismatchException(ResultTypes.Number | ResultTypes.Vector, result, 0);
             }
 
-            for (var i = 0; i < results.Count; i++)
-                if (results[i] != ResultTypes.Number)
-                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, results[i], i);
+            using var enumerator = exp.Arguments.GetEnumerator();
+            for (var i = 0; enumerator.MoveNext(); i++)
+            {
+                var item = enumerator.Current.Analyze(this);
+                if (item == ResultTypes.Undefined)
+                    return ResultTypes.Undefined;
+                if (item != ResultTypes.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, item, i);
+            }
 
             return ResultTypes.Number;
         }
@@ -233,20 +236,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Define exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(Define exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Del exp)
-        {
-            return ResultTypes.Vector;
-        }
+        public ResultTypes Analyze(Del exp) => ResultTypes.Vector;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -395,13 +392,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(GCD exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            for (var i = 0; i < results.Count; i++)
+            using var enumerator = exp.Arguments.GetEnumerator();
+            for (var i = 0; enumerator.MoveNext(); i++)
             {
-                if (results[i] == ResultTypes.Undefined)
+                var item = enumerator.Current.Analyze(this);
+                if (item == ResultTypes.Undefined)
                     return ResultTypes.Undefined;
-                if (results[i] != ResultTypes.Number)
-                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, results[i], i);
+                if (item != ResultTypes.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, item, i);
             }
 
             return ResultTypes.Number;
@@ -428,13 +426,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(LCM exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            for (var i = 0; i < results.Count; i++)
+            using var enumerator = exp.Arguments.GetEnumerator();
+            for (var i = 0; enumerator.MoveNext(); i++)
             {
-                if (results[i] == ResultTypes.Undefined)
+                var item = enumerator.Current.Analyze(this);
+                if (item == ResultTypes.Undefined)
                     return ResultTypes.Undefined;
-                if (results[i] != ResultTypes.Number)
-                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, results[i], i);
+                if (item != ResultTypes.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, item, i);
             }
 
             return ResultTypes.Number;
@@ -717,11 +716,12 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Round exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            for (var i = 0; i < results.Count; i++)
+            using var enumerator = exp.Arguments.GetEnumerator();
+            for (var i = 0; enumerator.MoveNext(); i++)
             {
-                if (results[i] != ResultTypes.Undefined && results[i] != ResultTypes.Number)
-                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, results[i], i);
+                var item = enumerator.Current.Analyze(this);
+                if (item != ResultTypes.Undefined && item != ResultTypes.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, item, i);
             }
 
             return ResultTypes.Number;
@@ -732,20 +732,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Simplify exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(Simplify exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Sqrt exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(Sqrt exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -815,40 +809,28 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Undefine exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(Undefine exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(UserFunction exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(UserFunction exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Variable exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(Variable exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(DelegateExpression exp)
-        {
-            return ResultTypes.Undefined;
-        }
+        public ResultTypes Analyze(DelegateExpression exp) => ResultTypes.Undefined;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -875,13 +857,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Vector exp)
         {
-            var results = exp.Arguments.Select(x => x.Analyze(this)).ToList();
-            for (var i = 0; i < results.Count; i++)
+            using var enumerator = exp.Arguments.GetEnumerator();
+            for (var i = 0; enumerator.MoveNext(); i++)
             {
-                if (results[i] == ResultTypes.Undefined)
+                var item = enumerator.Current.Analyze(this);
+                if (item == ResultTypes.Undefined)
                     return ResultTypes.Undefined;
-                if (results[i] != ResultTypes.Number)
-                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, results[i], i);
+                if (item != ResultTypes.Number)
+                    throw new DifferentParameterTypeMismatchException(ResultTypes.Number, item, i);
             }
 
             return ResultTypes.Vector;
@@ -894,10 +877,12 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// <returns>The result of analysis.</returns>
         public ResultTypes Analyze(Matrix exp)
         {
-            // TODO: pool?
-            var results = exp.Vectors.Select(x => x.Analyze(this)).ToList();
-            if (results.Any(result => result == ResultTypes.Undefined))
-                return ResultTypes.Undefined;
+            foreach (var item in exp.Vectors)
+            {
+                var result = item.Analyze(this);
+                if (result == ResultTypes.Undefined)
+                    return ResultTypes.Undefined;
+            }
 
             return ResultTypes.Matrix;
         }
@@ -1001,10 +986,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(ComplexNumber exp)
-        {
-            return ResultTypes.ComplexNumber;
-        }
+        public ResultTypes Analyze(ComplexNumber exp) => ResultTypes.ComplexNumber;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1085,120 +1067,84 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arccos exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arccos exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arccot exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arccot exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arccsc exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arccsc exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arcsec exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arcsec exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arcsin exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arcsin exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arctan exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arctan exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Cos exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Cos exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Cot exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Cot exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Csc exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Csc exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Sec exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Sec exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Sin exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Sin exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Tan exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Tan exp) => CheckTrigonometric(exp);
 
         #endregion
 
@@ -1209,120 +1155,84 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arcosh exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arcosh exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arcoth exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arcoth exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arcsch exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arcsch exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arsech exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arsech exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Arsinh exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Arsinh exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Artanh exp)
-        {
-            return CheckInverseTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Artanh exp) => CheckInverseTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Cosh exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Cosh exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Coth exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Coth exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Csch exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Csch exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Sech exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Sech exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Sinh exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Sinh exp) => CheckTrigonometric(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Tanh exp)
-        {
-            return CheckTrigonometric(exp);
-        }
+        public ResultTypes Analyze(Tanh exp) => CheckTrigonometric(exp);
 
         #endregion Hyperbolic
 
@@ -1333,100 +1243,70 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Avg exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Avg exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expresion.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Count exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Count exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Max exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Max exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Min exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Min exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Product exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Product exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Stdev exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Stdev exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Stdevp exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Stdevp exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Sum exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Sum exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Var exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Var exp) => CheckStatistical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Varp exp)
-        {
-            return CheckStatistical(exp);
-        }
+        public ResultTypes Analyze(Varp exp) => CheckStatistical(exp);
 
         #endregion Statistical
 
@@ -1437,60 +1317,42 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(And exp)
-        {
-            return AnalyzeLogicalAndBitwise(exp);
-        }
+        public ResultTypes Analyze(And exp) => AnalyzeLogicalAndBitwise(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Bool exp)
-        {
-            return ResultTypes.Boolean;
-        }
+        public ResultTypes Analyze(Bool exp) => ResultTypes.Boolean;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Equality exp)
-        {
-            return AnalyzeLogical(exp);
-        }
+        public ResultTypes Analyze(Equality exp) => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Implication exp)
-        {
-            return AnalyzeLogical(exp);
-        }
+        public ResultTypes Analyze(Implication exp) => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(NAnd exp)
-        {
-            return AnalyzeLogical(exp);
-        }
+        public ResultTypes Analyze(NAnd exp) => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(NOr exp)
-        {
-            return AnalyzeLogical(exp);
-        }
+        public ResultTypes Analyze(NOr exp) => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1515,20 +1377,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Or exp)
-        {
-            return AnalyzeLogicalAndBitwise(exp);
-        }
+        public ResultTypes Analyze(Or exp) => AnalyzeLogicalAndBitwise(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(XOr exp)
-        {
-            return AnalyzeLogicalAndBitwise(exp);
-        }
+        public ResultTypes Analyze(XOr exp) => AnalyzeLogicalAndBitwise(exp);
 
         #endregion Logical and Bitwise
 
@@ -1553,20 +1409,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(ConditionalAnd exp)
-        {
-            return AnalyzeLogical(exp);
-        }
+        public ResultTypes Analyze(ConditionalAnd exp) => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Dec exp)
-        {
-            return ResultTypes.Number;
-        }
+        public ResultTypes Analyze(Dec exp) => ResultTypes.Number;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1587,10 +1437,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Equal exp)
-        {
-            return AnalyzeLogicalAndBitwise(exp);
-        }
+        public ResultTypes Analyze(Equal exp) => AnalyzeLogicalAndBitwise(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1611,20 +1458,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(GreaterOrEqual exp)
-        {
-            return AnalyzeForNumber(exp);
-        }
+        public ResultTypes Analyze(GreaterOrEqual exp) => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(GreaterThan exp)
-        {
-            return AnalyzeForNumber(exp);
-        }
+        public ResultTypes Analyze(GreaterThan exp) => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1649,30 +1490,21 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Inc exp)
-        {
-            return ResultTypes.Number;
-        }
+        public ResultTypes Analyze(Inc exp) => ResultTypes.Number;
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(LessOrEqual exp)
-        {
-            return AnalyzeForNumber(exp);
-        }
+        public ResultTypes Analyze(LessOrEqual exp) => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(LessThan exp)
-        {
-            return AnalyzeForNumber(exp);
-        }
+        public ResultTypes Analyze(LessThan exp) => AnalyzeForNumber(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1693,20 +1525,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(NotEqual exp)
-        {
-            return AnalyzeLogicalAndBitwise(exp);
-        }
+        public ResultTypes Analyze(NotEqual exp) => AnalyzeLogicalAndBitwise(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(ConditionalOr exp)
-        {
-            return AnalyzeLogical(exp);
-        }
+        public ResultTypes Analyze(ConditionalOr exp) => AnalyzeLogical(exp);
 
         /// <summary>
         /// Analyzes the specified expression.

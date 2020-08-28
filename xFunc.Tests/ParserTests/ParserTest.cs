@@ -19,7 +19,6 @@ using xFunc.Maths;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
-using xFunc.Maths.Expressions.ComplexNumbers;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Matrices;
 using xFunc.Maths.Expressions.Programming;
@@ -1533,6 +1532,54 @@ namespace xFunc.Tests.ParserTests
 
             var exp = parser.Parse(tokens);
             var expected = new Ceil(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void TruncTest()
+        {
+            var tokens = Builder()
+                .Id("trunc")
+                .OpenParenthesis()
+                .Number(2)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Trunc(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void TruncateTest()
+        {
+            var tokens = Builder()
+                .Id("truncate")
+                .OpenParenthesis()
+                .Number(2)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Trunc(new Number(2));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void FracTest()
+        {
+            var tokens = Builder()
+                .Id("frac")
+                .OpenParenthesis()
+                .Number(2)
+                .CloseParenthesis()
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Frac(new Number(2));
 
             Assert.Equal(expected, exp);
         }

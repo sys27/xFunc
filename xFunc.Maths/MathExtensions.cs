@@ -379,7 +379,20 @@ namespace xFunc.Maths
         /// <param name="left">The current number.</param>
         /// <param name="right">The number to compare with the current number.</param>
         /// <returns><c>true</c> if the specified number is equal to the current number; otherwise, <c>false</c>.</returns>
-        public static bool Equals(double left, double right) =>
-            Math.Abs(left - right) < Epsilon;
+        public static bool Equals(double left, double right)
+            => Math.Abs(left - right) < Epsilon;
+
+        /// <summary>
+        /// Returns the fractional part of the number.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        /// <returns>The fractional part.</returns>
+        public static double Frac(double number)
+        {
+            if (number >= 0)
+                return number - Math.Floor(number);
+
+            return number - Math.Ceiling(number);
+        }
     }
 }

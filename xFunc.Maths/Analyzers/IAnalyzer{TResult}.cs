@@ -108,6 +108,20 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
+        TResult Analyze(Trunc exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Frac exp);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
         TResult Analyze(GCD exp);
 
         /// <summary>

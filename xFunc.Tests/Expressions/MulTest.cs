@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulNumberByNumberTest()
         {
-            var exp = new Mul(new Number(2), new Number(2));
+            var exp = new Mul(Number.Two, Number.Two);
 
             Assert.Equal(4.0, exp.Execute());
         }
@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulComplexByNumberTest()
         {
-            var exp = new Mul(new ComplexNumber(2, 5), new Number(2));
+            var exp = new Mul(new ComplexNumber(2, 5), Number.Two);
             var expected = new Complex(4, 10);
 
             Assert.Equal(expected, exp.Execute());
@@ -56,7 +56,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulNumberByComplexTest()
         {
-            var exp = new Mul(new Number(2), new ComplexNumber(3, 2));
+            var exp = new Mul(Number.Two, new ComplexNumber(3, 2));
             var expected = new Complex(6, 4);
 
             Assert.Equal(expected, exp.Execute());
@@ -65,7 +65,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteMulNumberBySqrtComplexTest()
         {
-            var exp = new Mul(new Number(2), new Sqrt(new Number(-9)));
+            var exp = new Mul(Number.Two, new Sqrt(new Number(-9)));
             var expected = new Complex(0, 6);
 
             Assert.Equal(expected, exp.Execute());
@@ -76,7 +76,7 @@ namespace xFunc.Tests.Expressions
         {
             var vector1 = new Vector(new IExpression[]
             {
-                new Number(1), new Number(2), new Number(3)
+                Number.One, Number.Two, new Number(3)
             });
             var vector2 = new Vector(new IExpression[]
             {
@@ -112,8 +112,8 @@ namespace xFunc.Tests.Expressions
         {
             var vector = new Vector(new IExpression[]
             {
-                new Number(1),
-                new Number(2),
+                Number.One,
+                Number.Two,
                 new Number(3)
             });
             var matrix = new Matrix(new[]
@@ -143,8 +143,8 @@ namespace xFunc.Tests.Expressions
             });
             var vector = new Vector(new IExpression[]
             {
-                new Number(1),
-                new Number(2),
+                Number.One,
+                Number.Two,
                 new Number(3)
             });
             var exp = new Mul(matrix, vector);
@@ -173,7 +173,7 @@ namespace xFunc.Tests.Expressions
         {
             var matrix1 = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(2), new Number(3) })
+                new Vector(new IExpression[] { Number.One, Number.Two, new Number(3) })
             });
             var matrix2 = new Matrix(new[]
             {
@@ -197,8 +197,8 @@ namespace xFunc.Tests.Expressions
             var number = new Number(5);
             var vector = new Vector(new IExpression[]
             {
-                new Number(1),
-                new Number(2),
+                Number.One,
+                Number.Two,
                 new Number(3)
             });
             var exp = new Mul(number, vector);
@@ -218,7 +218,7 @@ namespace xFunc.Tests.Expressions
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
                 new Vector(new IExpression[] { new Number(3), new Number(4) })
             });
             var number = new Number(5);
@@ -239,7 +239,7 @@ namespace xFunc.Tests.Expressions
             var number = new Number(5);
             var matrix = new Matrix(new[]
             {
-                new Vector(new IExpression[] { new Number(1), new Number(2) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
                 new Vector(new IExpression[] { new Number(3), new Number(4) })
             });
             var exp = new Mul(number, matrix);
@@ -256,7 +256,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void MulNumberAndDegree()
         {
-            var exp = new Mul(new Number(2), Angle.Degree(10).AsExpression());
+            var exp = new Mul(Number.Two, Angle.Degree(10).AsExpression());
             var actual = exp.Execute();
             var expected = Angle.Degree(20);
 
@@ -266,7 +266,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void MulRadianAndNumber()
         {
-            var exp = new Mul(Angle.Radian(10).AsExpression(), new Number(2));
+            var exp = new Mul(Angle.Radian(10).AsExpression(), Number.Two);
             var actual = exp.Execute();
             var expected = Angle.Radian(20);
 
@@ -312,7 +312,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Mul(Variable.X, new Number(0));
+            var exp = new Mul(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

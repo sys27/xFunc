@@ -27,13 +27,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void InvalidTypeTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Define(new Number(1), new Number(1)));
+            Assert.Throws<NotSupportedException>(() => new Define(Number.One, Number.One));
         }
 
         [Fact]
         public void SimpDefineTest()
         {
-            var exp = new Define(Variable.X, new Number(1));
+            var exp = new Define(Variable.X, Number.One);
             var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineExpTest()
         {
-            var exp = new Define(Variable.X, new Mul(new Number(4), new Add(new Number(8), new Number(1))));
+            var exp = new Define(Variable.X, new Mul(new Number(4), new Add(new Number(8), Number.One)));
             var parameters = new ExpressionParameters();
 
             var answer = exp.Execute(parameters);
@@ -70,7 +70,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void OverrideConstTest()
         {
-            var exp = new Define(new Variable("π"), new Number(1));
+            var exp = new Define(new Variable("π"), Number.One);
             var parameters = new ExpressionParameters();
 
             exp.Execute(parameters);
@@ -82,7 +82,7 @@ namespace xFunc.Tests.Expressions
         public void DefineFuncTest()
         {
             var uf = new UserFunction("s", new IExpression[0]);
-            var func = new Sin(new Number(1));
+            var func = new Sin(Number.One);
             var exp = new Define(uf, func);
             var parameters = new ExpressionParameters();
 
@@ -109,19 +109,19 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ParamsNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Define(new Variable("π"), new Number(1)).Execute(null));
+            Assert.Throws<ArgumentNullException>(() => new Define(new Variable("π"), Number.One).Execute(null));
         }
 
         [Fact]
         public void ExecuteWithoutParametesTest()
         {
-            Assert.Throws<NotSupportedException>(() => new Define(new Variable("π"), new Number(1)).Execute());
+            Assert.Throws<NotSupportedException>(() => new Define(new Variable("π"), Number.One).Execute());
         }
 
         [Fact]
         public void KeyIsNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Define(null, new Number(1)));
+            Assert.Throws<ArgumentNullException>(() => new Define(null, Number.One));
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsSameReferenceTest()
         {
-            var def = new Define(Variable.X, new Number(1));
+            var def = new Define(Variable.X, Number.One);
 
             Assert.True(def.Equals(def));
         }
@@ -141,8 +141,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsDifferentTypesTest()
         {
-            var def = new Define(Variable.X, new Number(1));
-            var number = new Number(1);
+            var def = new Define(Variable.X, Number.One);
+            var number = Number.One;
 
             Assert.False(def.Equals(number));
         }
@@ -150,8 +150,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsDifferentOnjectsTest()
         {
-            var def1 = new Define(Variable.X, new Number(1));
-            var def2 = new Define(new Variable("y"), new Number(2));
+            var def1 = new Define(Variable.X, Number.One);
+            var def2 = new Define(new Variable("y"), Number.Two);
 
             Assert.False(def1.Equals(def2));
         }
@@ -159,7 +159,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Define(Variable.X, new Number(0));
+            var exp = new Define(Variable.X, Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);
@@ -168,7 +168,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = new Define(Variable.X, new Number(0));
+            var exp = new Define(Variable.X, Number.Zero);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -176,7 +176,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = new Define(Variable.X, new Number(0));
+            var exp = new Define(Variable.X, Number.Zero);
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }

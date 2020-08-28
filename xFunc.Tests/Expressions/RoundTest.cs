@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CalculateRoundWithDigits()
         {
-            var round = new Round(new Number(5.555555), new Number(2));
+            var round = new Round(new Number(5.555555), Number.Two);
             var result = round.Execute();
             var expected = 5.56;
 
@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteArgumentIsNotNumber()
         {
-            var exp = new Round(Bool.False, new Number(2));
+            var exp = new Round(Bool.False, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }
@@ -69,7 +69,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Round(new Number(5.555555), new Number(2));
+            var exp = new Round(new Number(5.555555), Number.Two);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

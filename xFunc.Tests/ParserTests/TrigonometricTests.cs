@@ -32,7 +32,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Sin(new Number(2));
+            var expected = new Sin(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -48,7 +48,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Cos(new Number(2));
+            var expected = new Cos(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -64,7 +64,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Tan(new Number(2));
+            var expected = new Tan(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -80,7 +80,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Tan(new Number(2));
+            var expected = new Tan(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -96,7 +96,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Cot(new Number(2));
+            var expected = new Cot(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -112,7 +112,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Cot(new Number(2));
+            var expected = new Cot(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -128,7 +128,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Sec(new Number(2));
+            var expected = new Sec(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -144,7 +144,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Csc(new Number(2));
+            var expected = new Csc(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -160,7 +160,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Csc(new Number(2));
+            var expected = new Csc(Number.Two);
 
             Assert.Equal(expected, exp);
         }

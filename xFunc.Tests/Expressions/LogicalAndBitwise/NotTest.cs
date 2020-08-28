@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Not(new Number(2));
+            var exp = new Not(Number.Two);
 
             Assert.Equal(-3.0, exp.Execute());
         }

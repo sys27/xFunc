@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
             var parameters = new ExpressionParameters();
             parameters.Variables.Add(new Parameter("x", 0));
 
-            var body = new Define(Variable.X, new Add(Variable.X, new Number(2)));
+            var body = new Define(Variable.X, new Add(Variable.X, Number.Two));
             var cond = new LessThan(Variable.X, new Number(10));
 
             var @while = new While(body, cond);
@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var body = new Define(Variable.X, new Add(Variable.X, new Number(2)));
+            var body = new Define(Variable.X, new Add(Variable.X, Number.Two));
             var cond = new LessThan(Variable.X, new Number(10));
 
             var exp = new While(body, cond);

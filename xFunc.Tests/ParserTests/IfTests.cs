@@ -47,9 +47,9 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new If(
                 new ConditionalAnd(
-                    new Equal(Variable.X, new Number(0)),
-                    new NotEqual(new Variable("y"), new Number(0))),
-                new Number(2),
+                    new Equal(Variable.X, Number.Zero),
+                    new NotEqual(new Variable("y"), Number.Zero)),
+                Number.Two,
                 new Number(8));
 
             Assert.Equal(expected, exp);
@@ -76,9 +76,9 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new If(
                 new ConditionalAnd(
-                    new Equal(Variable.X, new Number(0)),
-                    new NotEqual(new Variable("y"), new Number(0))),
-                new Number(2));
+                    new Equal(Variable.X, Number.Zero),
+                    new NotEqual(new Variable("y"), Number.Zero)),
+                Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -222,8 +222,8 @@ namespace xFunc.Tests.ParserTests
             var exp = parser.Parse(tokens);
             var expected = new If(
                 Bool.True,
-                new Number(1),
-                new UnaryMinus(new Number(1)));
+                Number.One,
+                new UnaryMinus(Number.One));
 
             Assert.Equal(expected, exp);
         }
@@ -286,8 +286,8 @@ namespace xFunc.Tests.ParserTests
             var expected = new Sin(
                 new If(
                     Bool.True,
-                    new Number(1),
-                    new UnaryMinus(new Number(1))));
+                    Number.One,
+                    new UnaryMinus(Number.One)));
 
             Assert.Equal(expected, exp);
         }

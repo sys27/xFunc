@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void ExecuteInvalidParametersTest()
         {
-            var or = new ConditionalOr(new Number(1), new Number(2));
+            var or = new ConditionalOr(Number.One, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => or.Execute());
         }

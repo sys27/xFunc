@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAbsVector()
         {
-            var exp = new Abs(new Vector(new IExpression[] { new Number(1) }));
+            var exp = new Abs(new Vector(new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Number);
         }
@@ -119,7 +119,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var diff = new Differentiator();
             var simp = new Simplifier();
-            var exp = new Del(diff, simp, new Number(2));
+            var exp = new Del(diff, simp, Number.Two);
 
             Test(exp, ResultTypes.Vector);
         }
@@ -149,7 +149,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var diff = new Differentiator();
             var simp = new Simplifier();
-            var exp = new Derivative(diff, simp, Variable.X, Variable.X, new Number(2));
+            var exp = new Derivative(diff, simp, Variable.X, Variable.X, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -451,7 +451,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogUndefined()
         {
-            var exp = new Log(new Number(2), Variable.X);
+            var exp = new Log(Number.Two, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -459,7 +459,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogNumber()
         {
-            var exp = new Log(new Number(2), new Number(4));
+            var exp = new Log(Number.Two, new Number(4));
 
             Test(exp, ResultTypes.Number);
         }
@@ -467,7 +467,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogComplexNumber()
         {
-            var exp = new Log(new Number(2), new ComplexNumber(8, 3));
+            var exp = new Log(Number.Two, new ComplexNumber(8, 3));
 
             Test(exp, ResultTypes.ComplexNumber);
         }
@@ -475,7 +475,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogException()
         {
-            var exp = new Log(new Number(2), Bool.False);
+            var exp = new Log(Number.Two, Bool.False);
 
             TestBinaryException(exp);
         }
@@ -483,7 +483,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestLogBaseIsNotNumber()
         {
-            var exp = new Log(Bool.False, new Number(2));
+            var exp = new Log(Bool.False, Number.Two);
 
             TestBinaryException(exp);
         }
@@ -491,7 +491,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestModUndefined()
         {
-            var exp = new Mod(Variable.X, new Number(2));
+            var exp = new Mod(Variable.X, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -499,7 +499,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestModNumber()
         {
-            var exp = new Mod(new Number(4), new Number(2));
+            var exp = new Mod(new Number(4), Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -515,7 +515,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestModException()
         {
-            var exp = new Mod(Bool.False, new Number(2));
+            var exp = new Mod(Bool.False, Number.Two);
 
             TestBinaryException(exp);
         }
@@ -531,13 +531,13 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNumber()
         {
-            Test(new Number(1), ResultTypes.Number);
+            Test(Number.One, ResultTypes.Number);
         }
 
         [Fact]
         public void TestPowUndefined()
         {
-            var exp = new Pow(Variable.X, new Number(2));
+            var exp = new Pow(Variable.X, Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -545,7 +545,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestPowNumber()
         {
-            var exp = new Pow(new Number(4), new Number(2));
+            var exp = new Pow(new Number(4), Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -569,7 +569,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestPowException()
         {
-            var exp = new Pow(Bool.False, new Number(2));
+            var exp = new Pow(Bool.False, Number.Two);
 
             TestBinaryException(exp);
         }
@@ -585,7 +585,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestRootUndefined()
         {
-            var exp = new Root(Variable.X, new Number(2));
+            var exp = new Root(Variable.X, Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -593,7 +593,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestRootNumber()
         {
-            var exp = new Root(new Number(4), new Number(2));
+            var exp = new Root(new Number(4), Number.Two);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -601,7 +601,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestRootNumberBoolException()
         {
-            var exp = new Root(new Number(2), Bool.False);
+            var exp = new Root(Number.Two, Bool.False);
 
             TestBinaryException(exp);
         }
@@ -609,7 +609,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestRootException()
         {
-            var exp = new Root(Bool.False, new Number(2));
+            var exp = new Root(Bool.False, Number.Two);
 
             TestBinaryException(exp);
         }

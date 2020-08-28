@@ -52,8 +52,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1) }),
-                new Vector(new[] { new Number(1) })
+                new Vector(new[] { Number.One }),
+                new Vector(new[] { Number.One })
             });
 
             Test(exp, ResultTypes.Matrix);
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { Number.One, Number.Two }),
                 new Vector(new[] { new Number(3), new Number(4) }),
             });
             var exp = new Determinant(matrix);
@@ -107,7 +107,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
                 {
                     new Number(3),
                     new Number(7),
-                    new Number(2),
+                    Number.Two,
                     new Number(5)
                 }));
 
@@ -127,7 +127,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { Number.One, Number.Two }),
                 new Vector(new[] { new Number(3), new Number(4) }),
             });
             var exp = new Inverse(matrix);
@@ -151,7 +151,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
                 {
                     new Number(3),
                     new Number(7),
-                    new Number(2),
+                    Number.Two,
                     new Number(5)
                 }));
 
@@ -169,7 +169,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductLeftUndefined()
         {
-            var exp = new DotProduct(Variable.X, new Vector(new IExpression[] { new Number(1) }));
+            var exp = new DotProduct(Variable.X, new Vector(new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -177,7 +177,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void DotProductRightUndefined()
         {
-            var exp = new DotProduct(new Vector(new IExpression[] { new Number(1) }), Variable.X);
+            var exp = new DotProduct(new Vector(new IExpression[] { Number.One }), Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -186,8 +186,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void DotProduct()
         {
             var exp = new DotProduct(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Vector(new IExpression[] { new Number(2) }));
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.Two }));
 
             Test(exp, ResultTypes.Number);
         }
@@ -196,8 +196,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void DotProductLeftException()
         {
             var exp = new DotProduct(
-                new Number(1),
-                new Vector(new IExpression[] { new Number(2) }));
+                Number.One,
+                new Vector(new IExpression[] { Number.Two }));
 
             TestBinaryException(exp);
         }
@@ -206,8 +206,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void DotProductRightException()
         {
             var exp = new DotProduct(
-                new Vector(new IExpression[] { new Number(2) }),
-                new Number(1));
+                new Vector(new IExpression[] { Number.Two }),
+                Number.One);
 
             TestBinaryException(exp);
         }
@@ -223,7 +223,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductLeftUndefined()
         {
-            var exp = new CrossProduct(Variable.X, new Vector(new IExpression[] { new Number(1) }));
+            var exp = new CrossProduct(Variable.X, new Vector(new IExpression[] { Number.One }));
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -231,7 +231,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void CrossProductRightUndefined()
         {
-            var exp = new CrossProduct(new Vector(new IExpression[] { new Number(1) }), Variable.X);
+            var exp = new CrossProduct(new Vector(new IExpression[] { Number.One }), Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
@@ -240,8 +240,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void CrossProduct()
         {
             var exp = new CrossProduct(
-                new Vector(new IExpression[] { new Number(1) }),
-                new Vector(new IExpression[] { new Number(2) }));
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.Two }));
 
             Test(exp, ResultTypes.Vector);
         }
@@ -250,8 +250,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void CrossProductLeftException()
         {
             var exp = new CrossProduct(
-                new Number(1),
-                new Vector(new IExpression[] { new Number(2) }));
+                Number.One,
+                new Vector(new IExpression[] { Number.Two }));
 
             TestBinaryException(exp);
         }
@@ -260,8 +260,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void CrossProductRightException()
         {
             var exp = new CrossProduct(
-                new Vector(new IExpression[] { new Number(2) }),
-                new Number(1));
+                new Vector(new IExpression[] { Number.Two }),
+                Number.One);
 
             TestBinaryException(exp);
         }
@@ -279,7 +279,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { new Number(1), new Number(2) }),
+                new Vector(new[] { Number.One, Number.Two }),
                 new Vector(new[] { new Number(3), new Number(4) }),
             });
             var exp = new Transpose(matrix);

@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new Arcsin(new Number(1));
+            var exp = new Arcsin(Number.One);
             var result = exp.Execute();
             var expected = Angle.Radian(1.5707963267948966);
 
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void CloneTest()
         {
-            var exp = new Arcsin(new Number(1));
+            var exp = new Arcsin(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

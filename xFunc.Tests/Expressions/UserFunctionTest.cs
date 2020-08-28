@@ -32,7 +32,7 @@ namespace xFunc.Tests.Expressions
                 { new UserFunction("f", new IExpression[] { Variable.X }), new Ln(Variable.X) }
             };
 
-            var func = new UserFunction("f", new IExpression[] { new Number(1) });
+            var func = new UserFunction("f", new IExpression[] { Number.One });
             Assert.Equal(Math.Log(1), func.Execute(functions));
         }
 
@@ -41,7 +41,7 @@ namespace xFunc.Tests.Expressions
         {
             var functions = new FunctionCollection();
 
-            var func = new UserFunction("f", new IExpression[] { new Number(1) });
+            var func = new UserFunction("f", new IExpression[] { Number.One });
 
             Assert.Throws<KeyNotFoundException>(() => func.Execute(functions));
         }
@@ -51,9 +51,9 @@ namespace xFunc.Tests.Expressions
         {
             var expParams = new ExpressionParameters();
 
-            var exp = new If(new Equal(Variable.X, new Number(0)),
-                new Number(1),
-                new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, new Number(1)) })));
+            var exp = new If(new Equal(Variable.X, Number.Zero),
+                Number.One,
+                new Mul(Variable.X, new UserFunction("f", new[] { new Sub(Variable.X, Number.One) })));
             expParams.Functions.Add(new UserFunction("f", new[] { Variable.X }), exp);
 
             var func = new UserFunction("f", new[] { new Number(4) });
@@ -96,7 +96,7 @@ namespace xFunc.Tests.Expressions
         public void EqualDiffCountTest()
         {
             var exp1 = new UserFunction("f", new[] { new Number(5) });
-            var exp2 = new UserFunction("f", new[] { new Number(5), new Number(2) });
+            var exp2 = new UserFunction("f", new[] { new Number(5), Number.Two });
 
             Assert.False(exp1.Equals(exp2));
         }

@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void OneNumberTest()
         {
-            var exp = new Avg(new[] { new Number(2) });
+            var exp = new Avg(new[] { Number.Two });
             var result = exp.Execute();
 
             Assert.Equal(2.0, result);
@@ -35,7 +35,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void TwoNumberTest()
         {
-            var exp = new Avg(new[] { new Number(2), new Number(4) });
+            var exp = new Avg(new[] { Number.Two, new Number(4) });
             var result = exp.Execute();
 
             Assert.Equal(3.0, result);
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void ThreeNumberTest()
         {
-            var exp = new Avg(new[] { new Number(9), new Number(2), new Number(4) });
+            var exp = new Avg(new[] { new Number(9), Number.Two, new Number(4) });
             var result = exp.Execute();
 
             Assert.Equal(5.0, result);
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void VectorTest()
         {
-            var exp = new Avg(new[] { new Vector(new[] { new Number(1), new Number(2), new Number(3) }) });
+            var exp = new Avg(new[] { new Vector(new[] { Number.One, Number.Two, new Number(3) }) });
             var result = exp.Execute();
 
             Assert.Equal(2.0, result);
@@ -70,7 +70,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void CloneTest()
         {
-            var exp = new Avg(new[] { new Number(1), new Number(2) });
+            var exp = new Avg(new[] { Number.One, Number.Two });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

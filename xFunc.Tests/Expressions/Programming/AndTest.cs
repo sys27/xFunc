@@ -47,7 +47,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateInvalidParametersTest()
         {
-            var and = new ConditionalAnd(new Number(1), new Number(2));
+            var and = new ConditionalAnd(Number.One, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => and.Execute());
         }

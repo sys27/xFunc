@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest()
         {
-            var exp = new Lb(new Number(2));
+            var exp = new Lb(Number.Two);
 
             Assert.Equal(Math.Log(2, 2), exp.Execute());
         }

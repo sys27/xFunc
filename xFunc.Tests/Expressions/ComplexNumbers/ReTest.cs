@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         [Fact]
         public void ExecuteExceptionTest()
         {
-            var exp = new Re(new Number(2));
+            var exp = new Re(Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
         }

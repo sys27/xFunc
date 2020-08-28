@@ -49,7 +49,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestConjugateException()
         {
-            var exp = new Conjugate(new Number(2));
+            var exp = new Conjugate(Number.Two);
 
             TestException(exp);
         }
@@ -73,7 +73,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestImException()
         {
-            var exp = new Im(new Number(2));
+            var exp = new Im(Number.Two);
 
             TestException(exp);
         }
@@ -97,7 +97,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestPhaseException()
         {
-            var exp = new Phase(new Number(2));
+            var exp = new Phase(Number.Two);
 
             TestException(exp);
         }
@@ -121,7 +121,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestReException()
         {
-            var exp = new Re(new Number(2));
+            var exp = new Re(Number.Two);
 
             TestException(exp);
         }
@@ -145,7 +145,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestReciprocalException()
         {
-            var exp = new Reciprocal(new Number(2));
+            var exp = new Reciprocal(Number.Two);
 
             TestException(exp);
         }

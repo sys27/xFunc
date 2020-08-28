@@ -24,8 +24,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsTest1()
         {
-            var add1 = new Add(new Number(2), new Number(3));
-            var add2 = new Add(new Number(2), new Number(3));
+            var add1 = new Add(Number.Two, new Number(3));
+            var add2 = new Add(Number.Two, new Number(3));
 
             Assert.Equal(add1, add2);
         }
@@ -33,8 +33,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsTest2()
         {
-            var add = new Add(new Number(2), new Number(3));
-            var sub = new Sub(new Number(2), new Number(3));
+            var add = new Add(Number.Two, new Number(3));
+            var sub = new Sub(Number.Two, new Number(3));
 
             Assert.NotEqual<IExpression>(add, sub);
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsSameTest()
         {
-            var exp = new Add(new Number(1), new Number(1));
+            var exp = new Add(Number.One, Number.One);
 
             Assert.True(exp.Equals(exp));
         }
@@ -50,7 +50,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void EqualsNullTest()
         {
-            var exp = new Add(new Number(1), new Number(1));
+            var exp = new Add(Number.One, Number.One);
 
             Assert.False(exp.Equals(null));
         }
@@ -58,13 +58,13 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void LeftNullExceptionTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Add(null, new Number(1)));
+            Assert.Throws<ArgumentNullException>(() => new Add(null, Number.One));
         }
 
         [Fact]
         public void RightNullExceptionTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new Add(new Number(1), null));
+            Assert.Throws<ArgumentNullException>(() => new Add(Number.One, null));
         }
     }
 }

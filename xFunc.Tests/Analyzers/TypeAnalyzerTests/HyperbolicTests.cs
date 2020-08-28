@@ -35,7 +35,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcoshNumber()
         {
-            var exp = new Arcosh(new Number(2));
+            var exp = new Arcosh(Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -67,7 +67,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcothNumber()
         {
-            var exp = new Arcoth(new Number(2));
+            var exp = new Arcoth(Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -99,7 +99,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArcschNumber()
         {
-            var exp = new Arcsch(new Number(2));
+            var exp = new Arcsch(Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -131,7 +131,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArsechNumber()
         {
-            var exp = new Arsech(new Number(2));
+            var exp = new Arsech(Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -163,7 +163,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArsinhNumber()
         {
-            var exp = new Arsinh(new Number(2));
+            var exp = new Arsinh(Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -195,7 +195,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestArtanhNumber()
         {
-            var exp = new Artanh(new Number(2));
+            var exp = new Artanh(Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -227,7 +227,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCoshNumber()
         {
-            var exp = new Cosh(new Number(2));
+            var exp = new Cosh(Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -259,7 +259,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCothNumber()
         {
-            var exp = new Coth(new Number(2));
+            var exp = new Coth(Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -291,7 +291,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCschNumber()
         {
-            var exp = new Csch(new Number(2));
+            var exp = new Csch(Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -323,7 +323,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSechNumber()
         {
-            var exp = new Sech(new Number(2));
+            var exp = new Sech(Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -355,7 +355,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSinhNumber()
         {
-            var exp = new Sinh(new Number(2));
+            var exp = new Sinh(Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -387,7 +387,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTanhNumber()
         {
-            var exp = new Tanh(new Number(2));
+            var exp = new Tanh(Number.Two);
 
             Test(exp, ResultTypes.Number);
         }

@@ -34,7 +34,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndNumber()
         {
-            var exp = new And(new Number(1), new Number(2));
+            var exp = new And(Number.One, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndNumberComplexException()
         {
-            var exp = new And(new Number(1), new ComplexNumber(1, 1));
+            var exp = new And(Number.One, new ComplexNumber(1, 1));
 
             TestBinaryException(exp);
         }
@@ -50,7 +50,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAndComplexNumberException()
         {
-            var exp = new And(new ComplexNumber(1, 1), new Number(2));
+            var exp = new And(new ComplexNumber(1, 1), Number.Two);
 
             TestBinaryException(exp);
         }
@@ -266,7 +266,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestNotNumber()
         {
-            var exp = new Not(new Number(1));
+            var exp = new Not(Number.One);
 
             Test(exp, ResultTypes.Number);
         }
@@ -298,7 +298,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrNumber()
         {
-            var exp = new Or(new Number(1), new Number(2));
+            var exp = new Or(Number.One, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -306,7 +306,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrNumberComplexException()
         {
-            var exp = new Or(new Number(1), new ComplexNumber(1, 1));
+            var exp = new Or(Number.One, new ComplexNumber(1, 1));
 
             TestBinaryException(exp);
         }
@@ -314,7 +314,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestOrComplexNumberException()
         {
-            var exp = new Or(new ComplexNumber(1, 1), new Number(2));
+            var exp = new Or(new ComplexNumber(1, 1), Number.Two);
 
             TestBinaryException(exp);
         }
@@ -362,7 +362,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestXOrNumber()
         {
-            var exp = new XOr(new Number(1), new Number(2));
+            var exp = new XOr(Number.One, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
@@ -370,7 +370,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestXOrNumberComplexException()
         {
-            var exp = new XOr(new Number(1), new ComplexNumber(1, 1));
+            var exp = new XOr(Number.One, new ComplexNumber(1, 1));
 
             TestBinaryException(exp);
         }
@@ -378,7 +378,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestXOrComplexNumberException()
         {
-            var exp = new XOr(new ComplexNumber(1, 1), new Number(1));
+            var exp = new XOr(new ComplexNumber(1, 1), Number.One);
 
             TestBinaryException(exp);
         }

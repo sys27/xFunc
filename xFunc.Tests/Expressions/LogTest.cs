@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Log(new Number(2), new Number(10));
+            var exp = new Log(Number.Two, new Number(10));
 
             Assert.Equal(Math.Log(10, 2), exp.Execute());
         }
@@ -60,7 +60,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Log(new Number(0), new Number(5));
+            var exp = new Log(Number.Zero, new Number(5));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

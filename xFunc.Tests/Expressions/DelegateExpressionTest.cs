@@ -90,7 +90,7 @@ namespace xFunc.Tests.Expressions
         public void EqualDiffTypeTest()
         {
             var exp1 = new DelegateExpression(p => 1.0);
-            var exp2 = new Number(2);
+            var exp2 = Number.Two;
 
             Assert.False(exp1.Equals(exp2));
         }

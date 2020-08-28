@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTest1()
         {
-            var exp = new Exp(new Number(2));
+            var exp = new Exp(Number.Two);
 
             Assert.Equal(Math.Exp(2), exp.Execute());
         }
@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void CloneTest()
         {
-            var exp = new Exp(new Number(0));
+            var exp = new Exp(Number.Zero);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

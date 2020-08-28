@@ -27,10 +27,10 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }),
-                new Vector(new[] { new Number(1), new Number(8), new Number(4), new Number(2) }),
-                new Vector(new[] { new Number(2), new Number(1), new Number(9), new Number(3) }),
-                new Vector(new[] { new Number(5), new Number(4), new Number(7), new Number(1) })
+                new Vector(new[] { new Number(3), new Number(7), Number.Two, new Number(5) }),
+                new Vector(new[] { Number.One, new Number(8), new Number(4), Number.Two }),
+                new Vector(new[] { Number.Two, Number.One, new Number(9), new Number(3) }),
+                new Vector(new[] { new Number(5), new Number(4), new Number(7), Number.One })
             });
             var expected = new Matrix(new[]
             {
@@ -50,9 +50,9 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) }),
-                new Vector(new[] { new Number(1), new Number(8), new Number(4), new Number(2) }),
-                new Vector(new[] { new Number(2), new Number(1), new Number(9), new Number(3) })
+                new Vector(new[] { new Number(3), new Number(7), Number.Two, new Number(5) }),
+                new Vector(new[] { Number.One, new Number(8), new Number(4), Number.Two }),
+                new Vector(new[] { Number.Two, Number.One, new Number(9), new Number(3) })
             });
             var exp = new Inverse(matrix);
 
@@ -62,7 +62,7 @@ namespace xFunc.Tests.Expressions.Matrices
         [Fact]
         public void ExecuteVectorTest()
         {
-            var vector = new Vector(new[] { new Number(3), new Number(7), new Number(2), new Number(5) });
+            var vector = new Vector(new[] { new Number(3), new Number(7), Number.Two, new Number(5) });
             var exp = new Inverse(vector);
 
             Assert.Throws<ResultIsNotSupportedException>(() => exp.Execute());
@@ -73,8 +73,8 @@ namespace xFunc.Tests.Expressions.Matrices
         {
             var exp = new Inverse(new Matrix(new[]
             {
-                new Vector(new[] { new Number(1), new Number(-2), new Number(3) }),
-                new Vector(new[] { new Number(4), new Number(0), new Number(6) }),
+                new Vector(new[] { Number.One, new Number(-2), new Number(3) }),
+                new Vector(new[] { new Number(4), Number.Zero, new Number(6) }),
                 new Vector(new[] { new Number(-7), new Number(8), new Number(9) })
             }));
             var clone = exp.Clone();

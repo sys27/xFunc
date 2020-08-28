@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void TwoNumbersTest()
         {
-            var sum = new Product(new[] { new Number(3), new Number(2) });
+            var sum = new Product(new[] { new Number(3), Number.Two });
 
             Assert.Equal(6.0, sum.Execute());
         }
@@ -34,7 +34,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void OneNumberTest()
         {
-            var sum = new Product(new[] { new Number(2) });
+            var sum = new Product(new[] { Number.Two });
 
             Assert.Equal(2.0, sum.Execute());
         }
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void VectorTest()
         {
-            var sum = new Product(new[] { new Vector(new[] { new Number(4), new Number(2) }) });
+            var sum = new Product(new[] { new Vector(new[] { new Number(4), Number.Two }) });
 
             Assert.Equal(8.0, sum.Execute());
         }
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Statistical
         [Fact]
         public void CloneTest()
         {
-            var exp = new Product(new[] { new Number(1), new Number(2) });
+            var exp = new Product(new[] { Number.One, Number.Two });
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -62,7 +62,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Lb(new Number(2));
+            var expected = new Lb(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -78,7 +78,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Lb(new Number(2));
+            var expected = new Lb(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -94,7 +94,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Lg(new Number(2));
+            var expected = new Lg(Number.Two);
 
             Assert.Equal(expected, exp);
         }
@@ -110,7 +110,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new Ln(new Number(2));
+            var expected = new Ln(Number.Two);
 
             Assert.Equal(expected, exp);
         }

@@ -40,7 +40,7 @@ namespace xFunc.Tests.Expressions.LogicalAndBitwise
         [Fact]
         public void ExecuteResultIsNotSupported()
         {
-            var eq = new Equality(new Number(1), new Number(2));
+            var eq = new Equality(Number.One, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => eq.Execute());
         }

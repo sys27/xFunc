@@ -52,7 +52,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CloneTest()
         {
-            var exp = new GreaterThan(new Number(2), new Number(3));
+            var exp = new GreaterThan(Number.Two, new Number(3));
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

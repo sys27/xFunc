@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteNumberTest()
         {
-            var exp = new Csc(new Number(1));
+            var exp = new Csc(Number.One);
             var result = (double)exp.Execute();
 
             Assert.Equal(57.298688498550185, result, 15);
@@ -83,7 +83,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void CloneTest()
         {
-            var exp = new Csc(new Number(1));
+            var exp = new Csc(Number.One);
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

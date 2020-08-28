@@ -378,6 +378,22 @@ namespace xFunc.Maths.Expressions.Angles
             => new Angle(Math.Floor(angle.Value), angle.Unit);
 
         /// <summary>
+        /// Calculates the integral part of a specified angle number.
+        /// </summary>
+        /// <param name="angle">An angle to truncate.</param>
+        /// <returns>The integral part of angle number.</returns>
+        public static Angle Truncate(Angle angle)
+            => new Angle(Math.Truncate(angle.Value), angle.Unit);
+
+        /// <summary>
+        /// Returns the fractional part of the angle number.
+        /// </summary>
+        /// <param name="angle">The angle number.</param>
+        /// <returns>The fractional part.</returns>
+        public static Angle Frac(Angle angle)
+            => new Angle(MathExtensions.Frac(angle.Value), angle.Unit);
+
+        /// <summary>
         /// Gets a value.
         /// </summary>
         public double Value { get; }

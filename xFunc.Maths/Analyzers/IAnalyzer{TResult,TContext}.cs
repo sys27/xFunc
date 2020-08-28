@@ -120,6 +120,22 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
+        TResult Analyze(Trunc exp, TContext context);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(Frac exp, TContext context);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
         TResult Analyze(GCD exp, TContext context);
 
         /// <summary>

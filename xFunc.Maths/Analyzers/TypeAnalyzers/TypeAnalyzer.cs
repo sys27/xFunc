@@ -224,7 +224,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-                _ => ResultTypes.Number.ThrowFor(result),
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
 
@@ -348,7 +348,43 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 ResultTypes.Undefined => ResultTypes.Undefined,
                 ResultTypes.Number => ResultTypes.Number,
                 ResultTypes.AngleNumber => ResultTypes.AngleNumber,
-                _ => ResultTypes.Number.ThrowFor(result),
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(Trunc exp)
+        {
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
+            };
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public ResultTypes Analyze(Frac exp)
+        {
+            var result = exp.Argument.Analyze(this);
+
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.NumberOrAngle.ThrowFor(result),
             };
         }
 

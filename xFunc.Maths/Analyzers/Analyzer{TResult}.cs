@@ -151,6 +151,22 @@ namespace xFunc.Maths.Analyzers
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(Trunc exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(Frac exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
         /// <returns>
         /// The result of analysis.
         /// </returns>

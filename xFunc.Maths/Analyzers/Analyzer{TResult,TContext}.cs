@@ -134,6 +134,24 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(Trunc exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(Frac exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
         public virtual TResult Analyze(GCD exp, TContext context)
             => throw new NotSupportedException();
 

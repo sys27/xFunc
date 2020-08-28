@@ -61,7 +61,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAbsVector()
         {
-            var exp = new Abs(new Vector(new[] { new Number(1) }));
+            var exp = new Abs(new Vector(new IExpression[] { new Number(1) }));
 
             Test(exp, ResultTypes.Number);
         }
@@ -107,7 +107,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestdDefineUndefine()
+        public void TestDefineUndefined()
         {
             var exp = new Define(Variable.X, new Number(-2));
 
@@ -243,6 +243,70 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
+        public void TestTruncUndefined()
+        {
+            var exp = new Trunc(Variable.X);
+
+            Test(exp, ResultTypes.Undefined);
+        }
+
+        [Fact]
+        public void TestTruncNumber()
+        {
+            var exp = new Trunc(new Number(10));
+
+            Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestTruncAngle()
+        {
+            var exp = new Trunc(Angle.Degree(5.5).AsExpression());
+
+            Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestTruncException()
+        {
+            var exp = new Trunc(Bool.False);
+
+            TestException(exp);
+        }
+
+        [Fact]
+        public void TestFracUndefined()
+        {
+            var exp = new Frac(Variable.X);
+
+            Test(exp, ResultTypes.Undefined);
+        }
+
+        [Fact]
+        public void TestFracNumber()
+        {
+            var exp = new Frac(new Number(10));
+
+            Test(exp, ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestFracAngle()
+        {
+            var exp = new Frac(Angle.Degree(5.5).AsExpression());
+
+            Test(exp, ResultTypes.AngleNumber);
+        }
+
+        [Fact]
+        public void TestFracException()
+        {
+            var exp = new Frac(Bool.False);
+
+            TestException(exp);
+        }
+
+        [Fact]
         public void TestGCDUndefined()
         {
             var exp = new GCD(new Number(10), Variable.X);
@@ -251,9 +315,12 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestGCDnumber()
+        public void TestGCDNumber()
         {
-            var exp = new GCD(new[] { new Number(10), new Number(10), new Number(10) });
+            var exp = new GCD(new IExpression[]
+            {
+                new Number(10), new Number(10), new Number(10)
+            });
 
             Test(exp, ResultTypes.Number);
         }
@@ -299,7 +366,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         }
 
         [Fact]
-        public void TestLCMnumber()
+        public void TestLCMNumber()
         {
             var exp = new LCM(new IExpression[]
             {

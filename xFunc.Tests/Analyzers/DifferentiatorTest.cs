@@ -16,6 +16,7 @@
 using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
@@ -47,6 +48,14 @@ namespace xFunc.Tests.Analyzers
         public void NumberTest()
         {
             var exp = Differentiate(new Number(10));
+
+            Assert.Equal(zero, exp);
+        }
+
+        [Fact]
+        public void AngleNumberTest()
+        {
+            var exp = Differentiate(new AngleNumber(Angle.Degree(10)));
 
             Assert.Equal(zero, exp);
         }

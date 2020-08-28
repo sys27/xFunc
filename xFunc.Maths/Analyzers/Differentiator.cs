@@ -18,6 +18,7 @@
 
 using System;
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Trigonometric;
 
@@ -270,6 +271,19 @@ namespace xFunc.Maths.Analyzers
         /// The result of analysis.
         /// </returns>
         public override IExpression Analyze(Number exp, DifferentiatorContext context)
+        {
+            return new Number(0);
+        }
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>
+        /// The result of analysis.
+        /// </returns>
+        public override IExpression Analyze(AngleNumber exp, DifferentiatorContext context)
         {
             return new Number(0);
         }

@@ -15,7 +15,6 @@
 
 using System.Numerics;
 using xFunc.Maths.Analyzers;
-using xFunc.Maths.Analyzers.Formatters;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -154,6 +153,22 @@ namespace xFunc.Tests.Analyzers.Formatters
             var exp = new Floor(new Number(5.55555555));
 
             Assert.Equal("floor(5.55555555)", exp.ToString());
+        }
+
+        [Fact]
+        public void TruncToStringTest()
+        {
+            var exp = new Trunc(new Number(5.55555555));
+
+            Assert.Equal("trunc(5.55555555)", exp.ToString());
+        }
+
+        [Fact]
+        public void FracToStringTest()
+        {
+            var exp = new Frac(new Number(5.55555555));
+
+            Assert.Equal("frac(5.55555555)", exp.ToString());
         }
 
         [Fact]

@@ -518,8 +518,7 @@ namespace xFunc.Maths
             var number = Number(tokenReader);
             if (number != null)
             {
-                var rightUnary = Function(tokenReader) ??
-                                 Variable(tokenReader) ??
+                var rightUnary = MulImplicitExponentiation(tokenReader) ??
                                  ParenthesesExpression(tokenReader) ??
                                  Matrix(tokenReader) ??
                                  Vector(tokenReader);
@@ -537,6 +536,23 @@ namespace xFunc.Maths
             tokenReader.Rollback(scope);
 
             return null;
+        }
+
+        private IExpression MulImplicitExponentiation(TokenReader tokenReader)
+        {
+            var left = Function(tokenReader) ??
+                       Variable(tokenReader);
+            if (left == null)
+                return null;
+
+            var @operator = tokenReader.Operator(OperatorToken.Exponentiation);
+            if (@operator == null)
+                return left;
+
+            var right = Exponentiation(tokenReader) ??
+                        throw new ParseException(Resource.ExponentParseException);
+
+            return CreateExponentiation(left, right);
         }
 
         private IExpression LeftUnary(TokenReader tokenReader)

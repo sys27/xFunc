@@ -581,7 +581,7 @@ namespace xFunc.Maths
             if (@operator == null)
                 return left;
 
-            var right = Exponentiation(tokenReader) ??
+            var right = LeftUnary(tokenReader) ??
                         throw new ParseException(Resource.ExponentParseException);
 
             return CreateExponentiation(left, right);

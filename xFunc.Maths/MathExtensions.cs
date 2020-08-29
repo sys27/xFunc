@@ -40,21 +40,14 @@ namespace xFunc.Maths
         {
             if (number < 0)
             {
-                // TODO:
                 if ((BitConverter.DoubleToInt64Bits(power) & 1) == 1)
-                {
                     return -Math.Pow(-number, power);
-                }
 
                 if (power > 0 && power < 1)
-                {
-                    return new Complex(0, Math.Pow(-number, power));
-                }
+                    return Complex.Pow(number, power);
 
                 if (power < 0 && power > -1)
-                {
                     return new Complex(0, -Math.Pow(-number, power));
-                }
             }
 
             return Math.Pow(number, power);

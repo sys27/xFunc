@@ -43,8 +43,11 @@ namespace xFunc.Tests.Expressions
         public void NegativeNumberExecuteTest1()
         {
             var exp = new Pow(new Number(-25), new Number(1 / 2.0));
+            var result = (Complex)exp.Execute();
+            var expected = new Complex(0, 5);
 
-            Assert.Equal(new Complex(0, 5), exp.Execute());
+            Assert.Equal(expected.Real, result.Real, 14);
+            Assert.Equal(expected.Imaginary, result.Imaginary, 14);
         }
 
         [Fact]

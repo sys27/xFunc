@@ -59,12 +59,7 @@ namespace xFunc.Maths.Expressions
 
             return (leftResult, rightResult) switch
             {
-                // TODO:
-                (double first, double second) when first < 0 && (second % 2 == 0) =>
-                    new Complex(0, Complex.Pow(first, 1 / second).Imaginary),
-
-                (double first, double second) => MathExtensions.Pow(first, 1 / second),
-
+                (double number, double power) => MathExtensions.Pow(number, 1 / power),
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

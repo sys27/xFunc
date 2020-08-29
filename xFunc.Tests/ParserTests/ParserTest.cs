@@ -2151,5 +2151,46 @@ namespace xFunc.Tests.ParserTests
 
             ParseErrorTest(tokens);
         }
+
+        [Fact]
+        public void ImplicitMulAndPowerFunction()
+        {
+            var tokens = Builder()
+                .Number(2)
+                .Id("sin")
+                .OpenParenthesis()
+                .VariableX()
+                .CloseParenthesis()
+                .Operation(OperatorToken.Exponentiation)
+                .Number(2)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Mul(
+                Number.Two,
+                new Pow(new Sin(Variable.X), Number.Two)
+            );
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void ImplicitMulAndPowerVariable()
+        {
+            var tokens = Builder()
+                .Number(2)
+                .VariableX()
+                .Operation(OperatorToken.Exponentiation)
+                .Number(2)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Mul(
+                Number.Two,
+                new Pow(Variable.X, Number.Two)
+            );
+
+            Assert.Equal(expected, exp);
+        }
     }
 }

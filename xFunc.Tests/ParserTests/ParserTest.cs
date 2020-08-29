@@ -2192,5 +2192,21 @@ namespace xFunc.Tests.ParserTests
 
             Assert.Equal(expected, exp);
         }
+
+        [Fact]
+        public void PowerWithUnaryMinus()
+        {
+            var tokens = Builder()
+                .Number(2)
+                .Operation(OperatorToken.Exponentiation)
+                .Operation(OperatorToken.Minus)
+                .Number(2)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new Pow(Number.Two, new UnaryMinus(Number.Two));
+
+            Assert.Equal(expected, exp);
+        }
     }
 }

@@ -61,14 +61,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>The element of matrix.</returns>
         public Vector this[int index]
         {
-            get
-            {
-                return vectors[index];
-            }
-            set
-            {
-                vectors[index] = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => vectors[index];
+            set => vectors[index] = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>

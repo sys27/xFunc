@@ -28,19 +28,13 @@ namespace xFunc.Maths.Expressions.Angles
         /// Initializes a new instance of the <see cref="AngleNumber"/> class.
         /// </summary>
         /// <param name="value">An angle.</param>
-        public AngleNumber(Angle value)
-        {
-            Value = value;
-        }
+        public AngleNumber(Angle value) => Value = value;
 
         /// <summary>
         /// Deconstructs <see cref="AngleNumber"/> to <see cref="Angle"/>.
         /// </summary>
         /// <param name="value">The angle.</param>
-        public void Deconstruct(out Angle value)
-        {
-            value = Value;
-        }
+        public void Deconstruct(out Angle value) => value = Value;
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.

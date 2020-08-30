@@ -91,7 +91,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Conjugate(Argument.Clone());
+        public override IExpression Clone()
+            => new Conjugate(Argument.Clone());
     }
 }

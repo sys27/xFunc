@@ -95,8 +95,8 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Vector(CloneArguments());
+        public override IExpression Clone()
+            => new Vector(CloneArguments());
 
         /// <summary>
         /// Calculates current vector and returns it as an array.

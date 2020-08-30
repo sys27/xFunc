@@ -28,9 +28,7 @@ namespace xFunc.Maths.Results
         /// </summary>
         /// <param name="exp">The expression.</param>
         public ExpressionResult(IExpression exp)
-        {
-            Result = exp ?? throw new ArgumentNullException(nameof(exp));
-        }
+            => Result = exp ?? throw new ArgumentNullException(nameof(exp));
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

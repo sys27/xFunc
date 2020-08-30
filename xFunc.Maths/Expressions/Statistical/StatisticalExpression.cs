@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Statistical
                 if (result is double doubleResult)
                     return doubleResult;
 
-                throw new ResultIsNotSupportedException();
+                throw new ResultIsNotSupportedException(this, result);
             }).ToArray();
 
             return ExecuteInternal(calculated);

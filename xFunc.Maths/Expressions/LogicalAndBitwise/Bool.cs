@@ -28,10 +28,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// Initializes a new instance of the <see cref="Bool"/> class.
         /// </summary>
         /// <param name="value">The value of this constant.</param>
-        private Bool(bool value)
-        {
-            Value = value;
-        }
+        private Bool(bool value) => Value = value;
 
         /// <summary>
         /// Executes this expression.
@@ -148,8 +145,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// Returns a hash function for this type.
         /// </summary>
         /// <returns>A hash code for the current <see cref="Bool"/>.</returns>
-        public override int GetHashCode() =>
-            HashCode.Combine(Value);
+        public override int GetHashCode() => HashCode.Combine(Value);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

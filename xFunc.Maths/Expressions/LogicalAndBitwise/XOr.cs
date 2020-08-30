@@ -82,7 +82,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// Clones this instance of the <see cref="XOr"/>.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new XOr(Left.Clone(), Right.Clone());
+        public override IExpression Clone()
+            => new XOr(Left.Clone(), Right.Clone());
     }
 }

@@ -45,8 +45,9 @@ namespace xFunc.Maths.Expressions.Matrices
                 throw new ArgumentException(Resource.LessParams, nameof(vectors));
 
             var size = vectors[0].ParametersCount;
-            if (vectors.Any(exp => exp.ParametersCount != size))
-                throw new MatrixIsInvalidException();
+            foreach (var vector in vectors)
+                if (vector.ParametersCount != size)
+                    throw new MatrixIsInvalidException();
 
             this.vectors = vectors;
         }

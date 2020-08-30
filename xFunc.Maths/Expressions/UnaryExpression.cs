@@ -185,14 +185,8 @@ namespace xFunc.Maths.Expressions
         /// <value>The expression.</value>
         public IExpression Argument
         {
-            get
-            {
-                return argument;
-            }
-            set
-            {
-                argument = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => argument;
+            set => argument = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

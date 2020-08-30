@@ -149,8 +149,8 @@ namespace xFunc.Maths.Expressions
         /// </value>
         public IExpression Expression
         {
-            get { return this[0]; }
-            set { this[0] = value ?? throw new ArgumentNullException(nameof(value)); }
+            get => this[0];
+            set => this[0] = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>

@@ -26,10 +26,7 @@ namespace xFunc.Maths.Results
         /// Initializes a new instance of the <see cref="NumberResult"/> class.
         /// </summary>
         /// <param name="number">The numerical representation of result.</param>
-        public NumberResult(double number)
-        {
-            Result = number;
-        }
+        public NumberResult(double number) => Result = number;
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

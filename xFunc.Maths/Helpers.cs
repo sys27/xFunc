@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Tokenization.Tokens;
@@ -28,23 +27,29 @@ namespace xFunc.Maths
     public static class Helpers
     {
         /// <summary>
-        /// Checks that <paramref name="expression"/> has  the <paramref name="arg"/> variable.
+        /// Checks that <paramref name="expression"/> has  the <paramref name="variable"/> variable.
         /// </summary>
         /// <param name="expression">The expression that is checked.</param>
-        /// <param name="arg">The variable that can be contained in the expression.</param>
-        /// <returns>true if <paramref name="expression"/> has <paramref name="arg"/>; otherwise, false.</returns>
-        public static bool HasVariable(IExpression expression, Variable arg)
+        /// <param name="variable">The variable that can be contained in the expression.</param>
+        /// <returns>true if <paramref name="expression"/> has <paramref name="variable"/>; otherwise, false.</returns>
+        public static bool HasVariable(IExpression expression, Variable variable)
         {
             if (expression is BinaryExpression bin)
-                return HasVariable(bin.Left, arg) || HasVariable(bin.Right, arg);
+                return HasVariable(bin.Left, variable) || HasVariable(bin.Right, variable);
 
             if (expression is UnaryExpression un)
-                return HasVariable(un.Argument, arg);
+                return HasVariable(un.Argument, variable);
 
             if (expression is DifferentParametersExpression paramExp)
-                return paramExp.Arguments.Any(e => HasVariable(e, arg));
+            {
+                foreach (var argument in paramExp.Arguments)
+                    if (HasVariable(argument, variable))
+                        return true;
 
-            return expression is Variable && expression.Equals(arg);
+                return false;
+            }
+
+            return expression is Variable && expression.Equals(variable);
         }
 
         /// <summary>
@@ -60,8 +65,8 @@ namespace xFunc.Maths
             var c = new SortedSet<Parameter>();
 
             foreach (var token in tokens)
-                if (token is IdToken @var)
-                    c.Add(new Parameter(@var.Id, false));
+                if (token is IdToken var)
+                    c.Add(new Parameter(var.Id, false));
 
             return new ParameterCollection(c, false);
         }

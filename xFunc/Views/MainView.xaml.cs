@@ -117,7 +117,7 @@ namespace xFunc.Views
                         hexButton.IsChecked = false;
                         decButton.IsChecked = true;
                         break;
-                    case NumeralSystem.Hexidecimal:
+                    case NumeralSystem.Hexadecimal:
                         binButton.IsChecked = false;
                         octButton.IsChecked = false;
                         decButton.IsChecked = false;
@@ -419,7 +419,7 @@ namespace xFunc.Views
 
         private void HexCommand_Execute(object o, ExecutedRoutedEventArgs args)
         {
-            mathPresenter.Base = NumeralSystem.Hexidecimal;
+            mathPresenter.Base = NumeralSystem.Hexadecimal;
         }
 
         private void BaseCommands_CanExecute(object o, CanExecuteRoutedEventArgs args)

@@ -26,10 +26,7 @@ namespace xFunc.Maths.Results
         /// Initializes a new instance of the <see cref="ComplexNumberResult"/> class.
         /// </summary>
         /// <param name="complex">The numerical representation of result.</param>
-        public ComplexNumberResult(Complex complex)
-        {
-            Result = complex;
-        }
+        public ComplexNumberResult(Complex complex) => Result = complex;
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

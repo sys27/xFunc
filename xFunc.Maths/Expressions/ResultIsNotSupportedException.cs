@@ -15,7 +15,6 @@
 
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.Serialization;
 using xFunc.Maths.Resources;
 
@@ -38,14 +37,29 @@ namespace xFunc.Maths.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
         /// </summary>
-        /// <param name="that">The that.</param>
-        /// <param name="result">The result.</param>
-        public ResultIsNotSupportedException(object that, params object[] result)
+        /// <param name="exp">The expression with wrong argument type.</param>
+        /// <param name="first">The result of argument calculation.</param>
+        public ResultIsNotSupportedException(IExpression exp, object first)
             : this(string.Format(
                 CultureInfo.InvariantCulture,
                 Resource.ResultIsNotSupported,
-                that?.GetType().Name,
-                string.Join(", ", result.Select(x => x.GetType().Name))))
+                exp?.GetType().Name,
+                first))
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResultIsNotSupportedException"/> class.
+        /// </summary>
+        /// <param name="exp">The expression with wrong argument type.</param>
+        /// <param name="first">The first result of argument calculation.</param>
+        /// <param name="second">The second result of argument calculation.</param>
+        public ResultIsNotSupportedException(IExpression exp, object first, object second)
+            : this(string.Format(
+                CultureInfo.InvariantCulture,
+                Resource.ResultIsNotSupported,
+                exp?.GetType().Name,
+                $"{first}, {second}"))
         {
         }
 

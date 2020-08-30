@@ -27,9 +27,7 @@ namespace xFunc.Maths.Results
         /// </summary>
         /// <param name="str">The string representation of result.</param>
         public StringResult(string str)
-        {
-            Result = str ?? throw new ArgumentNullException(nameof(str));
-        }
+            => Result = str ?? throw new ArgumentNullException(nameof(str));
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

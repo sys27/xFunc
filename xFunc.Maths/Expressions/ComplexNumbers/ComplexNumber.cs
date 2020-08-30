@@ -40,10 +40,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// Initializes a new instance of the <see cref="ComplexNumber"/> class.
         /// </summary>
         /// <param name="complex">The complex number.</param>
-        public ComplexNumber(Complex complex)
-        {
-            Value = complex;
-        }
+        public ComplexNumber(Complex complex) => Value = complex;
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="ComplexNumber"/> to <see cref="Complex"/>.

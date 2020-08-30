@@ -20,7 +20,7 @@ using xFunc.Maths.Analyzers;
 namespace xFunc.Maths.Expressions.Matrices
 {
     /// <summary>
-    /// Represets the Transpose function.
+    /// Represents the Transpose function.
     /// </summary>
     public class Transpose : UnaryExpression
     {
@@ -94,7 +94,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Transpose(Argument.Clone());
+        public override IExpression Clone()
+            => new Transpose(Argument.Clone());
     }
 }

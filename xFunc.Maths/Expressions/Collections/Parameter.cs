@@ -81,9 +81,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="value">The value of parameter.</param>
         /// <returns>A constant.</returns>
         public static Parameter CreateConstant(string key, object value)
-        {
-            return new Parameter(key, value, ParameterType.Constant);
-        }
+            => new Parameter(key, value, ParameterType.Constant);
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -108,9 +106,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
-        {
-            return HashCode.Combine(Key);
-        }
+            => HashCode.Combine(Key);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -119,9 +115,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
         public override string ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", Key, value, Type);
-        }
+            => string.Format(CultureInfo.InvariantCulture, "{0}: {1} ({2})", Key, value, Type);
 
         /// <summary>
         /// Compares the current object with another object of the same type.
@@ -133,9 +127,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// Greater than zero - This object is greater than other.
         /// </returns>
         public int CompareTo(Parameter other)
-        {
-            return string.Compare(Key, other?.Key, StringComparison.Ordinal);
-        }
+            => string.Compare(Key, other?.Key, StringComparison.Ordinal);
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
@@ -174,9 +166,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is not equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Parameter left, Parameter right)
-        {
-            return !(left == right);
-        }
+            => !(left == right);
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter.
@@ -213,9 +203,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         public static bool operator >=(Parameter left, Parameter right)
-        {
-            return !(left < right);
-        }
+            => !(left < right);
 
         /// <summary>
         /// Indicates whether <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter.
@@ -224,9 +212,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
         public static bool operator <=(Parameter left, Parameter right)
-        {
-            return !(left > right);
-        }
+            => !(left > right);
 
         /// <summary>
         /// Gets the name of parameter.

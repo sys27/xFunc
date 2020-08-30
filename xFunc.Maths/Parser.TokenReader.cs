@@ -26,7 +26,7 @@ namespace xFunc.Maths
     /// </summary>
     public partial class Parser
     {
-        private class TokenReader : IDisposable
+        private ref struct TokenReader
         {
             private const int BufferSize = 64;
 
@@ -128,12 +128,12 @@ namespace xFunc.Maths
             {
                 scopeCount++;
 
-                return new Scope(this);
+                return new Scope(ref this);
             }
 
             public void Rollback(Scope scope)
             {
-                scope.Rollback(this);
+                scope.Rollback(ref this);
             }
 
             public void Commit()
@@ -198,10 +198,10 @@ namespace xFunc.Maths
             {
                 private readonly int position;
 
-                public Scope(TokenReader tokenReader)
+                public Scope(ref TokenReader tokenReader)
                     => position = tokenReader.readIndex;
 
-                public void Rollback(TokenReader tokenReader)
+                public void Rollback(ref TokenReader tokenReader)
                     => tokenReader.Rollback(position);
             }
         }

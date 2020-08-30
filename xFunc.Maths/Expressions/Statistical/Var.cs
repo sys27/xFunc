@@ -45,8 +45,11 @@ namespace xFunc.Maths.Expressions.Statistical
         private protected override double ExecuteInternal(double[] numbers)
         {
             var avg = numbers.Average();
+            var sum = 0.0;
+            foreach (var number in numbers)
+                sum += Math.Pow(number - avg, 2);
 
-            return numbers.Sum(x => Math.Pow(x - avg, 2)) / (numbers.Length - 1);
+            return sum / (numbers.Length - 1);
         }
 
         /// <summary>

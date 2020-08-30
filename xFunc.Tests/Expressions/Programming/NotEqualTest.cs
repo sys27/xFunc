@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
@@ -35,7 +36,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void NumberVarEqualTest()
         {
-            var parameters = new ParameterCollection()
+            var parameters = new ParameterCollection
             {
                 new Parameter("x", 11),
                 new Parameter("y", 10)
@@ -49,7 +50,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void NumberAndBoolVarEqualTest()
         {
-            var parameters = new ParameterCollection()
+            var parameters = new ParameterCollection
             {
                 new Parameter("x", 10),
                 new Parameter("y", false)
@@ -71,7 +72,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolTrueVarEqualTest()
         {
-            var parameters = new ParameterCollection()
+            var parameters = new ParameterCollection
             {
                 new Parameter("x", true),
                 new Parameter("y", true)
@@ -94,7 +95,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolTrueAndFalseVarEqualTest()
         {
-            var parameters = new ParameterCollection()
+            var parameters = new ParameterCollection
             {
                 new Parameter("x", true),
                 new Parameter("y", false)
@@ -117,7 +118,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolFalseVarEqualTest()
         {
-            var parameters = new ParameterCollection()
+            var parameters = new ParameterCollection
             {
                 new Parameter("x", false),
                 new Parameter("y", false)
@@ -126,6 +127,18 @@ namespace xFunc.Tests.Expressions.Programming
             var result = (bool) equal.Execute(parameters);
 
             Assert.False(result);
+        }
+
+        [Fact]
+        public void AngleNotEqualTest()
+        {
+            var equal = new NotEqual(
+                Angle.Degree(10).AsExpression(),
+                Angle.Degree(12).AsExpression()
+            );
+            var result = (bool)equal.Execute();
+
+            Assert.True(result);
         }
 
         [Fact]

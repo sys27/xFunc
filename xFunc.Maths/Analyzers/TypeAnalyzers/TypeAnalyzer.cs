@@ -96,10 +96,17 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
                 (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Boolean,
                 (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Boolean,
                 (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Boolean,
+                (ResultTypes.AngleNumber, ResultTypes.Undefined) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.AngleNumber) => ResultTypes.Boolean,
+
                 (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Boolean,
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.Boolean,
 
                 (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
                 (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+                (_, ResultTypes.AngleNumber) => ResultTypes.AngleNumber.ThrowForLeft(leftResult),
+                (ResultTypes.AngleNumber, _) => ResultTypes.AngleNumber.ThrowForRight(rightResult),
 
                 _ => throw new ParameterTypeMismatchException(),
             };
@@ -142,6 +149,38 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
 
                 (_, ResultTypes.Boolean) => ResultTypes.Boolean.ThrowForLeft(leftResult),
                 (ResultTypes.Boolean, _) => ResultTypes.Boolean.ThrowForRight(rightResult),
+
+                _ => throw new ParameterTypeMismatchException(),
+            };
+        }
+
+        private ResultTypes AnalyzeEquality(BinaryExpression exp)
+        {
+            var leftResult = exp.Left.Analyze(this);
+            var rightResult = exp.Right.Analyze(this);
+
+            return (leftResult, rightResult) switch
+            {
+                (ResultTypes.Undefined, ResultTypes.Undefined) => ResultTypes.Boolean,
+                (ResultTypes.Number, ResultTypes.Undefined) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.Number) => ResultTypes.Boolean,
+                (ResultTypes.Boolean, ResultTypes.Undefined) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.Boolean) => ResultTypes.Boolean,
+                (ResultTypes.AngleNumber, ResultTypes.Undefined) => ResultTypes.Boolean,
+                (ResultTypes.Undefined, ResultTypes.AngleNumber) => ResultTypes.Boolean,
+
+                (ResultTypes.Number, ResultTypes.Number) => ResultTypes.Boolean,
+                (ResultTypes.Boolean, ResultTypes.Boolean) => ResultTypes.Boolean,
+                (ResultTypes.AngleNumber, ResultTypes.AngleNumber) => ResultTypes.Boolean,
+
+                (_, ResultTypes.Number) => ResultTypes.Number.ThrowForLeft(leftResult),
+                (ResultTypes.Number, _) => ResultTypes.Number.ThrowForRight(rightResult),
+
+                (_, ResultTypes.Boolean) => ResultTypes.Boolean.ThrowForLeft(leftResult),
+                (ResultTypes.Boolean, _) => ResultTypes.Boolean.ThrowForRight(rightResult),
+
+                (_, ResultTypes.AngleNumber) => ResultTypes.AngleNumber.ThrowForLeft(leftResult),
+                (ResultTypes.AngleNumber, _) => ResultTypes.AngleNumber.ThrowForRight(rightResult),
 
                 _ => throw new ParameterTypeMismatchException(),
             };
@@ -840,10 +879,14 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         public ResultTypes Analyze(Sign exp)
         {
             var result = exp.Argument.Analyze(this);
-            if (result == ResultTypes.Undefined || result == ResultTypes.Number)
-                return ResultTypes.Number;
 
-            return ResultTypes.Number.ThrowFor(result);
+            return result switch
+            {
+                ResultTypes.Undefined => ResultTypes.Undefined,
+                ResultTypes.Number => ResultTypes.Number,
+                ResultTypes.AngleNumber => ResultTypes.AngleNumber,
+                _ => ResultTypes.Number.ThrowFor(result),
+            };
         }
 
         #endregion Standard
@@ -1437,7 +1480,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(Equal exp) => AnalyzeLogicalAndBitwise(exp);
+        public ResultTypes Analyze(Equal exp) => AnalyzeEquality(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1525,7 +1568,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public ResultTypes Analyze(NotEqual exp) => AnalyzeLogicalAndBitwise(exp);
+        public ResultTypes Analyze(NotEqual exp) => AnalyzeEquality(exp);
 
         /// <summary>
         /// Analyzes the specified expression.

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions.Programming
 {
@@ -42,14 +43,15 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var left = Left.Execute(parameters);
-            var right = Right.Execute(parameters);
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
-            return (left, right) switch
+            return (leftResult, rightResult) switch
             {
-                (double leftDouble, double rightDouble) => !MathExtensions.Equals(leftDouble, rightDouble),
-                (bool leftBool, bool rightBool) => leftBool != rightBool,
-                _ => throw new ResultIsNotSupportedException(this, left, right),
+                (double left, double right) => !MathExtensions.Equals(left, right),
+                (bool left, bool right) => left != right,
+                (Angle left, Angle right) => left != right,
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }
 
@@ -83,7 +85,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <returns>
         /// Returns the new instance of <see cref="NotEqual" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new NotEqual(Left.Clone(), Right.Clone());
+        public override IExpression Clone()
+            => new NotEqual(Left.Clone(), Right.Clone());
     }
 }

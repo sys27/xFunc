@@ -726,13 +726,19 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSignUndefined()
         {
-            Test(new Sign(new Number(-5)), ResultTypes.Number);
+            Test(new Sign(Variable.X), ResultTypes.Undefined);
         }
 
         [Fact]
         public void TestSignNumber()
         {
             Test(new Sign(new Number(-5)), ResultTypes.Number);
+        }
+
+        [Fact]
+        public void TestSignAngle()
+        {
+            Test(new Sign(Angle.Degree(10).AsExpression()), ResultTypes.AngleNumber);
         }
 
         [Fact]

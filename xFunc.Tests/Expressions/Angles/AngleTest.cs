@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
 using Xunit;
 
@@ -47,6 +46,60 @@ namespace xFunc.Tests.Expressions.Angles
             var angle2 = Angle.Degree(12);
 
             Assert.True(angle1 != angle2);
+        }
+
+        [Fact]
+        public void LessTest()
+        {
+            var angle1 = Angle.Degree(10);
+            var angle2 = Angle.Degree(12);
+
+            Assert.True(angle1 < angle2);
+        }
+
+        [Fact]
+        public void LessFalseTest()
+        {
+            var angle1 = Angle.Degree(20);
+            var angle2 = Angle.Degree(12);
+
+            Assert.False(angle1 < angle2);
+        }
+
+        [Fact]
+        public void GreaterTest()
+        {
+            var angle1 = Angle.Degree(20);
+            var angle2 = Angle.Degree(12);
+
+            Assert.True(angle1 > angle2);
+        }
+
+        [Fact]
+        public void GreaterFalseTest()
+        {
+            var angle1 = Angle.Degree(10);
+            var angle2 = Angle.Degree(12);
+
+            Assert.False(angle1 > angle2);
+        }
+
+        [Fact]
+        public void LessOrEqualTest()
+        {
+            var angle1 = Angle.Degree(10);
+            var angle2 = Angle.Degree(10);
+
+            Assert.True(angle1 <= angle2);
+        }
+
+        [Fact]
+        public void GreaterOrEqualTest()
+        {
+            var angle1 = Angle.Degree(10);
+            var angle2 = Angle.Degree(10);
+
+            Assert.True(angle1 >= angle2);
         }
 
         [Fact]

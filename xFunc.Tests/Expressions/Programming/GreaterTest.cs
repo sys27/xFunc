@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
@@ -26,19 +27,31 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateGreaterTrueTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 463) };
+            var parameters = new ParameterCollection { new Parameter("x", 463) };
             var greaterThen = new GreaterThan(Variable.X, new Number(10));
 
-            Assert.True((bool) greaterThen.Execute(parameters));
+            Assert.True((bool)greaterThen.Execute(parameters));
         }
 
         [Fact]
         public void CalculateGreaterFalseTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var parameters = new ParameterCollection { new Parameter("x", 0) };
             var greaterThan = new GreaterThan(Variable.X, new Number(10));
 
-            Assert.False((bool) greaterThan.Execute(parameters));
+            Assert.False((bool)greaterThan.Execute(parameters));
+        }
+
+        [Fact]
+        public void GreaterAngleTest()
+        {
+            var exp = new GreaterThan(
+                Angle.Degree(12).AsExpression(),
+                Angle.Degree(10).AsExpression()
+            );
+            var result = (bool)exp.Execute();
+
+            Assert.True(result);
         }
 
         [Fact]

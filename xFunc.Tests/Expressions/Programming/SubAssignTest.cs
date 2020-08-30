@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void SubAssignCalc()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var sub = new SubAssign(Variable.X, Number.Two);
             var result = sub.Execute(parameters);
             var expected = 8.0;
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolSubNumberTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var parameters = new ParameterCollection { new Parameter("x", true) };
             var add = new SubAssign(Variable.X, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));

@@ -536,7 +536,6 @@ namespace xFunc.Maths
 
                     tokenReader.Commit();
 
-                    // TODO:
                     return CreateMultiplication(number, rightUnary);
                 }
             }

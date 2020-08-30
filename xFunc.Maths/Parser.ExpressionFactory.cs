@@ -348,8 +348,8 @@ namespace xFunc.Maths
             => new UnaryMinus(operand);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IExpression CreateMultiplication(params IExpression[] arguments)
-            => new Mul(arguments);
+        private IExpression CreateMultiplication(IExpression left, IExpression right)
+            => new Mul(left, right);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private IExpression CreateIf(IExpression condition, IExpression then)

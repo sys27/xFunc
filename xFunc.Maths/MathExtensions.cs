@@ -40,21 +40,14 @@ namespace xFunc.Maths
         {
             if (number < 0)
             {
-                // TODO:
                 if ((BitConverter.DoubleToInt64Bits(power) & 1) == 1)
-                {
                     return -Math.Pow(-number, power);
-                }
 
                 if (power > 0 && power < 1)
-                {
-                    return new Complex(0, Math.Pow(-number, power));
-                }
+                    return Complex.Pow(number, power);
 
                 if (power < 0 && power > -1)
-                {
                     return new Complex(0, -Math.Pow(-number, power));
-                }
             }
 
             return Math.Pow(number, power);
@@ -66,9 +59,7 @@ namespace xFunc.Maths
         /// <param name="d">An angle, measured in radians.</param>
         /// <returns>The cotangent of d.</returns>
         public static double Cot(double d)
-        {
-            return Math.Cos(d) / Math.Sin(d);
-        }
+            => Math.Cos(d) / Math.Sin(d);
 
         /// <summary>
         /// Returns the hyperbolic cotangent of the specified angle.
@@ -76,9 +67,7 @@ namespace xFunc.Maths
         /// <param name="d">An angle, measured in radians.</param>
         /// <returns>The hyperbolic cotangent of value.</returns>
         public static double Coth(double d)
-        {
-            return (Math.Exp(d) + Math.Exp(-d)) / (Math.Exp(d) - Math.Exp(-d));
-        }
+            => (Math.Exp(d) + Math.Exp(-d)) / (Math.Exp(d) - Math.Exp(-d));
 
         /// <summary>
         /// Returns the secant of the specified angle.
@@ -86,9 +75,7 @@ namespace xFunc.Maths
         /// <param name="d">An angle, measured in radians.</param>
         /// <returns>The secant of d.</returns>
         public static double Sec(double d)
-        {
-            return 1 / Math.Cos(d);
-        }
+            => 1 / Math.Cos(d);
 
         /// <summary>
         /// Returns the hyperbolic secant of the specified angle.
@@ -96,9 +83,7 @@ namespace xFunc.Maths
         /// <param name="d">An angle, measured in radians.</param>
         /// <returns>The hyperbolic secant of value.</returns>
         public static double Sech(double d)
-        {
-            return 2 / (Math.Exp(d) + Math.Exp(-d));
-        }
+            => 2 / (Math.Exp(d) + Math.Exp(-d));
 
         /// <summary>
         /// Returns the cosecant of the specified angle.
@@ -106,9 +91,7 @@ namespace xFunc.Maths
         /// <param name="d">An angle, measured in radians.</param>
         /// <returns>The cosecant of d.</returns>
         public static double Csc(double d)
-        {
-            return 1 / Math.Sin(d);
-        }
+            => 1 / Math.Sin(d);
 
         /// <summary>
         /// Returns the hyperbolic cosecant of the specified angle.
@@ -116,9 +99,7 @@ namespace xFunc.Maths
         /// <param name="d">An angle, measured in radians.</param>
         /// <returns>The hyperbolic cosecant of value.</returns>
         public static double Csch(double d)
-        {
-            return 2 / (Math.Exp(d) - Math.Exp(-d));
-        }
+            => 2 / (Math.Exp(d) - Math.Exp(-d));
 
         /// <summary>
         /// Returns the angle whose hyperbolic sine is the specified number.
@@ -126,9 +107,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a hyperbolic sine.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Asinh(double d)
-        {
-            return Math.Log(d + Math.Sqrt(d * d + 1));
-        }
+            => Math.Log(d + Math.Sqrt(d * d + 1));
 
         /// <summary>
         /// Returns the angle whose hyperbolic cosine is the specified number.
@@ -136,9 +115,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a hyperbolic cosine.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Acosh(double d)
-        {
-            return Math.Log(d + Math.Sqrt(d + 1) * Math.Sqrt(d - 1));
-        }
+            => Math.Log(d + Math.Sqrt(d + 1) * Math.Sqrt(d - 1));
 
         /// <summary>
         /// Returns the angle whose hyperbolic tangent is the specified number.
@@ -146,9 +123,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a hyperbolic tangent.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Atanh(double d)
-        {
-            return Math.Log((1 + d) / (1 - d)) / 2;
-        }
+            => Math.Log((1 + d) / (1 - d)) / 2;
 
         /// <summary>
         /// Returns the angle whose cotangent is the specified number.
@@ -156,9 +131,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a cotangent.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Acot(double d)
-        {
-            return Math.PI / 2 - Math.Atan(d);
-        }
+            => Math.PI / 2 - Math.Atan(d);
 
         /// <summary>
         /// Returns the angle whose hyperbolic cotangent is the specified number.
@@ -166,9 +139,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a hyperbolic cotangent.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Acoth(double d)
-        {
-            return Math.Log((d + 1) / (d - 1)) / 2;
-        }
+            => Math.Log((d + 1) / (d - 1)) / 2;
 
         /// <summary>
         /// Returns the angle whose secant is the specified number.
@@ -176,9 +147,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a secant.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Asec(double d)
-        {
-            return Math.Acos(1 / d);
-        }
+            => Math.Acos(1 / d);
 
         /// <summary>
         /// Returns the angle whose hyperbolic secant is the specified number.
@@ -197,9 +166,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a hyperbolic cosecant.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Acsc(double d)
-        {
-            return Math.Asin(1 / d);
-        }
+            => Math.Asin(1 / d);
 
         /// <summary>
         /// Returns the angle whose hyperbolic cosecant is the specified number.
@@ -207,9 +174,7 @@ namespace xFunc.Maths
         /// <param name="d">A number representing a hyperbolic cosecant.</param>
         /// <returns>An angle, measured in radians.</returns>
         public static double Acsch(double d)
-        {
-            return Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
-        }
+            => Math.Log(1 / d + Math.Sqrt(1 / d * d + 1));
 
         /// <summary>
         /// Computes the polynomial greatest common divisor.
@@ -219,7 +184,7 @@ namespace xFunc.Maths
         /// <returns>The greatest common divisor.</returns>
         public static double GCD(double a, double b)
         {
-            while (!(b.Equals(0) || Math.Abs(b) < 1E-14))
+            while (!Equals(b, 0.0))
                 b = a % (a = b);
 
             return a;
@@ -232,11 +197,7 @@ namespace xFunc.Maths
         /// <param name="b">The second numbers.</param>
         /// <returns>The least common multiple.</returns>
         public static double LCM(double a, double b)
-        {
-            var numerator = Math.Abs(a * b);
-
-            return numerator / GCD(a, b);
-        }
+            => Math.Abs(a * b) / GCD(a, b);
 
         /// <summary>
         /// Converts <paramref name="number"/> to the new numeral system.
@@ -251,7 +212,7 @@ namespace xFunc.Maths
                 NumeralSystem.Decimal => number.ToString(CultureInfo.InvariantCulture),
                 NumeralSystem.Binary => "0b" + Convert.ToString(number, 2),
                 NumeralSystem.Octal => "0" + Convert.ToString(number, 8),
-                NumeralSystem.Hexidecimal => "0x" + Convert.ToString(number, 16),
+                NumeralSystem.Hexadecimal => "0x" + Convert.ToString(number, 16),
                 _ => null,
             };
         }
@@ -266,7 +227,7 @@ namespace xFunc.Maths
             if (n < 0)
                 return double.NaN;
 
-            double result = 1;
+            var result = 1.0;
 
             for (var i = n; i > 0; i--)
                 result *= i;
@@ -305,8 +266,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="value">The double value.</param>
         /// <returns>true if <paramref name="value"/> is an integer; otherwise, false.</returns>
-        public static bool IsInt(this double value) =>
-            Math.Abs(value % 1) <= Epsilon;
+        public static bool IsInt(this double value)
+            => Math.Abs(value % 1) <= Epsilon;
 
         /// <summary>
         /// Calculates AND operation between two double values.

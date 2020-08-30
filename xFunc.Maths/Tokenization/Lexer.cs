@@ -97,7 +97,7 @@ namespace xFunc.Maths.Tokenization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool Compare(ReadOnlySpan<char> id, string str) =>
-            id.Equals(str, StringComparison.OrdinalIgnoreCase);
+        private bool Compare(ReadOnlySpan<char> id, string str)
+            => id.Equals(str, StringComparison.OrdinalIgnoreCase);
     }
 }

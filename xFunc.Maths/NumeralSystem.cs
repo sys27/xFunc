@@ -38,8 +38,8 @@ namespace xFunc.Maths
 #pragma warning restore CA1720
 
         /// <summary>
-        /// The hexidecimal numeral system.
+        /// The hexadecimal numeral system.
         /// </summary>
-        Hexidecimal = 16,
+        Hexadecimal = 16,
     }
 }

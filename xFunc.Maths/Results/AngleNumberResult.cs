@@ -26,10 +26,7 @@ namespace xFunc.Maths.Results
         /// Initializes a new instance of the <see cref="AngleNumberResult"/> class.
         /// </summary>
         /// <param name="value">The numerical representation of result.</param>
-        public AngleNumberResult(Angle value)
-        {
-            Result = value;
-        }
+        public AngleNumberResult(Angle value) => Result = value;
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

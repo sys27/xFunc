@@ -61,7 +61,7 @@ limitations under the License. -->
                         <ComboBoxItem Content="{x:Static res:Resource.SettingsBin}" Tag="{x:Static maths:NumeralSystem.Binary}" />
                         <ComboBoxItem Content="{x:Static res:Resource.SettingsOct}" Tag="{x:Static maths:NumeralSystem.Octal}" />
                         <ComboBoxItem Content="{x:Static res:Resource.SettingsDec}" Tag="{x:Static maths:NumeralSystem.Decimal}" />
-                        <ComboBoxItem Content="{x:Static res:Resource.SettingsHex}" Tag="{x:Static maths:NumeralSystem.Hexidecimal}" />
+                        <ComboBoxItem Content="{x:Static res:Resource.SettingsHex}" Tag="{x:Static maths:NumeralSystem.Hexadecimal}" />
                     </ComboBox>
                 </Grid>
             </GroupBox.Content>

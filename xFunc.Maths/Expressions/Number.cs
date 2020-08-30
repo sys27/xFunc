@@ -68,10 +68,7 @@ namespace xFunc.Maths.Expressions
         /// Deconstructs <see cref="Number"/> to <see cref="double"/>.
         /// </summary>
         /// <param name="number">The number.</param>
-        public void Deconstruct(out double number)
-        {
-            number = Value;
-        }
+        public void Deconstruct(out double number) => number = Value;
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.

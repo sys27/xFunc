@@ -24,7 +24,7 @@ using xFunc.Maths.Resources;
 namespace xFunc.Maths.Expressions.Collections
 {
     /// <summary>
-    /// Strongly typed dictionaty that contains user-defined functions.
+    /// Strongly typed dictionary that contains user-defined functions.
     /// </summary>
     [Serializable]
     public class FunctionCollection : Dictionary<UserFunction, IExpression>, INotifyCollectionChanged

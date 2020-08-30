@@ -27,7 +27,7 @@ using xFunc.Maths.Tokenization.Tokens;
 namespace xFunc.Maths
 {
     /// <summary>
-    /// The main point of this library. Bring together all features.
+    /// The main point of this library. Brings together all features.
     /// </summary>
     public class Processor
     {
@@ -159,8 +159,8 @@ namespace xFunc.Maths
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="function">The function.</param>
         /// <returns>The result of solving.</returns>
-        public TResult Solve<TResult>(string function) where TResult : IResult =>
-            (TResult)Solve(function);
+        public TResult Solve<TResult>(string function) where TResult : IResult
+            => (TResult)Solve(function);
 
         /// <summary>
         /// Solves the specified function.
@@ -169,8 +169,8 @@ namespace xFunc.Maths
         /// <param name="function">The function.</param>
         /// <param name="simplify">if set to <c>true</c> parser will simplify expression.</param>
         /// <returns>The result of solving.</returns>
-        public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult =>
-            (TResult)Solve(function, simplify);
+        public TResult Solve<TResult>(string function, bool simplify) where TResult : IResult
+            => (TResult)Solve(function, simplify);
 
         /// <summary>
         /// Simplifies the <paramref name="expression"/>.
@@ -190,8 +190,8 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>Returns the derivative.</returns>
-        public IExpression Differentiate(IExpression expression) =>
-            Differentiate(expression, Variable.X);
+        public IExpression Differentiate(IExpression expression)
+            => Differentiate(expression, Variable.X);
 
         /// <summary>
         /// Differentiates the specified expression.
@@ -199,8 +199,8 @@ namespace xFunc.Maths
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         /// <returns>Returns the derivative.</returns>
-        public IExpression Differentiate(IExpression expression, Variable variable) =>
-            Differentiate(expression, variable, new ExpressionParameters());
+        public IExpression Differentiate(IExpression expression, Variable variable)
+            => Differentiate(expression, variable, new ExpressionParameters());
 
         /// <summary>
         /// Differentiates the specified expression.
@@ -231,16 +231,16 @@ namespace xFunc.Maths
         /// <returns>The parsed expression.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         /// <exception cref="ParseException">Error while parsing.</exception>
-        public IExpression Parse(string function) =>
-            parser.Parse(lexer.Tokenize(function));
+        public IExpression Parse(string function)
+            => parser.Parse(lexer.Tokenize(function));
 
         /// <summary>
         /// Converts the string into a sequence of tokens.
         /// </summary>
         /// <param name="function">The string that contains the functions and operators.</param>
         /// <returns>The sequence of tokens.</returns>
-        public IEnumerable<IToken> Tokenize(string function) =>
-            lexer.Tokenize(function);
+        public IEnumerable<IToken> Tokenize(string function)
+            => lexer.Tokenize(function);
 
         /// <summary>
         /// Gets expression parameters object.

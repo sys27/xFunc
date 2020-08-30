@@ -192,14 +192,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public IExpression Left
         {
-            get
-            {
-                return left;
-            }
-            set
-            {
-                left = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => left;
+            set => left = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -207,14 +201,8 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         public IExpression Right
         {
-            get
-            {
-                return right;
-            }
-            set
-            {
-                right = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => right;
+            set => right = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

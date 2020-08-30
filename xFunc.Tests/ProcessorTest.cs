@@ -70,7 +70,7 @@ namespace xFunc.Tests
                 simplifier.Object,
                 differentiator.Object)
             {
-                NumeralSystem = NumeralSystem.Hexidecimal
+                NumeralSystem = NumeralSystem.Hexadecimal
             };
             var result = processor.Solve<StringResult>(strExp);
 

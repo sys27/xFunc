@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -55,18 +54,19 @@ namespace xFunc.Maths.Expressions
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            return Arguments
-                .Select(item =>
-                {
-                    var result = item.Execute(parameters);
+            var lcm = 1.0;
+            foreach (var argument in Arguments)
+            {
+                var result = argument.Execute(parameters);
 
-                    return result switch
-                    {
-                        double number => number,
-                        _ => throw new ResultIsNotSupportedException(this, result),
-                    };
-                })
-                .Aggregate(MathExtensions.LCM);
+                lcm = result switch
+                {
+                    double number => MathExtensions.LCM(lcm, number),
+                    _ => throw new ResultIsNotSupportedException(this, result),
+                };
+            }
+
+            return lcm;
         }
 
         /// <summary>

@@ -32,10 +32,7 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Undefine"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
-        public Undefine(IExpression key)
-        {
-            Key = key;
-        }
+        public Undefine(IExpression key) => Key = key;
 
         /// <summary>
         /// Determines whether the specified <see cref="object" />, is equal to this instance.

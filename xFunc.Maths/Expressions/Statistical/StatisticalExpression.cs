@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using System.Linq;
 using xFunc.Maths.Expressions.Matrices;
 
 namespace xFunc.Maths.Expressions.Statistical
@@ -53,23 +52,26 @@ namespace xFunc.Maths.Expressions.Statistical
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters parameters)
         {
-            var data = Arguments;
+            var (data, size) = (Arguments, ParametersCount);
 
             if (ParametersCount == 1)
             {
                 var result = this[0].Execute(parameters);
                 if (result is Vector vector)
-                    data = vector.Arguments;
+                    (data, size) = (vector.Arguments, vector.ParametersCount);
             }
 
-            var calculated = data.Select(exp =>
+            var calculated = new double[size];
+            var i = 0;
+            foreach (var expression in data)
             {
-                var result = exp.Execute(parameters);
-                if (result is double doubleResult)
-                    return doubleResult;
+                var result = expression.Execute(parameters);
+                if (!(result is double doubleResult))
+                    throw new ResultIsNotSupportedException(this, result);
 
-                throw new ResultIsNotSupportedException(this, result);
-            }).ToArray();
+                calculated[i] = doubleResult;
+                i++;
+            }
 
             return ExecuteInternal(calculated);
         }

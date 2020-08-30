@@ -156,14 +156,8 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>The variable.</value>
         public Variable Variable
         {
-            get
-            {
-                return variable;
-            }
-            set
-            {
-                variable = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get => variable;
+            set => variable = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

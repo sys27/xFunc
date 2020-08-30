@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
@@ -48,6 +49,18 @@ namespace xFunc.Tests.Expressions.Programming
             var lessOrEqual = new LessOrEqual(Variable.X, new Number(10));
 
             Assert.False((bool) lessOrEqual.Execute(parameters));
+        }
+
+        [Fact]
+        public void LessOrEqualAngleTest()
+        {
+            var exp = new LessOrEqual(
+                Angle.Degree(10).AsExpression(),
+                Angle.Degree(12).AsExpression()
+            );
+            var result = (bool)exp.Execute();
+
+            Assert.True(result);
         }
 
         [Fact]

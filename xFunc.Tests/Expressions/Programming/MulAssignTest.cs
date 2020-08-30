@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void MulAssignCalc()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var mul = new MulAssign(Variable.X, Number.Two);
             var result = mul.Execute(parameters);
             var expected = 20.0;
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolMulNumberTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var parameters = new ParameterCollection { new Parameter("x", true) };
             var mul = new MulAssign(Variable.X, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => mul.Execute(parameters));

@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using xFunc.Maths.Expressions.Programming;
@@ -26,19 +27,31 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateLessTrueTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var parameters = new ParameterCollection { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
 
-            Assert.True((bool) lessThen.Execute(parameters));
+            Assert.True((bool)lessThen.Execute(parameters));
         }
 
         [Fact]
         public void CalculateLessFalseTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var lessThen = new LessThan(Variable.X, new Number(10));
 
-            Assert.False((bool) lessThen.Execute(parameters));
+            Assert.False((bool)lessThen.Execute(parameters));
+        }
+
+        [Fact]
+        public void LessAngleTest()
+        {
+            var exp = new LessThan(
+                Angle.Degree(10).AsExpression(),
+                Angle.Degree(12).AsExpression()
+            );
+            var result = (bool)exp.Execute();
+
+            Assert.True(result);
         }
 
         [Fact]

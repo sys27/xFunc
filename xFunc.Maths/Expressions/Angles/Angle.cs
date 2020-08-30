@@ -21,7 +21,7 @@ namespace xFunc.Maths.Expressions.Angles
     /// <summary>
     /// Represents a number with angle measurement unit.
     /// </summary>
-    public readonly struct Angle : IEquatable<Angle>
+    public readonly struct Angle : IEquatable<Angle>, IComparable<Angle>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Angle"/> struct.
@@ -75,6 +75,25 @@ namespace xFunc.Maths.Expressions.Angles
             => obj is Angle other && Equals(other);
 
         /// <summary>
+        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+        /// </summary>
+        /// <param name="other">An object to compare with this instance.</param>
+        /// <returns>
+        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings:
+        /// Less than zero - This object is less than the other parameter.
+        /// Zero - This object is equal to other.
+        /// Greater than zero - This object is greater than other.
+        /// </returns>
+        public int CompareTo(Angle other)
+        {
+            var valueComparison = Value.CompareTo(other.Value);
+            if (valueComparison != 0)
+                return valueComparison;
+
+            return Unit.CompareTo(other.Unit);
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -114,6 +133,42 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns><c>true</c> if <paramref name="left"/> is not equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Angle left, Angle right)
             => !left.Equals(right);
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left angle.</param>
+        /// <param name="right">The right angle.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator <(Angle left, Angle right)
+            => left.CompareTo(right) < 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left angle.</param>
+        /// <param name="right">The right angle.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator >(Angle left, Angle right)
+            => left.CompareTo(right) > 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left angle.</param>
+        /// <param name="right">The right angle.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator <=(Angle left, Angle right)
+            => left.CompareTo(right) <= 0;
+
+        /// <summary>
+        /// Indicates whether <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter.
+        /// </summary>
+        /// <param name="left">The left angle.</param>
+        /// <param name="right">The right angle.</param>
+        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
+        public static bool operator >=(Angle left, Angle right)
+            => left.CompareTo(right) >= 0;
 
         /// <summary>
         /// Adds two objects of <see cref="Angle"/>.
@@ -402,5 +457,10 @@ namespace xFunc.Maths.Expressions.Angles
         /// Gets a unit.
         /// </summary>
         public AngleUnit Unit { get; }
+
+        /// <summary>
+        /// Gets an integer that indicates the sign of a double-precision floating-point number.
+        /// </summary>
+        public int Sign => Math.Sign(Value);
     }
 }

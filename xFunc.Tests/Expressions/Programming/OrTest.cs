@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateOrTrueTest1()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var parameters = new ParameterCollection { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(10));
             var greaterThen = new GreaterThan(Variable.X, new Number(-10));
             var or = new ConditionalOr(lessThen, greaterThen);
@@ -36,7 +36,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void CalculateOrTrueTest2()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 0) };
+            var parameters = new ParameterCollection { new Parameter("x", 0) };
             var lessThen = new LessThan(Variable.X, new Number(-10));
             var greaterThen = new GreaterThan(Variable.X, new Number(-10));
             var or = new ConditionalOr(lessThen, greaterThen);

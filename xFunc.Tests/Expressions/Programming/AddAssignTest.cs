@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void AddAssignCalc()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var add = new AddAssign(Variable.X, Number.Two);
             var result = add.Execute(parameters);
             var expected = 12.0;
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void BoolAddNumberTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var parameters = new ParameterCollection { new Parameter("x", true) };
             var add = new AddAssign(Variable.X, Number.Two);
 
             Assert.Throws<ResultIsNotSupportedException>(() => add.Execute(parameters));

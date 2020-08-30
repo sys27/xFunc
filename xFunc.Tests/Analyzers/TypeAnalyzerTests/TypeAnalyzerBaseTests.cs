@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
@@ -49,5 +50,11 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             Assert.Throws<DifferentParameterTypeMismatchException>(() => exp.Analyze(analyzer));
         }
+
+        protected IExpression Create(Type type, IExpression left, IExpression right)
+            => (IExpression)Activator.CreateInstance(type, left, right);
+
+        protected BinaryExpression CreateBinary(Type type, IExpression left, IExpression right)
+            => (BinaryExpression)Activator.CreateInstance(type, left, right);
     }
 }

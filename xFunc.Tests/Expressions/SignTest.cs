@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using xFunc.Maths.Expressions;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.LogicalAndBitwise;
 using Xunit;
 
@@ -27,7 +28,7 @@ namespace xFunc.Tests.Expressions
             var exp = new Sign(new Number(5));
             var result = exp.Execute();
 
-            Assert.Equal(1, result);
+            Assert.Equal(1.0, result);
         }
 
         [Fact]
@@ -36,7 +37,16 @@ namespace xFunc.Tests.Expressions
             var exp = new Sign(new Number(-5));
             var result = exp.Execute();
 
-            Assert.Equal(-1, result);
+            Assert.Equal(-1.0, result);
+        }
+
+        [Fact]
+        public void AngleSignTest()
+        {
+            var exp = new Sign(Angle.Degree(10).AsExpression());
+            var result = exp.Execute();
+
+            Assert.Equal(1.0, result);
         }
 
         [Fact]

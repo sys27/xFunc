@@ -27,7 +27,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void DecCalcTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", 10) };
+            var parameters = new ParameterCollection { new Parameter("x", 10) };
             var dec = new Dec(Variable.X);
             var result = (double)dec.Execute(parameters);
 
@@ -44,7 +44,7 @@ namespace xFunc.Tests.Expressions.Programming
         [Fact]
         public void DecBoolTest()
         {
-            var parameters = new ParameterCollection() { new Parameter("x", true) };
+            var parameters = new ParameterCollection { new Parameter("x", true) };
             var dec = new Dec(Variable.X);
 
             Assert.Throws<ResultIsNotSupportedException>(() => dec.Execute(parameters));

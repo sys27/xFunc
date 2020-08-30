@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using xFunc.Maths.Analyzers;
+using xFunc.Maths.Expressions.Angles;
 
 namespace xFunc.Maths.Expressions
 {
@@ -55,10 +56,13 @@ namespace xFunc.Maths.Expressions
         public override object Execute(ExpressionParameters parameters)
         {
             var result = Argument.Execute(parameters);
-            if (result is double number)
-                return Math.Sign(number);
 
-            throw new ResultIsNotSupportedException(this, result);
+            return result switch
+            {
+                double number => (double)Math.Sign(number),
+                Angle angle => (double)angle.Sign,
+                _ => throw new ResultIsNotSupportedException(this, result),
+            };
         }
 
         /// <summary>
@@ -89,7 +93,7 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance of the <see cref="Sqrt"/> class.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Sign(Argument.Clone());
+        public override IExpression Clone()
+            => new Sign(Argument.Clone());
     }
 }

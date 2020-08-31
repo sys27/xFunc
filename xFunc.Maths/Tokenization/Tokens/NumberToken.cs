@@ -28,17 +28,14 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Initializes a new instance of the <see cref="NumberToken"/> class.
         /// </summary>
         /// <param name="number">A number.</param>
-        public NumberToken(double number)
-        {
-            Number = number;
-        }
+        public NumberToken(double number) => Number = number;
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj == null)
                 return false;

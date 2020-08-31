@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var gcd = 0.0;
             foreach (var argument in Arguments)

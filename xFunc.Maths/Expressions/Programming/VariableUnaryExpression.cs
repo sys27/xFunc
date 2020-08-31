@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions.Programming
     /// </summary>
     public abstract class VariableUnaryExpression : IExpression
     {
-        private Variable variable;
+        private Variable variable = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableUnaryExpression"/> class.
@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters parameters);
+        public abstract object Execute(ExpressionParameters? parameters);
 
         /// <summary>
         /// Analyzes the current expression.

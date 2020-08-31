@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the execution.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
 

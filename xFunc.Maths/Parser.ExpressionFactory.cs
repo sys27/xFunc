@@ -316,12 +316,12 @@ namespace xFunc.Maths
             => new Angle(numberToken.Number, unit).AsExpression();
 
         private IExpression CreateComplexNumber(
-            OperatorToken magnitudeSign,
+            OperatorToken? magnitudeSign,
             NumberToken magnitude,
-            OperatorToken phaseSign,
+            OperatorToken? phaseSign,
             NumberToken phase)
         {
-            static int GetSign(OperatorToken token)
+            static int GetSign(OperatorToken? token)
                 => token == OperatorToken.Minus ? -1 : 1;
 
             var magnitudeNumber = magnitude.Number * GetSign(magnitudeSign);

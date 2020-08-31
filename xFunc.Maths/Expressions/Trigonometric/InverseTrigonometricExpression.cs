@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
 

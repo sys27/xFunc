@@ -46,7 +46,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="variable">The value to convert.</param>
         /// <returns>An object that contains the converted value.</returns>
-        public static implicit operator string(Variable variable)
+        public static implicit operator string(Variable? variable)
             => variable?.Name ?? throw new ArgumentNullException(nameof(variable));
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public bool Equals(Variable other)
+        public bool Equals(Variable? other)
         {
             if (ReferenceEquals(null, other))
                 return false;
@@ -84,7 +84,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;
@@ -136,7 +136,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="parameters">Collection of variables.</param>
         /// <returns>A value of this variable.</returns>
-        public object Execute(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));

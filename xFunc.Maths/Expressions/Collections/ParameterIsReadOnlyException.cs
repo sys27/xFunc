@@ -68,7 +68,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="message">The message.</param>
         /// <param name="parameterName">The parameter name.</param>
         /// <param name="inner">The inner.</param>
-        public ParameterIsReadOnlyException(string message, string parameterName, Exception inner)
+        public ParameterIsReadOnlyException(string message, string parameterName, Exception? inner)
            : base(message, inner)
         {
             ParameterName = parameterName;
@@ -87,6 +87,6 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Gets the parameter name.
         /// </summary>
-        public string ParameterName { get; }
+        public string? ParameterName { get; }
     }
 }

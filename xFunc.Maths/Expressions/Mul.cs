@@ -56,7 +56,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="System.NotSupportedException">The multiplication of two vectors is not allowed.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);

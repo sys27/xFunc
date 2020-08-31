@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -54,7 +53,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
 

@@ -58,7 +58,7 @@ namespace xFunc.Maths.Tokenization
             }
         }
 
-        private IToken SkipWhiteSpaces(ref ReadOnlyMemory<char> function)
+        private IToken? SkipWhiteSpaces(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 
@@ -72,7 +72,7 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken CreateSymbol(ref ReadOnlyMemory<char> function)
+        private IToken? CreateSymbol(ref ReadOnlyMemory<char> function)
         {
             var symbol = function.Span[0] switch
             {

@@ -20,7 +20,7 @@ using xFunc.Maths.Analyzers;
 namespace xFunc.Maths.Expressions
 {
     /// <summary>
-    /// Represents the Deriv function.
+    /// Represents the 'deriv' function.
     /// </summary>
     public class Derivative : DifferentParametersExpression
     {
@@ -30,7 +30,10 @@ namespace xFunc.Maths.Expressions
         /// <param name="differentiator">The differentiator.</param>
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The expression.</param>
-        public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression)
+        public Derivative(
+            IDifferentiator differentiator,
+            ISimplifier simplifier,
+            IExpression expression)
             : this(differentiator, simplifier, new[] { expression })
         {
         }
@@ -42,7 +45,11 @@ namespace xFunc.Maths.Expressions
         /// <param name="simplifier">The simplifier.</param>
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
-        public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression, Variable variable)
+        public Derivative(
+            IDifferentiator differentiator,
+            ISimplifier simplifier,
+            IExpression expression,
+            Variable variable)
             : this(differentiator, simplifier, new[] { expression, variable })
         {
         }
@@ -55,7 +62,12 @@ namespace xFunc.Maths.Expressions
         /// <param name="expression">The expression.</param>
         /// <param name="variable">The variable.</param>
         /// <param name="point">The point of derivation.</param>
-        public Derivative(IDifferentiator differentiator, ISimplifier simplifier, IExpression expression, Variable variable, Number point)
+        public Derivative(
+            IDifferentiator differentiator,
+            ISimplifier simplifier,
+            IExpression expression,
+            Variable variable,
+            Number point)
             : this(differentiator, simplifier, new[] { expression, variable, point })
         {
         }
@@ -87,27 +99,22 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var variable = Variable;
             var context = new DifferentiatorContext(parameters, variable);
             var diff = Analyze(Differentiator, context);
 
             var point = DerivativePoint;
-            if (variable != null && point != null)
+            if (point != null)
             {
-                if (parameters == null)
-                    parameters = new ExpressionParameters();
-
+                parameters ??= new ExpressionParameters();
                 parameters.Variables[variable.Name] = point.Value;
 
                 return diff.Execute(parameters);
             }
 
-            if (Simplifier != null)
-                return diff.Analyze(Simplifier);
-
-            return diff;
+            return diff.Analyze(Simplifier);
         }
 
         /// <summary>
@@ -138,8 +145,8 @@ namespace xFunc.Maths.Expressions
         /// Clones this instance.
         /// </summary>
         /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Derivative(Differentiator, Simplifier, CloneArguments());
+        public override IExpression Clone()
+            => new Derivative(Differentiator, Simplifier, CloneArguments());
 
         /// <summary>
         /// Gets or sets the expression.
@@ -167,7 +174,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The derivative point.
         /// </value>
-        public Number DerivativePoint => ParametersCount >= 3 ? (Number)this[2] : null;
+        public Number? DerivativePoint => ParametersCount >= 3 ? (Number)this[2] : null;
 
         /// <summary>
         /// Gets the simplifier.

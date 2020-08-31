@@ -25,15 +25,15 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     public partial class Lexer
     {
-        private IToken CreateNumberToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateNumberToken(ref ReadOnlyMemory<char> function)
         {
             return CreateBinToken(ref function) ??
                    CreateHexToken(ref function) ??
                    CreateOctToken(ref function) ??
-                   CreateToken(ref function);
+                   CreateDecToken(ref function);
         }
 
-        private IToken CreateBinToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateBinToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 
@@ -59,7 +59,7 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken CreateHexToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateHexToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 
@@ -85,7 +85,7 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken CreateOctToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateOctToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Tokenization
             return null;
         }
 
-        private IToken CreateToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateDecToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 

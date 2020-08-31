@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public class Undefine : IExpression
     {
-        private IExpression key;
+        private IExpression key = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Undefine"/> class.
@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -88,7 +88,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
-        public object Execute(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));

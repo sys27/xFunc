@@ -60,11 +60,11 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is UserFunction exp &&
-                Function == exp.Function &&
-                ParametersCount == exp.ParametersCount;
+                   Function == exp.Function &&
+                   ParametersCount == exp.ParametersCount;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="parameters"/> is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -119,10 +119,8 @@ namespace xFunc.Maths.Expressions
 
             var newParameters = new ParameterCollection(parameters.Variables.Collection);
             for (var i = 0; i < ParametersCount; i++)
-            {
-                var arg = func.arguments[i] as Variable;
-                newParameters[arg.Name] = (double)arguments[i].Execute(parameters);
-            }
+                if (func.arguments[i] is Variable arg)
+                    newParameters[arg.Name] = (double)arguments[i].Execute(parameters);
 
             var expParam = new ExpressionParameters(newParameters, parameters.Functions);
             return parameters.Functions[this].Execute(expParam);

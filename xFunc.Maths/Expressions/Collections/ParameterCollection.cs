@@ -35,7 +35,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Occurs when the collection changes.
         /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
@@ -194,11 +194,11 @@ namespace xFunc.Maths.Expressions.Collections
         private Parameter GetParameterByKey(string key)
         {
             var item = collection.FirstOrDefault(p => p.Key == key);
-            if (item != null)
+            if (!(item is null))
                 return item;
 
             var param = constants.FirstOrDefault(p => p.Key == key);
-            if (param != null)
+            if (!(param is null))
                 return param;
 
             throw new KeyNotFoundException(string.Format(CultureInfo.InvariantCulture, Resource.VariableNotFoundExceptionError, key));
@@ -227,9 +227,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="key">The name of variable.</param>
         public void Add(string key)
-        {
-            Add(new Parameter(key, 0));
-        }
+            => Add(new Parameter(key, 0));
 
         /// <summary>
         /// Adds the specified element to a set.
@@ -237,9 +235,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of variable.</param>
         /// <param name="value">The value of variable.</param>
         public void Add(string key, object value)
-        {
-            Add(new Parameter(key, value));
-        }
+            => Add(new Parameter(key, value));
 
         /// <summary>
         /// Removes the specified element from this object.
@@ -288,9 +284,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool Contains(Parameter param)
-        {
-            return collection.Contains(param) || constants.Contains(param);
-        }
+            => collection.Contains(param) || constants.Contains(param);
 
         /// <summary>
         /// Determines whether an object contains the specified element.
@@ -298,9 +292,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="param">The element.</param>
         /// <returns><c>true</c> if the object contains the specified element; otherwise, <c>false</c>.</returns>
         public bool ContainsInConstants(Parameter param)
-        {
-            return constants.Contains(param);
-        }
+            => constants.Contains(param);
 
         /// <summary>
         /// Determines whether an object contains the specified key.
@@ -318,9 +310,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="key">The name of variable.</param>
         /// <returns><c>true</c> if the object contains the specified key; otherwise, <c>false</c>.</returns>
         public bool ContainsKeyInConstants(string key)
-        {
-            return constants.FirstOrDefault(p => p.Key == key) != null;
-        }
+            => constants.FirstOrDefault(p => p.Key == key) != null;
 
         /// <summary>
         /// Gets the constants.

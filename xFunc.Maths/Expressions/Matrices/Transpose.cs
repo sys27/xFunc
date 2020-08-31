@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         /// <exception cref="NotSupportedException">Argument is not <see cref="Matrix"/> or <see cref="Vector"/>.</exception>
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
 

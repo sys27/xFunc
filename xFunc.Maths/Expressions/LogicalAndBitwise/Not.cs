@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var arg = Argument.Execute(parameters);
 

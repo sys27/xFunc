@@ -43,17 +43,14 @@ namespace xFunc.Maths.Expressions
         /// Initializes a new instance of the <see cref="Number"/> class.
         /// </summary>
         /// <param name="number">A number.</param>
-        public Number(double number)
-        {
-            Value = number;
-        }
+        public Number(double number) => Value = number;
 
         /// <summary>
         /// Defines an implicit conversion of a <see cref="Number"/> to a double value.
         /// </summary>
         /// <param name="number">The value to convert to a double.</param>
         /// <returns>An object that contains the value of the <paramref name="number"/> parameter.</returns>
-        public static implicit operator double(Number number)
+        public static implicit operator double(Number? number)
             => number?.Value ?? throw new ArgumentNullException(nameof(number));
 
         /// <summary>
@@ -75,7 +72,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
-        public bool Equals(Number other)
+        public bool Equals(Number? other)
         {
             if (ReferenceEquals(null, other))
                 return false;
@@ -91,7 +88,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;
@@ -145,7 +142,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the execution.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        public object Execute(ExpressionParameters parameters) => Value;
+        public object Execute(ExpressionParameters? parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.

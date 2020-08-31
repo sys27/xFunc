@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using System.Numerics;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions
@@ -52,7 +51,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var leftResult = Left.Execute(parameters);
             var rightResult = Right.Execute(parameters);

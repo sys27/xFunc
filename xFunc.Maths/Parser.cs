@@ -80,7 +80,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IExpression Statement(ref TokenReader tokenReader)
+        private IExpression? Statement(ref TokenReader tokenReader)
         {
             // TODO: to expressions?
             return UnaryAssign(ref tokenReader) ??
@@ -94,7 +94,7 @@ namespace xFunc.Maths
                    Expression(ref tokenReader);
         }
 
-        private IExpression UnaryAssign(ref TokenReader tokenReader)
+        private IExpression? UnaryAssign(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -116,7 +116,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression BinaryAssign(ref TokenReader tokenReader)
+        private IExpression? BinaryAssign(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -147,13 +147,13 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression AssignmentKey(ref TokenReader tokenReader)
+        private IExpression? AssignmentKey(ref TokenReader tokenReader)
         {
             return FunctionDeclaration(ref tokenReader) ??
                    Variable(ref tokenReader);
         }
 
-        private IExpression Assign(ref TokenReader tokenReader)
+        private IExpression? Assign(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -181,7 +181,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression Def(ref TokenReader tokenReader)
+        private IExpression? Def(ref TokenReader tokenReader)
         {
             var def = tokenReader.Keyword(KeywordToken.Define);
             if (def == null)
@@ -205,7 +205,7 @@ namespace xFunc.Maths
             return CreateAssign(key, value);
         }
 
-        private IExpression Undef(ref TokenReader tokenReader)
+        private IExpression? Undef(ref TokenReader tokenReader)
         {
             var undef = tokenReader.Keyword(KeywordToken.Undefine);
             if (undef == null)
@@ -223,7 +223,7 @@ namespace xFunc.Maths
             return CreateUndef(key);
         }
 
-        private IExpression If(ref TokenReader tokenReader)
+        private IExpression? If(ref TokenReader tokenReader)
         {
             var @if = tokenReader.Keyword(KeywordToken.If);
             if (@if == null)
@@ -241,7 +241,7 @@ namespace xFunc.Maths
             var then = Expression(ref tokenReader) ??
                        throw new ParseException(Resource.IfThenParseException);
 
-            IExpression @else = null;
+            IExpression? @else = null;
             if (tokenReader.Symbol(SymbolToken.Comma))
                 @else = Expression(ref tokenReader) ??
                         throw new ParseException(Resource.IfElseParseException);
@@ -255,7 +255,7 @@ namespace xFunc.Maths
             return CreateIf(condition, then);
         }
 
-        private IExpression For(ref TokenReader tokenReader)
+        private IExpression? For(ref TokenReader tokenReader)
         {
             var @for = tokenReader.Keyword(KeywordToken.For);
             if (@for == null)
@@ -291,7 +291,7 @@ namespace xFunc.Maths
             return CreateFor(body, init, condition, iter);
         }
 
-        private IExpression While(ref TokenReader tokenReader)
+        private IExpression? While(ref TokenReader tokenReader)
         {
             var @while = tokenReader.Keyword(KeywordToken.While);
             if (@while == null)
@@ -315,7 +315,7 @@ namespace xFunc.Maths
             return CreateWhile(body, condition);
         }
 
-        private IExpression FunctionDeclaration(ref TokenReader tokenReader)
+        private IExpression? FunctionDeclaration(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -356,12 +356,12 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression Expression(ref TokenReader tokenReader)
+        private IExpression? Expression(ref TokenReader tokenReader)
         {
             return Ternary(ref tokenReader);
         }
 
-        private IExpression Ternary(ref TokenReader tokenReader)
+        private IExpression? Ternary(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -394,7 +394,7 @@ namespace xFunc.Maths
             return CreateIf(condition, then, @else);
         }
 
-        private IExpression ConditionalOperator(ref TokenReader tokenReader)
+        private IExpression? ConditionalOperator(ref TokenReader tokenReader)
         {
             var left = BitwiseOperator(ref tokenReader);
             if (left == null)
@@ -414,7 +414,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IExpression BitwiseOperator(ref TokenReader tokenReader)
+        private IExpression? BitwiseOperator(ref TokenReader tokenReader)
         {
             var left = EqualityOperator(ref tokenReader);
             if (left == null)
@@ -426,13 +426,13 @@ namespace xFunc.Maths
                              tokenReader.Operator(OperatorToken.Or) ??
                              tokenReader.Operator(OperatorToken.Implication) ??
                              tokenReader.Operator(OperatorToken.Equality)) ??
-                            (IToken)(tokenReader.Keyword(KeywordToken.NAnd) ??
-                                     tokenReader.Keyword(KeywordToken.NOr) ??
-                                     tokenReader.Keyword(KeywordToken.And) ??
-                                     tokenReader.Keyword(KeywordToken.Or) ??
-                                     tokenReader.Keyword(KeywordToken.XOr) ??
-                                     tokenReader.Keyword(KeywordToken.Eq) ??
-                                     tokenReader.Keyword(KeywordToken.Impl));
+                            (IToken?)(tokenReader.Keyword(KeywordToken.NAnd) ??
+                                      tokenReader.Keyword(KeywordToken.NOr) ??
+                                      tokenReader.Keyword(KeywordToken.And) ??
+                                      tokenReader.Keyword(KeywordToken.Or) ??
+                                      tokenReader.Keyword(KeywordToken.XOr) ??
+                                      tokenReader.Keyword(KeywordToken.Eq) ??
+                                      tokenReader.Keyword(KeywordToken.Impl));
 
                 if (token == null)
                     return left;
@@ -444,7 +444,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IExpression EqualityOperator(ref TokenReader tokenReader)
+        private IExpression? EqualityOperator(ref TokenReader tokenReader)
         {
             var left = AddSub(ref tokenReader);
             if (left == null)
@@ -468,7 +468,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IExpression AddSub(ref TokenReader tokenReader)
+        private IExpression? AddSub(ref TokenReader tokenReader)
         {
             var left = MulDivMod(ref tokenReader);
             if (left == null)
@@ -488,7 +488,7 @@ namespace xFunc.Maths
             }
         }
 
-        private IExpression MulDivMod(ref TokenReader tokenReader)
+        private IExpression? MulDivMod(ref TokenReader tokenReader)
         {
             var left = MulImplicit(ref tokenReader);
             if (left == null)
@@ -499,7 +499,7 @@ namespace xFunc.Maths
                 var token = (tokenReader.Operator(OperatorToken.Multiplication) ??
                              tokenReader.Operator(OperatorToken.Division) ??
                              tokenReader.Operator(OperatorToken.Modulo)) ??
-                            (IToken)tokenReader.Keyword(KeywordToken.Mod);
+                            (IToken?)tokenReader.Keyword(KeywordToken.Mod);
 
                 if (token == null)
                     return left;
@@ -511,13 +511,13 @@ namespace xFunc.Maths
             }
         }
 
-        private IExpression MulImplicit(ref TokenReader tokenReader)
+        private IExpression? MulImplicit(ref TokenReader tokenReader)
         {
             return MulImplicitLeftUnary(ref tokenReader) ??
                    LeftUnary(ref tokenReader);
         }
 
-        private IExpression MulImplicitLeftUnary(ref TokenReader tokenReader)
+        private IExpression? MulImplicitLeftUnary(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -545,7 +545,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private IExpression MulImplicitExponentiation(ref TokenReader tokenReader)
+        private IExpression? MulImplicitExponentiation(ref TokenReader tokenReader)
         {
             var left = Function(ref tokenReader) ??
                        Variable(ref tokenReader);
@@ -562,14 +562,14 @@ namespace xFunc.Maths
             return CreateExponentiation(left, right);
         }
 
-        private IExpression LeftUnary(ref TokenReader tokenReader)
+        private IExpression? LeftUnary(ref TokenReader tokenReader)
         {
             var token = (tokenReader.Operator(OperatorToken.Not) ??
                          tokenReader.Operator(OperatorToken.Minus) ??
                          tokenReader.Operator(OperatorToken.Plus)) ??
-                        (IToken)tokenReader.Keyword(KeywordToken.Not);
+                        (IToken?)tokenReader.Keyword(KeywordToken.Not);
             var operand = Exponentiation(ref tokenReader);
-            if (token == null || token == OperatorToken.Plus)
+            if (operand == null || token == null || token == OperatorToken.Plus)
                 return operand;
 
             if (token == OperatorToken.Minus)
@@ -578,7 +578,7 @@ namespace xFunc.Maths
             return CreateNot(operand);
         }
 
-        private IExpression Exponentiation(ref TokenReader tokenReader)
+        private IExpression? Exponentiation(ref TokenReader tokenReader)
         {
             var left = RightUnary(ref tokenReader);
             if (left == null)
@@ -594,7 +594,7 @@ namespace xFunc.Maths
             return CreateExponentiation(left, right);
         }
 
-        private IExpression RightUnary(ref TokenReader tokenReader)
+        private IExpression? RightUnary(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -615,7 +615,7 @@ namespace xFunc.Maths
             return Operand(ref tokenReader);
         }
 
-        private IExpression Operand(ref TokenReader tokenReader)
+        private IExpression? Operand(ref TokenReader tokenReader)
         {
             return ComplexNumber(ref tokenReader) ??
                    Number(ref tokenReader) ??
@@ -627,7 +627,7 @@ namespace xFunc.Maths
                    Vector(ref tokenReader);
         }
 
-        private IExpression ParenthesesExpression(ref TokenReader tokenReader)
+        private IExpression? ParenthesesExpression(ref TokenReader tokenReader)
         {
             if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 return null;
@@ -641,7 +641,7 @@ namespace xFunc.Maths
             return exp;
         }
 
-        private IExpression Function(ref TokenReader tokenReader)
+        private IExpression? Function(ref TokenReader tokenReader)
         {
             var function = tokenReader.GetCurrent<IdToken>();
             if (function == null)
@@ -654,7 +654,7 @@ namespace xFunc.Maths
             return CreateFunction(function, parameterList);
         }
 
-        private IList<IExpression> ParameterList(ref TokenReader tokenReader)
+        private IList<IExpression>? ParameterList(ref TokenReader tokenReader)
         {
             if (!tokenReader.Symbol(SymbolToken.OpenParenthesis))
                 return null;
@@ -681,7 +681,7 @@ namespace xFunc.Maths
             return parameterList;
         }
 
-        private IExpression Number(ref TokenReader tokenReader)
+        private IExpression? Number(ref TokenReader tokenReader)
         {
             var number = tokenReader.GetCurrent<NumberToken>();
             if (number == null)
@@ -700,7 +700,7 @@ namespace xFunc.Maths
             return CreateNumber(number);
         }
 
-        private IExpression ComplexNumber(ref TokenReader tokenReader)
+        private IExpression? ComplexNumber(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 
@@ -733,7 +733,7 @@ namespace xFunc.Maths
             return null;
         }
 
-        private Variable Variable(ref TokenReader tokenReader)
+        private Variable? Variable(ref TokenReader tokenReader)
         {
             var variable = tokenReader.GetCurrent<IdToken>();
             if (variable == null)
@@ -742,7 +742,7 @@ namespace xFunc.Maths
             return CreateVariable(variable);
         }
 
-        private IExpression Boolean(ref TokenReader tokenReader)
+        private IExpression? Boolean(ref TokenReader tokenReader)
         {
             var boolean = tokenReader.Keyword(KeywordToken.True) ??
                           tokenReader.Keyword(KeywordToken.False);
@@ -752,7 +752,7 @@ namespace xFunc.Maths
             return CreateBoolean(boolean);
         }
 
-        private Vector Vector(ref TokenReader tokenReader)
+        private Vector? Vector(ref TokenReader tokenReader)
         {
             if (!tokenReader.Symbol(SymbolToken.OpenBrace))
                 return null;
@@ -779,7 +779,7 @@ namespace xFunc.Maths
             return CreateVector(parameterList);
         }
 
-        private IExpression Matrix(ref TokenReader tokenReader)
+        private IExpression? Matrix(ref TokenReader tokenReader)
         {
             var scope = tokenReader.CreateScope();
 

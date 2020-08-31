@@ -24,13 +24,13 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public class DelegateExpression : IExpression
     {
-        private readonly Func<ExpressionParameters, object> func;
+        private readonly Func<ExpressionParameters?, object> func;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateExpression"/> class.
         /// </summary>
         /// <param name="func">The delegate of function.</param>
-        public DelegateExpression(Func<ExpressionParameters, object> func)
+        public DelegateExpression(Func<ExpressionParameters?, object> func)
         {
             this.func = func;
         }
@@ -42,7 +42,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -86,8 +86,8 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters) =>
-            func(parameters);
+        public object Execute(ExpressionParameters? parameters)
+            => func(parameters);
 
         /// <summary>
         /// Analyzes the current expression.

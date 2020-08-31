@@ -25,13 +25,33 @@ namespace xFunc.Tests.Expressions.Trigonometric
 {
     public class CosecantTest
     {
-        [Fact]
-        public void ExecuteNumberTest()
+        [Theory]
+        [InlineData(0.0, double.PositiveInfinity)] // -
+        [InlineData(30.0, 2.0)] // 2
+        [InlineData(45.0, 1.4142135623730951)] // sqrt(2)
+        [InlineData(60.0, 1.1547005383792515)] // 2sqrt(3) / 3
+        [InlineData(90.0, 1.0)] // 1
+        [InlineData(120.0, 1.1547005383792515)] // 2sqrt(3) / 3
+        [InlineData(135.0, 1.4142135623730951)] // sqrt(2)
+        [InlineData(150.0, 2.0)] // 2
+        [InlineData(180.0, double.PositiveInfinity)] // -
+        [InlineData(210.0, -2.0)] // -2
+        [InlineData(225.0, -1.4142135623730951)] // -sqrt(2)
+        [InlineData(240.0, -1.1547005383792515)] // -2sqrt(3) / 3
+        [InlineData(270.0, -1.0)] // -1
+        [InlineData(300.0, 1.1547005383792515)] // 2sqrt(3) / 3
+        [InlineData(315.0, 1.4142135623730951)] // sqrt(2)
+        [InlineData(330.0, 2.0)] // 2
+        [InlineData(360.0, double.PositiveInfinity)] // -
+        [InlineData(1110.0, 2.0)] // 2
+        [InlineData(1770.0, 2.0)] // 2
+        [InlineData(-390.0, 2.0)] // 2
+        public void ExecuteNumberTest(double degree, double expected)
         {
-            var exp = new Csc(Number.One);
+            var exp = new Csc(new Number(degree));
             var result = (double)exp.Execute();
 
-            Assert.Equal(57.298688498550185, result, 15);
+            Assert.Equal(expected, result, 15);
         }
 
         [Fact]

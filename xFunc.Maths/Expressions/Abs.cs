@@ -63,7 +63,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => Math.Abs(number),
-                Angle angle => Angle.Abs(angle),
+                Angle angle => AngleExtensions.Abs(angle),
                 Complex complex => Complex.Abs(complex),
                 Vector vector => vector.Abs(parameters),
                 _ => throw new ResultIsNotSupportedException(this, result),

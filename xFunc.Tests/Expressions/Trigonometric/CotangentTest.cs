@@ -25,13 +25,33 @@ namespace xFunc.Tests.Expressions.Trigonometric
 {
     public class CotangentTest
     {
-        [Fact]
-        public void ExecuteNumberTest()
+        [Theory]
+        [InlineData(0.0, double.PositiveInfinity)] // -
+        [InlineData(30.0, 1.7320508075688772)] // sqrt(3)
+        [InlineData(45.0, 1.0)] // 1
+        [InlineData(60.0, 0.57735026918962573)] // sqrt(3) / 3
+        [InlineData(90.0, 0.0)] // 0
+        [InlineData(120.0, -0.57735026918962573)] // -sqrt(3) / 3
+        [InlineData(135.0, -1)] // -1
+        [InlineData(150.0, -1.7320508075688772)] // -sqrt(3)
+        [InlineData(180.0, double.PositiveInfinity)] // -
+        [InlineData(210.0, 1.7320508075688772)] // sqrt(3)
+        [InlineData(225.0, 1.0)] // 1
+        [InlineData(240.0, 0.57735026918962573)] // sqrt(3) / 3
+        [InlineData(270.0, 0.0)] // 0
+        [InlineData(300.0, -1.7320508075688772)] // -sqrt(3)
+        [InlineData(315.0, -1.0)] // -1
+        [InlineData(330.0, -0.57735026918962573)] // -sqrt(3) / 3
+        [InlineData(360.0, double.PositiveInfinity)] // -
+        [InlineData(1110.0, 1.7320508075688772)] // sqrt(3)
+        [InlineData(1770.0, -0.57735026918962573)] // -sqrt(3) / 3
+        [InlineData(-390.0, -0.57735026918962573)] // -sqrt(3) / 3
+        public void ExecuteNumberTest(double degree, double expected)
         {
-            var exp = new Cot(Number.One);
+            var exp = new Cot(new Number(degree));
             var actual = (double)exp.Execute();
 
-            Assert.Equal(57.28996163075943, actual, 15);
+            Assert.Equal(expected, actual, 15);
         }
 
         [Fact]
@@ -56,7 +76,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void ExecuteGradianTest()
         {
             var exp = new Cot(Angle.Gradian(1).AsExpression());
-            var actual =(double) exp.Execute();
+            var actual = (double)exp.Execute();
 
             Assert.Equal(63.65674116287158, actual, 15);
         }

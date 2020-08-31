@@ -25,13 +25,33 @@ namespace xFunc.Tests.Expressions.Trigonometric
 {
     public class CosineTest
     {
-        [Fact]
-        public void ExecuteNumberTest()
+        [Theory]
+        [InlineData(0.0, 1.0)] // 1
+        [InlineData(30.0, 0.86602540378443864)] // sqrt(3) / 2
+        [InlineData(45.0, 0.70710678118654757)] // sqrt(2) / 2
+        [InlineData(60.0, 0.5)] // 1 / 2
+        [InlineData(90.0, 0.0)] // 0
+        [InlineData(120.0, -0.5)] // -1 / 2
+        [InlineData(135.0, -0.70710678118654757)] // -sqrt(2) / 2
+        [InlineData(150.0, -0.86602540378443864)] // -sqrt(3) / 2
+        [InlineData(180.0, -1.0)] // -1
+        [InlineData(210.0, -0.86602540378443864)] // -sqrt(3) / 2
+        [InlineData(225.0, -0.70710678118654757)] // -sqrt(2) / 2
+        [InlineData(240.0, -0.5)] // -1 / 2
+        [InlineData(270.0, 0.0)] // 0
+        [InlineData(300.0, 0.5)] // 1 / 2
+        [InlineData(315.0, 0.70710678118654757)] // sqrt(2) / 2
+        [InlineData(330.0, 0.86602540378443864)] // sqrt(3) / 2
+        [InlineData(360.0, 1.0)] // 1
+        [InlineData(1110.0, 0.86602540378443864)] // sqrt(3) / 2
+        [InlineData(1770.0, 0.86602540378443864)] // sqrt(3) / 2
+        [InlineData(-390.0, 0.86602540378443864)] // sqrt(3) / 2
+        public void ExecuteNumberTest(double degree, double expected)
         {
-            var exp = new Cos(Number.One);
+            var exp = new Cos(new Number(degree));
             var result = (double)exp.Execute();
 
-            Assert.Equal(0.9998476951563913, result, 15);
+            Assert.Equal(expected, result, 15);
         }
 
         [Fact]

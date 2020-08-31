@@ -402,51 +402,38 @@ namespace xFunc.Maths.Expressions.Angles
         };
 
         /// <summary>
+        /// Normalizes the current angle between [0, 2pi).
+        /// </summary>
+        /// <returns>The normalized angle.</returns>
+        public Angle Normalize()
+        {
+            const double degreeFullCircle = 360.0;
+            const double radianFullCircle = 2 * Math.PI;
+            const double gradianFullCircle = 400.0;
+
+            static double NormalizeInternal(double value, double circle)
+            {
+                value %= circle;
+                if (value < 0)
+                    value += circle;
+
+                return value;
+            }
+
+            return Unit switch
+            {
+                AngleUnit.Radian => Radian(NormalizeInternal(Value, radianFullCircle)),
+                AngleUnit.Gradian => Gradian(NormalizeInternal(Value, gradianFullCircle)),
+                _ => Degree(NormalizeInternal(Value, degreeFullCircle)),
+            };
+        }
+
+        /// <summary>
         /// Converts <see cref="Angle"/> to <see cref="AngleNumber"/>.
         /// </summary>
         /// <returns>The angle number.</returns>
         public AngleNumber AsExpression()
             => new AngleNumber(this);
-
-        /// <summary>
-        /// Returns the absolute value of a specified angle.
-        /// </summary>
-        /// <param name="angle">The angle.</param>
-        /// <returns>The angle, <c>x</c>, that such that 0 ≤ <c>x</c> ≤ <c>MaxValue</c>.</returns>
-        public static Angle Abs(Angle angle)
-            => new Angle(Math.Abs(angle.Value), angle.Unit);
-
-        /// <summary>
-        /// Returns the smallest integral value that is greater than or equal to the specified angle number.
-        /// </summary>
-        /// <param name="angle">The angle.</param>
-        /// <returns>The smallest integral value.</returns>
-        public static Angle Ceiling(Angle angle)
-            => new Angle(Math.Ceiling(angle.Value), angle.Unit);
-
-        /// <summary>
-        /// Returns the largest integral value less than or equal to the specified angle number.
-        /// </summary>
-        /// <param name="angle">The angle.</param>
-        /// <returns>The largest integral value.</returns>
-        public static Angle Floor(Angle angle)
-            => new Angle(Math.Floor(angle.Value), angle.Unit);
-
-        /// <summary>
-        /// Calculates the integral part of a specified angle number.
-        /// </summary>
-        /// <param name="angle">An angle to truncate.</param>
-        /// <returns>The integral part of angle number.</returns>
-        public static Angle Truncate(Angle angle)
-            => new Angle(Math.Truncate(angle.Value), angle.Unit);
-
-        /// <summary>
-        /// Returns the fractional part of the angle number.
-        /// </summary>
-        /// <param name="angle">The angle number.</param>
-        /// <returns>The fractional part.</returns>
-        public static Angle Frac(Angle angle)
-            => new Angle(MathExtensions.Frac(angle.Value), angle.Unit);
 
         /// <summary>
         /// Gets a value.

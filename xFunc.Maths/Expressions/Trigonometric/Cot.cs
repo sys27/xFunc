@@ -52,8 +52,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(Angle angle) =>
-            MathExtensions.Cot(angle.Value);
+        protected override double ExecuteInternal(Angle angle)
+            => AngleExtensions.Cot(angle);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -62,8 +62,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex ExecuteComplex(Complex complex) =>
-            ComplexExtensions.Cot(complex);
+        protected override Complex ExecuteComplex(Complex complex)
+            => ComplexExtensions.Cot(complex);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -93,7 +93,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Cot(Argument.Clone());
+        public override IExpression Clone()
+            => new Cot(Argument.Clone());
     }
 }

@@ -303,7 +303,7 @@ namespace xFunc.Maths
             }
 
             if (Equals(complex.Imaginary, 0))
-                return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}";
+                return complex.Real.ToString(CultureInfo.InvariantCulture);
 
             if (complex.Imaginary > 0)
                 return $"{complex.Real.ToString(CultureInfo.InvariantCulture)}+{complex.Imaginary.ToString(CultureInfo.InvariantCulture)}i";

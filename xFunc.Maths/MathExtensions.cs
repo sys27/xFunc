@@ -262,8 +262,9 @@ namespace xFunc.Maths
                 NumeralSystem.Decimal => number.ToString(CultureInfo.InvariantCulture),
                 NumeralSystem.Binary => "0b" + Convert.ToString(number, 2),
                 NumeralSystem.Octal => "0" + Convert.ToString(number, 8),
-                NumeralSystem.Hexadecimal => "0x" + Convert.ToString(number, 16),
-                _ => null,
+
+                // NumeralSystem.Hexadecimal
+                _ => "0x" + Convert.ToString(number, 16),
             };
         }
 

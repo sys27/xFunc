@@ -62,7 +62,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var result = Argument.Execute(parameters);
             var digits = Digits?.Execute(parameters) ?? 0.0;
@@ -107,8 +107,8 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         /// Returns the new instance of <see cref="IExpression" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new Round(CloneArguments());
+        public override IExpression Clone()
+            => new Round(CloneArguments());
 
         /// <summary>
         /// Gets the expression that represents a double-precision floating-point number to be rounded.
@@ -124,7 +124,7 @@ namespace xFunc.Maths.Expressions
         /// <value>
         /// The expression that represents the number of fractional digits in the return value.
         /// </value>
-        public IExpression Digits => ParametersCount == 2 ? this[1] : null;
+        public IExpression? Digits => ParametersCount == 2 ? this[1] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.

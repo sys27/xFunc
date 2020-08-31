@@ -24,8 +24,8 @@ namespace xFunc.Maths.Expressions.Programming
     /// </summary>
     public abstract class VariableBinaryExpression : IExpression
     {
-        private Variable variable;
-        private IExpression right;
+        private Variable variable = default!;
+        private IExpression right = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableBinaryExpression"/> class.
@@ -43,7 +43,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters parameters);
+        public abstract object Execute(ExpressionParameters? parameters);
 
         /// <summary>
         /// Analyzes the current expression.

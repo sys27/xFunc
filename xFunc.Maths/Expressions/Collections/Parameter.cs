@@ -24,7 +24,7 @@ namespace xFunc.Maths.Expressions.Collections
     /// </summary>
     public class Parameter : IComparable<Parameter>, IEquatable<Parameter>
     {
-        private object value;
+        private object value = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parameter"/> class.
@@ -90,7 +90,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var param = obj as Parameter;
             if (param == null)
@@ -126,7 +126,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// Zero - This object is equal to other.
         /// Greater than zero - This object is greater than other.
         /// </returns>
-        public int CompareTo(Parameter other)
+        public int CompareTo(Parameter? other)
             => string.Compare(Key, other?.Key, StringComparison.Ordinal);
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns><c>true</c> if the current object is equal to the other parameter; otherwise, <c>false</c>.</returns>
-        public bool Equals(Parameter other)
+        public bool Equals(Parameter? other)
         {
             if (other is null)
                 return false;
@@ -151,7 +151,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="left">The left parameter.</param>
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator ==(Parameter left, Parameter right)
+        public static bool operator ==(Parameter? left, Parameter? right)
         {
             if (left is null)
                 return right is null;
@@ -165,7 +165,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="left">The left parameter.</param>
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is not equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(Parameter left, Parameter right)
+        public static bool operator !=(Parameter? left, Parameter? right)
             => !(left == right);
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="left">The left parameter.</param>
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator >(Parameter left, Parameter right)
+        public static bool operator >(Parameter? left, Parameter? right)
         {
             if (left is null || right is null)
                 return false;
@@ -188,7 +188,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="left">The left parameter.</param>
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator <(Parameter left, Parameter right)
+        public static bool operator <(Parameter? left, Parameter? right)
         {
             if (left is null || right is null)
                 return false;
@@ -202,7 +202,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="left">The left parameter.</param>
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator >=(Parameter left, Parameter right)
+        public static bool operator >=(Parameter? left, Parameter? right)
             => !(left < right);
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <param name="left">The left parameter.</param>
         /// <param name="right">The right parameter.</param>
         /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator <=(Parameter left, Parameter right)
+        public static bool operator <=(Parameter? left, Parameter? right)
             => !(left > right);
 
         /// <summary>

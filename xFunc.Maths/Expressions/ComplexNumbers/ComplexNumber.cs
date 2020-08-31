@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator Complex(ComplexNumber number)
+        public static implicit operator Complex(ComplexNumber? number)
             => number?.Value ?? throw new ArgumentNullException(nameof(number));
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ComplexNumber num)
                 return Value.Equals(num.Value);
@@ -110,7 +110,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters) => Value;
+        public object Execute(ExpressionParameters? parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.

@@ -26,8 +26,8 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class BinaryExpression : IExpression
     {
-        private IExpression left;
-        private IExpression right;
+        private IExpression left = default!;
+        private IExpression right = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression"/> class.
@@ -75,7 +75,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -121,7 +121,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters parameters);
+        public abstract object Execute(ExpressionParameters? parameters);
 
         /// <summary>
         /// Analyzes the current expression.

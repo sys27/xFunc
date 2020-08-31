@@ -26,10 +26,7 @@ namespace xFunc.Maths.Tokenization.Tokens
     {
         private readonly char symbol;
 
-        private SymbolToken(char symbol)
-        {
-            this.symbol = symbol;
-        }
+        private SymbolToken(char symbol) => this.symbol = symbol;
 
         /// <summary>
         /// Returns a string that represents the current object.

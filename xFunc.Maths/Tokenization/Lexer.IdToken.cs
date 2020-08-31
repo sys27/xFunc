@@ -24,7 +24,7 @@ namespace xFunc.Maths.Tokenization
     /// </summary>
     public partial class Lexer
     {
-        private IToken CreateIdToken(ref ReadOnlyMemory<char> function)
+        private IToken? CreateIdToken(ref ReadOnlyMemory<char> function)
         {
             var span = function.Span;
 

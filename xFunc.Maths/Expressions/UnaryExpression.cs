@@ -26,7 +26,7 @@ namespace xFunc.Maths.Expressions
     /// </summary>
     public abstract class UnaryExpression : IExpression
     {
-        private IExpression argument;
+        private IExpression argument = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression"/> class.
@@ -59,17 +59,14 @@ namespace xFunc.Maths.Expressions
         /// Deconstructs <see cref="UnaryExpression"/>.
         /// </summary>
         /// <param name="argument">The argument.</param>
-        public void Deconstruct(out IExpression argument)
-        {
-            argument = Argument;
-        }
+        public void Deconstruct(out IExpression argument) => argument = Argument;
 
         /// <summary>
         /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -113,7 +110,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters parameters);
+        public abstract object Execute(ExpressionParameters? parameters);
 
         /// <summary>
         /// Analyzes the current expression.

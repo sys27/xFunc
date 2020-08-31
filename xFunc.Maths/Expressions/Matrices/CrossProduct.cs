@@ -51,7 +51,7 @@ namespace xFunc.Maths.Expressions.Matrices
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var left = Left.Execute(parameters);
             var right = Right.Execute(parameters);

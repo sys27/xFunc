@@ -71,7 +71,7 @@ namespace xFunc.Maths.Expressions
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
                 return true;
@@ -120,7 +120,7 @@ namespace xFunc.Maths.Expressions
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public abstract object Execute(ExpressionParameters parameters);
+        public abstract object Execute(ExpressionParameters? parameters);
 
         /// <summary>
         /// Analyzes the current expression.

@@ -73,7 +73,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="ArgumentNullException">The differentiator is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var variables = Helpers.GetAllVariables(Argument).ToList();
             var vector = new IExpression[variables.Count];

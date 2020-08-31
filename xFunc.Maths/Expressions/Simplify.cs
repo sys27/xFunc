@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions
         /// </returns>
         /// <exception cref="ArgumentNullException">Simplifier is null.</exception>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters) =>
+        public override object Execute(ExpressionParameters? parameters) =>
             Analyze(simplifier);
 
         /// <summary>

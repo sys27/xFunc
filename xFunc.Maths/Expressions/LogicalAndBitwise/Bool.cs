@@ -46,7 +46,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters) => Value;
+        public object Execute(ExpressionParameters? parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.
@@ -89,7 +89,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator bool(Bool boolean)
+        public static implicit operator bool(Bool? boolean)
             => boolean?.Value ?? throw new ArgumentNullException(nameof(boolean));
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         ///   <c>true</c> if the specified object is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Bool other)
+        public bool Equals(Bool? other)
         {
             if (ReferenceEquals(null, other))
                 return false;
@@ -127,7 +127,7 @@ namespace xFunc.Maths.Expressions.LogicalAndBitwise
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;

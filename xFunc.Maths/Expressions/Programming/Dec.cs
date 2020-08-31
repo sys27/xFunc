@@ -40,7 +40,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));

@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.Statistical
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var (data, size) = (Arguments, ParametersCount);
 

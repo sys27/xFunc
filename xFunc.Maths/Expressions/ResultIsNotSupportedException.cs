@@ -39,7 +39,7 @@ namespace xFunc.Maths.Expressions
         /// </summary>
         /// <param name="exp">The expression with wrong argument type.</param>
         /// <param name="first">The result of argument calculation.</param>
-        public ResultIsNotSupportedException(IExpression exp, object first)
+        public ResultIsNotSupportedException(IExpression? exp, object first)
             : this(string.Format(
                 CultureInfo.InvariantCulture,
                 Resource.ResultIsNotSupported,
@@ -54,7 +54,7 @@ namespace xFunc.Maths.Expressions
         /// <param name="exp">The expression with wrong argument type.</param>
         /// <param name="first">The first result of argument calculation.</param>
         /// <param name="second">The second result of argument calculation.</param>
-        public ResultIsNotSupportedException(IExpression exp, object first, object second)
+        public ResultIsNotSupportedException(IExpression? exp, object first, object second)
             : this(string.Format(
                 CultureInfo.InvariantCulture,
                 Resource.ResultIsNotSupported,

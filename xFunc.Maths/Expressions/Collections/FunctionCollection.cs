@@ -32,7 +32,7 @@ namespace xFunc.Maths.Expressions.Collections
         /// <summary>
         /// Occurs when the collection changes.
         /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionCollection"/> class.

@@ -66,8 +66,7 @@ namespace xFunc.Maths.Analyzers
         private IExpression AnalyzeDiffParams(DifferentParametersExpression exp)
         {
             for (var i = 0; i < exp.ParametersCount; i++)
-                if (exp[i] != null)
-                    exp[i] = exp[i].Analyze(this);
+                exp[i] = exp[i].Analyze(this);
 
             return exp;
         }
@@ -872,8 +871,7 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(UserFunction exp)
         {
             for (var i = 0; i < exp.ParametersCount; i++)
-                if (exp[i] != null)
-                    exp[i] = exp[i].Analyze(this);
+                exp[i] = exp[i].Analyze(this);
 
             return exp;
         }
@@ -931,8 +929,7 @@ namespace xFunc.Maths.Analyzers
         public IExpression Analyze(Matrix exp)
         {
             for (var i = 0; i < exp.Rows; i++)
-                if (exp[i] != null)
-                    exp[i] = (Vector)exp[i].Analyze(this);
+                exp[i] = (Vector)exp[i].Analyze(this);
 
             return exp;
         }

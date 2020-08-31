@@ -27,9 +27,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         private readonly string @operator;
 
         private OperatorToken(string @operator)
-        {
-            this.@operator = @operator ?? throw new ArgumentNullException(nameof(@operator));
-        }
+            => this.@operator = @operator ?? throw new ArgumentNullException(nameof(@operator));
 
         /// <summary>
         /// Returns a string that represents the current object.

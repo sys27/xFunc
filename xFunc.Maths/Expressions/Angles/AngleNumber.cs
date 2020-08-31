@@ -41,7 +41,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// </summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
-        public bool Equals(AngleNumber other)
+        public bool Equals(AngleNumber? other)
         {
             if (ReferenceEquals(null, other))
                 return false;
@@ -57,7 +57,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;
@@ -111,7 +111,7 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="parameters">A collection of variables.</param>
         /// <returns>A result of the execution.</returns>
         /// <seealso cref="ExpressionParameters"/>
-        public object Execute(ExpressionParameters parameters) => Value;
+        public object Execute(ExpressionParameters? parameters) => Value;
 
         /// <summary>
         /// Analyzes the current expression.

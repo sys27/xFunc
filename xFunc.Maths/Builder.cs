@@ -28,7 +28,7 @@ namespace xFunc.Maths
     /// </summary>
     public class Builder : IExpression
     {
-        private IExpression current;
+        private IExpression current = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Builder"/> class.
@@ -752,7 +752,7 @@ namespace xFunc.Maths
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public object Execute(ExpressionParameters parameters)
+        public object Execute(ExpressionParameters? parameters)
             => Current.Execute(parameters);
 
         /// <summary>

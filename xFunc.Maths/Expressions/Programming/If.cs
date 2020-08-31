@@ -61,7 +61,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// A result of the execution.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        public override object Execute(ExpressionParameters parameters)
+        public override object Execute(ExpressionParameters? parameters)
         {
             var result = Condition.Execute(parameters);
             if (result is bool condition)
@@ -130,7 +130,7 @@ namespace xFunc.Maths.Expressions.Programming
         /// <value>
         /// The else.
         /// </value>
-        public IExpression Else => ParametersCount == 3 ? this[2] : null;
+        public IExpression? Else => ParametersCount == 3 ? this[2] : null;
 
         /// <summary>
         /// Gets the minimum count of parameters.

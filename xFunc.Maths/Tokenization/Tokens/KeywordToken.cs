@@ -27,9 +27,7 @@ namespace xFunc.Maths.Tokenization.Tokens
         private readonly string keyword;
 
         private KeywordToken(string keyword)
-        {
-            this.keyword = keyword ?? throw new ArgumentNullException(nameof(keyword));
-        }
+            => this.keyword = keyword ?? throw new ArgumentNullException(nameof(keyword));
 
         /// <summary>
         /// Returns a string that represents the current object.

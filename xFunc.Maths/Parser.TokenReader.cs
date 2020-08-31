@@ -39,7 +39,7 @@ namespace xFunc.Maths
             // points to last write position (item != null)
             private int writeIndex;
 
-            private IToken[] buffer;
+            private IToken?[] buffer;
 
             private int scopeCount;
 
@@ -49,14 +49,14 @@ namespace xFunc.Maths
                 enumerableEnded = false;
                 readIndex = -1;
                 writeIndex = -1;
-                buffer = ArrayPool<IToken>.Shared.Rent(BufferSize);
+                buffer = ArrayPool<IToken?>.Shared.Rent(BufferSize);
                 scopeCount = 0;
             }
 
             public void Dispose()
             {
                 enumerator.Dispose();
-                ArrayPool<IToken>.Shared.Return(buffer);
+                ArrayPool<IToken?>.Shared.Return(buffer);
             }
 
             private void EnsureEnoughSpace()
@@ -66,11 +66,11 @@ namespace xFunc.Maths
 
                 var newBuffer = ArrayPool<IToken>.Shared.Rent(buffer.Length * 2);
                 Array.Copy(buffer, newBuffer, buffer.Length);
-                ArrayPool<IToken>.Shared.Return(buffer);
+                ArrayPool<IToken?>.Shared.Return(buffer);
                 buffer = newBuffer;
             }
 
-            private TToken Read<TToken>() where TToken : class, IToken
+            private TToken? Read<TToken>() where TToken : class, IToken
             {
                 // readIndex > writeIndex
                 Debug.Assert(readIndex <= writeIndex, "The read index should be less than or equal to write index.");
@@ -146,7 +146,7 @@ namespace xFunc.Maths
                     Flush();
             }
 
-            public TToken GetCurrent<TToken>() where TToken : class, IToken
+            public TToken? GetCurrent<TToken>() where TToken : class, IToken
             {
                 var token = Read<TToken>();
                 if (token != null)
@@ -165,7 +165,7 @@ namespace xFunc.Maths
                 return result;
             }
 
-            public OperatorToken Operator(OperatorToken operatorToken)
+            public OperatorToken? Operator(OperatorToken operatorToken)
             {
                 var token = Read<OperatorToken>();
                 if (token == operatorToken)
@@ -178,7 +178,7 @@ namespace xFunc.Maths
                 return null;
             }
 
-            public KeywordToken Keyword(KeywordToken keywordToken)
+            public KeywordToken? Keyword(KeywordToken keywordToken)
             {
                 var token = Read<KeywordToken>();
                 if (token == keywordToken)

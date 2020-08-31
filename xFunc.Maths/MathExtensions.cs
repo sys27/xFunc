@@ -31,6 +31,56 @@ namespace xFunc.Maths
         public const double Epsilon = 1E-14;
 
         /// <summary>
+        /// sqrt(2).
+        /// </summary>
+        public const double Sqrt2 = 1.4142135623730951;
+
+        /// <summary>
+        /// sqrt(3).
+        /// </summary>
+        public const double Sqrt3 = 1.7320508075688772;
+
+        /// <summary>
+        /// 0.
+        /// </summary>
+        public const double Zero = 0.0;
+
+        /// <summary>
+        /// 1.
+        /// </summary>
+        public const double One = 1.0;
+
+        /// <summary>
+        /// 2.
+        /// </summary>
+        public const double Two = 2.0;
+
+        /// <summary>
+        /// 1 / 2 = 0.5.
+        /// </summary>
+        public const double Half = 0.5;
+
+        /// <summary>
+        /// sqrt(2) / 2.
+        /// </summary>
+        public const double Sqrt2By2 = Sqrt2 / 2.0;
+
+        /// <summary>
+        /// sqrt(3) / 2.
+        /// </summary>
+        public const double Sqrt3By2 = Sqrt3 / 2.0;
+
+        /// <summary>
+        /// sqrt(3) / 3.
+        /// </summary>
+        public const double Sqrt3By3 = Sqrt3 / 3.0;
+
+        /// <summary>
+        /// 2 * sqrt(3) / 3.
+        /// </summary>
+        public const double Sqrt3By3By2 = 2 * Sqrt3By3;
+
+        /// <summary>
         /// Returns a specified number raised to the specified power.
         /// </summary>
         /// <param name="number">A double-precision floating-point number to be raised to a power.</param>

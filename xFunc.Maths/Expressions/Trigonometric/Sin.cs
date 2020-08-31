@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
 using System.Numerics;
 using xFunc.Maths.Analyzers;
@@ -53,8 +52,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(Angle angle) =>
-            Math.Sin(angle.Value);
+        protected override double ExecuteInternal(Angle angle)
+            => AngleExtensions.Sin(angle);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).
@@ -63,8 +62,8 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override Complex ExecuteComplex(Complex complex) =>
-            Complex.Sin(complex);
+        protected override Complex ExecuteComplex(Complex complex)
+            => Complex.Sin(complex);
 
         /// <summary>
         /// Analyzes the current expression.
@@ -94,7 +93,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// Clones this instance.
         /// </summary>
         /// <returns>The new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
-        public override IExpression Clone() =>
-            new Sin(Argument.Clone());
+        public override IExpression Clone()
+            => new Sin(Argument.Clone());
     }
 }

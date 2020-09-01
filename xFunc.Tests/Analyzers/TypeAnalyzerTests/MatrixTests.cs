@@ -52,8 +52,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Matrix(new[]
             {
-                new Vector(new[] { Number.One }),
-                new Vector(new[] { Number.One })
+                new Vector(new IExpression[] { Number.One }),
+                new Vector(new IExpression[] { Number.One })
             });
 
             Test(exp, ResultTypes.Matrix);
@@ -64,7 +64,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Matrix(new[]
             {
-                new Vector(new[] { Variable.X }),
+                new Vector(new IExpression[] { Variable.X }),
             });
 
             Test(exp, ResultTypes.Undefined);
@@ -83,8 +83,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { Number.One, Number.Two }),
-                new Vector(new[] { new Number(3), new Number(4) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
+                new Vector(new IExpression[] { new Number(3), new Number(4) }),
             });
             var exp = new Determinant(matrix);
 
@@ -127,8 +127,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { Number.One, Number.Two }),
-                new Vector(new[] { new Number(3), new Number(4) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
+                new Vector(new IExpression[] { new Number(3), new Number(4) }),
             });
             var exp = new Inverse(matrix);
 
@@ -279,8 +279,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var matrix = new Matrix(new[]
             {
-                new Vector(new[] { Number.One, Number.Two }),
-                new Vector(new[] { new Number(3), new Number(4) }),
+                new Vector(new IExpression[] { Number.One, Number.Two }),
+                new Vector(new IExpression[] { new Number(3), new Number(4) }),
             });
             var exp = new Transpose(matrix);
 

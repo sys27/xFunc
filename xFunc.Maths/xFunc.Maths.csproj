@@ -20,8 +20,7 @@
     <RepositoryUrl>https://github.com/sys27/xFunc</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageReleaseNotes>https://github.com/sys27/xFunc/wiki/ChangeLog
-    
-    https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
+https://github.com/sys27/xFunc/wiki/Breaking-Changes</PackageReleaseNotes>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>

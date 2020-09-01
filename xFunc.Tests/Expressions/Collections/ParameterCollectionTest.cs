@@ -17,6 +17,7 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
+using xFunc.Maths.Expressions.Angles;
 using xFunc.Maths.Expressions.Collections;
 using Xunit;
 
@@ -152,7 +153,7 @@ namespace xFunc.Tests.Expressions.Collections
         {
             var parameters = new ParameterCollection();
 
-            Assert.Equal(Math.PI, parameters["π"]);
+            Assert.Equal(Angle.Radian(Math.PI), parameters["π"]);
         }
 
         [Fact]
@@ -269,7 +270,7 @@ namespace xFunc.Tests.Expressions.Collections
 
             var parameter = parameters[0];
 
-            Assert.Equal(Math.PI, parameter);
+            Assert.Equal(Angle.Radian(Math.PI), parameter);
         }
 
         [Fact]

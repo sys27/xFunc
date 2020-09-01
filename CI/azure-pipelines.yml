@@ -35,6 +35,7 @@ jobs:
     - script: echo '##vso[task.setvariable variable=nupkgVersion]$(defaultPackageVersion)-preview$(Build.BuildNumber)
       condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
+    - script: dotnet tool install --global dotnet-reportgenerator-globaltool
     - script: dotnet tool install --global Codecov.Tool
 
     - task: DotNetCoreCLI@2
@@ -59,7 +60,7 @@ jobs:
 
     - task: CmdLine@2
       inputs:
-        script: 'dotnet reportgenerator -reports:"$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -targetdir:"$(Build.SourcesDirectory)/coverage/" -reporttypes:HtmlInline_AzurePipelines'
+        script: 'reportgenerator -reports:"$(Build.SourcesDirectory)/coverage/coverage.cobertura.xml" -targetdir:"$(Build.SourcesDirectory)/coverage/" -reporttypes:HtmlInline_AzurePipelines'
         workingDirectory: 'xFunc.Tests'
         failOnStderr: true
 

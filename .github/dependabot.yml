@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "./xFunc.Tests/"
+    schedule:
+      interval: "daily"
+    target-branch: "dev"
+    assignees:
+      - "sys27"

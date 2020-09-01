@@ -54,7 +54,7 @@ jobs:
       inputs:
         command: test
         projects: '$(solution)'
-        arguments: '-c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/" -p:ExcludeByAttribute="ExcludeFromCodeCoverage" -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total'
+        arguments: '--nologo --no-build -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput="$(Build.SourcesDirectory)/coverage/" -p:ExcludeByAttribute="ExcludeFromCodeCoverage" -p:Include="[xFunc.*]*" -p:Exclude="[xFunc.Tests*]*%2c[xFunc.*]*.Resource%2c[xFunc.*]*Exception" -p:Threshold=90 -p:ThresholdStat=total'
         publishTestResults: true
 
     - task: CmdLine@2

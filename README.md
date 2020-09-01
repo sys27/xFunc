@@ -80,7 +80,30 @@ processor.Differentiate("2x + sin(y)", new Variable("x")); // will return "2"
 
 ## Performance
 
-TODO:
+### Lexer
+
+Version |        Method |            Mean |  Allocated |
+-------:|-------------- |----------------:|-----------:|
+  3.7.1 |     TestLexer |      172.721 μs |    50162 B |
+  4.0.0 |     TestLexer | **16,635.4 ns** | **1600 B** |
+
+### Parser
+
+Version | Method |         Mean |   Allocated |
+-------:|------- |-------------:|------------:|
+  3.7.1 |  Parse | **17.54 μs** |    13.36 KB |
+  4.0.0 |  Parse |     29.21 μs | **3.81 KB** |
+
+### Processor
+
+Version | Method |         Mean |    Allocated |
+-------:|------- |-------------:|-------------:|
+  3.7.1 |  Parse |     198.7 μs |     62.27 KB |
+  4.0.0 |  Parse | **46.49 μs** |   **5.3 KB** |
+  3.7.1 |  Solve |     269.4 μs |     94.68 KB |
+  4.0.0 |  Solve | **68.37 μs** | **12.09 KB** |
+
+[More details](https://github.com/sys27/xFunc/wiki/Performance-Comparison)
 
 ## Bug Tracker
 

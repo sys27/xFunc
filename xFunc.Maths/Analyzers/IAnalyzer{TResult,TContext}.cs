@@ -950,6 +950,38 @@ namespace xFunc.Maths.Analyzers
         /// <returns>The result of analysis.</returns>
         TResult Analyze(While exp, TContext context);
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(LeftShift exp, TContext context);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(RightShift exp, TContext context);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(LeftShiftAssign exp, TContext context);
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        TResult Analyze(RightShiftAssign exp, TContext context);
+
         #endregion Programming
     }
 }

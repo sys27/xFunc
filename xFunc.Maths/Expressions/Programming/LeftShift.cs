@@ -13,23 +13,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Analyzers;
 
 namespace xFunc.Maths.Expressions.Programming
 {
     /// <summary>
-    /// Represents the "*=" operator.
+    /// Represents the '&lt;&lt;' operator.
     /// </summary>
-    public class MulAssign : VariableBinaryExpression
+    public class LeftShift : BinaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MulAssign"/> class.
+        /// Initializes a new instance of the <see cref="LeftShift"/> class.
         /// </summary>
-        /// <param name="variable">The variable.</param>
-        /// <param name="exp">The expression.</param>
-        public MulAssign(Variable variable, IExpression exp)
-            : base(variable, exp)
+        /// <param name="left">The left (first) operand.</param>
+        /// <param name="right">The right (second) operand.</param>
+        public LeftShift(IExpression left, IExpression right)
+            : base(left, right)
         {
         }
 
@@ -43,25 +42,14 @@ namespace xFunc.Maths.Expressions.Programming
         /// <seealso cref="ExpressionParameters" />
         public override object Execute(ExpressionParameters? parameters)
         {
-            if (parameters == null)
-                throw new ArgumentNullException(nameof(parameters));
+            var leftResult = Left.Execute(parameters);
+            var rightResult = Right.Execute(parameters);
 
-            var result = Variable.Execute(parameters);
-            if (result is double value)
+            return (leftResult, rightResult) switch
             {
-                var rightResult = Value.Execute(parameters);
-                if (rightResult is double rightValue)
-                {
-                    var newValue = value * rightValue;
-                    parameters.Variables[Variable.Name] = newValue;
-
-                    return newValue;
-                }
-
-                throw new ResultIsNotSupportedException(this, rightResult);
-            }
-
-            throw new ResultIsNotSupportedException(this, result);
+                (double left, double right) => left.LeftShift(right),
+                _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
+            };
         }
 
         /// <summary>
@@ -92,9 +80,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// Creates the clone of this instance.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="MulAssign" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="LeftShift" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new MulAssign((Variable)Variable.Clone(), Value.Clone());
+        public override IExpression Clone()
+            => new LeftShift(Left.Clone(), Right.Clone());
     }
 }

@@ -49,7 +49,7 @@ namespace xFunc.Maths.Expressions.Programming
             var result = Variable.Execute(parameters);
             if (result is double value)
             {
-                var rightResult = Right.Execute(parameters);
+                var rightResult = Value.Execute(parameters);
                 if (rightResult is double rightValue)
                 {
                     var newValue = value / rightValue;
@@ -95,6 +95,6 @@ namespace xFunc.Maths.Expressions.Programming
         /// Returns the new instance of <see cref="DivAssign" /> that is a clone of this instance.
         /// </returns>
         public override IExpression Clone() =>
-            new DivAssign((Variable)Variable.Clone(), Right.Clone());
+            new DivAssign((Variable)Variable.Clone(), Value.Clone());
     }
 }

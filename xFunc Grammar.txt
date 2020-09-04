@@ -11,7 +11,7 @@ statement = unaryAssign
           / exp
 
 unaryAssign = variable ('++' / '--')
-binaryAssign = variable ('+=' / '-=' / '*=' / '/=') exp
+binaryAssign = variable ('+=' / '-=' / '*=' / '/=' / '<<=' / '>>=') exp
 
 assignmentKey = functionDeclaration / variable
 assign = assignmentKey ':=' exp
@@ -28,7 +28,8 @@ ternary = conditional ('?' exp ':' exp)*
 
 conditional = bitwise (('&&' / '||') bitwise)*
 bitwise = equality (('&' / 'and' / '|' / 'or' / 'xor' / '=>' / '->' / 'impl' / '<=>' / '<->' / 'eq' / 'nor' / 'nand') equality)*
-equality = addSub (('==' / '!=' / '<' / '<=' / '>' / '>=') addSub)*
+equality = shift (('==' / '!=' / '<' / '<=' / '>' / '>=') shift)*
+shift = addSub (('<<' / '>>') addSub)*
 addSub = mulDivMod (('+' / '-') mulDivMod)*
 mulDivMod = mulImplicit (('*' / '/' / '%') mulImplicit)*
 mulImplicit = mulImplicitLeftUnary / leftUnary

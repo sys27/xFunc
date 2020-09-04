@@ -1065,6 +1065,42 @@ namespace xFunc.Maths.Analyzers
         public virtual TResult Analyze(While exp, TContext context)
             => throw new NotSupportedException();
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(LeftShift exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(RightShift exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(LeftShiftAssign exp, TContext context)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(RightShiftAssign exp, TContext context)
+            => throw new NotSupportedException();
+
         #endregion Programming
     }
 }

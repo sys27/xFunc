@@ -2208,5 +2208,54 @@ namespace xFunc.Tests.ParserTests
 
             Assert.Equal(expected, exp);
         }
+
+        [Fact]
+        public void LeftShiftTest()
+        {
+            var tokens = Builder()
+                .Number(1)
+                .Operation(OperatorToken.LeftShift)
+                .Number(10)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new LeftShift(Number.One, new Number(10));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void RightShiftTest()
+        {
+            var tokens = Builder()
+                .Number(1)
+                .Operation(OperatorToken.RightShift)
+                .Number(10)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new RightShift(Number.One, new Number(10));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void LeftShiftComplexTest()
+        {
+            var tokens = Builder()
+                .Number(1)
+                .Operation(OperatorToken.LeftShift)
+                .Number(2)
+                .Operation(OperatorToken.LeftShift)
+                .Number(3)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new LeftShift(
+                new LeftShift(Number.One, Number.Two),
+                new Number(3));
+
+            Assert.Equal(expected, exp);
+        }
     }
 }

@@ -25,17 +25,17 @@ namespace xFunc.Maths.Expressions.Programming
     public abstract class VariableBinaryExpression : IExpression
     {
         private Variable variable = default!;
-        private IExpression right = default!;
+        private IExpression value = default!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableBinaryExpression"/> class.
         /// </summary>
         /// <param name="left">The left (first) operand.</param>
-        /// <param name="right">The right (second) operand.</param>
-        protected VariableBinaryExpression(Variable left, IExpression right)
+        /// <param name="value">The right (second) operand.</param>
+        protected VariableBinaryExpression(Variable left, IExpression value)
         {
             Variable = left;
-            Right = right;
+            Value = value;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace xFunc.Maths.Expressions.Programming
 
             var exp = (VariableBinaryExpression)obj;
 
-            return variable.Equals(exp.Variable) && right.Equals(exp.Right);
+            return variable.Equals(exp.Variable) && value.Equals(exp.Value);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace xFunc.Maths.Expressions.Programming
         public abstract IExpression Clone();
 
         /// <summary>
-        /// Gets or sets the left (first) operand.
+        /// Gets or sets the variable.
         /// </summary>
         public Variable Variable
         {
@@ -165,12 +165,12 @@ namespace xFunc.Maths.Expressions.Programming
         }
 
         /// <summary>
-        /// Gets or sets the right (second) operand.
+        /// Gets or sets the value.
         /// </summary>
-        public IExpression Right
+        public IExpression Value
         {
-            get => right;
-            set => right = value ?? throw new ArgumentNullException(nameof(value));
+            get => value;
+            set => this.value = value ?? throw new ArgumentNullException(nameof(value));
         }
     }
 }

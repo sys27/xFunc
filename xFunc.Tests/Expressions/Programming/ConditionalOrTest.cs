@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-    public class OrTest
+    public class ConditionalOrTest
     {
         [Fact]
         public void CalculateOrTrueTest1()

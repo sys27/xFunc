@@ -29,6 +29,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [InlineData(typeof(SubAssign))]
         [InlineData(typeof(MulAssign))]
         [InlineData(typeof(DivAssign))]
+        [InlineData(typeof(LeftShiftAssign))]
+        [InlineData(typeof(RightShiftAssign))]
         public void TestAssignUndefined(Type type)
         {
             var exp = Create(type, Variable.X, Variable.X);
@@ -41,6 +43,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [InlineData(typeof(SubAssign))]
         [InlineData(typeof(MulAssign))]
         [InlineData(typeof(DivAssign))]
+        [InlineData(typeof(LeftShiftAssign))]
+        [InlineData(typeof(RightShiftAssign))]
         public void TestAssignNumber(Type type)
         {
             var exp = Create(type, Variable.X, new Number(10));
@@ -53,6 +57,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [InlineData(typeof(SubAssign))]
         [InlineData(typeof(MulAssign))]
         [InlineData(typeof(DivAssign))]
+        [InlineData(typeof(LeftShiftAssign))]
+        [InlineData(typeof(RightShiftAssign))]
         public void TestAssignException(Type type)
         {
             var exp = Create(type, Variable.X, Bool.False);

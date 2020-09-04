@@ -131,7 +131,9 @@ namespace xFunc.Maths
             var @operator = tokenReader.Operator(OperatorToken.MulAssign) ??
                             tokenReader.Operator(OperatorToken.DivAssign) ??
                             tokenReader.Operator(OperatorToken.AddAssign) ??
-                            tokenReader.Operator(OperatorToken.SubAssign);
+                            tokenReader.Operator(OperatorToken.SubAssign) ??
+                            tokenReader.Operator(OperatorToken.LeftShiftAssign) ??
+                            tokenReader.Operator(OperatorToken.RightShiftAssign);
             if (@operator != null)
             {
                 var right = Expression(ref tokenReader) ??
@@ -446,7 +448,7 @@ namespace xFunc.Maths
 
         private IExpression? EqualityOperator(ref TokenReader tokenReader)
         {
-            var left = AddSub(ref tokenReader);
+            var left = Shift(ref tokenReader);
             if (left == null)
                 return null;
 
@@ -461,10 +463,30 @@ namespace xFunc.Maths
                 if (@operator == null)
                     return left;
 
-                var right = AddSub(ref tokenReader) ??
+                var right = Shift(ref tokenReader) ??
                             throw new ParseException(SecondOperand(@operator));
 
                 left = CreateEqualityOperator(@operator, left, right);
+            }
+        }
+
+        private IExpression? Shift(ref TokenReader tokenReader)
+        {
+            var left = AddSub(ref tokenReader);
+            if (left == null)
+                return null;
+
+            while (true)
+            {
+                var @operator = tokenReader.Operator(OperatorToken.LeftShift) ??
+                                tokenReader.Operator(OperatorToken.RightShift);
+                if (@operator == null)
+                    return left;
+
+                var right = AddSub(ref tokenReader) ??
+                            throw new ParseException(SecondOperand(@operator));
+
+                left = CreateShift(@operator, left, right);
             }
         }
 

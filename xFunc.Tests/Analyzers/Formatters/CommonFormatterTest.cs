@@ -1399,6 +1399,42 @@ namespace xFunc.Tests.Analyzers.Formatters
             Assert.Equal("sign(-5)", str);
         }
 
+        [Fact]
+        public void LeftShiftTest()
+        {
+            var exp = new LeftShift(Number.One, new Number(10));
+            var str = exp.ToString();
+
+            Assert.Equal("1 << 10", str);
+        }
+
+        [Fact]
+        public void RightShiftTest()
+        {
+            var exp = new RightShift(Number.One, new Number(10));
+            var str = exp.ToString();
+
+            Assert.Equal("1 >> 10", str);
+        }
+
+        [Fact]
+        public void LeftShiftAssignTest()
+        {
+            var exp = new LeftShiftAssign(Variable.X, new Number(10));
+            var str = exp.ToString();
+
+            Assert.Equal("x <<= 10", str);
+        }
+
+        [Fact]
+        public void RightShiftAssignTest()
+        {
+            var exp = new RightShiftAssign(Variable.X, new Number(10));
+            var str = exp.ToString();
+
+            Assert.Equal("x >>= 10", str);
+        }
+
         #endregion
     }
 }

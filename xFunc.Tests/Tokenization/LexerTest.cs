@@ -1892,5 +1892,57 @@ namespace xFunc.Tests.Tokenization
 
             Assert.Equal(expected, tokens.ToList());
         }
+
+        [Fact]
+        public void LeftShiftTest()
+        {
+            var tokens = lexer.Tokenize("1 << 10");
+            var expected = Builder()
+                .Number(1)
+                .Operation(OperatorToken.LeftShift)
+                .Number(10)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void RightShiftTest()
+        {
+            var tokens = lexer.Tokenize("1 >> 10");
+            var expected = Builder()
+                .Number(1)
+                .Operation(OperatorToken.RightShift)
+                .Number(10)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void LeftShiftAssignTest()
+        {
+            var tokens = lexer.Tokenize("x <<= 10");
+            var expected = Builder()
+                .VariableX()
+                .Operation(OperatorToken.LeftShiftAssign)
+                .Number(10)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
+
+        [Fact]
+        public void RightShiftAssignTest()
+        {
+            var tokens = lexer.Tokenize("x >>= 10");
+            var expected = Builder()
+                .VariableX()
+                .Operation(OperatorToken.RightShiftAssign)
+                .Number(10)
+                .Tokens;
+
+            Assert.Equal(expected, tokens.ToList());
+        }
     }
 }

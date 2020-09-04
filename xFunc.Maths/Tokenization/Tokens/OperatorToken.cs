@@ -169,5 +169,25 @@ namespace xFunc.Maths.Tokenization.Tokens
         /// Gets the '&lt;=>, &lt;->, eq' token.
         /// </summary>
         public static OperatorToken Equality { get; } = new OperatorToken("<->");
+
+        /// <summary>
+        /// Gets the '&lt;&lt;' token.
+        /// </summary>
+        public static OperatorToken LeftShift { get; } = new OperatorToken("<<");
+
+        /// <summary>
+        /// Gets the '&gt;&gt;' token.
+        /// </summary>
+        public static OperatorToken RightShift { get; } = new OperatorToken(">>");
+
+        /// <summary>
+        /// Gets the '&lt;&lt;=' token.
+        /// </summary>
+        public static OperatorToken LeftShiftAssign { get; } = new OperatorToken("<<=");
+
+        /// <summary>
+        /// Gets the '&gt;&gt;=' token.
+        /// </summary>
+        public static OperatorToken RightShiftAssign { get; } = new OperatorToken(">>=");
     }
 }

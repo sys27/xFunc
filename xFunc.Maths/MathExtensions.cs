@@ -386,6 +386,40 @@ namespace xFunc.Maths
         }
 
         /// <summary>
+        /// Shifts <paramref name="left"/> by number of bits from <paramref name="right"/>.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of '&lt;&lt;' operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static double LeftShift(this double left, double right)
+        {
+            if (!left.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!right.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return (int)left << (int)right;
+        }
+
+        /// <summary>
+        /// Shifts <paramref name="left"/> by number of bits from <paramref name="right"/>.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns>The result of '&gt;&gt;' operation.</returns>
+        /// <exception cref="InvalidOperationException"><paramref name="left"/> or <paramref name="right"/> is not an integer.</exception>
+        public static double RightShift(this double left, double right)
+        {
+            if (!left.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(left));
+            if (!right.IsInt())
+                throw new ArgumentException(Resource.ValueIsNotInteger, nameof(right));
+
+            return (int)left >> (int)right;
+        }
+
+        /// <summary>
         /// Determines whether the specified number is equal to the current number.
         /// </summary>
         /// <param name="left">The current number.</param>

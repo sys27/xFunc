@@ -181,11 +181,15 @@ namespace xFunc.Maths
                 return new SubAssign(first, second);
             if (token == OperatorToken.MulAssign)
                 return new MulAssign(first, second);
+            if (token == OperatorToken.DivAssign)
+                return new DivAssign(first, second);
+            if (token == OperatorToken.LeftShiftAssign)
+                return new LeftShiftAssign(first, second);
 
-            // if (token == OperatorToken.DivAssign)
-            Debug.Assert(token == OperatorToken.DivAssign, "Only '+=', '-=', '*=', '/=' operators are allowed here.");
+            // if (token == OperatorToken.RightShiftAssign)
+            Debug.Assert(token == OperatorToken.RightShiftAssign, "Only '+=', '-=', '*=', '/=', '<<=', '>>=' operators are allowed here.");
 
-            return new DivAssign(first, second);
+            return new RightShiftAssign(first, second);
         }
 
         private IExpression CreateUnaryAssign(OperatorToken token, Variable first)
@@ -258,6 +262,17 @@ namespace xFunc.Maths
             Debug.Assert(token == OperatorToken.GreaterOrEqual, "Incorrect token type.");
 
             return new GreaterOrEqual(first, second);
+        }
+
+        private IExpression CreateShift(OperatorToken token, IExpression first, IExpression second)
+        {
+            if (token == OperatorToken.LeftShift)
+                return new LeftShift(first, second);
+
+            // if (token == OperatorToken.RightShift)
+            Debug.Assert(token == OperatorToken.RightShift, "Only '<<', '>>' are allowed here.");
+
+            return new RightShift(first, second);
         }
 
         private IExpression CreateAddSub(OperatorToken token, IExpression first, IExpression second)

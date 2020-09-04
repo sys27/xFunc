@@ -71,13 +71,12 @@
             "dependsOn": [
                 "Code Coverage"
             ],
-            "command": "dotnet",
+            "command": "reportgenerator",
             "type": "process",
             "options": {
                 "cwd": "${workspaceRoot}/xFunc.Tests/"
             },
             "args": [
-                "reportgenerator",
                 "-reports:\"../coverage/coverage.cobertura.xml\"",
                 "-targetdir:\"../coverage\"",
                 "-reporttypes:HtmlInline_AzurePipelines"

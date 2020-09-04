@@ -36,6 +36,8 @@ namespace xFunc.Maths.Tokenization
                 ('<', '-', '>') => (Equality, 3),
                 ('<', '−', '>') => (Equality, 3),
                 ('<', '=', '>') => (Equality, 3),
+                ('<', '<', '=') => (LeftShiftAssign, 3),
+                ('>', '>', '=') => (RightShiftAssign, 3),
 
                 (':', '=', _) => (Assign, 2),
                 ('+', '=', _) => (AddAssign, 2),
@@ -56,6 +58,8 @@ namespace xFunc.Maths.Tokenization
                 ('-', '>', _) => (Implication, 2),
                 ('−', '>', _) => (Implication, 2),
                 ('=', '>', _) => (Implication, 2),
+                ('<', '<', _) => (LeftShift, 2),
+                ('>', '>', _) => (RightShift, 2),
 
                 ('+', _, _) => (Plus, 1),
                 ('-', _, _) => (Minus, 1),

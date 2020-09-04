@@ -1256,6 +1256,38 @@ namespace xFunc.Maths.Analyzers
         public virtual TResult Analyze(While exp)
             => throw new NotSupportedException();
 
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(LeftShift exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(RightShift exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(LeftShiftAssign exp)
+            => throw new NotSupportedException();
+
+        /// <summary>
+        /// Analyzes the specified expression.
+        /// </summary>
+        /// <param name="exp">The expression.</param>
+        /// <returns>The result of analysis.</returns>
+        public virtual TResult Analyze(RightShiftAssign exp)
+            => throw new NotSupportedException();
+
         #endregion Programming
     }
 }

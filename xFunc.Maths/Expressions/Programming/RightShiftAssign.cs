@@ -19,16 +19,16 @@ using xFunc.Maths.Analyzers;
 namespace xFunc.Maths.Expressions.Programming
 {
     /// <summary>
-    /// Represents the "*=" operator.
+    /// Represents the '&lt;&lt;=' operator.
     /// </summary>
-    public class MulAssign : VariableBinaryExpression
+    public class RightShiftAssign : VariableBinaryExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MulAssign"/> class.
+        /// Initializes a new instance of the <see cref="RightShiftAssign"/> class.
         /// </summary>
         /// <param name="variable">The variable.</param>
         /// <param name="exp">The expression.</param>
-        public MulAssign(Variable variable, IExpression exp)
+        public RightShiftAssign(Variable variable, IExpression exp)
             : base(variable, exp)
         {
         }
@@ -52,7 +52,7 @@ namespace xFunc.Maths.Expressions.Programming
                 var rightResult = Value.Execute(parameters);
                 if (rightResult is double rightValue)
                 {
-                    var newValue = value * rightValue;
+                    var newValue = value.RightShift(rightValue);
                     parameters.Variables[Variable.Name] = newValue;
 
                     return newValue;
@@ -92,9 +92,9 @@ namespace xFunc.Maths.Expressions.Programming
         /// Creates the clone of this instance.
         /// </summary>
         /// <returns>
-        /// Returns the new instance of <see cref="MulAssign" /> that is a clone of this instance.
+        /// Returns the new instance of <see cref="AddAssign" /> that is a clone of this instance.
         /// </returns>
-        public override IExpression Clone() =>
-            new MulAssign((Variable)Variable.Clone(), Value.Clone());
+        public override IExpression Clone()
+            => new RightShiftAssign((Variable)Variable.Clone(), Value.Clone());
     }
 }

@@ -326,5 +326,35 @@ namespace xFunc.Tests.ParserTests
 
             ParseErrorTest(tokens);
         }
+
+        [Fact]
+        public void LeftShiftAssignTest()
+        {
+            var tokens = Builder()
+                .VariableX()
+                .Operation(OperatorToken.LeftShiftAssign)
+                .Number(10)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new LeftShiftAssign(Variable.X, new Number(10));
+
+            Assert.Equal(expected, exp);
+        }
+
+        [Fact]
+        public void RightShiftAssignTest()
+        {
+            var tokens = Builder()
+                .VariableX()
+                .Operation(OperatorToken.RightShiftAssign)
+                .Number(10)
+                .Tokens;
+
+            var exp = parser.Parse(tokens);
+            var expected = new RightShiftAssign(Variable.X, new Number(10));
+
+            Assert.Equal(expected, exp);
+        }
     }
 }

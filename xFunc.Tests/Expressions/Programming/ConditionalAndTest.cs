@@ -20,7 +20,7 @@ using Xunit;
 
 namespace xFunc.Tests.Expressions.Programming
 {
-    public class AndTest
+    public class ConditionalAndTest
     {
         [Fact]
         public void CalculateAndTrueTest()

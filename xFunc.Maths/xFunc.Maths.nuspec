@@ -3,8 +3,8 @@
     <metadata>
         <id>xFunc.Maths</id>
         <version>$version$</version>
-        <authors>Dmitry Kischenko</authors>
-        <owners>Dmitry Kischenko</owners>
+        <authors>Dmytro Kyshchenko</authors>
+        <owners>Dmytro Kyshchenko</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">Apache-2.0</license>
 		<licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
@@ -12,7 +12,7 @@
         <iconUrl>https://raw.githubusercontent.com/sys27/xFunc/master/xFunc/Images/xFunc.ico</iconUrl>
         <description>xFunc.Maths is a simple and easy to use library that allows you to build mathematical expressions.</description>
         <releaseNotes></releaseNotes>
-        <copyright>Copyright 2012-2019 Dmitry Kischenko</copyright>
+        <copyright>Copyright 2012-2020 Dmytro Kyshchenko</copyright>
         <tags>Math Expression Expressions Parser MathParser Differentiation Simplification</tags>
     </metadata>
     <files>

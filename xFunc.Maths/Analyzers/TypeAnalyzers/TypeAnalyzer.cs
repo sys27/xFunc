@@ -1697,7 +1697,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (leftResult == ResultType.Number)
             {
                 if (rightResult == ResultType.Number)
-                    return ResultType.Number;
+                    return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
             }
@@ -1894,7 +1894,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
             if (leftResult == ResultType.Number)
             {
                 if (rightResult == ResultType.Number)
-                    return ResultType.Number;
+                    return ResultType.Boolean;
 
                 throw new BinaryParameterTypeMismatchException(ResultType.Number, rightResult, BinaryParameterType.Right);
             }

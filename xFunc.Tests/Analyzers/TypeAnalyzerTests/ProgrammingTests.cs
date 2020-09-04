@@ -142,7 +142,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Equal(new Number(20), new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]
@@ -214,7 +214,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new NotEqual(new Number(20), new Number(10));
 
-            Test(exp, ResultType.Number);
+            Test(exp, ResultType.Boolean);
         }
 
         [Fact]

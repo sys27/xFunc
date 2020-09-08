@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -24,386 +25,90 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
     public class HyperbolicTests : TypeAnalyzerBaseTests
     {
-        [Fact]
-        public void TestArcoshUndefined()
+        [Theory]
+        [InlineData(typeof(Arcosh))]
+        [InlineData(typeof(Arcoth))]
+        [InlineData(typeof(Arcsch))]
+        [InlineData(typeof(Arsech))]
+        [InlineData(typeof(Arsinh))]
+        [InlineData(typeof(Artanh))]
+        [InlineData(typeof(Cosh))]
+        [InlineData(typeof(Coth))]
+        [InlineData(typeof(Csch))]
+        [InlineData(typeof(Sech))]
+        [InlineData(typeof(Sinh))]
+        [InlineData(typeof(Tanh))]
+        public void TestUndefined(Type type)
         {
-            var exp = new Arcosh(Variable.X);
+            var exp = Create(type, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
 
-        [Fact]
-        public void TestArcoshNumber()
+        [Theory]
+        [InlineData(typeof(Arcosh))]
+        [InlineData(typeof(Arcoth))]
+        [InlineData(typeof(Arcsch))]
+        [InlineData(typeof(Arsech))]
+        [InlineData(typeof(Arsinh))]
+        [InlineData(typeof(Artanh))]
+        public void TestAngleNumber(Type type)
         {
-            var exp = new Arcosh(Number.Two);
+            var exp = Create(type, Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
 
-        [Fact]
-        public void TestArcoshComplexNumber()
+        [Theory]
+        [InlineData(typeof(Cosh))]
+        [InlineData(typeof(Coth))]
+        [InlineData(typeof(Csch))]
+        [InlineData(typeof(Sech))]
+        [InlineData(typeof(Sinh))]
+        [InlineData(typeof(Tanh))]
+        public void TestNumber(Type type)
         {
-            var exp = new Arcosh(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArcoshException()
-        {
-            var exp = new Arcosh(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArcothUndefined()
-        {
-            var exp = new Arcoth(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArcothNumber()
-        {
-            var exp = new Arcoth(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArcothComplexNumber()
-        {
-            var exp = new Arcoth(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArcothException()
-        {
-            var exp = new Arcoth(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArcschUndefined()
-        {
-            var exp = new Arcsch(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArcschNumber()
-        {
-            var exp = new Arcsch(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArcschComplexNumber()
-        {
-            var exp = new Arcsch(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArcschException()
-        {
-            var exp = new Arcsch(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArsechUndefined()
-        {
-            var exp = new Arsech(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArsechNumber()
-        {
-            var exp = new Arsech(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArsechComplexNumber()
-        {
-            var exp = new Arsech(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArsechException()
-        {
-            var exp = new Arsech(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArsinhUndefined()
-        {
-            var exp = new Arsinh(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArsinhNumber()
-        {
-            var exp = new Arsinh(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArsinhComplexNumber()
-        {
-            var exp = new Arsinh(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArsinhException()
-        {
-            var exp = new Arsinh(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArtanhUndefined()
-        {
-            var exp = new Artanh(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArtanhNumber()
-        {
-            var exp = new Artanh(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArtanhComplexNumber()
-        {
-            var exp = new Artanh(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArtanhException()
-        {
-            var exp = new Artanh(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestCoshUndefined()
-        {
-            var exp = new Cosh(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestCoshNumber()
-        {
-            var exp = new Cosh(Number.Two);
+            var exp = Create(type, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
 
-        [Fact]
-        public void TestCoshComplexNumber()
+        [Theory]
+        [InlineData(typeof(Arcosh))]
+        [InlineData(typeof(Arcoth))]
+        [InlineData(typeof(Arcsch))]
+        [InlineData(typeof(Arsech))]
+        [InlineData(typeof(Arsinh))]
+        [InlineData(typeof(Artanh))]
+        [InlineData(typeof(Cosh))]
+        [InlineData(typeof(Coth))]
+        [InlineData(typeof(Csch))]
+        [InlineData(typeof(Sech))]
+        [InlineData(typeof(Sinh))]
+        [InlineData(typeof(Tanh))]
+        public void TestComplexNumber(Type type)
         {
-            var exp = new Cosh(new ComplexNumber(2, 2));
+            var exp = Create(type, new ComplexNumber(2, 2));
 
             Test(exp, ResultTypes.ComplexNumber);
         }
 
-        [Fact]
-        public void TestCoshException()
+        [Theory]
+        [InlineData(typeof(Arcosh))]
+        [InlineData(typeof(Arcoth))]
+        [InlineData(typeof(Arcsch))]
+        [InlineData(typeof(Arsech))]
+        [InlineData(typeof(Arsinh))]
+        [InlineData(typeof(Artanh))]
+        [InlineData(typeof(Cosh))]
+        [InlineData(typeof(Coth))]
+        [InlineData(typeof(Csch))]
+        [InlineData(typeof(Sech))]
+        [InlineData(typeof(Sinh))]
+        [InlineData(typeof(Tanh))]
+        public void TestParameterException(Type type)
         {
-            var exp = new Cosh(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestCothUndefined()
-        {
-            var exp = new Coth(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestCothNumber()
-        {
-            var exp = new Coth(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestCothComplexNumber()
-        {
-            var exp = new Coth(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestCothException()
-        {
-            var exp = new Coth(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestCschUndefined()
-        {
-            var exp = new Csch(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestCschNumber()
-        {
-            var exp = new Csch(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestCschComplexNumber()
-        {
-            var exp = new Csch(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestCschException()
-        {
-            var exp = new Csch(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestSechUndefined()
-        {
-            var exp = new Sech(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestSechNumber()
-        {
-            var exp = new Sech(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestSechComplexNumber()
-        {
-            var exp = new Sech(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestSechException()
-        {
-            var exp = new Sech(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestSinhUndefined()
-        {
-            var exp = new Sinh(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestSinhNumber()
-        {
-            var exp = new Sinh(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestSinhComplexNumber()
-        {
-            var exp = new Sinh(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestSinhException()
-        {
-            var exp = new Sinh(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestTanhUndefined()
-        {
-            var exp = new Tanh(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestTanhNumber()
-        {
-            var exp = new Tanh(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestTanhComplexNumber()
-        {
-            var exp = new Tanh(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestTanhException()
-        {
-            var exp = new Tanh(Bool.False);
+            var exp = Create(type, Bool.False);
 
             TestException(exp);
         }

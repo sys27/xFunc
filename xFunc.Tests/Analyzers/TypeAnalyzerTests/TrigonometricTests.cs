@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers.TypeAnalyzers;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.ComplexNumbers;
@@ -24,386 +25,90 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
 {
     public class TrigonometricTests : TypeAnalyzerBaseTests
     {
-        [Fact]
-        public void TestArccosUndefined()
+        [Theory]
+        [InlineData(typeof(Arccos))]
+        [InlineData(typeof(Arccot))]
+        [InlineData(typeof(Arccsc))]
+        [InlineData(typeof(Arcsec))]
+        [InlineData(typeof(Arcsin))]
+        [InlineData(typeof(Arctan))]
+        [InlineData(typeof(Cos))]
+        [InlineData(typeof(Cot))]
+        [InlineData(typeof(Csc))]
+        [InlineData(typeof(Sec))]
+        [InlineData(typeof(Sin))]
+        [InlineData(typeof(Tan))]
+        public void TestUndefined(Type type)
         {
-            var exp = new Arccos(Variable.X);
+            var exp = Create(type, Variable.X);
 
             Test(exp, ResultTypes.Undefined);
         }
 
-        [Fact]
-        public void TestArccosNumber()
+        [Theory]
+        [InlineData(typeof(Arccos))]
+        [InlineData(typeof(Arccot))]
+        [InlineData(typeof(Arccsc))]
+        [InlineData(typeof(Arcsec))]
+        [InlineData(typeof(Arcsin))]
+        [InlineData(typeof(Arctan))]
+        public void TestAngleNumber(Type type)
         {
-            var exp = new Arccos(Number.Two);
+            var exp = Create(type, Number.Two);
 
             Test(exp, ResultTypes.AngleNumber);
         }
 
-        [Fact]
-        public void TestArccosComplexNumber()
+        [Theory]
+        [InlineData(typeof(Cos))]
+        [InlineData(typeof(Cot))]
+        [InlineData(typeof(Csc))]
+        [InlineData(typeof(Sec))]
+        [InlineData(typeof(Sin))]
+        [InlineData(typeof(Tan))]
+        public void TestNumber(Type type)
         {
-            var exp = new Arccos(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArccosException()
-        {
-            var exp = new Arccos(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArccotUndefined()
-        {
-            var exp = new Arccot(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArccotNumber()
-        {
-            var exp = new Arccot(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArccotComplexNumber()
-        {
-            var exp = new Arccot(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArccotException()
-        {
-            var exp = new Arccot(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArccscUndefined()
-        {
-            var exp = new Arccsc(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArccscNumber()
-        {
-            var exp = new Arccsc(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArccscComplexNumber()
-        {
-            var exp = new Arccsc(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArccscException()
-        {
-            var exp = new Arccsc(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArcsecUndefined()
-        {
-            var exp = new Arcsec(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArcsecNumber()
-        {
-            var exp = new Arcsec(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArcsecComplexNumber()
-        {
-            var exp = new Arcsec(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArcsecException()
-        {
-            var exp = new Arcsec(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArcsinUndefined()
-        {
-            var exp = new Arcsin(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArcsinNumber()
-        {
-            var exp = new Arcsin(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArcsinComplexNumber()
-        {
-            var exp = new Arcsin(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArcsinException()
-        {
-            var exp = new Arcsin(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestArctanUndefined()
-        {
-            var exp = new Arctan(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestArctanNumber()
-        {
-            var exp = new Arctan(Number.Two);
-
-            Test(exp, ResultTypes.AngleNumber);
-        }
-
-        [Fact]
-        public void TestArctanComplexNumber()
-        {
-            var exp = new Arctan(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestArctanException()
-        {
-            var exp = new Arctan(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestCosUndefined()
-        {
-            var exp = new Cos(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestCosNumber()
-        {
-            var exp = new Cos(Number.Two);
+            var exp = Create(type, Number.Two);
 
             Test(exp, ResultTypes.Number);
         }
 
-        [Fact]
-        public void TestCosComplexNumber()
+        [Theory]
+        [InlineData(typeof(Arccos))]
+        [InlineData(typeof(Arccot))]
+        [InlineData(typeof(Arccsc))]
+        [InlineData(typeof(Arcsec))]
+        [InlineData(typeof(Arcsin))]
+        [InlineData(typeof(Arctan))]
+        [InlineData(typeof(Cos))]
+        [InlineData(typeof(Cot))]
+        [InlineData(typeof(Csc))]
+        [InlineData(typeof(Sec))]
+        [InlineData(typeof(Sin))]
+        [InlineData(typeof(Tan))]
+        public void TestComplexNumber(Type type)
         {
-            var exp = new Cos(new ComplexNumber(2, 2));
+            var exp = Create(type, new ComplexNumber(2, 2));
 
             Test(exp, ResultTypes.ComplexNumber);
         }
 
-        [Fact]
-        public void TestCosException()
+        [Theory]
+        [InlineData(typeof(Arccos))]
+        [InlineData(typeof(Arccot))]
+        [InlineData(typeof(Arccsc))]
+        [InlineData(typeof(Arcsec))]
+        [InlineData(typeof(Arcsin))]
+        [InlineData(typeof(Arctan))]
+        [InlineData(typeof(Cos))]
+        [InlineData(typeof(Cot))]
+        [InlineData(typeof(Csc))]
+        [InlineData(typeof(Sec))]
+        [InlineData(typeof(Sin))]
+        [InlineData(typeof(Tan))]
+        public void TestParameterException(Type type)
         {
-            var exp = new Cos(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestCotUndefined()
-        {
-            var exp = new Cot(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestCotNumber()
-        {
-            var exp = new Cot(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestCotComplexNumber()
-        {
-            var exp = new Cot(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestCotException()
-        {
-            var exp = new Cot(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestCscUndefined()
-        {
-            var exp = new Csc(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestCscNumber()
-        {
-            var exp = new Csc(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestCscComplexNumber()
-        {
-            var exp = new Csc(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestCscException()
-        {
-            var exp = new Csc(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestSecUndefined()
-        {
-            var exp = new Sec(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestSecNumber()
-        {
-            var exp = new Sec(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestSecComplexNumber()
-        {
-            var exp = new Sec(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestSecException()
-        {
-            var exp = new Sec(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestSinUndefined()
-        {
-            var exp = new Sin(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestSinNumber()
-        {
-            var exp = new Sin(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestSinComplexNumber()
-        {
-            var exp = new Sin(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestSinException()
-        {
-            var exp = new Sin(Bool.False);
-
-            TestException(exp);
-        }
-
-        [Fact]
-        public void TestTanUndefined()
-        {
-            var exp = new Tan(Variable.X);
-
-            Test(exp, ResultTypes.Undefined);
-        }
-
-        [Fact]
-        public void TestTanNumber()
-        {
-            var exp = new Tan(Number.Two);
-
-            Test(exp, ResultTypes.Number);
-        }
-
-        [Fact]
-        public void TestTanComplexNumber()
-        {
-            var exp = new Tan(new ComplexNumber(2, 2));
-
-            Test(exp, ResultTypes.ComplexNumber);
-        }
-
-        [Fact]
-        public void TestTanException()
-        {
-            var exp = new Tan(Bool.False);
+            var exp = Create(type, Bool.False);
 
             TestException(exp);
         }

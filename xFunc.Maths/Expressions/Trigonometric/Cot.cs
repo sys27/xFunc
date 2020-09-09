@@ -53,7 +53,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
         protected override double ExecuteInternal(AngleValue angleValue)
-            => AngleExtensions.Cot(angleValue);
+            => angleValue.Cot();
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).

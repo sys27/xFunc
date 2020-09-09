@@ -28,7 +28,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle.</param>
         /// <returns>The angle, <c>x</c>, that such that 0 ≤ <c>x</c> ≤ <c>MaxValue</c>.</returns>
-        public static AngleValue Abs(AngleValue angleValue)
+        public static AngleValue Abs(this AngleValue angleValue)
             => new AngleValue(Math.Abs(angleValue.Value), angleValue.Unit);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle.</param>
         /// <returns>The smallest integral value.</returns>
-        public static AngleValue Ceiling(AngleValue angleValue)
+        public static AngleValue Ceiling(this AngleValue angleValue)
             => new AngleValue(Math.Ceiling(angleValue.Value), angleValue.Unit);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle.</param>
         /// <returns>The largest integral value.</returns>
-        public static AngleValue Floor(AngleValue angleValue)
+        public static AngleValue Floor(this AngleValue angleValue)
             => new AngleValue(Math.Floor(angleValue.Value), angleValue.Unit);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">An angle to truncate.</param>
         /// <returns>The integral part of angle number.</returns>
-        public static AngleValue Truncate(AngleValue angleValue)
+        public static AngleValue Truncate(this AngleValue angleValue)
             => new AngleValue(Math.Truncate(angleValue.Value), angleValue.Unit);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The fractional part.</returns>
-        public static AngleValue Frac(AngleValue angleValue)
+        public static AngleValue Frac(this AngleValue angleValue)
             => new AngleValue(MathExtensions.Frac(angleValue.Value), angleValue.Unit);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of sine function.</returns>
-        public static double Sin(AngleValue angleValue)
+        public static double Sin(this AngleValue angleValue)
         {
             var value = angleValue.Normalize().Value;
 
@@ -144,7 +144,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of cosine function.</returns>
-        public static double Cos(AngleValue angleValue)
+        public static double Cos(this AngleValue angleValue)
         {
             var value = angleValue.Normalize().Value;
 
@@ -220,7 +220,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of tangent function.</returns>
-        public static double Tan(AngleValue angleValue)
+        public static double Tan(this AngleValue angleValue)
         {
             var value = angleValue.Normalize().Value;
 
@@ -296,7 +296,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of cotangent function.</returns>
-        public static double Cot(AngleValue angleValue)
+        public static double Cot(this AngleValue angleValue)
         {
             var value = angleValue.Normalize().Value;
 
@@ -372,7 +372,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of secant function.</returns>
-        public static double Sec(AngleValue angleValue)
+        public static double Sec(this AngleValue angleValue)
         {
             var value = angleValue.Normalize().Value;
 
@@ -448,7 +448,7 @@ namespace xFunc.Maths
         /// </summary>
         /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of cosecant function.</returns>
-        public static double Csc(AngleValue angleValue)
+        public static double Csc(this AngleValue angleValue)
         {
             var value = angleValue.Normalize().Value;
 

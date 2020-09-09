@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => Math.Truncate(number),
-                AngleValue angle => AngleExtensions.Truncate(angle),
+                AngleValue angle => angle.Truncate(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

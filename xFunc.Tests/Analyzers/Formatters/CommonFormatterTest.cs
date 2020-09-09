@@ -286,7 +286,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void AngleNumberTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.Equal("10 degree", exp.ToString());
         }
@@ -318,7 +318,7 @@ namespace xFunc.Tests.Analyzers.Formatters
         [Fact]
         public void ToNumberTest()
         {
-            var exp = new ToNumber(Angle.Degree(10).AsExpression());
+            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
 
             Assert.Equal("tonumber(10 degree)", exp.ToString());
         }

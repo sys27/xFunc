@@ -208,7 +208,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        TResult Analyze(AngleNumber exp, TContext context);
+        TResult Analyze(Angle exp, TContext context);
 
         /// <summary>
         /// Analyzes the specified expression.

@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteRadianTest()
         {
-            var exp = new Sin(Angle.Radian(1).AsExpression());
+            var exp = new Sin(AngleValue.Radian(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.8414709848078965, result, 15);
@@ -66,7 +66,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteDegreeTest()
         {
-            var exp = new Sin(Angle.Degree(1).AsExpression());
+            var exp = new Sin(AngleValue.Degree(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.017452406437283512, result, 15);
@@ -75,7 +75,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Sin(Angle.Gradian(1).AsExpression());
+            var exp = new Sin(AngleValue.Gradian(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.015707317311820675, result, 15);

@@ -55,8 +55,8 @@ namespace xFunc.Maths.Expressions.Angles
 
             return result switch
             {
-                double number => Angle.Radian(number),
-                Angle angle => angle.ToRadian(),
+                double number => AngleValue.Radian(number),
+                AngleValue angle => angle.ToRadian(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

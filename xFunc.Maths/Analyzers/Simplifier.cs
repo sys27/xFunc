@@ -584,7 +584,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
         [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(AngleNumber exp) => exp;
+        public virtual IExpression Analyze(Angle exp) => exp;
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -597,9 +597,9 @@ namespace xFunc.Maths.Analyzers
 
             return exp.Argument switch
             {
-                Number number => Angle.Degree(number.Value).AsExpression(),
-                AngleNumber({ Unit: AngleUnit.Degree }) number => number,
-                AngleNumber(var angle) => angle.ToDegree().AsExpression(),
+                Number number => AngleValue.Degree(number.Value).AsExpression(),
+                Angle({ Unit: AngleUnit.Degree }) number => number,
+                Angle(var angle) => angle.ToDegree().AsExpression(),
                 _ => exp,
             };
         }
@@ -615,9 +615,9 @@ namespace xFunc.Maths.Analyzers
 
             return exp.Argument switch
             {
-                Number number => Angle.Radian(number.Value).AsExpression(),
-                AngleNumber({ Unit: AngleUnit.Radian }) number => number,
-                AngleNumber(var angle) => angle.ToRadian().AsExpression(),
+                Number number => AngleValue.Radian(number.Value).AsExpression(),
+                Angle({ Unit: AngleUnit.Radian }) number => number,
+                Angle(var angle) => angle.ToRadian().AsExpression(),
                 _ => exp,
             };
         }
@@ -633,9 +633,9 @@ namespace xFunc.Maths.Analyzers
 
             return exp.Argument switch
             {
-                Number number => Angle.Gradian(number.Value).AsExpression(),
-                AngleNumber({ Unit: AngleUnit.Gradian }) number => number,
-                AngleNumber(var angle) => angle.ToGradian().AsExpression(),
+                Number number => AngleValue.Gradian(number.Value).AsExpression(),
+                Angle({ Unit: AngleUnit.Gradian }) number => number,
+                Angle(var angle) => angle.ToGradian().AsExpression(),
                 _ => exp,
             };
         }
@@ -651,7 +651,7 @@ namespace xFunc.Maths.Analyzers
 
             return exp.Argument switch
             {
-                AngleNumber(var angle) => new Number(angle.Value),
+                Angle(var angle) => new Number(angle.Value),
                 _ => exp,
             };
         }

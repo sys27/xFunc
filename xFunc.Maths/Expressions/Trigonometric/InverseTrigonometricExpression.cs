@@ -77,7 +77,7 @@ namespace xFunc.Maths.Expressions.Trigonometric
 
             return result switch
             {
-                double number => Angle.Radian(ExecuteInternal(number)),
+                double number => AngleValue.Radian(ExecuteInternal(number)),
                 Complex complex => (object)ExecuteComplex(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

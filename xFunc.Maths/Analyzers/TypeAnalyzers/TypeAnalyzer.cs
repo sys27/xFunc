@@ -657,7 +657,7 @@ namespace xFunc.Maths.Analyzers.TypeAnalyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual ResultTypes Analyze(AngleNumber exp)
+        public virtual ResultTypes Analyze(Angle exp)
             => ResultTypes.AngleNumber;
 
         /// <summary>

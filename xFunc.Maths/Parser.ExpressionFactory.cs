@@ -328,7 +328,7 @@ namespace xFunc.Maths
             => new Number(numberToken.Number);
 
         private IExpression CreateAngleNumber(NumberToken numberToken, AngleUnit unit)
-            => new Angle(numberToken.Number, unit).AsExpression();
+            => new AngleValue(numberToken.Number, unit).AsExpression();
 
         private IExpression CreateComplexNumber(
             OperatorToken? magnitudeSign,

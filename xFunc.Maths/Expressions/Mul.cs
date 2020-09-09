@@ -65,9 +65,9 @@ namespace xFunc.Maths.Expressions
             {
                 (double left, double right) => left * right,
 
-                (double left, Angle right) => left * right,
-                (Angle left, double right) => left * right,
-                (Angle left, Angle right) => left * right,
+                (double left, AngleValue right) => left * right,
+                (AngleValue left, double right) => left * right,
+                (AngleValue left, AngleValue right) => left * right,
 
                 (double left, Complex right) => left * right,
                 (Complex left, double right) => left * right,

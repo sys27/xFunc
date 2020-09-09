@@ -58,7 +58,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => MathExtensions.Frac(number),
-                Angle angle => AngleExtensions.Frac(angle),
+                AngleValue angle => angle.Frac(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

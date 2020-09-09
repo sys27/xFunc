@@ -283,7 +283,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public override IExpression Analyze(AngleNumber exp, DifferentiatorContext context)
+        public override IExpression Analyze(Angle exp, DifferentiatorContext context)
         {
             return Number.Zero;
         }

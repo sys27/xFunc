@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Angles
         {
             var exp = new ToRadian(new Number(10));
             var actual = exp.Execute();
-            var expected = Angle.Radian(10);
+            var expected = AngleValue.Radian(10);
 
             Assert.Equal(expected, actual);
         }
@@ -36,9 +36,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new ToRadian(Angle.Radian(10).AsExpression());
+            var exp = new ToRadian(AngleValue.Radian(10).AsExpression());
             var actual = exp.Execute();
-            var expected = Angle.Radian(10);
+            var expected = AngleValue.Radian(10);
 
             Assert.Equal(expected, actual);
         }

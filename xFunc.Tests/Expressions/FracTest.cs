@@ -45,9 +45,9 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new Frac(Angle.Degree(5.5).AsExpression());
+            var exp = new Frac(AngleValue.Degree(5.5).AsExpression());
             var result = exp.Execute();
-            var expected = Angle.Degree(0.5);
+            var expected = AngleValue.Degree(0.5);
 
             Assert.Equal(expected, result);
         }
@@ -55,9 +55,9 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteNegativeAngleTest()
         {
-            var exp = new Frac(Angle.Degree(-5.5).AsExpression());
+            var exp = new Frac(AngleValue.Degree(-5.5).AsExpression());
             var result = exp.Execute();
-            var expected = Angle.Degree(-0.5);
+            var expected = AngleValue.Degree(-0.5);
 
             Assert.Equal(expected, result);
         }

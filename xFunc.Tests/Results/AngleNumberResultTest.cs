@@ -24,7 +24,7 @@ namespace xFunc.Tests.Results
         [Fact]
         public void ResultTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
             var result = new AngleNumberResult(angle);
 
             Assert.Equal(angle, result.Result);
@@ -33,7 +33,7 @@ namespace xFunc.Tests.Results
         [Fact]
         public void IResultTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
             var result = new AngleNumberResult(angle) as IResult;
 
             Assert.Equal(angle, result.Result);
@@ -42,7 +42,7 @@ namespace xFunc.Tests.Results
         [Fact]
         public void ToStringTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
             var result = new AngleNumberResult(angle);
 
             Assert.Equal("10 degree", result.ToString());

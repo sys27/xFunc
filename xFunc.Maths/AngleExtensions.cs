@@ -19,58 +19,58 @@ using xFunc.Maths.Expressions.Angles;
 namespace xFunc.Maths
 {
     /// <summary>
-    /// Extension method for <see cref="Angle"/>.
+    /// Extension method for <see cref="AngleValue"/>.
     /// </summary>
     internal static class AngleExtensions
     {
         /// <summary>
         /// Returns the absolute value of a specified angle.
         /// </summary>
-        /// <param name="angle">The angle.</param>
+        /// <param name="angleValue">The angle.</param>
         /// <returns>The angle, <c>x</c>, that such that 0 ≤ <c>x</c> ≤ <c>MaxValue</c>.</returns>
-        public static Angle Abs(Angle angle)
-            => new Angle(Math.Abs(angle.Value), angle.Unit);
+        public static AngleValue Abs(this AngleValue angleValue)
+            => new AngleValue(Math.Abs(angleValue.Value), angleValue.Unit);
 
         /// <summary>
         /// Returns the smallest integral value that is greater than or equal to the specified angle number.
         /// </summary>
-        /// <param name="angle">The angle.</param>
+        /// <param name="angleValue">The angle.</param>
         /// <returns>The smallest integral value.</returns>
-        public static Angle Ceiling(Angle angle)
-            => new Angle(Math.Ceiling(angle.Value), angle.Unit);
+        public static AngleValue Ceiling(this AngleValue angleValue)
+            => new AngleValue(Math.Ceiling(angleValue.Value), angleValue.Unit);
 
         /// <summary>
         /// Returns the largest integral value less than or equal to the specified angle number.
         /// </summary>
-        /// <param name="angle">The angle.</param>
+        /// <param name="angleValue">The angle.</param>
         /// <returns>The largest integral value.</returns>
-        public static Angle Floor(Angle angle)
-            => new Angle(Math.Floor(angle.Value), angle.Unit);
+        public static AngleValue Floor(this AngleValue angleValue)
+            => new AngleValue(Math.Floor(angleValue.Value), angleValue.Unit);
 
         /// <summary>
         /// Calculates the integral part of a specified angle number.
         /// </summary>
-        /// <param name="angle">An angle to truncate.</param>
+        /// <param name="angleValue">An angle to truncate.</param>
         /// <returns>The integral part of angle number.</returns>
-        public static Angle Truncate(Angle angle)
-            => new Angle(Math.Truncate(angle.Value), angle.Unit);
+        public static AngleValue Truncate(this AngleValue angleValue)
+            => new AngleValue(Math.Truncate(angleValue.Value), angleValue.Unit);
 
         /// <summary>
         /// Returns the fractional part of the angle number.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The fractional part.</returns>
-        public static Angle Frac(Angle angle)
-            => new Angle(MathExtensions.Frac(angle.Value), angle.Unit);
+        public static AngleValue Frac(this AngleValue angleValue)
+            => new AngleValue(MathExtensions.Frac(angleValue.Value), angleValue.Unit);
 
         /// <summary>
         /// The 'sin' function.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of sine function.</returns>
-        public static double Sin(Angle angle)
+        public static double Sin(this AngleValue angleValue)
         {
-            var value = angle.Normalize().Value;
+            var value = angleValue.Normalize().Value;
 
             // 0
             if (MathExtensions.Equals(value, 0))
@@ -136,17 +136,17 @@ namespace xFunc.Maths
             if (MathExtensions.Equals(value, 11 * Math.PI / 6))
                 return -MathExtensions.Half;
 
-            return Math.Sin(angle.Value);
+            return Math.Sin(angleValue.Value);
         }
 
         /// <summary>
         /// The 'cos' function.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of cosine function.</returns>
-        public static double Cos(Angle angle)
+        public static double Cos(this AngleValue angleValue)
         {
-            var value = angle.Normalize().Value;
+            var value = angleValue.Normalize().Value;
 
             // 0
             if (MathExtensions.Equals(value, 0))
@@ -212,17 +212,17 @@ namespace xFunc.Maths
             if (MathExtensions.Equals(value, 11 * Math.PI / 6))
                 return MathExtensions.Sqrt3By2;
 
-            return Math.Cos(angle.Value);
+            return Math.Cos(angleValue.Value);
         }
 
         /// <summary>
         /// The 'tan' function.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of tangent function.</returns>
-        public static double Tan(Angle angle)
+        public static double Tan(this AngleValue angleValue)
         {
-            var value = angle.Normalize().Value;
+            var value = angleValue.Normalize().Value;
 
             // 0
             if (MathExtensions.Equals(value, 0))
@@ -288,17 +288,17 @@ namespace xFunc.Maths
             if (MathExtensions.Equals(value, 11 * Math.PI / 6))
                 return -MathExtensions.Sqrt3By3;
 
-            return Math.Tan(angle.Value);
+            return Math.Tan(angleValue.Value);
         }
 
         /// <summary>
         /// The 'cot' function.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of cotangent function.</returns>
-        public static double Cot(Angle angle)
+        public static double Cot(this AngleValue angleValue)
         {
-            var value = angle.Normalize().Value;
+            var value = angleValue.Normalize().Value;
 
             // 0
             if (MathExtensions.Equals(value, 0))
@@ -364,17 +364,17 @@ namespace xFunc.Maths
             if (MathExtensions.Equals(value, 11 * Math.PI / 6))
                 return -MathExtensions.Sqrt3By3;
 
-            return MathExtensions.Cot(angle.Value);
+            return MathExtensions.Cot(angleValue.Value);
         }
 
         /// <summary>
         /// The 'cot' function.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of secant function.</returns>
-        public static double Sec(Angle angle)
+        public static double Sec(this AngleValue angleValue)
         {
-            var value = angle.Normalize().Value;
+            var value = angleValue.Normalize().Value;
 
             // 0
             if (MathExtensions.Equals(value, 0))
@@ -440,17 +440,17 @@ namespace xFunc.Maths
             if (MathExtensions.Equals(value, 11 * Math.PI / 6))
                 return MathExtensions.Sqrt3By3By2;
 
-            return MathExtensions.Sec(angle.Value);
+            return MathExtensions.Sec(angleValue.Value);
         }
 
         /// <summary>
         /// The 'csc' function.
         /// </summary>
-        /// <param name="angle">The angle number.</param>
+        /// <param name="angleValue">The angle number.</param>
         /// <returns>The result of cosecant function.</returns>
-        public static double Csc(Angle angle)
+        public static double Csc(this AngleValue angleValue)
         {
-            var value = angle.Normalize().Value;
+            var value = angleValue.Normalize().Value;
 
             // 0
             if (MathExtensions.Equals(value, 0))
@@ -516,7 +516,7 @@ namespace xFunc.Maths
             if (MathExtensions.Equals(value, 11 * Math.PI / 6))
                 return MathExtensions.Two;
 
-            return MathExtensions.Csc(angle.Value);
+            return MathExtensions.Csc(angleValue.Value);
         }
     }
 }

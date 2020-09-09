@@ -153,7 +153,7 @@ namespace xFunc.Tests.Expressions.Collections
         {
             var parameters = new ParameterCollection();
 
-            Assert.Equal(Angle.Radian(Math.PI), parameters["π"]);
+            Assert.Equal(AngleValue.Radian(Math.PI), parameters["π"]);
         }
 
         [Fact]
@@ -270,7 +270,7 @@ namespace xFunc.Tests.Expressions.Collections
 
             var parameter = parameters[0];
 
-            Assert.Equal(Angle.Radian(Math.PI), parameter);
+            Assert.Equal(AngleValue.Radian(Math.PI), parameter);
         }
 
         [Fact]

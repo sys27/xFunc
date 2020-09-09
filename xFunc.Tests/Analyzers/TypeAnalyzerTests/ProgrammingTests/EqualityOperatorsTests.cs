@@ -81,7 +81,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [InlineData(typeof(NotEqual))]
         public void TestEqualAngleUndefined(Type type)
         {
-            var exp = CreateBinary(type, Angle.Degree(1).AsExpression(), Variable.X);
+            var exp = CreateBinary(type, AngleValue.Degree(1).AsExpression(), Variable.X);
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -91,7 +91,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         [InlineData(typeof(NotEqual))]
         public void TestEqualUndefinedAngle(Type type)
         {
-            var exp = CreateBinary(type, Variable.X, Angle.Degree(1).AsExpression());
+            var exp = CreateBinary(type, Variable.X, AngleValue.Degree(1).AsExpression());
 
             Test(exp, ResultTypes.Boolean);
         }
@@ -122,8 +122,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         public void TestEqualAngleNumber(Type type)
         {
             var exp = CreateBinary(type,
-                Angle.Degree(10).AsExpression(),
-                Angle.Degree(10).AsExpression()
+                AngleValue.Degree(10).AsExpression(),
+                AngleValue.Degree(10).AsExpression()
             );
 
             Test(exp, ResultTypes.Boolean);
@@ -176,7 +176,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         {
             var exp = CreateBinary(type,
                 new ComplexNumber(1, 2),
-                Angle.Degree(10).AsExpression()
+                AngleValue.Degree(10).AsExpression()
             );
 
             TestBinaryException(exp);
@@ -188,7 +188,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests.ProgrammingTests
         public void TestEqualAngleNumberBool(Type type)
         {
             var exp = CreateBinary(type,
-                Angle.Degree(10).AsExpression(),
+                AngleValue.Degree(10).AsExpression(),
                 new ComplexNumber(1, 2)
             );
 

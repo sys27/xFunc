@@ -125,7 +125,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Div(
                 new Number(10),
-                Angle.Radian(10).AsExpression()
+                AngleValue.Radian(10).AsExpression()
             );
 
             Test(exp, ResultTypes.AngleNumber);
@@ -135,7 +135,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestDivAngleNumber()
         {
             var exp = new Div(
-                Angle.Degree(10).AsExpression(),
+                AngleValue.Degree(10).AsExpression(),
                 new Number(10)
             );
 
@@ -146,8 +146,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestDivAngleAngle()
         {
             var exp = new Div(
-                Angle.Degree(10).AsExpression(),
-                Angle.Radian(10).AsExpression()
+                AngleValue.Degree(10).AsExpression(),
+                AngleValue.Radian(10).AsExpression()
             );
 
             Test(exp, ResultTypes.AngleNumber);

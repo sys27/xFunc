@@ -26,7 +26,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void ToDegreeNumber()
         {
             var exp = new ToDegree(new Number(10));
-            var expected = Angle.Degree(10).AsExpression();
+            var expected = AngleValue.Degree(10).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -34,8 +34,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void DegreeToDegree()
         {
-            var exp = new ToDegree(Angle.Degree(10).AsExpression());
-            var expected = Angle.Degree(10).AsExpression();
+            var exp = new ToDegree(AngleValue.Degree(10).AsExpression());
+            var expected = AngleValue.Degree(10).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -43,8 +43,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void RadianToDegree()
         {
-            var exp = new ToDegree(Angle.Radian(Math.PI).AsExpression());
-            var expected = Angle.Degree(180).AsExpression();
+            var exp = new ToDegree(AngleValue.Radian(Math.PI).AsExpression());
+            var expected = AngleValue.Degree(180).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -53,7 +53,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void ToRadianNumber()
         {
             var exp = new ToRadian(new Number(10));
-            var expected = Angle.Radian(10).AsExpression();
+            var expected = AngleValue.Radian(10).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -61,8 +61,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void RadianToRadian()
         {
-            var exp = new ToRadian(Angle.Radian(10).AsExpression());
-            var expected = Angle.Radian(10).AsExpression();
+            var exp = new ToRadian(AngleValue.Radian(10).AsExpression());
+            var expected = AngleValue.Radian(10).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -70,8 +70,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void DegreeToRadian()
         {
-            var exp = new ToRadian(Angle.Degree(180).AsExpression());
-            var expected = Angle.Radian(Math.PI).AsExpression();
+            var exp = new ToRadian(AngleValue.Degree(180).AsExpression());
+            var expected = AngleValue.Radian(Math.PI).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -80,7 +80,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         public void ToGradianNumber()
         {
             var exp = new ToGradian(new Number(10));
-            var expected = Angle.Gradian(10).AsExpression();
+            var expected = AngleValue.Gradian(10).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -88,8 +88,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void GradianToGradian()
         {
-            var exp = new ToGradian(Angle.Gradian(10).AsExpression());
-            var expected = Angle.Gradian(10).AsExpression();
+            var exp = new ToGradian(AngleValue.Gradian(10).AsExpression());
+            var expected = AngleValue.Gradian(10).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -97,8 +97,8 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void DegreeToGradian()
         {
-            var exp = new ToGradian(Angle.Degree(180).AsExpression());
-            var expected = Angle.Gradian(200).AsExpression();
+            var exp = new ToGradian(AngleValue.Degree(180).AsExpression());
+            var expected = AngleValue.Gradian(200).AsExpression();
 
             SimpleTest(exp, expected);
         }
@@ -106,7 +106,7 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         [Fact]
         public void ToNumberTest()
         {
-            var exp = new ToNumber(Angle.Degree(10).AsExpression());
+            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
             var expected = new Number(10);
 
             SimpleTest(exp, expected);

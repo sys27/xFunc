@@ -46,8 +46,8 @@ namespace xFunc.Tests.Expressions.Programming
         public void LessAngleTest()
         {
             var exp = new LessThan(
-                Angle.Degree(10).AsExpression(),
-                Angle.Degree(12).AsExpression()
+                AngleValue.Degree(10).AsExpression(),
+                AngleValue.Degree(12).AsExpression()
             );
             var result = (bool)exp.Execute();
 

@@ -121,8 +121,8 @@ namespace xFunc.Tests.Expressions.Programming
         public void AngleEqualTest()
         {
             var equal = new Equal(
-                Angle.Degree(10).AsExpression(),
-                Angle.Degree(10).AsExpression()
+                AngleValue.Degree(10).AsExpression(),
+                AngleValue.Degree(10).AsExpression()
             );
             var result = (bool)equal.Execute();
 

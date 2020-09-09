@@ -55,7 +55,7 @@ namespace xFunc.Tests.Analyzers
         [Fact]
         public void AngleNumberTest()
         {
-            var exp = Differentiate(new AngleNumber(Angle.Degree(10)));
+            var exp = Differentiate(new Angle(AngleValue.Degree(10)));
 
             Assert.Equal(zero, exp);
         }

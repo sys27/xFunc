@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteRadianTest()
         {
-            var exp = new Sinh(Angle.Radian(1).AsExpression());
+            var exp = new Sinh(AngleValue.Radian(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(1.1752011936438014, result, 15);
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteDegreeTest()
         {
-            var exp = new Sinh(Angle.Degree(1).AsExpression());
+            var exp = new Sinh(AngleValue.Degree(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.01745417862959511, result, 15);
@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Sinh(Angle.Gradian(1).AsExpression());
+            var exp = new Sinh(AngleValue.Gradian(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.015708609240015783, result, 15);

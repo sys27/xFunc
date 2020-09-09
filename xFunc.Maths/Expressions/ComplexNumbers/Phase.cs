@@ -59,7 +59,7 @@ namespace xFunc.Maths.Expressions.ComplexNumbers
 
             return result switch
             {
-                Complex complex => Angle.Radian(complex.Phase),
+                Complex complex => AngleValue.Radian(complex.Phase),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

@@ -211,7 +211,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         {
             var exp = new Mul(
                 new Number(10),
-                Angle.Radian(10).AsExpression()
+                AngleValue.Radian(10).AsExpression()
             );
 
             Test(exp, ResultTypes.AngleNumber);
@@ -221,7 +221,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulAngleNumber()
         {
             var exp = new Mul(
-                Angle.Degree(10).AsExpression(),
+                AngleValue.Degree(10).AsExpression(),
                 new Number(10)
             );
 
@@ -232,8 +232,8 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         public void TestMulAngleAngle()
         {
             var exp = new Mul(
-                Angle.Degree(10).AsExpression(),
-                Angle.Radian(10).AsExpression()
+                AngleValue.Degree(10).AsExpression(),
+                AngleValue.Radian(10).AsExpression()
             );
 
             Test(exp, ResultTypes.AngleNumber);

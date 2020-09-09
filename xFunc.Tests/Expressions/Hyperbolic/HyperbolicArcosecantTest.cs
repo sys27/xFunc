@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         {
             var exp = new Arcsch(new Number(0.5));
             var result = exp.Execute();
-            var expected = Angle.Radian(1.2279471772995156);
+            var expected = AngleValue.Radian(1.2279471772995156);
 
             Assert.Equal(expected, result);
         }

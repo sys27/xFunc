@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => Math.Floor(number),
-                Angle angle => AngleExtensions.Floor(angle),
+                AngleValue angle => AngleExtensions.Floor(angle),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

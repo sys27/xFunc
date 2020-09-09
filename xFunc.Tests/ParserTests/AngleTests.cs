@@ -30,7 +30,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = Angle.Degree(1).AsExpression();
+            var expected = AngleValue.Degree(1).AsExpression();
 
             Assert.Equal(expected, exp);
         }
@@ -44,7 +44,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = Angle.Degree(1).AsExpression();
+            var expected = AngleValue.Degree(1).AsExpression();
 
             Assert.Equal(expected, exp);
         }
@@ -58,7 +58,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = Angle.Radian(1).AsExpression();
+            var expected = AngleValue.Radian(1).AsExpression();
 
             Assert.Equal(expected, exp);
         }
@@ -72,7 +72,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = Angle.Gradian(1).AsExpression();
+            var expected = AngleValue.Gradian(1).AsExpression();
 
             Assert.Equal(expected, exp);
         }
@@ -89,7 +89,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToDegree(Angle.Degree(1).AsExpression());
+            var expected = new ToDegree(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }
@@ -106,7 +106,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToDegree(Angle.Degree(1).AsExpression());
+            var expected = new ToDegree(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }
@@ -123,7 +123,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToRadian(Angle.Degree(1).AsExpression());
+            var expected = new ToRadian(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }
@@ -140,7 +140,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToRadian(Angle.Degree(1).AsExpression());
+            var expected = new ToRadian(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }
@@ -157,7 +157,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToGradian(Angle.Degree(1).AsExpression());
+            var expected = new ToGradian(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }
@@ -174,7 +174,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToGradian(Angle.Degree(1).AsExpression());
+            var expected = new ToGradian(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }
@@ -191,7 +191,7 @@ namespace xFunc.Tests.ParserTests
                 .Tokens;
 
             var exp = parser.Parse(tokens);
-            var expected = new ToNumber(Angle.Degree(1).AsExpression());
+            var expected = new ToNumber(AngleValue.Degree(1).AsExpression());
 
             Assert.Equal(expected, exp);
         }

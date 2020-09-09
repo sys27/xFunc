@@ -297,7 +297,7 @@ namespace xFunc.Maths.Analyzers.Formatters
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual string Analyze(AngleNumber exp)
+        public virtual string Analyze(Angle exp)
         {
             return exp.Value.ToString();
         }

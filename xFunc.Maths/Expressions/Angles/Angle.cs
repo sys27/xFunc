@@ -14,57 +14,43 @@
 // limitations under the License.
 
 using System;
-using System.Globalization;
+using xFunc.Maths.Analyzers;
+using xFunc.Maths.Analyzers.Formatters;
 
 namespace xFunc.Maths.Expressions.Angles
 {
     /// <summary>
-    /// Represents a number with angle measurement unit.
+    /// Represents an angle number.
     /// </summary>
-    public readonly struct Angle : IEquatable<Angle>, IComparable<Angle>
+    public class Angle : IExpression, IEquatable<Angle>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Angle"/> struct.
+        /// Initializes a new instance of the <see cref="Angle"/> class.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="unit">The unit of number.</param>
-        public Angle(double value, AngleUnit unit)
-        {
-            Value = value;
-            Unit = unit;
-        }
+        /// <param name="value">An angle.</param>
+        public Angle(AngleValue value) => Value = value;
 
         /// <summary>
-        /// Creates the <see cref="Angle"/> struct with <c>Degree</c> unit.
+        /// Deconstructs <see cref="Angle"/> to <see cref="AngleValue"/>.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The angle.</returns>
-        public static Angle Degree(double value)
-            => new Angle(value, AngleUnit.Degree);
-
-        /// <summary>
-        /// Creates the <see cref="Angle"/> struct with <c>Radian</c> unit.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The angle.</returns>
-        public static Angle Radian(double value)
-            => new Angle(value, AngleUnit.Radian);
-
-        /// <summary>
-        /// Creates the <see cref="Angle"/> struct with <c>Gradian</c> unit.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The angle.</returns>
-        public static Angle Gradian(double value)
-            => new Angle(value, AngleUnit.Gradian);
+        /// <param name="value">The angle.</param>
+        public void Deconstruct(out AngleValue value) => value = Value;
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
-        public bool Equals(Angle other)
-            => MathExtensions.Equals(Value, other.Value) && Unit == other.Unit;
+        public bool Equals(Angle? other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Value == other.Value;
+        }
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
@@ -72,25 +58,17 @@ namespace xFunc.Maths.Expressions.Angles
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.</returns>
         public override bool Equals(object? obj)
-            => obj is Angle other && Equals(other);
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
-        /// </summary>
-        /// <param name="other">An object to compare with this instance.</param>
-        /// <returns>
-        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings:
-        /// Less than zero - This object is less than the other parameter.
-        /// Zero - This object is equal to other.
-        /// Greater than zero - This object is greater than other.
-        /// </returns>
-        public int CompareTo(Angle other)
         {
-            var valueComparison = Value.CompareTo(other.Value);
-            if (valueComparison != 0)
-                return valueComparison;
+            if (ReferenceEquals(null, obj))
+                return false;
 
-            return Unit.CompareTo(other.Unit);
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (typeof(Angle) != obj.GetType())
+                return false;
+
+            return Equals((Angle)obj);
         }
 
         /// <summary>
@@ -100,7 +78,17 @@ namespace xFunc.Maths.Expressions.Angles
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
-            => HashCode.Combine(Value, (int)Unit);
+            => HashCode.Combine(Value);
+
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <param name="formatter">The formatter.</param>
+        /// <returns>
+        /// A <see cref="string" /> that represents this instance.
+        /// </returns>
+        public string ToString(IFormatter formatter)
+            => Analyze(formatter);
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -108,346 +96,67 @@ namespace xFunc.Maths.Expressions.Angles
         /// <returns>
         /// A <see cref="string" /> that represents this instance.
         /// </returns>
-        public override string ToString() => Unit switch
+        public override string ToString()
+            => ToString(new CommonFormatter());
+
+        /// <summary>
+        /// Returns a number. Don't use this method if your expression has variables.
+        /// </summary>
+        /// <returns>A result of the execution.</returns>
+        public object Execute() => Value;
+
+        /// <summary>
+        /// Returns a number.
+        /// </summary>
+        /// <param name="parameters">A collection of variables.</param>
+        /// <returns>A result of the execution.</returns>
+        /// <seealso cref="ExpressionParameters"/>
+        public object Execute(ExpressionParameters? parameters) => Value;
+
+        /// <summary>
+        /// Analyzes the current expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <returns>
+        /// The analysis result.
+        /// </returns>
+        public TResult Analyze<TResult>(IAnalyzer<TResult> analyzer)
         {
-            AngleUnit.Degree => $"{Value.ToString(CultureInfo.InvariantCulture)} degree",
-            AngleUnit.Radian => $"{Value.ToString(CultureInfo.InvariantCulture)} radian",
-            AngleUnit.Gradian => $"{Value.ToString(CultureInfo.InvariantCulture)} gradian",
-            _ => throw new InvalidOperationException(),
-        };
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
 
-        /// <summary>
-        /// Determines whether two specified instances of <see cref="Angle"/> are equal.
-        /// </summary>
-        /// <param name="left">The first object to compare.</param>
-        /// <param name="right">The second object to compare.</param>
-        /// <returns><c>true</c> if <paramref name="left"/> is equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator ==(Angle left, Angle right)
-            => left.Equals(right);
-
-        /// <summary>
-        /// Determines whether two specified instances of <see cref="Angle"/> are not equal.
-        /// </summary>
-        /// <param name="left">The first object to compare.</param>
-        /// <param name="right">The second object to compare.</param>
-        /// <returns><c>true</c> if <paramref name="left"/> is not equal to <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(Angle left, Angle right)
-            => !left.Equals(right);
-
-        /// <summary>
-        /// Indicates whether <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter.
-        /// </summary>
-        /// <param name="left">The left angle.</param>
-        /// <param name="right">The right angle.</param>
-        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator <(Angle left, Angle right)
-            => left.CompareTo(right) < 0;
-
-        /// <summary>
-        /// Indicates whether <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter.
-        /// </summary>
-        /// <param name="left">The left angle.</param>
-        /// <param name="right">The right angle.</param>
-        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator >(Angle left, Angle right)
-            => left.CompareTo(right) > 0;
-
-        /// <summary>
-        /// Indicates whether <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter.
-        /// </summary>
-        /// <param name="left">The left angle.</param>
-        /// <param name="right">The right angle.</param>
-        /// <returns><c>true</c> if the <paramref name="left"/> parameter is less than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator <=(Angle left, Angle right)
-            => left.CompareTo(right) <= 0;
-
-        /// <summary>
-        /// Indicates whether <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter.
-        /// </summary>
-        /// <param name="left">The left angle.</param>
-        /// <param name="right">The right angle.</param>
-        /// <returns><c>true</c> if the <paramref name="left"/> parameter is greater than or equal to the <paramref name="right"/> parameter; otherwise, <c>false</c>.</returns>
-        public static bool operator >=(Angle left, Angle right)
-            => left.CompareTo(right) >= 0;
-
-        /// <summary>
-        /// Adds two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="left">The first object to add.</param>
-        /// <param name="right">The second object to add.</param>
-        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
-        public static Angle operator +(Angle left, Angle right)
-        {
-            (left, right) = ToCommonUnits(left, right);
-
-            return new Angle(left.Value + right.Value, left.Unit);
+            return analyzer.Analyze(this);
         }
 
         /// <summary>
-        /// Adds two objects of <see cref="Angle"/>.
+        /// Analyzes the current expression.
         /// </summary>
-        /// <param name="number">The first object to add.</param>
-        /// <param name="right">The second object to add.</param>
-        /// <returns>An object that is the sum of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static Angle operator +(double number, Angle right)
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="TContext">The type of additional parameter for analyzer.</typeparam>
+        /// <param name="analyzer">The analyzer.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>The analysis result.</returns>
+        public TResult Analyze<TResult, TContext>(
+            IAnalyzer<TResult, TContext> analyzer,
+            TContext context)
         {
-            var left = new Angle(number, right.Unit);
+            if (analyzer == null)
+                throw new ArgumentNullException(nameof(analyzer));
 
-            return left + right;
+            return analyzer.Analyze(this, context);
         }
 
         /// <summary>
-        /// Adds two objects of <see cref="Angle"/>.
+        /// Clones this instance of the <see cref="Angle"/> class.
         /// </summary>
-        /// <param name="left">The first object to add.</param>
-        /// <param name="number">The second object to add.</param>
-        /// <returns>An object that is the sum of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static Angle operator +(Angle left, double number)
-        {
-            var right = new Angle(number, left.Unit);
-
-            return left + right;
-        }
+        /// <returns>Returns the new instance of <see cref="IExpression"/> that is a clone of this instance.</returns>
+        public IExpression Clone()
+            => new Angle(Value);
 
         /// <summary>
-        /// Subtracts two objects of <see cref="Angle"/>.
+        /// Gets an angle.
         /// </summary>
-        /// <param name="left">The first object to sub.</param>
-        /// <param name="right">The second object to sub.</param>
-        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="right"/>.</returns>
-        public static Angle operator -(Angle left, Angle right)
-        {
-            (left, right) = ToCommonUnits(left, right);
-
-            return new Angle(left.Value - right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Subtracts two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="number">The first object to sub.</param>
-        /// <param name="right">The second object to sub.</param>
-        /// <returns>An object that is the difference of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static Angle operator -(double number, Angle right)
-        {
-            var left = new Angle(number, right.Unit);
-
-            return left - right;
-        }
-
-        /// <summary>
-        /// Subtracts two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="left">The first object to sub.</param>
-        /// <param name="number">The second object to sub.</param>
-        /// <returns>An object that is the difference of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static Angle operator -(Angle left, double number)
-        {
-            var right = new Angle(number, left.Unit);
-
-            return left - right;
-        }
-
-        /// <summary>
-        /// Produces the negative of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="angle">The angle.</param>
-        /// <returns>The negative of <paramref name="angle"/>.</returns>
-        public static Angle operator -(Angle angle)
-            => new Angle(-angle.Value, angle.Unit);
-
-        /// <summary>
-        /// Multiplies two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="left">The first object to multiply.</param>
-        /// <param name="right">The second object to multiply.</param>
-        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-        public static Angle operator *(Angle left, Angle right)
-        {
-            (left, right) = ToCommonUnits(left, right);
-
-            return new Angle(left.Value * right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Multiplies two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="number">The first object to multiply.</param>
-        /// <param name="right">The second object to multiply.</param>
-        /// <returns>An object that is the product of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static Angle operator *(double number, Angle right)
-        {
-            var left = new Angle(number, right.Unit);
-
-            return left * right;
-        }
-
-        /// <summary>
-        /// Multiplies two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="left">The first object to multiply.</param>
-        /// <param name="number">The second object to multiply.</param>
-        /// <returns>An object that is the product of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static Angle operator *(Angle left, double number)
-        {
-            var right = new Angle(number, left.Unit);
-
-            return left * right;
-        }
-
-        /// <summary>
-        /// Divides two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="left">The first object to divide.</param>
-        /// <param name="right">The second object to divide.</param>
-        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="right"/>.</returns>
-        public static Angle operator /(Angle left, Angle right)
-        {
-            (left, right) = ToCommonUnits(left, right);
-
-            return new Angle(left.Value / right.Value, left.Unit);
-        }
-
-        /// <summary>
-        /// Divides two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="number">The first object to divide.</param>
-        /// <param name="right">The second object to divide.</param>
-        /// <returns>An object that is the fraction of <paramref name="number"/> and <paramref name="right"/>.</returns>
-        public static Angle operator /(double number, Angle right)
-        {
-            var left = new Angle(number, right.Unit);
-
-            return left / right;
-        }
-
-        /// <summary>
-        /// Divides two objects of <see cref="Angle"/>.
-        /// </summary>
-        /// <param name="left">The first object to divide.</param>
-        /// <param name="number">The second object to divide.</param>
-        /// <returns>An object that is the fraction of <paramref name="left"/> and <paramref name="number"/>.</returns>
-        public static Angle operator /(Angle left, double number)
-        {
-            var right = new Angle(number, left.Unit);
-
-            return left / right;
-        }
-
-        private static (Angle Left, Angle Right) ToCommonUnits(Angle left, Angle right)
-        {
-            var commonUnit = GetCommonUnit(left.Unit, right.Unit);
-
-            return (left.To(commonUnit), right.To(commonUnit));
-        }
-
-        private static AngleUnit GetCommonUnit(AngleUnit left, AngleUnit right)
-            => (left, right) switch
-            {
-                _ when left == right => left,
-
-                (AngleUnit.Radian, AngleUnit.Gradian) => AngleUnit.Radian,
-                (AngleUnit.Gradian, AngleUnit.Radian) => AngleUnit.Radian,
-
-                _ => AngleUnit.Degree,
-            };
-
-        /// <summary>
-        /// Converts the current object to the specified <paramref name="unit"/>.
-        /// </summary>
-        /// <param name="unit">The unit to convert to.</param>
-        /// <returns>The angle which is converted to the specified <paramref name="unit"/>.</returns>
-        public Angle To(AngleUnit unit) => unit switch
-        {
-            AngleUnit.Degree => ToDegree(),
-            AngleUnit.Radian => ToRadian(),
-            AngleUnit.Gradian => ToGradian(),
-            _ => throw new ArgumentOutOfRangeException(nameof(unit)),
-        };
-
-        /// <summary>
-        /// Converts the current object to degrees.
-        /// </summary>
-        /// <returns>The angle which is converted to degrees.</returns>
-        public Angle ToDegree() => Unit switch
-        {
-            AngleUnit.Degree => this,
-            AngleUnit.Radian => Degree(Value * 180 / Math.PI),
-            AngleUnit.Gradian => Degree(Value * 0.9),
-            _ => throw new InvalidOperationException(),
-        };
-
-        /// <summary>
-        /// Converts the current object to radians.
-        /// </summary>
-        /// <returns>The angle which is converted to radians.</returns>
-        public Angle ToRadian() => Unit switch
-        {
-            AngleUnit.Degree => Radian(Value * Math.PI / 180),
-            AngleUnit.Radian => this,
-            AngleUnit.Gradian => Radian(Value * Math.PI / 200),
-            _ => throw new InvalidOperationException(),
-        };
-
-        /// <summary>
-        /// Converts the current object to gradians.
-        /// </summary>
-        /// <returns>The angle which is converted to gradians.</returns>
-        public Angle ToGradian() => Unit switch
-        {
-            AngleUnit.Degree => Gradian(Value / 0.9),
-            AngleUnit.Radian => Gradian(Value * 200 / Math.PI),
-            AngleUnit.Gradian => this,
-            _ => throw new InvalidOperationException(),
-        };
-
-        /// <summary>
-        /// Normalizes the current angle between [0, 2pi).
-        /// </summary>
-        /// <returns>The normalized angle.</returns>
-        public Angle Normalize()
-        {
-            const double degreeFullCircle = 360.0;
-            const double radianFullCircle = 2 * Math.PI;
-            const double gradianFullCircle = 400.0;
-
-            static double NormalizeInternal(double value, double circle)
-            {
-                value %= circle;
-                if (value < 0)
-                    value += circle;
-
-                return value;
-            }
-
-            return Unit switch
-            {
-                AngleUnit.Radian => Radian(NormalizeInternal(Value, radianFullCircle)),
-                AngleUnit.Gradian => Gradian(NormalizeInternal(Value, gradianFullCircle)),
-                _ => Degree(NormalizeInternal(Value, degreeFullCircle)),
-            };
-        }
-
-        /// <summary>
-        /// Converts <see cref="Angle"/> to <see cref="AngleNumber"/>.
-        /// </summary>
-        /// <returns>The angle number.</returns>
-        public AngleNumber AsExpression()
-            => new AngleNumber(this);
-
-        /// <summary>
-        /// Gets a value.
-        /// </summary>
-        public double Value { get; }
-
-        /// <summary>
-        /// Gets a unit.
-        /// </summary>
-        public AngleUnit Unit { get; }
-
-        /// <summary>
-        /// Gets an integer that indicates the sign of a double-precision floating-point number.
-        /// </summary>
-        public int Sign => Math.Sign(Value);
+        public AngleValue Value { get; }
     }
 }

@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Angles
         {
             var exp = new ToDegree(new Number(10));
             var actual = exp.Execute();
-            var expected = Angle.Degree(10);
+            var expected = AngleValue.Degree(10);
 
             Assert.Equal(expected, actual);
         }
@@ -36,9 +36,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new ToDegree(Angle.Degree(10).AsExpression());
+            var exp = new ToDegree(AngleValue.Degree(10).AsExpression());
             var actual = exp.Execute();
-            var expected = Angle.Degree(10);
+            var expected = AngleValue.Degree(10);
 
             Assert.Equal(expected, actual);
         }

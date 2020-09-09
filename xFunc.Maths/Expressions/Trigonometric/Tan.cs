@@ -47,13 +47,13 @@ namespace xFunc.Maths.Expressions.Trigonometric
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="angle">The angle.</param>
+        /// <param name="angleValue">The angle.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
         /// <seealso cref="ExpressionParameters" />
-        protected override double ExecuteInternal(Angle angle)
-            => AngleExtensions.Tan(angle);
+        protected override double ExecuteInternal(AngleValue angleValue)
+            => AngleExtensions.Tan(angleValue);
 
         /// <summary>
         /// Calculates the this mathematical expression (complex number).

@@ -55,8 +55,8 @@ namespace xFunc.Maths.Expressions.Angles
 
             return result switch
             {
-                double number => Angle.Degree(number),
-                Angle angle => angle.ToDegree(),
+                double number => AngleValue.Degree(number),
+                AngleValue angle => angle.ToDegree(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

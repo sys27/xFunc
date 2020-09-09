@@ -24,8 +24,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(10);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(10);
 
             Assert.True(angle1.Equals(angle2));
         }
@@ -33,8 +33,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualOperatorTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(10);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(10);
 
             Assert.True(angle1 == angle2);
         }
@@ -42,8 +42,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void NotEqualTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(12);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(12);
 
             Assert.True(angle1 != angle2);
         }
@@ -51,8 +51,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void LessTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(12);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(12);
 
             Assert.True(angle1 < angle2);
         }
@@ -60,8 +60,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void LessFalseTest()
         {
-            var angle1 = Angle.Degree(20);
-            var angle2 = Angle.Degree(12);
+            var angle1 = AngleValue.Degree(20);
+            var angle2 = AngleValue.Degree(12);
 
             Assert.False(angle1 < angle2);
         }
@@ -69,8 +69,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void GreaterTest()
         {
-            var angle1 = Angle.Degree(20);
-            var angle2 = Angle.Degree(12);
+            var angle1 = AngleValue.Degree(20);
+            var angle2 = AngleValue.Degree(12);
 
             Assert.True(angle1 > angle2);
         }
@@ -78,8 +78,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void GreaterFalseTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(12);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(12);
 
             Assert.False(angle1 > angle2);
         }
@@ -87,8 +87,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void LessOrEqualTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(10);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(10);
 
             Assert.True(angle1 <= angle2);
         }
@@ -96,8 +96,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void GreaterOrEqualTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(10);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(10);
 
             Assert.True(angle1 >= angle2);
         }
@@ -105,8 +105,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ValueNotEqualTest()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Degree(12);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Degree(12);
 
             Assert.False(angle1.Equals(angle2));
         }
@@ -114,8 +114,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void UnitNotEqualTest2()
         {
-            var angle1 = Angle.Degree(10);
-            var angle2 = Angle.Radian(10);
+            var angle1 = AngleValue.Degree(10);
+            var angle2 = AngleValue.Radian(10);
 
             Assert.False(angle1.Equals(angle2));
         }
@@ -123,7 +123,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualDiffTypeTest()
         {
-            var angle1 = Angle.Degree(10);
+            var angle1 = AngleValue.Degree(10);
             var angle2 = 3;
 
             Assert.False(angle1.Equals(angle2));
@@ -132,7 +132,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ToStringDegreeTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
 
             Assert.Equal("10 degree", angle.ToString());
         }
@@ -140,7 +140,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ToStringRadianTest()
         {
-            var angle = Angle.Radian(10);
+            var angle = AngleValue.Radian(10);
 
             Assert.Equal("10 radian", angle.ToString());
         }
@@ -148,7 +148,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ToStringGradianTest()
         {
-            var angle = Angle.Gradian(10);
+            var angle = AngleValue.Gradian(10);
 
             Assert.Equal("10 gradian", angle.ToString());
         }
@@ -156,9 +156,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void DegreeToDegreeTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
             var actual = angle.To(AngleUnit.Degree);
-            var expected = Angle.Degree(10);
+            var expected = AngleValue.Degree(10);
 
             Assert.Equal(expected, actual);
         }
@@ -166,9 +166,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void DegreeToRadianTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
             var actual = angle.To(AngleUnit.Radian);
-            var expected = Angle.Radian(10 * Math.PI / 180);
+            var expected = AngleValue.Radian(10 * Math.PI / 180);
 
             Assert.Equal(expected, actual);
         }
@@ -176,9 +176,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void DegreeToGradianTest()
         {
-            var angle = Angle.Degree(10);
+            var angle = AngleValue.Degree(10);
             var actual = angle.To(AngleUnit.Gradian);
-            var expected = Angle.Gradian(10 / 0.9);
+            var expected = AngleValue.Gradian(10 / 0.9);
 
             Assert.Equal(expected, actual);
         }
@@ -186,9 +186,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void RadianToDegreeTest()
         {
-            var angle = Angle.Radian(10);
+            var angle = AngleValue.Radian(10);
             var actual = angle.To(AngleUnit.Degree);
-            var expected = Angle.Degree(10 * 180 / Math.PI);
+            var expected = AngleValue.Degree(10 * 180 / Math.PI);
 
             Assert.Equal(expected, actual);
         }
@@ -196,9 +196,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void RadianToRadianTest()
         {
-            var angle = Angle.Radian(10);
+            var angle = AngleValue.Radian(10);
             var actual = angle.To(AngleUnit.Radian);
-            var expected = Angle.Radian(10);
+            var expected = AngleValue.Radian(10);
 
             Assert.Equal(expected, actual);
         }
@@ -206,9 +206,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void RadianToGradianTest()
         {
-            var angle = Angle.Radian(10);
+            var angle = AngleValue.Radian(10);
             var actual = angle.To(AngleUnit.Gradian);
-            var expected = Angle.Gradian(10 * 200 / Math.PI);
+            var expected = AngleValue.Gradian(10 * 200 / Math.PI);
 
             Assert.Equal(expected, actual);
         }
@@ -216,9 +216,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void GradianToDegreeTest()
         {
-            var angle = Angle.Gradian(10);
+            var angle = AngleValue.Gradian(10);
             var actual = angle.To(AngleUnit.Degree);
-            var expected = Angle.Degree(10 * 0.9);
+            var expected = AngleValue.Degree(10 * 0.9);
 
             Assert.Equal(expected, actual);
         }
@@ -226,9 +226,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void GradianToRadianTest()
         {
-            var angle = Angle.Gradian(10);
+            var angle = AngleValue.Gradian(10);
             var actual = angle.To(AngleUnit.Radian);
-            var expected = Angle.Radian(10 * Math.PI / 200);
+            var expected = AngleValue.Radian(10 * Math.PI / 200);
 
             Assert.Equal(expected, actual);
         }
@@ -236,9 +236,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void GradianToGradianTest()
         {
-            var angle = Angle.Gradian(10);
+            var angle = AngleValue.Gradian(10);
             var actual = angle.To(AngleUnit.Gradian);
-            var expected = Angle.Gradian(10);
+            var expected = AngleValue.Gradian(10);
 
             Assert.Equal(expected, actual);
         }

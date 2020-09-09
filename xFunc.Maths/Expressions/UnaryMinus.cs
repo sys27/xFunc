@@ -48,7 +48,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => -number,
-                Angle angle => -angle,
+                AngleValue angle => -angle,
                 Complex complex => (object)Complex.Negate(complex),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };

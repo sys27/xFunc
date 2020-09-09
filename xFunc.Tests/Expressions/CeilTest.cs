@@ -35,9 +35,9 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestAngleNumber()
         {
-            var ceil = new Ceil(Angle.Degree(5.55555555).AsExpression());
+            var ceil = new Ceil(AngleValue.Degree(5.55555555).AsExpression());
             var result = ceil.Execute();
-            var expected = Angle.Degree(6);
+            var expected = AngleValue.Degree(6);
 
             Assert.Equal(expected, result);
         }

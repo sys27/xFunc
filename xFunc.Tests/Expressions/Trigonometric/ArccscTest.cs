@@ -30,7 +30,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         {
             var exp = new Arccsc(Number.One);
             var result = exp.Execute();
-            var expected = Angle.Radian(1.5707963267948966);
+            var expected = AngleValue.Radian(1.5707963267948966);
 
             Assert.Equal(expected, result);
         }

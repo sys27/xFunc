@@ -50,7 +50,7 @@ namespace xFunc.Maths.Expressions.Programming
             {
                 (double left, double right) => MathExtensions.Equals(left, right),
                 (bool left, bool right) => left == right,
-                (Angle left, Angle right) => left == right,
+                (AngleValue left, AngleValue right) => left == right,
                 _ => throw new ResultIsNotSupportedException(this, leftResult, rightResult),
             };
         }

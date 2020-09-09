@@ -267,7 +267,7 @@ namespace xFunc.Maths.Analyzers
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual TResult Analyze(AngleNumber exp)
+        public virtual TResult Analyze(Angle exp)
             => throw new NotSupportedException();
 
         /// <summary>

@@ -122,7 +122,7 @@ namespace xFunc.Maths
                 return new StringResult(MathExtensions.ToNewBase((int)number, NumeralSystem));
             }
 
-            if (result is Angle angle)
+            if (result is AngleValue angle)
             {
                 return new AngleNumberResult(angle);
             }

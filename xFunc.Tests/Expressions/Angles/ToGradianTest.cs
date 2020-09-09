@@ -28,7 +28,7 @@ namespace xFunc.Tests.Expressions.Angles
         {
             var exp = new ToGradian(new Number(10));
             var actual = exp.Execute();
-            var expected = Angle.Gradian(10);
+            var expected = AngleValue.Gradian(10);
 
             Assert.Equal(expected, actual);
         }
@@ -36,9 +36,9 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new ToGradian(Angle.Gradian(10).AsExpression());
+            var exp = new ToGradian(AngleValue.Gradian(10).AsExpression());
             var actual = exp.Execute();
-            var expected = Angle.Gradian(10);
+            var expected = AngleValue.Gradian(10);
 
             Assert.Equal(expected, actual);
         }

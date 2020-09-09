@@ -174,7 +174,7 @@ namespace xFunc.Tests
                 simplifier.Object,
                 differentiator.Object);
             var result = processor.Solve<AngleNumberResult>(strExp);
-            var expected = Angle.Degree(90);
+            var expected = AngleValue.Degree(90);
 
             Assert.Equal(expected, result.Result);
         }

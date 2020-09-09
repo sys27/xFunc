@@ -59,12 +59,12 @@ namespace xFunc.Maths.Expressions.Hyperbolic
         /// <summary>
         /// Calculates this mathematical expression (using radian).
         /// </summary>
-        /// <param name="angle">The angle.</param>
+        /// <param name="angleValue">The angle.</param>
         /// <returns>
         /// A result of the calculation.
         /// </returns>
-        protected override double ExecuteInternal(Angle angle) =>
-            Math.Sinh(angle.Value);
+        protected override double ExecuteInternal(AngleValue angleValue) =>
+            Math.Sinh(angleValue.Value);
 
         /// <summary>
         /// Analyzes the current expression.

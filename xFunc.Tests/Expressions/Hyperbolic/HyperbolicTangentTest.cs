@@ -37,7 +37,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteRadianTest()
         {
-            var exp = new Tanh(Angle.Radian(1).AsExpression());
+            var exp = new Tanh(AngleValue.Radian(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.7615941559557649, result, 15);
@@ -46,7 +46,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteDegreeTest()
         {
-            var exp = new Tanh(Angle.Degree(1).AsExpression());
+            var exp = new Tanh(AngleValue.Degree(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.017451520543541533, result, 15);
@@ -55,7 +55,7 @@ namespace xFunc.Tests.Expressions.Hyperbolic
         [Fact]
         public void ExecuteGradianTest()
         {
-            var exp = new Tanh(Angle.Gradian(1).AsExpression());
+            var exp = new Tanh(AngleValue.Gradian(1).AsExpression());
             var result = (double)exp.Execute();
 
             Assert.Equal(0.015706671467249425, result, 15);

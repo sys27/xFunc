@@ -89,8 +89,8 @@ namespace xFunc.Maths.Expressions.Collections
 
         private void InitializeConstants()
         {
-            constants.Add(Parameter.CreateConstant("π", Angle.Radian(Math.PI))); // Archimedes' constant
-            constants.Add(Parameter.CreateConstant("pi", Angle.Radian(Math.PI))); // Archimedes' constant
+            constants.Add(Parameter.CreateConstant("π", AngleValue.Radian(Math.PI))); // Archimedes' constant
+            constants.Add(Parameter.CreateConstant("pi", AngleValue.Radian(Math.PI))); // Archimedes' constant
             constants.Add(Parameter.CreateConstant("e", Math.E)); // Euler's number
             constants.Add(Parameter.CreateConstant("i", Complex.ImaginaryOne)); // Imaginary unit
             constants.Add(Parameter.CreateConstant("g", 9.80665)); // Gravity on Earth

@@ -43,7 +43,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void AngleSignTest()
         {
-            var exp = new Sign(Angle.Degree(10).AsExpression());
+            var exp = new Sign(AngleValue.Degree(10).AsExpression());
             var result = exp.Execute();
 
             Assert.Equal(1.0, result);

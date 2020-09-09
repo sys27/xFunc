@@ -37,7 +37,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAbsAngleNumber()
         {
-            var exp = new Abs(Angle.Degree(1).AsExpression());
+            var exp = new Abs(AngleValue.Degree(1).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -85,7 +85,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestCeilAngle()
         {
-            var exp = new Ceil(Angle.Degree(5.5).AsExpression());
+            var exp = new Ceil(AngleValue.Degree(5.5).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -229,7 +229,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestFloorAngle()
         {
-            var exp = new Floor(Angle.Degree(5.5).AsExpression());
+            var exp = new Floor(AngleValue.Degree(5.5).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -261,7 +261,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestTruncAngle()
         {
-            var exp = new Trunc(Angle.Degree(5.5).AsExpression());
+            var exp = new Trunc(AngleValue.Degree(5.5).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -293,7 +293,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestFracAngle()
         {
-            var exp = new Frac(Angle.Degree(5.5).AsExpression());
+            var exp = new Frac(AngleValue.Degree(5.5).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -678,7 +678,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestUnaryMinusAngleNumber()
         {
-            var exp = new UnaryMinus(Angle.Degree(10).AsExpression());
+            var exp = new UnaryMinus(AngleValue.Degree(10).AsExpression());
 
             Test(exp, ResultTypes.AngleNumber);
         }
@@ -738,7 +738,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestSignAngle()
         {
-            Test(new Sign(Angle.Degree(10).AsExpression()), ResultTypes.AngleNumber);
+            Test(new Sign(AngleValue.Degree(10).AsExpression()), ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -750,7 +750,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestAngleNumber()
         {
-            Test(Angle.Degree(10).AsExpression(), ResultTypes.AngleNumber);
+            Test(AngleValue.Degree(10).AsExpression(), ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -762,7 +762,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestToDegreeAngle()
         {
-            Test(new ToDegree(Angle.Radian(10).AsExpression()), ResultTypes.AngleNumber);
+            Test(new ToDegree(AngleValue.Radian(10).AsExpression()), ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -780,7 +780,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestToRadianAngle()
         {
-            Test(new ToRadian(Angle.Degree(10).AsExpression()), ResultTypes.AngleNumber);
+            Test(new ToRadian(AngleValue.Degree(10).AsExpression()), ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -798,7 +798,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestToGradianAngle()
         {
-            Test(new ToGradian(Angle.Radian(10).AsExpression()), ResultTypes.AngleNumber);
+            Test(new ToGradian(AngleValue.Radian(10).AsExpression()), ResultTypes.AngleNumber);
         }
 
         [Fact]
@@ -810,7 +810,7 @@ namespace xFunc.Tests.Analyzers.TypeAnalyzerTests
         [Fact]
         public void TestToNumber()
         {
-            Test(new ToNumber(Angle.Degree(10).AsExpression()), ResultTypes.Number);
+            Test(new ToNumber(AngleValue.Degree(10).AsExpression()), ResultTypes.Number);
         }
 
         [Fact]

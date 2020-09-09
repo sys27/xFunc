@@ -55,8 +55,8 @@ namespace xFunc.Maths.Expressions.Angles
 
             return result switch
             {
-                double number => Angle.Gradian(number),
-                Angle angle => angle.ToGradian(),
+                double number => AngleValue.Gradian(number),
+                AngleValue angle => angle.ToGradian(),
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

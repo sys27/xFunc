@@ -35,8 +35,8 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteTestAngleNumber()
         {
-            var exp = new Abs(Angle.Degree(-10).AsExpression());
-            var expected = Angle.Degree(10);
+            var exp = new Abs(AngleValue.Degree(-10).AsExpression());
+            var expected = AngleValue.Degree(10);
 
             Assert.Equal(expected, exp.Execute());
         }

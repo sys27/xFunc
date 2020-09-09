@@ -35,9 +35,9 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new Trunc(Angle.Degree(5.55555555).AsExpression());
+            var exp = new Trunc(AngleValue.Degree(5.55555555).AsExpression());
             var result = exp.Execute();
-            var expected = Angle.Degree(5);
+            var expected = AngleValue.Degree(5);
 
             Assert.Equal(expected, result);
         }

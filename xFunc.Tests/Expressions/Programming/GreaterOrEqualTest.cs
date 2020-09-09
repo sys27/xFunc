@@ -55,8 +55,8 @@ namespace xFunc.Tests.Expressions.Programming
         public void GreaterOrEqualAngleTest()
         {
             var exp = new GreaterOrEqual(
-                Angle.Degree(12).AsExpression(),
-                Angle.Degree(10).AsExpression()
+                AngleValue.Degree(12).AsExpression(),
+                AngleValue.Degree(10).AsExpression()
             );
             var result = (bool)exp.Execute();
 

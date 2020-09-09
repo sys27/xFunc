@@ -60,7 +60,7 @@ namespace xFunc.Maths.Expressions
             return result switch
             {
                 double number => (double)Math.Sign(number),
-                Angle angle => (double)angle.Sign,
+                AngleValue angle => (double)angle.Sign,
                 _ => throw new ResultIsNotSupportedException(this, result),
             };
         }

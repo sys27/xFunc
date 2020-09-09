@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions.ComplexNumbers
         {
             var complex = new Complex(3.1, 2.5);
             var exp = new Phase(new ComplexNumber(complex));
-            var expected = Angle.Radian(complex.Phase);
+            var expected = AngleValue.Radian(complex.Phase);
 
             Assert.Equal(expected, exp.Execute());
         }

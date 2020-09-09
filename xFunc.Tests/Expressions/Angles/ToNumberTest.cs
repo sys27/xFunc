@@ -26,7 +26,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteAngleTest()
         {
-            var exp = new ToNumber(Angle.Degree(10).AsExpression());
+            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
             var actual = exp.Execute();
             var expected = 10.0;
 
@@ -58,7 +58,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void CloneTest()
         {
-            var exp = new ToNumber(Angle.Degree(10).AsExpression());
+            var exp = new ToNumber(AngleValue.Degree(10).AsExpression());
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

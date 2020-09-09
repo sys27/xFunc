@@ -25,7 +25,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualNullTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.False(exp.Equals(null));
         }
@@ -33,7 +33,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualNullObjectTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.False(exp.Equals((object)null));
         }
@@ -41,7 +41,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualSameTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.True(exp.Equals(exp));
         }
@@ -49,7 +49,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualSameObjectTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.True(exp.Equals((object)exp));
         }
@@ -57,7 +57,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void EqualDiffTypeTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
             var number = Number.One;
 
             Assert.False(exp.Equals(number));
@@ -66,8 +66,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
-            var expected = Angle.Degree(10);
+            var exp = AngleValue.Degree(10).AsExpression();
+            var expected = AngleValue.Degree(10);
 
             Assert.Equal(expected, exp.Execute());
         }
@@ -75,8 +75,8 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void ExecuteTest2()
         {
-            var exp = Angle.Degree(10).AsExpression();
-            var expected = Angle.Degree(10);
+            var exp = AngleValue.Degree(10).AsExpression();
+            var expected = AngleValue.Degree(10);
 
             Assert.Equal(expected, exp.Execute(null));
         }
@@ -84,7 +84,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void NullAnalyzerTest1()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string>(null));
         }
@@ -92,7 +92,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void NullAnalyzerTest2()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
 
             Assert.Throws<ArgumentNullException>(() => exp.Analyze<string, object>(null, null));
         }
@@ -100,7 +100,7 @@ namespace xFunc.Tests.Expressions.Angles
         [Fact]
         public void CloneTest()
         {
-            var exp = Angle.Degree(10).AsExpression();
+            var exp = AngleValue.Degree(10).AsExpression();
             var clone = exp.Clone();
 
             Assert.Equal(exp, clone);

@@ -233,7 +233,7 @@ namespace xFunc.Maths.Analyzers
         /// <param name="exp">The expression.</param>
         /// <param name="context">The context.</param>
         /// <returns>The result of analysis.</returns>
-        public virtual TResult Analyze(AngleNumber exp, TContext context)
+        public virtual TResult Analyze(Angle exp, TContext context)
             => throw new NotSupportedException();
 
         /// <summary>

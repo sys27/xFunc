@@ -45,7 +45,7 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void DefineWithFuncTest()
         {
-            var exp = new Define(Variable.X, new Sin(Angle.Radian(1).AsExpression()));
+            var exp = new Define(Variable.X, new Sin(AngleValue.Radian(1).AsExpression()));
             var parameters = new ParameterCollection();
             var expParams = new ExpressionParameters(parameters);
 

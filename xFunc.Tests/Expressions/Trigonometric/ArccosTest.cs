@@ -29,7 +29,7 @@ namespace xFunc.Tests.Expressions.Trigonometric
         public void ExecuteNumberTest()
         {
             var exp = new Arccos(Number.One);
-            var expected = Angle.Radian(0);
+            var expected = AngleValue.Radian(0);
 
             Assert.Equal(expected, exp.Execute());
         }

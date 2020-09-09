@@ -133,8 +133,8 @@ namespace xFunc.Tests.Expressions.Programming
         public void AngleNotEqualTest()
         {
             var equal = new NotEqual(
-                Angle.Degree(10).AsExpression(),
-                Angle.Degree(12).AsExpression()
+                AngleValue.Degree(10).AsExpression(),
+                AngleValue.Degree(12).AsExpression()
             );
             var result = (bool)equal.Execute();
 

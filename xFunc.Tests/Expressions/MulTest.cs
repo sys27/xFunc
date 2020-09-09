@@ -256,9 +256,9 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void MulNumberAndDegree()
         {
-            var exp = new Mul(Number.Two, Angle.Degree(10).AsExpression());
+            var exp = new Mul(Number.Two, AngleValue.Degree(10).AsExpression());
             var actual = exp.Execute();
-            var expected = Angle.Degree(20);
+            var expected = AngleValue.Degree(20);
 
             Assert.Equal(expected, actual);
         }
@@ -266,9 +266,9 @@ namespace xFunc.Tests.Expressions
         [Fact]
         public void MulRadianAndNumber()
         {
-            var exp = new Mul(Angle.Radian(10).AsExpression(), Number.Two);
+            var exp = new Mul(AngleValue.Radian(10).AsExpression(), Number.Two);
             var actual = exp.Execute();
-            var expected = Angle.Radian(20);
+            var expected = AngleValue.Radian(20);
 
             Assert.Equal(expected, actual);
         }
@@ -277,11 +277,11 @@ namespace xFunc.Tests.Expressions
         public void MulDegreeAndRadian()
         {
             var exp = new Mul(
-                Angle.Radian(Math.PI).AsExpression(),
-                Angle.Degree(10).AsExpression()
+                AngleValue.Radian(Math.PI).AsExpression(),
+                AngleValue.Degree(10).AsExpression()
             );
             var actual = exp.Execute();
-            var expected = Angle.Degree(1800);
+            var expected = AngleValue.Degree(1800);
 
             Assert.Equal(expected, actual);
         }
@@ -290,11 +290,11 @@ namespace xFunc.Tests.Expressions
         public void MulGradianAndGradian()
         {
             var exp = new Mul(
-                Angle.Gradian(10).AsExpression(),
-                Angle.Gradian(20).AsExpression()
+                AngleValue.Gradian(10).AsExpression(),
+                AngleValue.Gradian(20).AsExpression()
             );
             var actual = exp.Execute();
-            var expected = Angle.Gradian(200);
+            var expected = AngleValue.Gradian(200);
 
             Assert.Equal(expected, actual);
         }

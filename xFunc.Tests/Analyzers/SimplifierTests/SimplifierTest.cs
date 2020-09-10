@@ -557,5 +557,32 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
 
             SimpleTest(exp, expected);
         }
+
+        [Fact]
+        public void UnaryMinusNumberTest()
+        {
+            var exp = new Abs(new UnaryMinus(Variable.X));
+            var expected = Variable.X;
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AbsAbsTest()
+        {
+            var exp = new Abs(new Abs(Variable.X));
+            var expected = new Abs(Variable.X);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AbsAbsAbsTest()
+        {
+            var exp = new Abs(new Abs(new Abs(Variable.X)));
+            var expected = new Abs(Variable.X);
+
+            SimpleTest(exp, expected);
+        }
     }
 }

@@ -80,8 +80,17 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Abs exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Abs exp)
+        {
+            exp = AnalyzeUnary(exp);
+
+            return exp.Argument switch
+            {
+                UnaryMinus minus => minus.Argument,
+                Abs abs => abs,
+                _ => exp,
+            };
+        }
 
         /// <summary>
         /// Analyzes the specified expression.

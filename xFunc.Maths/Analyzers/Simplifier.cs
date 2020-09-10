@@ -80,8 +80,17 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Abs exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Abs exp)
+        {
+            exp = AnalyzeUnary(exp);
+
+            return exp.Argument switch
+            {
+                UnaryMinus minus => minus.Argument,
+                Abs abs => abs,
+                _ => exp,
+            };
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1109,16 +1118,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cos exp)
-        {
-            var simplifiedExp = AnalyzeTrigonometric<Arccos>(exp);
-
-            return simplifiedExp switch
-            {
-                Cos(Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
-                _ => simplifiedExp,
-            };
-        }
+        public virtual IExpression Analyze(Cos exp) => AnalyzeTrigonometric<Arccos>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1127,17 +1127,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cot exp)
-        {
-            var simplifiedExp = AnalyzeTrigonometric<Arccot>(exp);
-
-            return simplifiedExp switch
-            {
-                Cot(Number(var number)) when MathExtensions.Equals(number, 0)
-                    => new Number(double.PositiveInfinity),
-                _ => simplifiedExp,
-            };
-        }
+        public virtual IExpression Analyze(Cot exp) => AnalyzeTrigonometric<Arccot>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1146,17 +1136,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Csc exp)
-        {
-            var simplifiedExp = AnalyzeTrigonometric<Arccsc>(exp);
-
-            return simplifiedExp switch
-            {
-                Csc(Number(var number)) when MathExtensions.Equals(number, 0)
-                    => new Number(double.PositiveInfinity),
-                _ => simplifiedExp,
-            };
-        }
+        public virtual IExpression Analyze(Csc exp) => AnalyzeTrigonometric<Arccsc>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1165,16 +1145,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sec exp)
-        {
-            var simplifiedExp = AnalyzeTrigonometric<Arcsec>(exp);
-
-            return simplifiedExp switch
-            {
-                Sec(Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
-                _ => simplifiedExp,
-            };
-        }
+        public virtual IExpression Analyze(Sec exp) => AnalyzeTrigonometric<Arcsec>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1183,16 +1154,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sin exp)
-        {
-            var simplifiedExp = AnalyzeTrigonometric<Arcsin>(exp);
-
-            return simplifiedExp switch
-            {
-                Sin(Number(var number)) when MathExtensions.Equals(number, 0) => Number.Zero,
-                _ => simplifiedExp,
-            };
-        }
+        public virtual IExpression Analyze(Sin exp) => AnalyzeTrigonometric<Arcsin>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1201,16 +1163,7 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Tan exp)
-        {
-            var simplifiedExp = AnalyzeTrigonometric<Arctan>(exp);
-
-            return simplifiedExp switch
-            {
-                Tan(Number(var number)) when MathExtensions.Equals(number, 0) => Number.Zero,
-                _ => simplifiedExp,
-            };
-        }
+        public virtual IExpression Analyze(Tan exp) => AnalyzeTrigonometric<Arctan>(exp);
 
         #endregion
 

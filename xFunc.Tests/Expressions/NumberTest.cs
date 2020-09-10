@@ -80,6 +80,38 @@ namespace xFunc.Tests.Expressions
         }
 
         [Fact]
+        public void NanTest()
+        {
+            var number = new Number(double.NaN);
+
+            Assert.True(number.IsNaN);
+        }
+
+        [Fact]
+        public void PositiveInfinityTest()
+        {
+            var number = new Number(double.PositiveInfinity);
+
+            Assert.True(number.IsPositiveInfinity);
+        }
+
+        [Fact]
+        public void NegativeInfinityTest()
+        {
+            var number = new Number(double.NegativeInfinity);
+
+            Assert.True(number.IsNegativeInfinity);
+        }
+
+        [Fact]
+        public void InfinityTest()
+        {
+            var number = new Number(double.NegativeInfinity);
+
+            Assert.True(number.IsInfinity);
+        }
+
+        [Fact]
         public void ImplicitNullToNumber()
         {
             Number x = null;

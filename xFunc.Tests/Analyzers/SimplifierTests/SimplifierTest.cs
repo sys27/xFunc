@@ -13,34 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
-using xFunc.Maths.Expressions.Hyperbolic;
 using xFunc.Maths.Expressions.Statistical;
-using xFunc.Maths.Expressions.Trigonometric;
 using Xunit;
 
 namespace xFunc.Tests.Analyzers.SimplifierTests
 {
-    public class SimplifierTest
+    public class SimplifierTest : BaseSimplifierTest
     {
-        private readonly IAnalyzer<IExpression> simplifier;
-
-        private readonly Number zero = 0;
-
-        public SimplifierTest()
-        {
-            simplifier = new Simplifier();
-        }
-
-        private void SimpleTest(IExpression exp, IExpression expected)
-        {
-            var simple = exp.Analyze(simplifier);
-
-            Assert.Equal(expected, simple);
-        }
-
         [Fact]
         public void DoubleUnary()
         {
@@ -262,284 +243,6 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
             SimpleTest(simp, expected);
         }
 
-        #region Trigonometric
-
-        [Fact]
-        public void ArcsinSin()
-        {
-            var exp = new Arcsin(new Sin(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArccosCos()
-        {
-            var exp = new Arccos(new Cos(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArctanTan()
-        {
-            var exp = new Arctan(new Tan(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArccotCot()
-        {
-            var exp = new Arccot(new Cot(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArcsecSec()
-        {
-            var exp = new Arcsec(new Sec(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArccscCsc()
-        {
-            var exp = new Arccsc(new Csc(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void SinArcsin()
-        {
-            var exp = new Sin(new Arcsin(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CosArccos()
-        {
-            var exp = new Cos(new Arccos(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void TanArctan()
-        {
-            var exp = new Tan(new Arctan(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CotArccot()
-        {
-            var exp = new Cot(new Arccot(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void SecArcsec()
-        {
-            var exp = new Sec(new Arcsec(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CscArccsc()
-        {
-            var exp = new Csc(new Arccsc(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CosZero()
-        {
-            var exp = new Cos(zero);
-            var expected = new Number(Math.Cos(0));
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CotZero()
-        {
-            var exp = new Cot(zero);
-            var actual = (Number)exp.Analyze(simplifier);
-
-            Assert.True(actual.IsPositiveInfinity);
-        }
-
-        [Fact]
-        public void CscZero()
-        {
-            var exp = new Csc(zero);
-            var actual = (Number)exp.Analyze(simplifier);
-
-            Assert.True(actual.IsPositiveInfinity);
-        }
-
-        [Fact]
-        public void SecZero()
-        {
-            var exp = new Sec(zero);
-            var expected = new Number(1.0);
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void SinZero()
-        {
-            var exp = new Sin(zero);
-            var expected = new Number(Math.Sin(0));
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void TanZero()
-        {
-            var exp = new Tan(zero);
-            var expected = new Number(Math.Tan(0));
-
-            SimpleTest(exp, expected);
-        }
-
-        #endregion
-
-        #region Hyperbolic
-
-        [Fact]
-        public void ArsinhSinh()
-        {
-            var exp = new Arsinh(new Sinh(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArcoshCosh()
-        {
-            var exp = new Arcosh(new Cosh(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArtanhTanh()
-        {
-            var exp = new Artanh(new Tanh(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArcothCoth()
-        {
-            var exp = new Arcoth(new Coth(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArsechSech()
-        {
-            var exp = new Arsech(new Sech(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void ArcschCsch()
-        {
-            var exp = new Arcsch(new Csch(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void SinhArsinh()
-        {
-            var exp = new Sinh(new Arsinh(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CoshArcosh()
-        {
-            var exp = new Cosh(new Arcosh(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void TanhArtanh()
-        {
-            var exp = new Tanh(new Artanh(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CothArcoth()
-        {
-            var exp = new Coth(new Arcoth(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void SechArsech()
-        {
-            var exp = new Sech(new Arsech(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        [Fact]
-        public void CschArcsch()
-        {
-            var exp = new Csch(new Arcsch(Variable.X));
-            var expected = Variable.X;
-
-            SimpleTest(exp, expected);
-        }
-
-        #endregion
-
         [Fact]
         public void UserFunc()
         {
@@ -554,6 +257,33 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             var exp = new Count(new IExpression[] { new Add(Number.Two, Number.Two) });
             var expected = new Count(new IExpression[] { new Number(4) });
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void UnaryMinusNumberTest()
+        {
+            var exp = new Abs(new UnaryMinus(Variable.X));
+            var expected = Variable.X;
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AbsAbsTest()
+        {
+            var exp = new Abs(new Abs(Variable.X));
+            var expected = new Abs(Variable.X);
+
+            SimpleTest(exp, expected);
+        }
+
+        [Fact]
+        public void AbsAbsAbsTest()
+        {
+            var exp = new Abs(new Abs(new Abs(Variable.X)));
+            var expected = new Abs(Variable.X);
 
             SimpleTest(exp, expected);
         }

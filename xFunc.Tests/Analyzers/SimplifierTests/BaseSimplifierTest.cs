@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using xFunc.Maths.Analyzers;
 using xFunc.Maths.Expressions;
 using Xunit;
@@ -27,6 +28,9 @@ namespace xFunc.Tests.Analyzers.SimplifierTests
         {
             simplifier = new Simplifier();
         }
+
+        protected IExpression Create(Type type, IExpression argument)
+            => (IExpression)Activator.CreateInstance(type, argument);
 
         protected void SimpleTest(IExpression exp, IExpression expected)
         {

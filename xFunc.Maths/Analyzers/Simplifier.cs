@@ -13,11 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO:
-#pragma warning disable SA1513
-#pragma warning disable SA1515
-#pragma warning disable CA1062
-
 using System;
 using System.Diagnostics.CodeAnalysis;
 using xFunc.Maths.Expressions;
@@ -39,23 +34,41 @@ namespace xFunc.Maths.Analyzers
     /// <seealso cref="ISimplifier" />
     public class Simplifier : ISimplifier
     {
-        private T AnalyzeUnary<T>(T exp) where T : UnaryExpression
+        private T AnalyzeSimple<T>([NotNull] T exp) where T : IExpression
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            return exp;
+        }
+
+        private T AnalyzeUnary<T>([NotNull] T exp) where T : UnaryExpression
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             exp.Argument = exp.Argument.Analyze(this);
 
             return exp;
         }
 
-        private T AnalyzeBinary<T>(T exp) where T : BinaryExpression
+        private T AnalyzeBinary<T>([NotNull] T exp) where T : BinaryExpression
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             exp.Left = exp.Left.Analyze(this);
             exp.Right = exp.Right.Analyze(this);
 
             return exp;
         }
 
-        private IExpression AnalyzeTrigonometric<T>(UnaryExpression exp) where T : UnaryExpression
+        private IExpression AnalyzeTrigonometric<T>([NotNull] UnaryExpression exp)
+            where T : UnaryExpression
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             exp.Argument = exp.Argument.Analyze(this);
             if (exp.Argument is T trigonometric)
                 return trigonometric.Argument;
@@ -63,10 +76,23 @@ namespace xFunc.Maths.Analyzers
             return exp;
         }
 
-        private IExpression AnalyzeDiffParams(DifferentParametersExpression exp)
+        private IExpression AnalyzeDiffParams([NotNull] DifferentParametersExpression exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             for (var i = 0; i < exp.ParametersCount; i++)
                 exp[i] = exp[i].Analyze(this);
+
+            return exp;
+        }
+
+        private T AnalyzeVariableBinary<T>([NotNull] T exp) where T : VariableBinaryExpression
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            exp.Value = exp.Value.Analyze(this);
 
             return exp;
         }
@@ -167,6 +193,7 @@ namespace xFunc.Maths.Analyzers
                 // ax + x
                 (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value + 1), x1)),
+
                 // xa + x
                 (Mul(Variable x1, Number a), Variable x2) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value + 1), x1)),
@@ -198,8 +225,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Ceil exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Ceil exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -208,9 +235,11 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
         public virtual IExpression Analyze(Define exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             exp.Value = exp.Value.Analyze(this);
 
             return exp;
@@ -223,8 +252,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Del exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Del exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -235,6 +264,9 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public virtual IExpression Analyze(Derivative exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             exp.Expression = exp.Expression.Analyze(this);
 
             return exp;
@@ -336,8 +368,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Fact exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Fact exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -346,8 +378,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Floor exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Floor exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -356,16 +388,16 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Trunc exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Trunc exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Frac exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Frac exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -374,8 +406,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(GCD exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(GCD exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -402,8 +434,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(LCM exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(LCM exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -467,8 +499,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Mod exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(Mod exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -584,16 +616,16 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Number exp) => exp;
+        public virtual IExpression Analyze(Number exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Angle exp) => exp;
+        public virtual IExpression Analyze(Angle exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -680,18 +712,25 @@ namespace xFunc.Maths.Analyzers
             {
                 // x^0
                 (_, Number(var number)) when MathExtensions.Equals(number, 0) => Number.One,
+
                 // 0^x
                 (Number(var number), _) when MathExtensions.Equals(number, 0) => Number.Zero,
+
                 // x^1
                 (var left, Number(var number)) when MathExtensions.Equals(number, 1) => left,
+
                 // x ^ log(x, y) -> y
                 (var left, Log log) when left.Equals(log.Left) => log.Right,
+
                 // e ^ ln(y) -> y
                 (Variable("e"), Ln ln) => ln.Argument,
+
                 // 10 ^ lg(y) -> y
                 (Number number, Lg lg) when MathExtensions.Equals(number.Value, 10) => lg.Argument,
+
                 // 2 ^ lb(y) -> y
                 (Number number, Lb lb) when MathExtensions.Equals(number.Value, 2) => lb.Argument,
+
                 _ => exp,
             };
         }
@@ -722,8 +761,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Round exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Round exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -732,7 +771,13 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Simplify exp) => exp.Argument.Analyze(this);
+        public virtual IExpression Analyze(Simplify exp)
+        {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
+            return exp.Argument.Analyze(this);
+        }
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -741,8 +786,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Sqrt exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Sqrt exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -817,6 +862,7 @@ namespace xFunc.Maths.Analyzers
                 // ax - x
                 (Mul(Number a, Variable x1), Variable x2) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value - 1), x1)),
+
                 // xa - x
                 (Mul(Variable x1, Number a), Variable x2) when x1.Equals(x2)
                     => Analyze(new Mul(new Number(a.Value - 1), x1)),
@@ -867,8 +913,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Undefine exp) => exp;
+        public virtual IExpression Analyze(Undefine exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -879,6 +925,9 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public virtual IExpression Analyze(UserFunction exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             for (var i = 0; i < exp.ParametersCount; i++)
                 exp[i] = exp[i].Analyze(this);
 
@@ -892,8 +941,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Variable exp) => exp;
+        public virtual IExpression Analyze(Variable exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -902,16 +951,16 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(DelegateExpression exp) => exp;
+        public virtual IExpression Analyze(DelegateExpression exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Sign exp) => exp;
+        public virtual IExpression Analyze(Sign exp)
+            => AnalyzeSimple(exp);
 
         #endregion Standard
 
@@ -924,8 +973,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Vector exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Vector exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -934,9 +983,11 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
         public virtual IExpression Analyze(Matrix exp)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+
             for (var i = 0; i < exp.Rows; i++)
                 exp[i] = (Vector)exp[i].Analyze(this);
 
@@ -950,8 +1001,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Determinant exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Determinant exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -960,8 +1011,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Inverse exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Inverse exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -970,24 +1021,24 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Transpose exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Transpose exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(DotProduct exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(DotProduct exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(CrossProduct exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(CrossProduct exp)
+            => AnalyzeBinary(exp);
 
         #endregion Matrix
 
@@ -1000,8 +1051,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(ComplexNumber exp) => exp;
+        public virtual IExpression Analyze(ComplexNumber exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1010,8 +1061,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Conjugate exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Conjugate exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1020,8 +1071,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Im exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Im exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1030,8 +1081,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Phase exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Phase exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1040,8 +1091,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Re exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Re exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1050,8 +1101,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Reciprocal exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Reciprocal exp)
+            => AnalyzeUnary(exp);
 
         #endregion Complex Numbers
 
@@ -1064,7 +1115,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arccos exp) => AnalyzeTrigonometric<Cos>(exp);
+        public virtual IExpression Analyze(Arccos exp)
+            => AnalyzeTrigonometric<Cos>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1073,7 +1125,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arccot exp) => AnalyzeTrigonometric<Cot>(exp);
+        public virtual IExpression Analyze(Arccot exp)
+            => AnalyzeTrigonometric<Cot>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1082,7 +1135,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arccsc exp) => AnalyzeTrigonometric<Csc>(exp);
+        public virtual IExpression Analyze(Arccsc exp)
+            => AnalyzeTrigonometric<Csc>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1091,7 +1145,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcsec exp) => AnalyzeTrigonometric<Sec>(exp);
+        public virtual IExpression Analyze(Arcsec exp)
+            => AnalyzeTrigonometric<Sec>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1100,7 +1155,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcsin exp) => AnalyzeTrigonometric<Sin>(exp);
+        public virtual IExpression Analyze(Arcsin exp)
+            => AnalyzeTrigonometric<Sin>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1109,7 +1165,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arctan exp) => AnalyzeTrigonometric<Tan>(exp);
+        public virtual IExpression Analyze(Arctan exp)
+            => AnalyzeTrigonometric<Tan>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1118,7 +1175,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cos exp) => AnalyzeTrigonometric<Arccos>(exp);
+        public virtual IExpression Analyze(Cos exp)
+            => AnalyzeTrigonometric<Arccos>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1127,7 +1185,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cot exp) => AnalyzeTrigonometric<Arccot>(exp);
+        public virtual IExpression Analyze(Cot exp)
+            => AnalyzeTrigonometric<Arccot>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1136,7 +1195,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Csc exp) => AnalyzeTrigonometric<Arccsc>(exp);
+        public virtual IExpression Analyze(Csc exp)
+            => AnalyzeTrigonometric<Arccsc>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1145,7 +1205,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sec exp) => AnalyzeTrigonometric<Arcsec>(exp);
+        public virtual IExpression Analyze(Sec exp)
+            => AnalyzeTrigonometric<Arcsec>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1154,7 +1215,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sin exp) => AnalyzeTrigonometric<Arcsin>(exp);
+        public virtual IExpression Analyze(Sin exp)
+            => AnalyzeTrigonometric<Arcsin>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1163,7 +1225,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Tan exp) => AnalyzeTrigonometric<Arctan>(exp);
+        public virtual IExpression Analyze(Tan exp)
+            => AnalyzeTrigonometric<Arctan>(exp);
 
         #endregion
 
@@ -1176,7 +1239,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcosh exp) => AnalyzeTrigonometric<Cosh>(exp);
+        public virtual IExpression Analyze(Arcosh exp)
+            => AnalyzeTrigonometric<Cosh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1185,7 +1249,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcoth exp) => AnalyzeTrigonometric<Coth>(exp);
+        public virtual IExpression Analyze(Arcoth exp)
+            => AnalyzeTrigonometric<Coth>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1194,7 +1259,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arcsch exp) => AnalyzeTrigonometric<Csch>(exp);
+        public virtual IExpression Analyze(Arcsch exp)
+            => AnalyzeTrigonometric<Csch>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1203,7 +1269,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arsech exp) => AnalyzeTrigonometric<Sech>(exp);
+        public virtual IExpression Analyze(Arsech exp)
+            => AnalyzeTrigonometric<Sech>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1212,7 +1279,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Arsinh exp) => AnalyzeTrigonometric<Sinh>(exp);
+        public virtual IExpression Analyze(Arsinh exp)
+            => AnalyzeTrigonometric<Sinh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1221,7 +1289,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Artanh exp) => AnalyzeTrigonometric<Tanh>(exp);
+        public virtual IExpression Analyze(Artanh exp)
+            => AnalyzeTrigonometric<Tanh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1230,7 +1299,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Cosh exp) => AnalyzeTrigonometric<Arcosh>(exp);
+        public virtual IExpression Analyze(Cosh exp)
+            => AnalyzeTrigonometric<Arcosh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1239,7 +1309,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Coth exp) => AnalyzeTrigonometric<Arcoth>(exp);
+        public virtual IExpression Analyze(Coth exp)
+            => AnalyzeTrigonometric<Arcoth>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1248,7 +1319,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Csch exp) => AnalyzeTrigonometric<Arcsch>(exp);
+        public virtual IExpression Analyze(Csch exp)
+            => AnalyzeTrigonometric<Arcsch>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1257,7 +1329,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sech exp) => AnalyzeTrigonometric<Arsech>(exp);
+        public virtual IExpression Analyze(Sech exp)
+            => AnalyzeTrigonometric<Arsech>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1266,7 +1339,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Sinh exp) => AnalyzeTrigonometric<Arsinh>(exp);
+        public virtual IExpression Analyze(Sinh exp)
+            => AnalyzeTrigonometric<Arsinh>(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1275,7 +1349,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        public virtual IExpression Analyze(Tanh exp) => AnalyzeTrigonometric<Artanh>(exp);
+        public virtual IExpression Analyze(Tanh exp)
+            => AnalyzeTrigonometric<Artanh>(exp);
 
         #endregion Hyperbolic
 
@@ -1288,8 +1363,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Avg exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Avg exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1298,8 +1373,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Count exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Count exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1308,8 +1383,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Max exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Max exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1318,8 +1393,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Min exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Min exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1328,8 +1403,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Product exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Product exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1338,8 +1413,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Stdev exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Stdev exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1348,8 +1423,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Stdevp exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Stdevp exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1358,8 +1433,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Sum exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Sum exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1368,8 +1443,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Var exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Var exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1378,8 +1453,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Varp exp) => AnalyzeDiffParams(exp);
+        public virtual IExpression Analyze(Varp exp)
+            => AnalyzeDiffParams(exp);
 
         #endregion Statistical
 
@@ -1392,8 +1467,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(And exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(And exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1402,8 +1477,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Bool exp) => exp;
+        public virtual IExpression Analyze(Bool exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1412,8 +1487,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Equality exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(Equality exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1422,8 +1497,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Implication exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(Implication exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1432,8 +1507,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(NAnd exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(NAnd exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1442,8 +1517,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(NOr exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(NOr exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1452,8 +1527,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Not exp) => AnalyzeUnary(exp);
+        public virtual IExpression Analyze(Not exp)
+            => AnalyzeUnary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1462,8 +1537,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Or exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(Or exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1472,8 +1547,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(XOr exp) => AnalyzeBinary(exp);
+        public virtual IExpression Analyze(XOr exp)
+            => AnalyzeBinary(exp);
 
         #endregion Logical and Bitwise
 
@@ -1486,8 +1561,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(AddAssign exp) => exp;
+        public virtual IExpression Analyze(AddAssign exp)
+            => AnalyzeVariableBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1496,8 +1571,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(ConditionalAnd exp) => exp;
+        public virtual IExpression Analyze(ConditionalAnd exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1506,8 +1581,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Dec exp) => exp;
+        public virtual IExpression Analyze(Dec exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1516,8 +1591,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(DivAssign exp) => exp;
+        public virtual IExpression Analyze(DivAssign exp)
+            => AnalyzeVariableBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1526,8 +1601,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Equal exp) => exp;
+        public virtual IExpression Analyze(Equal exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1536,8 +1611,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(For exp) => exp;
+        public virtual IExpression Analyze(For exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1546,8 +1621,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(GreaterOrEqual exp) => exp;
+        public virtual IExpression Analyze(GreaterOrEqual exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1556,8 +1631,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(GreaterThan exp) => exp;
+        public virtual IExpression Analyze(GreaterThan exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1566,8 +1641,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(If exp) => exp;
+        public virtual IExpression Analyze(If exp)
+            => AnalyzeDiffParams(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1576,8 +1651,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(Inc exp) => exp;
+        public virtual IExpression Analyze(Inc exp)
+            => AnalyzeSimple(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1586,8 +1661,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(LessOrEqual exp) => exp;
+        public virtual IExpression Analyze(LessOrEqual exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1596,8 +1671,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(LessThan exp) => exp;
+        public virtual IExpression Analyze(LessThan exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1606,8 +1681,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(MulAssign exp) => exp;
+        public virtual IExpression Analyze(MulAssign exp)
+            => AnalyzeVariableBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1616,8 +1691,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(NotEqual exp) => exp;
+        public virtual IExpression Analyze(NotEqual exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1626,8 +1701,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(ConditionalOr exp) => exp;
+        public virtual IExpression Analyze(ConditionalOr exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1636,8 +1711,8 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(SubAssign exp) => exp;
+        public virtual IExpression Analyze(SubAssign exp)
+            => AnalyzeVariableBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
@@ -1646,45 +1721,41 @@ namespace xFunc.Maths.Analyzers
         /// <returns>
         /// The result of analysis.
         /// </returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(While exp) => exp;
+        public virtual IExpression Analyze(While exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(LeftShift exp) => exp;
+        public virtual IExpression Analyze(LeftShift exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(RightShift exp) => exp;
+        public virtual IExpression Analyze(RightShift exp)
+            => AnalyzeBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(LeftShiftAssign exp) => exp;
+        public virtual IExpression Analyze(LeftShiftAssign exp)
+            => AnalyzeVariableBinary(exp);
 
         /// <summary>
         /// Analyzes the specified expression.
         /// </summary>
         /// <param name="exp">The expression.</param>
         /// <returns>The result of analysis.</returns>
-        [ExcludeFromCodeCoverage]
-        public virtual IExpression Analyze(RightShiftAssign exp) => exp;
+        public virtual IExpression Analyze(RightShiftAssign exp)
+            => AnalyzeVariableBinary(exp);
 
         #endregion Programming
     }
 }
-
-#pragma warning restore SA1513
-#pragma warning restore SA1515
-#pragma warning restore CA1062

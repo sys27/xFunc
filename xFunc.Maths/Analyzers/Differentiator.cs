@@ -13,9 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO:
-#pragma warning disable CA1062
-
 using System;
 using xFunc.Maths.Expressions;
 using xFunc.Maths.Expressions.Angles;
@@ -43,6 +40,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Abs exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -61,6 +63,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Add exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
             var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
 
@@ -83,6 +90,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Derivative exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -105,6 +117,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Div exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
             var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
 
@@ -139,6 +156,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Exp exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -155,6 +177,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Lb exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -175,6 +202,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Lg exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -195,6 +227,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Ln exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -211,6 +248,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Log exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (Helpers.HasVariable(exp.Left, context.Variable))
             {
                 var div = new Div(
@@ -242,6 +284,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Mul exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
             var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
 
@@ -272,6 +319,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Number exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             return Number.Zero;
         }
 
@@ -285,6 +337,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Angle exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             return Number.Zero;
         }
 
@@ -298,6 +355,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Pow exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (Helpers.HasVariable(exp.Left, context.Variable))
             {
                 return new Mul(
@@ -331,6 +393,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Root exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -351,6 +418,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Simplify exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -367,6 +439,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sqrt exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -385,6 +462,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sub exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             var hasVariableInLeft = Helpers.HasVariable(exp.Left, context.Variable);
             var hasVariableInRight = Helpers.HasVariable(exp.Right, context.Variable);
 
@@ -407,6 +489,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(UnaryMinus exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -423,6 +510,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(UserFunction exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (context.Parameters == null)
                 throw new InvalidOperationException();
 
@@ -439,6 +531,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Variable exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (exp.Equals(context.Variable))
                 return Number.One;
 
@@ -459,6 +556,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arccos exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -481,6 +583,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arccot exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -502,6 +609,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arccsc exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -526,6 +638,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcsec exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -549,6 +666,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcsin exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -570,6 +692,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arctan exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -590,6 +717,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Cos exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -609,6 +741,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Cot exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -630,6 +767,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Csc exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             return new Mul(
                 new UnaryMinus(exp.Argument.Analyze(this, context)),
                 new Mul(
@@ -647,6 +789,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sec exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -667,6 +814,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sin exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -685,6 +837,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Tan exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -709,6 +866,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcosh exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -730,6 +892,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcoth exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -750,6 +917,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arcsch exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -774,6 +946,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arsech exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             return new UnaryMinus(
                 new Div(
                     exp.Argument.Analyze(this, context),
@@ -795,6 +972,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Arsinh exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -816,6 +998,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Artanh exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -836,6 +1023,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Cosh exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -854,6 +1046,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Coth exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -875,6 +1072,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Csch exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -896,6 +1098,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sech exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -917,6 +1124,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Sinh exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -935,6 +1147,11 @@ namespace xFunc.Maths.Analyzers
         /// </returns>
         public override IExpression Analyze(Tanh exp, DifferentiatorContext context)
         {
+            if (exp is null)
+                throw ThrowHelpers.ExpNull();
+            if (context is null)
+                throw ThrowHelpers.ContextNull();
+
             if (!Helpers.HasVariable(exp, context.Variable))
                 return Number.Zero;
 
@@ -948,5 +1165,3 @@ namespace xFunc.Maths.Analyzers
         #endregion Hyperbolic
     }
 }
-
-#pragma warning restore CA1062
